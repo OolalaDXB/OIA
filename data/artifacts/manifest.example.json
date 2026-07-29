@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "_readme": "EXAMPLE manifest. Copy to manifest.json and place the downloaded official files alongside it. Each entry describes ONE genuine official-source artifact you downloaded directly from the issuer. `sourceFormat` is your claim; the classifier re-checks it. Nothing here reaches VERIFIED without a human confirming the issuer↔domain relationship.",
+  "artifacts": [
+    {
+      "originalUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/DIGITAL-2026-AI-DATA-10-COMPLIANCE",
+      "issuingOrganization": "European Commission",
+      "officialDomain": "ec.europa.eu",
+      "retrievalDate": "2026-07-29",
+      "localFilename": "digital-2026-ai-data-10-compliance.pdf",
+      "contentType": "application/pdf",
+      "sourceFormat": "PDF",
+      "expectedDocumentTitle": "DIGITAL-2026-AI-DATA-10-COMPLIANCE call fiche",
+      "applicationUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/how-to-participate"
+    },
+    {
+      "originalUrl": "https://hub71.com/programs/access",
+      "issuingOrganization": "Hub71",
+      "officialDomain": "hub71.com",
+      "retrievalDate": "2026-07-29",
+      "localFilename": "hub71-access-cohort-20.html",
+      "contentType": "text/html",
+      "sourceFormat": "STATIC_HTML",
+      "expectedDocumentTitle": "Hub71 Access — Cohort 20"
+    }
+  ]
+}

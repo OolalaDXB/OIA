@@ -7,5 +7,6 @@ export {
   buildSediaQuery,
   SediaResponseSchema,
   EU_FT_KEY,
+  EU_FT_CONNECTOR_STATUS,
 } from "./connectors/eu-funding-tenders";
 export { manualConnector, MANUAL_KEY } from "./connectors/manual";

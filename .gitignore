@@ -13,3 +13,10 @@ coverage/
 # OS / editor
 .DS_Store
 *.log
+
+# Supplied official artifacts (may be large / rights-restricted) — commit deliberately.
+data/artifacts/manifest.json
+data/artifacts/*.pdf
+data/artifacts/*.html
+data/seeds/bawaba-funding-opportunities.json
+data/seeds/bawaba-funding-opportunities.md

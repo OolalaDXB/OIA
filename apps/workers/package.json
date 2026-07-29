@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "start": "tsx src/run.ts",
+    "validate:seed": "tsx src/validate-seed.ts",
+    "ingest:artifact": "tsx src/ingest-artifact.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests"
   },
@@ -13,6 +15,7 @@
     "@oia/config": "workspace:*",
     "@oia/connectors": "workspace:*",
     "@oia/database": "workspace:*",
+    "@oia/ingestion": "workspace:*",
     "@oia/intelligence": "workspace:*",
     "@oia/providers": "workspace:*",
     "@oia/scoring": "workspace:*"

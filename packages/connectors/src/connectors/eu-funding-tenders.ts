@@ -11,16 +11,22 @@ import type {
 /**
  * EU Funding & Tenders Portal connector (SEDIA public search API).
  *
- * Endpoint: POST {EU_FT_BASE_URL}?apiKey=SEDIA&text=<query>
- * Body: multipart/form-data with JSON `query`, `languages`, `page`, `pageSize`.
+ * ⚠️  STATUS: EXPERIMENTAL_UNVERIFIED — NOT production-ready, NOT "delivered".
+ * No successful live contract test has ever occurred; the execution environment
+ * returns a proxy/egress 403 for `api.tech.ec.europa.eu`. All tests use RECORDED
+ * FIXTURES, which prove compatibility with the fixture only — not endpoint
+ * availability, stability, live schema, auth requirements, or production
+ * usability. See docs/connectors/sedia-experimental-status.md before any
+ * activation.
  *
- * NOTE: `api.tech.ec.europa.eu` egress is blocked in the build/CI environment,
- * so this connector is validated by fixture-based contract tests (see test/).
- * Live discovery runs only in the deployed worker under a network policy that
- * permits the host. The mapping function `mapSediaResults` is pure and tested.
+ * Endpoint (ASSUMED): POST {EU_FT_BASE_URL}?apiKey=SEDIA&text=<query>
+ * Body (ASSUMED): multipart/form-data with JSON `query`, `languages`, `page`, `pageSize`.
  */
 
 export const EU_FT_KEY = "eu-funding-tenders";
+
+/** Lifecycle status of this connector. Do not present it as delivered. */
+export const EU_FT_CONNECTOR_STATUS = "EXPERIMENTAL_UNVERIFIED" as const;
 
 // SEDIA status codes → our status vocabulary.
 const STATUS_MAP: Record<string, RawOpportunity["hints"]["status"]> = {

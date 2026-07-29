@@ -38,3 +38,30 @@ export const KEY_FIELDS = [
 ] as const;
 
 export type KeyField = (typeof KEY_FIELDS)[number];
+
+/**
+ * Ingestion / fetch-security limits (Milestone 0, spec §5–§6). Conservative
+ * defaults; tune via env if needed.
+ */
+export const INGESTION_LIMITS = {
+  maxRedirects: 5,
+  timeoutMs: 30_000,
+  maxResponseBytes: 10 * 1024 * 1024, // 10 MB
+  maxDecompressedBytes: 50 * 1024 * 1024, // 50 MB (decompression-bomb guard)
+  rateLimitPerHostPerMinute: 20,
+} as const;
+
+/** Content types the fetcher will retain. Anything else → UNSUPPORTED. */
+export const FETCH_CONTENT_TYPE_ALLOWLIST = [
+  "text/html",
+  "application/xhtml+xml",
+  "application/pdf",
+  "text/plain",
+] as const;
+
+/**
+ * Domain denylist (never fetch) and optional allowlist. Empty allowlist means
+ * "no allowlist filter" (deny-by-policy still applies via the egress proxy).
+ */
+export const FETCH_DOMAIN_DENYLIST: string[] = [];
+export const FETCH_DOMAIN_ALLOWLIST: string[] = [];
