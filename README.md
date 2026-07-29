@@ -12,14 +12,35 @@ Signals, Ventures.
 
 ## Status
 
-This branch contains **architecture and planning artifacts only**. No
-application code has been written. Implementation is gated on review and
-approval of the documents in [`docs/architecture/`](docs/architecture/).
+Architecture **approved**. Milestone 1 (P1) implementation is **underway**,
+starting with the EU/FR connector as directed.
+
+**Implemented and tested (46 tests green):**
+
+| Package | What it does |
+|---------|--------------|
+| `packages/config` | Zod-validated env + scoring constants |
+| `packages/database` | Domain Zod schemas, row types, Supabase client, migration `0001_init.sql`, BAWABA seed |
+| `packages/audit` | Fail-closed policy hooks + append-only audit sink |
+| `packages/providers` | Provider-neutral `LLMProvider` (Anthropic default + fake) |
+| `packages/connectors` | `SourceConnector` interface, polite hash-pinning fetcher, **EU Funding & Tenders (SEDIA)** + manual connectors |
+| `packages/scoring` | Four scores + the hard PURSUE gate (pure, table-tested) |
+| `packages/intelligence` | Qualifier: deterministic fact corroboration, eligibility, scoring, gating |
+| `apps/workers` | Dockerized `discover→fetch→qualify→persist` pipeline (Supabase + memory persistence) |
+
+**Not yet built:** `apps/web` operator UI (P1 item 10), live Supabase project
+link, scoring calibration. See [`docs/architecture/06-milestone-1-plan.md`](docs/architecture/06-milestone-1-plan.md).
+
+```bash
+pnpm install
+pnpm typecheck
+pnpm test
+```
 
 ## Where to start
 
-Read [`docs/architecture/README.md`](docs/architecture/README.md) — it is the
-index for all ten requested deliverables.
+Read [`docs/architecture/README.md`](docs/architecture/README.md) — the index
+for all ten architecture deliverables and the rationale behind the code.
 
 ## Non-negotiable product rule
 

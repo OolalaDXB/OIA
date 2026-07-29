@@ -1,0 +1,27 @@
+{
+  "name": "oia",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Oolala Intelligence Agency — OIA Funding V0",
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "build": "turbo run build",
+    "worker:bawaba": "pnpm --filter @oia/workers run start -- --project bawaba"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "dependencies": {
+    "zod": "^3.24.1"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@oia/workers",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/run.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@oia/audit": "workspace:*",
+    "@oia/config": "workspace:*",
+    "@oia/connectors": "workspace:*",
+    "@oia/database": "workspace:*",
+    "@oia/intelligence": "workspace:*",
+    "@oia/providers": "workspace:*",
+    "@oia/scoring": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

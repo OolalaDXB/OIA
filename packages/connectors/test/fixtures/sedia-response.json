@@ -1,0 +1,40 @@
+{
+  "totalResults": 3,
+  "results": [
+    {
+      "reference": "ref-1",
+      "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL4-2026-DIGITAL-01",
+      "title": "fallback title 1",
+      "content": "Support for AI-enabled cultural and creative industries platforms.",
+      "metadata": {
+        "identifier": ["HORIZON-CL4-2026-DIGITAL-01"],
+        "title": ["AI for Creative Industries"],
+        "status": ["31094502"],
+        "deadlineDate": ["2026-09-15T17:00:00+02:00"],
+        "startDate": ["2026-05-01T00:00:00+02:00"],
+        "programmeName": ["Horizon Europe"],
+        "callIdentifier": ["HORIZON-CL4-2026-DIGITAL"]
+      }
+    },
+    {
+      "reference": "ref-2",
+      "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/CREA-MEDIA-2026-DEV",
+      "title": "fallback title 2",
+      "content": "Development support for immersive storytelling.",
+      "metadata": {
+        "identifier": ["CREA-MEDIA-2026-DEV"],
+        "title": ["Creative Europe MEDIA — Development"],
+        "status": ["31094501"],
+        "deadlineDate": ["2026-11-30T17:00:00+01:00"],
+        "programmeName": ["Creative Europe"]
+      }
+    },
+    {
+      "reference": "ref-incomplete",
+      "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/NO-ID",
+      "metadata": {
+        "status": ["31094502"]
+      }
+    }
+  ]
+}
