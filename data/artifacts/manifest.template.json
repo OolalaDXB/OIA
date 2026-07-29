@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "_readme": "TEMPLATE — copy to data/artifacts/manifest.json and replace the entries with your real supplied official files. This file mirrors the CURRENT repo schema (packages/ingestion/src/manifest.ts ArtifactManifestSchema). Do not add fields the schema does not define — unknown fields are not part of the contract. `sourceFormat` is your CLAIM; the classifier re-derives it and a mismatch is reported as a discrepancy (not a hard error).",
+  "artifacts": [
+    {
+      "originalUrl": "https://hub71.com/programmes/REPLACE-ME",
+      "issuingOrganization": "Hub71",
+      "officialDomain": "hub71.com",
+      "retrievalDate": "2026-07-29",
+      "localFilename": "hub71-access-cohort-20.html",
+      "contentType": "text/html",
+      "sourceFormat": "STATIC_HTML",
+      "expectedDocumentTitle": "Hub71 Access — Cohort 20",
+      "applicationUrl": "https://hub71.com/apply/REPLACE-ME"
+    },
+    {
+      "originalUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/DIGITAL-2026-AI-DATA-10-COMPLIANCE",
+      "issuingOrganization": "European Commission",
+      "officialDomain": "ec.europa.eu",
+      "retrievalDate": "2026-07-29",
+      "localFilename": "digital-2026-ai-data-10-compliance.pdf",
+      "contentType": "application/pdf",
+      "sourceFormat": "PDF",
+      "expectedDocumentTitle": "DIGITAL-2026-AI-DATA-10-COMPLIANCE call fiche",
+      "applicationUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/how-to-participate"
+    },
+    {
+      "originalUrl": "https://issuer.example.org/REPLACE-ME-client-rendered-page",
+      "issuingOrganization": "REPLACE-ME issuer of the SPA page",
+      "officialDomain": "issuer.example.org",
+      "retrievalDate": "2026-07-29",
+      "localFilename": "spa-captured-as-print.pdf",
+      "contentType": "application/pdf",
+      "sourceFormat": "PDF",
+      "expectedDocumentTitle": "REPLACE-ME title of the SPA programme page (captured as PDF)"
+    }
+  ]
+}

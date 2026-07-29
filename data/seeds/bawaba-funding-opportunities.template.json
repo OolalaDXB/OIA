@@ -1,25 +1,35 @@
 {
   "version": 1,
-  "_readme": "TEMPLATE ONLY — not the real dataset. Copy to bawaba-funding-opportunities.json and replace with the ten real records. Every `expected*` field is a HYPOTHESIS the pipeline will test against real official sources, not a fact. Do not invent values. Fields: id, title, issuer are required; provide at least one of officialUrl / discoveryUrl / applicationUrl / localArtifact. `localArtifact` links to a localFilename in data/artifacts/manifest.json.",
+  "_readme": "TEMPLATE — copy to data/seeds/bawaba-funding-opportunities.json and replace with your TEN real records. Mirrors the CURRENT repo schema (packages/ingestion/src/seed-manifest.ts SeedDatasetSchema). Every `expected*` field is a HYPOTHESIS the pipeline tests against real official sources — NOT a confirmed fact. The seed carries NO confirmed facts and NO scores; those are produced only by ingestion. Leave `expected*` as UNKNOWN when you do not want to assert a hypothesis. The two records below are illustrative SKELETONS (delete them). For the exact encoding of all ten coverage cases see outputs/milestone-0/input-schema-reference.md.",
   "records": [
     {
-      "id": "example-record-remove-me",
-      "title": "<official programme / call title>",
-      "issuer": "<issuing organisation>",
-      "officialUrl": "https://<official-issuer-domain>/<path>",
-      "discoveryUrl": "https://<where-you-found-it-if-different>",
-      "applicationUrl": "https://<application-portal-if-any>",
-      "localArtifact": "<localFilename in data/artifacts/manifest.json, if supplied>",
+      "id": "skeleton-official-source-remove-me",
+      "title": "REPLACE-ME official programme / call title",
+      "issuer": "REPLACE-ME issuing organisation",
+      "officialUrl": "https://issuer.example.org/REPLACE-ME",
+      "applicationUrl": "https://issuer.example.org/apply/REPLACE-ME",
+      "localArtifact": "REPLACE-ME.pdf",
       "isAggregatorOnly": false,
       "isClosedCall": false,
       "expectedSourceFormat": "STATIC_HTML",
-      "expectedVerificationStatus": "DISCOVERED_UNVERIFIED",
+      "expectedVerificationStatus": "MANUAL_REVIEW_REQUIRED",
       "expectedApplicationEligibility": "UNKNOWN",
       "expectedAwardEligibility": "UNKNOWN",
       "expectedStrategicRoute": "UNKNOWN",
       "expectedRecommendation": "INVESTIGATE",
       "expectedExtractedFacts": {},
-      "notes": "Free text. Everything here is a hypothesis to be confirmed against the live official source."
+      "notes": "Everything here is a hypothesis to confirm against the live official source."
+    },
+    {
+      "id": "skeleton-aggregator-only-remove-me",
+      "title": "REPLACE-ME lead spotted on an aggregator/blog/newsletter",
+      "issuer": "REPLACE-ME aggregator or unknown issuer",
+      "discoveryUrl": "https://aggregator.example.com/REPLACE-ME",
+      "isAggregatorOnly": true,
+      "expectedVerificationStatus": "DISCOVERED_UNVERIFIED",
+      "expectedRecommendation": "INVESTIGATE",
+      "expectedExtractedFacts": {},
+      "notes": "Aggregator-only lead: no confirmed financial facts, never VERIFIED/PURSUE from this source alone."
     }
   ]
 }
