@@ -11,8 +11,11 @@ export interface PdfPage {
 export async function extractPdfPages(data: Uint8Array): Promise<PdfPage[]> {
   // Lazy import so packages that don't parse PDFs don't pay the cost.
   const pdfjs = await import("pdfjs-dist/legacy/build/pdf.mjs");
+  // pdfjs rejects a Node Buffer (its backing ArrayBuffer may be pooled/shared).
+  // Copy into a plain Uint8Array to be safe.
+  const bytes = new Uint8Array(data);
   const loadingTask = pdfjs.getDocument({
-    data,
+    data: bytes,
     isEvalSupported: false,
     disableFontFace: true,
     useSystemFonts: false,
