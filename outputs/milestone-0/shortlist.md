@@ -2,7 +2,7 @@
 
 > Automated run; nothing is human-VERIFIED, so no item is PURSUE.
 
-| Record | Issuer | Reco | Verification | Source | Live fetch | Info | Facts |
+| Record | Issuer | Reco | Verification | Source | Live | Info | Facts |
 |---|---|---|---|---|---|---|---|
 | bpifrance-aide-developpement-deeptech | Bpifrance (operateur France 2030) | INVESTIGATE | SOURCE_UNAVAILABLE | - | ERROR | 0 | 0 |
 | eic-accelerator | European Innovation Council (European Commission) | INVESTIGATE | SOURCE_UNAVAILABLE | - | ERROR | 0 | 0 |

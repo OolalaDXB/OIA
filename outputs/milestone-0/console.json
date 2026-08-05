@@ -1,0 +1,1485 @@
+{
+  "note": "Milestone 0 real run. Automated (no human sign-off): nothing is human-VERIFIED, so no item is PURSUE. Live external fetch is blocked; official content supplied as local files.",
+  "run": {
+    "records": 10,
+    "artifactsIngested": 1,
+    "discrepancies": 0,
+    "warnings": [
+      "artifact file not supplied: digital-2026-ai-data-10-compliance-portal.pdf",
+      "artifact file not supplied: qdb-startup-qatar-start.html",
+      "artifact file not supplied: nsf-sbir-eligibility.html"
+    ],
+    "recommendationCounts": {
+      "REJECT": 3,
+      "INVESTIGATE": 7
+    }
+  },
+  "records": [
+    {
+      "id": "hub71-access-cohort-20",
+      "title": "Hub71 Access — Cohort 20",
+      "issuer": "Hub71",
+      "officialUrl": "https://hub71.com/",
+      "expected": {
+        "recommendation": "REJECT",
+        "sourceFormat": "UNKNOWN"
+      },
+      "humanReview": "PENDING",
+      "linkedBy": "officialUrl",
+      "liveFetch": {
+        "attemptedUrl": "https://hub71.com/",
+        "status": "ERROR",
+        "egressDenied": false,
+        "error": "fetch failed"
+      },
+      "verificationStatus": "SOURCE_UNAVAILABLE",
+      "verificationEvidence": [
+        "live fetch blocked; no official artifact supplied"
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 0
+      },
+      "gate": {
+        "accessiblePrimarySource": false,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": false,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "no accessible primary source",
+          "source not human-VERIFIED",
+          "no verified, non-conflicting, unexpired deadline",
+          "application eligibility is UNKNOWN",
+          "call is closed",
+          "no exact next action",
+          "info confidence 0 < floor 70"
+        ]
+      },
+      "recommendation": "REJECT",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "unresolvedQuestions": [
+        "Application/award eligibility not yet determined (UNKNOWN).",
+        "Gate: no accessible primary source",
+        "Gate: source not human-VERIFIED",
+        "Gate: no verified, non-conflicting, unexpired deadline",
+        "Gate: application eligibility is UNKNOWN",
+        "Gate: call is closed",
+        "Gate: no exact next action",
+        "Gate: info confidence 0 < floor 70"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "bpifrance-aide-developpement-deeptech",
+      "title": "Bpifrance — Aide au Developpement Deeptech (France 2030)",
+      "issuer": "Bpifrance (operateur France 2030)",
+      "officialUrl": "https://www.bpifrance.fr/nos-solutions/financement/aides-au-financement-de-linnovation",
+      "expected": {
+        "recommendation": "INVESTIGATE",
+        "sourceFormat": "UNKNOWN"
+      },
+      "humanReview": "PENDING",
+      "linkedBy": "officialUrl",
+      "liveFetch": {
+        "attemptedUrl": "https://www.bpifrance.fr/nos-solutions/financement/aides-au-financement-de-linnovation",
+        "status": "ERROR",
+        "egressDenied": false,
+        "error": "fetch failed"
+      },
+      "verificationStatus": "SOURCE_UNAVAILABLE",
+      "verificationEvidence": [
+        "live fetch blocked; no official artifact supplied"
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 0
+      },
+      "gate": {
+        "accessiblePrimarySource": false,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "no accessible primary source",
+          "source not human-VERIFIED",
+          "no verified, non-conflicting, unexpired deadline",
+          "application eligibility is UNKNOWN",
+          "no exact next action",
+          "info confidence 0 < floor 70"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "unresolvedQuestions": [
+        "Application/award eligibility not yet determined (UNKNOWN).",
+        "Gate: no accessible primary source",
+        "Gate: source not human-VERIFIED",
+        "Gate: no verified, non-conflicting, unexpired deadline",
+        "Gate: application eligibility is UNKNOWN",
+        "Gate: no exact next action",
+        "Gate: info confidence 0 < floor 70"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "eic-accelerator",
+      "title": "EIC Accelerator (Open)",
+      "issuer": "European Innovation Council (European Commission)",
+      "officialUrl": "https://eic.ec.europa.eu/eic-funding-opportunities/eic-accelerator_en",
+      "expected": {
+        "recommendation": "INVESTIGATE",
+        "sourceFormat": "UNKNOWN"
+      },
+      "humanReview": "PENDING",
+      "linkedBy": "officialUrl",
+      "liveFetch": {
+        "attemptedUrl": "https://eic.ec.europa.eu/eic-funding-opportunities/eic-accelerator_en",
+        "status": "ERROR",
+        "egressDenied": false,
+        "error": "fetch failed"
+      },
+      "verificationStatus": "SOURCE_UNAVAILABLE",
+      "verificationEvidence": [
+        "live fetch blocked; no official artifact supplied"
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 0
+      },
+      "gate": {
+        "accessiblePrimarySource": false,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "no accessible primary source",
+          "source not human-VERIFIED",
+          "no verified, non-conflicting, unexpired deadline",
+          "application eligibility is UNKNOWN",
+          "no exact next action",
+          "info confidence 0 < floor 70"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "unresolvedQuestions": [
+        "Application/award eligibility not yet determined (UNKNOWN).",
+        "Gate: no accessible primary source",
+        "Gate: source not human-VERIFIED",
+        "Gate: no verified, non-conflicting, unexpired deadline",
+        "Gate: application eligibility is UNKNOWN",
+        "Gate: no exact next action",
+        "Gate: info confidence 0 < floor 70"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "digital-2026-ai-data-10-compliance",
+      "title": "DIGITAL-2026-AI-DATA-10-COMPLIANCE — Digital solutions for regulatory compliance through data",
+      "issuer": "European Commission — Digital Europe Programme",
+      "officialUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/DIGITAL-2026-AI-DATA-10-COMPLIANCE",
+      "expected": {
+        "recommendation": "INVESTIGATE",
+        "sourceFormat": "CLIENT_RENDERED_SPA"
+      },
+      "humanReview": "PENDING",
+      "linkedBy": "localArtifact",
+      "liveFetch": {
+        "attemptedUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/DIGITAL-2026-AI-DATA-10-COMPLIANCE",
+        "status": "ERROR",
+        "egressDenied": false,
+        "error": "fetch failed"
+      },
+      "verificationStatus": "SOURCE_UNAVAILABLE",
+      "verificationEvidence": [
+        "artifact file 'digital-2026-ai-data-10-compliance-portal.pdf' not supplied"
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 0
+      },
+      "gate": {
+        "accessiblePrimarySource": false,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "no accessible primary source",
+          "source not human-VERIFIED",
+          "no verified, non-conflicting, unexpired deadline",
+          "application eligibility is UNKNOWN",
+          "no exact next action",
+          "info confidence 0 < floor 70"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "unresolvedQuestions": [
+        "Application/award eligibility not yet determined (UNKNOWN).",
+        "Gate: no accessible primary source",
+        "Gate: source not human-VERIFIED",
+        "Gate: no verified, non-conflicting, unexpired deadline",
+        "Gate: application eligibility is UNKNOWN",
+        "Gate: no exact next action",
+        "Gate: info confidence 0 < floor 70"
+      ],
+      "warnings": [
+        "linked artifact 'digital-2026-ai-data-10-compliance-portal.pdf' not supplied"
+      ]
+    },
+    {
+      "id": "digital-2026-ai-09-genai-pa",
+      "title": "DIGITAL-2026-AI-09-GENAI-PA — Apply AI: GenAI for the public administrations",
+      "issuer": "European Commission — Digital Europe Programme",
+      "officialUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/DIGITAL-2026-AI-09-GENAI-PA",
+      "expected": {
+        "recommendation": "REJECT",
+        "sourceFormat": "PDF"
+      },
+      "humanReview": "PENDING",
+      "linkedBy": "localArtifact",
+      "artifact": {
+        "id": "art_a13246034824e247",
+        "sourceFormat": "PDF",
+        "contentHash": "2b6efda6b98e887ab3f01dc12293bba70025525aa3928e945bfc2324e34cd126",
+        "renderMethod": "LOCAL_FILE",
+        "byteSize": 681806,
+        "pageCount": 62,
+        "localFilename": "digital-2026-ai-09-call-fiche.pdf",
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/digital/wp-call/2026/call-fiche_digital-2026-ai-09_en.pdf",
+        "status": "ERROR",
+        "egressDenied": false,
+        "error": "fetch failed"
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "issuer domain recorded from official URL: ec.europa.eu",
+        "government/supranational domain: ec.europa.eu",
+        "artifact content is consistent with the named programme (token overlap ≥ 50%)"
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 65
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": false,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "source not human-VERIFIED",
+          "no verified, non-conflicting, unexpired deadline",
+          "application eligibility is UNKNOWN",
+          "call is closed",
+          "no exact next action",
+          "info confidence 65 < floor 70"
+        ]
+      },
+      "recommendation": "REJECT",
+      "facts": [
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 60 200 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 31",
+            "page": 31
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 60 200 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 5 000 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 31",
+            "page": 31
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 5 000 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 17 500 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 31",
+            "page": 31
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 17 500 000"
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 14 400 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 32",
+            "page": 32
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 14 400 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 1 000 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 32",
+            "page": 32
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 1 000 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 3 500 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 32",
+            "page": 32
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 3 500 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 1 800 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 32",
+            "page": 32
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 1 800 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 17 000 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 32",
+            "page": 32
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 17 000 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 60 000.",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 40",
+            "page": 40
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 60 000. "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 5 000 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 46",
+            "page": 46
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 5 000 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 17 5 00 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 46",
+            "page": 46
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 17 5 00 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 14 400 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 46",
+            "page": 46
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 14 400 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 1 0 00 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 46",
+            "page": 46
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 1 0 00 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 3 5 00 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 46",
+            "page": 46
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 3 5 00 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 1 8 00 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 46",
+            "page": 46
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 1 8 00 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 8 000 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 46",
+            "page": 46
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 8 000 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 9 000 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 46",
+            "page": 46
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 9 000 000 "
+        },
+        {
+          "field": "expected_title",
+          "normalizedValue": "Call document: DIGITAL-2026-AI-09 (Digital Europe) — exact PDF extraction fixture",
+          "classification": "USER_PROVIDED",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "manifest"
+          },
+          "extractionMethod": "manifest",
+          "extractingProvider": "user",
+          "extractingModel": "none",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "Call document: DIGITAL-2026-AI-09 (Digital Europe) — exact PDF extraction fixture"
+        }
+      ],
+      "deadlines": [
+        {
+          "normalized": "2024-09-23",
+          "originalSourceString": "23 September 2024",
+          "deadlineType": "UNKNOWN",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 6",
+            "page": 6
+          },
+          "conflicts": []
+        },
+        {
+          "normalized": "2021-04-29",
+          "originalSourceString": "29 April 2021",
+          "deadlineType": "UNKNOWN",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 6",
+            "page": 6
+          },
+          "conflicts": []
+        },
+        {
+          "normalized": "2025-11-04",
+          "originalSourceString": "4 November 2025",
+          "deadlineType": "APPLICATION",
+          "isConfirmPending": true,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 32",
+            "page": 32
+          },
+          "conflicts": [
+            "2026-03-03"
+          ]
+        },
+        {
+          "normalized": "2026-03-03",
+          "originalSourceString": "3 March 2026",
+          "deadlineType": "APPLICATION",
+          "isConfirmPending": true,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 32",
+            "page": 32
+          },
+          "conflicts": [
+            "2025-11-04"
+          ]
+        },
+        {
+          "normalized": "2022-12-16",
+          "originalSourceString": "16 December 2022",
+          "deadlineType": "UNKNOWN",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 37",
+            "page": 37
+          },
+          "conflicts": []
+        },
+        {
+          "normalized": "2020-12-16",
+          "originalSourceString": "16 December 2020",
+          "deadlineType": "UNKNOWN",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 37",
+            "page": 37
+          },
+          "conflicts": []
+        },
+        {
+          "normalized": "2015-03-13",
+          "originalSourceString": "13 March 2015",
+          "deadlineType": "UNKNOWN",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 39",
+            "page": 39
+          },
+          "conflicts": []
+        },
+        {
+          "normalized": "2020-10-20",
+          "originalSourceString": "20 October 2020",
+          "deadlineType": "UNKNOWN",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 47",
+            "page": 47
+          },
+          "conflicts": []
+        },
+        {
+          "normalized": "2021-01-12",
+          "originalSourceString": "12 January 2021",
+          "deadlineType": "PROGRAMME_PERIOD",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 47",
+            "page": 47
+          },
+          "conflicts": []
+        }
+      ],
+      "conflicts": [
+        "2026-03-03",
+        "2025-11-04"
+      ],
+      "discrepancies": [],
+      "unresolvedQuestions": [
+        "Application/award eligibility not yet determined (UNKNOWN).",
+        "A deadline is marked 'to be confirmed' — cannot be verified.",
+        "Gate: source not human-VERIFIED",
+        "Gate: no verified, non-conflicting, unexpired deadline",
+        "Gate: application eligibility is UNKNOWN",
+        "Gate: call is closed",
+        "Gate: no exact next action",
+        "Gate: info confidence 65 < floor 70"
+      ],
+      "warnings": [
+        "PDF magic bytes / content-type"
+      ]
+    },
+    {
+      "id": "startup-qatar-qdb-start",
+      "title": "Startup Qatar Investment Program — START",
+      "issuer": "Qatar Development Bank (QDB)",
+      "officialUrl": "https://www.qdb.qa/Financing-And-Funding/Equity-And-Investment/Startup-Qatar-Investment-Program",
+      "applicationUrl": "https://startupqatar.qa/en/investment-program",
+      "expected": {
+        "recommendation": "INVESTIGATE",
+        "sourceFormat": "STATIC_HTML"
+      },
+      "humanReview": "PENDING",
+      "linkedBy": "localArtifact",
+      "liveFetch": {
+        "attemptedUrl": "https://www.qdb.qa/Financing-And-Funding/Equity-And-Investment/Startup-Qatar-Investment-Program",
+        "status": "ERROR",
+        "egressDenied": false,
+        "error": "fetch failed"
+      },
+      "verificationStatus": "SOURCE_UNAVAILABLE",
+      "verificationEvidence": [
+        "artifact file 'qdb-startup-qatar-start.html' not supplied"
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 0
+      },
+      "gate": {
+        "accessiblePrimarySource": false,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "no accessible primary source",
+          "source not human-VERIFIED",
+          "no verified, non-conflicting, unexpired deadline",
+          "application eligibility is UNKNOWN",
+          "no exact next action",
+          "info confidence 0 < floor 70"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "unresolvedQuestions": [
+        "Application/award eligibility not yet determined (UNKNOWN).",
+        "Gate: no accessible primary source",
+        "Gate: source not human-VERIFIED",
+        "Gate: no verified, non-conflicting, unexpired deadline",
+        "Gate: application eligibility is UNKNOWN",
+        "Gate: no exact next action",
+        "Gate: info confidence 0 < floor 70"
+      ],
+      "warnings": [
+        "linked artifact 'qdb-startup-qatar-start.html' not supplied"
+      ]
+    },
+    {
+      "id": "nsf-sbir",
+      "title": "NSF SBIR/STTR (America's Seed Fund) — eligibility",
+      "issuer": "U.S. National Science Foundation (NSF)",
+      "officialUrl": "https://seedfund.nsf.gov/solicitation-eligibility/",
+      "applicationUrl": "https://seedfund.nsf.gov/",
+      "expected": {
+        "recommendation": "INVESTIGATE",
+        "sourceFormat": "STATIC_HTML"
+      },
+      "humanReview": "PENDING",
+      "linkedBy": "localArtifact",
+      "liveFetch": {
+        "attemptedUrl": "https://seedfund.nsf.gov/solicitation-eligibility/",
+        "status": "ERROR",
+        "egressDenied": false,
+        "error": "fetch failed"
+      },
+      "verificationStatus": "SOURCE_UNAVAILABLE",
+      "verificationEvidence": [
+        "artifact file 'nsf-sbir-eligibility.html' not supplied"
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 0
+      },
+      "gate": {
+        "accessiblePrimarySource": false,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "no accessible primary source",
+          "source not human-VERIFIED",
+          "no verified, non-conflicting, unexpired deadline",
+          "application eligibility is UNKNOWN",
+          "no exact next action",
+          "info confidence 0 < floor 70"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "unresolvedQuestions": [
+        "Application/award eligibility not yet determined (UNKNOWN).",
+        "Gate: no accessible primary source",
+        "Gate: source not human-VERIFIED",
+        "Gate: no verified, non-conflicting, unexpired deadline",
+        "Gate: application eligibility is UNKNOWN",
+        "Gate: no exact next action",
+        "Gate: info confidence 0 < floor 70"
+      ],
+      "warnings": [
+        "linked artifact 'nsf-sbir-eligibility.html' not supplied"
+      ]
+    },
+    {
+      "id": "unesco-ungm-300342",
+      "title": "UNESCO RFP (UNGM Notice 300342) — AI governance / data-protection legislative support (Ukraine)",
+      "issuer": "UNESCO (via UN Global Marketplace)",
+      "officialUrl": "https://www.ungm.org/Public/Notice/300342",
+      "expected": {
+        "recommendation": "REJECT",
+        "sourceFormat": "UNKNOWN"
+      },
+      "humanReview": "PENDING",
+      "linkedBy": "officialUrl",
+      "liveFetch": {
+        "attemptedUrl": "https://www.ungm.org/Public/Notice/300342",
+        "status": "ERROR",
+        "egressDenied": false,
+        "error": "fetch failed"
+      },
+      "verificationStatus": "SOURCE_UNAVAILABLE",
+      "verificationEvidence": [
+        "live fetch blocked; no official artifact supplied"
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 0
+      },
+      "gate": {
+        "accessiblePrimarySource": false,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": false,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "no accessible primary source",
+          "source not human-VERIFIED",
+          "no verified, non-conflicting, unexpired deadline",
+          "application eligibility is UNKNOWN",
+          "call is closed",
+          "no exact next action",
+          "info confidence 0 < floor 70"
+        ]
+      },
+      "recommendation": "REJECT",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "unresolvedQuestions": [
+        "Application/award eligibility not yet determined (UNKNOWN).",
+        "Gate: no accessible primary source",
+        "Gate: source not human-VERIFIED",
+        "Gate: no verified, non-conflicting, unexpired deadline",
+        "Gate: application eligibility is UNKNOWN",
+        "Gate: call is closed",
+        "Gate: no exact next action",
+        "Gate: info confidence 0 < floor 70"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "aggregator-only-digital-health-ai-usd",
+      "title": "Aggregator lead: 'Digital Europe — Advanced Digital Skills for AI Uptake in Health' listed with USD figures",
+      "issuer": "grantedai.com (aggregator; issuer unconfirmed)",
+      "discoveryUrl": "https://grantedai.com/grants/digital-europe-programme-grants-advanced-digital-skills-for-ai-uptake-in-european-commission-22c8b6f2",
+      "expected": {
+        "recommendation": "INVESTIGATE",
+        "verificationStatus": "DISCOVERED_UNVERIFIED",
+        "sourceFormat": "UNKNOWN"
+      },
+      "humanReview": "PENDING",
+      "linkedBy": "discoveryUrl",
+      "liveFetch": {
+        "attemptedUrl": "https://grantedai.com/grants/digital-europe-programme-grants-advanced-digital-skills-for-ai-uptake-in-european-commission-22c8b6f2",
+        "status": "ERROR",
+        "egressDenied": false,
+        "error": "fetch failed"
+      },
+      "verificationStatus": "DISCOVERED_UNVERIFIED",
+      "verificationEvidence": [
+        "discovery source only: grantedai.com",
+        "an aggregator/blog/newsletter/search result cannot independently produce VERIFIED or PURSUE"
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 0
+      },
+      "gate": {
+        "accessiblePrimarySource": false,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": false,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "no accessible primary source",
+          "source not human-VERIFIED",
+          "no verified, non-conflicting, unexpired deadline",
+          "application eligibility is UNKNOWN",
+          "aggregator-only lead cannot be pursued",
+          "no exact next action",
+          "info confidence 0 < floor 70"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "unresolvedQuestions": [
+        "Application/award eligibility not yet determined (UNKNOWN).",
+        "Gate: no accessible primary source",
+        "Gate: source not human-VERIFIED",
+        "Gate: no verified, non-conflicting, unexpired deadline",
+        "Gate: application eligibility is UNKNOWN",
+        "Gate: aggregator-only lead cannot be pursued",
+        "Gate: no exact next action",
+        "Gate: info confidence 0 < floor 70"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "pdf-fixture-digital-2026-ai-09",
+      "title": "Call document: DIGITAL-2026-AI-09 (Digital Europe) — exact PDF extraction fixture",
+      "issuer": "European Commission — Digital Europe Programme",
+      "officialUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/digital/wp-call/2026/call-fiche_digital-2026-ai-09_en.pdf",
+      "expected": {
+        "recommendation": "INVESTIGATE",
+        "sourceFormat": "PDF"
+      },
+      "humanReview": "PENDING",
+      "linkedBy": "localArtifact",
+      "artifact": {
+        "id": "art_a13246034824e247",
+        "sourceFormat": "PDF",
+        "contentHash": "2b6efda6b98e887ab3f01dc12293bba70025525aa3928e945bfc2324e34cd126",
+        "renderMethod": "LOCAL_FILE",
+        "byteSize": 681806,
+        "pageCount": 62,
+        "localFilename": "digital-2026-ai-09-call-fiche.pdf",
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/digital/wp-call/2026/call-fiche_digital-2026-ai-09_en.pdf",
+        "status": "ERROR",
+        "egressDenied": false,
+        "error": "fetch failed"
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "issuer domain recorded from official URL: ec.europa.eu",
+        "government/supranational domain: ec.europa.eu",
+        "artifact content is consistent with the named programme (token overlap ≥ 50%)"
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 65
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "source not human-VERIFIED",
+          "no verified, non-conflicting, unexpired deadline",
+          "application eligibility is UNKNOWN",
+          "no exact next action",
+          "info confidence 65 < floor 70"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "facts": [
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 60 200 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 31",
+            "page": 31
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 60 200 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 5 000 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 31",
+            "page": 31
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 5 000 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 17 500 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 31",
+            "page": 31
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 17 500 000"
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 14 400 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 32",
+            "page": 32
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 14 400 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 1 000 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 32",
+            "page": 32
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 1 000 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 3 500 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 32",
+            "page": 32
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 3 500 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 1 800 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 32",
+            "page": 32
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 1 800 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 17 000 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 32",
+            "page": 32
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 17 000 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 60 000.",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 40",
+            "page": 40
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 60 000. "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 5 000 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 46",
+            "page": 46
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 5 000 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 17 5 00 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 46",
+            "page": 46
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 17 5 00 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 14 400 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 46",
+            "page": 46
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 14 400 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 1 0 00 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 46",
+            "page": 46
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 1 0 00 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 3 5 00 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 46",
+            "page": 46
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 3 5 00 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 1 8 00 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 46",
+            "page": 46
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 1 8 00 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 8 000 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 46",
+            "page": 46
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 8 000 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 9 000 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 46",
+            "page": 46
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 9 000 000 "
+        },
+        {
+          "field": "expected_title",
+          "normalizedValue": "Call document: DIGITAL-2026-AI-09 (Digital Europe) — exact PDF extraction fixture",
+          "classification": "USER_PROVIDED",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "manifest"
+          },
+          "extractionMethod": "manifest",
+          "extractingProvider": "user",
+          "extractingModel": "none",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "Call document: DIGITAL-2026-AI-09 (Digital Europe) — exact PDF extraction fixture"
+        }
+      ],
+      "deadlines": [
+        {
+          "normalized": "2024-09-23",
+          "originalSourceString": "23 September 2024",
+          "deadlineType": "UNKNOWN",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 6",
+            "page": 6
+          },
+          "conflicts": []
+        },
+        {
+          "normalized": "2021-04-29",
+          "originalSourceString": "29 April 2021",
+          "deadlineType": "UNKNOWN",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 6",
+            "page": 6
+          },
+          "conflicts": []
+        },
+        {
+          "normalized": "2025-11-04",
+          "originalSourceString": "4 November 2025",
+          "deadlineType": "APPLICATION",
+          "isConfirmPending": true,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 32",
+            "page": 32
+          },
+          "conflicts": [
+            "2026-03-03"
+          ]
+        },
+        {
+          "normalized": "2026-03-03",
+          "originalSourceString": "3 March 2026",
+          "deadlineType": "APPLICATION",
+          "isConfirmPending": true,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 32",
+            "page": 32
+          },
+          "conflicts": [
+            "2025-11-04"
+          ]
+        },
+        {
+          "normalized": "2022-12-16",
+          "originalSourceString": "16 December 2022",
+          "deadlineType": "UNKNOWN",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 37",
+            "page": 37
+          },
+          "conflicts": []
+        },
+        {
+          "normalized": "2020-12-16",
+          "originalSourceString": "16 December 2020",
+          "deadlineType": "UNKNOWN",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 37",
+            "page": 37
+          },
+          "conflicts": []
+        },
+        {
+          "normalized": "2015-03-13",
+          "originalSourceString": "13 March 2015",
+          "deadlineType": "UNKNOWN",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 39",
+            "page": 39
+          },
+          "conflicts": []
+        },
+        {
+          "normalized": "2020-10-20",
+          "originalSourceString": "20 October 2020",
+          "deadlineType": "UNKNOWN",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 47",
+            "page": 47
+          },
+          "conflicts": []
+        },
+        {
+          "normalized": "2021-01-12",
+          "originalSourceString": "12 January 2021",
+          "deadlineType": "PROGRAMME_PERIOD",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 47",
+            "page": 47
+          },
+          "conflicts": []
+        }
+      ],
+      "conflicts": [
+        "2026-03-03",
+        "2025-11-04"
+      ],
+      "discrepancies": [],
+      "unresolvedQuestions": [
+        "Application/award eligibility not yet determined (UNKNOWN).",
+        "A deadline is marked 'to be confirmed' — cannot be verified.",
+        "Gate: source not human-VERIFIED",
+        "Gate: no verified, non-conflicting, unexpired deadline",
+        "Gate: application eligibility is UNKNOWN",
+        "Gate: no exact next action",
+        "Gate: info confidence 65 < floor 70"
+      ],
+      "warnings": [
+        "PDF magic bytes / content-type"
+      ]
+    }
+  ]
+}
