@@ -1,14 +1,16 @@
-# Seed validation — NOT RUN
+# Seed validation report
 
-Seed file not found: `/home/user/OIA/data/seeds/bawaba-funding-opportunities.json`
+Seed file: `/home/user/OIA/data/seeds/bawaba-funding-opportunities.json`
+Schema valid: **YES**
 
-The ten-record dataset has not been supplied yet. Per instruction §6 the
-ten-record execution is PAUSED until both files exist:
+## Schema errors
+- none
 
-- `data/seeds/bawaba-funding-opportunities.json`
-- `data/seeds/bawaba-funding-opportunities.md`
+## Internal inconsistencies (0)
 
-The schema + validator + inconsistency checks are implemented and tested
-(`@oia/ingestion` seed.unit.test) and will run automatically once the file
-is provided. A documented empty template is at
-`data/seeds/bawaba-funding-opportunities.template.json`.
+> These are the seed's own claims cross-examined by deterministic rules. Each
+> is a hypothesis to test against real sources, not an automatic failure.
+
+- none detected
+
+Records: 10
