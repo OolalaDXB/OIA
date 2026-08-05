@@ -1,23 +1,19 @@
 # Milestone 0 — Run report
 
-## Live fetch vs artifact processing (reported separately)
-- sources attempted: 1
-- live fetch succeeded: 0
-- live fetch BLOCKED (organizational egress 403): 0
-- official artifacts processed: 1
-- artifact processing failures: 0
-- PDFs processed: 1
-- SPA/empty-shell detected: 0
-- verifications requiring human review: 1
+- seed records evaluated: 10
+- official artifacts ingested: 1
+- total discrepancies (seed vs observed): 0
 
-## Recommendations
+## Recommendations (observed)
 - PURSUE: 0
 - PARTNER: 0
-- INVESTIGATE: 1
+- INVESTIGATE: 7
 - MONITOR: 0
-- REJECT: 0
+- REJECT: 3
 
 ## Warnings
-- digital-2026-ai-09-call-fiche.pdf: PDF magic bytes / content-type
+- artifact file not supplied: digital-2026-ai-data-10-compliance-portal.pdf
+- artifact file not supplied: qdb-startup-qatar-start.html
+- artifact file not supplied: nsf-sbir-eligibility.html
 
-> No production-readiness claim is made. Live-source processing was blocked by egress; official content was supplied as local files and processed as OFFICIAL_PDF / MANUAL_DOCUMENT.
+> Live external fetch is blocked in this environment; official content was supplied as local files. No production-readiness claim relies on fixtures.

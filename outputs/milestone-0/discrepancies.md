@@ -1,6 +1,7 @@
-# Milestone 0 — Discrepancies
+# Milestone 0 — Discrepancies (seed hypothesis vs observed)
 
-> Seed-vs-observed discrepancies are produced once the seed dataset is supplied.
-
-## Ingestion warnings (observed)
-- digital-2026-ai-09-call-fiche.pdf: PDF magic bytes / content-type
+_No discrepancies: every seed hypothesis matched the observed result._
+## Run warnings
+- artifact file not supplied: digital-2026-ai-data-10-compliance-portal.pdf
+- artifact file not supplied: qdb-startup-qatar-start.html
+- artifact file not supplied: nsf-sbir-eligibility.html

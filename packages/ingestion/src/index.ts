@@ -10,4 +10,5 @@ export * from "./deadline";
 export * from "./verification";
 export * from "./gate";
 export * from "./seed-manifest";
+export * from "./discrepancy";
 export * from "./ingest";
