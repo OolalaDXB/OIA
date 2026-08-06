@@ -1,8 +1,8 @@
 # Milestone 0 — Run report
 
 - seed records evaluated: 10
-- official artifacts ingested: 1
-- total discrepancies (seed vs observed): 0
+- official artifacts ingested: 2
+- total discrepancies (seed vs observed): 1
 
 ## Recommendations (observed)
 - PURSUE: 0
@@ -12,7 +12,6 @@
 - REJECT: 3
 
 ## Warnings
-- artifact file not supplied: digital-2026-ai-data-10-compliance-portal.pdf
 - artifact file not supplied: qdb-startup-qatar-start.html
 - artifact file not supplied: nsf-sbir-eligibility.html
 

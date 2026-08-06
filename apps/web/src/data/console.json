@@ -2,10 +2,9 @@
   "note": "Milestone 0 real run. Automated (no human sign-off): nothing is human-VERIFIED, so no item is PURSUE. Live external fetch is blocked; official content supplied as local files.",
   "run": {
     "records": 10,
-    "artifactsIngested": 1,
-    "discrepancies": 0,
+    "artifactsIngested": 2,
+    "discrepancies": 1,
     "warnings": [
-      "artifact file not supplied: digital-2026-ai-data-10-compliance-portal.pdf",
       "artifact file not supplied: qdb-startup-qatar-start.html",
       "artifact file not supplied: nsf-sbir-eligibility.html"
     ],
@@ -223,15 +222,27 @@
       },
       "humanReview": "PENDING",
       "linkedBy": "localArtifact",
+      "artifact": {
+        "id": "art_91f10045d5e03bf6",
+        "sourceFormat": "PDF",
+        "contentHash": "9969527fa61040fd10019746e8a979b01b52e6646bb83c817f9893c9f2649c3c",
+        "renderMethod": "LOCAL_FILE",
+        "byteSize": 520089,
+        "pageCount": 30,
+        "localFilename": "digital-2026-ai-data-10-compliance-portal.pdf",
+        "processing": "SUCCESS"
+      },
       "liveFetch": {
         "attemptedUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/DIGITAL-2026-AI-DATA-10-COMPLIANCE",
         "status": "ERROR",
         "egressDenied": false,
         "error": "fetch failed"
       },
-      "verificationStatus": "SOURCE_UNAVAILABLE",
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
       "verificationEvidence": [
-        "artifact file 'digital-2026-ai-data-10-compliance-portal.pdf' not supplied"
+        "issuer domain recorded from official URL: ec.europa.eu",
+        "government/supranational domain: ec.europa.eu",
+        "artifact content is consistent with the named programme (token overlap ≥ 50%)"
       ],
       "application": "UNKNOWN",
       "award": "UNKNOWN",
@@ -239,10 +250,10 @@
       "scores": {
         "relevance": null,
         "winPotential": null,
-        "infoConfidence": 0
+        "infoConfidence": 65
       },
       "gate": {
-        "accessiblePrimarySource": false,
+        "accessiblePrimarySource": true,
         "verifiedSource": false,
         "verifiedDeadline": false,
         "notExpired": true,
@@ -253,30 +264,257 @@
         "sufficientConfidence": false,
         "pursueEligible": false,
         "failedReasons": [
-          "no accessible primary source",
           "source not human-VERIFIED",
           "no verified, non-conflicting, unexpired deadline",
           "application eligibility is UNKNOWN",
           "no exact next action",
-          "info confidence 0 < floor 70"
+          "info confidence 65 < floor 70"
         ]
       },
       "recommendation": "INVESTIGATE",
-      "facts": [],
-      "deadlines": [],
-      "conflicts": [],
-      "discrepancies": [],
+      "facts": [
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 8 500 000 .",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 8",
+            "page": 8
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 8 500 000 . "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 8 500 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 8",
+            "page": 8
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 8 500 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 60 000.",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 13",
+            "page": 13
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 60 000. "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 2 000 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 18",
+            "page": 18
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 2 000 000 "
+        },
+        {
+          "field": "amount",
+          "normalizedValue": "EUR 5 0 00 000",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 18",
+            "page": 18
+          },
+          "extractionMethod": "pdf-text",
+          "extractingProvider": "deterministic",
+          "extractingModel": "rules-v1",
+          "extractionConfidence": 0.6,
+          "originalSourceText": "EUR 5 0 00 000 "
+        },
+        {
+          "field": "expected_title",
+          "normalizedValue": "DIGITAL-2026-AI-DATA-10-COMPLIANCE — Digital solutions for regulatory compliance through data",
+          "classification": "USER_PROVIDED",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "manifest"
+          },
+          "extractionMethod": "manifest",
+          "extractingProvider": "user",
+          "extractingModel": "none",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "DIGITAL-2026-AI-DATA-10-COMPLIANCE — Digital solutions for regulatory compliance through data"
+        }
+      ],
+      "deadlines": [
+        {
+          "normalized": "2024-09-23",
+          "originalSourceString": "23 September 2024",
+          "deadlineType": "UNKNOWN",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 4",
+            "page": 4
+          },
+          "conflicts": []
+        },
+        {
+          "normalized": "2021-04-29",
+          "originalSourceString": "29 April 2021",
+          "deadlineType": "UNKNOWN",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 4",
+            "page": 4
+          },
+          "conflicts": []
+        },
+        {
+          "normalized": "2026-03-19",
+          "originalSourceString": "19/03/2026",
+          "deadlineType": "UNKNOWN",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 4",
+            "page": 4
+          },
+          "conflicts": []
+        },
+        {
+          "normalized": "2026-04-21",
+          "originalSourceString": "21 April 2026",
+          "deadlineType": "APPLICATION",
+          "isConfirmPending": true,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 8",
+            "page": 8
+          },
+          "conflicts": [
+            "2026-10-01"
+          ]
+        },
+        {
+          "normalized": "2026-10-01",
+          "originalSourceString": "1 October 2026",
+          "deadlineType": "APPLICATION",
+          "isConfirmPending": true,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 8",
+            "page": 8
+          },
+          "conflicts": [
+            "2026-04-21"
+          ]
+        },
+        {
+          "normalized": "2026-03-19",
+          "originalSourceString": "19/03/2026",
+          "deadlineType": "UNKNOWN",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 10",
+            "page": 10
+          },
+          "conflicts": []
+        },
+        {
+          "normalized": "2022-12-16",
+          "originalSourceString": "16 December 2022",
+          "deadlineType": "UNKNOWN",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 11",
+            "page": 11
+          },
+          "conflicts": []
+        },
+        {
+          "normalized": "2020-12-16",
+          "originalSourceString": "16 December 2020",
+          "deadlineType": "UNKNOWN",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 11",
+            "page": 11
+          },
+          "conflicts": []
+        },
+        {
+          "normalized": "2015-03-13",
+          "originalSourceString": "13 March 2015",
+          "deadlineType": "UNKNOWN",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 12",
+            "page": 12
+          },
+          "conflicts": []
+        },
+        {
+          "normalized": "2023-03-31",
+          "originalSourceString": "31 March 2023",
+          "deadlineType": "UNKNOWN",
+          "isConfirmPending": false,
+          "locator": {
+            "type": "PDF_PAGE",
+            "value": "page 18",
+            "page": 18
+          },
+          "conflicts": []
+        }
+      ],
+      "conflicts": [
+        "2026-10-01",
+        "2026-04-21"
+      ],
+      "discrepancies": [
+        {
+          "recordId": "digital-2026-ai-data-10-compliance",
+          "field": "sourceFormat",
+          "seedExpectation": "CLIENT_RENDERED_SPA",
+          "observed": "PDF",
+          "evidence": "content classifier",
+          "ruleApplied": "format-classification",
+          "humanReviewRequired": false
+        }
+      ],
       "unresolvedQuestions": [
         "Application/award eligibility not yet determined (UNKNOWN).",
-        "Gate: no accessible primary source",
+        "A deadline is marked 'to be confirmed' — cannot be verified.",
         "Gate: source not human-VERIFIED",
         "Gate: no verified, non-conflicting, unexpired deadline",
         "Gate: application eligibility is UNKNOWN",
         "Gate: no exact next action",
-        "Gate: info confidence 0 < floor 70"
+        "Gate: info confidence 65 < floor 70"
       ],
       "warnings": [
-        "linked artifact 'digital-2026-ai-data-10-compliance-portal.pdf' not supplied"
+        "PDF magic bytes / content-type"
       ]
     },
     {
