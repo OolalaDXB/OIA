@@ -23,3 +23,7 @@ data/seeds/bawaba-funding-opportunities.md
 
 # Large run output embedding full official-document text (keep local)
 outputs/milestone-0/opportunities.json
+
+# Next static export output
+out/
+apps/web/out/
