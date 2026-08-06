@@ -1,9 +1,6 @@
 import { loadConsoleData } from "../lib/loadData";
 import { Console } from "./Console";
 
-// Read the generated file at request time (local run output, not a build asset).
-export const dynamic = "force-dynamic";
-
 export default function Page() {
   const data = loadConsoleData();
   if (!data) {

@@ -94,7 +94,12 @@ async function main() {
     run: { records: records.length, artifactsIngested: ingestionByFile.size, discrepancies: totalDisc, warnings, recommendationCounts },
     records,
   };
-  writeFileSync(join(outDir, "console.json"), JSON.stringify(data, null, 2), "utf8");
+  const consoleJson = JSON.stringify(data, null, 2);
+  writeFileSync(join(outDir, "console.json"), consoleJson, "utf8");
+  // Bundled copy consumed by apps/web (imported at build time so it ships on Vercel).
+  const webData = fromRoot("apps/web/src/data");
+  mkdirSync(webData, { recursive: true });
+  writeFileSync(join(webData, "console.json"), consoleJson, "utf8");
   writeMarkdown(outDir, data);
 
   console.log(`Records: ${records.length} | artifacts ingested: ${ingestionByFile.size} | discrepancies: ${totalDisc}`);
