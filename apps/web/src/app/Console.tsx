@@ -11,18 +11,18 @@ type FactClass =
   | "UNKNOWN";
 
 const RECO_COLOR: Record<string, string> = {
-  PURSUE: "#2f9e44",
-  PARTNER: "#1971c2",
-  INVESTIGATE: "#e8a90c",
-  MONITOR: "#7048e8",
-  REJECT: "#e03131",
+  PURSUE: "var(--pursue)",
+  PARTNER: "var(--partner)",
+  INVESTIGATE: "var(--investigate)",
+  MONITOR: "var(--monitor)",
+  REJECT: "var(--reject)",
 };
 const PROV_COLOR: Record<FactClass, string> = {
-  CONFIRMED_OFFICIAL: "#2f9e44",
-  EXTRACTED_FROM_OFFICIAL_SOURCE: "#1971c2",
-  INFERRED: "#e8a90c",
-  USER_PROVIDED: "#868e96",
-  UNKNOWN: "#868e96",
+  CONFIRMED_OFFICIAL: "var(--pursue)",
+  EXTRACTED_FROM_OFFICIAL_SOURCE: "var(--partner)",
+  INFERRED: "var(--investigate)",
+  USER_PROVIDED: "var(--muted)",
+  UNKNOWN: "var(--muted)",
 };
 const CONFIRMED: FactClass[] = ["CONFIRMED_OFFICIAL", "EXTRACTED_FROM_OFFICIAL_SOURCE"];
 const FACT_ORDER: FactClass[] = ["CONFIRMED_OFFICIAL", "EXTRACTED_FROM_OFFICIAL_SOURCE", "INFERRED", "USER_PROVIDED", "UNKNOWN"];
@@ -230,7 +230,7 @@ function Detail({ record: r, review, onReview }: { record: ConsoleRecord; review
       </Section>
 
       <Section title="Verification">
-        <KV k="Status" v={<Badge text={r.verificationStatus} color={r.verificationStatus === "VERIFIED" ? "#2f9e44" : "#e8a90c"} />} />
+        <KV k="Status" v={<Badge text={r.verificationStatus} color={r.verificationStatus === "VERIFIED" ? "var(--pursue)" : "var(--investigate)"} />} />
         <ul className="evi">
           {r.verificationEvidence.map((e, i) => (
             <li key={i} className="muted">{e}</li>
