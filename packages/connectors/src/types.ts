@@ -47,6 +47,12 @@ export interface ConnectorContext {
     euFtBaseUrl: string;
     userAgent: string;
     timeoutMs: number;
+    /** TED Search API config (optional; connectors default when unset). */
+    tedBaseUrl?: string;
+    /** Raw TED expert query override (built on the TED site, pasted verbatim). */
+    tedQuery?: string;
+    /** TED result page size (max 250). */
+    tedPageSize?: number;
   };
 }
 

@@ -1,0 +1,9 @@
+**/node_modules
+**/.next
+**/out
+**/.turbo
+**/dist
+.git
+*.log
+data/artifacts/*.pdf
+data/artifacts/*.html

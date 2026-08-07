@@ -8,6 +8,7 @@
     "validate:seed": "tsx src/validate-seed.ts",
     "ingest:artifact": "tsx src/ingest-artifact.ts",
     "m0:run": "tsx src/m0-run.ts",
+    "discover:ted": "tsx src/discover-ted.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests"
   },

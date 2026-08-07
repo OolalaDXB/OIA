@@ -1,0 +1,27 @@
+# Sprint 1 — one lean service: the TED discovery worker.
+# Run on a machine WITH egress:  docker compose up --build
+# It performs one live TED search, records the raw response as the real test
+# fixture, qualifies each candidate through the existing engine (capped at
+# MANUAL_REVIEW_REQUIRED), writes outputs/sprint-1/, then exits.
+services:
+  ted-discovery:
+    build:
+      context: .
+      dockerfile: apps/workers/Dockerfile.discover
+    environment:
+      # Optional: paste an exact expert query built on the TED website. If unset,
+      # the worker derives one from BAWABA sectors (TED_SECTORS) → CPV.
+      TED_QUERY: ${TED_QUERY:-}
+      TED_SECTORS: ${TED_SECTORS:-AI,digital,creative}
+      TED_PAGE_SIZE: ${TED_PAGE_SIZE:-100}
+      TED_MAX: ${TED_MAX:-5}
+      FETCH_USER_AGENT: ${FETCH_USER_AGENT:-OIA-Funding/0.0 (TED discovery; contact ops)}
+      FETCH_TIMEOUT_MS: ${FETCH_TIMEOUT_MS:-30000}
+      # Supabase not used this sprint (outputs are local files); placeholders satisfy env schema.
+      SUPABASE_URL: https://placeholder.supabase.co
+      SUPABASE_ANON_KEY: placeholder
+    volumes:
+      # Results and the recorded real fixture persist to the host repo.
+      - ./outputs:/app/outputs
+      - ./packages/connectors/test/fixtures:/app/packages/connectors/test/fixtures
+    restart: "no"

@@ -1,0 +1,14 @@
+# Sprint 1 — lean single-service image for the TED discovery worker.
+# Runs where there is egress (Mickaël's machine via `docker compose up`).
+FROM node:22-slim
+
+RUN corepack enable
+WORKDIR /app
+
+# Copy the workspace (heavy build artifacts excluded via .dockerignore) and install.
+COPY . .
+RUN pnpm install --frozen-lockfile
+
+WORKDIR /app/apps/workers
+# One shot: discover on TED, qualify via the existing engine, write outputs, exit.
+CMD ["pnpm", "run", "discover:ted"]
