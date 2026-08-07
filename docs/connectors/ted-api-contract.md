@@ -13,17 +13,21 @@ re-checked at run time (noted inline).
 ## Request body
 
 ```jsonc
+// Validated from the container (page + limit / PAGE_NUMBER):
 {
   "query": "classification-cpv IN (72000000) AND buyer-country IN (FRA)",  // TED expert search syntax
   "fields": ["publication-number", "notice-title", "buyer-name", "buyer-country",
-             "publication-date", "deadline", "classification-cpv", "links"],
-  "limit": 100,                 // page size, MAX 250
-  "scope": "ACTIVE",            // ACTIVE | LATEST | ALL
+             "publication-date", "deadline", "classification-cpv", "links"],  // mandatory
+  "page": 1,
+  "limit": 100,                  // page size, MAX 250
+  "scope": "ACTIVE",             // ACTIVE | LATEST | ALL
   "checkQuerySyntax": false,
-  "paginationMode": "ITERATION" // ITERATION (token/scroll) | PAGE_NUMBER
-  // "page": 1                  // with PAGE_NUMBER mode
+  "paginationMode": "PAGE_NUMBER" // ITERATION (token/scroll) also documented
 }
 ```
+
+The connector sends exactly this shape (`page + limit`, `paginationMode:
+"PAGE_NUMBER"`). Response: `{ notices: [...], totalNoticeCount }`.
 
 - **`query`**: TED **expert search** syntax — the same language as the TED
   website's Expert Search (field operators, `IN (...)`, `AND`/`OR`, ranges on

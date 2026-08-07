@@ -24,7 +24,8 @@ export interface TedSearchParams {
   baseUrl: string;
   query: string;
   fields?: readonly string[];
-  pageSize?: number; // max 250
+  pageSize?: number; // max 250 (the `limit`)
+  page?: number; // 1-based (PAGE_NUMBER mode)
   scope?: "ACTIVE" | "LATEST" | "ALL";
   userAgent: string;
   timeoutMs: number;
@@ -44,13 +45,15 @@ export async function fetchTedRaw(params: TedSearchParams): Promise<unknown> {
         accept: "application/json, */*",
         "user-agent": params.userAgent,
       },
+      // Body matches the contract validated from the container: page + limit.
       body: JSON.stringify({
         query: params.query,
         fields: [...(params.fields ?? TED_FIELDS)],
-        limit: String(Math.min(params.pageSize ?? 100, 250)),
+        page: params.page ?? 1,
+        limit: Math.min(params.pageSize ?? 100, 250),
         scope: params.scope ?? "ACTIVE",
         checkQuerySyntax: false,
-        paginationMode: "ITERATION",
+        paginationMode: "PAGE_NUMBER",
       }),
       signal: controller.signal,
     });
