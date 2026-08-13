@@ -72,7 +72,7 @@ export function Console({ data }: { data: ConsoleData }) {
   return (
     <div className="app">
       <header className="topbar">
-        <strong>OIA Funding · Milestone 0 Review Console</strong>
+        <strong>OIA · Review Console</strong>
         <span className="muted">
           {data.run.records} opportunities · {data.run.artifactsIngested} official artifact(s) ingested ·{" "}
           {data.run.discrepancies} discrepancies ·{" "}
