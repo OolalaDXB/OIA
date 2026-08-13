@@ -1,0 +1,417 @@
+[
+  {
+    "externalId": "283014-2016",
+    "title": "United Kingdom-Huyton: Health and social work services",
+    "officialUrl": "https://ted.europa.eu/en/notice/283014-2016/html",
+    "issuer": "Knowsley Council",
+    "liveFetch": "OK",
+    "sourceFormat": "STATIC_HTML",
+    "contentHash": "413f9401a7373b8018de1eaec390c38c1ae680433523e3e4cd4fdd706c80bc4f",
+    "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+    "verificationEvidence": [
+      "issuer domain recorded from official URL: ted.europa.eu",
+      "government/supranational domain: ted.europa.eu",
+      "artifact content does NOT clearly match the expected title — needs human review",
+      "content-consistency check failed → still requires human review, not auto-reject"
+    ],
+    "factCount": 1,
+    "provenance": [
+      {
+        "field": "publication-number",
+        "value": "283014-2016",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "publication-number"
+        }
+      },
+      {
+        "field": "notice-title",
+        "value": "United Kingdom-Huyton: Health and social work services",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "notice-title"
+        }
+      },
+      {
+        "field": "buyer-name",
+        "value": "Knowsley Council",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "buyer-name"
+        }
+      },
+      {
+        "field": "buyer-country",
+        "value": "GBR",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "buyer-country"
+        }
+      },
+      {
+        "field": "publication-date",
+        "value": "2016-08-13+02:00",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "publication-date"
+        }
+      },
+      {
+        "field": "classification-cpv",
+        "value": "79622000, 79624000, 79625000, 80110000, 80300000, 80420000, 85000000, 85100000, 92500000, 92600000, 98133110",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "classification-cpv"
+        }
+      },
+      {
+        "field": "notice-type",
+        "value": "cn-social",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "notice-type"
+        }
+      },
+      {
+        "field": "links",
+        "value": "https://ted.europa.eu/en/notice/283014-2016/xml",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "links"
+        }
+      }
+    ]
+  },
+  {
+    "externalId": "412169-2016",
+    "title": "Spain-Madrid: Business services: law, marketing, consulting, recruitment, printing and security",
+    "officialUrl": "https://ted.europa.eu/en/notice/412169-2016/html",
+    "issuer": "Achilles South Europe, S.L.U.",
+    "liveFetch": "OK",
+    "sourceFormat": "STATIC_HTML",
+    "contentHash": "5294a698ad279bf2661eb83815a92e14a15d26cd1727efaedce7289b99c77d5e",
+    "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+    "verificationEvidence": [
+      "issuer domain recorded from official URL: ted.europa.eu",
+      "government/supranational domain: ted.europa.eu",
+      "artifact content does NOT clearly match the expected title — needs human review",
+      "content-consistency check failed → still requires human review, not auto-reject"
+    ],
+    "factCount": 1,
+    "provenance": [
+      {
+        "field": "publication-number",
+        "value": "412169-2016",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "publication-number"
+        }
+      },
+      {
+        "field": "notice-title",
+        "value": "Spain-Madrid: Business services: law, marketing, consulting, recruitment, printing and security",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "notice-title"
+        }
+      },
+      {
+        "field": "buyer-name",
+        "value": "Achilles South Europe, S.L.U.",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "buyer-name"
+        }
+      },
+      {
+        "field": "buyer-country",
+        "value": "ESP",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "buyer-country"
+        }
+      },
+      {
+        "field": "publication-date",
+        "value": "2016-11-23+01:00",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "publication-date"
+        }
+      },
+      {
+        "field": "classification-cpv",
+        "value": "03000000, 09000000, 14000000, 14700000, 14800000, 14900000, 15000000, 16000000, 18000000, 19000000, 19500000, 22000000, 24000000, 30000000, 30197600, 31000000, 32000000, 33000000, 34000000, 35000000, 39000000, 41000000, 42000000, 43000000, 44000000, 45000000, 50000000, 51000000, 55000000, 60000000, 63000000, 64000000, 65000000, 66000000, 70000000, 71000000, 72000000, 73000000, 75000000, 76000000, 77000000, 79000000, 79100000, 79200000, 79340000, 79714000, 79800000, 79900000, 80000000, 85000000, 90000000, 92000000, 98100000, 98300000, 98500000, 98900000",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "classification-cpv"
+        }
+      },
+      {
+        "field": "notice-type",
+        "value": "qu-sy",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "notice-type"
+        }
+      },
+      {
+        "field": "links",
+        "value": "https://ted.europa.eu/en/notice/412169-2016/xml",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "links"
+        }
+      }
+    ]
+  },
+  {
+    "externalId": "448146-2016",
+    "title": "Italy-Rome: Machine tools",
+    "officialUrl": "https://ted.europa.eu/en/notice/448146-2016/html",
+    "issuer": "Ferservizi SpA — Gruppo Ferrovie dello Stato Italiane (Società con socio unico soggetta alla direzione e coordinamento di Ferrovie dello Stato Italiane SpA)",
+    "liveFetch": "OK",
+    "sourceFormat": "STATIC_HTML",
+    "contentHash": "dcca90c01a878ecd9ca93d8fdca7dda1815557cb10b8bf2c4fc0a8aa3b915d38",
+    "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+    "verificationEvidence": [
+      "issuer domain recorded from official URL: ted.europa.eu",
+      "government/supranational domain: ted.europa.eu",
+      "artifact content does NOT clearly match the expected title — needs human review",
+      "content-consistency check failed → still requires human review, not auto-reject"
+    ],
+    "factCount": 1,
+    "provenance": [
+      {
+        "field": "publication-number",
+        "value": "448146-2016",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "publication-number"
+        }
+      },
+      {
+        "field": "notice-title",
+        "value": "Italy-Rome: Machine tools",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "notice-title"
+        }
+      },
+      {
+        "field": "buyer-name",
+        "value": "Ferservizi SpA — Gruppo Ferrovie dello Stato Italiane (Società con socio unico soggetta alla direzione e coordinamento di Ferrovie dello Stato Italiane SpA)",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "buyer-name"
+        }
+      },
+      {
+        "field": "buyer-country",
+        "value": "ITA",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "buyer-country"
+        }
+      },
+      {
+        "field": "publication-date",
+        "value": "2016-12-20+01:00",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "publication-date"
+        }
+      },
+      {
+        "field": "classification-cpv",
+        "value": "30213000, 30213100, 31200000, 32420000, 42600000, 44300000, 44512000, 44530000, 50320000, 72315100",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "classification-cpv"
+        }
+      },
+      {
+        "field": "notice-type",
+        "value": "qu-sy",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "notice-type"
+        }
+      },
+      {
+        "field": "links",
+        "value": "https://ted.europa.eu/en/notice/448146-2016/xml",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "links"
+        }
+      }
+    ]
+  },
+  {
+    "externalId": "448194-2016",
+    "title": "Italy-Rome: IT services: consulting, software development, Internet and support",
+    "officialUrl": "https://ted.europa.eu/en/notice/448194-2016/html",
+    "issuer": "Ferservizi SpA — Gruppo Ferrovie dello Stato Italiane (Società con socio unico soggetta alla direzione e coordinamento di Ferrovie dello Stato Italiane SpA)",
+    "liveFetch": "OK",
+    "sourceFormat": "STATIC_HTML",
+    "contentHash": "257548b06f394819cfea1cdb2b170eeb5efe23c352605ea0000a725e4bd71d0c",
+    "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+    "verificationEvidence": [
+      "issuer domain recorded from official URL: ted.europa.eu",
+      "government/supranational domain: ted.europa.eu",
+      "artifact content does NOT clearly match the expected title — needs human review",
+      "content-consistency check failed → still requires human review, not auto-reject"
+    ],
+    "factCount": 1,
+    "provenance": [
+      {
+        "field": "publication-number",
+        "value": "448194-2016",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "publication-number"
+        }
+      },
+      {
+        "field": "notice-title",
+        "value": "Italy-Rome: IT services: consulting, software development, Internet and support",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "notice-title"
+        }
+      },
+      {
+        "field": "buyer-name",
+        "value": "Ferservizi SpA — Gruppo Ferrovie dello Stato Italiane (Società con socio unico soggetta alla direzione e coordinamento di Ferrovie dello Stato Italiane SpA)",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "buyer-name"
+        }
+      },
+      {
+        "field": "buyer-country",
+        "value": "ITA",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "buyer-country"
+        }
+      },
+      {
+        "field": "publication-date",
+        "value": "2016-12-20+01:00",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "publication-date"
+        }
+      },
+      {
+        "field": "classification-cpv",
+        "value": "72000000",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "classification-cpv"
+        }
+      },
+      {
+        "field": "notice-type",
+        "value": "qu-sy",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "notice-type"
+        }
+      },
+      {
+        "field": "links",
+        "value": "https://ted.europa.eu/en/notice/448194-2016/xml",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "links"
+        }
+      }
+    ]
+  },
+  {
+    "externalId": "2382-2017",
+    "title": "Austria-Vienna: System implementation planning services",
+    "officialUrl": "https://ted.europa.eu/en/notice/2382-2017/html",
+    "issuer": "ÖBB-Infrastruktur AG",
+    "liveFetch": "OK",
+    "sourceFormat": "STATIC_HTML",
+    "contentHash": "b8db0a9fb94abefcbb36387159b50dfb6d6079f9365888bd35c72cf11c05a97c",
+    "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+    "verificationEvidence": [
+      "issuer domain recorded from official URL: ted.europa.eu",
+      "government/supranational domain: ted.europa.eu",
+      "artifact content does NOT clearly match the expected title — needs human review",
+      "content-consistency check failed → still requires human review, not auto-reject"
+    ],
+    "factCount": 1,
+    "provenance": [
+      {
+        "field": "publication-number",
+        "value": "2382-2017",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "publication-number"
+        }
+      },
+      {
+        "field": "notice-title",
+        "value": "Austria-Vienna: System implementation planning services",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "notice-title"
+        }
+      },
+      {
+        "field": "buyer-name",
+        "value": "ÖBB-Infrastruktur AG",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "buyer-name"
+        }
+      },
+      {
+        "field": "buyer-country",
+        "value": "AUT",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "buyer-country"
+        }
+      },
+      {
+        "field": "publication-date",
+        "value": "2017-01-04+01:00",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "publication-date"
+        }
+      },
+      {
+        "field": "classification-cpv",
+        "value": "72224100",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "classification-cpv"
+        }
+      },
+      {
+        "field": "notice-type",
+        "value": "qu-sy",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "notice-type"
+        }
+      },
+      {
+        "field": "links",
+        "value": "https://ted.europa.eu/en/notice/2382-2017/xml",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "links"
+        }
+      }
+    ]
+  }
+]
