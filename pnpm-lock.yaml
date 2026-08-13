@@ -30,6 +30,9 @@ importers:
       '@oia/ingestion':
         specifier: workspace:*
         version: link:../../packages/ingestion
+      '@oia/workspace':
+        specifier: workspace:*
+        version: link:../../packages/workspace
       next:
         specifier: 14.2.15
         version: 14.2.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -237,6 +240,19 @@ importers:
       '@oia/config':
         specifier: workspace:*
         version: link:../config
+    devDependencies:
+      typescript:
+        specifier: ^5.7.2
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.8
+        version: 2.1.9(@types/node@22.20.1)
+
+  packages/workspace:
+    dependencies:
+      '@oia/ingestion':
+        specifier: workspace:*
+        version: link:../ingestion
     devDependencies:
       typescript:
         specifier: ^5.7.2
