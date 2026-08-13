@@ -27,11 +27,12 @@ const NoticeSchema = z.record(z.string(), z.unknown());
 
 export const TedSearchResponseSchema = z
   .object({
-    totalNoticeCount: z.number().optional(),
-    iterationNextToken: z.string().optional(),
+    // Real TED responses return these as null in PAGE_NUMBER mode → tolerate null.
+    totalNoticeCount: z.number().nullish(),
+    iterationNextToken: z.string().nullish(),
     // The envelope names the array `notices`; accept `results` defensively too.
-    notices: z.array(NoticeSchema).optional(),
-    results: z.array(NoticeSchema).optional(),
+    notices: z.array(NoticeSchema).nullish(),
+    results: z.array(NoticeSchema).nullish(),
   })
   .passthrough();
 
