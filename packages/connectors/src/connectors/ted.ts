@@ -70,7 +70,11 @@ export async function fetchTedRaw(params: TedSearchParams): Promise<unknown> {
 export function resolveTedQuery(ctx: ConnectorContext, project: ProjectProfile): string {
   if (ctx.env.tedQuery && ctx.env.tedQuery.trim()) return ctx.env.tedQuery.trim();
   const cpv = sectorsToCpv(project.sectors);
-  const built = buildTedExpertQuery({ cpv: cpv.length ? cpv : ["72000000"] });
+  // Recency floor: without it, scope ACTIVE + no sort surfaced 2016 notices (first live run).
+  const built = buildTedExpertQuery({
+    cpv: cpv.length ? cpv : ["72000000"],
+    publishedSince: ctx.env.tedPublishedSince,
+  });
   return built ?? "classification-cpv IN (72000000)";
 }
 

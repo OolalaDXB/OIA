@@ -6,7 +6,7 @@ const nextConfig = {
   // framework-detection needed (avoids "No Next.js version detected" at repo root).
   output: "export",
   // @oia/* packages are consumed as TypeScript source (internal packages).
-  transpilePackages: ["@oia/ingestion"],
+  transpilePackages: ["@oia/ingestion", "@oia/workspace"],
   eslint: { ignoreDuringBuilds: true },
 };
 

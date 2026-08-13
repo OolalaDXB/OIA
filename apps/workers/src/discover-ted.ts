@@ -73,6 +73,11 @@ async function main() {
       tedBaseUrl: process.env.TED_BASE_URL ?? TED_DEFAULT_BASE_URL,
       tedQuery: process.env.TED_QUERY,
       tedPageSize: envInt("TED_PAGE_SIZE", 100),
+      // Recency floor (default: last 90 days) so discovery surfaces CURRENT
+      // notices, not 2016 ones. Override with TED_PUBLISHED_SINCE=YYYYMMDD.
+      tedPublishedSince:
+        process.env.TED_PUBLISHED_SINCE ??
+        new Date(Date.now() - 90 * 24 * 3600 * 1000).toISOString().slice(0, 10).replace(/-/g, ""),
     },
   });
 

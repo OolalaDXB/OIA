@@ -53,6 +53,8 @@ export interface ConnectorContext {
     tedQuery?: string;
     /** TED result page size (max 250). */
     tedPageSize?: number;
+    /** Recency floor (TED format YYYYMMDD): publication-date >= this. Ignored when tedQuery is set. */
+    tedPublishedSince?: string;
   };
 }
 

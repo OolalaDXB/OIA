@@ -11,6 +11,11 @@ describe("[UNIT] TED query builder", () => {
   it("returns undefined when there is nothing to filter on", () => {
     expect(buildTedExpertQuery({})).toBeUndefined();
   });
+  it("applies the recency floor (publication-date >=) when publishedSince is set", () => {
+    expect(buildTedExpertQuery({ cpv: ["72000000"], publishedSince: "20260515" })).toBe(
+      "classification-cpv IN (72000000) AND publication-date>=20260515",
+    );
+  });
   it("maps BAWABA-ish sectors to CPV codes", () => {
     const cpv = sectorsToCpv(["AI", "creative industries"]);
     expect(cpv).toContain("72000000");

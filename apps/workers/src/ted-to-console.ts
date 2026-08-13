@@ -97,8 +97,15 @@ function toConsoleRecord(c: TedCandidate): ConsoleRecord {
   };
 }
 
+function publicationDate(c: TedCandidate): string {
+  return c.provenance.find((p) => p.field === "publication-date")?.value ?? "";
+}
+
 export function tedCandidatesToConsole(candidates: TedCandidate[]): ConsoleData {
-  const records = candidates.map(toConsoleRecord);
+  // Most recent first (publication-date desc): current opportunities lead the queue.
+  const records = [...candidates]
+    .sort((a, b) => publicationDate(b).localeCompare(publicationDate(a)))
+    .map(toConsoleRecord);
   return {
     note: "Sprint 1 — real TED discovery (live run). Candidates found via the TED Search API and run through the existing engine; each caps at MANUAL_REVIEW_REQUIRED — never VERIFIED without a human. Facts are the official TED metadata fields with their JSON_PATH locators.",
     run: {

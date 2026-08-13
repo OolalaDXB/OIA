@@ -11,21 +11,21 @@
   },
   "records": [
     {
-      "id": "283014-2016",
-      "title": "United Kingdom-Huyton: Health and social work services",
-      "issuer": "Knowsley Council",
+      "id": "2382-2017",
+      "title": "Austria-Vienna: System implementation planning services",
+      "issuer": "ÖBB-Infrastruktur AG",
       "linkedBy": "officialUrl",
-      "officialUrl": "https://ted.europa.eu/en/notice/283014-2016/html",
+      "officialUrl": "https://ted.europa.eu/en/notice/2382-2017/html",
       "artifact": {
-        "id": "283014-2016",
+        "id": "2382-2017",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "413f9401a7373b8018de1eaec390c38c1ae680433523e3e4cd4fdd706c80bc4f",
+        "contentHash": "b8db0a9fb94abefcbb36387159b50dfb6d6079f9365888bd35c72cf11c05a97c",
         "renderMethod": "STATIC_HTTP",
         "byteSize": 0,
         "processing": "SUCCESS"
       },
       "liveFetch": {
-        "attemptedUrl": "https://ted.europa.eu/en/notice/283014-2016/html",
+        "attemptedUrl": "https://ted.europa.eu/en/notice/2382-2017/html",
         "status": "OK",
         "egressDenied": false
       },
@@ -65,7 +65,7 @@
       "facts": [
         {
           "field": "publication-number",
-          "normalizedValue": "283014-2016",
+          "normalizedValue": "2382-2017",
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
           "locator": {
             "type": "JSON_PATH",
@@ -75,11 +75,11 @@
           "extractingProvider": "ted",
           "extractingModel": "search-api-v3",
           "extractionConfidence": 0.85,
-          "originalSourceText": "283014-2016"
+          "originalSourceText": "2382-2017"
         },
         {
           "field": "notice-title",
-          "normalizedValue": "United Kingdom-Huyton: Health and social work services",
+          "normalizedValue": "Austria-Vienna: System implementation planning services",
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
           "locator": {
             "type": "JSON_PATH",
@@ -89,11 +89,11 @@
           "extractingProvider": "ted",
           "extractingModel": "search-api-v3",
           "extractionConfidence": 0.85,
-          "originalSourceText": "United Kingdom-Huyton: Health and social work services"
+          "originalSourceText": "Austria-Vienna: System implementation planning services"
         },
         {
           "field": "buyer-name",
-          "normalizedValue": "Knowsley Council",
+          "normalizedValue": "ÖBB-Infrastruktur AG",
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
           "locator": {
             "type": "JSON_PATH",
@@ -103,11 +103,11 @@
           "extractingProvider": "ted",
           "extractingModel": "search-api-v3",
           "extractionConfidence": 0.85,
-          "originalSourceText": "Knowsley Council"
+          "originalSourceText": "ÖBB-Infrastruktur AG"
         },
         {
           "field": "buyer-country",
-          "normalizedValue": "GBR",
+          "normalizedValue": "AUT",
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
           "locator": {
             "type": "JSON_PATH",
@@ -117,11 +117,11 @@
           "extractingProvider": "ted",
           "extractingModel": "search-api-v3",
           "extractionConfidence": 0.85,
-          "originalSourceText": "GBR"
+          "originalSourceText": "AUT"
         },
         {
           "field": "publication-date",
-          "normalizedValue": "2016-08-13+02:00",
+          "normalizedValue": "2017-01-04+01:00",
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
           "locator": {
             "type": "JSON_PATH",
@@ -131,11 +131,11 @@
           "extractingProvider": "ted",
           "extractingModel": "search-api-v3",
           "extractionConfidence": 0.85,
-          "originalSourceText": "2016-08-13+02:00"
+          "originalSourceText": "2017-01-04+01:00"
         },
         {
           "field": "classification-cpv",
-          "normalizedValue": "79622000, 79624000, 79625000, 80110000, 80300000, 80420000, 85000000, 85100000, 92500000, 92600000, 98133110",
+          "normalizedValue": "72224100",
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
           "locator": {
             "type": "JSON_PATH",
@@ -145,183 +145,7 @@
           "extractingProvider": "ted",
           "extractingModel": "search-api-v3",
           "extractionConfidence": 0.85,
-          "originalSourceText": "79622000, 79624000, 79625000, 80110000, 80300000, 80420000, 85000000, 85100000, 92500000, 92600000, 98133110"
-        },
-        {
-          "field": "notice-type",
-          "normalizedValue": "cn-social",
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "locator": {
-            "type": "JSON_PATH",
-            "value": "notice-type"
-          },
-          "extractionMethod": "ted-search-api",
-          "extractingProvider": "ted",
-          "extractingModel": "search-api-v3",
-          "extractionConfidence": 0.85,
-          "originalSourceText": "cn-social"
-        },
-        {
-          "field": "links",
-          "normalizedValue": "https://ted.europa.eu/en/notice/283014-2016/xml",
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "locator": {
-            "type": "JSON_PATH",
-            "value": "links"
-          },
-          "extractionMethod": "ted-search-api",
-          "extractingProvider": "ted",
-          "extractingModel": "search-api-v3",
-          "extractionConfidence": 0.85,
-          "originalSourceText": "https://ted.europa.eu/en/notice/283014-2016/xml"
-        }
-      ],
-      "deadlines": [],
-      "conflicts": [],
-      "discrepancies": [],
-      "expected": {},
-      "unresolvedQuestions": [
-        "Eligibility not assessed (TED discovery surfaces metadata; qualification is Sprint 2+).",
-        "Source not human-VERIFIED — a reviewer must confirm before PURSUE."
-      ],
-      "warnings": []
-    },
-    {
-      "id": "412169-2016",
-      "title": "Spain-Madrid: Business services: law, marketing, consulting, recruitment, printing and security",
-      "issuer": "Achilles South Europe, S.L.U.",
-      "linkedBy": "officialUrl",
-      "officialUrl": "https://ted.europa.eu/en/notice/412169-2016/html",
-      "artifact": {
-        "id": "412169-2016",
-        "sourceFormat": "STATIC_HTML",
-        "contentHash": "5294a698ad279bf2661eb83815a92e14a15d26cd1727efaedce7289b99c77d5e",
-        "renderMethod": "STATIC_HTTP",
-        "byteSize": 0,
-        "processing": "SUCCESS"
-      },
-      "liveFetch": {
-        "attemptedUrl": "https://ted.europa.eu/en/notice/412169-2016/html",
-        "status": "OK",
-        "egressDenied": false
-      },
-      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
-      "verificationEvidence": [
-        "issuer domain recorded from official URL: ted.europa.eu",
-        "government/supranational domain: ted.europa.eu",
-        "artifact content does NOT clearly match the expected title — needs human review",
-        "content-consistency check failed → still requires human review, not auto-reject"
-      ],
-      "application": "UNKNOWN",
-      "award": "UNKNOWN",
-      "strategicRoute": "UNKNOWN",
-      "scores": {
-        "relevance": null,
-        "winPotential": null,
-        "infoConfidence": 50
-      },
-      "gate": {
-        "accessiblePrimarySource": true,
-        "verifiedSource": false,
-        "verifiedDeadline": false,
-        "notExpired": true,
-        "eligibilityAssessed": false,
-        "notAggregatorOnly": true,
-        "notClosedCall": true,
-        "hasExactNextAction": false,
-        "sufficientConfidence": false,
-        "pursueEligible": false,
-        "failedReasons": [
-          "source not human-VERIFIED",
-          "eligibility not assessed"
-        ]
-      },
-      "recommendation": "INVESTIGATE",
-      "humanReview": "PENDING",
-      "facts": [
-        {
-          "field": "publication-number",
-          "normalizedValue": "412169-2016",
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "locator": {
-            "type": "JSON_PATH",
-            "value": "publication-number"
-          },
-          "extractionMethod": "ted-search-api",
-          "extractingProvider": "ted",
-          "extractingModel": "search-api-v3",
-          "extractionConfidence": 0.85,
-          "originalSourceText": "412169-2016"
-        },
-        {
-          "field": "notice-title",
-          "normalizedValue": "Spain-Madrid: Business services: law, marketing, consulting, recruitment, printing and security",
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "locator": {
-            "type": "JSON_PATH",
-            "value": "notice-title"
-          },
-          "extractionMethod": "ted-search-api",
-          "extractingProvider": "ted",
-          "extractingModel": "search-api-v3",
-          "extractionConfidence": 0.85,
-          "originalSourceText": "Spain-Madrid: Business services: law, marketing, consulting, recruitment, printing and security"
-        },
-        {
-          "field": "buyer-name",
-          "normalizedValue": "Achilles South Europe, S.L.U.",
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "locator": {
-            "type": "JSON_PATH",
-            "value": "buyer-name"
-          },
-          "extractionMethod": "ted-search-api",
-          "extractingProvider": "ted",
-          "extractingModel": "search-api-v3",
-          "extractionConfidence": 0.85,
-          "originalSourceText": "Achilles South Europe, S.L.U."
-        },
-        {
-          "field": "buyer-country",
-          "normalizedValue": "ESP",
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "locator": {
-            "type": "JSON_PATH",
-            "value": "buyer-country"
-          },
-          "extractionMethod": "ted-search-api",
-          "extractingProvider": "ted",
-          "extractingModel": "search-api-v3",
-          "extractionConfidence": 0.85,
-          "originalSourceText": "ESP"
-        },
-        {
-          "field": "publication-date",
-          "normalizedValue": "2016-11-23+01:00",
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "locator": {
-            "type": "JSON_PATH",
-            "value": "publication-date"
-          },
-          "extractionMethod": "ted-search-api",
-          "extractingProvider": "ted",
-          "extractingModel": "search-api-v3",
-          "extractionConfidence": 0.85,
-          "originalSourceText": "2016-11-23+01:00"
-        },
-        {
-          "field": "classification-cpv",
-          "normalizedValue": "03000000, 09000000, 14000000, 14700000, 14800000, 14900000, 15000000, 16000000, 18000000, 19000000, 19500000, 22000000, 24000000, 30000000, 30197600, 31000000, 32000000, 33000000, 34000000, 35000000, 39000000, 41000000, 42000000, 43000000, 44000000, 45000000, 50000000, 51000000, 55000000, 60000000, 63000000, 64000000, 65000000, 66000000, 70000000, 71000000, 72000000, 73000000, 75000000, 76000000, 77000000, 79000000, 79100000, 79200000, 79340000, 79714000, 79800000, 79900000, 80000000, 85000000, 90000000, 92000000, 98100000, 98300000, 98500000, 98900000",
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "locator": {
-            "type": "JSON_PATH",
-            "value": "classification-cpv"
-          },
-          "extractionMethod": "ted-search-api",
-          "extractingProvider": "ted",
-          "extractingModel": "search-api-v3",
-          "extractionConfidence": 0.85,
-          "originalSourceText": "03000000, 09000000, 14000000, 14700000, 14800000, 14900000, 15000000, 16000000, 18000000, 19000000, 19500000, 22000000, 24000000, 30000000, 30197600, 31000000, 32000000, 33000000, 34000000, 35000000, 39000000, 41000000, 42000000, 43000000, 44000000, 45000000, 50000000, 51000000, 55000000, 60000000, 63000000, 64000000, 65000000, 66000000, 70000000, 71000000, 72000000, 73000000, 75000000, 76000000, 77000000, 79000000, 79100000, 79200000, 79340000, 79714000, 79800000, 79900000, 80000000, 85000000, 90000000, 92000000, 98100000, 98300000, 98500000, 98900000"
+          "originalSourceText": "72224100"
         },
         {
           "field": "notice-type",
@@ -339,7 +163,7 @@
         },
         {
           "field": "links",
-          "normalizedValue": "https://ted.europa.eu/en/notice/412169-2016/xml",
+          "normalizedValue": "https://ted.europa.eu/en/notice/2382-2017/xml",
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
           "locator": {
             "type": "JSON_PATH",
@@ -349,7 +173,7 @@
           "extractingProvider": "ted",
           "extractingModel": "search-api-v3",
           "extractionConfidence": 0.85,
-          "originalSourceText": "https://ted.europa.eu/en/notice/412169-2016/xml"
+          "originalSourceText": "https://ted.europa.eu/en/notice/2382-2017/xml"
         }
       ],
       "deadlines": [],
@@ -715,21 +539,21 @@
       "warnings": []
     },
     {
-      "id": "2382-2017",
-      "title": "Austria-Vienna: System implementation planning services",
-      "issuer": "ÖBB-Infrastruktur AG",
+      "id": "412169-2016",
+      "title": "Spain-Madrid: Business services: law, marketing, consulting, recruitment, printing and security",
+      "issuer": "Achilles South Europe, S.L.U.",
       "linkedBy": "officialUrl",
-      "officialUrl": "https://ted.europa.eu/en/notice/2382-2017/html",
+      "officialUrl": "https://ted.europa.eu/en/notice/412169-2016/html",
       "artifact": {
-        "id": "2382-2017",
+        "id": "412169-2016",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "b8db0a9fb94abefcbb36387159b50dfb6d6079f9365888bd35c72cf11c05a97c",
+        "contentHash": "5294a698ad279bf2661eb83815a92e14a15d26cd1727efaedce7289b99c77d5e",
         "renderMethod": "STATIC_HTTP",
         "byteSize": 0,
         "processing": "SUCCESS"
       },
       "liveFetch": {
-        "attemptedUrl": "https://ted.europa.eu/en/notice/2382-2017/html",
+        "attemptedUrl": "https://ted.europa.eu/en/notice/412169-2016/html",
         "status": "OK",
         "egressDenied": false
       },
@@ -769,7 +593,7 @@
       "facts": [
         {
           "field": "publication-number",
-          "normalizedValue": "2382-2017",
+          "normalizedValue": "412169-2016",
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
           "locator": {
             "type": "JSON_PATH",
@@ -779,11 +603,11 @@
           "extractingProvider": "ted",
           "extractingModel": "search-api-v3",
           "extractionConfidence": 0.85,
-          "originalSourceText": "2382-2017"
+          "originalSourceText": "412169-2016"
         },
         {
           "field": "notice-title",
-          "normalizedValue": "Austria-Vienna: System implementation planning services",
+          "normalizedValue": "Spain-Madrid: Business services: law, marketing, consulting, recruitment, printing and security",
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
           "locator": {
             "type": "JSON_PATH",
@@ -793,11 +617,11 @@
           "extractingProvider": "ted",
           "extractingModel": "search-api-v3",
           "extractionConfidence": 0.85,
-          "originalSourceText": "Austria-Vienna: System implementation planning services"
+          "originalSourceText": "Spain-Madrid: Business services: law, marketing, consulting, recruitment, printing and security"
         },
         {
           "field": "buyer-name",
-          "normalizedValue": "ÖBB-Infrastruktur AG",
+          "normalizedValue": "Achilles South Europe, S.L.U.",
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
           "locator": {
             "type": "JSON_PATH",
@@ -807,11 +631,11 @@
           "extractingProvider": "ted",
           "extractingModel": "search-api-v3",
           "extractionConfidence": 0.85,
-          "originalSourceText": "ÖBB-Infrastruktur AG"
+          "originalSourceText": "Achilles South Europe, S.L.U."
         },
         {
           "field": "buyer-country",
-          "normalizedValue": "AUT",
+          "normalizedValue": "ESP",
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
           "locator": {
             "type": "JSON_PATH",
@@ -821,11 +645,11 @@
           "extractingProvider": "ted",
           "extractingModel": "search-api-v3",
           "extractionConfidence": 0.85,
-          "originalSourceText": "AUT"
+          "originalSourceText": "ESP"
         },
         {
           "field": "publication-date",
-          "normalizedValue": "2017-01-04+01:00",
+          "normalizedValue": "2016-11-23+01:00",
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
           "locator": {
             "type": "JSON_PATH",
@@ -835,11 +659,11 @@
           "extractingProvider": "ted",
           "extractingModel": "search-api-v3",
           "extractionConfidence": 0.85,
-          "originalSourceText": "2017-01-04+01:00"
+          "originalSourceText": "2016-11-23+01:00"
         },
         {
           "field": "classification-cpv",
-          "normalizedValue": "72224100",
+          "normalizedValue": "03000000, 09000000, 14000000, 14700000, 14800000, 14900000, 15000000, 16000000, 18000000, 19000000, 19500000, 22000000, 24000000, 30000000, 30197600, 31000000, 32000000, 33000000, 34000000, 35000000, 39000000, 41000000, 42000000, 43000000, 44000000, 45000000, 50000000, 51000000, 55000000, 60000000, 63000000, 64000000, 65000000, 66000000, 70000000, 71000000, 72000000, 73000000, 75000000, 76000000, 77000000, 79000000, 79100000, 79200000, 79340000, 79714000, 79800000, 79900000, 80000000, 85000000, 90000000, 92000000, 98100000, 98300000, 98500000, 98900000",
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
           "locator": {
             "type": "JSON_PATH",
@@ -849,7 +673,7 @@
           "extractingProvider": "ted",
           "extractingModel": "search-api-v3",
           "extractionConfidence": 0.85,
-          "originalSourceText": "72224100"
+          "originalSourceText": "03000000, 09000000, 14000000, 14700000, 14800000, 14900000, 15000000, 16000000, 18000000, 19000000, 19500000, 22000000, 24000000, 30000000, 30197600, 31000000, 32000000, 33000000, 34000000, 35000000, 39000000, 41000000, 42000000, 43000000, 44000000, 45000000, 50000000, 51000000, 55000000, 60000000, 63000000, 64000000, 65000000, 66000000, 70000000, 71000000, 72000000, 73000000, 75000000, 76000000, 77000000, 79000000, 79100000, 79200000, 79340000, 79714000, 79800000, 79900000, 80000000, 85000000, 90000000, 92000000, 98100000, 98300000, 98500000, 98900000"
         },
         {
           "field": "notice-type",
@@ -867,7 +691,7 @@
         },
         {
           "field": "links",
-          "normalizedValue": "https://ted.europa.eu/en/notice/2382-2017/xml",
+          "normalizedValue": "https://ted.europa.eu/en/notice/412169-2016/xml",
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
           "locator": {
             "type": "JSON_PATH",
@@ -877,7 +701,183 @@
           "extractingProvider": "ted",
           "extractingModel": "search-api-v3",
           "extractionConfidence": 0.85,
-          "originalSourceText": "https://ted.europa.eu/en/notice/2382-2017/xml"
+          "originalSourceText": "https://ted.europa.eu/en/notice/412169-2016/xml"
+        }
+      ],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Eligibility not assessed (TED discovery surfaces metadata; qualification is Sprint 2+).",
+        "Source not human-VERIFIED — a reviewer must confirm before PURSUE."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "283014-2016",
+      "title": "United Kingdom-Huyton: Health and social work services",
+      "issuer": "Knowsley Council",
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://ted.europa.eu/en/notice/283014-2016/html",
+      "artifact": {
+        "id": "283014-2016",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "413f9401a7373b8018de1eaec390c38c1ae680433523e3e4cd4fdd706c80bc4f",
+        "renderMethod": "STATIC_HTTP",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://ted.europa.eu/en/notice/283014-2016/html",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "issuer domain recorded from official URL: ted.europa.eu",
+        "government/supranational domain: ted.europa.eu",
+        "artifact content does NOT clearly match the expected title — needs human review",
+        "content-consistency check failed → still requires human review, not auto-reject"
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 50
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "source not human-VERIFIED",
+          "eligibility not assessed"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [
+        {
+          "field": "publication-number",
+          "normalizedValue": "283014-2016",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "JSON_PATH",
+            "value": "publication-number"
+          },
+          "extractionMethod": "ted-search-api",
+          "extractingProvider": "ted",
+          "extractingModel": "search-api-v3",
+          "extractionConfidence": 0.85,
+          "originalSourceText": "283014-2016"
+        },
+        {
+          "field": "notice-title",
+          "normalizedValue": "United Kingdom-Huyton: Health and social work services",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "JSON_PATH",
+            "value": "notice-title"
+          },
+          "extractionMethod": "ted-search-api",
+          "extractingProvider": "ted",
+          "extractingModel": "search-api-v3",
+          "extractionConfidence": 0.85,
+          "originalSourceText": "United Kingdom-Huyton: Health and social work services"
+        },
+        {
+          "field": "buyer-name",
+          "normalizedValue": "Knowsley Council",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "JSON_PATH",
+            "value": "buyer-name"
+          },
+          "extractionMethod": "ted-search-api",
+          "extractingProvider": "ted",
+          "extractingModel": "search-api-v3",
+          "extractionConfidence": 0.85,
+          "originalSourceText": "Knowsley Council"
+        },
+        {
+          "field": "buyer-country",
+          "normalizedValue": "GBR",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "JSON_PATH",
+            "value": "buyer-country"
+          },
+          "extractionMethod": "ted-search-api",
+          "extractingProvider": "ted",
+          "extractingModel": "search-api-v3",
+          "extractionConfidence": 0.85,
+          "originalSourceText": "GBR"
+        },
+        {
+          "field": "publication-date",
+          "normalizedValue": "2016-08-13+02:00",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "JSON_PATH",
+            "value": "publication-date"
+          },
+          "extractionMethod": "ted-search-api",
+          "extractingProvider": "ted",
+          "extractingModel": "search-api-v3",
+          "extractionConfidence": 0.85,
+          "originalSourceText": "2016-08-13+02:00"
+        },
+        {
+          "field": "classification-cpv",
+          "normalizedValue": "79622000, 79624000, 79625000, 80110000, 80300000, 80420000, 85000000, 85100000, 92500000, 92600000, 98133110",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "JSON_PATH",
+            "value": "classification-cpv"
+          },
+          "extractionMethod": "ted-search-api",
+          "extractingProvider": "ted",
+          "extractingModel": "search-api-v3",
+          "extractionConfidence": 0.85,
+          "originalSourceText": "79622000, 79624000, 79625000, 80110000, 80300000, 80420000, 85000000, 85100000, 92500000, 92600000, 98133110"
+        },
+        {
+          "field": "notice-type",
+          "normalizedValue": "cn-social",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "JSON_PATH",
+            "value": "notice-type"
+          },
+          "extractionMethod": "ted-search-api",
+          "extractingProvider": "ted",
+          "extractingModel": "search-api-v3",
+          "extractionConfidence": 0.85,
+          "originalSourceText": "cn-social"
+        },
+        {
+          "field": "links",
+          "normalizedValue": "https://ted.europa.eu/en/notice/283014-2016/xml",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "JSON_PATH",
+            "value": "links"
+          },
+          "extractionMethod": "ted-search-api",
+          "extractingProvider": "ted",
+          "extractingModel": "search-api-v3",
+          "extractionConfidence": 0.85,
+          "originalSourceText": "https://ted.europa.eu/en/notice/283014-2016/xml"
         }
       ],
       "deadlines": [],

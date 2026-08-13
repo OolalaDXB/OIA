@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from "react";
 import type { ConsoleData, ConsoleRecord } from "@oia/ingestion/console";
+import { KIND_PHASE, WORKSPACE_RECORD_KINDS, type ReviewAction } from "@oia/workspace";
+import { useAuditLog, useSavedViews } from "../lib/workspaceStore";
 
 type FactClass =
   | "CONFIRMED_OFFICIAL"
@@ -27,6 +29,14 @@ const PROV_COLOR: Record<FactClass, string> = {
 const CONFIRMED: FactClass[] = ["CONFIRMED_OFFICIAL", "EXTRACTED_FROM_OFFICIAL_SOURCE"];
 const FACT_ORDER: FactClass[] = ["CONFIRMED_OFFICIAL", "EXTRACTED_FROM_OFFICIAL_SOURCE", "INFERRED", "USER_PROVIDED", "UNKNOWN"];
 
+const KIND_LABEL: Record<string, string> = {
+  OPPORTUNITY: "Opportunities",
+  PROJECT: "Projects",
+  NOTE: "Notes",
+  TASK: "Tasks",
+  CONTACT: "Contacts",
+};
+
 function Badge({ text, color }: { text: string; color: string }) {
   return (
     <span className="badge" style={{ borderColor: color, color }}>
@@ -40,94 +50,181 @@ function appDeadline(r: ConsoleRecord): string {
   return app?.normalized ?? r.deadlines.find((d) => d.normalized)?.normalized ?? "—";
 }
 
+/** Publication date read from the provenance-typed facts (TED metadata). */
+function pubDate(r: ConsoleRecord): string {
+  const f = r.facts.find((x) => x.field === "publication-date");
+  return f ? f.normalizedValue.slice(0, 10) : "";
+}
+
 const uniq = (xs: string[]) => [...new Set(xs)];
 
 export function Console({ data }: { data: ConsoleData }) {
   const records = data.records;
+  const audit = useAuditLog();
+  const savedViews = useSavedViews();
+
   const [selectedId, setSelectedId] = useState<string>(records[0]?.id ?? "");
   const [fReco, setFReco] = useState("");
   const [fVerif, setFVerif] = useState("");
   const [fFormat, setFFormat] = useState("");
   const [fRoute, setFRoute] = useState("");
   const [fReview, setFReview] = useState("");
-  const [review, setReview] = useState<Record<string, { status: string; comment: string }>>({});
+  const [sortKey, setSortKey] = useState("pubDate:desc");
 
-  const filtered = useMemo(
-    () =>
-      records.filter(
-        (r) =>
-          (!fReco || r.recommendation === fReco) &&
-          (!fVerif || r.verificationStatus === fVerif) &&
-          (!fFormat || (r.artifact?.sourceFormat ?? "—") === fFormat) &&
-          (!fRoute || r.strategicRoute === fRoute) &&
-          (!fReview || (review[r.id]?.status ?? "PENDING") === fReview),
-      ),
-    [records, fReco, fVerif, fFormat, fRoute, fReview, review],
-  );
+  const filtered = useMemo(() => {
+    const xs = records.filter(
+      (r) =>
+        (!fReco || r.recommendation === fReco) &&
+        (!fVerif || r.verificationStatus === fVerif) &&
+        (!fFormat || (r.artifact?.sourceFormat ?? "—") === fFormat) &&
+        (!fRoute || r.strategicRoute === fRoute) &&
+        (!fReview || audit.statusFor(r.id) === fReview),
+    );
+    const [field, dir] = sortKey.split(":");
+    const mul = dir === "asc" ? 1 : -1;
+    return [...xs].sort((a, b) => {
+      if (field === "confidence") return mul * (a.scores.infoConfidence - b.scores.infoConfidence);
+      if (field === "title") return mul * a.title.localeCompare(b.title);
+      return mul * pubDate(a).localeCompare(pubDate(b)); // pubDate default
+    });
+  }, [records, fReco, fVerif, fFormat, fRoute, fReview, sortKey, audit]);
 
   const selected = records.find((r) => r.id === selectedId) ?? filtered[0] ?? records[0];
 
   const opt = (xs: string[]) => uniq(xs).sort();
 
+  const applyView = (id: string) => {
+    const v = savedViews.views.find((x) => x.id === id);
+    if (!v) return;
+    setFReco(v.filters.reco ?? "");
+    setFVerif(v.filters.verif ?? "");
+    setFFormat(v.filters.format ?? "");
+    setFRoute(v.filters.route ?? "");
+    setFReview(v.filters.review ?? "");
+    setSortKey(`${v.sortField}:${v.sortDirection}`);
+  };
+
+  const saveCurrentView = () => {
+    const name = window.prompt("Nom de la vue ?");
+    if (!name?.trim()) return;
+    const [sortField, sortDirection] = sortKey.split(":");
+    savedViews.saveView(
+      name.trim(),
+      { reco: fReco, verif: fVerif, format: fFormat, route: fRoute, review: fReview },
+      sortField ?? "pubDate",
+      (sortDirection as "asc" | "desc") ?? "desc",
+    );
+  };
+
   return (
-    <div className="app">
-      <header className="topbar">
-        <strong>OIA · Review Console</strong>
-        <span className="muted">
-          {data.run.records} opportunities · {data.run.artifactsIngested} official artifact(s) ingested ·{" "}
-          {data.run.discrepancies} discrepancies ·{" "}
-          {Object.entries(data.run.recommendationCounts)
-            .map(([k, v]) => `${k}:${v}`)
-            .join("  ")}
-        </span>
-      </header>
-
-      <div className="filters">
-        <Select label="Recommendation" value={fReco} onChange={setFReco} options={opt(records.map((r) => r.recommendation))} />
-        <Select label="Verification" value={fVerif} onChange={setFVerif} options={opt(records.map((r) => r.verificationStatus))} />
-        <Select label="Source format" value={fFormat} onChange={setFFormat} options={opt(records.map((r) => r.artifact?.sourceFormat ?? "—"))} />
-        <Select label="Route" value={fRoute} onChange={setFRoute} options={opt(records.map((r) => r.strategicRoute))} />
-        <Select label="Human review" value={fReview} onChange={setFReview} options={["PENDING", "APPROVE", "REJECT", "NEEDS_VERIFICATION"]} />
-      </div>
-
-      <div className="split">
-        {/* LEFT — review queue */}
-        <ul className="queue">
-          {filtered.map((r) => {
-            const rev = review[r.id]?.status ?? "PENDING";
-            return (
-              <li
-                key={r.id}
-                className={r.id === selected?.id ? "row selected" : "row"}
-                onClick={() => setSelectedId(r.id)}
-              >
-                <div className="rowTop">
-                  <Badge text={r.recommendation} color={RECO_COLOR[r.recommendation] ?? "#888"} />
-                  <span className="rowTitle">{r.title}</span>
-                </div>
-                <div className="rowMeta">
-                  <span>{r.issuer}</span>
-                </div>
-                <div className="rowMeta small">
-                  <span>⚖ {r.verificationStatus}</span>
-                  <span>▸ {r.strategicRoute}</span>
-                  <span>◷ {appDeadline(r)}</span>
-                  <span>{r.artifact?.sourceFormat ?? r.linkedBy}</span>
-                  <span>fetch:{r.liveFetch?.status ?? "—"}</span>
-                  <span>conf:{r.scores.infoConfidence}</span>
-                  <span className={rev === "PENDING" ? "muted" : ""}>HR:{rev}</span>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-
-        {/* RIGHT — detail */}
-        {selected && (
-          <div className="detail">
-            <Detail record={selected} review={review[selected.id]} onReview={(status, comment) => setReview((s) => ({ ...s, [selected.id]: { status, comment } }))} />
+    <div className="shell">
+      {/* Workspace rail — the evolutive skeleton. Only OPPORTUNITY is wired
+          (Phase 1); the others are declared, visibly disabled with their phase. */}
+      <aside className="rail">
+        <div className="railBrand">OIA</div>
+        {WORKSPACE_RECORD_KINDS.map((k) => (
+          <div key={k} className={k === "OPPORTUNITY" ? "railItem active" : "railItem off"} title={k === "OPPORTUNITY" ? "" : `Phase ${KIND_PHASE[k]}`}>
+            <span>{KIND_LABEL[k]}</span>
+            {k !== "OPPORTUNITY" && <span className="railPhase">P{KIND_PHASE[k]}</span>}
           </div>
-        )}
+        ))}
+        <div className="railFoot">
+          <button className="ghostBtn" onClick={audit.exportLog}>Export audit</button>
+        </div>
+      </aside>
+
+      <div className="app">
+        {/* Envelope: hero band gets the treatment; the triage table below stays native. */}
+        <header className="hero reveal">
+          <div className="heroRow">
+            <h1>Review Console</h1>
+            <span className="heroStats">
+              {data.run.records} opportunities · {data.run.artifactsIngested} artifact(s) ·{" "}
+              {data.run.discrepancies} discrepancies ·{" "}
+              {Object.entries(data.run.recommendationCounts)
+                .map(([k, v]) => `${k}:${v}`)
+                .join("  ")}
+            </span>
+          </div>
+          {data.note && <p className="heroNote">{data.note}</p>}
+        </header>
+
+        <div className="filters">
+          <Select label="Recommendation" value={fReco} onChange={setFReco} options={opt(records.map((r) => r.recommendation))} />
+          <Select label="Verification" value={fVerif} onChange={setFVerif} options={opt(records.map((r) => r.verificationStatus))} />
+          <Select label="Source format" value={fFormat} onChange={setFFormat} options={opt(records.map((r) => r.artifact?.sourceFormat ?? "—"))} />
+          <Select label="Route" value={fRoute} onChange={setFRoute} options={opt(records.map((r) => r.strategicRoute))} />
+          <Select label="Human review" value={fReview} onChange={setFReview} options={["PENDING", "APPROVE", "REJECT", "NEEDS_VERIFICATION"]} />
+          <label className="filter">
+            <span className="muted">Sort</span>
+            <select value={sortKey} onChange={(e) => setSortKey(e.target.value)}>
+              <option value="pubDate:desc">publication ↓ (recent first)</option>
+              <option value="pubDate:asc">publication ↑</option>
+              <option value="confidence:desc">confidence ↓</option>
+              <option value="title:asc">title A→Z</option>
+            </select>
+          </label>
+          <label className="filter">
+            <span className="muted">Saved views</span>
+            <span className="viewsRow">
+              <select defaultValue="" onChange={(e) => { applyView(e.target.value); e.target.value = ""; }}>
+                <option value="" disabled>{savedViews.views.length ? "apply…" : "none yet"}</option>
+                {savedViews.views.map((v) => (
+                  <option key={v.id} value={v.id}>{v.name}</option>
+                ))}
+              </select>
+              <button className="ghostBtn" onClick={saveCurrentView}>save view</button>
+            </span>
+          </label>
+        </div>
+
+        <div className="split">
+          {/* LEFT — triage queue: dense, native scroll, no animation. */}
+          <ul className="queue">
+            {filtered.map((r) => {
+              const rev = audit.statusFor(r.id);
+              return (
+                <li
+                  key={r.id}
+                  className={r.id === selected?.id ? "row selected" : "row"}
+                  onClick={() => setSelectedId(r.id)}
+                >
+                  <div className="rowTop">
+                    <Badge text={r.recommendation} color={RECO_COLOR[r.recommendation] ?? "#888"} />
+                    <span className="rowTitle">{r.title}</span>
+                  </div>
+                  <div className="rowMeta">
+                    <span>{r.issuer}</span>
+                    {pubDate(r) && <span className="pubChip">published {pubDate(r)}</span>}
+                  </div>
+                  <div className="rowMeta small">
+                    <span>⚖ {r.verificationStatus}</span>
+                    <span>▸ {r.strategicRoute}</span>
+                    <span>◷ {appDeadline(r)}</span>
+                    <span>{r.artifact?.sourceFormat ?? r.linkedBy}</span>
+                    <span>fetch:{r.liveFetch?.status ?? "—"}</span>
+                    <span>conf:{r.scores.infoConfidence}</span>
+                    <span className={rev === "PENDING" ? "muted" : "hrOn"}>HR:{rev}</span>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* RIGHT — detail */}
+          {selected && (
+            <div className="detail">
+              <Detail
+                record={selected}
+                reviewStatus={audit.statusFor(selected.id)}
+                events={audit.eventsFor(selected.id)}
+                onReview={(action, comment) =>
+                  audit.append(selected.id, action, comment, !!selected.gate?.pursueEligible)
+                }
+              />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -167,8 +264,18 @@ function KV({ k, v }: { k: string; v: React.ReactNode }) {
   );
 }
 
-function Detail({ record: r, review, onReview }: { record: ConsoleRecord; review?: { status: string; comment: string }; onReview: (status: string, comment: string) => void }) {
-  const [comment, setComment] = useState(review?.comment ?? "");
+function Detail({
+  record: r,
+  reviewStatus,
+  events,
+  onReview,
+}: {
+  record: ConsoleRecord;
+  reviewStatus: ReviewAction | "PENDING";
+  events: { id: string; action: string; comment: string; at: string; actor: string; gatePursueEligibleAtDecision: boolean }[];
+  onReview: (action: ReviewAction, comment: string) => void;
+}) {
+  const [comment, setComment] = useState("");
   const gate = r.gate;
   const canPursue = !!gate?.pursueEligible;
 
@@ -180,6 +287,7 @@ function Detail({ record: r, review, onReview }: { record: ConsoleRecord; review
         <Badge text={r.recommendation} color={RECO_COLOR[r.recommendation] ?? "#888"} />
         <h2>{r.title}</h2>
         <span className="muted">{r.issuer}</span>
+        {pubDate(r) && <span className="pubChip">published {pubDate(r)}</span>}
       </div>
 
       {r.discrepancies.length > 0 && (
@@ -246,8 +354,8 @@ function Detail({ record: r, review, onReview }: { record: ConsoleRecord; review
 
       <Section title="Scores">
         <KV k="Information confidence" v={`${r.scores.infoConfidence} / 100`} />
-        <KV k="Relevance" v={r.scores.relevance ?? <span className="muted">not computed (M0)</span>} />
-        <KV k="Win potential" v={r.scores.winPotential ?? <span className="muted">not computed (M0)</span>} />
+        <KV k="Relevance" v={r.scores.relevance ?? <span className="muted">not computed</span>} />
+        <KV k="Win potential" v={r.scores.winPotential ?? <span className="muted">not computed</span>} />
       </Section>
 
       {gate && (
@@ -293,7 +401,8 @@ function Detail({ record: r, review, onReview }: { record: ConsoleRecord; review
                   </div>
                   <div className="muted small">
                     @{f.locator.type}
-                    {f.locator.page ? ` p.${f.locator.page}` : ""} · {f.extractionMethod} ({f.extractingProvider}/{f.extractingModel}) · conf {f.extractionConfidence}
+                    {f.locator.page ? ` p.${f.locator.page}` : ""}
+                    {f.locator.value && f.locator.type !== "PDF_PAGE" ? ` ${f.locator.value}` : ""} · {f.extractionMethod} ({f.extractingProvider}/{f.extractingModel}) · conf {f.extractionConfidence}
                   </div>
                   {f.originalSourceText && <div className="src small">“{f.originalSourceText}”</div>}
                 </div>
@@ -336,25 +445,42 @@ function Detail({ record: r, review, onReview }: { record: ConsoleRecord; review
           {(["APPROVE", "REJECT", "NEEDS_VERIFICATION"] as const).map((s) => (
             <button
               key={s}
-              className={(review?.status ?? "PENDING") === s ? "btn on" : "btn"}
-              onClick={() => onReview(s, comment)}
+              className={reviewStatus === s ? "btn on" : "btn"}
+              onClick={() => {
+                onReview(s, comment);
+                setComment("");
+              }}
             >
               {s}
             </button>
           ))}
         </div>
-        <textarea className="comment" placeholder="Reviewer comment…" value={comment} onChange={(e) => setComment(e.target.value)} onBlur={() => onReview(review?.status ?? "PENDING", comment)} />
-        {review?.status === "APPROVE" && (
+        <textarea className="comment" placeholder="Reviewer comment (recorded with the decision)…" value={comment} onChange={(e) => setComment(e.target.value)} />
+        {reviewStatus === "APPROVE" && (
           <div className={canPursue ? "ok small" : "warn small"}>
             {canPursue
               ? "APPROVE would promote to PURSUE (all hard gate conditions pass)."
-              : "APPROVE recorded, but the hard gate is NOT satisfied → it CANNOT become PURSUE. A human sign-off never overrides a failed deterministic condition."}
+              : "APPROVE recorded in the audit trail, but the hard gate is NOT satisfied → it CANNOT become PURSUE. A human sign-off never overrides a failed deterministic condition."}
           </div>
         )}
-        <div className="muted small">M0: review is local to this session (no production Supabase). Persisted as an append-only audit event once the store is wired.</div>
+        <div className="muted small">
+          Every decision appends an immutable audit event (local to this browser in Phase 1; server store returns with Phase 2 auth).
+        </div>
       </Section>
 
-      <Section title="Provenance / audit trail">
+      <Section title={`Audit trail (append-only) · ${events.length}`}>
+        {events.length === 0 && <div className="muted">No review event yet for this record.</div>}
+        {events.map((e) => (
+          <div key={e.id} className="fact">
+            <div>
+              <b>{e.action}</b>
+              {e.comment ? ` — “${e.comment}”` : ""}
+            </div>
+            <div className="muted small">
+              {e.at} · {e.actor} · gate at decision: {e.gatePursueEligibleAtDecision ? "PURSUE-eligible" : "blocked"}
+            </div>
+          </div>
+        ))}
         <ul className="evi small">
           {r.verificationEvidence.map((e, i) => (
             <li key={`v${i}`} className="muted">verification: {e}</li>
