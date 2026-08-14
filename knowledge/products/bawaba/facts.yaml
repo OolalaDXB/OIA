@@ -120,7 +120,7 @@
     approvedBy: "mickael (mandate 2026-08-14)"
 
 # ── Facts grounded in code (bawaba-command@9913a36, inventoried 2026-08-14) ──
-# lifecycle REVIEWED (not CANONICAL): code-derived, awaiting Mickael's approval.
+# Code-derived facts — approved CANONICAL by Mickael (chat, 2026-08-14).
 
 - id: fact-bawaba-product-repo
   statement: >-
@@ -129,7 +129,7 @@
     PostgreSQL). OolalaDXB/bawaba is the public marketing website only
     (bawaba.systems, static HTML).
   subject: bawaba
-  lifecycle: REVIEWED
+  lifecycle: CANONICAL
   disclosure: INTERNAL_ONLY
   provenance:
     sourceType: CODE_REPOSITORY
@@ -138,6 +138,7 @@
     confidence: 0.95
     createdAt: "2026-08-14"
     updatedAt: "2026-08-14"
+    approvedBy: "mickael (chat approval 2026-08-14)"
 
 - id: fact-bawaba-control-plane-real
   statement: >-
@@ -150,7 +151,7 @@
     public evidence sample on bawaba.systems verifies successfully
     (verify.py: chain OK, signature OK).
   subject: bawaba
-  lifecycle: REVIEWED
+  lifecycle: CANONICAL
   disclosure: EXTERNAL_OK
   provenance:
     sourceType: CODE_REPOSITORY
@@ -159,6 +160,7 @@
     confidence: 0.95
     createdAt: "2026-08-14"
     updatedAt: "2026-08-14"
+    approvedBy: "mickael (chat approval 2026-08-14)"
 
 - id: fact-bawaba-enforcement-not-implemented
   statement: >-
@@ -171,7 +173,7 @@
     binary allow/deny, no external decision endpoint). Never present
     enforcement to real backends as working.
   subject: bawaba
-  lifecycle: REVIEWED
+  lifecycle: CANONICAL
   disclosure: INTERNAL_ONLY
   provenance:
     sourceType: CODE_REPOSITORY
@@ -180,6 +182,7 @@
     confidence: 0.95
     createdAt: "2026-08-14"
     updatedAt: "2026-08-14"
+    approvedBy: "mickael (chat approval 2026-08-14)"
 
 - id: fact-bawaba-tests-ci-gap
   statement: >-
@@ -189,7 +192,7 @@
     governance claims are not executed continuously. Frontend and Rust tests
     are absent from CI; the console has one vacuous test.
   subject: bawaba
-  lifecycle: REVIEWED
+  lifecycle: CANONICAL
   disclosure: INTERNAL_ONLY
   provenance:
     sourceType: CODE_REPOSITORY
@@ -198,6 +201,7 @@
     confidence: 0.95
     createdAt: "2026-08-14"
     updatedAt: "2026-08-14"
+    approvedBy: "mickael (chat approval 2026-08-14)"
 
 - id: fact-bawaba-founder-claims-site
   statement: >-
@@ -208,7 +212,7 @@
     properly hedged). No certifications, no named customers, no incorporation
     claim on the site.
   subject: bawaba
-  lifecycle: REVIEWED
+  lifecycle: CANONICAL
   disclosure: EXTERNAL_OK
   provenance:
     sourceType: INTERNAL_DOCUMENT
@@ -217,6 +221,7 @@
     confidence: 0.9
     createdAt: "2026-08-14"
     updatedAt: "2026-08-14"
+    approvedBy: "mickael (chat approval 2026-08-14)"
 
 - id: km-delivery-footprint
   statement: >-
