@@ -1,0 +1,58 @@
+# Evidence inventory (§14, §29). Evidence = proof a capability really exists
+# or was really used. Maturity is explainable, never a pseudo-score.
+
+- id: ev-oia-ingestion-tests
+  title: "OIA ingestion & gate test suites (green)"
+  kind: TEST_SUITE
+  locator: "OolalaDXB/OIA packages/ingestion/test + packages/scoring/test"
+  maturity: TESTED
+  disclosure: INTERNAL_ONLY
+  provenance:
+    sourceType: CODE_REPOSITORY
+    sourceId: "OolalaDXB/OIA"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+
+- id: ev-ted-live-run
+  title: "Live TED discovery run (real API, recorded raw response, qualified candidates)"
+  kind: RUN_OUTPUT
+  locator: "OolalaDXB/OIA outputs/sprint-1/ (run-report, candidates, raw fixture)"
+  maturity: TESTED
+  disclosure: INTERNAL_ONLY
+  provenance:
+    sourceType: CODE_REPOSITORY
+    sourceId: "OolalaDXB/OIA"
+    locator: "outputs/sprint-1/run-report.md"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+
+- id: ev-rls-guard-repo
+  title: "RLS Guard implementation used across TheStudio products"
+  kind: REPOSITORY
+  locator: "TheStudio internal repositories (SILLON, myOolala, Maisons.co)"
+  maturity: IMPLEMENTED
+  disclosure: INTERNAL_ONLY
+  provenance:
+    sourceType: FOUNDER_DECLARED
+    sourceId: "mandat-kb-2026-08-14"
+    locator: "§12 example"
+    confidence: 0.85
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+
+- id: ev-km-track-record
+  title: "KM Openpay: existing company, 70+ people, validated payment products"
+  kind: CUSTOMER_REFERENCE
+  locator: "KM Openpay company track record (external-safe wording per disclosure policy)"
+  maturity: CUSTOMER_USED
+  disclosure: EXTERNAL_OK
+  provenance:
+    sourceType: FOUNDER_DECLARED
+    sourceId: "mandat-kb-2026-08-14"
+    locator: "§8"
+    confidence: 0.9
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+    approvedBy: "mickael (mandate 2026-08-14)"

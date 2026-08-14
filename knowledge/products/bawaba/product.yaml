@@ -1,0 +1,28 @@
+# BAWABA — canonical product index. Documents are OUTPUTS; this is the truth.
+slug: bawaba
+name: BAWABA
+oneLine: "Control and evidence plane for AI gateways and enterprise AI agents."
+status: PRE_LAUNCH
+capabilities:
+  - decision-api
+  - evidence-audit-plane
+  - provenance-fact-engine
+  - verification-gate
+entityRoutes:
+  - oolala-next
+  - oolala-france
+factIds:
+  - fact-bawaba-positioning
+  - fact-bawaba-target-architecture
+  - fact-bawaba-no-dedicated-entity
+  - fact-bawaba-carrier-entities
+  - fact-km-delivery-capacity
+  - fact-km-shareholding
+  - fact-bawaba-team-reality
+provenance:
+  sourceType: FOUNDER_DECLARED
+  sourceId: "mandat-kb-2026-08-14"
+  confidence: 0.95
+  createdAt: "2026-08-14"
+  updatedAt: "2026-08-14"
+  approvedBy: "mickael (mandate 2026-08-14)"

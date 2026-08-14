@@ -19,6 +19,7 @@
     "@oia/database": "workspace:*",
     "@oia/ingestion": "workspace:*",
     "@oia/intelligence": "workspace:*",
+    "@oia/knowledge": "workspace:*",
     "@oia/providers": "workspace:*",
     "@oia/scoring": "workspace:*"
   },

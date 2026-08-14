@@ -1,0 +1,167 @@
+# Capability / Brick Registry (§11-12, §28).
+# status: EXPERIMENTAL | INTERNAL | PROVEN | PRODUCTIZED | SUBMISSION_READY
+# maturity (§29): DECLARED → IMPLEMENTED → TESTED → DEPLOYED → CUSTOMER_USED → INDEPENDENTLY_VERIFIED
+# Honesty rule: a capability's registry entry never claims more than its evidence.
+
+- id: decision-api
+  name: "Decision API (policy enforcement)"
+  description: >-
+    Decision endpoint for AI gateway/agent actions: ALLOW / DENY / REVIEW with
+    policy evaluation and evidence emission. BAWABA core.
+  category: ai-governance
+  technicalCapabilities: ["policy evaluation", "decision contract", "evidence emission"]
+  businessCapabilities: ["AI governance", "enterprise AI control"]
+  status: EXPERIMENTAL
+  maturity: DECLARED
+  usedBy: [bawaba]
+  implementations: []
+  evidenceIds: []
+  limitations:
+    - "Specification stage — no implementation demonstrated yet. Never present as live."
+  keywords: [ai governance, decision, policy, enforcement, gateway, agent control, guardrails]
+  synonyms: [gouvernance ia, controle des agents]
+  provenance: &founder
+    sourceType: FOUNDER_DECLARED
+    sourceId: "mandat-kb-2026-08-14"
+    confidence: 0.9
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+    approvedBy: "mickael (mandate 2026-08-14)"
+
+- id: evidence-audit-plane
+  name: "Event / Evidence plane (audit & provenance)"
+  description: >-
+    Append-only event and evidence capture making agent/gateway decisions
+    verifiable: audit trail, provenance, tamper-evidence. BAWABA core.
+  category: audit
+  technicalCapabilities: ["append-only audit", "evidence capture", "provenance chain"]
+  businessCapabilities: ["auditability", "compliance support"]
+  status: EXPERIMENTAL
+  maturity: DECLARED
+  usedBy: [bawaba]
+  implementations: []
+  evidenceIds: []
+  limitations:
+    - "BAWABA-side implementation not demonstrated; the OIA provenance engine (separate brick) is the working precedent."
+  keywords: [audit, audit trail, evidence, provenance, traceability, logging, compliance]
+  synonyms: [tracabilite, piste d'audit, preuve]
+  provenance: *founder
+
+- id: provenance-fact-engine
+  name: "Provenance-first fact extraction"
+  description: >-
+    Ingestion of official sources (PDF/HTML/API) with fact-level provenance:
+    every extracted fact carries a source locator (PDF page, CSS selector,
+    JSON path), classification and confidence. Running inside OIA.
+  category: provenance
+  technicalCapabilities: ["PDF/HTML/API ingestion", "source locators", "fact classification", "confidence scoring"]
+  businessCapabilities: ["verifiable data extraction", "evidence-backed screening"]
+  status: INTERNAL
+  maturity: TESTED
+  usedBy: [oia]
+  implementations: ["OolalaDXB/OIA packages/ingestion"]
+  evidenceIds: [ev-oia-ingestion-tests, ev-ted-live-run]
+  limitations:
+    - "Internal to OIA today; not packaged as a standalone deployable product."
+  keywords: [provenance, extraction, data quality, document processing, verification]
+  synonyms: [provenance des faits, extraction verifiable]
+  provenance: *founder
+
+- id: verification-gate
+  name: "Deterministic verification gate"
+  description: >-
+    Deterministic promotion gate over screened items: hard conditions
+    (verified source, deadline, eligibility, confidence) that human approval
+    can never override. State machine caps at manual review without a human.
+  category: ai-governance
+  technicalCapabilities: ["deterministic gating", "state machine", "human-in-the-loop cap"]
+  businessCapabilities: ["decision quality", "no-hallucination screening"]
+  status: INTERNAL
+  maturity: TESTED
+  usedBy: [oia]
+  implementations: ["OolalaDXB/OIA packages/ingestion (gate) + packages/scoring"]
+  evidenceIds: [ev-oia-ingestion-tests]
+  limitations:
+    - "Internal to OIA today."
+  keywords: [verification, gating, human in the loop, quality gate, review]
+  synonyms: [gate deterministe, verification humaine]
+  provenance: *founder
+
+- id: source-discovery-connectors
+  name: "Official-source discovery connectors"
+  description: >-
+    Connector framework discovering opportunities from official APIs (first
+    live connector: TED public procurement Search API) and qualifying them
+    through the verification pipeline.
+  category: data-infrastructure
+  technicalCapabilities: ["API connectors", "defensive parsing", "recorded fixtures", "SSRF-safe fetching"]
+  businessCapabilities: ["tender/grant radar"]
+  status: INTERNAL
+  maturity: TESTED
+  usedBy: [oia]
+  implementations: ["OolalaDXB/OIA packages/connectors"]
+  evidenceIds: [ev-ted-live-run]
+  limitations:
+    - "One live connector (TED) so far."
+  keywords: [discovery, connectors, procurement, tenders, monitoring, radar]
+  synonyms: [veille, decouverte de sources]
+  provenance: *founder
+
+- id: tenant-isolation-rls-guard
+  name: "Tenant Isolation / RLS Guard"
+  description: >-
+    PostgreSQL row-level-security verification: RLS checks, migration replay,
+    CI gate and evidence report, used across TheStudio products.
+  category: identity
+  technicalCapabilities: ["PostgreSQL RLS verification", "migration replay", "CI gate", "evidence report"]
+  businessCapabilities: ["multi-tenant data isolation", "security assurance"]
+  status: INTERNAL
+  maturity: IMPLEMENTED
+  usedBy: [sillon, myoolala, maisons-co]
+  implementations: ["TheStudio internal repositories"]
+  evidenceIds: [ev-rls-guard-repo]
+  limitations:
+    - "Not packaged as an independent deployable product; proven pattern across internal products."
+  keywords: [security, rls, tenant isolation, postgres, multi-tenant, data isolation]
+  synonyms: [isolation des donnees, securite multi-tenant]
+  provenance: *founder
+
+- id: identity-and-permissions
+  name: "Identity & permissions"
+  description: >-
+    Authentication, roles and permission patterns (Supabase Auth + RLS)
+    reused across TheStudio products.
+  category: identity
+  technicalCapabilities: ["authentication", "role-based permissions", "RLS policies"]
+  businessCapabilities: ["user identity", "access control"]
+  status: INTERNAL
+  maturity: IMPLEMENTED
+  usedBy: [sillon, myoolala, maisons-co]
+  implementations: ["TheStudio internal repositories"]
+  evidenceIds: [ev-rls-guard-repo]
+  limitations:
+    - "Pattern/bricks level, not an independent identity product."
+  keywords: [identity, authentication, sso, permissions, access control, rbac]
+  synonyms: [identite, authentification, droits]
+  provenance: *founder
+
+- id: payments-integration
+  name: "Payments integration (via KM Openpay partnership)"
+  description: >-
+    Payment capability through the KM Openpay partnership: an existing company
+    with validated payment products and real operational capacity, mobilisable
+    on engagement.
+  category: payments
+  technicalCapabilities: ["payment products (KM)", "integration capacity"]
+  businessCapabilities: ["payment delivery", "fintech expertise"]
+  status: INTERNAL
+  maturity: CUSTOMER_USED
+  usedBy: []
+  implementations: ["KM Openpay products (partner)"]
+  evidenceIds: [ev-km-track-record]
+  limitations:
+    - "Delivered via the KM Openpay partnership, not an in-house packaged product."
+    - "KM capacity is mobilisable, not a permanently dedicated team."
+  keywords: [payment, payments, fintech, billing, transaction]
+  synonyms: [paiement, monetique]
+  provenance: *founder

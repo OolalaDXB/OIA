@@ -1,0 +1,120 @@
+# BAWABA canonical facts — ONE canonical source per fact (mandate §2).
+# lifecycle: DRAFT → REVIEWED → CANONICAL → SUPERSEDED (§19).
+# disclosure: EXTERNAL_OK | INTERNAL_ONLY | FORBIDDEN_EXTERNAL (§9-10).
+
+- id: fact-bawaba-positioning
+  statement: "BAWABA is a control and evidence plane for AI gateways and enterprise AI agents."
+  subject: bawaba
+  lifecycle: CANONICAL
+  disclosure: EXTERNAL_OK
+  provenance:
+    sourceType: FOUNDER_DECLARED
+    sourceId: "mandat-kb-2026-08-14"
+    locator: "§6 Positionnement"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+    approvedBy: "mickael (mandate 2026-08-14)"
+
+- id: fact-bawaba-target-architecture
+  statement: >-
+    BAWABA's TARGET architecture: overlay/sidecar deployment, enforcement
+    adapters, a Decision API, an event/evidence plane, audit/provenance, and an
+    optional embedded sovereign gateway. This is the intended architecture —
+    planned capabilities must never be presented as already demonstrated.
+  subject: bawaba
+  lifecycle: CANONICAL
+  disclosure: EXTERNAL_OK
+  provenance:
+    sourceType: FOUNDER_DECLARED
+    sourceId: "mandat-kb-2026-08-14"
+    locator: "§6 Architecture cible"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+    approvedBy: "mickael (mandate 2026-08-14)"
+
+- id: fact-bawaba-no-dedicated-entity
+  statement: >-
+    BAWABA has no dedicated legal entity. Incorporation follows funding,
+    market access and eligibility ("location follows money"). Never encode
+    ADGM, Qatar, France or UAE as the default/definitive jurisdiction.
+  subject: bawaba
+  lifecycle: CANONICAL
+  disclosure: INTERNAL_ONLY
+  provenance:
+    sourceType: FOUNDER_DECLARED
+    sourceId: "mandat-kb-2026-08-14"
+    locator: "§7"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+    approvedBy: "mickael (mandate 2026-08-14)"
+
+- id: fact-bawaba-carrier-entities
+  statement: >-
+    Oolala Next FZ-LLC (UAE, active) can currently carry BAWABA; Oolala France
+    SAS (France, active) provides EU/FR eligibility routes. Product and legal
+    entity are distinct; several routes are possible per opportunity.
+  subject: bawaba
+  lifecycle: CANONICAL
+  disclosure: EXTERNAL_OK
+  provenance:
+    sourceType: FOUNDER_DECLARED
+    sourceId: "mandat-kb-2026-08-14"
+    locator: "§7 Situation actuelle"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+    approvedBy: "mickael (mandate 2026-08-14)"
+
+- id: fact-km-delivery-capacity
+  statement: >-
+    KM Openpay is an existing company with 70+ people, validated products and
+    real operational capacity. Its resources are MOBILISABLE for BAWABA
+    delivery (activation notably possible from a first client engagement).
+    This is a real delivery and win-potential asset — distinct from a
+    dedicated BAWABA team, which it is not.
+  subject: bawaba
+  lifecycle: CANONICAL
+  disclosure: EXTERNAL_OK
+  provenance:
+    sourceType: FOUNDER_DECLARED
+    sourceId: "mandat-kb-2026-08-14"
+    locator: "§8"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+    approvedBy: "mickael (mandate 2026-08-14)"
+
+- id: fact-km-shareholding
+  statement: "Mickael holds a 30% participation in KM Projets (KM OpenPay)."
+  subject: bawaba
+  lifecycle: CANONICAL
+  disclosure: INTERNAL_ONLY
+  notes: "Shareholding/participation structure must never reach an external output (§9)."
+  provenance:
+    sourceType: FOUNDER_DECLARED
+    sourceId: "contexte-studio-mt"
+    locator: "Entités & doctrine"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+    approvedBy: "mickael (mandate 2026-08-14)"
+
+- id: fact-bawaba-team-reality
+  statement: >-
+    BAWABA has no fully dedicated permanent team today: founder-led, with KM
+    Openpay capacity mobilisable on engagement. Do not present a dedicated
+    team as already staffed and permanently consumed.
+  subject: bawaba
+  lifecycle: CANONICAL
+  disclosure: INTERNAL_ONLY
+  provenance:
+    sourceType: FOUNDER_DECLARED
+    sourceId: "mandat-kb-2026-08-14"
+    locator: "§8"
+    confidence: 0.9
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+    approvedBy: "mickael (mandate 2026-08-14)"

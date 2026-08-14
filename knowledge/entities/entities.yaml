@@ -1,0 +1,77 @@
+# Entity inventory (§7). product != legal entity; location follows money.
+# Jurisdiction is ABSENT unless a canonical fact establishes it — never invented.
+
+- id: oolala-next
+  name: "Oolala Next FZ-LLC"
+  status: ACTIVE
+  jurisdiction: "UAE (RAKEZ)"
+  roles:
+    - "GCC commercial arm"
+    - "current possible carrier for BAWABA"
+  eligibleGeographies: [AE, GCC, MENA]
+  provenance:
+    sourceType: FOUNDER_DECLARED
+    sourceId: "contexte-studio-mt"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+    approvedBy: "mickael (mandate 2026-08-14)"
+
+- id: oolala-france
+  name: "Oolala France SAS"
+  status: ACTIVE
+  jurisdiction: "France (RCS Lorient)"
+  roles:
+    - "IP vehicle"
+    - "EU/FR funding and eligibility routes"
+  eligibleGeographies: [FR, EU]
+  provenance:
+    sourceType: FOUNDER_DECLARED
+    sourceId: "contexte-studio-mt"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+    approvedBy: "mickael (mandate 2026-08-14)"
+
+- id: km-openpay
+  name: "KM Projets (KM OpenPay)"
+  status: ACTIVE
+  roles:
+    - "delivery partner — mobilisable capacity for BAWABA"
+    - "payments expertise"
+  eligibleGeographies: []
+  deliveryCapacity:
+    type: MOBILISABLE
+    description: >-
+      Existing company with validated products and real operational capacity;
+      resources mobilisable for BAWABA, activation notably possible from a
+      first client engagement. NOT a dedicated BAWABA team.
+    headcount: "70+"
+  disclosureNotes:
+    - "External-safe: partner/delivery capacity, experience, products, size, expertise, authorised representatives."
+    - "Internal-only: Mickael's participation / shareholding structure."
+  internalOnlyFactIds: [fact-km-shareholding]
+  provenance:
+    sourceType: FOUNDER_DECLARED
+    sourceId: "mandat-kb-2026-08-14"
+    locator: "§8-9"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+    approvedBy: "mickael (mandate 2026-08-14)"
+
+- id: bawaba-entity
+  name: "BAWABA (dedicated company)"
+  status: PLANNED
+  # NO jurisdiction on purpose: location follows money (§7).
+  roles:
+    - "future dedicated entity — trigger-gated (funding, market access, eligibility)"
+  eligibleGeographies: []
+  provenance:
+    sourceType: FOUNDER_DECLARED
+    sourceId: "mandat-kb-2026-08-14"
+    locator: "§7"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+    approvedBy: "mickael (mandate 2026-08-14)"

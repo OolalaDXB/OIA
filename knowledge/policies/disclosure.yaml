@@ -1,0 +1,34 @@
+# Machine-readable disclosure policy (§9-10). This must never depend on the
+# memory of whoever writes the next deck.
+id: disclosure-v1
+
+# Names that must NEVER appear in an external output. No code path may
+# override this — human override means editing THIS policy, traceably.
+forbiddenExternalNames:
+  - "Dixio"
+
+# Patterns (case-insensitive regex) that are internal-only in external outputs
+# unless an explicit human override is recorded.
+internalOnlyPatterns:
+  - "participation.{0,40}(KM|OpenPay)"
+  - "(KM|OpenPay).{0,40}participation"
+  - "30\\s?%.{0,40}(KM|OpenPay)"
+  - "(KM|OpenPay).{0,40}30\\s?%"
+  - "shareholding"
+  - "actionnariat"
+
+# Claims forbidden because NO canonical fact establishes them (§32).
+# Matching one of these in a draft output = CONFLICTING_CLAIM.
+forbiddenClaims:
+  - "BAWABA is an ADGM company"
+  - "BAWABA (is|was) incorporated"
+  - "BAWABA.{0,30}(ADGM|DIFC|Qatar)-based"
+  - "ISO ?27001 certified"
+  - "SOC ?2 (Type ?(I|II) )?certified"
+
+rules:
+  - "One canonical source per fact; decks/PDFs/applications are outputs, never truth."
+  - "A planned capability is never presented as demonstrated."
+  - "KM Openpay: capacity/experience/size external-safe; participation structure internal-only."
+  - "BAWABA jurisdiction is not fixed: location follows money. No default ADGM/Qatar/France/UAE."
+  - "An INFERRED fact is never auto-promoted to CANONICAL."
