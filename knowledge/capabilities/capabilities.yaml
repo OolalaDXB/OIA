@@ -4,48 +4,117 @@
 # Honesty rule: a capability's registry entry never claims more than its evidence.
 
 - id: decision-api
-  name: "Decision API (policy enforcement)"
+  name: "Policy decision engine (default-deny)"
   description: >-
-    Decision endpoint for AI gateway/agent actions: ALLOW / DENY / REVIEW with
-    policy evaluation and evidence emission. BAWABA core.
+    Default-deny policy evaluation for AI agent tool calls (per-agent YAML
+    allow/deny lists, wildcard matching, deny precedence), evaluated in-process
+    by the BAWABA gateway pipeline with full audit emission.
   category: ai-governance
-  technicalCapabilities: ["policy evaluation", "decision contract", "evidence emission"]
+  technicalCapabilities: ["default-deny policy evaluation", "per-agent tool allowlists", "decision audit emission"]
   businessCapabilities: ["AI governance", "enterprise AI control"]
   status: EXPERIMENTAL
-  maturity: DECLARED
+  maturity: TESTED
   usedBy: [bawaba]
-  implementations: []
-  evidenceIds: []
+  implementations: ["OolalaDXB/bawaba-command internal/policy/policy.go (+ proxy pipeline)"]
+  evidenceIds: [ev-bawaba-go-tests]
   limitations:
-    - "Specification stage — no implementation demonstrated yet. Never present as live."
+    - "Binary ALLOW/DENY only — no REVIEW tri-state; no standalone external decision endpoint (in-process only)."
+    - "Static YAML pre-OPA MVP: no policy DSL, no attribute/context-based evaluation."
+    - "Policy tests exist but are excluded from CI (run locally)."
   keywords: [ai governance, decision, policy, enforcement, gateway, agent control, guardrails]
   synonyms: [gouvernance ia, controle des agents]
-  provenance: &founder
-    sourceType: FOUNDER_DECLARED
-    sourceId: "mandat-kb-2026-08-14"
-    confidence: 0.9
+  provenance: &code
+    sourceType: CODE_REPOSITORY
+    sourceId: "OolalaDXB/bawaba-command@9913a36"
+    confidence: 0.95
     createdAt: "2026-08-14"
     updatedAt: "2026-08-14"
-    approvedBy: "mickael (mandate 2026-08-14)"
 
 - id: evidence-audit-plane
-  name: "Event / Evidence plane (audit & provenance)"
+  name: "Tamper-evident audit & evidence plane"
   description: >-
-    Append-only event and evidence capture making agent/gateway decisions
-    verifiable: audit trail, provenance, tamper-evidence. BAWABA core.
+    Hash-chained (SHA-256), Ed25519-signed append-only audit trail with a
+    Postgres immutability trigger, server-side chain verification endpoint,
+    evidence export and a CLI verifier. A public evidence sample verifies
+    independently (verify.py: chain OK, signature OK). BAWABA's strongest
+    subsystem.
   category: audit
-  technicalCapabilities: ["append-only audit", "evidence capture", "provenance chain"]
-  businessCapabilities: ["auditability", "compliance support"]
+  technicalCapabilities: ["SHA-256 hash chain", "Ed25519 signing", "append-only Postgres trigger", "server-side chain verification", "evidence export + CLI verifier", "SSE event stream", "SIEM webhook forwarding"]
+  businessCapabilities: ["auditability", "verifiable evidence", "compliance support"]
+  status: INTERNAL
+  maturity: TESTED
+  usedBy: [bawaba]
+  implementations: ["OolalaDXB/bawaba-command internal/audit/ + internal/api/ + cmd/cli/"]
+  evidenceIds: [ev-bawaba-go-tests, ev-bawaba-public-evidence-sample]
+  limitations:
+    - "computeEventHash covers 14 of ~24 event fields — some fields (routing_proof, mcp_server…) are mutable without breaking the chain."
+    - "Merkle window is roadmap P2; audit tests excluded from CI (run locally)."
+  keywords: [audit, audit trail, evidence, provenance, traceability, logging, compliance, tamper-evident]
+  synonyms: [tracabilite, piste d'audit, preuve]
+  provenance: *code
+
+- id: jurisdiction-routing-proofs
+  name: "Sovereign jurisdiction routing with signed proofs"
+  description: >-
+    Jurisdiction-aware routing decisions producing Ed25519-signed routing
+    proofs with deterministic nonces and canonical payloads, re-verifiable by
+    third parties. Fail-closed on unknown jurisdiction.
+  category: ai-governance
+  technicalCapabilities: ["jurisdiction rule matching", "Ed25519-signed routing proofs", "deterministic canonical payloads", "fail-closed routing"]
+  businessCapabilities: ["data sovereignty", "regulatory routing"]
+  status: INTERNAL
+  maturity: TESTED
+  usedBy: [bawaba]
+  implementations: ["OolalaDXB/bawaba-command internal/router/router.go"]
+  evidenceIds: [ev-bawaba-go-tests, ev-bawaba-public-evidence-sample]
+  limitations:
+    - "Routing selects a backend label; actual forwarding to real backends is not implemented (see mcp-gateway-enforcement)."
+  keywords: [sovereignty, sovereign, jurisdiction, routing, data residency, compliance]
+  synonyms: [souverainete, residence des donnees]
+  provenance: *code
+
+- id: pii-tokenization-mena
+  name: "MENA PII tokenization"
+  description: >-
+    Rust tokenizer (cgo FFI) detecting and tokenizing MENA-relevant PII —
+    IBAN, email, phone, Emirates ID, card (Luhn), KSA NID, Morocco CIN — with
+    a TTL token vault and detokenization.
+  category: security
+  technicalCapabilities: ["regex PII detection (7 patterns)", "TTL token vault", "detokenization", "cgo FFI bridge"]
+  businessCapabilities: ["PII protection", "regulated-data handling"]
+  status: EXPERIMENTAL
+  maturity: IMPLEMENTED
+  usedBy: [bawaba]
+  implementations: ["OolalaDXB/bawaba-command rust/tokenizer/ + internal/tokenizer/"]
+  evidenceIds: [ev-bawaba-go-tests]
+  limitations:
+    - "Regex patterns are broad/naive (false positives likely, e.g. Morocco CIN); only 1 Rust test — regexes and vault untested."
+    - "Tokenization is per-agent opt-in config, not a global invariant."
+  keywords: [pii, tokenization, data protection, privacy, anonymization, gdpr, pdpl]
+  synonyms: [pseudonymisation, protection des donnees]
+  provenance: *code
+
+- id: mcp-gateway-enforcement
+  name: "MCP gateway enforcement (forwarding & adapters)"
+  description: >-
+    The enforcement half of BAWABA: real forwarding of governed MCP tool calls
+    to upstream backends, third-party gateway adapters, embedded sovereign
+    mode. Pipeline orchestration (authenticate → evaluate → tokenize → route →
+    execute → audit) is implemented; the terminal execution step is a stub.
+  category: ai-governance
+  technicalCapabilities: ["6-stage fail-closed pipeline orchestration (real)", "MCP JSON-RPC 2.0 reverse proxy shell"]
+  businessCapabilities: ["AI gateway control (target)"]
   status: EXPERIMENTAL
   maturity: DECLARED
   usedBy: [bawaba]
-  implementations: []
+  implementations: ["OolalaDXB/bawaba-command internal/proxy/proxy.go (execution stubbed at :463)"]
   evidenceIds: []
   limitations:
-    - "BAWABA-side implementation not demonstrated; the OIA provenance engine (separate brick) is the working precedent."
-  keywords: [audit, audit trail, evidence, provenance, traceability, logging, compliance]
-  synonyms: [tracabilite, piste d'audit, preuve]
-  provenance: *founder
+    - "executeToolCall returns simulated responses — no upstream MCP backend is ever contacted. NEVER claim live enforcement to real backends."
+    - "Zero third-party gateway adapters (Kong/Envoy/LiteLLM…); embedded sovereign mode is roadmap P3; OIDC/JWT auth is a stub; no TLS listener as deployed."
+  keywords: [gateway, enforcement, mcp, proxy, adapters, sidecar, overlay]
+  synonyms: [passerelle, adaptateurs]
+  provenance: *code
 
 - id: provenance-fact-engine
   name: "Provenance-first fact extraction"
@@ -65,7 +134,13 @@
     - "Internal to OIA today; not packaged as a standalone deployable product."
   keywords: [provenance, extraction, data quality, document processing, verification]
   synonyms: [provenance des faits, extraction verifiable]
-  provenance: *founder
+  provenance: &founder
+    sourceType: FOUNDER_DECLARED
+    sourceId: "mandat-kb-2026-08-14"
+    confidence: 0.9
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+    approvedBy: "mickael (mandate 2026-08-14)"
 
 - id: verification-gate
   name: "Deterministic verification gate"

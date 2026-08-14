@@ -6,6 +6,9 @@ status: PRE_LAUNCH
 capabilities:
   - decision-api
   - evidence-audit-plane
+  - jurisdiction-routing-proofs
+  - pii-tokenization-mena
+  - mcp-gateway-enforcement
   - provenance-fact-engine
   - verification-gate
 entityRoutes:
@@ -19,6 +22,11 @@ factIds:
   - fact-km-delivery-capacity
   - fact-km-shareholding
   - fact-bawaba-team-reality
+  - fact-bawaba-product-repo
+  - fact-bawaba-control-plane-real
+  - fact-bawaba-enforcement-not-implemented
+  - fact-bawaba-tests-ci-gap
+  - fact-bawaba-founder-claims-site
 provenance:
   sourceType: FOUNDER_DECLARED
   sourceId: "mandat-kb-2026-08-14"

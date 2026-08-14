@@ -56,3 +56,49 @@
     createdAt: "2026-08-14"
     updatedAt: "2026-08-14"
     approvedBy: "mickael (mandate 2026-08-14)"
+
+# ── Grounded in bawaba-command@9913a36 (inventoried 2026-08-14) ─────────────
+
+- id: ev-bawaba-go-tests
+  title: "bawaba-command Go test suites — 71 test functions (audit tamper detection, routing-proof verifiability, policy default-deny, proxy pipeline, quotas, SIEM retry)"
+  kind: TEST_SUITE
+  locator: "OolalaDXB/bawaba-command internal/*/..._test.go + cmd/cli/main_test.go"
+  maturity: TESTED
+  disclosure: INTERNAL_ONLY
+  notes: "CI runs only internal/api + internal/siem; the rest run locally (make test). Treat as tested-locally, unverified continuously."
+  provenance:
+    sourceType: CODE_REPOSITORY
+    sourceId: "OolalaDXB/bawaba-command@9913a36"
+    locator: ".github/workflows/ci.yml"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+
+- id: ev-bawaba-public-evidence-sample
+  title: "Public verifiable evidence sample (bawaba.systems): signed decision + audit chain + verify.py — executed 2026-08-14, chain OK, signature OK"
+  kind: DEMO
+  locator: "OolalaDXB/bawaba evidence/ (decision.json, decision.sig, audit-chain.jsonl, verify.py) — public on bawaba.systems"
+  maturity: TESTED
+  disclosure: EXTERNAL_OK
+  notes: "Demonstration fixture (5 events in 4 seconds), explicitly labelled as such — not a production extract."
+  provenance:
+    sourceType: CODE_REPOSITORY
+    sourceId: "OolalaDXB/bawaba@561451f"
+    locator: "evidence/"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+
+- id: ev-bawaba-demo-stack
+  title: "Deployable demo stack: Docker multi-stage build, docker-compose (Postgres+gateway), monitoring stack, demo/bench scripts, SSH deploy workflow"
+  kind: RELEASE
+  locator: "OolalaDXB/bawaba-command Dockerfile, docker-compose*.yml, Makefile, scripts/, .github/workflows/deploy.yml"
+  maturity: IMPLEMENTED
+  disclosure: INTERNAL_ONLY
+  notes: "Demo-grade: no staging/rollback/health gate; Prometheus scrapes a /metrics endpoint that does not exist."
+  provenance:
+    sourceType: CODE_REPOSITORY
+    sourceId: "OolalaDXB/bawaba-command@9913a36"
+    confidence: 0.9
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"

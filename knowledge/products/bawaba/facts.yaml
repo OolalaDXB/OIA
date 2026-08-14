@@ -118,3 +118,102 @@
     createdAt: "2026-08-14"
     updatedAt: "2026-08-14"
     approvedBy: "mickael (mandate 2026-08-14)"
+
+# ── Facts grounded in code (bawaba-command@9913a36, inventoried 2026-08-14) ──
+# lifecycle REVIEWED (not CANONICAL): code-derived, awaiting Mickael's approval.
+
+- id: fact-bawaba-product-repo
+  statement: >-
+    The BAWABA product code lives in OolalaDXB/bawaba-command (Go 1.24 control
+    plane ~5.9k LOC, Rust PII tokenizer via cgo FFI, React/Vite console,
+    PostgreSQL). OolalaDXB/bawaba is the public marketing website only
+    (bawaba.systems, static HTML).
+  subject: bawaba
+  lifecycle: REVIEWED
+  disclosure: INTERNAL_ONLY
+  provenance:
+    sourceType: CODE_REPOSITORY
+    sourceId: "OolalaDXB/bawaba-command@9913a36"
+    locator: "go.mod; rust/tokenizer/; src/; README.md"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+
+- id: fact-bawaba-control-plane-real
+  statement: >-
+    Implemented and locally tested in bawaba-command: default-deny policy
+    engine (YAML tool lists), tamper-evident audit chain (SHA-256 + Ed25519 +
+    Postgres append-only trigger, server-side verification endpoint),
+    Ed25519-signed jurisdiction routing proofs (third-party verifiable), MENA
+    PII tokenization (Rust, 7 patterns + Luhn), 16-endpoint REST API with SSE,
+    quotas/rate limiting, SIEM webhook forwarder, CLI evidence verifier. A
+    public evidence sample on bawaba.systems verifies successfully
+    (verify.py: chain OK, signature OK).
+  subject: bawaba
+  lifecycle: REVIEWED
+  disclosure: EXTERNAL_OK
+  provenance:
+    sourceType: CODE_REPOSITORY
+    sourceId: "OolalaDXB/bawaba-command@9913a36"
+    locator: "internal/{policy,audit,router,api,ratelimit,siem}/; rust/tokenizer/; cmd/cli/; bawaba repo evidence/"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+
+- id: fact-bawaba-enforcement-not-implemented
+  statement: >-
+    NOT implemented in bawaba-command: real gateway forwarding (executeToolCall
+    returns simulated responses — no upstream MCP backend is ever contacted),
+    third-party gateway adapters (Kong/Envoy/LiteLLM/etc.: zero code),
+    embedded sovereign mode (roadmap P3), OIDC/JWT auth (explicit stub), TLS
+    listener as deployed, /metrics endpoint (Prometheus configs scrape a
+    non-existent target), REVIEW tri-state decisions (policy contract is
+    binary allow/deny, no external decision endpoint). Never present
+    enforcement to real backends as working.
+  subject: bawaba
+  lifecycle: REVIEWED
+  disclosure: INTERNAL_ONLY
+  provenance:
+    sourceType: CODE_REPOSITORY
+    sourceId: "OolalaDXB/bawaba-command@9913a36"
+    locator: "internal/proxy/proxy.go:463; internal/auth/auth.go:212-245; cmd/gateway/main.go:214"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+
+- id: fact-bawaba-tests-ci-gap
+  statement: >-
+    71 Go test functions exist (audit tamper detection, routing-proof
+    determinism, policy default-deny, proxy pipeline, quotas, SIEM) but CI
+    runs only internal/api and internal/siem — the tests covering the core
+    governance claims are not executed continuously. Frontend and Rust tests
+    are absent from CI; the console has one vacuous test.
+  subject: bawaba
+  lifecycle: REVIEWED
+  disclosure: INTERNAL_ONLY
+  provenance:
+    sourceType: CODE_REPOSITORY
+    sourceId: "OolalaDXB/bawaba-command@9913a36"
+    locator: ".github/workflows/ci.yml; src/test/example.test.ts"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+
+- id: fact-bawaba-founder-claims-site
+  statement: >-
+    The public site claims founder-market access ("22+ years in regulated
+    payments infrastructure, including 14 at SWIFT, institutional
+    relationships across 83 countries"), a 12-week paid design-partner pilot
+    offer, and active discussions with two regulated institutions (unnamed,
+    properly hedged). No certifications, no named customers, no incorporation
+    claim on the site.
+  subject: bawaba
+  lifecycle: REVIEWED
+  disclosure: EXTERNAL_OK
+  provenance:
+    sourceType: INTERNAL_DOCUMENT
+    sourceId: "OolalaDXB/bawaba@561451f"
+    locator: "index.html:241,258,263"
+    confidence: 0.9
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"

@@ -132,7 +132,10 @@ describe("[§37] success criterion — compose from what really exists", () => {
     expect(s.entityRoutes.map((e) => e.id)).toContain("oolala-france");
     // KM mobilisable capacity surfaces:
     expect(s.deliveryCapacity.map((e) => e.id)).toContain("km-openpay");
-    // And the system admits what is missing instead of inventing:
-    expect(s.gaps.some((g) => g.includes("DECLARED"))).toBe(true);
+    // And the system admits what is missing instead of inventing: "EU
+    // delivery capability" is an entity route, not a registry capability.
+    // (The former "decision-api DECLARED without evidence" gap closed when
+    // the code inventory upgraded it to TESTED with real evidence.)
+    expect(s.gaps.some((g) => g.includes("EU delivery capability"))).toBe(true);
   });
 });
