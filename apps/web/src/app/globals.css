@@ -1,3 +1,13 @@
+/* Inter (SIL OFL) — self-hosted variable font, no CDN. The free stand-in for
+   BIOPTIC's licensed Helvetica Now Display; weights 100-900 in one file. */
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/InterVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* BIOPTIC tokens — EXACT, from docs/interface/reference/bioptic.webflow.min.css:
      :root{--white:white;--dark-blue:#10151d;--aqua:#00ffe0;--light-grey:#f3f7f8}
@@ -28,8 +38,8 @@
      tuned denser for a working tool. */
   --size-font: clamp(13px, 0.82vw, 15px);
 
-  /* BIOPTIC stacks (verbatim fallbacks from their CSS). */
-  --sans: "Helvetica Now Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* Inter self-hosted first (free Helvetica Now stand-in), BIOPTIC fallbacks after. */
+  --sans: "Inter", "Helvetica Now Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --mono: "SF Mono", ui-monospace, "SFMono-Regular", Menlo, "Trebuchet MS", sans-serif;
 }
 
