@@ -3,10 +3,14 @@
 import { useCallback, useEffect, useState } from "react";
 import {
   AUDIT_STORAGE_KEY,
+  NOTES_STORAGE_KEY,
+  TAGS_STORAGE_KEY,
   VIEWS_STORAGE_KEY,
   appendAuditEvent,
   latestReviewStatus,
+  type AttachedNote,
   type AuditEvent,
+  type ProjectTagMap,
   type ReviewAction,
   type SavedView,
 } from "@oia/workspace";
@@ -92,6 +96,50 @@ export function useAuditLog() {
   }, [log]);
 
   return { log, append, statusFor, eventsFor, exportLog };
+}
+
+/** Phase 2 — opportunity → project tag (a human decision, audit-logged by the caller). */
+export function useProjectTags() {
+  const [tags, setTags] = useState<ProjectTagMap>({});
+  useEffect(() => setTags(readJson<ProjectTagMap>(TAGS_STORAGE_KEY, {})), []);
+
+  const setTag = useCallback((recordId: string, projectSlug: string) => {
+    setTags((prev) => {
+      const next = { ...prev };
+      if (projectSlug) next[recordId] = projectSlug;
+      else delete next[recordId];
+      writeJson(TAGS_STORAGE_KEY, next);
+      return next;
+    });
+  }, []);
+
+  return { tags, setTag };
+}
+
+/** Phase 2 — notes attached to a record (standalone notes surface is Phase 3). */
+export function useAttachedNotes() {
+  const [notes, setNotes] = useState<AttachedNote[]>([]);
+  useEffect(() => setNotes(readJson<AttachedNote[]>(NOTES_STORAGE_KEY, [])), []);
+
+  const addNote = useCallback((recordId: string, text: string) => {
+    if (!text.trim()) return;
+    const note: AttachedNote = {
+      id: nextId("note"),
+      recordId,
+      text: text.trim(),
+      at: new Date().toISOString(),
+      actor: "mickael",
+    };
+    setNotes((prev) => {
+      const next = [...prev, note];
+      writeJson(NOTES_STORAGE_KEY, next);
+      return next;
+    });
+  }, []);
+
+  const notesFor = useCallback((recordId: string) => notes.filter((n) => n.recordId === recordId), [notes]);
+
+  return { notes, addNote, notesFor };
 }
 
 export function useSavedViews() {

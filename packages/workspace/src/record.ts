@@ -1,4 +1,5 @@
 import type { ConsoleRecord } from "@oia/ingestion";
+import type { ProjectProfile } from "@oia/database";
 
 /**
  * Workspace record model — the generic envelope every OIA surface shares
@@ -45,12 +46,22 @@ export interface OpportunityRecord extends WorkspaceRecordBase {
   payload: ConsoleRecord;
 }
 
-/** Declared, not built (Phase 2/3): payload intentionally absent until then. */
-export interface PlannedRecord extends WorkspaceRecordBase {
-  kind: Exclude<WorkspaceRecordKind, "OPPORTUNITY">;
+/** Phase 2: project records — payload IS the existing ProjectProfile. */
+export interface ProjectRecord extends WorkspaceRecordBase {
+  kind: "PROJECT";
+  payload: ProjectProfile;
 }
 
-export type WorkspaceRecord = OpportunityRecord | PlannedRecord;
+/** Declared, not built (Phase 3): payload intentionally absent until then. */
+export interface PlannedRecord extends WorkspaceRecordBase {
+  kind: Exclude<WorkspaceRecordKind, "OPPORTUNITY" | "PROJECT">;
+}
+
+export type WorkspaceRecord = OpportunityRecord | ProjectRecord | PlannedRecord;
+
+export function projectToRecord(payload: ProjectProfile): ProjectRecord {
+  return { id: payload.slug, kind: "PROJECT", title: payload.name, linkedRecordIds: [], payload };
+}
 
 export function opportunityToRecord(payload: ConsoleRecord): OpportunityRecord {
   return { id: payload.id, kind: "OPPORTUNITY", title: payload.title, linkedRecordIds: [], payload };

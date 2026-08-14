@@ -62,7 +62,9 @@ code { font-family: var(--mono); font-size: 0.85em; color: var(--soft); backgrou
 .railItem {
   display: flex; justify-content: space-between; align-items: center;
   padding: 7px 10px; border-radius: 6px; font-size: 12.5px;
+  border-bottom: none; color: var(--ink);
 }
+a.railItem:hover { background: var(--card); }
 .railItem.active { background: var(--ink); color: #fff; font-weight: 600; }
 .railItem.off { color: var(--muted); cursor: not-allowed; }
 .railPhase { font-family: var(--mono); font-size: 9px; letter-spacing: 1px; opacity: 0.8; }
@@ -118,6 +120,10 @@ code { font-family: var(--mono); font-size: 0.85em; color: var(--soft); backgrou
   font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.3px; color: var(--soft);
   background: var(--card); border-radius: 4px; padding: 2px 7px; white-space: nowrap;
 }
+.tagChip { background: var(--ink); color: #fff; }
+.applyBtn { margin-left: 10px; padding: 1px 9px; font-size: 9px; }
+.noteRow { align-items: flex-start; margin-top: 8px; }
+.noteRow .comment { min-height: 40px; }
 
 /* ————— Detail ————— */
 .detail { overflow: auto; padding: 22px 32px 60px; max-width: 1100px; }

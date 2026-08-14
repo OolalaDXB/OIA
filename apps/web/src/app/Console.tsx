@@ -1,9 +1,15 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { ConsoleData, ConsoleRecord } from "@oia/ingestion/console";
-import { KIND_PHASE, WORKSPACE_RECORD_KINDS, type ReviewAction } from "@oia/workspace";
-import { useAuditLog, useSavedViews } from "../lib/workspaceStore";
+import type { ConsoleData, ConsoleRecord, OpportunityKind } from "@oia/ingestion/console";
+import {
+  KIND_PHASE,
+  THESTUDIO_PROJECTS,
+  scoreProject,
+  type ProjectSuggestion,
+  type ReviewAction,
+} from "@oia/workspace";
+import { useAttachedNotes, useAuditLog, useProjectTags, useSavedViews } from "../lib/workspaceStore";
 
 type FactClass =
   | "CONFIRMED_OFFICIAL"
@@ -29,13 +35,52 @@ const PROV_COLOR: Record<FactClass, string> = {
 const CONFIRMED: FactClass[] = ["CONFIRMED_OFFICIAL", "EXTRACTED_FROM_OFFICIAL_SOURCE"];
 const FACT_ORDER: FactClass[] = ["CONFIRMED_OFFICIAL", "EXTRACTED_FROM_OFFICIAL_SOURCE", "INFERRED", "USER_PROVIDED", "UNKNOWN"];
 
-const KIND_LABEL: Record<string, string> = {
-  OPPORTUNITY: "Opportunities",
-  PROJECT: "Projects",
-  NOTE: "Notes",
-  TASK: "Tasks",
-  CONTACT: "Contacts",
+export const KIND_LABEL: Record<OpportunityKind, string> = {
+  GRANT: "Grant",
+  TENDER_RFP: "Tender / RFP",
+  VC_INVESTOR: "Investor",
+  REGULATORY: "Regulatory",
 };
+const KIND_COLOR: Record<OpportunityKind, string> = {
+  GRANT: "var(--pursue)",
+  TENDER_RFP: "var(--partner)",
+  VC_INVESTOR: "var(--monitor)",
+  REGULATORY: "var(--investigate)",
+};
+
+export type RailKey = "dashboard" | "grants" | "tenders" | "investors" | "projects";
+
+/** Shared workspace rail — one shell for every surface (mandate §5). */
+export function Rail({ active, onExportAudit }: { active: RailKey; onExportAudit?: () => void }) {
+  const nav: { key: RailKey; label: string; href: string }[] = [
+    { key: "dashboard", label: "Dashboard", href: "/" },
+    { key: "grants", label: "Grants", href: "/grants/" },
+    { key: "tenders", label: "Tenders / RFP", href: "/tenders/" },
+    { key: "investors", label: "Investors", href: "/investors/" },
+    { key: "projects", label: "Projects", href: "/projects/" },
+  ];
+  return (
+    <aside className="rail">
+      <div className="railBrand">OIA</div>
+      {nav.map((n) => (
+        <a key={n.key} href={n.href} className={active === n.key ? "railItem active" : "railItem"}>
+          <span>{n.label}</span>
+        </a>
+      ))}
+      {(["NOTE", "TASK", "CONTACT"] as const).map((k) => (
+        <div key={k} className="railItem off" title={`Phase ${KIND_PHASE[k]}`}>
+          <span>{k === "NOTE" ? "Notes" : k === "TASK" ? "Tasks" : "Contacts"}</span>
+          <span className="railPhase">P{KIND_PHASE[k]}</span>
+        </div>
+      ))}
+      {onExportAudit && (
+        <div className="railFoot">
+          <button className="ghostBtn" onClick={onExportAudit}>Export audit</button>
+        </div>
+      )}
+    </aside>
+  );
+}
 
 function Badge({ text, color }: { text: string; color: string }) {
   return (
@@ -58,49 +103,71 @@ function pubDate(r: ConsoleRecord): string {
 
 const uniq = (xs: string[]) => [...new Set(xs)];
 
-export function Console({ data }: { data: ConsoleData }) {
-  const records = data.records;
+export function Console({
+  data,
+  fixedKind,
+  active,
+  title,
+}: {
+  data: ConsoleData;
+  /** Set on /grants, /tenders, /investors — same shell, kind-scoped queue. */
+  fixedKind?: OpportunityKind;
+  active: RailKey;
+  title: string;
+}) {
   const audit = useAuditLog();
   const savedViews = useSavedViews();
+  const projectTags = useProjectTags();
+  const notes = useAttachedNotes();
 
-  const [selectedId, setSelectedId] = useState<string>(records[0]?.id ?? "");
+  const records = useMemo(
+    () => (fixedKind ? data.records.filter((r) => r.opportunityKind === fixedKind) : data.records),
+    [data.records, fixedKind],
+  );
+
+  const [selectedId, setSelectedId] = useState<string>("");
+  const [fKind, setFKind] = useState("");
   const [fReco, setFReco] = useState("");
   const [fVerif, setFVerif] = useState("");
-  const [fFormat, setFFormat] = useState("");
   const [fRoute, setFRoute] = useState("");
   const [fReview, setFReview] = useState("");
+  const [fProject, setFProject] = useState("");
   const [sortKey, setSortKey] = useState("pubDate:desc");
 
   const filtered = useMemo(() => {
     const xs = records.filter(
       (r) =>
+        (!fKind || (r.opportunityKind ?? "GRANT") === fKind) &&
         (!fReco || r.recommendation === fReco) &&
         (!fVerif || r.verificationStatus === fVerif) &&
-        (!fFormat || (r.artifact?.sourceFormat ?? "—") === fFormat) &&
         (!fRoute || r.strategicRoute === fRoute) &&
-        (!fReview || audit.statusFor(r.id) === fReview),
+        (!fReview || audit.statusFor(r.id) === fReview) &&
+        (!fProject ||
+          (fProject === "__untagged" ? !projectTags.tags[r.id] : projectTags.tags[r.id] === fProject)),
     );
     const [field, dir] = sortKey.split(":");
     const mul = dir === "asc" ? 1 : -1;
     return [...xs].sort((a, b) => {
       if (field === "confidence") return mul * (a.scores.infoConfidence - b.scores.infoConfidence);
       if (field === "title") return mul * a.title.localeCompare(b.title);
+      if (field === "deadline") return mul * appDeadline(a).localeCompare(appDeadline(b));
       return mul * pubDate(a).localeCompare(pubDate(b)); // pubDate default
     });
-  }, [records, fReco, fVerif, fFormat, fRoute, fReview, sortKey, audit]);
+  }, [records, fKind, fReco, fVerif, fRoute, fReview, fProject, sortKey, audit, projectTags.tags]);
 
-  const selected = records.find((r) => r.id === selectedId) ?? filtered[0] ?? records[0];
+  const selected = records.find((r) => r.id === selectedId) ?? filtered[0];
 
   const opt = (xs: string[]) => uniq(xs).sort();
 
   const applyView = (id: string) => {
     const v = savedViews.views.find((x) => x.id === id);
     if (!v) return;
+    setFKind(v.filters.kind ?? "");
     setFReco(v.filters.reco ?? "");
     setFVerif(v.filters.verif ?? "");
-    setFFormat(v.filters.format ?? "");
     setFRoute(v.filters.route ?? "");
     setFReview(v.filters.review ?? "");
+    setFProject(v.filters.project ?? "");
     setSortKey(`${v.sortField}:${v.sortDirection}`);
   };
 
@@ -110,7 +177,7 @@ export function Console({ data }: { data: ConsoleData }) {
     const [sortField, sortDirection] = sortKey.split(":");
     savedViews.saveView(
       name.trim(),
-      { reco: fReco, verif: fVerif, format: fFormat, route: fRoute, review: fReview },
+      { kind: fKind, reco: fReco, verif: fVerif, route: fRoute, review: fReview, project: fProject },
       sortField ?? "pubDate",
       (sortDirection as "asc" | "desc") ?? "desc",
     );
@@ -118,29 +185,15 @@ export function Console({ data }: { data: ConsoleData }) {
 
   return (
     <div className="shell">
-      {/* Workspace rail — the evolutive skeleton. Only OPPORTUNITY is wired
-          (Phase 1); the others are declared, visibly disabled with their phase. */}
-      <aside className="rail">
-        <div className="railBrand">OIA</div>
-        {WORKSPACE_RECORD_KINDS.map((k) => (
-          <div key={k} className={k === "OPPORTUNITY" ? "railItem active" : "railItem off"} title={k === "OPPORTUNITY" ? "" : `Phase ${KIND_PHASE[k]}`}>
-            <span>{KIND_LABEL[k]}</span>
-            {k !== "OPPORTUNITY" && <span className="railPhase">P{KIND_PHASE[k]}</span>}
-          </div>
-        ))}
-        <div className="railFoot">
-          <button className="ghostBtn" onClick={audit.exportLog}>Export audit</button>
-        </div>
-      </aside>
+      <Rail active={active} onExportAudit={audit.exportLog} />
 
       <div className="app">
         {/* Envelope: hero band gets the treatment; the triage table below stays native. */}
         <header className="hero reveal">
           <div className="heroRow">
-            <h1>Review Console</h1>
+            <h1>{title}</h1>
             <span className="heroStats">
-              {data.run.records} opportunities · {data.run.artifactsIngested} artifact(s) ·{" "}
-              {data.run.discrepancies} discrepancies ·{" "}
+              {records.length} shown / {data.run.records} total · {data.run.discrepancies} discrepancies ·{" "}
               {Object.entries(data.run.recommendationCounts)
                 .map(([k, v]) => `${k}:${v}`)
                 .join("  ")}
@@ -150,16 +203,37 @@ export function Console({ data }: { data: ConsoleData }) {
         </header>
 
         <div className="filters">
+          {!fixedKind && (
+            <label className="filter">
+              <span className="muted">Kind</span>
+              <select value={fKind} onChange={(e) => setFKind(e.target.value)}>
+                <option value="">all</option>
+                {(Object.keys(KIND_LABEL) as OpportunityKind[]).map((k) => (
+                  <option key={k} value={k}>{KIND_LABEL[k]}</option>
+                ))}
+              </select>
+            </label>
+          )}
           <Select label="Recommendation" value={fReco} onChange={setFReco} options={opt(records.map((r) => r.recommendation))} />
           <Select label="Verification" value={fVerif} onChange={setFVerif} options={opt(records.map((r) => r.verificationStatus))} />
-          <Select label="Source format" value={fFormat} onChange={setFFormat} options={opt(records.map((r) => r.artifact?.sourceFormat ?? "—"))} />
           <Select label="Route" value={fRoute} onChange={setFRoute} options={opt(records.map((r) => r.strategicRoute))} />
           <Select label="Human review" value={fReview} onChange={setFReview} options={["PENDING", "APPROVE", "REJECT", "NEEDS_VERIFICATION"]} />
+          <label className="filter">
+            <span className="muted">Project</span>
+            <select value={fProject} onChange={(e) => setFProject(e.target.value)}>
+              <option value="">all</option>
+              <option value="__untagged">untagged</option>
+              {THESTUDIO_PROJECTS.map((p) => (
+                <option key={p.slug} value={p.slug}>{p.name}</option>
+              ))}
+            </select>
+          </label>
           <label className="filter">
             <span className="muted">Sort</span>
             <select value={sortKey} onChange={(e) => setSortKey(e.target.value)}>
               <option value="pubDate:desc">publication ↓ (recent first)</option>
               <option value="pubDate:asc">publication ↑</option>
+              <option value="deadline:asc">deadline ↑</option>
               <option value="confidence:desc">confidence ↓</option>
               <option value="title:asc">title A→Z</option>
             </select>
@@ -183,6 +257,8 @@ export function Console({ data }: { data: ConsoleData }) {
           <ul className="queue">
             {filtered.map((r) => {
               const rev = audit.statusFor(r.id);
+              const tag = projectTags.tags[r.id];
+              const kind = r.opportunityKind;
               return (
                 <li
                   key={r.id}
@@ -191,17 +267,18 @@ export function Console({ data }: { data: ConsoleData }) {
                 >
                   <div className="rowTop">
                     <Badge text={r.recommendation} color={RECO_COLOR[r.recommendation] ?? "#888"} />
+                    {kind && !fixedKind && <Badge text={KIND_LABEL[kind]} color={KIND_COLOR[kind]} />}
                     <span className="rowTitle">{r.title}</span>
                   </div>
                   <div className="rowMeta">
                     <span>{r.issuer}</span>
                     {pubDate(r) && <span className="pubChip">published {pubDate(r)}</span>}
+                    {tag && <span className="pubChip tagChip">▣ {THESTUDIO_PROJECTS.find((p) => p.slug === tag)?.name ?? tag}</span>}
                   </div>
                   <div className="rowMeta small">
                     <span>⚖ {r.verificationStatus}</span>
                     <span>▸ {r.strategicRoute}</span>
                     <span>◷ {appDeadline(r)}</span>
-                    <span>{r.artifact?.sourceFormat ?? r.linkedBy}</span>
                     <span>fetch:{r.liveFetch?.status ?? "—"}</span>
                     <span>conf:{r.scores.infoConfidence}</span>
                     <span className={rev === "PENDING" ? "muted" : "hrOn"}>HR:{rev}</span>
@@ -209,6 +286,7 @@ export function Console({ data }: { data: ConsoleData }) {
                 </li>
               );
             })}
+            {filtered.length === 0 && <li className="row muted">No record matches (or none of this kind yet).</li>}
           </ul>
 
           {/* RIGHT — detail */}
@@ -218,6 +296,18 @@ export function Console({ data }: { data: ConsoleData }) {
                 record={selected}
                 reviewStatus={audit.statusFor(selected.id)}
                 events={audit.eventsFor(selected.id)}
+                projectTag={projectTags.tags[selected.id] ?? ""}
+                onTag={(slug) => {
+                  projectTags.setTag(selected.id, slug);
+                  audit.append(
+                    selected.id,
+                    "COMMENT",
+                    `project tag → ${slug || "(untagged)"}`,
+                    !!selected.gate?.pursueEligible,
+                  );
+                }}
+                notes={notes.notesFor(selected.id)}
+                onAddNote={(text) => notes.addNote(selected.id, text)}
                 onReview={(action, comment) =>
                   audit.append(selected.id, action, comment, !!selected.gate?.pursueEligible)
                 }
@@ -268,16 +358,33 @@ function Detail({
   record: r,
   reviewStatus,
   events,
+  projectTag,
+  onTag,
+  notes,
+  onAddNote,
   onReview,
 }: {
   record: ConsoleRecord;
   reviewStatus: ReviewAction | "PENDING";
   events: { id: string; action: string; comment: string; at: string; actor: string; gatePursueEligibleAtDecision: boolean }[];
+  projectTag: string;
+  onTag: (slug: string) => void;
+  notes: { id: string; text: string; at: string; actor: string }[];
+  onAddNote: (text: string) => void;
   onReview: (action: ReviewAction, comment: string) => void;
 }) {
   const [comment, setComment] = useState("");
+  const [noteDraft, setNoteDraft] = useState("");
   const gate = r.gate;
   const canPursue = !!gate?.pursueEligible;
+
+  const suggestions: ProjectSuggestion[] = useMemo(
+    () =>
+      THESTUDIO_PROJECTS.map((p) => scoreProject(r, p))
+        .filter((x): x is ProjectSuggestion => x !== null)
+        .sort((a, b) => b.confidence - a.confidence),
+    [r],
+  );
 
   const factsBy = (c: FactClass) => r.facts.filter((f) => (f.classification as FactClass) === c);
 
@@ -285,6 +392,7 @@ function Detail({
     <div>
       <div className="detailHead">
         <Badge text={r.recommendation} color={RECO_COLOR[r.recommendation] ?? "#888"} />
+        {r.opportunityKind && <Badge text={KIND_LABEL[r.opportunityKind]} color={KIND_COLOR[r.opportunityKind]} />}
         <h2>{r.title}</h2>
         <span className="muted">{r.issuer}</span>
         {pubDate(r) && <span className="pubChip">published {pubDate(r)}</span>}
@@ -300,6 +408,41 @@ function Detail({
           ))}
         </Section>
       )}
+
+      <Section title="TheStudio project">
+        <KV
+          k="Tagged project"
+          v={
+            <span className="viewsRow">
+              <select value={projectTag} onChange={(e) => onTag(e.target.value)}>
+                <option value="">— untagged —</option>
+                {THESTUDIO_PROJECTS.map((p) => (
+                  <option key={p.slug} value={p.slug}>{p.name}</option>
+                ))}
+              </select>
+              <span className="muted small">(a human decision — tagging is audit-logged)</span>
+            </span>
+          }
+        />
+        {suggestions.length === 0 ? (
+          <div className="muted small">No suggestion: no project profile signal matches this record (honest silence).</div>
+        ) : (
+          suggestions.map((s) => {
+            const p = THESTUDIO_PROJECTS.find((x) => x.slug === s.projectSlug);
+            return (
+              <div key={s.projectSlug} className="fact">
+                <div>
+                  <b>{p?.name ?? s.projectSlug}</b> · suggested {s.confidence}/100
+                  {projectTag !== s.projectSlug && (
+                    <button className="ghostBtn applyBtn" onClick={() => onTag(s.projectSlug)}>tag it</button>
+                  )}
+                </div>
+                <div className="muted small">{s.rationale}</div>
+              </div>
+            );
+          })
+        )}
+      </Section>
 
       <Section title="Sources">
         <KV k="Official source" v={r.officialUrl ? <a href={r.officialUrl} target="_blank" rel="noreferrer">{r.officialUrl}</a> : <span className="muted">—</span>} />
@@ -440,6 +583,27 @@ function Detail({
         </Section>
       )}
 
+      <Section title={`Notes · ${notes.length}`}>
+        {notes.map((n) => (
+          <div key={n.id} className="fact">
+            <div>{n.text}</div>
+            <div className="muted small">{n.at} · {n.actor}</div>
+          </div>
+        ))}
+        <div className="viewsRow noteRow">
+          <textarea className="comment" placeholder="Attach a note to this opportunity…" value={noteDraft} onChange={(e) => setNoteDraft(e.target.value)} />
+          <button
+            className="ghostBtn"
+            onClick={() => {
+              onAddNote(noteDraft);
+              setNoteDraft("");
+            }}
+          >
+            add note
+          </button>
+        </div>
+      </Section>
+
       <Section title="Human review">
         <div className="reviewBtns">
           {(["APPROVE", "REJECT", "NEEDS_VERIFICATION"] as const).map((s) => (
@@ -464,7 +628,7 @@ function Detail({
           </div>
         )}
         <div className="muted small">
-          Every decision appends an immutable audit event (local to this browser in Phase 1; server store returns with Phase 2 auth).
+          Every decision appends an immutable audit event (local to this browser in Phase 1-2; server store returns with auth).
         </div>
       </Section>
 

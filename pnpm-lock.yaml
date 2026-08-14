@@ -250,6 +250,9 @@ importers:
 
   packages/workspace:
     dependencies:
+      '@oia/database':
+        specifier: workspace:*
+        version: link:../database
       '@oia/ingestion':
         specifier: workspace:*
         version: link:../ingestion

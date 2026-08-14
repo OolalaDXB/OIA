@@ -58,6 +58,7 @@ function toConsoleRecord(c: TedCandidate): ConsoleRecord {
     id: c.externalId,
     title: c.title,
     issuer: c.issuer ?? "European Union — TED",
+    opportunityKind: "TENDER_RFP", // TED = public procurement notices
     linkedBy: "officialUrl",
     officialUrl: c.officialUrl,
     artifact: c.contentHash
@@ -124,8 +125,21 @@ export function tedCandidatesToConsole(candidates: TedCandidate[]): ConsoleData 
  * opportunities (official PDFs, seed comparison) AND the Sprint-1 TED
  * discovery. Both are real outputs; neither replaces the other.
  */
+/**
+ * Explicit kind per M0 record (reviewable data, not a title heuristic).
+ * Unlisted M0 records default to GRANT — the M0 seed is funding calls.
+ */
+const M0_KIND_OVERRIDES: Record<string, "TENDER_RFP" | "VC_INVESTOR"> = {
+  "unesco-ungm-300342": "TENDER_RFP", // an RFP, not a grant call
+  "startup-qatar-qdb-start": "VC_INVESTOR", // equity investment programme
+};
+
 export function mergeConsoleData(ted: ConsoleData, m0: ConsoleData | null): ConsoleData {
   if (!m0) return ted;
+  const m0Records = m0.records.map((r) => ({
+    ...r,
+    opportunityKind: r.opportunityKind ?? M0_KIND_OVERRIDES[r.id] ?? ("GRANT" as const),
+  }));
   const counts: Record<string, number> = { ...m0.run.recommendationCounts };
   for (const [k, v] of Object.entries(ted.run.recommendationCounts)) counts[k] = (counts[k] ?? 0) + v;
   return {
@@ -139,7 +153,7 @@ export function mergeConsoleData(ted: ConsoleData, m0: ConsoleData | null): Cons
     },
     // Funding opportunities (the shortlist work) lead; TED notices follow,
     // already sorted most-recent-first. The UI re-sorts client-side anyway.
-    records: [...m0.records, ...ted.records],
+    records: [...m0Records, ...ted.records],
   };
 }
 

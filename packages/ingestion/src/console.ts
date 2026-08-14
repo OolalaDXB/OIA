@@ -44,10 +44,22 @@ export interface ConsoleDeadline {
   conflicts: string[];
 }
 
+/**
+ * Opportunity sub-typing (mandate v2 §5). GRANT and TENDER_RFP share the
+ * verification/provenance/gate pipeline (official published source, deadline,
+ * eligibility) and differ by fact schema; VC_INVESTOR is a distinct kind with
+ * its own future pipeline (relational data, matching + outreach) — never
+ * forced through the tender pipeline. REGULATORY is watch-only.
+ */
+export const OPPORTUNITY_KINDS = ["GRANT", "TENDER_RFP", "VC_INVESTOR", "REGULATORY"] as const;
+export type OpportunityKind = (typeof OPPORTUNITY_KINDS)[number];
+
 export interface ConsoleRecord {
   id: string;
   title: string;
   issuer: string;
+  /** Sub-type discriminant; absent on records generated before it existed. */
+  opportunityKind?: OpportunityKind;
   linkedBy: ObservedForRecord["linkedBy"];
 
   officialUrl?: string;

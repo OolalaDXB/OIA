@@ -79,7 +79,8 @@
         "Gate: no exact next action",
         "Gate: info confidence 0 < floor 70"
       ],
-      "warnings": []
+      "warnings": [],
+      "opportunityKind": "GRANT"
     },
     {
       "id": "bpifrance-aide-developpement-deeptech",
@@ -144,7 +145,8 @@
         "Gate: no exact next action",
         "Gate: info confidence 0 < floor 70"
       ],
-      "warnings": []
+      "warnings": [],
+      "opportunityKind": "GRANT"
     },
     {
       "id": "eic-accelerator",
@@ -209,7 +211,8 @@
         "Gate: no exact next action",
         "Gate: info confidence 0 < floor 70"
       ],
-      "warnings": []
+      "warnings": [],
+      "opportunityKind": "GRANT"
     },
     {
       "id": "digital-2026-ai-data-10-compliance",
@@ -515,7 +518,8 @@
       ],
       "warnings": [
         "PDF magic bytes / content-type"
-      ]
+      ],
+      "opportunityKind": "GRANT"
     },
     {
       "id": "digital-2026-ai-09-genai-pa",
@@ -981,7 +985,8 @@
       ],
       "warnings": [
         "PDF magic bytes / content-type"
-      ]
+      ],
+      "opportunityKind": "GRANT"
     },
     {
       "id": "startup-qatar-qdb-start",
@@ -1049,7 +1054,8 @@
       ],
       "warnings": [
         "linked artifact 'qdb-startup-qatar-start.html' not supplied"
-      ]
+      ],
+      "opportunityKind": "VC_INVESTOR"
     },
     {
       "id": "nsf-sbir",
@@ -1117,7 +1123,8 @@
       ],
       "warnings": [
         "linked artifact 'nsf-sbir-eligibility.html' not supplied"
-      ]
+      ],
+      "opportunityKind": "GRANT"
     },
     {
       "id": "unesco-ungm-300342",
@@ -1184,7 +1191,8 @@
         "Gate: no exact next action",
         "Gate: info confidence 0 < floor 70"
       ],
-      "warnings": []
+      "warnings": [],
+      "opportunityKind": "TENDER_RFP"
     },
     {
       "id": "aggregator-only-digital-health-ai-usd",
@@ -1253,7 +1261,8 @@
         "Gate: no exact next action",
         "Gate: info confidence 0 < floor 70"
       ],
-      "warnings": []
+      "warnings": [],
+      "opportunityKind": "GRANT"
     },
     {
       "id": "pdf-fixture-digital-2026-ai-09",
@@ -1717,12 +1726,14 @@
       ],
       "warnings": [
         "PDF magic bytes / content-type"
-      ]
+      ],
+      "opportunityKind": "GRANT"
     },
     {
       "id": "2382-2017",
       "title": "Austria-Vienna: System implementation planning services",
       "issuer": "ÖBB-Infrastruktur AG",
+      "opportunityKind": "TENDER_RFP",
       "linkedBy": "officialUrl",
       "officialUrl": "https://ted.europa.eu/en/notice/2382-2017/html",
       "artifact": {
@@ -1899,6 +1910,7 @@
       "id": "448146-2016",
       "title": "Italy-Rome: Machine tools",
       "issuer": "Ferservizi SpA — Gruppo Ferrovie dello Stato Italiane (Società con socio unico soggetta alla direzione e coordinamento di Ferrovie dello Stato Italiane SpA)",
+      "opportunityKind": "TENDER_RFP",
       "linkedBy": "officialUrl",
       "officialUrl": "https://ted.europa.eu/en/notice/448146-2016/html",
       "artifact": {
@@ -2075,6 +2087,7 @@
       "id": "448194-2016",
       "title": "Italy-Rome: IT services: consulting, software development, Internet and support",
       "issuer": "Ferservizi SpA — Gruppo Ferrovie dello Stato Italiane (Società con socio unico soggetta alla direzione e coordinamento di Ferrovie dello Stato Italiane SpA)",
+      "opportunityKind": "TENDER_RFP",
       "linkedBy": "officialUrl",
       "officialUrl": "https://ted.europa.eu/en/notice/448194-2016/html",
       "artifact": {
@@ -2251,6 +2264,7 @@
       "id": "412169-2016",
       "title": "Spain-Madrid: Business services: law, marketing, consulting, recruitment, printing and security",
       "issuer": "Achilles South Europe, S.L.U.",
+      "opportunityKind": "TENDER_RFP",
       "linkedBy": "officialUrl",
       "officialUrl": "https://ted.europa.eu/en/notice/412169-2016/html",
       "artifact": {
@@ -2427,6 +2441,7 @@
       "id": "283014-2016",
       "title": "United Kingdom-Huyton: Health and social work services",
       "issuer": "Knowsley Council",
+      "opportunityKind": "TENDER_RFP",
       "linkedBy": "officialUrl",
       "officialUrl": "https://ted.europa.eu/en/notice/283014-2016/html",
       "artifact": {
