@@ -113,7 +113,8 @@ a.railItem:hover { background: var(--card); }
 .rowTop { display: flex; align-items: baseline; gap: 10px; }
 .rowTitle { font-size: 13.5px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; letter-spacing: -0.1px; }
 .rowMeta { display: flex; gap: 12px; flex-wrap: wrap; color: var(--muted); margin-top: 4px; font-size: 11.5px; align-items: baseline; }
-.rowMeta.small { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.2px; }
+.rowMeta.small { font-size: 10.5px; }
+.rowMeta.small span:not(:last-child)::after { content: "·"; margin-left: 12px; color: var(--line); }
 .hrOn { color: var(--ink); font-weight: 600; }
 
 .pubChip {
@@ -156,8 +157,14 @@ ul.evi li::before { content: none; }
 .factGroupHead { margin-bottom: 6px; }
 .fact { border-left: 2px solid var(--line); padding: 5px 0 5px 13px; margin: 8px 0; }
 .fact b { font-weight: 600; }
-.src { color: var(--muted); font-style: italic; }
-.fact .small, .factGroup .small { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.2px; }
+.src { color: var(--muted); }
+.fact .small, .factGroup .small { font-size: 10.5px; }
+/* BIOPTIC stats-table signature: mono key pill on #f3f7f8. */
+.factKey {
+  font-family: var(--mono); font-size: 10.5px; color: var(--ink);
+  background: var(--card); padding: 3px 9px; border-radius: 4px; margin-right: 6px;
+  white-space: nowrap;
+}
 
 .disc { border-left: 2px solid var(--reject); padding: 8px 14px; margin: 8px 0; background: rgba(168, 67, 47, 0.05); border-radius: 0 6px 6px 0; }
 .disc code { background: rgba(168, 67, 47, 0.08); color: var(--reject); }

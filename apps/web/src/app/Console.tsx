@@ -272,16 +272,16 @@ export function Console({
                   </div>
                   <div className="rowMeta">
                     <span>{r.issuer}</span>
-                    {pubDate(r) && <span className="pubChip">published {pubDate(r)}</span>}
-                    {tag && <span className="pubChip tagChip">▣ {THESTUDIO_PROJECTS.find((p) => p.slug === tag)?.name ?? tag}</span>}
+                    {pubDate(r) && <span className="pubChip">{pubDate(r)}</span>}
+                    {tag && <span className="pubChip tagChip">{THESTUDIO_PROJECTS.find((p) => p.slug === tag)?.name ?? tag}</span>}
                   </div>
                   <div className="rowMeta small">
-                    <span>⚖ {r.verificationStatus}</span>
-                    <span>▸ {r.strategicRoute}</span>
-                    <span>◷ {appDeadline(r)}</span>
-                    <span>fetch:{r.liveFetch?.status ?? "—"}</span>
-                    <span>conf:{r.scores.infoConfidence}</span>
-                    <span className={rev === "PENDING" ? "muted" : "hrOn"}>HR:{rev}</span>
+                    <span>{r.verificationStatus}</span>
+                    {r.strategicRoute !== "UNKNOWN" && <span>{r.strategicRoute}</span>}
+                    {appDeadline(r) !== "—" && <span>due {appDeadline(r)}</span>}
+                    <span>fetch {r.liveFetch?.status ?? "—"}</span>
+                    <span>conf {r.scores.infoConfidence}</span>
+                    <span className={rev === "PENDING" ? "muted" : "hrOn"}>{rev}</span>
                   </div>
                 </li>
               );
@@ -399,7 +399,7 @@ function Detail({
       </div>
 
       {r.discrepancies.length > 0 && (
-        <Section title={`⚠ Discrepancies (seed vs observed) · ${r.discrepancies.length}`}>
+        <Section title={`Discrepancies (seed vs observed) · ${r.discrepancies.length}`}>
           {r.discrepancies.map((d, i) => (
             <div key={i} className="disc">
               <b>{d.field}</b>: seed <code>{d.seedExpectation}</code> vs observed <code>{d.observed}</code>
@@ -540,14 +540,16 @@ function Detail({
               {fs.map((f, i) => (
                 <div key={i} className="fact">
                   <div>
-                    <b>{f.field}</b> = {f.normalizedValue}
+                    <span className="factKey">{f.field}</span> {f.normalizedValue}
                   </div>
                   <div className="muted small">
-                    @{f.locator.type}
+                    {f.locator.type}
                     {f.locator.page ? ` p.${f.locator.page}` : ""}
-                    {f.locator.value && f.locator.type !== "PDF_PAGE" ? ` ${f.locator.value}` : ""} · {f.extractionMethod} ({f.extractingProvider}/{f.extractingModel}) · conf {f.extractionConfidence}
+                    {f.locator.value && f.locator.type !== "PDF_PAGE" ? ` ${f.locator.value}` : ""} · {f.extractionMethod} · conf {f.extractionConfidence}
                   </div>
-                  {f.originalSourceText && <div className="src small">“{f.originalSourceText}”</div>}
+                  {f.originalSourceText && f.originalSourceText !== f.normalizedValue && (
+                    <div className="src small">“{f.originalSourceText}”</div>
+                  )}
                 </div>
               ))}
             </div>
@@ -564,7 +566,7 @@ function Detail({
                 {d.isConfirmPending && <span className="warn"> · to-be-confirmed (cannot verify)</span>}
               </div>
               <div className="muted small">
-                @{d.locator.type}
+                {d.locator.type}
                 {d.locator.page ? ` p.${d.locator.page}` : ""} · “{d.originalSourceString}”
                 {d.conflicts.length > 0 && ` · conflicts: ${d.conflicts.join(", ")}`}
               </div>
