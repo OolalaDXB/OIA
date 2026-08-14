@@ -36,7 +36,7 @@ export function ProjectsView({ data }: { data: ConsoleData }) {
     <div className="shell">
       <Rail active="projects" />
       <div className="app">
-        <header className="hero reveal">
+        <header className="hero">
           <div className="heroRow">
             <h1>Projects — TheStudio</h1>
             <span className="heroStats">{THESTUDIO_PROJECTS.length} profiles · working hypotheses, edit in @oia/workspace</span>

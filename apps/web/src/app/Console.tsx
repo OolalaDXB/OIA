@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { ConsoleData, ConsoleRecord, OpportunityKind } from "@oia/ingestion/console";
 import {
@@ -63,9 +64,9 @@ export function Rail({ active, onExportAudit }: { active: RailKey; onExportAudit
     <aside className="rail">
       <div className="railBrand">OIA</div>
       {nav.map((n) => (
-        <a key={n.key} href={n.href} className={active === n.key ? "railItem active" : "railItem"}>
+        <Link key={n.key} href={n.href} className={active === n.key ? "railItem active" : "railItem"}>
           <span>{n.label}</span>
-        </a>
+        </Link>
       ))}
       {(["NOTE", "TASK", "CONTACT"] as const).map((k) => (
         <div key={k} className="railItem off" title={`Phase ${KIND_PHASE[k]}`}>
@@ -189,7 +190,7 @@ export function Console({
 
       <div className="app">
         {/* Envelope: hero band gets the treatment; the triage table below stays native. */}
-        <header className="hero reveal">
+        <header className="hero">
           <div className="heroRow">
             <h1>{title}</h1>
             <span className="heroStats">
