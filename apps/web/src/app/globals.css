@@ -1,19 +1,21 @@
 :root {
-  /* BIOPTIC-derived tokens (verified from the Webflow export):
-     ink #10151d on white, cards #f3f7f8, hairlines rgba(16,21,29,.1),
-     SF Mono editorial accents, fluid type from --size-unit: 17. */
+  /* BIOPTIC tokens — EXACT, from docs/interface/reference/bioptic.webflow.min.css:
+     :root{--white:white;--dark-blue:#10151d;--aqua:#00ffe0;--light-grey:#f3f7f8}
+     Type: Helvetica Now Display (licensed; system Helvetica fallback) for
+     content, "SF Mono, Trebuchet MS" for technical accents. Radius 4px. */
   --ink: #10151d;
   --bg: #ffffff;
   --card: #f3f7f8;
   --card-2: #eaf1f3;
+  --aqua: #00ffe0;
   --line: rgba(16, 21, 29, 0.1);
   --line-soft: rgba(16, 21, 29, 0.06);
   --muted: rgba(16, 21, 29, 0.45);
   --soft: rgba(16, 21, 29, 0.7);
 
-  /* Hero gradient — soft cyan → lilac → pink, approximated from bioptic.io
-     (the external Webflow CSS is unreachable from the sandbox). */
-  --hero-grad: linear-gradient(105deg, #d7f1f8 0%, #e6e2f6 55%, #f4dcef 100%);
+  /* BIOPTIC's hero is an AVIF image (not CSS); this gradient stands in,
+     tinted toward their aqua. */
+  --hero-grad: linear-gradient(105deg, #d9f6f3 0%, #e6e2f6 55%, #f4dcef 100%);
 
   /* Status — legible on light, never neon, no gold. */
   --pursue: #2f7a4d;
@@ -26,9 +28,13 @@
      tuned denser for a working tool. */
   --size-font: clamp(13px, 0.82vw, 15px);
 
-  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --mono: "SF Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, "Trebuchet MS", monospace;
+  /* BIOPTIC stacks (verbatim fallbacks from their CSS). */
+  --sans: "Helvetica Now Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono: "SF Mono", ui-monospace, "SFMono-Regular", Menlo, "Trebuchet MS", sans-serif;
 }
+
+/* BIOPTIC selection: aqua behind, ink on top. */
+::selection { background-color: var(--aqua); color: var(--ink); text-shadow: none; }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; }
@@ -77,7 +83,7 @@ a.railItem:hover { background: var(--card); }
   padding: 18px 26px 14px; background: var(--hero-grad); border-bottom: 1px solid var(--line);
 }
 .heroRow { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; flex-wrap: wrap; }
-.hero h1 { margin: 0; font-size: 21px; font-weight: 600; letter-spacing: -0.2px; }
+.hero h1 { margin: 0; font-size: 21px; font-weight: 500; letter-spacing: -0.2px; }
 .heroStats { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.2px; color: var(--soft); }
 .heroNote { margin: 6px 0 0; max-width: 980px; font-size: 11.5px; color: var(--soft); }
 
@@ -129,7 +135,7 @@ a.railItem:hover { background: var(--card); }
 /* ————— Detail ————— */
 .detail { overflow: auto; padding: 22px 32px 60px; max-width: 1100px; }
 .detailHead { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; padding-bottom: 13px; border-bottom: 1px solid var(--line); }
-.detailHead h2 { margin: 0; font-size: 19px; font-weight: 650; letter-spacing: -0.2px; }
+.detailHead h2 { margin: 0; font-size: 19px; font-weight: 500; letter-spacing: -0.2px; }
 
 .badge {
   display: inline-block; border: 1px solid currentColor; border-radius: 4px;
@@ -177,5 +183,6 @@ ul.evi li::before { content: none; }
   text-transform: uppercase; transition: all 0.15s;
 }
 .btn:hover { border-color: var(--ink); color: var(--ink); }
-.btn.on { background: var(--ink); border-color: var(--ink); color: #fff; }
+/* BIOPTIC primary button: aqua pill, ink text. */
+.btn.on { background: var(--aqua); border-color: var(--aqua); color: var(--ink); font-weight: 600; }
 .comment { width: 100%; min-height: 54px; background: var(--card); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-family: var(--sans); font-size: 12.5px; resize: vertical; }
