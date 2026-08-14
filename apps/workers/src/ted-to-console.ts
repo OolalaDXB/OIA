@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname } from "node:path";
 import type { ConsoleData, ConsoleRecord, ConsoleFact, SourceFormat, FetchStatus, VerificationStatus } from "@oia/ingestion";
 import { fromRoot } from "./paths";
@@ -119,17 +119,48 @@ export function tedCandidatesToConsole(candidates: TedCandidate[]): ConsoleData 
   };
 }
 
+/**
+ * Merge the two REAL runs into one console dataset: the Milestone-0 funding
+ * opportunities (official PDFs, seed comparison) AND the Sprint-1 TED
+ * discovery. Both are real outputs; neither replaces the other.
+ */
+export function mergeConsoleData(ted: ConsoleData, m0: ConsoleData | null): ConsoleData {
+  if (!m0) return ted;
+  const counts: Record<string, number> = { ...m0.run.recommendationCounts };
+  for (const [k, v] of Object.entries(ted.run.recommendationCounts)) counts[k] = (counts[k] ?? 0) + v;
+  return {
+    note: `${m0.note ? `Milestone 0 — ${m0.note} ` : ""}· ${ted.note}`,
+    run: {
+      records: m0.run.records + ted.run.records,
+      artifactsIngested: m0.run.artifactsIngested + ted.run.artifactsIngested,
+      discrepancies: m0.run.discrepancies + ted.run.discrepancies,
+      warnings: [...m0.run.warnings, ...ted.run.warnings],
+      recommendationCounts: counts,
+    },
+    // Funding opportunities (the shortlist work) lead; TED notices follow,
+    // already sorted most-recent-first. The UI re-sorts client-side anyway.
+    records: [...m0.records, ...ted.records],
+  };
+}
+
 /** Standalone: read the last TED run output and refresh the console data. */
 function main() {
   const candidatesPath = fromRoot("outputs/sprint-1/candidates.json");
   const candidates = JSON.parse(readFileSync(candidatesPath, "utf8")) as TedCandidate[];
-  const data = tedCandidatesToConsole(candidates);
+
+  const m0Path = fromRoot("outputs/milestone-0/console.json");
+  const m0 = existsSync(m0Path) ? (JSON.parse(readFileSync(m0Path, "utf8")) as ConsoleData) : null;
+  if (!m0) console.warn("outputs/milestone-0/console.json not found — console will only carry TED records.");
+
+  const data = mergeConsoleData(tedCandidatesToConsole(candidates), m0);
 
   const webData = fromRoot("apps/web/src/data/console.json");
   mkdirSync(dirname(webData), { recursive: true });
   writeFileSync(webData, JSON.stringify(data, null, 2), "utf8");
   writeFileSync(fromRoot("outputs/sprint-1/console.json"), JSON.stringify(data, null, 2), "utf8");
-  console.log(`Wrote console data for ${data.records.length} TED candidate(s) → apps/web/src/data/console.json`);
+  console.log(
+    `Wrote console data: ${data.records.length} record(s) (${m0 ? m0.run.records : 0} M0 funding + ${data.records.length - (m0 ? m0.run.records : 0)} TED) → apps/web/src/data/console.json`,
+  );
 }
 
 // Run when invoked directly (tsx src/ted-to-console.ts).
