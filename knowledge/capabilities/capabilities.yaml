@@ -10,7 +10,7 @@
     allow/deny lists, wildcard matching, deny precedence), evaluated in-process
     by the BAWABA gateway pipeline with full audit emission.
   category: ai-governance
-  technicalCapabilities: ["default-deny policy evaluation", "per-agent tool allowlists", "decision audit emission"]
+  technicalCapabilities: ["default-deny policy evaluation", "per-agent tool allowlists", "attribute-based conditional rules (amount/currency/jurisdiction envelopes on real call arguments)", "durable policies (PostgreSQL) + append-only version history", "agents CRUD via API (server-generated credentials, soft delete)", "decision audit emission"]
   businessCapabilities: ["AI governance", "enterprise AI control"]
   status: EXPERIMENTAL
   maturity: TESTED
@@ -19,8 +19,7 @@
   evidenceIds: [ev-bawaba-go-tests]
   limitations:
     - "Binary ALLOW/DENY only — no REVIEW tri-state; no standalone external decision endpoint (in-process only)."
-    - "Static YAML pre-OPA MVP: no policy DSL, no attribute/context-based evaluation."
-    - "Policy tests exist but are excluded from CI (run locally)."
+    - "Conditional rules cover amount/currency/jurisdiction envelopes — not a general policy DSL (no OPA)."
   keywords: [ai governance, decision, policy, enforcement, gateway, agent control, guardrails]
   synonyms: [gouvernance ia, controle des agents]
   provenance: &code
@@ -48,7 +47,7 @@
   evidenceIds: [ev-bawaba-go-tests, ev-bawaba-public-evidence-sample]
   limitations:
     - "computeEventHash covers 14 of ~24 event fields — some fields (routing_proof, mcp_server…) are mutable without breaking the chain."
-    - "Merkle window is roadmap P2; audit tests excluded from CI (run locally)."
+    - "Merkle window is roadmap P2."
   keywords: [audit, audit trail, evidence, provenance, traceability, logging, compliance, tamper-evident]
   synonyms: [tracabilite, piste d'audit, preuve]
   provenance: *code

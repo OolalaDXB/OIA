@@ -185,6 +185,7 @@
     approvedBy: "mickael (chat approval 2026-08-14)"
 
 - id: fact-bawaba-tests-ci-gap
+  supersededBy: fact-bawaba-p1-control-plane
   statement: >-
     71 Go test functions exist (audit tamper detection, routing-proof
     determinism, policy default-deny, proxy pipeline, quotas, SIEM) but CI
@@ -192,7 +193,7 @@
     governance claims are not executed continuously. Frontend and Rust tests
     are absent from CI; the console has one vacuous test.
   subject: bawaba
-  lifecycle: CANONICAL
+  lifecycle: SUPERSEDED
   disclosure: INTERNAL_ONLY
   provenance:
     sourceType: CODE_REPOSITORY
@@ -277,3 +278,26 @@
     createdAt: "2026-08-14"
     updatedAt: "2026-08-14"
     approvedBy: "mickael (mandate 2026-08-14)"
+
+- id: fact-bawaba-p1-control-plane
+  statement: >-
+    P1 shipped (bawaba-command@173a9f2): REAL attribute-based conditional
+    policy engine (amount/currency/jurisdiction envelopes evaluated on actual
+    MCP call arguments, failed condition named in matched_rule, fail-closed),
+    durable control plane (PostgreSQL agent_policies + append-only
+    policy_versions with immutability trigger), agents CRUD via API with
+    server-generated credentials, Guided Demo + 6 really-triggerable
+    scenarios each ending in real chain verification. CI now runs 8/9 Go
+    packages (proxy still cgo-excluded). Still NOT implemented: real gateway
+    forwarding, third-party adapters, OIDC/JWT, REVIEW tri-state, standalone
+    decision endpoint.
+  subject: bawaba
+  lifecycle: REVIEWED
+  disclosure: INTERNAL_ONLY
+  provenance:
+    sourceType: CODE_REPOSITORY
+    sourceId: "OolalaDXB/bawaba-command@173a9f2"
+    locator: "internal/policy/policy.go (EvaluateCall); internal/store/; internal/api/control_plane.go; migrations/003; src/pages/{GuidedDemo,Scenarios}.tsx"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
