@@ -240,3 +240,31 @@
   keywords: [payment, payments, fintech, billing, transaction]
   synonyms: [paiement, monetique]
   provenance: *founder
+
+- id: dual-deployment
+  name: "Dual deployment: self-hosted & managed"
+  description: >-
+    BAWABA is offered self-hosted (PostgreSQL via Docker Compose, inside the
+    client's perimeter) AND as a managed deployment. Both modes are offered
+    commercially; maturity differs and is stated honestly.
+  category: deployment
+  technicalCapabilities: ["Docker Compose self-hosted stack (Postgres + gateway)", "managed-backend code path (hosted Postgres)"]
+  businessCapabilities: ["client-perimeter deployment", "managed operation"]
+  status: EXPERIMENTAL
+  maturity: IMPLEMENTED
+  usedBy: [bawaba]
+  implementations: ["OolalaDXB/bawaba-command docker-compose.yml (self-hosted); src/integrations + supabase/ (managed path)"]
+  evidenceIds: [ev-bawaba-demo-stack]
+  limitations:
+    - "Self-hosted: local development proven, no production deployment yet."
+    - "Managed: code path present, NOT yet a live operated service — never sell it as running."
+  keywords: [deployment, self-hosted, on-premises, managed, saas, hosting, vpc, sovereign hosting]
+  synonyms: [hebergement, sur site, "gere"]
+  provenance:
+    sourceType: FOUNDER_DECLARED
+    sourceId: "mandat-deploy-2026-08-14"
+    locator: "point 2"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+    approvedBy: "mickael (mandate 2026-08-14)"

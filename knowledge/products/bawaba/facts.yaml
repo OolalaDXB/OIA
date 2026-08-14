@@ -217,3 +217,58 @@
     confidence: 0.9
     createdAt: "2026-08-14"
     updatedAt: "2026-08-14"
+
+- id: km-delivery-footprint
+  statement: >-
+    KM Openpay operates through entities in Morocco, the UAE and France,
+    giving multi-jurisdiction delivery capacity including the EU via its
+    French entity. Externally representable via KM's co-CEOs (authorised
+    representatives).
+  subject: bawaba
+  lifecycle: CANONICAL
+  disclosure: EXTERNAL_OK
+  notes: "Mickael's participation in KM remains INTERNAL_ONLY (fact-km-shareholding)."
+  provenance:
+    sourceType: FOUNDER_DECLARED
+    sourceId: "mandat-deploy-2026-08-14"
+    locator: "point 1"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+    approvedBy: "mickael (mandate 2026-08-14)"
+
+- id: fact-bawaba-deployment-modes
+  statement: >-
+    BAWABA is offered in two deployment modes: self-hosted in the client's
+    perimeter (PostgreSQL via Docker) or managed. Honest status: self-hosted
+    runs in local development; the managed path exists in code (hosted
+    Postgres backend) and is not yet a live service.
+  subject: bawaba
+  lifecycle: CANONICAL
+  disclosure: EXTERNAL_OK
+  provenance:
+    sourceType: FOUNDER_DECLARED
+    sourceId: "mandat-deploy-2026-08-14"
+    locator: "points 2-3"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+    approvedBy: "mickael (mandate 2026-08-14)"
+
+- id: fact-bawaba-domain-positioning-converged
+  statement: >-
+    Single external identity: domain bawaba.systems (bawaba.io references
+    retired from the product README) and one positioning line — "control and
+    evidence plane for AI gateways and enterprise AI agents". Current
+    convergence, not a freeze of future direction.
+  subject: bawaba
+  lifecycle: CANONICAL
+  disclosure: EXTERNAL_OK
+  provenance:
+    sourceType: FOUNDER_DECLARED
+    sourceId: "mandat-deploy-2026-08-14"
+    locator: "point 6; applied in bawaba-command@acf3b08"
+    confidence: 0.9
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
+    approvedBy: "mickael (mandate 2026-08-14)"

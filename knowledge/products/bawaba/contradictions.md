@@ -1,5 +1,15 @@
 # BAWABA — Contradictions & risks detected (code inventory, 2026-08-14)
 
+> **Update (same day, bawaba-command@acf3b08)** : items 1, 2, 3 et 7 RÉSOLUS —
+> positionnement convergé sur la ligne canonique, domaine unique
+> bawaba.systems, « not a SaaS » remplacé par les deux modes offerts
+> (self-hosted / managed, maturité honnête), seed Supabase assaini (noms
+> fictifs alignés sur le seed Postgres). Restent ouverts : 4 (forwarding
+> stubbé vs diagramme), 5 (/metrics manquant), 8 (screenshots à régénérer).
+> Si le projet Supabase HÉBERGÉ a déjà exécuté l'ancien seed, purger/reseeder
+> la base hébergée — le fichier corrigé ne réécrit pas les données déjà
+> insérées.
+
 Manual Knowledge-Curator pass over `bawaba@561451f` (website) and
 `bawaba-command@9913a36` (product). Each item is CONFLICTING_CLAIM /
 STALE_DOCUMENT / RISK — the system signals, it does not silently pick a

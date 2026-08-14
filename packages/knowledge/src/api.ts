@@ -152,6 +152,9 @@ export interface ComposedSolution {
   capabilities: { criterion: string; capability: Capability; evidence: EvidenceItem[] }[];
   entityRoutes: Entity[];
   deliveryCapacity: Entity[];
+  /** Criteria covered not by a registry brick but by a partner entity's
+      mobilisable delivery footprint (stated as partnership, never in-house). */
+  partnerCoverage: { criterion: string; entity: Entity; note: string }[];
   externalSafeFacts: Fact[];
   gaps: string[];
 }
@@ -169,11 +172,32 @@ export function composeSolution(
 ): ComposedSolution {
   const matched = getTenderCapabilities(kb, criteria);
   const capabilities: ComposedSolution["capabilities"] = [];
+  const partnerCoverage: ComposedSolution["partnerCoverage"] = [];
   const gaps: string[] = [];
   const productSlugs = new Set<string>();
 
+  const wanted = geographies.map((g) => g.toUpperCase());
+  const mobilisable = kb.entities.filter((e) => e.deliveryCapacity?.type === "MOBILISABLE");
+
   for (const [criterion, caps] of matched) {
     if (caps.length === 0) {
+      // A delivery-capability criterion can be honestly covered by a partner
+      // entity whose footprint spans the requested geographies — stated as a
+      // partnership route, never as an in-house brick.
+      const isDelivery = /deliver|delivery|livraison|execution capacity/i.test(criterion);
+      const covering = isDelivery
+        ? mobilisable.filter((e) => e.eligibleGeographies.some((g) => wanted.includes(g.toUpperCase())))
+        : [];
+      if (covering.length > 0) {
+        for (const entity of covering) {
+          partnerCoverage.push({
+            criterion,
+            entity,
+            note: `Covered via partnership: ${entity.name} — ${entity.deliveryCapacity!.description} Footprint: ${entity.eligibleGeographies.join(", ")}.`,
+          });
+        }
+        continue;
+      }
       gaps.push(`No registry capability matches "${criterion}" — do not claim it.`);
       continue;
     }
@@ -204,6 +228,7 @@ export function composeSolution(
     capabilities,
     entityRoutes,
     deliveryCapacity,
+    partnerCoverage,
     externalSafeFacts: getExternalSafeFacts(kb),
     gaps: [...new Set(gaps)],
   };

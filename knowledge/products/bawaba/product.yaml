@@ -9,6 +9,7 @@ capabilities:
   - jurisdiction-routing-proofs
   - pii-tokenization-mena
   - mcp-gateway-enforcement
+  - dual-deployment
   - provenance-fact-engine
   - verification-gate
 entityRoutes:
@@ -27,6 +28,9 @@ factIds:
   - fact-bawaba-enforcement-not-implemented
   - fact-bawaba-tests-ci-gap
   - fact-bawaba-founder-claims-site
+  - km-delivery-footprint
+  - fact-bawaba-deployment-modes
+  - fact-bawaba-domain-positioning-converged
 provenance:
   sourceType: FOUNDER_DECLARED
   sourceId: "mandat-kb-2026-08-14"

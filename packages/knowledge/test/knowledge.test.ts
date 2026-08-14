@@ -132,10 +132,10 @@ describe("[§37] success criterion — compose from what really exists", () => {
     expect(s.entityRoutes.map((e) => e.id)).toContain("oolala-france");
     // KM mobilisable capacity surfaces:
     expect(s.deliveryCapacity.map((e) => e.id)).toContain("km-openpay");
-    // And the system admits what is missing instead of inventing: "EU
-    // delivery capability" is an entity route, not a registry capability.
-    // (The former "decision-api DECLARED without evidence" gap closed when
-    // the code inventory upgraded it to TESTED with real evidence.)
-    expect(s.gaps.some((g) => g.includes("EU delivery capability"))).toBe(true);
+    // "EU delivery capability" is not an in-house brick: it is honestly
+    // covered via the KM partnership (footprint MA/AE/FR → EU via France),
+    // stated as a partnership — no longer a blind gap, never an in-house claim.
+    expect(s.partnerCoverage.some((pc) => pc.criterion === "EU delivery capability" && pc.entity.id === "km-openpay")).toBe(true);
+    expect(s.gaps.some((g) => g.includes("EU delivery capability"))).toBe(false);
   });
 });

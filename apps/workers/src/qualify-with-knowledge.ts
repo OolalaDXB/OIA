@@ -67,9 +67,17 @@ lines.push("");
 
 lines.push(`## Delivery capacity`);
 for (const e of s.deliveryCapacity) {
-  lines.push(`- **${e.name}**: ${e.deliveryCapacity!.description} (headcount: ${e.deliveryCapacity!.headcount ?? "n/a"})`);
+  lines.push(`- **${e.name}**: ${e.deliveryCapacity!.description} (headcount: ${e.deliveryCapacity!.headcount ?? "n/a"}; footprint: ${e.eligibleGeographies.join(", ") || "n/a"})`);
 }
 lines.push("");
+
+if (s.partnerCoverage.length > 0) {
+  lines.push(`## Delivery coverage via partnership (not an in-house brick)`);
+  for (const pc of s.partnerCoverage) {
+    lines.push(`- criterion "${pc.criterion}": ${pc.note}`);
+  }
+  lines.push("");
+}
 
 lines.push(`## External-safe facts usable in the response`);
 for (const f of s.externalSafeFacts) lines.push(`- ${f.statement.trim().replace(/\s+/g, " ")} _(${f.id})_`);

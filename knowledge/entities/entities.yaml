@@ -39,7 +39,8 @@
   roles:
     - "delivery partner — mobilisable capacity for BAWABA"
     - "payments expertise"
-  eligibleGeographies: []
+    - "multi-jurisdiction delivery footprint: Morocco, UAE, France (EU via France)"
+  eligibleGeographies: [MA, AE, FR, EU]
   deliveryCapacity:
     type: MOBILISABLE
     description: >-
@@ -48,7 +49,7 @@
       first client engagement. NOT a dedicated BAWABA team.
     headcount: "70+"
   disclosureNotes:
-    - "External-safe: partner/delivery capacity, experience, products, size, expertise, authorised representatives."
+    - "External-safe: partner/delivery capacity, experience, products, size, expertise, entity footprint (MA/AE/FR), via the co-CEOs as authorised representatives."
     - "Internal-only: Mickael's participation / shareholding structure."
   internalOnlyFactIds: [fact-km-shareholding]
   provenance:
