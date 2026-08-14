@@ -51,12 +51,34 @@ intermédiaire), strictement dans le périmètre Phase 1.
    La requête inclut désormais `publication-date>=` (90 jours) — les avis
    découverts seront récents. Le push redéploie la console automatiquement.
 
-## Reste (phases suivantes — PAS commencé, anti-dérive respectée)
+## Phase 2 — livrée (débloquée explicitement par Mickael le 14/08)
 
-- Phase 2 : multi-projets + SuggestionService réel + **remettre une
-  protection d'accès avant toute donnée non publique** (dette actée).
-- Phase 3 : notes/tâches/contacts sur l'ossature existante.
+- **Sous-typage des opportunités** (mandat v2 §5) : `opportunityKind`
+  (GRANT / TENDER_RFP / VC_INVESTOR / REGULATORY) sur ConsoleRecord ; routes
+  `/grants`, `/tenders`, `/investors` sur la même coquille master-detail ;
+  dashboard fusionné `/` avec filtres transverses. VC_INVESTOR = kind
+  distinct, jamais forcé dans le pipeline tender.
+- **Multi-projets TheStudio** : 6 profils (`@oia/workspace/projects` —
+  BAWABA, SILLON, Maisons.co, myOolala, BEAU, Ludography), type
+  `ProjectProfile` existant réutilisé. **Hypothèses de travail à corriger
+  par Mickael** (SILLON/myOolala/BEAU volontairement minces).
+- **SuggestionService réel** : matching déterministe et explicable
+  (mots-clés/secteurs/géo), confiance plafonnée à 70, le pourquoi affiché,
+  « not a verdict » systématique, silence honnête sans signal. Testé.
+- **Tags projet** (décision humaine, audit-loggée), **notes attachées**,
+  **vues par projet** (/projects + filtre Project + vues sauvegardées).
+
+## Reste
+
+- **Dette de sécurité (mandat §9) : la console porte maintenant les profils
+  TheStudio et des suggestions internes → remettre une protection.** Le plus
+  simple : laisser/remettre Vercel Authentication ON (Mickael y accède via
+  son compte Vercel), ou dire à Claude de construire un vrai login en
+  Phase 2.1. Les tags/notes/audit restent locaux au navigateur (localStorage),
+  ils ne sont PAS publiés.
+- Phase 3 : notes autonomes/tâches/contacts sur l'ossature existante.
 - Phase 4 : DigestService réel (dépend du planificateur, Sprint 6).
+- Profils projets à réviser par Mickael (mots-clés = signaux de matching).
 - Cosmétique différée : Lottie (CDN inaccessible depuis la sandbox), valeurs
   exactes du dégradé BIOPTIC (CSS Webflow externe inaccessible — approché
   depuis les captures).
