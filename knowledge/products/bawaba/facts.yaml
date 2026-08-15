@@ -339,16 +339,21 @@
     provider-agnostic from the start: Anthropic Messages API, and any
     OpenAI-compatible endpoint (Mistral, self-hosted vLLM/Ollama = sovereign
     option), zero vendor SDK dependency. No provider configured → honest
-    503; the Souffleur never decides and never invents. LIMIT: wire formats
-    and prompt invariants are unit-tested; the endpoint has NOT yet been
-    exercised against a live LLM provider — do not claim a demonstrated
-    end-to-end Souffleur until that run happens.
+    503; the Souffleur never decides and never invents. DEMONSTRATED
+    end-to-end 2026-08-15: first live run on Mistral (mistral-large-latest)
+    faithfully translated a real deny record (denied_tools.execute_payment,
+    policy v1.0.0) in the Guided Demo — browser → gateway → audit trail →
+    Souffleur. Answers follow the reviewer's UI language (fr/en) since
+    @3b506cd. The browser demo path itself only became real the same day:
+    missing CORS on :8080/:8081 and deny-as-exception handling had blocked
+    it (fixed @99a0a1f/@10c05ec/@3b506cd); earlier curl-based checks had
+    masked this.
   subject: bawaba
   lifecycle: REVIEWED
   disclosure: INTERNAL_ONLY
   provenance:
     sourceType: CODE_REPOSITORY
-    sourceId: "OolalaDXB/bawaba-command@afa71bb"
+    sourceId: "OolalaDXB/bawaba-command@3b506cd"
     locator: "internal/souffleur/souffleur.go; internal/api/souffleur.go; internal/api/public_demo.go; src/pages/Join.tsx; src/components/SouffleurExplain.tsx"
     confidence: 0.95
     createdAt: "2026-08-15"
