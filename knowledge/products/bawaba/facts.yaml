@@ -323,3 +323,31 @@
     confidence: 0.95
     createdAt: "2026-08-14"
     updatedAt: "2026-08-14"
+
+- id: fact-bawaba-p3-copilot-share
+  statement: >-
+    P3 shipped (bawaba-command@393629d): (1) shareable workspace URL —
+    /join#payload carries the ephemeral session (id + clone keys) in the URL
+    fragment only (never reaches any server), validated against the gateway
+    before adoption; the P2 security debt is closed via BAWABA_PUBLIC_DEMO,
+    which restricts control-plane mutations to -demo- workspace clones and
+    makes routing rules read-only on a public host. (2) Copilot —
+    translation-only over real decision records (matched_rule,
+    policy_version, policy_result loaded server-side from the audit trail),
+    provider-agnostic from the start: Anthropic Messages API, and any
+    OpenAI-compatible endpoint (Mistral, self-hosted vLLM/Ollama = sovereign
+    option), zero vendor SDK dependency. No provider configured → honest
+    503; the Copilot never decides and never invents. LIMIT: wire formats
+    and prompt invariants are unit-tested; the endpoint has NOT yet been
+    exercised against a live LLM provider — do not claim a demonstrated
+    end-to-end Copilot until that run happens.
+  subject: bawaba
+  lifecycle: REVIEWED
+  disclosure: INTERNAL_ONLY
+  provenance:
+    sourceType: CODE_REPOSITORY
+    sourceId: "OolalaDXB/bawaba-command@393629d"
+    locator: "internal/copilot/copilot.go; internal/api/copilot.go; internal/api/public_demo.go; src/pages/Join.tsx; src/components/CopilotExplain.tsx"
+    confidence: 0.95
+    createdAt: "2026-08-15"
+    updatedAt: "2026-08-15"

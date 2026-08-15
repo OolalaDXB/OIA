@@ -33,6 +33,7 @@ factIds:
   - fact-bawaba-domain-positioning-converged
   - fact-bawaba-p1-control-plane
   - fact-bawaba-p2-demo-workspace
+  - fact-bawaba-p3-copilot-share
 provenance:
   sourceType: FOUNDER_DECLARED
   sourceId: "mandat-kb-2026-08-14"
