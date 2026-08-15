@@ -301,3 +301,25 @@
     confidence: 0.95
     createdAt: "2026-08-14"
     updatedAt: "2026-08-14"
+
+- id: fact-bawaba-p2-demo-workspace
+  statement: >-
+    P2 shipped (bawaba-command@942cbfd): ephemeral Demo Workspace — seeded
+    demo-xxxx sessions (~60 min TTL) cloning template agents with
+    server-generated credentials shown once, janitor teardown (credentials
+    revoked, agents removed, session flagged, teardown audit-logged), zero
+    pollution of canonical agents, audit chain never erased. Managed
+    persistence path documented through the API abstraction (BAWABA_DB_URL →
+    managed Postgres; browser never talks to the database). Recorded debt
+    before any public demo host: CRUD endpoints must be workspace-scoped or
+    link-gated.
+  subject: bawaba
+  lifecycle: REVIEWED
+  disclosure: INTERNAL_ONLY
+  provenance:
+    sourceType: CODE_REPOSITORY
+    sourceId: "OolalaDXB/bawaba-command@942cbfd"
+    locator: "internal/api/demo_workspace.go; internal/store/store.go; migrations/004; docs/DEPLOY_MANAGED.md; src/lib/demoWorkspace.ts"
+    confidence: 0.95
+    createdAt: "2026-08-14"
+    updatedAt: "2026-08-14"
