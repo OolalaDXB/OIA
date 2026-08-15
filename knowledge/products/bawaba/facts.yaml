@@ -163,6 +163,8 @@
     approvedBy: "mickael (chat approval 2026-08-14)"
 
 - id: fact-bawaba-enforcement-not-implemented
+  supersededBy: fact-bawaba-p4-real-enforcement
+  lifecycle: SUPERSEDED
   statement: >-
     NOT implemented in bawaba-command: real gateway forwarding (executeToolCall
     returns simulated responses — no upstream MCP backend is ever contacted),
@@ -173,7 +175,6 @@
     binary allow/deny, no external decision endpoint). Never present
     enforcement to real backends as working.
   subject: bawaba
-  lifecycle: CANONICAL
   disclosure: INTERNAL_ONLY
   provenance:
     sourceType: CODE_REPOSITORY
@@ -355,6 +356,33 @@
     sourceType: CODE_REPOSITORY
     sourceId: "OolalaDXB/bawaba-command@3b506cd"
     locator: "internal/souffleur/souffleur.go; internal/api/souffleur.go; internal/api/public_demo.go; src/pages/Join.tsx; src/components/SouffleurExplain.tsx"
+    confidence: 0.95
+    createdAt: "2026-08-15"
+    updatedAt: "2026-08-15"
+
+- id: fact-bawaba-p4-real-enforcement
+  statement: >-
+    P4 shipped (bawaba-command@bde954b): REAL enforcement path. Allowed
+    tool calls are forwarded as JSON-RPC to configured upstream MCP
+    backends (upstreams: in bawaba.yaml, per-upstream env URL override);
+    a tool served by no upstream is refused explicitly — the simulated
+    '{status: executed}' response is gone. A real separate-process demo
+    backend (invoice/payment ledger, own container, GET /ledger) proves
+    the asymmetry: ALLOW lands a real payment record, DENY never reaches
+    the process. Upstream errors surface as -32006 + tool_error audit
+    events; audit MCPServer carries the real upstream name. STILL NOT
+    implemented: third-party gateway adapters (Kong/Envoy/LiteLLM),
+    OIDC/JWT auth (stub), native TLS (Caddy fronting documented in
+    RUNBOOK_PUBLIC_DEMO.md), embedded sovereign mode, /metrics, tri-state
+    REVIEW decisions. Public deployment: code-ready, runbook written —
+    blocked only on operator-provided VPS + DNS.
+  subject: bawaba
+  lifecycle: REVIEWED
+  disclosure: INTERNAL_ONLY
+  provenance:
+    sourceType: CODE_REPOSITORY
+    sourceId: "OolalaDXB/bawaba-command@bde954b"
+    locator: "internal/proxy/upstream.go; cmd/demo-backend/; internal/proxy/proxy.go (executeToolCall); docs/RUNBOOK_PUBLIC_DEMO.md"
     confidence: 0.95
     createdAt: "2026-08-15"
     updatedAt: "2026-08-15"
