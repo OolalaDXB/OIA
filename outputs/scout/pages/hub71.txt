@@ -149,11 +149,11 @@ nationalities
 sectors
 SOME OF OUR STARTUPS:
 
-Making freight transactions automated, globally
-
 Expand your medical business worldwide with OnEx
 
-A community-based platform in outer space with blockchain technology
+Redefining the work-life experience by making automated HR, payroll, employee benefits and insurance a possibility for all businesses in UAE.
+
+Lune is an AI-driven engagement and hyper-personalization platform for banks, built on insights from over 1 billion transactions. Our Transaction Enrichment API transforms raw transaction data into actionable insights, powering our core products: Enrichment, Personal Finance Engagement (PFE) SDK, Insights Dashboard, and Smart Nudges. (Supports Arabic transliteration)
 
 We are currently on the Polygon (Matic) Network, which is an Ethereum-compatible blockchain network.
 

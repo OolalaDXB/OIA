@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T17:57:24.184Z",
+  "generatedAt": "2026-09-16T18:12:17.880Z",
   "found": [],
   "perSource": [
     {
@@ -40,10 +40,12 @@
     },
     {
       "id": "eu-funding-tenders",
-      "status": "ERROR",
+      "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "Mistral extract failed to produce valid ScoutResult: SyntaxError: Expected ',' or ']' after array element in JSON at position 12035 (line 169 column 8)"
+      "note": "followed \"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/calls-for-proposals\" (calls, funding, tenders, opportunityieses)",
+      "chars": 18611,
+      "links": 81
     },
     {
       "id": "flippa",
@@ -69,7 +71,7 @@
       "kept": 0,
       "dropped": 0,
       "note": "tried \"https://www.hub71.com/program/access-programme/apply\" but it had less text — stayed on the entry page",
-      "chars": 10952,
+      "chars": 11347,
       "links": 75
     },
     {
@@ -96,7 +98,7 @@
       "kept": 0,
       "dropped": 0,
       "note": "followed \"https://www.ungm.org/Public/Notice\" (opportunityieses, procurement)",
-      "chars": 9317,
+      "chars": 9423,
       "links": 219
     },
     {

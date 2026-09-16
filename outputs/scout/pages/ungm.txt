@@ -234,7 +234,7 @@ Sustainable opportunities
 Only sustainable
 Search Clear all 
 Save this search
-Displaying results 1 to 15 of 1443
+Displaying results 1 to 15 of 1441
 	Title	Deadline	Published	Organization	Type of opportunity	Reference	Beneficiary country or territory
 
 	
@@ -248,10 +248,6 @@ UNDP-SLV-00570 - IC Elaboración del Atlas Municipal Desarrollo Humano
 	
 UNDP-HND-00663 Adquisición Equipo Medios Nacionales de Comunicación
 	16-Sep-2026 15:00 (GMT -4.00) Expires within 24 hours	11-Aug-2026	UNDP	Request for quotation	UNDP-HND-00663,2	Honduras
-
-	
-Suministro de Equipamiento de Observación Astronómica y Espectrografía
-	16-Sep-2026 16:00 (GMT -4.00) Expires within 24 hours	11-Aug-2026	UNDP	Request for quotation	UNDP-HND-00669	Honduras
 
 	
 Réalisation d un forage d eau à Clercine (IGPNH)
@@ -274,14 +270,6 @@ Consultancy firm to provide Market Access and Commercialization Partner
 	16-Sep-2026 17:59 (GMT -4.00) Expires within 24 hours	02-Sep-2026	UNDP	Request for proposal	UNDP-NGA-01477	Nigeria
 
 	
-Adquisición de tabletas, lápiz óptico y carcasa para personal del Asociado como parte del fortalecimiento del proyecto PROERI CONAVI
-	16-Sep-2026 18:00 (GMT 0.00) Expires within 24 hours	07-Sep-2026	UNOPS	Request for quotation	RFQ/2026/64557	Costa Rica
-
-	
-Servicio de impresión de etiquetas adhesivas
-	16-Sep-2026 20:00 (GMT 2.00) Expires within 24 hours	10-Sep-2026	ILO	Request for quotation	rfx_10614_ROLAC	Mexico
-
-	
 Call for External Collaborator – Cooperative Development Advisor (Remote), ILO PROSPECTS Lebanon
 	16-Sep-2026 22:59 (GMT 2.00) Expires within 24 hours	02-Sep-2026	ILO	Call for individual consultants	rfx_10359_ROAS	Lebanon
 
@@ -296,6 +284,18 @@ Event management service for Public Employment Offices (PES) TOT workshop, ILO S
 	
 Request for Quotation for CO Manila - Photocopy and printing paper office supply
 	16-Sep-2026 23:00 (GMT 2.00) Expires within 24 hours	11-Sep-2026	ILO	Request for quotation	rfx_10736_ROAP	Philippines
+
+	
+RFQ_Procurement of market equipment for markets in Fiji
+	16-Sep-2026 23:41 (GMT -4.00) Expires within 24 hours	10-Sep-2026	UN-Women	Request for quotation	UNW-FJI-2026-00054	Fiji
+
+	
+Consultancy to support the development of a Framework of Action on Skills for a Just Energy Transition through Social Dialogue in Mpumalanga and the Eastern Cape.
+	16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours	09-Sep-2026	ILO	Call for individual consultants	rfx_10268_ROAF	South Africa
+
+	
+RFQ#138269 for Procurement and delivery of 2 620 Bottles of De-Wormer (Ivermectin 1% injection 50 ml bottle)
+	16-Sep-2026 23:59 (GMT 4.30) Expires within 24 hours	10-Sep-2026	FAO	Request for quotation	2026/FAAFG/FAAFG/138269	Afghanistan
 
 © 2026 - United Nations Global Marketplace (UNGM) •  Terms and Conditions •  Site Map •  Glossary •  
 
