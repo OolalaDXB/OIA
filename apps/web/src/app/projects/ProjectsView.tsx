@@ -183,7 +183,16 @@ export function ProjectsView({ data }: { data: ConsoleData }) {
                   <div className="kv"><span className="k">Watching</span><span className="v">{project.discovery.watch.join(", ")}</span></div>
                   <div className="kv"><span className="k">CPV codes</span><span className="v">{project.discovery.cpvCodes.join(", ") || "—"}</span></div>
                   <div className="kv"><span className="k">Buyer countries</span><span className="v">{project.discovery.countries.join(", ") || "any"}</span></div>
-                  <div className="kv"><span className="k">Query terms</span><span className="v">{project.discovery.queryTerms.join(", ") || "—"}</span></div>
+                  <div className="kv">
+                    <span className="k">Query terms</span>
+                    <span className="v">
+                      {project.discovery.queryTerms.join(", ") || "—"}
+                      <div className="warn small">
+                        Not used yet — the query is built from CPV codes, countries and the recency floor only.
+                        Wiring these into full-text search is roadmap S1.
+                      </div>
+                    </span>
+                  </div>
                   <div className="muted small">
                     Runs with <code>pnpm --filter @oia/workers discover:ted -- --project {project.slug}</code> (needs
                     network egress).

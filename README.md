@@ -115,6 +115,8 @@ custom domain or assuming anything is synced.
 
 ## Where to start reading
 
+- [`docs/roadmap.md`](docs/roadmap.md) — **what the system actually searches on
+  today (measured), what it cannot yet represent, and what comes next**
 - [`docs/architecture/README.md`](docs/architecture/README.md) — the ten
   architecture deliverables and the rationale behind the code
 - [`registry/README.md`](registry/README.md) — who OIA works for, and how to add

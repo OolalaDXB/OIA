@@ -68,7 +68,17 @@ export type ProfileReview = z.infer<typeof ProfileReviewSchema>;
  */
 export const DiscoverySchema = z.object({
   enabled: z.boolean().default(false),
-  /** Free-text expert-search terms (TED full-text, EU F&T keywords). */
+  /**
+   * Free-text search terms.
+   *
+   * NOT CONSUMED YET. The TED expert query is built from `cpvCodes`,
+   * `countries` and the recency floor only — these terms reach no connector
+   * today. They are kept because they are the right content for the full-text
+   * clause and for the SEDIA keyword search, and wiring them is roadmap S1
+   * (validated against the live API with `checkQuerySyntax`). Until then the
+   * console labels them as unused rather than implying a search that does not
+   * happen.
+   */
   queryTerms: z.array(z.string()).default([]),
   /** EU CPV codes for tender discovery (TED). */
   cpvCodes: z.array(z.string()).default([]),
