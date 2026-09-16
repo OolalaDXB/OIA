@@ -43,6 +43,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # A shallow clone has no parent for its one commit, so `git rebase`
+          # treats that commit as ADDING the whole tree and every single file
+          # comes back as an add/add conflict. Run 18 threw away a complete
+          # dataset that way. The rebase below is the recovery path for a push
+          # that raced — it has to work.
+          fetch-depth: 0
       - uses: pnpm/action-setup@v4
         with:
           version: 10.33.0
@@ -261,13 +268,18 @@ jobs:
           RECORDS=$(node -e "console.log(require('./apps/web/src/data/console.json').run.records)")
           git commit -m "data: scheduled discovery refresh (${RECORDS} records)" \
                      -m "Automated run of discover:ted across every project with discovery enabled, then ted-to-console. Typecheck, tests and the web build passed against this dataset before it was committed."
-          # Somebody pushing to main while a run is in flight is normal, and it
-          # must not cost the run its data. Rebase onto whatever arrived and try
-          # again; never force, because the other push is somebody's real work.
+          # Somebody pushing while a run is in flight is normal, and it must not
+          # cost the run its data. Rebase onto whatever arrived and try again;
+          # never force, because the other push is somebody's real work.
+          #
+          # Onto THIS branch, not main: the run commits to the branch it was
+          # dispatched on, and pulling main into a feature branch rebases the
+          # branch's own commits onto a base that never had them.
+          BRANCH="${GITHUB_REF_NAME}"
           for attempt in 1 2 3; do
             if git push; then exit 0; fi
-            echo "push rejected (attempt $attempt) — rebasing onto the new main and retrying"
-            git pull --rebase --autostash origin main || exit 1
+            echo "push rejected (attempt $attempt) — rebasing onto the new ${BRANCH} and retrying"
+            git pull --rebase --autostash origin "$BRANCH" || exit 1
           done
           echo "::error::could not push the refreshed data after 3 attempts"
           exit 1
