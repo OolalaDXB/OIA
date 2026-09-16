@@ -29,7 +29,42 @@ import { OPPORTUNITY_KINDS } from "@oia/ingestion/opportunity-kinds";
  * dropped with a reason. A prompt instruction cannot be tested; this can.
  */
 
-export const ScoutedCallSchema = z.object({
+/**
+ * Field names a model reasonably reaches for instead of ours.
+ *
+ * Mistral returned `name`, `amount` and `deadline` where the schema wanted
+ * `title`, `amountText` and `deadlineText`. Every item then failed validation,
+ * the array failed with it, and the run reported "no funding calls on this
+ * page" for a page listing twenty programmes. The model was not wrong; it was
+ * writing the obvious word. Meeting it there costs a map and removes a whole
+ * class of silent loss.
+ */
+const FIELD_ALIASES: Record<string, string> = {
+  name: "title", titre: "title", nom: "title", label: "title",
+  url: "sourceUrl", link: "sourceUrl", href: "sourceUrl", lien: "sourceUrl",
+  source_url: "sourceUrl", callUrl: "sourceUrl",
+  amount: "amountText", montant: "amountText", amount_text: "amountText", funding: "amountText",
+  deadline: "deadlineText", date_limite: "deadlineText", deadline_text: "deadlineText",
+  closing_date: "deadlineText", echeance: "deadlineText",
+  description: "summary", objet: "summary", resume: "summary", scope: "summary",
+  funder: "issuer", organisme: "issuer", organisation: "issuer", operator: "issuer",
+  eligibilite: "eligibility", beneficiaires: "eligibility",
+  type: "kind", category: "kind",
+  citation: "quote", excerpt: "quote",
+};
+
+function renameFields(raw: unknown): unknown {
+  if (typeof raw !== "object" || raw === null || Array.isArray(raw)) return raw;
+  const out: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(raw as Record<string, unknown>)) {
+    const target = FIELD_ALIASES[key] ?? FIELD_ALIASES[key.toLowerCase()] ?? key;
+    // Never let an alias overwrite a correctly named field that is already set.
+    if (out[target] === undefined || out[target] === "") out[target] = value;
+  }
+  return out;
+}
+
+export const ScoutedCallSchema = z.preprocess(renameFields, z.object({
   /** The call's own name, as printed on the page. */
   title: z.string().min(3),
   /** Who is offering the money. */
@@ -50,7 +85,7 @@ export const ScoutedCallSchema = z.object({
   deadlineText: z.string().default(""),
   /** The exact sentence the model took this from, so a human can check it. */
   quote: z.string().default(""),
-});
+}));
 export type ScoutedCall = z.infer<typeof ScoutedCallSchema>;
 
 const ScoutResultShape = z.object({
@@ -78,7 +113,21 @@ const ScoutResultShape = z.object({
  */
 export const ScoutResultSchema = z.preprocess((raw) => {
   if (typeof raw !== "object" || raw === null) return raw;
-  const obj = raw as Record<string, unknown>;
+  let obj = raw as Record<string, unknown>;
+
+  // Models wrap the payload in the schema's own name — the provider's system
+  // suffix literally says 'a single JSON object for "ScoutResult"', and Mistral
+  // obeyed it exactly: {"ScoutResult": {"calls": [...]}}. Unwrap a lone
+  // object-valued key rather than calling the model wrong for doing as it was
+  // told.
+  const keys = Object.keys(obj);
+  if (keys.length === 1) {
+    const inner = obj[keys[0]!];
+    if (typeof inner === "object" && inner !== null && !Array.isArray(inner)) {
+      obj = inner as Record<string, unknown>;
+    }
+  }
+
   if (Array.isArray(obj["calls"])) return obj;
 
   // Any other property holding a list of objects is the list.
