@@ -169,7 +169,7 @@ export const GATE_FAILURE: Record<string, Phrase> = {
 };
 
 /** Turn a gate failure into something a person can act on. */
-export function plainFailure(reason: string, lang: Lang = DEFAULT_LANG): string {
+export function plainFailure(reason: string, lang: Lang): string {
   const known = GATE_FAILURE[reason];
   if (known) return known[lang];
   const confidence = reason.match(/^info confidence (\d+) < floor (\d+)$/);
@@ -181,23 +181,23 @@ export function plainFailure(reason: string, lang: Lang = DEFAULT_LANG): string 
   return reason;
 }
 
-export function recommendationLabel(value: string, lang: Lang = DEFAULT_LANG): string {
+export function recommendationLabel(value: string, lang: Lang): string {
   return RECOMMENDATION[value] ? RECOMMENDATION[value]!.label[lang] : value;
 }
 
-export function verificationLabel(value: string, lang: Lang = DEFAULT_LANG): string {
+export function verificationLabel(value: string, lang: Lang): string {
   return VERIFICATION[value] ? VERIFICATION[value]!.label[lang] : value;
 }
 
-export function reviewLabel(value: string, lang: Lang = DEFAULT_LANG): string {
+export function reviewLabel(value: string, lang: Lang): string {
   return REVIEW[value] ? REVIEW[value]![lang] : value;
 }
 
-export function freshnessLabel(value: string, lang: Lang = DEFAULT_LANG): string {
+export function freshnessLabel(value: string, lang: Lang): string {
   return FRESHNESS[value] ? FRESHNESS[value]![lang] : value;
 }
 
-export function gateConditionLabel(value: string, lang: Lang = DEFAULT_LANG): string {
+export function gateConditionLabel(value: string, lang: Lang): string {
   return GATE_CONDITION[value] ? GATE_CONDITION[value]![lang] : value;
 }
 
@@ -234,19 +234,19 @@ const KIND_MEANING_FR: Record<string, string> = {
   REGULATORY: "À surveiller seulement : jamais quelque chose à poursuivre.",
 };
 
-export function kindLabel(value: string | undefined, lang: Lang = DEFAULT_LANG): string {
+export function kindLabel(value: string | undefined, lang: Lang): string {
   const kind = normalizeKind(value);
   return KIND_FR[kind] ? KIND_FR[kind]![lang] : KIND_PROFILES[kind].label;
 }
 
-export function kindMeaning(value: string | undefined, lang: Lang = DEFAULT_LANG): string {
+export function kindMeaning(value: string | undefined, lang: Lang): string {
   const kind = normalizeKind(value);
   if (lang === "fr" && KIND_MEANING_FR[kind]) return KIND_MEANING_FR[kind]!;
   return KIND_PROFILES[kind].description;
 }
 
 /** "dans 5 jours", "il y a 3 jours" — a date nobody has to subtract in their head. */
-export function relativeDays(days: number | null, lang: Lang = DEFAULT_LANG): string {
+export function relativeDays(days: number | null, lang: Lang): string {
   if (days === null) return "";
   if (lang === "en") {
     if (days === 0) return "today";
@@ -286,11 +286,11 @@ export const VERDICT: Record<string, Term> = {
   },
 };
 
-export function verdictLabel(value: string, lang: Lang = DEFAULT_LANG): string {
+export function verdictLabel(value: string, lang: Lang): string {
   return VERDICT[value] ? VERDICT[value]!.label[lang] : value;
 }
 
-export function verdictMeaning(value: string, lang: Lang = DEFAULT_LANG): string {
+export function verdictMeaning(value: string, lang: Lang): string {
   return VERDICT[value] ? VERDICT[value]!.meaning[lang] : "";
 }
 
@@ -308,6 +308,6 @@ export const UI: Record<string, Phrase> = {
   show: { fr: "afficher", en: "show" },
 };
 
-export function ui(key: string, lang: Lang = DEFAULT_LANG): string {
+export function ui(key: string, lang: Lang): string {
   return UI[key] ? UI[key]![lang] : key;
 }

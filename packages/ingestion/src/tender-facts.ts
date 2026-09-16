@@ -24,14 +24,45 @@ import { extractHtmlBlocks, htmlToVisibleText, type HtmlBlock } from "./html";
 /** Longest scope text kept. Enough to match on; short enough not to bloat a row. */
 export const SCOPE_MAX = 1200;
 
+/**
+ * Section headings, in the languages the notices are actually written in.
+ *
+ * These patterns were English-only, and the measurement showed the cost: an
+ * eligibility section was found on 9 records out of 47, so the analyst was
+ * asked "can we apply?" about documents whose eligibility text had never been
+ * extracted, and correctly answered "the document does not say".
+ *
+ * TED titles are translated to English; the BODY is in the buyer's language.
+ * A German notice says "Eignungskriterien", an Italian one "Criteri di
+ * selezione" — neither matches /eligib|selection criteria/. The extractor was
+ * looking for words that were never going to be there.
+ *
+ * The terms below are the standard eForms procurement vocabulary in the seven
+ * languages this registry's buyer countries use. They are UNVERIFIED against a
+ * live notice from this environment, which has no egress — so the worker
+ * measures and prints the eligibility hit rate on every run, and the next real
+ * run either proves this or shows it did nothing.
+ */
 const SECTION_PATTERNS: Array<{ field: string; re: RegExp; confidence: number }> = [
-  { field: "scope", re: /\b(description|object of the contract|scope|purpose|objet|short description)\b/i, confidence: 0.7 },
-  { field: "eligibility", re: /\b(eligib|selection criteria|participation|suitability|exclusion grounds)\b/i, confidence: 0.65 },
-  { field: "award_criteria", re: /\b(award criteria|criteria for award|attribution)\b/i, confidence: 0.65 },
+  {
+    field: "scope",
+    re: /\b(description|object of the contract|scope|purpose|short description|objet|description succincte|beschreibung|auftragsgegenstand|leistungsbeschreibung|oggetto|descrizione|objeto|descripción|voorwerp|omschrijving|objeto do contrato)\b/i,
+    confidence: 0.7,
+  },
+  {
+    field: "eligibility",
+    re: /\b(eligib|selection criteria|conditions? for participation|participation|suitability|exclusion grounds|critères de sélection|conditions de participation|motifs d'exclusion|capacité (?:économique|technique)|eignungskriterien|teilnahmebedingungen|ausschlussgründe|(?:wirtschaftliche|technische)[a-zäöüß ]*leistungsfähigkeit|criteri di selezione|condizioni di partecipazione|motivi di esclusione|criterios de selección|condiciones de participación|motivos de exclusión|selectiecriteria|uitsluitingsgronden|deelnemingsvoorwaarden|critérios de seleção|urvalskriterier)\b/i,
+    confidence: 0.65,
+  },
+  {
+    field: "award_criteria",
+    re: /\b(award criteria|criteria for award|attribution|critères d'attribution|zuschlagskriterien|criteri di aggiudicazione|criterios de adjudicación|gunningscriteria|critérios de adjudicação|tilldelningskriterier)\b/i,
+    confidence: 0.65,
+  },
 ];
 
 const ESTIMATED_VALUE =
-  /\b(?:estimated (?:total )?value|total value|value excluding vat|budget)\b[^.\n]{0,80}?((?:eur|€|gbp|£|usd|\$)\s?[\d][\d\s.,]*(?:million|bn|m)?)/i;
+  /\b(?:estimated (?:total )?value|total value|value excluding vat|budget|valeur (?:totale )?estimée|montant estimé|geschätzter (?:gesamt)?wert|auftragswert|valore stimato|importo stimato|valor estimado|geraamde waarde)\b[^.\n]{0,80}?((?:eur|€|gbp|£|usd|\$)\s?[\d][\d\s.,]*(?:million|bn|m)?)/i;
 const PROCEDURE =
   /\b(open procedure|restricted procedure|competitive procedure with negotiation|competitive dialogue|innovation partnership|negotiated procedure(?: without prior publication)?|direct award)\b/i;
 const NUTS = /\bNUTS(?: code)?\s*:?\s*([A-Z]{2}[A-Z0-9]{0,3})\b/;

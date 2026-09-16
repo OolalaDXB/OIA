@@ -308,7 +308,7 @@ export function ProjectsView({ data }: { data: ConsoleData }) {
                     {src.url && <LinkChip status={links.statusOf(src.url)} />}
                   </div>
                   <div className="muted small">
-                    {src.kinds.map((k) => kindLabel(k)).join(", ")} · {src.geographies.join(", ")}
+                    {src.kinds.map((k) => kindLabel(k, lang)).join(", ")} · {src.geographies.join(", ")}
                   </div>
                   <div className="muted small">{src.notes}</div>
                 </div>
@@ -332,10 +332,10 @@ export function ProjectsView({ data }: { data: ConsoleData }) {
                     ) : (
                       <b>{r.title}</b>
                     )}
-                    {r.opportunityKind ? ` · ${kindLabel(r.opportunityKind)}` : ""}
+                    {r.opportunityKind ? ` · ${kindLabel(r.opportunityKind, lang)}` : ""}
                   </div>
                   <div className="muted small">
-                    {r.issuer} · {verificationLabel(r.verificationStatus)} · {recommendationLabel(r.recommendation)}
+                    {r.issuer} · {verificationLabel(r.verificationStatus, lang)} · {recommendationLabel(r.recommendation, lang)}
                     {r.officialUrl && <LinkChip status={links.statusOf(r.officialUrl)} />}
                   </div>
                 </div>

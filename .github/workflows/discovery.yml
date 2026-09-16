@@ -197,7 +197,7 @@ jobs:
         continue-on-error: true
         env:
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
-          ANALYST_LIMIT: ${{ vars.ANALYST_LIMIT || '40' }}
+          ANALYST_LIMIT: ${{ vars.ANALYST_LIMIT || '120' }}
         run: |
           if [ -z "$MISTRAL_API_KEY" ]; then
             echo "::warning::MISTRAL_API_KEY not set — no eligibility was assessed."

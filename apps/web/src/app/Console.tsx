@@ -68,9 +68,14 @@ const PROV_COLOR: Record<FactClass, string> = {
 const CONFIRMED: FactClass[] = ["CONFIRMED_OFFICIAL", "EXTRACTED_FROM_OFFICIAL_SOURCE"];
 const FACT_ORDER: FactClass[] = ["CONFIRMED_OFFICIAL", "EXTRACTED_FROM_OFFICIAL_SOURCE", "INFERRED", "USER_PROVIDED", "UNKNOWN"];
 
-/** Kept for callers that import it; the labels now come from the taxonomy. */
+/**
+ * Kept for callers that import it. It renders in FRENCH whatever the toggle
+ * says, because a Proxy has no way to receive the current language — which is
+ * exactly how "SUBVENTION" and "TENDER" ended up side by side in the same list.
+ * Nothing user-facing should use it; `plainKindLabel(kind, lang)` is the way.
+ */
 export const KIND_LABEL = new Proxy({} as Record<string, string>, {
-  get: (_t, key: string) => plainKindLabel(key),
+  get: (_t, key: string) => plainKindLabel(key, "fr"),
 });
 
 const KIND_COLOR: Record<string, string> = {
@@ -505,10 +510,10 @@ export function Console({
               <option value="__none">{lang === "fr" ? "pas encore analysé" : "not analysed yet"}</option>
             </select>
           </label>
-          <Select label="Recommendation" value={fReco} onChange={setFReco} options={opt(records.map((r) => r.recommendation))} />
-          <Select label="Verification" value={fVerif} onChange={setFVerif} options={opt(records.map((r) => r.verificationStatus))} />
-          <Select label="Route" value={fRoute} onChange={setFRoute} options={opt(records.map((r) => r.strategicRoute))} />
-          <Select label="Human review" value={fReview} onChange={setFReview} options={["PENDING", "APPROVE", "REJECT", "NEEDS_VERIFICATION"]} />
+          <Select label={lang === "fr" ? "Recommandation" : "Recommendation"} value={fReco} onChange={setFReco} options={opt(records.map((r) => r.recommendation))} />
+          <Select label={lang === "fr" ? "Vérification" : "Verification"} value={fVerif} onChange={setFVerif} options={opt(records.map((r) => r.verificationStatus))} />
+          <Select label={lang === "fr" ? "Entité" : "Route"} value={fRoute} onChange={setFRoute} options={opt(records.map((r) => r.strategicRoute))} />
+          <Select label={lang === "fr" ? "Ton avis" : "Human review"} value={fReview} onChange={setFReview} options={["PENDING", "APPROVE", "REJECT", "NEEDS_VERIFICATION"]} />
           <label className="filter">
             <span className="muted">{lang === "fr" ? "Projet" : "Project"}</span>
             <select value={fProject} onChange={(e) => setFProject(e.target.value)}>
@@ -572,7 +577,7 @@ export function Console({
                   onClick={() => setSelectedId(r.id)}
                 >
                   <div className="rowTop">
-                    <Badge text={recommendationLabel(r.recommendation)} color={RECO_COLOR[r.recommendation] ?? "#888"} />
+                    <Badge text={recommendationLabel(r.recommendation, lang)} color={RECO_COLOR[r.recommendation] ?? "#888"} />
                     {kind && !fixedKind && <Badge text={plainKindLabel(kind, lang)} color={kindColor(kind)} />}
                     <span className="rowTitle">{r.title}</span>
                   </div>
@@ -738,11 +743,11 @@ function Detail({
   return (
     <div>
       <div className="detailHead">
-        <Badge text={recommendationLabel(r.recommendation)} color={RECO_COLOR[r.recommendation] ?? "#888"} />
-        {r.opportunityKind && <Badge text={plainKindLabel(r.opportunityKind)} color={kindColor(r.opportunityKind)} />}
+        <Badge text={recommendationLabel(r.recommendation, lang)} color={RECO_COLOR[r.recommendation] ?? "#888"} />
+        {r.opportunityKind && <Badge text={plainKindLabel(r.opportunityKind, lang)} color={kindColor(r.opportunityKind)} />}
         <h2>{r.title}</h2>
         <span className="muted">{r.issuer}</span>
-        {pubDate(r) && <span className="pubChip">published {pubDate(r)}</span>}
+        {pubDate(r) && <span className="pubChip">{lang === "fr" ? "publié" : "published"} {pubDate(r)}</span>}
         <span
           className={
             freshness.status === "EXPIRED"
@@ -752,7 +757,7 @@ function Detail({
                 : "pubChip"
           }
         >
-          {freshnessLabel(freshness.status)}
+          {freshnessLabel(freshness.status, lang)}
         </span>
       </div>
 
@@ -780,7 +785,7 @@ function Detail({
         </Section>
       )}
 
-      <Section title="TheStudio project">
+      <Section title={lang === "fr" ? "Projet du studio" : "TheStudio project"}>
         {r.discoveredFor && r.discoveredFor.length > 0 && (
           <KV
             k="Discovered for"
@@ -831,28 +836,28 @@ function Detail({
         )}
       </Section>
 
-      <Section title="Sources">
-        <KV k="Official source" v={r.officialUrl ? <a href={r.officialUrl} target="_blank" rel="noreferrer">{r.officialUrl}</a> : <span className="muted">—</span>} />
-        <KV k="Discovery source" v={r.discoveryUrl ? <a href={r.discoveryUrl} target="_blank" rel="noreferrer">{r.discoveryUrl}</a> : <span className="muted">—</span>} />
-        <KV k="Application portal" v={r.applicationUrl ? <a href={r.applicationUrl} target="_blank" rel="noreferrer">{r.applicationUrl}</a> : <span className="muted">—</span>} />
-        <KV k="Linked by" v={r.linkedBy} />
+      <Section title={lang === "fr" ? "Sources" : "Sources"}>
+        <KV k={lang === "fr" ? "Source officielle" : "Official source"} v={r.officialUrl ? <a href={r.officialUrl} target="_blank" rel="noreferrer">{r.officialUrl}</a> : <span className="muted">—</span>} />
+        <KV k={lang === "fr" ? "Source de découverte" : "Discovery source"} v={r.discoveryUrl ? <a href={r.discoveryUrl} target="_blank" rel="noreferrer">{r.discoveryUrl}</a> : <span className="muted">—</span>} />
+        <KV k={lang === "fr" ? "Portail de candidature" : "Application portal"} v={r.applicationUrl ? <a href={r.applicationUrl} target="_blank" rel="noreferrer">{r.applicationUrl}</a> : <span className="muted">—</span>} />
+        <KV k={lang === "fr" ? "Rattaché par" : "Linked by"} v={r.linkedBy} />
       </Section>
 
-      <Section title="Source artifact & ingestion (technical)">
+      <Section title={lang === "fr" ? "Document source et ingestion (technique)" : "Source artifact & ingestion (technical)"}>
         {r.artifact ? (
           <>
-            <KV k="Artifact id" v={<code>{r.artifact.id}</code>} />
+            <KV k={lang === "fr" ? "Identifiant du document" : "Artifact id"} v={<code>{r.artifact.id}</code>} />
             <KV k="Format" v={r.artifact.sourceFormat} />
-            <KV k="Render method" v={r.artifact.renderMethod} />
-            <KV k="Source hash (sha256)" v={<code>{r.artifact.contentHash}</code>} />
-            <KV k="Size / pages" v={`${r.artifact.byteSize} bytes${r.artifact.pageCount ? ` · ${r.artifact.pageCount} pages` : ""}`} />
-            <KV k="Processing" v={r.artifact.processing + (r.artifact.processingError ? ` (${r.artifact.processingError})` : "")} />
+            <KV k={lang === "fr" ? "Méthode de rendu" : "Render method"} v={r.artifact.renderMethod} />
+            <KV k={lang === "fr" ? "Empreinte de la source (sha256)" : "Source hash (sha256)"} v={<code>{r.artifact.contentHash}</code>} />
+            <KV k={lang === "fr" ? "Taille / pages" : "Size / pages"} v={`${r.artifact.byteSize} bytes${r.artifact.pageCount ? ` · ${r.artifact.pageCount} pages` : ""}`} />
+            <KV k={lang === "fr" ? "Traitement" : "Processing"} v={r.artifact.processing + (r.artifact.processingError ? ` (${r.artifact.processingError})` : "")} />
           </>
         ) : (
           <div className="muted">No official artifact supplied for this record.</div>
         )}
         <KV
-          k="Live fetch"
+          k={lang === "fr" ? "Récupération en direct" : "Live fetch"}
           v={
             r.liveFetch ? (
               <span>
@@ -867,8 +872,8 @@ function Detail({
         />
       </Section>
 
-      <Section title="Verification">
-        <KV k="Status" v={<Badge text={r.verificationStatus} color={r.verificationStatus === "VERIFIED" ? "var(--pursue)" : "var(--investigate)"} />} />
+      <Section title={lang === "fr" ? "Vérification" : "Verification"}>
+        <KV k={lang === "fr" ? "Statut" : "Status"} v={<Badge text={r.verificationStatus} color={r.verificationStatus === "VERIFIED" ? "var(--pursue)" : "var(--investigate)"} />} />
         <ul className="evi">
           {r.verificationEvidence.map((e, i) => (
             <li key={i} className="muted">{e}</li>
@@ -876,13 +881,13 @@ function Detail({
         </ul>
       </Section>
 
-      <Section title="Eligibility (two-stage) & entity route">
+      <Section title={lang === "fr" ? "Éligibilité (deux étapes) et entité porteuse" : "Eligibility (two-stage) & entity route"}>
         <KV k="Application eligibility" v={r.application} />
         <KV k="Award/onboarding eligibility" v={r.award} />
         <KV k="Strategic route" v={<b>{r.strategicRoute}</b>} />
       </Section>
 
-      <Section title="Scores">
+      <Section title={lang === "fr" ? "Scores" : "Scores"}>
         <KV k="Information confidence" v={`${r.scores.infoConfidence} / 100`} />
         <KV k="Relevance" v={r.scores.relevance ?? <span className="muted">not computed</span>} />
         <KV k="Win potential" v={r.scores.winPotential ?? <span className="muted">not computed</span>} />
@@ -1016,7 +1021,7 @@ function Detail({
       )}
 
       {r.unresolvedQuestions.length > 0 && (
-        <Section title="Unresolved questions">
+        <Section title={lang === "fr" ? "Questions en suspens" : "Unresolved questions"}>
           <ul className="evi">
             {r.unresolvedQuestions.map((q, i) => (
               <li key={i}>{q}</li>
@@ -1088,7 +1093,7 @@ function Detail({
         </div>
       </Section>
 
-      <Section title="Human review">
+      <Section title={lang === "fr" ? "Ton avis" : "Human review"}>
         <div className="reviewBtns">
           {(["APPROVE", "REJECT", "NEEDS_VERIFICATION"] as const).map((s) => (
             <button
