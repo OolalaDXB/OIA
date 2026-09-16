@@ -89,6 +89,13 @@ export const DiscoverySchema = z.object({
   cpvNote: z.string().default(""),
   /** Buyer countries bounding discovery — TED expert syntax wants ISO 3-letter (FRA, LUX). */
   countries: z.array(z.string()).default([]),
+  /**
+   * Why this country list and not a wider one. A narrow list is the quietest
+   * way to miss everything: padel.design's mandate was EMEA and its query asked
+   * France only, so Spain — the largest padel market in the world — was never
+   * searched, and the run looked like a success every week.
+   */
+  countriesNote: z.string().default(""),
   /** Opportunity kinds worth surfacing for this project. */
   watch: z.array(z.enum(OPPORTUNITY_KINDS_WATCHED)).default(["GRANT"]),
 });

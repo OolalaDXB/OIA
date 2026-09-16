@@ -83,6 +83,7 @@
           "BEL",
           "DEU"
         ],
+        "countriesNote": "",
         "watch": [
           "GRANT",
           "TENDER_RFP",
@@ -153,6 +154,7 @@
         "countries": [
           "FRA"
         ],
+        "countriesNote": "",
         "watch": [
           "GRANT",
           "VC_INVESTOR"
@@ -231,6 +233,7 @@
           "FRA",
           "LUX"
         ],
+        "countriesNote": "",
         "watch": [
           "GRANT",
           "VC_INVESTOR"
@@ -290,6 +293,7 @@
         "countries": [
           "FRA"
         ],
+        "countriesNote": "",
         "watch": [
           "GRANT"
         ]
@@ -349,6 +353,7 @@
         ],
         "cpvNote": "",
         "countries": [],
+        "countriesNote": "",
         "watch": [
           "VC_INVESTOR",
           "GRANT"
@@ -416,6 +421,7 @@
         "countries": [
           "FRA"
         ],
+        "countriesNote": "",
         "watch": [
           "GRANT"
         ]
@@ -471,6 +477,7 @@
         "cpvCodes": [],
         "cpvNote": "",
         "countries": [],
+        "countriesNote": "",
         "watch": [
           "GRANT"
         ]
@@ -538,6 +545,7 @@
         "countries": [
           "FRA"
         ],
+        "countriesNote": "",
         "watch": [
           "GRANT"
         ]
@@ -614,6 +622,7 @@
         "countries": [
           "FRA"
         ],
+        "countriesNote": "",
         "watch": [
           "GRANT",
           "TENDER_RFP"
@@ -694,6 +703,7 @@
         "countries": [
           "FRA"
         ],
+        "countriesNote": "",
         "watch": [
           "GRANT",
           "VC_INVESTOR"
@@ -750,6 +760,7 @@
         "cpvCodes": [],
         "cpvNote": "",
         "countries": [],
+        "countriesNote": "",
         "watch": [
           "GRANT"
         ]
@@ -811,8 +822,16 @@
         ],
         "cpvNote": "CPV codes refined from division level (72000000 = all IT services) to the specific services this project could deliver or would seek: feasibility studies, feasibility study, evaluation consultancy, sporting services. A wrong code returns nothing rather than the wrong thing, and the per-project counts in the run report make that visible immediately — verify against the official CPV nomenclature on the first real run.",
         "countries": [
-          "FRA"
+          "ESP",
+          "FRA",
+          "ITA",
+          "PRT",
+          "BEL",
+          "NLD",
+          "DEU",
+          "SWE"
         ],
+        "countriesNote": "EMEA was the stated mandate and the query asked France only. Spain is the largest padel market in the world by courts and by public sports investment, and it was not being queried at all; Italy and Portugal are the next two. TED covers the EU/EEA, so this is the whole of the mandate TED can serve. The non-EU half of EMEA — the Gulf and Africa — is not on TED at any price: it is covered by the UNGM, World Bank / AfDB / EBRD and UAE federal procurement source entries, and by the scout, not by widening this list with countries TED does not carry.",
         "watch": [
           "TENDER_RFP"
         ]
@@ -873,6 +892,7 @@
         "countries": [
           "FRA"
         ],
+        "countriesNote": "",
         "watch": [
           "GRANT"
         ]
@@ -947,6 +967,7 @@
           "LUX",
           "BEL"
         ],
+        "countriesNote": "",
         "watch": [
           "GRANT",
           "TENDER_RFP"
@@ -1026,6 +1047,7 @@
         "countries": [
           "FRA"
         ],
+        "countriesNote": "",
         "watch": [
           "GRANT",
           "TENDER_RFP"
@@ -1120,6 +1142,7 @@
           "LUX",
           "BEL"
         ],
+        "countriesNote": "",
         "watch": [
           "TENDER_RFP",
           "GRANT"

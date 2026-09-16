@@ -33,7 +33,16 @@ discovery:
   cpvCodes: ["71241000", "79314000", "79419000", "92600000"]
   cpvNote: >-
     CPV codes refined from division level (72000000 = all IT services) to the specific services this project could deliver or would seek: feasibility studies, feasibility study, evaluation consultancy, sporting services. A wrong code returns nothing rather than the wrong thing, and the per-project counts in the run report make that visible immediately — verify against the official CPV nomenclature on the first real run.
-  countries: ["FRA"]
+  countries: ["ESP", "FRA", "ITA", "PRT", "BEL", "NLD", "DEU", "SWE"]
+  countriesNote: >-
+    EMEA was the stated mandate and the query asked France only. Spain is the
+    largest padel market in the world by courts and by public sports investment,
+    and it was not being queried at all; Italy and Portugal are the next two.
+    TED covers the EU/EEA, so this is the whole of the mandate TED can serve.
+    The non-EU half of EMEA — the Gulf and Africa — is not on TED at any price:
+    it is covered by the UNGM, World Bank / AfDB / EBRD and UAE federal
+    procurement source entries, and by the scout, not by widening this list
+    with countries TED does not carry.
   watch: ["TENDER_RFP"]
 profileReview:
   status: DRAFT
