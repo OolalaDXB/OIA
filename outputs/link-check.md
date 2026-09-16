@@ -2,8 +2,8 @@
 
 Checked 62 distinct URL(s).
 
-- resolving: 51
-- **broken: 4**
+- resolving: 52
+- **broken: 3**
 - refused us (not broken): 7
 - inconclusive: 0
 
@@ -11,8 +11,6 @@ Checked 62 distinct URL(s).
 
 - **project live-great-foundation** — DEAD · HTTP 404 — the page is gone
   - https://livegreatfoundation.netlify.app
-- **project thestudio-mt** — UNREACHABLE · fetch failed
-  - https://thestudiomt.com
 - **source adio** — UNREACHABLE · fetch failed
   - https://www.investabudhabi.ae
 - **opportunity startup-qatar-qdb-start (application)** — UNREACHABLE · fetch failed
@@ -40,6 +38,8 @@ Checked 62 distinct URL(s).
   - https://pandamood.com
 - **project sillon** — now redirects to https://www.sillon.me/
   - https://sillon.me
+- **project thestudio-mt** — now redirects to https://www.thestudio.mt/
+  - https://thestudio.mt
 - **source acquire** — now redirects to https://acquire.com/
   - https://acquire.com
 - **source aides-territoires** — now redirects to https://aides-territoires.beta.gouv.fr/

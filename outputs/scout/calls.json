@@ -1,0 +1,104 @@
+{
+  "generatedAt": "2026-09-16T17:35:22.419Z",
+  "found": [],
+  "perSource": [
+    {
+      "id": "adio",
+      "status": "ERROR",
+      "kept": 0,
+      "dropped": 0,
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.investabudhabi.ae/\nCall log:\n  - navigating to \"https://www.investabudhabi.ae/\", waiting until \"domcontentloaded\"\n"
+    },
+    {
+      "id": "aides-territoires",
+      "status": "OK",
+      "kept": 0,
+      "dropped": 0,
+      "note": ""
+    },
+    {
+      "id": "boamp",
+      "status": "OK",
+      "kept": 0,
+      "dropped": 0,
+      "note": ""
+    },
+    {
+      "id": "bpifrance",
+      "status": "OK",
+      "kept": 0,
+      "dropped": 0,
+      "note": ""
+    },
+    {
+      "id": "cir-cii-jei",
+      "status": "OK",
+      "kept": 0,
+      "dropped": 0,
+      "note": ""
+    },
+    {
+      "id": "eu-funding-tenders",
+      "status": "ERROR",
+      "kept": 0,
+      "dropped": 0,
+      "note": "page.evaluate: TypeError: h.indexOf is not a function\n    at eval (eval at evaluate (:311:30), <anonymous>:1:81)\n    at Array.filter (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:67)\n    at eval (<anonymous>)\n    at UtilityScript.evaluate (<anonymous>:311:30)\n    at UtilityScr"
+    },
+    {
+      "id": "flippa",
+      "status": "OK",
+      "kept": 0,
+      "dropped": 0,
+      "note": ""
+    },
+    {
+      "id": "france-2030-ademe",
+      "status": "OK",
+      "kept": 0,
+      "dropped": 0,
+      "note": ""
+    },
+    {
+      "id": "hub71",
+      "status": "OK",
+      "kept": 0,
+      "dropped": 0,
+      "note": ""
+    },
+    {
+      "id": "region-bretagne",
+      "status": "OK",
+      "kept": 0,
+      "dropped": 0,
+      "note": ""
+    },
+    {
+      "id": "uae-federal-procurement",
+      "status": "EMPTY_PAGE",
+      "kept": 0,
+      "dropped": 0,
+      "note": "the page rendered almost no text"
+    },
+    {
+      "id": "uk-find-a-tender",
+      "status": "OK",
+      "kept": 0,
+      "dropped": 0,
+      "note": ""
+    },
+    {
+      "id": "ungm",
+      "status": "OK",
+      "kept": 0,
+      "dropped": 0,
+      "note": ""
+    },
+    {
+      "id": "worldbank-afdb-ebrd",
+      "status": "OK",
+      "kept": 0,
+      "dropped": 0,
+      "note": ""
+    }
+  ]
+}
