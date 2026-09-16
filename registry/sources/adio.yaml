@@ -8,9 +8,9 @@ operator: "ADIO"
 kinds: ["GRANT", "EQUITY"]
 geographies: ["AE", "GCC"]
 forProjects: ["bawaba", "myoolala"]
-url: "https://www.investabudhabi.ae"
+url: "https://adio.ae"
 urlVerified: false
-lastUrlCheck: "2026-09-16"
+lastUrlCheck: ""
 status: DECLARED
 access:
   mode: MANUAL
@@ -19,3 +19,6 @@ notes: >-
   Innovation and investment incentives for companies establishing in Abu Dhabi.
   Relevant through Oolala Next FZ-LLC — the entity route matters here more than
   the call itself.
+  investabudhabi.ae does not resolve in DNS — the scout's first real attempt
+  failed with ERR_NAME_NOT_RESOLVED, not with a refusal. Replaced with adio.ae
+  and set back to unverified so the link checker has to confirm it.

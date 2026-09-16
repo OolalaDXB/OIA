@@ -83,17 +83,23 @@ async function readPage(browser: Browser, url: string): Promise<ScoutPage> {
   const page = await context.newPage();
   try {
     await page.goto(url, { waitUntil: "domcontentloaded", timeout: 45_000 });
-    // Aid portals commonly render their list client-side; give it a beat, but
-    // never block the whole run on one slow site.
-    await page.waitForTimeout(2500);
+    // Aid portals are overwhelmingly client-rendered: aides-territoires is a
+    // React app, and several regional sites paint their list after an XHR. Wait
+    // for the network to settle rather than guessing at a delay, but never let
+    // one slow site hold the run.
+    await page.waitForLoadState("networkidle", { timeout: 20_000 }).catch(() => {});
+    await page.waitForTimeout(1500);
     // These two callbacks are serialised and run inside the browser, where the
     // DOM exists. This app's tsconfig has no "dom" lib and should not gain one
     // for two lines, so the browser globals are reached dynamically.
     const text = await page.evaluate(
       "document.body ? document.body.innerText : ''",
     ) as string;
+    // `a.href` on an SVG anchor is an SVGAnimatedString, not a string, and
+    // calling indexOf on it threw — losing every link on the page and with it
+    // the entire anchor guard. Coerce first, then test.
     const links = (await page.evaluate(
-      "Array.from(document.querySelectorAll('a[href]')).map(a => a.href).filter(h => h.indexOf('http') === 0)",
+      "Array.from(document.querySelectorAll('a[href]')).map(function(a){ return String(a.href || ''); }).filter(function(h){ return h.slice(0,4) === 'http'; })",
     )) as string[];
     return { url, text, links: [...new Set(links)] };
   } finally {
@@ -173,16 +179,23 @@ async function main() {
   });
 
   const found: Array<ScoutedCall & { sourceId: string; contentHash: string; facts: MaterialFact[] }> = [];
-  const perSource: Array<{ id: string; status: string; kept: number; dropped: number; note: string }> = [];
+  const perSource: Array<{ id: string; status: string; kept: number; dropped: number; note: string; chars?: number; links?: number }> = [];
 
   try {
     for (const source of sources) {
       try {
         const page = await readPage(browser, source.url);
         const contentHash = createHash("sha256").update(page.text, "utf8").digest("hex");
+        // Keep exactly what the model was shown. When a source returns nothing,
+        // the question is always "was the page empty, or did the model decline?"
+        // — and that is answerable only by looking at what it saw.
+        mkdirSync(join(outDir, "pages"), { recursive: true });
+        writeFileSync(join(outDir, "pages", `${source.id}.txt`), `${page.url}\n\n${page.text}`, "utf8");
+        writeFileSync(join(outDir, "pages", `${source.id}.links.txt`), page.links.join("\n"), "utf8");
+        console.log(`[${source.id}] ${page.text.length} chars, ${page.links.length} link(s)`);
 
         if (page.text.trim().length < 200) {
-          perSource.push({ id: source.id, status: "EMPTY_PAGE", kept: 0, dropped: 0, note: "the page rendered almost no text" });
+          perSource.push({ id: source.id, status: "EMPTY_PAGE", kept: 0, dropped: 0, note: "the page rendered almost no text", chars: page.text.length, links: page.links.length });
           console.warn(`[${source.id}] rendered ${page.text.length} chars — skipping rather than guessing`);
           continue;
         }
@@ -209,7 +222,7 @@ async function main() {
             facts: factsFor(call, `scout-${source.id}-${contentHash.slice(0, 12)}`, model),
           });
         }
-        perSource.push({ id: source.id, status: "OK", kept: kept.length, dropped: dropped.length, note: data.note });
+        perSource.push({ id: source.id, status: "OK", kept: kept.length, dropped: dropped.length, note: data.note, chars: page.text.length, links: page.links.length });
         console.log(`[${source.id}] ${kept.length} call(s) kept, ${dropped.length} dropped`);
       } catch (err) {
         const message = err instanceof Error ? err.message : String(err);
@@ -232,7 +245,12 @@ async function main() {
     `- model calls: ${spent.calls} · tokens in/out: ${spent.inputTokens}/${spent.outputTokens}`,
     "",
     "## Per source",
-    ...perSource.map((p) => `- **${p.id}** — ${p.status} · ${p.kept} kept, ${p.dropped} dropped${p.note ? ` — ${p.note}` : ""}`),
+    ...perSource.map(
+      (p) =>
+        `- **${p.id}** — ${p.status} · ${p.kept} kept, ${p.dropped} dropped` +
+        (p.chars !== undefined ? ` · page: ${p.chars} chars, ${p.links} link(s)` : "") +
+        (p.note ? ` — ${p.note}` : ""),
+    ),
     "",
     "## Calls",
     ...found.map(
