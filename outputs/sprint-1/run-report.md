@@ -23,10 +23,10 @@
   - query: `classification-cpv IN (72212517 72230000 72267000 72413000 79421000 72224000) AND buyer-country IN (FRA LUX BEL) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
 
 - unique notices across projects: 482
-- matchable text per record (the S2 measure): median 329 characters over 24 record(s)
+- matchable text per record (the S2 measure): median 1599 characters over 25 record(s)
 - candidates processed (cap 25): 25
-- qualified at MANUAL_REVIEW_REQUIRED: 24
-- notice-page fetch failures: 1
+- qualified at MANUAL_REVIEW_REQUIRED: 25
+- notice-page fetch failures: 0
 
 ## Candidates (each with official source URL)
 - **422623-2026** — France – Structural engineering consultancy services – Accord-cadre d'Assistance Technique à la Maîtrise d'Ouvrage (ATMO) pour le CHU de Strasbourg (HUS)
@@ -40,7 +40,7 @@
 - **427373-2026** — Germany – IT services: consulting, software development, Internet and support – Rahmenvereinbarung über Externe Unterstützungsleistungen im Bereich IT-Infrastruktur und Endnutzer
   - source: https://ted.europa.eu/en/notice/427373-2026/html
   - discovered for: bawaba
-  - verification: SOURCE_UNAVAILABLE · live fetch: SOURCE_UNAVAILABLE
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
 - **428975-2026** — Germany – Health and safety services – Landkreis Northeim - sicherheitstechnische und brandschutzrechtliche Betreuung
   - source: https://ted.europa.eu/en/notice/428975-2026/html
   - discovered for: bawaba

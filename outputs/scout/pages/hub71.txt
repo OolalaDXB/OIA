@@ -149,13 +149,13 @@ nationalities
 sectors
 SOME OF OUR STARTUPS:
 
-Redefining the work-life experience by making automated HR, payroll, employee benefits and insurance a possibility for all businesses in UAE.
+Dapio Tap to Pay transforms the way you get paid
 
-Lune is an AI-driven engagement and hyper-personalization platform for banks, built on insights from over 1 billion transactions. Our Transaction Enrichment API transforms raw transaction data into actionable insights, powering our core products: Enrichment, Personal Finance Engagement (PFE) SDK, Insights Dashboard, and Smart Nudges. (Supports Arabic transliteration)
-
-Making freight transactions automated, globally
+A community-based platform in outer space with blockchain technology
 
 Mashvisor is a platform that combines all services needed for real estate investing, cutting three months’ worth of research down to only 15 minutes.
+
+Algocyte is the first Self-Monitoring Blood Count home device based on AI
 
 ALL STARTUPS
 Our community says
