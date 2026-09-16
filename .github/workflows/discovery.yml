@@ -70,6 +70,21 @@ jobs:
           say SUPABASE_SERVICE_ROLE_KEY "$SUPABASE_SERVICE_ROLE_KEY"
           if [ -z "$MISTRAL_API_KEY" ]; then
             echo "::warning::MISTRAL_API_KEY is not visible to this job. It must be a REPOSITORY secret under Settings → Secrets and variables → **Actions** (not the Dependabot or Codespaces tab), spelled exactly MISTRAL_API_KEY."
+          else
+            # A present key is not a working key. An expired one costs the scout
+            # AND the analyst their whole run, each failing separately and late,
+            # and it already did: a key created and expired the same day burned
+            # several runs before the reason surfaced. One cheap call at the top
+            # turns that into a line you read before anything else runs.
+            code=$(curl -s -o /tmp/mistral-check.json -w "%{http_code}" \
+              -H "Authorization: Bearer $MISTRAL_API_KEY" \
+              https://api.mistral.ai/v1/models || echo 000)
+            if [ "$code" = "200" ]; then
+              echo "  MISTRAL_API_KEY: works (HTTP 200)"
+            else
+              echo "::error::MISTRAL_API_KEY is set but REJECTED by Mistral (HTTP $code): $(head -c 200 /tmp/mistral-check.json)"
+              echo "::error::The agents will find nothing this run. Create a new key at console.mistral.ai — check its EXPIRATION DATE, which is what broke the last one — and update the secret."
+            fi
           fi
 
       # Searches asked for from the console. Claimed here (QUEUED -> RUNNING) so
