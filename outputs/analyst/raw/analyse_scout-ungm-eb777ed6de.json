@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Consultancy to support the development of a Framework of Action on Skills for a Just Energy Transition through Social Dialogue in **Mpumalanga and the Eastern Cape**",
+    "reason": {
+      "en": "The opportunity explicitly targets activities in Mpumalanga and the Eastern Cape, which are provinces in South Africa. TheStudio MT operates in France, the European Union, the United Arab Emirates, and the Gulf Cooperation Council countries, with no indication of presence or operations in South Africa.",
+      "fr": "L'opportunité cible explicitement des activités dans le Mpumalanga et l'Eastern Cape, qui sont des provinces d'Afrique du Sud. TheStudio MT opère en France, dans l'Union européenne, aux Émirats arabes unis et dans les pays du Conseil de coopération du Golfe, sans indication de présence ou d'opérations en Afrique du Sud."
+    },
+    "nextAction": {
+      "en": "Confirm whether TheStudio MT has a legal entity or operational presence in South Africa that could qualify for this opportunity.",
+      "fr": "Vérifier si TheStudio MT dispose d'une entité légale ou d'une présence opérationnelle en Afrique du Sud qui pourrait être éligible pour cette opportunité."
+    }
+  }
+}

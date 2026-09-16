@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Le FTJ a été créé pour accompagner la transition énergétique et industrielle des territoires concernés par de fortes émissions de CO2 dans la transition vers une économie neutre en carbone, conformément aux objectifs de l’Union européenne dans le cadre de l’accord de Paris.",
+    "reason": {
+      "en": "The funding opportunity targets territories with high CO2 emissions for energy and industrial transition. The organisation's activities (heritage, culture, tourism) do not align with the scope of industrial or energy transition.",
+      "fr": "L'opportunité de financement cible les territoires à fortes émissions de CO2 pour une transition énergétique et industrielle. Les activités de l'organisation (patrimoine, culture, tourisme) ne correspondent pas à l'objectif de transition industrielle ou énergétique."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that support heritage, culture, or tourism projects.",
+      "fr": "Consulter d'autres opportunités de financement qui soutiennent des projets liés au patrimoine, à la culture ou au tourisme."
+    }
+  }
+}

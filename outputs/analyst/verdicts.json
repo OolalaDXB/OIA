@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T20:30:55.738Z",
+  "generatedAt": "2026-09-16T21:18:04.735Z",
   "results": [
     {
       "recordId": "505248-2026",
@@ -7,20 +7,20 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le texte extrait de l'opportunité ne précise pas qui peut postuler ni les critères d'éligibilité pour les candidats. Il n'y a aucune information permettant de déterminer si BAWABA répond aux exigences.",
-          "en": "The extracted text of the opportunity does not specify who may apply or any eligibility criteria for applicants. There is no information to determine if BAWABA meets the requirements."
+          "fr": "Le texte extrait de l'opportunité ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité tels que la forme juridique, la localisation ou le secteur d'activité.",
+          "en": "The extracted text of the opportunity does not specify which types of organisations may apply. There is no mention of eligibility criteria such as legal form, location, or sector."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Contacter l'acheteur (IEDOM) pour demander les documents complets de l'appel d'offres et confirmer les critères d'éligibilité.",
-          "en": "Contact the buyer (IEDOM) to request the full tender documents and confirm eligibility criteria."
+          "fr": "Consulter l'avis complet de l'appel d'offres (lien fourni) pour la section sur les exigences d'éligibilité.",
+          "en": "Check the full tender notice (link provided) for the section on eligibility requirements."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:28:32.160Z"
+      "at": "2026-09-16T21:12:45.350Z"
     },
     {
       "recordId": "506438-2026",
@@ -28,20 +28,20 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, la localisation ou le secteur des candidats.",
-          "en": "The extracted text does not specify which types of organisations may apply. There is no mention of eligibility criteria regarding the legal form, location, or sector of applicants."
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, la localisation ou le secteur des candidats.",
+          "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria regarding the legal form, location, or sector of applicants."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni pour trouver la section sur les exigences d'éligibilité.",
-          "en": "Check the full tender notice at the provided link to find the section on eligibility requirements."
+          "fr": "Demander les documents complets de l'appel d'offres à la SNCF pour identifier les critères d'éligibilité des candidats.",
+          "en": "Request the full tender documents from SNCF to identify the eligibility criteria for applicants."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:28:35.213Z"
+      "at": "2026-09-16T21:12:48.184Z"
     },
     {
       "recordId": "502549-2026",
@@ -49,20 +49,20 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité relatifs à la structure juridique, au secteur ou à la localisation géographique du candidat.",
-          "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria related to the applicant's legal structure, sector, or geographic location."
+          "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles. Il n'y a aucune mention de la forme juridique, des restrictions géographiques ou d'autres critères qui confirmeraient ou excluraient BAWABA.",
+          "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of legal form, geographic restrictions, or other criteria that would confirm or exclude BAWABA."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni pour identifier les critères d'éligibilité des candidats.",
-          "en": "Check the full tender notice at the provided link to identify the eligibility criteria for applicants."
+          "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni pour trouver la section sur les critères d'éligibilité.",
+          "en": "Check the full tender notice at the provided link to find the section on eligibility criteria."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:28:38.005Z"
+      "at": "2026-09-16T21:12:51.212Z"
     },
     {
       "recordId": "500358-2026",
@@ -70,20 +70,20 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles pour cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, le secteur ou la localisation géographique des candidats.",
-          "en": "The extracted text does not specify which types of organisations are eligible to apply for this tender. There is no mention of eligibility criteria regarding the legal form, sector, or geographic location of applicants."
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, le secteur ou la localisation géographique du candidat.",
+          "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria related to the applicant's legal form, sector, or geographic location."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Contacter l'IEOM ou consulter les documents complets de l'appel d'offres pour obtenir les critères d'éligibilité des candidats.",
-          "en": "Contact the IEOM or consult the full tender documents to obtain the eligibility criteria for applicants."
+          "fr": "Contacter l'IEOM (Institut d'émission Outre-mer) pour demander le dossier complet de l'appel d'offres et confirmer les critères d'éligibilité des candidats.",
+          "en": "Contact the IEOM (Institut d'émission Outre-mer) to request the full tender documentation and confirm the eligibility criteria for applicants."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:28:40.943Z"
+      "at": "2026-09-16T21:12:54.739Z"
     },
     {
       "recordId": "500966-2026",
@@ -104,7 +104,7 @@
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:28:43.649Z"
+      "at": "2026-09-16T21:12:58.708Z"
     },
     {
       "recordId": "494531-2026",
@@ -118,14 +118,14 @@
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Contacter directement le Landkreis Northeim pour demander les documents complets de l'appel d'offres et confirmer les critères d'éligibilité.",
-          "en": "Contact Landkreis Northeim directly to request the full tender documents and confirm eligibility requirements."
+          "fr": "Contacter directement le Landkreis Northeim pour demander la documentation complète de l'appel d'offres qui précise les critères d'éligibilité.",
+          "en": "Contact Landkreis Northeim directly to ask for the full tender documentation that outlines the eligibility criteria."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:28:47.666Z"
+      "at": "2026-09-16T21:13:01.764Z"
     },
     {
       "recordId": "496268-2026",
@@ -133,8 +133,8 @@
       "verdict": {
         "verdict": "NOT_ELIGIBLE",
         "reason": {
-          "fr": "L'opportunité exige explicitement des services fournis par du personnel médical pour la surveillance en matière de santé et de sécurité au travail. BAWABA opère dans les secteurs de l'IA, des données, du numérique, de la cybersécurité et des logiciels, sans indication de fournir des services médicaux ou de santé au travail.",
-          "en": "The opportunity explicitly requires services provided by medical personnel for occupational health and safety supervision. BAWABA operates in AI, data, digital, cybersecurity, and software sectors, with no indication of providing medical or occupational health services."
+          "fr": "L'opportunité exige explicitement des services fournis par du personnel médical pour la médecine du travail et la sécurité technique. BAWABA opère dans les secteurs de l'IA, des données, du numérique, de la cybersécurité et des logiciels, sans indication de fournir des services médicaux ou de santé au travail.",
+          "en": "The opportunity explicitly requires services provided by medical personnel for occupational health and safety. BAWABA operates in AI, data, digital, cybersecurity, and software sectors, with no indication of providing medical or occupational health services."
         },
         "entity": "",
         "missing": [],
@@ -149,7 +149,7 @@
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:28:51.136Z"
+      "at": "2026-09-16T21:13:05.713Z"
     },
     {
       "recordId": "491518-2026",
@@ -157,20 +157,20 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le texte de l'opportunité ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, le secteur ou la localisation géographique du demandeur.",
-          "en": "The opportunity text does not specify which types of organisations may apply. There is no mention of eligibility criteria related to the applicant's legal form, sector, or geographic location."
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, le secteur ou la localisation géographique du demandeur.",
+          "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria related to the applicant's legal form, sector, or geographic location."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Contacter BEW Berliner Energie und Wärme GmbH pour demander les documents complets de l'appel d'offres qui décrivent qui peut postuler.",
-          "en": "Contact BEW Berliner Energie und Wärme GmbH to ask for the full tender documents that describe who may apply."
+          "fr": "Contacter BEW Berliner Energie und Wärme GmbH ou consulter les documents complets de l'appel d'offres pour obtenir les critères d'éligibilité.",
+          "en": "Contact BEW Berliner Energie und Wärme GmbH or consult the full tender documents to obtain the eligibility criteria."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:28:55.137Z"
+      "at": "2026-09-16T21:13:08.600Z"
     },
     {
       "recordId": "480676-2026",
@@ -178,20 +178,20 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le texte extrait ne précise pas les types d'organisations éligibles pour cet appel d'offres. Il n'y a aucune mention du statut juridique requis, des certifications ou des qualifications spécifiques au secteur.",
-          "en": "The extracted text does not specify the types of organisations eligible to apply for this tender. There is no mention of required legal status, certifications, or sector-specific qualifications."
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent répondre à cet appel d'offres. Aucun critère d'éligibilité concernant la forme juridique, le secteur ou les activités du candidat n'est mentionné.",
+          "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria related to the applicant's legal form, sector, or activities."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Consulter les documents complets de l'appel d'offres sur le lien fourni pour identifier les critères d'éligibilité des candidats.",
-          "en": "Check the full tender documents on the provided link to identify eligibility criteria for applicants."
+          "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni pour identifier les critères d'éligibilité des candidats.",
+          "en": "Check the full tender notice at the provided link to identify the eligibility requirements for applicants."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:28:57.841Z"
+      "at": "2026-09-16T21:13:11.516Z"
     },
     {
       "recordId": "478020-2026",
@@ -199,20 +199,20 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles pour postuler. Il n'y a aucune mention de restrictions ou d'autorisations concernant les candidats.",
-          "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of restrictions or permitted applicants."
+          "fr": "Le texte extrait ne précise pas qui peut postuler à cet appel d'offres. Il n'est fait aucune mention des candidats éligibles, tels que les entreprises, les entités publiques ou les groupements.",
+          "en": "The extracted text does not specify who may apply for this tender. There is no mention of eligible applicants, such as companies, public entities, or consortia."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Contacter Seine Normandie Agglomération pour demander quels types d'organisations peuvent soumettre une offre pour cet appel d'offres.",
-          "en": "Contact Seine Normandie Agglomération to ask who may submit a bid for this tender."
+          "fr": "Contacter Seine Normandie Agglomération pour clarifier les critères d'éligibilité des candidats.",
+          "en": "Contact Seine Normandie Agglomération to clarify the eligibility criteria for applicants."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:29:00.548Z"
+      "at": "2026-09-16T21:13:13.973Z"
     },
     {
       "recordId": "471799-2026",
@@ -220,20 +220,20 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent répondre à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité relatifs à la forme juridique, au secteur d'activité ou à la localisation géographique des candidats.",
-          "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria related to the legal form, sector, or geographic location of applicants."
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, le secteur ou la localisation du candidat.",
+          "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria related to the applicant's legal form, sector, or location."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Contacter l'acheteur (Inserm Délégation Régionale Paris Ile de France Sud) pour demander le dossier complet de l'appel d'offres et confirmer les critères d'éligibilité.",
-          "en": "Contact the buyer (Inserm Délégation Régionale Paris Ile de France Sud) to request the full tender documentation and confirm eligibility requirements."
+          "fr": "Contacter l'acheteur (Inserm Délégation Régionale Paris Ile de France Sud) pour demander les documents complets de l'appel d'offres et confirmer les critères d'éligibilité.",
+          "en": "Contact the buyer (Inserm Délégation Régionale Paris Ile de France Sud) to request the full tender documents and confirm eligibility requirements."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:29:03.517Z"
+      "at": "2026-09-16T21:13:16.991Z"
     },
     {
       "recordId": "466007-2026",
@@ -241,20 +241,20 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le texte extrait ne précise pas qui peut postuler à cet appel d'offres. Il n'y a aucune mention des candidats éligibles, des formes juridiques ou des restrictions géographiques qui confirmeraient ou excluraient BAWABA.",
-          "en": "The extracted text does not specify who may apply for this tender. There is no mention of eligible applicants, legal forms, or geographic restrictions that would confirm or exclude BAWABA."
+          "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles. Il n'y a aucune mention de la forme juridique, de la localisation géographique ou d'autres critères qui confirmeraient ou excluraient BAWABA.",
+          "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of legal form, geographic location, or other criteria that would confirm or exclude BAWABA."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Demander les documents complets de l'appel d'offres à M.R.L. MAISON DE RETRAITE DE LA LOIRE pour confirmer les critères d'éligibilité.",
-          "en": "Request the full tender documents from M.R.L. MAISON DE RETRAITE DE LA LOIRE to confirm eligibility criteria."
+          "fr": "Contacter l'acheteur (M.R.L. MAISON DE RETRAITE DE LA LOIRE) pour demander les documents complets de l'appel d'offres et confirmer les critères d'éligibilité.",
+          "en": "Contact the buyer (M.R.L. MAISON DE RETRAITE DE LA LOIRE) to ask for the full tender documents and confirm eligibility requirements."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:29:06.447Z"
+      "at": "2026-09-16T21:13:20.031Z"
     },
     {
       "recordId": "450738-2026",
@@ -262,20 +262,20 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité concernant la structure juridique, le secteur ou la localisation géographique du demandeur.",
-          "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria related to the applicant's legal structure, sector, or geographic location."
+          "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles pour cet appel d'offres. Il n'y a aucune mention de la forme juridique, des restrictions géographiques ou d'autres critères qui confirmeraient ou excluraient BAWABA.",
+          "en": "The extracted text does not specify which types of organisations are eligible to apply for this tender. There is no mention of legal form, geographic restrictions, or other criteria that would confirm or exclude BAWABA."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni pour trouver la section sur les exigences d'éligibilité.",
-          "en": "Check the full tender notice at the provided link to find the section on eligibility requirements."
+          "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni pour identifier les critères d'éligibilité des candidats.",
+          "en": "Check the full tender notice at the provided link to identify the eligibility criteria for applicants."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:29:09.690Z"
+      "at": "2026-09-16T21:13:23.332Z"
     },
     {
       "recordId": "433728-2026",
@@ -289,14 +289,14 @@
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Consulter l'avis complet d'appel d'offres au lien fourni pour identifier les critères d'éligibilité des candidats.",
-          "en": "Check the full tender notice at the provided link to identify the eligibility criteria for applicants."
+          "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni pour trouver la section sur les critères d'éligibilité.",
+          "en": "Check the full tender notice at the provided link to find the section on eligibility criteria."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:29:12.566Z"
+      "at": "2026-09-16T21:13:26.926Z"
     },
     {
       "recordId": "435056-2026",
@@ -304,44 +304,23 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le texte extrait de l'opportunité ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité pour les candidats, tels que la forme juridique, la localisation ou le secteur d'activité.",
-          "en": "The extracted text of the opportunity does not specify which types of organisations may apply. There is no mention of eligibility criteria for applicants, such as legal form, location, or sector."
+          "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles. Il n'y a aucune mention de la forme juridique, des restrictions géographiques ou d'autres critères qui confirmeraient ou excluraient BAWABA.",
+          "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of legal form, geographic restrictions, or other criteria that would confirm or exclude BAWABA."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Contacter l'acheteur (Das Saarland, IT-Dienstleistungszentrum) pour demander les documents complets de l'appel d'offres et confirmer les critères d'éligibilité.",
-          "en": "Contact the buyer (Das Saarland, IT-Dienstleistungszentrum) to request the full tender documents and confirm eligibility requirements."
+          "fr": "Contacter l'acheteur (IT-Dienstleistungszentrum Saarland) pour demander les documents complets de l'appel d'offres et clarifier les critères d'éligibilité.",
+          "en": "Contact the buyer (IT-Dienstleistungszentrum Saarland) to ask for the full tender documents and clarify the eligibility criteria."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:29:15.922Z"
+      "at": "2026-09-16T21:13:31.135Z"
     },
     {
       "recordId": "429989-2026",
-      "projectSlug": "bawaba",
-      "verdict": {
-        "verdict": "NEEDS_INFO",
-        "reason": {
-          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité tels que la forme juridique, la localisation ou les exigences sectorielles.",
-          "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria such as legal form, location, or sector requirements."
-        },
-        "entity": "",
-        "missing": [],
-        "nextAction": {
-          "fr": "Contacter directement terranets bw GmbH pour demander la documentation complète de l'appel d'offres et confirmer les critères d'éligibilité.",
-          "en": "Contact terranets bw GmbH directly to request the full tender documentation and confirm eligibility requirements."
-        },
-        "citations": []
-      },
-      "droppedCitations": 0,
-      "model": "mistral-large-latest",
-      "at": "2026-09-16T20:29:18.612Z"
-    },
-    {
-      "recordId": "427373-2026",
       "projectSlug": "bawaba",
       "verdict": {
         "verdict": "NEEDS_INFO",
@@ -352,14 +331,35 @@
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Demander la documentation complète de l'appel d'offres auprès de l'Investitionsbank Schleswig-Holstein pour confirmer les critères d'éligibilité.",
-          "en": "Request the full tender documentation from Investitionsbank Schleswig-Holstein to confirm eligibility requirements."
+          "fr": "Contacter terranets bw GmbH pour demander la documentation complète de l'appel d'offres et confirmer les critères d'éligibilité.",
+          "en": "Contact terranets bw GmbH to request the full tender documentation and confirm eligibility requirements."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:29:21.253Z"
+      "at": "2026-09-16T21:13:34.786Z"
+    },
+    {
+      "recordId": "427373-2026",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, la localisation ou le secteur des candidats.",
+          "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria regarding the legal form, location, or sector of applicants."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter l'avis complet de l'appel d'offres (lien fourni) pour la section sur les conditions de participation ou 'Teilnahmebedingungen'.",
+          "en": "Check the full tender notice (link provided) for the section on eligibility requirements or 'Teilnahmebedingungen'."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:13:37.956Z"
     },
     {
       "recordId": "422623-2026",
@@ -367,20 +367,20 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le verdict initial ne citait rien de vérifiable dans le document — ramené à « à vérifier ».",
-          "en": "The original verdict cited nothing checkable in the document — downgraded to 'needs info'."
+          "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles. Il n'y a aucune mention de la forme juridique, du secteur ou d'autres critères qui confirmeraient ou excluraient BAWABA.",
+          "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of legal form, sector, or other criteria that would confirm or exclude BAWABA."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Examiner d'autres opportunités de financement ciblant spécifiquement les secteurs de l'IA, des données ou du numérique.",
-          "en": "Review other funding opportunities that specifically target AI, data, or digital sectors."
+          "fr": "Contacter l'acheteur (HUS-Etablissement support du GHT 10) pour demander les documents complets de l'appel d'offres et confirmer les critères d'éligibilité.",
+          "en": "Contact the buyer (HUS-Etablissement support du GHT 10) to ask for the full tender documents and confirm eligibility requirements."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:29:27.528Z"
+      "at": "2026-09-16T21:13:41.328Z"
     },
     {
       "recordId": "422920-2026",
@@ -388,23 +388,44 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le texte extrait ne précise pas qui peut postuler à cet appel d'offres. Il n'y a aucune mention des candidats éligibles, des formes juridiques ou des restrictions géographiques qui confirmeraient ou excluraient BAWABA.",
-          "en": "The extracted text does not specify who may apply for this tender. There is no mention of eligible applicants, legal forms, or geographic restrictions that would confirm or exclude BAWABA."
+          "fr": "Le texte extrait ne précise pas qui peut postuler à cet appel d'offres. Il n'y a aucune mention des candidats éligibles, tels que les entreprises, les entités juridiques ou les restrictions géographiques.",
+          "en": "The extracted text does not specify who may apply for this tender. There is no mention of eligible applicants, such as companies, legal entities, or geographic restrictions."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni (https://ted.europa.eu/en/notice/422920-2026/xml) pour identifier les critères d'éligibilité des candidats.",
-          "en": "Check the full tender notice at the provided link (https://ted.europa.eu/en/notice/422920-2026/xml) to identify the eligibility criteria for applicants."
+          "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni pour identifier les critères d'éligibilité des candidats.",
+          "en": "Check the full tender notice at the provided link to identify the eligibility criteria for applicants."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:29:30.771Z"
+      "at": "2026-09-16T21:13:44.368Z"
     },
     {
       "recordId": "scout-adio-35574470fd",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas qui peut postuler ni quels types d’organisations sont éligibles pour participer à l’Abu Dhabi Investment Forum.",
+          "en": "The extracted text does not specify who may apply or what types of organisations are eligible to participate in the Abu Dhabi Investment Forum."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Contacter directement l’ADIO pour demander quels types d’organisations (par exemple, entités souveraines, entreprises privées, startups) sont autorisés à manifester leur intérêt.",
+          "en": "Contact ADIO directly to ask which types of organisations (e.g., sovereign entities, private companies, startups) are permitted to express interest."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:13:47.795Z"
+    },
+    {
+      "recordId": "scout-adio-5a0dc0d8ec",
       "projectSlug": "bawaba",
       "verdict": {
         "verdict": "NEEDS_INFO",
@@ -415,35 +436,14 @@
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Contacter l’ADIO pour demander qui est éligible à participer au Abu Dhabi Investment Forum.",
-          "en": "Contact ADIO to ask who is eligible to participate in the Abu Dhabi Investment Forum."
+          "fr": "Contacter l’ADIO ou l’ADGM pour demander qui est éligible à participer au Abu Dhabi Investment Forum.",
+          "en": "Contact ADIO or ADGM to ask who is eligible to participate in the Abu Dhabi Investment Forum."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:29:34.149Z"
-    },
-    {
-      "recordId": "scout-adio-5a0dc0d8ec",
-      "projectSlug": "bawaba",
-      "verdict": {
-        "verdict": "NEEDS_INFO",
-        "reason": {
-          "fr": "Le texte extrait ne précise pas quels types d’organisations peuvent postuler ou manifester leur intérêt. Il décrit uniquement l’objectif et le public de l’événement.",
-          "en": "The extracted text does not specify which types of organisations may apply or manifest interest. It only describes the event's purpose and audience."
-        },
-        "entity": "",
-        "missing": [],
-        "nextAction": {
-          "fr": "Contacter l’ADIO ou l’ADGM pour demander qui peut manifester son intérêt pour l’Abu Dhabi Investment Forum.",
-          "en": "Contact ADIO or ADGM to ask who is eligible to express interest in the Abu Dhabi Investment Forum."
-        },
-        "citations": []
-      },
-      "droppedCitations": 0,
-      "model": "mistral-large-latest",
-      "at": "2026-09-16T20:29:38.071Z"
+      "at": "2026-09-16T21:13:50.911Z"
     },
     {
       "recordId": "scout-adio-873ee725b8",
@@ -451,20 +451,20 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le document ne précise pas les critères ou le processus pour recevoir une invitation. Il n'est pas clair qui peut postuler ou être invité.",
-          "en": "The document does not specify the criteria or process for receiving an invitation. It is unclear who may apply or be invited."
+          "fr": "Le verdict initial ne citait rien de vérifiable dans le document — ramené à « à vérifier ».",
+          "en": "The original verdict cited nothing checkable in the document — downgraded to 'needs info'."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Contacter ADIO pour demander comment les invitations sont émises et si BAWABA peut en faire la demande.",
-          "en": "Contact ADIO to ask how invitations are issued and whether BAWABA can request one."
+          "fr": "Vérifier si BAWABA a reçu une invitation pour participer au forum. Si ce n'est pas le cas, aucune autre action n'est possible pour cette opportunité.",
+          "en": "Confirm whether BAWABA has received an invitation to attend the forum. If not, no further action is possible for this opportunity."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:29:41.974Z"
+      "at": "2026-09-16T21:14:09.828Z"
     },
     {
       "recordId": "scout-adio-b6bef59921",
@@ -478,17 +478,84 @@
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Contacter l'ADIO ou les organisateurs de l'événement pour clarifier les critères d'éligibilité des candidats.",
-          "en": "Contact ADIO or the event organizers to clarify the eligibility criteria for applicants."
+          "fr": "Contacter l'ADIO ou les organisateurs de l'Abu Dhabi Investment Forum pour clarifier les critères d'éligibilité des candidats.",
+          "en": "Contact ADIO or the organizers of the Abu Dhabi Investment Forum to clarify the eligibility criteria for applicants."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:29:44.241Z"
+      "at": "2026-09-16T21:14:12.309Z"
     },
     {
       "recordId": "scout-aides-territoires-f5a3d1ac07",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il n'y a aucune mention des critères d'éligibilité liés au statut juridique, au secteur d'activité ou à d'autres exigences.",
+          "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria related to legal status, sector, or other requirements."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter l'appel à projets complet ou les directives officielles pour déterminer quels types d'organisations sont éligibles.",
+          "en": "Check the full call for proposals or official guidelines to determine which types of organisations are eligible to apply."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:14:15.476Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-c2e060925d",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NOT_ELIGIBLE",
+        "reason": {
+          "fr": "Le programme cible explicitement les collectivités locales et les acteurs du logement, du commerce et de l'urbanisme. Une association axée sur la randonnée patrimoniale ne correspond pas à ces catégories.",
+          "en": "The programme explicitly targets local authorities and actors in housing, commerce, and urban planning. An association focused on heritage hiking does not fall into these categories."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Vérifier s’il existe un partenariat avec une collectivité locale ou un acteur éligible qui pourrait déposer une demande au nom de l’association.",
+          "en": "Verify if there is a partnership with a local authority or an eligible actor that could apply on behalf of the association."
+        },
+        "citations": [
+          "Ce programme vise à faciliter et à soutenir le travail des collectivités locales, à inciter les acteurs du logement, du commerce et de l'urbanisme à réinvestir les centres-villes, à favoriser le maintien ou l'implantation d'activités en cœur de ville"
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:14:18.834Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-cfd6b07452",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NOT_ELIGIBLE",
+        "reason": {
+          "fr": "Le programme AGRIP soutient spécifiquement la promotion des produits agricoles, ce qui n'a aucun lien avec les secteurs du patrimoine, de la culture ou du tourisme de l'association 'Les Vieilles Pierres'.",
+          "en": "The AGRIP program specifically supports the promotion of agricultural products, which is unrelated to the heritage, culture, or tourism sectors of the organization 'Les Vieilles Pierres.'"
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Examiner d'autres opportunités de financement qui correspondent aux secteurs du patrimoine, de la culture ou du tourisme.",
+          "en": "Review other funding opportunities that align with heritage, culture, or tourism sectors."
+        },
+        "citations": [
+          "Le programme de promotion des produits agricoles (AGRIP) joue un rôle essentiel dans la concrétisation des objectifs politiques de la Commission européenne pour la période 2019-2024, en soutenant le Green Deal européen, la stratégie « Farm to Fork » et le plan européen de lutte contre le cancer."
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:14:22.279Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-ab454050d7",
       "projectSlug": "lesvieillespierres",
       "verdict": {
         "verdict": "NEEDS_INFO",
@@ -499,79 +566,14 @@
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Consulter l'appel à projets complet ou la documentation officielle du programme PIA 4 pour identifier les critères d'éligibilité des candidats.",
-          "en": "Check the full call for proposals or official documentation of the PIA 4 programme to identify the eligibility criteria for applicants."
+          "fr": "Contacter l'émetteur (beta.gouv.fr / État français) pour demander l'appel à projets officiel ou les directives d'éligibilité.",
+          "en": "Contact the issuer (beta.gouv.fr / French state) to ask for the official call for proposals or eligibility guidelines."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:29:47.661Z"
-    },
-    {
-      "recordId": "scout-aides-territoires-c2e060925d",
-      "projectSlug": "lesvieillespierres",
-      "verdict": {
-        "verdict": "NOT_ELIGIBLE",
-        "reason": {
-          "fr": "Le programme cible explicitement les collectivités locales et les acteurs du logement, du commerce et de l'urbanisme. Une association centrée sur la randonnée patrimoniale ne correspond pas à ces catégories.",
-          "en": "The program explicitly targets local authorities and actors in housing, commerce, and urban planning. An association focused on heritage hiking does not fall into these categories."
-        },
-        "entity": "",
-        "missing": [],
-        "nextAction": {
-          "fr": "Consulter d'autres opportunités de financement ouvertes spécifiquement aux associations patrimoniales ou culturelles.",
-          "en": "Review other funding opportunities specifically open to heritage or cultural associations."
-        },
-        "citations": [
-          "Ce programme vise à faciliter et à soutenir le travail des collectivités locales, à inciter les acteurs du logement, du commerce et de l'urbanisme à réinvestir les centres-villes, à favoriser le maintien ou l'implantation d'activités en cœur de ville"
-        ]
-      },
-      "droppedCitations": 0,
-      "model": "mistral-large-latest",
-      "at": "2026-09-16T20:29:51.032Z"
-    },
-    {
-      "recordId": "scout-aides-territoires-cfd6b07452",
-      "projectSlug": "lesvieillespierres",
-      "verdict": {
-        "verdict": "NEEDS_INFO",
-        "reason": {
-          "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles pour la subvention AGRIP. Il n'est pas mentionné si les associations, les entreprises ou d'autres entités juridiques peuvent postuler.",
-          "en": "The extracted text does not specify which types of organisations are eligible to apply for the AGRIP grant. There is no mention of whether associations, companies, or other legal entities can apply."
-        },
-        "entity": "",
-        "missing": [],
-        "nextAction": {
-          "fr": "Consulter la documentation complète de la subvention AGRIP ou contacter l'émetteur (beta.gouv.fr) pour confirmer si les associations patrimoniales ou culturelles sont éligibles.",
-          "en": "Check the full AGRIP grant documentation or contact the issuer (beta.gouv.fr) to confirm whether heritage or cultural associations are eligible to apply."
-        },
-        "citations": []
-      },
-      "droppedCitations": 0,
-      "model": "mistral-large-latest",
-      "at": "2026-09-16T20:30:09.692Z"
-    },
-    {
-      "recordId": "scout-aides-territoires-ab454050d7",
-      "projectSlug": "lesvieillespierres",
-      "verdict": {
-        "verdict": "NEEDS_INFO",
-        "reason": {
-          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il n'y a aucune mention des critères d'éligibilité relatifs au statut juridique, au secteur ou au type d'organisation.",
-          "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria related to legal status, sector, or organisational type."
-        },
-        "entity": "",
-        "missing": [],
-        "nextAction": {
-          "fr": "Consulter l'appel à projets officiel de Biodiversa+ ou les lignes directrices pour déterminer quels types d'organisations sont éligibles.",
-          "en": "Check the official Biodiversa+ call for proposals or guidelines to determine which types of organisations are eligible to apply."
-        },
-        "citations": []
-      },
-      "droppedCitations": 0,
-      "model": "mistral-large-latest",
-      "at": "2026-09-16T20:30:12.610Z"
+      "at": "2026-09-16T21:14:26.152Z"
     },
     {
       "recordId": "scout-aides-territoires-21a0b724a1",
@@ -579,8 +581,8 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il décrit le champ d'application du programme mais ne mentionne pas les critères d'éligibilité des candidats.",
-          "en": "The extracted text does not specify which types of organisations may apply. It describes the programme's scope but does not state eligibility criteria for applicants."
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité pour les candidats, tels que le statut juridique, le secteur ou la localisation.",
+          "en": "The extracted text does not specify which types of organisations may apply. There is no mention of eligibility criteria for applicants such as legal status, sector, or location."
         },
         "entity": "",
         "missing": [],
@@ -592,28 +594,30 @@
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:30:14.960Z"
+      "at": "2026-09-16T21:14:28.899Z"
     },
     {
       "recordId": "scout-aides-territoires-fe7ae9bfcb",
       "projectSlug": "lesvieillespierres",
       "verdict": {
-        "verdict": "NEEDS_INFO",
+        "verdict": "ELIGIBLE",
         "reason": {
-          "fr": "Le texte extrait ne précise pas quels types d’organismes peuvent postuler. Il mentionne seulement que des 'organismes' peuvent mettre en place des initiatives, sans indiquer de forme juridique ou de critère d’éligibilité.",
-          "en": "The extracted text does not specify which types of organisations may apply. It only mentions that 'organisms' can set up initiatives, but no legal form or eligibility criteria are provided."
+          "fr": "L'opportunité permet explicitement aux 'organismes' de mettre en place des initiatives en Europe, et l'organisation opère dans l'UE. Les secteurs mentionnés (patrimoine, culture) correspondent à la portée large des activités listées.",
+          "en": "The opportunity explicitly allows 'organismes' (organizations) to implement initiatives in Europe, and the organization operates in the EU. The sectors mentioned (heritage, culture) align with the broad scope of activities listed."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Contacter l’émetteur (beta.gouv.fr) pour demander quelles formes juridiques (association, entreprise, organisme public, etc.) sont éligibles.",
-          "en": "Contact the issuer (beta.gouv.fr) to ask which legal forms (association, company, public body, etc.) are eligible to apply."
+          "fr": "Vérifier auprès de l'émetteur si l'association 'Les Vieilles Pierres' peut officiellement postuler en tant qu'organisme dans le cadre de ce programme.",
+          "en": "Confirm with the issuer whether the association 'Les Vieilles Pierres' can formally apply as an organization under this program."
         },
-        "citations": []
+        "citations": [
+          "Le Corps européen de solidarité permet aux jeunes de s’engager et aux organismes de mettre en place des initiatives en Europe sur des activités variées, dans les domaines humanitaires, de la santé, de l’environnement, de l’intergénérationnel…"
+        ]
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:30:18.293Z"
+      "at": "2026-09-16T21:14:32.829Z"
     },
     {
       "recordId": "scout-aides-territoires-8fc3efc73a",
@@ -621,14 +625,14 @@
       "verdict": {
         "verdict": "NOT_ELIGIBLE",
         "reason": {
-          "fr": "L'opportunité cible explicitement les 'entreprises' et les 'petites et moyennes entreprises' (PME). 'Les Vieilles Pierres' est une association, pas une entreprise ou une PME.",
-          "en": "The opportunity explicitly targets 'entreprises' (businesses) and 'petites et moyennes entreprises' (SMEs). 'Les Vieilles Pierres' is an association, not a business or SME."
+          "fr": "L'opportunité cible explicitement les 'entreprises' et les 'petites et moyennes entreprises' (PME). 'Les Vieilles Pierres' est une association de randonnée patrimoniale, ce qui ne correspond pas à la définition d'une entreprise ou d'une PME dans le cadre de ce programme.",
+          "en": "The opportunity explicitly targets 'entreprises' (businesses) and 'petites et moyennes entreprises' (SMEs). 'Les Vieilles Pierres' is a heritage hiking association, which is not classified as an enterprise or SME under the terms of this program."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Confirmer auprès de l'émetteur si les associations à but non lucratif sont éligibles dans le cadre de ce programme.",
-          "en": "Confirm with the issuer whether non-profit associations are eligible under this programme."
+          "fr": "Vérifier auprès de l'émetteur si les associations à but non lucratif sont éligibles à ce programme, malgré la mention explicite des entreprises et PME.",
+          "en": "Confirm with the issuer whether non-profit associations are eligible under this program, despite the explicit mention of enterprises and SMEs."
         },
         "citations": [
           "Le programme pour la compétitivité des entreprises et des petites et moyennes entreprises (2014-2020), vise à promouvoir la croissance et à renforcer la compétitivité et la durabilité des entreprises dans l'Union européenne."
@@ -636,7 +640,7 @@
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:30:21.700Z"
+      "at": "2026-09-16T21:14:37.388Z"
     },
     {
       "recordId": "scout-aides-territoires-cc2155afd8",
@@ -644,20 +648,20 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au programme EaSI. Il décrit le champ d'application mais ne mentionne pas les critères d'éligibilité des candidats.",
-          "en": "The extracted text does not specify which types of organisations may apply for the EaSI programme. It describes the scope but does not state eligibility criteria for applicants."
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il n'est pas fait mention des candidats éligibles tels que les associations, les entreprises ou les organismes publics.",
+          "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligible applicants such as associations, companies, or public bodies."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Consulter la documentation officielle du programme EaSI ou contacter l'émetteur (beta.gouv.fr) pour confirmer si les associations comme 'Les Vieilles Pierres' peuvent postuler.",
-          "en": "Check the official EaSI programme documentation or contact the issuer (beta.gouv.fr) to confirm whether associations like 'Les Vieilles Pierres' are eligible to apply."
+          "fr": "Consulter l'appel à propositions complet ou la documentation officielle du programme pour identifier les candidats éligibles.",
+          "en": "Check the full call for proposals or official programme documentation to identify eligible applicants."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:30:25.737Z"
+      "at": "2026-09-16T21:14:40.399Z"
     },
     {
       "recordId": "scout-aides-territoires-4f0e193d06",
@@ -665,41 +669,43 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le texte extrait ne précise pas quels types d'organisations ou d'entités juridiques sont éligibles pour la subvention ÉcoQuartier. Il mentionne les 'porteurs de projets' sans les définir.",
-          "en": "The extracted text does not specify which types of organisations or legal entities are eligible to apply for the ÉcoQuartier grant. It mentions 'porteurs de projets' but does not define who they are."
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à la subvention ÉcoQuartier. Il mentionne 'porteurs de projets' sans définir si les associations, entreprises ou autres entités sont éligibles.",
+          "en": "The extracted text does not specify which types of organisations may apply for the ÉcoQuartier grant. It mentions 'porteurs de projets' but does not define whether associations, companies, or other entities are eligible."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Consulter l'appel à projets officiel ou les directives d'ÉcoQuartier pour vérifier si les associations comme 'Les Vieilles Pierres' peuvent postuler.",
-          "en": "Check the official ÉcoQuartier call for applications or guidelines to determine if associations like 'Les Vieilles Pierres' are eligible to apply."
+          "fr": "Consulter l'appel à projets officiel ou les directives d'ÉcoQuartier pour confirmer si les associations patrimoniales peuvent postuler.",
+          "en": "Check the official ÉcoQuartier call for applications or guidelines to confirm whether heritage associations are eligible applicants."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:30:30.184Z"
+      "at": "2026-09-16T21:14:43.661Z"
     },
     {
       "recordId": "scout-aides-territoires-e2773d3036",
       "projectSlug": "lesvieillespierres",
       "verdict": {
-        "verdict": "NEEDS_INFO",
+        "verdict": "NOT_ELIGIBLE",
         "reason": {
-          "fr": "Le verdict initial ne citait rien de vérifiable dans le document — ramené à « à vérifier ».",
-          "en": "The original verdict cited nothing checkable in the document — downgraded to 'needs info'."
+          "fr": "L'organisation 'Les Vieilles Pierres' est une association de randonnée patrimoniale, et non une structure éducative telle qu'une école, un collège ou un lycée.",
+          "en": "The organisation 'Les Vieilles Pierres' is a heritage hiking association, not an educational structure such as a school, college, or lycée."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Vérifier auprès de l'émetteur si les associations non éducatives gérant des sites patrimoniaux pourraient être considérées comme 'autres structures éducatives'.",
-          "en": "Confirm with the issuer whether non-educational associations managing heritage sites could be considered under 'other educational structures.'"
+          "fr": "Consulter d'autres opportunités de financement destinées aux associations patrimoniales, culturelles ou touristiques.",
+          "en": "Review other funding opportunities that target heritage, culture, or tourism associations."
         },
-        "citations": []
+        "citations": [
+          "cible les écoles, collèges, lycées, ainsi que d’autres structures éducatives."
+        ]
       },
-      "droppedCitations": 1,
+      "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:30:34.238Z"
+      "at": "2026-09-16T21:14:47.501Z"
     },
     {
       "recordId": "scout-aides-territoires-b12b40854e",
@@ -707,8 +713,8 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il mentionne les innovateurs, les entrepreneurs et les étudiants, mais ne clarifie pas si les associations comme Les Vieilles Pierres sont éligibles.",
-          "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. It mentions innovators, entrepreneurs, and students but does not clarify if associations like Les Vieilles Pierres are eligible."
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il mentionne les innovateurs, les entrepreneurs et les étudiants, mais ne clarifie pas si les associations comme 'Les Vieilles Pierres' sont éligibles.",
+          "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. It mentions innovators, entrepreneurs, and students but does not clarify if associations like 'Les Vieilles Pierres' are eligible."
         },
         "entity": "",
         "missing": [],
@@ -720,7 +726,7 @@
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:30:37.186Z"
+      "at": "2026-09-16T21:14:51.954Z"
     },
     {
       "recordId": "scout-aides-territoires-4ce66281ab",
@@ -728,20 +734,20 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Aucun critère d'éligibilité pour les candidats n'est mentionné.",
-          "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria for applicants."
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement.",
+          "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Contacter l'émetteur (beta.gouv.fr) pour demander les critères officiels d'éligibilité pour cette subvention.",
-          "en": "Contact the issuer (beta.gouv.fr) to ask for the official eligibility criteria for this grant."
+          "fr": "Contacter l'émetteur (beta.gouv.fr) pour demander quelles entités légales sont éligibles à postuler.",
+          "en": "Contact the issuer (beta.gouv.fr) to ask which legal entities are eligible to apply."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:30:39.993Z"
+      "at": "2026-09-16T21:14:54.358Z"
     },
     {
       "recordId": "scout-aides-territoires-8d4e828c36",
@@ -762,7 +768,7 @@
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:30:42.828Z"
+      "at": "2026-09-16T21:14:57.207Z"
     },
     {
       "recordId": "scout-aides-territoires-b45cb20405",
@@ -770,20 +776,20 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au programme Europe Numérique. Il décrit le champ d'application du programme mais ne mentionne pas les critères d'éligibilité des candidats.",
-          "en": "The extracted text does not specify which types of organisations may apply for the Digital Europe programme. It describes the programme's scope but does not list eligibility criteria for applicants."
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il n'y a aucune mention des critères d'éligibilité liés au statut juridique, au secteur ou au type de demandeur.",
+          "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria related to legal status, sector, or type of applicant."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Consulter l'appel à projets officiel ou les directives du programme pour confirmer quelles entités juridiques sont éligibles.",
-          "en": "Check the official call for proposals or programme guidelines to confirm which legal entities are eligible to apply."
+          "fr": "Consulter l'appel à projets complet ou les directives du programme pour identifier les demandeurs éligibles.",
+          "en": "Check the full call for proposals or programme guidelines to identify the eligible applicants."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:30:46.207Z"
+      "at": "2026-09-16T21:15:07.104Z"
     },
     {
       "recordId": "scout-aides-territoires-1d40f6079e",
@@ -791,20 +797,20 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il décrit uniquement le champ d'application de l'initiative.",
-          "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. It only describes the scope of the initiative."
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent demander le financement FEADER Leader. Il décrit uniquement le champ d'application de l'initiative.",
+          "en": "The extracted text does not specify which types of organisations may apply for the FEADER Leader funding. It only describes the scope of the initiative."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Consulter la documentation officielle du programme Leader FEADER ou contacter l'émetteur (beta.gouv.fr) pour confirmer les critères d'éligibilité pour les associations.",
-          "en": "Check the official FEADER Leader programme documentation or contact the issuer (beta.gouv.fr) to confirm eligibility criteria for associations."
+          "fr": "Contacter l'émetteur (beta.gouv.fr ou l'autorité compétente de l'État français) pour demander quelles entités juridiques sont éligibles à cette opportunité de financement.",
+          "en": "Contact the issuer (beta.gouv.fr or the relevant French state authority) to ask which legal entities are eligible to apply for this funding opportunity."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:30:49.353Z"
+      "at": "2026-09-16T21:15:09.938Z"
     },
     {
       "recordId": "scout-aides-territoires-69ab8e97aa",
@@ -825,7 +831,7 @@
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:30:52.493Z"
+      "at": "2026-09-16T21:15:13.665Z"
     },
     {
       "recordId": "scout-aides-territoires-424ff298b5",
@@ -833,20 +839,948 @@
       "verdict": {
         "verdict": "NEEDS_INFO",
         "reason": {
-          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent demander un financement FEDER. Il n'y a aucune mention des critères d'éligibilité pour les demandeurs.",
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent demander un financement FEDER. Aucun critère d'éligibilité pour les demandeurs n'est mentionné.",
           "en": "The extracted text does not specify which types of organisations may apply for FEDER funding. There is no mention of eligibility criteria for applicants."
         },
         "entity": "",
         "missing": [],
         "nextAction": {
-          "fr": "Consulter la documentation officielle du FEDER ou contacter l'émetteur (beta.gouv.fr) pour confirmer quels types d'organisations sont éligibles.",
-          "en": "Check the official FEDER documentation or contact the issuer (beta.gouv.fr) to confirm which types of organisations are eligible to apply."
+          "fr": "Consulter la documentation officielle du FEDER ou contacter l'émetteur (beta.gouv.fr / État français) pour confirmer l'éligibilité des associations patrimoniales.",
+          "en": "Check the official FEDER documentation or contact the issuer (beta.gouv.fr / French state) to confirm eligibility for heritage associations."
         },
         "citations": []
       },
       "droppedCitations": 0,
       "model": "mistral-large-latest",
-      "at": "2026-09-16T20:30:55.738Z"
+      "at": "2026-09-16T21:15:16.526Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-89a5898ab5",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à ce financement. Aucun critère d'éligibilité pour les candidats n'est mentionné.",
+          "en": "The extracted text does not specify which types of organisations may apply for this funding. There is no mention of eligibility criteria for applicants."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Contacter l'émetteur (beta.gouv.fr ou l'État français) pour demander l'appel à projets officiel ou les directives d'éligibilité.",
+          "en": "Contact the issuer (beta.gouv.fr or the French state) to ask for the official call for proposals or eligibility guidelines."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:15:20.348Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-80ba988829",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NOT_ELIGIBLE",
+        "reason": {
+          "fr": "L'opportunité de financement cible explicitement la recherche et le développement de programmes industriels dans le domaine de la défense. L'organisation opère dans les secteurs du patrimoine, de la culture et du tourisme, qui ne sont pas liés à la défense.",
+          "en": "The funding opportunity explicitly targets research and development of industrial programs in the defense sector. The organisation operates in heritage, culture, and tourism, which are not related to defense."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Examiner d'autres opportunités de financement qui correspondent aux secteurs d'activité de l'organisation (patrimoine, culture, tourisme).",
+          "en": "Review other funding opportunities that align with the organisation's sectors of activity (heritage, culture, tourism)."
+        },
+        "citations": [
+          "Le Fonds européen de défense (FED, ou FEDef) est un programme de l’Union européenne destiné à financer la recherche et le développement de programmes industriels dans le domaine de la défense."
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:15:23.745Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-58212d29aa",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au Fonds pour l'innovation. Il n'y a aucune mention des critères d'éligibilité pour les candidats, tels que le statut juridique, le secteur ou la localisation.",
+          "en": "The extracted text does not specify which types of organisations may apply to the InnovFund. There is no mention of eligibility criteria for applicants such as legal status, sector, or location."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter l'appel à projets ou le guide officiel du Fonds pour l'innovation afin de trouver la section sur les candidats éligibles.",
+          "en": "Check the official InnovFund call for proposals or guidelines to find the section on eligible applicants."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:15:27.031Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-c336d701fc",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NOT_ELIGIBLE",
+        "reason": {
+          "fr": "L'opportunité de financement cible les territoires à fortes émissions de CO2 pour une transition énergétique et industrielle. Les activités de l'organisation (patrimoine, culture, tourisme) ne correspondent pas à l'objectif de transition industrielle ou énergétique.",
+          "en": "The funding opportunity targets territories with high CO2 emissions for energy and industrial transition. The organisation's activities (heritage, culture, tourism) do not align with the scope of industrial or energy transition."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter d'autres opportunités de financement qui soutiennent des projets liés au patrimoine, à la culture ou au tourisme.",
+          "en": "Review other funding opportunities that support heritage, culture, or tourism projects."
+        },
+        "citations": [
+          "Le FTJ a été créé pour accompagner la transition énergétique et industrielle des territoires concernés par de fortes émissions de CO2 dans la transition vers une économie neutre en carbone, conformément aux objectifs de l’Union européenne dans le cadre de l’accord de Paris."
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:15:30.641Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-3d85ea437e",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles pour le Fonds vert - Édition 2026. Il n'est pas mentionné si les associations, les entreprises ou d'autres entités peuvent postuler.",
+          "en": "The extracted text does not specify which types of organisations are eligible to apply for the Fonds vert - Édition 2026. There is no mention of whether associations, companies, or other entities may apply."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter le règlement officiel du Fonds vert 2026 ou contacter beta.gouv.fr pour confirmer si les associations patrimoniales sont éligibles.",
+          "en": "Check the official Fonds vert 2026 guidelines or contact beta.gouv.fr to confirm whether heritage associations are eligible to apply."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:15:33.506Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-82d62b3400",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent demander un financement dans le cadre de France 2030. Il décrit uniquement le périmètre et les objectifs du plan.",
+          "en": "The extracted text does not specify which types of organisations may apply for funding under France 2030. It only describes the scope and objectives of the plan."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter la documentation officielle ou le site web de France 2030 pour connaître les critères d'éligibilité des demandeurs.",
+          "en": "Check the official France 2030 documentation or website to determine the eligibility criteria for applicants."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:15:37.214Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-d9709ada82",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent demander le financement FSE+. Il n'y a aucune mention des critères d'éligibilité pour les candidats.",
+          "en": "The extracted text does not specify which types of organisations may apply for the FSE+ funding. There is no mention of eligibility criteria for applicants."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter la documentation officielle du FSE+ ou contacter l'émetteur (beta.gouv.fr) pour confirmer si les associations patrimoniales sont éligibles.",
+          "en": "Check the official FSE+ documentation or contact the issuer (beta.gouv.fr) to confirm whether heritage associations are eligible to apply."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:15:41.470Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-3599205d18",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à Horizon Europe. Il décrit uniquement le champ d'application et la durée du programme.",
+          "en": "The extracted text does not specify which types of organisations may apply to Horizon Europe. It only describes the programme's scope and duration."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter le programme de travail officiel d'Horizon Europe ou l'appel à projets pour connaître les critères d'éligibilité concernant les types de candidats (par exemple, associations, exigences de statut juridique).",
+          "en": "Check the official Horizon Europe work programme or call text for eligibility criteria regarding applicant types (e.g., associations, legal status requirements)."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:15:44.715Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-676e63874a",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il n'y a aucune mention des critères d'éligibilité pour les candidats.",
+          "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria for applicants."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Contacter l'émetteur (beta.gouv.fr ou l'autorité européenne compétente) pour demander l'appel à propositions complet ou les directives d'éligibilité.",
+          "en": "Contact the issuer (beta.gouv.fr or the relevant EU authority) to request the full call for proposals or eligibility guidelines."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:15:47.893Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-ddd1ce4da8",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il décrit uniquement le champ d'application et les sources de financement du programme.",
+          "en": "The extracted text does not specify which types of organisations may apply. It only describes the scope and funding sources of the programme."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter la documentation officielle du programme Interreg France-Suisse pour déterminer les candidats éligibles.",
+          "en": "Check the official Interreg France-Suisse programme documentation to determine eligible applicants."
+        },
+        "citations": [
+          "Interreg France-Suisse est un programme de l’Union européenne cofinancé par le Fonds européen de développement régional (FEDER), la Confédération suisse et les cantons, pour soutenir la Coopération territoriale européenne (CTE) qui s’inscrit dans le cadre de la politique de cohésion européenne."
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:15:51.896Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-53bb5a3e80",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "ELIGIBLE",
+        "reason": {
+          "fr": "L'opportunité indique explicitement que les projets publics ou privés sont éligibles au cofinancement, et l'organisation est une association opérant dans les zones rurales (Bretagne) avec un focus sur le patrimoine, la culture et le tourisme, ce qui correspond à l'objectif de développement rural.",
+          "en": "The opportunity explicitly states that both public and private projects are eligible for co-financing, and the organisation is an association operating in rural areas (Bretagne) with a focus on heritage, culture, and tourism, which aligns with the scope of rural development."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Vérifier auprès de l'émetteur si une association sans entité juridique enregistrée peut officiellement déposer une candidature pour cette subvention.",
+          "en": "Confirm with the issuer whether an association without a recorded legal entity can formally apply for this grant."
+        },
+        "citations": [
+          "LEADER est un programme d'initiative communautaire pour cofinancer des projets publics ou privés qui favorisent le développement des zones rurales."
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:15:57.269Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-f63c9ad2d4",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au programme LIFE. Il n'y a aucune mention des critères d'éligibilité pour les candidats, tels que le statut juridique, le secteur ou la portée géographique.",
+          "en": "The extracted text does not specify which types of organisations may apply for the LIFE programme. There is no mention of eligibility criteria for applicants such as legal status, sector, or geographic scope."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter les directives officielles du programme LIFE ou contacter l'autorité émettrice pour confirmer si les associations patrimoniales sont éligibles.",
+          "en": "Check the official LIFE programme guidelines or call the issuing authority to confirm whether heritage associations are eligible applicants."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:16:06.889Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-22a13da92a",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au programme EU4Health. Il décrit uniquement le champ d'application et les objectifs du programme.",
+          "en": "The extracted text does not specify which types of organisations may apply for the EU4Health programme. It only describes the programme's scope and objectives."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter l'appel à propositions officiel ou les lignes directrices du programme EU4Health pour déterminer les candidats éligibles.",
+          "en": "Check the official EU4Health call for proposals or programme guidelines to determine eligible applicants."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:16:10.809Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-af9fbc13e8",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à la subvention MIE. Il décrit uniquement le champ d'application du mécanisme.",
+          "en": "The extracted text does not specify which types of organisations may apply for the MIE grant. It only describes the scope of the mechanism."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter l'appel à propositions complet ou les lignes directrices du programme MIE pour déterminer les candidats éligibles.",
+          "en": "Check the full call for proposals or the MIE programme guidelines to determine eligible applicants."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:16:14.535Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-6f8ac434a6",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NOT_ELIGIBLE",
+        "reason": {
+          "fr": "L'organisation 'Les Vieilles Pierres' est une association de randonnée patrimoniale, qui ne relève pas des catégories des services répressifs et judiciaires, des banques ou des autres acteurs de la lutte contre le faux monnayage de l'euro, comme spécifié dans le texte de l'opportunité.",
+          "en": "The organisation 'Les Vieilles Pierres' is a heritage hiking association, which does not fall under the categories of law enforcement, judicial services, banks, or other actors involved in combating euro counterfeiting as specified in the opportunity text."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Examiner d'autres opportunités de financement qui correspondent aux secteurs du patrimoine, de la culture ou du tourisme.",
+          "en": "Review other funding opportunities that align with the heritage, culture, or tourism sectors."
+        },
+        "citations": [
+          "Le programme Pericles IV finance des échanges de personnel, des séminaires, des formations et des études à l’intention des services répressifs et judiciaires, des banques et des autres acteurs de la lutte contre le faux monnayage de l’euro."
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:16:18.110Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-bc7b537931",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NOT_ELIGIBLE",
+        "reason": {
+          "fr": "L'opportunité de financement est exclusivement destinée aux communes de moins de 20 000 habitants. 'Les Vieilles Pierres' est une association, pas une commune.",
+          "en": "The funding opportunity is exclusively for municipalities (communes) with fewer than 20,000 inhabitants. 'Les Vieilles Pierres' is an association, not a municipality."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Vérifier auprès de l'émetteur si les associations peuvent s'associer à des communes éligibles pour déposer une candidature en leur nom.",
+          "en": "Confirm with the issuer whether associations can partner with eligible municipalities to apply on their behalf."
+        },
+        "citations": [
+          "Le programme PVD est destiné aux communes de moins de 20 000 habitants exerçant des fonctions de centralité et présentant des signes de fragilité."
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:16:22.127Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-9e1fd109a8",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NOT_ELIGIBLE",
+        "reason": {
+          "fr": "L'opportunité cible explicitement le déploiement de l'infrastructure à très haut débit pour la population française. Une association axée sur la randonnée patrimoniale ne correspond pas aux objectifs de déploiement d'infrastructure de ce programme.",
+          "en": "The opportunity explicitly targets the deployment of high-speed broadband infrastructure for the French population. An association focused on heritage hiking does not align with the infrastructure deployment objectives of this program."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter d'autres opportunités de financement liées au patrimoine, à la culture ou au tourisme.",
+          "en": "Review other funding opportunities related to heritage, culture, or tourism."
+        },
+        "citations": [
+          "Le programme France Très Haut Débit vise à donner accès à tous les Français au bon haut débit fixe (minimum 8 Mbit/s) d’ici à fin 2020, et au très haut débit fixe (minimum 30 Mbit/s) d’ici à fin 2022."
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:16:26.449Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-ba9dcac0af",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à ce financement. Il mentionne uniquement que le financement est accordé pour des équipements d'investigation techniques et opérationnels, des formations spécialisées et des activités de recherche, sans clarifier les critères d'éligibilité des candidats.",
+          "en": "The extracted text does not specify which types of organisations may apply for this funding. It only mentions that funding is provided for technical and operational investigation equipment, specialized training, and research activities, but does not clarify eligibility criteria for applicants."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Contacter l'émetteur (beta.gouv.fr) pour demander les critères officiels d'éligibilité pour cette opportunité de financement.",
+          "en": "Contact the issuer (beta.gouv.fr) to ask for the official eligibility criteria for this funding opportunity."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:16:29.767Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-76167bc334",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Aucun critère d'éligibilité pour les candidats n'est mentionné.",
+          "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria for applicants."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Contacter l'émetteur (beta.gouv.fr / État français) pour demander le document complet de l'appel à projets ou les directives d'éligibilité.",
+          "en": "Contact the issuer (beta.gouv.fr / French state) to request the full call for proposals document or eligibility guidelines."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:16:33.177Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-2706847555",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent faire une demande de financement. Il mentionne le soutien à la coopération judiciaire et l'accès à la justice, mais ne clarifie pas les critères d'éligibilité des demandeurs.",
+          "en": "The extracted text does not specify which types of organisations may apply for the funding. It mentions support for judicial cooperation and access to justice but does not clarify eligibility criteria for applicants."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter l'appel à projets complet ou les directives du programme pour déterminer quels types d'organisations sont éligibles.",
+          "en": "Check the full call for proposals or programme guidelines to determine which types of organisations are eligible to apply."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:16:36.932Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-3169efd3d6",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NOT_ELIGIBLE",
+        "reason": {
+          "fr": "L'opportunité de financement cible des zones urbaines spécifiques (QPV) définies par la loi pour des interventions publiques. L'organisation opère en Bretagne et ne mentionne aucune activité ou présence dans ces zones prioritaires urbaines désignées.",
+          "en": "The funding opportunity targets specific urban areas (QPV) defined by law for public intervention. The organisation operates in Bretagne and does not mention any activity or presence in these designated urban priority zones."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Vérifier si l'organisation a des projets ou activités situés dans une zone QPV telle que définie par la cartographie 2024.",
+          "en": "Verify if the organisation has any projects or activities located within a QPV zone as defined by the 2024 cartography."
+        },
+        "citations": [
+          "Les QPV sont entités définies par la loi de 2014, identifiant zones urbaines pauvres nécessitant des interventions publiques."
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:16:41.582Z"
+    },
+    {
+      "recordId": "scout-aides-territoires-bff0cce25c",
+      "projectSlug": "lesvieillespierres",
+      "verdict": {
+        "verdict": "NOT_ELIGIBLE",
+        "reason": {
+          "fr": "L'opportunité cible explicitement les acteurs des zones de montagne, alors que 'Les Vieilles Pierres' opère en Bretagne, une région non montagneuse.",
+          "en": "The opportunity explicitly targets actors in mountainous regions, while 'Les Vieilles Pierres' operates in Bretagne, which is not a mountainous area."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Vérifier si l'association mène des activités ou projets spécifiquement situés dans des zones montagneuses en France.",
+          "en": "Verify if the association has any activities or projects specifically located in mountainous regions of France."
+        },
+        "citations": [
+          "le programme accompagnera les acteurs de la montagne (collectivités, acteurs socio-économiques)"
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:16:44.642Z"
+    },
+    {
+      "recordId": "scout-cir-cii-jei-09dc03ff2c",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "ELIGIBLE",
+        "reason": {
+          "fr": "BAWABA est une entreprise qui engage des activités de recherche et développement (R&D), comme l'indique son focus sur les secteurs de l'IA, de la cybersécurité et des logiciels, qui impliquent généralement de la R&D.",
+          "en": "BAWABA is an enterprise engaging in research and development (R&D) activities, as indicated by its focus on AI, cybersecurity, and software sectors, which typically involve R&D."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Confirmer avec BAWABA que leurs activités spécifiques relèvent bien de la R&D selon les critères de l'administration fiscale française pour le CIR.",
+          "en": "Confirm with BAWABA that their specific activities qualify as R&D under the French tax administration's criteria for the CIR."
+        },
+        "citations": [
+          "Entreprises engageant des activités de recherche et développement (R&D)."
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:16:47.752Z"
+    },
+    {
+      "recordId": "scout-france-2030-ademe-f18fee27cb",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "ELIGIBLE",
+        "reason": {
+          "fr": "L'opportunité mentionne explicitement que les 'Entreprises' sont éligibles.",
+          "en": "The opportunity explicitly lists 'Entreprises' (companies) as eligible applicants."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Vérifier quelle entité légale de BAWABA est enregistrée en France ou dans l'UE et peut déposer la demande.",
+          "en": "Confirm which of BAWABA's legal entities is registered in France or the EU and can submit the application."
+        },
+        "citations": [
+          "eligibility: Entreprises, associations, acteurs de la recherche"
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:16:51.237Z"
+    },
+    {
+      "recordId": "scout-france-2030-ademe-d1637b6d70",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au Fonds Chaleur. Il mentionne uniquement des aides financières pour des projets de transition écologique sans détailler les critères d'éligibilité des demandeurs.",
+          "en": "The extracted text does not specify which types of organisations may apply for the Fonds Chaleur. It only mentions financial aid for ecological transition projects without detailing eligibility criteria for applicants."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter le site officiel de l'ADEME ou contacter directement l'ADEME pour confirmer quelles entités légales (par exemple, entreprises, organismes publics, associations) sont éligibles à une demande de subvention pour le Fonds Chaleur.",
+          "en": "Check the official ADEME website or contact ADEME directly to confirm which legal entities (e.g., companies, public bodies, associations) are eligible to apply for the Fonds Chaleur."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:16:54.764Z"
+    },
+    {
+      "recordId": "scout-france-2030-ademe-d1637b6d70",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles pour le Fonds Économie Circulaire. Aucune mention des formes juridiques, des secteurs ou d'autres critères permettant une évaluation n'est présente.",
+          "en": "The extracted text does not specify which types of organisations are eligible to apply for the Fonds Économie Circulaire. There is no mention of legal forms, sectors, or other criteria that would allow a determination."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter l'appel à projets complet ou le site de l'ADEME pour trouver les critères d'éligibilité du Fonds Économie Circulaire.",
+          "en": "Check the full call for proposals or the ADEME website to find the eligibility criteria for the Fonds Économie Circulaire."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:16:57.612Z"
+    },
+    {
+      "recordId": "scout-france-2030-ademe-d1637b6d70",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NOT_ELIGIBLE",
+        "reason": {
+          "fr": "L'opportunité cible explicitement des projets de transition écologique, alors que les activités de BAWABA (plan de contrôle de l'IA, cybersécurité, logiciels) ne correspondent pas à la portée des leviers de financement pour la transition écologique comme le Fonds Air Bois.",
+          "en": "The opportunity explicitly targets ecological transition projects, while BAWABA's activities (AI control plane, cybersecurity, software) do not align with the stated scope of ecological transition funding levers like Fonds Air Bois."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter d'autres opportunités de financement qui soutiennent explicitement des projets numériques, d'IA ou de cybersécurité sans lien avec la transition écologique.",
+          "en": "Review other funding opportunities that explicitly support digital, AI, or cybersecurity projects unrelated to ecological transition."
+        },
+        "citations": [
+          "Retrouvez des aides financières pour vos projets de transition écologique via plusieurs leviers de financement comme les Fonds Chaleur, Fonds Économie Circulaire, Fonds Air Bois ou encore France 2030."
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:17:04.005Z"
+    },
+    {
+      "recordId": "scout-france-2030-ademe-d1637b6d70",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité pour les candidats.",
+          "en": "The extracted text does not specify which types of organisations may apply. There is no mention of eligibility criteria for applicants."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter le document complet de l'appel à projets ou le site de l'ADEME pour trouver les critères d'éligibilité des candidats.",
+          "en": "Check the full call for projects document or the ADEME website to find the eligibility criteria for applicants."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:17:06.763Z"
+    },
+    {
+      "recordId": "scout-hub71-0d37144b7f",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NOT_ELIGIBLE",
+        "reason": {
+          "fr": "L'opportunité cible explicitement les fondateurs au stade de l'idéation ou pré-MVP. BAWABA est décrit comme opérant dans plusieurs régions et secteurs, ce qui implique qu'il dépasse le stade précoce de l'idéation ou pré-MVP.",
+          "en": "The opportunity explicitly targets founders at the ideation or pre-MVP stage. BAWABA is described as operating in multiple regions and sectors, implying it is beyond the early ideation or pre-MVP stage."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Examiner d'autres opportunités de financement qui soutiennent les startups en phase de croissance ou déjà établies.",
+          "en": "Review other funding opportunities that support growth-stage or established startups."
+        },
+        "citations": [
+          "Initiate is Hub71’s early-stage programme that supports founders at the ideation or pre-MVP stage to turn their ideas into scalable startups."
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:17:10.183Z"
+    },
+    {
+      "recordId": "scout-hub71-a6e2e5033c",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NOT_ELIGIBLE",
+        "reason": {
+          "fr": "L'opportunité restreint explicitement l'éligibilité aux 'fondateurs émiratis'. Le dossier de l'organisation ne confirme pas que BAWABA est fondée ou dirigée par des individus émiratis.",
+          "en": "The opportunity explicitly restricts eligibility to 'Emirati founders'. The organisation's dossier does not confirm that BAWABA is founded or led by Emirati individuals."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Vérifier si BAWABA compte des cofondateurs émiratis ou une propriété majoritaire émiratie. Si ce n'est pas le cas, ne pas poursuivre la candidature.",
+          "en": "Verify if BAWABA has Emirati co-founders or majority Emirati ownership. If not, do not proceed with the application."
+        },
+        "citations": [
+          "eligibility: Emirati founders"
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:17:13.254Z"
+    },
+    {
+      "recordId": "scout-hub71-ae5d925f4b",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "ELIGIBLE",
+        "reason": {
+          "fr": "L'opportunité indique explicitement que les 'startups internationales' sont éligibles. BAWABA opère en tant que startup dans les secteurs de l'IA, des données et de la cybersécurité et est active dans plusieurs régions, y compris le CCG et la MENA, ce qui correspond à l'objectif du programme de favoriser l'expansion internationale à Abu Dhabi.",
+          "en": "The opportunity explicitly states that 'International startups' are eligible. BAWABA operates as a startup in the AI, data, and cybersecurity sectors and is active in multiple regions, including the GCC and MENA, which aligns with the programme's focus on international expansion into Abu Dhabi."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Confirmer quelle entité légale de BAWABA soumettra la candidature et s'assurer que toute la documentation requise est préparée pour le programme Hub71 Immersion.",
+          "en": "Confirm which of BAWABA’s legal entities will submit the application and ensure all required documentation is prepared for the Hub71 Immersion Programme."
+        },
+        "citations": [
+          "eligibility: International startups"
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:17:18.415Z"
+    },
+    {
+      "recordId": "scout-hub71-2381bf46c2",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité tels que la structure juridique, la localisation ou le secteur d'activité.",
+          "en": "The extracted text does not specify which types of organisations may apply. There is no mention of eligibility criteria such as legal structure, location, or sector."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Contacter l'émetteur (Mubadala) pour demander les critères d'éligibilité complets du programme Access.",
+          "en": "Contact the issuer (Mubadala) to request the full eligibility criteria for the Access Programme."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:17:21.269Z"
+    },
+    {
+      "recordId": "scout-hub71-51bdee4e7e",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NOT_ELIGIBLE",
+        "reason": {
+          "fr": "L'organisation se concentre sur une 'plateforme de contrôle d'IA souveraine pour les industries réglementées', ce qui ne correspond pas au champ d'application spécifié concernant les défis du développement de la petite enfance.",
+          "en": "The organisation's focus on 'Sovereign AI control plane for regulated industries' does not align with the specified scope of addressing early childhood development challenges."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Examiner d'autres opportunités de financement qui correspondent à l'orientation de l'organisation sur l'IA, les données et la cybersécurité.",
+          "en": "Review other funding opportunities that align with the organisation's focus on AI, data, and cybersecurity."
+        },
+        "citations": [
+          "Startups addressing early childhood development challenges"
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:17:25.767Z"
+    },
+    {
+      "recordId": "scout-hub71-6a126663dc",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NOT_ELIGIBLE",
+        "reason": {
+          "fr": "BAWABA fonctionne comme un 'plan de contrôle d'IA souveraine pour les industries réglementées' et n'est pas décrite comme une startup de mobilité intelligente ou autonome. L'opportunité restreint explicitement l'éligibilité aux 'startups de mobilité intelligente et autonome.'",
+          "en": "BAWABA operates as a 'Sovereign AI control plane for regulated industries' and is not described as a smart or autonomous mobility startup. The opportunity explicitly restricts eligibility to 'Smart and autonomous mobility startups.'"
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Examiner d'autres opportunités de financement ciblant les startups en IA, données ou cybersécurité à Abu Dhabi ou dans les Émirats arabes unis en général.",
+          "en": "Review other funding opportunities that target AI, data, or cybersecurity startups in Abu Dhabi or the broader UAE."
+        },
+        "citations": [
+          "eligibility: Smart and autonomous mobility startups"
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:17:30.400Z"
+    },
+    {
+      "recordId": "scout-hub71-a43e33316e",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NOT_ELIGIBLE",
+        "reason": {
+          "fr": "L'opportunité cible explicitement les secteurs de la 'biotechnologie, MedTech et santé numérique'. BAWABA opère dans les domaines de l'IA, des données, de la cybersécurité et des logiciels, sans mention de la biotechnologie, MedTech ou santé numérique dans ses activités principales.",
+          "en": "The opportunity explicitly targets 'biotechnology, MedTech, and digital health' sectors. BAWABA operates in AI, data, cybersecurity, and software, with no mention of biotechnology, MedTech, or digital health in its core activities."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Examiner d'autres opportunités de financement qui incluent explicitement l'IA, les données ou la cybersécurité dans le domaine de la santé ou des industries réglementées.",
+          "en": "Review other funding opportunities that explicitly include AI, data, or cybersecurity in healthcare or regulated industries."
+        },
+        "citations": [
+          "scope: Hub71+ Life Sciences is Abu Dhabi’s specialist ecosystem driving innovation across biotechnology, MedTech, and digital health."
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:17:33.678Z"
+    },
+    {
+      "recordId": "scout-hub71-6c0b692152",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "LIKELY",
+        "reason": {
+          "fr": "L'opportunité cible explicitement les startups Web3, blockchain et cryptomonnaies, tandis que BAWABA opère dans l'IA, les données, la cybersécurité et les logiciels. Le document ne précise pas si les startups en IA ou cybersécurité sans focus explicite sur le Web3 sont éligibles.",
+          "en": "The opportunity explicitly targets Web3, blockchain, and cryptocurrency startups, while BAWABA operates in AI, data, cybersecurity, and software. The document does not clarify whether AI or cybersecurity startups with no explicit Web3 focus are eligible."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Vérifier auprès de l'émetteur si les startups en IA ou cybersécurité sans focus clair sur le Web3 sont éligibles à ce programme.",
+          "en": "Check with the issuer whether AI or cybersecurity startups without a clear Web3 focus are eligible for this programme."
+        },
+        "citations": [
+          "Hub71+ Digital Assets is a dedicated programme to promote Web3 startup growth from the heart of Abu Dhabi. We provide an integrated launchpad that unites builders, regulators, investors, foundations, corporate partners, and enthusiasts around Web3 including blockchain and cryptocurrency startups."
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:17:39.484Z"
+    },
+    {
+      "recordId": "scout-hub71-f0c5f7bb84",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "LIKELY",
+        "reason": {
+          "fr": "L'opportunité cible explicitement les 'startups de durabilité' axées sur la décarbonisation et un avenir net-zéro. Le dossier de BAWABA ne confirme pas si sa plateforme de contrôle d'IA pour les industries réglementées contribue directement aux technologies climatiques ou aux efforts de décarbonisation.",
+          "en": "The opportunity explicitly targets 'sustainability startups' focused on decarbonization and a net-zero future. BAWABA's dossier does not confirm whether its AI control plane for regulated industries directly contributes to climate technology or decarbonization efforts."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Vérifier auprès de BAWABA si leur technologie de plateforme de contrôle d'IA est conçue pour soutenir la décarbonisation ou des solutions liées au climat.",
+          "en": "Confirm with BAWABA whether their AI control plane technology is designed to support decarbonization or climate-related solutions."
+        },
+        "citations": [
+          "Hub71+ ClimateTech is a specialist ecosystem, where sustainability startups leverage technologies to drive decarbonization in supporting a net zero future."
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:17:43.356Z"
+    },
+    {
+      "recordId": "scout-hub71-223a32c713",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "LIKELY",
+        "reason": {
+          "fr": "L'opportunité cible explicitement les 'startups,' mais le dossier de l'organisation ne précise pas si BAWABA est légalement structurée comme une startup ou répond aux critères typiques d'une startup (par exemple, en phase de démarrage, avec un fort potentiel de croissance).",
+          "en": "The opportunity explicitly targets 'startups,' but the organisation's dossier does not clarify if BAWABA is legally structured as a startup or meets the typical criteria of a startup (e.g., early-stage, high-growth potential)."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Vérifier auprès de BAWABA s'ils sont légalement classés comme une startup ou s'ils répondent à la définition d'une startup selon les critères de l'opportunité.",
+          "en": "Confirm with BAWABA whether they are legally classified as a startup or meet the definition of a startup as per the opportunity's criteria."
+        },
+        "citations": [
+          "Hub71+ AI is a specialist ecosystem designed to support startups at the forefront of AI innovation."
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:17:47.344Z"
+    },
+    {
+      "recordId": "scout-uk-find-a-tender-0146d1743d",
+      "projectSlug": "thestudio-mt",
+      "verdict": {
+        "verdict": "NOT_ELIGIBLE",
+        "reason": {
+          "fr": "L'opportunité restreint explicitement les candidats aux PME (Petites et Moyennes Entreprises) et aux organisations VCSE (Volontaires, Communautaires et Sociales). TheStudio MT opère dans les secteurs du logiciel, du numérique, du design et du conseil, sans indication qu'il s'agit d'une VCSE. Ses entités légales ne sont pas spécifiées comme des VCSE ou des PME éligibles dans le cadre de ce programme.",
+          "en": "The opportunity explicitly restricts applicants to SMEs (Small and Medium-sized Enterprises) and VCSEs (Voluntary, Community, and Social Enterprises). TheStudio MT operates in software, digital, design, and advisory sectors, with no indication it is a VCSE. Its legal entities are not specified as VCSEs or qualifying SMEs under this framework."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Vérifier le statut légal des entités de TheStudio MT pour confirmer si l'une d'elles est éligible en tant que VCSE ou PME selon les définitions britanniques de ce cadre.",
+          "en": "Confirm the legal status of TheStudio MT’s entities to verify if any qualify as a VCSE or SME under the UK definitions for this framework."
+        },
+        "citations": [
+          "eligibility: Suitable for SME & VCSE"
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:17:51.923Z"
+    },
+    {
+      "recordId": "scout-ungm-eb777ed6de",
+      "projectSlug": "thestudio-mt",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il n'y a aucune mention des critères d'éligibilité liés au secteur, à la structure juridique ou au champ d'activité de l'organisation.",
+          "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria related to the organisation's sector, legal structure, or operational scope."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Contacter l'émetteur (Nations Unies) pour demander le document complet de l'appel d'offres (RFP) ou des précisions sur les critères d'éligibilité.",
+          "en": "Contact the issuer (United Nations) to request the full Request for Proposal (RFP) document or clarification on eligibility criteria."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:17:55.099Z"
+    },
+    {
+      "recordId": "scout-ungm-eb777ed6de",
+      "projectSlug": "thestudio-mt",
+      "verdict": {
+        "verdict": "NOT_ELIGIBLE",
+        "reason": {
+          "fr": "L'opportunité cible explicitement des activités dans le Mpumalanga et l'Eastern Cape, qui sont des provinces d'Afrique du Sud. TheStudio MT opère en France, dans l'Union européenne, aux Émirats arabes unis et dans les pays du Conseil de coopération du Golfe, sans indication de présence ou d'opérations en Afrique du Sud.",
+          "en": "The opportunity explicitly targets activities in Mpumalanga and the Eastern Cape, which are provinces in South Africa. TheStudio MT operates in France, the European Union, the United Arab Emirates, and the Gulf Cooperation Council countries, with no indication of presence or operations in South Africa."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Vérifier si TheStudio MT dispose d'une entité légale ou d'une présence opérationnelle en Afrique du Sud qui pourrait être éligible pour cette opportunité.",
+          "en": "Confirm whether TheStudio MT has a legal entity or operational presence in South Africa that could qualify for this opportunity."
+        },
+        "citations": [
+          "Consultancy to support the development of a Framework of Action on Skills for a Just Energy Transition through Social Dialogue in **Mpumalanga and the Eastern Cape**"
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:17:58.836Z"
+    },
+    {
+      "recordId": "scout-ungm-0553289095",
+      "projectSlug": "thestudio-mt",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations ou d'entités juridiques sont éligibles pour postuler aux Séminaires Internationaux sur les Achats (IPS). Il décrit uniquement l'objectif des séminaires.",
+          "en": "The extracted text does not specify which types of organisations or legal entities are eligible to apply for the International Procurement Seminars (IPS). It only describes the purpose of the seminars."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Contacter le bureau des achats des Nations Unies ou consulter la documentation complète de l'appel d'offres pour déterminer si les entités juridiques de TheStudio MT sont éligibles à participer.",
+          "en": "Contact the United Nations procurement office or consult the full tender documentation to determine if TheStudio MT’s legal entities are eligible to participate."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T21:18:04.734Z"
     }
   ]
 }

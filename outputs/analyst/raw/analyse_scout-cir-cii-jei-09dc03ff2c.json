@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "ELIGIBLE",
+    "citation": "Entreprises engageant des activités de recherche et développement (R&D).",
+    "reason": {
+      "en": "BAWABA is an enterprise engaging in research and development (R&D) activities, as indicated by its focus on AI, cybersecurity, and software sectors, which typically involve R&D.",
+      "fr": "BAWABA est une entreprise qui engage des activités de recherche et développement (R&D), comme l'indique son focus sur les secteurs de l'IA, de la cybersécurité et des logiciels, qui impliquent généralement de la R&D."
+    },
+    "nextAction": {
+      "en": "Confirm with BAWABA that their specific activities qualify as R&D under the French tax administration's criteria for the CIR.",
+      "fr": "Confirmer avec BAWABA que leurs activités spécifiques relèvent bien de la R&D selon les critères de l'administration fiscale française pour le CIR."
+    }
+  }
+}

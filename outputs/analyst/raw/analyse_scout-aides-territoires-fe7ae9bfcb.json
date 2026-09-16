@@ -1,14 +1,16 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NEEDS_INFO",
-    "citations": [],
+    "verdict": "ELIGIBLE",
+    "citations": [
+      "Le Corps européen de solidarité permet aux jeunes de s’engager et aux organismes de mettre en place des initiatives en Europe sur des activités variées, dans les domaines humanitaires, de la santé, de l’environnement, de l’intergénérationnel…"
+    ],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply. It only mentions that 'organisms' can set up initiatives, but no legal form or eligibility criteria are provided.",
-      "fr": "Le texte extrait ne précise pas quels types d’organismes peuvent postuler. Il mentionne seulement que des 'organismes' peuvent mettre en place des initiatives, sans indiquer de forme juridique ou de critère d’éligibilité."
+      "en": "The opportunity explicitly allows 'organismes' (organizations) to implement initiatives in Europe, and the organization operates in the EU. The sectors mentioned (heritage, culture) align with the broad scope of activities listed.",
+      "fr": "L'opportunité permet explicitement aux 'organismes' de mettre en place des initiatives en Europe, et l'organisation opère dans l'UE. Les secteurs mentionnés (patrimoine, culture) correspondent à la portée large des activités listées."
     },
     "nextAction": {
-      "en": "Contact the issuer (beta.gouv.fr) to ask which legal forms (association, company, public body, etc.) are eligible to apply.",
-      "fr": "Contacter l’émetteur (beta.gouv.fr) pour demander quelles formes juridiques (association, entreprise, organisme public, etc.) sont éligibles."
+      "en": "Confirm with the issuer whether the association 'Les Vieilles Pierres' can formally apply as an organization under this program.",
+      "fr": "Vérifier auprès de l'émetteur si l'association 'Les Vieilles Pierres' peut officiellement postuler en tant qu'organisme dans le cadre de ce programme."
     }
   }
 }

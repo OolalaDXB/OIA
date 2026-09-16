@@ -1,8 +1,8 @@
 # Link check
 
-Checked 242 distinct URL(s).
+Checked 205 distinct URL(s).
 
-- resolving: 231
+- resolving: 194
 - **broken: 2**
 - refused us (not broken): 9
 - inconclusive: 0
@@ -52,7 +52,7 @@ Checked 242 distinct URL(s).
   - https://flippa.com
 - **source hub71** — now redirects to https://www.hub71.com/
   - https://hub71.com
-- **source ted** — now redirects to https://ted.europa.eu/
+- **source ted** — now redirects to https://ted.europa.eu/en/
   - https://ted.europa.eu
 - **source uae-federal-procurement** — now redirects to https://www.mof.gov.ae/
   - https://www.mof.gov.ae
@@ -62,6 +62,8 @@ Checked 242 distinct URL(s).
   - https://www.ungm.org
 - **opportunity hub71-access-cohort-20** — now redirects to https://www.hub71.com/
   - https://hub71.com/
+- **opportunity scout-adio-daca5e364e** — now redirects to https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry/support-programmes
+  - https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry/support-programmes#access-to-capital
 - **opportunity scout-adio-35574470fd** — now redirects to https://adif.abudhabi/south-korea/
   - https://adif.abudhabi/south-korea/#register
 - **opportunity scout-aides-territoires-4f0e193d06** — now redirects to https://aides-territoires.beta.gouv.fr/portails/ecoquartier/

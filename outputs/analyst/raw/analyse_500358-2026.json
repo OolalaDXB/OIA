@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations are eligible to apply for this tender. There is no mention of eligibility criteria regarding the legal form, sector, or geographic location of applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles pour cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, le secteur ou la localisation géographique des candidats."
+      "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria related to the applicant's legal form, sector, or geographic location.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, le secteur ou la localisation géographique du candidat."
     },
     "nextAction": {
-      "en": "Contact the IEOM or consult the full tender documents to obtain the eligibility criteria for applicants.",
-      "fr": "Contacter l'IEOM ou consulter les documents complets de l'appel d'offres pour obtenir les critères d'éligibilité des candidats."
+      "en": "Contact the IEOM (Institut d'émission Outre-mer) to request the full tender documentation and confirm the eligibility criteria for applicants.",
+      "fr": "Contacter l'IEOM (Institut d'émission Outre-mer) pour demander le dossier complet de l'appel d'offres et confirmer les critères d'éligibilité des candidats."
     }
   }
 }

@@ -1,14 +1,16 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citation": [],
+    "citation": [
+      "Le Bureau d’investissement d’Abu Dhabi (ADIO), en partenariat avec l’Abu Dhabi Global Market (ADGM), a le plaisir de vous inviter à manifester votre intérêt pour participer à l’Abu Dhabi Investment Forum (ADIF)."
+    ],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply or manifest interest. It only describes the event's purpose and audience.",
-      "fr": "Le texte extrait ne précise pas quels types d’organisations peuvent postuler ou manifester leur intérêt. Il décrit uniquement l’objectif et le public de l’événement."
+      "en": "The extracted text does not specify which types of organisations may apply or manifest interest. There is no mention of eligibility criteria for applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d’organisations peuvent postuler ou manifester leur intérêt. Aucun critère d’éligibilité pour les candidats n’est mentionné."
     },
     "nextAction": {
-      "en": "Contact ADIO or ADGM to ask who is eligible to express interest in the Abu Dhabi Investment Forum.",
-      "fr": "Contacter l’ADIO ou l’ADGM pour demander qui peut manifester son intérêt pour l’Abu Dhabi Investment Forum."
+      "en": "Contact ADIO or ADGM to ask who is eligible to participate in the Abu Dhabi Investment Forum.",
+      "fr": "Contacter l’ADIO ou l’ADGM pour demander qui est éligible à participer au Abu Dhabi Investment Forum."
     }
   }
 }

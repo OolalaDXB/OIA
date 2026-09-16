@@ -234,44 +234,20 @@ Sustainable opportunities
 Only sustainable
 Search Clear all 
 Save this search
-Displaying results 1 to 15 of 1444
+Displaying results 1 to 15 of 1440
 	Title	Deadline	Published	Organization	Type of opportunity	Reference	Beneficiary country or territory
-
-	
-Réalisation d un forage d eau à Clercine (IGPNH)
-	16-Sep-2026 16:30 (GMT -4.00) Expires within 24 hours	28-Aug-2026	UNDP	Request for quotation	UNDP-HTI-00621	Haiti
-
-	
-Consultoría Fortalecimiento de la Implementación Protocolo de Nagoya en Honduras
-	16-Sep-2026 17:00 (GMT -4.00) Expires within 24 hours	21-Aug-2026	UNDP	Call for individual consultants	UNDP-HND-00681	Honduras
 
 	
 Producción de actividades deportivas, lúdicas y artísticas
 	16-Sep-2026 17:00 (GMT -5.00) Expires within 24 hours	03-Sep-2026	IOM	Request for quotation	30000032864	Peru
 
 	
-RFQ – Service de conception et impression de supports de communication
-	16-Sep-2026 17:03 (GMT -4.00) Expires within 24 hours	25-Aug-2026	UN-Women	Request for quotation	UNW-CAF-2026-00006-2	Central African Republic
-
-	
 Consultancy firm to provide Market Access and Commercialization Partner
 	16-Sep-2026 17:59 (GMT -4.00) Expires within 24 hours	02-Sep-2026	UNDP	Request for proposal	UNDP-NGA-01477	Nigeria
 
 	
-Call for External Collaborator – Cooperative Development Advisor (Remote), ILO PROSPECTS Lebanon
-	16-Sep-2026 22:59 (GMT 2.00) Expires within 24 hours	02-Sep-2026	ILO	Call for individual consultants	rfx_10359_ROAS	Lebanon
-
-	
-Event management service for Public Employment Offices (PES) TOT workshop, ILO Syria, PROSPECTS
-	16-Sep-2026 22:59 (GMT 2.00) Expires within 24 hours	09-Sep-2026	ILO	Request for quotation	rfx_10532_ROAS	Syrian Arab Republic
-
-	
 01 National Consultancy Firm for Conducting a survey and assessment
 	16-Sep-2026 23:00 (GMT -4.00) Expires within 24 hours	21-Aug-2026	UNDP	Request for proposal	UNDP-VNM-02310	Viet Nam
-
-	
-Request for Quotation for CO Manila - Photocopy and printing paper office supply
-	16-Sep-2026 23:00 (GMT 2.00) Expires within 24 hours	11-Sep-2026	ILO	Request for quotation	rfx_10736_ROAP	Philippines
 
 	
 RFQ_Procurement of market equipment for markets in Fiji
@@ -286,8 +262,12 @@ Building the Technical Architecture of the General Education Certificate (GEC)
 	16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours	27-Aug-2026	UNICEF	Request for proposal	LRPS-2026-9205867	South Africa
 
 	
-Production of digital education packages for Somalia
-	16-Sep-2026 23:59 (GMT 3.00) Expires within 24 hours	03-Sep-2026	UNICEF	Request for proposal	LRPS-2026-9205952	Somalia
+137883 SEMOVIENTES HUILA
+	16-Sep-2026 23:59 (GMT -5.00) Expires within 24 hours	28-Aug-2026	FAO	Invitation to bid	2026/FLCOL/FLCOL/137883	Colombia
+
+	
+Intercultural Trainings Kompass II
+	16-Sep-2026 23:59 (GMT 0.00) Expires within 24 hours	01-Sep-2026	IOM	Request for quotation	30000030159	Austria
 
 	
 138200 SUMINISTRO DE ANIMALES DE PRODUCCIÓN PECUARIA – AVES DE POSTURA Y PORCINOS DE LEVANTE, DPTO. DE CÓRDOBA
@@ -296,6 +276,26 @@ Production of digital education packages for Somalia
 	
 Consultancy to support the development of a Framework of Action on Skills for a Just Energy Transition through Social Dialogue in Mpumalanga and the Eastern Cape.
 	16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours	09-Sep-2026	ILO	Call for individual consultants	rfx_10268_ROAF	South Africa
+
+	
+Provision of Managed Print Services for ESCAP and Other Clients in Bangkok
+	16-Sep-2026 23:59 (GMT -4.00) Expires within 24 hours	26-Aug-2026	UN Secretariat	Request for EOI	EOIUNESCAP24651	Thailand
+
+	
+Provision of Chilled water Cenrtifugal Pump
+	16-Sep-2026 23:59 (GMT -4.00) Expires within 24 hours	02-Sep-2026	UN Secretariat	Request for EOI	EOIUNECA24668	Ethiopia
+
+	
+Invitation to Bid – Long-Term Agreement (LTA) for Provision of Prepaid Stored-Value Cards (Gift Cards) in Poland
+	17-Sep-2026 00:00 (GMT 1.00) Expires within 24 hours	31-Aug-2026	IOM	Invitation to bid	ITB Reference No: 30000032242	Poland
+
+	
+FOR THE SUPPLY AND DELIVERY (DDP) OF VEHICLE, CONSUMABLES, AND SPARES TO UNHCR GEDAREF OPERATIONS-COR
+	17-Sep-2026 00:00 (GMT -10.00) Expires within 24 hours	08-Sep-2026	UNHCR	Request for quotation	RFQ-HCR-GSO-2026-006	Sudan
+
+	
+FOR THE SUPPLY AND DELIVERY (DDP) OF VEHICLE, CONSUMABLES, AND SPARE PARTS TO UNHCR GEDAREF OPERATIONS
+	17-Sep-2026 00:00 (GMT -10.00) Expires within 24 hours	08-Sep-2026	UNHCR	Request for quotation	RFQ-HCR-GSO-2026-007	Sudan
 
 © 2026 - United Nations Global Marketplace (UNGM) •  Terms and Conditions •  Site Map •  Glossary •  
 

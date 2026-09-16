@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations may apply to the InnovFund. There is no mention of eligibility criteria for applicants such as legal status, sector, or location.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au Fonds pour l'innovation. Il n'y a aucune mention des critères d'éligibilité pour les candidats, tels que le statut juridique, le secteur ou la localisation."
+    },
+    "nextAction": {
+      "en": "Check the official InnovFund call for proposals or guidelines to find the section on eligible applicants.",
+      "fr": "Consulter l'appel à projets ou le guide officiel du Fonds pour l'innovation afin de trouver la section sur les candidats éligibles."
+    }
+  }
+}

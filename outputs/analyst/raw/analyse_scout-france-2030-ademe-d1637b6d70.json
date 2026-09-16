@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citations": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations may apply. There is no mention of eligibility criteria for applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité pour les candidats."
+    },
+    "nextAction": {
+      "en": "Check the full call for projects document or the ADEME website to find the eligibility criteria for applicants.",
+      "fr": "Consulter le document complet de l'appel à projets ou le site de l'ADEME pour trouver les critères d'éligibilité des candidats."
+    }
+  }
+}

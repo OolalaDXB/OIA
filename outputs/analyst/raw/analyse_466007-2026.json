@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citation": [],
+    "citations": [],
     "reason": {
-      "en": "The extracted text does not specify who may apply for this tender. There is no mention of eligible applicants, legal forms, or geographic restrictions that would confirm or exclude BAWABA.",
-      "fr": "Le texte extrait ne précise pas qui peut postuler à cet appel d'offres. Il n'y a aucune mention des candidats éligibles, des formes juridiques ou des restrictions géographiques qui confirmeraient ou excluraient BAWABA."
+      "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of legal form, geographic location, or other criteria that would confirm or exclude BAWABA.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles. Il n'y a aucune mention de la forme juridique, de la localisation géographique ou d'autres critères qui confirmeraient ou excluraient BAWABA."
     },
     "nextAction": {
-      "en": "Request the full tender documents from M.R.L. MAISON DE RETRAITE DE LA LOIRE to confirm eligibility criteria.",
-      "fr": "Demander les documents complets de l'appel d'offres à M.R.L. MAISON DE RETRAITE DE LA LOIRE pour confirmer les critères d'éligibilité."
+      "en": "Contact the buyer (M.R.L. MAISON DE RETRAITE DE LA LOIRE) to ask for the full tender documents and confirm eligibility requirements.",
+      "fr": "Contacter l'acheteur (M.R.L. MAISON DE RETRAITE DE LA LOIRE) pour demander les documents complets de l'appel d'offres et confirmer les critères d'éligibilité."
     }
   }
 }

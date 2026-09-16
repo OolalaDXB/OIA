@@ -1,0 +1,16 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citations": [
+      "eligibility: Suitable for SME & VCSE"
+    ],
+    "reason": {
+      "en": "The opportunity explicitly restricts applicants to SMEs (Small and Medium-sized Enterprises) and VCSEs (Voluntary, Community, and Social Enterprises). TheStudio MT operates in software, digital, design, and advisory sectors, with no indication it is a VCSE. Its legal entities are not specified as VCSEs or qualifying SMEs under this framework.",
+      "fr": "L'opportunité restreint explicitement les candidats aux PME (Petites et Moyennes Entreprises) et aux organisations VCSE (Volontaires, Communautaires et Sociales). TheStudio MT opère dans les secteurs du logiciel, du numérique, du design et du conseil, sans indication qu'il s'agit d'une VCSE. Ses entités légales ne sont pas spécifiées comme des VCSE ou des PME éligibles dans le cadre de ce programme."
+    },
+    "nextAction": {
+      "en": "Confirm the legal status of TheStudio MT’s entities to verify if any qualify as a VCSE or SME under the UK definitions for this framework.",
+      "fr": "Vérifier le statut légal des entités de TheStudio MT pour confirmer si l'une d'elles est éligible en tant que VCSE ou PME selon les définitions britanniques de ce cadre."
+    }
+  }
+}

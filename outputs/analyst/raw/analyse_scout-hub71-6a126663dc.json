@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "eligibility: Smart and autonomous mobility startups",
+    "reason": {
+      "en": "BAWABA operates as a 'Sovereign AI control plane for regulated industries' and is not described as a smart or autonomous mobility startup. The opportunity explicitly restricts eligibility to 'Smart and autonomous mobility startups.'",
+      "fr": "BAWABA fonctionne comme un 'plan de contrôle d'IA souveraine pour les industries réglementées' et n'est pas décrite comme une startup de mobilité intelligente ou autonome. L'opportunité restreint explicitement l'éligibilité aux 'startups de mobilité intelligente et autonome.'"
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that target AI, data, or cybersecurity startups in Abu Dhabi or the broader UAE.",
+      "fr": "Examiner d'autres opportunités de financement ciblant les startups en IA, données ou cybersécurité à Abu Dhabi ou dans les Émirats arabes unis en général."
+    }
+  }
+}

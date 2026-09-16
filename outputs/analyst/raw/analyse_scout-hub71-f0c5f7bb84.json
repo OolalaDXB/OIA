@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "LIKELY",
+    "citation": "Hub71+ ClimateTech is a specialist ecosystem, where sustainability startups leverage technologies to drive decarbonization in supporting a net zero future.",
+    "reason": {
+      "en": "The opportunity explicitly targets 'sustainability startups' focused on decarbonization and a net-zero future. BAWABA's dossier does not confirm whether its AI control plane for regulated industries directly contributes to climate technology or decarbonization efforts.",
+      "fr": "L'opportunité cible explicitement les 'startups de durabilité' axées sur la décarbonisation et un avenir net-zéro. Le dossier de BAWABA ne confirme pas si sa plateforme de contrôle d'IA pour les industries réglementées contribue directement aux technologies climatiques ou aux efforts de décarbonisation."
+    },
+    "nextAction": {
+      "en": "Confirm with BAWABA whether their AI control plane technology is designed to support decarbonization or climate-related solutions.",
+      "fr": "Vérifier auprès de BAWABA si leur technologie de plateforme de contrôle d'IA est conçue pour soutenir la décarbonisation ou des solutions liées au climat."
+    }
+  }
+}

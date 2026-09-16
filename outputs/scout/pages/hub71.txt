@@ -149,13 +149,13 @@ nationalities
 sectors
 SOME OF OUR STARTUPS:
 
-Dapio Tap to Pay transforms the way you get paid
+Smart Navigation Systems provides innovative location based solutions
+
+Lune is an AI-driven engagement and hyper-personalization platform for banks, built on insights from over 1 billion transactions. Our Transaction Enrichment API transforms raw transaction data into actionable insights, powering our core products: Enrichment, Personal Finance Engagement (PFE) SDK, Insights Dashboard, and Smart Nudges. (Supports Arabic transliteration)
 
 A community-based platform in outer space with blockchain technology
 
-Mashvisor is a platform that combines all services needed for real estate investing, cutting three months’ worth of research down to only 15 minutes.
-
-Algocyte is the first Self-Monitoring Blood Count home device based on AI
+We are currently on the Polygon (Matic) Network, which is an Ethereum-compatible blockchain network.
 
 ALL STARTUPS
 Our community says

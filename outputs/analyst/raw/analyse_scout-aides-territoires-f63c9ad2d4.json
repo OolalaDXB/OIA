@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations may apply for the LIFE programme. There is no mention of eligibility criteria for applicants such as legal status, sector, or geographic scope.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au programme LIFE. Il n'y a aucune mention des critères d'éligibilité pour les candidats, tels que le statut juridique, le secteur ou la portée géographique."
+    },
+    "nextAction": {
+      "en": "Check the official LIFE programme guidelines or call the issuing authority to confirm whether heritage associations are eligible applicants.",
+      "fr": "Consulter les directives officielles du programme LIFE ou contacter l'autorité émettrice pour confirmer si les associations patrimoniales sont éligibles."
+    }
+  }
+}

@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria for applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Aucun critère d'éligibilité pour les candidats n'est mentionné."
+      "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria related to legal status, sector, or other requirements.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il n'y a aucune mention des critères d'éligibilité liés au statut juridique, au secteur d'activité ou à d'autres exigences."
     },
     "nextAction": {
-      "en": "Check the full call for proposals or official documentation of the PIA 4 programme to identify the eligibility criteria for applicants.",
-      "fr": "Consulter l'appel à projets complet ou la documentation officielle du programme PIA 4 pour identifier les critères d'éligibilité des candidats."
+      "en": "Check the full call for proposals or official guidelines to determine which types of organisations are eligible to apply.",
+      "fr": "Consulter l'appel à projets complet ou les directives officielles pour déterminer quels types d'organisations sont éligibles."
     }
   }
 }

@@ -1,0 +1,16 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "ELIGIBLE",
+    "citations": [
+      "LEADER est un programme d'initiative communautaire pour cofinancer des projets publics ou privés qui favorisent le développement des zones rurales."
+    ],
+    "reason": {
+      "en": "The opportunity explicitly states that both public and private projects are eligible for co-financing, and the organisation is an association operating in rural areas (Bretagne) with a focus on heritage, culture, and tourism, which aligns with the scope of rural development.",
+      "fr": "L'opportunité indique explicitement que les projets publics ou privés sont éligibles au cofinancement, et l'organisation est une association opérant dans les zones rurales (Bretagne) avec un focus sur le patrimoine, la culture et le tourisme, ce qui correspond à l'objectif de développement rural."
+    },
+    "nextAction": {
+      "en": "Confirm with the issuer whether an association without a recorded legal entity can formally apply for this grant.",
+      "fr": "Vérifier auprès de l'émetteur si une association sans entité juridique enregistrée peut officiellement déposer une candidature pour cette subvention."
+    }
+  }
+}

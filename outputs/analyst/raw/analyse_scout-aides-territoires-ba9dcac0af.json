@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations may apply for this funding. It only mentions that funding is provided for technical and operational investigation equipment, specialized training, and research activities, but does not clarify eligibility criteria for applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à ce financement. Il mentionne uniquement que le financement est accordé pour des équipements d'investigation techniques et opérationnels, des formations spécialisées et des activités de recherche, sans clarifier les critères d'éligibilité des candidats."
+    },
+    "nextAction": {
+      "en": "Contact the issuer (beta.gouv.fr) to ask for the official eligibility criteria for this funding opportunity.",
+      "fr": "Contacter l'émetteur (beta.gouv.fr) pour demander les critères officiels d'éligibilité pour cette opportunité de financement."
+    }
+  }
+}

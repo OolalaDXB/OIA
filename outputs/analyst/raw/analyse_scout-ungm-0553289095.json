@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations or legal entities are eligible to apply for the International Procurement Seminars (IPS). It only describes the purpose of the seminars.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations ou d'entités juridiques sont éligibles pour postuler aux Séminaires Internationaux sur les Achats (IPS). Il décrit uniquement l'objectif des séminaires."
+    },
+    "nextAction": {
+      "en": "Contact the United Nations procurement office or consult the full tender documentation to determine if TheStudio MT’s legal entities are eligible to participate.",
+      "fr": "Contacter le bureau des achats des Nations Unies ou consulter la documentation complète de l'appel d'offres pour déterminer si les entités juridiques de TheStudio MT sont éligibles à participer."
+    }
+  }
+}

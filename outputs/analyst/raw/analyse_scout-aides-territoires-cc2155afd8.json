@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for the EaSI programme. It describes the scope but does not state eligibility criteria for applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au programme EaSI. Il décrit le champ d'application mais ne mentionne pas les critères d'éligibilité des candidats."
+      "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligible applicants such as associations, companies, or public bodies.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il n'est pas fait mention des candidats éligibles tels que les associations, les entreprises ou les organismes publics."
     },
     "nextAction": {
-      "en": "Check the official EaSI programme documentation or contact the issuer (beta.gouv.fr) to confirm whether associations like 'Les Vieilles Pierres' are eligible to apply.",
-      "fr": "Consulter la documentation officielle du programme EaSI ou contacter l'émetteur (beta.gouv.fr) pour confirmer si les associations comme 'Les Vieilles Pierres' peuvent postuler."
+      "en": "Check the full call for proposals or official programme documentation to identify eligible applicants.",
+      "fr": "Consulter l'appel à propositions complet ou la documentation officielle du programme pour identifier les candidats éligibles."
     }
   }
 }
