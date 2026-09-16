@@ -1,0 +1,21 @@
+# OIA source registry entry. One file per source.
+# `status` is the first thing to read: LIVE means a real run has retrieved from it,
+# DECLARED means a human watches it by hand. A long list is not coverage.
+
+id: upwork
+name: "Upwork"
+operator: "Upwork Inc."
+kinds: ["MARKETPLACE_PROJECT"]
+geographies: ["GLOBAL"]
+forProjects: ["thestudio-mt"]
+url: "https://www.upwork.com"
+urlVerified: false
+status: BLOCKED
+access:
+  mode: API
+  auth: OAUTH
+notes: >-
+  Clients posting paid software work. An API exists behind OAuth, and the terms
+  of service govern what may be automated — so this is BLOCKED rather than
+  DECLARED until that is read properly. Postings found by hand go through the
+  manual intake today.

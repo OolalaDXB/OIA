@@ -1,6 +1,8 @@
 import type { FetchStatus, SourceFormat, VerificationStatus } from "./models";
 import type { DeadlineGateResult } from "./deadline";
 import type { ApplicationEligibility, AwardEligibility } from "@oia/scoring";
+import { normalizeKind, KIND_PROFILES, type OpportunityKind } from "./opportunity-kinds";
+import { conditionsFor, isActionable, KIND_SPECIFIC_QUESTION, type GateCondition } from "./gate-profiles";
 
 /**
  * Milestone 0 deterministic gate (spec §7, §9, §15). PURSUE is unreachable
@@ -12,6 +14,11 @@ import type { ApplicationEligibility, AwardEligibility } from "@oia/scoring";
 export type M0Recommendation = "PURSUE" | "PARTNER" | "INVESTIGATE" | "MONITOR" | "REJECT";
 
 export interface M0GateInput {
+  /**
+   * What kind of opportunity this is. Decides which hard conditions APPLY —
+   * never how strictly they are judged. Absent means the historical default.
+   */
+  opportunityKind?: string;
   fetchStatus: FetchStatus;
   verificationStatus: VerificationStatus;
   sourceFormat: SourceFormat;
@@ -36,12 +43,27 @@ export interface M0GateReport {
   notClosedCall: boolean;
   hasExactNextAction: boolean;
   sufficientConfidence: boolean;
-  /** True only if ALL hard conditions hold (the precondition for PURSUE). */
+  /** True only if ALL APPLICABLE hard conditions hold (the precondition for PURSUE). */
   pursueEligible: boolean;
   failedReasons: string[];
+  /** The kind the conditions were selected for. */
+  kind?: OpportunityKind;
+  /**
+   * Conditions that were not asked, and why. A reader must be able to tell a
+   * condition that passed from one that never applied — otherwise "9 green
+   * ticks" would mean different things on different records.
+   */
+  notApplicable?: { condition: GateCondition; reason: string }[];
+  /** What a human must answer instead, for kinds with no deadline. */
+  humanQuestion?: string;
 }
 
 export function evaluateM0Gate(input: M0GateInput): M0GateReport {
+  const kind = normalizeKind(input.opportunityKind);
+  const applicability = conditionsFor(kind);
+  const applies = (c: GateCondition): boolean =>
+    applicability.find((a) => a.condition === c)?.applies ?? true;
+
   const accessiblePrimarySource =
     input.hasOfficialArtifact &&
     input.verificationStatus !== "DISCOVERED_UNVERIFIED" &&
@@ -54,20 +76,39 @@ export function evaluateM0Gate(input: M0GateInput): M0GateReport {
   const notClosedCall = !input.isClosedCall;
   const sufficientConfidence = input.infoConfidence >= input.confidenceFloor;
 
-  const checks: Array<[boolean, string]> = [
-    [accessiblePrimarySource, "no accessible primary source"],
-    [verifiedSource, "source not human-VERIFIED"],
-    [verifiedDeadline, "no verified, non-conflicting, unexpired deadline"],
-    [notExpired, "opportunity is expired"],
-    [eligibilityAssessed, "application eligibility is UNKNOWN"],
-    [notAggregatorOnly, "aggregator-only lead cannot be pursued"],
-    [notClosedCall, "call is closed"],
-    [input.hasExactNextAction, "no exact next action"],
-    [sufficientConfidence, `info confidence ${input.infoConfidence} < floor ${input.confidenceFloor}`],
+  const checks: Array<[GateCondition, boolean, string]> = [
+    ["accessiblePrimarySource", accessiblePrimarySource, "no accessible primary source"],
+    ["verifiedSource", verifiedSource, "source not human-VERIFIED"],
+    ["verifiedDeadline", verifiedDeadline, "no verified, non-conflicting, unexpired deadline"],
+    ["notExpired", notExpired, "opportunity is expired"],
+    ["eligibilityAssessed", eligibilityAssessed, "application eligibility is UNKNOWN"],
+    ["notAggregatorOnly", notAggregatorOnly, "aggregator-only lead cannot be pursued"],
+    ["notClosedCall", notClosedCall, "call is closed"],
+    ["hasExactNextAction", input.hasExactNextAction, "no exact next action"],
+    [
+      "sufficientConfidence",
+      sufficientConfidence,
+      `info confidence ${input.infoConfidence} < floor ${input.confidenceFloor}`,
+    ],
   ];
-  const failedReasons = checks.filter(([ok]) => !ok).map(([, r]) => r);
+  // Only conditions that APPLY to this kind can fail it. A tax relief is not
+  // blocked for lacking a deadline it could never have had.
+  const failedReasons = checks.filter(([c, ok]) => applies(c) && !ok).map(([, , r]) => r);
+  const notApplicable = applicability
+    .filter((a) => !a.applies)
+    .map((a) => ({ condition: a.condition, reason: a.reason }));
+
+  // Watch-only kinds are never pursuable, whatever the evidence.
+  if (!isActionable(kind)) {
+    failedReasons.push(`${KIND_PROFILES[kind].label.toLowerCase()} is watch-only — there is nothing to apply to`);
+  }
+
+  const question = KIND_SPECIFIC_QUESTION[kind];
 
   return {
+    kind,
+    ...(notApplicable.length > 0 ? { notApplicable } : {}),
+    ...(question ? { humanQuestion: question } : {}),
     accessiblePrimarySource,
     verifiedSource,
     verifiedDeadline,

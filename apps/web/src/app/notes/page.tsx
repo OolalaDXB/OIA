@@ -1,9 +1,9 @@
 import { loadConsoleData } from "../../lib/loadData";
-import { NotesView } from "./NotesView";
+import { WorkspaceView } from "../workspace/WorkspaceView";
 
-/** Notes (Phase 3). */
+/** Kept so existing links still work: notes live in the workspace now. */
 export default function NotesPage() {
   const data = loadConsoleData();
   if (!data) return null;
-  return <NotesView data={data} />;
+  return <WorkspaceView data={data} tab="notes" />;
 }

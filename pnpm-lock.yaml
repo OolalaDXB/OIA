@@ -100,6 +100,12 @@ importers:
       '@oia/watch':
         specifier: workspace:*
         version: link:../../packages/watch
+      '@supabase/supabase-js':
+        specifier: ^2.47.10
+        version: 2.111.0
+      yaml:
+        specifier: ^2.6.1
+        version: 2.9.0
     devDependencies:
       tsx:
         specifier: ^4.19.2
@@ -277,6 +283,9 @@ importers:
       '@oia/database':
         specifier: workspace:*
         version: link:../database
+      '@oia/ingestion':
+        specifier: workspace:*
+        version: link:../ingestion
       yaml:
         specifier: ^2.6.1
         version: 2.9.0

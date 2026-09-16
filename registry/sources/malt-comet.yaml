@@ -1,0 +1,20 @@
+# OIA source registry entry. One file per source.
+# `status` is the first thing to read: LIVE means a real run has retrieved from it,
+# DECLARED means a human watches it by hand. A long list is not coverage.
+
+id: malt-comet
+name: "Malt, Comet and French consulting marketplaces"
+operator: "Various"
+kinds: ["MARKETPLACE_PROJECT"]
+geographies: ["FR", "EU"]
+forProjects: ["thestudio-mt"]
+url: "https://www.malt.fr"
+urlVerified: false
+status: BLOCKED
+access:
+  mode: SCRAPE
+  auth: CREDENTIALS
+notes: >-
+  Visible only to signed-in members, which makes scraping both a terms question
+  and a credentials question. Manual intake until there is a reason to resolve
+  both.

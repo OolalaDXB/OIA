@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { ConsoleData, ConsoleRecord } from "@oia/ingestion/console";
 import { supabase } from "./supabase";
 
@@ -164,4 +164,62 @@ export function useAlerts() {
 
   const open = alerts.filter((a) => !a.acknowledgedAt);
   return { alerts, open, loading, error, acknowledge, reload: load };
+}
+
+export interface LinkStatusRow {
+  url: string;
+  status: string;
+  httpCode: number | null;
+  finalUrl: string | null;
+  checkedAt: string;
+  note: string;
+}
+
+/**
+ * What the link checker found, for every URL the console shows.
+ *
+ * A URL with no row has simply never been checked, and the UI says "unchecked"
+ * rather than implying it works — which is the whole difference between a link
+ * that was verified and one that was merely typed.
+ */
+export function useLinkStatus() {
+  const [byUrl, setByUrl] = useState<Map<string, LinkStatusRow>>(new Map());
+
+  useEffect(() => {
+    const client = supabase();
+    if (!client) return;
+    let active = true;
+    void (async () => {
+      const { data, error } = await client
+        .from("link_checks")
+        .select("url, status, http_code, final_url, checked_at, note");
+      if (!active || error || !data) return;
+      setByUrl(
+        new Map(
+          (data as Record<string, unknown>[]).map((r) => [
+            String(r["url"]),
+            {
+              url: String(r["url"]),
+              status: String(r["status"]),
+              httpCode: (r["http_code"] as number | null) ?? null,
+              finalUrl: (r["final_url"] as string | null) ?? null,
+              checkedAt: String(r["checked_at"]),
+              note: String(r["note"] ?? ""),
+            },
+          ]),
+        ),
+      );
+    })();
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const statusOf = useCallback((url: string): LinkStatusRow | null => byUrl.get(url) ?? null, [byUrl]);
+  const brokenCount = useMemo(
+    () => [...byUrl.values()].filter((r) => r.status === "DEAD" || r.status === "UNREACHABLE").length,
+    [byUrl],
+  );
+
+  return { statusOf, brokenCount, checked: byUrl.size };
 }

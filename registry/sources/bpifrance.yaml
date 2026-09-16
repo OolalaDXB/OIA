@@ -1,0 +1,18 @@
+# OIA source registry entry. One file per source.
+# `status` is the first thing to read: LIVE means a real run has retrieved from it,
+# DECLARED means a human watches it by hand. A long list is not coverage.
+
+id: bpifrance
+name: "Bpifrance"
+operator: "Bpifrance"
+kinds: ["GRANT", "DEBT_GUARANTEE", "EQUITY"]
+geographies: ["FR"]
+url: "https://www.bpifrance.fr/nos-appels-a-projets-concours"
+urlVerified: false
+status: DECLARED
+access:
+  mode: MANUAL
+  auth: NONE
+notes: >-
+  Grants, repayable advances, guarantees and equity. Covers three of the kinds
+  the taxonomy now distinguishes, which is why they were worth distinguishing.

@@ -1,0 +1,20 @@
+# OIA source registry entry. One file per source.
+# `status` is the first thing to read: LIVE means a real run has retrieved from it,
+# DECLARED means a human watches it by hand. A long list is not coverage.
+
+id: adio
+name: "Abu Dhabi Investment Office — incentive programmes"
+operator: "ADIO"
+kinds: ["GRANT", "EQUITY"]
+geographies: ["AE", "GCC"]
+forProjects: ["bawaba", "myoolala"]
+url: "https://www.investabudhabi.ae"
+urlVerified: false
+status: DECLARED
+access:
+  mode: MANUAL
+  auth: NONE
+notes: >-
+  Innovation and investment incentives for companies establishing in Abu Dhabi.
+  Relevant through Oolala Next FZ-LLC — the entity route matters here more than
+  the call itself.

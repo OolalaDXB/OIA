@@ -1,0 +1,18 @@
+# OIA source registry entry. One file per source.
+# `status` is the first thing to read: LIVE means a real run has retrieved from it,
+# DECLARED means a human watches it by hand. A long list is not coverage.
+
+id: uk-find-a-tender
+name: "Find a Tender (UK)"
+operator: "UK Cabinet Office"
+kinds: ["TENDER", "PRE_SOLICITATION"]
+geographies: ["GB"]
+url: "https://www.find-tender.service.gov.uk"
+urlVerified: false
+status: DECLARED
+access:
+  mode: API
+  auth: NONE
+notes: >-
+  The UK's post-Brexit equivalent of TED. Publishes an OCDS feed, which would
+  make it the second-easiest connector after TED.

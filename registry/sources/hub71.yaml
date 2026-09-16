@@ -1,0 +1,20 @@
+# OIA source registry entry. One file per source.
+# `status` is the first thing to read: LIVE means a real run has retrieved from it,
+# DECLARED means a human watches it by hand. A long list is not coverage.
+
+id: hub71
+name: "Hub71"
+operator: "Abu Dhabi (Mubadala)"
+kinds: ["EQUITY", "GRANT"]
+geographies: ["AE", "GCC"]
+forProjects: ["bawaba", "myoolala", "beau"]
+url: "https://hub71.com"
+urlVerified: false
+status: DECLARED
+access:
+  mode: MANUAL
+  auth: NONE
+notes: >-
+  Abu Dhabi tech ecosystem: incentive packages and cohorts. One Hub71 record
+  already sits in the dataset from the Milestone-0 seed, entered by hand — this
+  entry makes that source explicit rather than incidental.

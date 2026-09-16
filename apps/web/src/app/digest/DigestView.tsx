@@ -6,6 +6,8 @@ import { buildDigest, digestToMarkdown, projectName, type DigestReason } from "@
 import { applyFreshnessAll } from "@oia/ingestion/freshness";
 import { Shell } from "../Shell";
 import { download, useAuditLog, useProjectTags, useTasks } from "../../lib/workspaceStore";
+import { useAlerts } from "../../lib/watchData";
+import { isConfigured } from "../../lib/supabase";
 import { useLedger } from "../../lib/watchData";
 
 /**
@@ -37,6 +39,7 @@ export function DigestView({ data }: { data: ConsoleData }) {
   const audit = useAuditLog();
   const tags = useProjectTags();
   const tasks = useTasks();
+  const alerts = useAlerts();
   const [horizon, setHorizon] = useState(14);
 
   const today = useMemo(() => new Date().toISOString().slice(0, 10), []);
@@ -63,10 +66,10 @@ export function DigestView({ data }: { data: ConsoleData }) {
 
   return (
     <Shell
-      active="digest"
+      active="today"
       title={`Today — ${digest.date}`}
-      stats={`${digest.entries.length} item(s) · horizon ${horizon}d · ${ledger.source === "LEDGER" ? "watch ledger" : "bundled snapshot"}`}
-      note="Deterministic: deadlines, tasks and review state. No ranking model, no LLM. It never promotes a record and never invents an action."
+      stats={`${alerts.open.length} alert(s) · ${digest.entries.length} thing(s) to do · ${ledger.source === "LEDGER" ? "live ledger" : "bundled snapshot"}`}
+      note="Everything that is asking for you: alerts raised by the permanent watch, then what is closing, overdue, blocked or untriaged. No ranking model — just deadlines, tasks and what you already decided."
       onExportAudit={audit.exportLog}
     >
       <div className="filters">
@@ -92,7 +95,32 @@ export function DigestView({ data }: { data: ConsoleData }) {
       </div>
 
       <div className="detail wide">
-        {groups.length === 0 && (
+        {isConfigured() && alerts.open.length > 0 && (
+          <section className="sec">
+            <h3 className="warn">Alerts · {alerts.open.length}</h3>
+            <div className="muted small">
+              Raised by the watch when something changed: a new call matching a project, a deadline moving, a call
+              withdrawn. Acknowledging one keeps the record — it only stops asking.
+            </div>
+            {alerts.open.slice(0, 12).map((a) => (
+              <div key={a.id} className="fact" style={{ borderLeftColor: "var(--reject)" }}>
+                <div className="viewsRow">
+                  <b>{a.headline}</b>
+                  {a.projectSlug && <span className="pubChip tagChip">{projectName(a.projectSlug)}</span>}
+                </div>
+                <div>{a.nextAction}</div>
+                <div className="muted small">
+                  {a.detail}
+                  <button className="ghostBtn applyBtn" onClick={() => void alerts.acknowledge(a.id, "mickael")}>
+                    acknowledge
+                  </button>
+                </div>
+              </div>
+            ))}
+          </section>
+        )}
+
+        {groups.length === 0 && alerts.open.length === 0 && (
           <section className="sec">
             <h3>Nothing needs you today</h3>
             <p className="muted">

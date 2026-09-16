@@ -52,23 +52,76 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
 
+      # Searches asked for from the console. Claimed here (QUEUED -> RUNNING) so
+      # a second run cannot cover the same request twice, and closed at the end
+      # against what actually happened — a request is never reported as searched
+      # unless a search ran.
+      - name: Claim the searches the console asked for
+        id: requested
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo "::warning::No Supabase credentials — searches requested from the console were not read. See docs/access-and-data.md."
+            echo "projects=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          pnpm --filter @oia/workers requests -- --plan
+
+      # Explicit input wins; otherwise the console's requests decide; otherwise
+      # every project whose registry entry enables discovery.
+      - name: Decide which projects this run covers
+        id: scope
+        run: |
+          PROJECTS="${{ inputs.projects }}"
+          if [ -z "$PROJECTS" ]; then PROJECTS="${{ steps.requested.outputs.projects }}"; fi
+          echo "projects=$PROJECTS" >> "$GITHUB_OUTPUT"
+          if [ -n "$PROJECTS" ]; then
+            echo "Covering: $PROJECTS"
+          else
+            echo "Covering every project with discovery enabled."
+          fi
+
       - name: Show the discovery plan
-        run: pnpm --filter @oia/workers discover:ted -- --list --project "${{ inputs.projects }}"
-        if: inputs.projects != ''
-      - name: Show the discovery plan (all projects)
-        run: pnpm --filter @oia/workers discover:ted -- --list
-        if: inputs.projects == ''
+        run: |
+          if [ -n "${{ steps.scope.outputs.projects }}" ]; then
+            pnpm --filter @oia/workers discover:ted -- --list --project "${{ steps.scope.outputs.projects }}"
+          else
+            pnpm --filter @oia/workers discover:ted -- --list
+          fi
 
       - name: Discover (one expert query per project)
         env:
           TED_MAX: ${{ inputs.maxNotices || '25' }}
           TED_PUBLISHED_SINCE: ${{ inputs.publishedSince }}
         run: |
-          if [ -n "${{ inputs.projects }}" ]; then
-            pnpm --filter @oia/workers discover:ted -- --project "${{ inputs.projects }}"
+          if [ -n "${{ steps.scope.outputs.projects }}" ]; then
+            pnpm --filter @oia/workers discover:ted -- --project "${{ steps.scope.outputs.projects }}"
           else
             pnpm --filter @oia/workers discover:ted
           fi
+
+      # Links pasted from the console, and pages nobody has a connector for.
+      # Runs before the console is rebuilt so a newly ingested call is in it.
+      - name: Drain the request queue (links pasted from the console)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo "::warning::No Supabase credentials — pasted links and project drafts were not processed."
+            exit 0
+          fi
+          pnpm --filter @oia/workers requests
+
+      # Applying a project draft writes YAML, and the browser reads a generated
+      # snapshot of it. Regenerating here is what keeps the drift test in the
+      # next step a real check rather than a guaranteed failure.
+      - name: Regenerate and validate the registry
+        run: |
+          pnpm --filter @oia/registry generate
+          pnpm --filter @oia/registry validate
 
       - name: Rebuild the console dataset
         run: pnpm --filter @oia/workers exec tsx src/ted-to-console.ts
@@ -94,17 +147,34 @@ jobs:
             echo "::warning::SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY not set — the ledger was not updated and no alert was raised. See docs/access-and-data.md."
             exit 0
           fi
-          if [ -n "${{ inputs.projects }}" ]; then
-            pnpm --filter @oia/workers publish:watch -- --project "${{ inputs.projects }}"
+          if [ -n "${{ steps.scope.outputs.projects }}" ]; then
+            pnpm --filter @oia/workers publish:watch -- --project "${{ steps.scope.outputs.projects }}"
           else
             pnpm --filter @oia/workers publish:watch
           fi
+
+      # Every published link, actually requested. A 404 in a shortlist is the
+      # fastest way to lose trust in the whole thing, and this is also the only
+      # place with the egress to find out. It stamps the registry with what it
+      # verified — and refuses to stamp anything if its own egress is blocked,
+      # rather than blaming other people's sites for our network.
+      - name: Check every published link
+        id: links
+        continue-on-error: true
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          pnpm --filter @oia/workers check:links
+          # The stamp lands in YAML; the snapshot the browser reads must follow it.
+          pnpm --filter @oia/registry generate
 
       - name: Commit the refreshed data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add apps/web/src/data/console.json outputs/sprint-1
+          git add apps/web/src/data/console.json outputs/sprint-1 registry/sources registry/projects \
+                  packages/registry/src/snapshot.json packages/registry/src/sources.snapshot.json
           if git diff --cached --quiet; then
             echo "No change in the discovered set — nothing to publish."
             exit 0
@@ -114,6 +184,24 @@ jobs:
                      -m "Automated run of discover:ted across every project with discovery enabled, then ted-to-console. Typecheck, tests and the web build passed against this dataset before it was committed."
           git push
 
+      # Close the claimed requests against the real outcome. `always()`, because
+      # a request left RUNNING forever is indistinguishable from one still in
+      # flight, and the console would keep saying "searching".
+      - name: Close the searches the console asked for
+        if: always()
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then exit 0; fi
+          if [ "${{ job.status }}" = "success" ]; then
+            pnpm --filter @oia/workers requests -- --settle=success
+          else
+            pnpm --filter @oia/workers requests -- --settle=failure
+          fi
+
       - name: Run report
         if: always()
-        run: cat outputs/sprint-1/run-report.md >> "$GITHUB_STEP_SUMMARY" || true
+        run: |
+          cat outputs/sprint-1/run-report.md >> "$GITHUB_STEP_SUMMARY" || true
+          cat outputs/link-check/report.md >> "$GITHUB_STEP_SUMMARY" || true

@@ -45,21 +45,25 @@ export interface ConsoleDeadline {
 }
 
 /**
- * Opportunity sub-typing (mandate v2 §5). GRANT and TENDER_RFP share the
- * verification/provenance/gate pipeline (official published source, deadline,
- * eligibility) and differ by fact schema; VC_INVESTOR is a distinct kind with
- * its own future pipeline (relational data, matching + outreach) — never
- * forced through the tender pipeline. REGULATORY is watch-only.
+ * Opportunity sub-typing now lives in `opportunity-kinds.ts`, which replaced the
+ * original four values with nine — and, more importantly, stopped assuming that
+ * every opportunity is a call with a deadline. Re-exported here so the console's
+ * existing imports keep working.
  */
-export const OPPORTUNITY_KINDS = ["GRANT", "TENDER_RFP", "VC_INVESTOR", "REGULATORY"] as const;
-export type OpportunityKind = (typeof OPPORTUNITY_KINDS)[number];
+import type { OpportunityKind } from "./opportunity-kinds";
+export { OPPORTUNITY_KINDS } from "./opportunity-kinds";
+export type { OpportunityKind } from "./opportunity-kinds";
 
 export interface ConsoleRecord {
   id: string;
   title: string;
   issuer: string;
-  /** Sub-type discriminant; absent on records generated before it existed. */
-  opportunityKind?: OpportunityKind;
+  /**
+   * Sub-type discriminant. Records written before the taxonomy grew carry the
+   * legacy values (TENDER_RFP, VC_INVESTOR) — `normalizeKind` maps them on read
+   * rather than rewriting what a past run actually produced.
+   */
+  opportunityKind?: OpportunityKind | "TENDER_RFP" | "VC_INVESTOR";
   linkedBy: ObservedForRecord["linkedBy"];
 
   officialUrl?: string;

@@ -1,9 +1,13 @@
 # OIA — Oolala Intelligence Agency
 
 OIA finds, verifies and qualifies **real and currently actionable**
-opportunities — public funding, tenders, investors — for **every project the
-studio runs**, and gives one operator a workspace to triage them, decide, and
-track what is owed.
+opportunities for **every project the studio runs**, and gives one operator a
+workspace to triage them, decide, and track what is owed.
+
+Eleven kinds, because they do not behave alike: tenders and pre-solicitations
+(RFI, sources sought, PIN), grants, **tax incentives** (CIR, CII, JEI), equity,
+loans and guarantees, prizes, consortium calls, **marketplace projects**,
+**acquisitions** — and regulatory items that are only ever watched.
 
 It works for all of them from one place: 16 projects today (BAWABA, SILLON,
 Maisons.co, myOolala, BEAU, BEAU Treasury, RLS Guard, Coach Gari, Les Vieilles
@@ -22,9 +26,17 @@ opportunities. For every one it separates:
 and maintains four independent scores: **Relevance**, **Eligibility**,
 **Win potential**, **Information confidence**.
 
-No opportunity may be recommended as `PURSUE` without an accessible primary
-source, a verified deadline, confirmation it remains open, an eligibility
-assessment, an exact proposed next action, and sufficient source confidence.
+No opportunity may be recommended as `PURSUE` without **six universal
+conditions**: an accessible primary source, a verified source, an eligibility
+assessment, more than an aggregator listing, an exact proposed next action, and
+sufficient source confidence. **No kind can be exempted from any of them.**
+
+Three further conditions — verified deadline, not expired, call still open —
+apply **only to kinds that have a deadline**. A tax incentive is a status, not a
+call: demanding a deadline of it blocks it forever, which is a modelling bug,
+not rigour. That split is the difference between a gate that adapts and a gate
+that is a dial: the dial that would loosen "verified source" does not exist.
+
 **A human approval never overrides a failed condition** — the console records
 the approval and the gate still refuses, and the audit trail proves it.
 
@@ -43,18 +55,60 @@ dropdowns, the digest, the metrics — and in the next discovery run if
 
 ## The surfaces
 
+**Five destinations**, not thirteen. The rail was a list of every feature ever
+built; it is now a list of the things you actually do.
+
 | Route | What it is |
 |---|---|
-| `/digest` | **Today** — deadlines closing, work overdue, approvals the gate still blocks, what is untriaged. Deterministic; empty when nothing needs you |
-| `/` | Review console — the full queue, provenance-typed facts, gate report, four scores |
-| `/grants` `/tenders` `/investors` | The same shell, scoped by opportunity kind |
-| `/projects` | Every project: matching signals, entity route, discovery config, and whether the profile is owner-confirmed or still a hypothesis |
-| `/tasks` `/notes` `/contacts` | The human layer — what is owed, what was decided, who to talk to |
-| `/alerts` | What the permanent watch decided was worth interrupting you for — new, closing, moved, withdrawn, approved-but-blocked. Acknowledged, never deleted |
-| `/metrics` | Counts, and the one that matters: **why the gate blocks what it blocks** |
+| `/digest` | **Today** — what closes, what is overdue, what the watch raised, what is untriaged. Deterministic; empty when nothing needs you |
+| `/` | **Opportunities** — the full queue, provenance-typed facts, gate report, four scores |
+| `/projects` | **Projects** — signals, entity route, discovery config, whether the profile is owner-confirmed; and the three ways to start a search |
+| `/money` | **Money** — how much is in play per project, what is ready, and what is blocking the rest |
+| `/workspace` | **Workspace** — tasks, notes and contacts in one place |
 
-Shortlists export to CSV and Markdown; the digest exports to Markdown; the whole
-human layer backs up to one JSON file.
+Every older route (`/grants` `/tenders` `/investors` `/alerts` `/tasks` `/notes`
+`/contacts` `/metrics`) still resolves to the right view, so no shared link
+breaks.
+
+The vocabulary is translated once, in `lib/vocabulary.ts`:
+`MANUAL_REVIEW_REQUIRED` reads "not verified yet", `noVerifiedDeadline` reads
+"no confirmed deadline". Shortlists export to CSV and Markdown; the digest
+exports to Markdown; the whole human layer backs up to one JSON file.
+
+### Starting a search on anything
+
+Three ways, all from the console, all landing in the same pipeline:
+
+1. **Create a project** — the draft is validated by the *same* Zod schema the
+   YAML files are held to, then written to `registry/projects/<slug>.yaml` by
+   the worker. The YAML stays the source of truth.
+2. **Run a search** on any project. The request is *claimed* by the workflow,
+   run, then closed against what actually happened — never marked done for a
+   search that did not run.
+3. **Paste a link** — the universal intake, and the answer to sources with no
+   API. The page is fetched with the same SSRF-guarded fetcher, hashed, checked
+   against its own domain, read for scope and eligibility, and lands at **"not
+   verified yet"**. Pasting a link is not verifying a source.
+
+## Money, and links that actually resolve
+
+`/money` answers "how much is in play" under three rules that are printed on the
+screen rather than buried in the code: **coverage travels with every total**
+(a sum over 3 of 15 records is not a pipeline), **inbound and outbound never
+mix** (an acquisition spends), and **what the gate blocks is counted apart from
+what is ready**. Figures are *read* from documents, never estimated; ragged
+grouping lowers confidence instead of inventing certainty; currencies are never
+converted.
+
+`pnpm --filter @oia/workers check:links` verifies every published URL — project
+links, sources, opportunities — and writes the verdict back into the registry
+(`urlVerified`, `lastUrlCheck`). The console shows *verified on …* or *never
+checked*, never a link that merely looks fine.
+
+It starts with a **canary**: if our own egress is blocked, the run says the
+check did not happen, stamps nothing and exits non-zero. The first version
+reported 45 working URLs as refused — it was blaming other people's sites for
+our network, and a checker that lies about that is worse than none.
 
 ## Architecture
 
@@ -62,22 +116,22 @@ human layer backs up to one JSON file.
 |---|---|
 | `packages/config` | Zod-validated env + scoring constants |
 | `packages/database` | Domain Zod schemas, row types, Supabase client, migration `0001_init.sql` |
-| `packages/registry` | **The project registry** — YAML source of truth, schema, honesty rules, generated browser snapshot |
+| `packages/registry` | **The project and source registries** — YAML source of truth, schema, honesty rules, generated browser snapshot |
 | `packages/audit` | Fail-closed policy hooks + append-only audit sink |
 | `packages/providers` | Provider-neutral `LLMProvider` (Anthropic default + fake) |
 | `packages/connectors` | `SourceConnector` interface, polite hash-pinning fetcher, TED + EU Funding & Tenders (SEDIA) + manual |
-| `packages/ingestion` | Artifact ingestion, provenance-typed facts, deadlines, verification, the deterministic gate, **dedup**, **freshness/expiry** |
+| `packages/ingestion` | Artifact ingestion, provenance-typed facts, deadlines, verification, the deterministic gate, **the eleven kinds and their gate profiles**, tender-fact extraction, **link checking**, dedup, freshness/expiry |
 | `packages/scoring` | Four scores + the hard PURSUE gate (pure, table-tested) |
 | `packages/intelligence` | Qualifier: fact corroboration → eligibility → scores → gate → recommendation |
 | `packages/knowledge` | Canonical knowledge base + disclosure gate (what may be claimed externally) |
 | `packages/watch` | **The permanent watch** — the ledger that remembers between runs, change detection, and the alert rules |
-| `packages/workspace` | Workspace records, suggestions, **digest**, **metrics**, **exports**, storage adapter |
-| `apps/workers` | Dockerized pipelines; registry-driven multi-project discovery |
+| `packages/workspace` | Workspace records, suggestions, digest, metrics, **finance**, exports, storage adapter |
+| `apps/workers` | Dockerized pipelines; registry-driven multi-project discovery, ledger publishing, link checking, and the request queue |
 | `apps/web` | The console — static export, no backend |
 
 ```bash
 pnpm install
-pnpm typecheck && pnpm test          # 229 tests
+pnpm typecheck && pnpm test          # 275 tests
 pnpm --filter @oia/registry validate
 pnpm --filter @oia/knowledge validate
 pnpm --filter @oia/web build
@@ -114,10 +168,38 @@ pattern-matching a 54-character title.
 
 **It also runs itself.** `.github/workflows/discovery.yml` performs the same
 sequence every Monday (and on demand, with per-project overrides) where egress
-exists, verifies the result — typecheck, tests, web build — and only then commits
-the refreshed dataset, which redeploys the console. A shortlist that silently
-goes stale is not "currently actionable"; that is the point of the schedule.
-Disable it in the repository's Actions tab if you would rather refresh by hand.
+exists: it claims the searches the console asked for, discovers, drains the
+request queue, regenerates the registry, verifies the result — typecheck, tests,
+web build — checks every published link, and only then commits the refreshed
+dataset, which redeploys the console. Requests are closed at the end against the
+run's real outcome, with `always()`, because a request stuck at RUNNING looks
+exactly like one still in flight.
+
+A shortlist that silently goes stale is not "currently actionable"; that is the
+point of the schedule. Disable it in the repository's Actions tab if you would
+rather refresh by hand.
+
+## Where it looks
+
+`registry/sources/` holds 18 sources as YAML the code reads, not a list in a
+document. Each carries a status the validator enforces:
+
+| Status | Meaning | Today |
+|---|---|---|
+| `LIVE` | a connector runs and returns | TED |
+| `FIXTURE_ONLY` | connector written, never confirmed against the real service | EU Funding & Tenders |
+| `DECLARED` | source identified, **no connector** — paste-a-link is the path | 12, incl. **Région Bretagne**, aides-territoires, BPI, France 2030/ADEME, CIR-CII-JEI, **Hub71**, **ADIO**, UAE federal procurement, UK Find a Tender, UNGM, World Bank/AfDB/EBRD |
+| `BLOCKED` | automated access is forbidden or behind an account | Upwork, Malt/Comet, Acquire, Flippa |
+
+A `LIVE` entry without a connector fails validation, and a `DECLARED` entry that
+claims one fails too. That rule is what stops the list becoming a sales pitch.
+
+**On Upwork, Malt, Comet and Acquire specifically:** they are `BLOCKED` on
+purpose. Their terms forbid scraping, and using your credentials to harvest them
+would put **your** account at risk, not mine. The supported path is the link
+intake — see a mission or a listing worth having, paste the URL, it enters the
+pipeline like everything else. If any of them opens an official API, the entry
+changes status and a connector plugs in; the slot is already there.
 
 ## The permanent watch
 

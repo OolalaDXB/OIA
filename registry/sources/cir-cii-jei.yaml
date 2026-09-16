@@ -1,0 +1,19 @@
+# OIA source registry entry. One file per source.
+# `status` is the first thing to read: LIVE means a real run has retrieved from it,
+# DECLARED means a human watches it by hand. A long list is not coverage.
+
+id: cir-cii-jei
+name: "Research and innovation tax credits (CIR, CII, JEI)"
+operator: "French tax administration"
+kinds: ["TAX_INCENTIVE"]
+geographies: ["FR"]
+url: "https://www.entreprises.gouv.fr/fr/innovation/financement/credit-d-impot-recherche-cir"
+urlVerified: false
+status: DECLARED
+access:
+  mode: MANUAL
+  auth: NONE
+notes: >-
+  Not a call site and never will be: a fiscal status claimed on a filing. It is
+  listed because the taxonomy can now represent it — before TAX_INCENTIVE
+  existed, a tax credit could not pass the gate at any evidence level.

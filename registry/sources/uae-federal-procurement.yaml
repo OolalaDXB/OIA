@@ -1,0 +1,19 @@
+# OIA source registry entry. One file per source.
+# `status` is the first thing to read: LIVE means a real run has retrieved from it,
+# DECLARED means a human watches it by hand. A long list is not coverage.
+
+id: uae-federal-procurement
+name: "UAE federal and emirate procurement portals"
+operator: "UAE government entities"
+kinds: ["TENDER"]
+geographies: ["AE", "GCC"]
+url: "https://www.mof.gov.ae"
+urlVerified: false
+status: DECLARED
+access:
+  mode: MANUAL
+  auth: NONE
+notes: >-
+  Each emirate and several federal entities run their own portal, most
+  requiring supplier registration. No single machine-readable index is known to
+  exist. Treated as manual watch rather than pretending a connector is coming.

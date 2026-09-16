@@ -1,0 +1,17 @@
+# OIA source registry entry. One file per source.
+# `status` is the first thing to read: LIVE means a real run has retrieved from it,
+# DECLARED means a human watches it by hand. A long list is not coverage.
+
+id: flippa
+name: "Flippa"
+operator: "Flippa"
+kinds: ["ACQUISITION"]
+geographies: ["GLOBAL"]
+url: "https://flippa.com"
+urlVerified: false
+status: DECLARED
+access:
+  mode: MANUAL
+  auth: NONE
+notes: >-
+  Digital assets and small software businesses. Public listings; no connector.

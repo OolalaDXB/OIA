@@ -1,9 +1,9 @@
 import { loadConsoleData } from "../../lib/loadData";
-import { MetricsView } from "./MetricsView";
+import { MoneyView } from "../money/MoneyView";
 
-/** Metrics — counts over the run output and the human layer. */
+/** Kept so existing links still work: the metrics live on the money page now. */
 export default function MetricsPage() {
   const data = loadConsoleData();
   if (!data) return null;
-  return <MetricsView data={data} />;
+  return <MoneyView data={data} />;
 }

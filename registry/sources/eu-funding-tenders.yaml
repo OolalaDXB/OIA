@@ -1,0 +1,20 @@
+# OIA source registry entry. One file per source.
+# `status` is the first thing to read: LIVE means a real run has retrieved from it,
+# DECLARED means a human watches it by hand. A long list is not coverage.
+
+id: eu-funding-tenders
+name: "EU Funding & Tenders portal (SEDIA)"
+operator: "European Commission"
+kinds: ["GRANT", "TENDER", "CONSORTIUM_CALL"]
+geographies: ["EU"]
+url: "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home"
+urlVerified: false
+status: FIXTURE_ONLY
+connector: "eu-funding-tenders"
+access:
+  mode: API
+  auth: API_KEY
+notes: >-
+  Horizon Europe, Digital Europe, Creative Europe, EIC. The connector exists
+  and is exercised against a recorded response only — it has never completed a
+  live run. Status stays FIXTURE_ONLY until one does.

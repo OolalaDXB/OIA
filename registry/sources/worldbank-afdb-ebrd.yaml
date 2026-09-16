@@ -1,0 +1,20 @@
+# OIA source registry entry. One file per source.
+# `status` is the first thing to read: LIVE means a real run has retrieved from it,
+# DECLARED means a human watches it by hand. A long list is not coverage.
+
+id: worldbank-afdb-ebrd
+name: "Development bank procurement (World Bank, AfDB, EBRD)"
+operator: "Multilateral development banks"
+kinds: ["TENDER", "PRE_SOLICITATION"]
+geographies: ["EMEA", "GLOBAL", "Africa"]
+forProjects: ["padel-design", "district-267", "live-great-foundation", "thestudio-mt"]
+url: "https://projects.worldbank.org/en/projects-operations/procurement"
+urlVerified: false
+status: DECLARED
+access:
+  mode: MANUAL
+  auth: NONE
+notes: >-
+  Sport, leisure and social infrastructure in emerging markets — the realistic
+  route for padel.design and District 267, neither of which any European source
+  covers.

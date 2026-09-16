@@ -1,0 +1,22 @@
+# OIA source registry entry. One file per source.
+# `status` is the first thing to read: LIVE means a real run has retrieved from it,
+# DECLARED means a human watches it by hand. A long list is not coverage.
+
+id: ted
+name: "TED — Tenders Electronic Daily"
+operator: "European Union"
+kinds: ["TENDER", "PRE_SOLICITATION"]
+geographies: ["EU"]
+url: "https://ted.europa.eu"
+urlVerified: false
+status: LIVE
+connector: "ted"
+access:
+  mode: API
+  auth: NONE
+  endpoint: "https://api.ted.europa.eu/v3/notices/search"
+notes: >-
+  Above-EU-threshold public procurement. A real run retrieved from it and the
+  response is the repository's test fixture. Covers only contracts ABOVE the
+  European thresholds — the ones a studio of this size wins are usually below,
+  which is why BOAMP matters more.

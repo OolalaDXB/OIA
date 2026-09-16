@@ -1,4 +1,5 @@
 import type { ProjectRegistry } from "./schema";
+import type { SourceRegistry } from "./sources";
 
 /**
  * Registry honesty rules. Zod already guarantees the shape; these are the rules
@@ -65,5 +66,41 @@ export function validateRegistry(registry: ProjectRegistry): RegistryIssue[] {
     }
   }
 
+  return issues;
+}
+
+/**
+ * Source honesty rules. The one that matters: a source may not claim to be LIVE
+ * without a connector, because "LIVE" is a claim that a real run retrieved from
+ * it — and a list of names that implies coverage it does not have is exactly
+ * the failure this registry exists to prevent.
+ */
+export function validateSources(registry: SourceRegistry): RegistryIssue[] {
+  const issues: RegistryIssue[] = [];
+  const seen = new Set<string>();
+
+  for (const s of registry.sources) {
+    const at = `source:${s.id}`;
+    if (seen.has(s.id)) issues.push({ level: "ERROR", where: at, message: "duplicate id" });
+    seen.add(s.id);
+
+    if ((s.status === "LIVE" || s.status === "FIXTURE_ONLY") && !s.connector) {
+      issues.push({ level: "ERROR", where: at, message: `${s.status} requires a connector key` });
+    }
+    if (s.status === "DECLARED" && s.connector) {
+      issues.push({ level: "ERROR", where: at, message: "DECLARED but a connector exists — say which status is true" });
+    }
+    if (s.access.mode === "API" && s.status === "LIVE" && !s.access.endpoint) {
+      issues.push({ level: "ERROR", where: at, message: "a LIVE API source must record its endpoint" });
+    }
+    if (s.kinds.length === 0) {
+      issues.push({ level: "ERROR", where: at, message: "declare what kinds of opportunity this source carries" });
+    }
+    if (!s.url) {
+      issues.push({ level: "WARN", where: at, message: "no URL — a human cannot go and look" });
+    } else if (!s.urlVerified) {
+      issues.push({ level: "WARN", where: at, message: "URL never confirmed to resolve (run the link checker)" });
+    }
+  }
   return issues;
 }

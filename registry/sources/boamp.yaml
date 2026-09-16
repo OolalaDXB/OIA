@@ -1,0 +1,20 @@
+# OIA source registry entry. One file per source.
+# `status` is the first thing to read: LIVE means a real run has retrieved from it,
+# DECLARED means a human watches it by hand. A long list is not coverage.
+
+id: boamp
+name: "BOAMP — Bulletin officiel des annonces de marchés publics"
+operator: "DILA (French state)"
+kinds: ["TENDER", "PRE_SOLICITATION"]
+geographies: ["FR"]
+url: "https://www.boamp.fr"
+urlVerified: false
+status: DECLARED
+access:
+  mode: API
+  auth: NONE
+notes: >-
+  French public procurement INCLUDING below the European thresholds — the band
+  where a studio this size actually wins. The highest-value source not yet
+  connected. An open-data API is understood to exist; its shape has not been
+  verified from this environment.

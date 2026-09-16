@@ -15,5 +15,5 @@ export default function Page() {
       </main>
     );
   }
-  return <Console data={data} active="dashboard" title="Review Console" />;
+  return <Console data={data} active="opportunities" title="Opportunities" />;
 }

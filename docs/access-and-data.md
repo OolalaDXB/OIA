@@ -39,7 +39,7 @@ eu-central-1) as soon as the console carries `NEXT_PUBLIC_SUPABASE_URL` and
 `NEXT_PUBLIC_SUPABASE_ANON_KEY`. See [`watch-setup.md`](watch-setup.md) for the
 four steps that switch it on.
 
-Two properties are enforced by the database rather than by the UI:
+Three properties are enforced by the database rather than by the UI:
 
 - **Nothing answers the public key.** The console ships its key in a public
   bundle, so row-level security refuses every table without an authenticated
@@ -49,6 +49,22 @@ Two properties are enforced by the database rather than by the UI:
   policy, and no update or delete policy. Verified: an authenticated session
   could add a decision and could neither rewrite nor remove one. An
   append-only-ness that lives in client code is not append-only.
+- **The console can ask for work, not declare it done.** `requests` admits an
+  insert only at `status = 'QUEUED'`, and has no update policy at all — moving a
+  request to RUNNING, DONE or FAILED requires the service role, which exists
+  only in GitHub secrets. That is what makes "a search is never reported as run
+  unless it ran" a property of the schema rather than a promise in the worker.
+
+The full applied schema, transcribed from the live catalog, is in
+[`architecture/schema/0002_watch_and_workspace.sql`](architecture/schema/0002_watch_and_workspace.sql).
+
+### What the worker writes, and with which key
+
+The weekly run uses the **service role** key, which bypasses RLS entirely. It is
+the only credential that can write the ledger, raise alerts, apply a project
+draft or resolve a request — and it belongs in GitHub secrets and nowhere else:
+not in the repository, not in Vercel, not in a message to me. The console never
+sees it and does not need it.
 
 ### The previous state — in your browser, and nowhere else
 

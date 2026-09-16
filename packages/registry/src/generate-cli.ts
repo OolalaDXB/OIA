@@ -1,8 +1,8 @@
 import { writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { defaultRegistryRoot, loadRegistry } from "./load";
-import { validateRegistry } from "./validate";
+import { defaultRegistryRoot, loadRegistry, loadSources } from "./load";
+import { validateRegistry, validateSources } from "./validate";
 
 /**
  * CLI: pnpm --filter @oia/registry generate
@@ -27,3 +27,13 @@ if (errors.length > 0) {
 const out = join(dirname(fileURLToPath(import.meta.url)), "snapshot.json");
 writeFileSync(out, JSON.stringify({ generatedAt: "", projects: registry.projects }, null, 2) + "\n");
 console.log(`wrote ${out} (${registry.projects.length} projects)`);
+
+const sources = loadSources(defaultRegistryRoot());
+const sourceErrors = validateSources(sources).filter((i) => i.level === "ERROR");
+if (sourceErrors.length > 0) {
+  for (const e of sourceErrors) console.error(`ERROR [${e.where}] ${e.message}`);
+  process.exit(1);
+}
+const sourcesOut = join(dirname(fileURLToPath(import.meta.url)), "sources.snapshot.json");
+writeFileSync(sourcesOut, JSON.stringify({ sources: sources.sources }, null, 2) + "\n");
+console.log(`wrote ${sourcesOut} (${sources.sources.length} sources)`);

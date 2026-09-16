@@ -78,13 +78,27 @@ Do it from the browser you have actually been using, before clearing anything.
 
 Every Monday at 06:00 UTC, and on demand from the Actions tab:
 
-1. one TED query per project with discovery enabled;
-2. the dataset is rebuilt, and only committed if typecheck, tests and the web
+1. the searches you asked for from the console are **claimed** — moved from
+   queued to running, so a second run cannot cover them twice;
+2. one TED query per project the run covers (what you asked for, else what the
+   console requested, else every project with discovery enabled);
+3. links you pasted are fetched and ingested, and any project you created in the
+   console is written into `registry/projects/` and the registry regenerated;
+4. the dataset is rebuilt, and only committed if typecheck, tests and the web
    build pass against it;
-3. the run is folded into the ledger — new, changed, disappeared, reappeared —
+5. the run is folded into the ledger — new, changed, disappeared, reappeared —
    and each change is recorded as an event;
-4. alerts are raised for what crossed a line, and **never twice for the same
-   condition**.
+6. alerts are raised for what crossed a line, and **never twice for the same
+   condition**;
+7. every published link is checked and the verdict stamped into the registry;
+8. the claimed searches are **closed against the run's real outcome** — done if
+   it succeeded, failed if it did not. This step runs even when the job fails,
+   because a request left at *running* forever is indistinguishable from one
+   still in flight, and the console would keep saying "searching".
+
+Steps 1, 3, 6 and 8 need the two GitHub secrets from step 2. Without them the
+run still discovers, still verifies and still commits — it logs a warning and
+skips the parts that need the database, rather than failing or pretending.
 
 Between runs the deadline rules keep working without any job at all: they read
 the ledger, so "closes in 9 days" is true the day you open the console, not the
@@ -100,7 +114,16 @@ pnpm --filter @oia/workers discover:ted           # every discoverable project
 pnpm --filter @oia/workers exec tsx src/ted-to-console.ts
 pnpm --filter @oia/workers publish:watch -- --dry-run   # show the fold, write nothing
 pnpm --filter @oia/workers publish:watch
+
+pnpm --filter @oia/workers requests                     # drain pasted links + project drafts
+pnpm --filter @oia/workers requests -- --plan           # claim requested searches, print the slugs
+pnpm --filter @oia/workers requests -- --settle=success # close them once the run is done
+pnpm --filter @oia/workers check:links                  # verify every published URL
 ```
+
+`check:links` starts with an egress canary. If our own network is blocked it
+says the check did not happen, stamps nothing and exits non-zero — it will not
+report other people's working sites as broken because of our proxy.
 
 `--dry-run` prints exactly which rows are new, which changed and which would be
 marked as having disappeared, without touching the database. Worth using the

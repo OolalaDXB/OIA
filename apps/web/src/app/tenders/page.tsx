@@ -1,9 +1,9 @@
 import { loadConsoleData } from "../../lib/loadData";
 import { Console } from "../Console";
 
-/** Tenders / RFP — same shell, TENDER_RFP-scoped (TED notices live here). */
-export default function TendersPage() {
+/** Kept so existing links still work: kinds are a filter inside Opportunities now. */
+export default function Page() {
   const data = loadConsoleData();
   if (!data) return null;
-  return <Console data={data} fixedKind="TENDER_RFP" active="tenders" title="Tenders / RFP" />;
+  return <Console data={data} fixedKind="TENDER" active="opportunities" title="Tenders" />;
 }

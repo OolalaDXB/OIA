@@ -1,0 +1,21 @@
+# OIA source registry entry. One file per source.
+# `status` is the first thing to read: LIVE means a real run has retrieved from it,
+# DECLARED means a human watches it by hand. A long list is not coverage.
+
+id: region-bretagne
+name: "Région Bretagne — aides et appels à projets"
+operator: "Conseil régional de Bretagne"
+kinds: ["GRANT", "DEBT_GUARANTEE", "PRIZE"]
+geographies: ["FR", "FR-BRE"]
+forProjects: ["lesvieillespierres", "maisons-co", "sillon", "thestudio-mt", "ludography"]
+url: "https://www.bretagne.bzh/aides/"
+urlVerified: false
+status: DECLARED
+access:
+  mode: MANUAL
+  auth: NONE
+notes: >-
+  Regional aid for Brittany: heritage, culture, tourism, digital, business
+  development. Explicitly requested. No machine access identified — watched by
+  hand, and anything found goes through the manual intake so it lands in the
+  same ledger with the same verification.

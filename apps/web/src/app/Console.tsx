@@ -16,6 +16,16 @@ import {
 } from "@oia/workspace";
 import { applyFreshnessAll, assessFreshness } from "@oia/ingestion/freshness";
 import { classifyNoticeType, skipReason } from "@oia/connectors/notice-type";
+import {
+  FRESHNESS,
+  GATE_CONDITION,
+  plainFailure,
+  recommendationLabel,
+  relativeDays,
+  REVIEW,
+  verificationLabel,
+  kindLabel as plainKindLabel,
+} from "../lib/vocabulary";
 import { useAlerts, useLedger } from "../lib/watchData";
 import { useAuth } from "../lib/supabase";
 import {
@@ -53,53 +63,52 @@ const PROV_COLOR: Record<FactClass, string> = {
 const CONFIRMED: FactClass[] = ["CONFIRMED_OFFICIAL", "EXTRACTED_FROM_OFFICIAL_SOURCE"];
 const FACT_ORDER: FactClass[] = ["CONFIRMED_OFFICIAL", "EXTRACTED_FROM_OFFICIAL_SOURCE", "INFERRED", "USER_PROVIDED", "UNKNOWN"];
 
-export const KIND_LABEL: Record<OpportunityKind, string> = {
-  GRANT: "Grant",
-  TENDER_RFP: "Tender / RFP",
-  VC_INVESTOR: "Investor",
-  REGULATORY: "Regulatory",
-};
-const KIND_COLOR: Record<OpportunityKind, string> = {
+/** Kept for callers that import it; the labels now come from the taxonomy. */
+export const KIND_LABEL = new Proxy({} as Record<string, string>, {
+  get: (_t, key: string) => plainKindLabel(key),
+});
+
+const KIND_COLOR: Record<string, string> = {
   GRANT: "var(--pursue)",
+  TENDER: "var(--partner)",
   TENDER_RFP: "var(--partner)",
+  PRE_SOLICITATION: "var(--aqua-ink)",
+  EQUITY: "var(--monitor)",
   VC_INVESTOR: "var(--monitor)",
+  TAX_INCENTIVE: "var(--pursue)",
+  DEBT_GUARANTEE: "var(--partner)",
+  PRIZE: "var(--pursue)",
+  CONSORTIUM_CALL: "var(--muted)",
+  MARKETPLACE_PROJECT: "var(--partner)",
+  ACQUISITION: "var(--reject)",
   REGULATORY: "var(--investigate)",
 };
+const kindColor = (kind: string | undefined) => KIND_COLOR[kind ?? ""] ?? "var(--muted)";
 
-export type RailKey =
-  | "dashboard"
-  | "digest"
-  | "alerts"
-  | "grants"
-  | "tenders"
-  | "investors"
-  | "projects"
-  | "tasks"
-  | "notes"
-  | "contacts"
-  | "metrics";
+export type RailKey = "today" | "opportunities" | "projects" | "money" | "workspace";
 
 /**
- * Shared workspace rail — one shell for every surface. Every kind the Phase 1
- * skeleton declared is now a real destination: notes, tasks and contacts stopped
- * being greyed-out promises in Phase 3.
+ * Five destinations, down from eleven.
+ *
+ * The console had a separate route for grants, tenders, investors, alerts,
+ * tasks, notes, contacts and metrics. Each was reasonable on its own; together
+ * they made a tool nobody could hold in their head — the complaint was "ultra
+ * le bordel", and it was correct.
+ *
+ * What changed is grouping, not capability. Kinds are a filter inside
+ * Opportunities rather than three routes. Alerts belong with the digest, since
+ * both answer "what needs me". Tasks, notes and contacts are one Workspace with
+ * tabs. Metrics and the money table are one page, because "how much is in play"
+ * and "why is it blocked" are the same conversation.
  */
 export function Rail({ active, onExportAudit }: { active: RailKey; onExportAudit?: () => void }) {
-  // The badge is the whole point of a permanent watch: the number is visible
-  // before you decide to go looking.
   const { open } = useAlerts();
-  const nav: { key: RailKey; label: string; href: string; group?: boolean }[] = [
-    { key: "digest", label: "Today", href: "/digest/" },
-    { key: "alerts", label: "Alerts", href: "/alerts/" },
-    { key: "dashboard", label: "Dashboard", href: "/" },
-    { key: "grants", label: "Grants", href: "/grants/" },
-    { key: "tenders", label: "Tenders / RFP", href: "/tenders/" },
-    { key: "investors", label: "Investors", href: "/investors/" },
-    { key: "projects", label: "Projects", href: "/projects/", group: true },
-    { key: "tasks", label: "Tasks", href: "/tasks/" },
-    { key: "notes", label: "Notes", href: "/notes/" },
-    { key: "contacts", label: "Contacts", href: "/contacts/" },
-    { key: "metrics", label: "Metrics", href: "/metrics/", group: true },
+  const nav: { key: RailKey; label: string; href: string; hint: string }[] = [
+    { key: "today", label: "Today", href: "/digest/", hint: "What needs you now" },
+    { key: "opportunities", label: "Opportunities", href: "/", hint: "Everything found, to triage" },
+    { key: "projects", label: "Projects", href: "/projects/", hint: "Who we are looking for" },
+    { key: "money", label: "Money", href: "/money/", hint: "How much is in play, and what blocks it" },
+    { key: "workspace", label: "Workspace", href: "/workspace/", hint: "Tasks, notes, people" },
   ];
   return (
     <aside className="rail">
@@ -108,10 +117,11 @@ export function Rail({ active, onExportAudit }: { active: RailKey; onExportAudit
         <Link
           key={n.key}
           href={n.href}
-          className={`${active === n.key ? "railItem active" : "railItem"}${n.group ? " railGroup" : ""}`}
+          className={active === n.key ? "railItem active" : "railItem"}
+          title={n.hint}
         >
           <span>{n.label}</span>
-          {n.key === "alerts" && open.length > 0 && <span className="railBadge">{open.length}</span>}
+          {n.key === "today" && open.length > 0 && <span className="railBadge">{open.length}</span>}
         </Link>
       ))}
       {onExportAudit && (
@@ -431,8 +441,8 @@ export function Console({
                   onClick={() => setSelectedId(r.id)}
                 >
                   <div className="rowTop">
-                    <Badge text={r.recommendation} color={RECO_COLOR[r.recommendation] ?? "#888"} />
-                    {kind && !fixedKind && <Badge text={KIND_LABEL[kind]} color={KIND_COLOR[kind]} />}
+                    <Badge text={recommendationLabel(r.recommendation)} color={RECO_COLOR[r.recommendation] ?? "#888"} />
+                    {kind && !fixedKind && <Badge text={plainKindLabel(kind)} color={kindColor(kind)} />}
                     <span className="rowTitle">{r.title}</span>
                   </div>
                   <div className="rowMeta">
@@ -447,12 +457,11 @@ export function Console({
                     {tag && <span className="pubChip tagChip">{projectName(tag)}</span>}
                   </div>
                   <div className="rowMeta small">
-                    <span>{r.verificationStatus}</span>
-                    {r.strategicRoute !== "UNKNOWN" && <span>{r.strategicRoute}</span>}
-                    {appDeadline(r) !== "—" && <span>due {appDeadline(r)}</span>}
-                    <span>fetch {r.liveFetch?.status ?? "—"}</span>
-                    <span>conf {r.scores.infoConfidence}</span>
-                    <span className={rev === "PENDING" ? "muted" : "hrOn"}>{rev}</span>
+                    <span>{verificationLabel(r.verificationStatus)}</span>
+                    {appDeadline(r) !== "—" && (
+                      <span>closes {appDeadline(r)}{fresh.daysToDeadline !== null ? ` · ${relativeDays(fresh.daysToDeadline)}` : ""}</span>
+                    )}
+                    <span className={rev === "PENDING" ? "muted" : "hrOn"}>{REVIEW[rev] ?? rev}</span>
                   </div>
                 </li>
               );
@@ -584,8 +593,8 @@ function Detail({
   return (
     <div>
       <div className="detailHead">
-        <Badge text={r.recommendation} color={RECO_COLOR[r.recommendation] ?? "#888"} />
-        {r.opportunityKind && <Badge text={KIND_LABEL[r.opportunityKind]} color={KIND_COLOR[r.opportunityKind]} />}
+        <Badge text={recommendationLabel(r.recommendation)} color={RECO_COLOR[r.recommendation] ?? "#888"} />
+        {r.opportunityKind && <Badge text={plainKindLabel(r.opportunityKind)} color={kindColor(r.opportunityKind)} />}
         <h2>{r.title}</h2>
         <span className="muted">{r.issuer}</span>
         {pubDate(r) && <span className="pubChip">published {pubDate(r)}</span>}
@@ -598,7 +607,7 @@ function Detail({
                 : "pubChip"
           }
         >
-          {freshness.status.toLowerCase().replace("_", " ")}
+          {FRESHNESS[freshness.status] ?? freshness.status}
         </span>
       </div>
 

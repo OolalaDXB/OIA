@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { ConsoleData, ConsoleRecord } from "@oia/ingestion/console";
+import { KIND_PROFILES, normalizeKind } from "@oia/ingestion/opportunity-kinds";
 import {
   PROJECT_ENTRIES,
   openTasks,
@@ -9,8 +10,14 @@ import {
   toProfile,
   type ProjectSuggestion,
 } from "@oia/workspace";
-import { Rail, KIND_LABEL, StorageNote } from "../Console";
-import { useNotes, useProjectTags, useTasks } from "../../lib/workspaceStore";
+import { SOURCE_REGISTRY, sourcesForProject } from "@oia/registry";
+import { Rail, StorageNote } from "../Console";
+import { useNotes, useProjectTags, useTasks, useAuditLog } from "../../lib/workspaceStore";
+import { useLinkStatus } from "../../lib/watchData";
+import { kindLabel, recommendationLabel, verificationLabel } from "../../lib/vocabulary";
+import { NewProject } from "./NewProject";
+import { AddByUrl, RunSearch } from "./AddByUrl";
+import { financeByProject, formatTotals } from "@oia/workspace";
 
 /**
  * Projects — every project the studio runs, from `registry/projects/*.yaml`.
@@ -62,6 +69,18 @@ export function ProjectsView({ data }: { data: ConsoleData }) {
     [notes, project.slug, projectTags.tags],
   );
 
+  const audit = useAuditLog();
+  const links = useLinkStatus();
+  const nowIso = useMemo(() => new Date().toISOString(), []);
+  const finance = useMemo(
+    () =>
+      financeByProject(
+        { records: data.records, tags: projectTags.tags, auditLog: audit.log, nowIso },
+        [project.slug],
+      )[0],
+    [data.records, projectTags.tags, audit.log, nowIso, project.slug],
+  );
+  const sources = useMemo(() => sourcesForProject(SOURCE_REGISTRY, project.slug), [project.slug]);
   const confirmed = project.profileReview.status === "CONFIRMED_BY_OWNER";
   const discoverable = PROJECT_ENTRIES.filter((p) => p.discovery.enabled).length;
 
@@ -110,6 +129,7 @@ export function ProjectsView({ data }: { data: ConsoleData }) {
           </ul>
 
           <div className="detail">
+            <NewProject onDone={() => undefined} />
             <div className="detailHead">
               <h2>{project.name}</h2>
               <span className="pubChip">{project.status.toLowerCase().replace(/_/g, " ")}</span>
@@ -118,9 +138,7 @@ export function ProjectsView({ data }: { data: ConsoleData }) {
             {project.oneLiner && <p className="oneLiner">{project.oneLiner}</p>}
             {project.url && (
               <p className="small">
-                <a href={project.url} target="_blank" rel="noreferrer">
-                  {project.url}
-                </a>
+                <CheckedLink url={project.url} status={links.statusOf(project.url)} />
               </p>
             )}
 
@@ -180,7 +198,15 @@ export function ProjectsView({ data }: { data: ConsoleData }) {
               <h3>Automated discovery</h3>
               {project.discovery.enabled ? (
                 <>
-                  <div className="kv"><span className="k">Watching</span><span className="v">{project.discovery.watch.join(", ")}</span></div>
+                  <div className="kv">
+                    <span className="k">Watching</span>
+                    {/* Registry entries still carry the pre-S3 labels (TENDER_RFP, */}
+                    {/* VC_INVESTOR). They are remapped on read, so the screen shows */}
+                    {/* the plain name rather than the stored token. */}
+                    <span className="v">
+                      {project.discovery.watch.map((w) => KIND_PROFILES[normalizeKind(w)].label).join(", ") || "—"}
+                    </span>
+                  </div>
                   <div className="kv">
                     <span className="k">CPV codes</span>
                     <span className="v">
@@ -212,6 +238,70 @@ export function ProjectsView({ data }: { data: ConsoleData }) {
               )}
             </section>
 
+            {finance && (
+              <section className="sec">
+                <h3>Money in play</h3>
+                <div className="kv">
+                  <span className="k">Could come in</span>
+                  <span className="v">
+                    <b>{formatTotals(finance.inbound)}</b>
+                    <span className="muted small">
+                      {" "}
+                      · from {finance.withAmount} of {finance.records} record(s) that state a figure
+                    </span>
+                  </span>
+                </div>
+                {Object.keys(finance.clear).length > 0 && (
+                  <div className="kv">
+                    <span className="k">Ready to go after</span>
+                    <span className="v ok">{formatTotals(finance.clear)}</span>
+                  </div>
+                )}
+                {Object.keys(finance.outbound).length > 0 && (
+                  <div className="kv">
+                    <span className="k">Would go out</span>
+                    <span className="v warn">{formatTotals(finance.outbound)} — acquisitions, never added above</span>
+                  </div>
+                )}
+              </section>
+            )}
+
+            <section className="sec">
+              <div className="secHead">
+                <h3>Where we look for {project.name}</h3>
+                <RunSearch slug={project.slug} enabled={project.discovery.enabled} />
+              </div>
+              {sources.map((src) => (
+                <div key={src.id} className="fact">
+                  <div className="viewsRow">
+                    {src.url ? (
+                      <a href={src.url} target="_blank" rel="noreferrer">
+                        <b>{src.name}</b>
+                      </a>
+                    ) : (
+                      <b>{src.name}</b>
+                    )}
+                    <span className={src.status === "LIVE" ? "pubChip okChip" : "pubChip"}>
+                      {src.status === "LIVE"
+                        ? "automated"
+                        : src.status === "FIXTURE_ONLY"
+                          ? "connector untested"
+                          : src.status === "BLOCKED"
+                            ? "cannot be automated"
+                            : "watched by hand"}
+                    </span>
+                    {src.url && <LinkChip status={links.statusOf(src.url)} />}
+                  </div>
+                  <div className="muted small">
+                    {src.kinds.map((k) => kindLabel(k)).join(", ")} · {src.geographies.join(", ")}
+                  </div>
+                  <div className="muted small">{src.notes}</div>
+                </div>
+              ))}
+            </section>
+
+            <AddByUrl projectSlug={project.slug} />
+
             <section className="sec">
               <h3>Tagged opportunities · {tagged.length}</h3>
               {tagged.length === 0 && (
@@ -220,11 +310,18 @@ export function ProjectsView({ data }: { data: ConsoleData }) {
               {tagged.map((r) => (
                 <div key={r.id} className="fact">
                   <div>
-                    <b>{r.title}</b>
-                    {r.opportunityKind ? ` · ${KIND_LABEL[r.opportunityKind]}` : ""}
+                    {r.officialUrl ? (
+                      <a href={r.officialUrl} target="_blank" rel="noreferrer">
+                        <b>{r.title}</b>
+                      </a>
+                    ) : (
+                      <b>{r.title}</b>
+                    )}
+                    {r.opportunityKind ? ` · ${kindLabel(r.opportunityKind)}` : ""}
                   </div>
                   <div className="muted small">
-                    {r.issuer} · {r.verificationStatus} · {r.recommendation}
+                    {r.issuer} · {verificationLabel(r.verificationStatus)} · {recommendationLabel(r.recommendation)}
+                    {r.officialUrl && <LinkChip status={links.statusOf(r.officialUrl)} />}
                   </div>
                 </div>
               ))}
@@ -260,7 +357,14 @@ export function ProjectsView({ data }: { data: ConsoleData }) {
               {suggested.map(({ record, s }) => (
                 <div key={record.id} className="fact">
                   <div>
-                    <b>{record.title}</b> · {s.confidence}/100
+                    {record.officialUrl ? (
+                      <a href={record.officialUrl} target="_blank" rel="noreferrer">
+                        <b>{record.title}</b>
+                      </a>
+                    ) : (
+                      <b>{record.title}</b>
+                    )}{" "}
+                    · {s.confidence}/100
                   </div>
                   <div className="muted small">{s.rationale}</div>
                 </div>
@@ -271,4 +375,34 @@ export function ProjectsView({ data }: { data: ConsoleData }) {
       </div>
     </div>
   );
+}
+
+/** A link, with what we know about whether it actually resolves. */
+function CheckedLink({ url, status }: { url: string; status: ReturnType<typeof useLinkStatus>["statusOf"] extends (u: string) => infer R ? R : never }) {
+  return (
+    <span className="viewsRow">
+      <a href={url} target="_blank" rel="noreferrer">
+        {url}
+      </a>
+      <LinkChip status={status} />
+    </span>
+  );
+}
+
+function LinkChip({ status }: { status: { status: string; checkedAt: string; note: string } | null }) {
+  if (!status) return <span className="pubChip muted" title="never checked">unchecked</span>;
+  if (status.status === "DEAD" || status.status === "UNREACHABLE") {
+    return (
+      <span className="pubChip expiredChip" title={`${status.note} · checked ${status.checkedAt.slice(0, 10)}`}>
+        broken
+      </span>
+    );
+  }
+  if (status.status === "REDIRECTED") {
+    return <span className="pubChip closingChip" title={status.note}>moved</span>;
+  }
+  if (status.status === "OK") {
+    return <span className="pubChip okChip" title={`checked ${status.checkedAt.slice(0, 10)}`}>works</span>;
+  }
+  return <span className="pubChip muted" title={status.note}>not conclusive</span>;
 }

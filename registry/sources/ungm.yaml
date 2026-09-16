@@ -1,0 +1,19 @@
+# OIA source registry entry. One file per source.
+# `status` is the first thing to read: LIVE means a real run has retrieved from it,
+# DECLARED means a human watches it by hand. A long list is not coverage.
+
+id: ungm
+name: "UN Global Marketplace"
+operator: "United Nations"
+kinds: ["TENDER"]
+geographies: ["EMEA", "GLOBAL"]
+url: "https://www.ungm.org"
+urlVerified: false
+status: DECLARED
+access:
+  mode: MANUAL
+  auth: NONE
+notes: >-
+  UN agency procurement. One UNESCO record in the dataset came from here,
+  entered by hand. Registration required to bid; the notices themselves are
+  public.

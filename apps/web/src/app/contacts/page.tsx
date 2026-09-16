@@ -1,9 +1,9 @@
 import { loadConsoleData } from "../../lib/loadData";
-import { ContactsView } from "./ContactsView";
+import { WorkspaceView } from "../workspace/WorkspaceView";
 
-/** Contacts (Phase 3). */
+/** Kept so existing links still work: people live in the workspace now. */
 export default function ContactsPage() {
   const data = loadConsoleData();
   if (!data) return null;
-  return <ContactsView data={data} />;
+  return <WorkspaceView data={data} tab="contacts" />;
 }

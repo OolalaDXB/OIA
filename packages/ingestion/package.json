@@ -8,7 +8,10 @@
     "./console": "./src/console.ts",
     "./freshness": "./src/freshness.ts",
     "./dedup": "./src/dedup.ts",
-    "./tender-facts": "./src/tender-facts.ts"
+    "./tender-facts": "./src/tender-facts.ts",
+    "./opportunity-kinds": "./src/opportunity-kinds.ts",
+    "./gate-profiles": "./src/gate-profiles.ts",
+    "./link-check": "./src/link-check.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

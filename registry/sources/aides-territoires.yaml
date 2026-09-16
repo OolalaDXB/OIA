@@ -1,0 +1,19 @@
+# OIA source registry entry. One file per source.
+# `status` is the first thing to read: LIVE means a real run has retrieved from it,
+# DECLARED means a human watches it by hand. A long list is not coverage.
+
+id: aides-territoires
+name: "Aides-territoires"
+operator: "beta.gouv.fr / French state"
+kinds: ["GRANT", "DEBT_GUARANTEE"]
+geographies: ["FR"]
+url: "https://aides-territoires.beta.gouv.fr"
+urlVerified: false
+status: DECLARED
+access:
+  mode: API
+  auth: API_KEY
+notes: >-
+  Aggregates French aid for local authorities and associations, including
+  REGIONAL schemes. The most direct answer to 'aid is under-represented'.
+  Relevant above all to Les Vieilles Pierres and Maisons.co.

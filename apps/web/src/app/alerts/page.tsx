@@ -1,6 +1,9 @@
-import { AlertsView } from "./AlertsView";
+import { loadConsoleData } from "../../lib/loadData";
+import { DigestView } from "../digest/DigestView";
 
-/** Alerts raised by the permanent watch. Reads the ledger, not the snapshot. */
+/** Kept so existing links still work: alerts are part of Today now. */
 export default function AlertsPage() {
-  return <AlertsView />;
+  const data = loadConsoleData();
+  if (!data) return null;
+  return <DigestView data={data} />;
 }

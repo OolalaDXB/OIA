@@ -11,7 +11,9 @@
     "discover:ted": "tsx src/discover-ted.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",
-    "publish:watch": "tsx src/publish-watch.ts"
+    "publish:watch": "tsx src/publish-watch.ts",
+    "check:links": "tsx src/check-links.ts",
+    "requests": "tsx src/process-requests.ts"
   },
   "dependencies": {
     "@oia/audit": "workspace:*",
@@ -24,7 +26,9 @@
     "@oia/providers": "workspace:*",
     "@oia/registry": "workspace:*",
     "@oia/scoring": "workspace:*",
-    "@oia/watch": "workspace:*"
+    "@oia/watch": "workspace:*",
+    "@supabase/supabase-js": "^2.47.10",
+    "yaml": "^2.6.1"
   },
   "devDependencies": {
     "tsx": "^4.19.2",

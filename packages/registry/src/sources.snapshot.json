@@ -1,0 +1,461 @@
+{
+  "sources": [
+    {
+      "id": "acquire",
+      "name": "Acquire.com",
+      "operator": "Acquire.com",
+      "kinds": [
+        "ACQUISITION"
+      ],
+      "geographies": [
+        "GLOBAL"
+      ],
+      "url": "https://acquire.com",
+      "urlVerified": false,
+      "lastUrlCheck": "",
+      "status": "BLOCKED",
+      "access": {
+        "mode": "SCRAPE",
+        "auth": "CREDENTIALS",
+        "endpoint": ""
+      },
+      "connector": "",
+      "forProjects": [],
+      "notes": "Companies and modules for sale. Listings are visible only to signed-in buyers, so this needs stored credentials — which the system deliberately does not hold yet, and which is a decision to take on purpose rather than by default. Note the direction: an acquisition SPENDS money, so it is never added into a funding total."
+    },
+    {
+      "id": "adio",
+      "name": "Abu Dhabi Investment Office — incentive programmes",
+      "operator": "ADIO",
+      "kinds": [
+        "GRANT",
+        "EQUITY"
+      ],
+      "geographies": [
+        "AE",
+        "GCC"
+      ],
+      "url": "https://www.investabudhabi.ae",
+      "urlVerified": false,
+      "lastUrlCheck": "",
+      "status": "DECLARED",
+      "access": {
+        "mode": "MANUAL",
+        "auth": "NONE",
+        "endpoint": ""
+      },
+      "connector": "",
+      "forProjects": [
+        "bawaba",
+        "myoolala"
+      ],
+      "notes": "Innovation and investment incentives for companies establishing in Abu Dhabi. Relevant through Oolala Next FZ-LLC — the entity route matters here more than the call itself."
+    },
+    {
+      "id": "aides-territoires",
+      "name": "Aides-territoires",
+      "operator": "beta.gouv.fr / French state",
+      "kinds": [
+        "GRANT",
+        "DEBT_GUARANTEE"
+      ],
+      "geographies": [
+        "FR"
+      ],
+      "url": "https://aides-territoires.beta.gouv.fr",
+      "urlVerified": false,
+      "lastUrlCheck": "",
+      "status": "DECLARED",
+      "access": {
+        "mode": "API",
+        "auth": "API_KEY",
+        "endpoint": ""
+      },
+      "connector": "",
+      "forProjects": [],
+      "notes": "Aggregates French aid for local authorities and associations, including REGIONAL schemes. The most direct answer to 'aid is under-represented'. Relevant above all to Les Vieilles Pierres and Maisons.co."
+    },
+    {
+      "id": "boamp",
+      "name": "BOAMP — Bulletin officiel des annonces de marchés publics",
+      "operator": "DILA (French state)",
+      "kinds": [
+        "TENDER",
+        "PRE_SOLICITATION"
+      ],
+      "geographies": [
+        "FR"
+      ],
+      "url": "https://www.boamp.fr",
+      "urlVerified": false,
+      "lastUrlCheck": "",
+      "status": "DECLARED",
+      "access": {
+        "mode": "API",
+        "auth": "NONE",
+        "endpoint": ""
+      },
+      "connector": "",
+      "forProjects": [],
+      "notes": "French public procurement INCLUDING below the European thresholds — the band where a studio this size actually wins. The highest-value source not yet connected. An open-data API is understood to exist; its shape has not been verified from this environment."
+    },
+    {
+      "id": "bpifrance",
+      "name": "Bpifrance",
+      "operator": "Bpifrance",
+      "kinds": [
+        "GRANT",
+        "DEBT_GUARANTEE",
+        "EQUITY"
+      ],
+      "geographies": [
+        "FR"
+      ],
+      "url": "https://www.bpifrance.fr/nos-appels-a-projets-concours",
+      "urlVerified": false,
+      "lastUrlCheck": "",
+      "status": "DECLARED",
+      "access": {
+        "mode": "MANUAL",
+        "auth": "NONE",
+        "endpoint": ""
+      },
+      "connector": "",
+      "forProjects": [],
+      "notes": "Grants, repayable advances, guarantees and equity. Covers three of the kinds the taxonomy now distinguishes, which is why they were worth distinguishing."
+    },
+    {
+      "id": "cir-cii-jei",
+      "name": "Research and innovation tax credits (CIR, CII, JEI)",
+      "operator": "French tax administration",
+      "kinds": [
+        "TAX_INCENTIVE"
+      ],
+      "geographies": [
+        "FR"
+      ],
+      "url": "https://www.entreprises.gouv.fr/fr/innovation/financement/credit-d-impot-recherche-cir",
+      "urlVerified": false,
+      "lastUrlCheck": "",
+      "status": "DECLARED",
+      "access": {
+        "mode": "MANUAL",
+        "auth": "NONE",
+        "endpoint": ""
+      },
+      "connector": "",
+      "forProjects": [],
+      "notes": "Not a call site and never will be: a fiscal status claimed on a filing. It is listed because the taxonomy can now represent it — before TAX_INCENTIVE existed, a tax credit could not pass the gate at any evidence level."
+    },
+    {
+      "id": "eu-funding-tenders",
+      "name": "EU Funding & Tenders portal (SEDIA)",
+      "operator": "European Commission",
+      "kinds": [
+        "GRANT",
+        "TENDER",
+        "CONSORTIUM_CALL"
+      ],
+      "geographies": [
+        "EU"
+      ],
+      "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home",
+      "urlVerified": false,
+      "lastUrlCheck": "",
+      "status": "FIXTURE_ONLY",
+      "access": {
+        "mode": "API",
+        "auth": "API_KEY",
+        "endpoint": ""
+      },
+      "connector": "eu-funding-tenders",
+      "forProjects": [],
+      "notes": "Horizon Europe, Digital Europe, Creative Europe, EIC. The connector exists and is exercised against a recorded response only — it has never completed a live run. Status stays FIXTURE_ONLY until one does."
+    },
+    {
+      "id": "flippa",
+      "name": "Flippa",
+      "operator": "Flippa",
+      "kinds": [
+        "ACQUISITION"
+      ],
+      "geographies": [
+        "GLOBAL"
+      ],
+      "url": "https://flippa.com",
+      "urlVerified": false,
+      "lastUrlCheck": "",
+      "status": "DECLARED",
+      "access": {
+        "mode": "MANUAL",
+        "auth": "NONE",
+        "endpoint": ""
+      },
+      "connector": "",
+      "forProjects": [],
+      "notes": "Digital assets and small software businesses. Public listings; no connector."
+    },
+    {
+      "id": "france-2030-ademe",
+      "name": "France 2030 / ADEME calls",
+      "operator": "French state / ADEME",
+      "kinds": [
+        "GRANT"
+      ],
+      "geographies": [
+        "FR"
+      ],
+      "url": "https://agirpourlatransition.ademe.fr/entreprises/appels-projets-offres",
+      "urlVerified": false,
+      "lastUrlCheck": "",
+      "status": "DECLARED",
+      "access": {
+        "mode": "MANUAL",
+        "auth": "NONE",
+        "endpoint": ""
+      },
+      "connector": "",
+      "forProjects": [],
+      "notes": "National programme calls. Typically large consortia — relevant to BAWABA rather than to the smaller ventures."
+    },
+    {
+      "id": "hub71",
+      "name": "Hub71",
+      "operator": "Abu Dhabi (Mubadala)",
+      "kinds": [
+        "EQUITY",
+        "GRANT"
+      ],
+      "geographies": [
+        "AE",
+        "GCC"
+      ],
+      "url": "https://hub71.com",
+      "urlVerified": false,
+      "lastUrlCheck": "",
+      "status": "DECLARED",
+      "access": {
+        "mode": "MANUAL",
+        "auth": "NONE",
+        "endpoint": ""
+      },
+      "connector": "",
+      "forProjects": [
+        "bawaba",
+        "myoolala",
+        "beau"
+      ],
+      "notes": "Abu Dhabi tech ecosystem: incentive packages and cohorts. One Hub71 record already sits in the dataset from the Milestone-0 seed, entered by hand — this entry makes that source explicit rather than incidental."
+    },
+    {
+      "id": "malt-comet",
+      "name": "Malt, Comet and French consulting marketplaces",
+      "operator": "Various",
+      "kinds": [
+        "MARKETPLACE_PROJECT"
+      ],
+      "geographies": [
+        "FR",
+        "EU"
+      ],
+      "url": "https://www.malt.fr",
+      "urlVerified": false,
+      "lastUrlCheck": "",
+      "status": "BLOCKED",
+      "access": {
+        "mode": "SCRAPE",
+        "auth": "CREDENTIALS",
+        "endpoint": ""
+      },
+      "connector": "",
+      "forProjects": [
+        "thestudio-mt"
+      ],
+      "notes": "Visible only to signed-in members, which makes scraping both a terms question and a credentials question. Manual intake until there is a reason to resolve both."
+    },
+    {
+      "id": "region-bretagne",
+      "name": "Région Bretagne — aides et appels à projets",
+      "operator": "Conseil régional de Bretagne",
+      "kinds": [
+        "GRANT",
+        "DEBT_GUARANTEE",
+        "PRIZE"
+      ],
+      "geographies": [
+        "FR",
+        "FR-BRE"
+      ],
+      "url": "https://www.bretagne.bzh/aides/",
+      "urlVerified": false,
+      "lastUrlCheck": "",
+      "status": "DECLARED",
+      "access": {
+        "mode": "MANUAL",
+        "auth": "NONE",
+        "endpoint": ""
+      },
+      "connector": "",
+      "forProjects": [
+        "lesvieillespierres",
+        "maisons-co",
+        "sillon",
+        "thestudio-mt",
+        "ludography"
+      ],
+      "notes": "Regional aid for Brittany: heritage, culture, tourism, digital, business development. Explicitly requested. No machine access identified — watched by hand, and anything found goes through the manual intake so it lands in the same ledger with the same verification."
+    },
+    {
+      "id": "ted",
+      "name": "TED — Tenders Electronic Daily",
+      "operator": "European Union",
+      "kinds": [
+        "TENDER",
+        "PRE_SOLICITATION"
+      ],
+      "geographies": [
+        "EU"
+      ],
+      "url": "https://ted.europa.eu",
+      "urlVerified": false,
+      "lastUrlCheck": "",
+      "status": "LIVE",
+      "access": {
+        "mode": "API",
+        "auth": "NONE",
+        "endpoint": "https://api.ted.europa.eu/v3/notices/search"
+      },
+      "connector": "ted",
+      "forProjects": [],
+      "notes": "Above-EU-threshold public procurement. A real run retrieved from it and the response is the repository's test fixture. Covers only contracts ABOVE the European thresholds — the ones a studio of this size wins are usually below, which is why BOAMP matters more."
+    },
+    {
+      "id": "uae-federal-procurement",
+      "name": "UAE federal and emirate procurement portals",
+      "operator": "UAE government entities",
+      "kinds": [
+        "TENDER"
+      ],
+      "geographies": [
+        "AE",
+        "GCC"
+      ],
+      "url": "https://www.mof.gov.ae",
+      "urlVerified": false,
+      "lastUrlCheck": "",
+      "status": "DECLARED",
+      "access": {
+        "mode": "MANUAL",
+        "auth": "NONE",
+        "endpoint": ""
+      },
+      "connector": "",
+      "forProjects": [],
+      "notes": "Each emirate and several federal entities run their own portal, most requiring supplier registration. No single machine-readable index is known to exist. Treated as manual watch rather than pretending a connector is coming."
+    },
+    {
+      "id": "uk-find-a-tender",
+      "name": "Find a Tender (UK)",
+      "operator": "UK Cabinet Office",
+      "kinds": [
+        "TENDER",
+        "PRE_SOLICITATION"
+      ],
+      "geographies": [
+        "GB"
+      ],
+      "url": "https://www.find-tender.service.gov.uk",
+      "urlVerified": false,
+      "lastUrlCheck": "",
+      "status": "DECLARED",
+      "access": {
+        "mode": "API",
+        "auth": "NONE",
+        "endpoint": ""
+      },
+      "connector": "",
+      "forProjects": [],
+      "notes": "The UK's post-Brexit equivalent of TED. Publishes an OCDS feed, which would make it the second-easiest connector after TED."
+    },
+    {
+      "id": "ungm",
+      "name": "UN Global Marketplace",
+      "operator": "United Nations",
+      "kinds": [
+        "TENDER"
+      ],
+      "geographies": [
+        "EMEA",
+        "GLOBAL"
+      ],
+      "url": "https://www.ungm.org",
+      "urlVerified": false,
+      "lastUrlCheck": "",
+      "status": "DECLARED",
+      "access": {
+        "mode": "MANUAL",
+        "auth": "NONE",
+        "endpoint": ""
+      },
+      "connector": "",
+      "forProjects": [],
+      "notes": "UN agency procurement. One UNESCO record in the dataset came from here, entered by hand. Registration required to bid; the notices themselves are public."
+    },
+    {
+      "id": "upwork",
+      "name": "Upwork",
+      "operator": "Upwork Inc.",
+      "kinds": [
+        "MARKETPLACE_PROJECT"
+      ],
+      "geographies": [
+        "GLOBAL"
+      ],
+      "url": "https://www.upwork.com",
+      "urlVerified": false,
+      "lastUrlCheck": "",
+      "status": "BLOCKED",
+      "access": {
+        "mode": "API",
+        "auth": "OAUTH",
+        "endpoint": ""
+      },
+      "connector": "",
+      "forProjects": [
+        "thestudio-mt"
+      ],
+      "notes": "Clients posting paid software work. An API exists behind OAuth, and the terms of service govern what may be automated — so this is BLOCKED rather than DECLARED until that is read properly. Postings found by hand go through the manual intake today."
+    },
+    {
+      "id": "worldbank-afdb-ebrd",
+      "name": "Development bank procurement (World Bank, AfDB, EBRD)",
+      "operator": "Multilateral development banks",
+      "kinds": [
+        "TENDER",
+        "PRE_SOLICITATION"
+      ],
+      "geographies": [
+        "EMEA",
+        "GLOBAL",
+        "Africa"
+      ],
+      "url": "https://projects.worldbank.org/en/projects-operations/procurement",
+      "urlVerified": false,
+      "lastUrlCheck": "",
+      "status": "DECLARED",
+      "access": {
+        "mode": "MANUAL",
+        "auth": "NONE",
+        "endpoint": ""
+      },
+      "connector": "",
+      "forProjects": [
+        "padel-design",
+        "district-267",
+        "live-great-foundation",
+        "thestudio-mt"
+      ],
+      "notes": "Sport, leisure and social infrastructure in emerging markets — the realistic route for padel.design and District 267, neither of which any European source covers."
+    }
+  ]
+}

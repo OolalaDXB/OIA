@@ -6,7 +6,12 @@ remplace, comme document vivant, le plan Milestone 1
 
 ---
 
-## 1. Sur quelle base le système cherche et évalue — l'état réel
+## 1. Sur quelle base le système cherche et évalue — l'état de départ
+
+> **Ces quatre mesures datent du 16/09/2026 au matin, avant S1–S3.** Elles sont
+> conservées telles quelles : ce sont les chiffres qui ont décidé de l'ordre de
+> la roadmap, et les effacer une fois corrigés rendrait les sprints
+> invérifiables. Ce qui a changé depuis est écrit dans S1, S2 et S3.
 
 Quatre mesures, faites sur le dernier run réel et sur le code tel qu'il tourne.
 Elles ne sont pas flatteuses, et c'est le point de départ de tout le reste.
@@ -98,8 +103,11 @@ dépôts et dans `knowledge/capabilities`, pas dans une ligne de portfolio.
 Tu cherches : appels d'offres, RFP, **RFI / sources sought / expression de
 besoin amont**, dossiers de financement, **levée**, **aides**, et plus.
 
-Le modèle actuel connaît quatre types : `GRANT`, `TENDER_RFP`, `VC_INVESTOR`,
-`REGULATORY`. Le vrai problème n'est pas le nombre d'étiquettes — c'est que
+> **Résolu par S3** — le modèle en connaît onze et le gate s'adapte au type.
+> Le diagnostic ci-dessous reste parce qu'il explique *pourquoi*.
+
+Le modèle d'alors connaissait quatre types : `GRANT`, `TENDER_RFP`,
+`VC_INVESTOR`, `REGULATORY`. Le vrai problème n'est pas le nombre d'étiquettes — c'est que
 **le gate suppose un objet unique : « un appel officiel avec une date
 limite »**. Il exige une date limite vérifiée pour tout.
 
@@ -195,22 +203,86 @@ call » avec la raison, au lieu de les présenter comme des opportunités. Je n'
 pas réécrit le jeu de données : c'est la vraie sortie d'un vrai run, et elle
 reste telle quelle.
 
-### S3 — Une taxonomie qui couvre ce que tu cherches, et un gate qui s'y adapte
+### S3 — Une taxonomie qui couvre ce que tu cherches, et un gate qui s'y adapte — ✅ **livré le 16/09/2026**
 
-- Types : `TENDER`, `PRE_SOLICITATION` (RFI / sources sought / PIN),
-  `GRANT`, `TAX_INCENTIVE`, `EQUITY`, `DEBT_GUARANTEE`, `PRIZE`,
-  `CONSORTIUM_CALL`, `REGULATORY`.
-- **Gate par type.** Les conditions dures deviennent propres à chaque type : une
-  aide fiscale n'a pas de date limite mais exige un critère d'assiette et un
-  exercice ; une levée n'a pas d'émetteur mais exige une thèse d'investissement
-  et un stade. Le principe ne bouge pas — pas de PURSUE sans source primaire
-  accessible, ni sans action suivante exacte, ni sans qu'un humain ait vérifié —
-  seule la liste des conditions devient fonction du type.
-- **Preuve de fin :** un CIR et un investisseur peuvent atteindre
-  PURSUE-eligible **sous leurs propres conditions**, sans assouplir celles d'un
-  appel d'offres.
+**Onze types** au lieu de quatre, chacun avec un profil déclaré
+(`packages/ingestion/src/opportunity-kinds.ts`) :
 
-### S4 — Élargir les sources, par valeur décroissante
+| Type | Forme | Sens |
+|---|---|---|
+| `TENDER` | contrat | appel d'offres, RFP, ITT |
+| `PRE_SOLICITATION` | contrat | RFI, *sources sought*, avis de préinformation — l'amont où le cahier des charges s'écrit encore |
+| `GRANT` | non dilutif | subvention, appel à projets |
+| `TAX_INCENTIVE` | non dilutif | CIR, CII, JEI — un **statut**, pas un appel |
+| `EQUITY` | dilutif | levée, BA, accélérateur |
+| `DEBT_GUARANTEE` | remboursable | prêt, garantie BPI |
+| `PRIZE` | non dilutif | concours, prix |
+| `CONSORTIUM_CALL` | contrat | recherche de partenaires |
+| `MARKETPLACE_PROJECT` | contrat | Upwork, Malt, Comet — une mission publiée, pas un marché |
+| `ACQUISITION` | achat | Acquire, Flippa — **le seul type sortant** : l'argent part |
+| `REGULATORY` | aucune | à surveiller, jamais à poursuivre |
+
+Les anciens libellés (`TENDER_RFP`, `VC_INVESTOR`) sont remappés à la lecture :
+les données déjà en base ne sont pas réécrites.
+
+**Le gate est devenu fonction du type, sans devenir un réglage.**
+`gate-profiles.ts` sépare deux familles :
+
+- **six conditions universelles** — source primaire accessible, source vérifiée,
+  éligibilité évaluée, pas un simple agrégateur, action suivante exacte,
+  confiance suffisante. *Aucun type ne peut s'en exempter.*
+- **trois conditions de date limite** — date vérifiée, non expirée, appel non
+  clos. Elles ne s'appliquent **que si le type en a une**.
+
+C'est la différence entre un gate configurable et un gate adaptatif : le
+cadran qui aurait permis d'assouplir « source vérifiée » n'existe pas.
+
+Chaque type porte en plus **sa propre question à l'humain** (`humanQuestion`) :
+pour un CIR, « l'assiette et l'exercice sont-ils confirmés ? » ; pour une levée,
+« la thèse et le stade correspondent-ils ? » — la vérification humaine reste
+obligatoire, mais elle porte enfin sur ce qui compte pour l'objet.
+
+`ACQUISITION` est marqué `OUTBOUND` et `REGULATORY` `actionable: false` : le
+premier n'est jamais additionné au reste dans les totaux financiers, le second
+est forcé hors PURSUE quelle que soit la preuve.
+
+**Preuve de fin, atteinte :** un CIR et un investisseur passent PURSUE-eligible
+sous leurs propres conditions, sans qu'aucune condition d'appel d'offres soit
+assouplie — c'est un test, pas une affirmation.
+
+### S4 — Élargir les sources — 🟡 **registre livré, connecteurs à venir**
+
+Livré le 16/09/2026 : les sources ne sont plus une intention dans un tableau de
+roadmap, ce sont **18 fiches YAML** (`registry/sources/`) que le code lit, que
+Zod valide et que la console affiche. Chacune porte un **statut qui ne se
+contourne pas** :
+
+| Statut | Sens | Combien |
+|---|---|---|
+| `LIVE` | un connecteur tourne et ramène | 1 (TED) |
+| `FIXTURE_ONLY` | connecteur écrit, jamais confirmé en réel | 1 (EU Funding & Tenders) |
+| `DECLARED` | source identifiée, **aucun connecteur** — l'intake manuel est le chemin | 12 |
+| `BLOCKED` | l'accès automatisé est interdit ou sous compte | 4 |
+
+Le validateur **refuse** qu'une fiche se dise `LIVE` sans connecteur, et refuse
+qu'une fiche `DECLARED` en déclare un. C'est ce qui empêche la liste de devenir
+un argumentaire.
+
+Ajoutées sur ta demande : **aides régionales Bretagne**, aides-territoires,
+BPI, France 2030 / ADEME, CIR-CII-JEI, et côté Émirats **Hub71**, **ADIO**,
+marchés publics fédéraux UAE. Pour padel.design sur l'EMEA : UK Find a Tender,
+UNGM, Banque mondiale / BAD / BERD.
+
+Sur **Upwork, Malt, Comet, Acquire** : `BLOCKED`, et c'est délibéré. Leurs
+conditions d'utilisation interdisent le *scraping*, et te connecter avec tes
+identifiants pour les moissonner mettrait **ton compte** en jeu, pas le mien.
+Le chemin supporté est l'intake par lien (§ S7) : tu vois une mission ou une
+cession qui t'intéresse, tu colles l'URL, elle entre dans le pipeline comme
+tout le reste. Le jour où l'un d'eux ouvre une API officielle, la fiche change
+de statut et un connecteur se branche — la place est déjà faite.
+
+Le reste du tableau ci-dessous garde sa valeur de priorisation :
+
 
 | Source | Couvre | Pour qui | Effort | À vérifier avant |
 |---|---|---|---|---|
@@ -262,6 +334,63 @@ et la couche humaine passée en base. Mise en service :
 Reste de S6, non fait et non nécessaire aujourd'hui : plusieurs relecteurs,
 notifications sortantes (tu as choisi « dans la console uniquement »).
 
+### S7 — Liens vérifiés, argent visible, console utilisable — ✅ **livré le 16/09/2026**
+
+Quatre demandes en une, toutes venues de l'usage réel et pas d'un plan.
+
+**« Beaucoup de 404 ».** Chaque URL publiée — liens des projets, sources,
+opportunités — passe désormais par `check:links` : HEAD puis GET si le serveur
+refuse la première, garde SSRF, classement en `OK / REDIRECTED / DEAD /
+UNREACHABLE / REFUSED`. Le résultat est **écrit dans le registre** (`urlVerified`,
+`lastUrlCheck`) et affiché à côté du lien : *vérifié le …*, ou *jamais vérifié* —
+jamais rien qui laisse croire qu'un lien marche parce qu'il a été tapé.
+
+Le point qui compte : le premier jet du vérificateur a rapporté **45 URL
+valides comme refusées**. Elles ne l'étaient pas — c'est notre propre sortie
+réseau qui était bloquée, et l'outil accusait les sites des autres. Il y a
+maintenant une **sonde témoin** (`probeEgress`) au début du run : si elle ne
+sort pas, le run déclare « la vérification n'a pas eu lieu », **ne marque
+rien** et sort en erreur. Un vérificateur qui ment sur l'état du réseau est pire
+que pas de vérificateur.
+
+**« Un tableau de récap financier du potentiel par projet ».** Écran `/money`,
+avec trois règles visibles à l'écran plutôt qu'enfouies dans le code :
+
+- **la couverture accompagne chaque total** — « 3 sur 15 portent un montant » est
+  une partie du chiffre, pas une note de bas de page ;
+- **entrant et sortant ne se mélangent jamais** — une acquisition dépense ;
+- **ce que le gate bloque est compté à part** — pas de chiffre unique flatteur.
+
+Les montants sont **lus** dans les documents (`estimated_value` d'abord), jamais
+estimés ; un groupage irrégulier (`EUR 5 0 00 000`, vrai extrait de PDF) descend
+la confiance au lieu d'inventer une certitude. Aucune conversion de devise n'est
+faite : EUR et AED restent côte à côte.
+
+**« Ultra le bordel ».** Le rail passe de treize entrées à **cinq** :
+*Aujourd'hui · Opportunités · Projets · Argent · Espace de travail*. Les
+anciennes routes existent toujours et atterrissent sur la bonne vue — aucun lien
+partagé ne se casse. Et le vocabulaire est traduit une fois pour toutes
+(`vocabulary.ts`) : `MANUAL_REVIEW_REQUIRED` devient « pas encore vérifié »,
+`noVerifiedDeadline` devient « aucune date limite confirmée ».
+
+**« Lancer une recherche sur n'importe quel nouveau projet ».** Trois chemins,
+tous depuis la console :
+
+1. **Créer un projet** — le brouillon est validé par le **même schéma Zod** que
+   les fiches YAML, puis matérialisé en `registry/projects/<slug>.yaml` par le
+   worker. La YAML reste la source de vérité ; la console ne devient pas une
+   seconde vérité.
+2. **Lancer une recherche** sur un projet existant. La demande est *réclamée*
+   par le workflow (`requests --plan`), exécutée, puis **close contre ce qui
+   s'est réellement passé** (`requests --settle`). Une demande n'est jamais
+   marquée faite sans qu'une recherche ait tourné.
+3. **Coller un lien** — l'intake universel. C'est la réponse aux « sites plus
+   confidentiels » : la page est récupérée avec le même fetcher gardé, hachée,
+   confrontée à son propre domaine, lue pour son objet et son éligibilité, et
+   atterrit à **« pas encore vérifié »**. Coller un lien n'est pas vérifier une
+   source — seul un humain le fait.
+
+
 ---
 
 ## 3 bis. Ce que la base change pour les sprints ci-dessus
@@ -294,11 +423,16 @@ au lieu d'une impression.
 ## 5. L'ordre, et pourquoi
 
 ```
-S1 chercher au bon endroit  ──►  S2 matcher sur le dossier  ──►  S5 matcher sur les capacités
-        │                                                              ▲
-        └──►  S3 taxonomie + gate par type  ──►  S4 sources  ──────────┘
-                                                                  S6 multi-utilisateur (plus tard)
+S1 chercher au bon endroit ✅ ──► S2 matcher sur le dossier ✅ ──► S5 matcher sur les capacités
+        │                                                                 ▲
+        └──► S3 taxonomie + gate par type ✅ ──► S4 sources 🟡 ───────────┘
+                    │
+                    └──► S6 base permanente ✅ ──► S7 liens, argent, console ✅
 ```
+
+Reste devant : **S5** (matcher sur ce qu'on sait livrer, pas sur des mots-clés)
+et la moitié connecteurs de **S4** — BOAMP en premier, parce que c'est là que
+se gagnent les marchés sous les seuils européens.
 
 S1 d'abord parce que 81 % du flux actuel est structurellement hors sujet :
 c'est le seul chantier dont le gain ne dépend d'aucun autre. S2 ensuite, parce
