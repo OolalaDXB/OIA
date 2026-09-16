@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citations": [],
+    "citation": [],
     "reason": {
-      "en": "The extracted text does not specify the types of organisations eligible to apply for this tender. It focuses on the scope of work (health and safety consultancy services) but does not state whether private companies, public entities, or other types of organisations are permitted to bid.",
-      "fr": "Le texte extrait ne précise pas les types d'organisations éligibles pour répondre à cet appel d'offres. Il décrit l'objet de la mission (services de coordination en santé et sécurité) mais n'indique pas si les entreprises privées, les entités publiques ou d'autres types d'organisations sont autorisées à soumissionner."
+      "en": "The extracted text does not specify the types of organisations eligible to apply for this tender. There is no mention of required legal status, certifications, or sector-specific qualifications.",
+      "fr": "Le texte extrait ne précise pas les types d'organisations éligibles pour cet appel d'offres. Il n'y a aucune mention du statut juridique requis, des certifications ou des qualifications spécifiques au secteur."
     },
     "nextAction": {
-      "en": "Contact the buyer (GRAND PORT MARITIME DE MARSEILLE) via the provided email (correspondre@aws-france.com) to confirm whether private companies, including those in the AI and software sectors, are eligible to apply for this tender.",
-      "fr": "Contacter l'acheteur (GRAND PORT MARITIME DE MARSEILLE) via l'adresse email fournie (correspondre@aws-france.com) pour confirmer si les entreprises privées, y compris celles des secteurs de l'IA et des logiciels, sont éligibles pour répondre à cet appel d'offres."
+      "en": "Check the full tender documents on the provided link to identify eligibility criteria for applicants.",
+      "fr": "Consulter les documents complets de l'appel d'offres sur le lien fourni pour identifier les critères d'éligibilité des candidats."
     }
   }
 }

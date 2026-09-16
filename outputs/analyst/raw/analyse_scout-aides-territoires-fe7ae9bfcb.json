@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citations": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations may apply. It only mentions that 'organisms' can set up initiatives, but no legal form or eligibility criteria are provided.",
+      "fr": "Le texte extrait ne précise pas quels types d’organismes peuvent postuler. Il mentionne seulement que des 'organismes' peuvent mettre en place des initiatives, sans indiquer de forme juridique ou de critère d’éligibilité."
+    },
+    "nextAction": {
+      "en": "Contact the issuer (beta.gouv.fr) to ask which legal forms (association, company, public body, etc.) are eligible to apply.",
+      "fr": "Contacter l’émetteur (beta.gouv.fr) pour demander quelles formes juridiques (association, entreprise, organisme public, etc.) sont éligibles."
+    }
+  }
+}

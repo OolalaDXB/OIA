@@ -2,17 +2,16 @@
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
     "citations": [
-      "Main classification (cpv): 85141000 Services provided by medical personnel",
-      "Additional classification (cpv): 79417000 Safety consultancy services",
-      "Description: Arbeitsmedizinische und sicherheitstechnische Betreuung 2027-2030"
+      "Rahmenvertrag für die arbeitsmedizinische und sicherheitstechnische Betreuung 2027-2030",
+      "Services provided by medical personnel"
     ],
     "reason": {
-      "en": "The opportunity explicitly requires providers of medical and occupational safety services. BAWABA operates in AI, data, digital, cybersecurity, and software sectors, which do not align with the required medical or safety consultancy services specified in the tender.",
-      "fr": "L'opportunité exige explicitement des prestataires de services médicaux et de sécurité au travail. BAWABA opère dans les secteurs de l'IA, des données, du numérique, de la cybersécurité et des logiciels, ce qui ne correspond pas aux services médicaux ou de conseil en sécurité requis par l'appel d'offres."
+      "en": "The opportunity explicitly requires services provided by medical personnel for occupational health and safety supervision. BAWABA operates in AI, data, digital, cybersecurity, and software sectors, with no indication of providing medical or occupational health services.",
+      "fr": "L'opportunité exige explicitement des services fournis par du personnel médical pour la surveillance en matière de santé et de sécurité au travail. BAWABA opère dans les secteurs de l'IA, des données, du numérique, de la cybersécurité et des logiciels, sans indication de fournir des services médicaux ou de santé au travail."
     },
     "nextAction": {
       "en": "Review other funding opportunities that align with BAWABA’s core sectors (AI, data, digital, cybersecurity, or software).",
-      "fr": "Examiner d'autres opportunités de financement qui correspondent aux secteurs d'activité principaux de BAWABA (IA, données, numérique, cybersécurité ou logiciels)."
+      "fr": "Examiner d'autres opportunités de financement qui correspondent aux secteurs principaux de BAWABA (IA, données, numérique, cybersécurité ou logiciels)."
     }
   }
 }

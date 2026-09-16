@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations (e.g., public bodies, private companies, SMEs, etc.) are eligible to apply for this tender. There is no explicit exclusion or inclusion criteria mentioned regarding the legal status or type of applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations (par exemple, organismes publics, entreprises privées, PME, etc.) sont éligibles pour cet appel d'offres. Aucun critère d'exclusion ou d'inclusion explicite concernant le statut juridique ou le type de candidats n'est mentionné."
+      "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria related to the legal form, sector, or geographic location of applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent répondre à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité relatifs à la forme juridique, au secteur d'activité ou à la localisation géographique des candidats."
     },
     "nextAction": {
-      "en": "Consult the full tender notice on the TED website (link provided) to identify the eligibility criteria for applicants.",
-      "fr": "Consulter l'avis complet de l'appel d'offres sur le site TED (lien fourni) pour identifier les critères d'éligibilité des candidats."
+      "en": "Contact the buyer (Inserm Délégation Régionale Paris Ile de France Sud) to request the full tender documentation and confirm eligibility requirements.",
+      "fr": "Contacter l'acheteur (Inserm Délégation Régionale Paris Ile de France Sud) pour demander le dossier complet de l'appel d'offres et confirmer les critères d'éligibilité."
     }
   }
 }

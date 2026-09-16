@@ -1,33 +1,10 @@
 # Analyste / Analyst
 
-- fiches évaluées / records assessed: 0 of 19 analysable
-- —
-- citations inventées et retirées / invented citations dropped: 0
-- appels modèle / model calls: 19 · tokens 0/0
-- échecs / failures: 19
-
-## Échecs / Failures
-
-- 505248-2026: Mistral API error 401: {"detail":"Your API key expired on 2026-09-16."}
-
-- 506438-2026: Mistral API error 401: {"detail":"Your API key expired on 2026-09-16."}
-
-- 502549-2026: Mistral API error 401: {"detail":"Your API key expired on 2026-09-16."}
-
-- 500358-2026: Mistral API error 401: {"detail":"Your API key expired on 2026-09-16."}
-
-- 500966-2026: Mistral API error 401: {"detail":"Your API key expired on 2026-09-16."}
-
-- 494531-2026: Mistral API error 401: {"detail":"Your API key expired on 2026-09-16."}
-
-- 496268-2026: Mistral API error 401: {"detail":"Your API key expired on 2026-09-16."}
-
-- 491518-2026: Mistral API error 401: {"detail":"Your API key expired on 2026-09-16."}
-
-- 480676-2026: Mistral API error 401: {"detail":"Your API key expired on 2026-09-16."}
-
-- 478020-2026: Mistral API error 401: {"detail":"Your API key expired on 2026-09-16."}
-
+- fiches évaluées / records assessed: 40 of 107 analysable
+- NEEDS_INFO: 37 · NOT_ELIGIBLE: 3
+- citations inventées et retirées / invented citations dropped: 1
+- appels modèle / model calls: 40 · tokens 24422/8674
+- échecs / failures: 0
 
 > Chaque verdict a été produit par un modèle et n'est PAS une vérification humaine.
 > Aucun ne débloque le gate : il change l'ordre dans lequel tu regardes, pas ce que tu peux poursuivre.
@@ -35,3 +12,163 @@
 > Every verdict was produced by a model and is NOT a human verification.
 > None of them opens the gate: they change the order you look in, not what you may pursue.
 
+- **505248-2026** (bawaba) — **NEEDS_INFO**
+  - FR: Le texte extrait de l'opportunité ne précise pas qui peut postuler ni les critères d'éligibilité pour les candidats. Il n'y a aucune information permettant de déterminer si BAWABA répond aux exigences.
+  - EN: The extracted text of the opportunity does not specify who may apply or any eligibility criteria for applicants. There is no information to determine if BAWABA meets the requirements.
+  - 0 citation(s) vérifiée(s)
+- **506438-2026** (bawaba) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, la localisation ou le secteur des candidats.
+  - EN: The extracted text does not specify which types of organisations may apply. There is no mention of eligibility criteria regarding the legal form, location, or sector of applicants.
+  - 0 citation(s) vérifiée(s)
+- **502549-2026** (bawaba) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité relatifs à la structure juridique, au secteur ou à la localisation géographique du candidat.
+  - EN: The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria related to the applicant's legal structure, sector, or geographic location.
+  - 0 citation(s) vérifiée(s)
+- **500358-2026** (bawaba) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations sont éligibles pour cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, le secteur ou la localisation géographique des candidats.
+  - EN: The extracted text does not specify which types of organisations are eligible to apply for this tender. There is no mention of eligibility criteria regarding the legal form, sector, or geographic location of applicants.
+  - 0 citation(s) vérifiée(s)
+- **500966-2026** (bawaba) — **NEEDS_INFO**
+  - FR: Le texte extrait de l'opportunité ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité tels que la forme juridique, la localisation ou le secteur d'activité.
+  - EN: The extracted text of the opportunity does not specify which types of organisations may apply. There is no mention of eligibility criteria such as legal form, location, or sector.
+  - 0 citation(s) vérifiée(s)
+- **494531-2026** (bawaba) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité concernant le secteur, la structure juridique ou la localisation géographique du demandeur.
+  - EN: The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria related to the applicant's sector, legal structure, or geographic location.
+  - 0 citation(s) vérifiée(s)
+- **496268-2026** (bawaba) — **NOT_ELIGIBLE**
+  - FR: L'opportunité exige explicitement des services fournis par du personnel médical pour la surveillance en matière de santé et de sécurité au travail. BAWABA opère dans les secteurs de l'IA, des données, du numérique, de la cybersécurité et des logiciels, sans indication de fournir des services médicaux ou de santé au travail.
+  - EN: The opportunity explicitly requires services provided by medical personnel for occupational health and safety supervision. BAWABA operates in AI, data, digital, cybersecurity, and software sectors, with no indication of providing medical or occupational health services.
+  - 2 citation(s) vérifiée(s)
+- **491518-2026** (bawaba) — **NEEDS_INFO**
+  - FR: Le texte de l'opportunité ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, le secteur ou la localisation géographique du demandeur.
+  - EN: The opportunity text does not specify which types of organisations may apply. There is no mention of eligibility criteria related to the applicant's legal form, sector, or geographic location.
+  - 0 citation(s) vérifiée(s)
+- **480676-2026** (bawaba) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas les types d'organisations éligibles pour cet appel d'offres. Il n'y a aucune mention du statut juridique requis, des certifications ou des qualifications spécifiques au secteur.
+  - EN: The extracted text does not specify the types of organisations eligible to apply for this tender. There is no mention of required legal status, certifications, or sector-specific qualifications.
+  - 0 citation(s) vérifiée(s)
+- **478020-2026** (bawaba) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations sont éligibles pour postuler. Il n'y a aucune mention de restrictions ou d'autorisations concernant les candidats.
+  - EN: The extracted text does not specify which types of organisations are eligible to apply. There is no mention of restrictions or permitted applicants.
+  - 0 citation(s) vérifiée(s)
+- **471799-2026** (bawaba) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations peuvent répondre à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité relatifs à la forme juridique, au secteur d'activité ou à la localisation géographique des candidats.
+  - EN: The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria related to the legal form, sector, or geographic location of applicants.
+  - 0 citation(s) vérifiée(s)
+- **466007-2026** (bawaba) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas qui peut postuler à cet appel d'offres. Il n'y a aucune mention des candidats éligibles, des formes juridiques ou des restrictions géographiques qui confirmeraient ou excluraient BAWABA.
+  - EN: The extracted text does not specify who may apply for this tender. There is no mention of eligible applicants, legal forms, or geographic restrictions that would confirm or exclude BAWABA.
+  - 0 citation(s) vérifiée(s)
+- **450738-2026** (bawaba) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité concernant la structure juridique, le secteur ou la localisation géographique du demandeur.
+  - EN: The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria related to the applicant's legal structure, sector, or geographic location.
+  - 0 citation(s) vérifiée(s)
+- **433728-2026** (bawaba) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, la localisation ou le secteur des candidats.
+  - EN: The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria regarding the legal form, location, or sector of applicants.
+  - 0 citation(s) vérifiée(s)
+- **435056-2026** (bawaba) — **NEEDS_INFO**
+  - FR: Le texte extrait de l'opportunité ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité pour les candidats, tels que la forme juridique, la localisation ou le secteur d'activité.
+  - EN: The extracted text of the opportunity does not specify which types of organisations may apply. There is no mention of eligibility criteria for applicants, such as legal form, location, or sector.
+  - 0 citation(s) vérifiée(s)
+- **429989-2026** (bawaba) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité tels que la forme juridique, la localisation ou les exigences sectorielles.
+  - EN: The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria such as legal form, location, or sector requirements.
+  - 0 citation(s) vérifiée(s)
+- **427373-2026** (bawaba) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Aucun critère d'éligibilité tel que la forme juridique, la localisation ou le secteur n'est mentionné.
+  - EN: The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria such as legal form, location, or sector.
+  - 0 citation(s) vérifiée(s)
+- **422623-2026** (bawaba) — **NEEDS_INFO**
+  - FR: Le verdict initial ne citait rien de vérifiable dans le document — ramené à « à vérifier ».
+  - EN: The original verdict cited nothing checkable in the document — downgraded to 'needs info'.
+  - 0 citation(s) vérifiée(s)
+- **422920-2026** (bawaba) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas qui peut postuler à cet appel d'offres. Il n'y a aucune mention des candidats éligibles, des formes juridiques ou des restrictions géographiques qui confirmeraient ou excluraient BAWABA.
+  - EN: The extracted text does not specify who may apply for this tender. There is no mention of eligible applicants, legal forms, or geographic restrictions that would confirm or exclude BAWABA.
+  - 0 citation(s) vérifiée(s)
+- **scout-adio-35574470fd** (bawaba) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d’organisations peuvent postuler ou manifester leur intérêt. Aucun critère d’éligibilité pour les candidats n’est mentionné.
+  - EN: The extracted text does not specify which types of organisations may apply or manifest interest. There is no mention of eligibility criteria for applicants.
+  - 0 citation(s) vérifiée(s)
+- **scout-adio-5a0dc0d8ec** (bawaba) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d’organisations peuvent postuler ou manifester leur intérêt. Il décrit uniquement l’objectif et le public de l’événement.
+  - EN: The extracted text does not specify which types of organisations may apply or manifest interest. It only describes the event's purpose and audience.
+  - 0 citation(s) vérifiée(s)
+- **scout-adio-873ee725b8** (bawaba) — **NEEDS_INFO**
+  - FR: Le document ne précise pas les critères ou le processus pour recevoir une invitation. Il n'est pas clair qui peut postuler ou être invité.
+  - EN: The document does not specify the criteria or process for receiving an invitation. It is unclear who may apply or be invited.
+  - 0 citation(s) vérifiée(s)
+- **scout-adio-b6bef59921** (bawaba) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas qui peut postuler à cette opportunité de financement. Aucun critère d'éligibilité pour les candidats n'est mentionné.
+  - EN: The extracted text does not specify who may apply for this funding opportunity. There is no mention of eligibility criteria for applicants.
+  - 0 citation(s) vérifiée(s)
+- **scout-aides-territoires-f5a3d1ac07** (lesvieillespierres) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Aucun critère d'éligibilité pour les candidats n'est mentionné.
+  - EN: The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria for applicants.
+  - 0 citation(s) vérifiée(s)
+- **scout-aides-territoires-c2e060925d** (lesvieillespierres) — **NOT_ELIGIBLE**
+  - FR: Le programme cible explicitement les collectivités locales et les acteurs du logement, du commerce et de l'urbanisme. Une association centrée sur la randonnée patrimoniale ne correspond pas à ces catégories.
+  - EN: The program explicitly targets local authorities and actors in housing, commerce, and urban planning. An association focused on heritage hiking does not fall into these categories.
+  - 1 citation(s) vérifiée(s)
+- **scout-aides-territoires-cfd6b07452** (lesvieillespierres) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations sont éligibles pour la subvention AGRIP. Il n'est pas mentionné si les associations, les entreprises ou d'autres entités juridiques peuvent postuler.
+  - EN: The extracted text does not specify which types of organisations are eligible to apply for the AGRIP grant. There is no mention of whether associations, companies, or other legal entities can apply.
+  - 0 citation(s) vérifiée(s)
+- **scout-aides-territoires-ab454050d7** (lesvieillespierres) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il n'y a aucune mention des critères d'éligibilité relatifs au statut juridique, au secteur ou au type d'organisation.
+  - EN: The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria related to legal status, sector, or organisational type.
+  - 0 citation(s) vérifiée(s)
+- **scout-aides-territoires-21a0b724a1** (lesvieillespierres) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il décrit le champ d'application du programme mais ne mentionne pas les critères d'éligibilité des candidats.
+  - EN: The extracted text does not specify which types of organisations may apply. It describes the programme's scope but does not state eligibility criteria for applicants.
+  - 0 citation(s) vérifiée(s)
+- **scout-aides-territoires-fe7ae9bfcb** (lesvieillespierres) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d’organismes peuvent postuler. Il mentionne seulement que des 'organismes' peuvent mettre en place des initiatives, sans indiquer de forme juridique ou de critère d’éligibilité.
+  - EN: The extracted text does not specify which types of organisations may apply. It only mentions that 'organisms' can set up initiatives, but no legal form or eligibility criteria are provided.
+  - 0 citation(s) vérifiée(s)
+- **scout-aides-territoires-8fc3efc73a** (lesvieillespierres) — **NOT_ELIGIBLE**
+  - FR: L'opportunité cible explicitement les 'entreprises' et les 'petites et moyennes entreprises' (PME). 'Les Vieilles Pierres' est une association, pas une entreprise ou une PME.
+  - EN: The opportunity explicitly targets 'entreprises' (businesses) and 'petites et moyennes entreprises' (SMEs). 'Les Vieilles Pierres' is an association, not a business or SME.
+  - 1 citation(s) vérifiée(s)
+- **scout-aides-territoires-cc2155afd8** (lesvieillespierres) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations peuvent postuler au programme EaSI. Il décrit le champ d'application mais ne mentionne pas les critères d'éligibilité des candidats.
+  - EN: The extracted text does not specify which types of organisations may apply for the EaSI programme. It describes the scope but does not state eligibility criteria for applicants.
+  - 0 citation(s) vérifiée(s)
+- **scout-aides-territoires-4f0e193d06** (lesvieillespierres) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations ou d'entités juridiques sont éligibles pour la subvention ÉcoQuartier. Il mentionne les 'porteurs de projets' sans les définir.
+  - EN: The extracted text does not specify which types of organisations or legal entities are eligible to apply for the ÉcoQuartier grant. It mentions 'porteurs de projets' but does not define who they are.
+  - 0 citation(s) vérifiée(s)
+- **scout-aides-territoires-e2773d3036** (lesvieillespierres) — **NEEDS_INFO**
+  - FR: Le verdict initial ne citait rien de vérifiable dans le document — ramené à « à vérifier ».
+  - EN: The original verdict cited nothing checkable in the document — downgraded to 'needs info'.
+  - 0 citation(s) vérifiée(s)
+- **scout-aides-territoires-b12b40854e** (lesvieillespierres) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il mentionne les innovateurs, les entrepreneurs et les étudiants, mais ne clarifie pas si les associations comme Les Vieilles Pierres sont éligibles.
+  - EN: The extracted text does not specify which types of organisations may apply for this funding opportunity. It mentions innovators, entrepreneurs, and students but does not clarify if associations like Les Vieilles Pierres are eligible.
+  - 0 citation(s) vérifiée(s)
+- **scout-aides-territoires-4ce66281ab** (lesvieillespierres) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Aucun critère d'éligibilité pour les candidats n'est mentionné.
+  - EN: The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria for applicants.
+  - 0 citation(s) vérifiée(s)
+- **scout-aides-territoires-8d4e828c36** (lesvieillespierres) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Aucun critère d'éligibilité pour les candidats n'est mentionné.
+  - EN: The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria for applicants.
+  - 0 citation(s) vérifiée(s)
+- **scout-aides-territoires-b45cb20405** (lesvieillespierres) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations peuvent postuler au programme Europe Numérique. Il décrit le champ d'application du programme mais ne mentionne pas les critères d'éligibilité des candidats.
+  - EN: The extracted text does not specify which types of organisations may apply for the Digital Europe programme. It describes the programme's scope but does not list eligibility criteria for applicants.
+  - 0 citation(s) vérifiée(s)
+- **scout-aides-territoires-1d40f6079e** (lesvieillespierres) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il décrit uniquement le champ d'application de l'initiative.
+  - EN: The extracted text does not specify which types of organisations may apply for this funding opportunity. It only describes the scope of the initiative.
+  - 0 citation(s) vérifiée(s)
+- **scout-aides-territoires-69ab8e97aa** (lesvieillespierres) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations peuvent demander ce financement. Il n'y a aucune mention des critères d'éligibilité liés au statut juridique, au secteur ou à l'activité.
+  - EN: The extracted text does not specify which types of organisations may apply for this funding. There is no mention of eligibility criteria related to legal status, sector, or activity.
+  - 0 citation(s) vérifiée(s)
+- **scout-aides-territoires-424ff298b5** (lesvieillespierres) — **NEEDS_INFO**
+  - FR: Le texte extrait ne précise pas quels types d'organisations peuvent demander un financement FEDER. Il n'y a aucune mention des critères d'éligibilité pour les demandeurs.
+  - EN: The extracted text does not specify which types of organisations may apply for FEDER funding. There is no mention of eligibility criteria for applicants.
+  - 0 citation(s) vérifiée(s)

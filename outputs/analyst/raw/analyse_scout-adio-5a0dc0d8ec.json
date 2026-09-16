@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations may apply or manifest interest. It only describes the event's purpose and audience.",
+      "fr": "Le texte extrait ne précise pas quels types d’organisations peuvent postuler ou manifester leur intérêt. Il décrit uniquement l’objectif et le public de l’événement."
+    },
+    "nextAction": {
+      "en": "Contact ADIO or ADGM to ask who is eligible to express interest in the Abu Dhabi Investment Forum.",
+      "fr": "Contacter l’ADIO ou l’ADGM pour demander qui peut manifester son intérêt pour l’Abu Dhabi Investment Forum."
+    }
+  }
+}

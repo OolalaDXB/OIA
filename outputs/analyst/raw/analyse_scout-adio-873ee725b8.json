@@ -1,0 +1,16 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [
+      "Ce forum exclusif, accessible uniquement sur invitation, réunira d’éminents dirigeants, entrepreneurs et décideurs afin d’explorer les opportunités stratégiques de collaboration entre les communautés d’affaires d’Abu Dhabi et d’Italie."
+    ],
+    "reason": {
+      "en": "The document does not specify the criteria or process for receiving an invitation. It is unclear who may apply or be invited.",
+      "fr": "Le document ne précise pas les critères ou le processus pour recevoir une invitation. Il n'est pas clair qui peut postuler ou être invité."
+    },
+    "nextAction": {
+      "en": "Contact ADIO to ask how invitations are issued and whether BAWABA can request one.",
+      "fr": "Contacter ADIO pour demander comment les invitations sont émises et si BAWABA peut en faire la demande."
+    }
+  }
+}

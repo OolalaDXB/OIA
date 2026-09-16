@@ -1,7 +1,8 @@
 {
   "ScoutResult": {
+    "note": "Extracted 50 funding opportunities from the first page of results.",
     "calls": [
-       {
+      {
         "title": "Demonstration of hydropower technologies for efficient and forward-looking refurbishment of existing hydropower plants",
         "programme": "Horizon Europe (HORIZON)",
         "type": "Calls for proposals",
@@ -551,7 +552,6 @@
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL3-2027-01-BM-03?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
         "quote": "Detection and characterisation of threats or illegal/ smuggled goods in cargo"
       }
-    ],
-    "note": "Only the first 50 of over 10,000 calls are listed. The page contains a filterable list of all open, forthcoming, and closed calls for proposals under EU programmes."
+    ]
   }
 }

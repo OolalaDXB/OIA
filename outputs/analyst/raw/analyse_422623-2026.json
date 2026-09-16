@@ -1,0 +1,17 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": [
+      "France – Structural engineering consultancy services – Accord-cadre d'Assistance Technique à la Maîtrise d'Ouvrage (ATMO) pour le CHU de Strasbourg (HUS)",
+      "classification-cpv: 71312000, 71336000, 71356200, 71312000, 71312000, 71312000, 71312000, 71312000, 71312000, 71312000, 71312000, 71500000, 71336000, 71356200, 71334000, 71336000, 71356200, 71321400, 71336000, 71356200, 71325000, 71336000, 71356200, 71322100, 71336000, 71356200, 79417000, 71336000, 71356200, 71313200, 71336000, 71356200, 71400000, 71336000, 71356200"
+    ],
+    "reason": {
+      "en": "The opportunity explicitly targets structural engineering consultancy services (CPV codes such as 71312000, 71336000, 71356200, etc.), which do not align with BAWABA's sectors of AI, data, digital, cybersecurity, and software.",
+      "fr": "L'opportunité cible explicitement les services de conseil en ingénierie structurelle (codes CPV tels que 71312000, 71336000, 71356200, etc.), ce qui ne correspond pas aux secteurs d'activité de BAWABA, à savoir l'IA, les données, le numérique, la cybersécurité et les logiciels."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that specifically target AI, data, or digital sectors.",
+      "fr": "Examiner d'autres opportunités de financement ciblant spécifiquement les secteurs de l'IA, des données ou du numérique."
+    }
+  }
+}

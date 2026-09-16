@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations are eligible to apply for the AGRIP grant. There is no mention of whether associations, companies, or other legal entities can apply.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles pour la subvention AGRIP. Il n'est pas mentionné si les associations, les entreprises ou d'autres entités juridiques peuvent postuler."
+    },
+    "nextAction": {
+      "en": "Check the full AGRIP grant documentation or contact the issuer (beta.gouv.fr) to confirm whether heritage or cultural associations are eligible to apply.",
+      "fr": "Consulter la documentation complète de la subvention AGRIP ou contacter l'émetteur (beta.gouv.fr) pour confirmer si les associations patrimoniales ou culturelles sont éligibles."
+    }
+  }
+}

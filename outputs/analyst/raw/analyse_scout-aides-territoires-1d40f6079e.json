@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. It only describes the scope of the initiative.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il décrit uniquement le champ d'application de l'initiative."
+    },
+    "nextAction": {
+      "en": "Check the official FEADER Leader programme documentation or contact the issuer (beta.gouv.fr) to confirm eligibility criteria for associations.",
+      "fr": "Consulter la documentation officielle du programme Leader FEADER ou contacter l'émetteur (beta.gouv.fr) pour confirmer les critères d'éligibilité pour les associations."
+    }
+  }
+}

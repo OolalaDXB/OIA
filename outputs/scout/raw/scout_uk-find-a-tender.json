@@ -162,7 +162,7 @@
         "quote": ""
       },
       {
-        "title": "Further Premarket Engagement excerise",
+        "title": "Further Premarket Engagement exercise",
         "type": "Preliminary Market Engagement",
         "contractingAuthority": "London Borough of Hammersmith and Fulham",
         "contractingAuthorityType": "Regional and local public authority",
@@ -176,8 +176,7 @@
           "42992000 - Special-purpose electrical goods",
           "48000000 - Software package and information systems",
           "50000000 - Repair and maintenance services",
-          "51000000 - Installation services (except software)",
-          "and 12 more"
+          "51000000 - Installation services (except software)"
         ],
         "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e5",
         "quote": ""
@@ -257,8 +256,7 @@
           "45210000 - Building construction work",
           "45211300 - Houses construction work",
           "71000000 - Architectural, construction, engineering and inspection services",
-          "71200000 - Architectural and related services",
-          "and 3 more"
+          "71200000 - Architectural and related services"
         ],
         "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773df",
         "quote": ""
@@ -309,6 +307,7 @@
         "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773d9",
         "quote": ""
       }
-    ]
+    ],
+    "note": ""
   }
 }
