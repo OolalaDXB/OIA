@@ -157,6 +157,20 @@ interface CandidateRow {
   matchableChars?: number;
   /** Which schema the notice XML used, when it was read at all. */
   xmlSchema?: string;
+  /** The XML root element's local name — what it actually was, not a guess. */
+  xmlRoot?: string;
+}
+
+/** What the notice XML actually was, counted by root element and schema. */
+function xmlShapeBreakdown(rows: readonly CandidateRow[]): string {
+  const counts = new Map<string, number>();
+  for (const r of rows) {
+    if (!r.xmlSchema) continue;
+    const key = `${r.xmlSchema}/${r.xmlRoot || "?"}`;
+    counts.set(key, (counts.get(key) ?? 0) + 1);
+  }
+  if (counts.size === 0) return "none read";
+  return [...counts].sort((a, b) => b[1] - a[1]).map(([k, n]) => `${n} × ${k}`).join(" · ");
 }
 
 async function main() {
@@ -460,6 +474,7 @@ async function main() {
     // structured record, not from prose under a heading a regex recognised.
     let xmlFacts: MaterialFact[] = [];
     let xmlSchema: string | undefined;
+    let xmlRoot: string | undefined;
     const xmlUrl = fetchXml ? noticeXmlUrl(c.raw as Record<string, unknown>, c.externalId) : undefined;
     if (xmlUrl) {
       // Two requests per notice instead of one, against a public EU service.
@@ -474,6 +489,7 @@ async function main() {
       if (got.body && got.attempt.fetchStatus === "OK") {
         const read = readTedNoticeXml(got.body.toString("utf8"));
         xmlSchema = read.schema;
+        xmlRoot = read.rootElement;
         xmlFacts = tedXmlToFacts(read, ing.artifact.id, xmlUrl);
       } else {
         // Not fatal — the HTML facts still stand. But it is counted, because a
@@ -507,6 +523,7 @@ async function main() {
       noticeFacts,
       matchableChars,
       xmlSchema,
+      xmlRoot,
     });
   }
 
@@ -538,6 +555,8 @@ async function main() {
       `- qualified at MANUAL_REVIEW_REQUIRED: ${qualified}`,
       `- notice-page fetch failures: ${fetchFailures}`,
       `- notice-XML fetch failures: ${xmlFetchFailures}`,
+      `- notice XML shapes read: ${xmlShapeBreakdown(rows)}` +
+        " — a shape this reader does not know is named here rather than counted as silence",
       "",
       "## Candidates (each with official source URL)",
       ...rows.map(

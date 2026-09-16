@@ -95,8 +95,9 @@ const LEGACY = `<?xml version="1.0" encoding="UTF-8"?>
 describe("readTedNoticeXml — eForms", () => {
   const facts = readTedNoticeXml(EFORMS);
 
-  it("names the schema it read", () => {
+  it("names the schema and the root element it read", () => {
     expect(facts.schema).toBe("EFORMS");
+    expect(facts.rootElement).toBe("contractnotice");
   });
 
   it("finds selection criteria behind the efac: prefix", () => {
@@ -136,8 +137,9 @@ describe("readTedNoticeXml — eForms", () => {
 describe("readTedNoticeXml — legacy TED_EXPORT", () => {
   const facts = readTedNoticeXml(LEGACY);
 
-  it("names the schema it read", () => {
+  it("names the schema and the root element it read", () => {
     expect(facts.schema).toBe("TED_EXPORT");
+    expect(facts.rootElement).toBe("ted_export");
   });
 
   it("reads the LEFTI block the old schema uses for eligibility", () => {
@@ -173,10 +175,27 @@ describe("readTedNoticeXml — a notice that says nothing", () => {
     expect(facts.documentsUrl).toBe("");
   });
 
-  it("survives XML that is not a notice at all", () => {
+  it("survives XML that is not a notice at all, and says what it was", () => {
     const facts = readTedNoticeXml("<html><body>404 Not Found</body></html>");
     expect(facts.schema).toBe("UNKNOWN");
+    expect(facts.rootElement).toBe("html");
     expect(facts.eligibility).toBe("");
+  });
+
+  it("classifies an award notice as eForms by its root, not by a keyword", () => {
+    // The first real run classified 10 of 25 notices UNKNOWN. A root-based
+    // reading names what they are; a regex over the whole document would also
+    // call a legacy export eForms for quoting the words in a description.
+    const award = readTedNoticeXml(
+      `<ContractAwardNotice xmlns:cac="x"><cac:ProcurementProject/></ContractAwardNotice>`,
+    );
+    expect(award.schema).toBe("EFORMS");
+    expect(award.rootElement).toBe("contractawardnotice");
+
+    const legacy = readTedNoticeXml(
+      `<TED_EXPORT><FORM_SECTION><SHORT_DESCR>A ContractNotice is mentioned here.</SHORT_DESCR></FORM_SECTION></TED_EXPORT>`,
+    );
+    expect(legacy.schema).toBe("TED_EXPORT");
   });
 });
 

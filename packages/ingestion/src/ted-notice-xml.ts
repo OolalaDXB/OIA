@@ -65,6 +65,16 @@ export interface TedXmlFacts {
   documentsUrl: string;
   /** Which schema this notice used — eForms or the legacy export. */
   schema: "EFORMS" | "TED_EXPORT" | "UNKNOWN";
+  /**
+   * The root element's local name, verbatim.
+   *
+   * The first real run came back with 10 notices out of 25 classified
+   * UNKNOWN, which says nothing about what they actually were. The root
+   * element is the one fact that always exists, so it is reported rather
+   * than guessed at — a run that finds a shape this file does not read can
+   * then name it instead of shrugging.
+   */
+  rootElement: string;
 }
 
 function textOf(text: string): string {
@@ -143,13 +153,32 @@ function documentsUrl($: cheerio.CheerioAPI): string {
   return found;
 }
 
+/** eForms document roots, by local name. All of them are UBL. */
+const EFORMS_ROOTS = new Set([
+  "contractnotice",
+  "contractawardnotice",
+  "priorinformationnotice",
+  "tender",
+  "tenderercontractnotice",
+]);
+
 export function readTedNoticeXml(xml: string): TedXmlFacts {
   const $ = cheerio.load(xml, { xmlMode: true });
-  const schema: TedXmlFacts["schema"] = /ContractNotice|efac:|efbc:/i.test(xml)
-    ? "EFORMS"
-    : /TED_EXPORT|FORM_SECTION/i.test(xml)
-      ? "TED_EXPORT"
-      : "UNKNOWN";
+
+  // Read the root rather than pattern-matching the whole document: a legacy
+  // export that happens to quote the word "ContractNotice" in a description
+  // would otherwise be called eForms.
+  let rootElement = "";
+  $("*").each((_i, el) => {
+    if (!rootElement) rootElement = localName(el);
+  });
+
+  const schema: TedXmlFacts["schema"] =
+    EFORMS_ROOTS.has(rootElement) || /efac:|efbc:/i.test(xml)
+      ? "EFORMS"
+      : rootElement === "ted_export" || /<TED_EXPORT|FORM_SECTION/i.test(xml)
+        ? "TED_EXPORT"
+        : "UNKNOWN";
 
   return {
     eligibility: collect($, ELIGIBILITY_TAGS),
@@ -161,6 +190,7 @@ export function readTedNoticeXml(xml: string): TedXmlFacts {
     estimatedValue: collect($, VALUE_TAGS, { max: 200, min: 1, withAttr: ["currencyID", "CURRENCY"] }),
     documentsUrl: documentsUrl($),
     schema,
+    rootElement,
   };
 }
 
