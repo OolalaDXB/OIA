@@ -31,7 +31,7 @@ export function WorkspaceView({ data, tab: initial = "tasks" }: { data: ConsoleD
   return (
     <Shell
       active="workspace"
-      title="Workspace"
+      title={{ fr: "Espace de travail", en: "Workspace" }}
       stats={`${open.length} open task(s) · ${notes.notes.length} note(s) · ${contacts.contacts.length} contact(s)`}
       note="What you put here, attached to a project or to an opportunity. Anything with a due date shows up in Today."
     >

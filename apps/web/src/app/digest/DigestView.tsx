@@ -67,7 +67,7 @@ export function DigestView({ data }: { data: ConsoleData }) {
   return (
     <Shell
       active="today"
-      title={`Today — ${digest.date}`}
+      title={{ fr: `Aujourd'hui — ${digest.date}`, en: `Today — ${digest.date}` }}
       stats={`${alerts.open.length} alert(s) · ${digest.entries.length} thing(s) to do · ${ledger.source === "LEDGER" ? "live ledger" : "bundled snapshot"}`}
       note="Everything that is asking for you: alerts raised by the permanent watch, then what is closing, overdue, blocked or untriaged. No ranking model — just deadlines, tasks and what you already decided."
       onExportAudit={audit.exportLog}

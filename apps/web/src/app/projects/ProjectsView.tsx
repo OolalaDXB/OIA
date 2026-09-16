@@ -11,6 +11,7 @@ import {
   type ProjectSuggestion,
 } from "@oia/workspace";
 import { SOURCE_REGISTRY, sourcesForProject } from "@oia/registry";
+import { useLang } from "../../lib/lang";
 import { Rail, StorageNote } from "../Console";
 import { useNotes, useProjectTags, useTasks, useAuditLog } from "../../lib/workspaceStore";
 import { useLinkStatus } from "../../lib/watchData";
@@ -30,6 +31,7 @@ import { financeByProject, formatTotals } from "@oia/workspace";
  * hypothesis, with the source it was derived from. Correct it in one YAML file.
  */
 export function ProjectsView({ data }: { data: ConsoleData }) {
+  const { lang, toggle: toggleLang } = useLang();
   const projectTags = useProjectTags();
   const { tasks } = useTasks();
   const { notes } = useNotes();
@@ -90,10 +92,22 @@ export function ProjectsView({ data }: { data: ConsoleData }) {
       <div className="app">
         <header className="hero">
           <div className="heroRow">
-            <h1>Projects</h1>
+            <h1>{lang === "fr" ? "Projets" : "Projects"}</h1>
             <span className="heroStats">
-              {PROJECT_ENTRIES.length} projects · {discoverable} with automated discovery ·{" "}
-              {PROJECT_ENTRIES.filter((p) => p.profileReview.status === "CONFIRMED_BY_OWNER").length} owner-confirmed
+              <button
+                className="langBtn"
+                onClick={toggleLang}
+                title={lang === "fr" ? "Switch to English" : "Passer en français"}
+              >
+                {lang === "fr" ? "EN" : "FR"}
+              </button>{" "}
+              {lang === "fr"
+                ? `${PROJECT_ENTRIES.length} projets · ${discoverable} avec recherche automatique · ${
+                    PROJECT_ENTRIES.filter((p) => p.profileReview.status === "CONFIRMED_BY_OWNER").length
+                  } confirmés par toi`
+                : `${PROJECT_ENTRIES.length} projects · ${discoverable} with automated discovery · ${
+                    PROJECT_ENTRIES.filter((p) => p.profileReview.status === "CONFIRMED_BY_OWNER").length
+                  } owner-confirmed`}
             </span>
           </div>
           <p className="heroNote">

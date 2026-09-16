@@ -15,5 +15,5 @@ export default function Page() {
       </main>
     );
   }
-  return <Console data={data} active="opportunities" title="Opportunities" />;
+  return <Console data={data} active="opportunities" title={{ fr: "Opportunités", en: "Opportunities" }} />;
 }

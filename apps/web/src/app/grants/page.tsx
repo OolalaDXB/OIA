@@ -5,5 +5,5 @@ import { Console } from "../Console";
 export default function Page() {
   const data = loadConsoleData();
   if (!data) return null;
-  return <Console data={data} fixedKind="GRANT" active="opportunities" title="Grants" />;
+  return <Console data={data} fixedKind="GRANT" active="opportunities" title={{ fr: "Subventions", en: "Grants" }} />;
 }

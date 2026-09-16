@@ -2,6 +2,8 @@
 
 import type { ReactNode } from "react";
 import { Rail, StorageNote, type RailKey } from "./Console";
+import { useLang } from "../lib/lang";
+import type { Phrase } from "../lib/vocabulary";
 
 /**
  * The one page shell every surface shares: rail on the left, hero band, then
@@ -19,20 +21,31 @@ export function Shell({
   onExportAudit,
 }: {
   active: RailKey;
-  title: string;
+  /** A fixed string, or the same title in both languages. */
+  title: string | Phrase;
   stats?: ReactNode;
   note?: ReactNode;
   children: ReactNode;
   onExportAudit?: () => void;
 }) {
+  const { lang, toggle } = useLang();
   return (
     <div className="shell">
       <Rail active={active} {...(onExportAudit ? { onExportAudit } : {})} />
       <div className="app">
         <header className="hero">
           <div className="heroRow">
-            <h1>{title}</h1>
-            {stats && <span className="heroStats">{stats}</span>}
+            <h1>{typeof title === "string" ? title : title[lang]}</h1>
+            <span className="heroStats">
+              {stats}
+              <button
+                className="langBtn"
+                onClick={toggle}
+                title={lang === "fr" ? "Switch to English" : "Passer en français"}
+              >
+                {lang === "fr" ? "EN" : "FR"}
+              </button>
+            </span>
           </div>
           {note && <p className="heroNote">{note}</p>}
         </header>

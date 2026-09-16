@@ -5,5 +5,5 @@ import { Console } from "../Console";
 export default function Page() {
   const data = loadConsoleData();
   if (!data) return null;
-  return <Console data={data} fixedKind="TENDER" active="opportunities" title="Tenders" />;
+  return <Console data={data} fixedKind="TENDER" active="opportunities" title={{ fr: "Appels d'offres", en: "Tenders" }} />;
 }

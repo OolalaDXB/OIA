@@ -16,7 +16,8 @@ import {
 import { Shell } from "../Shell";
 import { useAuditLog, useProjectTags } from "../../lib/workspaceStore";
 import { useLedger } from "../../lib/watchData";
-import { plainFailure } from "../../lib/vocabulary";
+import { plainFailure, kindLabel, kindMeaning } from "../../lib/vocabulary";
+import { useLang } from "../../lib/lang";
 
 /**
  * How much is actually in play, and what is stopping it.
@@ -32,6 +33,8 @@ import { plainFailure } from "../../lib/vocabulary";
  *     single flattering headline number.
  */
 export function MoneyView({ data }: { data: ConsoleData }) {
+  const { lang } = useLang();
+  const fr = lang === "fr";
   const audit = useAuditLog();
   const tags = useProjectTags();
   const ledger = useLedger(data);
@@ -72,60 +75,63 @@ export function MoneyView({ data }: { data: ConsoleData }) {
   return (
     <Shell
       active="money"
-      title="Money"
-      stats={`${totalWithAmount} of ${totalRecords} record(s) state an amount`}
-      note="Every figure here was read out of a published document by a rule, not estimated. The coverage column is part of the number — a total is only worth what its coverage says, and what states no figure is unknown, not zero."
+      title={{ fr: "Argent", en: "Money" }}
+      stats={fr
+        ? `${totalWithAmount} fiche(s) sur ${totalRecords} indiquent un montant`
+        : `${totalWithAmount} of ${totalRecords} record(s) state an amount`}
+      note={fr
+        ? "Chaque chiffre ici a été lu dans un document publié par une règle, jamais estimé. La colonne de couverture fait partie du nombre — un total ne vaut que ce que dit sa couverture, et ce qui n'indique aucun montant est inconnu, pas zéro."
+        : "Every figure here was read out of a published document by a rule, not estimated. The coverage column is part of the number — a total is only worth what its coverage says, and what states no figure is unknown, not zero."}
       onExportAudit={audit.exportLog}
     >
       <div className="detail wide">
         <section className="sec">
-          <h3>Across everything</h3>
+          <h3>{fr ? "Tous projets confondus" : "Across everything"}</h3>
           <div className="moneyHeads">
             <div className="moneyHead">
-              <span className="moneyLabel">Could come in</span>
+              <span className="moneyLabel">{fr ? "Pourrait rentrer" : "Could come in"}</span>
               <span className="moneyValue">{formatTotals(grand.inbound)}</span>
               <span className="muted small">
-                across {totalWithAmount} record(s) that state a figure — the rest are unknown, not zero
+                {fr ? `sur ${totalWithAmount} fiche(s) indiquant un montant — le reste est inconnu, pas zéro` : `across ${totalWithAmount} record(s) that state a figure — the rest are unknown, not zero`}
               </span>
             </div>
             <div className="moneyHead">
-              <span className="moneyLabel">Ready to go after</span>
+              <span className="moneyLabel">{fr ? "Prêt à être poursuivi" : "Ready to go after"}</span>
               <span className="moneyValue ok">{formatTotals(grand.clear)}</span>
               <span className="muted small">
                 {Object.keys(grand.clear).length === 0
-                  ? "nothing yet — every figure above sits on a record a check still blocks"
-                  : "everything else is blocked by a check that has not been cleared"}
+                  ? (fr ? "rien pour l'instant — chaque montant ci-dessus porte sur une fiche qu'un contrôle bloque encore" : "nothing yet — every figure above sits on a record a check still blocks")
+                  : (fr ? "tout le reste est bloqué par un contrôle non levé" : "everything else is blocked by a check that has not been cleared")}
               </span>
             </div>
             {Object.keys(grand.outbound).length > 0 && (
               <div className="moneyHead">
-                <span className="moneyLabel">Would go out</span>
+                <span className="moneyLabel">{fr ? "Sortirait" : "Would go out"}</span>
                 <span className="moneyValue warn">{formatTotals(grand.outbound)}</span>
-                <span className="muted small">acquisitions — never added to the figures above</span>
+                <span className="muted small">{fr ? "acquisitions — jamais additionnées aux montants ci-dessus" : "acquisitions — never added to the figures above"}</span>
               </div>
             )}
           </div>
         </section>
 
         <section className="sec">
-          <h3>By project</h3>
+          <h3>{fr ? "Par projet" : "By project"}</h3>
           {rows.length === 0 && untriaged.records > 0 && (
             <div className="muted">
-              Nothing is attached to a project yet — every record below is waiting to be tagged, or to be found by a
-              project&apos;s own search. Tag one from an opportunity, or start a search from a project.
+              {fr ? "Rien n'est encore rattaché à un projet — chaque fiche ci-dessous attend d'être étiquetée, ou d'être trouvée par la recherche d'un projet. Étiquette-en une depuis une opportunité, ou lance une recherche depuis un projet." : "Nothing is attached to a project yet — every record below is waiting to be tagged, or to be found by a project's own search. Tag one from an opportunity, or start a search from a project."}
             </div>
           )}
           {(rows.length > 0 || untriaged.records > 0) && (
             <table className="money">
               <thead>
                 <tr>
-                  <th>Project</th>
-                  <th className="num">Records</th>
-                  <th className="num">With a figure</th>
-                  <th>Could come in</th>
-                  <th>Ready</th>
-                  <th>Closing soon</th>
-                  <th>Would go out</th>
+                  <th>{fr ? "Projet" : "Project"}</th>
+                  <th className="num">{fr ? "Fiches" : "Records"}</th>
+                  <th className="num">{fr ? "Avec un montant" : "With a figure"}</th>
+                  <th>{fr ? "Pourrait rentrer" : "Could come in"}</th>
+                  <th>{fr ? "Prêt" : "Ready"}</th>
+                  <th>{fr ? "Bientôt clos" : "Closing soon"}</th>
+                  <th>{fr ? "Sortirait" : "Would go out"}</th>
                 </tr>
               </thead>
               <tbody>
@@ -133,19 +139,18 @@ export function MoneyView({ data }: { data: ConsoleData }) {
                   <FinanceRow key={r.projectSlug} row={r} name={projectName(r.projectSlug)} />
                 ))}
                 {untriaged.records > 0 && (
-                  <FinanceRow row={untriaged} name="Attached to no project" muted />
+                  <FinanceRow row={untriaged} name={fr ? "Rattaché à aucun projet" : "Attached to no project"} muted />
                 )}
               </tbody>
             </table>
           )}
           <div className="muted small">
-            A record counts for a project when you tagged it, or — until you decide otherwise — when that
-            project&apos;s own query surfaced it.
+            {fr ? "Une fiche compte pour un projet quand tu l'as étiquetée, ou — jusqu'à ce que tu en décides autrement — quand la recherche de ce projet l'a remontée." : "A record counts for a project when you tagged it, or — until you decide otherwise — when that project's own query surfaced it."}
           </div>
         </section>
 
         <section className="sec">
-          <h3>By kind</h3>
+          <h3>{fr ? "Par type" : "By kind"}</h3>
           <div className="kindGrid">
             {Object.entries(metrics.byKind)
               .sort((a, b) => b[1] - a[1])
@@ -154,11 +159,11 @@ export function MoneyView({ data }: { data: ConsoleData }) {
                 return (
                   <div key={kind} className="kindCard">
                     <div className="viewsRow">
-                      <b>{profile.label}</b>
+                      <b>{kindLabel(kind, lang)}</b>
                       <span className="pubChip">{count}</span>
-                      {profile.direction === "OUTBOUND" && <span className="pubChip expiredChip">money out</span>}
+                      {profile.direction === "OUTBOUND" && <span className="pubChip expiredChip">{fr ? "argent sortant" : "money out"}</span>}
                     </div>
-                    <div className="muted small">{profile.description}</div>
+                    <div className="muted small">{kindMeaning(kind, lang)}</div>
                   </div>
                 );
               })}
@@ -167,19 +172,18 @@ export function MoneyView({ data }: { data: ConsoleData }) {
 
         <section className="sec">
           <div className="secHead">
-            <h3>What is blocking the money</h3>
+            <h3>{fr ? "Ce qui bloque l'argent" : "What is blocking the money"}</h3>
             <button className="ghostBtn" onClick={() => setShowBacklog(!showBacklog)}>
-              {showBacklog ? "hide" : "show"}
+              {showBacklog ? (fr ? "masquer" : "hide") : (fr ? "afficher" : "show")}
             </button>
           </div>
           <div className="muted small">
-            {metrics.pursueEligible} of {metrics.total} record(s) pass every check. These are the reasons for the
-            rest — the actual backlog of work, in order of how much it would unblock.
+            {fr ? `${metrics.pursueEligible} fiche(s) sur ${metrics.total} passent tous les contrôles. Voici les raisons pour les autres — le vrai travail à faire, par ordre de ce qu'il débloquerait.` : `${metrics.pursueEligible} of ${metrics.total} record(s) pass every check. These are the reasons for the rest — the actual backlog of work, in order of how much it would unblock.`}
           </div>
           {showBacklog &&
             metrics.gateFailures.map((f) => (
               <div key={f.reason} className="barRow">
-                <span className="barLabel">{plainFailure(f.reason)}</span>
+                <span className="barLabel">{plainFailure(f.reason, lang)}</span>
                 <span className="barTrack">
                   <span
                     className="barFill"
@@ -190,7 +194,7 @@ export function MoneyView({ data }: { data: ConsoleData }) {
               </div>
             ))}
           {showBacklog && metrics.gateFailures.length === 0 && (
-            <div className="muted">Nothing is blocked.</div>
+            <div className="muted">{fr ? "Rien n'est bloqué." : "Nothing is blocked."}</div>
           )}
         </section>
       </div>

@@ -16,13 +16,16 @@ import {
 } from "@oia/workspace";
 import { applyFreshnessAll, assessFreshness } from "@oia/ingestion/freshness";
 import { classifyNoticeType, skipReason } from "@oia/connectors/notice-type";
+import { useLang } from "../lib/lang";
 import {
-  FRESHNESS,
-  GATE_CONDITION,
+  freshnessLabel,
+  ui,
+  type Phrase,
+  gateConditionLabel,
   plainFailure,
   recommendationLabel,
   relativeDays,
-  REVIEW,
+  reviewLabel,
   verificationLabel,
   kindLabel as plainKindLabel,
 } from "../lib/vocabulary";
@@ -103,12 +106,41 @@ export type RailKey = "today" | "opportunities" | "projects" | "money" | "worksp
  */
 export function Rail({ active, onExportAudit }: { active: RailKey; onExportAudit?: () => void }) {
   const { open } = useAlerts();
-  const nav: { key: RailKey; label: string; href: string; hint: string }[] = [
-    { key: "today", label: "Today", href: "/digest/", hint: "What needs you now" },
-    { key: "opportunities", label: "Opportunities", href: "/", hint: "Everything found, to triage" },
-    { key: "projects", label: "Projects", href: "/projects/", hint: "Who we are looking for" },
-    { key: "money", label: "Money", href: "/money/", hint: "How much is in play, and what blocks it" },
-    { key: "workspace", label: "Workspace", href: "/workspace/", hint: "Tasks, notes, people" },
+  const { lang } = useLang();
+  // The five destinations and, on hover, what each is FOR. The hint matters as
+  // much as the label: a rail of nouns tells you where things are, not what to
+  // do with them.
+  const nav: { key: RailKey; label: Phrase; href: string; hint: Phrase }[] = [
+    {
+      key: "today",
+      label: { fr: "Aujourd'hui", en: "Today" },
+      href: "/digest/",
+      hint: { fr: "Ce qui demande ton attention maintenant", en: "What needs you now" },
+    },
+    {
+      key: "opportunities",
+      label: { fr: "Opportunités", en: "Opportunities" },
+      href: "/",
+      hint: { fr: "Tout ce qui a été trouvé, à trier", en: "Everything found, to triage" },
+    },
+    {
+      key: "projects",
+      label: { fr: "Projets", en: "Projects" },
+      href: "/projects/",
+      hint: { fr: "Pour qui on cherche", en: "Who we are looking for" },
+    },
+    {
+      key: "money",
+      label: { fr: "Argent", en: "Money" },
+      href: "/money/",
+      hint: { fr: "Combien est en jeu, et ce qui bloque", en: "How much is in play, and what blocks it" },
+    },
+    {
+      key: "workspace",
+      label: { fr: "Espace de travail", en: "Workspace" },
+      href: "/workspace/",
+      hint: { fr: "Tâches, notes, contacts", en: "Tasks, notes, people" },
+    },
   ];
   return (
     <aside className="rail">
@@ -118,15 +150,15 @@ export function Rail({ active, onExportAudit }: { active: RailKey; onExportAudit
           key={n.key}
           href={n.href}
           className={active === n.key ? "railItem active" : "railItem"}
-          title={n.hint}
+          title={n.hint[lang]}
         >
-          <span>{n.label}</span>
+          <span>{n.label[lang]}</span>
           {n.key === "today" && open.length > 0 && <span className="railBadge">{open.length}</span>}
         </Link>
       ))}
       {onExportAudit && (
         <div className="railFoot">
-          <button className="ghostBtn" onClick={onExportAudit}>Export audit</button>
+          <button className="ghostBtn" onClick={onExportAudit}>{ui("exportAudit", lang)}</button>
         </div>
       )}
     </aside>
@@ -135,6 +167,7 @@ export function Rail({ active, onExportAudit }: { active: RailKey; onExportAudit
 
 /** Where the human layer lives — stated, never implied. */
 export function StorageNote() {
+  const { lang } = useLang();
   const info = useStorageInfo();
   const backup = useWorkspaceBackup();
   const { state, signOut } = useAuth();
@@ -150,10 +183,16 @@ export function StorageNote() {
     <div className="storageNote">
       <span className="muted small">
         {info.remote
-          ? "Reviews, tags, notes, tasks and contacts are stored in the watch database — durable, and readable from another device."
+          ? lang === "fr"
+            ? "Décisions, étiquettes, notes, tâches et contacts sont dans la base permanente — durables, et lisibles depuis un autre appareil."
+            : "Reviews, tags, notes, tasks and contacts are stored in the watch database — durable, and readable from another device."
           : info.durability === "BROWSER_LOCAL"
-            ? "Reviews, tags, notes, tasks and contacts are stored in THIS browser only — no server, no sync. Back them up."
-            : "No browser storage available: this session keeps nothing."}
+            ? lang === "fr"
+              ? "Décisions, étiquettes, notes, tâches et contacts sont stockés dans CE navigateur uniquement — pas de serveur, pas de synchronisation. Pense à sauvegarder."
+              : "Reviews, tags, notes, tasks and contacts are stored in THIS browser only — no server, no sync. Back them up."
+            : lang === "fr"
+              ? "Aucun stockage navigateur disponible : cette session ne garde rien."
+              : "No browser storage available: this session keeps nothing."}
         {migration && <span className="ok"> · {migration}</span>}
       </span>
       <span className="viewsRow">
@@ -176,10 +215,10 @@ export function StorageNote() {
             move {pending} local item(s) to the database
           </button>
         )}
-        <button className="ghostBtn" onClick={backup.exportAll}>backup</button>
+        <button className="ghostBtn" onClick={backup.exportAll}>{lang === "fr" ? "sauvegarder" : "backup"}</button>
         {!info.remote && (
           <label className="ghostBtn restoreBtn">
-            restore
+            {lang === "fr" ? "restaurer" : "restore"}
             <input
               type="file"
               accept="application/json"
@@ -241,8 +280,9 @@ export function Console({
   /** Set on /grants, /tenders, /investors — same shell, kind-scoped queue. */
   fixedKind?: OpportunityKind;
   active: RailKey;
-  title: string;
+  title: string | Phrase;
 }) {
+  const { lang, toggle: toggleLang } = useLang();
   // One clock for the whole render: freshness must not shift between the row
   // and the detail of the same record.
   const nowIso = useMemo(() => new Date().toISOString(), []);
@@ -350,9 +390,18 @@ export function Console({
         {/* Envelope: hero band gets the treatment; the triage table below stays native. */}
         <header className="hero">
           <div className="heroRow">
-            <h1>{title}</h1>
+            <h1>{typeof title === "string" ? title : title[lang]}</h1>
             <span className="heroStats">
-              {ledger.source === "LEDGER" ? "watch ledger" : "bundled snapshot"} ·{" "}
+              <button
+                className="langBtn"
+                onClick={toggleLang}
+                title={lang === "fr" ? "Switch to English" : "Passer en français"}
+              >
+                {lang === "fr" ? "EN" : "FR"}
+              </button>{" "}
+              {ledger.source === "LEDGER"
+                ? lang === "fr" ? "registre permanent" : "watch ledger"
+                : lang === "fr" ? "instantané embarqué" : "bundled snapshot"} ·{" "}
               {records.length} shown / {ledger.records.length} total · {data.run.discrepancies} discrepancies ·{" "}
               {Object.entries(data.run.recommendationCounts)
                 .map(([k, v]) => `${k}:${v}`)
@@ -461,7 +510,7 @@ export function Console({
                     {appDeadline(r) !== "—" && (
                       <span>closes {appDeadline(r)}{fresh.daysToDeadline !== null ? ` · ${relativeDays(fresh.daysToDeadline)}` : ""}</span>
                     )}
-                    <span className={rev === "PENDING" ? "muted" : "hrOn"}>{REVIEW[rev] ?? rev}</span>
+                    <span className={rev === "PENDING" ? "muted" : "hrOn"}>{reviewLabel(rev)}</span>
                   </div>
                 </li>
               );
@@ -607,7 +656,7 @@ function Detail({
                 : "pubChip"
           }
         >
-          {FRESHNESS[freshness.status] ?? freshness.status}
+          {freshnessLabel(freshness.status)}
         </span>
       </div>
 
