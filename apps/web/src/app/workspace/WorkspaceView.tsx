@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import type { ConsoleData } from "@oia/ingestion/console";
 import { PROJECT_ENTRIES, openTasks, overdueTasks, projectName } from "@oia/workspace";
+import { useLang } from "../../lib/lang";
 import { Shell } from "../Shell";
 import { useContacts, useNotes, useProjectTags, useTasks } from "../../lib/workspaceStore";
 
@@ -17,6 +18,8 @@ import { useContacts, useNotes, useProjectTags, useTasks } from "../../lib/works
 export type WorkspaceTab = "tasks" | "notes" | "contacts";
 
 export function WorkspaceView({ data, tab: initial = "tasks" }: { data: ConsoleData; tab?: WorkspaceTab }) {
+  const { lang } = useLang();
+  const fr = lang === "fr";
   const [tab, setTab] = useState<WorkspaceTab>(initial);
   const tasks = useTasks();
   const notes = useNotes();
@@ -32,15 +35,26 @@ export function WorkspaceView({ data, tab: initial = "tasks" }: { data: ConsoleD
     <Shell
       active="workspace"
       title={{ fr: "Espace de travail", en: "Workspace" }}
-      stats={`${open.length} open task(s) · ${notes.notes.length} note(s) · ${contacts.contacts.length} contact(s)`}
-      note="What you put here, attached to a project or to an opportunity. Anything with a due date shows up in Today."
+      stats={
+        fr
+          ? `${open.length} tâche(s) ouverte(s) · ${notes.notes.length} note(s) · ${contacts.contacts.length} contact(s)`
+          : `${open.length} open task(s) · ${notes.notes.length} note(s) · ${contacts.contacts.length} contact(s)`
+      }
+      note={
+        fr
+          ? "Ce que tu notes ici, rattaché à un projet ou à une opportunité. Tout ce qui a une échéance remonte dans Aujourd'hui."
+          : "What you put here, attached to a project or to an opportunity. Anything with a due date shows up in Today."
+      }
     >
       <div className="tabs">
         {(
           [
-            ["tasks", `Tasks${overdue.size > 0 ? ` · ${overdue.size} overdue` : ""}`],
+            [
+              "tasks",
+              `${fr ? "Tâches" : "Tasks"}${overdue.size > 0 ? ` · ${overdue.size} ${fr ? "en retard" : "overdue"}` : ""}`,
+            ],
             ["notes", "Notes"],
-            ["contacts", "People"],
+            ["contacts", fr ? "Contacts" : "People"],
           ] as [WorkspaceTab, string][]
         ).map(([key, label]) => (
           <button key={key} className={tab === key ? "tab on" : "tab"} onClick={() => setTab(key)}>
@@ -105,6 +119,8 @@ function TasksPanel({
   recordTitle: (id: string) => string;
   tagOf: (id: string) => string | undefined;
 }) {
+  const { lang } = useLang();
+  const fr = lang === "fr";
   const [title, setTitle] = useState("");
   const [due, setDue] = useState("");
   const [project, setProject] = useState("");
@@ -120,11 +136,11 @@ function TasksPanel({
   return (
     <>
       <section className="sec">
-        <h3>Add a task</h3>
+        <h3>{fr ? "Ajouter une tâche" : "Add a task"}</h3>
         <div className="viewsRow wrapRow">
           <input
             className="comment inputLine wideInput"
-            placeholder="What has to happen…"
+            placeholder={fr ? "Ce qui doit être fait…" : "What has to happen…"}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -200,6 +216,8 @@ function NotesPanel({
   notes: ReturnType<typeof useNotes>;
   recordTitle: (id: string) => string;
 }) {
+  const { lang } = useLang();
+  const fr = lang === "fr";
   const [text, setText] = useState("");
   const [project, setProject] = useState("");
   const [recordId, setRecordId] = useState("");
@@ -215,11 +233,11 @@ function NotesPanel({
   return (
     <>
       <section className="sec">
-        <h3>Write a note</h3>
+        <h3>{fr ? "Écrire une note" : "Write a note"}</h3>
         <div className="viewsRow wrapRow">
           <textarea
             className="comment wideInput"
-            placeholder="Write it down before it is lost…"
+            placeholder={fr ? "Note-le avant de l'oublier…" : "Write it down before it is lost…"}
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
@@ -281,6 +299,8 @@ function ContactsPanel({
   contacts: ReturnType<typeof useContacts>;
   recordTitle: (id: string) => string;
 }) {
+  const { lang } = useLang();
+  const fr = lang === "fr";
   const [form, setForm] = useState({
     name: "", organisation: "", role: "", email: "", phone: "", note: "", projectSlug: "", recordId: "",
   });
@@ -296,11 +316,11 @@ function ContactsPanel({
   return (
     <>
       <section className="sec">
-        <h3>Add someone</h3>
+        <h3>{fr ? "Ajouter quelqu'un" : "Add someone"}</h3>
         <div className="viewsRow wrapRow">
-          <input className="comment inputLine" placeholder="Name" value={form.name} onChange={set("name")} />
+          <input className="comment inputLine" placeholder={fr ? "Nom" : "Name"} value={form.name} onChange={set("name")} />
           <input className="comment inputLine" placeholder="Organisation" value={form.organisation} onChange={set("organisation")} />
-          <input className="comment inputLine" placeholder="Role" value={form.role} onChange={set("role")} />
+          <input className="comment inputLine" placeholder={fr ? "Rôle" : "Role"} value={form.role} onChange={set("role")} />
           <input className="comment inputLine" placeholder="Email" value={form.email} onChange={set("email")} />
           <input className="comment inputLine" placeholder="Phone" value={form.phone} onChange={set("phone")} />
           <ProjectSelect value={form.projectSlug} onChange={(v) => setForm((f) => ({ ...f, projectSlug: v }))} />

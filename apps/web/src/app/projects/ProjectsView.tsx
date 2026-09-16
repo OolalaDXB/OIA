@@ -32,6 +32,7 @@ import { financeByProject, formatTotals } from "@oia/workspace";
  */
 export function ProjectsView({ data }: { data: ConsoleData }) {
   const { lang, toggle: toggleLang } = useLang();
+  const fr = lang === "fr";
   const projectTags = useProjectTags();
   const { tasks } = useTasks();
   const { notes } = useNotes();
@@ -157,7 +158,7 @@ export function ProjectsView({ data }: { data: ConsoleData }) {
             )}
 
             <section className="sec">
-              <h3>Profile status</h3>
+              <h3>{fr ? "État de la fiche" : "Profile status"}</h3>
               <div className={confirmed ? "ok small" : "warn small"}>
                 {confirmed
                   ? `Confirmed by the owner on ${project.profileReview.confirmedAt}.`
@@ -165,7 +166,7 @@ export function ProjectsView({ data }: { data: ConsoleData }) {
               </div>
               {project.profileReview.derivedFrom.length > 0 && (
                 <div className="kv">
-                  <span className="k">Derived from</span>
+                  <span className="k">{fr ? "Dérivée de" : "Derived from"}</span>
                   <span className="v">
                     <ul className="evi small">
                       {project.profileReview.derivedFrom.map((d, i) => (
@@ -179,12 +180,12 @@ export function ProjectsView({ data }: { data: ConsoleData }) {
               )}
               {project.profileReview.note && (
                 <div className="kv">
-                  <span className="k">Note</span>
+                  <span className="k">{fr ? "Note" : "Note"}</span>
                   <span className="v muted">{project.profileReview.note}</span>
                 </div>
               )}
               <div className="kv">
-                <span className="k">Edit at</span>
+                <span className="k">{fr ? "Modifier dans" : "Edit at"}</span>
                 <span className="v">
                   <code>registry/projects/{project.slug}.yaml</code>
                 </span>
@@ -192,14 +193,14 @@ export function ProjectsView({ data }: { data: ConsoleData }) {
             </section>
 
             <section className="sec">
-              <h3>Matching signals</h3>
-              <div className="kv"><span className="k">Sectors</span><span className="v">{project.sectors.join(", ") || "—"}</span></div>
-              <div className="kv"><span className="k">Geographies</span><span className="v">{project.geographies.join(", ") || "—"}</span></div>
-              <div className="kv"><span className="k">Funding types</span><span className="v">{project.fundingTypes.join(", ") || "—"}</span></div>
-              <div className="kv"><span className="k">Keywords</span><span className="v">{project.keywords.join(", ") || "—"}</span></div>
-              <div className="kv"><span className="k">Exclusions</span><span className="v">{project.exclusions.join(", ") || "—"}</span></div>
+              <h3>{fr ? "Signaux de correspondance" : "Matching signals"}</h3>
+              <div className="kv"><span className="k">{fr ? "Secteurs" : "Sectors"}</span><span className="v">{project.sectors.join(", ") || "—"}</span></div>
+              <div className="kv"><span className="k">{fr ? "Géographies" : "Geographies"}</span><span className="v">{project.geographies.join(", ") || "—"}</span></div>
+              <div className="kv"><span className="k">{fr ? "Types de financement" : "Funding types"}</span><span className="v">{project.fundingTypes.join(", ") || "—"}</span></div>
+              <div className="kv"><span className="k">{fr ? "Mots-clés" : "Keywords"}</span><span className="v">{project.keywords.join(", ") || "—"}</span></div>
+              <div className="kv"><span className="k">{fr ? "Exclusions" : "Exclusions"}</span><span className="v">{project.exclusions.join(", ") || "—"}</span></div>
               <div className="kv">
-                <span className="k">Entity route</span>
+                <span className="k">{fr ? "Entité porteuse" : "Entity route"}</span>
                 <span className="v">
                   {project.legalEntities.length > 0
                     ? project.legalEntities.map((e) => `${e.name} (${e.jurisdiction}, ${e.role})`).join(" · ")
@@ -209,11 +210,11 @@ export function ProjectsView({ data }: { data: ConsoleData }) {
             </section>
 
             <section className="sec">
-              <h3>Automated discovery</h3>
+              <h3>{fr ? "Recherche automatique" : "Automated discovery"}</h3>
               {project.discovery.enabled ? (
                 <>
                   <div className="kv">
-                    <span className="k">Watching</span>
+                    <span className="k">{fr ? "Surveille" : "Watching"}</span>
                     {/* Registry entries still carry the pre-S3 labels (TENDER_RFP, */}
                     {/* VC_INVESTOR). They are remapped on read, so the screen shows */}
                     {/* the plain name rather than the stored token. */}
@@ -222,15 +223,15 @@ export function ProjectsView({ data }: { data: ConsoleData }) {
                     </span>
                   </div>
                   <div className="kv">
-                    <span className="k">CPV codes</span>
+                    <span className="k">{fr ? "Codes CPV" : "CPV codes"}</span>
                     <span className="v">
                       {project.discovery.cpvCodes.join(", ") || "—"}
                       {project.discovery.cpvNote && <div className="muted small">{project.discovery.cpvNote}</div>}
                     </span>
                   </div>
-                  <div className="kv"><span className="k">Buyer countries</span><span className="v">{project.discovery.countries.join(", ") || "any"}</span></div>
+                  <div className="kv"><span className="k">{fr ? "Pays acheteurs" : "Buyer countries"}</span><span className="v">{project.discovery.countries.join(", ") || "any"}</span></div>
                   <div className="kv">
-                    <span className="k">Query terms</span>
+                    <span className="k">{fr ? "Termes de recherche" : "Query terms"}</span>
                     <span className="v">
                       {project.discovery.queryTerms.join(", ") || "—"}
                       <div className="muted small">
