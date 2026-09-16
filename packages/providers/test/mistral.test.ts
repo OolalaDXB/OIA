@@ -206,3 +206,65 @@ describe("the schema-name envelope", () => {
     expect(p.usage().calls).toBe(1); // no retry needed
   });
 });
+
+/**
+ * 40 calls, 0 tokens, 7 seconds, no verdicts, and no reason anywhere.
+ *
+ * Forty sequential calls with no pause is how a run turns its own impatience
+ * into an empty result. 429 and 5xx mean "come back later", not "you asked
+ * wrongly", and they are the one class worth waiting out.
+ */
+describe("transient failures", () => {
+  function failThenSucceed(status: number, failures: number) {
+    let n = 0;
+    return (async () => {
+      if (n++ < failures) return new Response("slow down", { status, headers: { "retry-after": "0" } });
+      return new Response(
+        JSON.stringify({ choices: [{ message: { content: '{"title":"ok"}' } }], usage: {} }),
+        { status: 200 },
+      );
+    }) as unknown as typeof fetch;
+  }
+
+  it("waits out a 429 instead of reporting an empty result", async () => {
+    const p = createMistralProvider({ apiKey: "k", model: "m", retryBaseMs: 1, fetchImpl: failThenSucceed(429, 2) });
+    expect((await p.extract(req)).data.title).toBe("ok");
+  });
+
+  it("waits out a 503 too", async () => {
+    const p = createMistralProvider({ apiKey: "k", model: "m", retryBaseMs: 1, fetchImpl: failThenSucceed(503, 1) });
+    expect((await p.extract(req)).data.title).toBe("ok");
+  });
+
+  it("does not charge a retry against the call budget", async () => {
+    // Otherwise a rate limit silently eats the budget and the run stops early
+    // for a reason that has nothing to do with spending.
+    const p = createMistralProvider({ apiKey: "k", model: "m", maxCalls: 1, retryBaseMs: 1, fetchImpl: failThenSucceed(429, 2) });
+    await p.extract(req);
+    expect(p.usage().calls).toBe(1);
+  });
+
+  it("gives up rather than retrying forever, and says the status", async () => {
+    const p = createMistralProvider({
+      apiKey: "k",
+      model: "m",
+      retryBaseMs: 1,
+      fetchImpl: (async () => new Response("nope", { status: 429, headers: { "retry-after": "0" } })) as unknown as typeof fetch,
+    });
+    await expect(p.extract(req)).rejects.toThrow(/Mistral API error 429/);
+  });
+
+  it("never retries a 401 — a wrong key does not fix itself", async () => {
+    let calls = 0;
+    const p = createMistralProvider({
+      apiKey: "bad",
+      model: "m",
+      fetchImpl: (async () => {
+        calls++;
+        return new Response("unauthorized", { status: 401 });
+      }) as unknown as typeof fetch,
+    });
+    await expect(p.extract(req)).rejects.toThrow(/401/);
+    expect(calls).toBeLessThanOrEqual(2); // the schema retry only, no backoff loop
+  });
+});

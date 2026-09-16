@@ -28,6 +28,8 @@ export interface MistralConfig {
   maxCalls?: number;
   /** Output ceiling per call. Too low truncates JSON mid-array; see below. */
   maxOutputTokens?: number;
+  /** Base backoff for a retryable status, doubled per attempt. Default 2s. */
+  retryBaseMs?: number;
   /**
    * Called with the model's raw text for every call, before any parsing.
    *
@@ -88,14 +90,14 @@ export function createMistralProvider(config: MistralConfig): MistralProvider {
   const maxCalls = config.maxCalls ?? Number.POSITIVE_INFINITY;
   const spent: MistralUsage = { calls: 0, inputTokens: 0, outputTokens: 0 };
 
-  async function call(system: string, user: string, model: string) {
-    if (spent.calls >= maxCalls) {
+  async function call(system: string, user: string, model: string, attempt = 0): Promise<{ text: string; usage?: { prompt_tokens?: number; completion_tokens?: number } }> {
+    if (attempt === 0 && spent.calls >= maxCalls) {
       // A budget that is only advisory is not a budget. Stopping mid-run is the
       // point: an unbounded agent loop against a paid API is exactly the failure
       // nobody notices until the invoice.
       throw new Error(`mistral: call budget of ${maxCalls} exhausted — stopping rather than spending more`);
     }
-    spent.calls += 1;
+    if (attempt === 0) spent.calls += 1;
 
     const res = await doFetch(baseUrl, {
       method: "POST",
@@ -122,7 +124,24 @@ export function createMistralProvider(config: MistralConfig): MistralProvider {
       }),
     });
     if (!res.ok) {
-      throw new Error(`Mistral API error ${res.status}: ${(await res.text()).slice(0, 500)}`);
+      const body = (await res.text()).slice(0, 300);
+      // 429 and 5xx are "come back later", not "you asked wrongly". Forty
+      // sequential calls with no pause is exactly how a run turns its own
+      // impatience into an empty result — and the last one did: 40 calls, zero
+      // tokens, seven seconds, no verdicts.
+      const retryable = res.status === 429 || res.status >= 500;
+      if (retryable && attempt < 3) {
+        // `||` would swallow an explicit `retry-after: 0` — a server saying
+        // "retry immediately" would be made to wait two seconds instead.
+        const header = res.headers.get("retry-after");
+        const fromHeader = header !== null && header.trim() !== "" ? Number(header) : Number.NaN;
+        const waitMs = Number.isFinite(fromHeader)
+          ? Math.max(0, fromHeader) * 1000
+          : (config.retryBaseMs ?? 2000) * 2 ** attempt;
+        await new Promise((r) => setTimeout(r, waitMs));
+        return call(system, user, model, attempt + 1);
+      }
+      throw new Error(`Mistral API error ${res.status}: ${body}`);
     }
     const json = (await res.json()) as {
       choices: Array<{ message?: { content?: string } }>;

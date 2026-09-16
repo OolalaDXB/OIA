@@ -106,6 +106,7 @@ async function main() {
   console.log(`analyse: ${queue.length} of ${candidates.length} analysable record(s), model ${model}`);
 
   const results: AnalysedRecord[] = [];
+  const failures: string[] = [];
   let droppedTotal = 0;
 
   for (const record of queue) {
@@ -154,6 +155,7 @@ async function main() {
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
       console.error(`[${record.id}] ${message}`);
+      failures.push(`${record.id}: ${message.slice(0, 160)}`);
       if (message.includes("call budget")) break;
     }
   }
@@ -174,7 +176,14 @@ async function main() {
       `- ${Object.entries(byVerdict).map(([k, v]) => `${k}: ${v}`).join(" · ") || "—"}`,
       `- citations inventées et retirées / invented citations dropped: ${droppedTotal}`,
       `- appels modèle / model calls: ${spent.calls} · tokens ${spent.inputTokens}/${spent.outputTokens}`,
+      `- échecs / failures: ${failures.length}`,
       "",
+      // A run that assessed nothing must say WHY in the report, not only in a
+      // console log nobody reads. The last one reported "0 of 87" with no
+      // reason anywhere, and the answer was one HTTP status away.
+      ...(failures.length > 0
+        ? ["## Échecs / Failures", "", ...failures.slice(0, 10).map((f) => `- ${f}`), ""]
+        : []),
       "> Chaque verdict a été produit par un modèle et n'est PAS une vérification humaine.",
       "> Aucun ne débloque le gate : il change l'ordre dans lequel tu regardes, pas ce que tu peux poursuivre.",
       "",
