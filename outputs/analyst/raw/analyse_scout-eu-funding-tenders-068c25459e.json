@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "scope: Rethinking sustainable competitiveness beyond traditional perspectives: role and contribution of the Social Economy",
+    "reason": {
+      "en": "The opportunity explicitly targets the 'Social Economy,' which typically refers to organizations prioritizing social objectives over profit, such as cooperatives, mutuals, associations, and social enterprises. BAWABA's focus on 'Sovereign AI control plane for regulated industries' and its sectors (AI, data, digital, cybersecurity, software) do not align with the Social Economy scope described in the opportunity.",
+      "fr": "L'opportunité cible explicitement l'« Économie Sociale », qui désigne généralement des organisations privilégiant des objectifs sociaux plutôt que le profit, comme les coopératives, les mutuelles, les associations et les entreprises sociales. L'activité de BAWABA, centrée sur un « plan de contrôle d'IA souveraine pour les industries réglementées » et ses secteurs (IA, données, numérique, cybersécurité, logiciels), ne correspond pas à la portée de l'Économie Sociale décrite dans l'opportunité."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that explicitly support technology or digital innovation in regulated industries, as this opportunity is not suitable for BAWABA's profile.",
+      "fr": "Consulter d'autres opportunités de financement qui soutiennent explicitement l'innovation technologique ou numérique dans les industries réglementées, car cette opportunité ne convient pas au profil de BAWABA."
+    }
+  }
+}

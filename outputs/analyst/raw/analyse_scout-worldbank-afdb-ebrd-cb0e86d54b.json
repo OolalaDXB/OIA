@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Eligible consulting firms with required qualifications and relevant experience in feasibility studies, detailed design, tender document preparation, construction supervision, and contract administration for irrigation projects.",
+    "reason": {
+      "en": "padel.design specializes in advisory for padel club development, which is unrelated to irrigation projects. The opportunity explicitly requires experience in irrigation projects.",
+      "fr": "padel.design se spécialise dans le conseil pour le développement de clubs de padel, ce qui n'a aucun rapport avec les projets d'irrigation. L'opportunité exige explicitement une expérience dans les projets d'irrigation."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that align with padel club development or sports infrastructure.",
+      "fr": "Examiner d'autres opportunités de financement alignées avec le développement de clubs de padel ou les infrastructures sportives."
+    }
+  }
+}

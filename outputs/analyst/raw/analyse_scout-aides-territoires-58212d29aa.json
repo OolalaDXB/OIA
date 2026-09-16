@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Le Fonds d’innovation (InnovFund) est le programme-cadre 2020-2030 de l’UE pour la démonstration de technologies innovantes à faible émission carbone.",
+    "reason": {
+      "en": "The opportunity explicitly targets the demonstration of innovative low-carbon technologies. The organisation's activities (heritage, culture, tourism) do not align with this scope.",
+      "fr": "L'opportunité cible explicitement la démonstration de technologies innovantes à faible émission de carbone. Les activités de l'organisation (patrimoine, culture, tourisme) ne correspondent pas à ce périmètre."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities focused on heritage, culture, or tourism.",
+      "fr": "Consulter d'autres opportunités de financement axées sur le patrimoine, la culture ou le tourisme."
+    }
+  }
+}

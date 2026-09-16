@@ -1,8 +1,8 @@
 # Link check
 
-Checked 242 distinct URL(s).
+Checked 256 distinct URL(s).
 
-- resolving: 231
+- resolving: 245
 - **broken: 2**
 - refused us (not broken): 9
 - inconclusive: 0
@@ -62,8 +62,6 @@ Checked 242 distinct URL(s).
   - https://www.ungm.org
 - **opportunity hub71-access-cohort-20** — now redirects to https://www.hub71.com/
   - https://hub71.com/
-- **opportunity scout-adio-35574470fd** — now redirects to https://adif.abudhabi/south-korea/
-  - https://adif.abudhabi/south-korea/#register
 - **opportunity scout-aides-territoires-4f0e193d06** — now redirects to https://aides-territoires.beta.gouv.fr/portails/ecoquartier/
   - https://aides-territoires.beta.gouv.fr/programmes/ecoquartier/
 

@@ -1,0 +1,16 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": [
+      "scope: Women’s, LGBTIQ and minority rights in a context of autocracy, conflict and geopolitical shifts"
+    ],
+    "reason": {
+      "en": "The organisation's stated purpose ('Sovereign AI control plane for regulated industries. MCP reverse proxy') and sectors (AI, data, digital, cybersecurity, software) do not align with the funding opportunity's focus on 'Women’s, LGBTIQ and minority rights in a context of autocracy, conflict and geopolitical shifts'. The opportunity targets rights-based initiatives, not technological or industrial solutions.",
+      "fr": "L'objectif déclaré de l'organisation ('Souveraineté de l'IA pour les industries réglementées. Proxy inverse MCP') et ses secteurs d'activité (IA, données, numérique, cybersécurité, logiciel) ne correspondent pas à l'objectif de l'opportunité de financement, qui se concentre sur 'les droits des femmes, des personnes LGBTIQ et des minorités dans un contexte d'autocratie, de conflit et de changements géopolitiques'. L'opportunité cible des initiatives basées sur les droits, et non des solutions technologiques ou industrielles."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that align with the organisation's focus on AI, data, or digital infrastructure.",
+      "fr": "Examiner d'autres opportunités de financement qui correspondent à l'orientation de l'organisation en matière d'IA, de données ou d'infrastructure numérique."
+    }
+  }
+}

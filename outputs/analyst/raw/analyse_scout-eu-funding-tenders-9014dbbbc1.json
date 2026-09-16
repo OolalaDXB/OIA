@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "scope: Persons with disabilities: opportunities for labour inclusion and social protection through the life course",
+    "reason": {
+      "en": "The opportunity's scope is strictly focused on initiatives related to labour inclusion and social protection for persons with disabilities. BAWABA's activities in AI, data, digital, cybersecurity, and software for regulated industries do not align with this scope.",
+      "fr": "Le champ d'application de l'opportunité se concentre strictement sur les initiatives liées à l'inclusion professionnelle et à la protection sociale des personnes en situation de handicap. Les activités de BAWABA dans les domaines de l'IA, des données, du numérique, de la cybersécurité et des logiciels pour les industries réglementées ne correspondent pas à ce champ d'application."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that align with BAWABA's focus on AI, data, digital, or cybersecurity sectors.",
+      "fr": "Examiner d'autres opportunités de financement qui correspondent aux domaines d'activité de BAWABA, tels que l'IA, les données, le numérique ou la cybersécurité."
+    }
+  }
+}

@@ -1,14 +1,16 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citation": "Le programme EduRénov [...] vise à accélérer la rénovation énergétique des bâtiments scolaires en France. Il s’inscrit dans la stratégie nationale de transition écologique et cible les écoles, collèges, lycées, ainsi que d’autres structures éducatives.",
+    "citations": [
+      "Le programme EduRénov, lancé en 2023 par la Banque des Territoires, vise à accélérer la rénovation énergétique des bâtiments scolaires en France. Il s’inscrit dans la stratégie nationale de transition écologique et cible les écoles, collèges, lycées, ainsi que d’autres structures éducatives."
+    ],
     "reason": {
-      "en": "The organisation 'Les Vieilles Pierres' is a heritage hiking association, not an educational institution or a manager of school buildings. The opportunity explicitly targets schools, colleges, high schools, and other educational structures.",
-      "fr": "L'organisation 'Les Vieilles Pierres' est une association de randonnée patrimoniale, et non une institution éducative ou gestionnaire de bâtiments scolaires. L'opportunité cible explicitement les écoles, collèges, lycées et autres structures éducatives."
+      "en": "The funding opportunity specifically targets schools, colleges, high schools, and other educational structures for energy renovation. 'Les Vieilles Pierres' is a heritage hiking association, not an educational institution or owner of school buildings.",
+      "fr": "L'opportunité de financement cible spécifiquement les écoles, collèges, lycées et autres structures éducatives pour la rénovation énergétique. 'Les Vieilles Pierres' est une association de randonnée patrimoniale, et non une institution éducative ou propriétaire de bâtiments scolaires."
     },
     "nextAction": {
-      "en": "Confirm with the issuer whether non-educational associations managing heritage sites could be considered under 'other educational structures.'",
-      "fr": "Vérifier auprès de l'émetteur si les associations non éducatives gérant des sites patrimoniaux pourraient être considérées comme 'autres structures éducatives'."
+      "en": "Confirm whether the association owns or manages any educational buildings (schools, colleges, etc.). If not, do not proceed with an application.",
+      "fr": "Vérifier si l’association possède ou gère des bâtiments éducatifs (écoles, collèges, etc.). Si ce n’est pas le cas, ne pas poursuivre la candidature."
     }
   }
 }

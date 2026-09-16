@@ -1,0 +1,16 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citations": [
+      "Re-imagining the creative economy: the interplay between the cultural and creative sectors and industries and the social economy"
+    ],
+    "reason": {
+      "en": "The funding opportunity explicitly targets the cultural and creative sectors and industries, as well as the social economy. BAWABA operates in AI, data, digital, cybersecurity, and software sectors, which are not mentioned as eligible sectors in the opportunity text.",
+      "fr": "L'opportunité de financement cible explicitement les secteurs culturels et créatifs ainsi que l'économie sociale. BAWABA opère dans les secteurs de l'IA, des données, du numérique, de la cybersécurité et des logiciels, qui ne sont pas mentionnés comme secteurs éligibles dans le texte de l'opportunité."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that explicitly include AI, data, or digital sectors.",
+      "fr": "Consulter d'autres opportunités de financement qui incluent explicitement les secteurs de l'IA, des données ou du numérique."
+    }
+  }
+}

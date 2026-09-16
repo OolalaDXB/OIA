@@ -1,0 +1,16 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citations": [
+      "eligibility: Smart and autonomous mobility startups"
+    ],
+    "reason": {
+      "en": "The opportunity explicitly restricts eligibility to 'Smart and autonomous mobility startups'. BAWABA operates in AI, data, cybersecurity, and software sectors, with no indication it is a smart or autonomous mobility startup.",
+      "fr": "L'opportunité restreint explicitement l'éligibilité aux 'startups de mobilité intelligente et autonome'. BAWABA opère dans les secteurs de l'IA, des données, de la cybersécurité et des logiciels, sans indication qu'il s'agit d'une startup de mobilité intelligente ou autonome."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that target AI, data, or cybersecurity startups.",
+      "fr": "Examiner d'autres opportunités de financement ciblant les startups en IA, données ou cybersécurité."
+    }
+  }
+}

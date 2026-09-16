@@ -1,6 +1,5 @@
 {
   "ScoutResult": {
-    "note": "Extracted 50 funding opportunities from the first page of results.",
     "calls": [
       {
         "title": "Demonstration of hydropower technologies for efficient and forward-looking refurbishment of existing hydropower plants",
@@ -551,6 +550,116 @@
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL3-2027-01-BM-03?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
         "quote": "Detection and characterisation of threats or illegal/ smuggled goods in cargo"
+      },
+      {
+        "title": "Horizon Europe (HORIZON)",
+        "programme": "Horizon Europe (HORIZON)",
+        "type": "Programme",
+        "actionType": "",
+        "openingDate": "",
+        "deadlineDate": "",
+        "submissionStatus": "",
+        "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/programmes/horizon",
+        "quote": "Horizon Europe (HORIZON)"
+      },
+      {
+        "title": "Horizon 2020 Framework Programme (H2020 - 2014-2020)",
+        "programme": "Horizon 2020 Framework Programme (H2020 - 2014-2020)",
+        "type": "Programme",
+        "actionType": "",
+        "openingDate": "",
+        "deadlineDate": "",
+        "submissionStatus": "",
+        "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/programmes/h2020",
+        "quote": "Horizon 2020 Framework Programme (H2020 - 2014-2020)"
+      },
+      {
+        "title": "Digital Europe Programme (DIGITAL)",
+        "programme": "Digital Europe Programme (DIGITAL)",
+        "type": "Programme",
+        "actionType": "",
+        "openingDate": "",
+        "deadlineDate": "",
+        "submissionStatus": "",
+        "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/programmes/digital",
+        "quote": "Digital Europe Programme (DIGITAL)"
+      },
+      {
+        "title": "Erasmus+ (ERASMUS)",
+        "programme": "Erasmus+ (ERASMUS)",
+        "type": "Programme",
+        "actionType": "",
+        "openingDate": "",
+        "deadlineDate": "",
+        "submissionStatus": "",
+        "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/programmes/erasmus",
+        "quote": "Erasmus+ (ERASMUS)"
+      },
+      {
+        "title": "Connecting Europe Facility (CEF)",
+        "programme": "Connecting Europe Facility (CEF)",
+        "type": "Programme",
+        "actionType": "",
+        "openingDate": "",
+        "deadlineDate": "",
+        "submissionStatus": "",
+        "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/programmes/cef",
+        "quote": "Connecting Europe Facility (CEF)"
+      },
+      {
+        "title": "Single Market Programme (SMP)",
+        "programme": "Single Market Programme (SMP)",
+        "type": "Programme",
+        "actionType": "",
+        "openingDate": "",
+        "deadlineDate": "",
+        "submissionStatus": "",
+        "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/programmes/smp",
+        "quote": "Single Market Programme (SMP)"
+      },
+      {
+        "title": "European Defence Fund (EDF)",
+        "programme": "European Defence Fund (EDF)",
+        "type": "Programme",
+        "actionType": "",
+        "openingDate": "",
+        "deadlineDate": "",
+        "submissionStatus": "",
+        "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/programmes/edf",
+        "quote": "European Defence Fund (EDF)"
+      },
+      {
+        "title": "Programme for the Environment and Climate Action (LIFE)",
+        "programme": "Programme for the Environment and Climate Action (LIFE)",
+        "type": "Programme",
+        "actionType": "",
+        "openingDate": "",
+        "deadlineDate": "",
+        "submissionStatus": "",
+        "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/programmes/life",
+        "quote": "Programme for the Environment and Climate Action (LIFE)"
+      },
+      {
+        "title": "Creative Europe Programme (CREA)",
+        "programme": "Creative Europe Programme (CREA)",
+        "type": "Programme",
+        "actionType": "",
+        "openingDate": "",
+        "deadlineDate": "",
+        "submissionStatus": "",
+        "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/programmes/crea",
+        "quote": "Creative Europe Programme (CREA)"
+      },
+      {
+        "title": "Citizens, Equality, Rights and Values programme (CERV)",
+        "programme": "Citizens, Equality, Rights and Values programme (CERV)",
+        "type": "Programme",
+        "actionType": "",
+        "openingDate": "",
+        "deadlineDate": "",
+        "submissionStatus": "",
+        "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/programmes/cerv",
+        "quote": "Citizens, Equality, Rights and Values programme (CERV)"
       }
     ]
   }

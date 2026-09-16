@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "scope: Closing the learning gap: uncovering causes and effective policy interventions for declining youth skills in mathematics, reading, and science",
+    "reason": {
+      "en": "The organisation's focus on 'Sovereign AI control plane for regulated industries' and sectors such as AI, data, digital, cybersecurity, and software does not align with the opportunity's scope of addressing declining youth skills in mathematics, reading, and science through policy interventions.",
+      "fr": "L'organisation se concentre sur un 'plan de contrôle d'IA souverain pour les industries réglementées' et des secteurs tels que l'IA, les données, le numérique, la cybersécurité et les logiciels, ce qui ne correspond pas à l'objectif de l'opportunité visant à traiter le déclin des compétences des jeunes en mathématiques, lecture et sciences par le biais d'interventions politiques."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that align with the organisation's focus on AI, data, or digital sectors.",
+      "fr": "Examiner d'autres opportunités de financement qui correspondent au domaine de l'organisation, notamment l'IA, les données ou le numérique."
+    }
+  }
+}

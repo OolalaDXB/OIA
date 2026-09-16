@@ -5,35 +5,30 @@
   - query: `classification-cpv IN (72212190 72224100 72226000 72254000 72600000 48218000 79417000) AND buyer-country IN (FRA LUX BEL DEU) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
 - **beau** — OK · 13 biddable of 13 retrieved
   - query: `classification-cpv IN (48812000 66170000 72212443 72212190) AND buyer-country IN (FRA LUX) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
-- **lesvieillespierres** — OK · 68 biddable of 68 retrieved
+- **lesvieillespierres** — OK · 67 biddable of 67 retrieved
   - query: `classification-cpv IN (92522000 92521000 45212350 79952000) AND buyer-country IN (FRA) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
-- **ludography** — OK · 87 biddable of 87 retrieved
+- **ludography** — OK · 89 biddable of 89 retrieved
   - query: `classification-cpv IN (48520000 92312000 79822500 92500000) AND buyer-country IN (FRA) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
-- **maisons-co** — OK · 38 biddable of 38 retrieved
+- **maisons-co** — OK · 39 biddable of 39 retrieved
   - query: `classification-cpv IN (72212517 48812000 55100000 70330000) AND buyer-country IN (FRA) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
-- **myoolala** — ERROR: TED search HTTP 429: <html>
-<head><title>429 Too Many Requests</title></head>
-<body>
-<center><h1>429 Too Many Requests</h1></center>
-<hr><center>nginx/1.31.3</center>
-</body>
-</html>
-
-  - query: `classification-cpv IN (72212517 48219700 72413000 72212224) AND buyer-country IN (FRA) AND publication-date>=20260618`
+- **myoolala** — OK · 9 biddable of 9 retrieved
+  - query: `classification-cpv IN (72212517 48219700 72413000 72212224) AND buyer-country IN (FRA) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
 - **padel-design** — OK · 100 biddable of 100 retrieved
   - query: `classification-cpv IN (71241000 79314000 79419000 92600000) AND buyer-country IN (ESP FRA ITA PRT BEL NLD DEU SWE) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
-- **rls-guard** — OK · 81 biddable of 81 retrieved
+- **rls-guard** — OK · 83 biddable of 83 retrieved
   - query: `classification-cpv IN (72212730 79417000 72267000 48218000) AND buyer-country IN (FRA LUX BEL) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
-- **sillon** — OK · 39 biddable of 39 retrieved
+- **sillon** — OK · 41 biddable of 41 retrieved
   - query: `classification-cpv IN (48451000 72212450 72212443 48812000 92500000) AND buyer-country IN (FRA) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
-- **thestudio-mt** — OK · 56 biddable of 100 retrieved (44 set aside: qualification systems, corrigenda, award notices)
-  - query: `classification-cpv IN (72212517 72230000 72267000 72413000 79421000 72224000) AND buyer-country IN (FRA LUX BEL) AND publication-date>=20260618`
+- **thestudio-mt** — OK · 100 biddable of 100 retrieved
+  - query: `classification-cpv IN (72212517 72230000 72267000 72413000 79421000 72224000) AND buyer-country IN (FRA LUX BEL) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
 
-- unique notices across projects: 466
-- matchable text per record (the S2 measure): median 268 characters over 25 record(s)
+- unique notices across projects: 485
+- matchable text per record (the S2 measure): median 2919 characters over 25 record(s)
 - candidates processed (cap 25): 25
+- **records carrying eligibility text: 9/25** — 9 of them from the notice XML, which the HTML summary page does not carry
 - qualified at MANUAL_REVIEW_REQUIRED: 25
 - notice-page fetch failures: 0
+- notice-XML fetch failures: 0
 
 ## Candidates (each with official source URL)
 - **422623-2026** — France – Structural engineering consultancy services – Accord-cadre d'Assistance Technique à la Maîtrise d'Ouvrage (ATMO) pour le CHU de Strasbourg (HUS)

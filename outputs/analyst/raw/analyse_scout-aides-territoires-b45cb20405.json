@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citation": [],
+    "citations": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for the Digital Europe programme. It describes the programme's scope but does not list eligibility criteria for applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au programme Europe Numérique. Il décrit le champ d'application du programme mais ne mentionne pas les critères d'éligibilité des candidats."
+      "en": "The extracted text does not specify which types of organisations are eligible to apply for the Digital Europe programme. It mentions support for citizens and businesses but does not clarify whether associations or non-profit entities are included.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles pour le programme Europe Numérique. Il mentionne un soutien aux citoyens et aux entreprises, mais ne clarifie pas si les associations ou les entités à but non lucratif sont incluses."
     },
     "nextAction": {
-      "en": "Check the official call for proposals or programme guidelines to confirm which legal entities are eligible to apply.",
-      "fr": "Consulter l'appel à projets officiel ou les directives du programme pour confirmer quelles entités juridiques sont éligibles."
+      "en": "Check the official call for proposals or programme guidelines to determine if associations are eligible to apply.",
+      "fr": "Consulter l'appel à propositions officiel ou les lignes directrices du programme pour déterminer si les associations sont éligibles."
     }
   }
 }

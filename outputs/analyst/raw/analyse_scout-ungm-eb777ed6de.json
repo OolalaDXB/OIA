@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "RFP/AFRO/019/2026-Technical Support for Health Technology Access Pool (HTAP) and WHO AFRO Programs for In Vitro Diagnostics (IVDs)",
+    "reason": {
+      "en": "The opportunity explicitly targets technical support for health technology access and WHO AFRO programs related to in vitro diagnostics (IVDs). The organisation's dossier does not indicate any expertise, experience, or operational focus in health technology, diagnostics, or public health programs, which are the core requirements of this grant.",
+      "fr": "Cette opportunité cible explicitement le soutien technique pour l'accès aux technologies de santé et les programmes de l'OMS AFRO liés aux diagnostics in vitro (DIV). Le dossier de l'organisation ne mentionne aucune expertise, expérience ou focus opérationnel en technologie de santé, diagnostics ou programmes de santé publique, qui sont les exigences principales de cette subvention."
+    },
+    "nextAction": {
+      "en": "Review the full RFP document to confirm if there are any specific clauses allowing non-health sector entities to apply for subcontracting or partnership roles.",
+      "fr": "Consulter le document complet de l'appel d'offres pour vérifier s'il existe des clauses spécifiques permettant aux entités non liées au secteur de la santé de postuler pour des rôles de sous-traitance ou de partenariat."
+    }
+  }
+}

@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria such as legal form, location, or sector.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité tels que la forme juridique, la localisation ou le secteur d'activité."
+      "en": "The extracted text does not specify who may apply for this tender. There is no mention of eligibility criteria for applicants, such as legal status, geographic location, or type of organization.",
+      "fr": "Le texte extrait ne précise pas qui peut postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité pour les candidats, tels que le statut juridique, la localisation géographique ou le type d'organisation."
     },
     "nextAction": {
-      "en": "Check the full tender notice at the provided link to find the section on eligibility requirements.",
-      "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni pour trouver la section sur les exigences d'éligibilité."
+      "en": "Download the full procurement document (DCE) from the provided URL and locate the section on eligibility criteria to confirm who may apply.",
+      "fr": "Télécharger le dossier de consultation complet (DCE) depuis l'URL fournie et localiser la section sur les critères d'éligibilité pour confirmer qui peut postuler."
     }
   }
 }

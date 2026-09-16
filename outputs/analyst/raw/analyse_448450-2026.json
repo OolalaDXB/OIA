@@ -1,0 +1,19 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": [
+      "Die Übertragung des Auftrags an Nachunternehmer / Subunternehmer ist nicht zulässig, da es sich um eine kritische Aufgabe gemäß § 47 Abs. 5 VgV handelt.",
+      "Es wird eine erfolgreich abgeschlossene Ausbildung als Fachkraft für Arbeitssicherheit vorausgesetzt. Die/der Auftragnehmer*in bestätigt, dass die Sicherheitsfachkraft die Anforderungen gemäß § 7 Absatz 1 Satz 1 ASiG mit einem technischen Studiengang als Grundlage erfüllt verfügt.",
+      "Für die Erbringung der ausgeschriebenen Leistung ist die Nutzung und Administration durch die/den Auftragnehmer*in dieser Software daher zwingend erforderlich.",
+      "Die/der Auftragnehmer*in verpflichtet sich die Software bis zum Leistungsbeginn anzuschaffen und sich in die Administration und Anwendung so einzuarbeiten, dass die vorgegebenen Prozesse innerhalb des bestehenden Systems vollständig zu bedient werden können."
+    ],
+    "reason": {
+      "en": "BAWABA operates in AI, data, digital, cybersecurity, and software sectors, with no evident expertise or qualifications in health and safety services, specifically as a 'Fachkraft für Arbeitssicherheit' (Safety Specialist) with a technical degree as required by § 7 Abs. 1 ASiG. Additionally, the tender explicitly prohibits subcontracting, and BAWABA's core services do not align with the mandatory use of the 'envioteq' work safety software for tasks like hazard assessment, operational instructions, or inspection management.",
+      "fr": "BAWABA opère dans les secteurs de l'IA, des données, du numérique, de la cybersécurité et des logiciels, sans expertise évidente ni qualifications en matière de services de santé et de sécurité, notamment en tant que 'Fachkraft für Arbeitssicherheit' (spécialiste en sécurité) avec un diplôme technique comme l'exige le § 7 al. 1 ASiG. De plus, l'appel d'offres interdit explicitement la sous-traitance, et les services principaux de BAWABA ne correspondent pas à l'utilisation obligatoire du logiciel de sécurité au travail 'envioteq' pour des tâches telles que l'évaluation des risques, les instructions opérationnelles ou la gestion des inspections."
+    },
+    "nextAction": {
+      "en": "Review the tender documents to confirm if any of BAWABA's legal entities or partners possess the required certification as a 'Fachkraft für Arbeitssicherheit' with a technical degree and experience with the 'envioteq' software. If not, consider partnering with a qualified entity that meets these criteria, though subcontracting is prohibited.",
+      "fr": "Consulter les documents de l'appel d'offres pour vérifier si l'une des entités juridiques de BAWABA ou ses partenaires possède la certification requise de 'Fachkraft für Arbeitssicherheit' avec un diplôme technique et une expérience du logiciel 'envioteq'. Si ce n'est pas le cas, envisager un partenariat avec une entité qualifiée répondant à ces critères, bien que la sous-traitance soit interdite."
+    }
+  }
+}

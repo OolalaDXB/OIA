@@ -1,14 +1,16 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citation": [],
+    "citation": [
+      "Es sind vier (4) Referenzen einzureichen. Die Referenzen müssen folgende Bedingungen erfüllen: 1) Jedes Referenzprojekt muss dem Bereich Informationssicherheit oder Resilienz zuzuordnen. 2) Mindestens zwei der Referenzprojekte müssen zum Zeitpunkt der Abgabefrist abgeschlossen sein bzw. den Status \"Implementiert\" erreicht haben. 3) Mindestens zwei der Referenzprojekte müssen bei einem KRITIS-Betreiber folgender Kategorien erbracht sein: KRITIS-Verteilnetzbetreiber, KRITIS-Übertragungsnetzbetreiber oder KRITIS-Telekommunikationsbetreiber oder KRITIS-Fernleitungsnetzbetreiber. 4) Die vier (4) Referenzprojekte enthalten zusammen mindestens acht (8) der folgenden elf (11) Themenschwerpunkte... 5) Im Rahmen der Referenzprojekte müssen mindestens drei (3) der folgenden fünf (5) Governance-Dokumentationen erzeugt worden sein..."
+    ],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria such as legal form, location, or sector requirements.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité tels que la forme juridique, la localisation ou les exigences sectorielles."
+      "en": "The opportunity requires specific references in cybersecurity/resilience for KRITIS operators, but the organisation's dossier does not provide details about past projects, clients, or governance documentation to verify eligibility.",
+      "fr": "L'opportunité exige des références spécifiques en cybersécurité/résilience pour des opérateurs KRITIS, mais le dossier de l'organisation ne fournit pas de détails sur les projets passés, les clients ou la documentation de gouvernance pour vérifier l'éligibilité."
     },
     "nextAction": {
-      "en": "Contact terranets bw GmbH directly to request the full tender documentation and confirm eligibility requirements.",
-      "fr": "Contacter directement terranets bw GmbH pour demander la documentation complète de l'appel d'offres et confirmer les critères d'éligibilité."
+      "en": "Provide a list of four past projects in cybersecurity/resilience, including client details (especially KRITIS operators), project status, covered themes, and governance documentation produced.",
+      "fr": "Fournir une liste de quatre projets passés en cybersécurité/résilience, incluant les détails des clients (notamment les opérateurs KRITIS), le statut des projets, les thèmes couverts et la documentation de gouvernance produite."
     }
   }
 }

@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations may apply for the Fonds vert - Édition 2026. There is no mention of eligibility criteria related to the legal form or status of applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent déposer une candidature pour le Fonds vert - Édition 2026. Il n'y a aucune mention des critères d'éligibilité relatifs à la forme juridique ou au statut des demandeurs."
+    },
+    "nextAction": {
+      "en": "Contact the issuer (beta.gouv.fr) to ask which legal entities are eligible to apply for this grant.",
+      "fr": "Contacter l'émetteur (beta.gouv.fr) pour demander quelles entités juridiques sont éligibles à cette subvention."
+    }
+  }
+}

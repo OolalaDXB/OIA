@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "ELIGIBLE",
+    "citation": "Entreprises, associations, acteurs professionnels",
+    "reason": {
+      "en": "The opportunity explicitly lists 'entreprises' (companies) as eligible applicants, and BAWABA operates as a company in the relevant sectors.",
+      "fr": "L'opportunité mentionne explicitement les 'entreprises' comme candidats éligibles, et BAWABA opère en tant qu'entreprise dans les secteurs concernés."
+    },
+    "nextAction": {
+      "en": "Confirm which of BAWABA’s legal entities is registered in France or the EU and can submit the application.",
+      "fr": "Vérifier quelle entité légale de BAWABA est enregistrée en France ou dans l'UE et peut déposer la candidature."
+    }
+  }
+}

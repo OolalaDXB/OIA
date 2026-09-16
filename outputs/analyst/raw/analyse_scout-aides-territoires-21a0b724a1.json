@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citation": [],
+    "citations": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply. It describes the programme's scope but does not state eligibility criteria for applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il décrit le champ d'application du programme mais ne mentionne pas les critères d'éligibilité des candidats."
+      "en": "The extracted text does not specify which types of organisations may apply for the CERV programme. There is no mention of eligibility criteria for applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au programme CERV. Il n'y a aucune mention des critères d'éligibilité pour les candidats."
     },
     "nextAction": {
-      "en": "Check the full call for proposals document to find the section on eligible applicants.",
-      "fr": "Consulter le document complet de l'appel à projets pour trouver la section sur les candidats éligibles."
+      "en": "Check the official CERV programme documentation or website to find the eligibility criteria for applicants.",
+      "fr": "Consulter la documentation officielle ou le site web du programme CERV pour trouver les critères d'éligibilité des candidats."
     }
   }
 }

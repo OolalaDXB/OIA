@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Le programme PVD est destiné aux communes de moins de 20 000 habitants exerçant des fonctions de centralité et présentant des signes de fragilité.",
+    "reason": {
+      "en": "The funding opportunity is exclusively for municipalities (communes) with fewer than 20,000 inhabitants. 'Les Vieilles Pierres' is a heritage hiking association, not a municipality.",
+      "fr": "L'opportunité de financement est exclusivement destinée aux communes de moins de 20 000 habitants. 'Les Vieilles Pierres' est une association de randonnée patrimoniale, pas une commune."
+    },
+    "nextAction": {
+      "en": "Confirm with the issuer whether associations can partner with eligible municipalities to apply on their behalf.",
+      "fr": "Vérifier auprès de l'émetteur si les associations peuvent s'associer à des communes éligibles pour déposer une candidature en leur nom."
+    }
+  }
+}

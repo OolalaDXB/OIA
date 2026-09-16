@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citations": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations are eligible to apply for this funding opportunity. There is no mention of legal forms, sectors, or geographic restrictions that would confirm or exclude BAWABA.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles pour cette opportunité de financement. Il n'y a aucune mention des formes juridiques, des secteurs ou des restrictions géographiques qui confirmeraient ou excluraient BAWABA."
+    },
+    "nextAction": {
+      "en": "Check the full call document or the European Commission’s official funding page for eligibility criteria regarding applicant types and sectors.",
+      "fr": "Consulter le document complet de l'appel ou la page officielle de financement de la Commission européenne pour connaître les critères d'éligibilité concernant les types de candidats et les secteurs."
+    }
+  }
+}

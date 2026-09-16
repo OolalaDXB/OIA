@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations or legal entities are eligible to apply for the ÉcoQuartier grant. It mentions 'porteurs de projets' but does not define who they are.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations ou d'entités juridiques sont éligibles pour la subvention ÉcoQuartier. Il mentionne les 'porteurs de projets' sans les définir."
+      "en": "The extracted text does not specify which types of organisations may apply for the ÉcoQuartier grant. It mentions 'porteurs de projets' but does not define whether associations, companies, or other entities are eligible.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à la subvention ÉcoQuartier. Il mentionne 'porteurs de projets' sans définir si les associations, entreprises ou autres entités sont éligibles."
     },
     "nextAction": {
-      "en": "Check the official ÉcoQuartier call for applications or guidelines to determine if associations like 'Les Vieilles Pierres' are eligible to apply.",
-      "fr": "Consulter l'appel à projets officiel ou les directives d'ÉcoQuartier pour vérifier si les associations comme 'Les Vieilles Pierres' peuvent postuler."
+      "en": "Check the official ÉcoQuartier call for applications or guidelines to confirm the types of organisations eligible to apply.",
+      "fr": "Consulter l'appel à projets officiel ÉcoQuartier ou les directives pour confirmer les types d'organisations éligibles."
     }
   }
 }

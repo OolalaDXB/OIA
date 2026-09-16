@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Demonstration of industrial excess/waste heat conversion to mechanical or electrical power",
+    "reason": {
+      "en": "The opportunity specifically targets the demonstration of technologies converting industrial excess or waste heat into mechanical or electrical power. BAWABA's activities in AI, data, digital, cybersecurity, and software do not align with this industrial energy conversion scope.",
+      "fr": "L'opportunité cible spécifiquement la démonstration de technologies de conversion de la chaleur industrielle excédentaire ou perdue en énergie mécanique ou électrique. Les activités de BAWABA dans les domaines de l'IA, des données, du numérique, de la cybersécurité et des logiciels ne correspondent pas à ce champ d'application énergétique industriel."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that focus on digital, AI, or software innovation, as these align more closely with BAWABA's core activities.",
+      "fr": "Examiner d'autres opportunités de financement axées sur l'innovation numérique, l'IA ou les logiciels, car celles-ci correspondent davantage aux activités principales de BAWABA."
+    }
+  }
+}

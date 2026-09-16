@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NEEDS_INFO",
-    "citations": [],
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Der Bieter/die Bietergemeinschaft muss über den folgenden Partnerstatus verfügen: - Licensing Solution Partner (LSP), - Azure Expert Managed Service Provider (MSP), - FastTrack Ready Partner.",
     "reason": {
-      "en": "The extracted text of the opportunity does not specify which types of organisations may apply. There is no mention of eligibility criteria for applicants, such as legal form, location, or sector.",
-      "fr": "Le texte extrait de l'opportunité ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité pour les candidats, tels que la forme juridique, la localisation ou le secteur d'activité."
+      "en": "The organisation does not demonstrate in its dossier that it holds any of the required Microsoft partner statuses (Licensing Solution Partner, Azure Expert MSP, or FastTrack Ready Partner).",
+      "fr": "L'organisation ne démontre pas dans son dossier qu'elle possède l'un des statuts de partenaire Microsoft requis (Licensing Solution Partner, Azure Expert MSP ou FastTrack Ready Partner)."
     },
     "nextAction": {
-      "en": "Contact the buyer (Das Saarland, IT-Dienstleistungszentrum) to request the full tender documents and confirm eligibility requirements.",
-      "fr": "Contacter l'acheteur (Das Saarland, IT-Dienstleistungszentrum) pour demander les documents complets de l'appel d'offres et confirmer les critères d'éligibilité."
+      "en": "Confirm with BAWABA whether they hold any of the required Microsoft partner statuses (LSP, Azure Expert MSP, or FastTrack Ready Partner). If not, they cannot apply.",
+      "fr": "Vérifier auprès de BAWABA s'ils possèdent l'un des statuts de partenaire Microsoft requis (LSP, Azure Expert MSP ou FastTrack Ready Partner). Sinon, ils ne peuvent pas postuler."
     }
   }
 }

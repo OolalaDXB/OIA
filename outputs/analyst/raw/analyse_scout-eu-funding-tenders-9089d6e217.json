@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of legal forms, geographic restrictions, or sector-specific criteria that would confirm or exclude BAWABA.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles. Il n'y a aucune mention des formes juridiques, des restrictions géographiques ou des critères sectoriels qui confirmeraient ou excluraient BAWABA."
+    },
+    "nextAction": {
+      "en": "Check the full call document for the 'Eligibility' or 'Who can apply' section to confirm the types of organisations permitted to submit proposals.",
+      "fr": "Consulter le document complet de l'appel pour la section 'Éligibilité' ou 'Qui peut postuler' afin de confirmer les types d'organisations autorisées à soumettre des propositions."
+    }
+  }
+}

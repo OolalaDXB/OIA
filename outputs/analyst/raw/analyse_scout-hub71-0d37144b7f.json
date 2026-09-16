@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Initiate is Hub71’s early-stage programme that supports founders at the ideation or pre-MVP stage to turn their ideas into scalable startups.",
+    "reason": {
+      "en": "The opportunity explicitly targets founders at the ideation or pre-MVP stage. BAWABA is described as having a product (Sovereign AI control plane) and operating in multiple regions, which suggests it is beyond the pre-MVP stage.",
+      "fr": "L'opportunité cible explicitement les fondateurs au stade de l'idéation ou pré-MVP. BAWABA est décrit comme ayant un produit (plan de contrôle d'IA souveraine) et opérant dans plusieurs régions, ce qui suggère qu'il dépasse le stade pré-MVP."
+    },
+    "nextAction": {
+      "en": "Confirm with BAWABA whether they are truly at the ideation or pre-MVP stage, despite their current product and operations.",
+      "fr": "Vérifier avec BAWABA s'ils sont réellement au stade de l'idéation ou pré-MVP, malgré leur produit actuel et leurs opérations."
+    }
+  }
+}

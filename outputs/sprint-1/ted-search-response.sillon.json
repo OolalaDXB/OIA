@@ -5279,9 +5279,271 @@
       "buyer-country": [
         "FRA"
       ]
+    },
+    {
+      "notice-type": "cn-standard",
+      "publication-number": "639798-2026",
+      "classification-cpv": [
+        "92521100",
+        "92521100",
+        "92521100",
+        "92521100",
+        "92521100",
+        "92521100"
+      ],
+      "buyer-name": {
+        "fra": [
+          "Commune de Bayonne"
+        ]
+      },
+      "publication-date": "2026-09-17+02:00",
+      "links": {
+        "xml": {
+          "MUL": "https://ted.europa.eu/en/notice/639798-2026/xml"
+        },
+        "pdf": {
+          "BUL": "https://ted.europa.eu/bg/notice/639798-2026/pdf",
+          "SPA": "https://ted.europa.eu/es/notice/639798-2026/pdf",
+          "CES": "https://ted.europa.eu/cs/notice/639798-2026/pdf",
+          "DAN": "https://ted.europa.eu/da/notice/639798-2026/pdf",
+          "DEU": "https://ted.europa.eu/de/notice/639798-2026/pdf",
+          "EST": "https://ted.europa.eu/et/notice/639798-2026/pdf",
+          "ELL": "https://ted.europa.eu/el/notice/639798-2026/pdf",
+          "ENG": "https://ted.europa.eu/en/notice/639798-2026/pdf",
+          "FRA": "https://ted.europa.eu/fr/notice/639798-2026/pdf",
+          "GLE": "https://ted.europa.eu/ga/notice/639798-2026/pdf",
+          "HRV": "https://ted.europa.eu/hr/notice/639798-2026/pdf",
+          "ITA": "https://ted.europa.eu/it/notice/639798-2026/pdf",
+          "LAV": "https://ted.europa.eu/lv/notice/639798-2026/pdf",
+          "LIT": "https://ted.europa.eu/lt/notice/639798-2026/pdf",
+          "HUN": "https://ted.europa.eu/hu/notice/639798-2026/pdf",
+          "MLT": "https://ted.europa.eu/mt/notice/639798-2026/pdf",
+          "NLD": "https://ted.europa.eu/nl/notice/639798-2026/pdf",
+          "POL": "https://ted.europa.eu/pl/notice/639798-2026/pdf",
+          "POR": "https://ted.europa.eu/pt/notice/639798-2026/pdf",
+          "RON": "https://ted.europa.eu/ro/notice/639798-2026/pdf",
+          "SLK": "https://ted.europa.eu/sk/notice/639798-2026/pdf",
+          "SLV": "https://ted.europa.eu/sl/notice/639798-2026/pdf",
+          "FIN": "https://ted.europa.eu/fi/notice/639798-2026/pdf",
+          "SWE": "https://ted.europa.eu/sv/notice/639798-2026/pdf"
+        },
+        "pdfs": {
+          "FRA": "https://ted.europa.eu/fr/notice/639798-2026/pdfs"
+        },
+        "html": {
+          "BUL": "https://ted.europa.eu/bg/notice/-/detail/639798-2026",
+          "SPA": "https://ted.europa.eu/es/notice/-/detail/639798-2026",
+          "CES": "https://ted.europa.eu/cs/notice/-/detail/639798-2026",
+          "DAN": "https://ted.europa.eu/da/notice/-/detail/639798-2026",
+          "DEU": "https://ted.europa.eu/de/notice/-/detail/639798-2026",
+          "EST": "https://ted.europa.eu/et/notice/-/detail/639798-2026",
+          "ELL": "https://ted.europa.eu/el/notice/-/detail/639798-2026",
+          "ENG": "https://ted.europa.eu/en/notice/-/detail/639798-2026",
+          "FRA": "https://ted.europa.eu/fr/notice/-/detail/639798-2026",
+          "GLE": "https://ted.europa.eu/ga/notice/-/detail/639798-2026",
+          "HRV": "https://ted.europa.eu/hr/notice/-/detail/639798-2026",
+          "ITA": "https://ted.europa.eu/it/notice/-/detail/639798-2026",
+          "LAV": "https://ted.europa.eu/lv/notice/-/detail/639798-2026",
+          "LIT": "https://ted.europa.eu/lt/notice/-/detail/639798-2026",
+          "HUN": "https://ted.europa.eu/hu/notice/-/detail/639798-2026",
+          "MLT": "https://ted.europa.eu/mt/notice/-/detail/639798-2026",
+          "NLD": "https://ted.europa.eu/nl/notice/-/detail/639798-2026",
+          "POL": "https://ted.europa.eu/pl/notice/-/detail/639798-2026",
+          "POR": "https://ted.europa.eu/pt/notice/-/detail/639798-2026",
+          "RON": "https://ted.europa.eu/ro/notice/-/detail/639798-2026",
+          "SLK": "https://ted.europa.eu/sk/notice/-/detail/639798-2026",
+          "SLV": "https://ted.europa.eu/sl/notice/-/detail/639798-2026",
+          "FIN": "https://ted.europa.eu/fi/notice/-/detail/639798-2026",
+          "SWE": "https://ted.europa.eu/sv/notice/-/detail/639798-2026"
+        },
+        "htmlDirect": {
+          "BUL": "https://ted.europa.eu/bg/notice/639798-2026/html",
+          "SPA": "https://ted.europa.eu/es/notice/639798-2026/html",
+          "CES": "https://ted.europa.eu/cs/notice/639798-2026/html",
+          "DAN": "https://ted.europa.eu/da/notice/639798-2026/html",
+          "DEU": "https://ted.europa.eu/de/notice/639798-2026/html",
+          "EST": "https://ted.europa.eu/et/notice/639798-2026/html",
+          "ELL": "https://ted.europa.eu/el/notice/639798-2026/html",
+          "ENG": "https://ted.europa.eu/en/notice/639798-2026/html",
+          "FRA": "https://ted.europa.eu/fr/notice/639798-2026/html",
+          "GLE": "https://ted.europa.eu/ga/notice/639798-2026/html",
+          "HRV": "https://ted.europa.eu/hr/notice/639798-2026/html",
+          "ITA": "https://ted.europa.eu/it/notice/639798-2026/html",
+          "LAV": "https://ted.europa.eu/lv/notice/639798-2026/html",
+          "LIT": "https://ted.europa.eu/lt/notice/639798-2026/html",
+          "HUN": "https://ted.europa.eu/hu/notice/639798-2026/html",
+          "MLT": "https://ted.europa.eu/mt/notice/639798-2026/html",
+          "NLD": "https://ted.europa.eu/nl/notice/639798-2026/html",
+          "POL": "https://ted.europa.eu/pl/notice/639798-2026/html",
+          "POR": "https://ted.europa.eu/pt/notice/639798-2026/html",
+          "RON": "https://ted.europa.eu/ro/notice/639798-2026/html",
+          "SLK": "https://ted.europa.eu/sk/notice/639798-2026/html",
+          "SLV": "https://ted.europa.eu/sl/notice/639798-2026/html",
+          "FIN": "https://ted.europa.eu/fi/notice/639798-2026/html",
+          "SWE": "https://ted.europa.eu/sv/notice/639798-2026/html"
+        }
+      },
+      "notice-title": {
+        "hun": "Franciaország – Múzeumi kiállítási szolgáltatások – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "lav": "Francija – Muzeju izstāžu pakalpojumi – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "swe": "Frankrike – Utställningstjänster i museer – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "gle": "An Fhrainc – Museum-exhibition services – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "ell": "Γαλλία – Υπηρεσίες εκθέσεων μουσείων – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "spa": "Francia – Servicios de exposición en museos – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "est": "Prantsusmaa – Muuseumi väljapanekute teenused – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "nld": "Frankrijk – Diensten voor museumexposities – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "fin": "Ranska – Museonäyttelypalvelut – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "pol": "Francja – Usługi wystawowe świadczone przez muzea – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "hrv": "Francuska – Usluge muzejskih izložbi – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "ces": "Francie – Výstavy v muzeích – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "dan": "Frankrig – Udstilling på museer – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "ron": "Franţa – Servicii de expoziţii în muzee – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "por": "França – Serviços de exposições em museus – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "slk": "Francúzsko – Muzeálne výstavy – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "fra": "France – Services d'exposition dans les musées – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "mlt": "Franza – Servizzi tal-mużewijiet ta' l-esibizzjoni – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "deu": "Frankreich – Museumsausstellungen – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "lit": "Prancūzija – Muziejų parodų paslaugos – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "ita": "Francia – Servizi di esposizione in musei – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "bul": "Фpaнция – Услуги по излагане и представяне на колекции – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "slv": "Francija – Muzejske razstave – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art",
+        "eng": "France – Museum-exhibition services – Accord-cadre de transport, installation et désinstallation d'oeuvres d'art"
+      },
+      "buyer-country": [
+        "FRA"
+      ]
+    },
+    {
+      "notice-type": "cn-standard",
+      "publication-number": "641640-2026",
+      "classification-cpv": [
+        "92511000",
+        "92511000"
+      ],
+      "buyer-name": {
+        "fra": [
+          "VILLE DE NANTES"
+        ]
+      },
+      "publication-date": "2026-09-17+02:00",
+      "links": {
+        "xml": {
+          "MUL": "https://ted.europa.eu/en/notice/641640-2026/xml"
+        },
+        "pdf": {
+          "BUL": "https://ted.europa.eu/bg/notice/641640-2026/pdf",
+          "SPA": "https://ted.europa.eu/es/notice/641640-2026/pdf",
+          "CES": "https://ted.europa.eu/cs/notice/641640-2026/pdf",
+          "DAN": "https://ted.europa.eu/da/notice/641640-2026/pdf",
+          "DEU": "https://ted.europa.eu/de/notice/641640-2026/pdf",
+          "EST": "https://ted.europa.eu/et/notice/641640-2026/pdf",
+          "ELL": "https://ted.europa.eu/el/notice/641640-2026/pdf",
+          "ENG": "https://ted.europa.eu/en/notice/641640-2026/pdf",
+          "FRA": "https://ted.europa.eu/fr/notice/641640-2026/pdf",
+          "GLE": "https://ted.europa.eu/ga/notice/641640-2026/pdf",
+          "HRV": "https://ted.europa.eu/hr/notice/641640-2026/pdf",
+          "ITA": "https://ted.europa.eu/it/notice/641640-2026/pdf",
+          "LAV": "https://ted.europa.eu/lv/notice/641640-2026/pdf",
+          "LIT": "https://ted.europa.eu/lt/notice/641640-2026/pdf",
+          "HUN": "https://ted.europa.eu/hu/notice/641640-2026/pdf",
+          "MLT": "https://ted.europa.eu/mt/notice/641640-2026/pdf",
+          "NLD": "https://ted.europa.eu/nl/notice/641640-2026/pdf",
+          "POL": "https://ted.europa.eu/pl/notice/641640-2026/pdf",
+          "POR": "https://ted.europa.eu/pt/notice/641640-2026/pdf",
+          "RON": "https://ted.europa.eu/ro/notice/641640-2026/pdf",
+          "SLK": "https://ted.europa.eu/sk/notice/641640-2026/pdf",
+          "SLV": "https://ted.europa.eu/sl/notice/641640-2026/pdf",
+          "FIN": "https://ted.europa.eu/fi/notice/641640-2026/pdf",
+          "SWE": "https://ted.europa.eu/sv/notice/641640-2026/pdf"
+        },
+        "pdfs": {
+          "FRA": "https://ted.europa.eu/fr/notice/641640-2026/pdfs"
+        },
+        "html": {
+          "BUL": "https://ted.europa.eu/bg/notice/-/detail/641640-2026",
+          "SPA": "https://ted.europa.eu/es/notice/-/detail/641640-2026",
+          "CES": "https://ted.europa.eu/cs/notice/-/detail/641640-2026",
+          "DAN": "https://ted.europa.eu/da/notice/-/detail/641640-2026",
+          "DEU": "https://ted.europa.eu/de/notice/-/detail/641640-2026",
+          "EST": "https://ted.europa.eu/et/notice/-/detail/641640-2026",
+          "ELL": "https://ted.europa.eu/el/notice/-/detail/641640-2026",
+          "ENG": "https://ted.europa.eu/en/notice/-/detail/641640-2026",
+          "FRA": "https://ted.europa.eu/fr/notice/-/detail/641640-2026",
+          "GLE": "https://ted.europa.eu/ga/notice/-/detail/641640-2026",
+          "HRV": "https://ted.europa.eu/hr/notice/-/detail/641640-2026",
+          "ITA": "https://ted.europa.eu/it/notice/-/detail/641640-2026",
+          "LAV": "https://ted.europa.eu/lv/notice/-/detail/641640-2026",
+          "LIT": "https://ted.europa.eu/lt/notice/-/detail/641640-2026",
+          "HUN": "https://ted.europa.eu/hu/notice/-/detail/641640-2026",
+          "MLT": "https://ted.europa.eu/mt/notice/-/detail/641640-2026",
+          "NLD": "https://ted.europa.eu/nl/notice/-/detail/641640-2026",
+          "POL": "https://ted.europa.eu/pl/notice/-/detail/641640-2026",
+          "POR": "https://ted.europa.eu/pt/notice/-/detail/641640-2026",
+          "RON": "https://ted.europa.eu/ro/notice/-/detail/641640-2026",
+          "SLK": "https://ted.europa.eu/sk/notice/-/detail/641640-2026",
+          "SLV": "https://ted.europa.eu/sl/notice/-/detail/641640-2026",
+          "FIN": "https://ted.europa.eu/fi/notice/-/detail/641640-2026",
+          "SWE": "https://ted.europa.eu/sv/notice/-/detail/641640-2026"
+        },
+        "htmlDirect": {
+          "BUL": "https://ted.europa.eu/bg/notice/641640-2026/html",
+          "SPA": "https://ted.europa.eu/es/notice/641640-2026/html",
+          "CES": "https://ted.europa.eu/cs/notice/641640-2026/html",
+          "DAN": "https://ted.europa.eu/da/notice/641640-2026/html",
+          "DEU": "https://ted.europa.eu/de/notice/641640-2026/html",
+          "EST": "https://ted.europa.eu/et/notice/641640-2026/html",
+          "ELL": "https://ted.europa.eu/el/notice/641640-2026/html",
+          "ENG": "https://ted.europa.eu/en/notice/641640-2026/html",
+          "FRA": "https://ted.europa.eu/fr/notice/641640-2026/html",
+          "GLE": "https://ted.europa.eu/ga/notice/641640-2026/html",
+          "HRV": "https://ted.europa.eu/hr/notice/641640-2026/html",
+          "ITA": "https://ted.europa.eu/it/notice/641640-2026/html",
+          "LAV": "https://ted.europa.eu/lv/notice/641640-2026/html",
+          "LIT": "https://ted.europa.eu/lt/notice/641640-2026/html",
+          "HUN": "https://ted.europa.eu/hu/notice/641640-2026/html",
+          "MLT": "https://ted.europa.eu/mt/notice/641640-2026/html",
+          "NLD": "https://ted.europa.eu/nl/notice/641640-2026/html",
+          "POL": "https://ted.europa.eu/pl/notice/641640-2026/html",
+          "POR": "https://ted.europa.eu/pt/notice/641640-2026/html",
+          "RON": "https://ted.europa.eu/ro/notice/641640-2026/html",
+          "SLK": "https://ted.europa.eu/sk/notice/641640-2026/html",
+          "SLV": "https://ted.europa.eu/sl/notice/641640-2026/html",
+          "FIN": "https://ted.europa.eu/fi/notice/641640-2026/html",
+          "SWE": "https://ted.europa.eu/sv/notice/641640-2026/html"
+        }
+      },
+      "notice-title": {
+        "hun": "Franciaország – Könyvtári szolgáltatások – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "lav": "Francija – Bibliotēku pakalpojumi – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "swe": "Frankrike – Bibliotekstjänster – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "gle": "An Fhrainc – Library services – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "ell": "Γαλλία – Υπηρεσίες βιβλιοθηκών – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "spa": "Francia – Servicios de bibliotecas – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "est": "Prantsusmaa – Raamatukoguteenused – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "nld": "Frankrijk – Bibliotheekdiensten – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "fin": "Ranska – Kirjastopalvelut – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "pol": "Francja – Usługi świadczone przez biblioteki – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "hrv": "Francuska – Usluge knjižnice – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "ces": "Francie – Služby knihoven – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "dan": "Frankrig – Bibliotekstjenester – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "ron": "Franţa – Servicii prestate de biblioteci – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "por": "França – Serviços das bibliotecas – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "slk": "Francúzsko – Služby knižníc – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "fra": "France – Services de bibliothèques – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "mlt": "Franza – Servizzi tal-libreriji – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "deu": "Frankreich – Dienstleistungen von Bibliotheken – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "lit": "Prancūzija – Bibliotekų paslaugos – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "ita": "Francia – Servizi di biblioteche – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "bul": "Фpaнция – Услуги на библиотеки – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "slv": "Francija – Storitve knjižnic – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville",
+        "eng": "France – Library services – Assistance à maîtrise d'ouvrage en vue du réaménagement de la Médiathèque Luce Courville"
+      },
+      "buyer-country": [
+        "FRA"
+      ]
     }
   ],
-  "totalNoticeCount": 39,
+  "totalNoticeCount": 41,
   "iterationNextToken": null,
   "timedOut": false
 }

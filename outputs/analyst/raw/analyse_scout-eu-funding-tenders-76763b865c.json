@@ -1,0 +1,16 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": [
+      "Advisory support and network for countering and preventing radicalisation, extremism, hate speech and polarisation"
+    ],
+    "reason": {
+      "en": "The opportunity explicitly targets organisations working on countering and preventing radicalisation, extremism, hate speech, and polarisation. BAWABA's focus on AI, data, digital, cybersecurity, and software for regulated industries does not align with the thematic scope of the grant.",
+      "fr": "L'opportunité cible explicitement les organisations travaillant sur la lutte contre la radicalisation, l'extrémisme, les discours de haine et la polarisation. L'activité de BAWABA, centrée sur l'IA, les données, le numérique, la cybersécurité et les logiciels pour les industries régulées, ne correspond pas au champ thématique de la subvention."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that align with BAWABA's focus on AI, data, or cybersecurity.",
+      "fr": "Examiner d'autres opportunités de financement correspondant aux domaines d'expertise de BAWABA, tels que l'IA, les données ou la cybersécurité."
+    }
+  }
+}

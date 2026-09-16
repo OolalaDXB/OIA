@@ -34,7 +34,7 @@ FAQs
 Helpdesk & Support
 SME Self-assessment tool
 Videos
-3
+2
 Home
 Funding
 Calls for proposals
@@ -110,9 +110,9 @@ Submission status
 Forthcoming
 274
 Open for submission
-403
+398
 Closed
-10923
+10928
 Opening date
 –
 Deadline date

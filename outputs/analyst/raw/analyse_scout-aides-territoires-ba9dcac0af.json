@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Le programme antifraude de l’UE vise à protéger les intérêts financiers de l’UE en fournissant un financement, sous forme de subventions et de marchés publics, pour des équipements d’investigation techniques et opérationnels, des formations spécialisées et des activités de recherche.",
+    "reason": {
+      "en": "The opportunity explicitly targets funding for technical and operational investigation equipment, specialized training, and research activities to protect the EU's financial interests. The organization's focus on heritage hiking and cultural tourism does not align with these objectives.",
+      "fr": "L'opportunité cible explicitement le financement d'équipements d'investigation techniques et opérationnels, de formations spécialisées et d'activités de recherche pour protéger les intérêts financiers de l'UE. Les activités de l'organisation, axées sur la randonnée patrimoniale et le tourisme culturel, ne correspondent pas à ces objectifs."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that support cultural, heritage, or tourism projects.",
+      "fr": "Examiner d'autres opportunités de financement qui soutiennent des projets culturels, patrimoniaux ou touristiques."
+    }
+  }
+}

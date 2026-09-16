@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citation": [],
+    "citations": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria related to the applicant's legal structure, sector, or geographic location.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité concernant la structure juridique, le secteur ou la localisation géographique du demandeur."
+      "en": "The extracted text does not specify which types of organisations are eligible to apply. The eligibility section refers to 'epo-procurement-document' and 'zie bestek' (see specifications), which are not provided here. Without access to the full tender specifications, it is impossible to determine eligibility criteria.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles. La section éligibilité renvoie à 'epo-procurement-document' et 'zie bestek' (voir cahier des charges), qui ne sont pas fournis ici. Sans accès aux spécifications complètes de l'appel d'offres, il est impossible de déterminer les critères d'éligibilité."
     },
     "nextAction": {
-      "en": "Check the full tender notice at the provided link to find the section on eligibility requirements.",
-      "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni pour trouver la section sur les exigences d'éligibilité."
+      "en": "Download and review the full tender specifications (bestek) from the provided URL: https://cloud.3p.eu/Downloads/1/4784/07/2026 to confirm eligibility criteria.",
+      "fr": "Télécharger et examiner le cahier des charges complet (bestek) depuis l'URL fournie : https://cloud.3p.eu/Downloads/1/4784/07/2026 pour confirmer les critères d'éligibilité."
     }
   }
 }

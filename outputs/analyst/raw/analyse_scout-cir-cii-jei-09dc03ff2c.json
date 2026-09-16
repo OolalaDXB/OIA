@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "ELIGIBLE",
+    "citation": "Entreprises engageant des activités de recherche et développement (R&D)",
+    "reason": {
+      "en": "The organisation BAWABA operates in sectors such as AI, data, and software, which typically involve research and development (R&D) activities. The opportunity explicitly states that enterprises engaging in R&D activities are eligible.",
+      "fr": "L'organisation BAWABA opère dans des secteurs tels que l'IA, les données et les logiciels, qui impliquent généralement des activités de recherche et développement (R&D). L'opportunité indique explicitement que les entreprises menant des activités de R&D sont éligibles."
+    },
+    "nextAction": {
+      "en": "Confirm with BAWABA that their legal entities are registered in France and that their activities qualify as R&D under the French tax administration's criteria.",
+      "fr": "Confirmer avec BAWABA que leurs entités légales sont immatriculées en France et que leurs activités relèvent bien de la R&D selon les critères de l'administration fiscale française."
+    }
+  }
+}

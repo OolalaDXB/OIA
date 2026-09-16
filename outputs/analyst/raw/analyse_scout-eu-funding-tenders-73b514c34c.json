@@ -1,0 +1,16 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citations": [
+      "scope: Impact of access to nature-positive environments in promoting social cohesion and reducing inequalities in urban and peri-urban settings"
+    ],
+    "reason": {
+      "en": "The opportunity focuses on research and impact related to nature-positive environments, social cohesion, and inequalities in urban/peri-urban settings. BAWABA's activities in AI, data, cybersecurity, and software for regulated industries do not align with the thematic scope of this grant.",
+      "fr": "L'opportunité se concentre sur la recherche et l'impact liés aux environnements positifs pour la nature, la cohésion sociale et les inégalités dans les zones urbaines et périurbaines. Les activités de BAWABA dans les domaines de l'IA, des données, de la cybersécurité et des logiciels pour les industries réglementées ne correspondent pas au champ thématique de cette subvention."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that align with BAWABA's focus on AI, digital infrastructure, or cybersecurity.",
+      "fr": "Examiner d'autres opportunités de financement qui correspondent à l'expertise de BAWABA en IA, infrastructure numérique ou cybersécurité."
+    }
+  }
+}

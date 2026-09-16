@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations may apply to Horizon Europe. It only describes the programme's scope and duration.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à Horizon Europe. Il décrit uniquement le champ d'application et la durée du programme."
+    },
+    "nextAction": {
+      "en": "Check the official Horizon Europe call for proposals to identify eligible applicants.",
+      "fr": "Consulter l'appel à propositions officiel de Horizon Europe pour identifier les candidats éligibles."
+    }
+  }
+}

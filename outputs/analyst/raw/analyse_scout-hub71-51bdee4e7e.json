@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Startups addressing challenges across early childhood development",
+    "reason": {
+      "en": "The organisation's focus on 'Sovereign AI control plane for regulated industries' does not align with the specified scope of addressing challenges in early childhood development.",
+      "fr": "L'organisation se concentre sur une 'plateforme de contrôle d'IA souveraine pour les industries réglementées', ce qui ne correspond pas au champ d'application spécifié concernant les défis du développement de la petite enfance."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that align with the organisation's focus on AI, data, and cybersecurity for regulated industries.",
+      "fr": "Examiner d'autres opportunités de financement qui correspondent à la spécialisation de l'organisation en IA, données et cybersécurité pour les industries réglementées."
+    }
+  }
+}

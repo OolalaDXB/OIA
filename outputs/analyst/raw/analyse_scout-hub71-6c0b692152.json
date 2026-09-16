@@ -1,0 +1,16 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citations": [
+      "eligibility: Web3, blockchain, and cryptocurrency startups"
+    ],
+    "reason": {
+      "en": "The organisation's core activity (Sovereign AI control plane for regulated industries) does not align with the specified sectors of Web3, blockchain, or cryptocurrency startups.",
+      "fr": "L'activité principale de l'organisation (plan de contrôle d'IA souveraine pour les industries réglementées) ne correspond pas aux secteurs spécifiés des startups Web3, blockchain ou cryptomonnaie."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that explicitly target AI, data, or cybersecurity startups.",
+      "fr": "Examiner d'autres opportunités de financement qui ciblent explicitement les startups en IA, données ou cybersécurité."
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "scope: Student and family engagement for developing a culture of democratic/civic participation",
+    "reason": {
+      "en": "The opportunity explicitly targets 'Student and family engagement for developing a culture of democratic/civic participation.' BAWABA's activities in AI, data, cybersecurity, and software for regulated industries do not align with this scope.",
+      "fr": "L'opportunité cible explicitement 'l'engagement des étudiants et des familles pour développer une culture de participation démocratique/civique.' Les activités de BAWABA dans l'IA, les données, la cybersécurité et les logiciels pour les industries réglementées ne correspondent pas à ce champ d'application."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that focus on AI, digital transformation, or cybersecurity.",
+      "fr": "Examiner d'autres opportunités de financement axées sur l'IA, la transformation numérique ou la cybersécurité."
+    }
+  }
+}

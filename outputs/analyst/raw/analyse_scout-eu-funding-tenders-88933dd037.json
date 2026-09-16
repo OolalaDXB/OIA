@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations are eligible to apply for this grant. There is no mention of legal forms, sectors, or geographic criteria that would confirm or exclude BAWABA.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles pour cette subvention. Aucune mention des formes juridiques, des secteurs ou des critères géographiques qui confirmeraient ou excluraient BAWABA."
+    },
+    "nextAction": {
+      "en": "Check the full call document or the European Commission’s official page for this grant to find the eligibility criteria section.",
+      "fr": "Consulter le document complet de l'appel ou la page officielle de la Commission européenne pour cette subvention afin de trouver la section sur les critères d'éligibilité."
+    }
+  }
+}

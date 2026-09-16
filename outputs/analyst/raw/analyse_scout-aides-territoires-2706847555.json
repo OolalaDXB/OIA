@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Le programme Justice 2021-2027 prévoit un financement pour soutenir la coopération judiciaire en matière civile et pénale et l’accès effectif des citoyens et des entreprises à la justice.",
+    "reason": {
+      "en": "The funding opportunity explicitly targets judicial cooperation in civil and criminal matters and effective access to justice for citizens and businesses. The organisation's activities in heritage, culture, and tourism do not align with these objectives.",
+      "fr": "L'opportunité de financement cible explicitement la coopération judiciaire en matière civile et pénale et l'accès effectif des citoyens et des entreprises à la justice. Les activités de l'organisation dans les domaines du patrimoine, de la culture et du tourisme ne correspondent pas à ces objectifs."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that align with the organisation's focus on heritage, culture, or tourism.",
+      "fr": "Consulter d'autres opportunités de financement qui correspondent aux domaines d'activité de l'organisation, à savoir le patrimoine, la culture ou le tourisme."
+    }
+  }
+}

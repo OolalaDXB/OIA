@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The opportunity text does not specify which types of organisations (e.g., companies, public entities, consortia) are eligible to apply as individual bidders. It only mentions requirements for economic operator groups ('groupement d’opérateurs économiques') and their legal form.",
+      "fr": "Le texte de l’opportunité ne précise pas quels types d’organisations (par exemple, entreprises, entités publiques, consortiums) sont éligibles pour postuler en tant que soumissionnaires individuels. Il mentionne uniquement les exigences pour les groupements d’opérateurs économiques et leur forme juridique."
+    },
+    "nextAction": {
+      "en": "Check the tender documents (cahier des charges) on the SNCF procurement portal to confirm whether individual companies like BAWABA are explicitly allowed to apply.",
+      "fr": "Consulter les documents de la consultation (cahier des charges) sur le portail d’achat de la SNCF pour confirmer si des entreprises individuelles comme BAWABA sont explicitement autorisées à postuler."
+    }
+  }
+}

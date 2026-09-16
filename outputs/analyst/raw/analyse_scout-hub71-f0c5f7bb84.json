@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "eligibility: Sustainability startups",
+    "reason": {
+      "en": "The opportunity explicitly restricts applicants to 'Sustainability startups,' and BAWABA's focus on AI, data, cybersecurity, and software for regulated industries does not align with sustainability or decarbonization technologies as described in the scope.",
+      "fr": "L'opportunité restreint explicitement les candidats aux 'startups de durabilité', et l'activité de BAWABA, centrée sur l'IA, les données, la cybersécurité et les logiciels pour les industries réglementées, ne correspond pas aux technologies de durabilité ou de décarbonisation décrites dans le champ d'application."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that specifically target AI, data, or cybersecurity startups.",
+      "fr": "Examiner d'autres opportunités de financement ciblant spécifiquement les startups en IA, données ou cybersécurité."
+    }
+  }
+}

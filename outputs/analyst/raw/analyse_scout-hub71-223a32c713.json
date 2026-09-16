@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "ELIGIBLE",
+    "citation": "eligibility: Startups at the forefront of AI innovation",
+    "reason": {
+      "en": "BAWABA operates in AI and is described as providing a sovereign AI control plane, which aligns with being at the forefront of AI innovation as specified in the eligibility criteria.",
+      "fr": "BAWABA opère dans le domaine de l'IA et est décrit comme fournissant un plan de contrôle d'IA souverain, ce qui correspond à être à la pointe de l'innovation en IA tel que spécifié dans les critères d'éligibilité."
+    },
+    "nextAction": {
+      "en": "Submit the application using the legal entity registered in the UAE or Abu Dhabi if available, or confirm which legal entity will be used for the application.",
+      "fr": "Soumettre la candidature en utilisant l'entité légale enregistrée aux Émirats arabes unis ou à Abu Dhabi si disponible, ou confirmer quelle entité légale sera utilisée pour la candidature."
+    }
+  }
+}

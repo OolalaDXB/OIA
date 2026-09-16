@@ -1,0 +1,12 @@
+{"EligibilityVerdict": {
+  "verdict": "NOT_ELIGIBLE",
+  "citation": "Les QPV sont entités définies par la loi de 2014, identifiant zones urbaines pauvres nécessitant des interventions publiques.",
+  "reason": {
+    "en": "The opportunity targets specific urban zones (QPV) defined by law for public intervention. The organisation operates in Bretagne and does not mention any activity or presence in these designated urban priority zones.",
+    "fr": "L'opportunité cible des zones urbaines spécifiques (QPV) définies par la loi pour des interventions publiques. L'organisation opère en Bretagne et ne mentionne aucune activité ou présence dans ces quartiers prioritaires urbains désignés."
+  },
+  "nextAction": {
+    "en": "Verify if the organisation has any projects or activities located within a QPV zone as defined by the 2024 cartography.",
+    "fr": "Vérifier si l'organisation a des projets ou activités situés dans un quartier prioritaire de la politique de la ville (QPV) selon la cartographie 2024."
+  }
+}}

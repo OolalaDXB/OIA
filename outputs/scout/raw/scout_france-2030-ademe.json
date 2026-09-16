@@ -2,7 +2,7 @@
   "ScoutResult": {
     "calls": [
       {
-        "title": "Catalogue des aides financières de l'ADEME",
+        "name": "Catalogue des aides financières de l'ADEME",
         "type": "Subventions, appels à projet, diagnostics et études",
         "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres/catalogue",
         "amount": "",
@@ -11,7 +11,7 @@
         "quote": "Trouvez les aides financières adaptées à votre entreprise : subventions, appels à projet, diagnostics et études proposés par l'ADEME et les autres acteurs publics comme les CCI, les CMA, les Régions…"
       },
       {
-        "title": "Tester mon éligibilité aux aides financières",
+        "name": "Tester mon éligibilité aux aides financières",
         "type": "Outil d'éligibilité",
         "sourceUrl": "https://mission-transition-ecologique.beta.gouv.fr/?profil-entreprise=oui&utm_campaign=agir-2",
         "amount": "",
@@ -20,7 +20,7 @@
         "quote": "Découvrez vos aides éligibles parmi tous les financeurs"
       },
       {
-        "title": "France 2030 (Aides financières)",
+        "name": "France 2030 (Aides financières)",
         "type": "Subventions, financements pour l'innovation et l'industrialisation",
         "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres/catalogue?target%5BEntreprise%5D=Entreprise&funding%5BFrance%202030%5D=France%202030",
         "amount": "",
@@ -29,7 +29,7 @@
         "quote": "L’ADEME a été désignée par l’État comme l’un des opérateurs du plan d’investissement France 2030. L’Agence a la charge d’expertiser et de financer les innovations et les industrialisations."
       },
       {
-        "title": "Appels à projets et subventions recherche, développement et innovation",
+        "name": "Appels à projets et subventions recherche, développement et innovation",
         "type": "Appels à projets, subventions",
         "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres/catalogue?target%5BEntreprise%5D=Entreprise&type%5BRecherche+et+Innovation%5D=Recherche+et+Innovation",
         "amount": "",
@@ -38,7 +38,7 @@
         "quote": "L’ADEME propose un accompagnement concret de la phase de recherche, au développement commercial, en passant par les tests et expérimentations en s'appuyant sur le budget de l’Agence et sur le programme France 2030."
       },
       {
-        "title": "Fonds Chaleur",
+        "name": "Fonds Chaleur",
         "type": "Subvention",
         "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
         "amount": "",
@@ -47,34 +47,34 @@
         "quote": "Retrouvez des aides financières pour vos projets de transition écologique via plusieurs leviers de financement comme les Fonds Chaleur, Fonds Économie Circulaire, Fonds Air Bois ou encore France 2030."
       },
       {
-        "title": "Fonds Économie Circulaire",
+        "name": "Fonds Économie Circulaire",
         "type": "Subvention",
-        "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financières#filter-anchor",
+        "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
         "amount": "",
         "deadline": "",
         "eligibility": "Entreprises, associations, acteurs professionnels",
         "quote": "Retrouvez des aides financières pour vos projets de transition écologique via plusieurs leviers de financement comme les Fonds Chaleur, Fonds Économie Circulaire, Fonds Air Bois ou encore France 2030."
       },
       {
-        "title": "Fonds Air Bois",
+        "name": "Fonds Air Bois",
         "type": "Subvention",
-        "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financières#filter-anchor",
+        "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
         "amount": "",
         "deadline": "",
         "eligibility": "Entreprises, associations, acteurs professionnels",
         "quote": "Retrouvez des aides financières pour vos projets de transition écologique via plusieurs leviers de financement comme les Fonds Chaleur, Fonds Économie Circulaire, Fonds Air Bois ou encore France 2030."
       },
       {
-        "title": "Subventions ADEME (forfaitaires ou taux d’aide)",
+        "name": "Subventions ADEME (forfaitaires ou taux d’aide)",
         "type": "Subventions",
         "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
-        "amount": "Forfaitaires ou calculées selon un taux d’aide, avec plafonnement lié à l’analyse économique du projet",
+        "amount": "",
         "deadline": "",
-        "eligibility": "Entreprises, associations, acteurs professionnels (projets non commencés)",
+        "eligibility": "Entreprises, associations, acteurs de la recherche (projets non commencés)",
         "quote": "Les subventions de l’ADEME peuvent être forfaitaires ou calculées selon un taux d’aide, avec un plafonnement lié à l’analyse économique de votre projet."
       },
       {
-        "title": "Appels à projets nationaux ou régionaux",
+        "name": "Appels à projets nationaux ou régionaux",
         "type": "Appels à projets",
         "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
         "amount": "",
@@ -83,7 +83,7 @@
         "quote": "L’Agence peut proposer une aide financière dans le cadre d'appels à projets nationaux ou régionaux avec des cahiers des charges plus spécifiques."
       },
       {
-        "title": "Aide gré à gré",
+        "name": "Aide gré à gré",
         "type": "Subvention",
         "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
         "amount": "",
@@ -92,7 +92,7 @@
         "quote": "D'autres subventions s’inscrivent dans le cadre d’une « Aide gré à gré », c’est-à-dire en appliquant les dispositifs classiques d’aide financière."
       },
       {
-        "title": "ADEME Investissement",
+        "name": "ADEME Investissement",
         "type": "Financement en fonds propres",
         "sourceUrl": "https://www.ademe-investissement.fr/",
         "amount": "",
@@ -101,6 +101,6 @@
         "quote": "ADEME Investissement intervient au stade du scale-up ou de la première commerciale en partageant le risque avec les financeurs classiques via un apport en fonds propres."
       }
     ],
-    "note": ""
+    "note": "All listed opportunities are explicitly mentioned on the page or linked from it. Regional links are not listed as separate opportunities since they redirect to the same catalogue with regional filters."
   }
 }

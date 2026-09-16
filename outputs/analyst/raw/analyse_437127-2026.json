@@ -1,0 +1,18 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": [
+      "Main classification (cpv): 85141000 Services provided by medical personnel",
+      "Additional classification (cpv): 79417000 Safety consultancy services",
+      "Arbeitsmedizinische und sicherheitstechnische Betreuung 2027-2030"
+    ],
+    "reason": {
+      "en": "The opportunity explicitly requires services provided by medical personnel and safety consultancy services. BAWABA's activities in AI, data, digital, cybersecurity, and software do not align with the required medical and safety consultancy services.",
+      "fr": "L'opportunité exige explicitement des services fournis par du personnel médical et des services de conseil en sécurité. Les activités de BAWABA dans les domaines de l'IA, des données, du numérique, de la cybersécurité et des logiciels ne correspondent pas aux services médicaux et de conseil en sécurité requis."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that align with BAWABA’s core sectors of AI, data, digital, cybersecurity, or software.",
+      "fr": "Examiner d'autres opportunités de financement qui correspondent aux secteurs principaux de BAWABA, à savoir l'IA, les données, le numérique, la cybersécurité ou les logiciels."
+    }
+  }
+}

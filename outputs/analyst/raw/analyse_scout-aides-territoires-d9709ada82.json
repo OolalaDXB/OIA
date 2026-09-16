@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations may apply for the FSE+ funding. There is no mention of eligibility criteria for applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent demander le financement FSE+. Aucun critère d'éligibilité des demandeurs n'est mentionné."
+    },
+    "nextAction": {
+      "en": "Check the official FSE+ call for proposals or guidelines to determine which legal entities are eligible to apply.",
+      "fr": "Consulter l'appel à projets officiel ou les directives du FSE+ pour déterminer quelles entités juridiques sont éligibles."
+    }
+  }
+}

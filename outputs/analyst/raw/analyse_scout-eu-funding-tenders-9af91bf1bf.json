@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Industrial processes and equipment for innovative, reliable and scalable tandem technologies (EUPI-PV Partnership)",
+    "reason": {
+      "en": "The opportunity explicitly targets 'Industrial processes and equipment for innovative, reliable and scalable tandem technologies,' which pertains to photovoltaic (PV) or related hardware/manufacturing sectors. BAWABA operates in AI, data, digital, cybersecurity, and software sectors, which do not align with the specified scope of the funding opportunity.",
+      "fr": "L'opportunité cible explicitement les 'procédés industriels et équipements pour des technologies tandem innovantes, fiables et évolutives,' ce qui concerne les secteurs photovoltaïques (PV) ou liés au matériel/à la fabrication. BAWABA opère dans les secteurs de l'IA, des données, du numérique, de la cybersécurité et des logiciels, ce qui ne correspond pas au périmètre spécifié de l'opportunité de financement."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that explicitly include AI, digital, or software sectors in their scope.",
+      "fr": "Examiner d'autres opportunités de financement qui incluent explicitement les secteurs de l'IA, du numérique ou des logiciels dans leur périmètre."
+    }
+  }
+}

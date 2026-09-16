@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "le programme accompagnera les acteurs de la montagne (collectivités, acteurs socio-économiques)",
+    "reason": {
+      "en": "The opportunity explicitly targets actors in mountain regions, while 'Les Vieilles Pierres' operates in Bretagne, which is not a mountain area.",
+      "fr": "L'opportunité cible explicitement les acteurs des zones de montagne, alors que 'Les Vieilles Pierres' opère en Bretagne, une région qui n'est pas montagneuse."
+    },
+    "nextAction": {
+      "en": "Confirm with the issuer whether heritage associations outside mountain regions may exceptionally apply.",
+      "fr": "Vérifier auprès de l'émetteur si les associations patrimoniales en dehors des zones de montagne peuvent exceptionnellement postuler."
+    }
+  }
+}

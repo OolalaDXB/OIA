@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citations": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of legal forms, sectors, or other criteria that would confirm or exclude BAWABA.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles. Il n'y a aucune mention des formes juridiques, des secteurs ou d'autres critères qui confirmeraient ou excluraient BAWABA."
+    },
+    "nextAction": {
+      "en": "Contact the issuer (European Commission) to request the full call text or eligibility guidelines.",
+      "fr": "Contacter l'émetteur (Commission européenne) pour demander le texte complet de l'appel ou les directives d'éligibilité."
+    }
+  }
+}

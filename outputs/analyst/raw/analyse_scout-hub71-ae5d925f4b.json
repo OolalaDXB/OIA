@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "ELIGIBLE",
+    "citation": "eligibility: International startups",
+    "reason": {
+      "en": "The opportunity explicitly states that 'International startups' are eligible. BAWABA operates internationally (EU, FR, AE, GCC, MENA) and fits the definition of a startup in the tech sector.",
+      "fr": "L'opportunité indique explicitement que les 'startups internationales' sont éligibles. BAWABA opère à l'international (UE, FR, AE, CCG, MENA) et correspond à la définition d'une startup dans le secteur technologique."
+    },
+    "nextAction": {
+      "en": "Submit the application on behalf of BAWABA, ensuring all required documents for an international startup are included.",
+      "fr": "Soumettre la candidature au nom de BAWABA, en veillant à inclure tous les documents requis pour une startup internationale."
+    }
+  }
+}

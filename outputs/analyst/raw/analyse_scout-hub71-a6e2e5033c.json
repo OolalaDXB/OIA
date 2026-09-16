@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "eligibility: Emirati founders",
+    "reason": {
+      "en": "The opportunity explicitly restricts eligibility to 'Emirati founders'. The organisation's dossier does not confirm that BAWABA is founded or led by Emirati individuals.",
+      "fr": "L'opportunité restreint explicitement l'éligibilité aux 'fondateurs émiratis'. Le dossier de l'organisation ne confirme pas que BAWABA est fondée ou dirigée par des individus émiratis."
+    },
+    "nextAction": {
+      "en": "Verify if BAWABA has Emirati co-founders or majority Emirati ownership. If not, do not proceed with the application.",
+      "fr": "Vérifier si BAWABA compte des cofondateurs émiratis ou une propriété majoritaire émiratie. Si ce n'est pas le cas, ne pas poursuivre la candidature."
+    }
+  }
+}

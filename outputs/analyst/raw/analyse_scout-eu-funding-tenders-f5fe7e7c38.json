@@ -1,0 +1,16 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": [
+      "scope: Enhancing Mobility for All: affordable, reliable, and accessible multimodal transport for inclusive rural and urban connectivity – Societal Readiness pilot"
+    ],
+    "reason": {
+      "en": "The opportunity explicitly targets projects focused on affordable, reliable, and accessible multimodal transport for inclusive rural and urban connectivity. BAWABA's work in AI, data, cybersecurity, and software for regulated industries does not align with the transport-focused scope of this grant.",
+      "fr": "L'opportunité cible explicitement des projets axés sur la mobilité multimodale abordable, fiable et accessible pour une connectivité inclusive en zones rurales et urbaines. Les activités de BAWABA dans l'IA, les données, la cybersécurité et les logiciels pour les industries réglementées ne correspondent pas à l'objectif transport de cette subvention."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that align with BAWABA's focus on AI, data, or digital infrastructure.",
+      "fr": "Examiner d'autres opportunités de financement qui correspondent aux domaines d'expertise de BAWABA, tels que l'IA, les données ou les infrastructures numériques."
+    }
+  }
+}

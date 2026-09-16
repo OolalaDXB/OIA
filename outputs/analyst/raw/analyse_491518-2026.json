@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The opportunity text does not specify which types of organisations may apply. There is no mention of eligibility criteria related to the applicant's legal form, sector, or geographic location.",
-      "fr": "Le texte de l'opportunité ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, le secteur ou la localisation géographique du demandeur."
+      "en": "The extracted text does not specify which types of organisations are eligible to apply for this tender. There is no mention of eligibility criteria related to the organisation's sector, legal structure, or geographic location.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles pour cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité liés au secteur, à la structure juridique ou à la localisation géographique de l'organisation."
     },
     "nextAction": {
-      "en": "Contact BEW Berliner Energie und Wärme GmbH to ask for the full tender documents that describe who may apply.",
-      "fr": "Contacter BEW Berliner Energie und Wärme GmbH pour demander les documents complets de l'appel d'offres qui décrivent qui peut postuler."
+      "en": "Check the full tender notice at the provided link to identify the eligibility criteria for applicants.",
+      "fr": "Consulter l'avis complet de l'appel d'offres sur le lien fourni pour identifier les critères d'éligibilité des candidats."
     }
   }
 }

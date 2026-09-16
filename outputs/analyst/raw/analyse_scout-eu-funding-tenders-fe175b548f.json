@@ -1,0 +1,16 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": [
+      "Demonstration of hydropower technologies for efficient and forward-looking refurbishment of existing hydropower plants"
+    ],
+    "reason": {
+      "en": "The opportunity explicitly targets hydropower technologies and refurbishment of existing hydropower plants. BAWABA operates in AI, data, digital, cybersecurity, and software sectors, with no mention of hydropower or related energy infrastructure.",
+      "fr": "L'opportunité cible explicitement les technologies hydroélectriques et la rénovation des centrales hydroélectriques existantes. BAWABA opère dans les secteurs de l'IA, des données, du numérique, de la cybersécurité et des logiciels, sans mention de l'hydroélectricité ou des infrastructures énergétiques associées."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities aligned with BAWABA’s sectors (AI, data, digital, cybersecurity).",
+      "fr": "Examiner d'autres opportunités de financement alignées sur les secteurs de BAWABA (IA, données, numérique, cybersécurité)."
+    }
+  }
+}

@@ -1,14 +1,16 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citation": "Le programme pour la compétitivité des entreprises et des petites et moyennes entreprises (2014-2020), vise à promouvoir la croissance et à renforcer la compétitivité et la durabilité des entreprises dans l'Union européenne.",
+    "citations": [
+      "Le programme pour la compétitivité des entreprises et des petites et moyennes entreprises (2014-2020), vise à promouvoir la croissance et à renforcer la compétitivité et la durabilité des entreprises dans l'Union européenne."
+    ],
     "reason": {
-      "en": "The opportunity explicitly targets 'entreprises' (businesses) and 'petites et moyennes entreprises' (SMEs). 'Les Vieilles Pierres' is an association, not a business or SME.",
-      "fr": "L'opportunité cible explicitement les 'entreprises' et les 'petites et moyennes entreprises' (PME). 'Les Vieilles Pierres' est une association, pas une entreprise ou une PME."
+      "en": "The opportunity explicitly targets 'entreprises' (businesses) and 'petites et moyennes entreprises' (SMEs), which excludes non-profit associations like Les Vieilles Pierres.",
+      "fr": "L'opportunité cible explicitement les 'entreprises' et les 'petites et moyennes entreprises' (PME), ce qui exclut les associations à but non lucratif comme Les Vieilles Pierres."
     },
     "nextAction": {
-      "en": "Confirm with the issuer whether non-profit associations are eligible under this programme.",
-      "fr": "Confirmer auprès de l'émetteur si les associations à but non lucratif sont éligibles dans le cadre de ce programme."
+      "en": "Review other funding opportunities specifically designed for non-profit associations or cultural heritage projects.",
+      "fr": "Consulter d'autres opportunités de financement spécifiquement destinées aux associations à but non lucratif ou aux projets liés au patrimoine culturel."
     }
   }
 }

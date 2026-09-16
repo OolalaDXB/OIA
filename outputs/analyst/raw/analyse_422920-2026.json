@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify who may apply for this tender. There is no mention of eligible applicants, legal forms, or geographic restrictions that would confirm or exclude BAWABA.",
-      "fr": "Le texte extrait ne précise pas qui peut postuler à cet appel d'offres. Il n'y a aucune mention des candidats éligibles, des formes juridiques ou des restrictions géographiques qui confirmeraient ou excluraient BAWABA."
+      "en": "The extracted text does not specify eligibility criteria for applicants. There is no mention of who may or may not apply, such as geographic restrictions, legal entity types, or other prerequisites.",
+      "fr": "Le texte extrait ne précise pas les critères d'éligibilité pour les candidats. Il n'est pas mentionné qui peut ou ne peut pas postuler, comme les restrictions géographiques, les types d'entités légales ou autres prérequis."
     },
     "nextAction": {
-      "en": "Check the full tender notice at the provided link (https://ted.europa.eu/en/notice/422920-2026/xml) to identify the eligibility criteria for applicants.",
-      "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni (https://ted.europa.eu/en/notice/422920-2026/xml) pour identifier les critères d'éligibilité des candidats."
+      "en": "Check the full tender documents at the provided URL to identify the eligibility criteria for applicants.",
+      "fr": "Consulter les documents complets de l'appel d'offres à l'URL fournie pour identifier les critères d'éligibilité des candidats."
     }
   }
 }

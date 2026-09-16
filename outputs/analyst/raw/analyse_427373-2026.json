@@ -1,14 +1,18 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NEEDS_INFO",
-    "citations": [],
+    "verdict": "LIKELY",
+    "citation": [
+      "1. Eigenerklärung, dass eine Eintragung im Berufs- oder Handelsregister oder ein anderer, vergleichbarer Nachweis für die erlaubte Berufsausübung vorliegt.",
+      "2. Auf Grundlage des (Konzern-) Jahresabschlusses des letzten abgeschlossenen Geschäftsjahres (2025) des Unternehmens sowie ggf. (Konzern-) Jahresabschlusses des letzten Geschäftsjahres des Mutterkonzerns (wenn der bewerbende Unternehmensteil eine Tochtergesellschaft darstellt) erfolgt ein Rating der Anbieter gem. dem offiziellen DSGV- oder RSU-Corporate-Ratingverfahren durch den Kreditbereich der IB.SH. Die Ratingnoten werden anschließend kategorisiert. Anbieter mit einer DSGV-/ RSU Corporate-Ratingnote von 12 oder schlechter werden im Verfahren nicht weiter berücksichtigt = Ausschluss von Verfahren.",
+      "4. Fachliche Qualifikation des Bieters (Know-how und Kundenreferenzen). Beschreibung des Leistungsspektrums, Know-How und Erfahrung des Unternehmens im Bereich IT-Infrastruktur und Endnutzer. Beschreibung der Geschäftsfelder, in denen es tätig ist; Darstellung von einschlägigen Referenzen (wünschenswert im Bereich Banken), die die umfassende Erfahrung des Bewerbers bei der ausgeschriebenen Tätigkeiten belegen (Kontaktdaten von Ansprechpartnern zu den benannten Referenzen sind mindestens auf Nachfrage zu benennen)."
+    ],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria such as legal form, location, or sector.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Aucun critère d'éligibilité tel que la forme juridique, la localisation ou le secteur n'est mentionné."
+      "en": "The opportunity requires registration in a professional or trade register, a corporate rating based on financial statements (which may not yet be available or assessed for BAWABA), and demonstrated expertise in IT infrastructure and end-user services with relevant references. The document does not explicitly exclude BAWABA, but the rating criterion (DSGV/RSU Corporate-Rating) is unsettled without further financial data.",
+      "fr": "L'opportunité exige une inscription au registre professionnel ou commercial, une notation financière basée sur les états financiers (qui peut ne pas être encore disponible ou évaluée pour BAWABA), et une expertise démontrée dans les services d'infrastructure informatique et d'utilisateur final avec des références pertinentes. Le document n'exclut pas explicitement BAWABA, mais le critère de notation (DSGV/RSU Corporate-Rating) n'est pas tranché sans données financières supplémentaires."
     },
     "nextAction": {
-      "en": "Request the full tender documentation from Investitionsbank Schleswig-Holstein to confirm eligibility requirements.",
-      "fr": "Demander la documentation complète de l'appel d'offres auprès de l'Investitionsbank Schleswig-Holstein pour confirmer les critères d'éligibilité."
+      "en": "Provide the latest audited financial statements (2025) for BAWABA or its parent company to assess eligibility for the DSGV/RSU Corporate-Rating.",
+      "fr": "Fournir les derniers états financiers audités (2025) de BAWABA ou de sa société mère pour évaluer l'éligibilité à la notation DSGV/RSU Corporate-Rating."
     }
   }
 }

@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations may apply for this grant. There is no mention of eligibility criteria related to the applicant's legal form, sector, or operational scope.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette subvention. Il n'y a aucune mention des critères d'éligibilité relatifs à la forme juridique, au secteur ou au champ d'activité du demandeur."
+    },
+    "nextAction": {
+      "en": "Contact the European Commission or consult the full call for proposals document to obtain the eligibility criteria for applicants.",
+      "fr": "Contacter la Commission européenne ou consulter l'intégralité de l'appel à propositions pour obtenir les critères d'éligibilité des demandeurs."
+    }
+  }
+}

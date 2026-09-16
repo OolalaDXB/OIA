@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Interreg France-Suisse est un programme de l’Union européenne cofinancé par le Fonds européen de développement régional (FEDER), la Confédération suisse et les cantons, pour soutenir la Coopération territoriale européenne (CTE) qui s’inscrit dans le cadre de la politique de cohésion européenne.",
+    "reason": {
+      "en": "The opportunity explicitly targets cross-border cooperation between France and Switzerland. The organisation operates in Bretagne (France) and the EU but does not mention any activity or presence in Switzerland, which is a requirement for this programme.",
+      "fr": "L'opportunité cible explicitement la coopération transfrontalière entre la France et la Suisse. L'organisation opère en Bretagne (France) et dans l'UE mais ne mentionne aucune activité ou présence en Suisse, ce qui est une condition requise pour ce programme."
+    },
+    "nextAction": {
+      "en": "Verify if the organisation has any existing partnerships or projects involving Swiss entities. If not, consider identifying potential Swiss partners to meet the cross-border requirement.",
+      "fr": "Vérifier si l'organisation a des partenariats ou projets existants impliquant des entités suisses. Si ce n'est pas le cas, envisager d'identifier des partenaires suisses potentiels pour répondre à l'exigence transfrontalière."
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": [
+      "scope: Integrating circularity in LCA-based modelling frameworks for renovation of buildings (Built4People Partnership)"
+    ],
+    "reason": {
+      "en": "The funding opportunity explicitly targets 'Integrating circularity in LCA-based modelling frameworks for renovation of buildings.' BAWABA's activities in AI, data, digital, cybersecurity, and software for regulated industries do not align with the specified scope of building renovation or circularity in construction/LCA frameworks.",
+      "fr": "L'opportunité de financement cible explicitement 'l'intégration de la circularité dans les cadres de modélisation basés sur l'ACV pour la rénovation des bâtiments.' Les activités de BAWABA dans les domaines de l'IA, des données, du numérique, de la cybersécurité et des logiciels pour les industries réglementées ne correspondent pas au champ d'application spécifié de la rénovation des bâtiments ou de la circularité dans les cadres de construction/ACV."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that align with BAWABA’s focus on AI, digital infrastructure, or cybersecurity for regulated industries.",
+      "fr": "Examiner d'autres opportunités de financement qui correspondent à l'orientation de BAWABA sur l'IA, les infrastructures numériques ou la cybersécurité pour les industries réglementées."
+    }
+  }
+}
