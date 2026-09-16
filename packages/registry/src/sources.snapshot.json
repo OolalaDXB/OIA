@@ -114,7 +114,7 @@
       "url": "https://www.bpifrance.fr/nos-appels-a-projets-concours",
       "urlVerified": false,
       "lastUrlCheck": "2026-09-16",
-      "status": "DECLARED",
+      "status": "BLOCKED",
       "access": {
         "mode": "MANUAL",
         "auth": "NONE",
@@ -122,7 +122,7 @@
       },
       "connector": "",
       "forProjects": [],
-      "notes": "Grants, repayable advances, guarantees and equity. Covers three of the kinds the taxonomy now distinguishes, which is why they were worth distinguishing."
+      "notes": "Grants, repayable advances, guarantees and equity. Covers three of the kinds the taxonomy now distinguishes, which is why they were worth distinguishing.\nBLOCKED as of the first real scout run: the URL answers an automated browser with CloudFront \"403 ERROR — Request blocked\". Same reasoning as Région Bretagne — the refusal is deliberate and is respected rather than worked around. Use the console's paste-a-link intake."
     },
     {
       "id": "cir-cii-jei",
@@ -289,7 +289,7 @@
       "url": "https://www.bretagne.bzh/aides/",
       "urlVerified": false,
       "lastUrlCheck": "2026-09-16",
-      "status": "DECLARED",
+      "status": "BLOCKED",
       "access": {
         "mode": "MANUAL",
         "auth": "NONE",
@@ -303,7 +303,7 @@
         "thestudio-mt",
         "ludography"
       ],
-      "notes": "Regional aid for Brittany: heritage, culture, tourism, digital, business development. Explicitly requested. No machine access identified — watched by hand, and anything found goes through the manual intake so it lands in the same ledger with the same verification."
+      "notes": "Regional aid for Brittany: heritage, culture, tourism, digital, business development. Explicitly requested. No machine access identified — watched by hand, and anything found goes through the manual intake so it lands in the same ledger with the same verification.\nBLOCKED as of the first real scout run: the site answers an automated browser with a Cloudflare security challenge (\"Vérification de sécurité en cours… protège contre les bots malveillants\"). That is an access control the operator put up deliberately, so OIA does not try to defeat it — defeating it is not a technical problem to solve, it is a decision the site owner already made. The supported path is the console's paste-a-link intake: open the page yourself, paste the URL of a scheme worth having, and it enters the pipeline with the same checks as everything else."
     },
     {
       "id": "ted",

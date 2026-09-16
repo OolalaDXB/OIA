@@ -1,14 +1,16 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { join } from "node:path";
-import { chromium, type Browser } from "playwright";
+import { chromium, type Browser, type Page } from "playwright";
 import { SOURCE_REGISTRY, type SourceEntry } from "@oia/registry";
 import { createMistralProvider, type MistralProvider } from "@oia/providers";
 import {
   ScoutResultSchema,
   SCOUT_SYSTEM,
   anchorViolations,
+  chooseListingLink,
   scoutPrompt,
+  CONSENT_LABELS,
   type ScoutPage,
   type ScoutedCall,
 } from "@oia/intelligence";
@@ -74,13 +76,50 @@ export function scoutableSources(sources: readonly SourceEntry[], only?: string)
   });
 }
 
+/**
+ * Accept the cookie banner, as a person would.
+ *
+ * Three of the French portals returned their consent dialog as the entire page
+ * text: the model was handed a GDPR notice and correctly reported no funding
+ * calls in it. Clicking the button a visitor clicks is not circumventing
+ * anything — it is the only way to see the page that is being offered.
+ */
+async function dismissConsent(page: Page): Promise<string | null> {
+  for (const label of CONSENT_LABELS) {
+    const button = page.getByRole("button", { name: new RegExp(`^\\s*${label}\\s*$`, "i") }).first();
+    try {
+      if (await button.isVisible({ timeout: 700 })) {
+        await button.click({ timeout: 2000 });
+        await page.waitForTimeout(800);
+        return label;
+      }
+    } catch {
+      // Not this one; the next label, or none at all.
+    }
+  }
+  return null;
+}
+
+/** Text and links as they stand right now. */
+async function harvest(page: Page, url: string): Promise<ScoutPage & { linkTexts: { url: string; text: string }[] }> {
+  const text = (await page.evaluate("document.body ? document.body.innerText : ''")) as string;
+  const pairs = (await page.evaluate(
+    "Array.from(document.querySelectorAll('a[href]')).map(function(a){ return { url: String(a.href || ''), text: (a.innerText || a.textContent || '').trim().slice(0,120) }; }).filter(function(p){ return p.url.slice(0,4) === 'http'; })",
+  )) as { url: string; text: string }[];
+  const seen = new Map<string, { url: string; text: string }>();
+  for (const p of pairs) if (!seen.has(p.url)) seen.set(p.url, p);
+  const linkTexts = [...seen.values()];
+  return { url, text, links: linkTexts.map((l) => l.url), linkTexts };
+}
+
 /** Render a page and take its text plus every absolute link on it. */
-async function readPage(browser: Browser, url: string): Promise<ScoutPage> {
+async function readPage(browser: Browser, url: string): Promise<ScoutPage & { trail: string[] }> {
   const context = await browser.newContext({
     userAgent: "OIA-Funding/0.0 (internal research; contact ops)",
     locale: "fr-FR",
   });
   const page = await context.newPage();
+  const trail: string[] = [];
   try {
     await page.goto(url, { waitUntil: "domcontentloaded", timeout: 45_000 });
     // Aid portals are overwhelmingly client-rendered: aides-territoires is a
@@ -89,19 +128,36 @@ async function readPage(browser: Browser, url: string): Promise<ScoutPage> {
     // one slow site hold the run.
     await page.waitForLoadState("networkidle", { timeout: 20_000 }).catch(() => {});
     await page.waitForTimeout(1500);
-    // These two callbacks are serialised and run inside the browser, where the
-    // DOM exists. This app's tsconfig has no "dom" lib and should not gain one
-    // for two lines, so the browser globals are reached dynamically.
-    const text = await page.evaluate(
-      "document.body ? document.body.innerText : ''",
-    ) as string;
-    // `a.href` on an SVG anchor is an SVGAnimatedString, not a string, and
-    // calling indexOf on it threw — losing every link on the page and with it
-    // the entire anchor guard. Coerce first, then test.
-    const links = (await page.evaluate(
-      "Array.from(document.querySelectorAll('a[href]')).map(function(a){ return String(a.href || ''); }).filter(function(h){ return h.slice(0,4) === 'http'; })",
-    )) as string[];
-    return { url, text, links: [...new Set(links)] };
+
+    const consented = await dismissConsent(page);
+    if (consented) trail.push(`accepted the cookie banner ("${consented}")`);
+
+    let harvested = await harvest(page, url);
+
+    // An entry page is usually the site's front door, not its list of calls.
+    // Follow ONE link, chosen from what this page itself offers, and only when
+    // it scores clearly — a wrong page found is worse than nothing found.
+    const listing = chooseListingLink(url, harvested.linkTexts);
+    if (listing) {
+      try {
+        await page.goto(listing.url, { waitUntil: "domcontentloaded", timeout: 45_000 });
+        await page.waitForLoadState("networkidle", { timeout: 20_000 }).catch(() => {});
+        await page.waitForTimeout(1200);
+        await dismissConsent(page);
+        const deeper = await harvest(page, listing.url);
+        // Only keep the move if it actually gained something to read.
+        if (deeper.text.length > harvested.text.length) {
+          trail.push(`followed "${listing.url}" (${listing.why})`);
+          harvested = deeper;
+        } else {
+          trail.push(`tried "${listing.url}" but it had less text — stayed on the entry page`);
+        }
+      } catch (err) {
+        trail.push(`could not follow "${listing.url}": ${err instanceof Error ? err.message.slice(0, 120) : ""}`);
+      }
+    }
+
+    return { url: harvested.url, text: harvested.text, links: harvested.links, trail };
   } finally {
     await context.close();
   }
@@ -192,7 +248,7 @@ async function main() {
         mkdirSync(join(outDir, "pages"), { recursive: true });
         writeFileSync(join(outDir, "pages", `${source.id}.txt`), `${page.url}\n\n${page.text}`, "utf8");
         writeFileSync(join(outDir, "pages", `${source.id}.links.txt`), page.links.join("\n"), "utf8");
-        console.log(`[${source.id}] ${page.text.length} chars, ${page.links.length} link(s)`);
+        console.log(`[${source.id}] ${page.text.length} chars, ${page.links.length} link(s)` + (page.trail.length ? ` · ${page.trail.join(" · ")}` : ""));
 
         if (page.text.trim().length < 200) {
           perSource.push({ id: source.id, status: "EMPTY_PAGE", kept: 0, dropped: 0, note: "the page rendered almost no text", chars: page.text.length, links: page.links.length });
@@ -222,7 +278,7 @@ async function main() {
             facts: factsFor(call, `scout-${source.id}-${contentHash.slice(0, 12)}`, model),
           });
         }
-        perSource.push({ id: source.id, status: "OK", kept: kept.length, dropped: dropped.length, note: data.note, chars: page.text.length, links: page.links.length });
+        perSource.push({ id: source.id, status: "OK", kept: kept.length, dropped: dropped.length, note: [data.note, ...page.trail].filter(Boolean).join(" · "), chars: page.text.length, links: page.links.length });
         console.log(`[${source.id}] ${kept.length} call(s) kept, ${dropped.length} dropped`);
       } catch (err) {
         const message = err instanceof Error ? err.message : String(err);

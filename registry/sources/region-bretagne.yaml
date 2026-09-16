@@ -11,7 +11,7 @@ forProjects: ["lesvieillespierres", "maisons-co", "sillon", "thestudio-mt", "lud
 url: "https://www.bretagne.bzh/aides/"
 urlVerified: false
 lastUrlCheck: "2026-09-16"
-status: DECLARED
+status: BLOCKED
 access:
   mode: MANUAL
   auth: NONE
@@ -20,3 +20,12 @@ notes: >-
   development. Explicitly requested. No machine access identified — watched by
   hand, and anything found goes through the manual intake so it lands in the
   same ledger with the same verification.
+
+  BLOCKED as of the first real scout run: the site answers an automated browser
+  with a Cloudflare security challenge ("Vérification de sécurité en cours…
+  protège contre les bots malveillants"). That is an access control the operator
+  put up deliberately, so OIA does not try to defeat it — defeating it is not a
+  technical problem to solve, it is a decision the site owner already made.
+  The supported path is the console's paste-a-link intake: open the page
+  yourself, paste the URL of a scheme worth having, and it enters the pipeline
+  with the same checks as everything else.

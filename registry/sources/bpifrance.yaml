@@ -10,10 +10,15 @@ geographies: ["FR"]
 url: "https://www.bpifrance.fr/nos-appels-a-projets-concours"
 urlVerified: false
 lastUrlCheck: "2026-09-16"
-status: DECLARED
+status: BLOCKED
 access:
   mode: MANUAL
   auth: NONE
 notes: >-
   Grants, repayable advances, guarantees and equity. Covers three of the kinds
   the taxonomy now distinguishes, which is why they were worth distinguishing.
+
+  BLOCKED as of the first real scout run: the URL answers an automated browser
+  with CloudFront "403 ERROR — Request blocked". Same reasoning as Région
+  Bretagne — the refusal is deliberate and is respected rather than worked
+  around. Use the console's paste-a-link intake.
