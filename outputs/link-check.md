@@ -1,10 +1,10 @@
 # Link check
 
-Checked 128 distinct URL(s).
+Checked 257 distinct URL(s).
 
-- resolving: 119
+- resolving: 246
 - **broken: 2**
-- refused us (not broken): 7
+- refused us (not broken): 9
 - inconclusive: 0
 
 ## Broken — these need fixing
@@ -52,7 +52,7 @@ Checked 128 distinct URL(s).
   - https://flippa.com
 - **source hub71** — now redirects to https://www.hub71.com/
   - https://hub71.com
-- **source ted** — now redirects to https://ted.europa.eu/
+- **source ted** — now redirects to https://ted.europa.eu/en/
   - https://ted.europa.eu
 - **source uae-federal-procurement** — now redirects to https://www.mof.gov.ae/
   - https://www.mof.gov.ae
@@ -62,6 +62,10 @@ Checked 128 distinct URL(s).
   - https://www.ungm.org
 - **opportunity hub71-access-cohort-20** — now redirects to https://www.hub71.com/
   - https://hub71.com/
+- **opportunity scout-adio-daca5e364e** — now redirects to https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry/support-programmes
+  - https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry/support-programmes#access-to-capital
+- **opportunity scout-adio-35574470fd** — now redirects to https://adif.abudhabi/south-korea/
+  - https://adif.abudhabi/south-korea/#register
 - **opportunity scout-aides-territoires-4f0e193d06** — now redirects to https://aides-territoires.beta.gouv.fr/portails/ecoquartier/
   - https://aides-territoires.beta.gouv.fr/programmes/ecoquartier/
 
@@ -76,3 +80,5 @@ These returned 401/403/429. The server declined our request; the page itself may
 - https://api.ted.europa.eu/v3/notices/search — HTTP 405
 - https://www.upwork.com — HTTP 403 — the server refused us, which is not the same as the link being broken
 - https://www.bpifrance.fr/nos-solutions/financement/aides-au-financement-de-linnovation — HTTP 403 — the server refused us, which is not the same as the link being broken
+- https://agirpourlatransition.ademe.fr/entreprises/aides-financieres/catalogue — HTTP 403 — the server refused us, which is not the same as the link being broken
+- https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor — HTTP 403 — the server refused us, which is not the same as the link being broken

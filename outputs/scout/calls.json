@@ -1,6 +1,261 @@
 {
-  "generatedAt": "2026-09-16T18:43:59.325Z",
+  "generatedAt": "2026-09-16T18:58:14.009Z",
   "found": [
+    {
+      "title": "Industries des véhicules intelligents et autonomes (SAVI)",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/savi",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Une nouvelle ère de mobilité intelligente",
+      "sourceId": "adio",
+      "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+      "facts": []
+    },
+    {
+      "title": "Croissance agroalimentaire et abondance en eau (AGWA)",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/agwa",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Cultiver l’avenir de l’alimentation et de l’eau",
+      "sourceId": "adio",
+      "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+      "facts": []
+    },
+    {
+      "title": "Santé, endurance, longévité et médecine (HELM)",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/helm",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Propulser la prochaine ère des sciences de la vie",
+      "sourceId": "adio",
+      "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+      "facts": []
+    },
+    {
+      "title": "Fintech, assurance, numérique et actifs alternatifs (FIDA)",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/fida",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Construire l’avenir de la finance mondiale depuis Abou Dhabi",
+      "sourceId": "adio",
+      "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+      "facts": []
+    },
+    {
+      "title": "Partenariats public-privé",
+      "issuer": "ADIO",
+      "kind": "CONSORTIUM_CALL",
+      "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/public-private-partnerships",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Des contrats de long terme qui réalisent des actifs publics avec des partenaires du secteur privé",
+      "sourceId": "adio",
+      "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+      "facts": []
+    },
+    {
+      "title": "Développement du commerce et de l’industrie",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Stratégie industrielle, facilitation du commerce et promotion des exportations réunies sur une seule plateforme",
+      "sourceId": "adio",
+      "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+      "facts": []
+    },
+    {
+      "title": "Programmes de soutien (Trade & Industry)",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry/support-programmes",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "adio",
+      "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+      "facts": []
+    },
+    {
+      "title": "Accès au capital (Trade & Industry)",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry/support-programmes#access-to-capital",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "adio",
+      "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+      "facts": []
+    },
+    {
+      "title": "Un référent unique vers le gouvernement",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.investwithabudhabi.com/fr",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Un référent unique coordonne licences, terrains, réseaux et autorisations auprès des entités publiques : un seul dossier, un seul fil.",
+      "sourceId": "adio",
+      "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+      "facts": []
+    },
+    {
+      "title": "Un accompagnement pensé pour votre projet",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.investwithabudhabi.com/fr",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Les programmes de soutien s’articulent autour de votre projet, sans catalogue imposé.",
+      "sourceId": "adio",
+      "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+      "facts": []
+    },
+    {
+      "title": "À vos côtés après l’implantation",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.investwithabudhabi.com/fr",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Accueil et suivi sur mesure tout au long du cycle d’investissement, de la première demande jusqu’à l’expansion.",
+      "sourceId": "adio",
+      "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+      "facts": []
+    },
+    {
+      "title": "Abu Dhabi Investment Forum : Séoul",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://adif.abudhabi/south-korea/#register",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "2026-09-16",
+      "quote": "Le Bureau d’investissement d’Abu Dhabi (ADIO) a le plaisir de vous inviter à manifester votre intérêt pour participer à l’Abu Dhabi Investment Forum (ADIF) au JW Marriott Hotel Seoul, en Corée du Sud, un événement exclusif réunissant les plus grands dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi, la capitale des Émirats arabes unis",
+      "sourceId": "adio",
+      "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-adio-0edf7fd115c8",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://adif.abudhabi/south-korea/#register"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "2026-09-16",
+          "originalSourceText": "Le Bureau d’investissement d’Abu Dhabi (ADIO) a le plaisir de vous inviter à manifester votre intérêt pour participer à l’Abu Dhabi Investment Forum (ADIF) au JW Marriott Hotel Seoul, en Corée du Sud, un événement exclusif réunissant les plus grands dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi, la capitale des Émirats arabes unis"
+        }
+      ]
+    },
+    {
+      "title": "Abu Dhabi Investment Forum : Shanghai",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://adif.abudhabi/shanghai/",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Le Bureau d’investissement d’Abu Dhabi (ADIO), en partenariat avec l’Abu Dhabi Global Market (ADGM), a le plaisir de vous inviter à manifester votre intérêt pour participer à l’Abu Dhabi Investment Forum (ADIF), un événement exclusif réunissant les plus grands dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi, la capitale des Émirats arabes unis",
+      "sourceId": "adio",
+      "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+      "facts": []
+    },
+    {
+      "title": "Abu Dhabi Investment Forum : Milan",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://adif.abudhabi/milan/",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Ce forum exclusif, accessible uniquement sur invitation, réunira d’éminents dirigeants, entrepreneurs et décideurs afin d’explorer les opportunités stratégiques de collaboration entre les communautés d’affaires d’Abu Dhabi et d’Italie.",
+      "sourceId": "adio",
+      "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+      "facts": []
+    },
+    {
+      "title": "Abu Dhabi Investment Forum : Mumbai",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://adif.abudhabi/mumbai/",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "L’Abu Dhabi Investment Forum a réuni dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi, la capitale des Émirats arabes unis.",
+      "sourceId": "adio",
+      "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+      "facts": []
+    },
+    {
+      "title": "Golden Visa et résidence",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.investwithabudhabi.com/fr/golden-visa-residency",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "adio",
+      "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+      "facts": []
+    },
+    {
+      "title": "Le guide de l’investisseur d’Abou Dhabi (PDF)",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.investwithabudhabi.com/assets/Ebook-ADIO%20Investor%20Guide.pdf",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Le cadre, les programmes et les parcours réunis en un seul document : la source qui étaye les repères de cette plateforme.",
+      "sourceId": "adio",
+      "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+      "facts": []
+    },
     {
       "title": "4ème Programme d’investissements d’avenir - PIA 4",
       "issuer": "beta.gouv.fr / French state",
@@ -980,21 +1235,3223 @@
       "facts": []
     },
     {
+      "title": "Avis publics à la concurrence (AAPC) nationaux et européens",
+      "issuer": "DILA (French state)",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.boamp.fr/pages/entreprise-accueil/",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics.",
+      "sourceId": "boamp",
+      "contentHash": "a5677dceb19500fcb0577279cb72aeadedfc6bac2f7f17db4944a9b1c88a6b90",
+      "facts": []
+    },
+    {
+      "title": "Avis de concession",
+      "issuer": "DILA (French state)",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.boamp.fr/pages/entreprise-accueil/",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics.",
+      "sourceId": "boamp",
+      "contentHash": "a5677dceb19500fcb0577279cb72aeadedfc6bac2f7f17db4944a9b1c88a6b90",
+      "facts": []
+    },
+    {
+      "title": "Avis d’attribution",
+      "issuer": "DILA (French state)",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.boamp.fr/pages/entreprise-accueil/",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics.",
+      "sourceId": "boamp",
+      "contentHash": "a5677dceb19500fcb0577279cb72aeadedfc6bac2f7f17db4944a9b1c88a6b90",
+      "facts": []
+    },
+    {
+      "title": "Contrats de partenariat public-privé",
+      "issuer": "DILA (French state)",
+      "kind": "CONSORTIUM_CALL",
+      "sourceUrl": "https://www.boamp.fr/pages/entreprise-accueil/",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics.",
+      "sourceId": "boamp",
+      "contentHash": "a5677dceb19500fcb0577279cb72aeadedfc6bac2f7f17db4944a9b1c88a6b90",
+      "facts": []
+    },
+    {
+      "title": "Service d'alerte BOAMP",
+      "issuer": "DILA (French state)",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.boamp.fr/pages/entreprise-service-dalerte/",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Le site boamp.fr propose une veille personnalisée et gratuite. Enregistrez vos recherches et paramétrez jusqu'à 10 alertes pour recevoir quotidiennement les nouveaux avis publiés au BOAMP.",
+      "sourceId": "boamp",
+      "contentHash": "a5677dceb19500fcb0577279cb72aeadedfc6bac2f7f17db4944a9b1c88a6b90",
+      "facts": []
+    },
+    {
+      "title": "Crédit d'impôt recherche (CIR)",
+      "issuer": "French tax administration",
+      "kind": "TAX_INCENTIVE",
+      "sourceUrl": "https://entreprendre.service-public.gouv.fr/vosdroits/F23533",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Le crédit d'impôt recherche (CIR) a pour but d'encourager les entreprises à engager des activités de recherche et développement (R&D).",
+      "sourceId": "cir-cii-jei",
+      "contentHash": "3d0f0fd73d03b56045751bf667dccff7660bd97af3350a41aba7427b9bbf2036",
+      "facts": []
+    },
+    {
+      "title": "Demonstration of hydropower technologies for efficient and forward-looking refurbishment of existing hydropower plants",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-07-D3-11?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Demonstration of hydropower technologies for efficient and forward-looking refurbishment of existing hydropower plants",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Delivery of industrial CCUS clusters – Societal Readiness pilot",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-07-D3-32?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Delivery of industrial CCUS clusters – Societal Readiness pilot",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "PV based electrification of the economy: Designing & optimising PV systems supporting industrial electrification and promoting participation in electricity markets (EUPI-PV Partnership)",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-07-D3-17?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "PV based electrification of the economy: Designing & optimising PV systems supporting industrial electrification and promoting participation in electricity markets (EUPI-PV Partnership)",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Advanced TSO control rooms to enhance grid observability, stability and resilience",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-07-D3-25?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Advanced TSO control rooms to enhance grid observability, stability and resilience",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Advanced Distribution Management Systems (ADSM) for more efficient and flexible distribution grids",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-07-D3-26?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Advanced Distribution Management Systems (ADSM) for more efficient and flexible distribution grids",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Community of practice - Data-Driven Decision-Making in Energy",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-07-D3-28?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Community of practice - Data-Driven Decision-Making in Energy",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Industrial processes and equipment for innovative, reliable and scalable tandem technologies (EUPI-PV Partnership)",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-07-D3-16?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Industrial processes and equipment for innovative, reliable and scalable tandem technologies (EUPI-PV Partnership)",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Integrated Approaches for Retrofitting Infrastructures with Innovative Energy Storage Technologies",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-07-D3-27?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Integrated Approaches for Retrofitting Infrastructures with Innovative Energy Storage Technologies",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Enhancing Resilience and Accuracy in Positioning, Navigation, and Timing (PNT) Systems and e-conspicuity solutions",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-06-D6-11?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Enhancing Resilience and Accuracy in Positioning, Navigation, and Timing (PNT) Systems and e-conspicuity solutions",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "European CCAM knowledge hub and tools for safe and scalable deployment (CCAM Partnership)",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-06-D6-05?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "European CCAM knowledge hub and tools for safe and scalable deployment (CCAM Partnership)",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Holistic solutions for CCAM integration in critical scenarios (CCAM Partnership)",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-06-D6-04?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Holistic solutions for CCAM integration in critical scenarios (CCAM Partnership)",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Advancing bio-printing of living cells for regenerative medicine",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-HLTH-2027-03-TOOL-02?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Advancing bio-printing of living cells for regenerative medicine",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Towards Artificial General Intelligence (AGI) for healthcare",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-HLTH-2027-03-TOOL-08?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Towards Artificial General Intelligence (AGI) for healthcare",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Support for dissemination events in the field of Transport Research",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-06-D6-12?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Support for dissemination events in the field of Transport Research",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Enhancing Mobility for All: affordable, reliable, and accessible multimodal transport for inclusive rural and urban connectivity – Societal Readiness pilot",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-06-D6-08?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Enhancing Mobility for All: affordable, reliable, and accessible multimodal transport for inclusive rural and urban connectivity – Societal Readiness pilot",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Virtual Human Twins (VHTs) for integrated clinical decision support in prevention and diagnosis",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-HLTH-2027-03-TOOL-04?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Virtual Human Twins (VHTs) for integrated clinical decision support in prevention and diagnosis",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Startup Europe",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-EIE-2027-01-CONNECT-01?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Startup Europe",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Enhancing the involvement of philanthropic organisations in innovation ecosystems",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-EIE-2027-01-CONNECT-03?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Enhancing the involvement of philanthropic organisations in innovation ecosystems",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Reinforcing synergies between experimentation spaces and innovation procurement",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-EIE-2027-01-CONNECT-02?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Reinforcing synergies between experimentation spaces and innovation procurement",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "MSCA Doctoral Networks 2027",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-MSCA-2027-DN-01-01?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "MSCA Doctoral Networks 2027",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "The impact of EU labour mobility on the Member States of the EU",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-TRANSFO-04?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "The impact of EU labour mobility on the Member States of the EU",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Societal impact of cultural heritage",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-HERITAGE-07?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Societal impact of cultural heritage",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Impact of access to nature-positive environments in promoting social cohesion and reducing inequalities in urban and peri-urban settings",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-TRANSFO-01?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Impact of access to nature-positive environments in promoting social cohesion and reducing inequalities in urban and peri-urban settings",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Rethinking sustainable competitiveness beyond traditional perspectives: role and contribution of the Social Economy",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-TRANSFO-03?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Rethinking sustainable competitiveness beyond traditional perspectives: role and contribution of the Social Economy",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Future-proofing sustainable cultural tourism",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-HERITAGE-06?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Future-proofing sustainable cultural tourism",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Addressing the impact of artificial intelligence, cyberviolence, and deepfakes on equality, democracy and inclusive societies",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-DEMOCRACY-04?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Addressing the impact of artificial intelligence, cyberviolence, and deepfakes on equality, democracy and inclusive societies",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Re-imagining the creative economy: the interplay between the cultural and creative sectors and industries and the social economy",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-HERITAGE-05?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Re-imagining the creative economy: the interplay between the cultural and creative sectors and industries and the social economy",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Development aid and democratic governance",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-DEMOCRACY-05?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Development aid and democratic governance",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "The role of private companies in democracy",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-DEMOCRACY-07?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "The role of private companies in democracy",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "AI4Creatives Support Platform: embracing a fair AI revolution",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-HERITAGE-02?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "AI4Creatives Support Platform: embracing a fair AI revolution",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Scaling and deploying innovations in migration management",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-TRANSFO-08?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Scaling and deploying innovations in migration management",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Crafting routes to a circular economy",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-HERITAGE-03?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Crafting routes to a circular economy",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Women’s, LGBTIQ and minority rights in a context of autocracy, conflict and geopolitical shifts",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-DEMOCRACY-02?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Women’s, LGBTIQ and minority rights in a context of autocracy, conflict and geopolitical shifts",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "The effective use of artificial intelligence in learning environments in pre-primary and primary education",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-TRANSFO-05?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "The effective use of artificial intelligence in learning environments in pre-primary and primary education",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Towards a consolidated culture and creativity driven European innovation ecosystem",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-HERITAGE-01?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Towards a consolidated culture and creativity driven European innovation ecosystem",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Closing the learning gap: uncovering causes and effective policy interventions for declining youth skills in mathematics, reading, and science",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-TRANSFO-06?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Closing the learning gap: uncovering causes and effective policy interventions for declining youth skills in mathematics, reading, and science",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Identifying user-focused solutions to support news media freedom",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-DEMOCRACY-06?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Identifying user-focused solutions to support news media freedom",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Global Human Rights and EU values",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-DEMOCRACY-08?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Global Human Rights and EU values",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Safeguarding & transmission of intangible cultural heritage",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-HERITAGE-08?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Safeguarding & transmission of intangible cultural heritage",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Student and family engagement for developing a culture of democratic/civic participation",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-DEMOCRACY-03?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Student and family engagement for developing a culture of democratic/civic participation",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Culture, heritage and creative industries for health and well-being",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-HERITAGE-04?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Culture, heritage and creative industries for health and well-being",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Advisory support and network for countering and preventing radicalisation, extremism, hate speech and polarisation",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-DEMOCRACY-01?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Advisory support and network for countering and preventing radicalisation, extremism, hate speech and polarisation",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Persons with disabilities: opportunities for labour inclusion and social protection through the life course",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-TRANSFO-07?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Persons with disabilities: opportunities for labour inclusion and social protection through the life course",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Impact of in-kind benefits on income distribution and on vulnerable populations",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-TRANSFO-02?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Impact of in-kind benefits on income distribution and on vulnerable populations",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Integrating circularity in LCA-based modelling frameworks for renovation of buildings (Built4People Partnership)",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-05-D4-07?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Integrating circularity in LCA-based modelling frameworks for renovation of buildings (Built4People Partnership)",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "On-site robotic and automated techniques for building renovation and new construction",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-05-D4-05?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "On-site robotic and automated techniques for building renovation and new construction",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Demonstration for Long-duration Battery Energy Storage Systems (BATT4EU Partnership)",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-05-D2-08?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Demonstration for Long-duration Battery Energy Storage Systems (BATT4EU Partnership)",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Thermal energy optimisation and waste heat recovery of high energy demand IT rooms in buildings or small edge data centres",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-05-D4-06?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Thermal energy optimisation and waste heat recovery of high energy demand IT rooms in buildings or small edge data centres",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Demonstration of industrial excess/waste heat conversion to mechanical or electrical power",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-05-D4-09?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Demonstration of industrial excess/waste heat conversion to mechanical or electrical power",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Detection and characterisation of threats or illegal/ smuggled goods in cargo",
+      "issuer": "European Commission",
+      "kind": "GRANT",
+      "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL3-2027-01-BM-03?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Detection and characterisation of threats or illegal/ smuggled goods in cargo",
+      "sourceId": "eu-funding-tenders",
+      "contentHash": "a054911cbadcbe89672f75761d6a9e3c4167cadd14ab54dc3a38d4dce8c3c269",
+      "facts": []
+    },
+    {
+      "title": "Catalogue des aides financières de l'ADEME",
+      "issuer": "French state / ADEME",
+      "kind": "GRANT",
+      "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres/catalogue",
+      "summary": "",
+      "eligibility": "Entreprises, associations, acteurs de la recherche",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Trouvez les aides financières adaptées à votre entreprise : subventions, appels à projet, diagnostics et études proposés par l'ADEME et les autres acteurs publics comme les CCI, les CMA, les Régions…",
+      "sourceId": "france-2030-ademe",
+      "contentHash": "49a9e9bbd309556116dd115ec2062fc160c524987d723eac638e9987aa9a2c0a",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-france-2030-ademe-49a9e9bbd309",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres/catalogue"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Entreprises, associations, acteurs de la recherche",
+          "originalSourceText": "Trouvez les aides financières adaptées à votre entreprise : subventions, appels à projet, diagnostics et études proposés par l'ADEME et les autres acteurs publics comme les CCI, les CMA, les Régions…"
+        }
+      ]
+    },
+    {
+      "title": "Tester mon éligibilité aux aides financières",
+      "issuer": "French state / ADEME",
+      "kind": "GRANT",
+      "sourceUrl": "https://mission-transition-ecologique.beta.gouv.fr/?profil-entreprise=oui&utm_campaign=agir-2",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Découvrez vos aides éligibles parmi tous les financeurs",
+      "sourceId": "france-2030-ademe",
+      "contentHash": "49a9e9bbd309556116dd115ec2062fc160c524987d723eac638e9987aa9a2c0a",
+      "facts": []
+    },
+    {
+      "title": "Fonds Chaleur",
+      "issuer": "French state / ADEME",
+      "kind": "GRANT",
+      "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Retrouvez des aides financières pour vos projets de transition écologique via plusieurs leviers de financement comme les Fonds Chaleur, Fonds Économie Circulaire, Fonds Air Bois ou encore France 2030.",
+      "sourceId": "france-2030-ademe",
+      "contentHash": "49a9e9bbd309556116dd115ec2062fc160c524987d723eac638e9987aa9a2c0a",
+      "facts": []
+    },
+    {
+      "title": "Fonds Économie Circulaire",
+      "issuer": "French state / ADEME",
+      "kind": "GRANT",
+      "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Retrouvez des aides financières pour vos projets de transition écologique via plusieurs leviers de financement comme les Fonds Chaleur, Fonds Économie Circulaire, Fonds Air Bois ou encore France 2030.",
+      "sourceId": "france-2030-ademe",
+      "contentHash": "49a9e9bbd309556116dd115ec2062fc160c524987d723eac638e9987aa9a2c0a",
+      "facts": []
+    },
+    {
+      "title": "Fonds Air Bois",
+      "issuer": "French state / ADEME",
+      "kind": "GRANT",
+      "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Retrouvez des aides financières pour vos projets de transition écologique via plusieurs leviers de financement comme les Fonds Chaleur, Fonds Économie Circulaire, Fonds Air Bois ou encore France 2030.",
+      "sourceId": "france-2030-ademe",
+      "contentHash": "49a9e9bbd309556116dd115ec2062fc160c524987d723eac638e9987aa9a2c0a",
+      "facts": []
+    },
+    {
+      "title": "Aides gré à gré",
+      "issuer": "French state / ADEME",
+      "kind": "GRANT",
+      "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
+      "summary": "",
+      "eligibility": "Entreprises, associations, acteurs de la recherche",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "L’Agence peut proposer une aide financière dans le cadre d'appels à projets nationaux ou régionaux avec des cahiers des charges plus spécifiques, lorsque d'autres subventions s’inscrivent dans le cadre d’une « Aide gré à gré », c’est-à-dire en appliquant les dispositifs classiques d’aide financière.",
+      "sourceId": "france-2030-ademe",
+      "contentHash": "49a9e9bbd309556116dd115ec2062fc160c524987d723eac638e9987aa9a2c0a",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-france-2030-ademe-49a9e9bbd309",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Entreprises, associations, acteurs de la recherche",
+          "originalSourceText": "L’Agence peut proposer une aide financière dans le cadre d'appels à projets nationaux ou régionaux avec des cahiers des charges plus spécifiques, lorsque d'autres subventions s’inscrivent dans le cadre d’une « Aide gré à gré », c’est-à-dire en appliquant les dispositifs classiques d’aide financière."
+        }
+      ]
+    },
+    {
+      "title": "Initiate",
+      "issuer": "Abu Dhabi (Mubadala)",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.hub71.com/program/initiate",
+      "summary": "",
+      "eligibility": "Founders at the ideation or pre-MVP stage",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Initiate is Hub71’s early-stage programme that supports founders at the ideation or pre-MVP stage to turn their ideas into scalable startups. By joining, founders will be connected with experienced venture builders and gain the resources, mentorship, and ecosystem access needed to transform ideas into startups that can scale.",
+      "sourceId": "hub71",
+      "contentHash": "b8306daa6db14f60ae7594ce37b1fc5bd6dc0d85f8c8e5fd8eee64ee0fad89ab",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-hub71-b8306daa6db1",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.hub71.com/program/initiate"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Founders at the ideation or pre-MVP stage",
+          "originalSourceText": "Initiate is Hub71’s early-stage programme that supports founders at the ideation or pre-MVP stage to turn their ideas into scalable startups. By joining, founders will be connected with experienced venture builders and gain the resources, mentorship, and ecosystem access needed to transform ideas into startups that can scale."
+        }
+      ]
+    },
+    {
+      "title": "MZN x Hub71 Programme",
+      "issuer": "Abu Dhabi (Mubadala)",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.hub71.com/program/mzn-x-hub71-programme",
+      "summary": "",
+      "eligibility": "Emirati founders",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "The MZN x Hub71 Programme is a three-month programme powered by Hub71 in partnership with the Khalifa Fund for Enterprise Development, designed to support Emirati founders in transforming innovative ideas into market-ready minimum viable products (MVPs).",
+      "sourceId": "hub71",
+      "contentHash": "b8306daa6db14f60ae7594ce37b1fc5bd6dc0d85f8c8e5fd8eee64ee0fad89ab",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-hub71-b8306daa6db1",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.hub71.com/program/mzn-x-hub71-programme"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Emirati founders",
+          "originalSourceText": "The MZN x Hub71 Programme is a three-month programme powered by Hub71 in partnership with the Khalifa Fund for Enterprise Development, designed to support Emirati founders in transforming innovative ideas into market-ready minimum viable products (MVPs)."
+        }
+      ]
+    },
+    {
+      "title": "Hub71 Immersion Programme (India)",
+      "issuer": "Abu Dhabi (Mubadala)",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.hub71.com/program/india",
+      "summary": "",
+      "eligibility": "International startups",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "The Hub71 Immersion Programme is a structured, in-market experience designed to support international startups as they explore and build connections within Abu Dhabi’s global tech ecosystem. Delivered in partnership with the UAE–India CEPA Council, the programme provides founders with direct access to key market stakeholders, including investors, corporates and government entities, enabling startups to assess and accelerate their expansion into the region.",
+      "sourceId": "hub71",
+      "contentHash": "b8306daa6db14f60ae7594ce37b1fc5bd6dc0d85f8c8e5fd8eee64ee0fad89ab",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-hub71-b8306daa6db1",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.hub71.com/program/india"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "International startups",
+          "originalSourceText": "The Hub71 Immersion Programme is a structured, in-market experience designed to support international startups as they explore and build connections within Abu Dhabi’s global tech ecosystem. Delivered in partnership with the UAE–India CEPA Council, the programme provides founders with direct access to key market stakeholders, including investors, corporates and government entities, enabling startups to assess and accelerate their expansion into the region."
+        }
+      ]
+    },
+    {
+      "title": "Access Programme",
+      "issuer": "Abu Dhabi (Mubadala)",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.hub71.com/program/access-programme",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Get the support you need to take your business to the next level in Abu Dhabi. Our Access Program offers a comprehensive support package and a route into the UAE capital’s marketplace. The benefits include in-kind and cash incentives and access to our vibrant community of capital and corporate partners, and mentors.",
+      "sourceId": "hub71",
+      "contentHash": "b8306daa6db14f60ae7594ce37b1fc5bd6dc0d85f8c8e5fd8eee64ee0fad89ab",
+      "facts": []
+    },
+    {
+      "title": "ECA Anjal Z x Hub71",
+      "issuer": "Abu Dhabi (Mubadala)",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.hub71.com/program/eca-anjal-z-x-hub71",
+      "summary": "",
+      "eligibility": "Startups addressing early childhood development challenges",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "The ECA Anjal Z x Hub71 programme supports startups addressing challenges across early childhood development, from pregnancy through age eight, by providing direct access to government partners, pilot opportunities, and Hub71’s broader innovation ecosystem. Founders are supported to embed locally, demonstrate impact, and scale with confidence.",
+      "sourceId": "hub71",
+      "contentHash": "b8306daa6db14f60ae7594ce37b1fc5bd6dc0d85f8c8e5fd8eee64ee0fad89ab",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-hub71-b8306daa6db1",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.hub71.com/program/eca-anjal-z-x-hub71"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Startups addressing early childhood development challenges",
+          "originalSourceText": "The ECA Anjal Z x Hub71 programme supports startups addressing challenges across early childhood development, from pregnancy through age eight, by providing direct access to government partners, pilot opportunities, and Hub71’s broader innovation ecosystem. Founders are supported to embed locally, demonstrate impact, and scale with confidence."
+        }
+      ]
+    },
+    {
+      "title": "Your gateway to SAVI",
+      "issuer": "Abu Dhabi (Mubadala)",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.hub71.com/program/savi",
+      "summary": "",
+      "eligibility": "Smart and autonomous mobility startups",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Hub71 is your startup’s gateway into Abu Dhabi’s SAVI cluster. Smart and autonomous mobility startups joining Hub71 gain direct access to SAVI’s network of partners, regulators and testing environments. This enables founders to validate, deploy and scale solutions across land, air and sea.",
+      "sourceId": "hub71",
+      "contentHash": "b8306daa6db14f60ae7594ce37b1fc5bd6dc0d85f8c8e5fd8eee64ee0fad89ab",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-hub71-b8306daa6db1",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.hub71.com/program/savi"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Smart and autonomous mobility startups",
+          "originalSourceText": "Hub71 is your startup’s gateway into Abu Dhabi’s SAVI cluster. Smart and autonomous mobility startups joining Hub71 gain direct access to SAVI’s network of partners, regulators and testing environments. This enables founders to validate, deploy and scale solutions across land, air and sea."
+        }
+      ]
+    },
+    {
+      "title": "Hub71+ Life Sciences",
+      "issuer": "Abu Dhabi (Mubadala)",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.hub71.com/program/hub71-plus-life-sciences",
+      "summary": "",
+      "eligibility": "Startups in biotechnology, MedTech, and digital health",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Hub71+ Life Sciences is Abu Dhabi’s specialist ecosystem driving innovation across biotechnology, MedTech, and digital health. From precision medicine to biomanufacturing, we bring together founders, researchers, regulators, investors, and corporates to advance next-generation healthcare solutions from Abu Dhabi to the world.",
+      "sourceId": "hub71",
+      "contentHash": "b8306daa6db14f60ae7594ce37b1fc5bd6dc0d85f8c8e5fd8eee64ee0fad89ab",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-hub71-b8306daa6db1",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.hub71.com/program/hub71-plus-life-sciences"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Startups in biotechnology, MedTech, and digital health",
+          "originalSourceText": "Hub71+ Life Sciences is Abu Dhabi’s specialist ecosystem driving innovation across biotechnology, MedTech, and digital health. From precision medicine to biomanufacturing, we bring together founders, researchers, regulators, investors, and corporates to advance next-generation healthcare solutions from Abu Dhabi to the world."
+        }
+      ]
+    },
+    {
+      "title": "Hub71+ Digital Assets",
+      "issuer": "Abu Dhabi (Mubadala)",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.hub71.com/program/hub71-plus-digital-assets",
+      "summary": "",
+      "eligibility": "Web3, blockchain, and cryptocurrency startups",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Hub71+ Digital Assets is a dedicated programme to promote Web3 startup growth from the heart of Abu Dhabi. We provide an integrated launchpad that unites builders, regulators, investors, foundations, corporate partners, and enthusiasts around Web3 including blockchain and cryptocurrency startups. No matter where you are in your journey, there’s something for you at Hub71.",
+      "sourceId": "hub71",
+      "contentHash": "b8306daa6db14f60ae7594ce37b1fc5bd6dc0d85f8c8e5fd8eee64ee0fad89ab",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-hub71-b8306daa6db1",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.hub71.com/program/hub71-plus-digital-assets"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Web3, blockchain, and cryptocurrency startups",
+          "originalSourceText": "Hub71+ Digital Assets is a dedicated programme to promote Web3 startup growth from the heart of Abu Dhabi. We provide an integrated launchpad that unites builders, regulators, investors, foundations, corporate partners, and enthusiasts around Web3 including blockchain and cryptocurrency startups. No matter where you are in your journey, there’s something for you at Hub71."
+        }
+      ]
+    },
+    {
+      "title": "Hub71+ ClimateTech",
+      "issuer": "Abu Dhabi (Mubadala)",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.hub71.com/program/hub71-plus-climatetech",
+      "summary": "",
+      "eligibility": "Sustainability startups driving decarbonization",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Hub71+ ClimateTech is a specialist ecosystem, where sustainability startups leverage technologies to drive decarbonization in supporting a net zero future. The programme offers a comprehensive support package and a route into the UAE capital's marketplace.",
+      "sourceId": "hub71",
+      "contentHash": "b8306daa6db14f60ae7594ce37b1fc5bd6dc0d85f8c8e5fd8eee64ee0fad89ab",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-hub71-b8306daa6db1",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.hub71.com/program/hub71-plus-climatetech"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Sustainability startups driving decarbonization",
+          "originalSourceText": "Hub71+ ClimateTech is a specialist ecosystem, where sustainability startups leverage technologies to drive decarbonization in supporting a net zero future. The programme offers a comprehensive support package and a route into the UAE capital's marketplace."
+        }
+      ]
+    },
+    {
+      "title": "Hub71+ AI",
+      "issuer": "Abu Dhabi (Mubadala)",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.hub71.com/program/hub71-plus-ai",
+      "summary": "",
+      "eligibility": "Startups at the forefront of AI innovation",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Hub71+ AI is a specialist ecosystem designed to support startups at the forefront of AI innovation. The ecosystem provides advanced technical resources, access to a robust network of AI researchers, industry practitioners, and strategic partners, and tailored expertise in AI-driven product development and scalability. With a focus on fostering collaboration and accelerating AI integration across sectors, Hub71+ AI empowers startups to develop and deploy sophisticated AI solutions, enabling founders to achieve operational efficiency, drive industry disruption, and deliver sustainable impact.",
+      "sourceId": "hub71",
+      "contentHash": "b8306daa6db14f60ae7594ce37b1fc5bd6dc0d85f8c8e5fd8eee64ee0fad89ab",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-hub71-b8306daa6db1",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.hub71.com/program/hub71-plus-ai"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Startups at the forefront of AI innovation",
+          "originalSourceText": "Hub71+ AI is a specialist ecosystem designed to support startups at the forefront of AI innovation. The ecosystem provides advanced technical resources, access to a robust network of AI researchers, industry practitioners, and strategic partners, and tailored expertise in AI-driven product development and scalability. With a focus on fostering collaboration and accelerating AI integration across sectors, Hub71+ AI empowers startups to develop and deploy sophisticated AI solutions, enabling founders to achieve operational efficiency, drive industry disruption, and deliver sustainable impact."
+        }
+      ]
+    },
+    {
+      "title": "Soft Market Testing-Sleep Service for Children and Young People",
+      "issuer": "UK Cabinet Office",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ef",
+      "summary": "",
+      "eligibility": "Suitable for SME & VCSE",
+      "amountText": "",
+      "deadlineText": "3 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ef"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Suitable for SME & VCSE",
+          "originalSourceText": "Suitable for SME & VCSE"
+        },
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ef"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "3 October 2026",
+          "originalSourceText": "3 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "Post Office Branch - Cabin Lane",
+      "issuer": "UK Cabinet Office",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06e89d",
+      "summary": "",
+      "eligibility": "Suitable for SME & VCSE",
+      "amountText": "",
+      "deadlineText": "18 August 2027",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06e89d"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Suitable for SME & VCSE",
+          "originalSourceText": "Suitable for SME & VCSE"
+        },
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06e89d"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "18 August 2027",
+          "originalSourceText": "18 August 2027"
+        }
+      ]
+    },
+    {
+      "title": "Post Office Branch - Kidwelly",
+      "issuer": "UK Cabinet Office",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ee",
+      "summary": "",
+      "eligibility": "Suitable for SME & VCSE",
+      "amountText": "",
+      "deadlineText": "30 September 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ee"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Suitable for SME & VCSE",
+          "originalSourceText": "Suitable for SME & VCSE"
+        },
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ee"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "30 September 2026",
+          "originalSourceText": "30 September 2026"
+        }
+      ]
+    },
+    {
+      "title": "Post Office branch - Perry Hall",
+      "issuer": "UK Cabinet Office",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ed",
+      "summary": "",
+      "eligibility": "Suitable for SME & VCSE",
+      "amountText": "",
+      "deadlineText": "30 September 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ed"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Suitable for SME & VCSE",
+          "originalSourceText": "Suitable for SME & VCSE"
+        },
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ed"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "30 September 2026",
+          "originalSourceText": "30 September 2026"
+        }
+      ]
+    },
+    {
+      "title": "Residential and Nursing Care Home Partnership Framework in Herefordshire",
+      "issuer": "UK Cabinet Office",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0669a0",
+      "summary": "",
+      "eligibility": "Suitable for SME & VCSE",
+      "amountText": "",
+      "deadlineText": "8 October 2026 (estimated tender or transparency notice publication date)",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0669a0"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Suitable for SME & VCSE",
+          "originalSourceText": "Suitable for SME & VCSE"
+        },
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0669a0"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "8 October 2026 (estimated tender or transparency notice publication date)",
+          "originalSourceText": "8 October 2026 (estimated tender or transparency notice publication date)"
+        }
+      ]
+    },
+    {
+      "title": "Post Office Branch - Kingsway",
+      "issuer": "UK Cabinet Office",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ec",
+      "summary": "",
+      "eligibility": "Suitable for SME & VCSE",
+      "amountText": "",
+      "deadlineText": "30 September 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ec"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Suitable for SME & VCSE",
+          "originalSourceText": "Suitable for SME & VCSE"
+        },
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ec"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "30 September 2026",
+          "originalSourceText": "30 September 2026"
+        }
+      ]
+    },
+    {
+      "title": "Procurement of development viability training and bespoke support for Local Planning Authorities",
+      "issuer": "UK Cabinet Office",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ea",
+      "summary": "",
+      "eligibility": "Suitable for SME & VCSE",
+      "amountText": "",
+      "deadlineText": "16 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ea"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Suitable for SME & VCSE",
+          "originalSourceText": "Suitable for SME & VCSE"
+        },
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ea"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "16 October 2026",
+          "originalSourceText": "16 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "SONI089 – Software Licensing & Buying Services",
+      "issuer": "UK Cabinet Office",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e9",
+      "summary": "",
+      "eligibility": "Suitable for SME",
+      "amountText": "",
+      "deadlineText": "30 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e9"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Suitable for SME",
+          "originalSourceText": "Suitable for SME"
+        },
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e9"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "30 October 2026",
+          "originalSourceText": "30 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "Trafford Youth Cabinet",
+      "issuer": "UK Cabinet Office",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e8",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "7 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e8"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "7 October 2026",
+          "originalSourceText": "7 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "Multiple Needs Navigators",
+      "issuer": "UK Cabinet Office",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e7",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "13 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e7"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "13 October 2026",
+          "originalSourceText": "13 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "Further Premarket Engagement exercise",
+      "issuer": "UK Cabinet Office",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e5",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "5 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e5"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "5 October 2026",
+          "originalSourceText": "5 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "Procurement of Design Led Multi-Disciplinary Team – South of Romsey Town Centre Regeneration Project",
+      "issuer": "UK Cabinet Office",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e4",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "21 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e4"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "21 October 2026",
+          "originalSourceText": "21 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "Webinar Invitation: Cyber Accelerator Programme - Design Partnerships",
+      "issuer": "UK Cabinet Office",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f26d",
+      "summary": "",
+      "eligibility": "Suitable for SME & VCSE",
+      "amountText": "",
+      "deadlineText": "23 September 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f26d"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Suitable for SME & VCSE",
+          "originalSourceText": "Suitable for SME & VCSE"
+        },
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f26d"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "23 September 2026",
+          "originalSourceText": "23 September 2026"
+        }
+      ]
+    },
+    {
+      "title": "D2 Dehumidification (L&A and Radiation Stores)",
+      "issuer": "UK Cabinet Office",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e1",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "7 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e1"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "7 October 2026",
+          "originalSourceText": "7 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "PR Agency Services",
+      "issuer": "UK Cabinet Office",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773de",
+      "summary": "",
+      "eligibility": "Suitable for SME & VCSE",
+      "amountText": "",
+      "deadlineText": "12 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773de"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Suitable for SME & VCSE",
+          "originalSourceText": "Suitable for SME & VCSE"
+        },
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773de"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "12 October 2026",
+          "originalSourceText": "12 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "PRN26119 Omagh Area Land, Design and Build",
+      "issuer": "UK Cabinet Office",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773df",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "16 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773df"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "16 October 2026",
+          "originalSourceText": "16 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "Green Roof Bike Stores RfQ",
+      "issuer": "UK Cabinet Office",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773d2",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "7 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773d2"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "7 October 2026",
+          "originalSourceText": "7 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "LGS-Q-004-2026 Audio Visual System",
+      "issuer": "UK Cabinet Office",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f946",
+      "summary": "",
+      "eligibility": "Suitable for SME & VCSE",
+      "amountText": "",
+      "deadlineText": "30 September 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f946"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Suitable for SME & VCSE",
+          "originalSourceText": "Suitable for SME & VCSE"
+        },
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f946"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "30 September 2026",
+          "originalSourceText": "30 September 2026"
+        }
+      ]
+    },
+    {
+      "title": "TWBC - Assembly Hall Theatre Security",
+      "issuer": "UK Cabinet Office",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773d9",
+      "summary": "",
+      "eligibility": "Suitable for SME & VCSE",
+      "amountText": "",
+      "deadlineText": "21 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773d9"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Suitable for SME & VCSE",
+          "originalSourceText": "Suitable for SME & VCSE"
+        },
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773d9"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "21 October 2026",
+          "originalSourceText": "21 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "Reducing Parental Conflict Digital Support - Separating & Separated Parents",
+      "issuer": "UK Cabinet Office",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773d6",
+      "summary": "",
+      "eligibility": "Suitable for SME & VCSE",
+      "amountText": "",
+      "deadlineText": "24 September 2026 (estimated tender or transparency notice publication date)",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773d6"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Suitable for SME & VCSE",
+          "originalSourceText": "Suitable for SME & VCSE"
+        },
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-236e42d5971e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773d6"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "24 September 2026 (estimated tender or transparency notice publication date)",
+          "originalSourceText": "24 September 2026 (estimated tender or transparency notice publication date)"
+        }
+      ]
+    },
+    {
+      "title": "UNDP-HND-00663 Adquisición Equipo Medios Nacionales de Comunicación",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "16-Sep-2026 15:00 (GMT -4.00) Expires within 24 hours",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-ungm-79e915cc380f",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.ungm.org/Public/Notice"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "16-Sep-2026 15:00 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "16-Sep-2026 15:00 (GMT -4.00) Expires within 24 hours"
+        }
+      ]
+    },
+    {
+      "title": "Réalisation d un forage d eau à Clercine (IGPNH)",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "16-Sep-2026 16:30 (GMT -4.00) Expires within 24 hours",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-ungm-79e915cc380f",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.ungm.org/Public/Notice"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "16-Sep-2026 16:30 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "16-Sep-2026 16:30 (GMT -4.00) Expires within 24 hours"
+        }
+      ]
+    },
+    {
+      "title": "Consultoría Fortalecimiento de la Implementación Protocolo de Nagoya en Honduras",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "16-Sep-2026 17:00 (GMT -4.00) Expires within 24 hours",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-ungm-79e915cc380f",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.ungm.org/Public/Notice"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "16-Sep-2026 17:00 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "16-Sep-2026 17:00 (GMT -4.00) Expires within 24 hours"
+        }
+      ]
+    },
+    {
+      "title": "Producción de actividades deportivas, lúdicas y artísticas",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "16-Sep-2026 17:00 (GMT -5.00) Expires within 24 hours",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-ungm-79e915cc380f",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.ungm.org/Public/Notice"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "16-Sep-2026 17:00 (GMT -5.00) Expires within 24 hours",
+          "originalSourceText": "16-Sep-2026 17:00 (GMT -5.00) Expires within 24 hours"
+        }
+      ]
+    },
+    {
+      "title": "RFQ – Service de conception et impression de supports de communication",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "16-Sep-2026 17:03 (GMT -4.00) Expires within 24 hours",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-ungm-79e915cc380f",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.ungm.org/Public/Notice"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "16-Sep-2026 17:03 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "16-Sep-2026 17:03 (GMT -4.00) Expires within 24 hours"
+        }
+      ]
+    },
+    {
+      "title": "Consultancy firm to provide Market Access and Commercialization Partner",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "16-Sep-2026 17:59 (GMT -4.00) Expires within 24 hours",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-ungm-79e915cc380f",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.ungm.org/Public/Notice"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "16-Sep-2026 17:59 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "16-Sep-2026 17:59 (GMT -4.00) Expires within 24 hours"
+        }
+      ]
+    },
+    {
+      "title": "Call for External Collaborator – Cooperative Development Advisor (Remote), ILO PROSPECTS Lebanon",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "16-Sep-2026 22:59 (GMT 2.00) Expires within 24 hours",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-ungm-79e915cc380f",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.ungm.org/Public/Notice"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "16-Sep-2026 22:59 (GMT 2.00) Expires within 24 hours",
+          "originalSourceText": "16-Sep-2026 22:59 (GMT 2.00) Expires within 24 hours"
+        }
+      ]
+    },
+    {
+      "title": "Event management service for Public Employment Offices (PES) TOT workshop, ILO Syria, PROSPECTS",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "16-Sep-2026 22:59 (GMT 2.00) Expires within 24 hours",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-ungm-79e915cc380f",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.ungm.org/Public/Notice"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "16-Sep-2026 22:59 (GMT 2.00) Expires within 24 hours",
+          "originalSourceText": "16-Sep-2026 22:59 (GMT 2.00) Expires within 24 hours"
+        }
+      ]
+    },
+    {
+      "title": "01 National Consultancy Firm for Conducting a survey and assessment",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "16-Sep-2026 23:00 (GMT -4.00) Expires within 24 hours",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-ungm-79e915cc380f",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.ungm.org/Public/Notice"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "16-Sep-2026 23:00 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "16-Sep-2026 23:00 (GMT -4.00) Expires within 24 hours"
+        }
+      ]
+    },
+    {
+      "title": "Request for Quotation for CO Manila - Photocopy and printing paper office supply",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "16-Sep-2026 23:00 (GMT 2.00) Expires within 24 hours",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-ungm-79e915cc380f",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.ungm.org/Public/Notice"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "16-Sep-2026 23:00 (GMT 2.00) Expires within 24 hours",
+          "originalSourceText": "16-Sep-2026 23:00 (GMT 2.00) Expires within 24 hours"
+        }
+      ]
+    },
+    {
+      "title": "RFQ_Procurement of market equipment for markets in Fiji",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "16-Sep-2026 23:41 (GMT -4.00) Expires within 24 hours",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-ungm-79e915cc380f",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.ungm.org/Public/Notice"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "16-Sep-2026 23:41 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "16-Sep-2026 23:41 (GMT -4.00) Expires within 24 hours"
+        }
+      ]
+    },
+    {
+      "title": "RFP/AFRO/019/2026-Technical Support for Health Technology Access Pool (HTAP) and WHO AFRO Programs for In Vitro Diagnostics (IVDs)",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "16-Sep-2026 23:59 (GMT 1.00) Expires within 24 hours",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-ungm-79e915cc380f",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.ungm.org/Public/Notice"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "16-Sep-2026 23:59 (GMT 1.00) Expires within 24 hours",
+          "originalSourceText": "16-Sep-2026 23:59 (GMT 1.00) Expires within 24 hours"
+        }
+      ]
+    },
+    {
+      "title": "Building the Technical Architecture of the General Education Certificate (GEC)",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-ungm-79e915cc380f",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.ungm.org/Public/Notice"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours",
+          "originalSourceText": "16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours"
+        }
+      ]
+    },
+    {
+      "title": "Consultancy to support the development of a Framework of Action on Skills for a Just Energy Transition through Social Dialogue in Mpumalanga and the Eastern Cape",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-ungm-79e915cc380f",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.ungm.org/Public/Notice"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours",
+          "originalSourceText": "16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours"
+        }
+      ]
+    },
+    {
+      "title": "RFQ#138269 for Procurement and delivery of 2 620 Bottles of De-Wormer (Ivermectin 1% injection 50 ml bottle)",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "16-Sep-2026 23:59 (GMT 4.30) Expires within 24 hours",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-ungm-79e915cc380f",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.ungm.org/Public/Notice"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "16-Sep-2026 23:59 (GMT 4.30) Expires within 24 hours",
+          "originalSourceText": "16-Sep-2026 23:59 (GMT 4.30) Expires within 24 hours"
+        }
+      ]
+    },
+    {
+      "title": "International Procurement Seminars (IPS)",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/VBS_BusSeminar",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "International Procurement Seminars (IPS)",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "IPS, Vienna, June 2026",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJUNE2026",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "IPS, Geneva, November 2025",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSNOVEMBER2025",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "IPS, Copenhagen, June 2025",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJUNE2025",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "IPS, Copenhagen, March 2025",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSMARCH2025",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "IPS, China, November 2024",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSNovember2024",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "IPS, Copenhagen, June 2024",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJune2024",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "IPS, Copenhagen, November 2023",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSNovember2023",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "IPS, Copenhagen, March 2023",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSMarch2023",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "IPS, Turin, November 2022",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSNov2022",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "IPS, Vienna, April 2022",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSApril2022",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "IPS, European Consortium [2], June 2021",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJune2021",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "IPS, European Consortium [1], January 2021",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJan22021",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "IPS, Nordic Countries, January 2021",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJan2021",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "IPS, Argentina, November 2019",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSNov2019",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "IPS, Copenhagen, June 2019",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJune2019",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "IPS, Rome, May 2019",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS_Rome",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "Nordic UN Procurement Seminar 2025, June 2025",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS38_6_3_2025_to_6_3_2025",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "UN Business Meetings - May 2025",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS34_5_19_2025_to_5_20_2025",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "UN International Procurement Seminar, Copenhagen, 11 and 12 March 2025",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS31_3_11_2025_to_3_12_2025",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "UN IPS, Ningbo, Nov 2024",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS30_11_13_2024_to_11_14_2024",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "Estonia, France, Belgium, Brussels IPS - June 2024",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS28_6_11_2024_to_6_12_2024",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "UN International Procurement Seminar March 2024",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS27_3_20_2024_to_3_21_2024",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "The Republic of Zambia Virtual Business Seminar 2024",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS29_2_27_2024_to_2_27_2024",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "Nordic UN Procurement Seminar 2023",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS23_6_14_2023_to_6_14_2023",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "Liberia Virtual Business Seminar - Feb 2025",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS33_2_18_2025_to_2_18_2025",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "UN Virtual Business Seminar for Peruvian Vendors",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "Burundi virtual business seminar",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "UN Virtual Business Seminar for Côte d’Ivoire Vendors",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "United Nation International Procurement Seminar",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "United Nations Business Seminar for Ghanaian Suppliers",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "United Nations Virtual Business Seminar for Paraguayan Suppliers",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "United Nations Secretariat Virtual Business Seminar for Mozambique Suppliers",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "UN International Procurement Seminar June 2026",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS45_6_9_2026_to_6_10_2026",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "Angola virtual business seminar",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "Bolivia virtual business seminar",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "Mexico virtual business seminar",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "Business Meetings ONU 2026 - New York",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "Deep Wave 2026",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "UN Procurement Business Seminar for Tanzanian vendors 2026",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "Lesotho Business Seminar",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "The Gambia virtual business seminar",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "Sierra Leone Virtual Business Seminar",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "Guyana virtual business seminar",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "Rwanda Virtual Business Seminar",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "United Nations Secretariat Virtual Business Seminar for Paraguayan Suppliers",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "UN Procurement Business Seminar for Nepalese Vendors 2026",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "The United Nations International Procurement Seminar — Jordan 2026",
+      "issuer": "United Nations",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "United Nations Virtual Business Seminar: Bangladesh 2026",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "United Nations Virtual Business Seminar: Cambodia 2026",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
+      "title": "Séminaire virtuel des Nations Unies à l'intention des fournisseurs algériens 2026",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+      "facts": []
+    },
+    {
       "title": "Consultancy services for the feasibility study, detailed design, tender document preparation, construction supervision, & contract administration for the Gidabo Left Bank New Irrigation Development project",
       "issuer": "Multilateral development banks",
       "kind": "GRANT",
       "sourceUrl": "https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00468424",
       "summary": "",
-      "eligibility": "Eligible consulting firms with required qualifications and relevant experience in the field of assignment, including core business, years in business, organizational, managerial, and technical capabilities. Firms may associate in joint ventures or sub-consultancies.",
+      "eligibility": "Eligible consulting firms with required qualifications and relevant experience in the field of assignment, including core business and years in business, organizational, managerial, and technical capabilities. Firms may associate in joint ventures or sub-consultancies.",
       "amountText": "",
       "deadlineText": "Oct 05, 2026 04:30",
       "quote": "The Federal Democratic Republic of Ethiopia has received financing from the World Bank toward the cost of the Climate Resilient Irrigation for Sustainable Production (CRISP) Project. The implementing agency, the Ministry of Irrigation and Lowlands, intends to apply part of the proceeds for the consulting service.",
       "sourceId": "worldbank-afdb-ebrd",
-      "contentHash": "5afc1998ff001416fcab3c38f23b3a34db801f87abb142fa7e96c92dfad64124",
+      "contentHash": "55d2559e2f319c1e0a8fc352580e89e3b6beef24e7c36dd8ce34105d209b15ed",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-worldbank-afdb-ebrd-5afc1998ff00",
+          "sourceArtifactId": "scout-worldbank-afdb-ebrd-55d2559e2f31",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00468424"
@@ -1005,12 +4462,12 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "eligibility",
-          "normalizedValue": "Eligible consulting firms with required qualifications and relevant experience in the field of assignment, including core business, years in business, organizational, managerial, and technical capabilities. Firms may associate in joint ventures or sub-consultancies.",
+          "normalizedValue": "Eligible consulting firms with required qualifications and relevant experience in the field of assignment, including core business and years in business, organizational, managerial, and technical capabilities. Firms may associate in joint ventures or sub-consultancies.",
           "originalSourceText": "The Federal Democratic Republic of Ethiopia has received financing from the World Bank toward the cost of the Climate Resilient Irrigation for Sustainable Production (CRISP) Project. The implementing agency, the Ministry of Irrigation and Lowlands, intends to apply part of the proceeds for the consulting service."
         },
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-worldbank-afdb-ebrd-5afc1998ff00",
+          "sourceArtifactId": "scout-worldbank-afdb-ebrd-55d2559e2f31",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00468424"
@@ -1030,10 +4487,12 @@
   "perSource": [
     {
       "id": "adio",
-      "status": "ERROR",
-      "kept": 0,
+      "status": "OK",
+      "kept": 17,
       "dropped": 0,
-      "note": "Mistral extract failed to produce valid ScoutResult: [\n  {\n    \"received\": \"Cluster programme\",\n    \"code\": \"invalid_enum_value\",\n    \"options\": [\n      \"TENDER\",\n      \"PRE_SOLICITATION\",\n      \"GRANT\",\n      \"TAX_INCENTIVE\",\n      \"EQUITY\",\n      \"DEBT_GUARANTEE\",\n      \"PRIZE\",\n      \"CONSORTIUM_"
+      "note": "accepted the cookie banner (\"tout accepter\")",
+      "chars": 11009,
+      "links": 56
     },
     {
       "id": "aides-territoires",
@@ -1047,48 +4506,56 @@
     {
       "id": "boamp",
       "status": "OK",
-      "kept": 0,
+      "kept": 5,
       "dropped": 0,
-      "note": "The page is a portal for public procurement notices (avis de marché public) and does not list specific funding opportunities, grants, or programmes. It provides access to calls for tenders and public contracts, but these are not enumerated as individual opportunities on the page itself. The page directs users to search for active tenders rather than listing them explicitly. · tried \"https://www.boamp.fr/pages/aide/\" but it had less text — stayed on the entry page",
+      "note": "The page is a portal for public procurement notices (avis de marché public) and does not list specific funding opportunities, grants, or programmes. It provides access to calls for tenders (appels d'offres) and public contracts, but these are not enumerated as individual opportunities on the page itself. The page directs users to search for active tenders or set up alerts for new ones. · tried \"https://www.boamp.fr/pages/aide/\" but it had less text — stayed on the entry page",
       "chars": 1697,
       "links": 38
     },
     {
       "id": "cir-cii-jei",
-      "status": "ERROR",
-      "kept": 0,
+      "status": "OK",
+      "kept": 1,
       "dropped": 0,
-      "note": "Mistral extract failed to produce valid ScoutResult: [\n  {\n    \"received\": \"Tax incentive\",\n    \"code\": \"invalid_enum_value\",\n    \"options\": [\n      \"TENDER\",\n      \"PRE_SOLICITATION\",\n      \"GRANT\",\n      \"TAX_INCENTIVE\",\n      \"EQUITY\",\n      \"DEBT_GUARANTEE\",\n      \"PRIZE\",\n      \"CONSORTIUM_CALL"
+      "note": "accepted the cookie banner (\"accepter\")",
+      "chars": 3446,
+      "links": 106
     },
     {
       "id": "eu-funding-tenders",
-      "status": "ERROR",
-      "kept": 0,
+      "status": "OK",
+      "kept": 50,
       "dropped": 0,
-      "note": "Mistral extract failed to produce valid ScoutResult: [\n  {\n    \"received\": \"Calls for proposals\",\n    \"code\": \"invalid_enum_value\",\n    \"options\": [\n      \"TENDER\",\n      \"PRE_SOLICITATION\",\n      \"GRANT\",\n      \"TAX_INCENTIVE\",\n      \"EQUITY\",\n      \"DEBT_GUARANTEE\",\n      \"PRIZE\",\n      \"CONSORTIU"
+      "note": "Extracted 50 funding opportunities from the first page of results. · followed \"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/calls-for-proposals\" (calls, funding, tenders, opportunityieses)",
+      "chars": 18611,
+      "links": 81
     },
     {
       "id": "flippa",
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "The page is a marketplace for buying and selling online businesses, not a public funding body offering grants, subsidies, or funding opportunities. No funding opportunities as defined in the rules are present.",
+      "note": "The page is a marketplace for buying and selling online businesses, not a funding body offering grants, subsidies, or financial support. No funding opportunities (grants, loans, tax incentives, etc.) are listed.",
       "chars": 15729,
       "links": 189
     },
     {
       "id": "france-2030-ademe",
-      "status": "ERROR",
-      "kept": 0,
-      "dropped": 0,
-      "note": "Mistral extract failed to produce valid ScoutResult: [\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"object\",\n    \"received\": \"number\",\n    \"path\": [\n      \"calls\",\n      0\n    ],\n    \"message\": \"Expected object, received number\"\n  },\n  {\n    \"received\": \"Subventions, appels à projet, diagnostics"
+      "status": "OK",
+      "kept": 6,
+      "dropped": 3,
+      "note": "followed \"https://agirpourlatransition.ademe.fr/entreprises/aides-financieres\" (aides)",
+      "chars": 7716,
+      "links": 113
     },
     {
       "id": "hub71",
-      "status": "ERROR",
-      "kept": 0,
-      "dropped": 0,
-      "note": "Mistral extract failed to produce valid ScoutResult: [\n  {\n    \"received\": \"Programme\",\n    \"code\": \"invalid_enum_value\",\n    \"options\": [\n      \"TENDER\",\n      \"PRE_SOLICITATION\",\n      \"GRANT\",\n      \"TAX_INCENTIVE\",\n      \"EQUITY\",\n      \"DEBT_GUARANTEE\",\n      \"PRIZE\",\n      \"CONSORTIUM_CALL\",\n "
+      "status": "OK",
+      "kept": 10,
+      "dropped": 2,
+      "note": "tried \"https://www.hub71.com/program/access-programme/apply\" but it had less text — stayed on the entry page",
+      "chars": 11386,
+      "links": 75
     },
     {
       "id": "uae-federal-procurement",
@@ -1101,17 +4568,21 @@
     },
     {
       "id": "uk-find-a-tender",
-      "status": "ERROR",
-      "kept": 0,
+      "status": "OK",
+      "kept": 20,
       "dropped": 0,
-      "note": "Mistral extract failed to produce valid ScoutResult: [\n  {\n    \"received\": \"Preliminary Market Engagement\",\n    \"code\": \"invalid_enum_value\",\n    \"options\": [\n      \"TENDER\",\n      \"PRE_SOLICITATION\",\n      \"GRANT\",\n      \"TAX_INCENTIVE\",\n      \"EQUITY\",\n      \"DEBT_GUARANTEE\",\n      \"PRIZE\",\n      "
+      "note": "followed \"https://www.find-tender.service.gov.uk/search/opportunities?language=en_GB&cookies_accepted=unknown\" (opportunityieses)",
+      "chars": 10197,
+      "links": 43
     },
     {
       "id": "ungm",
-      "status": "ERROR",
-      "kept": 0,
+      "status": "OK",
+      "kept": 66,
       "dropped": 0,
-      "note": "Mistral extract failed to produce valid ScoutResult: [\n  {\n    \"received\": \"Call for individual consultants\",\n    \"code\": \"invalid_enum_value\",\n    \"options\": [\n      \"TENDER\",\n      \"PRE_SOLICITATION\",\n      \"GRANT\",\n      \"TAX_INCENTIVE\",\n      \"EQUITY\",\n      \"DEBT_GUARANTEE\",\n      \"PRIZE\",\n    "
+      "note": "followed \"https://www.ungm.org/Public/Notice\" (opportunityieses, procurement)",
+      "chars": 9448,
+      "links": 219
     },
     {
       "id": "worldbank-afdb-ebrd",

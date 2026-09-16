@@ -238,10 +238,6 @@ Displaying results 1 to 15 of 1441
 	Title	Deadline	Published	Organization	Type of opportunity	Reference	Beneficiary country or territory
 
 	
-UNDP-SLV-00570 - IC Elaboración del Atlas Municipal Desarrollo Humano
-	16-Sep-2026 14:46 (GMT -4.00) Expires within 24 hours	02-Sep-2026	UNDP	Call for individual consultants	UNDP-SLV-00570	El Salvador
-
-	
 UNDP-HND-00663 Adquisición Equipo Medios Nacionales de Comunicación
 	16-Sep-2026 15:00 (GMT -4.00) Expires within 24 hours	11-Aug-2026	UNDP	Request for quotation	UNDP-HND-00663,2	Honduras
 
@@ -288,6 +284,10 @@ RFQ_Procurement of market equipment for markets in Fiji
 	
 RFP/AFRO/019/2026-Technical Support for Health Technology Access Pool (HTAP) and WHO AFRO Programs for In Vitro Diagnostics (IVDs)
 	16-Sep-2026 23:59 (GMT 1.00) Expires within 24 hours	25-Aug-2026	WHO	Request for proposal	AF/GMC/PSS/P/0009491	Congo
+
+	
+Building the Technical Architecture of the General Education Certificate (GEC)
+	16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours	27-Aug-2026	UNICEF	Request for proposal	LRPS-2026-9205867	South Africa
 
 	
 Consultancy to support the development of a Framework of Action on Skills for a Just Energy Transition through Social Dialogue in Mpumalanga and the Eastern Cape.

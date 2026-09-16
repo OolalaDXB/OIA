@@ -151,11 +151,11 @@ SOME OF OUR STARTUPS:
 
 A community-based platform in outer space with blockchain technology
 
-We are currently on the Polygon (Matic) Network, which is an Ethereum-compatible blockchain network.
+Jade Autism is an app for ASD (Autistic Spectrum Disorder) that stimulates and develops children's cognitive functions.
 
-Smart Navigation Systems provides innovative location based solutions
+Lune is an AI-driven engagement and hyper-personalization platform for banks, built on insights from over 1 billion transactions. Our Transaction Enrichment API transforms raw transaction data into actionable insights, powering our core products: Enrichment, Personal Finance Engagement (PFE) SDK, Insights Dashboard, and Smart Nudges. (Supports Arabic transliteration)
 
-Making freight transactions automated, globally
+Redefining the work-life experience by making automated HR, payroll, employee benefits and insurance a possibility for all businesses in UAE.
 
 ALL STARTUPS
 Our community says

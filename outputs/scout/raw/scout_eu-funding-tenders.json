@@ -1,5 +1,6 @@
 {
   "ScoutResult": {
+    "note": "Extracted 50 funding opportunities from the first page of results.",
     "calls": [
       {
         "title": "Demonstration of hydropower technologies for efficient and forward-looking refurbishment of existing hydropower plants",
@@ -10,7 +11,9 @@
         "deadlineDate": "1 December 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-07-D3-11?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Demonstration of hydropower technologies for efficient and forward-looking refurbishment of existing hydropower plants"
+        "quote": "Demonstration of hydropower technologies for efficient and forward-looking refurbishment of existing hydropower plants",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Delivery of industrial CCUS clusters – Societal Readiness pilot",
@@ -21,7 +24,9 @@
         "deadlineDate": "1 December 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-07-D3-32?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Delivery of industrial CCUS clusters – Societal Readiness pilot"
+        "quote": "Delivery of industrial CCUS clusters – Societal Readiness pilot",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "PV based electrification of the economy: Designing & optimising PV systems supporting industrial electrification and promoting participation in electricity markets (EUPI-PV Partnership)",
@@ -32,7 +37,9 @@
         "deadlineDate": "1 December 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-07-D3-17?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "PV based electrification of the economy: Designing & optimising PV systems supporting industrial electrification and promoting participation in electricity markets (EUPI-PV Partnership)"
+        "quote": "PV based electrification of the economy: Designing & optimising PV systems supporting industrial electrification and promoting participation in electricity markets (EUPI-PV Partnership)",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Advanced TSO control rooms to enhance grid observability, stability and resilience",
@@ -43,7 +50,9 @@
         "deadlineDate": "1 December 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-07-D3-25?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Advanced TSO control rooms to enhance grid observability, stability and resilience"
+        "quote": "Advanced TSO control rooms to enhance grid observability, stability and resilience",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Advanced Distribution Management Systems (ADSM) for more efficient and flexible distribution grids",
@@ -54,7 +63,9 @@
         "deadlineDate": "1 December 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-07-D3-26?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Advanced Distribution Management Systems (ADSM) for more efficient and flexible distribution grids"
+        "quote": "Advanced Distribution Management Systems (ADSM) for more efficient and flexible distribution grids",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Community of practice - Data-Driven Decision-Making in Energy",
@@ -65,7 +76,9 @@
         "deadlineDate": "1 December 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-07-D3-28?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Community of practice - Data-Driven Decision-Making in Energy"
+        "quote": "Community of practice - Data-Driven Decision-Making in Energy",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Industrial processes and equipment for innovative, reliable and scalable tandem technologies (EUPI-PV Partnership)",
@@ -76,7 +89,9 @@
         "deadlineDate": "1 December 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-07-D3-16?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Industrial processes and equipment for innovative, reliable and scalable tandem technologies (EUPI-PV Partnership)"
+        "quote": "Industrial processes and equipment for innovative, reliable and scalable tandem technologies (EUPI-PV Partnership)",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Integrated Approaches for Retrofitting Infrastructures with Innovative Energy Storage Technologies",
@@ -87,7 +102,9 @@
         "deadlineDate": "1 December 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-07-D3-27?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Integrated Approaches for Retrofitting Infrastructures with Innovative Energy Storage Technologies"
+        "quote": "Integrated Approaches for Retrofitting Infrastructures with Innovative Energy Storage Technologies",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Enhancing Resilience and Accuracy in Positioning, Navigation, and Timing (PNT) Systems and e-conspicuity solutions",
@@ -98,7 +115,9 @@
         "deadlineDate": "7 October 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-06-D6-11?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Enhancing Resilience and Accuracy in Positioning, Navigation, and Timing (PNT) Systems and e-conspicuity solutions"
+        "quote": "Enhancing Resilience and Accuracy in Positioning, Navigation, and Timing (PNT) Systems and e-conspicuity solutions",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "European CCAM knowledge hub and tools for safe and scalable deployment (CCAM Partnership)",
@@ -109,7 +128,9 @@
         "deadlineDate": "7 October 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-06-D6-05?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "European CCAM knowledge hub and tools for safe and scalable deployment (CCAM Partnership)"
+        "quote": "European CCAM knowledge hub and tools for safe and scalable deployment (CCAM Partnership)",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Holistic solutions for CCAM integration in critical scenarios (CCAM Partnership)",
@@ -120,7 +141,9 @@
         "deadlineDate": "7 October 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-06-D6-04?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Holistic solutions for CCAM integration in critical scenarios (CCAM Partnership)"
+        "quote": "Holistic solutions for CCAM integration in critical scenarios (CCAM Partnership)",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Advancing bio-printing of living cells for regenerative medicine",
@@ -131,7 +154,9 @@
         "deadlineDate": "22 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-HLTH-2027-03-TOOL-02?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Advancing bio-printing of living cells for regenerative medicine"
+        "quote": "Advancing bio-printing of living cells for regenerative medicine",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Towards Artificial General Intelligence (AGI) for healthcare",
@@ -142,7 +167,9 @@
         "deadlineDate": "22 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-HLTH-2027-03-TOOL-08?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Towards Artificial General Intelligence (AGI) for healthcare"
+        "quote": "Towards Artificial General Intelligence (AGI) for healthcare",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Support for dissemination events in the field of Transport Research",
@@ -153,7 +180,9 @@
         "deadlineDate": "7 October 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-06-D6-12?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Support for dissemination events in the field of Transport Research"
+        "quote": "Support for dissemination events in the field of Transport Research",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Enhancing Mobility for All: affordable, reliable, and accessible multimodal transport for inclusive rural and urban connectivity – Societal Readiness pilot",
@@ -164,7 +193,9 @@
         "deadlineDate": "7 October 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-06-D6-08?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Enhancing Mobility for All: affordable, reliable, and accessible multimodal transport for inclusive rural and urban connectivity – Societal Readiness pilot"
+        "quote": "Enhancing Mobility for All: affordable, reliable, and accessible multimodal transport for inclusive rural and urban connectivity – Societal Readiness pilot",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Virtual Human Twins (VHTs) for integrated clinical decision support in prevention and diagnosis",
@@ -175,7 +206,9 @@
         "deadlineDate": "22 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-HLTH-2027-03-TOOL-04?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Virtual Human Twins (VHTs) for integrated clinical decision support in prevention and diagnosis"
+        "quote": "Virtual Human Twins (VHTs) for integrated clinical decision support in prevention and diagnosis",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Startup Europe",
@@ -186,7 +219,9 @@
         "deadlineDate": "15 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-EIE-2027-01-CONNECT-01?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Startup Europe"
+        "quote": "Startup Europe",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Enhancing the involvement of philanthropic organisations in innovation ecosystems",
@@ -197,7 +232,9 @@
         "deadlineDate": "15 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-EIE-2027-01-CONNECT-03?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Enhancing the involvement of philanthropic organisations in innovation ecosystems"
+        "quote": "Enhancing the involvement of philanthropic organisations in innovation ecosystems",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Reinforcing synergies between experimentation spaces and innovation procurement",
@@ -208,7 +245,9 @@
         "deadlineDate": "15 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-EIE-2027-01-CONNECT-02?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Reinforcing synergies between experimentation spaces and innovation procurement"
+        "quote": "Reinforcing synergies between experimentation spaces and innovation procurement",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "MSCA Doctoral Networks 2027",
@@ -219,7 +258,9 @@
         "deadlineDate": "23 November 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-MSCA-2027-DN-01-01?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "MSCA Doctoral Networks 2027"
+        "quote": "MSCA Doctoral Networks 2027",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "The impact of EU labour mobility on the Member States of the EU",
@@ -230,7 +271,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-TRANSFO-04?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "The impact of EU labour mobility on the Member States of the EU"
+        "quote": "The impact of EU labour mobility on the Member States of the EU",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Societal impact of cultural heritage",
@@ -241,7 +284,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-HERITAGE-07?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Societal impact of cultural heritage"
+        "quote": "Societal impact of cultural heritage",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Impact of access to nature-positive environments in promoting social cohesion and reducing inequalities in urban and peri-urban settings",
@@ -252,7 +297,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-TRANSFO-01?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Impact of access to nature-positive environments in promoting social cohesion and reducing inequalities in urban and peri-urban settings"
+        "quote": "Impact of access to nature-positive environments in promoting social cohesion and reducing inequalities in urban and peri-urban settings",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Rethinking sustainable competitiveness beyond traditional perspectives: role and contribution of the Social Economy",
@@ -263,7 +310,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-TRANSFO-03?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Rethinking sustainable competitiveness beyond traditional perspectives: role and contribution of the Social Economy"
+        "quote": "Rethinking sustainable competitiveness beyond traditional perspectives: role and contribution of the Social Economy",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Future-proofing sustainable cultural tourism",
@@ -274,7 +323,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-HERITAGE-06?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Future-proofing sustainable cultural tourism"
+        "quote": "Future-proofing sustainable cultural tourism",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Addressing the impact of artificial intelligence, cyberviolence, and deepfakes on equality, democracy and inclusive societies",
@@ -285,7 +336,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-DEMOCRACY-04?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Addressing the impact of artificial intelligence, cyberviolence, and deepfakes on equality, democracy and inclusive societies"
+        "quote": "Addressing the impact of artificial intelligence, cyberviolence, and deepfakes on equality, democracy and inclusive societies",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Re-imagining the creative economy: the interplay between the cultural and creative sectors and industries and the social economy",
@@ -296,7 +349,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-HERITAGE-05?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Re-imagining the creative economy: the interplay between the cultural and creative sectors and industries and the social economy"
+        "quote": "Re-imagining the creative economy: the interplay between the cultural and creative sectors and industries and the social economy",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Development aid and democratic governance",
@@ -307,7 +362,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-DEMOCRACY-05?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Development aid and democratic governance"
+        "quote": "Development aid and democratic governance",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "The role of private companies in democracy",
@@ -318,7 +375,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-DEMOCRACY-07?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "The role of private companies in democracy"
+        "quote": "The role of private companies in democracy",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "AI4Creatives Support Platform: embracing a fair AI revolution",
@@ -329,7 +388,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-HERITAGE-02?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "AI4Creatives Support Platform: embracing a fair AI revolution"
+        "quote": "AI4Creatives Support Platform: embracing a fair AI revolution",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Scaling and deploying innovations in migration management",
@@ -340,7 +401,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-TRANSFO-08?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Scaling and deploying innovations in migration management"
+        "quote": "Scaling and deploying innovations in migration management",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Crafting routes to a circular economy",
@@ -351,7 +414,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-HERITAGE-03?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Crafting routes to a circular economy"
+        "quote": "Crafting routes to a circular economy",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Women’s, LGBTIQ and minority rights in a context of autocracy, conflict and geopolitical shifts",
@@ -362,7 +427,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-DEMOCRACY-02?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Women’s, LGBTIQ and minority rights in a context of autocracy, conflict and geopolitical shifts"
+        "quote": "Women’s, LGBTIQ and minority rights in a context of autocracy, conflict and geopolitical shifts",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "The effective use of artificial intelligence in learning environments in pre-primary and primary education",
@@ -373,7 +440,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-TRANSFO-05?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "The effective use of artificial intelligence in learning environments in pre-primary and primary education"
+        "quote": "The effective use of artificial intelligence in learning environments in pre-primary and primary education",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Towards a consolidated culture and creativity driven European innovation ecosystem",
@@ -384,7 +453,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-HERITAGE-01?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Towards a consolidated culture and creativity driven European innovation ecosystem"
+        "quote": "Towards a consolidated culture and creativity driven European innovation ecosystem",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Closing the learning gap: uncovering causes and effective policy interventions for declining youth skills in mathematics, reading, and science",
@@ -395,7 +466,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-TRANSFO-06?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Closing the learning gap: uncovering causes and effective policy interventions for declining youth skills in mathematics, reading, and science"
+        "quote": "Closing the learning gap: uncovering causes and effective policy interventions for declining youth skills in mathematics, reading, and science",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Identifying user-focused solutions to support news media freedom",
@@ -406,7 +479,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-DEMOCRACY-06?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Identifying user-focused solutions to support news media freedom"
+        "quote": "Identifying user-focused solutions to support news media freedom",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Global Human Rights and EU values",
@@ -417,7 +492,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-DEMOCRACY-08?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Global Human Rights and EU values"
+        "quote": "Global Human Rights and EU values",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Safeguarding & transmission of intangible cultural heritage",
@@ -428,7 +505,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-HERITAGE-08?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Safeguarding & transmission of intangible cultural heritage"
+        "quote": "Safeguarding & transmission of intangible cultural heritage",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Student and family engagement for developing a culture of democratic/civic participation",
@@ -439,7 +518,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-DEMOCRACY-03?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Student and family engagement for developing a culture of democratic/civic participation"
+        "quote": "Student and family engagement for developing a culture of democratic/civic participation",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Culture, heritage and creative industries for health and well-being",
@@ -450,7 +531,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-HERITAGE-04?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Culture, heritage and creative industries for health and well-being"
+        "quote": "Culture, heritage and creative industries for health and well-being",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Advisory support and network for countering and preventing radicalisation, extremism, hate speech and polarisation",
@@ -461,7 +544,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-DEMOCRACY-01?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Advisory support and network for countering and preventing radicalisation, extremism, hate speech and polarisation"
+        "quote": "Advisory support and network for countering and preventing radicalisation, extremism, hate speech and polarisation",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Persons with disabilities: opportunities for labour inclusion and social protection through the life course",
@@ -472,7 +557,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-TRANSFO-07?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Persons with disabilities: opportunities for labour inclusion and social protection through the life course"
+        "quote": "Persons with disabilities: opportunities for labour inclusion and social protection through the life course",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Impact of in-kind benefits on income distribution and on vulnerable populations",
@@ -483,7 +570,9 @@
         "deadlineDate": "23 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL2-2027-01-TRANSFO-02?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Impact of in-kind benefits on income distribution and on vulnerable populations"
+        "quote": "Impact of in-kind benefits on income distribution and on vulnerable populations",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Integrating circularity in LCA-based modelling frameworks for renovation of buildings (Built4People Partnership)",
@@ -494,7 +583,9 @@
         "deadlineDate": "15 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-05-D4-07?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Integrating circularity in LCA-based modelling frameworks for renovation of buildings (Built4People Partnership)"
+        "quote": "Integrating circularity in LCA-based modelling frameworks for renovation of buildings (Built4People Partnership)",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "On-site robotic and automated techniques for building renovation and new construction",
@@ -505,7 +596,9 @@
         "deadlineDate": "15 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-05-D4-05?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "On-site robotic and automated techniques for building renovation and new construction"
+        "quote": "On-site robotic and automated techniques for building renovation and new construction",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Demonstration for Long-duration Battery Energy Storage Systems (BATT4EU Partnership)",
@@ -516,7 +609,9 @@
         "deadlineDate": "15 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-05-D2-08?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Demonstration for Long-duration Battery Energy Storage Systems (BATT4EU Partnership)"
+        "quote": "Demonstration for Long-duration Battery Energy Storage Systems (BATT4EU Partnership)",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Thermal energy optimisation and waste heat recovery of high energy demand IT rooms in buildings or small edge data centres",
@@ -527,7 +622,9 @@
         "deadlineDate": "15 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-05-D4-06?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Thermal energy optimisation and waste heat recovery of high energy demand IT rooms in buildings or small edge data centres"
+        "quote": "Thermal energy optimisation and waste heat recovery of high energy demand IT rooms in buildings or small edge data centres",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Demonstration of industrial excess/waste heat conversion to mechanical or electrical power",
@@ -538,7 +635,9 @@
         "deadlineDate": "15 September 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL5-2027-05-D4-09?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Demonstration of industrial excess/waste heat conversion to mechanical or electrical power"
+        "quote": "Demonstration of industrial excess/waste heat conversion to mechanical or electrical power",
+        "eligibility": "",
+        "amount": ""
       },
       {
         "title": "Detection and characterisation of threats or illegal/ smuggled goods in cargo",
@@ -549,9 +648,10 @@
         "deadlineDate": "4 November 2027",
         "submissionStatus": "Forthcoming",
         "sourceUrl": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL3-2027-01-BM-03?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate",
-        "quote": "Detection and characterisation of threats or illegal/ smuggled goods in cargo"
+        "quote": "Detection and characterisation of threats or illegal/ smuggled goods in cargo",
+        "eligibility": "",
+        "amount": ""
       }
-    ],
-    "note": "Only the first 50 of over 10,000 calls are listed. The page contains a filterable list of all open, forthcoming, and closed calls for proposals under EU programmes."
+    ]
   }
 }

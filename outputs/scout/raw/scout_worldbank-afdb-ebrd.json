@@ -1,22 +1,20 @@
 {
   "ScoutResult": {
     "calls": [
-      {
-        "title": "Consultancy services for the feasibility study, detailed design, tender document preparation, construction supervision, & contract administration for the Gidabo Left Bank New Irrigation Development project",
-        "programme": "Climate Resilient Irrigation for Sustainable Production (CRISP)",
-        "fundingBody": "World Bank",
-        "country": "Ethiopia",
-        "noticeType": "Request for Expression of Interest",
-        "noticeNo": "OP00468424",
-        "procurementMethod": "Quality And Cost-Based Selection",
-        "deadline": "Oct 05, 2026 04:30",
-        "publishedDate": "Sep 15, 2026",
-        "amount": "",
-        "eligibility": "Eligible consulting firms with required qualifications and relevant experience in the field of assignment, including core business, years in business, organizational, managerial, and technical capabilities. Firms may associate in joint ventures or sub-consultancies.",
-        "quote": "The Federal Democratic Republic of Ethiopia has received financing from the World Bank toward the cost of the Climate Resilient Irrigation for Sustainable Production (CRISP) Project. The implementing agency, the Ministry of Irrigation and Lowlands, intends to apply part of the proceeds for the consulting service.",
-        "sourceUrl": "https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00468424"
-      }
-    ],
-    "note": ""
-  }
-}
+      6
+        ],
+        "note": "The page contains a single funding opportunity: a Request for Expression of Interest for consulting services under the Ethiopia Climate Resilient Irrigation for Sustainable Production (CRISP) Project."
+      },
+      "calls": [
+        {
+          "title": "Consultancy services for the feasibility study, detailed design, tender document preparation, construction supervision, & contract administration for the Gidabo Left Bank New Irrigation Development project",
+          "programme": "Climate Resilient Irrigation for Sustainable Production (CRISP)",
+          "fundingBody": "World Bank",
+          "sourceUrl": "https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00468424",
+          "deadline": "Oct 05, 2026 04:30",
+          "amount": "",
+          "eligibility": "Eligible consulting firms with required qualifications and relevant experience in the field of assignment, including core business and years in business, organizational, managerial, and technical capabilities. Firms may associate in joint ventures or sub-consultancies.",
+          "quote": "The Federal Democratic Republic of Ethiopia has received financing from the World Bank toward the cost of the Climate Resilient Irrigation for Sustainable Production (CRISP) Project. The implementing agency, the Ministry of Irrigation and Lowlands, intends to apply part of the proceeds for the consulting service."
+        }
+      ]
+    }
