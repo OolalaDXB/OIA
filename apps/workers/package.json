@@ -13,7 +13,8 @@
     "test": "vitest run --passWithNoTests",
     "publish:watch": "tsx src/publish-watch.ts",
     "check:links": "tsx src/check-links.ts",
-    "requests": "tsx src/process-requests.ts"
+    "requests": "tsx src/process-requests.ts",
+    "scout:aid": "tsx src/scout-aid.ts"
   },
   "dependencies": {
     "@oia/audit": "workspace:*",
@@ -28,6 +29,7 @@
     "@oia/scoring": "workspace:*",
     "@oia/watch": "workspace:*",
     "@supabase/supabase-js": "^2.47.10",
+    "playwright": "^1.49.1",
     "yaml": "^2.6.1"
   },
   "devDependencies": {

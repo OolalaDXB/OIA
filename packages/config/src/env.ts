@@ -21,8 +21,10 @@ export const EnvSchema = z.object({
   // Optional in web context; required by workers (checked separately).
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1).optional(),
 
-  LLM_PROVIDER: z.enum(["anthropic", "openai"]).default("anthropic"),
-  LLM_MODEL: z.string().min(1).default("claude-sonnet-5"),
+  // Mistral is the default: OIA serves a studio whose own positioning is
+  // European sovereignty, and it is the provider already exercised live here.
+  LLM_PROVIDER: z.enum(["mistral", "anthropic", "openai"]).default("mistral"),
+  LLM_MODEL: z.string().min(1).default("mistral-large-latest"),
   LLM_API_KEY: z.string().min(1).optional(),
 
   EU_FT_API_KEY: z.string().min(1).default("SEDIA"),

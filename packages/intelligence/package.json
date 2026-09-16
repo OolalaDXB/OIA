@@ -15,6 +15,7 @@
     "@oia/config": "workspace:*",
     "@oia/connectors": "workspace:*",
     "@oia/database": "workspace:*",
+    "@oia/ingestion": "workspace:*",
     "@oia/providers": "workspace:*",
     "@oia/scoring": "workspace:*",
     "zod": "^3.24.1"
