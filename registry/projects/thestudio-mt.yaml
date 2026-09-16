@@ -9,9 +9,9 @@ name: TheStudio MT
 kind: STUDIO
 oneLiner: "The studio itself — product strategy, architecture and full-stack delivery, as a contracting party."
 status: LIVE
-url: "https://thestudiomt.com"
+url: "https://thestudio.mt"
 urlVerified: false
-lastUrlCheck: "2026-09-16"
+lastUrlCheck: ""
 active: true
 legalEntities:
   - name: "Oolala France SAS"

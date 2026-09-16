@@ -18,7 +18,7 @@ Phase 1 report — *"the console now carries TheStudio profiles and internal
 suggestions, put protection back"* — is therefore **closed**.
 
 **One thing to remember:** Vercel Authentication with this setting does not
-cover a *custom domain*. The day a domain like `oia.thestudiomt.com` is attached
+cover a *custom domain*. The day a domain like `oia.thestudio.mt` is attached
 to this project, that domain is public unless protection is reconfigured. Do not
 attach one without revisiting this page.
 
