@@ -306,6 +306,7 @@ export function Console({
   }, [ledger.records, fixedKind, nowIso]);
 
   const [selectedId, setSelectedId] = useState<string>("");
+  const [fBlocked, setFBlocked] = useState("");
   const [fKind, setFKind] = useState("");
   const [fReco, setFReco] = useState("");
   const [fVerif, setFVerif] = useState("");
@@ -315,16 +316,54 @@ export function Console({
   const [fFresh, setFFresh] = useState("");
   const [sortKey, setSortKey] = useState("pubDate:desc");
 
+  /**
+   * The queue is addressable.
+   *
+   * Money and Today could show a figure and a count and then leave you
+   * stranded: nothing on either screen was a link, so "EUR 128,900,000" and
+   * "29 blocked on an unconfirmed source" were dead ends. A number you cannot
+   * click is a number you cannot act on.
+   *
+   * So every filter can arrive in the URL — ?project=bawaba,
+   * ?blocked=verifiedSource, ?id=422623-2026 — and the other screens link here
+   * instead of restating what they cannot reach.
+   */
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    const set = (key: string, apply: (v: string) => void) => {
+      const v = q.get(key);
+      if (v) apply(v);
+    };
+    set("project", setFProject);
+    set("kind", setFKind);
+    set("reco", setFReco);
+    set("verif", setFVerif);
+    set("review", setFReview);
+    set("fresh", setFFresh);
+    set("blocked", setFBlocked);
+    set("id", setSelectedId);
+  }, []);
+
   const filtered = useMemo(() => {
     const xs = records.filter(
       (r) =>
+        (!fBlocked || (r.gate?.failedReasons ?? []).includes(fBlocked)) &&
         (!fKind || (r.opportunityKind ?? "GRANT") === fKind) &&
         (!fReco || r.recommendation === fReco) &&
         (!fVerif || r.verificationStatus === fVerif) &&
         (!fRoute || r.strategicRoute === fRoute) &&
         (!fReview || audit.statusFor(r.id) === fReview) &&
+        // A record belongs to a project when a human tagged it OR — until a
+        // human decides otherwise — when that project's own query surfaced it.
+        // Money counts it that way; this filter used to count only the tag, so
+        // Money said BAWABA had 19 records, you clicked, and the queue showed
+        // zero. Two screens disagreeing about the same number is worse than
+        // either being wrong alone.
         (!fProject ||
-          (fProject === "__untagged" ? !projectTags.tags[r.id] : projectTags.tags[r.id] === fProject)) &&
+          (fProject === "__untagged"
+            ? !projectTags.tags[r.id] && (r.discoveredFor ?? []).length === 0
+            : projectTags.tags[r.id] === fProject ||
+              (!projectTags.tags[r.id] && (r.discoveredFor ?? []).includes(fProject)))) &&
         (!fFresh || assessFreshness(r, nowIso).status === fFresh),
     );
     const [field, dir] = sortKey.split(":");
@@ -335,7 +374,7 @@ export function Console({
       if (field === "deadline") return mul * appDeadline(a).localeCompare(appDeadline(b));
       return mul * pubDate(a).localeCompare(pubDate(b)); // pubDate default
     });
-  }, [records, fKind, fReco, fVerif, fRoute, fReview, fProject, fFresh, sortKey, audit, projectTags.tags, nowIso]);
+  }, [records, fBlocked, fKind, fReco, fVerif, fRoute, fReview, fProject, fFresh, sortKey, audit, projectTags.tags, nowIso]);
 
   const selected = records.find((r) => r.id === selectedId) ?? filtered[0];
 
@@ -411,10 +450,37 @@ export function Console({
           {data.note && <p className="heroNote">{data.note}</p>}
         </header>
 
+        {/* A filter that arrived in the URL must be visible and undoable. An
+            invisible filter is worse than no link at all: the queue looks
+            empty and nothing on screen says why. */}
+        {(fBlocked || fProject || selectedId) && (
+          <div className="activeFilter">
+            <span>
+              {lang === "fr" ? "Vue filtrée :" : "Filtered view:"}{" "}
+              {fBlocked && <b>{plainFailure(fBlocked, lang)}</b>}
+              {fProject && <b>{fProject === "__untagged" ? (lang === "fr" ? "sans projet" : "no project") : fProject}</b>}
+              {selectedId && !fBlocked && !fProject && <b>{selectedId}</b>}
+              {" · "}
+              {filtered.length} {lang === "fr" ? "fiche(s)" : "record(s)"}
+            </span>
+            <button
+              className="ghostBtn"
+              onClick={() => {
+                setFBlocked("");
+                setFProject("");
+                setSelectedId("");
+                window.history.replaceState({}, "", window.location.pathname);
+              }}
+            >
+              {lang === "fr" ? "tout afficher" : "show everything"}
+            </button>
+          </div>
+        )}
+
         <div className="filters">
           {!fixedKind && (
             <label className="filter">
-              <span className="muted">Kind</span>
+              <span className="muted">{lang === "fr" ? "Type" : "Kind"}</span>
               <select value={fKind} onChange={(e) => setFKind(e.target.value)}>
                 <option value="">all</option>
                 {(Object.keys(KIND_LABEL) as OpportunityKind[]).map((k) => (
@@ -428,7 +494,7 @@ export function Console({
           <Select label="Route" value={fRoute} onChange={setFRoute} options={opt(records.map((r) => r.strategicRoute))} />
           <Select label="Human review" value={fReview} onChange={setFReview} options={["PENDING", "APPROVE", "REJECT", "NEEDS_VERIFICATION"]} />
           <label className="filter">
-            <span className="muted">Project</span>
+            <span className="muted">{lang === "fr" ? "Projet" : "Project"}</span>
             <select value={fProject} onChange={(e) => setFProject(e.target.value)}>
               <option value="">all</option>
               <option value="__untagged">untagged</option>
@@ -438,7 +504,7 @@ export function Console({
             </select>
           </label>
           <label className="filter">
-            <span className="muted">Sort</span>
+            <span className="muted">{lang === "fr" ? "Tri" : "Sort"}</span>
             <select value={sortKey} onChange={(e) => setSortKey(e.target.value)}>
               <option value="pubDate:desc">publication ↓ (recent first)</option>
               <option value="pubDate:asc">publication ↑</option>
@@ -454,14 +520,14 @@ export function Console({
             options={["FRESH", "CLOSING_SOON", "EXPIRED", "NO_DEADLINE"]}
           />
           <label className="filter">
-            <span className="muted">Export ({filtered.length})</span>
+            <span className="muted">{lang === "fr" ? "Exporter" : "Export"} ({filtered.length})</span>
             <span className="viewsRow">
               <button className="ghostBtn" onClick={exportCsv}>csv</button>
               <button className="ghostBtn" onClick={exportMarkdown}>markdown</button>
             </span>
           </label>
           <label className="filter">
-            <span className="muted">Saved views</span>
+            <span className="muted">{lang === "fr" ? "Vues enregistrées" : "Saved views"}</span>
             <span className="viewsRow">
               <select defaultValue="" onChange={(e) => { applyView(e.target.value); e.target.value = ""; }}>
                 <option value="" disabled>{savedViews.views.length ? "apply…" : "none yet"}</option>

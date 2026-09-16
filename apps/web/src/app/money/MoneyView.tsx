@@ -13,6 +13,7 @@ import {
   untriagedFinance,
   type ProjectFinance,
 } from "@oia/workspace";
+import Link from "next/link";
 import { Shell } from "../Shell";
 import { useAuditLog, useProjectTags } from "../../lib/workspaceStore";
 import { useLedger } from "../../lib/watchData";
@@ -136,10 +137,22 @@ export function MoneyView({ data }: { data: ConsoleData }) {
               </thead>
               <tbody>
                 {rows.map((r) => (
-                  <FinanceRow key={r.projectSlug} row={r} name={projectName(r.projectSlug)} />
+                  <FinanceRow
+                    key={r.projectSlug}
+                    row={r}
+                    name={projectName(r.projectSlug)}
+                    href={`/?project=${encodeURIComponent(r.projectSlug)}`}
+                    fr={fr}
+                  />
                 ))}
                 {untriaged.records > 0 && (
-                  <FinanceRow row={untriaged} name={fr ? "Rattaché à aucun projet" : "Attached to no project"} muted />
+                  <FinanceRow
+                    row={untriaged}
+                    name={fr ? "Rattaché à aucun projet" : "Attached to no project"}
+                    href="/?project=__untagged"
+                    fr={fr}
+                    muted
+                  />
                 )}
               </tbody>
             </table>
@@ -157,14 +170,14 @@ export function MoneyView({ data }: { data: ConsoleData }) {
               .map(([kind, count]) => {
                 const profile = KIND_PROFILES[normalizeKind(kind)];
                 return (
-                  <div key={kind} className="kindCard">
+                  <Link key={kind} className="kindCard kindLink" href={`/?kind=${encodeURIComponent(kind)}`}>
                     <div className="viewsRow">
                       <b>{kindLabel(kind, lang)}</b>
                       <span className="pubChip">{count}</span>
                       {profile.direction === "OUTBOUND" && <span className="pubChip expiredChip">{fr ? "argent sortant" : "money out"}</span>}
                     </div>
                     <div className="muted small">{kindMeaning(kind, lang)}</div>
-                  </div>
+                  </Link>
                 );
               })}
           </div>
@@ -182,7 +195,12 @@ export function MoneyView({ data }: { data: ConsoleData }) {
           </div>
           {showBacklog &&
             metrics.gateFailures.map((f) => (
-              <div key={f.reason} className="barRow">
+              <Link
+                key={f.reason}
+                className="barRow barLink"
+                href={`/?blocked=${encodeURIComponent(f.reason)}`}
+                title={fr ? "Voir les fiches concernées" : "See the records this blocks"}
+              >
                 <span className="barLabel">{plainFailure(f.reason, lang)}</span>
                 <span className="barTrack">
                   <span
@@ -191,7 +209,7 @@ export function MoneyView({ data }: { data: ConsoleData }) {
                   />
                 </span>
                 <span className="barValue">{f.count}</span>
-              </div>
+              </Link>
             ))}
           {showBacklog && metrics.gateFailures.length === 0 && (
             <div className="muted">{fr ? "Rien n'est bloqué." : "Nothing is blocked."}</div>
@@ -202,11 +220,27 @@ export function MoneyView({ data }: { data: ConsoleData }) {
   );
 }
 
-function FinanceRow({ row, name, muted }: { row: ProjectFinance; name: string; muted?: boolean }) {
+function FinanceRow({
+  row,
+  name,
+  href,
+  fr,
+  muted,
+}: {
+  row: ProjectFinance;
+  name: string;
+  href: string;
+  fr: boolean;
+  muted?: boolean;
+}) {
   const coverage = row.records === 0 ? 0 : Math.round((row.withAmount / row.records) * 100);
   return (
     <tr className={muted ? "mutedRow" : undefined}>
-      <td>{name}</td>
+      <td>
+        <Link href={href} title={fr ? "Voir ces fiches" : "See these records"}>
+          {name}
+        </Link>
+      </td>
       <td className="num">{row.records}</td>
       <td className="num">
         {row.withAmount}

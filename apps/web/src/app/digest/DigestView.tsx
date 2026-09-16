@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import type { ConsoleData } from "@oia/ingestion/console";
 import { buildDigest, digestToMarkdown, projectName, type DigestReason } from "@oia/workspace";
 import { applyFreshnessAll } from "@oia/ingestion/freshness";
+import Link from "next/link";
+import { useLang } from "../../lib/lang";
 import { Shell } from "../Shell";
 import { download, useAuditLog, useProjectTags, useTasks } from "../../lib/workspaceStore";
 import { useAlerts } from "../../lib/watchData";
@@ -17,13 +19,13 @@ import { useLedger } from "../../lib/watchData";
  * instead of filling the page.
  */
 
-const LABEL: Record<DigestReason, string> = {
-  TASK_OVERDUE: "Overdue",
-  JUST_EXPIRED: "Closed since you last looked",
-  CLOSING_SOON: "Closing soon",
-  TASK_DUE: "Due shortly",
-  APPROVED_BUT_BLOCKED: "Approved but gate-blocked",
-  UNREVIEWED: "Waiting for triage",
+const LABEL: Record<DigestReason, { fr: string; en: string }> = {
+  TASK_OVERDUE: { fr: "En retard", en: "Overdue" },
+  JUST_EXPIRED: { fr: "Clos depuis ta dernière visite", en: "Closed since you last looked" },
+  CLOSING_SOON: { fr: "Bientôt clos", en: "Closing soon" },
+  TASK_DUE: { fr: "À faire sous peu", en: "Due shortly" },
+  APPROVED_BUT_BLOCKED: { fr: "Approuvé mais bloqué par un contrôle", en: "Approved but gate-blocked" },
+  UNREVIEWED: { fr: "En attente de tri", en: "Waiting for triage" },
 };
 
 const TONE: Record<DigestReason, string> = {
@@ -36,6 +38,8 @@ const TONE: Record<DigestReason, string> = {
 };
 
 export function DigestView({ data }: { data: ConsoleData }) {
+  const { lang } = useLang();
+  const fr = lang === "fr";
   const audit = useAuditLog();
   const tags = useProjectTags();
   const tasks = useTasks();
@@ -68,8 +72,16 @@ export function DigestView({ data }: { data: ConsoleData }) {
     <Shell
       active="today"
       title={{ fr: `Aujourd'hui — ${digest.date}`, en: `Today — ${digest.date}` }}
-      stats={`${alerts.open.length} alert(s) · ${digest.entries.length} thing(s) to do · ${ledger.source === "LEDGER" ? "live ledger" : "bundled snapshot"}`}
-      note="Everything that is asking for you: alerts raised by the permanent watch, then what is closing, overdue, blocked or untriaged. No ranking model — just deadlines, tasks and what you already decided."
+      stats={
+        fr
+          ? `${alerts.open.length} alerte(s) · ${digest.entries.length} chose(s) à faire · ${ledger.source === "LEDGER" ? "registre permanent" : "instantané embarqué"}`
+          : `${alerts.open.length} alert(s) · ${digest.entries.length} thing(s) to do · ${ledger.source === "LEDGER" ? "live ledger" : "bundled snapshot"}`
+      }
+      note={
+        fr
+          ? "Tout ce qui te réclame : les alertes de la veille permanente, puis ce qui ferme, ce qui est en retard, ce qui est bloqué ou non trié. Aucun modèle de classement — seulement des dates, des tâches et ce que tu as déjà décidé. Clique une ligne pour ouvrir la fiche."
+          : "Everything that is asking for you: alerts raised by the permanent watch, then what is closing, overdue, blocked or untriaged. No ranking model — just deadlines, tasks and what you already decided. Click a line to open the record."
+      }
       onExportAudit={audit.exportLog}
     >
       <div className="filters">
@@ -97,7 +109,7 @@ export function DigestView({ data }: { data: ConsoleData }) {
       <div className="detail wide">
         {isConfigured() && alerts.open.length > 0 && (
           <section className="sec">
-            <h3 className="warn">Alerts · {alerts.open.length}</h3>
+            <h3 className="warn">{fr ? "Alertes" : "Alerts"} · {alerts.open.length}</h3>
             <div className="muted small">
               Raised by the watch when something changed: a new call matching a project, a deadline moving, a call
               withdrawn. Acknowledging one keeps the record — it only stops asking.
@@ -122,10 +134,11 @@ export function DigestView({ data }: { data: ConsoleData }) {
 
         {groups.length === 0 && alerts.open.length === 0 && (
           <section className="sec">
-            <h3>Nothing needs you today</h3>
+            <h3>{fr ? "Rien ne te réclame aujourd'hui" : "Nothing needs you today"}</h3>
             <p className="muted">
-              No call closing inside the horizon, no task due, no approval blocked by the gate, nothing untriaged.
-              That is a real answer, not an empty screen.
+              {fr
+                ? "Aucun appel ne ferme dans l'horizon, aucune tâche à échéance, aucune approbation bloquée, rien à trier. C'est une vraie réponse, pas un écran vide."
+                : "No call closing inside the horizon, no task due, no approval blocked by the gate, nothing untriaged. That is a real answer, not an empty screen."}
             </p>
           </section>
         )}
@@ -133,17 +146,25 @@ export function DigestView({ data }: { data: ConsoleData }) {
         {groups.map(({ reason, entries }) => (
           <section key={reason} className="sec">
             <h3 style={{ color: TONE[reason] }}>
-              {LABEL[reason]} · {entries.length}
+              {LABEL[reason][lang]} · {entries.length}
             </h3>
             {entries.map((e, i) => (
-              <div key={`${e.recordId}-${i}`} className="fact" style={{ borderLeftColor: TONE[reason] }}>
+              // Today's whole job is "what should I open first". Every line
+              // therefore opens the record it is about; a to-do list you cannot
+              // click is just a list of regrets.
+              <Link
+                key={`${e.recordId}-${i}`}
+                href={`/?id=${encodeURIComponent(e.recordId)}`}
+                className="fact factLink"
+                style={{ borderLeftColor: TONE[reason] }}
+              >
                 <div>
                   <b>{e.headline}</b>
                   {e.projectSlug && <span className="pubChip tagChip digestChip">{projectName(e.projectSlug)}</span>}
                 </div>
                 <div>{e.nextAction}</div>
                 <div className="muted small">{e.detail}</div>
-              </div>
+              </Link>
             ))}
           </section>
         ))}
