@@ -34,7 +34,9 @@ exclusions: []
 discovery:
   enabled: true
   queryTerms: ["cybersecurity", "open source security", "software assurance"]
-  cpvCodes: ["72000000", "48000000"]
+  cpvCodes: ["72212730", "79417000", "72267000", "48218000"]
+  cpvNote: >-
+    CPV codes refined from division level (72000000 = all IT services) to the specific services this project could deliver or would seek: security software development, security consultancy, software maintenance. A wrong code returns nothing rather than the wrong thing, and the per-project counts in the run report make that visible immediately — verify against the official CPV nomenclature on the first real run.
   countries: ["FRA", "LUX", "BEL"]
   watch: ["GRANT", "TENDER_RFP"]
 profileReview:

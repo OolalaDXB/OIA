@@ -12,6 +12,18 @@ import { fromRoot } from "./paths";
  * at MANUAL_REVIEW_REQUIRED (never VERIFIED without a human).
  */
 
+interface NoticeFact {
+  field: string;
+  normalizedValue: string;
+  originalSourceText: string;
+  classification: string;
+  locator: { type: string; value: string; page?: number };
+  extractionMethod: string;
+  extractingProvider: string;
+  extractingModel: string;
+  extractionConfidence: number;
+}
+
 interface TedCandidate {
   externalId: string;
   title: string;
@@ -19,6 +31,11 @@ interface TedCandidate {
   issuer?: string;
   /** Registry slugs whose discovery query surfaced this notice (multi-project run). */
   discoveredFor?: string[];
+  /** TED notice type, and what it means for whether this can be bid on. */
+  noticeType?: string;
+  noticeClass?: string;
+  /** Facts read from the notice PAGE — scope, value, procedure, place, lots. */
+  noticeFacts?: NoticeFact[];
   liveFetch: string;
   sourceFormat?: string;
   contentHash?: string;
@@ -29,7 +46,8 @@ interface TedCandidate {
 }
 
 function toConsoleRecord(c: TedCandidate): ConsoleRecord {
-  const facts: ConsoleFact[] = c.provenance.map((p) => ({
+  // Search-API metadata: what the listing told us.
+  const metadataFacts: ConsoleFact[] = c.provenance.map((p) => ({
     field: p.field,
     normalizedValue: p.value,
     classification: "EXTRACTED_FROM_OFFICIAL_SOURCE",
@@ -40,6 +58,22 @@ function toConsoleRecord(c: TedCandidate): ConsoleRecord {
     extractionConfidence: 0.85,
     originalSourceText: p.value,
   }));
+
+  // Notice-page facts: what the call actually says. These are what let the
+  // matcher reason about a call rather than pattern-match its title.
+  const pageFacts: ConsoleFact[] = (c.noticeFacts ?? []).map((f) => ({
+    field: f.field,
+    normalizedValue: f.normalizedValue,
+    classification: f.classification as ConsoleFact["classification"],
+    locator: f.locator as ConsoleFact["locator"],
+    extractionMethod: f.extractionMethod,
+    extractingProvider: f.extractingProvider,
+    extractingModel: f.extractingModel,
+    extractionConfidence: f.extractionConfidence,
+    originalSourceText: f.originalSourceText,
+  }));
+
+  const facts: ConsoleFact[] = [...pageFacts, ...metadataFacts];
 
   // TED discovery does not assess eligibility and is never human-VERIFIED here:
   // a gate that cannot pass, so APPROVE can never force PURSUE.
@@ -85,7 +119,13 @@ function toConsoleRecord(c: TedCandidate): ConsoleRecord {
     application: "UNKNOWN",
     award: "UNKNOWN",
     strategicRoute: "UNKNOWN",
-    scores: { relevance: null, winPotential: null, infoConfidence: Math.min(50, 15 + facts.length * 5) },
+    // Reading the notice body is worth more than reading its listing, but it is
+    // still not a human verification: the ceiling stays well under the floor.
+    scores: {
+      relevance: null,
+      winPotential: null,
+      infoConfidence: Math.min(60, 15 + metadataFacts.length * 3 + pageFacts.length * 5),
+    },
     gate,
     recommendation: "INVESTIGATE",
     humanReview: "PENDING",
@@ -95,7 +135,9 @@ function toConsoleRecord(c: TedCandidate): ConsoleRecord {
     discrepancies: [],
     expected: {},
     unresolvedQuestions: [
-      "Eligibility not assessed (TED discovery surfaces metadata; qualification is Sprint 2+).",
+      ...(pageFacts.some((f) => f.field === "eligibility")
+        ? ["Eligibility section extracted from the notice but NOT assessed against the project — a human must read it."]
+        : ["Eligibility not assessed and no eligibility section found in the notice."]),
       "Source not human-VERIFIED — a reviewer must confirm before PURSUE.",
     ],
     warnings: [],

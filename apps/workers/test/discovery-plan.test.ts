@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { PROJECT_REGISTRY, discoverableProjects, findProject } from "@oia/registry";
-import { selectProjects, projectTedQuery } from "../src/discover-ted";
+import { narrowQuery, queryFromLayers } from "@oia/connectors";
+import { selectProjects, projectTedQuery, projectQueryLayers } from "../src/discover-ted";
 import { mergeConsoleData, tedCandidatesToConsole } from "../src/ted-to-console";
 
 const SINCE = "20260618";
@@ -23,11 +24,44 @@ describe("multi-project discovery plan", () => {
   it("builds a distinct query per project from its own CPV codes and countries", () => {
     const sillon = projectTedQuery(findProject(PROJECT_REGISTRY, "sillon")!, SINCE);
     const studio = projectTedQuery(findProject(PROJECT_REGISTRY, "thestudio-mt")!, SINCE);
-    expect(sillon).toContain("92000000"); // cultural
-    expect(studio).toContain("79400000"); // consultancy
+    expect(sillon).toContain("92500000"); // library/archives/cultural services
+    expect(studio).toContain("79421000"); // project management services
     expect(sillon).not.toEqual(studio);
     // The recency floor is never lost: every project query carries it.
     for (const p of selectProjects()) expect(projectTedQuery(p, SINCE)).toContain(`publication-date>=${SINCE}`);
+  });
+
+  it("asks for specific services, not whole CPV divisions", () => {
+    // 72000000 is "IT services", entire. Querying a division is not filtering:
+    // it is taking a huge slice of the flow and hoping to sort it out later.
+    for (const p of selectProjects()) {
+      for (const code of p.discovery.cpvCodes) {
+        expect(code).not.toMatch(/^\d{2}000000$/);
+      }
+    }
+  });
+
+  it("carries the project's own search terms into the query", () => {
+    const studio = projectTedQuery(findProject(PROJECT_REGISTRY, "thestudio-mt")!, SINCE);
+    expect(studio).toContain('"digital transformation"');
+    expect(studio).toContain("notice-type IN (cn-standard cn-social)");
+  });
+
+  it("degrades to the proven clauses when the speculative ones are rejected", () => {
+    const entry = findProject(PROJECT_REGISTRY, "sillon")!;
+    let layers = projectQueryLayers(entry, SINCE);
+    let next = narrowQuery(layers);
+    while (next) {
+      layers = next;
+      next = narrowQuery(layers);
+    }
+    const core = queryFromLayers(layers)!;
+    // What survives is exactly what a real recorded run already proved works.
+    expect(core).toContain("classification-cpv IN");
+    expect(core).toContain("buyer-country IN");
+    expect(core).toContain(`publication-date>=${SINCE}`);
+    expect(core).not.toContain("notice-type");
+    expect(core).not.toContain("FT ~");
   });
 });
 

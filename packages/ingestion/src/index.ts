@@ -12,6 +12,7 @@ export * from "./gate";
 export * from "./seed-manifest";
 export * from "./discrepancy";
 export * from "./console";
+export * from "./tender-facts";
 export * from "./dedup";
 export * from "./freshness";
 export * from "./ingest";

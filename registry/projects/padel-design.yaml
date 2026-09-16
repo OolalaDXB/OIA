@@ -28,7 +28,9 @@ exclusions: []
 discovery:
   enabled: true
   queryTerms: ["sports facility feasibility", "sport development consultancy"]
-  cpvCodes: ["79400000", "92000000"]
+  cpvCodes: ["71241000", "79314000", "79419000", "92600000"]
+  cpvNote: >-
+    CPV codes refined from division level (72000000 = all IT services) to the specific services this project could deliver or would seek: feasibility studies, feasibility study, evaluation consultancy, sporting services. A wrong code returns nothing rather than the wrong thing, and the per-project counts in the run report make that visible immediately — verify against the official CPV nomenclature on the first real run.
   countries: ["FRA"]
   watch: ["TENDER_RFP"]
 profileReview:

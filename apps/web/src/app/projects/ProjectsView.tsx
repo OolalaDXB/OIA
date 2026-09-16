@@ -181,15 +181,21 @@ export function ProjectsView({ data }: { data: ConsoleData }) {
               {project.discovery.enabled ? (
                 <>
                   <div className="kv"><span className="k">Watching</span><span className="v">{project.discovery.watch.join(", ")}</span></div>
-                  <div className="kv"><span className="k">CPV codes</span><span className="v">{project.discovery.cpvCodes.join(", ") || "—"}</span></div>
+                  <div className="kv">
+                    <span className="k">CPV codes</span>
+                    <span className="v">
+                      {project.discovery.cpvCodes.join(", ") || "—"}
+                      {project.discovery.cpvNote && <div className="muted small">{project.discovery.cpvNote}</div>}
+                    </span>
+                  </div>
                   <div className="kv"><span className="k">Buyer countries</span><span className="v">{project.discovery.countries.join(", ") || "any"}</span></div>
                   <div className="kv">
                     <span className="k">Query terms</span>
                     <span className="v">
                       {project.discovery.queryTerms.join(", ") || "—"}
-                      <div className="warn small">
-                        Not used yet — the query is built from CPV codes, countries and the recency floor only.
-                        Wiring these into full-text search is roadmap S1.
+                      <div className="muted small">
+                        OR-ed into the query&apos;s full-text clause. That clause sits in a speculative layer: if TED
+                        rejects its syntax the run drops it and retries on the proven clauses rather than failing.
                       </div>
                     </span>
                   </div>

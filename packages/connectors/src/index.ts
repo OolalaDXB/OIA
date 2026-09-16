@@ -30,4 +30,20 @@ export {
   type TedNotice,
   type TedFieldProvenance,
 } from "./ted/map";
-export { buildTedExpertQuery, sectorsToCpv, type TedQueryInput } from "./ted/query";
+export {
+  buildTedExpertQuery,
+  buildTedQueryLayers,
+  queryFromLayers,
+  narrowQuery,
+  sectorsToCpv,
+  type TedQueryInput,
+  type QueryLayer,
+} from "./ted/query";
+export {
+  classifyNoticeType,
+  isWorthProcessing,
+  skipReason,
+  NOTICE_CLASSES,
+  WORTH_PROCESSING,
+  type NoticeClass,
+} from "./ted/notice-type";

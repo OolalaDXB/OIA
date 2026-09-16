@@ -11,6 +11,7 @@
     "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
+    "@oia/connectors": "workspace:*",
     "@oia/ingestion": "workspace:*",
     "@oia/registry": "workspace:*",
     "@oia/workspace": "workspace:*",

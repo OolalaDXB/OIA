@@ -31,7 +31,9 @@ exclusions: []
 discovery:
   enabled: true
   queryTerms: ["cultural heritage", "heritage restoration", "local tourism"]
-  cpvCodes: ["92000000"]
+  cpvCodes: ["92522000", "92521000", "45212350", "79952000"]
+  cpvNote: >-
+    CPV codes refined from division level (72000000 = all IT services) to the specific services this project could deliver or would seek: preservation of historical sites, museum services, buildings of historical interest, event services. A wrong code returns nothing rather than the wrong thing, and the per-project counts in the run report make that visible immediately — verify against the official CPV nomenclature on the first real run.
   countries: ["FRA"]
   watch: ["GRANT"]
 profileReview:

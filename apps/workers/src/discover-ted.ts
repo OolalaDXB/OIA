@@ -5,17 +5,26 @@ import {
   createConnectorContext,
   fetchTedRaw,
   mapTedNotices,
-  buildTedExpertQuery,
+  buildTedQueryLayers,
+  queryFromLayers,
+  narrowQuery,
+  classifyNoticeType,
+  isWorthProcessing,
+  skipReason,
   noticeProvenance,
   TED_DEFAULT_BASE_URL,
+  type QueryLayer,
 } from "@oia/connectors";
 import { createPolicy } from "@oia/audit";
 import { PROJECT_REGISTRY, discoverableProjects, findProject, type ProjectEntry } from "@oia/registry";
 import {
   safeFetch,
   ingestOfficialArtifact,
+  extractTenderFacts,
+  matchableTextLength,
   type ArtifactManifestEntry,
   type LiveFetchAttempt,
+  type MaterialFact,
 } from "@oia/ingestion";
 import { fromRoot } from "./paths";
 
@@ -46,6 +55,14 @@ function envInt(name: string, dflt: number): number {
   return Number.isFinite(n) ? n : dflt;
 }
 
+/** Median, for the run report's matchable-text measure. */
+function median(xs: number[]): number {
+  if (xs.length === 0) return 0;
+  const sorted = [...xs].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2 ? sorted[mid]! : Math.round((sorted[mid - 1]! + sorted[mid]!) / 2);
+}
+
 function arg(name: string): string | undefined {
   const hit = process.argv.find((a) => a === `--${name}` || a.startsWith(`--${name}=`));
   if (!hit) return undefined;
@@ -66,15 +83,29 @@ export function selectProjects(slugsCsv?: string): ProjectEntry[] {
   });
 }
 
-/** The TED expert query for one project, from its registry discovery block. */
-export function projectTedQuery(entry: ProjectEntry, publishedSince: string): string {
+/**
+ * Notice types worth asking the server for. SPECULATIVE — this clause's syntax
+ * is unverified from here, so it sits in a layer that is dropped if TED rejects
+ * it. Correctness does not depend on it: whatever comes back is classified
+ * again locally, so qualification systems are removed either way.
+ */
+const WANTED_NOTICE_TYPES = ["cn-standard", "cn-social"];
+
+/** The query for one project, as layers ordered proven → speculative. */
+export function projectQueryLayers(entry: ProjectEntry, publishedSince: string): QueryLayer[] {
   const cpv = entry.discovery.cpvCodes;
-  const built = buildTedExpertQuery({
+  return buildTedQueryLayers({
     cpv: cpv.length ? cpv : ["72000000"],
     countries: entry.discovery.countries,
     publishedSince,
+    noticeTypes: WANTED_NOTICE_TYPES,
+    fullText: entry.discovery.queryTerms,
   });
-  return built ?? "classification-cpv IN (72000000)";
+}
+
+/** The TED expert query for one project, from its registry discovery block. */
+export function projectTedQuery(entry: ProjectEntry, publishedSince: string): string {
+  return queryFromLayers(projectQueryLayers(entry, publishedSince)) ?? "classification-cpv IN (72000000)";
 }
 
 interface CandidateRow {
@@ -92,6 +123,13 @@ interface CandidateRow {
   verificationEvidence: string[];
   factCount: number;
   provenance: unknown;
+  /** TED notice type and what it means for whether this can be bid on. */
+  noticeType?: string;
+  noticeClass?: string;
+  /** Facts read from the notice PAGE (scope, value, procedure, place, lots). */
+  noticeFacts?: MaterialFact[];
+  /** Characters the matcher can actually see for this record (the S2 measure). */
+  matchableChars?: number;
 }
 
 async function main() {
@@ -145,30 +183,59 @@ async function main() {
 
   // 1. Discover per project. One failure does not sink the run: it is recorded.
   const byId = new Map<string, { candidate: ReturnType<typeof mapTedNotices>[number]; projects: string[] }>();
-  const perProject: { slug: string; query: string; status: string; count: number; error?: string }[] = [];
+  const perProject: {
+    slug: string;
+    query: string;
+    status: string;
+    count: number;
+    retrieved?: number;
+    setAside?: number;
+    error?: string;
+  }[] = [];
   let fixtureWritten = false;
 
   for (const project of projects) {
     // An explicit TED_QUERY override applies to every project (single-query debug run).
-    const query = ctx.env.tedQuery?.trim() || projectTedQuery(project, publishedSince);
-    console.log(`[${project.slug}] TED query: ${query}`);
+    const override = ctx.env.tedQuery?.trim();
+    let layers: QueryLayer[] | null = override ? null : projectQueryLayers(project, publishedSince);
+    let query = override ?? queryFromLayers(layers!)!;
 
     let raw: unknown;
-    try {
-      raw = await fetchTedRaw({
-        baseUrl: ctx.env.tedBaseUrl!,
-        query,
-        pageSize: ctx.env.tedPageSize,
-        userAgent: ctx.env.userAgent,
-        timeoutMs: ctx.env.timeoutMs,
-      });
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
-      const status = /403|egress|tunnel|proxy/i.test(msg) ? "BLOCKED" : "ERROR";
-      perProject.push({ slug: project.slug, query, status, count: 0, error: msg });
-      console.error(`[${project.slug}] TED discovery ${status}: ${msg}`);
-      continue;
+    let lastError = "";
+    let attempt = 0;
+    // Speculative clauses (notice-type, full-text) have unverified syntax. If
+    // TED rejects the query, drop the newest speculative layer and try again
+    // rather than losing the run to a guess. Once only proven layers remain, a
+    // rejection is a real failure and is reported as one.
+    for (;;) {
+      attempt += 1;
+      console.log(`[${project.slug}] TED query (attempt ${attempt}): ${query}`);
+      try {
+        raw = await fetchTedRaw({
+          baseUrl: ctx.env.tedBaseUrl!,
+          query,
+          pageSize: ctx.env.tedPageSize,
+          userAgent: ctx.env.userAgent,
+          timeoutMs: ctx.env.timeoutMs,
+        });
+        break;
+      } catch (err) {
+        lastError = err instanceof Error ? err.message : String(err);
+        const networkProblem = /403|egress|tunnel|proxy|timeout|abort|fetch failed/i.test(lastError);
+        const narrowed = !networkProblem && layers ? narrowQuery(layers) : null;
+        if (!narrowed) {
+          const status = networkProblem ? "BLOCKED" : "ERROR";
+          perProject.push({ slug: project.slug, query, status, count: 0, error: lastError });
+          console.error(`[${project.slug}] TED discovery ${status}: ${lastError}`);
+          break;
+        }
+        const dropped = layers!.find((l) => !narrowed.includes(l))?.name ?? "?";
+        console.warn(`[${project.slug}] TED rejected the query — dropping the "${dropped}" clause and retrying`);
+        layers = narrowed;
+        query = queryFromLayers(layers)!;
+      }
     }
+    if (raw === undefined) continue;
 
     writeFileSync(join(outDir, `ted-search-response.${project.slug}.json`), JSON.stringify(raw, null, 2), "utf8");
     // The shared connector fixture is the FIRST successful response of a run —
@@ -180,8 +247,31 @@ async function main() {
       fixtureWritten = true;
     }
 
-    const candidates = mapTedNotices(raw, new Date().toISOString());
-    perProject.push({ slug: project.slug, query, status: "OK", count: candidates.length });
+    const all = mapTedNotices(raw, new Date().toISOString());
+    // The server-side filter is unverified, so the classification is applied
+    // again here — this is the half that is guaranteed to work. On the last
+    // real recorded response it removed 83 notices out of 100.
+    const candidates = all.filter((c) => isWorthProcessing(c.hints.noticeType));
+    const setAside = all.length - candidates.length;
+    if (setAside > 0) {
+      const reasons = new Map<string, number>();
+      for (const c of all) {
+        const why = skipReason(c.hints.noticeType);
+        if (why) reasons.set(why, (reasons.get(why) ?? 0) + 1);
+      }
+      console.log(
+        `[${project.slug}] set aside ${setAside}/${all.length}: ` +
+          [...reasons].map(([why, n]) => `${n} × ${why}`).join(" · "),
+      );
+    }
+    perProject.push({
+      slug: project.slug,
+      query,
+      status: "OK",
+      count: candidates.length,
+      retrieved: all.length,
+      setAside,
+    });
     for (const c of candidates) {
       const seen = byId.get(c.externalId);
       if (seen) {
@@ -215,6 +305,7 @@ async function main() {
 
   // 2. Qualify each candidate via the EXISTING engine on the official notice page.
   const rows: CandidateRow[] = [];
+  const matchableLengths: number[] = [];
   let qualified = 0;
   let fetchFailures = 0;
   const toProcess = unique.slice(0, maxProcess);
@@ -238,6 +329,8 @@ async function main() {
         verificationEvidence: [],
         factCount: 0,
         provenance: noticeProvenance(c.raw as Record<string, unknown>),
+        noticeType: c.hints.noticeType,
+        noticeClass: classifyNoticeType(c.hints.noticeType),
       });
       continue;
     }
@@ -255,6 +348,19 @@ async function main() {
     const ing = await ingestOfficialArtifact(entry, body, { liveFetch: liveFetchFor(attempt) });
     if (ing.verification.verificationStatus === "MANUAL_REVIEW_REQUIRED") qualified += 1;
 
+    // The notice page was fetched, hashed and parsed — and until now its text
+    // was thrown away, leaving the matcher with a 54-character title. Read the
+    // scope, the estimated value, the procedure, the place and the lots out of
+    // it, and keep the generic facts the engine already produced.
+    const knownCpv = (c.raw as Record<string, unknown>)["classification-cpv"];
+    const tenderFacts = extractTenderFacts(body.toString("utf8"), {
+      artifactId: ing.artifact.id,
+      knownCpv: Array.isArray(knownCpv) ? knownCpv.map(String) : [],
+    });
+    const noticeFacts = [...tenderFacts, ...ing.facts];
+    const matchableChars = matchableTextLength(noticeFacts, c.title, c.hints.funder ?? "");
+    matchableLengths.push(matchableChars);
+
     rows.push({
       externalId: c.externalId,
       title: c.title,
@@ -267,8 +373,12 @@ async function main() {
       contentHash: ing.artifact.contentHash,
       verificationStatus: ing.verification.verificationStatus, // never VERIFIED w/o human
       verificationEvidence: ing.verification.verificationEvidence,
-      factCount: ing.facts.length,
+      factCount: noticeFacts.length,
       provenance: noticeProvenance(c.raw as Record<string, unknown>),
+      noticeType: c.hints.noticeType,
+      noticeClass: classifyNoticeType(c.hints.noticeType),
+      noticeFacts,
+      matchableChars,
     });
   }
 
@@ -281,10 +391,17 @@ async function main() {
       "## Per project",
       ...perProject.map(
         (p) =>
-          `- **${p.slug}** — ${p.status}${p.error ? `: ${p.error}` : ` · ${p.count} notice(s)`}\n  - query: \`${p.query}\``,
+          `- **${p.slug}** — ${p.status}` +
+          (p.error
+            ? `: ${p.error}`
+            : ` · ${p.count} biddable of ${p.retrieved ?? p.count} retrieved` +
+              (p.setAside ? ` (${p.setAside} set aside: qualification systems, corrigenda, award notices)` : "")) +
+          `\n  - query: \`${p.query}\``,
       ),
       "",
       `- unique notices across projects: ${unique.length}`,
+      `- matchable text per record (the S2 measure): median ${median(matchableLengths)} characters` +
+        (matchableLengths.length ? ` over ${matchableLengths.length} record(s)` : " — nothing processed"),
       `- candidates processed (cap ${maxProcess}): ${toProcess.length}`,
       `- qualified at MANUAL_REVIEW_REQUIRED: ${qualified}`,
       `- notice-page fetch failures: ${fetchFailures}`,
@@ -302,7 +419,8 @@ async function main() {
   );
 
   console.log(
-    `retained: ${toProcess.length} | qualified (MANUAL_REVIEW_REQUIRED): ${qualified} | fetch failures: ${fetchFailures}`,
+    `retained: ${toProcess.length} | qualified (MANUAL_REVIEW_REQUIRED): ${qualified} | ` +
+      `fetch failures: ${fetchFailures} | median matchable text: ${median(matchableLengths)} chars`,
   );
   console.log(`Outputs written to ${outDir}`);
 }

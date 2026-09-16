@@ -35,7 +35,9 @@ exclusions: []
 discovery:
   enabled: true
   queryTerms: ["tourism digitalisation", "accommodation", "property management"]
-  cpvCodes: ["55000000", "48000000", "72000000"]
+  cpvCodes: ["72212517", "48812000", "55100000", "70330000"]
+  cpvNote: >-
+    CPV codes refined from division level (72000000 = all IT services) to the specific services this project could deliver or would seek: property/accounting software, hotel services, property management services. A wrong code returns nothing rather than the wrong thing, and the per-project counts in the run report make that visible immediately — verify against the official CPV nomenclature on the first real run.
   countries: ["FRA"]
   watch: ["GRANT", "TENDER_RFP"]
 profileReview:

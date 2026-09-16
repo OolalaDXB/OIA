@@ -245,3 +245,4 @@ ul.evi li::before { content: none; }
 .gateField .muted { font-family: var(--mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 1.2px; }
 .gateBtn { align-self: flex-start; margin-top: 4px; }
 .gateFoot { border-top: 1px solid var(--line-soft); padding-top: 10px; margin-top: 4px; }
+.asideChip { background: rgba(168, 67, 47, 0.1); color: var(--reject); }

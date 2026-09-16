@@ -15,6 +15,7 @@ import {
   type TaskItem,
 } from "@oia/workspace";
 import { applyFreshnessAll, assessFreshness } from "@oia/ingestion/freshness";
+import { classifyNoticeType, skipReason } from "@oia/connectors/notice-type";
 import { useAlerts, useLedger } from "../lib/watchData";
 import { useAuth } from "../lib/supabase";
 import {
@@ -209,6 +210,16 @@ function pubDate(r: ConsoleRecord): string {
 }
 
 const uniq = (xs: string[]) => [...new Set(xs)];
+
+/**
+ * What TED said this notice is. Records discovered before the classification
+ * existed still carry the raw `notice-type` fact, so the console can now name
+ * what it is — rather than rewriting a real run's output to look tidier.
+ */
+function noticeAside(r: ConsoleRecord): string | null {
+  const noticeType = r.facts.find((f) => f.field === "notice-type")?.normalizedValue;
+  return noticeType ? skipReason(noticeType) : null;
+}
 
 export function Console({
   data,
@@ -412,6 +423,7 @@ export function Console({
               const tag = projectTags.tags[r.id];
               const kind = r.opportunityKind;
               const fresh = assessFreshness(r, nowIso);
+              const aside = noticeAside(r);
               return (
                 <li
                   key={r.id}
@@ -431,6 +443,7 @@ export function Console({
                         {fresh.status === "EXPIRED" ? "closed" : `closes in ${fresh.daysToDeadline}d`}
                       </span>
                     )}
+                    {aside && <span className="pubChip asideChip">not a call</span>}
                     {tag && <span className="pubChip tagChip">{projectName(tag)}</span>}
                   </div>
                   <div className="rowMeta small">
@@ -589,6 +602,13 @@ function Detail({
         </span>
       </div>
 
+      {noticeAside(r) && (
+        <div className="warn small">
+          TED notice type <code>{r.facts.find((f) => f.field === "notice-type")?.normalizedValue}</code> —{" "}
+          {noticeAside(r)}. Discovery now filters these out at the source; this record predates that filter and is
+          kept rather than deleted, because it is the real output of a real run.
+        </div>
+      )}
       {freshness.reasons.length > 0 && (
         <div className={freshness.status === "EXPIRED" ? "warn small" : "muted small"}>
           {freshness.reasons.join(" · ")}

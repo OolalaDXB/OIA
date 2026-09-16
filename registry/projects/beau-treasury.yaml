@@ -30,7 +30,9 @@ exclusions: []
 discovery:
   enabled: false
   queryTerms: ["treasury management", "cash management", "ISO 20022"]
-  cpvCodes: ["48000000", "66000000"]
+  cpvCodes: ["48812000", "66170000", "72212440"]
+  cpvNote: >-
+    CPV codes refined from division level (72000000 = all IT services) to the specific services this project could deliver or would seek: financial information systems, treasury/financial software. A wrong code returns nothing rather than the wrong thing, and the per-project counts in the run report make that visible immediately — verify against the official CPV nomenclature on the first real run.
   countries: ["FRA"]
   watch: ["GRANT", "VC_INVESTOR"]
 profileReview:

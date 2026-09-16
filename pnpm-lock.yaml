@@ -27,6 +27,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@oia/connectors':
+        specifier: workspace:*
+        version: link:../../packages/connectors
       '@oia/ingestion':
         specifier: workspace:*
         version: link:../../packages/ingestion

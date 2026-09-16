@@ -7,7 +7,8 @@
     ".": "./src/index.ts",
     "./console": "./src/console.ts",
     "./freshness": "./src/freshness.ts",
-    "./dedup": "./src/dedup.ts"
+    "./dedup": "./src/dedup.ts",
+    "./tender-facts": "./src/tender-facts.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

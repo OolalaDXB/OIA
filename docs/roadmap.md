@@ -131,29 +131,69 @@ valeur pour un studio, et c'est celle qui est aujourd'hui invisible. Le champ
 
 Ordonnée par valeur business divisée par effort, pas par élégance technique.
 
-### S1 — Chercher au bon endroit *(le gain le plus élevé, l'effort le plus faible)*
+### S1 — Chercher au bon endroit — ✅ **livré le 16/09/2026**
 
-- Filtrer par `notice-type` : exclure `qu-sy`, viser `cn-standard`, `cn-social`,
-  et **remonter `pin` comme catégorie à part** (l'amont).
-- Descendre les CPV du niveau division au niveau réel, par projet
-  (`72212000` développement d'applications, `72261000` support logiciel,
-  `79421000` gestion de projet…) au lieu de `72000000`.
-- **Câbler `queryTerms`** en plein-texte dans la requête experte, validé avec
-  `checkQuerySyntax: true` sur l'API live avant de le committer.
-- **Preuve de fin :** sur un run réel, > 70 % des avis ramenés sont des avis sur
-  lesquels on peut soumissionner, et portent une date limite.
+- **Classification des avis** (`classifyNoticeType`) : BIDDABLE, PRE_SOLICITATION,
+  QUALIFICATION_SYSTEM, AWARD_RESULT, CORRECTION, UNKNOWN. Par préfixe et non
+  par liste fermée — un type inconnu est **conservé** et signalé, jamais jeté
+  en silence : ce serait refaire la même erreur dans l'autre sens.
+- **Filtrage à deux étages.** Côté requête (`notice-type IN (…)`) *et* côté
+  résultats. Le second est la garantie : il ne dépend d'aucune syntaxe non
+  vérifiée.
+- **CPV descendus au niveau réel** sur les 10 projets : `72212517` développement
+  de logiciels, `72212730` logiciels de sécurité, `92522000` préservation de
+  sites historiques, `48451000` progiciels ERP… au lieu de `72000000`. Chaque
+  fiche porte un `cpvNote` disant d'où viennent les codes et ce qui reste à
+  vérifier.
+- **`queryTerms` câblé** en clause plein-texte.
+- **Requête en couches, du prouvé au spéculatif.** CPV / pays / date sont
+  prouvés (un run réel les a validés). `notice-type` et le plein-texte ne le
+  sont pas — impossible de tester la syntaxe experte sans egress. Ils vivent
+  donc dans des couches que le worker **abandonne une par une** si TED rejette
+  la requête, avant de réessayer. Une clause spéculative peut améliorer un run ;
+  elle ne peut pas le faire échouer.
 
-> Aujourd'hui, 81 % de ce qu'on ramène est du bruit structurel. Aucune
-> amélioration de l'interface ou du scoring ne compense ça.
+**Mesuré :** sur la réponse TED réellement enregistrée, 100 avis → **17 à
+traiter** (81 systèmes de qualification + 2 rectificatifs écartés). Test de
+contrat sur le fixture réel, pas sur un exemple inventé.
 
-### S2 — Matcher sur le dossier, pas sur le titre
+**Pas encore mesurable ici :** le « > 70 % avec date limite » demande un run
+live. Le rapport de run affiche désormais, par projet, `N retenus sur M
+ramenés` — la preuve se produira toute seule au premier run.
 
-- La page de l'avis est déjà téléchargée, hachée et analysée. Extraire de son
-  texte, avec localisateur et provenance : objet et lots, critères d'éligibilité,
-  budget/estimation, région (NUTS), date limite, procédure.
-- Alimenter le corpus de matching avec ça.
-- **Preuve de fin :** corpus médian > 1 500 caractères par enregistrement, et
-  une suggestion cite **une phrase de l'avis**, pas son titre.
+### S2 — Matcher sur le dossier, pas sur le titre — ✅ **livré le 16/09/2026**
+
+`extractTenderFacts` lit la page de l'avis — celle qui était déjà téléchargée,
+hachée, vérifiée, puis jetée — et en sort des faits provenancés :
+
+| Champ | Ce que ça change |
+|---|---|
+| `scope` | l'objet réel du marché, plafonné à 1 200 caractères |
+| `eligibility` | **le blocage n°1 du gate** : les critères de sélection, enfin extraits |
+| `award_criteria` | sur quoi l'attribution se joue |
+| `estimated_value` | le budget — un marché à 40 k€ et un à 4 M€ ne se traitent pas pareil |
+| `procedure` | ouverte, restreinte, négociée… |
+| `place_of_performance`, `nuts_code` | où |
+| `lots` | combien de lots |
+| `cpv_additional` | les codes secondaires que la recherche ne montrait pas |
+
+Deux règles d'honnêteté dans l'extracteur : **une section absente ne produit
+aucun fait** (jamais de valeur devinée), et quand aucun titre de section n'est
+reconnu, le repli sur le texte d'ouverture **le dit dans son localisateur** et
+baisse sa confiance.
+
+**Mesuré :** sur un avis représentatif, le corpus passe de **61 à 796
+caractères** — treize fois plus, entièrement depuis une page déjà payée.
+
+**Pas encore mesurable ici :** la médiane sur données réelles. Le worker la
+calcule et l'affiche à chaque run (`median matchable text: N chars`), donc la
+preuve arrive avec le premier run live.
+
+**Effet de bord immédiat, visible dans la console :** les 5 avis TED déjà en
+base portent leur `notice-type`. La console les étiquette maintenant « not a
+call » avec la raison, au lieu de les présenter comme des opportunités. Je n'ai
+pas réécrit le jeu de données : c'est la vraie sortie d'un vrai run, et elle
+reste telle quelle.
 
 ### S3 — Une taxonomie qui couvre ce que tu cherches, et un gate qui s'y adapte
 

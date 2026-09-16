@@ -37,7 +37,9 @@ exclusions: []
 discovery:
   enabled: true
   queryTerms: ["music distribution", "cultural sector digitalisation", "e-invoicing"]
-  cpvCodes: ["48000000", "72000000", "92000000"]
+  cpvCodes: ["48451000", "72212450", "72212443", "48812000", "92500000"]
+  cpvNote: >-
+    CPV codes refined from division level (72000000 = all IT services) to the specific services this project could deliver or would seek: ERP and accounting software development, point-of-sale/invoicing, cultural services. A wrong code returns nothing rather than the wrong thing, and the per-project counts in the run report make that visible immediately — verify against the official CPV nomenclature on the first real run.
   countries: ["FRA"]
   watch: ["GRANT", "TENDER_RFP"]
 profileReview:

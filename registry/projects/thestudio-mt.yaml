@@ -43,7 +43,9 @@ exclusions:
 discovery:
   enabled: true
   queryTerms: ["software development services", "digital transformation", "web application", "IT consultancy"]
-  cpvCodes: ["72000000", "48000000", "79400000"]
+  cpvCodes: ["72212517", "72230000", "72267000", "72413000", "79421000", "72224000"]
+  cpvNote: >-
+    CPV codes refined from division level (72000000 = all IT services) to the specific services this project could deliver or would seek: custom software development, software maintenance, website design, project management, project-management consultancy. A wrong code returns nothing rather than the wrong thing, and the per-project counts in the run report make that visible immediately — verify against the official CPV nomenclature on the first real run.
   countries: ["FRA", "LUX", "BEL"]
   watch: ["TENDER_RFP", "GRANT"]
 profileReview:

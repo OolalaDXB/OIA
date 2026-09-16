@@ -69,19 +69,24 @@ export type ProfileReview = z.infer<typeof ProfileReviewSchema>;
 export const DiscoverySchema = z.object({
   enabled: z.boolean().default(false),
   /**
-   * Free-text search terms.
+   * Free-text search terms, OR-ed into the TED expert query's full-text clause.
    *
-   * NOT CONSUMED YET. The TED expert query is built from `cpvCodes`,
-   * `countries` and the recency floor only — these terms reach no connector
-   * today. They are kept because they are the right content for the full-text
-   * clause and for the SEDIA keyword search, and wiring them is roadmap S1
-   * (validated against the live API with `checkQuerySyntax`). Until then the
-   * console labels them as unused rather than implying a search that does not
-   * happen.
+   * That clause's syntax is unverified from the build environment, which has no
+   * egress to TED, so it lives in a SPECULATIVE query layer: if TED rejects the
+   * query the worker drops the clause and retries rather than losing the run.
+   * These terms therefore make discovery sharper when the syntax holds, and
+   * cost nothing when it does not.
    */
   queryTerms: z.array(z.string()).default([]),
   /** EU CPV codes for tender discovery (TED). */
   cpvCodes: z.array(z.string()).default([]),
+  /**
+   * Where these codes came from and what is still unverified about them.
+   * A CPV code is a claim about what this project could deliver or would seek,
+   * and a wrong one fails silently in the sense that it simply returns nothing —
+   * so the provenance is written down rather than assumed.
+   */
+  cpvNote: z.string().default(""),
   /** Buyer countries bounding discovery — TED expert syntax wants ISO 3-letter (FRA, LUX). */
   countries: z.array(z.string()).default([]),
   /** Opportunity kinds worth surfacing for this project. */

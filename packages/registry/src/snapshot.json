@@ -68,10 +68,15 @@
           "audit trail"
         ],
         "cpvCodes": [
-          "72000000",
-          "48000000",
-          "73000000"
+          "72212190",
+          "72224100",
+          "72226000",
+          "72254000",
+          "72600000",
+          "48218000",
+          "79417000"
         ],
+        "cpvNote": "CPV codes refined from division level (72000000 = all IT services) to the specific services this project could deliver or would seek: AI/data platform, systems implementation planning, software testing, computer support, security consultancy. A wrong code returns nothing rather than the wrong thing, and the per-project counts in the run report make that visible immediately — verify against the official CPV nomenclature on the first real run.",
         "countries": [
           "FRA",
           "LUX",
@@ -140,9 +145,11 @@
           "ISO 20022"
         ],
         "cpvCodes": [
-          "48000000",
-          "66000000"
+          "48812000",
+          "66170000",
+          "72212440"
         ],
+        "cpvNote": "CPV codes refined from division level (72000000 = all IT services) to the specific services this project could deliver or would seek: financial information systems, treasury/financial software. A wrong code returns nothing rather than the wrong thing, and the per-project counts in the run report make that visible immediately — verify against the official CPV nomenclature on the first real run.",
         "countries": [
           "FRA"
         ],
@@ -214,10 +221,12 @@
           "encryption"
         ],
         "cpvCodes": [
-          "48000000",
-          "66000000",
-          "72000000"
+          "48812000",
+          "66170000",
+          "72212443",
+          "72212190"
         ],
+        "cpvNote": "CPV codes refined from division level (72000000 = all IT services) to the specific services this project could deliver or would seek: financial information systems, financial consultancy, financial-software development. A wrong code returns nothing rather than the wrong thing, and the per-project counts in the run report make that visible immediately — verify against the official CPV nomenclature on the first real run.",
         "countries": [
           "FRA",
           "LUX"
@@ -277,6 +286,7 @@
         "cpvCodes": [
           "92000000"
         ],
+        "cpvNote": "",
         "countries": [
           "FRA"
         ],
@@ -337,6 +347,7 @@
           "45000000",
           "92000000"
         ],
+        "cpvNote": "",
         "countries": [],
         "watch": [
           "VC_INVESTOR",
@@ -396,8 +407,12 @@
           "local tourism"
         ],
         "cpvCodes": [
-          "92000000"
+          "92522000",
+          "92521000",
+          "45212350",
+          "79952000"
         ],
+        "cpvNote": "CPV codes refined from division level (72000000 = all IT services) to the specific services this project could deliver or would seek: preservation of historical sites, museum services, buildings of historical interest, event services. A wrong code returns nothing rather than the wrong thing, and the per-project counts in the run report make that visible immediately — verify against the official CPV nomenclature on the first real run.",
         "countries": [
           "FRA"
         ],
@@ -454,6 +469,7 @@
           "grassroots education"
         ],
         "cpvCodes": [],
+        "cpvNote": "",
         "countries": [],
         "watch": [
           "GRANT"
@@ -513,9 +529,12 @@
           "cultural creative industries"
         ],
         "cpvCodes": [
-          "92000000",
-          "48000000"
+          "48520000",
+          "92312000",
+          "79822500",
+          "92500000"
         ],
+        "cpvNote": "CPV codes refined from division level (72000000 = all IT services) to the specific services this project could deliver or would seek: multimedia/game software, artistic services, graphic design, cultural services. A wrong code returns nothing rather than the wrong thing, and the per-project counts in the run report make that visible immediately — verify against the official CPV nomenclature on the first real run.",
         "countries": [
           "FRA"
         ],
@@ -586,10 +605,12 @@
           "property management"
         ],
         "cpvCodes": [
-          "55000000",
-          "48000000",
-          "72000000"
+          "72212517",
+          "48812000",
+          "55100000",
+          "70330000"
         ],
+        "cpvNote": "CPV codes refined from division level (72000000 = all IT services) to the specific services this project could deliver or would seek: property/accounting software, hotel services, property management services. A wrong code returns nothing rather than the wrong thing, and the per-project counts in the run report make that visible immediately — verify against the official CPV nomenclature on the first real run.",
         "countries": [
           "FRA"
         ],
@@ -664,9 +685,12 @@
           "consumer application"
         ],
         "cpvCodes": [
-          "48000000",
-          "72000000"
+          "72212517",
+          "48219700",
+          "72413000",
+          "72212224"
         ],
+        "cpvNote": "CPV codes refined from division level (72000000 = all IT services) to the specific services this project could deliver or would seek: IT software development, communication software, website design, web-page editing software. A wrong code returns nothing rather than the wrong thing, and the per-project counts in the run report make that visible immediately — verify against the official CPV nomenclature on the first real run.",
         "countries": [
           "FRA"
         ],
@@ -724,6 +748,7 @@
           "education Africa"
         ],
         "cpvCodes": [],
+        "cpvNote": "",
         "countries": [],
         "watch": [
           "GRANT"
@@ -779,9 +804,12 @@
           "sport development consultancy"
         ],
         "cpvCodes": [
-          "79400000",
-          "92000000"
+          "71241000",
+          "79314000",
+          "79419000",
+          "92600000"
         ],
+        "cpvNote": "CPV codes refined from division level (72000000 = all IT services) to the specific services this project could deliver or would seek: feasibility studies, feasibility study, evaluation consultancy, sporting services. A wrong code returns nothing rather than the wrong thing, and the per-project counts in the run report make that visible immediately — verify against the official CPV nomenclature on the first real run.",
         "countries": [
           "FRA"
         ],
@@ -841,6 +869,7 @@
           "consumer brand"
         ],
         "cpvCodes": [],
+        "cpvNote": "",
         "countries": [
           "FRA"
         ],
@@ -907,9 +936,12 @@
           "software assurance"
         ],
         "cpvCodes": [
-          "72000000",
-          "48000000"
+          "72212730",
+          "79417000",
+          "72267000",
+          "48218000"
         ],
+        "cpvNote": "CPV codes refined from division level (72000000 = all IT services) to the specific services this project could deliver or would seek: security software development, security consultancy, software maintenance. A wrong code returns nothing rather than the wrong thing, and the per-project counts in the run report make that visible immediately — verify against the official CPV nomenclature on the first real run.",
         "countries": [
           "FRA",
           "LUX",
@@ -984,10 +1016,13 @@
           "e-invoicing"
         ],
         "cpvCodes": [
-          "48000000",
-          "72000000",
-          "92000000"
+          "48451000",
+          "72212450",
+          "72212443",
+          "48812000",
+          "92500000"
         ],
+        "cpvNote": "CPV codes refined from division level (72000000 = all IT services) to the specific services this project could deliver or would seek: ERP and accounting software development, point-of-sale/invoicing, cultural services. A wrong code returns nothing rather than the wrong thing, and the per-project counts in the run report make that visible immediately — verify against the official CPV nomenclature on the first real run.",
         "countries": [
           "FRA"
         ],
@@ -1072,10 +1107,14 @@
           "IT consultancy"
         ],
         "cpvCodes": [
-          "72000000",
-          "48000000",
-          "79400000"
+          "72212517",
+          "72230000",
+          "72267000",
+          "72413000",
+          "79421000",
+          "72224000"
         ],
+        "cpvNote": "CPV codes refined from division level (72000000 = all IT services) to the specific services this project could deliver or would seek: custom software development, software maintenance, website design, project management, project-management consultancy. A wrong code returns nothing rather than the wrong thing, and the per-project counts in the run report make that visible immediately — verify against the official CPV nomenclature on the first real run.",
         "countries": [
           "FRA",
           "LUX",

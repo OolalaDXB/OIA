@@ -77,7 +77,7 @@ human layer backs up to one JSON file.
 
 ```bash
 pnpm install
-pnpm typecheck && pnpm test          # 210 tests
+pnpm typecheck && pnpm test          # 229 tests
 pnpm --filter @oia/registry validate
 pnpm --filter @oia/knowledge validate
 pnpm --filter @oia/web build
@@ -97,9 +97,20 @@ pnpm --filter @oia/workers discover:ted -- --project sillon,bawaba
 pnpm --filter @oia/workers exec tsx src/ted-to-console.ts     # refresh the console dataset
 ```
 
-Each project gets its own expert query from its registry profile. A notice found
-by several projects is kept once and carries the list of projects whose query
-surfaced it — discovery provenance, never a match verdict.
+Each project gets its own expert query from its registry profile — specific CPV
+codes, buyer countries, a recency floor, the project's own search terms, and a
+notice-type filter. A notice found by several projects is kept once and carries
+the list of projects whose query surfaced it — discovery provenance, never a
+match verdict.
+
+**Two things stop the queue being noise.** Notices are classified before
+processing: on the last real recorded response, 81 of 100 were *qualification
+systems* — standing supplier registers with no deadline and nothing to bid on —
+and are now set aside with the reason recorded. And the notice page, already
+fetched and hashed, is read rather than discarded: scope, eligibility criteria,
+award criteria, estimated value, procedure, place and lots become
+provenance-typed facts, so matching reasons about the call instead of
+pattern-matching a 54-character title.
 
 **It also runs itself.** `.github/workflows/discovery.yml` performs the same
 sequence every Monday (and on demand, with per-project overrides) where egress

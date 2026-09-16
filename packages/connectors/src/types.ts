@@ -10,6 +10,8 @@ export interface RawOpportunity {
   discoveredAt: string; // ISO
   /** Fields the source already exposes (deadline, status, amount…) — untrusted until corroborated. */
   hints: {
+    /** Source-specific notice type (TED `notice-type`), when the source has one. */
+    noticeType?: string;
     programmeName?: string;
     funder?: string;
     deadlineAt?: string; // ISO, source-claimed

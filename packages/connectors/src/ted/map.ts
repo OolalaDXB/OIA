@@ -117,6 +117,10 @@ export function mapTedNotices(raw: unknown, discoveredAt: string): RawOpportunit
       url: noticeUrl(pub),
       discoveredAt,
       hints: {
+        // The notice type decides whether this is a call at all (see
+        // notice-type.ts): 81% of a real recorded run were qualification
+        // systems, which have no deadline and nothing to bid on.
+        noticeType: pickText(notice["notice-type"]),
         programmeName: pickText(notice["notice-type"]),
         funder: buyer ?? "European Union — TED",
         deadlineAt: deadline,
