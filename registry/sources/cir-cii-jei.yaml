@@ -7,7 +7,7 @@ name: "Research and innovation tax credits (CIR, CII, JEI)"
 operator: "French tax administration"
 kinds: ["TAX_INCENTIVE"]
 geographies: ["FR"]
-url: "https://www.entreprises.gouv.fr/fr/innovation/financement/credit-d-impot-recherche-cir"
+url: "https://www.service-public.fr/professionnels-entreprises/vosdroits/F23533"
 urlVerified: false
 lastUrlCheck: "2026-09-16"
 status: DECLARED
@@ -18,3 +18,8 @@ notes: >-
   Not a call site and never will be: a fiscal status claimed on a filing. It is
   listed because the taxonomy can now represent it — before TAX_INCENTIVE
   existed, a tax credit could not pass the gate at any evidence level.
+  The entreprises.gouv.fr URL first published here returned HTTP 404 on the
+  first real link check — a dead link in the exact place this product exists to
+  prevent. Replaced with the service-public.fr reference page, and set back to
+  unverified so the checker has to confirm the new one rather than inheriting
+  the old one's word.

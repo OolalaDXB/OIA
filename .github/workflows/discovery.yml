@@ -52,6 +52,26 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
 
+      # What this job can actually see. A secret set in the wrong tab
+      # (Dependabot and Codespaces sit next to Actions on the same page) or
+      # under a slightly different name is invisible to the workflow and looks
+      # exactly like not having set one — so the run says which it is, by name,
+      # never by value.
+      - name: What secrets does this job have
+        env:
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          say() { if [ -n "$2" ]; then echo "  $1: present (${#2} chars)"; else echo "  $1: MISSING"; fi; }
+          echo "Secrets visible to this job:"
+          say MISTRAL_API_KEY "$MISTRAL_API_KEY"
+          say SUPABASE_URL "$SUPABASE_URL"
+          say SUPABASE_SERVICE_ROLE_KEY "$SUPABASE_SERVICE_ROLE_KEY"
+          if [ -z "$MISTRAL_API_KEY" ]; then
+            echo "::warning::MISTRAL_API_KEY is not visible to this job. It must be a REPOSITORY secret under Settings → Secrets and variables → **Actions** (not the Dependabot or Codespaces tab), spelled exactly MISTRAL_API_KEY."
+          fi
+
       # Searches asked for from the console. Claimed here (QUEUED -> RUNNING) so
       # a second run cannot cover the same request twice, and closed at the end
       # against what actually happened — a request is never reported as searched
@@ -197,7 +217,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add apps/web/src/data/console.json outputs/sprint-1 outputs/scout outputs/link-check \
+          git add apps/web/src/data/console.json outputs/sprint-1 outputs/scout outputs/link-check.md \
                   registry/sources registry/projects \
                   packages/registry/src/snapshot.json packages/registry/src/sources.snapshot.json
           if git diff --cached --quiet; then
@@ -207,7 +227,16 @@ jobs:
           RECORDS=$(node -e "console.log(require('./apps/web/src/data/console.json').run.records)")
           git commit -m "data: scheduled discovery refresh (${RECORDS} records)" \
                      -m "Automated run of discover:ted across every project with discovery enabled, then ted-to-console. Typecheck, tests and the web build passed against this dataset before it was committed."
-          git push
+          # Somebody pushing to main while a run is in flight is normal, and it
+          # must not cost the run its data. Rebase onto whatever arrived and try
+          # again; never force, because the other push is somebody's real work.
+          for attempt in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "push rejected (attempt $attempt) — rebasing onto the new main and retrying"
+            git pull --rebase --autostash origin main || exit 1
+          done
+          echo "::error::could not push the refreshed data after 3 attempts"
+          exit 1
 
       # Close the claimed requests against the real outcome. `always()`, because
       # a request left RUNNING forever is indistinguishable from one still in
@@ -230,4 +259,4 @@ jobs:
         run: |
           cat outputs/sprint-1/run-report.md >> "$GITHUB_STEP_SUMMARY" || true
           cat outputs/scout/report.md >> "$GITHUB_STEP_SUMMARY" || true
-          cat outputs/link-check/report.md >> "$GITHUB_STEP_SUMMARY" || true
+          cat outputs/link-check.md >> "$GITHUB_STEP_SUMMARY" || true
