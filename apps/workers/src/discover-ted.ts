@@ -147,9 +147,16 @@ async function main() {
 
   // Recency floor (default: last 90 days) so discovery surfaces CURRENT notices,
   // not 2016 ones. Override with TED_PUBLISHED_SINCE=YYYYMMDD.
+  // `??` is not enough: a workflow that passes an unset input sets the variable
+  // to the EMPTY STRING, which `??` happily accepts. The first real scheduled
+  // run lost its entire recency floor that way — the plan printed
+  // `publication-date>=20260618` and the query that went out had no date clause
+  // at all. Treat blank as absent.
+  const sinceEnv = (process.env.TED_PUBLISHED_SINCE ?? "").trim();
   const publishedSince =
-    process.env.TED_PUBLISHED_SINCE ??
-    new Date(Date.now() - 90 * 24 * 3600 * 1000).toISOString().slice(0, 10).replace(/-/g, "");
+    sinceEnv !== ""
+      ? sinceEnv
+      : new Date(Date.now() - 90 * 24 * 3600 * 1000).toISOString().slice(0, 10).replace(/-/g, "");
 
   const projects = selectProjects(arg("project"));
   if (projects.length === 0) {
@@ -203,22 +210,50 @@ async function main() {
     let raw: unknown;
     let lastError = "";
     let attempt = 0;
-    // Speculative clauses (notice-type, full-text) have unverified syntax. If
-    // TED rejects the query, drop the newest speculative layer and try again
-    // rather than losing the run to a guess. Once only proven layers remain, a
-    // rejection is a real failure and is reported as one.
+    let narrowedOnEmpty = false;
+    // Speculative clauses (notice-type, full-text) have unverified syntax AND
+    // unverified selectivity. Both have to be survivable:
+    //
+    //   - REJECTED — TED refuses the syntax. Drop the newest speculative layer
+    //     and retry.
+    //   - ACCEPTED BUT EMPTY — TED is happy and returns nothing. This is the
+    //     failure mode that actually happened on the first real run: ten
+    //     projects, ten accepted queries, zero notices, and a layered fallback
+    //     that never fired because nothing was ever rejected. A guess that
+    //     matches nothing silently is worse than one that errors loudly.
+    //
+    // Both now narrow. Only once the PROVEN core returns empty is the answer
+    // "there is genuinely nothing", which is a real and reportable result.
     for (;;) {
       attempt += 1;
       console.log(`[${project.slug}] TED query (attempt ${attempt}): ${query}`);
       try {
-        raw = await fetchTedRaw({
+        const response = await fetchTedRaw({
           baseUrl: ctx.env.tedBaseUrl!,
           query,
           pageSize: ctx.env.tedPageSize,
           userAgent: ctx.env.userAgent,
           timeoutMs: ctx.env.timeoutMs,
         });
-        break;
+        const got = mapTedNotices(response, new Date().toISOString()).length;
+        console.log(`[${project.slug}] TED returned ${got} notice(s)`);
+        if (got > 0) {
+          raw = response;
+          break;
+        }
+        const narrowed = layers ? narrowQuery(layers) : null;
+        if (!narrowed) {
+          // The proven core itself found nothing. That is an answer, not a bug.
+          raw = response;
+          break;
+        }
+        const dropped = layers!.find((l) => !narrowed.includes(l))?.name ?? "?";
+        console.warn(
+          `[${project.slug}] accepted but empty — dropping the speculative "${dropped}" clause and retrying`,
+        );
+        layers = narrowed;
+        query = queryFromLayers(layers)!;
+        narrowedOnEmpty = true;
       } catch (err) {
         lastError = err instanceof Error ? err.message : String(err);
         const networkProblem = /403|egress|tunnel|proxy|timeout|abort|fetch failed/i.test(lastError);
@@ -236,6 +271,9 @@ async function main() {
       }
     }
     if (raw === undefined) continue;
+    if (narrowedOnEmpty) {
+      console.log(`[${project.slug}] the speculative clauses were what emptied this query, not the market`);
+    }
 
     writeFileSync(join(outDir, `ted-search-response.${project.slug}.json`), JSON.stringify(raw, null, 2), "utf8");
     // The shared connector fixture is the FIRST successful response of a run —
@@ -286,6 +324,15 @@ async function main() {
   console.log(`retrieved: ${unique.length} unique notice(s) across ${projects.length} project(s)`);
 
   if (unique.length === 0) {
+    // "Nothing came back" has two very different causes and they must not share
+    // an exit code. If every project reached TED and TED had nothing matching,
+    // that is a true and unremarkable answer — an empty week is not a broken
+    // build, and failing here would skip the link check and the ledger for no
+    // reason. If nothing reached TED at all, that IS a failure.
+    const reached = perProject.filter((p) => p.status === "OK");
+    const unreachable = perProject.filter((p) => p.status !== "OK");
+    const genuinelyEmpty = reached.length > 0 && unreachable.length === 0;
+
     writeFileSync(
       join(outDir, "run-report.md"),
       [
@@ -293,12 +340,25 @@ async function main() {
         "",
         ...perProject.map((p) => `- **${p.slug}** — ${p.status}${p.error ? `: ${p.error}` : ""}\n  - query: \`${p.query}\``),
         "",
-        "> No candidates retrieved. Where a project reports BLOCKED, the TED search fetch did not succeed in this environment — run where egress is allowed.",
+        genuinelyEmpty
+          ? `> Every one of the ${reached.length} project queries reached TED and matched nothing. ` +
+            "That is an answer, not a failure: no notice published in the window fits these CPV codes and countries. " +
+            "If this repeats week after week, the codes are too narrow — widen them in `registry/projects/*.yaml`."
+          : "> No candidates retrieved, and " +
+            `${unreachable.length} project(s) never reached TED. Where a project reports BLOCKED, the search fetch did ` +
+            "not succeed in this environment — run where egress is allowed.",
         "",
       ].join("\n"),
       "utf8",
     );
-    console.error("no candidates retrieved");
+
+    if (genuinelyEmpty) {
+      console.warn(
+        `no notice matched any of the ${reached.length} project queries — the searches ran and the window is empty`,
+      );
+      return;
+    }
+    console.error(`no candidates retrieved, and ${unreachable.length} project(s) could not reach TED`);
     process.exit(1);
     return;
   }

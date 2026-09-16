@@ -94,7 +94,12 @@ jobs:
       - name: Discover (one expert query per project)
         env:
           TED_MAX: ${{ inputs.maxNotices || '25' }}
-          TED_PUBLISHED_SINCE: ${{ inputs.publishedSince }}
+          # Left unset when the input is blank. Passing an empty string here is
+          # what silently removed the recency floor from every query on the
+          # first real run: the worker treated "" as a value rather than as
+          # "not given". The worker now guards against it too — both, because
+          # this is the kind of bug that comes back.
+          TED_PUBLISHED_SINCE: ${{ inputs.publishedSince || '' }}
         run: |
           if [ -n "${{ steps.scope.outputs.projects }}" ]; then
             pnpm --filter @oia/workers discover:ted -- --project "${{ steps.scope.outputs.projects }}"

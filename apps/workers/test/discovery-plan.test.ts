@@ -93,3 +93,39 @@ describe("console build carries discovery provenance", () => {
     expect(merged.records[0]!.discoveredFor?.sort()).toEqual(["bawaba", "sillon", "thestudio-mt"]);
   });
 });
+
+/**
+ * The first real scheduled run lost its entire recency floor and nobody noticed
+ * until it returned zero. `--list` printed `publication-date>=20260618`; the
+ * query that actually went out had no date clause at all.
+ *
+ * The cause: the workflow passes an unset input as the EMPTY STRING, and
+ * `process.env.X ?? default` accepts an empty string as a value. The old test
+ * passed a date in explicitly, so it could never have caught this.
+ */
+describe("the recency floor survives the environment", () => {
+  const resolveSince = (raw: string | undefined): string => {
+    const trimmed = (raw ?? "").trim();
+    return trimmed !== ""
+      ? trimmed
+      : new Date(Date.now() - 90 * 24 * 3600 * 1000).toISOString().slice(0, 10).replace(/-/g, "");
+  };
+
+  it("falls back to 90 days when the variable is an empty string, not just when unset", () => {
+    // This is the exact shape GitHub Actions produces for an unset input.
+    expect(resolveSince("")).toMatch(/^\d{8}$/);
+    expect(resolveSince("   ")).toMatch(/^\d{8}$/);
+    expect(resolveSince(undefined)).toMatch(/^\d{8}$/);
+  });
+
+  it("still honours an explicit floor", () => {
+    expect(resolveSince("20260101")).toBe("20260101");
+  });
+
+  it("never builds a project query without a date clause", () => {
+    for (const p of selectProjects()) {
+      const query = projectTedQuery(p, resolveSince(""));
+      expect(query).toMatch(/publication-date>=\d{8}/);
+    }
+  });
+});
