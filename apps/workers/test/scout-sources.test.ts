@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { SOURCE_REGISTRY } from "@oia/registry";
+import { PROJECT_REGISTRY, SOURCE_REGISTRY } from "@oia/registry";
+
+const PROJECT_ENTRIES = PROJECT_REGISTRY.projects;
 import { scoutableSources } from "../src/scout-aid";
 
 /**
@@ -57,5 +59,31 @@ describe("what the scout is allowed to read", () => {
 
   it("honours an explicit subset", () => {
     expect(scoutableSources(all, "adio,hub71").map((s) => s.id).sort()).toEqual(["adio", "hub71"]);
+  });
+});
+
+/**
+ * Every scoutable source must say who it serves.
+ *
+ * Eight of twelve carried no `forProjects`. The schema documents "empty means
+ * all"; the code read it as "no project at all", so 207 of 234 scouted aids
+ * arrived attached to nothing and the analyst skipped every one. Both halves
+ * are fixed — the registry now states it, and the worker falls back to every
+ * discoverable project rather than to none — and this keeps the gap from
+ * reopening silently the next time a source is added.
+ */
+describe("a source says who it serves", () => {
+  it("leaves no scoutable source without projects", () => {
+    const orphans = scoutableSources(SOURCE_REGISTRY.sources).filter((s) => s.forProjects.length === 0);
+    expect(orphans.map((s) => s.id)).toEqual([]);
+  });
+
+  it("names only projects that exist in the registry", () => {
+    const known = new Set(PROJECT_ENTRIES.map((p) => p.slug));
+    for (const source of SOURCE_REGISTRY.sources) {
+      for (const slug of source.forProjects) {
+        expect(known.has(slug), `${source.id} → ${slug}`).toBe(true);
+      }
+    }
   });
 });

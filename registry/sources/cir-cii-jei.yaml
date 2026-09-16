@@ -6,6 +6,7 @@ id: cir-cii-jei
 name: "Research and innovation tax credits (CIR, CII, JEI)"
 operator: "French tax administration"
 kinds: ["TAX_INCENTIVE"]
+forProjects: ["bawaba", "sillon", "rls-guard", "myoolala", "ludography", "thestudio-mt"]
 geographies: ["FR"]
 url: "https://www.service-public.fr/professionnels-entreprises/vosdroits/F23533"
 urlVerified: true
@@ -23,3 +24,4 @@ notes: >-
   prevent. Replaced with the service-public.fr reference page, and set back to
   unverified so the checker has to confirm the new one rather than inheriting
   the old one's word.
+  Projets servis : Dispositifs fiscaux R&D : tout projet produit porté par une entité française.

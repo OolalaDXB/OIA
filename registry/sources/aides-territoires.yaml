@@ -6,6 +6,7 @@ id: aides-territoires
 name: "Aides-territoires"
 operator: "beta.gouv.fr / French state"
 kinds: ["GRANT", "DEBT_GUARANTEE"]
+forProjects: ["lesvieillespierres", "live-great-foundation", "oolala-social-foundation", "maisons-co"]
 geographies: ["FR"]
 url: "https://aides-territoires.beta.gouv.fr"
 urlVerified: true
@@ -18,3 +19,4 @@ notes: >-
   Aggregates French aid for local authorities and associations, including
   REGIONAL schemes. The most direct answer to 'aid is under-represented'.
   Relevant above all to Les Vieilles Pierres and Maisons.co.
+  Projets servis : Aides destinées aux collectivités et aux acteurs de territoire : patrimoine, tourisme local, fondations.

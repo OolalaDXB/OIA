@@ -6,6 +6,7 @@ id: eu-funding-tenders
 name: "EU Funding & Tenders portal (SEDIA)"
 operator: "European Commission"
 kinds: ["GRANT", "TENDER", "CONSORTIUM_CALL"]
+forProjects: ["bawaba", "sillon", "ludography", "rls-guard", "thestudio-mt"]
 geographies: ["EU"]
 url: "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home"
 urlVerified: true
@@ -19,3 +20,4 @@ notes: >-
   Horizon Europe, Digital Europe, Creative Europe, EIC. The connector exists
   and is exercised against a recorded response only — it has never completed a
   live run. Status stays FIXTURE_ONLY until one does.
+  Projets servis : Horizon, Digital Europe, Creative Europe : produits logiciels et culturels.

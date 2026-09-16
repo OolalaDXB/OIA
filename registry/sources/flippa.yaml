@@ -6,6 +6,7 @@ id: flippa
 name: "Flippa"
 operator: "Flippa"
 kinds: ["ACQUISITION"]
+forProjects: ["thestudio-mt"]
 geographies: ["GLOBAL"]
 url: "https://flippa.com"
 urlVerified: true
@@ -16,3 +17,4 @@ access:
   auth: NONE
 notes: >-
   Digital assets and small software businesses. Public listings; no connector.
+  Projets servis : Acquisitions éventuelles — le studio seul décide d'acheter.

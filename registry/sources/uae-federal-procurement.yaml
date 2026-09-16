@@ -6,6 +6,7 @@ id: uae-federal-procurement
 name: "UAE federal and emirate procurement portals"
 operator: "UAE government entities"
 kinds: ["TENDER"]
+forProjects: ["bawaba", "myoolala", "beau", "thestudio-mt"]
 geographies: ["AE", "GCC"]
 url: "https://www.mof.gov.ae"
 urlVerified: true
@@ -18,3 +19,4 @@ notes: >-
   Each emirate and several federal entities run their own portal, most
   requiring supplier registration. No single machine-readable index is known to
   exist. Treated as manual watch rather than pretending a connector is coming.
+  Projets servis : Marchés publics fédéraux émiriens : les projets portés par l'entité AE.

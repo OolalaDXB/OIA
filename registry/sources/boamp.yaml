@@ -6,6 +6,7 @@ id: boamp
 name: "BOAMP — Bulletin officiel des annonces de marchés publics"
 operator: "DILA (French state)"
 kinds: ["TENDER", "PRE_SOLICITATION"]
+forProjects: ["thestudio-mt", "padel-design", "bawaba", "rls-guard"]
 geographies: ["FR"]
 url: "https://www.boamp.fr"
 urlVerified: true
@@ -19,3 +20,4 @@ notes: >-
   where a studio this size actually wins. The highest-value source not yet
   connected. An open-data API is understood to exist; its shape has not been
   verified from this environment.
+  Projets servis : Marchés publics français, y compris sous les seuils européens — le studio et l'advisory.

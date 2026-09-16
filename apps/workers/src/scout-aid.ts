@@ -2,7 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { join } from "node:path";
 import { chromium, type Browser, type Page } from "playwright";
-import { SOURCE_REGISTRY, type SourceEntry } from "@oia/registry";
+import { PROJECT_REGISTRY, SOURCE_REGISTRY, type SourceEntry } from "@oia/registry";
 import { createMistralProvider, type MistralProvider } from "@oia/providers";
 import {
   ScoutResultSchema,
@@ -185,7 +185,11 @@ function factsFor(call: ScoutedCall, artifactId: string, model: string): Materia
       out.push({ ...base, field, normalizedValue: value.trim(), originalSourceText: call.quote || value.trim() });
     }
   };
-  add("scope", call.summary);
+  // The model puts the page's own sentence in `quote` far more often than it
+  // fills `summary`. Dropping it left most scouted aids with NO facts at all,
+  // so the analyst saw a bare title and answered "cannot decide" — correctly,
+  // and uselessly. The quote IS the page's description of the call.
+  add("scope", call.summary || call.quote);
   add("eligibility", call.eligibility);
   add("estimated_value", call.amountText);
   add("deadline_text", call.deadlineText);
@@ -340,9 +344,16 @@ async function main() {
   // the product is back to "nothing runs" one layer deeper.
   const sourcePages: Record<string, string> = {};
   const forProjects: Record<string, readonly string[]> = {};
+  // "Empty means every project" is what the registry schema documents, and what
+  // the code read as "no project at all". Eight of twelve sources carry no
+  // forProjects, so 207 of 234 scouted aids arrived attached to nothing and
+  // were skipped by the analyst entirely.
+  const allDiscoverable = PROJECT_REGISTRY.projects
+    .filter((p) => p.active && p.discovery.enabled)
+    .map((p) => p.slug);
   for (const source of sources) {
     sourcePages[source.id] = source.url;
-    forProjects[source.id] = source.forProjects;
+    forProjects[source.id] = source.forProjects.length > 0 ? source.forProjects : allDiscoverable;
   }
   const consoleData = scoutedToConsole(found, sourcePages, forProjects, model);
   writeFileSync(join(outDir, "console.json"), JSON.stringify(consoleData, null, 2), "utf8");

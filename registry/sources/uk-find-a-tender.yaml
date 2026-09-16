@@ -6,6 +6,7 @@ id: uk-find-a-tender
 name: "Find a Tender (UK)"
 operator: "UK Cabinet Office"
 kinds: ["TENDER", "PRE_SOLICITATION"]
+forProjects: ["thestudio-mt", "padel-design", "bawaba"]
 geographies: ["GB"]
 url: "https://www.find-tender.service.gov.uk"
 urlVerified: true
@@ -17,3 +18,4 @@ access:
 notes: >-
   The UK's post-Brexit equivalent of TED. Publishes an OCDS feed, which would
   make it the second-easiest connector after TED.
+  Projets servis : Marchés publics britanniques : le studio, l'advisory sport, la plateforme souveraine.

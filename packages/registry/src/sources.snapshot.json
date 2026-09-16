@@ -72,8 +72,13 @@
         "endpoint": ""
       },
       "connector": "",
-      "forProjects": [],
-      "notes": "Aggregates French aid for local authorities and associations, including REGIONAL schemes. The most direct answer to 'aid is under-represented'. Relevant above all to Les Vieilles Pierres and Maisons.co."
+      "forProjects": [
+        "lesvieillespierres",
+        "live-great-foundation",
+        "oolala-social-foundation",
+        "maisons-co"
+      ],
+      "notes": "Aggregates French aid for local authorities and associations, including REGIONAL schemes. The most direct answer to 'aid is under-represented'. Relevant above all to Les Vieilles Pierres and Maisons.co. Projets servis : Aides destinées aux collectivités et aux acteurs de territoire : patrimoine, tourisme local, fondations."
     },
     {
       "id": "boamp",
@@ -96,8 +101,13 @@
         "endpoint": ""
       },
       "connector": "",
-      "forProjects": [],
-      "notes": "French public procurement INCLUDING below the European thresholds — the band where a studio this size actually wins. The highest-value source not yet connected. An open-data API is understood to exist; its shape has not been verified from this environment."
+      "forProjects": [
+        "thestudio-mt",
+        "padel-design",
+        "bawaba",
+        "rls-guard"
+      ],
+      "notes": "French public procurement INCLUDING below the European thresholds — the band where a studio this size actually wins. The highest-value source not yet connected. An open-data API is understood to exist; its shape has not been verified from this environment. Projets servis : Marchés publics français, y compris sous les seuils européens — le studio et l'advisory."
     },
     {
       "id": "bpifrance",
@@ -144,8 +154,15 @@
         "endpoint": ""
       },
       "connector": "",
-      "forProjects": [],
-      "notes": "Not a call site and never will be: a fiscal status claimed on a filing. It is listed because the taxonomy can now represent it — before TAX_INCENTIVE existed, a tax credit could not pass the gate at any evidence level. The entreprises.gouv.fr URL first published here returned HTTP 404 on the first real link check — a dead link in the exact place this product exists to prevent. Replaced with the service-public.fr reference page, and set back to unverified so the checker has to confirm the new one rather than inheriting the old one's word."
+      "forProjects": [
+        "bawaba",
+        "sillon",
+        "rls-guard",
+        "myoolala",
+        "ludography",
+        "thestudio-mt"
+      ],
+      "notes": "Not a call site and never will be: a fiscal status claimed on a filing. It is listed because the taxonomy can now represent it — before TAX_INCENTIVE existed, a tax credit could not pass the gate at any evidence level. The entreprises.gouv.fr URL first published here returned HTTP 404 on the first real link check — a dead link in the exact place this product exists to prevent. Replaced with the service-public.fr reference page, and set back to unverified so the checker has to confirm the new one rather than inheriting the old one's word. Projets servis : Dispositifs fiscaux R&D : tout projet produit porté par une entité française."
     },
     {
       "id": "eu-funding-tenders",
@@ -169,8 +186,14 @@
         "endpoint": ""
       },
       "connector": "eu-funding-tenders",
-      "forProjects": [],
-      "notes": "Horizon Europe, Digital Europe, Creative Europe, EIC. The connector exists and is exercised against a recorded response only — it has never completed a live run. Status stays FIXTURE_ONLY until one does."
+      "forProjects": [
+        "bawaba",
+        "sillon",
+        "ludography",
+        "rls-guard",
+        "thestudio-mt"
+      ],
+      "notes": "Horizon Europe, Digital Europe, Creative Europe, EIC. The connector exists and is exercised against a recorded response only — it has never completed a live run. Status stays FIXTURE_ONLY until one does. Projets servis : Horizon, Digital Europe, Creative Europe : produits logiciels et culturels."
     },
     {
       "id": "flippa",
@@ -192,8 +215,10 @@
         "endpoint": ""
       },
       "connector": "",
-      "forProjects": [],
-      "notes": "Digital assets and small software businesses. Public listings; no connector."
+      "forProjects": [
+        "thestudio-mt"
+      ],
+      "notes": "Digital assets and small software businesses. Public listings; no connector. Projets servis : Acquisitions éventuelles — le studio seul décide d'acheter."
     },
     {
       "id": "france-2030-ademe",
@@ -215,8 +240,14 @@
         "endpoint": ""
       },
       "connector": "",
-      "forProjects": [],
-      "notes": "National programme calls. Typically large consortia — relevant to BAWABA rather than to the smaller ventures."
+      "forProjects": [
+        "bawaba",
+        "sillon",
+        "rls-guard",
+        "myoolala",
+        "thestudio-mt"
+      ],
+      "notes": "National programme calls. Typically large consortia — relevant to BAWABA rather than to the smaller ventures. Projets servis : Innovation et transition : produits logiciels et le studio comme opérateur."
     },
     {
       "id": "hub71",
@@ -350,8 +381,13 @@
         "endpoint": ""
       },
       "connector": "",
-      "forProjects": [],
-      "notes": "Each emirate and several federal entities run their own portal, most requiring supplier registration. No single machine-readable index is known to exist. Treated as manual watch rather than pretending a connector is coming."
+      "forProjects": [
+        "bawaba",
+        "myoolala",
+        "beau",
+        "thestudio-mt"
+      ],
+      "notes": "Each emirate and several federal entities run their own portal, most requiring supplier registration. No single machine-readable index is known to exist. Treated as manual watch rather than pretending a connector is coming. Projets servis : Marchés publics fédéraux émiriens : les projets portés par l'entité AE."
     },
     {
       "id": "uk-find-a-tender",
@@ -374,8 +410,12 @@
         "endpoint": ""
       },
       "connector": "",
-      "forProjects": [],
-      "notes": "The UK's post-Brexit equivalent of TED. Publishes an OCDS feed, which would make it the second-easiest connector after TED."
+      "forProjects": [
+        "thestudio-mt",
+        "padel-design",
+        "bawaba"
+      ],
+      "notes": "The UK's post-Brexit equivalent of TED. Publishes an OCDS feed, which would make it the second-easiest connector after TED. Projets servis : Marchés publics britanniques : le studio, l'advisory sport, la plateforme souveraine."
     },
     {
       "id": "ungm",
@@ -398,8 +438,13 @@
         "endpoint": ""
       },
       "connector": "",
-      "forProjects": [],
-      "notes": "UN agency procurement. One UNESCO record in the dataset came from here, entered by hand. Registration required to bid; the notices themselves are public."
+      "forProjects": [
+        "thestudio-mt",
+        "live-great-foundation",
+        "oolala-social-foundation",
+        "padel-design"
+      ],
+      "notes": "UN agency procurement. One UNESCO record in the dataset came from here, entered by hand. Registration required to bid; the notices themselves are public. Projets servis : Appels des organisations internationales : le studio et les fondations."
     },
     {
       "id": "upwork",

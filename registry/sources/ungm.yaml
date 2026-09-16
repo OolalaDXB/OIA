@@ -6,6 +6,7 @@ id: ungm
 name: "UN Global Marketplace"
 operator: "United Nations"
 kinds: ["TENDER"]
+forProjects: ["thestudio-mt", "live-great-foundation", "oolala-social-foundation", "padel-design"]
 geographies: ["EMEA", "GLOBAL"]
 url: "https://www.ungm.org"
 urlVerified: true
@@ -18,3 +19,4 @@ notes: >-
   UN agency procurement. One UNESCO record in the dataset came from here,
   entered by hand. Registration required to bid; the notices themselves are
   public.
+  Projets servis : Appels des organisations internationales : le studio et les fondations.

@@ -6,6 +6,7 @@ id: france-2030-ademe
 name: "France 2030 / ADEME calls"
 operator: "French state / ADEME"
 kinds: ["GRANT"]
+forProjects: ["bawaba", "sillon", "rls-guard", "myoolala", "thestudio-mt"]
 geographies: ["FR"]
 url: "https://agirpourlatransition.ademe.fr/entreprises/appels-projets-offres"
 urlVerified: false
@@ -17,3 +18,4 @@ access:
 notes: >-
   National programme calls. Typically large consortia — relevant to BAWABA
   rather than to the smaller ventures.
+  Projets servis : Innovation et transition : produits logiciels et le studio comme opérateur.
