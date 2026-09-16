@@ -1,6 +1,6 @@
 {
   "ScoutResult": {
-    "note": "The page lists multiple funding and support programmes for startups, investors, and talents. All are included as funding opportunities.",
+    "note": "",
     "calls": [
       {
         "title": "Initiate",
@@ -108,7 +108,16 @@
         "deadline": "",
         "amount": "",
         "eligibility": "",
-        "quote": "Company building program with flexible incentives."
+        "quote": "Company building program with flexible incentives"
+      },
+      {
+        "title": "Info Session: A Deep Dive into the Hub71 Ecosystem",
+        "type": "Event/Programme",
+        "sourceUrl": "https://www.hub71.com/info-sessions#formPopup",
+        "deadline": "",
+        "amount": "",
+        "eligibility": "",
+        "quote": "Don’t miss this opportunity to connect with our team, explore the benefits of joining Hub71, and get your questions answered live."
       }
     ]
   }

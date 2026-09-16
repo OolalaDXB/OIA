@@ -4,10 +4,13 @@
       {
         "title": "Crédit d'impôt recherche (CIR)",
         "type": "Tax incentive",
-        "status": "Permanently open",
         "sourceUrl": "https://entreprendre.service-public.gouv.fr/vosdroits/F23533",
+        "deadline": "",
+        "amount": "",
+        "eligibility": "Entreprises engageant des activités de recherche et développement (R&D)",
         "quote": "Le crédit d'impôt recherche (CIR) a pour but d'encourager les entreprises à engager des activités de recherche et développement (R&D)."
       }
-    ]
+    ],
+    "note": ""
   }
 }

@@ -20,12 +20,12 @@
         "quote": "Découvrez vos aides éligibles parmi tous les financeurs"
       },
       {
-        "name": "France 2030 (via ADEME)",
+        "name": "France 2030 (Aides financières)",
         "type": "Subventions, financements pour l'innovation et l'industrialisation",
         "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres/catalogue?target%5BEntreprise%5D=Entreprise&funding%5BFrance%202030%5D=France%202030",
         "amount": "",
         "deadline": "",
-        "eligibility": "Entreprises, innovations et industrialisations dans la transition énergétique et écologique",
+        "eligibility": "Entreprises, acteurs de l'innovation",
         "quote": "L’ADEME a été désignée par l’État comme l’un des opérateurs du plan d’investissement France 2030. L’Agence a la charge d’expertiser et de financer les innovations et les industrialisations."
       },
       {
@@ -34,7 +34,7 @@
         "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres/catalogue?target%5BEntreprise%5D=Entreprise&type%5BRecherche+et+Innovation%5D=Recherche+et+Innovation",
         "amount": "",
         "deadline": "",
-        "eligibility": "Entreprises, associations, acteurs de la recherche avec des projets en lien avec la transition énergétique et écologique",
+        "eligibility": "Entreprises, associations, acteurs de la recherche avec un projet en lien avec la transition énergétique et écologique",
         "quote": "L’ADEME propose un accompagnement concret de la phase de recherche, au développement commercial, en passant par les tests et expérimentations en s'appuyant sur le budget de l’Agence et sur le programme France 2030."
       },
       {
@@ -43,7 +43,7 @@
         "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
         "amount": "",
         "deadline": "",
-        "eligibility": "",
+        "eligibility": "Entreprises, associations",
         "quote": "Retrouvez des aides financières pour vos projets de transition écologique via plusieurs leviers de financement comme les Fonds Chaleur, Fonds Économie Circulaire, Fonds Air Bois ou encore France 2030."
       },
       {
@@ -52,7 +52,7 @@
         "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
         "amount": "",
         "deadline": "",
-        "eligibility": "",
+        "eligibility": "Entreprises, associations",
         "quote": "Retrouvez des aides financières pour vos projets de transition écologique via plusieurs leviers de financement comme les Fonds Chaleur, Fonds Économie Circulaire, Fonds Air Bois ou encore France 2030."
       },
       {
@@ -61,39 +61,30 @@
         "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
         "amount": "",
         "deadline": "",
-        "eligibility": "",
+        "eligibility": "Entreprises, associations",
         "quote": "Retrouvez des aides financières pour vos projets de transition écologique via plusieurs leviers de financement comme les Fonds Chaleur, Fonds Économie Circulaire, Fonds Air Bois ou encore France 2030."
       },
       {
-        "name": "Subventions ADEME (forfaitaires ou taux d’aide)",
-        "type": "Subventions",
-        "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
+        "name": "Aides financières régionales (exemples par région)",
+        "type": "Subventions, appels à projets",
+        "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres?localisation_name=Auvergne-Rhône-Alpes#filter-anchor",
         "amount": "",
         "deadline": "",
-        "eligibility": "Entreprises, associations, acteurs de la recherche (projets non commencés)",
-        "quote": "Les subventions de l’ADEME peuvent être forfaitaires ou calculées selon un taux d’aide, avec un plafonnement lié à l’analyse économique de votre projet."
+        "eligibility": "Entreprises, associations (varie selon la région)",
+        "quote": "L’ensemble des critères de financement de l’Agence varie selon la thématique du projet, la région et le type de projet que vous demandez et auquel vous pouvez prétendre."
       },
       {
-        "name": "Appels à projets nationaux ou régionaux",
-        "type": "Appels à projets",
-        "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
-        "amount": "",
-        "deadline": "",
-        "eligibility": "",
-        "quote": "L’Agence peut proposer une aide financière dans le cadre d'appels à projets nationaux ou régionaux avec des cahiers des charges plus spécifiques."
-      },
-      {
-        "name": "Aide gré à gré",
+        "name": "Aides gré à gré",
         "type": "Subvention",
         "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
         "amount": "",
         "deadline": "",
-        "eligibility": "",
-        "quote": "D'autres subventions s’inscrivent dans le cadre d’une « Aide gré à gré », c’est-à-dire en appliquant les dispositifs classiques d’aide financière."
+        "eligibility": "Entreprises, associations",
+        "quote": "Lorsque d'autres subventions s’inscrivent dans le cadre d’une « Aide gré à gré », c’est-à-dire en appliquant les dispositifs classiques d’aide financière."
       },
       {
         "name": "ADEME Investissement",
-        "type": "Financement en fonds propres",
+        "type": "Financement en fonds propres, partage de risque",
         "sourceUrl": "https://www.ademe-investissement.fr/",
         "amount": "",
         "deadline": "",

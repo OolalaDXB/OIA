@@ -45,7 +45,7 @@
         "name": "EUROPE - Biodiversa +",
         "amount": "",
         "deadline": "",
-        "eligibility": "",
+        "eligibility": "74 programmeurs et bailleurs de fonds de recherche et acteurs de la politique environnementale de 37 pays différents",
         "quote": "Biodiversa + est le Partenariat européen sur la biodiversité. Dans la continuité de Biodiversa, il a été développé conjointement avec la Commission européenne et regroupe 74 programmeurs et bailleurs de fonds de recherche et acteurs de la politique environnementale de 37 pays différents.",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/biodiversa/"
       },
@@ -69,7 +69,7 @@
         "name": "EUROPE - CES - Corps européen de solidarité",
         "amount": "",
         "deadline": "",
-        "eligibility": "Jeunes, organismes",
+        "eligibility": "Jeunes et organismes",
         "quote": "Le Corps européen de solidarité permet aux jeunes de s’engager et aux organismes de mettre en place des initiatives en Europe sur des activités variées, dans les domaines humanitaires, de la santé, de l’environnement, de l’intergénérationnel…",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/corps-europeen-de-solidarite/"
       },
@@ -77,7 +77,7 @@
         "name": "EUROPE - COSME - Programme européen pour la compétitivité des entreprises",
         "amount": "",
         "deadline": "",
-        "eligibility": "Petites et moyennes entreprises",
+        "eligibility": "Entreprises et petites et moyennes entreprises",
         "quote": "Le programme pour la compétitivité des entreprises et des petites et moyennes entreprises (2014-2020), vise à promouvoir la croissance et à renforcer la compétitivité et la durabilité des entreprises dans l'Union européenne.",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/cosme-fonds-europeens/"
       },
@@ -109,7 +109,7 @@
         "name": "EduRénov",
         "amount": "",
         "deadline": "",
-        "eligibility": "Écoles, collèges, lycées, structures éducatives",
+        "eligibility": "Bâtiments scolaires en France",
         "quote": "Le programme EduRénov, lancé en 2023 par la Banque des Territoires, vise à accélérer la rénovation énergétique des bâtiments scolaires en France. Il s’inscrit dans la stratégie nationale de transition écologique et cible les écoles, collèges, lycées, ainsi que d’autres structures éducatives.",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/edurenov/"
       },
@@ -117,7 +117,7 @@
         "name": "EUROPE - EIT Food",
         "amount": "",
         "deadline": "",
-        "eligibility": "Innovateurs, entrepreneurs, étudiants",
+        "eligibility": "Innovateurs, entrepreneurs et étudiants",
         "quote": "EIT Food est un partenariat paneuropéen, axé sur le consommateur, qui permet aux innovateurs, aux entrepreneurs et aux étudiants de développer des solutions de classe mondiale aux défis de société, d'accélérer l'innovation, de créer des emplois et d'accroître la compétitivité de l'Europe.",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/eit-food/"
       },
@@ -125,7 +125,7 @@
         "name": "EUROPE - EIT Manufacturing",
         "amount": "",
         "deadline": "",
-        "eligibility": "",
+        "eligibility": "Acteurs de l'industrie",
         "quote": "EIT Manufacturing a pour objectif de faire de l'Europe le leader de l'innovation industrielle internationale, grâce à son large écosystème d'acteurs de l'industrie.",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/eit-manufacturing/"
       },
@@ -157,7 +157,7 @@
         "name": "EUROPE - Europe Créative",
         "amount": "",
         "deadline": "",
-        "eligibility": "",
+        "eligibility": "Secteurs de la culture et de la création",
         "quote": "Europe Créative est le programme de l'Union Européenne qui soutient les secteurs de la culture et de la création.",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/europe-creative/"
       },
@@ -413,7 +413,7 @@
         "name": "EUROPE - PERICLES IV",
         "amount": "",
         "deadline": "",
-        "eligibility": "Services répressifs, judiciaires, banques, acteurs de la lutte contre le faux monnayage",
+        "eligibility": "Services répressifs et judiciaires, banques et autres acteurs de la lutte contre le faux monnayage de l’euro",
         "quote": "Le programme Pericles IV finance des échanges de personnel, des séminaires, des formations et des études à l’intention des services répressifs et judiciaires, des banques et des autres acteurs de la lutte contre le faux monnayage de l’euro.",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/pericles-iv/"
       },
@@ -428,7 +428,7 @@
       {
         "name": "Plan France Très Haut Débit",
         "amount": "",
-        "deadline": "fin 2020 (bon haut débit), fin 2022 (très haut débit)",
+        "deadline": "",
         "eligibility": "",
         "quote": "Le programme France Très Haut Débit vise à donner accès à tous les Français au bon haut débit fixe (minimum 8 Mbit/s) d’ici à fin 2020, et au très haut débit fixe (minimum 30 Mbit/s) d’ici à fin 2022.",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/plan-france-tres-haut-debit/"
@@ -469,7 +469,7 @@
         "name": "QPV - Quartiers Prioritaires de la politique de la Ville",
         "amount": "",
         "deadline": "",
-        "eligibility": "Zones urbaines pauvres",
+        "eligibility": "Zones urbaines pauvres nécessitant des interventions publiques",
         "quote": "Les QPV sont entités définies par la loi de 2014, identifiant zones urbaines pauvres nécessitant des interventions publiques. Une nouvelle cartographie est entrée en vigueur le 1er janvier 2024 (décret 28/12/2023), actualisant périmètres et contrat ville",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/qpv-quartiers-prioritaires-de-la-politique-de-la-ville/"
       },

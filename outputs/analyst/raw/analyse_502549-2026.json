@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria such as legal form, location, or sector.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité tels que la forme juridique, la localisation ou le secteur d'activité."
+      "en": "The extracted text does not specify which types of organisations may apply. There is no mention of eligibility criteria such as legal form, location, or sector requirements.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité tels que la forme juridique, la localisation ou les exigences sectorielles."
     },
     "nextAction": {
-      "en": "Check the full tender notice at the provided link to identify the eligibility criteria.",
-      "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni pour identifier les critères d'éligibilité."
+      "en": "Contact the buyer (réséda) at b-belkaid@uem-metz.fr to ask for the full tender notice and confirm eligibility requirements.",
+      "fr": "Contacter l'acheteur (réséda) à l'adresse b-belkaid@uem-metz.fr pour demander l'avis complet de marché et confirmer les critères d'éligibilité."
     }
   }
 }

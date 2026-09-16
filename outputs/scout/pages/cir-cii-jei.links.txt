@@ -102,5 +102,5 @@ https://entreprendre.service-public.gouv.fr/P10175
 https://entreprendre.service-public.gouv.fr/P10153
 https://entreprendre.service-public.gouv.fr/P10154
 https://entreprendre.service-public.gouv.fr/P10155
-https://entreprendre.service-public.gouv.fr/#
+https://entreprendre.service-public.gouv.fr/vosdroits/F23533#
 https://github.com/etalab/licence-ouverte/blob/master/LO.md

@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations (e.g., public bodies, private companies, SMEs, etc.) are eligible to apply for this tender. There is no explicit exclusion or inclusion criteria mentioned regarding the legal status or type of applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations (par exemple, organismes publics, entreprises privées, PME, etc.) sont éligibles pour cet appel d'offres. Aucun critère d'exclusion ou d'inclusion explicite concernant le statut juridique ou le type de candidats n'est mentionné."
+    },
+    "nextAction": {
+      "en": "Consult the full tender notice on the TED website (link provided) to identify the eligibility criteria for applicants.",
+      "fr": "Consulter l'avis complet de l'appel d'offres sur le site TED (lien fourni) pour identifier les critères d'éligibilité des candidats."
+    }
+  }
+}

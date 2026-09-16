@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-16T19:24:06.712Z",
+  "generatedAt": "2026-09-16T19:38:59.773Z",
   "found": [
     {
-      "title": "Industries des véhicules intelligents et autonomes (SAVI Cluster)",
+      "title": "Industries des véhicules intelligents et autonomes (SAVI)",
       "issuer": "ADIO",
       "kind": "GRANT",
       "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/savi",
@@ -12,11 +12,11 @@
       "deadlineText": "",
       "quote": "Une nouvelle ère de mobilité intelligente",
       "sourceId": "adio",
-      "contentHash": "9923c153b18cac39c67b5c163dd89833bda9e09f3385bfec473767d928a11d21",
+      "contentHash": "e27b25fb0904c0d867fe424515c40a1f1e527910df710a259197b9a5f9c2e134",
       "facts": []
     },
     {
-      "title": "Croissance agroalimentaire et abondance en eau (AGWA Cluster)",
+      "title": "Croissance agroalimentaire et abondance en eau (AGWA)",
       "issuer": "ADIO",
       "kind": "GRANT",
       "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/agwa",
@@ -26,11 +26,11 @@
       "deadlineText": "",
       "quote": "Cultiver l’avenir de l’alimentation et de l’eau",
       "sourceId": "adio",
-      "contentHash": "9923c153b18cac39c67b5c163dd89833bda9e09f3385bfec473767d928a11d21",
+      "contentHash": "e27b25fb0904c0d867fe424515c40a1f1e527910df710a259197b9a5f9c2e134",
       "facts": []
     },
     {
-      "title": "Santé, endurance, longévité et médecine (HELM Cluster)",
+      "title": "Santé, endurance, longévité et médecine (HELM)",
       "issuer": "ADIO",
       "kind": "GRANT",
       "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/helm",
@@ -40,11 +40,11 @@
       "deadlineText": "",
       "quote": "Propulser la prochaine ère des sciences de la vie",
       "sourceId": "adio",
-      "contentHash": "9923c153b18cac39c67b5c163dd89833bda9e09f3385bfec473767d928a11d21",
+      "contentHash": "e27b25fb0904c0d867fe424515c40a1f1e527910df710a259197b9a5f9c2e134",
       "facts": []
     },
     {
-      "title": "Fintech, assurance, numérique et actifs alternatifs (FIDA Cluster)",
+      "title": "Fintech, assurance, numérique et actifs alternatifs (FIDA)",
       "issuer": "ADIO",
       "kind": "GRANT",
       "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/fida",
@@ -54,7 +54,7 @@
       "deadlineText": "",
       "quote": "Construire l’avenir de la finance mondiale depuis Abou Dhabi",
       "sourceId": "adio",
-      "contentHash": "9923c153b18cac39c67b5c163dd89833bda9e09f3385bfec473767d928a11d21",
+      "contentHash": "e27b25fb0904c0d867fe424515c40a1f1e527910df710a259197b9a5f9c2e134",
       "facts": []
     },
     {
@@ -68,7 +68,7 @@
       "deadlineText": "",
       "quote": "Des contrats de long terme qui réalisent des actifs publics avec des partenaires du secteur privé",
       "sourceId": "adio",
-      "contentHash": "9923c153b18cac39c67b5c163dd89833bda9e09f3385bfec473767d928a11d21",
+      "contentHash": "e27b25fb0904c0d867fe424515c40a1f1e527910df710a259197b9a5f9c2e134",
       "facts": []
     },
     {
@@ -82,11 +82,112 @@
       "deadlineText": "",
       "quote": "Stratégie industrielle, facilitation du commerce et promotion des exportations réunies sur une seule plateforme",
       "sourceId": "adio",
-      "contentHash": "9923c153b18cac39c67b5c163dd89833bda9e09f3385bfec473767d928a11d21",
+      "contentHash": "e27b25fb0904c0d867fe424515c40a1f1e527910df710a259197b9a5f9c2e134",
       "facts": []
     },
     {
-      "title": "Abu Dhabi Investment Forum: Milan",
+      "title": "Programmes de soutien (Trade & Industry)",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry/support-programmes",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "adio",
+      "contentHash": "e27b25fb0904c0d867fe424515c40a1f1e527910df710a259197b9a5f9c2e134",
+      "facts": []
+    },
+    {
+      "title": "Un référent unique vers le gouvernement",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.investwithabudhabi.com/fr",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Un référent unique coordonne licences, terrains, réseaux et autorisations auprès des entités publiques : un seul dossier, un seul fil.",
+      "sourceId": "adio",
+      "contentHash": "e27b25fb0904c0d867fe424515c40a1f1e527910df710a259197b9a5f9c2e134",
+      "facts": []
+    },
+    {
+      "title": "Accompagnement pensé pour votre projet",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.investwithabudhabi.com/fr",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Les programmes de soutien s’articulent autour de votre projet, sans catalogue imposé.",
+      "sourceId": "adio",
+      "contentHash": "e27b25fb0904c0d867fe424515c40a1f1e527910df710a259197b9a5f9c2e134",
+      "facts": []
+    },
+    {
+      "title": "À vos côtés après l’implantation",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.investwithabudhabi.com/fr",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Accueil et suivi sur mesure tout au long du cycle d’investissement, de la première demande jusqu’à l’expansion.",
+      "sourceId": "adio",
+      "contentHash": "e27b25fb0904c0d867fe424515c40a1f1e527910df710a259197b9a5f9c2e134",
+      "facts": []
+    },
+    {
+      "title": "Abu Dhabi Investment Forum : Séoul",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://adif.abudhabi/south-korea/#register",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "2026-09-16",
+      "quote": "Le Bureau d’investissement d’Abu Dhabi (ADIO) a le plaisir de vous inviter à manifester votre intérêt pour participer à l’Abu Dhabi Investment Forum (ADIF) au JW Marriott Hotel Seoul, en Corée du Sud, un événement exclusif réunissant les plus grands dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi, la capitale des Émirats arabes unis",
+      "sourceId": "adio",
+      "contentHash": "e27b25fb0904c0d867fe424515c40a1f1e527910df710a259197b9a5f9c2e134",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-adio-e27b25fb0904",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://adif.abudhabi/south-korea/#register"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "2026-09-16",
+          "originalSourceText": "Le Bureau d’investissement d’Abu Dhabi (ADIO) a le plaisir de vous inviter à manifester votre intérêt pour participer à l’Abu Dhabi Investment Forum (ADIF) au JW Marriott Hotel Seoul, en Corée du Sud, un événement exclusif réunissant les plus grands dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi, la capitale des Émirats arabes unis"
+        }
+      ]
+    },
+    {
+      "title": "Abu Dhabi Investment Forum : Shanghai",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://adif.abudhabi/shanghai/",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Le Bureau d’investissement d’Abu Dhabi (ADIO), en partenariat avec l’Abu Dhabi Global Market (ADGM), a le plaisir de vous inviter à manifester votre intérêt pour participer à l’Abu Dhabi Investment Forum (ADIF), un événement exclusif réunissant les plus grands dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi, la capitale des Émirats arabes unis",
+      "sourceId": "adio",
+      "contentHash": "e27b25fb0904c0d867fe424515c40a1f1e527910df710a259197b9a5f9c2e134",
+      "facts": []
+    },
+    {
+      "title": "Abu Dhabi Investment Forum : Milan",
       "issuer": "ADIO",
       "kind": "GRANT",
       "sourceUrl": "https://adif.abudhabi/milan/",
@@ -96,11 +197,11 @@
       "deadlineText": "",
       "quote": "Ce forum exclusif, accessible uniquement sur invitation, réunira d’éminents dirigeants, entrepreneurs et décideurs afin d’explorer les opportunités stratégiques de collaboration entre les communautés d’affaires d’Abu Dhabi et d’Italie.",
       "sourceId": "adio",
-      "contentHash": "9923c153b18cac39c67b5c163dd89833bda9e09f3385bfec473767d928a11d21",
+      "contentHash": "e27b25fb0904c0d867fe424515c40a1f1e527910df710a259197b9a5f9c2e134",
       "facts": []
     },
     {
-      "title": "Abu Dhabi Investment Forum: Mumbai",
+      "title": "Abu Dhabi Investment Forum : Mumbai",
       "issuer": "ADIO",
       "kind": "GRANT",
       "sourceUrl": "https://adif.abudhabi/mumbai/",
@@ -108,9 +209,23 @@
       "eligibility": "",
       "amountText": "",
       "deadlineText": "",
-      "quote": "L’Abu Dhabi Investment Forum a réuni dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi.",
+      "quote": "L’Abu Dhabi Investment Forum a réuni dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi, la capitale des Émirats arabes unis.",
       "sourceId": "adio",
-      "contentHash": "9923c153b18cac39c67b5c163dd89833bda9e09f3385bfec473767d928a11d21",
+      "contentHash": "e27b25fb0904c0d867fe424515c40a1f1e527910df710a259197b9a5f9c2e134",
+      "facts": []
+    },
+    {
+      "title": "Golden Visa et résidence",
+      "issuer": "ADIO",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.investwithabudhabi.com/fr/golden-visa-residency",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "adio",
+      "contentHash": "e27b25fb0904c0d867fe424515c40a1f1e527910df710a259197b9a5f9c2e134",
       "facts": []
     },
     {
@@ -223,13 +338,30 @@
       "kind": "GRANT",
       "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/biodiversa/",
       "summary": "",
-      "eligibility": "",
+      "eligibility": "74 programmeurs et bailleurs de fonds de recherche et acteurs de la politique environnementale de 37 pays différents",
       "amountText": "",
       "deadlineText": "",
       "quote": "Biodiversa + est le Partenariat européen sur la biodiversité. Dans la continuité de Biodiversa, il a été développé conjointement avec la Commission européenne et regroupe 74 programmeurs et bailleurs de fonds de recherche et acteurs de la politique environnementale de 37 pays différents.",
       "sourceId": "aides-territoires",
       "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
-      "facts": []
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-aides-territoires-5f766cbcb05c",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/biodiversa/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "74 programmeurs et bailleurs de fonds de recherche et acteurs de la politique environnementale de 37 pays différents",
+          "originalSourceText": "Biodiversa + est le Partenariat européen sur la biodiversité. Dans la continuité de Biodiversa, il a été développé conjointement avec la Commission européenne et regroupe 74 programmeurs et bailleurs de fonds de recherche et acteurs de la politique environnementale de 37 pays différents."
+        }
+      ]
     },
     {
       "title": "Cités éducatives",
@@ -265,7 +397,7 @@
       "kind": "GRANT",
       "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/corps-europeen-de-solidarite/",
       "summary": "",
-      "eligibility": "Jeunes, organismes",
+      "eligibility": "Jeunes et organismes",
       "amountText": "",
       "deadlineText": "",
       "quote": "Le Corps européen de solidarité permet aux jeunes de s’engager et aux organismes de mettre en place des initiatives en Europe sur des activités variées, dans les domaines humanitaires, de la santé, de l’environnement, de l’intergénérationnel…",
@@ -285,7 +417,7 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "eligibility",
-          "normalizedValue": "Jeunes, organismes",
+          "normalizedValue": "Jeunes et organismes",
           "originalSourceText": "Le Corps européen de solidarité permet aux jeunes de s’engager et aux organismes de mettre en place des initiatives en Europe sur des activités variées, dans les domaines humanitaires, de la santé, de l’environnement, de l’intergénérationnel…"
         }
       ]
@@ -296,7 +428,7 @@
       "kind": "GRANT",
       "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/cosme-fonds-europeens/",
       "summary": "",
-      "eligibility": "Petites et moyennes entreprises",
+      "eligibility": "Entreprises et petites et moyennes entreprises",
       "amountText": "",
       "deadlineText": "",
       "quote": "Le programme pour la compétitivité des entreprises et des petites et moyennes entreprises (2014-2020), vise à promouvoir la croissance et à renforcer la compétitivité et la durabilité des entreprises dans l'Union européenne.",
@@ -316,7 +448,7 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "eligibility",
-          "normalizedValue": "Petites et moyennes entreprises",
+          "normalizedValue": "Entreprises et petites et moyennes entreprises",
           "originalSourceText": "Le programme pour la compétitivité des entreprises et des petites et moyennes entreprises (2014-2020), vise à promouvoir la croissance et à renforcer la compétitivité et la durabilité des entreprises dans l'Union européenne."
         }
       ]
@@ -386,7 +518,7 @@
       "kind": "GRANT",
       "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/edurenov/",
       "summary": "",
-      "eligibility": "Écoles, collèges, lycées, structures éducatives",
+      "eligibility": "Bâtiments scolaires en France",
       "amountText": "",
       "deadlineText": "",
       "quote": "Le programme EduRénov, lancé en 2023 par la Banque des Territoires, vise à accélérer la rénovation énergétique des bâtiments scolaires en France. Il s’inscrit dans la stratégie nationale de transition écologique et cible les écoles, collèges, lycées, ainsi que d’autres structures éducatives.",
@@ -406,7 +538,7 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "eligibility",
-          "normalizedValue": "Écoles, collèges, lycées, structures éducatives",
+          "normalizedValue": "Bâtiments scolaires en France",
           "originalSourceText": "Le programme EduRénov, lancé en 2023 par la Banque des Territoires, vise à accélérer la rénovation énergétique des bâtiments scolaires en France. Il s’inscrit dans la stratégie nationale de transition écologique et cible les écoles, collèges, lycées, ainsi que d’autres structures éducatives."
         }
       ]
@@ -417,7 +549,7 @@
       "kind": "GRANT",
       "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/eit-food/",
       "summary": "",
-      "eligibility": "Innovateurs, entrepreneurs, étudiants",
+      "eligibility": "Innovateurs, entrepreneurs et étudiants",
       "amountText": "",
       "deadlineText": "",
       "quote": "EIT Food est un partenariat paneuropéen, axé sur le consommateur, qui permet aux innovateurs, aux entrepreneurs et aux étudiants de développer des solutions de classe mondiale aux défis de société, d'accélérer l'innovation, de créer des emplois et d'accroître la compétitivité de l'Europe.",
@@ -437,7 +569,7 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "eligibility",
-          "normalizedValue": "Innovateurs, entrepreneurs, étudiants",
+          "normalizedValue": "Innovateurs, entrepreneurs et étudiants",
           "originalSourceText": "EIT Food est un partenariat paneuropéen, axé sur le consommateur, qui permet aux innovateurs, aux entrepreneurs et aux étudiants de développer des solutions de classe mondiale aux défis de société, d'accélérer l'innovation, de créer des emplois et d'accroître la compétitivité de l'Europe."
         }
       ]
@@ -448,13 +580,30 @@
       "kind": "GRANT",
       "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/eit-manufacturing/",
       "summary": "",
-      "eligibility": "",
+      "eligibility": "Acteurs de l'industrie",
       "amountText": "",
       "deadlineText": "",
       "quote": "EIT Manufacturing a pour objectif de faire de l'Europe le leader de l'innovation industrielle internationale, grâce à son large écosystème d'acteurs de l'industrie.",
       "sourceId": "aides-territoires",
       "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
-      "facts": []
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-aides-territoires-5f766cbcb05c",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/eit-manufacturing/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Acteurs de l'industrie",
+          "originalSourceText": "EIT Manufacturing a pour objectif de faire de l'Europe le leader de l'innovation industrielle internationale, grâce à son large écosystème d'acteurs de l'industrie."
+        }
+      ]
     },
     {
       "title": "EUROPE - Erasmus +",
@@ -504,13 +653,30 @@
       "kind": "GRANT",
       "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/europe-creative/",
       "summary": "",
-      "eligibility": "",
+      "eligibility": "Secteurs de la culture et de la création",
       "amountText": "",
       "deadlineText": "",
       "quote": "Europe Créative est le programme de l'Union Européenne qui soutient les secteurs de la culture et de la création.",
       "sourceId": "aides-territoires",
       "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
-      "facts": []
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-aides-territoires-5f766cbcb05c",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/europe-creative/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Secteurs de la culture et de la création",
+          "originalSourceText": "Europe Créative est le programme de l'Union Européenne qui soutient les secteurs de la culture et de la création."
+        }
+      ]
     },
     {
       "title": "EUROPE - Digital Europe - Europe Numérique",
@@ -1054,7 +1220,7 @@
       "kind": "GRANT",
       "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/pericles-iv/",
       "summary": "",
-      "eligibility": "Services répressifs, judiciaires, banques, acteurs de la lutte contre le faux monnayage",
+      "eligibility": "Services répressifs et judiciaires, banques et autres acteurs de la lutte contre le faux monnayage de l’euro",
       "amountText": "",
       "deadlineText": "",
       "quote": "Le programme Pericles IV finance des échanges de personnel, des séminaires, des formations et des études à l’intention des services répressifs et judiciaires, des banques et des autres acteurs de la lutte contre le faux monnayage de l’euro.",
@@ -1074,7 +1240,7 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "eligibility",
-          "normalizedValue": "Services répressifs, judiciaires, banques, acteurs de la lutte contre le faux monnayage",
+          "normalizedValue": "Services répressifs et judiciaires, banques et autres acteurs de la lutte contre le faux monnayage de l’euro",
           "originalSourceText": "Le programme Pericles IV finance des échanges de personnel, des séminaires, des formations et des études à l’intention des services répressifs et judiciaires, des banques et des autres acteurs de la lutte contre le faux monnayage de l’euro."
         }
       ]
@@ -1118,28 +1284,11 @@
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "fin 2020 (bon haut débit), fin 2022 (très haut débit)",
+      "deadlineText": "",
       "quote": "Le programme France Très Haut Débit vise à donner accès à tous les Français au bon haut débit fixe (minimum 8 Mbit/s) d’ici à fin 2020, et au très haut débit fixe (minimum 30 Mbit/s) d’ici à fin 2022.",
       "sourceId": "aides-territoires",
       "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-aides-territoires-5f766cbcb05c",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://aides-territoires.beta.gouv.fr/programmes/plan-france-tres-haut-debit/"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "fin 2020 (bon haut débit), fin 2022 (très haut débit)",
-          "originalSourceText": "Le programme France Très Haut Débit vise à donner accès à tous les Français au bon haut débit fixe (minimum 8 Mbit/s) d’ici à fin 2020, et au très haut débit fixe (minimum 30 Mbit/s) d’ici à fin 2022."
-        }
-      ]
+      "facts": []
     },
     {
       "title": "EUROPE - EUAF - Programme Anti-Fraude 2021-2027",
@@ -1220,7 +1369,7 @@
       "kind": "GRANT",
       "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/qpv-quartiers-prioritaires-de-la-politique-de-la-ville/",
       "summary": "",
-      "eligibility": "Zones urbaines pauvres",
+      "eligibility": "Zones urbaines pauvres nécessitant des interventions publiques",
       "amountText": "",
       "deadlineText": "",
       "quote": "Les QPV sont entités définies par la loi de 2014, identifiant zones urbaines pauvres nécessitant des interventions publiques. Une nouvelle cartographie est entrée en vigueur le 1er janvier 2024 (décret 28/12/2023), actualisant périmètres et contrat ville",
@@ -1240,7 +1389,7 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "eligibility",
-          "normalizedValue": "Zones urbaines pauvres",
+          "normalizedValue": "Zones urbaines pauvres nécessitant des interventions publiques",
           "originalSourceText": "Les QPV sont entités définies par la loi de 2014, identifiant zones urbaines pauvres nécessitant des interventions publiques. Une nouvelle cartographie est entrée en vigueur le 1er janvier 2024 (décret 28/12/2023), actualisant périmètres et contrat ville"
         }
       ]
@@ -1352,13 +1501,30 @@
       "kind": "TAX_INCENTIVE",
       "sourceUrl": "https://entreprendre.service-public.gouv.fr/vosdroits/F23533",
       "summary": "",
-      "eligibility": "",
+      "eligibility": "Entreprises engageant des activités de recherche et développement (R&D)",
       "amountText": "",
       "deadlineText": "",
       "quote": "Le crédit d'impôt recherche (CIR) a pour but d'encourager les entreprises à engager des activités de recherche et développement (R&D).",
       "sourceId": "cir-cii-jei",
-      "contentHash": "0f70036163570b25976275d159101d5174fba8dd082410e03947e525a8082afb",
-      "facts": []
+      "contentHash": "3d0f0fd73d03b56045751bf667dccff7660bd97af3350a41aba7427b9bbf2036",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-cir-cii-jei-3d0f0fd73d03",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://entreprendre.service-public.gouv.fr/vosdroits/F23533"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Entreprises engageant des activités de recherche et développement (R&D)",
+          "originalSourceText": "Le crédit d'impôt recherche (CIR) a pour but d'encourager les entreprises à engager des activités de recherche et développement (R&D)."
+        }
+      ]
     },
     {
       "title": "Demonstration of hydropower technologies for efficient and forward-looking refurbishment of existing hydropower plants",
@@ -2111,13 +2277,30 @@
       "kind": "GRANT",
       "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
       "summary": "",
-      "eligibility": "",
+      "eligibility": "Entreprises, associations",
       "amountText": "",
       "deadlineText": "",
       "quote": "Retrouvez des aides financières pour vos projets de transition écologique via plusieurs leviers de financement comme les Fonds Chaleur, Fonds Économie Circulaire, Fonds Air Bois ou encore France 2030.",
       "sourceId": "france-2030-ademe",
       "contentHash": "49a9e9bbd309556116dd115ec2062fc160c524987d723eac638e9987aa9a2c0a",
-      "facts": []
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-france-2030-ademe-49a9e9bbd309",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Entreprises, associations",
+          "originalSourceText": "Retrouvez des aides financières pour vos projets de transition écologique via plusieurs leviers de financement comme les Fonds Chaleur, Fonds Économie Circulaire, Fonds Air Bois ou encore France 2030."
+        }
+      ]
     },
     {
       "title": "Fonds Économie Circulaire",
@@ -2125,13 +2308,30 @@
       "kind": "GRANT",
       "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
       "summary": "",
-      "eligibility": "",
+      "eligibility": "Entreprises, associations",
       "amountText": "",
       "deadlineText": "",
       "quote": "Retrouvez des aides financières pour vos projets de transition écologique via plusieurs leviers de financement comme les Fonds Chaleur, Fonds Économie Circulaire, Fonds Air Bois ou encore France 2030.",
       "sourceId": "france-2030-ademe",
       "contentHash": "49a9e9bbd309556116dd115ec2062fc160c524987d723eac638e9987aa9a2c0a",
-      "facts": []
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-france-2030-ademe-49a9e9bbd309",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Entreprises, associations",
+          "originalSourceText": "Retrouvez des aides financières pour vos projets de transition écologique via plusieurs leviers de financement comme les Fonds Chaleur, Fonds Économie Circulaire, Fonds Air Bois ou encore France 2030."
+        }
+      ]
     },
     {
       "title": "Fonds Air Bois",
@@ -2139,27 +2339,30 @@
       "kind": "GRANT",
       "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
       "summary": "",
-      "eligibility": "",
+      "eligibility": "Entreprises, associations",
       "amountText": "",
       "deadlineText": "",
       "quote": "Retrouvez des aides financières pour vos projets de transition écologique via plusieurs leviers de financement comme les Fonds Chaleur, Fonds Économie Circulaire, Fonds Air Bois ou encore France 2030.",
       "sourceId": "france-2030-ademe",
       "contentHash": "49a9e9bbd309556116dd115ec2062fc160c524987d723eac638e9987aa9a2c0a",
-      "facts": []
-    },
-    {
-      "title": "Appels à projets nationaux ou régionaux",
-      "issuer": "French state / ADEME",
-      "kind": "GRANT",
-      "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "",
-      "quote": "L’Agence peut proposer une aide financière dans le cadre d'appels à projets nationaux ou régionaux avec des cahiers des charges plus spécifiques.",
-      "sourceId": "france-2030-ademe",
-      "contentHash": "49a9e9bbd309556116dd115ec2062fc160c524987d723eac638e9987aa9a2c0a",
-      "facts": []
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-france-2030-ademe-49a9e9bbd309",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Entreprises, associations",
+          "originalSourceText": "Retrouvez des aides financières pour vos projets de transition écologique via plusieurs leviers de financement comme les Fonds Chaleur, Fonds Économie Circulaire, Fonds Air Bois ou encore France 2030."
+        }
+      ]
     },
     {
       "title": "Initiate",
@@ -2172,7 +2375,7 @@
       "deadlineText": "",
       "quote": "Initiate is Hub71’s early-stage programme that supports founders at the ideation or pre-MVP stage to turn their ideas into scalable startups. By joining, founders will be connected with experienced venture builders and gain the resources, mentorship, and ecosystem access needed to transform ideas into startups that can scale.",
       "sourceId": "hub71",
-      "contentHash": "d72babf9a528c5324171a37288c187211b56f58be9e3acef176f08a86fe12c46",
+      "contentHash": "68aae74909f0389f39fa781ff412f94c98f2ad320a8fc5816b2a1a6273cb0cf5",
       "facts": []
     },
     {
@@ -2186,11 +2389,11 @@
       "deadlineText": "",
       "quote": "The MZN x Hub71 Programme is a three-month programme powered by Hub71 in partnership with the Khalifa Fund for Enterprise Development, designed to support Emirati founders in transforming innovative ideas into market-ready minimum viable products (MVPs).",
       "sourceId": "hub71",
-      "contentHash": "d72babf9a528c5324171a37288c187211b56f58be9e3acef176f08a86fe12c46",
+      "contentHash": "68aae74909f0389f39fa781ff412f94c98f2ad320a8fc5816b2a1a6273cb0cf5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-d72babf9a528",
+          "sourceArtifactId": "scout-hub71-68aae74909f0",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.hub71.com/program/mzn-x-hub71-programme"
@@ -2217,11 +2420,11 @@
       "deadlineText": "",
       "quote": "The Hub71 Immersion Programme is a structured, in-market experience designed to support international startups as they explore and build connections within Abu Dhabi’s global tech ecosystem.",
       "sourceId": "hub71",
-      "contentHash": "d72babf9a528c5324171a37288c187211b56f58be9e3acef176f08a86fe12c46",
+      "contentHash": "68aae74909f0389f39fa781ff412f94c98f2ad320a8fc5816b2a1a6273cb0cf5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-d72babf9a528",
+          "sourceArtifactId": "scout-hub71-68aae74909f0",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.hub71.com/program/india"
@@ -2248,7 +2451,7 @@
       "deadlineText": "",
       "quote": "Get the support you need to take your business to the next level in Abu Dhabi. Our Access Program offers a comprehensive support package and a route into the UAE capital’s marketplace. The benefits include in-kind and cash incentives and access to our vibrant community of capital and corporate partners, and mentors.",
       "sourceId": "hub71",
-      "contentHash": "d72babf9a528c5324171a37288c187211b56f58be9e3acef176f08a86fe12c46",
+      "contentHash": "68aae74909f0389f39fa781ff412f94c98f2ad320a8fc5816b2a1a6273cb0cf5",
       "facts": []
     },
     {
@@ -2262,11 +2465,11 @@
       "deadlineText": "",
       "quote": "The ECA Anjal Z x Hub71 programme supports startups addressing challenges across early childhood development, from pregnancy through age eight, by providing direct access to government partners, pilot opportunities, and Hub71’s broader innovation ecosystem.",
       "sourceId": "hub71",
-      "contentHash": "d72babf9a528c5324171a37288c187211b56f58be9e3acef176f08a86fe12c46",
+      "contentHash": "68aae74909f0389f39fa781ff412f94c98f2ad320a8fc5816b2a1a6273cb0cf5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-d72babf9a528",
+          "sourceArtifactId": "scout-hub71-68aae74909f0",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.hub71.com/program/eca-anjal-z-x-hub71"
@@ -2293,11 +2496,11 @@
       "deadlineText": "",
       "quote": "Hub71 is your startup’s gateway into Abu Dhabi’s SAVI cluster. Smart and autonomous mobility startups joining Hub71 gain direct access to SAVI’s network of partners, regulators and testing environments.",
       "sourceId": "hub71",
-      "contentHash": "d72babf9a528c5324171a37288c187211b56f58be9e3acef176f08a86fe12c46",
+      "contentHash": "68aae74909f0389f39fa781ff412f94c98f2ad320a8fc5816b2a1a6273cb0cf5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-d72babf9a528",
+          "sourceArtifactId": "scout-hub71-68aae74909f0",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.hub71.com/program/savi"
@@ -2324,11 +2527,11 @@
       "deadlineText": "",
       "quote": "Hub71+ Life Sciences is Abu Dhabi’s specialist ecosystem driving innovation across biotechnology, MedTech, and digital health. From precision medicine to biomanufacturing, we bring together founders, researchers, regulators, investors, and corporates to advance next-generation healthcare solutions from Abu Dhabi to the world.",
       "sourceId": "hub71",
-      "contentHash": "d72babf9a528c5324171a37288c187211b56f58be9e3acef176f08a86fe12c46",
+      "contentHash": "68aae74909f0389f39fa781ff412f94c98f2ad320a8fc5816b2a1a6273cb0cf5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-d72babf9a528",
+          "sourceArtifactId": "scout-hub71-68aae74909f0",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.hub71.com/program/hub71-plus-life-sciences"
@@ -2355,11 +2558,11 @@
       "deadlineText": "",
       "quote": "Hub71+ Digital Assets is a dedicated programme to promote Web3 startup growth from the heart of Abu Dhabi. We provide an integrated launchpad that unites builders, regulators, investors, foundations, corporate partners, and enthusiasts around Web3 including blockchain and cryptocurrency startups.",
       "sourceId": "hub71",
-      "contentHash": "d72babf9a528c5324171a37288c187211b56f58be9e3acef176f08a86fe12c46",
+      "contentHash": "68aae74909f0389f39fa781ff412f94c98f2ad320a8fc5816b2a1a6273cb0cf5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-d72babf9a528",
+          "sourceArtifactId": "scout-hub71-68aae74909f0",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.hub71.com/program/hub71-plus-digital-assets"
@@ -2386,11 +2589,11 @@
       "deadlineText": "",
       "quote": "Hub71+ ClimateTech is a specialist ecosystem, where sustainability startups leverage technologies to drive decarbonization in supporting a net zero future. The programme offers a comprehensive support package and a route into the UAE capital's marketplace.",
       "sourceId": "hub71",
-      "contentHash": "d72babf9a528c5324171a37288c187211b56f58be9e3acef176f08a86fe12c46",
+      "contentHash": "68aae74909f0389f39fa781ff412f94c98f2ad320a8fc5816b2a1a6273cb0cf5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-d72babf9a528",
+          "sourceArtifactId": "scout-hub71-68aae74909f0",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.hub71.com/program/hub71-plus-climatetech"
@@ -2417,11 +2620,11 @@
       "deadlineText": "",
       "quote": "Hub71+ AI is a specialist ecosystem designed to support startups at the forefront of AI innovation. The ecosystem provides advanced technical resources, access to a robust network of AI researchers, industry practitioners, and strategic partners, and tailored expertise in AI-driven product development and scalability.",
       "sourceId": "hub71",
-      "contentHash": "d72babf9a528c5324171a37288c187211b56f58be9e3acef176f08a86fe12c46",
+      "contentHash": "68aae74909f0389f39fa781ff412f94c98f2ad320a8fc5816b2a1a6273cb0cf5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-d72babf9a528",
+          "sourceArtifactId": "scout-hub71-68aae74909f0",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.hub71.com/program/hub71-plus-ai"
@@ -2436,6 +2639,20 @@
           "originalSourceText": "Hub71+ AI is a specialist ecosystem designed to support startups at the forefront of AI innovation. The ecosystem provides advanced technical resources, access to a robust network of AI researchers, industry practitioners, and strategic partners, and tailored expertise in AI-driven product development and scalability."
         }
       ]
+    },
+    {
+      "title": "Info Session: A Deep Dive into the Hub71 Ecosystem",
+      "issuer": "Abu Dhabi (Mubadala)",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.hub71.com/info-sessions#formPopup",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Don’t miss this opportunity to connect with our team, explore the benefits of joining Hub71, and get your questions answered live.",
+      "sourceId": "hub71",
+      "contentHash": "68aae74909f0389f39fa781ff412f94c98f2ad320a8fc5816b2a1a6273cb0cf5",
+      "facts": []
     },
     {
       "title": "Digital Exposure Analysis",
@@ -3276,11 +3493,11 @@
       "deadlineText": "16-Sep-2026 16:30 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-9355186b4280",
+          "sourceArtifactId": "scout-ungm-932667ef8acd",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -3307,11 +3524,11 @@
       "deadlineText": "16-Sep-2026 17:00 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-9355186b4280",
+          "sourceArtifactId": "scout-ungm-932667ef8acd",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -3338,11 +3555,11 @@
       "deadlineText": "16-Sep-2026 17:00 (GMT -5.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-9355186b4280",
+          "sourceArtifactId": "scout-ungm-932667ef8acd",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -3369,11 +3586,11 @@
       "deadlineText": "16-Sep-2026 17:03 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-9355186b4280",
+          "sourceArtifactId": "scout-ungm-932667ef8acd",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -3400,11 +3617,11 @@
       "deadlineText": "16-Sep-2026 17:59 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-9355186b4280",
+          "sourceArtifactId": "scout-ungm-932667ef8acd",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -3431,11 +3648,11 @@
       "deadlineText": "16-Sep-2026 22:59 (GMT 2.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-9355186b4280",
+          "sourceArtifactId": "scout-ungm-932667ef8acd",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -3462,11 +3679,11 @@
       "deadlineText": "16-Sep-2026 22:59 (GMT 2.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-9355186b4280",
+          "sourceArtifactId": "scout-ungm-932667ef8acd",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -3493,11 +3710,11 @@
       "deadlineText": "16-Sep-2026 23:00 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-9355186b4280",
+          "sourceArtifactId": "scout-ungm-932667ef8acd",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -3524,11 +3741,11 @@
       "deadlineText": "16-Sep-2026 23:00 (GMT 2.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-9355186b4280",
+          "sourceArtifactId": "scout-ungm-932667ef8acd",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -3555,11 +3772,11 @@
       "deadlineText": "16-Sep-2026 23:41 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-9355186b4280",
+          "sourceArtifactId": "scout-ungm-932667ef8acd",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -3586,11 +3803,11 @@
       "deadlineText": "16-Sep-2026 23:59 (GMT 1.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-9355186b4280",
+          "sourceArtifactId": "scout-ungm-932667ef8acd",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -3617,11 +3834,11 @@
       "deadlineText": "16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-9355186b4280",
+          "sourceArtifactId": "scout-ungm-932667ef8acd",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -3638,6 +3855,37 @@
       ]
     },
     {
+      "title": "Production of digital education packages for Somalia",
+      "issuer": "United Nations",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "16-Sep-2026 23:59 (GMT 3.00) Expires within 24 hours",
+      "quote": "",
+      "sourceId": "ungm",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-ungm-932667ef8acd",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.ungm.org/Public/Notice"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "16-Sep-2026 23:59 (GMT 3.00) Expires within 24 hours",
+          "originalSourceText": "16-Sep-2026 23:59 (GMT 3.00) Expires within 24 hours"
+        }
+      ]
+    },
+    {
       "title": "138200 SUMINISTRO DE ANIMALES DE PRODUCCIÓN PECUARIA – AVES DE POSTURA Y PORCINOS DE LEVANTE, DPTO. DE CÓRDOBA",
       "issuer": "United Nations",
       "kind": "GRANT",
@@ -3648,11 +3896,11 @@
       "deadlineText": "16-Sep-2026 23:59 (GMT -5.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-9355186b4280",
+          "sourceArtifactId": "scout-ungm-932667ef8acd",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -3679,11 +3927,11 @@
       "deadlineText": "16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-9355186b4280",
+          "sourceArtifactId": "scout-ungm-932667ef8acd",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -3700,37 +3948,6 @@
       ]
     },
     {
-      "title": "RFQ#138269 for Procurement and delivery of 2 620 Bottles of De-Wormer (Ivermectin 1% injection 50 ml bottle)",
-      "issuer": "United Nations",
-      "kind": "GRANT",
-      "sourceUrl": "https://www.ungm.org/Public/Notice",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "16-Sep-2026 23:59 (GMT 4.30) Expires within 24 hours",
-      "quote": "",
-      "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-9355186b4280",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Public/Notice"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "16-Sep-2026 23:59 (GMT 4.30) Expires within 24 hours",
-          "originalSourceText": "16-Sep-2026 23:59 (GMT 4.30) Expires within 24 hours"
-        }
-      ]
-    },
-    {
       "title": "International Procurement Seminars (IPS)",
       "issuer": "United Nations",
       "kind": "TENDER",
@@ -3741,7 +3958,7 @@
       "deadlineText": "",
       "quote": "International Procurement Seminars (IPS)",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -3755,7 +3972,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -3769,7 +3986,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -3783,7 +4000,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -3797,7 +4014,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -3811,7 +4028,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -3825,7 +4042,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -3839,7 +4056,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -3853,7 +4070,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -3867,7 +4084,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -3881,7 +4098,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -3895,7 +4112,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -3909,7 +4126,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -3923,7 +4140,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -3937,7 +4154,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -3951,7 +4168,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -3965,7 +4182,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -3979,21 +4196,21 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
       "title": "UN Business Meetings - May 2025",
       "issuer": "United Nations",
       "kind": "GRANT",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS40_6_5_2025_to_6_5_2025",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS34_5_19_2025_to_5_20_2025",
       "summary": "",
       "eligibility": "",
       "amountText": "",
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4007,7 +4224,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4021,7 +4238,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4035,7 +4252,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4049,7 +4266,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4063,7 +4280,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4077,7 +4294,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4091,49 +4308,49 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
       "title": "UN Virtual Business Seminar for Peruvian Vendors",
       "issuer": "United Nations",
       "kind": "GRANT",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS35_5_28_2025_to_5_28_2025",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
       "title": "Burundi virtual business seminar",
       "issuer": "United Nations",
       "kind": "GRANT",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS36_6_4_2025_to_6_4_2025",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
       "title": "UN Virtual Business Seminar for Côte d’Ivoire Vendors",
       "issuer": "United Nations",
       "kind": "GRANT",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS39_11_19_2025_to_11_20_2025",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4147,49 +4364,49 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
       "title": "United Nations Business Seminar for Ghanaian Suppliers",
       "issuer": "United Nations",
       "kind": "GRANT",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS41_7_17_2025_to_7_17_2025",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
       "title": "United Nations Virtual Business Seminar for Paraguayan Suppliers",
       "issuer": "United Nations",
       "kind": "GRANT",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS42_7_24_2025_to_7_24_2025",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
       "title": "United Nations Secretariat Virtual Business Seminar for Mozambique Suppliers",
       "issuer": "United Nations",
       "kind": "GRANT",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS44_8_26_2025_to_8_26_2025",
+      "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4203,7 +4420,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4217,7 +4434,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4231,7 +4448,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4245,7 +4462,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4259,7 +4476,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4273,13 +4490,13 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
       "title": "UN Procurement Business Seminar for Tanzanian vendors 2026",
       "issuer": "United Nations",
-      "kind": "GRANT",
+      "kind": "TENDER",
       "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
@@ -4287,7 +4504,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4301,7 +4518,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4315,7 +4532,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4329,7 +4546,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4343,7 +4560,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4357,7 +4574,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4371,13 +4588,13 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
       "title": "UN Procurement Business Seminar for Nepalese Vendors 2026",
       "issuer": "United Nations",
-      "kind": "GRANT",
+      "kind": "TENDER",
       "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
@@ -4385,7 +4602,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4399,7 +4616,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4413,7 +4630,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4427,7 +4644,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4441,7 +4658,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+      "contentHash": "932667ef8acd302affd0fcd3dc6a840f861f8e17a6148610be5587e3264cb9b5",
       "facts": []
     },
     {
@@ -4450,16 +4667,16 @@
       "kind": "GRANT",
       "sourceUrl": "https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00468424",
       "summary": "",
-      "eligibility": "Eligible consulting firms with required qualifications and relevant experience in the field of assignment, including core business and years in business, organizational, managerial, and technical capabilities. Consultants may associate with other firms in the form of a joint venture or a sub-consultancy.",
+      "eligibility": "Eligible consulting firms with required qualifications and relevant experience in the field of assignment, including core business, years in business, organizational, managerial, and technical capabilities. Firms may associate in joint ventures or sub-consultancies.",
       "amountText": "",
       "deadlineText": "Oct 05, 2026 04:30",
       "quote": "The Federal Democratic Republic of Ethiopia has received financing from the World Bank toward the cost of the Climate Resilient Irrigation for Sustainable Production (CRISP) Project. The implementing agency, the Ministry of Irrigation and Lowlands, intends to apply part of the proceeds for the consulting service.",
       "sourceId": "worldbank-afdb-ebrd",
-      "contentHash": "25389454d123b989370dfc970b926d243445ce31eff550424c839f68f1544355",
+      "contentHash": "4ace41db2505cfab0316d7e1717930f1e2fcd26ae18e6c266b32dabb75a2291b",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-worldbank-afdb-ebrd-25389454d123",
+          "sourceArtifactId": "scout-worldbank-afdb-ebrd-4ace41db2505",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00468424"
@@ -4470,12 +4687,12 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "eligibility",
-          "normalizedValue": "Eligible consulting firms with required qualifications and relevant experience in the field of assignment, including core business and years in business, organizational, managerial, and technical capabilities. Consultants may associate with other firms in the form of a joint venture or a sub-consultancy.",
+          "normalizedValue": "Eligible consulting firms with required qualifications and relevant experience in the field of assignment, including core business, years in business, organizational, managerial, and technical capabilities. Firms may associate in joint ventures or sub-consultancies.",
           "originalSourceText": "The Federal Democratic Republic of Ethiopia has received financing from the World Bank toward the cost of the Climate Resilient Irrigation for Sustainable Production (CRISP) Project. The implementing agency, the Ministry of Irrigation and Lowlands, intends to apply part of the proceeds for the consulting service."
         },
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-worldbank-afdb-ebrd-25389454d123",
+          "sourceArtifactId": "scout-worldbank-afdb-ebrd-4ace41db2505",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00468424"
@@ -4496,9 +4713,9 @@
     {
       "id": "adio",
       "status": "OK",
-      "kept": 8,
-      "dropped": 3,
-      "note": "The page lists clusters, support programmes, and events as pathways to funding or investment opportunities, but does not explicitly detail specific funding opportunities (e.g., grants, subsidies, loans, or calls for proposals) with clear application processes or financial details. The closest items are the four ADIO clusters and the public-private partnerships, but these are described as frameworks rather than direct funding opportunities. The page is primarily informational and promotional. · accepted the cookie banner (\"tout accepter\")",
+      "kept": 15,
+      "dropped": 0,
+      "note": "All listed opportunities are explicitly mentioned on the page or linked from it. Some programmes (e.g., clusters, support services) have no specific deadline or amount, as per the page content. · accepted the cookie banner (\"tout accepter\")",
       "chars": 11009,
       "links": 56
     },
@@ -4516,7 +4733,7 @@
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "The page is a portal for public procurement notices (avis de marchés publics) and does not list specific funding opportunities, grants, or programmes with details such as amounts or deadlines. It provides access to calls for tenders (appels d'offres) but does not enumerate them individually. No explicit funding opportunities are displayed on this page. · tried \"https://www.boamp.fr/pages/aide/\" but it had less text — stayed on the entry page",
+      "note": "The page is a portal for public procurement notices (avis de marchés publics) and does not list specific funding opportunities, grants, subsidies, or programmes. It provides access to calls for tenders and public contracts but does not enumerate individual funding opportunities with details like amounts or deadlines. No explicit funding opportunities are displayed on this page. · tried \"https://www.boamp.fr/pages/aide/\" but it had less text — stayed on the entry page",
       "chars": 1697,
       "links": 38
     },
@@ -4525,8 +4742,8 @@
       "status": "OK",
       "kept": 1,
       "dropped": 0,
-      "note": "",
-      "chars": 3349,
+      "note": "accepted the cookie banner (\"accepter\")",
+      "chars": 3446,
       "links": 106
     },
     {
@@ -4534,7 +4751,7 @@
       "status": "OK",
       "kept": 50,
       "dropped": 0,
-      "note": "Only the first 50 opportunities from the page are listed. The page contains over 10,000 opportunities in total. · followed \"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/calls-for-proposals\" (calls, funding, tenders, opportunityieses)",
+      "note": "Only the first 50 of over 10,000 calls are listed. The page contains a filterable list of all open, forthcoming, and closed calls for proposals under EU programmes. · followed \"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/calls-for-proposals\" (calls, funding, tenders, opportunityieses)",
       "chars": 18611,
       "links": 81
     },
@@ -4543,14 +4760,14 @@
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "The page is a marketplace for buying and selling online businesses, not a funding body offering grants, subsidies, or financial support. No funding opportunities (grants, loans, tax incentives, etc.) are listed.",
+      "note": "This page is a marketplace for buying and selling online businesses, not a funding body offering grants, subsidies, or financial support. No funding opportunities are listed.",
       "chars": 15729,
       "links": 189
     },
     {
       "id": "france-2030-ademe",
       "status": "OK",
-      "kept": 6,
+      "kept": 5,
       "dropped": 5,
       "note": "followed \"https://agirpourlatransition.ademe.fr/entreprises/aides-financieres\" (aides)",
       "chars": 7716,
@@ -4559,10 +4776,10 @@
     {
       "id": "hub71",
       "status": "OK",
-      "kept": 10,
+      "kept": 11,
       "dropped": 2,
-      "note": "The page lists multiple funding and support programmes for startups, investors, and talents. All are included as funding opportunities. · tried \"https://www.hub71.com/program/access-programme/apply\" but it had less text — stayed on the entry page",
-      "chars": 10997,
+      "note": "tried \"https://www.hub71.com/program/access-programme/apply\" but it had less text — stayed on the entry page",
+      "chars": 11052,
       "links": 75
     },
     {
@@ -4589,7 +4806,7 @@
       "kept": 66,
       "dropped": 0,
       "note": "followed \"https://www.ungm.org/Public/Notice\" (opportunityieses, procurement)",
-      "chars": 9493,
+      "chars": 9429,
       "links": 219
     },
     {

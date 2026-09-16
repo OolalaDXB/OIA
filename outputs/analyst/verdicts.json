@@ -1,4 +1,303 @@
 {
-  "generatedAt": "2026-09-16T19:24:57.547Z",
-  "results": []
+  "generatedAt": "2026-09-16T19:39:54.603Z",
+  "results": [
+    {
+      "recordId": "505248-2026",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas qui peut postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité pour les candidats (par exemple, statut juridique, restrictions géographiques ou exigences sectorielles).",
+          "en": "The extracted text does not specify who may apply for this tender. There is no mention of eligibility criteria for applicants (e.g., legal status, geographic restrictions, or sector-specific requirements)."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter l'avis complet de l'appel d'offres sur le site TED (lien fourni) pour confirmer les critères d'éligibilité des candidats.",
+          "en": "Check the full tender notice on the TED website (link provided) to confirm the eligibility criteria for applicants."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T19:39:05.034Z"
+    },
+    {
+      "recordId": "506438-2026",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas qui peut postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité pour les candidats, tels que le statut juridique, la localisation géographique ou les exigences sectorielles.",
+          "en": "The extracted text does not specify who may apply for this tender. There is no mention of eligibility criteria for applicants, such as legal status, geographic location, or sector-specific requirements."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter l'avis complet sur le site TED (lien fourni) pour identifier les critères d'éligibilité des candidats.",
+          "en": "Consult the full notice on the TED website (link provided) to identify the eligibility criteria for applicants."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T19:39:08.410Z"
+    },
+    {
+      "recordId": "502549-2026",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité tels que la forme juridique, la localisation ou les exigences sectorielles.",
+          "en": "The extracted text does not specify which types of organisations may apply. There is no mention of eligibility criteria such as legal form, location, or sector requirements."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Contacter l'acheteur (réséda) à l'adresse b-belkaid@uem-metz.fr pour demander l'avis complet de marché et confirmer les critères d'éligibilité.",
+          "en": "Contact the buyer (réséda) at b-belkaid@uem-metz.fr to ask for the full tender notice and confirm eligibility requirements."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T19:39:11.483Z"
+    },
+    {
+      "recordId": "500358-2026",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, le secteur ou la localisation géographique des candidats.",
+          "en": "The extracted text does not specify which types of organisations may apply. There is no mention of eligibility criteria regarding the legal form, sector, or geographic location of applicants."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter l'avis complet sur le site TED (lien fourni) pour identifier les critères d'éligibilité des candidats.",
+          "en": "Consult the full notice on the TED website (link provided) to identify the eligibility criteria for applicants."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T19:39:14.142Z"
+    },
+    {
+      "recordId": "500966-2026",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, la localisation ou le secteur des candidats.",
+          "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria related to the legal form, location, or sector of applicants."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter l'avis complet de l'appel d'offres sur le site TED (lien fourni) pour identifier les critères d'éligibilité des candidats.",
+          "en": "Consult the full tender notice on the TED website (link provided) to identify the eligibility criteria for applicants."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T19:39:17.006Z"
+    },
+    {
+      "recordId": "494531-2026",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles pour postuler. Il décrit uniquement l'acheteur, la procédure et le champ des services requis.",
+          "en": "The extracted text does not specify which types of organisations are eligible to apply. It only describes the buyer, the procedure, and the scope of services required."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter l'avis complet sur le site TED (lien fourni) pour trouver la section sur les critères d'éligibilité.",
+          "en": "Check the full notice on the TED website (link provided) to find the section on eligibility criteria."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T19:39:19.738Z"
+    },
+    {
+      "recordId": "496268-2026",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NOT_ELIGIBLE",
+        "reason": {
+          "fr": "L'opportunité exige explicitement des prestataires de services médicaux et de sécurité au travail. BAWABA opère dans les secteurs de l'IA, des données, du numérique, de la cybersécurité et des logiciels, ce qui ne correspond pas aux services médicaux ou de conseil en sécurité requis par l'appel d'offres.",
+          "en": "The opportunity explicitly requires providers of medical and occupational safety services. BAWABA operates in AI, data, digital, cybersecurity, and software sectors, which do not align with the required medical or safety consultancy services specified in the tender."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Examiner d'autres opportunités de financement qui correspondent aux secteurs d'activité principaux de BAWABA (IA, données, numérique, cybersécurité ou logiciels).",
+          "en": "Review other funding opportunities that align with BAWABA’s core sectors (AI, data, digital, cybersecurity, or software)."
+        },
+        "citations": [
+          "Main classification (cpv): 85141000 Services provided by medical personnel",
+          "Additional classification (cpv): 79417000 Safety consultancy services",
+          "Description: Arbeitsmedizinische und sicherheitstechnische Betreuung 2027-2030"
+        ]
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T19:39:23.989Z"
+    },
+    {
+      "recordId": "491518-2026",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité tels que la forme juridique, la localisation ou les exigences sectorielles.",
+          "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria such as legal form, location, or sector requirements."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter l'avis complet sur le site TED (lien fourni) pour les critères d'éligibilité dans la section 'Conditions de participation' ou une section similaire.",
+          "en": "Check the full notice on the TED website (link provided) for eligibility criteria under the 'Conditions for participation' or similar section."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T19:39:28.245Z"
+    },
+    {
+      "recordId": "480676-2026",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas les types d'organisations éligibles pour répondre à cet appel d'offres. Il décrit l'objet de la mission (services de coordination en santé et sécurité) mais n'indique pas si les entreprises privées, les entités publiques ou d'autres types d'organisations sont autorisées à soumissionner.",
+          "en": "The extracted text does not specify the types of organisations eligible to apply for this tender. It focuses on the scope of work (health and safety consultancy services) but does not state whether private companies, public entities, or other types of organisations are permitted to bid."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Contacter l'acheteur (GRAND PORT MARITIME DE MARSEILLE) via l'adresse email fournie (correspondre@aws-france.com) pour confirmer si les entreprises privées, y compris celles des secteurs de l'IA et des logiciels, sont éligibles pour répondre à cet appel d'offres.",
+          "en": "Contact the buyer (GRAND PORT MARITIME DE MARSEILLE) via the provided email (correspondre@aws-france.com) to confirm whether private companies, including those in the AI and software sectors, are eligible to apply for this tender."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T19:39:32.862Z"
+    },
+    {
+      "recordId": "478020-2026",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent répondre à cet appel d'offres. Il décrit uniquement l'acheteur et la procédure, sans indiquer les critères d'éligibilité des candidats.",
+          "en": "The extracted text does not specify which types of organisations may apply for this tender. It only describes the buyer and the procedure but does not state eligibility criteria for applicants."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter l'avis complet sur le site TED (lien fourni) pour trouver la section sur les critères d'éligibilité des candidats.",
+          "en": "Check the full notice on the TED website (link provided) to find the section on eligibility criteria for applicants."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T19:39:35.746Z"
+    },
+    {
+      "recordId": "471799-2026",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations (par exemple, organismes publics, entreprises privées, PME, etc.) sont éligibles pour cet appel d'offres. Aucun critère d'exclusion ou d'inclusion explicite concernant le statut juridique ou le type de candidats n'est mentionné.",
+          "en": "The extracted text does not specify which types of organisations (e.g., public bodies, private companies, SMEs, etc.) are eligible to apply for this tender. There is no explicit exclusion or inclusion criteria mentioned regarding the legal status or type of applicants."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter l'avis complet de l'appel d'offres sur le site TED (lien fourni) pour identifier les critères d'éligibilité des candidats.",
+          "en": "Consult the full tender notice on the TED website (link provided) to identify the eligibility criteria for applicants."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T19:39:42.277Z"
+    },
+    {
+      "recordId": "466007-2026",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas les critères d'éligibilité pour les candidats. Il décrit uniquement la procédure comme 'Restreinte' et mentionne une phase de présélection, mais n'indique pas qui peut postuler ou quels sont les critères d'exclusion.",
+          "en": "The extracted text does not specify the eligibility criteria for applicants. It only describes the procedure as 'Restricted' and mentions a preselection phase, but does not state who may apply or any exclusion criteria."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter l'avis complet sur le site TED (lien fourni) pour identifier les exigences d'éligibilité pour les candidats.",
+          "en": "Consult the full notice on the TED website (link provided) to identify the eligibility requirements for applicants."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T19:39:45.341Z"
+    },
+    {
+      "recordId": "467100-2026",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité tels que la forme juridique, la localisation ou le secteur d'activité.",
+          "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria such as legal form, location, or sector."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni pour trouver la section sur les exigences d'éligibilité.",
+          "en": "Check the full tender notice at the provided link to find the section on eligibility requirements."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T19:39:48.085Z"
+    },
+    {
+      "recordId": "450738-2026",
+      "projectSlug": "bawaba",
+      "verdict": {
+        "verdict": "NEEDS_INFO",
+        "reason": {
+          "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité relatifs à la forme juridique, au secteur ou à la portée opérationnelle des candidats.",
+          "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria related to the legal form, sector, or operational scope of applicants."
+        },
+        "entity": "",
+        "missing": [],
+        "nextAction": {
+          "fr": "Consulter l'avis complet sur le site TED (lien fourni) pour vérifier les critères d'éligibilité concernant les types d'organisations autorisées à postuler.",
+          "en": "Check the full notice on the TED website (link provided) for eligibility criteria regarding the types of organisations permitted to apply."
+        },
+        "citations": []
+      },
+      "droppedCitations": 0,
+      "model": "mistral-large-latest",
+      "at": "2026-09-16T19:39:52.678Z"
+    }
+  ]
 }
