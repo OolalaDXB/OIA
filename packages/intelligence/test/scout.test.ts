@@ -157,3 +157,49 @@ describe("taking the model's list whatever it called it", () => {
     expect(parsed.note).toBe("this is a contact page");
   });
 });
+
+/**
+ * Eight sources out of twelve failed on this, after everything else was fixed.
+ *
+ * Mistral answered "Tax incentive", "Cluster programme", "Subvention" — all
+ * reasonable words, none of them enum members. Zod rejected the item, the array
+ * failed with it, and the whole source reported an error instead of its
+ * findings. Rejecting a correct answer over its spelling is not rigour.
+ */
+describe("the kind, however the model spells it", () => {
+  const call = (kind: unknown) =>
+    ScoutedCallSchema.parse({ title: "Un dispositif", sourceUrl: "https://x.fr/a", kind });
+
+  it("accepts the exact enum value", () => {
+    expect(call("TAX_INCENTIVE").kind).toBe("TAX_INCENTIVE");
+  });
+
+  it("accepts the same word written as a human writes it", () => {
+    expect(call("Tax incentive").kind).toBe("TAX_INCENTIVE");
+    expect(call("tax-incentive").kind).toBe("TAX_INCENTIVE");
+  });
+
+  it("recognises the French vocabulary these portals actually use", () => {
+    expect(call("Crédit d'impôt recherche").kind).toBe("TAX_INCENTIVE");
+    expect(call("Prêt garanti").kind).toBe("DEBT_GUARANTEE");
+    expect(call("Appel d'offres").kind).toBe("TENDER");
+    expect(call("Concours").kind).toBe("PRIZE");
+    expect(call("Appel à partenaires").kind).toBe("CONSORTIUM_CALL");
+  });
+
+  it("falls back to GRANT rather than losing the opportunity", () => {
+    // "Cluster programme" is real output. Non-repayable, non-dilutive money is
+    // a grant for our purposes, and a human re-labels it in one click — losing
+    // the record entirely is the expensive outcome.
+    expect(call("Cluster programme").kind).toBe("GRANT");
+    expect(call("").kind).toBe("GRANT");
+    expect(call(undefined).kind).toBe("GRANT");
+    expect(call(42).kind).toBe("GRANT");
+  });
+
+  it("does not let a loose match override an exact one", () => {
+    // "EQUITY" contains no tax words and must stay EQUITY.
+    expect(call("EQUITY").kind).toBe("EQUITY");
+    expect(call("ACQUISITION").kind).toBe("ACQUISITION");
+  });
+});

@@ -53,6 +53,55 @@ const FIELD_ALIASES: Record<string, string> = {
   citation: "quote", excerpt: "quote",
 };
 
+/**
+ * Map whatever word the model used for the kind onto one of the eleven.
+ *
+ * Mistral answered "Tax incentive", "Cluster programme", "Subvention". All
+ * reasonable; none of them an enum member, so the item failed, the array failed
+ * with it, and eight sources out of twelve reported an error instead of their
+ * findings. Rejecting a correct answer for its spelling is not rigour.
+ *
+ * Unrecognised wording becomes GRANT rather than failing the record: the kind
+ * steers presentation and which gate conditions apply, and a human re-labels it
+ * in a click. Losing the opportunity entirely is the expensive outcome.
+ */
+function normaliseKind(value: unknown): string {
+  if (typeof value !== "string") return "GRANT";
+  const v = value.trim().toUpperCase().replace(/[\s-]+/g, "_");
+  const KNOWN = [
+    "TENDER", "PRE_SOLICITATION", "GRANT", "TAX_INCENTIVE", "EQUITY",
+    "DEBT_GUARANTEE", "PRIZE", "CONSORTIUM_CALL", "MARKETPLACE_PROJECT",
+    "ACQUISITION", "REGULATORY",
+  ];
+  if (KNOWN.includes(v)) return v;
+
+  // Strip accents before matching. These are French portals: "crédit d'impôt"
+  // and "prêt garanti" are the normal spellings, and a rule written without
+  // accents would quietly never fire on exactly the words it was written for.
+  const text = value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+  const rules: Array<[RegExp, string]> = [
+    [/tax|fiscal|credit d.?imp|cir\b|cii\b|jei\b/, "TAX_INCENTIVE"],
+    [/equity|invest|venture|capital|accelerat|incubat|levee/, "EQUITY"],
+    [/loan|debt|guarantee|pret|garantie|avance/, "DEBT_GUARANTEE"],
+    [/prize|award|competition|concours|prix/, "PRIZE"],
+    [/consortium|partner|partenaire/, "CONSORTIUM_CALL"],
+    [/acquisition|takeover|rachat|cession/, "ACQUISITION"],
+    [/regulat|complian|reglement/, "REGULATORY"],
+    // Matched against the accent-stripped ORIGINAL text, which keeps its spaces
+    // and apostrophes — an underscore here would never fire.
+    [/tender|procurement|marche[\s_]*public|appel[\s_]*d.?[\s_]*offres|rfp|itt/, "TENDER"],
+    [/rfi|sources[\s_]*sought|pre.?information|\bpin\b|amont/, "PRE_SOLICITATION"],
+    [/freelance|marketplace|mission|gig/, "MARKETPLACE_PROJECT"],
+  ];
+  for (const [pattern, kind] of rules) if (pattern.test(text)) return kind;
+  // "Cluster programme", "Aid scheme", "Dispositif" — funding that is not
+  // repayable and not dilutive is a grant for our purposes.
+  return "GRANT";
+}
+
 function renameFields(raw: unknown): unknown {
   if (typeof raw !== "object" || raw === null || Array.isArray(raw)) return raw;
   const out: Record<string, unknown> = {};
@@ -61,6 +110,7 @@ function renameFields(raw: unknown): unknown {
     // Never let an alias overwrite a correctly named field that is already set.
     if (out[target] === undefined || out[target] === "") out[target] = value;
   }
+  if (out["kind"] !== undefined) out["kind"] = normaliseKind(out["kind"]);
   return out;
 }
 
