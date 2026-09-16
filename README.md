@@ -50,6 +50,7 @@ dropdowns, the digest, the metrics — and in the next discovery run if
 | `/grants` `/tenders` `/investors` | The same shell, scoped by opportunity kind |
 | `/projects` | Every project: matching signals, entity route, discovery config, and whether the profile is owner-confirmed or still a hypothesis |
 | `/tasks` `/notes` `/contacts` | The human layer — what is owed, what was decided, who to talk to |
+| `/alerts` | What the permanent watch decided was worth interrupting you for — new, closing, moved, withdrawn, approved-but-blocked. Acknowledged, never deleted |
 | `/metrics` | Counts, and the one that matters: **why the gate blocks what it blocks** |
 
 Shortlists export to CSV and Markdown; the digest exports to Markdown; the whole
@@ -69,13 +70,14 @@ human layer backs up to one JSON file.
 | `packages/scoring` | Four scores + the hard PURSUE gate (pure, table-tested) |
 | `packages/intelligence` | Qualifier: fact corroboration → eligibility → scores → gate → recommendation |
 | `packages/knowledge` | Canonical knowledge base + disclosure gate (what may be claimed externally) |
+| `packages/watch` | **The permanent watch** — the ledger that remembers between runs, change detection, and the alert rules |
 | `packages/workspace` | Workspace records, suggestions, **digest**, **metrics**, **exports**, storage adapter |
 | `apps/workers` | Dockerized pipelines; registry-driven multi-project discovery |
 | `apps/web` | The console — static export, no backend |
 
 ```bash
 pnpm install
-pnpm typecheck && pnpm test          # 191 tests
+pnpm typecheck && pnpm test          # 210 tests
 pnpm --filter @oia/registry validate
 pnpm --filter @oia/knowledge validate
 pnpm --filter @oia/web build
@@ -106,12 +108,24 @@ the refreshed dataset, which redeploys the console. A shortlist that silently
 goes stale is not "currently actionable"; that is the point of the schedule.
 Disable it in the repository's Actions tab if you would rather refresh by hand.
 
+## The permanent watch
+
+Discovery that runs weekly is not a watch if each run forgets the last one. The
+ledger (`packages/watch`) keeps one row per opportunity **identity** across all
+runs, so the system can say what is new, what changed, what vanished and since
+when a call has been open — and raise alerts on it, idempotently.
+
+Switching it on takes four steps that need your credentials:
+[`docs/watch-setup.md`](docs/watch-setup.md). Until then the console runs on its
+bundled snapshot exactly as before.
+
 ## Access and data
 
-The console is behind Vercel Authentication. The human layer (reviews, tags,
-notes, tasks, contacts) lives in **your browser only** — back it up.
-Read [`docs/access-and-data.md`](docs/access-and-data.md) before attaching a
-custom domain or assuming anything is synced.
+The console is behind Vercel Authentication, and the database behind a sign-in:
+it ships its key in a public bundle, so row-level security refuses to answer
+without a session. The audit trail is append-only in the database itself, not by
+convention. Read [`docs/access-and-data.md`](docs/access-and-data.md) before
+attaching a custom domain.
 
 ## Where to start reading
 

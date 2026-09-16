@@ -10,7 +10,8 @@
     "m0:run": "tsx src/m0-run.ts",
     "discover:ted": "tsx src/discover-ted.ts",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests"
+    "test": "vitest run --passWithNoTests",
+    "publish:watch": "tsx src/publish-watch.ts"
   },
   "dependencies": {
     "@oia/audit": "workspace:*",
@@ -22,7 +23,8 @@
     "@oia/knowledge": "workspace:*",
     "@oia/providers": "workspace:*",
     "@oia/registry": "workspace:*",
-    "@oia/scoring": "workspace:*"
+    "@oia/scoring": "workspace:*",
+    "@oia/watch": "workspace:*"
   },
   "devDependencies": {
     "tsx": "^4.19.2",

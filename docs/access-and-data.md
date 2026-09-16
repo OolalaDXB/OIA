@@ -31,7 +31,26 @@ workers, committed as `apps/web/src/data/console.json` and `outputs/**`, shipped
 inside the build. Durable, versioned, reviewable in a diff. Nothing here is
 personal data; everything traces to a public official source.
 
-### 2. The human layer — in your browser, and nowhere else
+### 2. The human layer — in the watch database once it is switched on
+
+**This changed on 2026-09-16.** Review decisions, project tags, notes, tasks and
+contacts now live in Postgres (Supabase project `iywmvyebuikxyvnrcnoy`,
+eu-central-1) as soon as the console carries `NEXT_PUBLIC_SUPABASE_URL` and
+`NEXT_PUBLIC_SUPABASE_ANON_KEY`. See [`watch-setup.md`](watch-setup.md) for the
+four steps that switch it on.
+
+Two properties are enforced by the database rather than by the UI:
+
+- **Nothing answers the public key.** The console ships its key in a public
+  bundle, so row-level security refuses every table without an authenticated
+  session. Verified by impersonating the roles: `anon` sees 0 rows everywhere,
+  `authenticated` sees the ledger.
+- **The audit trail is append-only.** `reviews` has an insert policy and a select
+  policy, and no update or delete policy. Verified: an authenticated session
+  could add a decision and could neither rewrite nor remove one. An
+  append-only-ness that lives in client code is not append-only.
+
+### The previous state — in your browser, and nowhere else
 
 Review decisions and their audit trail, project tags, notes, tasks, contacts,
 saved views. Keys: `oia.audit.v1`, `oia.tags.v1`, `oia.notes.v1`,
@@ -52,23 +71,24 @@ way, and gives you two buttons: **backup** (one JSON file with every key) and
 *merged* rather than replaced — restoring an older file never erases decisions
 taken since — while tags, notes, tasks and contacts are replaced wholesale.
 
-## Why not a server database?
+## Why a server database, in the end
 
-Because a server store needs authentication to be worth anything, and
-authentication needs a backend the static console does not have. Building a
-half-authenticated store would have been worse than none: it would have implied
-a durability the product could not deliver.
+Because a permanent watch cannot be built on a snapshot. Every run replaced the
+dataset, so the system had no way to tell a new call from one it had already
+seen ten times — and there is no alerting without that distinction. The ledger
+is that memory, and once it exists the human layer belongs next to it: the alert
+rules need to know what you already triaged in order to decide what is worth
+telling you.
 
-What exists instead is the seam. `packages/workspace/src/store.ts` defines a
-three-method `WorkspaceStore` interface (`read`, `write`, `keys`) plus a
-`durability` flag that the UI reads. The localStorage driver implements it
-today; a Supabase driver implements the same three methods the day a login
-exists, and **not one hook or component changes** — only the durability banner
-stops saying "this browser only".
+The seam that made the move cheap is still there. `packages/workspace/src/store.ts`
+defines the localStorage driver behind a three-method interface; the console now
+picks the Postgres path when it is configured and falls back to that driver when
+it is not, with the same hooks either way.
 
-The database schema for that day already exists: `docs/architecture/schema/0001_init.sql`.
-No Supabase project is linked to OIA yet (the account's two projects belong to
-myOolala and Sillon).
+Schema: `docs/architecture/schema/0002_watch_and_workspace.sql` (applied).
+`0001_init.sql` remains a design document for the Milestone-1 qualifier and is
+deliberately **not** applied — nothing writes to it, and a dead schema is the
+same lie as a dead feature.
 
 ## What a reviewer should verify
 

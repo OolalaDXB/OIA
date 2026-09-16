@@ -36,6 +36,9 @@ importers:
       '@oia/workspace':
         specifier: workspace:*
         version: link:../../packages/workspace
+      '@supabase/supabase-js':
+        specifier: ^2.47.10
+        version: 2.111.0
       next:
         specifier: 14.2.15
         version: 14.2.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -91,6 +94,9 @@ importers:
       '@oia/scoring':
         specifier: workspace:*
         version: link:../../packages/scoring
+      '@oia/watch':
+        specifier: workspace:*
+        version: link:../../packages/watch
     devDependencies:
       tsx:
         specifier: ^4.19.2
@@ -290,6 +296,25 @@ importers:
       '@oia/config':
         specifier: workspace:*
         version: link:../config
+    devDependencies:
+      typescript:
+        specifier: ^5.7.2
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.8
+        version: 2.1.9(@types/node@22.20.1)
+
+  packages/watch:
+    dependencies:
+      '@oia/ingestion':
+        specifier: workspace:*
+        version: link:../ingestion
+      '@oia/registry':
+        specifier: workspace:*
+        version: link:../registry
+      '@supabase/supabase-js':
+        specifier: ^2.47.10
+        version: 2.111.0
     devDependencies:
       typescript:
         specifier: ^5.7.2

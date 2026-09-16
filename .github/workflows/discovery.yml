@@ -82,6 +82,24 @@ jobs:
           pnpm test
           pnpm --filter @oia/web build
 
+      # Fold the run into the permanent ledger and raise alerts. Skipped with a
+      # clear message when the credentials are absent, rather than failing the
+      # whole refresh: the committed dataset is still worth publishing.
+      - name: Publish to the watch ledger
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo "::warning::SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY not set — the ledger was not updated and no alert was raised. See docs/access-and-data.md."
+            exit 0
+          fi
+          if [ -n "${{ inputs.projects }}" ]; then
+            pnpm --filter @oia/workers publish:watch -- --project "${{ inputs.projects }}"
+          else
+            pnpm --filter @oia/workers publish:watch
+          fi
+
       - name: Commit the refreshed data
         run: |
           git config user.name "github-actions[bot]"

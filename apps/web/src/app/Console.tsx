@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { ConsoleData, ConsoleRecord, OpportunityKind } from "@oia/ingestion/console";
 import {
   PROJECT_ENTRIES,
@@ -15,6 +15,8 @@ import {
   type TaskItem,
 } from "@oia/workspace";
 import { applyFreshnessAll, assessFreshness } from "@oia/ingestion/freshness";
+import { useAlerts, useLedger } from "../lib/watchData";
+import { useAuth } from "../lib/supabase";
 import {
   download,
   useAttachedNotes,
@@ -66,6 +68,7 @@ const KIND_COLOR: Record<OpportunityKind, string> = {
 export type RailKey =
   | "dashboard"
   | "digest"
+  | "alerts"
   | "grants"
   | "tenders"
   | "investors"
@@ -81,8 +84,12 @@ export type RailKey =
  * being greyed-out promises in Phase 3.
  */
 export function Rail({ active, onExportAudit }: { active: RailKey; onExportAudit?: () => void }) {
+  // The badge is the whole point of a permanent watch: the number is visible
+  // before you decide to go looking.
+  const { open } = useAlerts();
   const nav: { key: RailKey; label: string; href: string; group?: boolean }[] = [
     { key: "digest", label: "Today", href: "/digest/" },
+    { key: "alerts", label: "Alerts", href: "/alerts/" },
     { key: "dashboard", label: "Dashboard", href: "/" },
     { key: "grants", label: "Grants", href: "/grants/" },
     { key: "tenders", label: "Tenders / RFP", href: "/tenders/" },
@@ -103,6 +110,7 @@ export function Rail({ active, onExportAudit }: { active: RailKey; onExportAudit
           className={`${active === n.key ? "railItem active" : "railItem"}${n.group ? " railGroup" : ""}`}
         >
           <span>{n.label}</span>
+          {n.key === "alerts" && open.length > 0 && <span className="railBadge">{open.length}</span>}
         </Link>
       ))}
       {onExportAudit && (
@@ -118,26 +126,64 @@ export function Rail({ active, onExportAudit }: { active: RailKey; onExportAudit
 export function StorageNote() {
   const info = useStorageInfo();
   const backup = useWorkspaceBackup();
+  const { state, signOut } = useAuth();
+  const [pending, setPending] = useState(0);
+  const [migration, setMigration] = useState<string | null>(null);
+
+  // Only offered when this browser still holds decisions the database does not.
+  useEffect(() => {
+    if (info.remote) setPending(backup.localCount());
+  }, [info.remote, backup]);
+
   return (
     <div className="storageNote">
       <span className="muted small">
-        {info.durability === "BROWSER_LOCAL"
-          ? "Reviews, tags, notes, tasks and contacts are stored in THIS browser only — no server, no sync. Back them up."
-          : "No browser storage available: this session keeps nothing."}
+        {info.remote
+          ? "Reviews, tags, notes, tasks and contacts are stored in the watch database — durable, and readable from another device."
+          : info.durability === "BROWSER_LOCAL"
+            ? "Reviews, tags, notes, tasks and contacts are stored in THIS browser only — no server, no sync. Back them up."
+            : "No browser storage available: this session keeps nothing."}
+        {migration && <span className="ok"> · {migration}</span>}
       </span>
       <span className="viewsRow">
-        <button className="ghostBtn" onClick={backup.exportAll}>backup</button>
-        <label className="ghostBtn restoreBtn">
-          restore
-          <input
-            type="file"
-            accept="application/json"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) void backup.importAll(file);
+        {info.remote && pending > 0 && (
+          <button
+            className="ghostBtn"
+            onClick={async () => {
+              setMigration("migrating…");
+              try {
+                const r = await backup.migrateLocalToDatabase();
+                setMigration(
+                  `migrated ${r.reviews} review(s), ${r.tags} tag(s), ${r.notes} note(s), ${r.tasks} task(s), ${r.contacts} contact(s)`,
+                );
+                setPending(0);
+              } catch (e) {
+                setMigration(`migration failed: ${(e as Error).message}`);
+              }
             }}
-          />
-        </label>
+          >
+            move {pending} local item(s) to the database
+          </button>
+        )}
+        <button className="ghostBtn" onClick={backup.exportAll}>backup</button>
+        {!info.remote && (
+          <label className="ghostBtn restoreBtn">
+            restore
+            <input
+              type="file"
+              accept="application/json"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) void backup.importAll(file);
+              }}
+            />
+          </label>
+        )}
+        {state.status === "SIGNED_IN" && (
+          <button className="ghostBtn" onClick={() => void signOut()} title={state.email}>
+            sign out
+          </button>
+        )}
       </span>
     </div>
   );
@@ -185,13 +231,18 @@ export function Console({
   const notes = useAttachedNotes();
   const tasks = useTasks();
 
+  // The permanent ledger when there is one, the bundled snapshot otherwise —
+  // and the header says which, because a stale snapshot presented as live data
+  // is the failure this product exists to avoid.
+  const ledger = useLedger(data);
+
   // Expiry is re-checked on every read, not at generation time: a shortlist
   // generated last month must not still present a closed call as pursuable.
   // applyFreshness only ever removes — it can close a gate condition, never open one.
   const records = useMemo(() => {
-    const scoped = fixedKind ? data.records.filter((r) => r.opportunityKind === fixedKind) : data.records;
+    const scoped = fixedKind ? ledger.records.filter((r) => r.opportunityKind === fixedKind) : ledger.records;
     return applyFreshnessAll(scoped, nowIso);
-  }, [data.records, fixedKind, nowIso]);
+  }, [ledger.records, fixedKind, nowIso]);
 
   const [selectedId, setSelectedId] = useState<string>("");
   const [fKind, setFKind] = useState("");
@@ -280,7 +331,8 @@ export function Console({
           <div className="heroRow">
             <h1>{title}</h1>
             <span className="heroStats">
-              {records.length} shown / {data.run.records} total · {data.run.discrepancies} discrepancies ·{" "}
+              {ledger.source === "LEDGER" ? "watch ledger" : "bundled snapshot"} ·{" "}
+              {records.length} shown / {ledger.records.length} total · {data.run.discrepancies} discrepancies ·{" "}
               {Object.entries(data.run.recommendationCounts)
                 .map(([k, v]) => `${k}:${v}`)
                 .join("  ")}

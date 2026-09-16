@@ -205,14 +205,33 @@ et les tâches, pas simulé par un agrégateur.
   quelle exigence, avec quelle preuve — **et nomme les trous**. C'est déjà ce que
   fait `qualify-with-knowledge.ts` pour BAWABA ; il s'agit de le généraliser.
 
-### S6 — Quand ça cesse d'être un poste à un opérateur
+### S6 — Base permanente et alertes — ✅ **livré le 16/09/2026**
 
-Persistance serveur derrière une authentification (le schéma SQL et l'interface
-de store existent, le driver Supabase reste à écrire), plusieurs relecteurs,
-notifications. **À ne faire que quand quelqu'un d'autre que toi utilise
-l'outil** — pas avant.
+Demandé en cours de route : *« la recherche et la veille doivent être permanentes
+donc je dois pouvoir tenir une base de données et gérer des alertes »*. C'était
+en réalité un **préalable**, pas une suite : chaque run remplaçait l'instantané,
+donc le système ne pouvait pas distinguer un appel nouveau d'un appel vu dix
+fois — et sans cette distinction, aucune alerte n'est possible.
+
+Livré : registre permanent en Postgres (une ligne par **identité**
+d'opportunité, à travers tous les runs), journal de changements append-only,
+moteur d'alertes déterministe et idempotent, écran `/alerts`, authentification,
+et la couche humaine passée en base. Mise en service :
+[`watch-setup.md`](watch-setup.md).
+
+Reste de S6, non fait et non nécessaire aujourd'hui : plusieurs relecteurs,
+notifications sortantes (tu as choisi « dans la console uniquement »).
 
 ---
+
+## 3 bis. Ce que la base change pour les sprints ci-dessus
+
+S1 et S2 gagnent un effet de levier qu'ils n'avaient pas. Avant, améliorer la
+requête ne faisait que changer un instantané. Maintenant, chaque amélioration
+est **mesurable dans le temps** : le registre garde la trace de ce qui est
+remonté, quand, et combien de fois — donc « la nouvelle requête ramène-t-elle
+mieux que l'ancienne ? » devient une question à laquelle les données répondent,
+au lieu d'une impression.
 
 ## 4. Ce que je recommande de ne pas construire
 

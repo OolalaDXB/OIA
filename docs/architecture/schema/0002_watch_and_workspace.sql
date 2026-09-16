@@ -1,0 +1,13 @@
+-- APPLIED to the OIA Supabase project (ref iywmvyebuikxyvnrcnoy) on 2026-09-16,
+-- as two migrations: `watch_ledger_and_workspace` then
+-- `rename_dedup_key_to_watch_key`. This file is the consolidated result and the
+-- repository's copy of the truth.
+--
+-- Note on 0001_init.sql, which sits next to this file: it is a DESIGN document
+-- for the Milestone-1 qualifier (claims / scores / recommendations tables) and
+-- is deliberately NOT applied. Nothing writes to it, and a dead schema is the
+-- same lie as a dead feature. What is applied is what is used.
+--
+-- Regenerate a fresh copy from the live database with:
+--   supabase db dump --schema public
+-- (the statements are the two migrations shown in the Supabase dashboard; kept here for review)

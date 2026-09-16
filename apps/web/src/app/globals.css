@@ -225,3 +225,23 @@ ul.evi li::before { content: none; }
 .barTrack { background: var(--card); border-radius: 4px; height: 10px; overflow: hidden; }
 .barFill { display: block; height: 100%; background: var(--ink); opacity: 0.75; }
 .barValue { font-family: var(--mono); font-size: 11px; text-align: right; color: var(--soft); }
+
+/* ————— Watch: alerts badge and the sign-in gate ————— */
+.railBadge {
+  background: var(--reject); color: #fff; border-radius: 999px;
+  font-family: var(--mono); font-size: 9px; font-weight: 700;
+  padding: 1px 6px; min-width: 17px; text-align: center;
+}
+.railItem.active .railBadge { background: var(--aqua); color: var(--ink); }
+
+.gate { min-height: 100vh; display: grid; place-items: center; background: var(--hero-grad); padding: 24px; }
+.gateCard {
+  width: min(420px, 100%); background: var(--bg); border: 1px solid var(--line);
+  border-radius: 10px; padding: 28px 30px 24px; display: flex; flex-direction: column; gap: 12px;
+}
+.gateBrand { padding: 0 0 4px; }
+.gateCard h1 { margin: 0; font-size: 20px; font-weight: 500; letter-spacing: -0.2px; }
+.gateField { display: flex; flex-direction: column; gap: 4px; }
+.gateField .muted { font-family: var(--mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 1.2px; }
+.gateBtn { align-self: flex-start; margin-top: 4px; }
+.gateFoot { border-top: 1px solid var(--line-soft); padding-top: 10px; margin-top: 4px; }

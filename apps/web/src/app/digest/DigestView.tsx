@@ -6,6 +6,7 @@ import { buildDigest, digestToMarkdown, projectName, type DigestReason } from "@
 import { applyFreshnessAll } from "@oia/ingestion/freshness";
 import { Shell } from "../Shell";
 import { download, useAuditLog, useProjectTags, useTasks } from "../../lib/workspaceStore";
+import { useLedger } from "../../lib/watchData";
 
 /**
  * "Today" — the Phase 4 digest, on screen. Deterministic and unflattering: it
@@ -39,7 +40,11 @@ export function DigestView({ data }: { data: ConsoleData }) {
   const [horizon, setHorizon] = useState(14);
 
   const today = useMemo(() => new Date().toISOString().slice(0, 10), []);
-  const records = useMemo(() => applyFreshnessAll(data.records, `${today}T00:00:00Z`), [data.records, today]);
+  const ledger = useLedger(data);
+  const records = useMemo(
+    () => applyFreshnessAll(ledger.records, `${today}T00:00:00Z`),
+    [ledger.records, today],
+  );
   const digest = useMemo(
     () =>
       buildDigest(today, {
@@ -60,7 +65,7 @@ export function DigestView({ data }: { data: ConsoleData }) {
     <Shell
       active="digest"
       title={`Today — ${digest.date}`}
-      stats={`${digest.entries.length} item(s) · horizon ${horizon}d`}
+      stats={`${digest.entries.length} item(s) · horizon ${horizon}d · ${ledger.source === "LEDGER" ? "watch ledger" : "bundled snapshot"}`}
       note="Deterministic: deadlines, tasks and review state. No ranking model, no LLM. It never promotes a record and never invents an action."
       onExportAudit={audit.exportLog}
     >

@@ -6,6 +6,7 @@ import { computeMetrics, projectName } from "@oia/workspace";
 import { applyFreshnessAll } from "@oia/ingestion/freshness";
 import { Shell } from "../Shell";
 import { useAuditLog, useProjectTags } from "../../lib/workspaceStore";
+import { useLedger } from "../../lib/watchData";
 
 /** A tally, never a score. Each bar is something already decided elsewhere. */
 function Bars({ title, data, rename }: { title: string; data: Record<string, number>; rename?: (k: string) => string }) {
@@ -32,16 +33,17 @@ export function MetricsView({ data }: { data: ConsoleData }) {
   const audit = useAuditLog();
   const tags = useProjectTags();
   const nowIso = useMemo(() => new Date().toISOString(), []);
+  const ledger = useLedger(data);
   const m = useMemo(
-    () => computeMetrics(applyFreshnessAll(data.records, nowIso), audit.log, tags.tags, nowIso),
-    [data.records, audit.log, tags.tags, nowIso],
+    () => computeMetrics(applyFreshnessAll(ledger.records, nowIso), audit.log, tags.tags, nowIso),
+    [ledger.records, audit.log, tags.tags, nowIso],
   );
 
   return (
     <Shell
       active="metrics"
       title="Metrics"
-      stats={`${m.total} record(s) · ${m.pursueEligible} gate-clear · ${m.untagged} untagged`}
+      stats={`${m.total} record(s) · ${m.pursueEligible} gate-clear · ${m.untagged} untagged · ${ledger.source === "LEDGER" ? "watch ledger" : "bundled snapshot"}`}
       note="Counts, not scores. The last panel is the one that matters: the reasons the gate blocks what it blocks — that is the evidence backlog, and it is what work would actually unblock a shortlist."
       onExportAudit={audit.exportLog}
     >
