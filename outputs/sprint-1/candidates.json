@@ -2653,13 +2653,20 @@
     "externalId": "471799-2026",
     "title": "France – Technical computer support services – AOO Prestation de développement pour la refonte du Système d’Information de l’US10-CépiDC Inserm",
     "officialUrl": "https://ted.europa.eu/en/notice/471799-2026/html",
+    "issuer": "Inserm Délégation Régionale Paris Ile de France Sud",
     "discoveredFor": [
       "bawaba"
     ],
-    "liveFetch": "SOURCE_UNAVAILABLE",
-    "verificationStatus": "SOURCE_UNAVAILABLE",
-    "verificationEvidence": [],
-    "factCount": 0,
+    "liveFetch": "OK",
+    "sourceFormat": "STATIC_HTML",
+    "contentHash": "08f55d6c65c534b551a934b97ef1e05954b25400c0f2c5ba371f1f4faea8a79e",
+    "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+    "verificationEvidence": [
+      "issuer domain recorded from official URL: ted.europa.eu",
+      "government/supranational domain: ted.europa.eu",
+      "artifact content is consistent with the named programme (token overlap ≥ 50%)"
+    ],
+    "factCount": 5,
     "provenance": [
       {
         "field": "publication-number",
@@ -2727,20 +2734,120 @@
       }
     ],
     "noticeType": "cn-standard",
-    "noticeClass": "BIDDABLE"
+    "noticeClass": "BIDDABLE",
+    "noticeFacts": [
+      {
+        "field": "scope",
+        "normalizedValue": "See the notice on TED website 471799-2026 - Competition 471799-2026 471799-2026 - Competition France – Technical computer support services – AOO Prestation de développement pour la refonte du Système d’Information de l’US10-CépiDC Inserm OJ S 129/2026 08/07/2026 Contract or concession notice – standard regime Services 1. Buyer 1.1. Buyer Official name: Inserm Délégation Régionale Paris Ile de France Sud Email: achat.paris11@inserm.fr Legal type of the buyer: Body governed by public law Activity of the contracting authority: Health 2. Procedure 2.1. Procedure Title: AOO Prestation de développement pour la refonte du Système d’Information de l’US10-CépiDC Inserm Description: Développement pour la refonte du Système d’Information de l’unité de service US10-CépiDC pour la production des causes de décès. Cette refonte s’appuiera sur une conception et la mise en œuvre d’un paramétrage et d’une intégration d’un socle logiciel existant, éprouvé en production. Les prestations attendues sont : -La fondation du système d’information comprenant :  Pilotage du projet  Conception fonctionnelle et technique ;  Paramétrage du progiciel ;  Data Production, Management et Intégration ;  Migratio",
+        "originalSourceText": "See the notice on TED website 471799-2026 - Competition 471799-2026 471799-2026 - Competition France – Technical computer support services – AOO Prestation de développement pour la refonte du Système d’Information de l’US10-CépiDC Inserm OJ S 129/2026 08/07/2026 Contract or concession notice – stand",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_db2a10caa6694dcb",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "opening text (no description heading found)"
+        },
+        "extractionMethod": "html-fallback",
+        "extractingProvider": "deterministic",
+        "extractingModel": "tender-rules-v1",
+        "extractionConfidence": 0.4,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "place_of_performance",
+        "normalizedValue": "Country subdivision (NUTS): Val-de-Marne (FR107) Country: France 2",
+        "originalSourceText": "Place of performance Country subdivision (NUTS): Val-de-Marne (FR107) Country: France 2",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_db2a10caa6694dcb",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "place of performance"
+        },
+        "extractionMethod": "regex",
+        "extractingProvider": "deterministic",
+        "extractingModel": "tender-rules-v1",
+        "extractionConfidence": 0.6,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "lots",
+        "normalizedValue": "1",
+        "originalSourceText": "lot numbers seen: 5",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_db2a10caa6694dcb",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "lots"
+        },
+        "extractionMethod": "regex",
+        "extractingProvider": "deterministic",
+        "extractingModel": "tender-rules-v1",
+        "extractionConfidence": 0.5,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "title",
+        "normalizedValue": "129/2026",
+        "originalSourceText": "129/2026",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_db2a10caa6694dcb",
+        "locator": {
+          "type": "HTML_HEADING",
+          "value": "title/h1"
+        },
+        "extractionMethod": "html-title",
+        "extractingProvider": "deterministic",
+        "extractingModel": "rules-v1",
+        "extractionConfidence": 0.8,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "expected_title",
+        "normalizedValue": "France – Technical computer support services – AOO Prestation de développement pour la refonte du Système d’Information de l’US10-CépiDC Inserm",
+        "originalSourceText": "France – Technical computer support services – AOO Prestation de développement pour la refonte du Système d’Information de l’US10-CépiDC Inserm",
+        "classification": "USER_PROVIDED",
+        "sourceArtifactId": "art_db2a10caa6694dcb",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "manifest"
+        },
+        "extractionMethod": "manifest",
+        "extractingProvider": "user",
+        "extractingModel": "none",
+        "extractionConfidence": 0.5,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      }
+    ],
+    "matchableChars": 1670
   },
   {
     "externalId": "478020-2026",
     "title": "France – License management software package – Groupement de commandes pour l'externalisation des outils de communication interne",
     "officialUrl": "https://ted.europa.eu/en/notice/478020-2026/html",
+    "issuer": "Seine Normandie Agglomération",
     "discoveredFor": [
       "bawaba",
       "rls-guard"
     ],
-    "liveFetch": "SOURCE_UNAVAILABLE",
-    "verificationStatus": "SOURCE_UNAVAILABLE",
-    "verificationEvidence": [],
-    "factCount": 0,
+    "liveFetch": "OK",
+    "sourceFormat": "STATIC_HTML",
+    "contentHash": "bd17951e80be489f6d2d5b126eb286ec1660a79ec5b0f5e58c920ad76719bafe",
+    "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+    "verificationEvidence": [
+      "issuer domain recorded from official URL: ted.europa.eu",
+      "government/supranational domain: ted.europa.eu",
+      "artifact content is consistent with the named programme (token overlap ≥ 50%)"
+    ],
+    "factCount": 6,
     "provenance": [
       {
         "field": "publication-number",
@@ -2808,7 +2915,118 @@
       }
     ],
     "noticeType": "cn-standard",
-    "noticeClass": "BIDDABLE"
+    "noticeClass": "BIDDABLE",
+    "noticeFacts": [
+      {
+        "field": "scope",
+        "normalizedValue": "See the notice on TED website 478020-2026 - Competition 478020-2026 478020-2026 - Competition France – License management software package – Groupement de commandes pour l'externalisation des outils de communication interne OJ S 131/2026 10/07/2026 Contract or concession notice – standard regime Supplies 1. Buyer 1.1. Buyer Official name: Seine Normandie Agglomération Email: marchespublics@sna.vernon27.fr Legal type of the buyer: Local authority Activity of the contracting authority: General public services 2. Procedure 2.1. Procedure Title: Groupement de commandes pour l'externalisation des outils de communication interne Description: L'accord-cadre sera exécuté par l'émission de bons de commande. Les prestations sont réglées par des prix unitaires. Les montants estimatifs sont indicatifs et comprennent la totalité des périodes de reconduction. Contexte lié au lancement du marché : Depuis plusieurs années, la ville de Vernon, Seine Normandie Agglomération et l'Office de Tourisme Communautaire ont développé l'usage des outils collaboratifs au travers de la suite Google Workspace et des outils visio Google Meet. Ce marché s'inscrit dans la continuité et la pérennisation de cet usage",
+        "originalSourceText": "See the notice on TED website 478020-2026 - Competition 478020-2026 478020-2026 - Competition France – License management software package – Groupement de commandes pour l'externalisation des outils de communication interne OJ S 131/2026 10/07/2026 Contract or concession notice – standard regime Sup",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_f0449491596a70a0",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "opening text (no description heading found)"
+        },
+        "extractionMethod": "html-fallback",
+        "extractingProvider": "deterministic",
+        "extractingModel": "tender-rules-v1",
+        "extractionConfidence": 0.4,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "estimated_value",
+        "normalizedValue": "EUR 2.1.4.",
+        "originalSourceText": "Estimated value excluding VAT: 780 000,00 EUR 2.1.4. ",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_f0449491596a70a0",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "estimated value"
+        },
+        "extractionMethod": "regex",
+        "extractingProvider": "deterministic",
+        "extractingModel": "tender-rules-v1",
+        "extractionConfidence": 0.7,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "place_of_performance",
+        "normalizedValue": "Postal address: 12 rue la mare à Jouy Town: Douains Postcode: 27120 Country subd",
+        "originalSourceText": "Place of performance Postal address: 12 rue la mare à Jouy Town: Douains Postcode: 27120 Country subd",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_f0449491596a70a0",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "place of performance"
+        },
+        "extractionMethod": "regex",
+        "extractingProvider": "deterministic",
+        "extractingModel": "tender-rules-v1",
+        "extractionConfidence": 0.6,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "lots",
+        "normalizedValue": "1",
+        "originalSourceText": "lot numbers seen: 5",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_f0449491596a70a0",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "lots"
+        },
+        "extractionMethod": "regex",
+        "extractingProvider": "deterministic",
+        "extractingModel": "tender-rules-v1",
+        "extractionConfidence": 0.5,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "title",
+        "normalizedValue": "131/2026",
+        "originalSourceText": "131/2026",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_f0449491596a70a0",
+        "locator": {
+          "type": "HTML_HEADING",
+          "value": "title/h1"
+        },
+        "extractionMethod": "html-title",
+        "extractingProvider": "deterministic",
+        "extractingModel": "rules-v1",
+        "extractionConfidence": 0.8,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "expected_title",
+        "normalizedValue": "France – License management software package – Groupement de commandes pour l'externalisation des outils de communication interne",
+        "originalSourceText": "France – License management software package – Groupement de commandes pour l'externalisation des outils de communication interne",
+        "classification": "USER_PROVIDED",
+        "sourceArtifactId": "art_f0449491596a70a0",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "manifest"
+        },
+        "extractionMethod": "manifest",
+        "extractingProvider": "user",
+        "extractingModel": "none",
+        "extractionConfidence": 0.5,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      }
+    ],
+    "matchableChars": 1661
   },
   {
     "externalId": "480676-2026",
@@ -3391,13 +3609,20 @@
     "externalId": "496268-2026",
     "title": "Germany – Services provided by medical personnel – Rahmenvertrag für die arbeitsmedizinische und sicherheitstechnische Betreuung 2027-2030",
     "officialUrl": "https://ted.europa.eu/en/notice/496268-2026/html",
+    "issuer": "Landratsamt Rems-Murr-Kreis",
     "discoveredFor": [
       "bawaba"
     ],
-    "liveFetch": "SOURCE_UNAVAILABLE",
-    "verificationStatus": "SOURCE_UNAVAILABLE",
-    "verificationEvidence": [],
-    "factCount": 0,
+    "liveFetch": "OK",
+    "sourceFormat": "STATIC_HTML",
+    "contentHash": "46c1b5bab7c65af9c83e0e2b0cdb609e027fd87503422d8fc1a9a1ebf94cbfbf",
+    "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+    "verificationEvidence": [
+      "issuer domain recorded from official URL: ted.europa.eu",
+      "government/supranational domain: ted.europa.eu",
+      "artifact content is consistent with the named programme (token overlap ≥ 50%)"
+    ],
+    "factCount": 5,
     "provenance": [
       {
         "field": "publication-number",
@@ -3465,19 +3690,119 @@
       }
     ],
     "noticeType": "cn-standard",
-    "noticeClass": "BIDDABLE"
+    "noticeClass": "BIDDABLE",
+    "noticeFacts": [
+      {
+        "field": "scope",
+        "normalizedValue": "See the notice on TED website 496268-2026 - Competition 496268-2026 496268-2026 - Competition Germany – Services provided by medical personnel – Rahmenvertrag für die arbeitsmedizinische und sicherheitstechnische Betreuung 2027-2030 OJ S 136/2026 17/07/2026 Contract or concession notice – standard regime - Change notice Services 1. Buyer 1.1. Buyer Official name: Landratsamt Rems-Murr-Kreis Email: vergabe@rems-murr-kreis.de Legal type of the buyer: Local authority Activity of the contracting authority: General public services 2. Procedure 2.1. Procedure Title: Rahmenvertrag für die arbeitsmedizinische und sicherheitstechnische Betreuung 2027-2030 Description: Arbeitsmedizinische und sicherheitstechnische Betreuung 2027-2030 Procedure identifier: a6abdede-ad2f-4073-bc68-2a21584f7091 Internal identifier: LRAWN_26-2026 Type of procedure: Open The procedure is accelerated: no 2.1.1. Purpose Main nature of the contract: Services Main classification (cpv): 85141000 Services provided by medical personnel Additional classification (cpv): 79417000 Safety consultancy services 2.1.2. Place of performance Town: Waiblingen Postcode: 71332 Country subdivision (NUTS): Rems-Murr-Kreis (DE116) Coun",
+        "originalSourceText": "See the notice on TED website 496268-2026 - Competition 496268-2026 496268-2026 - Competition Germany – Services provided by medical personnel – Rahmenvertrag für die arbeitsmedizinische und sicherheitstechnische Betreuung 2027-2030 OJ S 136/2026 17/07/2026 Contract or concession notice – standard r",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_c25210da361df901",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "opening text (no description heading found)"
+        },
+        "extractionMethod": "html-fallback",
+        "extractingProvider": "deterministic",
+        "extractingModel": "tender-rules-v1",
+        "extractionConfidence": 0.4,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "place_of_performance",
+        "normalizedValue": "Town: Waiblingen Postcode: 71332 Country subdivision (NUTS): Rems-Murr-Kreis (DE",
+        "originalSourceText": "Place of performance Town: Waiblingen Postcode: 71332 Country subdivision (NUTS): Rems-Murr-Kreis (DE",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_c25210da361df901",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "place of performance"
+        },
+        "extractionMethod": "regex",
+        "extractingProvider": "deterministic",
+        "extractingModel": "tender-rules-v1",
+        "extractionConfidence": 0.6,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "lots",
+        "normalizedValue": "1",
+        "originalSourceText": "lot numbers seen: 5",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_c25210da361df901",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "lots"
+        },
+        "extractionMethod": "regex",
+        "extractingProvider": "deterministic",
+        "extractingModel": "tender-rules-v1",
+        "extractionConfidence": 0.5,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "title",
+        "normalizedValue": "136/2026",
+        "originalSourceText": "136/2026",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_c25210da361df901",
+        "locator": {
+          "type": "HTML_HEADING",
+          "value": "title/h1"
+        },
+        "extractionMethod": "html-title",
+        "extractingProvider": "deterministic",
+        "extractingModel": "rules-v1",
+        "extractionConfidence": 0.8,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "expected_title",
+        "normalizedValue": "Germany – Services provided by medical personnel – Rahmenvertrag für die arbeitsmedizinische und sicherheitstechnische Betreuung 2027-2030",
+        "originalSourceText": "Germany – Services provided by medical personnel – Rahmenvertrag für die arbeitsmedizinische und sicherheitstechnische Betreuung 2027-2030",
+        "classification": "USER_PROVIDED",
+        "sourceArtifactId": "art_c25210da361df901",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "manifest"
+        },
+        "extractionMethod": "manifest",
+        "extractingProvider": "user",
+        "extractingModel": "none",
+        "extractionConfidence": 0.5,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      }
+    ],
+    "matchableChars": 1650
   },
   {
     "externalId": "500358-2026",
     "title": "France – Technical computer support services – Prestation de support et de maitrise d'ouvrage du système d'information bancaire de l'IEOM.",
     "officialUrl": "https://ted.europa.eu/en/notice/500358-2026/html",
+    "issuer": "Institut d'émission Outre-mer (IEOM)",
     "discoveredFor": [
       "bawaba"
     ],
-    "liveFetch": "SOURCE_UNAVAILABLE",
-    "verificationStatus": "SOURCE_UNAVAILABLE",
-    "verificationEvidence": [],
-    "factCount": 0,
+    "liveFetch": "OK",
+    "sourceFormat": "STATIC_HTML",
+    "contentHash": "de771b2754cc9da5e280de6e6917291433afcd840554a8a1a1c3e8fe5ad0e028",
+    "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+    "verificationEvidence": [
+      "issuer domain recorded from official URL: ted.europa.eu",
+      "government/supranational domain: ted.europa.eu",
+      "artifact content is consistent with the named programme (token overlap ≥ 50%)"
+    ],
+    "factCount": 6,
     "provenance": [
       {
         "field": "publication-number",
@@ -3545,7 +3870,118 @@
       }
     ],
     "noticeType": "cn-standard",
-    "noticeClass": "BIDDABLE"
+    "noticeClass": "BIDDABLE",
+    "noticeFacts": [
+      {
+        "field": "scope",
+        "normalizedValue": "See the notice on TED website 500358-2026 - Competition 500358-2026 500358-2026 - Competition France – Technical computer support services – Prestation de support et de maitrise d'ouvrage du système d'information bancaire de l'IEOM. OJ S 137/2026 20/07/2026 Contract or concession notice – standard regime Services 1. Buyer 1.1. Buyer Official name: Institut d'émission Outre-mer (IEOM) Email: achats@iedom-ieom.fr Legal type of the buyer: Body governed by public law Activity of the contracting authority: Economic affairs 2. Procedure 2.1. Procedure Title: Prestation de support et de maitrise d'ouvrage du système d'information bancaire de l'IEOM. Description: * Le support métier pour l'ensemble de la communauté CEGID XRP Ultimate des Instituts. * Le traitement des demandes d'intervention et la gestion des anomalies qui lui sont remontées par les utilisateurs de l'IEOM, * L'initialisation des demandes au sein de l'outil MANTIS des Instituts, * La qualification des demandes d'intervention et la répartition logique des activités selon la nature des travaux (dysfonctionnement/évolution/besoin de précision...) entre les équipes fonctionnelles et techniques, * L'appui au paramétrage fonction",
+        "originalSourceText": "See the notice on TED website 500358-2026 - Competition 500358-2026 500358-2026 - Competition France – Technical computer support services – Prestation de support et de maitrise d'ouvrage du système d'information bancaire de l'IEOM. OJ S 137/2026 20/07/2026 Contract or concession notice – standard r",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_c261c1adf05a5064",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "opening text (no description heading found)"
+        },
+        "extractionMethod": "html-fallback",
+        "extractingProvider": "deterministic",
+        "extractingModel": "tender-rules-v1",
+        "extractionConfidence": 0.4,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "estimated_value",
+        "normalizedValue": "EUR 2.1.4.",
+        "originalSourceText": "Estimated value excluding VAT: 0,00 EUR 2.1.4. ",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_c261c1adf05a5064",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "estimated value"
+        },
+        "extractionMethod": "regex",
+        "extractingProvider": "deterministic",
+        "extractingModel": "tender-rules-v1",
+        "extractionConfidence": 0.7,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "place_of_performance",
+        "normalizedValue": "Postal address: Agence l’IEOM Nouméa sur le site principal, dont l’adresse est :",
+        "originalSourceText": "Place of performance Postal address: Agence l’IEOM Nouméa sur le site principal, dont l’adresse est :",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_c261c1adf05a5064",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "place of performance"
+        },
+        "extractionMethod": "regex",
+        "extractingProvider": "deterministic",
+        "extractingModel": "tender-rules-v1",
+        "extractionConfidence": 0.6,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "lots",
+        "normalizedValue": "1",
+        "originalSourceText": "lot numbers seen: 5",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_c261c1adf05a5064",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "lots"
+        },
+        "extractionMethod": "regex",
+        "extractingProvider": "deterministic",
+        "extractingModel": "tender-rules-v1",
+        "extractionConfidence": 0.5,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "title",
+        "normalizedValue": "137/2026",
+        "originalSourceText": "137/2026",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_c261c1adf05a5064",
+        "locator": {
+          "type": "HTML_HEADING",
+          "value": "title/h1"
+        },
+        "extractionMethod": "html-title",
+        "extractingProvider": "deterministic",
+        "extractingModel": "rules-v1",
+        "extractionConfidence": 0.8,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "expected_title",
+        "normalizedValue": "France – Technical computer support services – Prestation de support et de maitrise d'ouvrage du système d'information bancaire de l'IEOM.",
+        "originalSourceText": "France – Technical computer support services – Prestation de support et de maitrise d'ouvrage du système d'information bancaire de l'IEOM.",
+        "classification": "USER_PROVIDED",
+        "sourceArtifactId": "art_c261c1adf05a5064",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "manifest"
+        },
+        "extractionMethod": "manifest",
+        "extractingProvider": "user",
+        "extractingModel": "none",
+        "extractionConfidence": 0.5,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      }
+    ],
+    "matchableChars": 1686
   },
   {
     "externalId": "500966-2026",
@@ -3713,14 +4149,21 @@
     "externalId": "502549-2026",
     "title": "France – Systems consultancy services – Analyse de risques et accompagnement SMSI V2",
     "officialUrl": "https://ted.europa.eu/en/notice/502549-2026/html",
+    "issuer": "réséda",
     "discoveredFor": [
       "bawaba",
       "rls-guard"
     ],
-    "liveFetch": "SOURCE_UNAVAILABLE",
-    "verificationStatus": "SOURCE_UNAVAILABLE",
-    "verificationEvidence": [],
-    "factCount": 0,
+    "liveFetch": "OK",
+    "sourceFormat": "STATIC_HTML",
+    "contentHash": "2900ca31e85140dc28146c30fb4ebba269631ce6a606160027fed22894c108d7",
+    "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+    "verificationEvidence": [
+      "issuer domain recorded from official URL: ted.europa.eu",
+      "government/supranational domain: ted.europa.eu",
+      "artifact content is consistent with the named programme (token overlap ≥ 50%)"
+    ],
+    "factCount": 6,
     "provenance": [
       {
         "field": "publication-number",
@@ -3788,7 +4231,118 @@
       }
     ],
     "noticeType": "cn-standard",
-    "noticeClass": "BIDDABLE"
+    "noticeClass": "BIDDABLE",
+    "noticeFacts": [
+      {
+        "field": "scope",
+        "normalizedValue": "See the notice on TED website 502549-2026 - Competition 502549-2026 502549-2026 - Competition France – Systems consultancy services – Analyse de risques et accompagnement SMSI V2 OJ S 138/2026 21/07/2026 Contract or concession notice – standard regime Services 1. Buyer 1.1. Buyer Official name: réséda Email: b-belkaid@uem-metz.fr Activity of the contracting entity: Electricity-related activities 2. Procedure 2.1. Procedure Title: Analyse de risques et accompagnement SMSI V2 Description: Etude et réalisation d'analyses de risques et accompagnement pour la mise en place d'un SMSI (conforme NIS2) Procedure identifier: 3fd4e631-598b-4ae4-b00b-a801a330dce5 Internal identifier: NGC-26-047 Type of procedure: Negotiated with prior publication of a call for competition / competitive with negotiation The procedure is accelerated: no 2.1.1. Purpose Main nature of the contract: Services Main classification (cpv): 72246000 Systems consultancy services 2.1.2. Place of performance Postal address: 2 bis, rue Ardant du Picq - BP 10102 Town: METZ Cedex 01 Postcode: 57014 Country subdivision (NUTS): Moselle (FRF33) Country: France 2.1.3. Value Estimated value excluding VAT: 200 000,00 EUR 2.1.4. Gene",
+        "originalSourceText": "See the notice on TED website 502549-2026 - Competition 502549-2026 502549-2026 - Competition France – Systems consultancy services – Analyse de risques et accompagnement SMSI V2 OJ S 138/2026 21/07/2026 Contract or concession notice – standard regime Services 1. Buyer 1.1. Buyer Official name: résé",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_20508d20e4d1a7a0",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "opening text (no description heading found)"
+        },
+        "extractionMethod": "html-fallback",
+        "extractingProvider": "deterministic",
+        "extractingModel": "tender-rules-v1",
+        "extractionConfidence": 0.4,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "estimated_value",
+        "normalizedValue": "EUR 2.1.4.",
+        "originalSourceText": "Estimated value excluding VAT: 200 000,00 EUR 2.1.4. ",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_20508d20e4d1a7a0",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "estimated value"
+        },
+        "extractionMethod": "regex",
+        "extractingProvider": "deterministic",
+        "extractingModel": "tender-rules-v1",
+        "extractionConfidence": 0.7,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "place_of_performance",
+        "normalizedValue": "Postal address: 2 bis, rue Ardant du Picq - BP 10102 Town: METZ Cedex 01 Postcod",
+        "originalSourceText": "Place of performance Postal address: 2 bis, rue Ardant du Picq - BP 10102 Town: METZ Cedex 01 Postcod",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_20508d20e4d1a7a0",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "place of performance"
+        },
+        "extractionMethod": "regex",
+        "extractingProvider": "deterministic",
+        "extractingModel": "tender-rules-v1",
+        "extractionConfidence": 0.6,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "lots",
+        "normalizedValue": "3",
+        "originalSourceText": "lot numbers seen: 1, 2, 5",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_20508d20e4d1a7a0",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "lots"
+        },
+        "extractionMethod": "regex",
+        "extractingProvider": "deterministic",
+        "extractingModel": "tender-rules-v1",
+        "extractionConfidence": 0.5,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "title",
+        "normalizedValue": "138/2026",
+        "originalSourceText": "138/2026",
+        "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+        "sourceArtifactId": "art_20508d20e4d1a7a0",
+        "locator": {
+          "type": "HTML_HEADING",
+          "value": "title/h1"
+        },
+        "extractionMethod": "html-title",
+        "extractingProvider": "deterministic",
+        "extractingModel": "rules-v1",
+        "extractionConfidence": 0.8,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      },
+      {
+        "field": "expected_title",
+        "normalizedValue": "France – Systems consultancy services – Analyse de risques et accompagnement SMSI V2",
+        "originalSourceText": "France – Systems consultancy services – Analyse de risques et accompagnement SMSI V2",
+        "classification": "USER_PROVIDED",
+        "sourceArtifactId": "art_20508d20e4d1a7a0",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "manifest"
+        },
+        "extractionMethod": "manifest",
+        "extractingProvider": "user",
+        "extractingModel": "none",
+        "extractionConfidence": 0.5,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      }
+    ],
+    "matchableChars": 1548
   },
   {
     "externalId": "505248-2026",

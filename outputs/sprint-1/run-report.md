@@ -14,7 +14,7 @@
 - **myoolala** — OK · 9 biddable of 9 retrieved
   - query: `classification-cpv IN (72212517 48219700 72413000 72212224) AND buyer-country IN (FRA) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
 - **padel-design** — OK · 100 biddable of 100 retrieved
-  - query: `classification-cpv IN (71241000 79314000 79419000 92600000) AND buyer-country IN (FRA) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
+  - query: `classification-cpv IN (71241000 79314000 79419000 92600000) AND buyer-country IN (ESP FRA ITA PRT BEL NLD DEU SWE) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
 - **rls-guard** — OK · 81 biddable of 81 retrieved
   - query: `classification-cpv IN (72212730 79417000 72267000 48218000) AND buyer-country IN (FRA LUX BEL) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
 - **sillon** — OK · 39 biddable of 39 retrieved
@@ -22,11 +22,11 @@
 - **thestudio-mt** — OK · 100 biddable of 100 retrieved
   - query: `classification-cpv IN (72212517 72230000 72267000 72413000 79421000 72224000) AND buyer-country IN (FRA LUX BEL) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
 
-- unique notices across projects: 481
-- matchable text per record (the S2 measure): median 1599 characters over 20 record(s)
+- unique notices across projects: 482
+- matchable text per record (the S2 measure): median 1599 characters over 25 record(s)
 - candidates processed (cap 25): 25
-- qualified at MANUAL_REVIEW_REQUIRED: 20
-- notice-page fetch failures: 5
+- qualified at MANUAL_REVIEW_REQUIRED: 25
+- notice-page fetch failures: 0
 
 ## Candidates (each with official source URL)
 - **422623-2026** — France – Structural engineering consultancy services – Accord-cadre d'Assistance Technique à la Maîtrise d'Ouvrage (ATMO) pour le CHU de Strasbourg (HUS)
@@ -88,11 +88,11 @@
 - **471799-2026** — France – Technical computer support services – AOO Prestation de développement pour la refonte du Système d’Information de l’US10-CépiDC Inserm
   - source: https://ted.europa.eu/en/notice/471799-2026/html
   - discovered for: bawaba
-  - verification: SOURCE_UNAVAILABLE · live fetch: SOURCE_UNAVAILABLE
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
 - **478020-2026** — France – License management software package – Groupement de commandes pour l'externalisation des outils de communication interne
   - source: https://ted.europa.eu/en/notice/478020-2026/html
   - discovered for: bawaba, rls-guard
-  - verification: SOURCE_UNAVAILABLE · live fetch: SOURCE_UNAVAILABLE
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
 - **480676-2026** — France – Health and safety consultancy services – Mission de Coordination SPS de Niveau 1 pour la desserte du Môle Central - RP 541 et RP 539
   - source: https://ted.europa.eu/en/notice/480676-2026/html
   - discovered for: bawaba, rls-guard
@@ -108,11 +108,11 @@
 - **496268-2026** — Germany – Services provided by medical personnel – Rahmenvertrag für die arbeitsmedizinische und sicherheitstechnische Betreuung 2027-2030
   - source: https://ted.europa.eu/en/notice/496268-2026/html
   - discovered for: bawaba
-  - verification: SOURCE_UNAVAILABLE · live fetch: SOURCE_UNAVAILABLE
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
 - **500358-2026** — France – Technical computer support services – Prestation de support et de maitrise d'ouvrage du système d'information bancaire de l'IEOM.
   - source: https://ted.europa.eu/en/notice/500358-2026/html
   - discovered for: bawaba
-  - verification: SOURCE_UNAVAILABLE · live fetch: SOURCE_UNAVAILABLE
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
 - **500966-2026** — France – Computer back-up services – PRESTATIONS D'ASSISTANCE ET D'EXPERTISE INFORMATIQUE
   - source: https://ted.europa.eu/en/notice/500966-2026/html
   - discovered for: bawaba
@@ -120,7 +120,7 @@
 - **502549-2026** — France – Systems consultancy services – Analyse de risques et accompagnement SMSI V2
   - source: https://ted.europa.eu/en/notice/502549-2026/html
   - discovered for: bawaba, rls-guard
-  - verification: SOURCE_UNAVAILABLE · live fetch: SOURCE_UNAVAILABLE
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
 - **505248-2026** — France – Technical computer support services – Prestation d'assistance technique informatique pour l'agence IEDOM de Guadeloupe.
   - source: https://ted.europa.eu/en/notice/505248-2026/html
   - discovered for: bawaba
