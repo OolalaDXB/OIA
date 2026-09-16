@@ -28,9 +28,21 @@ describe("what the scout is allowed to read", () => {
   it("covers the declared sources that were the whole point", () => {
     const ids = scoutableSources(all).map((s) => s.id);
     // The French and Emirati aid sources that sat unread in YAML.
-    for (const id of ["region-bretagne", "aides-territoires", "bpifrance", "france-2030-ademe", "cir-cii-jei", "hub71", "adio"]) {
+    for (const id of ["aides-territoires", "france-2030-ademe", "cir-cii-jei", "hub71", "adio"]) {
       expect(ids).toContain(id);
     }
+  });
+
+  /**
+   * Région Bretagne and Bpifrance answer an automated browser with a security
+   * challenge. They were DECLARED and scoutable until the first real run showed
+   * the refusal; they are BLOCKED now, and this asserts the scout respects that
+   * rather than a future change quietly deciding to push through it.
+   */
+  it("stays out of sources that answered with a security challenge", () => {
+    const ids = scoutableSources(all).map((s) => s.id);
+    expect(ids).not.toContain("region-bretagne");
+    expect(ids).not.toContain("bpifrance");
   });
 
   it("leaves LIVE sources to their connector instead of browsing them", () => {
@@ -44,9 +56,6 @@ describe("what the scout is allowed to read", () => {
   });
 
   it("honours an explicit subset", () => {
-    expect(scoutableSources(all, "region-bretagne,hub71").map((s) => s.id).sort()).toEqual([
-      "hub71",
-      "region-bretagne",
-    ]);
+    expect(scoutableSources(all, "adio,hub71").map((s) => s.id).sort()).toEqual(["adio", "hub71"]);
   });
 });
