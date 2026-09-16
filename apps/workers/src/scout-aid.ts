@@ -225,7 +225,20 @@ async function main() {
   // single JSON repair retry the provider allows.
   const maxCalls = Number(process.env["SCOUT_MAX_CALLS"] ?? String(sources.length * 2));
   const model = process.env["LLM_MODEL"] ?? "mistral-large-latest";
-  const mistral: MistralProvider = createMistralProvider({ apiKey, model, maxCalls });
+  // Keep every raw model response. The last run produced 36,823 output tokens
+  // and reported zero findings, and nothing on disk could say which of the two
+  // was lying.
+  const rawDir = join(outDir, "raw");
+  mkdirSync(rawDir, { recursive: true });
+  const mistral: MistralProvider = createMistralProvider({
+    apiKey,
+    model,
+    maxCalls,
+    onRawResponse: ({ purpose, text }) => {
+      const name = purpose.replace(/[^a-z0-9._-]+/gi, "_");
+      writeFileSync(join(rawDir, `${name}.json`), text, "utf8");
+    },
+  });
 
   console.log(`scout: ${sources.length} source(s), budget ${maxCalls} model call(s), model ${model}`);
 

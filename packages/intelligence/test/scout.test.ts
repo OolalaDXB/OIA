@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { anchorViolations, scoutPrompt, ScoutedCallSchema, type ScoutPage } from "../src/scout";
+import { anchorViolations, scoutPrompt, ScoutedCallSchema, ScoutResultSchema, type ScoutPage } from "../src/scout";
 
 /**
  * The guard that decides whether this feature is trustworthy or dangerous.
@@ -99,5 +99,61 @@ describe("what the model is shown", () => {
   it("truncates an enormous portal rather than sending the whole thing", () => {
     const huge = { ...page, text: "x".repeat(100_000) };
     expect(scoutPrompt(huge).length).toBeLessThan(40_000);
+  });
+});
+
+/**
+ * The silent-drop bug, which cost a full run and produced no error at all.
+ *
+ * Mistral returned 36,823 output tokens of extracted programmes and the scout
+ * reported zero calls. `calls` had a default of `[]`, so a response keyed
+ * `opportunities` parsed CLEANLY into an empty result: valid, successful, and
+ * completely wrong. A schema that discards its input and reports success is
+ * worse than one that rejects it, because rejection is visible.
+ */
+describe("taking the model's list whatever it called it", () => {
+  const one = {
+    title: "PIA 4",
+    sourceUrl: "https://aides-territoires.beta.gouv.fr/programmes/pia-4/",
+    issuer: "État",
+  };
+
+  it("still prefers a correctly keyed response", () => {
+    const parsed = ScoutResultSchema.parse({ calls: [one], note: "" });
+    expect(parsed.calls).toHaveLength(1);
+  });
+
+  it("rescues a list the model keyed 'opportunities'", () => {
+    const parsed = ScoutResultSchema.parse({ opportunities: [one, one] });
+    expect(parsed.calls).toHaveLength(2);
+    expect(parsed.note).toMatch(/opportunities/);
+  });
+
+  it("rescues a list keyed in French", () => {
+    expect(ScoutResultSchema.parse({ aides: [one] }).calls).toHaveLength(1);
+  });
+
+  it("rescues a single opportunity returned unwrapped", () => {
+    const parsed = ScoutResultSchema.parse(one);
+    expect(parsed.calls).toHaveLength(1);
+    expect(parsed.calls[0]!.title).toBe("PIA 4");
+  });
+
+  it("says what the keys actually were when no list can be found", () => {
+    // The next person debugging this should not have to guess either.
+    const parsed = ScoutResultSchema.parse({ summary: "nothing here", page: "x" });
+    expect(parsed.calls).toHaveLength(0);
+    expect(parsed.note).toMatch(/keys were: summary, page/);
+  });
+
+  it("does not mistake a list of strings for a list of opportunities", () => {
+    const parsed = ScoutResultSchema.parse({ links: ["https://a.fr", "https://b.fr"] });
+    expect(parsed.calls).toHaveLength(0);
+  });
+
+  it("reports an empty page as empty, not as a failure", () => {
+    const parsed = ScoutResultSchema.parse({ calls: [], note: "this is a contact page" });
+    expect(parsed.calls).toHaveLength(0);
+    expect(parsed.note).toBe("this is a contact page");
   });
 });

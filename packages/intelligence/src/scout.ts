@@ -53,7 +53,7 @@ export const ScoutedCallSchema = z.object({
 });
 export type ScoutedCall = z.infer<typeof ScoutedCallSchema>;
 
-export const ScoutResultSchema = z.object({
+const ScoutResultShape = z.object({
   calls: z.array(ScoutedCallSchema).default([]),
   /**
    * The model's own account of what it could not do. An empty page and a page
@@ -61,7 +61,41 @@ export const ScoutResultSchema = z.object({
    */
   note: z.string().default(""),
 });
-export type ScoutResult = z.infer<typeof ScoutResultSchema>;
+
+/**
+ * Take the model's list whatever it decided to call it.
+ *
+ * This cost a whole run to find. The model was returning 36,823 output tokens —
+ * pages and pages of extracted programmes — and the scout reported zero calls,
+ * with no error anywhere. `calls` has a default of `[]`, so a response keyed
+ * `opportunities` or `aides` parsed CLEANLY into an empty result. A schema that
+ * silently discards its input and reports success is worse than one that
+ * rejects it: rejection is visible.
+ *
+ * So the array is found by shape rather than by name, and a response whose list
+ * cannot be found at all keeps its original keys in `note` — the next person
+ * debugging this should not have to guess either.
+ */
+export const ScoutResultSchema = z.preprocess((raw) => {
+  if (typeof raw !== "object" || raw === null) return raw;
+  const obj = raw as Record<string, unknown>;
+  if (Array.isArray(obj["calls"])) return obj;
+
+  // Any other property holding a list of objects is the list.
+  for (const [key, value] of Object.entries(obj)) {
+    if (key === "calls") continue;
+    if (Array.isArray(value) && value.every((v) => typeof v === "object" && v !== null)) {
+      return { ...obj, calls: value, note: String(obj["note"] ?? `list read from "${key}"`) };
+    }
+  }
+  // A single opportunity returned bare, rather than wrapped in a list.
+  if (typeof obj["title"] === "string" && typeof obj["sourceUrl"] === "string") {
+    return { calls: [obj], note: "the model returned one opportunity unwrapped" };
+  }
+  return { ...obj, calls: [], note: String(obj["note"] ?? `no list found; keys were: ${Object.keys(obj).join(", ")}`) };
+}, ScoutResultShape);
+
+export type ScoutResult = z.infer<typeof ScoutResultShape>;
 
 export interface ScoutPage {
   /** The URL that was fetched. */
@@ -176,6 +210,8 @@ export const SCOUT_SYSTEM = [
   "5. If the page genuinely shows no funding opportunity — it is a contact page, a news article, a login —",
   "   return an empty array and say so in note. An empty answer is a correct answer for an empty page,",
   "   and a wrong answer for a page full of programmes.",
+  "",
+  "Return the list under the key \"calls\". Not \"opportunities\", not \"results\", not \"aides\" — \"calls\".",
   "",
   "You are extracting claims for a human to verify, not deciding anything.",
 ].join("\n");

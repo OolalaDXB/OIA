@@ -28,6 +28,14 @@ export interface MistralConfig {
   maxCalls?: number;
   /** Output ceiling per call. Too low truncates JSON mid-array; see below. */
   maxOutputTokens?: number;
+  /**
+   * Called with the model's raw text for every call, before any parsing.
+   *
+   * Exists because a schema silently turned 36,823 tokens of real output into
+   * an empty result and reported success. Whatever the parse then does, the
+   * answer to "what did the model actually say" has to be recoverable.
+   */
+  onRawResponse?: (raw: { purpose: string; text: string }) => void;
 }
 
 function extractJson(text: string): string {
@@ -112,6 +120,7 @@ export function createMistralProvider(config: MistralConfig): MistralProvider {
       let lastErr: unknown;
       for (let attempt = 0; attempt < 2; attempt++) {
         const { text, usage } = await call(system, req.input, model);
+        config.onRawResponse?.({ purpose: req.purpose, text });
         try {
           const data = req.schema.parse(JSON.parse(extractJson(text)));
           return {
