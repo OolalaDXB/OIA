@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T17:42:24.326Z",
+  "generatedAt": "2026-09-16T17:57:24.184Z",
   "found": [],
   "perSource": [
     {
@@ -7,8 +7,8 @@
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "",
-      "chars": 11397,
+      "note": "accepted the cookie banner (\"tout accepter\")",
+      "chars": 11009,
       "links": 56
     },
     {
@@ -16,45 +16,34 @@
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "",
-      "chars": 5634,
-      "links": 58
+      "note": "followed \"https://aides-territoires.beta.gouv.fr/programmes/\" (aides, programmes)",
+      "chars": 14498,
+      "links": 103
     },
     {
       "id": "boamp",
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "",
+      "note": "tried \"https://www.boamp.fr/pages/aide/\" but it had less text — stayed on the entry page",
       "chars": 1697,
       "links": 38
-    },
-    {
-      "id": "bpifrance",
-      "status": "OK",
-      "kept": 0,
-      "dropped": 0,
-      "note": "",
-      "chars": 513,
-      "links": 0
     },
     {
       "id": "cir-cii-jei",
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "",
-      "chars": 3903,
+      "note": "accepted the cookie banner (\"accepter\")",
+      "chars": 3446,
       "links": 106
     },
     {
       "id": "eu-funding-tenders",
-      "status": "OK",
+      "status": "ERROR",
       "kept": 0,
       "dropped": 0,
-      "note": "",
-      "chars": 4345,
-      "links": 39
+      "note": "Mistral extract failed to produce valid ScoutResult: SyntaxError: Expected ',' or ']' after array element in JSON at position 12035 (line 169 column 8)"
     },
     {
       "id": "flippa",
@@ -70,27 +59,18 @@
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "",
-      "chars": 2409,
-      "links": 67
+      "note": "followed \"https://agirpourlatransition.ademe.fr/entreprises/aides-financieres\" (aides)",
+      "chars": 7716,
+      "links": 113
     },
     {
       "id": "hub71",
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "",
-      "chars": 10960,
+      "note": "tried \"https://www.hub71.com/program/access-programme/apply\" but it had less text — stayed on the entry page",
+      "chars": 10952,
       "links": 75
-    },
-    {
-      "id": "region-bretagne",
-      "status": "OK",
-      "kept": 0,
-      "dropped": 0,
-      "note": "",
-      "chars": 296,
-      "links": 2
     },
     {
       "id": "uae-federal-procurement",
@@ -106,27 +86,27 @@
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "",
-      "chars": 2694,
-      "links": 51
+      "note": "followed \"https://www.find-tender.service.gov.uk/search/opportunities?language=en_GB&cookies_accepted=unknown\" (opportunityieses)",
+      "chars": 10197,
+      "links": 43
     },
     {
       "id": "ungm",
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "",
-      "chars": 3914,
-      "links": 24
+      "note": "followed \"https://www.ungm.org/Public/Notice\" (opportunityieses, procurement)",
+      "chars": 9317,
+      "links": 219
     },
     {
       "id": "worldbank-afdb-ebrd",
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "",
-      "chars": 5966,
-      "links": 395
+      "note": "followed \"https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00468424\" (tenders, procurement)",
+      "chars": 8534,
+      "links": 356
     }
   ]
 }

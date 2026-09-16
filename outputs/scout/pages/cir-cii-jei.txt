@@ -1,8 +1,5 @@
 https://www.service-public.fr/professionnels-entreprises/vosdroits/F23533
 
-Ce site utilise des cookies permettant de visualiser des contenus et d'améliorer le fonctionnement grâce aux statistiques de navigation. Si vous cliquez sur « Accepter », la Dila (éditeur du site Service Public Entreprendre) et ses partenaires déposeront ces cookies sur votre terminal lors de votre navigation. Si vous cliquez sur « Refuser », ces cookies ne seront pas déposés. Votre choix est conservé pendant 6 mois et vous pouvez être informé et modifier vos préférences à tout moment sur la page « Gérer les cookies ».
-
-AccepterRefuserPersonnaliser
 Contenu
 Menu
 Recherche
@@ -139,3 +136,8 @@ Nos partenaires
 Plan du siteAccessibilité : totalement conformeAccessibilité des services en ligneMentions légalesDonnées personnelles et sécuritéConditions générales d'utilisationGestion des cookies Paramètres d'affichage
 
 Sauf mention contraire, tous les contenus de ce site sont sous licence etalab-2.0 
+
+Vous êtes
+Micro-entrepreneur (auto-entrepreneur)
+Entrepreneur Individuel
+Société (SARL, EURL...)

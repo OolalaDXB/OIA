@@ -1,4 +1,4 @@
-https://aides-territoires.beta.gouv.fr
+https://aides-territoires.beta.gouv.fr/programmes/
 
 Contenu
 Menu
@@ -21,217 +21,268 @@ Actualités
 Portails
 Europe
 En savoir plus
- Aides-territoires recentre son action pour être au plus près des besoins des acteurs publics – À compter de Mars 2026, nous concentrons notre expertise sur les besoins spécifiques des collectivités territoriales et établissements publics. Si vous êtes association, entreprise ou particulier, nous vous orienterons vers les ressources adaptées. En savoir plus
-Masquer le message
-Réalisez vos projets locaux
+Accueil  Tous les programmes d’aides
+Tous les programmes d’aides
+Filtrer par nom
+4ème Programme d’investissements d’avenir - PIA 4
 
-Chaque jour, des collectivités comme la vôtre trouvent des aides pour financer et accompagner leurs projets sur de nombreuses thématiques. Vous aussi, découvrez les aides disponibles et paramétrez des alertes pour donner vie aux ambitions de votre territoire.
+20 milliards d’euros pour l’innovation dont plus de la moitié mobilisée pour la relance économique
 
-Aides
-Projets
-Bénéficiaire
-Tous types de structures
-Collectivité d’outre-mer à statut particulier
-Commune
-Département
-Entreprise publique locale (Sem, Spl, SemOp)
-Etablissement public dont services de l'Etat
-Intercommunalité / Pays
-Région
-Territoire
-Type de projet ou mot-clé
-Thématiques
-Afficher les critères avancés
-Rechercher
-Actualités
+ACTEE - Action des Collectivités Territoriales pour l’Efficacité Energétique
+
+ACTEE – Action des Collectivités Territoriales pour l’Efficacité Energétique
+
+Action cœur de ville
+
+Ce programme vise à faciliter et à soutenir le travail des collectivités locales, à inciter les acteurs du logement, du commerce et de l'urbanisme à réinvestir les centres-villes, à favoriser le maintien ou l'implantation d'activités en cœur de ville
+
+Actions pour la Relance (complémentaires à France Relance)
+
+Actions pour la relance - hors France Relance
+
+EUROPE - AGRIP - Promotion des produits agricoles
+
+Le programme de promotion des produits agricoles (AGRIP) joue un rôle essentiel dans la concrétisation des objectifs politiques de la Commission européenne pour la période 2019-2024, en soutenant le Green Deal européen, la stratégie « Farm to Fork » et le plan européen de lutte contre le cancer.
+
+EUROPE - Biodiversa +
+
+Biodiversa + est le Partenariat européen sur la biodiversité. Dans la continuité de Biodiversa, il a été développé conjointement avec la Commission européenne et regroupe 74 programmeurs et bailleurs de fonds de recherche et acteurs de la politique environnementale de 37 pays différents.
+
+Cités éducatives
+
+Les Cités éducatives consistent en une meilleure coordination des dispositifs afin de parvenir à des "Territoires à haute qualité éducative".
+
+EUROPE - CERV - Citoyenneté, Egalité, Droits et Valeurs
+
+Le programme CERV vise à soutenir et à développer des sociétés ouvertes, démocratiques, égalitaires, inclusives et fondées sur les droits et l’état de droit.
+
+EUROPE - CES - Corps européen de solidarité
+
+Le Corps européen de solidarité permet aux jeunes de s’engager et aux organismes de mettre en place des initiatives en Europe sur des activités variées, dans les domaines humanitaires, de la santé, de l’environnement, de l’intergénérationnel…
+
+EUROPE - COSME - Programme européen pour la compétitivité des entreprises
+
+Le programme pour la compétitivité des entreprises et des petites et moyennes entreprises (2014-2020), vise à promouvoir la croissance et à renforcer la compétitivité et la durabilité des entreprises dans l'Union européenne.
+
+Destination France
+
+Le plan Destination France vise à renforcer le secteur et garantir la place de notre pays en tête du tourisme mondial.
+
+EUROPE - EaSI - Programme européen pour l'emploi et l'innovation sociale
+
+Le programme pour l'emploi et l'innovation sociale (EaSI) est un instrument de financement européen visant à promouvoir un niveau élevé d'emplois durables et de qualité, à garantir une protection sociale correcte et adéquate, à lutter contre la pauvreté et l'exclusion sociale.
+
+ÉcoQuartier
+
+La démarche ÉcoQuartier été lancée en 2009 en application de la loi Grenelle 2 dans le cadre du plan Ville durable. Elle vise à favoriser l'émergence d'une nouvelle façon de concevoir, de construire et de gérer la ville durablement, en outillant, sensibilisant et valorisant les porteurs de projets.
+
+EduRénov
+
+Le programme EduRénov, lancé en 2023 par la Banque des Territoires, vise à accélérer la rénovation énergétique des bâtiments scolaires en France. Il s’inscrit dans la stratégie nationale de transition écologique et cible les écoles, collèges, lycées, ainsi que d’autres structures éducatives.
+
+EUROPE - EIT Food
+
+EIT Food est un partenariat paneuropéen, axé sur le consommateur, qui permet aux innovateurs, aux entrepreneurs et aux étudiants de développer des solutions de classe mondiale aux défis de société, d'accélérer l'innovation, de créer des emplois et d'accroître la compétitivité de l'Europe.
+
+EUROPE - EIT Manufacturing
+
+EIT Manufacturing a pour objectif de faire de l'Europe le leader de l'innovation industrielle internationale, grâce à son large écosystème d'acteurs de l'industrie.
+
+EUROPE - Erasmus +
+
+Erasmus+ est le programme de l'UE en faveur de l'éducation, de la formation, de la jeunesse et du sport en Europe.
+
+EUROPE - EUCF - EU City Facility
+
+EU City Facility est une initiative européenne visant à soutenir les investissements dans les énergies durables.
+
+EUROPE - EPSON - European Observation Network for Territorial Development and Cohesion
+
+ESPON, European Observation Network for Territorial Development and Cohesion, est un programme de recherche sur le développement territorial européen.
+
+EUROPE - Europe Créative
+
+Europe Créative est le programme de l'Union Européenne qui soutient les secteurs de la culture et de la création.
+
+EUROPE - Digital Europe - Europe Numérique
+
+Le nouveau programme pour une Europe numérique (Digital Europe programme) ouvre la voie à la transformation numérique de la société et de l’économie européennes et y apporte un soutien, pour le bénéfice des citoyens et des entreprises. Il vise également à accélérer la reprise.
+
+EUROPE - FEADER - Fonds européen agricole pour le développement rural
+
+Leader (pour Liaison entre actions de développement de l'économie rurale) est une initiative de l'Union européenne pour soutenir des projets de développement rural lancés au niveau local afin de revitaliser les zones rurales et de créer des emplois.
+
+EUROPE - FEAMPA - Fonds européen pour les affaires maritimes, la pêche et l'aquaculture
+
+Le Fonds européen pour les affaires maritimes et l'aquaculture, qui finance la politique de la pêche et des affaires maritimes.
+
+EUROPE - FEDER - Fonds européen de développement régional
+
+Le Fonds européen de développement régional (FEDER), aussi appelés fonds structurels, financent la politique de cohésion économique, sociale et territoriale.
+
+EUROPE - AMIF - Fonds Asile, Migration et Intégration
+
+Le Fonds Asile, migrations et intégration vise à contribuer à une gestion efficace des flux migratoires intégrée au niveau de l’Union européenne.
+
+Fonds Biodiversité
+
+Le fonds biodiversité a vocation à mobiliser les territoires pour contribuer à nos objectifs de biodiversité
+
+EUROPE - FED - Fonds Européen de Défense
+
+Le Fonds européen de défense (FED, ou FEDef) est un programme de l’Union européenne destiné à financer la recherche et le développement de programmes industriels dans le domaine de la défense.
+
+EUROPE - FSI - Fonds pour la Sécurité Intérieure
+
+Le FSI a pour objectif général de contribuer à assurer un niveau élevé de sécurité dans l’Union.
+
+EUROPE - InnovFund - Fonds pour l'innovation 2020-2030
+
+Le Fonds d’innovation (InnovFund) est le programme-cadre 2020-2030 de l’UE pour la démonstration de technologies innovantes à faible émission carbone.
+
+EUROPE - FTJ - Fonds pour une transition juste
+
+Le FTJ a été créé pour accompagner la transition énergétique et industrielle des territoires concernés par de fortes émissions de CO2 dans la transition vers une économie neutre en carbone, conformément aux objectifs de l’Union européenne dans le cadre de l’accord de Paris.
+
 Fonds vert - Édition 2026
-Fonds vert - Édition 2026
 
-Découvrez le Fonds vert - Édition 2026
+Doté d'une enveloppe de 200 millions d'euros d'aides financières, le fonds vert a pour but d'accélérer la transition écologique dans les territoires.
 
-Nos derniers articles
+Fonds vert Ingénierie
 
-Voir tous les articles
+Toutes les offres en ingénierie pour réaliser vos projets de transition écologique
 
-Adapter les établissements scolaires aux fortes chaleurs : un accompagnement...
-Habitat rural : Renforcer l’accompagnement des territoires ruraux en matiè...
-Découvrez les programmes et porteurs d’aides de votre territoire
-Choisissez un département
-Choisissez un département
-01 - Ain
-02 - Aisne
-03 - Allier
-04 - Alpes-de-Haute-Provence
-05 - Hautes-Alpes
-06 - Alpes-Maritimes
-07 - Ardèche
-08 - Ardennes
-09 - Ariège
-10 - Aube
-11 - Aude
-12 - Aveyron
-13 - Bouches-du-Rhône
-14 - Calvados
-15 - Cantal
-16 - Charente
-17 - Charente-Maritime
-18 - Cher
-19 - Corrèze
-21 - Côte-d'Or
-22 - Côtes-d'Armor
-23 - Creuse
-24 - Dordogne
-25 - Doubs
-26 - Drôme
-27 - Eure
-28 - Eure-et-Loir
-29 - Finistère
-2A - Corse-du-Sud
-2B - Haute-Corse
-30 - Gard
-31 - Haute-Garonne
-32 - Gers
-33 - Gironde
-34 - Hérault
-35 - Ille-et-Vilaine
-36 - Indre
-37 - Indre-et-Loire
-38 - Isère
-39 - Jura
-40 - Landes
-41 - Loir-et-Cher
-42 - Loire
-43 - Haute-Loire
-44 - Loire-Atlantique
-45 - Loiret
-46 - Lot
-47 - Lot-et-Garonne
-48 - Lozère
-49 - Maine-et-Loire
-50 - Manche
-51 - Marne
-52 - Haute-Marne
-53 - Mayenne
-54 - Meurthe-et-Moselle
-55 - Meuse
-56 - Morbihan
-57 - Moselle
-58 - Nièvre
-59 - Nord
-60 - Oise
-61 - Orne
-62 - Pas-de-Calais
-63 - Puy-de-Dôme
-64 - Pyrénées-Atlantiques
-65 - Hautes-Pyrénées
-66 - Pyrénées-Orientales
-67 - Bas-Rhin
-68 - Haut-Rhin
-69 - Rhône
-70 - Haute-Saône
-71 - Saône-et-Loire
-72 - Sarthe
-73 - Savoie
-74 - Haute-Savoie
-75 - Paris
-76 - Seine-Maritime
-77 - Seine-et-Marne
-78 - Yvelines
-79 - Deux-Sèvres
-80 - Somme
-81 - Tarn
-82 - Tarn-et-Garonne
-83 - Var
-84 - Vaucluse
-85 - Vendée
-86 - Vienne
-87 - Haute-Vienne
-88 - Vosges
-89 - Yonne
-90 - Territoire de Belfort
-91 - Essonne
-92 - Hauts-de-Seine
-93 - Seine-Saint-Denis
-94 - Val-de-Marne
-95 - Val-d'Oise
-971 - Guadeloupe
-972 - Martinique
-973 - Guyane
-974 - La Réunion
-976 - Mayotte
-DR+AR - Drôme + Ardèche
+France 2030
 
-3360 aides recensées par 1170 porteurs d’aides partout en France
+Le plan « France 2030 », doté de 30 milliards d’euros déployés sur 5 ans , vise à développer la compétitivité industrielle et les technologies d’avenir.
 
-65 programmes d’aides nationaux
+France Mobilités
 
-Vidéo de présentation d’Aides Territoires
-Je m’inscris à une session de démonstration
-Porteur d’aides
+Améliorer durablement les mobilités du quotidien pour tous et dans tous les territoires
 
-Valorisez gratuitement et rapidement vos aides
+France Relance
 
-Porteur de projet
+France Relance
 
-Simplifiez votre recherche d’aides et créez des alertes personnalisées
+France Ruralités
 
-Accompagnateur
+Né en 2023, le Plan France Ruralités vise à soutenir les territoires ruraux
 
-Consultez les projets de votre territoire et suggérez-leur des aides
+EUROPE - FSE + - Fonds social européen
 
-Inscrivez-vous
-Les aides les plus récentes
-COUR D’ÉCOLE : VÉGÉTALISER, DÉSIMPERMÉABILISER, JEUX, VOILES OMBRAGES
-ENTRETIEN / RESTAURATION DES HAIES
-+3 AUTRES PROJETS
-🇪🇺 Préserver et valoriser les ressources naturelles et patrimoniales
- PORTEUR D’AIDES
-Remiremont et ses Vallées (PETR)
- NATURE DE L’AIDE
-Aide financière
-Aide en ingénierie
- TAUX DE SUBVENTION
-Max : 80%
- RÉCURRENCE
-Permanente
-Soutenir les services publics de transport à la demande
- PORTEUR D’AIDES
-Conseil régional du Grand Est
- NATURE DE L’AIDE
-Aide financière
- RÉCURRENCE
-Ponctuelle
- CALENDRIER
-Ouverture : 18/10/2024
-Développer la gestion intégrée des eaux pluviales et renaturer les villes et villages
- PORTEUR D’AIDES
-Agence de l'eau Adour-Garonne
- NATURE DE L’AIDE
-Aide financière
- TAUX DE SUBVENTION
-Min : 50%
-Max : 70%
- RÉCURRENCE
-Ponctuelle
- CALENDRIER
-Ouverture : 01/01/2025
-Échéance : 31/12/2030
-Trouver des aides pour mon projet
-Ces collectivités utilisent Aides Territoires pour leur projet
+Le Fonds social européen, aussi appelés fonds structurels, financent la politique de cohésion économique, sociale et territoriale.
 
-Voir plus de projets
+EUROPE - Horizon Europe
 
-installation d'hydrants
+Horizon Europe est le programme-cadre de l'Union européenne pour la recherche et l'innovation pour la période allant de 2021 à 2027. Horizon Europe prend ainsi la suite du programme Horizon 2020.
 
-Mairie de Saint-Sulpice-de-Favières ( 91910 )
+EUROPE - IVCDCI - Instrument de Voisinage, de Coopération au Développement et de Coopération Internationale
 
-Végétalisation cours d'école
+L’instrument de voisinage, de développement et de coopération internationale (NDICI) – « Global Europe » pour la période 2021-2027 est le principal instrument de l’UE pour les partenariats internationaux sur le développement durable, le changement climatique, la démocratie et la gouvernance.
 
-Mairie de Couthenans ( 70400 )
+EUROPE - Interreg - Fonds européens
 
-Création d'un parking
+Interreg est un programme européen visant à promouvoir la coopération entre les régions européennes.
 
-Mairie de Villecomtal ( 12580 )
+EUROPE - Interreg Europe
+
+Interreg Europe est un programme de coopération internationale
+
+EUROPE - Interreg France-Suisse
+
+Interreg France-Suisse est un programme de l’Union européenne cofinancé par le Fonds européen de développement régional (FEDER), la Confédération suisse et les cantons, pour soutenir la Coopération territoriale européenne (CTE) qui s’inscrit dans le cadre de la politique de cohésion européenne. Cett
+
+EUROPE - InvestEU
+
+Promotion de la reprise, d'une croissance verte, des emplois de qualité et du bien-être dans toute l’Europe
+
+EUROPE - LEADER - Liaison entre Actions de Développement de l’Économie Rurale
+
+LEADER est un programme d'initiative communautaire pour cofinancer des projets publics ou privés qui favorisent le développement des zones rurales.
+
+EUROPE - LIFE - Programme européen pour l'environnement et le climat
+
+Le programme LIFE est l'instrument financier de la Commission européenne de soutien aux projets dans les domaines de l'environnement et du climat.
+
+EUROPE - Lignes de prérogatives sociales et de compétences spécifiques - 2021-2027
+
+Lignes de prérogatives sociales et de compétences spécifiques - 2021-2027
+
+EUROPE - EU4Health - L'UE pour la santé
+
+Le programme «L’UE pour la santé» (EU4Health) a été adopté en réaction à la pandémie de COVID-19 et afin de renforcer la préparation aux crises dans l’UE. La pandémie a mis en évidence la fragilité des systèmes de santé nationaux.
+
+EUROPE - Mécanisme de protection civile
+
+Le mécanisme européen de protection civile a pour objectif de renforcer la coopération en matière de protection civile.
+
+EUROPE - MIE - Mécanisme pour l'interconnexion en Europe
+
+Le mécanisme pour l’interconnexion en Europe (MIE) est le principal instrument de financement de l’Union pour promouvoir la croissance, l’emploi et la compétitivité grâce à des investissements ciblés dans les infrastructures au niveau européen
+
+Mission Société Numérique
+
+Mission Société Numérique
+
+Nouveaux lieux, nouveaux liens
+
+ANCT
+
+EUROPE - PERICLES IV
+
+Le programme Pericles IV finance des échanges de personnel, des séminaires, des formations et des études à l’intention des services répressifs et judiciaires, des banques et des autres acteurs de la lutte contre le faux monnayage de l’euro.
+
+Petites villes de demain
+
+Le programme PVD est destiné aux communes de moins de 20 000 habitants exerçant des fonctions de centralité et présentant des signes de fragilité.
+
+Plan France Très Haut Débit
+
+Le programme France Très Haut Débit vise à donner accès à tous les Français au bon haut débit fixe (minimum 8 Mbit/s) d’ici à fin 2020, et au très haut débit fixe (minimum 30 Mbit/s) d’ici à fin 2022.
+
+EUROPE - EUAF - Programme Anti-Fraude 2021-2027
+
+Le programme antifraude de l’UE vise à protéger les intérêts financiers de l’UE en fournissant un financement, sous forme de subventions et de marchés publics, pour des équipements d’investigation techniques et opérationnels, des formations spécialisées et des activités de recherche.
+
+EUROPE - SMP - Programme du marché unique
+
+Doté d’un budget de 4,2 milliards d’euros, le programme de l’UE en faveur du marché unique est une nouveauté de la programmation 2021-2027. Son principal objectif est d’assurer le bon fonctionnement du marché unique et de poursuivre sa mise en œuvre pour atteindre son plein potentiel.
+
+EUROPE - Programme Justice 2021-2027
+
+Le programme Justice 2021-2027 prévoit un financement pour soutenir la coopération judiciaire en matière civile et pénale et l’accès effectif des citoyens et des entreprises à la justice.
+
+EUROPE - Promotion des produits agricoles
+
+L’objectif général est de renforcer la compétitivité du secteur agricole de l’UE.
+
+QPV - Quartiers Prioritaires de la politique de la Ville
+
+Les QPV sont entités définies par la loi de 2014, identifiant zones urbaines pauvres nécessitant des interventions publiques. Une nouvelle cartographie est entrée en vigueur le 1er janvier 2024 (décret 28/12/2023), actualisant périmètres et contrat ville
+
+Renaturation des villes
+
+Cofinancer des solutions d’adaptation au changement climatique, fondées sur la présence de la nature en ville.
+
+Avenir Montagnes
+
+Piloté par l’ANCT, le programme accompagnera les acteurs de la montagne (collectivités, acteurs socio-économiques) dans le développement économique, la préservation de leur patrimoine naturel et l’adaptation nécessaire au changement climatique.
+
+Terres Mers Ultra-Marines (Te Me Um)
+
+« Terres Mers Ultra-Marines » (Te Me Um)
+
+Territoires d'industrie
+
+Le programme vise à apporter, dans et par les territoires, des réponses concrètes aux enjeux de soutien à l’industrie
+
+Tourisme Ingénierie Développement
+
+Programme Tourisme Ingénierie Développement
+
+EUROPE - URBACT
+
+URBACT est un programme de coopération territoriale européen qui promeut le développement urbain intégré.
 
 Abonnez-vous à notre lettre d’information
 

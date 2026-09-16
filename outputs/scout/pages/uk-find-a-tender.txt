@@ -1,71 +1,278 @@
-https://www.find-tender.service.gov.uk
+https://www.find-tender.service.gov.uk/search/opportunities?language=en_GB&cookies_accepted=unknown
 
 Skip to main content
 Cookies on Find a Tender
 
 We use some essential cookies to make this service work.
 
-We’d also like to use analytics cookies so we can understand how you use the service and make improvements.
+We'd also like to use analytics cookies so we can understand how you use the service and make improvements.
 
-Accept analytics cookies Reject analytics cookies View cookies
+Accept analytics cookies
+Reject analytics cookies
+View cookies
 Find a Tender
 Search
 Sign in
 English
+Newid yr iaith ir Gymraeg
 Cymraeg
 
 BetaContact the Find a Tender team (opens in new tab) if you have feedback, questions or suggestions.
 
-Find information on UK public sector procurements and contracts
+Summarised Search
 
-Find a Tender is where public sector buyers publish notices about procurements opportunities and contracts.
+Help and support for summarised search
 
-Notice Search
-Summarised Search New
-
-These summaries consolidate all notices from a procurement in one place to give you a current picture of its status. Use Notice Search (above) to view individual published notices.
-
-Opportunities and contracts search cover procurements published from February 2025, under the Procurement Act 2023. For procurements under other legal regimes, use the Notice Search.
-
-Help and support for summarised search.
-
+Choose a search type:
 Opportunities
-
-Upcoming pipelines and active tenders.
-
+ 
 Contracts
-
-Awarded contracts, covering both active and expired agreements.
-
+ 
 Commercial tools
 
-Framework agreements, dynamic markets and dynamic purchasing systems.
+Find upcoming pipelines and active tenders under the Procurement Act 2023.
 
-Procurement Act 2023 Data Tools New
+Search by keyword
+For example, search by title or keyword
+Search
+Filter results:
+Status
+Contracting authority name
+Contracting authority type
+Suitability
+CPV code
+Value
+Apply filters
+Export results (CSV)
 
-Payments transparency register
+Export is limited to 15,000 results.
 
-Search for payments linked to public contracts.
+Save search
 
-Service Information
-Open all
-sections
-About Find a Tender
-Public procurement legislation
-Report procurement concerns
-Get service support
-Sign in or register an account
+We've found 15,373 result(s)
 
-You'll need a GOV.UK One Login to sign in to this service. You can create one if you do not already have one.
-
-When you have an account you can:
-
-register a buyer or supplier organisation
-save search criteria
-sign up for notifications via email
-
-Sign in or register an account
-
+Sort by
+Newest
+Oldest
+Soft Market Testing-Sleep Service for Children and Young People
+Preliminary Market Engagement Suitable for SME & VCSE
+Contracting authority type: Regional and local public authority
+Contracting authority name: Tameside Metropolitan Borough Council
+Procurement identifier: ocds-h6vhtk-0773ef
+Engagement deadline date: 3 October 2026
+Delivery location: Not specified
+CPV code(s):
+85311300 - Welfare services for children and young people
+Post Office Branch - Cabin Lane
+Active tender Suitable for SME & VCSE
+Contracting authority type: Public undertaking
+Contracting authority name: Post Office Limited
+Procurement identifier: ocds-h6vhtk-06e89d
+Submission deadline date: 18 August 2027
+Total value including VAT: £9,500.00
+Delivery location: Shropshire and Staffordshire
+CPV code(s):
+64114000 - Post office counter services
+Post Office Branch - Kidwelly
+Active tender Suitable for SME & VCSE
+Contracting authority type: Public undertaking
+Contracting authority name: Post Office Limited
+Procurement identifier: ocds-h6vhtk-0773ee
+Submission deadline date: 30 September 2026
+Total value including VAT: £15,000.00
+Delivery location: West Wales and the Valleys
+CPV code(s):
+64114000 - Post office counter services
+Post Office branch - Perry Hall
+Active tender Suitable for SME & VCSE
+Contracting authority type: Public undertaking
+Contracting authority name: Post Office Limited
+Procurement identifier: ocds-h6vhtk-0773ed
+Submission deadline date: 30 September 2026
+Total value including VAT: £8,000.00
+Delivery location: Wolverhampton
+CPV code(s):
+64114000 - Post office counter services
+Residential and Nursing Care Home Partnership Framework in Herefordshire
+Pipeline Suitable for SME & VCSE
+Contracting authority type: Regional and local public authority
+Contracting authority name: Herefordshire Council
+Procurement identifier: ocds-h6vhtk-0669a0
+Tender or transparency notice publication date (estimated): 8 October 2026
+Total value including VAT: £580,800,000.00
+Delivery location: Herefordshire, County of
+CPV code(s):
+85000000 - Health and social work services
+Post Office Branch - Kingsway
+Active tender Suitable for SME & VCSE
+Contracting authority type: Public undertaking
+Contracting authority name: Post Office Limited
+Procurement identifier: ocds-h6vhtk-0773ec
+Submission deadline date: 30 September 2026
+Total value including VAT: £8,000.00
+Delivery location: London
+CPV code(s):
+64114000 - Post office counter services
+Procurement of development viability training and bespoke support for Local Planning Authorities
+Active tender Suitable for SME & VCSE
+Contracting authority type: Regional and local public authority
+Contracting authority name: Improvement and Development Agency for Local Government (IDeA)
+Procurement identifier: ocds-h6vhtk-0773ea
+Submission deadline date: 16 October 2026
+Total value including VAT: £204,000.00
+Delivery location: Not specified
+CPV code(s):
+73220000 - Development consultancy services
+SONI089 – Software Licensing & Buying Services
+Active tender Suitable for SME
+Contracting authority type: Private utility
+Contracting authority name: SONI Ltd
+Procurement identifier: ocds-h6vhtk-0773e9
+Submission deadline date: 30 October 2026
+Total value including VAT: £82,268,466.09
+Delivery location: United Kingdom
+CPV code(s):
+48210000 - Networking software package
+72000000 - IT services: consulting, software development, Internet and support
+Trafford Youth Cabinet
+Active tender
+Contracting authority type: Regional and local public authority
+Contracting authority name: Trafford Council
+Procurement identifier: ocds-h6vhtk-0773e8
+Submission deadline date: 7 October 2026
+Total value including VAT: £75,000.00
+Delivery location: Greater Manchester
+CPV code(s):
+80000000 - Education and training services
+85000000 - Health and social work services
+Multiple Needs Navigators
+Active tender
+Contracting authority type: Regional and local public authority
+Contracting authority name: City of Bradford Metropolitan District Council
+Procurement identifier: ocds-h6vhtk-0773e7
+Submission deadline date: 13 October 2026
+Total value including VAT: £4,852,569.60
+Delivery location: Bradford
+CPV code(s):
+85000000 - Health and social work services
+Further Premarket Engagement excerise
+Preliminary Market Engagement
+Contracting authority type: Regional and local public authority
+Contracting authority name: London Borough of Hammersmith and Fuham
+Procurement identifier: ocds-h6vhtk-0773e5
+Engagement deadline date: 5 October 2026
+Total value including VAT: £72,000,000.00
+Delivery location: Not specified
+CPV code(s):
+45000000 - Construction work
+42992000 - Special-purpose electrical goods
+48000000 - Software package and information systems
+50000000 - Repair and maintenance services
+51000000 - Installation services (except software)
+and 12 more
+Procurement of Design Led Multi-Disciplinary Team – South of Romsey Town Centre Regeneration Project
+Active tender
+Contracting authority type: Regional and local public authority
+Contracting authority name: Test Valley Borough Council
+Procurement identifier: ocds-h6vhtk-0773e4
+Submission deadline date: 21 October 2026
+Total value including VAT: £2,760,000.00
+Delivery location: Hampshire and Isle of Wight
+CPV code(s):
+71200000 - Architectural and related services
+Webinar Invitation: Cyber Accelerator Programme - Design Partnerships
+Preliminary Market Engagement Suitable for SME & VCSE
+Contracting authority type: Central government
+Contracting authority name: Department for Science, Innovation & Technology
+Procurement identifier: ocds-h6vhtk-06f26d
+Engagement deadline date: 23 September 2026
+Total value including VAT: £1,500,000.00
+Delivery location: United Kingdom
+CPV code(s):
+72590000 - Computer-related professional services
+D2 Dehumidification (L&A and Radiation Stores)
+Active tender
+Contracting authority type: Central government
+Contracting authority name: Science Museum Group
+Procurement identifier: ocds-h6vhtk-0773e1
+Submission deadline date: 7 October 2026
+Total value including VAT: £600,000.00
+Delivery location: Not specified
+CPV code(s):
+42512300 - HVAC packages
+45261420 - Waterproofing work
+45331200 - Ventilation and air-conditioning installation work
+PR Agency Services
+Active tender Suitable for SME & VCSE
+Contracting authority type: Central government
+Contracting authority name: COUNTY DURHAM AND DARLINGTON NHS FOUNDATION TRUST
+Procurement identifier: ocds-h6vhtk-0773de
+Submission deadline date: 12 October 2026
+Total value including VAT: £144,000,000.00
+Delivery location: North East (England)
+CPV code(s):
+79416000 - Public relations services
+PRN26119 Omagh Area Land, Design and Build
+Active tender
+Contracting authority type: Public undertaking
+Contracting authority name: Choice Housing Ireland Limited
+Procurement identifier: ocds-h6vhtk-0773df
+Submission deadline date: 16 October 2026
+Total value including VAT: £8,520,000.00
+Delivery location: Northern Ireland
+CPV code(s):
+45211000 - Construction work for multi-dwelling buildings and individual houses
+45210000 - Building construction work
+45211300 - Houses construction work
+71000000 - Architectural, construction, engineering and inspection services
+71200000 - Architectural and related services
+and 3 more
+Green Roof Bike Stores RfQ
+Active tender
+Contracting authority type: Regional and local public authority
+Contracting authority name: Cambridge City Council
+Procurement identifier: ocds-h6vhtk-0773d2
+Submission deadline date: 7 October 2026
+Total value including VAT: £180,000.00
+Delivery location: Cambridgeshire CC
+CPV code(s):
+34928400 - Urban furniture
+44112100 - Shelters
+45223800 - Assembly and erection of prefabricated structures
+LGS-Q-004-2026 Audio Visual System
+Active tender Suitable for SME & VCSE
+Contracting authority type: Regional and local public authority
+Contracting authority name: Middlesbrough Council
+Procurement identifier: ocds-h6vhtk-06f946
+Submission deadline date: 30 September 2026
+Total value including VAT: £179,086.00
+Delivery location: South Teesside
+CPV code(s):
+48000000 - Software package and information systems
+TWBC - Assembly Hall Theatre Security
+Active tender Suitable for SME & VCSE
+Contracting authority type: Regional and local public authority
+Contracting authority name: Tunbridge Wells Borough Council
+Procurement identifier: ocds-h6vhtk-0773d9
+Submission deadline date: 21 October 2026
+Total value including VAT: £250,000.00
+Delivery location: West Kent
+CPV code(s):
+79710000 - Security services
+Reducing Parental Conflict Digital Support - Separating & Separated Parents
+Pipeline Suitable for SME & VCSE
+Contracting authority type: Central government
+Contracting authority name: Department for Work & Pensions
+Procurement identifier: ocds-h6vhtk-0773d6
+Tender or transparency notice publication date (estimated): 24 September 2026
+Total value including VAT: £2,628,000.00
+Delivery location: Not specified
+CPV code(s):
+48000000 - Software package and information systems
+Next
+ page
+:
+2 of 769
 Support links
 Contact us
 Accessibility statement
@@ -78,25 +285,3 @@ Notices are based on TED XML schema. © European Union, https://ted.europa.eu, 1
 
  All content is available under the Open Government Licence v3.0, except where otherwise stated
 © Crown copyright
-Report concerns about this procurement
-
-Contact the service for the location of the procurement:
-
-England - Procurement Review Unit
-Northern Ireland - CPD's Complaints Procedure
-Scotland - Single Point of Enquiry
-Wales - Supplier Feedback Service
-Close
-Confirm
-Yes
-No
-Session timeout
-
-Your session will time out soon
-
-You will be signed out of your account if you do not respond in 5 minutes. We do this to keep your information secure.
-
-5 minutes remaining until you will be signed out.
-Continue session
-Sign out
-warning you will not be able to undo this action
