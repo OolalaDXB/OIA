@@ -172,8 +172,10 @@ async function main() {
 
     writeFileSync(join(outDir, `ted-search-response.${project.slug}.json`), JSON.stringify(raw, null, 2), "utf8");
     // The shared connector fixture is the FIRST successful response of a run —
-    // one recorded real response, not a synthetic merge of several.
-    if (!fixtureWritten) {
+    // one recorded real response, not a synthetic merge of several. Opt-in
+    // (TED_RECORD_FIXTURE=1) so a scheduled data refresh does not churn a
+    // 14k-line test fixture every week; capture it deliberately instead.
+    if (!fixtureWritten && process.env.TED_RECORD_FIXTURE === "1") {
       writeFileSync(fixturePath, JSON.stringify(raw, null, 2), "utf8");
       fixtureWritten = true;
     }

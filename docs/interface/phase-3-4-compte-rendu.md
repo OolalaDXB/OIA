@@ -70,9 +70,18 @@ découverte, jamais un verdict de correspondance, et la console le dit ainsi.
 L'échec d'un projet (BLOCKED/ERROR) est consigné sans couler le run.
 
 **Non exécuté ici :** la sandbox de l'agent n'a pas d'egress (403 du proxy sur
-`api.ted.europa.eu`, vérifié). Le run réel est à lancer chez toi ou dans le
-worker Docker. Les données de la console restent donc celles du dernier run réel
-(TED 2016-2017) — inchangées, pas réinventées.
+`api.ted.europa.eu`, vérifié). Les données de la console restent donc celles du
+dernier run réel (TED 2016-2017) — inchangées, pas réinventées.
+
+**Mais le run n'a plus besoin de toi.** `.github/workflows/discovery.yml` exécute
+la séquence complète **tous les lundis 06:00 UTC** (et à la demande, avec
+surcharge des projets / de la fenêtre / du volume) là où l'egress existe : les
+10 requêtes, la reconstruction du jeu de données, puis — et seulement si
+typecheck, tests et build web passent sur ce jeu — le commit, qui redéploie la
+console. Une shortlist qui vieillit en silence n'est pas « actionnable
+maintenant » : c'est toute la raison de cette automatisation. Elle ne touche que
+des fichiers de données générés, et se désactive en un clic dans l'onglet
+Actions.
 
 ## 3. Dédoublonnage + fraîcheur/expiration (M1 P2 §12-13)
 
@@ -174,8 +183,10 @@ sans signal n'affiche plus rien : *« aucun signal de profil ne correspond
 ## Reste — honnêtement
 
 1. **Relire les 16 fiches de `registry/projects/`** et confirmer (toi seul).
-2. **Lancer un run de découverte avec egress** pour remplacer les avis 2016-2017
-   par des avis courants, maintenant multi-projets.
+2. **Le premier run planifié** remplacera les avis 2016-2017 par des avis
+   courants (lundi 06:00 UTC après fusion sur `main`) — ou déclenche-le tout de
+   suite : Actions → *Discovery refresh* → *Run workflow*. À surveiller une fois,
+   pour confirmer que les requêtes par projet ramènent ce qu'on attend.
 3. **Persistance serveur** : possible le jour où il y a une authentification.
    Le schéma SQL existe, l'interface de store existe, aucun projet Supabase n'est
    lié à OIA.

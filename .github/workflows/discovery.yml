@@ -1,0 +1,101 @@
+name: Discovery refresh
+
+# The product promises opportunities that are *currently* actionable. That
+# promise decays on its own: a shortlist captured in August is wrong in October.
+# Refreshing it needs network egress, which the agent sandbox does not have and
+# a laptop only has when it is open — so it runs here, on a schedule.
+#
+# This is the automation of the step the run book already described by hand
+# (`docker compose up` → `ted-to-console` → commit → Vercel redeploys). It only
+# ever touches generated data files, and it refuses to commit a dataset that
+# fails the test suite.
+#
+# To stop it: disable this workflow in the repository's Actions tab.
+
+on:
+  schedule:
+    # Mondays 06:00 UTC — the queue is fresh before the week starts.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+    inputs:
+      projects:
+        description: "Comma-separated project slugs (empty = every discoverable project)"
+        required: false
+        default: ""
+      publishedSince:
+        description: "Recency floor, YYYYMMDD (empty = last 90 days)"
+        required: false
+        default: ""
+      maxNotices:
+        description: "Max notice pages to fetch and qualify"
+        required: false
+        default: "25"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: discovery-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: Show the discovery plan
+        run: pnpm --filter @oia/workers discover:ted -- --list --project "${{ inputs.projects }}"
+        if: inputs.projects != ''
+      - name: Show the discovery plan (all projects)
+        run: pnpm --filter @oia/workers discover:ted -- --list
+        if: inputs.projects == ''
+
+      - name: Discover (one expert query per project)
+        env:
+          TED_MAX: ${{ inputs.maxNotices || '25' }}
+          TED_PUBLISHED_SINCE: ${{ inputs.publishedSince }}
+        run: |
+          if [ -n "${{ inputs.projects }}" ]; then
+            pnpm --filter @oia/workers discover:ted -- --project "${{ inputs.projects }}"
+          else
+            pnpm --filter @oia/workers discover:ted
+          fi
+
+      - name: Rebuild the console dataset
+        run: pnpm --filter @oia/workers exec tsx src/ted-to-console.ts
+
+      # A refresh that breaks the suite must not reach the console. The data is
+      # the product; shipping a dataset the invariants reject would be worse
+      # than shipping last week's.
+      - name: Verify before publishing
+        run: |
+          pnpm typecheck
+          pnpm test
+          pnpm --filter @oia/web build
+
+      - name: Commit the refreshed data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/src/data/console.json outputs/sprint-1
+          if git diff --cached --quiet; then
+            echo "No change in the discovered set — nothing to publish."
+            exit 0
+          fi
+          RECORDS=$(node -e "console.log(require('./apps/web/src/data/console.json').run.records)")
+          git commit -m "data: scheduled discovery refresh (${RECORDS} records)" \
+                     -m "Automated run of discover:ted across every project with discovery enabled, then ted-to-console. Typecheck, tests and the web build passed against this dataset before it was committed."
+          git push
+
+      - name: Run report
+        if: always()
+        run: cat outputs/sprint-1/run-report.md >> "$GITHUB_STEP_SUMMARY" || true

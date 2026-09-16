@@ -99,6 +99,13 @@ Each project gets its own expert query from its registry profile. A notice found
 by several projects is kept once and carries the list of projects whose query
 surfaced it — discovery provenance, never a match verdict.
 
+**It also runs itself.** `.github/workflows/discovery.yml` performs the same
+sequence every Monday (and on demand, with per-project overrides) where egress
+exists, verifies the result — typecheck, tests, web build — and only then commits
+the refreshed dataset, which redeploys the console. A shortlist that silently
+goes stale is not "currently actionable"; that is the point of the schedule.
+Disable it in the repository's Actions tab if you would rather refresh by hand.
+
 ## Access and data
 
 The console is behind Vercel Authentication. The human layer (reviews, tags,
