@@ -1,23 +1,29 @@
 # Aid scout
 
-- sources read: 11 of 12
-- calls kept: 234
-- calls dropped as unanchored: 7
-- model calls: 12 · tokens in/out: 69790/37155
+- sources read: 5 of 12
+- calls kept: 134
+- calls dropped as unanchored: 0
+- model calls: 11 · tokens in/out: 29508/21313
 
 ## Per source
-- **adio** — OK · 15 kept, 0 dropped · page: 11009 chars, 56 link(s) — All listed opportunities are explicitly mentioned on the page or linked from it. Some programmes (e.g., clusters, support services) have no specific deadline or amount, as per the page content. · accepted the cookie banner ("tout accepter")
+- **adio** — OK · 16 kept, 0 dropped · page: 11009 chars, 56 link(s) — All listed opportunities are explicitly mentioned on the page or linked from it. Some programmes lack specific details (amount, deadline, eligibility) but are included as named opportunities. · accepted the cookie banner ("tout accepter")
 - **aides-territoires** — OK · 65 kept, 0 dropped · page: 14498 chars, 103 link(s) — followed "https://aides-territoires.beta.gouv.fr/programmes/" (aides, programmes)
-- **boamp** — OK · 0 kept, 0 dropped · page: 1697 chars, 38 link(s) — The page is a portal for public procurement notices (avis de marchés publics) and does not list specific funding opportunities, grants, subsidies, or programmes. It provides access to calls for tenders and public contracts but does not enumerate individual funding opportunities with details like amounts or deadlines. No explicit funding opportunities are displayed on this page. · tried "https://www.boamp.fr/pages/aide/" but it had less text — stayed on the entry page
+- **boamp** — OK · 2 kept, 0 dropped · page: 1697 chars, 38 link(s) — The page is a portal for public procurement notices (avis de marchés publics) and does not list specific funding opportunities, grants, or programmes by name. It provides access to calls for tenders (appels d'offres) and public contracts, but these are not enumerated as individual opportunities on the page itself. The page directs users to search for active tenders or set up alerts for new ones. · tried "https://www.boamp.fr/pages/aide/" but it had less text — stayed on the entry page
 - **cir-cii-jei** — OK · 1 kept, 0 dropped · page: 3446 chars, 106 link(s) — accepted the cookie banner ("accepter")
 - **eu-funding-tenders** — OK · 50 kept, 0 dropped · page: 18611 chars, 81 link(s) — Only the first 50 of over 10,000 calls are listed. The page contains a filterable list of all open, forthcoming, and closed calls for proposals under EU programmes. · followed "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/calls-for-proposals" (calls, funding, tenders, opportunityieses)
-- **flippa** — OK · 0 kept, 0 dropped · page: 15729 chars, 189 link(s) — This page is a marketplace for buying and selling online businesses, not a funding body offering grants, subsidies, or financial support. No funding opportunities are listed.
-- **france-2030-ademe** — OK · 5 kept, 5 dropped · page: 7716 chars, 113 link(s) — followed "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres" (aides)
-- **hub71** — OK · 11 kept, 2 dropped · page: 11052 chars, 75 link(s) — tried "https://www.hub71.com/program/access-programme/apply" but it had less text — stayed on the entry page
+- **flippa** — ERROR · 0 kept, 0 dropped — Mistral API error 401: {"detail":"Your API key expired on 2026-09-16."}
+
+- **france-2030-ademe** — ERROR · 0 kept, 0 dropped — Mistral API error 401: {"detail":"Your API key expired on 2026-09-16."}
+
+- **hub71** — ERROR · 0 kept, 0 dropped — Mistral API error 401: {"detail":"Your API key expired on 2026-09-16."}
+
 - **uae-federal-procurement** — EMPTY_PAGE · 0 kept, 0 dropped · page: 124 chars, 0 link(s) — the page rendered almost no text
-- **uk-find-a-tender** — OK · 20 kept, 0 dropped · page: 10084 chars, 43 link(s) — followed "https://www.find-tender.service.gov.uk/search/opportunities?language=en_GB&cookies_accepted=unknown" (opportunityieses)
-- **ungm** — OK · 66 kept, 0 dropped · page: 9429 chars, 219 link(s) — followed "https://www.ungm.org/Public/Notice" (opportunityieses, procurement)
-- **worldbank-afdb-ebrd** — OK · 1 kept, 0 dropped · page: 8534 chars, 356 link(s) — followed "https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00468424" (tenders, procurement)
+- **uk-find-a-tender** — ERROR · 0 kept, 0 dropped — Mistral API error 401: {"detail":"Your API key expired on 2026-09-16."}
+
+- **ungm** — ERROR · 0 kept, 0 dropped — Mistral API error 401: {"detail":"Your API key expired on 2026-09-16."}
+
+- **worldbank-afdb-ebrd** — ERROR · 0 kept, 0 dropped — Mistral API error 401: {"detail":"Your API key expired on 2026-09-16."}
+
 
 ## Calls
 - **Industries des véhicules intelligents et autonomes (SAVI)** (GRANT) — ADIO
@@ -38,7 +44,7 @@
 - **Développement du commerce et de l’industrie** (GRANT) — ADIO
   - https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry
   - amount: — · deadline: —
-- **Programmes de soutien (Trade & Industry)** (GRANT) — ADIO
+- **Programmes de soutien (Trade and Industry)** (GRANT) — ADIO
   - https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry/support-programmes
   - amount: — · deadline: —
 - **Un référent unique vers le gouvernement** (GRANT) — ADIO
@@ -64,6 +70,9 @@
   - amount: — · deadline: —
 - **Golden Visa et résidence** (GRANT) — ADIO
   - https://www.investwithabudhabi.com/fr/golden-visa-residency
+  - amount: — · deadline: —
+- **Le guide de l’investisseur d’Abou Dhabi (PDF)** (GRANT) — ADIO
+  - https://www.investwithabudhabi.com/assets/Ebook-ADIO%20Investor%20Guide.pdf
   - amount: — · deadline: —
 - **4ème Programme d’investissements d’avenir - PIA 4** (GRANT) — beta.gouv.fr / French state
   - https://aides-territoires.beta.gouv.fr/programmes/4eme-programme-dinvestissements-davenir-pia-4/
@@ -260,6 +269,12 @@
 - **EUROPE - URBACT** (GRANT) — beta.gouv.fr / French state
   - https://aides-territoires.beta.gouv.fr/programmes/urbact/
   - amount: — · deadline: —
+- **Avis de marchés publics (Appels d'offres publics)** (TENDER) — DILA (French state)
+  - https://www.boamp.fr/pages/recherche/
+  - amount: — · deadline: —
+- **Service d'alerte BOAMP** (TENDER) — DILA (French state)
+  - https://www.boamp.fr/pages/entreprise-service-dalerte/
+  - amount: — · deadline: —
 - **Crédit d'impôt recherche (CIR)** (TAX_INCENTIVE) — French tax administration
   - https://entreprendre.service-public.gouv.fr/vosdroits/F23533
   - amount: — · deadline: —
@@ -413,315 +428,6 @@
 - **Detection and characterisation of threats or illegal/ smuggled goods in cargo** (GRANT) — European Commission
   - https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-CL3-2027-01-BM-03?isExactMatch=true&status=31094501,31094502,31094503&order=DESC&pageNumber=1&pageSize=50&sortBy=startDate
   - amount: — · deadline: —
-- **Catalogue des aides financières de l'ADEME** (GRANT) — French state / ADEME
-  - https://agirpourlatransition.ademe.fr/entreprises/aides-financieres/catalogue
-  - amount: — · deadline: —
-- **Tester mon éligibilité aux aides financières** (GRANT) — French state / ADEME
-  - https://mission-transition-ecologique.beta.gouv.fr/?profil-entreprise=oui&utm_campaign=agir-2
-  - amount: — · deadline: —
-- **Fonds Chaleur** (GRANT) — French state / ADEME
-  - https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor
-  - amount: — · deadline: —
-- **Fonds Économie Circulaire** (GRANT) — French state / ADEME
-  - https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor
-  - amount: — · deadline: —
-- **Fonds Air Bois** (GRANT) — French state / ADEME
-  - https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor
-  - amount: — · deadline: —
-- **Initiate** (GRANT) — Abu Dhabi (Mubadala)
-  - https://www.hub71.com/program/initiate
-  - amount: — · deadline: —
-- **MZN x Hub71 Programme** (GRANT) — Abu Dhabi (Mubadala)
-  - https://www.hub71.com/program/mzn-x-hub71-programme
-  - amount: — · deadline: —
-- **Hub71 Immersion Programme (India)** (GRANT) — Abu Dhabi (Mubadala)
-  - https://www.hub71.com/program/india
-  - amount: — · deadline: —
-- **Access Programme** (GRANT) — Abu Dhabi (Mubadala)
-  - https://www.hub71.com/program/access-programme
-  - amount: — · deadline: —
-- **ECA Anjal Z x Hub71** (GRANT) — Abu Dhabi (Mubadala)
-  - https://www.hub71.com/program/eca-anjal-z-x-hub71
-  - amount: — · deadline: —
-- **Your gateway to SAVI** (GRANT) — Abu Dhabi (Mubadala)
-  - https://www.hub71.com/program/savi
-  - amount: — · deadline: —
-- **Hub71+ Life Sciences** (GRANT) — Abu Dhabi (Mubadala)
-  - https://www.hub71.com/program/hub71-plus-life-sciences
-  - amount: — · deadline: —
-- **Hub71+ Digital Assets** (GRANT) — Abu Dhabi (Mubadala)
-  - https://www.hub71.com/program/hub71-plus-digital-assets
-  - amount: — · deadline: —
-- **Hub71+ ClimateTech** (GRANT) — Abu Dhabi (Mubadala)
-  - https://www.hub71.com/program/hub71-plus-climatetech
-  - amount: — · deadline: —
-- **Hub71+ AI** (GRANT) — Abu Dhabi (Mubadala)
-  - https://www.hub71.com/program/hub71-plus-ai
-  - amount: — · deadline: —
-- **Info Session: A Deep Dive into the Hub71 Ecosystem** (GRANT) — Abu Dhabi (Mubadala)
-  - https://www.hub71.com/info-sessions#formPopup
-  - amount: — · deadline: —
-- **Digital Exposure Analysis** (TENDER) — UK Cabinet Office
-  - https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773f2
-  - amount: — · deadline: 23 September 2026
-- **Soft Market Testing-Sleep Service for Children and Young People** (GRANT) — UK Cabinet Office
-  - https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ef
-  - amount: — · deadline: 3 October 2026
-- **Post Office Branch - Cabin Lane** (TENDER) — UK Cabinet Office
-  - https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06e89d
-  - amount: — · deadline: 18 August 2027
-- **Post Office Branch - Kidwelly** (TENDER) — UK Cabinet Office
-  - https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ee
-  - amount: — · deadline: 30 September 2026
-- **Post Office branch - Perry Hall** (TENDER) — UK Cabinet Office
-  - https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ed
-  - amount: — · deadline: 30 September 2026
-- **Residential and Nursing Care Home Partnership Framework in Herefordshire** (GRANT) — UK Cabinet Office
-  - https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0669a0
-  - amount: — · deadline: 8 October 2026 (estimated tender or transparency notice publication date)
-- **Post Office Branch - Kingsway** (TENDER) — UK Cabinet Office
-  - https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ec
-  - amount: — · deadline: 30 September 2026
-- **Procurement of development viability training and bespoke support for Local Planning Authorities** (TENDER) — UK Cabinet Office
-  - https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ea
-  - amount: — · deadline: 16 October 2026
-- **SONI089 – Software Licensing & Buying Services** (TENDER) — UK Cabinet Office
-  - https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e9
-  - amount: — · deadline: 30 October 2026
-- **Trafford Youth Cabinet** (TENDER) — UK Cabinet Office
-  - https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e8
-  - amount: — · deadline: 7 October 2026
-- **Multiple Needs Navigators** (TENDER) — UK Cabinet Office
-  - https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e7
-  - amount: — · deadline: 13 October 2026
-- **Further Premarket Engagement excerise** (GRANT) — UK Cabinet Office
-  - https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e5
-  - amount: — · deadline: 5 October 2026
-- **Procurement of Design Led Multi-Disciplinary Team – South of Romsey Town Centre Regeneration Project** (TENDER) — UK Cabinet Office
-  - https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e4
-  - amount: — · deadline: 21 October 2026
-- **Webinar Invitation: Cyber Accelerator Programme - Design Partnerships** (GRANT) — UK Cabinet Office
-  - https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f26d
-  - amount: — · deadline: 23 September 2026
-- **D2 Dehumidification (L&A and Radiation Stores)** (TENDER) — UK Cabinet Office
-  - https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e1
-  - amount: — · deadline: 7 October 2026
-- **PR Agency Services** (TENDER) — UK Cabinet Office
-  - https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773de
-  - amount: — · deadline: 12 October 2026
-- **PRN26119 Omagh Area Land, Design and Build** (TENDER) — UK Cabinet Office
-  - https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773df
-  - amount: — · deadline: 16 October 2026
-- **Green Roof Bike Stores RfQ** (TENDER) — UK Cabinet Office
-  - https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773d2
-  - amount: — · deadline: 7 October 2026
-- **LGS-Q-004-2026 Audio Visual System** (TENDER) — UK Cabinet Office
-  - https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f946
-  - amount: — · deadline: 30 September 2026
-- **TWBC - Assembly Hall Theatre Security** (TENDER) — UK Cabinet Office
-  - https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773d9
-  - amount: — · deadline: 21 October 2026
-- **Réalisation d un forage d eau à Clercine (IGPNH)** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: 16-Sep-2026 16:30 (GMT -4.00) Expires within 24 hours
-- **Consultoría Fortalecimiento de la Implementación Protocolo de Nagoya en Honduras** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: 16-Sep-2026 17:00 (GMT -4.00) Expires within 24 hours
-- **Producción de actividades deportivas, lúdicas y artísticas** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: 16-Sep-2026 17:00 (GMT -5.00) Expires within 24 hours
-- **RFQ – Service de conception et impression de supports de communication** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: 16-Sep-2026 17:03 (GMT -4.00) Expires within 24 hours
-- **Consultancy firm to provide Market Access and Commercialization Partner** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: 16-Sep-2026 17:59 (GMT -4.00) Expires within 24 hours
-- **Call for External Collaborator – Cooperative Development Advisor (Remote), ILO PROSPECTS Lebanon** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: 16-Sep-2026 22:59 (GMT 2.00) Expires within 24 hours
-- **Event management service for Public Employment Offices (PES) TOT workshop, ILO Syria, PROSPECTS** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: 16-Sep-2026 22:59 (GMT 2.00) Expires within 24 hours
-- **01 National Consultancy Firm for Conducting a survey and assessment** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: 16-Sep-2026 23:00 (GMT -4.00) Expires within 24 hours
-- **Request for Quotation for CO Manila - Photocopy and printing paper office supply** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: 16-Sep-2026 23:00 (GMT 2.00) Expires within 24 hours
-- **RFQ_Procurement of market equipment for markets in Fiji** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: 16-Sep-2026 23:41 (GMT -4.00) Expires within 24 hours
-- **RFP/AFRO/019/2026-Technical Support for Health Technology Access Pool (HTAP) and WHO AFRO Programs for In Vitro Diagnostics (IVDs)** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: 16-Sep-2026 23:59 (GMT 1.00) Expires within 24 hours
-- **Building the Technical Architecture of the General Education Certificate (GEC)** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: 16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours
-- **Production of digital education packages for Somalia** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: 16-Sep-2026 23:59 (GMT 3.00) Expires within 24 hours
-- **138200 SUMINISTRO DE ANIMALES DE PRODUCCIÓN PECUARIA – AVES DE POSTURA Y PORCINOS DE LEVANTE, DPTO. DE CÓRDOBA** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: 16-Sep-2026 23:59 (GMT -5.00) Expires within 24 hours
-- **Consultancy to support the development of a Framework of Action on Skills for a Just Energy Transition through Social Dialogue in Mpumalanga and the Eastern Cape** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: 16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours
-- **International Procurement Seminars (IPS)** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/VBS_BusSeminar
-  - amount: — · deadline: —
-- **IPS, Vienna, June 2026** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJUNE2026
-  - amount: — · deadline: —
-- **IPS, Geneva, November 2025** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSNOVEMBER2025
-  - amount: — · deadline: —
-- **IPS, Copenhagen, June 2025** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJUNE2025
-  - amount: — · deadline: —
-- **IPS, Copenhagen, March 2025** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSMARCH2025
-  - amount: — · deadline: —
-- **IPS, China, November 2024** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSNovember2024
-  - amount: — · deadline: —
-- **IPS, Copenhagen, June 2024** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJune2024
-  - amount: — · deadline: —
-- **IPS, Copenhagen, November 2023** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSNovember2023
-  - amount: — · deadline: —
-- **IPS, Copenhagen, March 2023** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSMarch2023
-  - amount: — · deadline: —
-- **IPS, Turin, November 2022** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSNov2022
-  - amount: — · deadline: —
-- **IPS, Vienna, April 2022** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSApril2022
-  - amount: — · deadline: —
-- **IPS, European Consortium [2], June 2021** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJune2021
-  - amount: — · deadline: —
-- **IPS, European Consortium [1], January 2021** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJan22021
-  - amount: — · deadline: —
-- **IPS, Nordic Countries, January 2021** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJan2021
-  - amount: — · deadline: —
-- **IPS, Argentina, November 2019** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSNov2019
-  - amount: — · deadline: —
-- **IPS, Copenhagen, June 2019** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJune2019
-  - amount: — · deadline: —
-- **IPS, Rome, May 2019** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS_Rome
-  - amount: — · deadline: —
-- **Nordic UN Procurement Seminar 2025, June 2025** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS38_6_3_2025_to_6_3_2025
-  - amount: — · deadline: —
-- **UN Business Meetings - May 2025** (GRANT) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS34_5_19_2025_to_5_20_2025
-  - amount: — · deadline: —
-- **UN International Procurement Seminar, Copenhagen, 11 and 12 March 2025** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS31_3_11_2025_to_3_12_2025
-  - amount: — · deadline: —
-- **UN IPS, Ningbo, Nov 2024** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS30_11_13_2024_to_11_14_2024
-  - amount: — · deadline: —
-- **Estonia, France, Belgium, Brussels IPS - June 2024** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS28_6_11_2024_to_6_12_2024
-  - amount: — · deadline: —
-- **UN International Procurement Seminar March 2024** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS27_3_20_2024_to_3_21_2024
-  - amount: — · deadline: —
-- **The Republic of Zambia Virtual Business Seminar 2024** (GRANT) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS29_2_27_2024_to_2_27_2024
-  - amount: — · deadline: —
-- **Nordic UN Procurement Seminar 2023** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS23_6_14_2023_to_6_14_2023
-  - amount: — · deadline: —
-- **Liberia Virtual Business Seminar - Feb 2025** (GRANT) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS33_2_18_2025_to_2_18_2025
-  - amount: — · deadline: —
-- **UN Virtual Business Seminar for Peruvian Vendors** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **Burundi virtual business seminar** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **UN Virtual Business Seminar for Côte d’Ivoire Vendors** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **United Nation International Procurement Seminar** (TENDER) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **United Nations Business Seminar for Ghanaian Suppliers** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **United Nations Virtual Business Seminar for Paraguayan Suppliers** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **United Nations Secretariat Virtual Business Seminar for Mozambique Suppliers** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **UN International Procurement Seminar June 2026** (TENDER) — United Nations
-  - https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS45_6_9_2026_to_6_10_2026
-  - amount: — · deadline: —
-- **Angola virtual business seminar** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **Bolivia virtual business seminar** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **Mexico virtual business seminar** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **Business Meetings ONU 2026 - New York** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **Deep Wave 2026** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **UN Procurement Business Seminar for Tanzanian vendors 2026** (TENDER) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **Lesotho Business Seminar** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **The Gambia virtual business seminar** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **Sierra Leone Virtual Business Seminar** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **Guyana virtual business seminar** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **Rwanda Virtual Business Seminar** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **United Nations Secretariat Virtual Business Seminar for Paraguayan Suppliers** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **UN Procurement Business Seminar for Nepalese Vendors 2026** (TENDER) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **The United Nations International Procurement Seminar — Jordan 2026** (TENDER) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **United Nations Virtual Business Seminar: Bangladesh 2026** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **United Nations Virtual Business Seminar: Cambodia 2026** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **Séminaire virtuel des Nations Unies à l'intention des fournisseurs algériens 2026** (GRANT) — United Nations
-  - https://www.ungm.org/Public/Notice
-  - amount: — · deadline: —
-- **Consultancy services for the feasibility study, detailed design, tender document preparation, construction supervision, & contract administration for the Gidabo Left Bank New Irrigation Development project** (GRANT) — Multilateral development banks
-  - https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00468424
-  - amount: — · deadline: Oct 05, 2026 04:30
 
 > Every call above was read by a model and is UNVERIFIED. Each is anchored to a link that
 > really appears on the page it was read from — that is a check, not a promise — but a human

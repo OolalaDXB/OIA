@@ -21,7 +21,7 @@
         "name": "Action cœur de ville",
         "amount": "",
         "deadline": "",
-        "eligibility": "Collectivités locales",
+        "eligibility": "",
         "quote": "Ce programme vise à faciliter et à soutenir le travail des collectivités locales, à inciter les acteurs du logement, du commerce et de l'urbanisme à réinvestir les centres-villes, à favoriser le maintien ou l'implantation d'activités en cœur de ville",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/action-cur-de-ville/"
       },
@@ -45,7 +45,7 @@
         "name": "EUROPE - Biodiversa +",
         "amount": "",
         "deadline": "",
-        "eligibility": "74 programmeurs et bailleurs de fonds de recherche et acteurs de la politique environnementale de 37 pays différents",
+        "eligibility": "",
         "quote": "Biodiversa + est le Partenariat européen sur la biodiversité. Dans la continuité de Biodiversa, il a été développé conjointement avec la Commission européenne et regroupe 74 programmeurs et bailleurs de fonds de recherche et acteurs de la politique environnementale de 37 pays différents.",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/biodiversa/"
       },
@@ -69,7 +69,7 @@
         "name": "EUROPE - CES - Corps européen de solidarité",
         "amount": "",
         "deadline": "",
-        "eligibility": "Jeunes et organismes",
+        "eligibility": "",
         "quote": "Le Corps européen de solidarité permet aux jeunes de s’engager et aux organismes de mettre en place des initiatives en Europe sur des activités variées, dans les domaines humanitaires, de la santé, de l’environnement, de l’intergénérationnel…",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/corps-europeen-de-solidarite/"
       },
@@ -77,7 +77,7 @@
         "name": "EUROPE - COSME - Programme européen pour la compétitivité des entreprises",
         "amount": "",
         "deadline": "",
-        "eligibility": "Entreprises et petites et moyennes entreprises",
+        "eligibility": "",
         "quote": "Le programme pour la compétitivité des entreprises et des petites et moyennes entreprises (2014-2020), vise à promouvoir la croissance et à renforcer la compétitivité et la durabilité des entreprises dans l'Union européenne.",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/cosme-fonds-europeens/"
       },
@@ -101,7 +101,7 @@
         "name": "ÉcoQuartier",
         "amount": "",
         "deadline": "",
-        "eligibility": "Porteurs de projets",
+        "eligibility": "",
         "quote": "La démarche ÉcoQuartier été lancée en 2009 en application de la loi Grenelle 2 dans le cadre du plan Ville durable. Elle vise à favoriser l'émergence d'une nouvelle façon de concevoir, de construire et de gérer la ville durablement, en outillant, sensibilisant et valorisant les porteurs de projets.",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/ecoquartier/"
       },
@@ -109,7 +109,7 @@
         "name": "EduRénov",
         "amount": "",
         "deadline": "",
-        "eligibility": "Bâtiments scolaires en France",
+        "eligibility": "",
         "quote": "Le programme EduRénov, lancé en 2023 par la Banque des Territoires, vise à accélérer la rénovation énergétique des bâtiments scolaires en France. Il s’inscrit dans la stratégie nationale de transition écologique et cible les écoles, collèges, lycées, ainsi que d’autres structures éducatives.",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/edurenov/"
       },
@@ -117,7 +117,7 @@
         "name": "EUROPE - EIT Food",
         "amount": "",
         "deadline": "",
-        "eligibility": "Innovateurs, entrepreneurs et étudiants",
+        "eligibility": "",
         "quote": "EIT Food est un partenariat paneuropéen, axé sur le consommateur, qui permet aux innovateurs, aux entrepreneurs et aux étudiants de développer des solutions de classe mondiale aux défis de société, d'accélérer l'innovation, de créer des emplois et d'accroître la compétitivité de l'Europe.",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/eit-food/"
       },
@@ -125,7 +125,7 @@
         "name": "EUROPE - EIT Manufacturing",
         "amount": "",
         "deadline": "",
-        "eligibility": "Acteurs de l'industrie",
+        "eligibility": "",
         "quote": "EIT Manufacturing a pour objectif de faire de l'Europe le leader de l'innovation industrielle internationale, grâce à son large écosystème d'acteurs de l'industrie.",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/eit-manufacturing/"
       },
@@ -157,7 +157,7 @@
         "name": "EUROPE - Europe Créative",
         "amount": "",
         "deadline": "",
-        "eligibility": "Secteurs de la culture et de la création",
+        "eligibility": "",
         "quote": "Europe Créative est le programme de l'Union Européenne qui soutient les secteurs de la culture et de la création.",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/europe-creative/"
       },
@@ -205,7 +205,7 @@
         "name": "Fonds Biodiversité",
         "amount": "",
         "deadline": "",
-        "eligibility": "Territoires",
+        "eligibility": "",
         "quote": "Le fonds biodiversité a vocation à mobiliser les territoires pour contribuer à nos objectifs de biodiversité",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-biodiversite/"
       },
@@ -237,7 +237,7 @@
         "name": "EUROPE - FTJ - Fonds pour une transition juste",
         "amount": "",
         "deadline": "",
-        "eligibility": "Territoires concernés par de fortes émissions de CO2",
+        "eligibility": "",
         "quote": "Le FTJ a été créé pour accompagner la transition énergétique et industrielle des territoires concernés par de fortes émissions de CO2 dans la transition vers une économie neutre en carbone, conformément aux objectifs de l’Union européenne dans le cadre de l’accord de Paris.",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-pour-une-transition-juste-ftj/"
       },
@@ -285,7 +285,7 @@
         "name": "France Ruralités",
         "amount": "",
         "deadline": "",
-        "eligibility": "Territoires ruraux",
+        "eligibility": "",
         "quote": "Né en 2023, le Plan France Ruralités vise à soutenir les territoires ruraux",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/france-ruralites/"
       },
@@ -349,7 +349,7 @@
         "name": "EUROPE - LEADER - Liaison entre Actions de Développement de l’Économie Rurale",
         "amount": "",
         "deadline": "",
-        "eligibility": "Projets publics ou privés en zones rurales",
+        "eligibility": "",
         "quote": "LEADER est un programme d'initiative communautaire pour cofinancer des projets publics ou privés qui favorisent le développement des zones rurales.",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/leader/"
       },
@@ -413,7 +413,7 @@
         "name": "EUROPE - PERICLES IV",
         "amount": "",
         "deadline": "",
-        "eligibility": "Services répressifs et judiciaires, banques et autres acteurs de la lutte contre le faux monnayage de l’euro",
+        "eligibility": "",
         "quote": "Le programme Pericles IV finance des échanges de personnel, des séminaires, des formations et des études à l’intention des services répressifs et judiciaires, des banques et des autres acteurs de la lutte contre le faux monnayage de l’euro.",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/pericles-iv/"
       },
@@ -421,7 +421,7 @@
         "name": "Petites villes de demain",
         "amount": "",
         "deadline": "",
-        "eligibility": "Communes de moins de 20 000 habitants exerçant des fonctions de centralité et présentant des signes de fragilité",
+        "eligibility": "",
         "quote": "Le programme PVD est destiné aux communes de moins de 20 000 habitants exerçant des fonctions de centralité et présentant des signes de fragilité.",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/petites-villes-de-demain/"
       },
@@ -469,7 +469,7 @@
         "name": "QPV - Quartiers Prioritaires de la politique de la Ville",
         "amount": "",
         "deadline": "",
-        "eligibility": "Zones urbaines pauvres nécessitant des interventions publiques",
+        "eligibility": "",
         "quote": "Les QPV sont entités définies par la loi de 2014, identifiant zones urbaines pauvres nécessitant des interventions publiques. Une nouvelle cartographie est entrée en vigueur le 1er janvier 2024 (décret 28/12/2023), actualisant périmètres et contrat ville",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/qpv-quartiers-prioritaires-de-la-politique-de-la-ville/"
       },
@@ -485,7 +485,7 @@
         "name": "Avenir Montagnes",
         "amount": "",
         "deadline": "",
-        "eligibility": "Acteurs de la montagne (collectivités, acteurs socio-économiques)",
+        "eligibility": "",
         "quote": "Piloté par l’ANCT, le programme accompagnera les acteurs de la montagne (collectivités, acteurs socio-économiques) dans le développement économique, la préservation de leur patrimoine naturel et l’adaptation nécessaire au changement climatique.",
         "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/ruralite-montagne-anct/"
       },

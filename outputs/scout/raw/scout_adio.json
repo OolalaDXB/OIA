@@ -25,6 +25,7 @@
         "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/helm",
         "deadline": "",
         "amount": "",
+        "eligibility": "",
         "quote": "Propulser la prochaine ère des sciences de la vie"
       },
       {
@@ -55,7 +56,7 @@
         "quote": "Stratégie industrielle, facilitation du commerce et promotion des exportations réunies sur une seule plateforme"
       },
       {
-        "title": "Programmes de soutien (Trade & Industry)",
+        "title": "Programmes de soutien (Trade and Industry)",
         "type": "Support programme",
         "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry/support-programmes",
         "deadline": "",
@@ -119,7 +120,7 @@
       },
       {
         "title": "Abu Dhabi Investment Forum : Mumbai",
-        "type": "Event / Networking opportunity (recap)",
+        "type": "Event / Networking opportunity",
         "sourceUrl": "https://adif.abudhabi/mumbai/",
         "deadline": "",
         "amount": "",
@@ -128,14 +129,23 @@
       },
       {
         "title": "Golden Visa et résidence",
-        "type": "Residency incentive",
+        "type": "Residency programme",
         "sourceUrl": "https://www.investwithabudhabi.com/fr/golden-visa-residency",
         "deadline": "",
         "amount": "",
         "eligibility": "",
         "quote": ""
+      },
+      {
+        "title": "Le guide de l’investisseur d’Abou Dhabi (PDF)",
+        "type": "Resource / Support document",
+        "sourceUrl": "https://www.investwithabudhabi.com/assets/Ebook-ADIO%20Investor%20Guide.pdf",
+        "deadline": "",
+        "amount": "",
+        "eligibility": "",
+        "quote": "Le cadre, les programmes et les parcours réunis en un seul document : la source qui étaye les repères de cette plateforme."
       }
     ],
-    "note": "All listed opportunities are explicitly mentioned on the page or linked from it. Some programmes (e.g., clusters, support services) have no specific deadline or amount, as per the page content."
+    "note": "All listed opportunities are explicitly mentioned on the page or linked from it. Some programmes lack specific details (amount, deadline, eligibility) but are included as named opportunities."
   }
 }

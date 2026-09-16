@@ -1,10 +1,10 @@
 # Link check
 
-Checked 255 distinct URL(s).
+Checked 194 distinct URL(s).
 
-- resolving: 244
+- resolving: 185
 - **broken: 2**
-- refused us (not broken): 9
+- refused us (not broken): 7
 - inconclusive: 0
 
 ## Broken — these need fixing
@@ -66,8 +66,6 @@ Checked 255 distinct URL(s).
   - https://adif.abudhabi/south-korea/#register
 - **opportunity scout-aides-territoires-4f0e193d06** — now redirects to https://aides-territoires.beta.gouv.fr/portails/ecoquartier/
   - https://aides-territoires.beta.gouv.fr/programmes/ecoquartier/
-- **opportunity scout-hub71-752f31c14a** — now redirects to https://www.hub71.com/info-sessions
-  - https://www.hub71.com/info-sessions#formPopup
 
 ## Refused us
 
@@ -80,5 +78,3 @@ These returned 401/403/429. The server declined our request; the page itself may
 - https://api.ted.europa.eu/v3/notices/search — HTTP 405
 - https://www.upwork.com — HTTP 403 — the server refused us, which is not the same as the link being broken
 - https://www.bpifrance.fr/nos-solutions/financement/aides-au-financement-de-linnovation — HTTP 403 — the server refused us, which is not the same as the link being broken
-- https://agirpourlatransition.ademe.fr/entreprises/aides-financieres/catalogue — HTTP 403 — the server refused us, which is not the same as the link being broken
-- https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor — HTTP 403 — the server refused us, which is not the same as the link being broken

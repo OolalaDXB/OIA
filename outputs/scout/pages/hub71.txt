@@ -149,13 +149,13 @@ nationalities
 sectors
 SOME OF OUR STARTUPS:
 
-Dapio Tap to Pay transforms the way you get paid
-
-Jade Autism is an app for ASD (Autistic Spectrum Disorder) that stimulates and develops children's cognitive functions.
-
 Redefining the work-life experience by making automated HR, payroll, employee benefits and insurance a possibility for all businesses in UAE.
 
-On a mission to democratize AI for the Banking Industry
+Lune is an AI-driven engagement and hyper-personalization platform for banks, built on insights from over 1 billion transactions. Our Transaction Enrichment API transforms raw transaction data into actionable insights, powering our core products: Enrichment, Personal Finance Engagement (PFE) SDK, Insights Dashboard, and Smart Nudges. (Supports Arabic transliteration)
+
+Making freight transactions automated, globally
+
+Mashvisor is a platform that combines all services needed for real estate investing, cutting three months’ worth of research down to only 15 minutes.
 
 ALL STARTUPS
 Our community says
