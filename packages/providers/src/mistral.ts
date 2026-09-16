@@ -26,6 +26,8 @@ export interface MistralConfig {
   fetchImpl?: typeof fetch;
   /** Hard ceiling on calls for one process. Exceeded → throws rather than spends. */
   maxCalls?: number;
+  /** Output ceiling per call. Too low truncates JSON mid-array; see below. */
+  maxOutputTokens?: number;
 }
 
 function extractJson(text: string): string {
@@ -78,7 +80,12 @@ export function createMistralProvider(config: MistralConfig): MistralProvider {
         // Native JSON mode: a constraint, not a polite request in the prompt.
         response_format: { type: "json_object" },
         temperature: 0,
-        max_tokens: 4096,
+        // A listing page with twenty programmes does not fit in 4096 tokens.
+        // It did not fail loudly either: the JSON came back cut off mid-array
+        // and surfaced as a generic parse error ("Expected ',' or ']' at
+        // position 12035"), which reads like a model problem and is a ceiling
+        // problem.
+        max_tokens: config.maxOutputTokens ?? 16_000,
       }),
     });
     if (!res.ok) {
@@ -122,6 +129,18 @@ export function createMistralProvider(config: MistralConfig): MistralProvider {
           // A budget stop is final: retrying would be the one thing the cap exists
           // to prevent.
           if (err instanceof Error && err.message.includes("call budget")) throw err;
+          // Truncated output is not a model failing to follow instructions; it
+          // is our ceiling cutting it off. Retrying identically would truncate
+          // identically, so say what happened instead of burning another call.
+          // Truncation looks like JSON that STARTS and never finishes. Output
+          // that never looked like JSON at all is a different failure and is
+          // still worth one retry.
+          const looksTruncated = text.trimStart().startsWith("{") && !text.trimEnd().endsWith("}");
+          if (err instanceof SyntaxError && looksTruncated) {
+            throw new Error(
+              `Mistral output was cut off at ${text.length} characters — raise maxOutputTokens (currently ${config.maxOutputTokens ?? 16_000}).`,
+            );
+          }
         }
       }
       throw new Error(`Mistral extract failed to produce valid ${req.schemaName}: ${String(lastErr)}`);

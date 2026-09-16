@@ -97,3 +97,58 @@ describe("mistral provider", () => {
     await expect(p.extract(req)).rejects.toThrow(/Mistral API error 401/);
   });
 });
+
+/**
+ * The failure that looked like the model's fault and was ours.
+ *
+ * A funding portal listing twenty programmes does not fit in 4096 output
+ * tokens. The JSON came back cut off mid-array and surfaced as
+ * "SyntaxError: Expected ',' or ']' after array element at position 12035" —
+ * which reads like a model that cannot follow instructions, and is a ceiling
+ * nobody set high enough.
+ */
+describe("output truncation", () => {
+  const truncated = '{"calls":[{"title":"A","sourceUrl":"https://x.fr/a"},{"title":"B","sourceU';
+
+  it("names the ceiling instead of reporting a parse error", async () => {
+    const p = createMistralProvider({
+      apiKey: "k",
+      model: "m",
+      maxOutputTokens: 4096,
+      fetchImpl: fakeFetch([truncated]) as unknown as typeof fetch,
+    });
+    await expect(p.extract(req)).rejects.toThrow(/cut off at \d+ characters — raise maxOutputTokens \(currently 4096\)/);
+  });
+
+  it("does not burn a second call retrying something that will truncate identically", async () => {
+    const p = createMistralProvider({
+      apiKey: "k",
+      model: "m",
+      fetchImpl: fakeFetch([truncated]) as unknown as typeof fetch,
+    });
+    await expect(p.extract(req)).rejects.toThrow(/cut off/);
+    expect(p.usage().calls).toBe(1);
+  });
+
+  it("still retries output that is merely wrong rather than cut off", async () => {
+    // Ends cleanly, so it is a model mistake and worth one more attempt.
+    const p = createMistralProvider({
+      apiKey: "k",
+      model: "m",
+      fetchImpl: fakeFetch(['{"wrong":"shape"}']) as unknown as typeof fetch,
+    });
+    await expect(p.extract(req)).rejects.toThrow(/failed to produce valid Thing/);
+    expect(p.usage().calls).toBe(2);
+  });
+
+  it("asks for enough room by default", async () => {
+    let sent: Record<string, unknown> = {};
+    const p = createMistralProvider({
+      apiKey: "k",
+      model: "m",
+      fetchImpl: fakeFetch(['{"title":"ok"}'], (b) => (sent = b as Record<string, unknown>)) as unknown as typeof fetch,
+    });
+    await p.extract(req);
+    expect(Number(sent["max_tokens"])).toBeGreaterThanOrEqual(16_000);
+  });
+});
