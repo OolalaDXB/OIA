@@ -739,6 +739,7 @@ function Detail({
   );
 
   const factsBy = (c: FactClass) => r.facts.filter((f) => (f.classification as FactClass) === c);
+  const tenderDocumentsUrl = r.facts.find((f) => f.field === "tender_documents_url")?.normalizedValue;
 
   return (
     <div>
@@ -840,6 +841,23 @@ function Detail({
         <KV k={lang === "fr" ? "Source officielle" : "Official source"} v={r.officialUrl ? <a href={r.officialUrl} target="_blank" rel="noreferrer">{r.officialUrl}</a> : <span className="muted">—</span>} />
         <KV k={lang === "fr" ? "Source de découverte" : "Discovery source"} v={r.discoveryUrl ? <a href={r.discoveryUrl} target="_blank" rel="noreferrer">{r.discoveryUrl}</a> : <span className="muted">—</span>} />
         <KV k={lang === "fr" ? "Portail de candidature" : "Application portal"} v={r.applicationUrl ? <a href={r.applicationUrl} target="_blank" rel="noreferrer">{r.applicationUrl}</a> : <span className="muted">—</span>} />
+        {/* The consultation documents themselves — read out of the notice XML,
+            which is the only place that says where they are. Worth its own row:
+            it is the document you actually have to read before deciding. */}
+        <KV
+          k={lang === "fr" ? "Dossier de consultation" : "Tender documents"}
+          v={
+            tenderDocumentsUrl ? (
+              <a href={tenderDocumentsUrl} target="_blank" rel="noreferrer">
+                {tenderDocumentsUrl}
+              </a>
+            ) : (
+              <span className="muted">
+                {lang === "fr" ? "— l'avis ne dit pas où ils sont" : "— the notice does not say where they are"}
+              </span>
+            )
+          }
+        />
         <KV k={lang === "fr" ? "Rattaché par" : "Linked by"} v={r.linkedBy} />
       </Section>
 
@@ -985,7 +1003,17 @@ function Detail({
               {fs.map((f, i) => (
                 <div key={i} className="fact">
                   <div>
-                    <span className="factKey">{f.field}</span> {f.normalizedValue}
+                    <span className="factKey">{f.field}</span>{" "}
+                    {/* A fact whose value IS a link should be one. "Nothing is
+                        clickable" was a fair description, and a URL printed as
+                        plain text is the smallest example of it. */}
+                    {/^https?:\/\/\S+$/.test(f.normalizedValue) ? (
+                      <a href={f.normalizedValue} target="_blank" rel="noreferrer">
+                        {f.normalizedValue}
+                      </a>
+                    ) : (
+                      f.normalizedValue
+                    )}
                   </div>
                   <div className="muted small">
                     {f.locator.type}
