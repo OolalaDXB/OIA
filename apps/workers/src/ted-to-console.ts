@@ -226,14 +226,44 @@ function main() {
   const m0 = existsSync(m0Path) ? (JSON.parse(readFileSync(m0Path, "utf8")) as ConsoleData) : null;
   if (!m0) console.warn("outputs/milestone-0/console.json not found — console will only carry TED records.");
 
-  const data = mergeConsoleData(tedCandidatesToConsole(candidates), m0);
+  let data = mergeConsoleData(tedCandidatesToConsole(candidates), m0);
+
+  // Aid calls the scout read from portals with no API. Folded in through the
+  // same dedup as everything else, so the same scheme arriving from a regional
+  // portal and from TED is one record, not two.
+  const scoutPath = fromRoot("outputs/scout/console.json");
+  const scout = existsSync(scoutPath) ? (JSON.parse(readFileSync(scoutPath, "utf8")) as ConsoleData) : null;
+  let scoutCount = 0;
+  if (scout && scout.records.length > 0) {
+    scoutCount = scout.records.length;
+    const { records, merged } = dedupeRecords([...data.records, ...scout.records]);
+    const counts: Record<string, number> = {};
+    for (const r of records) counts[r.recommendation] = (counts[r.recommendation] ?? 0) + 1;
+    data = {
+      note: `${data.note} · ${scout.note}`,
+      run: {
+        ...data.run,
+        records: records.length,
+        artifactsIngested: data.run.artifactsIngested + scout.run.artifactsIngested,
+        warnings: [
+          ...data.run.warnings,
+          ...(merged > 0 ? [`${merged} record(s) merged as duplicates across sources.`] : []),
+        ],
+        recommendationCounts: counts,
+      },
+      records,
+    };
+  } else {
+    console.warn("outputs/scout/console.json not found or empty — the console carries no scouted aid calls.");
+  }
 
   const webData = fromRoot("apps/web/src/data/console.json");
   mkdirSync(dirname(webData), { recursive: true });
   writeFileSync(webData, JSON.stringify(data, null, 2), "utf8");
   writeFileSync(fromRoot("outputs/sprint-1/console.json"), JSON.stringify(data, null, 2), "utf8");
   console.log(
-    `Wrote console data: ${data.records.length} record(s) (${m0 ? m0.run.records : 0} M0 funding + ${data.records.length - (m0 ? m0.run.records : 0)} TED) → apps/web/src/data/console.json`,
+    `Wrote console data: ${data.records.length} record(s) ` +
+      `(${m0 ? m0.run.records : 0} M0 funding + TED + ${scoutCount} scouted aid) → apps/web/src/data/console.json`,
   );
 }
 

@@ -148,6 +148,25 @@ jobs:
           pnpm --filter @oia/registry generate
           pnpm --filter @oia/registry validate
 
+      # The agent half of discovery. Seventeen of the eighteen registry sources
+      # have no connector — they sat in YAML marked "a human watches this" and
+      # no human did. A browser renders them and a model reads them.
+      #
+      # continue-on-error: this is additive. A scout that fails must never cost
+      # the run its TED results, its ledger update or its commit.
+      - name: Scout the sources nobody wrote a connector for
+        id: scout
+        continue-on-error: true
+        env:
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          SCOUT_MAX_CALLS: ${{ vars.SCOUT_MAX_CALLS || '40' }}
+        run: |
+          if [ -z "$MISTRAL_API_KEY" ]; then
+            echo "::warning::MISTRAL_API_KEY not set — the aid sources were not read. Add it under Settings → Secrets → Actions."
+          fi
+          pnpm --filter @oia/workers exec playwright install --with-deps chromium
+          pnpm --filter @oia/workers scout:aid
+
       - name: Rebuild the console dataset
         run: pnpm --filter @oia/workers exec tsx src/ted-to-console.ts
 
@@ -177,25 +196,6 @@ jobs:
           else
             pnpm --filter @oia/workers publish:watch
           fi
-
-      # The agent half of discovery. Seventeen of the eighteen registry sources
-      # have no connector — they sat in YAML marked "a human watches this" and
-      # no human did. A browser renders them and a model reads them.
-      #
-      # continue-on-error: this is additive. A scout that fails must never cost
-      # the run its TED results, its ledger update or its commit.
-      - name: Scout the sources nobody wrote a connector for
-        id: scout
-        continue-on-error: true
-        env:
-          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
-          SCOUT_MAX_CALLS: ${{ vars.SCOUT_MAX_CALLS || '40' }}
-        run: |
-          if [ -z "$MISTRAL_API_KEY" ]; then
-            echo "::warning::MISTRAL_API_KEY not set — the aid sources were not read. Add it under Settings → Secrets → Actions."
-          fi
-          pnpm --filter @oia/workers exec playwright install --with-deps chromium
-          pnpm --filter @oia/workers scout:aid
 
       # Every published link, actually requested. A 404 in a shortlist is the
       # fastest way to lose trust in the whole thing, and this is also the only

@@ -14,6 +14,7 @@ import {
 } from "@oia/intelligence";
 import type { MaterialFact } from "@oia/ingestion";
 import { normalizeKind } from "@oia/ingestion/opportunity-kinds";
+import { scoutedToConsole } from "./scout-to-console";
 import { fromRoot } from "./paths";
 
 /**
@@ -246,6 +247,19 @@ async function main() {
   ].join("\n");
   writeFileSync(join(outDir, "report.md"), report, "utf8");
   writeFileSync(join(outDir, "calls.json"), JSON.stringify({ generatedAt: new Date().toISOString(), found, perSource }, null, 2), "utf8");
+
+  // The console dataset is the deliverable. A report nobody opens is the same
+  // as not running: the aid pages get read, the console looks unchanged, and
+  // the product is back to "nothing runs" one layer deeper.
+  const sourcePages: Record<string, string> = {};
+  const forProjects: Record<string, readonly string[]> = {};
+  for (const source of sources) {
+    sourcePages[source.id] = source.url;
+    forProjects[source.id] = source.forProjects;
+  }
+  const consoleData = scoutedToConsole(found, sourcePages, forProjects, model);
+  writeFileSync(join(outDir, "console.json"), JSON.stringify(consoleData, null, 2), "utf8");
+  console.log(`scout: wrote ${consoleData.records.length} console record(s) to outputs/scout/console.json`);
 
   console.log(`scout: ${found.length} call(s) kept across ${sources.length} source(s); ${spent.calls} model call(s)`);
   if (dryRun) console.log("scout: --dry-run, nothing published");
