@@ -90,6 +90,44 @@ Three ways, all from the console, all landing in the same pipeline:
    against its own domain, read for scope and eligibility, and lands at **"not
    verified yet"**. Pasting a link is not verifying a source.
 
+## The agent that reads what has no API
+
+Seventeen of the eighteen registry sources have no machine access. They were
+`DECLARED` — an honest word for "a human is supposed to look at this" — and no
+human ever did. Brittany's regional aid, aides-territoires, BPI, France 2030,
+CIR/CII/JEI, Hub71, ADIO: declared, never read.
+
+`pnpm --filter @oia/workers scout:aid` renders each of those pages in a real
+browser (most return an empty shell to a plain fetch) and hands the visible text
+and the page's own links to **Mistral**, which returns structured candidates.
+Mistral rather than anything else because OIA serves a studio whose positioning
+is European sovereignty, and because it is the provider already exercised live
+here. One secret: `MISTRAL_API_KEY`.
+
+**What stops it being a rumour mill is a function, not a prompt.** "Only report
+calls that are really on the page" is a wish. `anchorViolations()` is a check:
+every call must cite a URL that actually appears on the page it was read from,
+and any quote must actually occur in the page text. Anything else is dropped
+with a stated reason.
+
+That guard was verified against a really rendered page: two genuine calls kept
+with their relative links resolved, and *Bourse French Tech Emergence* — a real
+French programme, correctly named, correctly attributed to Bpifrance, simply not
+on that page — dropped. That is the dangerous case, because it reads as
+credible.
+
+**What it does not change is what counts as true.** Everything the model returns
+is a claim. Facts carry `extractionMethod: "llm"`, the provider, the model id
+and confidence 0.5, so nothing a model produced can be mistaken for something a
+rule read. Records land at MANUAL_REVIEW_REQUIRED exactly like a TED notice; the
+deterministic gate still refuses PURSUE and a human still verifies.
+
+`BLOCKED` sources stay excluded. Owning a browser that could scrape Upwork or
+Acquire does not make it permitted, and the account at risk would be yours.
+
+The call budget is hard: the provider throws when it is exhausted rather than
+continuing with a warning.
+
 ## Money, and links that actually resolve
 
 `/money` answers "how much is in play" under three rules that are printed on the
@@ -118,11 +156,11 @@ our network, and a checker that lies about that is worse than none.
 | `packages/database` | Domain Zod schemas, row types, Supabase client, migration `0001_init.sql` |
 | `packages/registry` | **The project and source registries** — YAML source of truth, schema, honesty rules, generated browser snapshot |
 | `packages/audit` | Fail-closed policy hooks + append-only audit sink |
-| `packages/providers` | Provider-neutral `LLMProvider` (Anthropic default + fake) |
+| `packages/providers` | Provider-neutral `LLMProvider` — **Mistral by default** (native JSON mode, temperature 0, hard call budget), Anthropic and a fake |
 | `packages/connectors` | `SourceConnector` interface, polite hash-pinning fetcher, TED + EU Funding & Tenders (SEDIA) + manual |
 | `packages/ingestion` | Artifact ingestion, provenance-typed facts, deadlines, verification, the deterministic gate, **the eleven kinds and their gate profiles**, tender-fact extraction, **link checking**, dedup, freshness/expiry |
 | `packages/scoring` | Four scores + the hard PURSUE gate (pure, table-tested) |
-| `packages/intelligence` | Qualifier: fact corroboration → eligibility → scores → gate → recommendation |
+| `packages/intelligence` | Qualifier: fact corroboration → eligibility → scores → gate → recommendation. **The aid scout** and its anchor guard |
 | `packages/knowledge` | Canonical knowledge base + disclosure gate (what may be claimed externally) |
 | `packages/watch` | **The permanent watch** — the ledger that remembers between runs, change detection, and the alert rules |
 | `packages/workspace` | Workspace records, suggestions, digest, metrics, **finance**, exports, storage adapter |
@@ -131,7 +169,7 @@ our network, and a checker that lies about that is worse than none.
 
 ```bash
 pnpm install
-pnpm typecheck && pnpm test          # 275 tests
+pnpm typecheck && pnpm test          # 285 tests
 pnpm --filter @oia/registry validate
 pnpm --filter @oia/knowledge validate
 pnpm --filter @oia/web build

@@ -1,4 +1,35 @@
-# Turning the permanent watch on — what only you can do
+# Mettre OIA en marche — ce que toi seul peux faire
+
+## Le strict minimum : un secret
+
+| Secret | Ce qu'il débloque |
+|---|---|
+| **`MISTRAL_API_KEY`** | **Les agents.** Le chercheur d'aides lit les 17 sources qui n'ont aucun connecteur — Bretagne, BPI, France 2030, CIR, Hub71, ADIO, aides-territoires. Sans lui, elles ne sont pas lues du tout. |
+
+GitHub → `OolalaDXB/OIA` → **Settings** → *Secrets and variables* → *Actions* →
+*New repository secret*. Nom exact : `MISTRAL_API_KEY`. Valeur : ta clé depuis
+console.mistral.ai.
+
+Sans cette clé, le run continue de tourner : TED est interrogé, le jeu de
+données est reconstruit, les liens sont vérifiés. Le chercheur dit simplement
+quelles sources il n'a pas lues, et sort en succès. Il ne casse rien.
+
+Plafond de dépense : la variable de dépôt `SCOUT_MAX_CALLS` (défaut 40) est un
+plafond **dur**. Le provider lève une erreur et s'arrête quand il est atteint,
+il ne continue pas en avertissant.
+
+---
+
+## Ce qui tourne déjà, sans rien de ta part
+
+`.github/workflows/discovery.yml`, tous les lundis 06:00 UTC et à la demande
+depuis l'onglet Actions. Premier run réel le 16/09/2026 : **481 avis uniques sur
+10 projets, 100 % exploitables, 1 599 caractères de texte analysable par avis
+en médiane.**
+
+---
+
+# Le registre permanent et les alertes — les deux secrets optionnels
 
 The code, the schema and the rules are in place and verified. Four steps remain,
 and all four need credentials or a dashboard, which is exactly why they are
