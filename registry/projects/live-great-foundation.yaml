@@ -1,0 +1,41 @@
+# OIA project registry entry. One file per project — this is the source of truth.
+# Matching signals (sectors/keywords/geographies) steer the suggestion engine;
+# `profileReview` says whether the owner has confirmed them or they are still a
+# working hypothesis. Correct a wrong keyword HERE and every surface follows.
+
+
+slug: live-great-foundation
+name: Live Great Foundation
+kind: FOUNDATION
+status: LIVE
+oneLiner: "Grassroots foundation in Kibera, Nairobi. Sponsored rebuild."
+url: "https://livegreatfoundation.netlify.app"
+active: true
+legalEntities: []
+sectors: ["philanthropy", "education", "development"]
+geographies: ["KE", "Africa"]
+stage: operating
+fundingTypes: ["grant", "donation"]
+keywords:
+  - "kibera"
+  - "nairobi"
+  - "kenya"
+  - "grassroots"
+  - "foundation"
+  - "education"
+  - "community"
+  - "development"
+exclusions: []
+discovery:
+  enabled: false
+  queryTerms: ["community development Kenya", "grassroots education"]
+  cpvCodes: []
+  countries: []
+  watch: ["GRANT"]
+profileReview:
+  status: DRAFT
+  derivedFrom:
+    - "TheStudioMT portfolio card 'Live Great Foundation' (public copy: funding, information architecture, web design, copy)"
+  note: >-
+    Kenya-based: OIA's current connectors (TED, EU F&T) do not cover it. Tracked
+    honestly as manual rather than pretending a queue exists.

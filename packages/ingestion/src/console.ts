@@ -101,6 +101,25 @@ export interface ConsoleRecord {
   recommendation: M0Recommendation;
   humanReview: "PENDING" | "APPROVE" | "REJECT" | "NEEDS_VERIFICATION";
 
+  /**
+   * Projects whose discovery query surfaced this record (registry slugs).
+   * Discovery provenance, NOT a match verdict: the suggestion engine still has
+   * to argue the fit and the gate still has to pass. Absent on records
+   * generated before the registry existed.
+   */
+  discoveredFor?: string[];
+  /** Cross-source identity key (see dedup.ts). Set when a dataset is deduped. */
+  dedupKey?: string;
+  /** Ids of duplicate records merged into this one — never silently dropped. */
+  mergedFrom?: string[];
+  /** Deterministic expiry/recency re-check, applied on read (see freshness.ts). */
+  freshness?: {
+    status: "FRESH" | "CLOSING_SOON" | "EXPIRED" | "NO_DEADLINE";
+    daysToDeadline: number | null;
+    ageDays: number | null;
+    reasons: string[];
+  };
+
   facts: ConsoleFact[];
   deadlines: ConsoleDeadline[];
   conflicts: string[];

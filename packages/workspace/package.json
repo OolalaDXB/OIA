@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "@oia/database": "workspace:*",
-    "@oia/ingestion": "workspace:*"
+    "@oia/ingestion": "workspace:*",
+    "@oia/registry": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.7.2",

@@ -1,106 +1,33 @@
 import type { ProjectProfile } from "@oia/database";
+import { PROJECT_REGISTRY, activeProjects, toProfile, toProfiles, type ProjectEntry } from "@oia/registry";
 
 /**
- * TheStudio project profiles (Phase 2) — the EXISTING ProjectProfile type
- * from @oia/database, no DTO redefined.
+ * The workspace's view of "which projects does OIA work for?".
  *
- * WORKING HYPOTHESES, not gospel: sectors/keywords/geographies are Claude's
- * best current understanding, written to be reviewed and corrected by
- * Mickael. The suggestion engine always shows WHICH signals matched, so a
- * wrong keyword is visible and fixable here, in one place.
+ * These used to be a hand-maintained array in this file. They now come from the
+ * registry (`registry/projects/*.yaml` → generated snapshot), so adding next
+ * year's project is one YAML file and no code change, and so the console can
+ * show whether a profile is owner-confirmed or still a working hypothesis.
  *
- * Entity doctrine (reminder): EU/FR funding routes through Oolala France SAS
- * (IP + financements), GCC commercial through Oolala Next FZ-LLC; dedicated
- * entities (Bawaba SAS, BEAU SAS…) only on precise triggers.
+ * Entity doctrine (reminder, encoded per project in `legalEntities`): EU/FR
+ * funding routes through Oolala France SAS, GCC commercial through Oolala Next
+ * FZ-LLC; dedicated entities only on precise triggers.
  */
-export const THESTUDIO_PROJECTS: ProjectProfile[] = [
-  {
-    slug: "bawaba",
-    name: "BAWABA",
-    legalEntities: [],
-    sectors: ["AI", "data", "digital", "creative industries", "culture"],
-    geographies: ["EU", "FR", "AE", "GCC", "MENA"],
-    stage: "pre-launch",
-    fundingTypes: ["grant", "subsidy", "equity-free"],
-    keywords: [
-      "artificial intelligence",
-      "ai",
-      "data",
-      "platform",
-      "digital",
-      "creative",
-      "culture",
-      "media",
-      "software",
-      "innovation",
-    ],
-    exclusions: [],
-  },
-  {
-    slug: "sillon",
-    name: "SILLON",
-    legalEntities: [],
-    sectors: ["digital", "software"],
-    geographies: ["FR", "EU"],
-    stage: "build",
-    fundingTypes: ["grant"],
-    // Profile deliberately thin — to be filled by Mickael (SIL- product).
-    keywords: ["software", "saas", "application"],
-    exclusions: [],
-  },
-  {
-    slug: "maisons-co",
-    name: "Maisons.co",
-    legalEntities: [],
-    sectors: ["hospitality", "tourism", "real estate"],
-    geographies: ["FR", "GE", "AE"],
-    stage: "operating",
-    fundingTypes: ["grant", "subsidy"],
-    keywords: [
-      "hospitality",
-      "tourism",
-      "accommodation",
-      "rural",
-      "heritage",
-      "renovation",
-      "real estate",
-      "hotel",
-    ],
-    exclusions: [],
-  },
-  {
-    slug: "myoolala",
-    name: "myOolala",
-    legalEntities: [],
-    sectors: ["digital", "consumer app"],
-    geographies: ["FR", "EU", "AE"],
-    stage: "build",
-    fundingTypes: ["grant"],
-    // Profile deliberately thin — to be filled by Mickael (MYO- product).
-    keywords: ["app", "application", "consumer", "family", "saas"],
-    exclusions: [],
-  },
-  {
-    slug: "beau",
-    name: "BEAU",
-    legalEntities: [],
-    sectors: ["creative industries", "design"],
-    geographies: ["FR", "EU"],
-    stage: "concept",
-    fundingTypes: ["grant"],
-    // Profile deliberately thin — to be filled by Mickael (BEAU SAS trigger-gated).
-    keywords: ["design", "creative", "brand", "craft"],
-    exclusions: [],
-  },
-  {
-    slug: "ludography",
-    name: "Ludography",
-    legalEntities: [],
-    sectors: ["games", "culture", "creative industries", "publishing"],
-    geographies: ["FR", "EU"],
-    stage: "concept",
-    fundingTypes: ["grant"],
-    keywords: ["game", "games", "ludic", "play", "culture", "publishing", "creative", "catalogue"],
-    exclusions: [],
-  },
-];
+
+/** Full registry entries (identity, status, discovery config, review state). */
+export const PROJECT_ENTRIES: ProjectEntry[] = activeProjects(PROJECT_REGISTRY);
+
+/** Matching-signal view — the EXISTING ProjectProfile shape the matcher takes. */
+export const THESTUDIO_PROJECTS: ProjectProfile[] = toProfiles(PROJECT_REGISTRY);
+
+export function projectEntry(slug: string): ProjectEntry | undefined {
+  return PROJECT_ENTRIES.find((p) => p.slug === slug);
+}
+
+export function projectName(slug: string): string {
+  return projectEntry(slug)?.name ?? slug;
+}
+
+/** Re-exported so consumers need one import for "the projects and their shape". */
+export { toProfile };
+export type { ProjectEntry };

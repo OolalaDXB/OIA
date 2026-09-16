@@ -1,0 +1,40 @@
+# OIA project registry entry. One file per project — this is the source of truth.
+# Matching signals (sectors/keywords/geographies) steer the suggestion engine;
+# `profileReview` says whether the owner has confirmed them or they are still a
+# working hypothesis. Correct a wrong keyword HERE and every surface follows.
+
+
+slug: padel-design
+name: padel.design
+kind: ADVISORY
+status: LIVE
+oneLiner: "Advisory for padel club development in underserved markets."
+url: "https://padel.design"
+active: true
+legalEntities: []
+sectors: ["sport", "advisory", "real estate"]
+geographies: ["FR", "EU", "Africa", "AE"]
+stage: operating
+fundingTypes: ["tender", "grant"]
+keywords:
+  - "padel"
+  - "sport"
+  - "feasibility"
+  - "advisory"
+  - "consultancy"
+  - "club"
+  - "territory"
+exclusions: []
+discovery:
+  enabled: true
+  queryTerms: ["sports facility feasibility", "sport development consultancy"]
+  cpvCodes: ["79400000", "92000000"]
+  countries: ["FRA"]
+  watch: ["TENDER_RFP"]
+profileReview:
+  status: DRAFT
+  derivedFrom:
+    - "TheStudioMT portfolio card 'padel.design' (public copy: territory analysis, feasibility, club playbooks)"
+  note: >-
+    The one studio venture whose natural funding shape is a public TENDER
+    (consultancy lots), not a grant — hence watch: TENDER_RFP only.

@@ -1,0 +1,46 @@
+# OIA project registry entry. One file per project — this is the source of truth.
+# Matching signals (sectors/keywords/geographies) steer the suggestion engine;
+# `profileReview` says whether the owner has confirmed them or they are still a
+# working hypothesis. Correct a wrong keyword HERE and every surface follows.
+
+
+slug: maisons-co
+name: Maisons.co
+kind: PRODUCT
+status: LIVE
+oneLiner: "Short-term rentals and long-term leases, with the accounting that follows both."
+url: "https://maisons.co"
+active: true
+legalEntities:
+  - name: "Oolala France SAS"
+    jurisdiction: "FR"
+    role: applicant
+sectors: ["hospitality", "tourism", "real estate", "software"]
+geographies: ["FR", "EU", "GE", "AE"]
+stage: operating
+fundingTypes: ["grant", "subsidy", "tender"]
+keywords:
+  - "hospitality"
+  - "tourism"
+  - "accommodation"
+  - "rental"
+  - "lease"
+  - "property"
+  - "real estate"
+  - "heritage"
+  - "renovation"
+  - "booking"
+  - "reconciliation"
+exclusions: []
+discovery:
+  enabled: true
+  queryTerms: ["tourism digitalisation", "accommodation", "property management"]
+  cpvCodes: ["55000000", "48000000", "72000000"]
+  countries: ["FRA"]
+  watch: ["GRANT", "TENDER_RFP"]
+profileReview:
+  status: DRAFT
+  derivedFrom:
+    - "TheStudioMT portfolio card 'Maisons.co' (public copy: booking, leases & rent calls, reconciliation, team ops)"
+    - "earlier @oia/workspace profile (hospitality/tourism/real estate)"
+  note: "Geography GE kept from the earlier profile; confirm it is still accurate."

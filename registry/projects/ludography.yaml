@@ -1,0 +1,44 @@
+# OIA project registry entry. One file per project — this is the source of truth.
+# Matching signals (sectors/keywords/geographies) steer the suggestion engine;
+# `profileReview` says whether the owner has confirmed them or they are still a
+# working hypothesis. Correct a wrong keyword HERE and every surface follows.
+
+
+slug: ludography
+name: Ludography
+kind: PRODUCT
+status: CONCEPT
+oneLiner: "Games and play catalogue project (concept)."
+active: true
+legalEntities:
+  - name: "Oolala France SAS"
+    jurisdiction: "FR"
+    role: applicant
+sectors: ["games", "culture", "creative industries", "publishing"]
+geographies: ["FR", "EU"]
+stage: concept
+fundingTypes: ["grant"]
+keywords:
+  - "game"
+  - "games"
+  - "video game"
+  - "play"
+  - "culture"
+  - "publishing"
+  - "creative"
+  - "catalogue"
+exclusions: []
+discovery:
+  enabled: true
+  queryTerms: ["video games", "cultural creative industries"]
+  cpvCodes: ["92000000", "48000000"]
+  countries: ["FRA"]
+  watch: ["GRANT"]
+profileReview:
+  status: DRAFT
+  derivedFrom:
+    - "earlier @oia/workspace profile (Phase 2, Claude working hypothesis)"
+  note: >-
+    Carried over unchanged from the Phase 2 profile set and NOT present on the
+    public portfolio — the one entry with no second source. Confirm it is still
+    a live concept, or set active: false.

@@ -4,13 +4,27 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { ConsoleData, ConsoleRecord, OpportunityKind } from "@oia/ingestion/console";
 import {
-  KIND_PHASE,
-  THESTUDIO_PROJECTS,
+  PROJECT_ENTRIES,
+  projectName,
+  recordsToCsv,
+  recordsToMarkdown,
   scoreProject,
+  toProfile,
   type ProjectSuggestion,
   type ReviewAction,
+  type TaskItem,
 } from "@oia/workspace";
-import { useAttachedNotes, useAuditLog, useProjectTags, useSavedViews } from "../lib/workspaceStore";
+import { applyFreshnessAll, assessFreshness } from "@oia/ingestion/freshness";
+import {
+  download,
+  useAttachedNotes,
+  useAuditLog,
+  useProjectTags,
+  useSavedViews,
+  useStorageInfo,
+  useTasks,
+  useWorkspaceBackup,
+} from "../lib/workspaceStore";
 
 type FactClass =
   | "CONFIRMED_OFFICIAL"
@@ -49,30 +63,47 @@ const KIND_COLOR: Record<OpportunityKind, string> = {
   REGULATORY: "var(--investigate)",
 };
 
-export type RailKey = "dashboard" | "grants" | "tenders" | "investors" | "projects";
+export type RailKey =
+  | "dashboard"
+  | "digest"
+  | "grants"
+  | "tenders"
+  | "investors"
+  | "projects"
+  | "tasks"
+  | "notes"
+  | "contacts"
+  | "metrics";
 
-/** Shared workspace rail — one shell for every surface (mandate §5). */
+/**
+ * Shared workspace rail — one shell for every surface. Every kind the Phase 1
+ * skeleton declared is now a real destination: notes, tasks and contacts stopped
+ * being greyed-out promises in Phase 3.
+ */
 export function Rail({ active, onExportAudit }: { active: RailKey; onExportAudit?: () => void }) {
-  const nav: { key: RailKey; label: string; href: string }[] = [
+  const nav: { key: RailKey; label: string; href: string; group?: boolean }[] = [
+    { key: "digest", label: "Today", href: "/digest/" },
     { key: "dashboard", label: "Dashboard", href: "/" },
     { key: "grants", label: "Grants", href: "/grants/" },
     { key: "tenders", label: "Tenders / RFP", href: "/tenders/" },
     { key: "investors", label: "Investors", href: "/investors/" },
-    { key: "projects", label: "Projects", href: "/projects/" },
+    { key: "projects", label: "Projects", href: "/projects/", group: true },
+    { key: "tasks", label: "Tasks", href: "/tasks/" },
+    { key: "notes", label: "Notes", href: "/notes/" },
+    { key: "contacts", label: "Contacts", href: "/contacts/" },
+    { key: "metrics", label: "Metrics", href: "/metrics/", group: true },
   ];
   return (
     <aside className="rail">
       <div className="railBrand">OIA</div>
       {nav.map((n) => (
-        <Link key={n.key} href={n.href} className={active === n.key ? "railItem active" : "railItem"}>
+        <Link
+          key={n.key}
+          href={n.href}
+          className={`${active === n.key ? "railItem active" : "railItem"}${n.group ? " railGroup" : ""}`}
+        >
           <span>{n.label}</span>
         </Link>
-      ))}
-      {(["NOTE", "TASK", "CONTACT"] as const).map((k) => (
-        <div key={k} className="railItem off" title={`Phase ${KIND_PHASE[k]}`}>
-          <span>{k === "NOTE" ? "Notes" : k === "TASK" ? "Tasks" : "Contacts"}</span>
-          <span className="railPhase">P{KIND_PHASE[k]}</span>
-        </div>
       ))}
       {onExportAudit && (
         <div className="railFoot">
@@ -80,6 +111,35 @@ export function Rail({ active, onExportAudit }: { active: RailKey; onExportAudit
         </div>
       )}
     </aside>
+  );
+}
+
+/** Where the human layer lives — stated, never implied. */
+export function StorageNote() {
+  const info = useStorageInfo();
+  const backup = useWorkspaceBackup();
+  return (
+    <div className="storageNote">
+      <span className="muted small">
+        {info.durability === "BROWSER_LOCAL"
+          ? "Reviews, tags, notes, tasks and contacts are stored in THIS browser only — no server, no sync. Back them up."
+          : "No browser storage available: this session keeps nothing."}
+      </span>
+      <span className="viewsRow">
+        <button className="ghostBtn" onClick={backup.exportAll}>backup</button>
+        <label className="ghostBtn restoreBtn">
+          restore
+          <input
+            type="file"
+            accept="application/json"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) void backup.importAll(file);
+            }}
+          />
+        </label>
+      </span>
+    </div>
   );
 }
 
@@ -116,15 +176,22 @@ export function Console({
   active: RailKey;
   title: string;
 }) {
+  // One clock for the whole render: freshness must not shift between the row
+  // and the detail of the same record.
+  const nowIso = useMemo(() => new Date().toISOString(), []);
   const audit = useAuditLog();
   const savedViews = useSavedViews();
   const projectTags = useProjectTags();
   const notes = useAttachedNotes();
+  const tasks = useTasks();
 
-  const records = useMemo(
-    () => (fixedKind ? data.records.filter((r) => r.opportunityKind === fixedKind) : data.records),
-    [data.records, fixedKind],
-  );
+  // Expiry is re-checked on every read, not at generation time: a shortlist
+  // generated last month must not still present a closed call as pursuable.
+  // applyFreshness only ever removes — it can close a gate condition, never open one.
+  const records = useMemo(() => {
+    const scoped = fixedKind ? data.records.filter((r) => r.opportunityKind === fixedKind) : data.records;
+    return applyFreshnessAll(scoped, nowIso);
+  }, [data.records, fixedKind, nowIso]);
 
   const [selectedId, setSelectedId] = useState<string>("");
   const [fKind, setFKind] = useState("");
@@ -133,6 +200,7 @@ export function Console({
   const [fRoute, setFRoute] = useState("");
   const [fReview, setFReview] = useState("");
   const [fProject, setFProject] = useState("");
+  const [fFresh, setFFresh] = useState("");
   const [sortKey, setSortKey] = useState("pubDate:desc");
 
   const filtered = useMemo(() => {
@@ -144,7 +212,8 @@ export function Console({
         (!fRoute || r.strategicRoute === fRoute) &&
         (!fReview || audit.statusFor(r.id) === fReview) &&
         (!fProject ||
-          (fProject === "__untagged" ? !projectTags.tags[r.id] : projectTags.tags[r.id] === fProject)),
+          (fProject === "__untagged" ? !projectTags.tags[r.id] : projectTags.tags[r.id] === fProject)) &&
+        (!fFresh || assessFreshness(r, nowIso).status === fFresh),
     );
     const [field, dir] = sortKey.split(":");
     const mul = dir === "asc" ? 1 : -1;
@@ -154,7 +223,7 @@ export function Console({
       if (field === "deadline") return mul * appDeadline(a).localeCompare(appDeadline(b));
       return mul * pubDate(a).localeCompare(pubDate(b)); // pubDate default
     });
-  }, [records, fKind, fReco, fVerif, fRoute, fReview, fProject, sortKey, audit, projectTags.tags]);
+  }, [records, fKind, fReco, fVerif, fRoute, fReview, fProject, fFresh, sortKey, audit, projectTags.tags, nowIso]);
 
   const selected = records.find((r) => r.id === selectedId) ?? filtered[0];
 
@@ -169,20 +238,37 @@ export function Console({
     setFRoute(v.filters.route ?? "");
     setFReview(v.filters.review ?? "");
     setFProject(v.filters.project ?? "");
+    setFFresh(v.filters.fresh ?? "");
     setSortKey(`${v.sortField}:${v.sortDirection}`);
   };
 
   const saveCurrentView = () => {
-    const name = window.prompt("Nom de la vue ?");
+    const name = window.prompt("Name this view");
     if (!name?.trim()) return;
     const [sortField, sortDirection] = sortKey.split(":");
     savedViews.saveView(
       name.trim(),
-      { kind: fKind, reco: fReco, verif: fVerif, route: fRoute, review: fReview, project: fProject },
+      { kind: fKind, reco: fReco, verif: fVerif, route: fRoute, review: fReview, project: fProject, fresh: fFresh },
       sortField ?? "pubDate",
       (sortDirection as "asc" | "desc") ?? "desc",
     );
   };
+
+  const exportCtx = {
+    auditLog: audit.log,
+    tags: projectTags.tags,
+    projectName,
+    nowIso,
+  };
+  const stamp = nowIso.slice(0, 10);
+  const exportCsv = () =>
+    download(`oia-shortlist-${stamp}.csv`, recordsToCsv(filtered, exportCtx), "text/csv");
+  const exportMarkdown = () =>
+    download(
+      `oia-shortlist-${stamp}.md`,
+      recordsToMarkdown(filtered, exportCtx, `${title} — ${stamp}`),
+      "text/markdown",
+    );
 
   return (
     <div className="shell">
@@ -224,7 +310,7 @@ export function Console({
             <select value={fProject} onChange={(e) => setFProject(e.target.value)}>
               <option value="">all</option>
               <option value="__untagged">untagged</option>
-              {THESTUDIO_PROJECTS.map((p) => (
+              {PROJECT_ENTRIES.map((p) => (
                 <option key={p.slug} value={p.slug}>{p.name}</option>
               ))}
             </select>
@@ -238,6 +324,19 @@ export function Console({
               <option value="confidence:desc">confidence ↓</option>
               <option value="title:asc">title A→Z</option>
             </select>
+          </label>
+          <Select
+            label="Freshness"
+            value={fFresh}
+            onChange={setFFresh}
+            options={["FRESH", "CLOSING_SOON", "EXPIRED", "NO_DEADLINE"]}
+          />
+          <label className="filter">
+            <span className="muted">Export ({filtered.length})</span>
+            <span className="viewsRow">
+              <button className="ghostBtn" onClick={exportCsv}>csv</button>
+              <button className="ghostBtn" onClick={exportMarkdown}>markdown</button>
+            </span>
           </label>
           <label className="filter">
             <span className="muted">Saved views</span>
@@ -260,6 +359,7 @@ export function Console({
               const rev = audit.statusFor(r.id);
               const tag = projectTags.tags[r.id];
               const kind = r.opportunityKind;
+              const fresh = assessFreshness(r, nowIso);
               return (
                 <li
                   key={r.id}
@@ -274,7 +374,12 @@ export function Console({
                   <div className="rowMeta">
                     <span>{r.issuer}</span>
                     {pubDate(r) && <span className="pubChip">{pubDate(r)}</span>}
-                    {tag && <span className="pubChip tagChip">{THESTUDIO_PROJECTS.find((p) => p.slug === tag)?.name ?? tag}</span>}
+                    {(fresh.status === "CLOSING_SOON" || fresh.status === "EXPIRED") && (
+                      <span className={fresh.status === "EXPIRED" ? "pubChip expiredChip" : "pubChip closingChip"}>
+                        {fresh.status === "EXPIRED" ? "closed" : `closes in ${fresh.daysToDeadline}d`}
+                      </span>
+                    )}
+                    {tag && <span className="pubChip tagChip">{projectName(tag)}</span>}
                   </div>
                   <div className="rowMeta small">
                     <span>{r.verificationStatus}</span>
@@ -309,6 +414,16 @@ export function Console({
                 }}
                 notes={notes.notesFor(selected.id)}
                 onAddNote={(text) => notes.addNote(selected.id, text)}
+                tasks={tasks.tasksFor(selected.id)}
+                onAddTask={(title, due) =>
+                  tasks.addTask(title, {
+                    recordId: selected.id,
+                    ...(due ? { due } : {}),
+                    ...(projectTags.tags[selected.id] ? { projectSlug: projectTags.tags[selected.id]! } : {}),
+                  })
+                }
+                onToggleTask={tasks.toggle}
+                nowIso={nowIso}
                 onReview={(action, comment) =>
                   audit.append(selected.id, action, comment, !!selected.gate?.pursueEligible)
                 }
@@ -363,6 +478,10 @@ function Detail({
   onTag,
   notes,
   onAddNote,
+  tasks,
+  onAddTask,
+  onToggleTask,
+  nowIso,
   onReview,
 }: {
   record: ConsoleRecord;
@@ -372,18 +491,26 @@ function Detail({
   onTag: (slug: string) => void;
   notes: { id: string; text: string; at: string; actor: string }[];
   onAddNote: (text: string) => void;
+  tasks: TaskItem[];
+  onAddTask: (title: string, due: string) => void;
+  onToggleTask: (task: TaskItem) => void;
+  nowIso: string;
   onReview: (action: ReviewAction, comment: string) => void;
 }) {
   const [comment, setComment] = useState("");
   const [noteDraft, setNoteDraft] = useState("");
+  const [taskDraft, setTaskDraft] = useState("");
+  const [taskDue, setTaskDue] = useState("");
   const gate = r.gate;
   const canPursue = !!gate?.pursueEligible;
+  const freshness = assessFreshness(r, nowIso);
 
   const suggestions: ProjectSuggestion[] = useMemo(
     () =>
-      THESTUDIO_PROJECTS.map((p) => scoreProject(r, p))
+      PROJECT_ENTRIES.map((p) => scoreProject(r, toProfile(p)))
         .filter((x): x is ProjectSuggestion => x !== null)
-        .sort((a, b) => b.confidence - a.confidence),
+        .sort((a, b) => b.confidence - a.confidence)
+        .slice(0, 5),
     [r],
   );
 
@@ -397,7 +524,24 @@ function Detail({
         <h2>{r.title}</h2>
         <span className="muted">{r.issuer}</span>
         {pubDate(r) && <span className="pubChip">published {pubDate(r)}</span>}
+        <span
+          className={
+            freshness.status === "EXPIRED"
+              ? "pubChip expiredChip"
+              : freshness.status === "CLOSING_SOON"
+                ? "pubChip closingChip"
+                : "pubChip"
+          }
+        >
+          {freshness.status.toLowerCase().replace("_", " ")}
+        </span>
       </div>
+
+      {freshness.reasons.length > 0 && (
+        <div className={freshness.status === "EXPIRED" ? "warn small" : "muted small"}>
+          {freshness.reasons.join(" · ")}
+        </div>
+      )}
 
       {r.discrepancies.length > 0 && (
         <Section title={`Discrepancies (seed vs observed) · ${r.discrepancies.length}`}>
@@ -411,13 +555,26 @@ function Detail({
       )}
 
       <Section title="TheStudio project">
+        {r.discoveredFor && r.discoveredFor.length > 0 && (
+          <KV
+            k="Discovered for"
+            v={
+              <span>
+                {r.discoveredFor.map((slug) => projectName(slug)).join(", ")}
+                <div className="muted small">
+                  The project queries that surfaced this notice — discovery provenance, not a match verdict.
+                </div>
+              </span>
+            }
+          />
+        )}
         <KV
           k="Tagged project"
           v={
             <span className="viewsRow">
               <select value={projectTag} onChange={(e) => onTag(e.target.value)}>
                 <option value="">— untagged —</option>
-                {THESTUDIO_PROJECTS.map((p) => (
+                {PROJECT_ENTRIES.map((p) => (
                   <option key={p.slug} value={p.slug}>{p.name}</option>
                 ))}
               </select>
@@ -429,11 +586,14 @@ function Detail({
           <div className="muted small">No suggestion: no project profile signal matches this record (honest silence).</div>
         ) : (
           suggestions.map((s) => {
-            const p = THESTUDIO_PROJECTS.find((x) => x.slug === s.projectSlug);
+            const p = PROJECT_ENTRIES.find((x) => x.slug === s.projectSlug);
             return (
               <div key={s.projectSlug} className="fact">
                 <div>
                   <b>{p?.name ?? s.projectSlug}</b> · suggested {s.confidence}/100
+                  {p?.profileReview.status === "DRAFT" && (
+                    <span className="muted small"> · profile unconfirmed</span>
+                  )}
                   {projectTag !== s.projectSlug && (
                     <button className="ghostBtn applyBtn" onClick={() => onTag(s.projectSlug)}>tag it</button>
                   )}
@@ -603,6 +763,48 @@ function Detail({
             }}
           >
             add note
+          </button>
+        </div>
+      </Section>
+
+      <Section title={`Tasks · ${tasks.filter((t) => t.status === "OPEN").length} open`}>
+        {tasks.length === 0 && <div className="muted">No task on this opportunity yet.</div>}
+        {tasks.map((t) => (
+          <div key={t.id} className="fact">
+            <div className="viewsRow">
+              <button className="ghostBtn" onClick={() => onToggleTask(t)}>
+                {t.status === "DONE" ? "done" : "mark done"}
+              </button>
+              <span className={t.status === "DONE" ? "muted" : undefined}>{t.title}</span>
+            </div>
+            <div className="muted small">
+              {t.due ? `due ${t.due}` : "no due date"}
+              {t.completedAt ? ` · completed ${t.completedAt.slice(0, 10)}` : ""}
+            </div>
+          </div>
+        ))}
+        <div className="viewsRow noteRow">
+          <input
+            className="comment inputLine"
+            placeholder="What has to happen next…"
+            value={taskDraft}
+            onChange={(e) => setTaskDraft(e.target.value)}
+          />
+          <input
+            className="comment inputLine dateInput"
+            type="date"
+            value={taskDue}
+            onChange={(e) => setTaskDue(e.target.value)}
+          />
+          <button
+            className="ghostBtn"
+            onClick={() => {
+              onAddTask(taskDraft, taskDue);
+              setTaskDraft("");
+              setTaskDue("");
+            }}
+          >
+            add task
           </button>
         </div>
       </Section>

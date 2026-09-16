@@ -1,4 +1,4 @@
-import type { ConsoleRecord } from "@oia/ingestion";
+import type { ConsoleRecord } from "@oia/ingestion/console";
 import type { ProjectProfile } from "@oia/database";
 import type { ProjectSuggestion, SuggestionService } from "./services";
 
@@ -48,8 +48,14 @@ export function scoreProject(record: ConsoleRecord, project: ProjectProfile): Pr
   if (project.exclusions.some((x) => wordMatch(corpus, x))) return null;
 
   const s = matchSignals(record, project);
+
+  // Geography alone is NOT a match. Every EU project shares "EU", so scoring on
+  // it produced a suggestion for every project on every record — sixteen 4/100
+  // rows that told the reviewer nothing. A suggestion needs a substantive
+  // signal (a keyword or a sector); geography only strengthens one.
+  if (s.keywords.length === 0 && s.sectors.length === 0) return null;
+
   const score = s.keywords.length * 12 + s.sectors.length * 10 + s.geographies.length * 4;
-  if (score <= 0) return null;
 
   const parts: string[] = [];
   if (s.keywords.length) parts.push(`keywords: ${s.keywords.join(", ")}`);

@@ -1,4 +1,4 @@
-import type { ConsoleRecord } from "@oia/ingestion";
+import type { ConsoleRecord } from "@oia/ingestion/console";
 
 /**
  * Service interfaces stubbed in Phase 1 so the skeleton accommodates later

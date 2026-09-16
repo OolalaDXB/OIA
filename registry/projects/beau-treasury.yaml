@@ -1,0 +1,43 @@
+# OIA project registry entry. One file per project — this is the source of truth.
+# Matching signals (sectors/keywords/geographies) steer the suggestion engine;
+# `profileReview` says whether the owner has confirmed them or they are still a
+# working hypothesis. Correct a wrong keyword HERE and every surface follows.
+
+
+slug: beau-treasury
+name: BEAU Treasury
+kind: PRODUCT
+status: IN_DEVELOPMENT
+oneLiner: "Treasury intelligence for mid-market corporates. ISO 20022 native."
+active: true
+legalEntities:
+  - name: "Oolala France SAS"
+    jurisdiction: "FR"
+    role: applicant
+sectors: ["fintech", "treasury", "software", "digital"]
+geographies: ["FR", "EU"]
+stage: build
+fundingTypes: ["grant", "equity"]
+keywords:
+  - "treasury"
+  - "cash management"
+  - "iso 20022"
+  - "payments"
+  - "liquidity"
+  - "fintech"
+  - "software"
+exclusions: []
+discovery:
+  enabled: false
+  queryTerms: ["treasury management", "cash management", "ISO 20022"]
+  cpvCodes: ["48000000", "66000000"]
+  countries: ["FRA"]
+  watch: ["GRANT", "VC_INVESTOR"]
+profileReview:
+  status: DRAFT
+  derivedFrom:
+    - "TheStudioMT portfolio card 'BEAU Treasury' (public copy, badged In development)"
+  note: >-
+    Discovery deliberately OFF: the product is pre-shipping, so an automated
+    funding queue would produce noise before there is anything to apply with.
+    Flip `discovery.enabled` when the scope being built is stable.

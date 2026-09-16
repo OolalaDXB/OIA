@@ -21,6 +21,7 @@
     "@oia/intelligence": "workspace:*",
     "@oia/knowledge": "workspace:*",
     "@oia/providers": "workspace:*",
+    "@oia/registry": "workspace:*",
     "@oia/scoring": "workspace:*"
   },
   "devDependencies": {

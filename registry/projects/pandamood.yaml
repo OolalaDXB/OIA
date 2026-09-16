@@ -1,0 +1,39 @@
+# OIA project registry entry. One file per project — this is the source of truth.
+# Matching signals (sectors/keywords/geographies) steer the suggestion engine;
+# `profileReview` says whether the owner has confirmed them or they are still a
+# working hypothesis. Correct a wrong keyword HERE and every surface follows.
+
+
+slug: pandamood
+name: PandaMood
+kind: VENTURE
+status: PROTOTYPE
+oneLiner: "Quiet-luxury padel equipment brand. Limited editions only."
+url: "https://pandamood.com"
+active: true
+legalEntities: []
+sectors: ["sport", "consumer goods", "design", "e-commerce"]
+geographies: ["FR", "EU", "AE"]
+stage: prototype
+fundingTypes: ["grant", "equity"]
+keywords:
+  - "padel"
+  - "equipment"
+  - "brand"
+  - "design"
+  - "manufacturing"
+  - "supply chain"
+  - "e-commerce"
+  - "sport"
+exclusions: []
+discovery:
+  enabled: false
+  queryTerms: ["design", "manufacturing", "consumer brand"]
+  cpvCodes: []
+  countries: ["FRA"]
+  watch: ["GRANT"]
+profileReview:
+  status: DRAFT
+  derivedFrom:
+    - "TheStudioMT portfolio card 'PandaMood' (public copy: brand identity, product design, supply chain, e-commerce; badged Prototype)"
+  note: "Tracked manually until the brand ships; no public-funding queue worth running yet."

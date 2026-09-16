@@ -1,0 +1,57 @@
+# OIA project registry entry. One file per project — this is the source of truth.
+# Matching signals (sectors/keywords/geographies) steer the suggestion engine;
+# `profileReview` says whether the owner has confirmed them or they are still a
+# working hypothesis. Correct a wrong keyword HERE and every surface follows.
+
+
+slug: thestudio-mt
+name: TheStudio MT
+kind: STUDIO
+oneLiner: "The studio itself — product strategy, architecture and full-stack delivery, as a contracting party."
+status: LIVE
+url: "https://thestudiomt.com"
+active: true
+legalEntities:
+  - name: "Oolala France SAS"
+    jurisdiction: "FR"
+    role: applicant
+  - name: "Oolala Next FZ-LLC"
+    jurisdiction: "AE"
+    role: applicant
+sectors: ["software", "digital", "design", "advisory", "AI"]
+geographies: ["FR", "EU", "AE", "GCC"]
+stage: operating
+fundingTypes: ["tender", "grant", "subsidy"]
+keywords:
+  - "software development"
+  - "software"
+  - "web"
+  - "application"
+  - "platform"
+  - "digital transformation"
+  - "architecture"
+  - "design"
+  - "ux"
+  - "consultancy"
+  - "advisory"
+  - "artificial intelligence"
+  - "data"
+  - "maintenance"
+exclusions:
+  - "hardware supply"
+  - "staffing agency"
+discovery:
+  enabled: true
+  queryTerms: ["software development services", "digital transformation", "web application", "IT consultancy"]
+  cpvCodes: ["72000000", "48000000", "79400000"]
+  countries: ["FRA", "LUX", "BEL"]
+  watch: ["TENDER_RFP", "GRANT"]
+profileReview:
+  status: DRAFT
+  derivedFrom:
+    - "TheStudioMT public site (capabilities + execution lines across the portfolio)"
+    - "entity doctrine — knowledge/entities/entities.yaml"
+  note: >-
+    The studio as its own client: public IT tenders it could bid on, and
+    innovation funding it could carry. Exclusions keep pure hardware-supply and
+    body-shopping lots out of the queue.

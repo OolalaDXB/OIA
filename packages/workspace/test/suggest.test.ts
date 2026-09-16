@@ -63,6 +63,15 @@ describe("[P2] SuggestionService (deterministic, explainable)", () => {
     expect(out.find((s) => s.projectSlug === "maisons-co")).toBeUndefined();
   });
 
+  it("does not suggest a project on geography alone", async () => {
+    // Every project here operates in the EU, so a bare "EU" mention used to
+    // produce one weak suggestion per project — noise dressed as analysis.
+    const r = record("Procurement of catering equipment", "Buyer in the EU");
+    const out = await svc.suggestProjects(r);
+    for (const s of out) expect(s.rationale).toMatch(/keywords:|sectors:/);
+    expect(out.every((s) => !/^Matched geo:/.test(s.rationale))).toBe(true);
+  });
+
   it("hard-caps confidence below certainty", async () => {
     const kitchen = record(
       "AI data digital creative culture media software innovation platform",
