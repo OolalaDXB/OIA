@@ -11,8 +11,8 @@
         "GLOBAL"
       ],
       "url": "https://acquire.com",
-      "urlVerified": false,
-      "lastUrlCheck": "",
+      "urlVerified": true,
+      "lastUrlCheck": "2026-09-16",
       "status": "BLOCKED",
       "access": {
         "mode": "SCRAPE",
@@ -37,7 +37,7 @@
       ],
       "url": "https://www.investabudhabi.ae",
       "urlVerified": false,
-      "lastUrlCheck": "",
+      "lastUrlCheck": "2026-09-16",
       "status": "DECLARED",
       "access": {
         "mode": "MANUAL",
@@ -63,8 +63,8 @@
         "FR"
       ],
       "url": "https://aides-territoires.beta.gouv.fr",
-      "urlVerified": false,
-      "lastUrlCheck": "",
+      "urlVerified": true,
+      "lastUrlCheck": "2026-09-16",
       "status": "DECLARED",
       "access": {
         "mode": "API",
@@ -87,8 +87,8 @@
         "FR"
       ],
       "url": "https://www.boamp.fr",
-      "urlVerified": false,
-      "lastUrlCheck": "",
+      "urlVerified": true,
+      "lastUrlCheck": "2026-09-16",
       "status": "DECLARED",
       "access": {
         "mode": "API",
@@ -113,7 +113,7 @@
       ],
       "url": "https://www.bpifrance.fr/nos-appels-a-projets-concours",
       "urlVerified": false,
-      "lastUrlCheck": "",
+      "lastUrlCheck": "2026-09-16",
       "status": "DECLARED",
       "access": {
         "mode": "MANUAL",
@@ -136,7 +136,7 @@
       ],
       "url": "https://www.entreprises.gouv.fr/fr/innovation/financement/credit-d-impot-recherche-cir",
       "urlVerified": false,
-      "lastUrlCheck": "",
+      "lastUrlCheck": "2026-09-16",
       "status": "DECLARED",
       "access": {
         "mode": "MANUAL",
@@ -160,8 +160,8 @@
         "EU"
       ],
       "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home",
-      "urlVerified": false,
-      "lastUrlCheck": "",
+      "urlVerified": true,
+      "lastUrlCheck": "2026-09-16",
       "status": "FIXTURE_ONLY",
       "access": {
         "mode": "API",
@@ -183,8 +183,8 @@
         "GLOBAL"
       ],
       "url": "https://flippa.com",
-      "urlVerified": false,
-      "lastUrlCheck": "",
+      "urlVerified": true,
+      "lastUrlCheck": "2026-09-16",
       "status": "DECLARED",
       "access": {
         "mode": "MANUAL",
@@ -207,7 +207,7 @@
       ],
       "url": "https://agirpourlatransition.ademe.fr/entreprises/appels-projets-offres",
       "urlVerified": false,
-      "lastUrlCheck": "",
+      "lastUrlCheck": "2026-09-16",
       "status": "DECLARED",
       "access": {
         "mode": "MANUAL",
@@ -231,8 +231,8 @@
         "GCC"
       ],
       "url": "https://hub71.com",
-      "urlVerified": false,
-      "lastUrlCheck": "",
+      "urlVerified": true,
+      "lastUrlCheck": "2026-09-16",
       "status": "DECLARED",
       "access": {
         "mode": "MANUAL",
@@ -260,7 +260,7 @@
       ],
       "url": "https://www.malt.fr",
       "urlVerified": false,
-      "lastUrlCheck": "",
+      "lastUrlCheck": "2026-09-16",
       "status": "BLOCKED",
       "access": {
         "mode": "SCRAPE",
@@ -288,7 +288,7 @@
       ],
       "url": "https://www.bretagne.bzh/aides/",
       "urlVerified": false,
-      "lastUrlCheck": "",
+      "lastUrlCheck": "2026-09-16",
       "status": "DECLARED",
       "access": {
         "mode": "MANUAL",
@@ -317,8 +317,8 @@
         "EU"
       ],
       "url": "https://ted.europa.eu",
-      "urlVerified": false,
-      "lastUrlCheck": "",
+      "urlVerified": true,
+      "lastUrlCheck": "2026-09-16",
       "status": "LIVE",
       "access": {
         "mode": "API",
@@ -341,8 +341,8 @@
         "GCC"
       ],
       "url": "https://www.mof.gov.ae",
-      "urlVerified": false,
-      "lastUrlCheck": "",
+      "urlVerified": true,
+      "lastUrlCheck": "2026-09-16",
       "status": "DECLARED",
       "access": {
         "mode": "MANUAL",
@@ -365,8 +365,8 @@
         "GB"
       ],
       "url": "https://www.find-tender.service.gov.uk",
-      "urlVerified": false,
-      "lastUrlCheck": "",
+      "urlVerified": true,
+      "lastUrlCheck": "2026-09-16",
       "status": "DECLARED",
       "access": {
         "mode": "API",
@@ -389,8 +389,8 @@
         "GLOBAL"
       ],
       "url": "https://www.ungm.org",
-      "urlVerified": false,
-      "lastUrlCheck": "",
+      "urlVerified": true,
+      "lastUrlCheck": "2026-09-16",
       "status": "DECLARED",
       "access": {
         "mode": "MANUAL",
@@ -413,7 +413,7 @@
       ],
       "url": "https://www.upwork.com",
       "urlVerified": false,
-      "lastUrlCheck": "",
+      "lastUrlCheck": "2026-09-16",
       "status": "BLOCKED",
       "access": {
         "mode": "API",
@@ -440,8 +440,8 @@
         "Africa"
       ],
       "url": "https://projects.worldbank.org/en/projects-operations/procurement",
-      "urlVerified": false,
-      "lastUrlCheck": "",
+      "urlVerified": true,
+      "lastUrlCheck": "2026-09-16",
       "status": "DECLARED",
       "access": {
         "mode": "MANUAL",

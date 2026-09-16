@@ -9,7 +9,8 @@ kinds: ["EQUITY", "GRANT"]
 geographies: ["AE", "GCC"]
 forProjects: ["bawaba", "myoolala", "beau"]
 url: "https://hub71.com"
-urlVerified: false
+urlVerified: true
+lastUrlCheck: "2026-09-16"
 status: DECLARED
 access:
   mode: MANUAL

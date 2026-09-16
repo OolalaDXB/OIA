@@ -10,6 +10,7 @@ geographies: ["FR", "EU"]
 forProjects: ["thestudio-mt"]
 url: "https://www.malt.fr"
 urlVerified: false
+lastUrlCheck: "2026-09-16"
 status: BLOCKED
 access:
   mode: SCRAPE

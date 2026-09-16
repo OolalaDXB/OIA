@@ -9,7 +9,8 @@ kinds: ["TENDER", "PRE_SOLICITATION"]
 geographies: ["EMEA", "GLOBAL", "Africa"]
 forProjects: ["padel-design", "district-267", "live-great-foundation", "thestudio-mt"]
 url: "https://projects.worldbank.org/en/projects-operations/procurement"
-urlVerified: false
+urlVerified: true
+lastUrlCheck: "2026-09-16"
 status: DECLARED
 access:
   mode: MANUAL

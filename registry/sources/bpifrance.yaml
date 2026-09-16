@@ -9,6 +9,7 @@ kinds: ["GRANT", "DEBT_GUARANTEE", "EQUITY"]
 geographies: ["FR"]
 url: "https://www.bpifrance.fr/nos-appels-a-projets-concours"
 urlVerified: false
+lastUrlCheck: "2026-09-16"
 status: DECLARED
 access:
   mode: MANUAL

@@ -8,7 +8,8 @@ operator: "European Union"
 kinds: ["TENDER", "PRE_SOLICITATION"]
 geographies: ["EU"]
 url: "https://ted.europa.eu"
-urlVerified: false
+urlVerified: true
+lastUrlCheck: "2026-09-16"
 status: LIVE
 connector: "ted"
 access:

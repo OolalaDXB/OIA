@@ -10,6 +10,7 @@ geographies: ["FR", "FR-BRE"]
 forProjects: ["lesvieillespierres", "maisons-co", "sillon", "thestudio-mt", "ludography"]
 url: "https://www.bretagne.bzh/aides/"
 urlVerified: false
+lastUrlCheck: "2026-09-16"
 status: DECLARED
 access:
   mode: MANUAL

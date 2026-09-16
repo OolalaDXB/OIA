@@ -10,6 +10,8 @@ kind: PRODUCT
 status: PRIVATE_BETA
 oneLiner: "Wealth structuring infrastructure for multi-jurisdictional families."
 url: "https://beau.capital"
+urlVerified: true
+lastUrlCheck: "2026-09-16"
 active: true
 legalEntities:
   - name: "Oolala France SAS"

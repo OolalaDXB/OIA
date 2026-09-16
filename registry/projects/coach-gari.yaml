@@ -10,6 +10,8 @@ kind: PRODUCT
 status: LIVE
 oneLiner: "Coaching business and influencer partnerships, run from one back-office."
 url: "https://coachgari28.com"
+urlVerified: true
+lastUrlCheck: "2026-09-16"
 active: true
 legalEntities: []
 sectors: ["sport", "coaching", "creator economy", "software"]

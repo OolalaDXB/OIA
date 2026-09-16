@@ -8,7 +8,8 @@ operator: "United Nations"
 kinds: ["TENDER"]
 geographies: ["EMEA", "GLOBAL"]
 url: "https://www.ungm.org"
-urlVerified: false
+urlVerified: true
+lastUrlCheck: "2026-09-16"
 status: DECLARED
 access:
   mode: MANUAL

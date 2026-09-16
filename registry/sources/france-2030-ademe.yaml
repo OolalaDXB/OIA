@@ -9,6 +9,7 @@ kinds: ["GRANT"]
 geographies: ["FR"]
 url: "https://agirpourlatransition.ademe.fr/entreprises/appels-projets-offres"
 urlVerified: false
+lastUrlCheck: "2026-09-16"
 status: DECLARED
 access:
   mode: MANUAL

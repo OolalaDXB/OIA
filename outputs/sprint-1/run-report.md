@@ -1,26 +1,133 @@
-# Sprint 1 — TED discovery run
+# TED discovery run (multi-project)
 
-- query: `classification-cpv IN (72000000 92000000)`
-- notices retrieved: 100
-- candidates processed (cap 5): 5
-- qualified at MANUAL_REVIEW_REQUIRED: 5
-- notice-page fetch failures: 0
+## Per project
+- **bawaba** — OK · 100 biddable of 100 retrieved
+  - query: `classification-cpv IN (72212190 72224100 72226000 72254000 72600000 48218000 79417000) AND buyer-country IN (FRA LUX BEL DEU) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
+- **beau** — OK · 13 biddable of 13 retrieved
+  - query: `classification-cpv IN (48812000 66170000 72212443 72212190) AND buyer-country IN (FRA LUX) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
+- **lesvieillespierres** — OK · 68 biddable of 68 retrieved
+  - query: `classification-cpv IN (92522000 92521000 45212350 79952000) AND buyer-country IN (FRA) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
+- **ludography** — OK · 87 biddable of 87 retrieved
+  - query: `classification-cpv IN (48520000 92312000 79822500 92500000) AND buyer-country IN (FRA) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
+- **maisons-co** — OK · 38 biddable of 38 retrieved
+  - query: `classification-cpv IN (72212517 48812000 55100000 70330000) AND buyer-country IN (FRA) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
+- **myoolala** — OK · 9 biddable of 9 retrieved
+  - query: `classification-cpv IN (72212517 48219700 72413000 72212224) AND buyer-country IN (FRA) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
+- **padel-design** — OK · 100 biddable of 100 retrieved
+  - query: `classification-cpv IN (71241000 79314000 79419000 92600000) AND buyer-country IN (FRA) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
+- **rls-guard** — OK · 81 biddable of 81 retrieved
+  - query: `classification-cpv IN (72212730 79417000 72267000 48218000) AND buyer-country IN (FRA LUX BEL) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
+- **sillon** — OK · 39 biddable of 39 retrieved
+  - query: `classification-cpv IN (48451000 72212450 72212443 48812000 92500000) AND buyer-country IN (FRA) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
+- **thestudio-mt** — OK · 100 biddable of 100 retrieved
+  - query: `classification-cpv IN (72212517 72230000 72267000 72413000 79421000 72224000) AND buyer-country IN (FRA LUX BEL) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
+
+- unique notices across projects: 481
+- matchable text per record (the S2 measure): median 1599 characters over 20 record(s)
+- candidates processed (cap 25): 25
+- qualified at MANUAL_REVIEW_REQUIRED: 20
+- notice-page fetch failures: 5
 
 ## Candidates (each with official source URL)
-- **283014-2016** — United Kingdom-Huyton: Health and social work services
-  - source: https://ted.europa.eu/en/notice/283014-2016/html
+- **422623-2026** — France – Structural engineering consultancy services – Accord-cadre d'Assistance Technique à la Maîtrise d'Ouvrage (ATMO) pour le CHU de Strasbourg (HUS)
+  - source: https://ted.europa.eu/en/notice/422623-2026/html
+  - discovered for: bawaba, rls-guard
   - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **412169-2016** — Spain-Madrid: Business services: law, marketing, consulting, recruitment, printing and security
-  - source: https://ted.europa.eu/en/notice/412169-2016/html
+- **422920-2026** — Germany – License management software package – Lizenzerweiterung Splunk
+  - source: https://ted.europa.eu/en/notice/422920-2026/html
+  - discovered for: bawaba
   - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **448146-2016** — Italy-Rome: Machine tools
-  - source: https://ted.europa.eu/en/notice/448146-2016/html
+- **427373-2026** — Germany – IT services: consulting, software development, Internet and support – Rahmenvereinbarung über Externe Unterstützungsleistungen im Bereich IT-Infrastruktur und Endnutzer
+  - source: https://ted.europa.eu/en/notice/427373-2026/html
+  - discovered for: bawaba
   - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **448194-2016** — Italy-Rome: IT services: consulting, software development, Internet and support
-  - source: https://ted.europa.eu/en/notice/448194-2016/html
+- **428975-2026** — Germany – Health and safety services – Landkreis Northeim - sicherheitstechnische und brandschutzrechtliche Betreuung
+  - source: https://ted.europa.eu/en/notice/428975-2026/html
+  - discovered for: bawaba
   - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **2382-2017** — Austria-Vienna: System implementation planning services
-  - source: https://ted.europa.eu/en/notice/2382-2017/html
+- **429989-2026** — Germany – Computer support and consultancy services – RV Beratung Cybersicherheit- & Resilienzstärkung
+  - source: https://ted.europa.eu/en/notice/429989-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **433728-2026** — Luxembourg – Data-processing services – ID 6246207 - SEUPB - Information Services - Data Protection Officer Advisory Services
+  - source: https://ted.europa.eu/en/notice/433728-2026/html
+  - discovered for: bawaba, rls-guard
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **435056-2026** — Germany – License management software package – Handelspartner Rahmenvereinbarung über die Lieferung von Software des Lizenzgebers Microsoft sowie zugehörigen Services und Dienstleistungen für das Saarland und den Landkreis Saarlouis
+  - source: https://ted.europa.eu/en/notice/435056-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **437127-2026** — Germany – Services provided by medical personnel – Rahmenvertrag für die arbeitsmedizinische und sicherheitstechnische Betreuung 2027-2030
+  - source: https://ted.europa.eu/en/notice/437127-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **444972-2026** — Germany – Health and safety services – Landkreis Northeim - sicherheitstechnische und brandschutzrechtliche Betreuung
+  - source: https://ted.europa.eu/en/notice/444972-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **448450-2026** — Germany – Health and safety services – Landkreis Northeim - sicherheitstechnische und brandschutzrechtliche Betreuung
+  - source: https://ted.europa.eu/en/notice/448450-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **450738-2026** — Belgium – Safety consultancy services – Raamovereenkomst voor veiligheidscoördinatie – ontwerp en verwezenlijking
+  - source: https://ted.europa.eu/en/notice/450738-2026/html
+  - discovered for: bawaba, rls-guard
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **456097-2026** — France – Computer support and consultancy services – Contrat-cadre Conseil IT 2027
+  - source: https://ted.europa.eu/en/notice/456097-2026/html
+  - discovered for: bawaba, thestudio-mt
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **466007-2026** — France – Computer-related services – Prestation d'infogérance et d'Hébergement : La présente consultation concerne la 1ère phase : présélection de 5 candidats admis à soumissionner
+  - source: https://ted.europa.eu/en/notice/466007-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **467100-2026** — France – Computer back-up services – PRESTATIONS D'ASSISTANCE ET D'EXPERTISE INFORMATIQUE
+  - source: https://ted.europa.eu/en/notice/467100-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **471799-2026** — France – Technical computer support services – AOO Prestation de développement pour la refonte du Système d’Information de l’US10-CépiDC Inserm
+  - source: https://ted.europa.eu/en/notice/471799-2026/html
+  - discovered for: bawaba
+  - verification: SOURCE_UNAVAILABLE · live fetch: SOURCE_UNAVAILABLE
+- **478020-2026** — France – License management software package – Groupement de commandes pour l'externalisation des outils de communication interne
+  - source: https://ted.europa.eu/en/notice/478020-2026/html
+  - discovered for: bawaba, rls-guard
+  - verification: SOURCE_UNAVAILABLE · live fetch: SOURCE_UNAVAILABLE
+- **480676-2026** — France – Health and safety consultancy services – Mission de Coordination SPS de Niveau 1 pour la desserte du Môle Central - RP 541 et RP 539
+  - source: https://ted.europa.eu/en/notice/480676-2026/html
+  - discovered for: bawaba, rls-guard
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **491518-2026** — Germany – Systems consultancy services – SAP S/4HANA Utilities
+  - source: https://ted.europa.eu/en/notice/491518-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **494531-2026** — Germany – Health and safety services – Landkreis Northeim - sicherheitstechnische und brandschutzrechtliche Betreuung
+  - source: https://ted.europa.eu/en/notice/494531-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **496268-2026** — Germany – Services provided by medical personnel – Rahmenvertrag für die arbeitsmedizinische und sicherheitstechnische Betreuung 2027-2030
+  - source: https://ted.europa.eu/en/notice/496268-2026/html
+  - discovered for: bawaba
+  - verification: SOURCE_UNAVAILABLE · live fetch: SOURCE_UNAVAILABLE
+- **500358-2026** — France – Technical computer support services – Prestation de support et de maitrise d'ouvrage du système d'information bancaire de l'IEOM.
+  - source: https://ted.europa.eu/en/notice/500358-2026/html
+  - discovered for: bawaba
+  - verification: SOURCE_UNAVAILABLE · live fetch: SOURCE_UNAVAILABLE
+- **500966-2026** — France – Computer back-up services – PRESTATIONS D'ASSISTANCE ET D'EXPERTISE INFORMATIQUE
+  - source: https://ted.europa.eu/en/notice/500966-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **502549-2026** — France – Systems consultancy services – Analyse de risques et accompagnement SMSI V2
+  - source: https://ted.europa.eu/en/notice/502549-2026/html
+  - discovered for: bawaba, rls-guard
+  - verification: SOURCE_UNAVAILABLE · live fetch: SOURCE_UNAVAILABLE
+- **505248-2026** — France – Technical computer support services – Prestation d'assistance technique informatique pour l'agence IEDOM de Guadeloupe.
+  - source: https://ted.europa.eu/en/notice/505248-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **506438-2026** — France – Computer support and consultancy services – Contrat-cadre Conseil IT 2027
+  - source: https://ted.europa.eu/en/notice/506438-2026/html
+  - discovered for: bawaba, thestudio-mt
   - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
 
-> Discovery via TED Search API (official primary source). No item is VERIFIED without a human. Raw response recorded as the real test fixture.
+> Discovery via the TED Search API (official primary source), one query per project profile. No item is VERIFIED without a human. `discovered for` is the query that surfaced the notice — not a match verdict.

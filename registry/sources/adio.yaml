@@ -10,6 +10,7 @@ geographies: ["AE", "GCC"]
 forProjects: ["bawaba", "myoolala"]
 url: "https://www.investabudhabi.ae"
 urlVerified: false
+lastUrlCheck: "2026-09-16"
 status: DECLARED
 access:
   mode: MANUAL

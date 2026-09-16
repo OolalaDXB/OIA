@@ -9,6 +9,7 @@ kinds: ["TAX_INCENTIVE"]
 geographies: ["FR"]
 url: "https://www.entreprises.gouv.fr/fr/innovation/financement/credit-d-impot-recherche-cir"
 urlVerified: false
+lastUrlCheck: "2026-09-16"
 status: DECLARED
 access:
   mode: MANUAL

@@ -8,7 +8,8 @@ operator: "beta.gouv.fr / French state"
 kinds: ["GRANT", "DEBT_GUARANTEE"]
 geographies: ["FR"]
 url: "https://aides-territoires.beta.gouv.fr"
-urlVerified: false
+urlVerified: true
+lastUrlCheck: "2026-09-16"
 status: DECLARED
 access:
   mode: API

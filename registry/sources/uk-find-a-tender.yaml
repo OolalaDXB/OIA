@@ -8,7 +8,8 @@ operator: "UK Cabinet Office"
 kinds: ["TENDER", "PRE_SOLICITATION"]
 geographies: ["GB"]
 url: "https://www.find-tender.service.gov.uk"
-urlVerified: false
+urlVerified: true
+lastUrlCheck: "2026-09-16"
 status: DECLARED
 access:
   mode: API

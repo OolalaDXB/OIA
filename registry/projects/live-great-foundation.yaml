@@ -10,6 +10,8 @@ kind: FOUNDATION
 status: LIVE
 oneLiner: "Grassroots foundation in Kibera, Nairobi. Sponsored rebuild."
 url: "https://livegreatfoundation.netlify.app"
+urlVerified: false
+lastUrlCheck: "2026-09-16"
 active: true
 legalEntities: []
 sectors: ["philanthropy", "education", "development"]

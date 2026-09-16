@@ -10,6 +10,8 @@ kind: PRODUCT
 status: LIVE
 oneLiner: "Short-term rentals and long-term leases, with the accounting that follows both."
 url: "https://maisons.co"
+urlVerified: true
+lastUrlCheck: "2026-09-16"
 active: true
 legalEntities:
   - name: "Oolala France SAS"

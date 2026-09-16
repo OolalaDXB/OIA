@@ -10,6 +10,8 @@ kind: ADVISORY
 status: LIVE
 oneLiner: "Advisory for padel club development in underserved markets."
 url: "https://padel.design"
+urlVerified: true
+lastUrlCheck: "2026-09-16"
 active: true
 legalEntities: []
 sectors: ["sport", "advisory", "real estate"]

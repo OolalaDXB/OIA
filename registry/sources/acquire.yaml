@@ -8,7 +8,8 @@ operator: "Acquire.com"
 kinds: ["ACQUISITION"]
 geographies: ["GLOBAL"]
 url: "https://acquire.com"
-urlVerified: false
+urlVerified: true
+lastUrlCheck: "2026-09-16"
 status: BLOCKED
 access:
   mode: SCRAPE

@@ -10,6 +10,8 @@ kind: VENTURE
 status: ON_HOLD
 oneLiner: "Premium padel & wellness club in Gaborone, Botswana."
 url: "https://district267.co.bw"
+urlVerified: true
+lastUrlCheck: "2026-09-16"
 active: true
 legalEntities: []
 sectors: ["sport", "leisure", "real estate", "wellness"]

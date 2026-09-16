@@ -8,7 +8,8 @@ operator: "European Commission"
 kinds: ["GRANT", "TENDER", "CONSORTIUM_CALL"]
 geographies: ["EU"]
 url: "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home"
-urlVerified: false
+urlVerified: true
+lastUrlCheck: "2026-09-16"
 status: FIXTURE_ONLY
 connector: "eu-funding-tenders"
 access:
