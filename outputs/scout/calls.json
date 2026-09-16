@@ -1,104 +1,132 @@
 {
-  "generatedAt": "2026-09-16T17:35:22.419Z",
+  "generatedAt": "2026-09-16T17:42:24.326Z",
   "found": [],
   "perSource": [
     {
       "id": "adio",
-      "status": "ERROR",
+      "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.investabudhabi.ae/\nCall log:\n  - navigating to \"https://www.investabudhabi.ae/\", waiting until \"domcontentloaded\"\n"
+      "note": "",
+      "chars": 11397,
+      "links": 56
     },
     {
       "id": "aides-territoires",
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": ""
+      "note": "",
+      "chars": 5634,
+      "links": 58
     },
     {
       "id": "boamp",
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": ""
+      "note": "",
+      "chars": 1697,
+      "links": 38
     },
     {
       "id": "bpifrance",
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": ""
+      "note": "",
+      "chars": 513,
+      "links": 0
     },
     {
       "id": "cir-cii-jei",
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": ""
+      "note": "",
+      "chars": 3903,
+      "links": 106
     },
     {
       "id": "eu-funding-tenders",
-      "status": "ERROR",
+      "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "page.evaluate: TypeError: h.indexOf is not a function\n    at eval (eval at evaluate (:311:30), <anonymous>:1:81)\n    at Array.filter (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:67)\n    at eval (<anonymous>)\n    at UtilityScript.evaluate (<anonymous>:311:30)\n    at UtilityScr"
+      "note": "",
+      "chars": 4345,
+      "links": 39
     },
     {
       "id": "flippa",
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": ""
+      "note": "",
+      "chars": 15729,
+      "links": 189
     },
     {
       "id": "france-2030-ademe",
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": ""
+      "note": "",
+      "chars": 2409,
+      "links": 67
     },
     {
       "id": "hub71",
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": ""
+      "note": "",
+      "chars": 10960,
+      "links": 75
     },
     {
       "id": "region-bretagne",
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": ""
+      "note": "",
+      "chars": 296,
+      "links": 2
     },
     {
       "id": "uae-federal-procurement",
       "status": "EMPTY_PAGE",
       "kept": 0,
       "dropped": 0,
-      "note": "the page rendered almost no text"
+      "note": "the page rendered almost no text",
+      "chars": 124,
+      "links": 0
     },
     {
       "id": "uk-find-a-tender",
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": ""
+      "note": "",
+      "chars": 2694,
+      "links": 51
     },
     {
       "id": "ungm",
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": ""
+      "note": "",
+      "chars": 3914,
+      "links": 24
     },
     {
       "id": "worldbank-afdb-ebrd",
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": ""
+      "note": "",
+      "chars": 5966,
+      "links": 395
     }
   ]
 }

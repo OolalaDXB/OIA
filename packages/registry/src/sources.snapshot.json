@@ -36,8 +36,8 @@
         "GCC"
       ],
       "url": "https://adio.ae",
-      "urlVerified": false,
-      "lastUrlCheck": "",
+      "urlVerified": true,
+      "lastUrlCheck": "2026-09-16",
       "status": "DECLARED",
       "access": {
         "mode": "MANUAL",

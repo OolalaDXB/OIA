@@ -9,8 +9,8 @@ kinds: ["GRANT", "EQUITY"]
 geographies: ["AE", "GCC"]
 forProjects: ["bawaba", "myoolala"]
 url: "https://adio.ae"
-urlVerified: false
-lastUrlCheck: ""
+urlVerified: true
+lastUrlCheck: "2026-09-16"
 status: DECLARED
 access:
   mode: MANUAL

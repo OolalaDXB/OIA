@@ -1,0 +1,13 @@
+{
+  "note": "Aid scout — funding calls read by a model from public portals that have no API. Every call was confirmed to be linked from the page it was read on. All are UNVERIFIED and carry lower information confidence than an official API record, by design.",
+  "run": {
+    "records": 0,
+    "artifactsIngested": 0,
+    "discrepancies": 0,
+    "warnings": [],
+    "recommendationCounts": {
+      "INVESTIGATE": 0
+    }
+  },
+  "records": []
+}

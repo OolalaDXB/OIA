@@ -1,34 +1,25 @@
 # Aid scout
 
-- sources read: 11 of 14
+- sources read: 13 of 14
 - calls kept: 0
 - calls dropped as unanchored: 0
-- model calls: 11 · tokens in/out: 31773/2386
+- model calls: 13 · tokens in/out: 39038/2554
 
 ## Per source
-- **adio** — ERROR · 0 kept, 0 dropped — page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.investabudhabi.ae/
-Call log:
-  - navigating to "https://www.investabudhabi.ae/", waiting until "domcontentloaded"
-
-- **aides-territoires** — OK · 0 kept, 0 dropped
-- **boamp** — OK · 0 kept, 0 dropped
-- **bpifrance** — OK · 0 kept, 0 dropped
-- **cir-cii-jei** — OK · 0 kept, 0 dropped
-- **eu-funding-tenders** — ERROR · 0 kept, 0 dropped — page.evaluate: TypeError: h.indexOf is not a function
-    at eval (eval at evaluate (:311:30), <anonymous>:1:81)
-    at Array.filter (<anonymous>)
-    at eval (eval at evaluate (:311:30), <anonymous>:1:67)
-    at eval (<anonymous>)
-    at UtilityScript.evaluate (<anonymous>:311:30)
-    at UtilityScr
-- **flippa** — OK · 0 kept, 0 dropped
-- **france-2030-ademe** — OK · 0 kept, 0 dropped
-- **hub71** — OK · 0 kept, 0 dropped
-- **region-bretagne** — OK · 0 kept, 0 dropped
-- **uae-federal-procurement** — EMPTY_PAGE · 0 kept, 0 dropped — the page rendered almost no text
-- **uk-find-a-tender** — OK · 0 kept, 0 dropped
-- **ungm** — OK · 0 kept, 0 dropped
-- **worldbank-afdb-ebrd** — OK · 0 kept, 0 dropped
+- **adio** — OK · 0 kept, 0 dropped · page: 11397 chars, 56 link(s)
+- **aides-territoires** — OK · 0 kept, 0 dropped · page: 5634 chars, 58 link(s)
+- **boamp** — OK · 0 kept, 0 dropped · page: 1697 chars, 38 link(s)
+- **bpifrance** — OK · 0 kept, 0 dropped · page: 513 chars, 0 link(s)
+- **cir-cii-jei** — OK · 0 kept, 0 dropped · page: 3903 chars, 106 link(s)
+- **eu-funding-tenders** — OK · 0 kept, 0 dropped · page: 4345 chars, 39 link(s)
+- **flippa** — OK · 0 kept, 0 dropped · page: 15729 chars, 189 link(s)
+- **france-2030-ademe** — OK · 0 kept, 0 dropped · page: 2409 chars, 67 link(s)
+- **hub71** — OK · 0 kept, 0 dropped · page: 10960 chars, 75 link(s)
+- **region-bretagne** — OK · 0 kept, 0 dropped · page: 296 chars, 2 link(s)
+- **uae-federal-procurement** — EMPTY_PAGE · 0 kept, 0 dropped · page: 124 chars, 0 link(s) — the page rendered almost no text
+- **uk-find-a-tender** — OK · 0 kept, 0 dropped · page: 2694 chars, 51 link(s)
+- **ungm** — OK · 0 kept, 0 dropped · page: 3914 chars, 24 link(s)
+- **worldbank-afdb-ebrd** — OK · 0 kept, 0 dropped · page: 5966 chars, 395 link(s)
 
 ## Calls
 

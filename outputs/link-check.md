@@ -2,8 +2,8 @@
 
 Checked 62 distinct URL(s).
 
-- resolving: 52
-- **broken: 3**
+- resolving: 53
+- **broken: 2**
 - refused us (not broken): 7
 - inconclusive: 0
 
@@ -11,8 +11,6 @@ Checked 62 distinct URL(s).
 
 - **project live-great-foundation** — DEAD · HTTP 404 — the page is gone
   - https://livegreatfoundation.netlify.app
-- **source adio** — UNREACHABLE · fetch failed
-  - https://www.investabudhabi.ae
 - **opportunity startup-qatar-qdb-start (application)** — UNREACHABLE · fetch failed
   - https://startupqatar.qa/en/investment-program
 
@@ -42,6 +40,8 @@ Checked 62 distinct URL(s).
   - https://thestudio.mt
 - **source acquire** — now redirects to https://acquire.com/
   - https://acquire.com
+- **source adio** — now redirects to https://www.investwithabudhabi.com/en
+  - https://adio.ae
 - **source aides-territoires** — now redirects to https://aides-territoires.beta.gouv.fr/
   - https://aides-territoires.beta.gouv.fr
 - **source boamp** — now redirects to https://www.boamp.fr/pages/entreprise-accueil/
