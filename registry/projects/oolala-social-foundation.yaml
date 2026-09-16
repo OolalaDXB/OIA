@@ -1,0 +1,39 @@
+# OIA project registry entry. One file per project — this is the source of truth.
+# Matching signals (sectors/keywords/geographies) steer the suggestion engine;
+# `profileReview` says whether the owner has confirmed them or they are still a
+# working hypothesis. Correct a wrong keyword HERE and every surface follows.
+
+
+slug: oolala-social-foundation
+name: Oolala Social Foundation
+kind: FOUNDATION
+status: CONCEPT
+oneLiner: "Giving vehicle for youth initiatives in Africa."
+active: true
+legalEntities: []
+sectors: ["philanthropy", "education", "youth", "development"]
+geographies: ["Africa", "FR", "EU"]
+stage: concept
+fundingTypes: ["grant", "donation"]
+keywords:
+  - "youth"
+  - "education"
+  - "africa"
+  - "development"
+  - "philanthropy"
+  - "foundation"
+  - "social impact"
+exclusions: []
+discovery:
+  enabled: false
+  queryTerms: ["youth development", "education Africa"]
+  cpvCodes: []
+  countries: []
+  watch: ["GRANT"]
+profileReview:
+  status: DRAFT
+  derivedFrom:
+    - "TheStudioMT portfolio card 'Oolala Social Foundation' (public copy: structure design, governance, grant framework)"
+  note: >-
+    Structure still being designed, and the vehicle gives rather than receives.
+    Discovery stays off until there is an entity that could actually apply.

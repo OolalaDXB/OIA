@@ -1,0 +1,1099 @@
+{
+  "generatedAt": "",
+  "projects": [
+    {
+      "slug": "bawaba",
+      "name": "BAWABA",
+      "legalEntities": [
+        {
+          "name": "Oolala France SAS",
+          "jurisdiction": "FR",
+          "role": "applicant"
+        },
+        {
+          "name": "Oolala Next FZ-LLC",
+          "jurisdiction": "AE",
+          "role": "applicant"
+        }
+      ],
+      "sectors": [
+        "AI",
+        "data",
+        "digital",
+        "cybersecurity",
+        "software"
+      ],
+      "geographies": [
+        "EU",
+        "FR",
+        "AE",
+        "GCC",
+        "MENA"
+      ],
+      "stage": "pre-launch",
+      "fundingTypes": [
+        "grant",
+        "subsidy",
+        "equity-free",
+        "tender"
+      ],
+      "keywords": [
+        "artificial intelligence",
+        "ai",
+        "data",
+        "platform",
+        "digital",
+        "sovereignty",
+        "sovereign cloud",
+        "gateway",
+        "proxy",
+        "audit",
+        "compliance",
+        "security",
+        "software",
+        "innovation"
+      ],
+      "exclusions": [],
+      "kind": "PRODUCT",
+      "status": "DOSSIER_ON_REQUEST",
+      "oneLiner": "Sovereign AI control plane for regulated industries. MCP reverse proxy.",
+      "url": "https://bawaba.systems",
+      "active": true,
+      "discovery": {
+        "enabled": true,
+        "queryTerms": [
+          "artificial intelligence",
+          "sovereign cloud",
+          "data governance",
+          "audit trail"
+        ],
+        "cpvCodes": [
+          "72000000",
+          "48000000",
+          "73000000"
+        ],
+        "countries": [
+          "FRA",
+          "LUX",
+          "BEL",
+          "DEU"
+        ],
+        "watch": [
+          "GRANT",
+          "TENDER_RFP",
+          "VC_INVESTOR"
+        ]
+      },
+      "profileReview": {
+        "status": "DRAFT",
+        "derivedFrom": [
+          "knowledge/products/bawaba (canonical dossier, OIA repo)",
+          "TheStudioMT portfolio card 'Bawaba' (public copy, owner-cleared)"
+        ],
+        "note": "Signals extended beyond the original AI/data set with the control-plane vocabulary the dossier actually uses (sovereignty, gateway, audit). Owner review pending — these steer matching only, never a claim about the product."
+      }
+    },
+    {
+      "slug": "beau-treasury",
+      "name": "BEAU Treasury",
+      "legalEntities": [
+        {
+          "name": "Oolala France SAS",
+          "jurisdiction": "FR",
+          "role": "applicant"
+        }
+      ],
+      "sectors": [
+        "fintech",
+        "treasury",
+        "software",
+        "digital"
+      ],
+      "geographies": [
+        "FR",
+        "EU"
+      ],
+      "stage": "build",
+      "fundingTypes": [
+        "grant",
+        "equity"
+      ],
+      "keywords": [
+        "treasury",
+        "cash management",
+        "iso 20022",
+        "payments",
+        "liquidity",
+        "fintech",
+        "software"
+      ],
+      "exclusions": [],
+      "kind": "PRODUCT",
+      "status": "IN_DEVELOPMENT",
+      "oneLiner": "Treasury intelligence for mid-market corporates. ISO 20022 native.",
+      "active": true,
+      "discovery": {
+        "enabled": false,
+        "queryTerms": [
+          "treasury management",
+          "cash management",
+          "ISO 20022"
+        ],
+        "cpvCodes": [
+          "48000000",
+          "66000000"
+        ],
+        "countries": [
+          "FRA"
+        ],
+        "watch": [
+          "GRANT",
+          "VC_INVESTOR"
+        ]
+      },
+      "profileReview": {
+        "status": "DRAFT",
+        "derivedFrom": [
+          "TheStudioMT portfolio card 'BEAU Treasury' (public copy, badged In development)"
+        ],
+        "note": "Discovery deliberately OFF: the product is pre-shipping, so an automated funding queue would produce noise before there is anything to apply with. Flip `discovery.enabled` when the scope being built is stable."
+      }
+    },
+    {
+      "slug": "beau",
+      "name": "BEAU",
+      "legalEntities": [
+        {
+          "name": "Oolala France SAS",
+          "jurisdiction": "FR",
+          "role": "applicant"
+        }
+      ],
+      "sectors": [
+        "fintech",
+        "wealth management",
+        "software",
+        "digital"
+      ],
+      "geographies": [
+        "FR",
+        "EU",
+        "AE",
+        "GCC"
+      ],
+      "stage": "build",
+      "fundingTypes": [
+        "grant",
+        "equity",
+        "tender"
+      ],
+      "keywords": [
+        "wealth",
+        "estate",
+        "succession",
+        "inheritance",
+        "family office",
+        "encryption",
+        "custody",
+        "fintech",
+        "software",
+        "platform"
+      ],
+      "exclusions": [],
+      "kind": "PRODUCT",
+      "status": "PRIVATE_BETA",
+      "oneLiner": "Wealth structuring infrastructure for multi-jurisdictional families.",
+      "url": "https://beau.capital",
+      "active": true,
+      "discovery": {
+        "enabled": true,
+        "queryTerms": [
+          "wealth management",
+          "succession",
+          "secure custody",
+          "encryption"
+        ],
+        "cpvCodes": [
+          "48000000",
+          "66000000",
+          "72000000"
+        ],
+        "countries": [
+          "FRA",
+          "LUX"
+        ],
+        "watch": [
+          "GRANT",
+          "VC_INVESTOR"
+        ]
+      },
+      "profileReview": {
+        "status": "DRAFT",
+        "derivedFrom": [
+          "TheStudioMT portfolio card 'BEAU' (public copy: product strategy, data architecture, UX, Zero Access encryption)"
+        ],
+        "note": "Sectors and keywords read off the public card only. No claim is made here about Zero Access, Faraid or the Dead Man Switch — those are product features, not matching signals, and remain unverified in the portfolio."
+      }
+    },
+    {
+      "slug": "coach-gari",
+      "name": "Coach Gari",
+      "legalEntities": [],
+      "sectors": [
+        "sport",
+        "coaching",
+        "creator economy",
+        "software"
+      ],
+      "geographies": [
+        "FR",
+        "EU"
+      ],
+      "stage": "operating",
+      "fundingTypes": [
+        "grant"
+      ],
+      "keywords": [
+        "sport",
+        "coaching",
+        "fitness",
+        "influencer",
+        "partnership",
+        "crm",
+        "back-office"
+      ],
+      "exclusions": [],
+      "kind": "PRODUCT",
+      "status": "LIVE",
+      "oneLiner": "Coaching business and influencer partnerships, run from one back-office.",
+      "url": "https://coachgari28.com",
+      "active": true,
+      "discovery": {
+        "enabled": false,
+        "queryTerms": [
+          "sport",
+          "coaching"
+        ],
+        "cpvCodes": [
+          "92000000"
+        ],
+        "countries": [
+          "FRA"
+        ],
+        "watch": [
+          "GRANT"
+        ]
+      },
+      "profileReview": {
+        "status": "DRAFT",
+        "derivedFrom": [
+          "TheStudioMT portfolio card 'Coach Gari' (public copy: site, booking, payment hub, brand partnerships, CRM, back-office)"
+        ],
+        "note": "Tracked in the workspace, no automated discovery: a private coaching business rarely maps onto public funding calls. Turn discovery on if a sport/health programme becomes relevant."
+      }
+    },
+    {
+      "slug": "district-267",
+      "name": "District 267",
+      "legalEntities": [],
+      "sectors": [
+        "sport",
+        "leisure",
+        "real estate",
+        "wellness"
+      ],
+      "geographies": [
+        "BW",
+        "Africa"
+      ],
+      "stage": "on-hold",
+      "fundingTypes": [
+        "equity",
+        "debt",
+        "grant"
+      ],
+      "keywords": [
+        "padel",
+        "sport",
+        "club",
+        "wellness",
+        "leisure",
+        "botswana",
+        "africa"
+      ],
+      "exclusions": [],
+      "kind": "VENTURE",
+      "status": "ON_HOLD",
+      "oneLiner": "Premium padel & wellness club in Gaborone, Botswana.",
+      "url": "https://district267.co.bw",
+      "active": true,
+      "discovery": {
+        "enabled": false,
+        "queryTerms": [
+          "sport infrastructure",
+          "leisure development"
+        ],
+        "cpvCodes": [
+          "45000000",
+          "92000000"
+        ],
+        "countries": [],
+        "watch": [
+          "VC_INVESTOR",
+          "GRANT"
+        ]
+      },
+      "profileReview": {
+        "status": "DRAFT",
+        "derivedFrom": [
+          "TheStudioMT portfolio card 'District 267' (public copy: market scan, financial model, investor deck, local ops; badged On hold)"
+        ],
+        "note": "Discovery OFF twice over: the project is on hold, and EU/TED sources do not cover Botswana. Investor-side sourcing would need a connector OIA does not have yet — stated rather than faked."
+      }
+    },
+    {
+      "slug": "lesvieillespierres",
+      "name": "Les Vieilles Pierres",
+      "legalEntities": [],
+      "sectors": [
+        "heritage",
+        "culture",
+        "tourism",
+        "association"
+      ],
+      "geographies": [
+        "FR",
+        "EU"
+      ],
+      "stage": "operating",
+      "fundingTypes": [
+        "grant",
+        "subsidy"
+      ],
+      "keywords": [
+        "heritage",
+        "patrimoine",
+        "hiking",
+        "association",
+        "culture",
+        "cultural",
+        "tourism",
+        "bretagne",
+        "brittany",
+        "volunteer"
+      ],
+      "exclusions": [],
+      "kind": "FOUNDATION",
+      "status": "LIVE",
+      "oneLiner": "Heritage hiking association in Bretagne — public site and self-managed back-office.",
+      "url": "https://lesvieillespierres.com",
+      "active": true,
+      "discovery": {
+        "enabled": true,
+        "queryTerms": [
+          "cultural heritage",
+          "heritage restoration",
+          "local tourism"
+        ],
+        "cpvCodes": [
+          "92000000"
+        ],
+        "countries": [
+          "FRA"
+        ],
+        "watch": [
+          "GRANT"
+        ]
+      },
+      "profileReview": {
+        "status": "DRAFT",
+        "derivedFrom": [
+          "TheStudioMT portfolio card 'Les Vieilles Pierres' (public copy: editorial site, multi-role CMS, embedded AI assistant)"
+        ],
+        "note": "An association is eligible for heritage and regional culture funding that no company profile here matches — the clearest case for keeping the registry open to non-software projects."
+      }
+    },
+    {
+      "slug": "live-great-foundation",
+      "name": "Live Great Foundation",
+      "legalEntities": [],
+      "sectors": [
+        "philanthropy",
+        "education",
+        "development"
+      ],
+      "geographies": [
+        "KE",
+        "Africa"
+      ],
+      "stage": "operating",
+      "fundingTypes": [
+        "grant",
+        "donation"
+      ],
+      "keywords": [
+        "kibera",
+        "nairobi",
+        "kenya",
+        "grassroots",
+        "foundation",
+        "education",
+        "community",
+        "development"
+      ],
+      "exclusions": [],
+      "kind": "FOUNDATION",
+      "status": "LIVE",
+      "oneLiner": "Grassroots foundation in Kibera, Nairobi. Sponsored rebuild.",
+      "url": "https://livegreatfoundation.netlify.app",
+      "active": true,
+      "discovery": {
+        "enabled": false,
+        "queryTerms": [
+          "community development Kenya",
+          "grassroots education"
+        ],
+        "cpvCodes": [],
+        "countries": [],
+        "watch": [
+          "GRANT"
+        ]
+      },
+      "profileReview": {
+        "status": "DRAFT",
+        "derivedFrom": [
+          "TheStudioMT portfolio card 'Live Great Foundation' (public copy: funding, information architecture, web design, copy)"
+        ],
+        "note": "Kenya-based: OIA's current connectors (TED, EU F&T) do not cover it. Tracked honestly as manual rather than pretending a queue exists."
+      }
+    },
+    {
+      "slug": "ludography",
+      "name": "Ludography",
+      "legalEntities": [
+        {
+          "name": "Oolala France SAS",
+          "jurisdiction": "FR",
+          "role": "applicant"
+        }
+      ],
+      "sectors": [
+        "games",
+        "culture",
+        "creative industries",
+        "publishing"
+      ],
+      "geographies": [
+        "FR",
+        "EU"
+      ],
+      "stage": "concept",
+      "fundingTypes": [
+        "grant"
+      ],
+      "keywords": [
+        "game",
+        "games",
+        "video game",
+        "play",
+        "culture",
+        "publishing",
+        "creative",
+        "catalogue"
+      ],
+      "exclusions": [],
+      "kind": "PRODUCT",
+      "status": "CONCEPT",
+      "oneLiner": "Games and play catalogue project (concept).",
+      "active": true,
+      "discovery": {
+        "enabled": true,
+        "queryTerms": [
+          "video games",
+          "cultural creative industries"
+        ],
+        "cpvCodes": [
+          "92000000",
+          "48000000"
+        ],
+        "countries": [
+          "FRA"
+        ],
+        "watch": [
+          "GRANT"
+        ]
+      },
+      "profileReview": {
+        "status": "DRAFT",
+        "derivedFrom": [
+          "earlier @oia/workspace profile (Phase 2, Claude working hypothesis)"
+        ],
+        "note": "Carried over unchanged from the Phase 2 profile set and NOT present on the public portfolio — the one entry with no second source. Confirm it is still a live concept, or set active: false."
+      }
+    },
+    {
+      "slug": "maisons-co",
+      "name": "Maisons.co",
+      "legalEntities": [
+        {
+          "name": "Oolala France SAS",
+          "jurisdiction": "FR",
+          "role": "applicant"
+        }
+      ],
+      "sectors": [
+        "hospitality",
+        "tourism",
+        "real estate",
+        "software"
+      ],
+      "geographies": [
+        "FR",
+        "EU",
+        "GE",
+        "AE"
+      ],
+      "stage": "operating",
+      "fundingTypes": [
+        "grant",
+        "subsidy",
+        "tender"
+      ],
+      "keywords": [
+        "hospitality",
+        "tourism",
+        "accommodation",
+        "rental",
+        "lease",
+        "property",
+        "real estate",
+        "heritage",
+        "renovation",
+        "booking",
+        "reconciliation"
+      ],
+      "exclusions": [],
+      "kind": "PRODUCT",
+      "status": "LIVE",
+      "oneLiner": "Short-term rentals and long-term leases, with the accounting that follows both.",
+      "url": "https://maisons.co",
+      "active": true,
+      "discovery": {
+        "enabled": true,
+        "queryTerms": [
+          "tourism digitalisation",
+          "accommodation",
+          "property management"
+        ],
+        "cpvCodes": [
+          "55000000",
+          "48000000",
+          "72000000"
+        ],
+        "countries": [
+          "FRA"
+        ],
+        "watch": [
+          "GRANT",
+          "TENDER_RFP"
+        ]
+      },
+      "profileReview": {
+        "status": "DRAFT",
+        "derivedFrom": [
+          "TheStudioMT portfolio card 'Maisons.co' (public copy: booking, leases & rent calls, reconciliation, team ops)",
+          "earlier @oia/workspace profile (hospitality/tourism/real estate)"
+        ],
+        "note": "Geography GE kept from the earlier profile; confirm it is still accurate."
+      }
+    },
+    {
+      "slug": "myoolala",
+      "name": "myOolala",
+      "legalEntities": [
+        {
+          "name": "Oolala France SAS",
+          "jurisdiction": "FR",
+          "role": "applicant"
+        },
+        {
+          "name": "Oolala Next FZ-LLC",
+          "jurisdiction": "AE",
+          "role": "applicant"
+        }
+      ],
+      "sectors": [
+        "digital identity",
+        "consumer app",
+        "digital",
+        "software"
+      ],
+      "geographies": [
+        "FR",
+        "EU",
+        "AE"
+      ],
+      "stage": "operating",
+      "fundingTypes": [
+        "grant",
+        "equity"
+      ],
+      "keywords": [
+        "identity",
+        "digital identity",
+        "passport",
+        "profile",
+        "wallet",
+        "qr",
+        "consumer",
+        "application",
+        "saas",
+        "payments"
+      ],
+      "exclusions": [],
+      "kind": "PRODUCT",
+      "status": "LIVE",
+      "oneLiner": "Multi-view digital passport. One identity, many faces.",
+      "url": "https://myoolala.com",
+      "active": true,
+      "discovery": {
+        "enabled": true,
+        "queryTerms": [
+          "digital identity",
+          "digital wallet",
+          "consumer application"
+        ],
+        "cpvCodes": [
+          "48000000",
+          "72000000"
+        ],
+        "countries": [
+          "FRA"
+        ],
+        "watch": [
+          "GRANT",
+          "VC_INVESTOR"
+        ]
+      },
+      "profileReview": {
+        "status": "DRAFT",
+        "derivedFrom": [
+          "TheStudioMT portfolio card 'MyOolala' (public copy: per-view architecture, Wallet integration, Stripe)"
+        ],
+        "note": "Replaces the earlier thin profile; identity/wallet signals come from the card."
+      }
+    },
+    {
+      "slug": "oolala-social-foundation",
+      "name": "Oolala Social Foundation",
+      "legalEntities": [],
+      "sectors": [
+        "philanthropy",
+        "education",
+        "youth",
+        "development"
+      ],
+      "geographies": [
+        "Africa",
+        "FR",
+        "EU"
+      ],
+      "stage": "concept",
+      "fundingTypes": [
+        "grant",
+        "donation"
+      ],
+      "keywords": [
+        "youth",
+        "education",
+        "africa",
+        "development",
+        "philanthropy",
+        "foundation",
+        "social impact"
+      ],
+      "exclusions": [],
+      "kind": "FOUNDATION",
+      "status": "CONCEPT",
+      "oneLiner": "Giving vehicle for youth initiatives in Africa.",
+      "active": true,
+      "discovery": {
+        "enabled": false,
+        "queryTerms": [
+          "youth development",
+          "education Africa"
+        ],
+        "cpvCodes": [],
+        "countries": [],
+        "watch": [
+          "GRANT"
+        ]
+      },
+      "profileReview": {
+        "status": "DRAFT",
+        "derivedFrom": [
+          "TheStudioMT portfolio card 'Oolala Social Foundation' (public copy: structure design, governance, grant framework)"
+        ],
+        "note": "Structure still being designed, and the vehicle gives rather than receives. Discovery stays off until there is an entity that could actually apply."
+      }
+    },
+    {
+      "slug": "padel-design",
+      "name": "padel.design",
+      "legalEntities": [],
+      "sectors": [
+        "sport",
+        "advisory",
+        "real estate"
+      ],
+      "geographies": [
+        "FR",
+        "EU",
+        "Africa",
+        "AE"
+      ],
+      "stage": "operating",
+      "fundingTypes": [
+        "tender",
+        "grant"
+      ],
+      "keywords": [
+        "padel",
+        "sport",
+        "feasibility",
+        "advisory",
+        "consultancy",
+        "club",
+        "territory"
+      ],
+      "exclusions": [],
+      "kind": "ADVISORY",
+      "status": "LIVE",
+      "oneLiner": "Advisory for padel club development in underserved markets.",
+      "url": "https://padel.design",
+      "active": true,
+      "discovery": {
+        "enabled": true,
+        "queryTerms": [
+          "sports facility feasibility",
+          "sport development consultancy"
+        ],
+        "cpvCodes": [
+          "79400000",
+          "92000000"
+        ],
+        "countries": [
+          "FRA"
+        ],
+        "watch": [
+          "TENDER_RFP"
+        ]
+      },
+      "profileReview": {
+        "status": "DRAFT",
+        "derivedFrom": [
+          "TheStudioMT portfolio card 'padel.design' (public copy: territory analysis, feasibility, club playbooks)"
+        ],
+        "note": "The one studio venture whose natural funding shape is a public TENDER (consultancy lots), not a grant — hence watch: TENDER_RFP only."
+      }
+    },
+    {
+      "slug": "pandamood",
+      "name": "PandaMood",
+      "legalEntities": [],
+      "sectors": [
+        "sport",
+        "consumer goods",
+        "design",
+        "e-commerce"
+      ],
+      "geographies": [
+        "FR",
+        "EU",
+        "AE"
+      ],
+      "stage": "prototype",
+      "fundingTypes": [
+        "grant",
+        "equity"
+      ],
+      "keywords": [
+        "padel",
+        "equipment",
+        "brand",
+        "design",
+        "manufacturing",
+        "supply chain",
+        "e-commerce",
+        "sport"
+      ],
+      "exclusions": [],
+      "kind": "VENTURE",
+      "status": "PROTOTYPE",
+      "oneLiner": "Quiet-luxury padel equipment brand. Limited editions only.",
+      "url": "https://pandamood.com",
+      "active": true,
+      "discovery": {
+        "enabled": false,
+        "queryTerms": [
+          "design",
+          "manufacturing",
+          "consumer brand"
+        ],
+        "cpvCodes": [],
+        "countries": [
+          "FRA"
+        ],
+        "watch": [
+          "GRANT"
+        ]
+      },
+      "profileReview": {
+        "status": "DRAFT",
+        "derivedFrom": [
+          "TheStudioMT portfolio card 'PandaMood' (public copy: brand identity, product design, supply chain, e-commerce; badged Prototype)"
+        ],
+        "note": "Tracked manually until the brand ships; no public-funding queue worth running yet."
+      }
+    },
+    {
+      "slug": "rls-guard",
+      "name": "RLS Guard",
+      "legalEntities": [
+        {
+          "name": "Oolala France SAS",
+          "jurisdiction": "FR",
+          "role": "applicant"
+        }
+      ],
+      "sectors": [
+        "cybersecurity",
+        "developer tools",
+        "software",
+        "digital"
+      ],
+      "geographies": [
+        "FR",
+        "EU"
+      ],
+      "stage": "operating",
+      "fundingTypes": [
+        "grant",
+        "tender"
+      ],
+      "keywords": [
+        "security",
+        "cybersecurity",
+        "postgres",
+        "database",
+        "multi-tenant",
+        "isolation",
+        "continuous integration",
+        "open source",
+        "developer tools",
+        "software"
+      ],
+      "exclusions": [],
+      "kind": "PRODUCT",
+      "status": "LIVE",
+      "oneLiner": "Security CI for multi-tenant Postgres. Catches tenant isolation breaks before they merge.",
+      "url": "https://github.com/OolalaDXB/rls-guard/releases/tag/v1.0.0",
+      "active": true,
+      "discovery": {
+        "enabled": true,
+        "queryTerms": [
+          "cybersecurity",
+          "open source security",
+          "software assurance"
+        ],
+        "cpvCodes": [
+          "72000000",
+          "48000000"
+        ],
+        "countries": [
+          "FRA",
+          "LUX",
+          "BEL"
+        ],
+        "watch": [
+          "GRANT",
+          "TENDER_RFP"
+        ]
+      },
+      "profileReview": {
+        "status": "DRAFT",
+        "derivedFrom": [
+          "TheStudioMT portfolio card 'RLS Guard' (public copy: CLI, GitHub Action, migration replay, evidence report)"
+        ],
+        "note": "Open-source security tooling — a natural fit for EU cyber/OSS programmes, to be confirmed."
+      }
+    },
+    {
+      "slug": "sillon",
+      "name": "SILLON",
+      "legalEntities": [
+        {
+          "name": "Oolala France SAS",
+          "jurisdiction": "FR",
+          "role": "applicant"
+        }
+      ],
+      "sectors": [
+        "music",
+        "culture",
+        "creative industries",
+        "software",
+        "retail"
+      ],
+      "geographies": [
+        "FR",
+        "EU"
+      ],
+      "stage": "operating",
+      "fundingTypes": [
+        "grant",
+        "subsidy",
+        "tender"
+      ],
+      "keywords": [
+        "music",
+        "record",
+        "vinyl",
+        "distribution",
+        "label",
+        "culture",
+        "cultural",
+        "erp",
+        "saas",
+        "invoicing",
+        "e-invoicing",
+        "point of sale",
+        "software"
+      ],
+      "exclusions": [],
+      "kind": "PRODUCT",
+      "status": "LIVE",
+      "oneLiner": "Multi-tenant ERP for physical music distribution — and the SaaS that bills it.",
+      "url": "https://sillon.me",
+      "active": true,
+      "discovery": {
+        "enabled": true,
+        "queryTerms": [
+          "music distribution",
+          "cultural sector digitalisation",
+          "e-invoicing"
+        ],
+        "cpvCodes": [
+          "48000000",
+          "72000000",
+          "92000000"
+        ],
+        "countries": [
+          "FRA"
+        ],
+        "watch": [
+          "GRANT",
+          "TENDER_RFP"
+        ]
+      },
+      "profileReview": {
+        "status": "DRAFT",
+        "derivedFrom": [
+          "TheStudioMT portfolio card 'Sillon' (public copy: domain modeling, multi-tenant architecture, POS, accounting, e-invoicing, pro portal)"
+        ],
+        "note": "Replaces the earlier deliberately-thin profile. Music/culture signals come from the card's own description of the domain, not from an assumption."
+      }
+    },
+    {
+      "slug": "thestudio-mt",
+      "name": "TheStudio MT",
+      "legalEntities": [
+        {
+          "name": "Oolala France SAS",
+          "jurisdiction": "FR",
+          "role": "applicant"
+        },
+        {
+          "name": "Oolala Next FZ-LLC",
+          "jurisdiction": "AE",
+          "role": "applicant"
+        }
+      ],
+      "sectors": [
+        "software",
+        "digital",
+        "design",
+        "advisory",
+        "AI"
+      ],
+      "geographies": [
+        "FR",
+        "EU",
+        "AE",
+        "GCC"
+      ],
+      "stage": "operating",
+      "fundingTypes": [
+        "tender",
+        "grant",
+        "subsidy"
+      ],
+      "keywords": [
+        "software development",
+        "software",
+        "web",
+        "application",
+        "platform",
+        "digital transformation",
+        "architecture",
+        "design",
+        "ux",
+        "consultancy",
+        "advisory",
+        "artificial intelligence",
+        "data",
+        "maintenance"
+      ],
+      "exclusions": [
+        "hardware supply",
+        "staffing agency"
+      ],
+      "kind": "STUDIO",
+      "status": "LIVE",
+      "oneLiner": "The studio itself — product strategy, architecture and full-stack delivery, as a contracting party.",
+      "url": "https://thestudiomt.com",
+      "active": true,
+      "discovery": {
+        "enabled": true,
+        "queryTerms": [
+          "software development services",
+          "digital transformation",
+          "web application",
+          "IT consultancy"
+        ],
+        "cpvCodes": [
+          "72000000",
+          "48000000",
+          "79400000"
+        ],
+        "countries": [
+          "FRA",
+          "LUX",
+          "BEL"
+        ],
+        "watch": [
+          "TENDER_RFP",
+          "GRANT"
+        ]
+      },
+      "profileReview": {
+        "status": "DRAFT",
+        "derivedFrom": [
+          "TheStudioMT public site (capabilities + execution lines across the portfolio)",
+          "entity doctrine — knowledge/entities/entities.yaml"
+        ],
+        "note": "The studio as its own client: public IT tenders it could bid on, and innovation funding it could carry. Exclusions keep pure hardware-supply and body-shopping lots out of the queue."
+      }
+    }
+  ]
+}

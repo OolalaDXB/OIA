@@ -1,0 +1,47 @@
+# OIA project registry entry. One file per project — this is the source of truth.
+# Matching signals (sectors/keywords/geographies) steer the suggestion engine;
+# `profileReview` says whether the owner has confirmed them or they are still a
+# working hypothesis. Correct a wrong keyword HERE and every surface follows.
+
+
+slug: myoolala
+name: myOolala
+kind: PRODUCT
+status: LIVE
+oneLiner: "Multi-view digital passport. One identity, many faces."
+url: "https://myoolala.com"
+active: true
+legalEntities:
+  - name: "Oolala France SAS"
+    jurisdiction: "FR"
+    role: applicant
+  - name: "Oolala Next FZ-LLC"
+    jurisdiction: "AE"
+    role: applicant
+sectors: ["digital identity", "consumer app", "digital", "software"]
+geographies: ["FR", "EU", "AE"]
+stage: operating
+fundingTypes: ["grant", "equity"]
+keywords:
+  - "identity"
+  - "digital identity"
+  - "passport"
+  - "profile"
+  - "wallet"
+  - "qr"
+  - "consumer"
+  - "application"
+  - "saas"
+  - "payments"
+exclusions: []
+discovery:
+  enabled: true
+  queryTerms: ["digital identity", "digital wallet", "consumer application"]
+  cpvCodes: ["48000000", "72000000"]
+  countries: ["FRA"]
+  watch: ["GRANT", "VC_INVESTOR"]
+profileReview:
+  status: DRAFT
+  derivedFrom:
+    - "TheStudioMT portfolio card 'MyOolala' (public copy: per-view architecture, Wallet integration, Stripe)"
+  note: "Replaces the earlier thin profile; identity/wallet signals come from the card."

@@ -1,0 +1,41 @@
+# OIA project registry entry. One file per project — this is the source of truth.
+# Matching signals (sectors/keywords/geographies) steer the suggestion engine;
+# `profileReview` says whether the owner has confirmed them or they are still a
+# working hypothesis. Correct a wrong keyword HERE and every surface follows.
+
+
+slug: coach-gari
+name: Coach Gari
+kind: PRODUCT
+status: LIVE
+oneLiner: "Coaching business and influencer partnerships, run from one back-office."
+url: "https://coachgari28.com"
+active: true
+legalEntities: []
+sectors: ["sport", "coaching", "creator economy", "software"]
+geographies: ["FR", "EU"]
+stage: operating
+fundingTypes: ["grant"]
+keywords:
+  - "sport"
+  - "coaching"
+  - "fitness"
+  - "influencer"
+  - "partnership"
+  - "crm"
+  - "back-office"
+exclusions: []
+discovery:
+  enabled: false
+  queryTerms: ["sport", "coaching"]
+  cpvCodes: ["92000000"]
+  countries: ["FRA"]
+  watch: ["GRANT"]
+profileReview:
+  status: DRAFT
+  derivedFrom:
+    - "TheStudioMT portfolio card 'Coach Gari' (public copy: site, booking, payment hub, brand partnerships, CRM, back-office)"
+  note: >-
+    Tracked in the workspace, no automated discovery: a private coaching
+    business rarely maps onto public funding calls. Turn discovery on if a
+    sport/health programme becomes relevant.

@@ -1,4 +1,4 @@
-import type { ConsoleRecord } from "@oia/ingestion";
+import type { ConsoleRecord } from "@oia/ingestion/console";
 import type { ProjectProfile } from "@oia/database";
 
 /**

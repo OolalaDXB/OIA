@@ -1,0 +1,41 @@
+# OIA project registry entry. One file per project — this is the source of truth.
+# Matching signals (sectors/keywords/geographies) steer the suggestion engine;
+# `profileReview` says whether the owner has confirmed them or they are still a
+# working hypothesis. Correct a wrong keyword HERE and every surface follows.
+
+
+slug: district-267
+name: District 267
+kind: VENTURE
+status: ON_HOLD
+oneLiner: "Premium padel & wellness club in Gaborone, Botswana."
+url: "https://district267.co.bw"
+active: true
+legalEntities: []
+sectors: ["sport", "leisure", "real estate", "wellness"]
+geographies: ["BW", "Africa"]
+stage: on-hold
+fundingTypes: ["equity", "debt", "grant"]
+keywords:
+  - "padel"
+  - "sport"
+  - "club"
+  - "wellness"
+  - "leisure"
+  - "botswana"
+  - "africa"
+exclusions: []
+discovery:
+  enabled: false
+  queryTerms: ["sport infrastructure", "leisure development"]
+  cpvCodes: ["45000000", "92000000"]
+  countries: []
+  watch: ["VC_INVESTOR", "GRANT"]
+profileReview:
+  status: DRAFT
+  derivedFrom:
+    - "TheStudioMT portfolio card 'District 267' (public copy: market scan, financial model, investor deck, local ops; badged On hold)"
+  note: >-
+    Discovery OFF twice over: the project is on hold, and EU/TED sources do not
+    cover Botswana. Investor-side sourcing would need a connector OIA does not
+    have yet — stated rather than faked.

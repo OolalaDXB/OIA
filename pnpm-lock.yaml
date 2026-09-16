@@ -30,6 +30,9 @@ importers:
       '@oia/ingestion':
         specifier: workspace:*
         version: link:../../packages/ingestion
+      '@oia/registry':
+        specifier: workspace:*
+        version: link:../../packages/registry
       '@oia/workspace':
         specifier: workspace:*
         version: link:../../packages/workspace
@@ -82,6 +85,9 @@ importers:
       '@oia/providers':
         specifier: workspace:*
         version: link:../../packages/providers
+      '@oia/registry':
+        specifier: workspace:*
+        version: link:../../packages/registry
       '@oia/scoring':
         specifier: workspace:*
         version: link:../../packages/scoring
@@ -257,6 +263,28 @@ importers:
         specifier: ^2.1.8
         version: 2.1.9(@types/node@22.20.1)
 
+  packages/registry:
+    dependencies:
+      '@oia/database':
+        specifier: workspace:*
+        version: link:../database
+      yaml:
+        specifier: ^2.6.1
+        version: 2.9.0
+      zod:
+        specifier: ^3.24.1
+        version: 3.25.76
+    devDependencies:
+      tsx:
+        specifier: ^4.19.2
+        version: 4.23.1
+      typescript:
+        specifier: ^5.7.2
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.8
+        version: 2.1.9(@types/node@22.20.1)
+
   packages/scoring:
     dependencies:
       '@oia/config':
@@ -278,6 +306,9 @@ importers:
       '@oia/ingestion':
         specifier: workspace:*
         version: link:../ingestion
+      '@oia/registry':
+        specifier: workspace:*
+        version: link:../registry
     devDependencies:
       typescript:
         specifier: ^5.7.2

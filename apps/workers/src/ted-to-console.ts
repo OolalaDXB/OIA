@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname } from "node:path";
 import type { ConsoleData, ConsoleRecord, ConsoleFact, SourceFormat, FetchStatus, VerificationStatus } from "@oia/ingestion";
+import { dedupeRecords } from "@oia/ingestion";
 import { fromRoot } from "./paths";
 
 /**
@@ -16,6 +17,8 @@ interface TedCandidate {
   title: string;
   officialUrl: string;
   issuer?: string;
+  /** Registry slugs whose discovery query surfaced this notice (multi-project run). */
+  discoveredFor?: string[];
   liveFetch: string;
   sourceFormat?: string;
   contentHash?: string;
@@ -59,6 +62,7 @@ function toConsoleRecord(c: TedCandidate): ConsoleRecord {
     title: c.title,
     issuer: c.issuer ?? "European Union — TED",
     opportunityKind: "TENDER_RFP", // TED = public procurement notices
+    discoveredFor: c.discoveredFor ?? [],
     linkedBy: "officialUrl",
     officialUrl: c.officialUrl,
     artifact: c.contentHash
@@ -135,25 +139,39 @@ const M0_KIND_OVERRIDES: Record<string, "TENDER_RFP" | "VC_INVESTOR"> = {
 };
 
 export function mergeConsoleData(ted: ConsoleData, m0: ConsoleData | null): ConsoleData {
-  if (!m0) return ted;
+  if (!m0) {
+    const solo = dedupeRecords(ted.records);
+    return {
+      ...ted,
+      run: { ...ted.run, records: solo.records.length },
+      records: solo.records,
+    };
+  }
   const m0Records = m0.records.map((r) => ({
     ...r,
     opportunityKind: r.opportunityKind ?? M0_KIND_OVERRIDES[r.id] ?? ("GRANT" as const),
   }));
-  const counts: Record<string, number> = { ...m0.run.recommendationCounts };
-  for (const [k, v] of Object.entries(ted.run.recommendationCounts)) counts[k] = (counts[k] ?? 0) + v;
+  // Dedup runs across the MERGED set: the whole point is catching the same call
+  // arriving from two different sources (an M0 programme page and a TED notice).
+  const { records, merged } = dedupeRecords([...m0Records, ...ted.records]);
+  const counts: Record<string, number> = {};
+  for (const r of records) counts[r.recommendation] = (counts[r.recommendation] ?? 0) + 1;
   return {
     note: `${m0.note ? `Milestone 0 — ${m0.note} ` : ""}· ${ted.note}`,
     run: {
-      records: m0.run.records + ted.run.records,
+      records: records.length,
       artifactsIngested: m0.run.artifactsIngested + ted.run.artifactsIngested,
       discrepancies: m0.run.discrepancies + ted.run.discrepancies,
-      warnings: [...m0.run.warnings, ...ted.run.warnings],
+      warnings: [
+        ...m0.run.warnings,
+        ...ted.run.warnings,
+        ...(merged > 0 ? [`${merged} duplicate record(s) merged across sources (dedup_key)`] : []),
+      ],
       recommendationCounts: counts,
     },
     // Funding opportunities (the shortlist work) lead; TED notices follow,
     // already sorted most-recent-first. The UI re-sorts client-side anyway.
-    records: [...m0Records, ...ted.records],
+    records,
   };
 }
 
@@ -177,5 +195,6 @@ function main() {
   );
 }
 
-// Run when invoked directly (tsx src/ted-to-console.ts).
-main();
+// Run only when invoked directly (tsx src/ted-to-console.ts): importing this
+// module must not rewrite the console dataset as a side effect.
+if (process.argv[1] && process.argv[1].endsWith("ted-to-console.ts")) main();

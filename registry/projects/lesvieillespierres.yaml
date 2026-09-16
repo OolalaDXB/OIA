@@ -1,0 +1,44 @@
+# OIA project registry entry. One file per project — this is the source of truth.
+# Matching signals (sectors/keywords/geographies) steer the suggestion engine;
+# `profileReview` says whether the owner has confirmed them or they are still a
+# working hypothesis. Correct a wrong keyword HERE and every surface follows.
+
+
+slug: lesvieillespierres
+name: Les Vieilles Pierres
+kind: FOUNDATION
+status: LIVE
+oneLiner: "Heritage hiking association in Bretagne — public site and self-managed back-office."
+url: "https://lesvieillespierres.com"
+active: true
+legalEntities: []
+sectors: ["heritage", "culture", "tourism", "association"]
+geographies: ["FR", "EU"]
+stage: operating
+fundingTypes: ["grant", "subsidy"]
+keywords:
+  - "heritage"
+  - "patrimoine"
+  - "hiking"
+  - "association"
+  - "culture"
+  - "cultural"
+  - "tourism"
+  - "bretagne"
+  - "brittany"
+  - "volunteer"
+exclusions: []
+discovery:
+  enabled: true
+  queryTerms: ["cultural heritage", "heritage restoration", "local tourism"]
+  cpvCodes: ["92000000"]
+  countries: ["FRA"]
+  watch: ["GRANT"]
+profileReview:
+  status: DRAFT
+  derivedFrom:
+    - "TheStudioMT portfolio card 'Les Vieilles Pierres' (public copy: editorial site, multi-role CMS, embedded AI assistant)"
+  note: >-
+    An association is eligible for heritage and regional culture funding that no
+    company profile here matches — the clearest case for keeping the registry
+    open to non-software projects.

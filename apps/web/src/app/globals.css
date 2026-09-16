@@ -189,3 +189,39 @@ ul.evi li::before { content: none; }
 /* BIOPTIC primary button: aqua pill, ink text. */
 .btn.on { background: var(--aqua); border-color: var(--aqua); color: var(--ink); font-weight: 600; }
 .comment { width: 100%; min-height: 54px; background: var(--card); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-family: var(--sans); font-size: 12.5px; resize: vertical; }
+
+/* ————— Phase 3-4 surfaces: tasks, notes, contacts, digest, metrics ————— */
+
+/* Rail: a hairline before a new group of destinations. */
+.railGroup { margin-top: 10px; padding-top: 12px; border-top: 1px solid var(--line-soft); }
+
+/* Where the human layer lives — stated on every surface, never buried. */
+.storageNote {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  padding: 7px 26px; background: var(--card); border-bottom: 1px solid var(--line);
+}
+.restoreBtn { position: relative; overflow: hidden; }
+.restoreBtn input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+.page { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: auto; }
+.detail.wide { max-width: 1100px; width: 100%; }
+
+/* Single-line inputs reuse the comment box's skin. */
+.inputLine { min-height: 0; height: 30px; padding: 4px 9px; }
+.dateInput { width: 148px; }
+.wideInput { min-width: 280px; }
+.contactForm { flex-wrap: wrap; max-width: 900px; }
+.noteText { white-space: pre-wrap; }
+.oneLiner { margin: 10px 0 0; font-size: 14px; color: var(--soft); }
+
+/* Freshness chips: the only place the queue raises its voice. */
+.closingChip { background: rgba(138, 109, 47, 0.14); color: var(--investigate); }
+.expiredChip { background: rgba(168, 67, 47, 0.12); color: var(--reject); }
+.digestChip { margin-left: 8px; }
+
+/* Metrics bars — a tally, drawn plainly. */
+.barRow { display: grid; grid-template-columns: 260px 1fr 40px; gap: 12px; align-items: center; padding: 3px 0; }
+.barLabel { color: var(--soft); font-size: 12px; overflow: hidden; text-overflow: ellipsis; }
+.barTrack { background: var(--card); border-radius: 4px; height: 10px; overflow: hidden; }
+.barFill { display: block; height: 100%; background: var(--ink); opacity: 0.75; }
+.barValue { font-family: var(--mono); font-size: 11px; text-align: right; color: var(--soft); }

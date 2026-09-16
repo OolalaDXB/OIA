@@ -5,7 +5,9 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./console": "./src/console.ts"
+    "./console": "./src/console.ts",
+    "./freshness": "./src/freshness.ts",
+    "./dedup": "./src/dedup.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

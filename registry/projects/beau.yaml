@@ -1,0 +1,47 @@
+# OIA project registry entry. One file per project — this is the source of truth.
+# Matching signals (sectors/keywords/geographies) steer the suggestion engine;
+# `profileReview` says whether the owner has confirmed them or they are still a
+# working hypothesis. Correct a wrong keyword HERE and every surface follows.
+
+
+slug: beau
+name: BEAU
+kind: PRODUCT
+status: PRIVATE_BETA
+oneLiner: "Wealth structuring infrastructure for multi-jurisdictional families."
+url: "https://beau.capital"
+active: true
+legalEntities:
+  - name: "Oolala France SAS"
+    jurisdiction: "FR"
+    role: applicant
+sectors: ["fintech", "wealth management", "software", "digital"]
+geographies: ["FR", "EU", "AE", "GCC"]
+stage: build
+fundingTypes: ["grant", "equity", "tender"]
+keywords:
+  - "wealth"
+  - "estate"
+  - "succession"
+  - "inheritance"
+  - "family office"
+  - "encryption"
+  - "custody"
+  - "fintech"
+  - "software"
+  - "platform"
+exclusions: []
+discovery:
+  enabled: true
+  queryTerms: ["wealth management", "succession", "secure custody", "encryption"]
+  cpvCodes: ["48000000", "66000000", "72000000"]
+  countries: ["FRA", "LUX"]
+  watch: ["GRANT", "VC_INVESTOR"]
+profileReview:
+  status: DRAFT
+  derivedFrom:
+    - "TheStudioMT portfolio card 'BEAU' (public copy: product strategy, data architecture, UX, Zero Access encryption)"
+  note: >-
+    Sectors and keywords read off the public card only. No claim is made here
+    about Zero Access, Faraid or the Dead Man Switch — those are product
+    features, not matching signals, and remain unverified in the portfolio.

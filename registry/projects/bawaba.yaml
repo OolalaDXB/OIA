@@ -1,0 +1,55 @@
+# OIA project registry entry. One file per project — this is the source of truth.
+# Matching signals (sectors/keywords/geographies) steer the suggestion engine;
+# `profileReview` says whether the owner has confirmed them or they are still a
+# working hypothesis. Correct a wrong keyword HERE and every surface follows.
+
+
+slug: bawaba
+name: BAWABA
+kind: PRODUCT
+status: DOSSIER_ON_REQUEST
+oneLiner: "Sovereign AI control plane for regulated industries. MCP reverse proxy."
+url: "https://bawaba.systems"
+active: true
+legalEntities:
+  - name: "Oolala France SAS"
+    jurisdiction: "FR"
+    role: applicant
+  - name: "Oolala Next FZ-LLC"
+    jurisdiction: "AE"
+    role: applicant
+sectors: ["AI", "data", "digital", "cybersecurity", "software"]
+geographies: ["EU", "FR", "AE", "GCC", "MENA"]
+stage: pre-launch
+fundingTypes: ["grant", "subsidy", "equity-free", "tender"]
+keywords:
+  - "artificial intelligence"
+  - "ai"
+  - "data"
+  - "platform"
+  - "digital"
+  - "sovereignty"
+  - "sovereign cloud"
+  - "gateway"
+  - "proxy"
+  - "audit"
+  - "compliance"
+  - "security"
+  - "software"
+  - "innovation"
+exclusions: []
+discovery:
+  enabled: true
+  queryTerms: ["artificial intelligence", "sovereign cloud", "data governance", "audit trail"]
+  cpvCodes: ["72000000", "48000000", "73000000"]
+  countries: ["FRA", "LUX", "BEL", "DEU"]
+  watch: ["GRANT", "TENDER_RFP", "VC_INVESTOR"]
+profileReview:
+  status: DRAFT
+  derivedFrom:
+    - "knowledge/products/bawaba (canonical dossier, OIA repo)"
+    - "TheStudioMT portfolio card 'Bawaba' (public copy, owner-cleared)"
+  note: >-
+    Signals extended beyond the original AI/data set with the control-plane
+    vocabulary the dossier actually uses (sovereignty, gateway, audit). Owner
+    review pending — these steer matching only, never a claim about the product.

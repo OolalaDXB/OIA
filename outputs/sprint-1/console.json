@@ -80,7 +80,8 @@
         "Gate: info confidence 0 < floor 70"
       ],
       "warnings": [],
-      "opportunityKind": "GRANT"
+      "opportunityKind": "GRANT",
+      "dedupKey": "hub71|hub71-access-cohort|no-deadline"
     },
     {
       "id": "bpifrance-aide-developpement-deeptech",
@@ -146,7 +147,8 @@
         "Gate: info confidence 0 < floor 70"
       ],
       "warnings": [],
-      "opportunityKind": "GRANT"
+      "opportunityKind": "GRANT",
+      "dedupKey": "bpifrance-operateur-france-2030|bpifrance-aide-developpement-deeptech-france-2030|no-deadline"
     },
     {
       "id": "eic-accelerator",
@@ -212,7 +214,8 @@
         "Gate: info confidence 0 < floor 70"
       ],
       "warnings": [],
-      "opportunityKind": "GRANT"
+      "opportunityKind": "GRANT",
+      "dedupKey": "european-innovation-council-european|eic-accelerator-open|no-deadline"
     },
     {
       "id": "digital-2026-ai-data-10-compliance",
@@ -519,7 +522,8 @@
       "warnings": [
         "PDF magic bytes / content-type"
       ],
-      "opportunityKind": "GRANT"
+      "opportunityKind": "GRANT",
+      "dedupKey": "european-commission-digital-europe|digital-2026-data-compliance-digital-solutions-regulatory-compliance|2026-04-21"
     },
     {
       "id": "digital-2026-ai-09-genai-pa",
@@ -986,7 +990,8 @@
       "warnings": [
         "PDF magic bytes / content-type"
       ],
-      "opportunityKind": "GRANT"
+      "opportunityKind": "GRANT",
+      "dedupKey": "european-commission-digital-europe|digital-2026-genai-apply-genai-public-administrations|2025-11-04"
     },
     {
       "id": "startup-qatar-qdb-start",
@@ -1055,7 +1060,8 @@
       "warnings": [
         "linked artifact 'qdb-startup-qatar-start.html' not supplied"
       ],
-      "opportunityKind": "VC_INVESTOR"
+      "opportunityKind": "VC_INVESTOR",
+      "dedupKey": "qatar-development-bank-qdb|startup-qatar-investment-program-start|no-deadline"
     },
     {
       "id": "nsf-sbir",
@@ -1124,7 +1130,8 @@
       "warnings": [
         "linked artifact 'nsf-sbir-eligibility.html' not supplied"
       ],
-      "opportunityKind": "GRANT"
+      "opportunityKind": "GRANT",
+      "dedupKey": "u-s-national-science|nsf-sbir-sttr-america-seed-fund-eligibility|no-deadline"
     },
     {
       "id": "unesco-ungm-300342",
@@ -1192,7 +1199,8 @@
         "Gate: info confidence 0 < floor 70"
       ],
       "warnings": [],
-      "opportunityKind": "TENDER_RFP"
+      "opportunityKind": "TENDER_RFP",
+      "dedupKey": "unesco-via-un-global|unesco-rfp-ungm-300342-governance-data-protection-legislative|no-deadline"
     },
     {
       "id": "aggregator-only-digital-health-ai-usd",
@@ -1262,7 +1270,8 @@
         "Gate: info confidence 0 < floor 70"
       ],
       "warnings": [],
-      "opportunityKind": "GRANT"
+      "opportunityKind": "GRANT",
+      "dedupKey": "grantedai-com-aggregator-issuer|aggregator-lead-digital-europe-advanced-digital-skills-uptake|no-deadline"
     },
     {
       "id": "pdf-fixture-digital-2026-ai-09",
@@ -1727,13 +1736,15 @@
       "warnings": [
         "PDF magic bytes / content-type"
       ],
-      "opportunityKind": "GRANT"
+      "opportunityKind": "GRANT",
+      "dedupKey": "european-commission-digital-europe|document-digital-2026-digital-europe-exact-pdf-extraction|2025-11-04"
     },
     {
       "id": "2382-2017",
       "title": "Austria-Vienna: System implementation planning services",
       "issuer": "ÖBB-Infrastruktur AG",
       "opportunityKind": "TENDER_RFP",
+      "discoveredFor": [],
       "linkedBy": "officialUrl",
       "officialUrl": "https://ted.europa.eu/en/notice/2382-2017/html",
       "artifact": {
@@ -1904,13 +1915,15 @@
         "Eligibility not assessed (TED discovery surfaces metadata; qualification is Sprint 2+).",
         "Source not human-VERIFIED — a reviewer must confirm before PURSUE."
       ],
-      "warnings": []
+      "warnings": [],
+      "dedupKey": "obb-infrastruktur-ag|austria-vienna-system-implementation-planning|no-deadline"
     },
     {
       "id": "448146-2016",
       "title": "Italy-Rome: Machine tools",
       "issuer": "Ferservizi SpA — Gruppo Ferrovie dello Stato Italiane (Società con socio unico soggetta alla direzione e coordinamento di Ferrovie dello Stato Italiane SpA)",
       "opportunityKind": "TENDER_RFP",
+      "discoveredFor": [],
       "linkedBy": "officialUrl",
       "officialUrl": "https://ted.europa.eu/en/notice/448146-2016/html",
       "artifact": {
@@ -2081,13 +2094,15 @@
         "Eligibility not assessed (TED discovery surfaces metadata; qualification is Sprint 2+).",
         "Source not human-VERIFIED — a reviewer must confirm before PURSUE."
       ],
-      "warnings": []
+      "warnings": [],
+      "dedupKey": "ferservizi-spa-gruppo-ferrovie|italy-rome-machine-tools|no-deadline"
     },
     {
       "id": "448194-2016",
       "title": "Italy-Rome: IT services: consulting, software development, Internet and support",
       "issuer": "Ferservizi SpA — Gruppo Ferrovie dello Stato Italiane (Società con socio unico soggetta alla direzione e coordinamento di Ferrovie dello Stato Italiane SpA)",
       "opportunityKind": "TENDER_RFP",
+      "discoveredFor": [],
       "linkedBy": "officialUrl",
       "officialUrl": "https://ted.europa.eu/en/notice/448194-2016/html",
       "artifact": {
@@ -2258,13 +2273,15 @@
         "Eligibility not assessed (TED discovery surfaces metadata; qualification is Sprint 2+).",
         "Source not human-VERIFIED — a reviewer must confirm before PURSUE."
       ],
-      "warnings": []
+      "warnings": [],
+      "dedupKey": "ferservizi-spa-gruppo-ferrovie|italy-rome-consulting-software-development-internet-support|no-deadline"
     },
     {
       "id": "412169-2016",
       "title": "Spain-Madrid: Business services: law, marketing, consulting, recruitment, printing and security",
       "issuer": "Achilles South Europe, S.L.U.",
       "opportunityKind": "TENDER_RFP",
+      "discoveredFor": [],
       "linkedBy": "officialUrl",
       "officialUrl": "https://ted.europa.eu/en/notice/412169-2016/html",
       "artifact": {
@@ -2435,13 +2452,15 @@
         "Eligibility not assessed (TED discovery surfaces metadata; qualification is Sprint 2+).",
         "Source not human-VERIFIED — a reviewer must confirm before PURSUE."
       ],
-      "warnings": []
+      "warnings": [],
+      "dedupKey": "achilles-south-europe-s|spain-madrid-business-law-marketing-consulting-recruitment-printing|no-deadline"
     },
     {
       "id": "283014-2016",
       "title": "United Kingdom-Huyton: Health and social work services",
       "issuer": "Knowsley Council",
       "opportunityKind": "TENDER_RFP",
+      "discoveredFor": [],
       "linkedBy": "officialUrl",
       "officialUrl": "https://ted.europa.eu/en/notice/283014-2016/html",
       "artifact": {
@@ -2612,7 +2631,8 @@
         "Eligibility not assessed (TED discovery surfaces metadata; qualification is Sprint 2+).",
         "Source not human-VERIFIED — a reviewer must confirm before PURSUE."
       ],
-      "warnings": []
+      "warnings": [],
+      "dedupKey": "knowsley-council|united-kingdom-huyton-health-social-work|no-deadline"
     }
   ]
 }

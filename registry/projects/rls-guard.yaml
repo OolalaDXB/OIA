@@ -1,0 +1,44 @@
+# OIA project registry entry. One file per project — this is the source of truth.
+# Matching signals (sectors/keywords/geographies) steer the suggestion engine;
+# `profileReview` says whether the owner has confirmed them or they are still a
+# working hypothesis. Correct a wrong keyword HERE and every surface follows.
+
+
+slug: rls-guard
+name: RLS Guard
+kind: PRODUCT
+status: LIVE
+oneLiner: "Security CI for multi-tenant Postgres. Catches tenant isolation breaks before they merge."
+url: "https://github.com/OolalaDXB/rls-guard/releases/tag/v1.0.0"
+active: true
+legalEntities:
+  - name: "Oolala France SAS"
+    jurisdiction: "FR"
+    role: applicant
+sectors: ["cybersecurity", "developer tools", "software", "digital"]
+geographies: ["FR", "EU"]
+stage: operating
+fundingTypes: ["grant", "tender"]
+keywords:
+  - "security"
+  - "cybersecurity"
+  - "postgres"
+  - "database"
+  - "multi-tenant"
+  - "isolation"
+  - "continuous integration"
+  - "open source"
+  - "developer tools"
+  - "software"
+exclusions: []
+discovery:
+  enabled: true
+  queryTerms: ["cybersecurity", "open source security", "software assurance"]
+  cpvCodes: ["72000000", "48000000"]
+  countries: ["FRA", "LUX", "BEL"]
+  watch: ["GRANT", "TENDER_RFP"]
+profileReview:
+  status: DRAFT
+  derivedFrom:
+    - "TheStudioMT portfolio card 'RLS Guard' (public copy: CLI, GitHub Action, migration replay, evidence report)"
+  note: "Open-source security tooling — a natural fit for EU cyber/OSS programmes, to be confirmed."

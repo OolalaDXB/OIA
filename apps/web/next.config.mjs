@@ -8,7 +8,7 @@ const nextConfig = {
   // Folder-per-route (…/tenders/index.html) so any static host serves clean URLs.
   trailingSlash: true,
   // @oia/* packages are consumed as TypeScript source (internal packages).
-  transpilePackages: ["@oia/ingestion", "@oia/workspace", "@oia/database"],
+  transpilePackages: ["@oia/ingestion", "@oia/workspace", "@oia/database", "@oia/registry"],
   eslint: { ignoreDuringBuilds: true },
 };
 

@@ -1,0 +1,49 @@
+# OIA project registry entry. One file per project — this is the source of truth.
+# Matching signals (sectors/keywords/geographies) steer the suggestion engine;
+# `profileReview` says whether the owner has confirmed them or they are still a
+# working hypothesis. Correct a wrong keyword HERE and every surface follows.
+
+
+slug: sillon
+name: SILLON
+kind: PRODUCT
+status: LIVE
+oneLiner: "Multi-tenant ERP for physical music distribution — and the SaaS that bills it."
+url: "https://sillon.me"
+active: true
+legalEntities:
+  - name: "Oolala France SAS"
+    jurisdiction: "FR"
+    role: applicant
+sectors: ["music", "culture", "creative industries", "software", "retail"]
+geographies: ["FR", "EU"]
+stage: operating
+fundingTypes: ["grant", "subsidy", "tender"]
+keywords:
+  - "music"
+  - "record"
+  - "vinyl"
+  - "distribution"
+  - "label"
+  - "culture"
+  - "cultural"
+  - "erp"
+  - "saas"
+  - "invoicing"
+  - "e-invoicing"
+  - "point of sale"
+  - "software"
+exclusions: []
+discovery:
+  enabled: true
+  queryTerms: ["music distribution", "cultural sector digitalisation", "e-invoicing"]
+  cpvCodes: ["48000000", "72000000", "92000000"]
+  countries: ["FRA"]
+  watch: ["GRANT", "TENDER_RFP"]
+profileReview:
+  status: DRAFT
+  derivedFrom:
+    - "TheStudioMT portfolio card 'Sillon' (public copy: domain modeling, multi-tenant architecture, POS, accounting, e-invoicing, pro portal)"
+  note: >-
+    Replaces the earlier deliberately-thin profile. Music/culture signals come
+    from the card's own description of the domain, not from an assumption.
