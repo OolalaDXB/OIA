@@ -1,10 +1,9 @@
 {
   "ScoutResult": {
-    "note": "The page lists clusters, support programmes, and events as potential funding or support opportunities, but does not explicitly detail specific funding calls, grants, subsidies, loans, or tax incentives with clear application processes or deadlines. The following entries are extracted based on named programmes or initiatives that could imply funding or support opportunities.",
     "calls": [
-      {
-        "title": "Industries des véhicules intelligents et autonomes (SAVI Cluster)",
-        "type": "Cluster / Support Programme",
+       {
+        "title": "Industries des véhicules intelligents et autonomes (SAVI)",
+        "type": "Cluster programme",
         "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/savi",
         "deadline": "",
         "amount": "",
@@ -12,8 +11,8 @@
         "quote": "Une nouvelle ère de mobilité intelligente"
       },
       {
-        "title": "Croissance agroalimentaire et abondance en eau (AGWA Cluster)",
-        "type": "Cluster / Support Programme",
+        "title": "Croissance agroalimentaire et abondance en eau (AGWA)",
+        "type": "Cluster programme",
         "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/agwa",
         "deadline": "",
         "amount": "",
@@ -21,8 +20,8 @@
         "quote": "Cultiver l’avenir de l’alimentation et de l’eau"
       },
       {
-        "title": "Santé, endurance, longévité et médecine (HELM Cluster)",
-        "type": "Cluster / Support Programme",
+        "title": "Santé, endurance, longévité et médecine (HELM)",
+        "type": "Cluster programme",
         "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/helm",
         "deadline": "",
         "amount": "",
@@ -30,8 +29,8 @@
         "quote": "Propulser la prochaine ère des sciences de la vie"
       },
       {
-        "title": "Fintech, assurance, numérique et actifs alternatifs (FIDA Cluster)",
-        "type": "Cluster / Support Programme",
+        "title": "Fintech, assurance, numérique et actifs alternatifs (FIDA)",
+        "type": "Cluster programme",
         "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/fida",
         "deadline": "",
         "amount": "",
@@ -40,7 +39,7 @@
       },
       {
         "title": "Partenariats public-privé",
-        "type": "Partnership Programme",
+        "type": "Partnership programme",
         "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/public-private-partnerships",
         "deadline": "",
         "amount": "",
@@ -49,7 +48,7 @@
       },
       {
         "title": "Développement du commerce et de l’industrie",
-        "type": "Support Programme",
+        "type": "Support programme",
         "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry",
         "deadline": "",
         "amount": "",
@@ -57,8 +56,8 @@
         "quote": "Stratégie industrielle, facilitation du commerce et promotion des exportations réunies sur une seule plateforme"
       },
       {
-        "title": "Programmes de soutien (Trade & Industry)",
-        "type": "Support Programme",
+        "title": "Programmes de soutien (accès au capital et autres)",
+        "type": "Support programme",
         "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry/support-programmes",
         "deadline": "",
         "amount": "",
@@ -67,25 +66,25 @@
       },
       {
         "title": "Abu Dhabi Investment Forum : Séoul",
-        "type": "Event / Networking Opportunity",
+        "type": "Event / Networking opportunity",
         "sourceUrl": "https://adif.abudhabi/south-korea/#register",
         "deadline": "2026-09-16",
         "amount": "",
         "eligibility": "",
-        "quote": "Un événement exclusif réunissant les plus grands dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi."
+        "quote": "Le Bureau d’investissement d’Abu Dhabi (ADIO) a le plaisir de vous inviter à manifester votre intérêt pour participer à l’Abu Dhabi Investment Forum (ADIF) au JW Marriott Hotel Seoul, en Corée du Sud, un événement exclusif réunissant les plus grands dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi, la capitale des Émirats arabes unis"
       },
       {
         "title": "Abu Dhabi Investment Forum : Shanghai",
-        "type": "Event / Networking Opportunity",
+        "type": "Event / Networking opportunity (recap)",
         "sourceUrl": "https://adif.abudhabi/shanghai/",
         "deadline": "",
         "amount": "",
         "eligibility": "",
-        "quote": "Un événement exclusif réunissant les plus grands dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi."
+        "quote": "Le Bureau d’investissement d’Abu Dhabi (ADIO), en partenariat avec l’Abu Dhabi Global Market (ADGM), a le plaisir de vous inviter à manifester votre intérêt pour participer à l’Abu Dhabi Investment Forum (ADIF), un événement exclusif réunissant les plus grands dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi, la capitale des Émirats arabes unis"
       },
       {
         "title": "Abu Dhabi Investment Forum : Milan",
-        "type": "Event / Networking Opportunity",
+        "type": "Event / Networking opportunity (recap)",
         "sourceUrl": "https://adif.abudhabi/milan/",
         "deadline": "",
         "amount": "",
@@ -94,16 +93,16 @@
       },
       {
         "title": "Abu Dhabi Investment Forum : Mumbai",
-        "type": "Event / Networking Opportunity",
+        "type": "Event / Networking opportunity (recap)",
         "sourceUrl": "https://adif.abudhabi/mumbai/",
         "deadline": "",
         "amount": "",
         "eligibility": "",
-        "quote": "L’Abu Dhabi Investment Forum a réuni dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi."
+        "quote": "L’Abu Dhabi Investment Forum a réuni dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi, la capitale des Émirats arabes unis."
       },
       {
         "title": "Un référent unique vers le gouvernement",
-        "type": "Support Service",
+        "type": "Support programme",
         "sourceUrl": "https://www.investwithabudhabi.com/fr",
         "deadline": "",
         "amount": "",
@@ -111,17 +110,18 @@
         "quote": "Un référent unique coordonne licences, terrains, réseaux et autorisations auprès des entités publiques : un seul dossier, un seul fil."
       },
       {
-        "title": "Accompagnement pensé pour votre projet",
-        "type": "Support Service",
+        "title": "Un accompagnement pensé pour votre projet",
+        "type": "Support programme",
         "sourceUrl": "https://www.investwithabudhabi.com/fr",
         "deadline": "",
         "amount": "",
+        "amountNote": "5 domaines de programme",
         "eligibility": "",
         "quote": "Les programmes de soutien s’articulent autour de votre projet, sans catalogue imposé."
       },
       {
         "title": "À vos côtés après l’implantation",
-        "type": "Support Service",
+        "type": "Support programme",
         "sourceUrl": "https://www.investwithabudhabi.com/fr",
         "deadline": "",
         "amount": "",
@@ -130,13 +130,14 @@
       },
       {
         "title": "Golden Visa et résidence",
-        "type": "Residency Programme",
+        "type": "Residency incentive",
         "sourceUrl": "https://www.investwithabudhabi.com/fr/golden-visa-residency",
         "deadline": "",
         "amount": "",
         "eligibility": "",
         "quote": ""
       }
-    ]
+    ],
+    "note": "The page contains multiple funding and support opportunities, including cluster programmes, public-private partnerships, support programmes, events, and residency incentives. Some opportunities lack specific deadlines or amounts but are still listed as they appear on the page."
   }
 }

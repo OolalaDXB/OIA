@@ -1,13 +1,4464 @@
 {
   "note": "Aid scout — funding calls read by a model from public portals that have no API. Every call was confirmed to be linked from the page it was read on. All are UNVERIFIED and carry lower information confidence than an official API record, by design.",
   "run": {
-    "records": 0,
-    "artifactsIngested": 0,
+    "records": 66,
+    "artifactsIngested": 66,
     "discrepancies": 0,
     "warnings": [],
     "recommendationCounts": {
-      "INVESTIGATE": 0
+      "INVESTIGATE": 66
     }
   },
-  "records": []
+  "records": [
+    {
+      "id": "scout-aides-territoires-f5a3d1ac07",
+      "title": "4ème Programme d’investissements d’avenir - PIA 4",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/4eme-programme-dinvestissements-davenir-pia-4/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-f5a3d1ac07",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"20 milliards d’euros pour l’innovation dont plus de la moitié mobilisée pour la relance économique\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 20
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [
+        {
+          "field": "estimated_value",
+          "normalizedValue": "20 milliards d’euros",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/4eme-programme-dinvestissements-davenir-pia-4/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "20 milliards d’euros pour l’innovation dont plus de la moitié mobilisée pour la relance économique"
+        }
+      ],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-344cf008a5",
+      "title": "ACTEE - Action des Collectivités Territoriales pour l’Efficacité Energétique",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/actee-action-des-collectivites-territoriales-pour/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-344cf008a5",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"ACTEE – Action des Collectivités Territoriales pour l’Efficacité Energétique\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-c2e060925d",
+      "title": "Action cœur de ville",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/action-cur-de-ville/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-c2e060925d",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Ce programme vise à faciliter et à soutenir le travail des collectivités locales, à inciter les acteurs du logement, du commerce et de l'urbanisme à réinvestir les centres-villes, à favoriser le maint\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-70cb4d1a95",
+      "title": "Actions pour la Relance (complémentaires à France Relance)",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/actions-pour-la-relance-hors-france-relance/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-70cb4d1a95",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Actions pour la relance - hors France Relance\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-cfd6b07452",
+      "title": "EUROPE - AGRIP - Promotion des produits agricoles",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/agrip-promotion-des-produits-agricoles/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-cfd6b07452",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le programme de promotion des produits agricoles (AGRIP) joue un rôle essentiel dans la concrétisation des objectifs politiques de la Commission européenne pour la période 2019-2024, en soutenant le G\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-ab454050d7",
+      "title": "EUROPE - Biodiversa +",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/biodiversa/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-ab454050d7",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Biodiversa + est le Partenariat européen sur la biodiversité. Dans la continuité de Biodiversa, il a été développé conjointement avec la Commission européenne et regroupe 74 programmeurs et bailleurs \""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-03afbabf14",
+      "title": "Cités éducatives",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/cites-educatives/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-03afbabf14",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Les Cités éducatives consistent en une meilleure coordination des dispositifs afin de parvenir à des \"Territoires à haute qualité éducative\".\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-21a0b724a1",
+      "title": "EUROPE - CERV - Citoyenneté, Egalité, Droits et Valeurs",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/citoyennete-egalite-droits-et-valeurs/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-21a0b724a1",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le programme CERV vise à soutenir et à développer des sociétés ouvertes, démocratiques, égalitaires, inclusives et fondées sur les droits et l’état de droit.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-fe7ae9bfcb",
+      "title": "EUROPE - CES - Corps européen de solidarité",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/corps-europeen-de-solidarite/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-fe7ae9bfcb",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le Corps européen de solidarité permet aux jeunes de s’engager et aux organismes de mettre en place des initiatives en Europe sur des activités variées, dans les domaines humanitaires, de la santé, de\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-8fc3efc73a",
+      "title": "EUROPE - COSME - Programme européen pour la compétitivité des entreprises",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/cosme-fonds-europeens/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-8fc3efc73a",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le programme pour la compétitivité des entreprises et des petites et moyennes entreprises (2014-2020), vise à promouvoir la croissance et à renforcer la compétitivité et la durabilité des entreprises \""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-df1687e15d",
+      "title": "Destination France",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/destination-france/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-df1687e15d",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le plan Destination France vise à renforcer le secteur et garantir la place de notre pays en tête du tourisme mondial.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-cc2155afd8",
+      "title": "EUROPE - EaSI - Programme européen pour l'emploi et l'innovation sociale",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/easi-programme-europeen-pour-lemploi-et-linnovatio/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-cc2155afd8",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le programme pour l'emploi et l'innovation sociale (EaSI) est un instrument de financement européen visant à promouvoir un niveau élevé d'emplois durables et de qualité, à garantir une protection soci\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-4f0e193d06",
+      "title": "ÉcoQuartier",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/ecoquartier/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-4f0e193d06",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"La démarche ÉcoQuartier été lancée en 2009 en application de la loi Grenelle 2 dans le cadre du plan Ville durable. Elle vise à favoriser l'émergence d'une nouvelle façon de concevoir, de construire e\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-e2773d3036",
+      "title": "EduRénov",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/edurenov/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-e2773d3036",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le programme EduRénov, lancé en 2023 par la Banque des Territoires, vise à accélérer la rénovation énergétique des bâtiments scolaires en France. Il s’inscrit dans la stratégie nationale de transition\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-b12b40854e",
+      "title": "EUROPE - EIT Food",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/eit-food/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-b12b40854e",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"EIT Food est un partenariat paneuropéen, axé sur le consommateur, qui permet aux innovateurs, aux entrepreneurs et aux étudiants de développer des solutions de classe mondiale aux défis de société, d'\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-4ce66281ab",
+      "title": "EUROPE - EIT Manufacturing",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/eit-manufacturing/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-4ce66281ab",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"EIT Manufacturing a pour objectif de faire de l'Europe le leader de l'innovation industrielle internationale, grâce à son large écosystème d'acteurs de l'industrie.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-570b707d02",
+      "title": "EUROPE - Erasmus +",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/erasmus/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-570b707d02",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Erasmus+ est le programme de l'UE en faveur de l'éducation, de la formation, de la jeunesse et du sport en Europe.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-025fa5727a",
+      "title": "EUROPE - EUCF - EU City Facility",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/eu-city-facility/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-025fa5727a",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"EU City Facility est une initiative européenne visant à soutenir les investissements dans les énergies durables.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-8d4e828c36",
+      "title": "EUROPE - EPSON - European Observation Network for Territorial Development and Cohesion",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/european-observation-network-for-territorial-development-and-cohesion-epson/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-8d4e828c36",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"ESPON, European Observation Network for Territorial Development and Cohesion, est un programme de recherche sur le développement territorial européen.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-e28d7c3eba",
+      "title": "EUROPE - Europe Créative",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/europe-creative/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-e28d7c3eba",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Europe Créative est le programme de l'Union Européenne qui soutient les secteurs de la culture et de la création.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-b45cb20405",
+      "title": "EUROPE - Digital Europe - Europe Numérique",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/europe-numerique/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-b45cb20405",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le nouveau programme pour une Europe numérique (Digital Europe programme) ouvre la voie à la transformation numérique de la société et de l’économie européennes et y apporte un soutien, pour le bénéfi\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-1d40f6079e",
+      "title": "EUROPE - FEADER - Fonds européen agricole pour le développement rural",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/feader/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-1d40f6079e",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Leader (pour Liaison entre actions de développement de l'économie rurale) est une initiative de l'Union européenne pour soutenir des projets de développement rural lancés au niveau local afin de revit\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-69ab8e97aa",
+      "title": "EUROPE - FEAMPA - Fonds européen pour les affaires maritimes, la pêche et l'aquaculture",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/feamp-fonds-europeen-pour-les-affaires-maritimes-e/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-69ab8e97aa",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le Fonds européen pour les affaires maritimes et l'aquaculture, qui finance la politique de la pêche et des affaires maritimes.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-424ff298b5",
+      "title": "EUROPE - FEDER - Fonds européen de développement régional",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/feder-fonds-europeens-de-developpement-regional/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-424ff298b5",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le Fonds européen de développement régional (FEDER), aussi appelés fonds structurels, financent la politique de cohésion économique, sociale et territoriale.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-89a5898ab5",
+      "title": "EUROPE - AMIF - Fonds Asile, Migration et Intégration",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-asile-migration-et-integration/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-89a5898ab5",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le Fonds Asile, migrations et intégration vise à contribuer à une gestion efficace des flux migratoires intégrée au niveau de l’Union européenne.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-5f358916e7",
+      "title": "Fonds Biodiversité",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-biodiversite/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-5f358916e7",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le fonds biodiversité a vocation à mobiliser les territoires pour contribuer à nos objectifs de biodiversité\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-80ba988829",
+      "title": "EUROPE - FED - Fonds Européen de Défense",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-europeen-de-defense/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-80ba988829",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le Fonds européen de défense (FED, ou FEDef) est un programme de l’Union européenne destiné à financer la recherche et le développement de programmes industriels dans le domaine de la défense.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-ba4049bded",
+      "title": "EUROPE - FSI - Fonds pour la Sécurité Intérieure",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-pour-la-securite-interieure/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-ba4049bded",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le FSI a pour objectif général de contribuer à assurer un niveau élevé de sécurité dans l’Union.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-58212d29aa",
+      "title": "EUROPE - InnovFund - Fonds pour l'innovation 2020-2030",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-pour-linnovation-2020-2030/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-58212d29aa",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le Fonds d’innovation (InnovFund) est le programme-cadre 2020-2030 de l’UE pour la démonstration de technologies innovantes à faible émission carbone.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-c336d701fc",
+      "title": "EUROPE - FTJ - Fonds pour une transition juste",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-pour-une-transition-juste-ftj/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-c336d701fc",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le FTJ a été créé pour accompagner la transition énergétique et industrielle des territoires concernés par de fortes émissions de CO2 dans la transition vers une économie neutre en carbone, conforméme\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-3d85ea437e",
+      "title": "Fonds vert - Édition 2026",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-vert/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-3d85ea437e",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Doté d'une enveloppe de 200 millions d'euros d'aides financières, le fonds vert a pour but d'accélérer la transition écologique dans les territoires.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 20
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [
+        {
+          "field": "estimated_value",
+          "normalizedValue": "200 millions d'euros",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/fonds-vert/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "Doté d'une enveloppe de 200 millions d'euros d'aides financières, le fonds vert a pour but d'accélérer la transition écologique dans les territoires."
+        }
+      ],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-bfbaed108f",
+      "title": "Fonds vert Ingénierie",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-vert-ingenierie/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-bfbaed108f",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Toutes les offres en ingénierie pour réaliser vos projets de transition écologique\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-82d62b3400",
+      "title": "France 2030",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/france-2030/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-82d62b3400",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le plan « France 2030 », doté de 30 milliards d’euros déployés sur 5 ans, vise à développer la compétitivité industrielle et les technologies d’avenir.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 20
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [
+        {
+          "field": "estimated_value",
+          "normalizedValue": "30 milliards d’euros",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/france-2030/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "Le plan « France 2030 », doté de 30 milliards d’euros déployés sur 5 ans, vise à développer la compétitivité industrielle et les technologies d’avenir."
+        }
+      ],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-a1ce6c3a68",
+      "title": "France Mobilités",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/france-mobilites/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-a1ce6c3a68",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Améliorer durablement les mobilités du quotidien pour tous et dans tous les territoires\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-88f13fc647",
+      "title": "France Relance",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/france-relance/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-88f13fc647",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"France Relance\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-e27c06df57",
+      "title": "France Ruralités",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/france-ruralites/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-e27c06df57",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Né en 2023, le Plan France Ruralités vise à soutenir les territoires ruraux\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-d9709ada82",
+      "title": "EUROPE - FSE + - Fonds social européen",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/fse-fonds-social-europeen/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-d9709ada82",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le Fonds social européen, aussi appelés fonds structurels, financent la politique de cohésion économique, sociale et territoriale.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-3599205d18",
+      "title": "EUROPE - Horizon Europe",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/horizon-europe/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-3599205d18",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Horizon Europe est le programme-cadre de l'Union européenne pour la recherche et l'innovation pour la période allant de 2021 à 2027. Horizon Europe prend ainsi la suite du programme Horizon 2020.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-676e63874a",
+      "title": "EUROPE - IVCDCI - Instrument de Voisinage, de Coopération au Développement et de Coopération Internationale",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/instrument-de-voisinage-de-cooperation-au-developp/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-676e63874a",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"L’instrument de voisinage, de développement et de coopération internationale (NDICI) – « Global Europe » pour la période 2021-2027 est le principal instrument de l’UE pour les partenariats internation\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-c2fa3d0145",
+      "title": "EUROPE - Interreg - Fonds européens",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/interreg/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-c2fa3d0145",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Interreg est un programme européen visant à promouvoir la coopération entre les régions européennes.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-a0d08e5bb0",
+      "title": "EUROPE - Interreg Europe",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/interreg-europe/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-a0d08e5bb0",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Interreg Europe est un programme de coopération internationale\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-ddd1ce4da8",
+      "title": "EUROPE - Interreg France-Suisse",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/interreg-france-suisse/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-ddd1ce4da8",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Interreg France-Suisse est un programme de l’Union européenne cofinancé par le Fonds européen de développement régional (FEDER), la Confédération suisse et les cantons, pour soutenir la Coopération te\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-f9869599c0",
+      "title": "EUROPE - InvestEU",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/investeu/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-f9869599c0",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Promotion de la reprise, d'une croissance verte, des emplois de qualité et du bien-être dans toute l’Europe\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-53bb5a3e80",
+      "title": "EUROPE - LEADER - Liaison entre Actions de Développement de l’Économie Rurale",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/leader/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-53bb5a3e80",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"LEADER est un programme d'initiative communautaire pour cofinancer des projets publics ou privés qui favorisent le développement des zones rurales.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-f63c9ad2d4",
+      "title": "EUROPE - LIFE - Programme européen pour l'environnement et le climat",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/life/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-f63c9ad2d4",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le programme LIFE est l'instrument financier de la Commission européenne de soutien aux projets dans les domaines de l'environnement et du climat.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-45a04125d7",
+      "title": "EUROPE - Lignes de prérogatives sociales et de compétences spécifiques - 2021-2027",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/lignes-de-prerogatives-sociales-et-de-competences/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-45a04125d7",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Lignes de prérogatives sociales et de compétences spécifiques - 2021-2027\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-22a13da92a",
+      "title": "EUROPE - EU4Health - L'UE pour la santé",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/lue-pour-la-sante/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-22a13da92a",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le programme «L’UE pour la santé» (EU4Health) a été adopté en réaction à la pandémie de COVID-19 et afin de renforcer la préparation aux crises dans l’UE. La pandémie a mis en évidence la fragilité de\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-8749c04b73",
+      "title": "EUROPE - Mécanisme de protection civile",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/mecanisme-de-protection-civile/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-8749c04b73",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le mécanisme européen de protection civile a pour objectif de renforcer la coopération en matière de protection civile.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-af9fbc13e8",
+      "title": "EUROPE - MIE - Mécanisme pour l'interconnexion en Europe",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/mecanisme-pour-linterconnexion-en-europe/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-af9fbc13e8",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le mécanisme pour l’interconnexion en Europe (MIE) est le principal instrument de financement de l’Union pour promouvoir la croissance, l’emploi et la compétitivité grâce à des investissements ciblés \""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-23f3ef06da",
+      "title": "Mission Société Numérique",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/mission-societe-numerique/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-23f3ef06da",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Mission Société Numérique\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-634c563ab2",
+      "title": "Nouveaux lieux, nouveaux liens",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/nouveaux-lieux-nouveaux-liens/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-634c563ab2",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"ANCT\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-6f8ac434a6",
+      "title": "EUROPE - PERICLES IV",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/pericles-iv/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-6f8ac434a6",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le programme Pericles IV finance des échanges de personnel, des séminaires, des formations et des études à l’intention des services répressifs et judiciaires, des banques et des autres acteurs de la l\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-bc7b537931",
+      "title": "Petites villes de demain",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/petites-villes-de-demain/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-bc7b537931",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le programme PVD est destiné aux communes de moins de 20 000 habitants exerçant des fonctions de centralité et présentant des signes de fragilité.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-9e1fd109a8",
+      "title": "Plan France Très Haut Débit",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/plan-france-tres-haut-debit/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-9e1fd109a8",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le programme France Très Haut Débit vise à donner accès à tous les Français au bon haut débit fixe (minimum 8 Mbit/s) d’ici à fin 2020, et au très haut débit fixe (minimum 30 Mbit/s) d’ici à fin 2022.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-ba9dcac0af",
+      "title": "EUROPE - EUAF - Programme Anti-Fraude 2021-2027",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/programme-anti-fraude-2021-2027/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-ba9dcac0af",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le programme antifraude de l’UE vise à protéger les intérêts financiers de l’UE en fournissant un financement, sous forme de subventions et de marchés publics, pour des équipements d’investigation tec\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-76167bc334",
+      "title": "EUROPE - SMP - Programme du marché unique",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/programme-du-marche-unique/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-76167bc334",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Doté d’un budget de 4,2 milliards d’euros, le programme de l’UE en faveur du marché unique est une nouveauté de la programmation 2021-2027. Son principal objectif est d’assurer le bon fonctionnement d\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 20
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [
+        {
+          "field": "estimated_value",
+          "normalizedValue": "4,2 milliards d’euros",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/programme-du-marche-unique/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "Doté d’un budget de 4,2 milliards d’euros, le programme de l’UE en faveur du marché unique est une nouveauté de la programmation 2021-2027. Son principal objectif est d’assurer le bon fonctionnement du marché unique et de poursuivre sa mise en œuvre pour atteindre son plein potentiel."
+        }
+      ],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-2706847555",
+      "title": "EUROPE - Programme Justice 2021-2027",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/programme-justice-2021-2027/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-2706847555",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le programme Justice 2021-2027 prévoit un financement pour soutenir la coopération judiciaire en matière civile et pénale et l’accès effectif des citoyens et des entreprises à la justice.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-c773484b86",
+      "title": "EUROPE - Promotion des produits agricoles",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/promotion-des-produits-agricoles/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-c773484b86",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"L’objectif général est de renforcer la compétitivité du secteur agricole de l’UE.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-3169efd3d6",
+      "title": "QPV - Quartiers Prioritaires de la politique de la Ville",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/qpv-quartiers-prioritaires-de-la-politique-de-la-ville/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-3169efd3d6",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Les QPV sont entités définies par la loi de 2014, identifiant zones urbaines pauvres nécessitant des interventions publiques. Une nouvelle cartographie est entrée en vigueur le 1er janvier 2024 (décre\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-8a10e49c11",
+      "title": "Renaturation des villes",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/renaturation-des-villes/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-8a10e49c11",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Cofinancer des solutions d’adaptation au changement climatique, fondées sur la présence de la nature en ville.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-bff0cce25c",
+      "title": "Avenir Montagnes",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/ruralite-montagne-anct/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-bff0cce25c",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Piloté par l’ANCT, le programme accompagnera les acteurs de la montagne (collectivités, acteurs socio-économiques) dans le développement économique, la préservation de leur patrimoine naturel et l’ada\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-1486ab5e76",
+      "title": "Terres Mers Ultra-Marines (Te Me Um)",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/terres-mers-ultra-marines-te-me-um/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-1486ab5e76",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"« Terres Mers Ultra-Marines » (Te Me Um)\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-d88cd5c9b1",
+      "title": "Territoires d'industrie",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/territoires-dindustrie/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-d88cd5c9b1",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Le programme vise à apporter, dans et par les territoires, des réponses concrètes aux enjeux de soutien à l’industrie\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-ca659226bd",
+      "title": "Tourisme Ingénierie Développement",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/tourisme-ingenierie-developpement/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-ca659226bd",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"Programme Tourisme Ingénierie Développement\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-aides-territoires-99c9e2224d",
+      "title": "EUROPE - URBACT",
+      "issuer": "beta.gouv.fr / French state",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://aides-territoires.beta.gouv.fr/programmes/urbact/",
+      "discoveryUrl": "https://aides-territoires.beta.gouv.fr",
+      "artifact": {
+        "id": "scout-aides-territoires-99c9e2224d",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5f766cbcb05c489eccac88e6cf438a37f0e770bb902467556792031886833cea",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://aides-territoires.beta.gouv.fr",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://aides-territoires.beta.gouv.fr in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"URBACT est un programme de coopération territoriale européen qui promeut le développement urbain intégré.\""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 15
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-worldbank-afdb-ebrd-cb0e86d54b",
+      "title": "Consultancy services for the feasibility study, detailed design, tender document preparation, construction supervision, & contract administration for the Gidabo Left Bank New Irrigation Development project",
+      "issuer": "Multilateral development banks",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [
+        "padel-design",
+        "district-267",
+        "live-great-foundation",
+        "thestudio-mt"
+      ],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00468424",
+      "discoveryUrl": "https://projects.worldbank.org/en/projects-operations/procurement",
+      "artifact": {
+        "id": "scout-worldbank-afdb-ebrd-cb0e86d54b",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "5afc1998ff001416fcab3c38f23b3a34db801f87abb142fa7e96c92dfad64124",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://projects.worldbank.org/en/projects-operations/procurement",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://projects.worldbank.org/en/projects-operations/procurement in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "Quoted from the page: \"The Federal Democratic Republic of Ethiopia has received financing from the World Bank toward the cost of the Climate Resilient Irrigation for Sustainable Production (CRISP) Project. The implementing \""
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 25
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [
+        {
+          "field": "eligibility",
+          "normalizedValue": "Eligible consulting firms with required qualifications and relevant experience in the field of assignment, including core business, years in business, organizational, managerial, and technical capabilities. Firms may associate in joint ventures or sub-consultancies.",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00468424"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "The Federal Democratic Republic of Ethiopia has received financing from the World Bank toward the cost of the Climate Resilient Irrigation for Sustainable Production (CRISP) Project. The implementing agency, the Ministry of Irrigation and Lowlands, intends to apply part of the proceeds for the consulting service."
+        },
+        {
+          "field": "deadline_text",
+          "normalizedValue": "Oct 05, 2026 04:30",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00468424"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "The Federal Democratic Republic of Ethiopia has received financing from the World Bank toward the cost of the Climate Resilient Irrigation for Sustainable Production (CRISP) Project. The implementing agency, the Ministry of Irrigation and Lowlands, intends to apply part of the proceeds for the consulting service."
+        }
+      ],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "The page states a deadline of \"Oct 05, 2026 04:30\" — unparsed and unconfirmed.",
+        "Eligibility text was extracted but NOT assessed against any project."
+      ],
+      "warnings": []
+    }
+  ]
 }
