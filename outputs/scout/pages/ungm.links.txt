@@ -197,7 +197,6 @@ https://www.ungm.org/Shared/KnowledgeCenter/Pages/About
 https://www.ungm.org/Shared/KnowledgeCenter/Pages/UNGMGlossary
 https://www.ungm.org/Public/ASR
 https://www.ungm.org/Public/TenderAlertService
-https://www.ungm.org/Public/Notice/312327
 https://www.ungm.org/Public/Notice/313261
 https://www.ungm.org/Public/Notice/310593
 https://www.ungm.org/Public/Notice/312723
@@ -210,6 +209,7 @@ https://www.ungm.org/Public/Notice/313713
 https://www.ungm.org/Public/Notice/311892
 https://www.ungm.org/Public/Notice/314067
 https://www.ungm.org/Public/Notice/313965
+https://www.ungm.org/Public/Notice/312409
 https://www.ungm.org/Public/Notice/313805
 https://www.ungm.org/Public/Notice/314003
 https://www.ungm.org/Public/Pages/Terms

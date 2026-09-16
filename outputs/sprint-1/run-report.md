@@ -23,7 +23,7 @@
   - query: `classification-cpv IN (72212517 72230000 72267000 72413000 79421000 72224000) AND buyer-country IN (FRA LUX BEL) AND publication-date>=20260618 AND notice-type IN (cn-standard cn-social)`
 
 - unique notices across projects: 482
-- matchable text per record (the S2 measure): median 268 characters over 25 record(s)
+- matchable text per record (the S2 measure): median 1599 characters over 25 record(s)
 - candidates processed (cap 25): 25
 - qualified at MANUAL_REVIEW_REQUIRED: 25
 - notice-page fetch failures: 0

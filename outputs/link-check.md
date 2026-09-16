@@ -52,7 +52,7 @@ Checked 62 distinct URL(s).
   - https://flippa.com
 - **source hub71** — now redirects to https://www.hub71.com/
   - https://hub71.com
-- **source ted** — now redirects to https://ted.europa.eu/
+- **source ted** — now redirects to https://ted.europa.eu/en/
   - https://ted.europa.eu
 - **source uae-federal-procurement** — now redirects to https://www.mof.gov.ae/
   - https://www.mof.gov.ae

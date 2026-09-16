@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T18:12:17.880Z",
+  "generatedAt": "2026-09-16T18:26:02.195Z",
   "found": [],
   "perSource": [
     {
@@ -7,7 +7,7 @@
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "accepted the cookie banner (\"tout accepter\")",
+      "note": "no list found; keys were: ScoutResult · accepted the cookie banner (\"tout accepter\")",
       "chars": 11009,
       "links": 56
     },
@@ -16,7 +16,7 @@
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "followed \"https://aides-territoires.beta.gouv.fr/programmes/\" (aides, programmes)",
+      "note": "no list found; keys were: ScoutResult · followed \"https://aides-territoires.beta.gouv.fr/programmes/\" (aides, programmes)",
       "chars": 14498,
       "links": 103
     },
@@ -25,7 +25,7 @@
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "tried \"https://www.boamp.fr/pages/aide/\" but it had less text — stayed on the entry page",
+      "note": "no list found; keys were: ScoutResult · tried \"https://www.boamp.fr/pages/aide/\" but it had less text — stayed on the entry page",
       "chars": 1697,
       "links": 38
     },
@@ -34,7 +34,7 @@
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "accepted the cookie banner (\"accepter\")",
+      "note": "Only one funding opportunity (CIR) is explicitly listed on the page. · accepted the cookie banner (\"accepter\")",
       "chars": 3446,
       "links": 106
     },
@@ -43,7 +43,7 @@
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "followed \"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/calls-for-proposals\" (calls, funding, tenders, opportunityieses)",
+      "note": "no list found; keys were: ScoutResult · followed \"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/calls-for-proposals\" (calls, funding, tenders, opportunityieses)",
       "chars": 18611,
       "links": 81
     },
@@ -52,7 +52,7 @@
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "",
+      "note": "no list found; keys were: ScoutResult",
       "chars": 15729,
       "links": 189
     },
@@ -61,7 +61,7 @@
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "followed \"https://agirpourlatransition.ademe.fr/entreprises/aides-financieres\" (aides)",
+      "note": "no list found; keys were: ScoutResult · followed \"https://agirpourlatransition.ademe.fr/entreprises/aides-financieres\" (aides)",
       "chars": 7716,
       "links": 113
     },
@@ -70,7 +70,7 @@
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "tried \"https://www.hub71.com/program/access-programme/apply\" but it had less text — stayed on the entry page",
+      "note": "no list found; keys were: ScoutResult · tried \"https://www.hub71.com/program/access-programme/apply\" but it had less text — stayed on the entry page",
       "chars": 11347,
       "links": 75
     },
@@ -88,7 +88,7 @@
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "followed \"https://www.find-tender.service.gov.uk/search/opportunities?language=en_GB&cookies_accepted=unknown\" (opportunityieses)",
+      "note": "no list found; keys were: ScoutResult · followed \"https://www.find-tender.service.gov.uk/search/opportunities?language=en_GB&cookies_accepted=unknown\" (opportunityieses)",
       "chars": 10197,
       "links": 43
     },
@@ -97,8 +97,8 @@
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "followed \"https://www.ungm.org/Public/Notice\" (opportunityieses, procurement)",
-      "chars": 9423,
+      "note": "no list found; keys were: ScoutResult · followed \"https://www.ungm.org/Public/Notice\" (opportunityieses, procurement)",
+      "chars": 9445,
       "links": 219
     },
     {
@@ -106,7 +106,7 @@
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "followed \"https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00468424\" (tenders, procurement)",
+      "note": "no list found; keys were: ScoutResult · followed \"https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00468424\" (tenders, procurement)",
       "chars": 8534,
       "links": 356
     }
