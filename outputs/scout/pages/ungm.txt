@@ -238,10 +238,6 @@ Displaying results 1 to 15 of 1441
 	Title	Deadline	Published	Organization	Type of opportunity	Reference	Beneficiary country or territory
 
 	
-UNDP-HND-00663 Adquisición Equipo Medios Nacionales de Comunicación
-	16-Sep-2026 15:00 (GMT -4.00) Expires within 24 hours	11-Aug-2026	UNDP	Request for quotation	UNDP-HND-00663,2	Honduras
-
-	
 Réalisation d un forage d eau à Clercine (IGPNH)
 	16-Sep-2026 16:30 (GMT -4.00) Expires within 24 hours	28-Aug-2026	UNDP	Request for quotation	UNDP-HTI-00621	Haiti
 
@@ -288,6 +284,10 @@ RFP/AFRO/019/2026-Technical Support for Health Technology Access Pool (HTAP) and
 	
 Building the Technical Architecture of the General Education Certificate (GEC)
 	16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours	27-Aug-2026	UNICEF	Request for proposal	LRPS-2026-9205867	South Africa
+
+	
+138200 SUMINISTRO DE ANIMALES DE PRODUCCIÓN PECUARIA – AVES DE POSTURA Y PORCINOS DE LEVANTE, DPTO. DE CÓRDOBA
+	16-Sep-2026 23:59 (GMT -5.00) Expires within 24 hours	04-Sep-2026	FAO	Invitation to bid	2026/FLCOL/FLCOL/138200	Colombia
 
 	
 Consultancy to support the development of a Framework of Action on Skills for a Just Energy Transition through Social Dialogue in Mpumalanga and the Eastern Cape.

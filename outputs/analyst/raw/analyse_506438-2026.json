@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria regarding the legal form, location, or sector of applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, la localisation ou le secteur des candidats."
+    },
+    "nextAction": {
+      "en": "Request the full tender documents from SNCF to identify the eligibility criteria for applicants.",
+      "fr": "Demander les documents complets de l'appel d'offres à la SNCF pour identifier les critères d'éligibilité des candidats."
+    }
+  }
+}

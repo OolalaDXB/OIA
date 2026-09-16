@@ -149,13 +149,13 @@ nationalities
 sectors
 SOME OF OUR STARTUPS:
 
-A community-based platform in outer space with blockchain technology
-
 Jade Autism is an app for ASD (Autistic Spectrum Disorder) that stimulates and develops children's cognitive functions.
 
-Lune is an AI-driven engagement and hyper-personalization platform for banks, built on insights from over 1 billion transactions. Our Transaction Enrichment API transforms raw transaction data into actionable insights, powering our core products: Enrichment, Personal Finance Engagement (PFE) SDK, Insights Dashboard, and Smart Nudges. (Supports Arabic transliteration)
+Expand your medical business worldwide with OnEx
 
-Redefining the work-life experience by making automated HR, payroll, employee benefits and insurance a possibility for all businesses in UAE.
+A community-based platform in outer space with blockchain technology
+
+Algocyte is the first Self-Monitoring Blood Count home device based on AI
 
 ALL STARTUPS
 Our community says

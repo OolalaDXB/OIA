@@ -49,11 +49,21 @@ Export is limited to 15,000 results.
 
 Save search
 
-We've found 15,373 result(s)
+We've found 15,374 result(s)
 
 Sort by
 Newest
 Oldest
+Digital Exposure Analysis
+Active tender Suitable for SME
+Contracting authority type: Central government
+Contracting authority name: Home Office
+Procurement identifier: ocds-h6vhtk-0773f2
+Submission deadline date: 23 September 2026
+Total value including VAT: £60,000.00
+Delivery location: Not specified
+CPV code(s):
+79700000 - Investigation and security services
 Soft Market Testing-Sleep Service for Children and Young People
 Preliminary Market Engagement Suitable for SME & VCSE
 Contracting authority type: Regional and local public authority
@@ -259,16 +269,6 @@ Total value including VAT: £250,000.00
 Delivery location: West Kent
 CPV code(s):
 79710000 - Security services
-Reducing Parental Conflict Digital Support - Separating & Separated Parents
-Pipeline Suitable for SME & VCSE
-Contracting authority type: Central government
-Contracting authority name: Department for Work & Pensions
-Procurement identifier: ocds-h6vhtk-0773d6
-Tender or transparency notice publication date (estimated): 24 September 2026
-Total value including VAT: £2,628,000.00
-Delivery location: Not specified
-CPV code(s):
-48000000 - Software package and information systems
 Next
  page
 :

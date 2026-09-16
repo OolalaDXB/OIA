@@ -1,18 +1,18 @@
 {
   "note": "Aid scout — funding calls read by a model from public portals that have no API. Every call was confirmed to be linked from the page it was read on. All are UNVERIFIED and carry lower information confidence than an official API record, by design.",
   "run": {
-    "records": 241,
-    "artifactsIngested": 241,
+    "records": 227,
+    "artifactsIngested": 227,
     "discrepancies": 0,
     "warnings": [],
     "recommendationCounts": {
-      "INVESTIGATE": 241
+      "INVESTIGATE": 227
     }
   },
   "records": [
     {
       "id": "scout-adio-cc83e5af7d",
-      "title": "Industries des véhicules intelligents et autonomes (SAVI)",
+      "title": "Industries des véhicules intelligents et autonomes (SAVI Cluster)",
       "issuer": "ADIO",
       "opportunityKind": "GRANT",
       "discoveredFor": [
@@ -25,7 +25,7 @@
       "artifact": {
         "id": "scout-adio-cc83e5af7d",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+        "contentHash": "9923c153b18cac39c67b5c163dd89833bda9e09f3385bfec473767d928a11d21",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -81,7 +81,7 @@
     },
     {
       "id": "scout-adio-7dba563501",
-      "title": "Croissance agroalimentaire et abondance en eau (AGWA)",
+      "title": "Croissance agroalimentaire et abondance en eau (AGWA Cluster)",
       "issuer": "ADIO",
       "opportunityKind": "GRANT",
       "discoveredFor": [
@@ -94,7 +94,7 @@
       "artifact": {
         "id": "scout-adio-7dba563501",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+        "contentHash": "9923c153b18cac39c67b5c163dd89833bda9e09f3385bfec473767d928a11d21",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -150,7 +150,7 @@
     },
     {
       "id": "scout-adio-010242d838",
-      "title": "Santé, endurance, longévité et médecine (HELM)",
+      "title": "Santé, endurance, longévité et médecine (HELM Cluster)",
       "issuer": "ADIO",
       "opportunityKind": "GRANT",
       "discoveredFor": [
@@ -163,7 +163,7 @@
       "artifact": {
         "id": "scout-adio-010242d838",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+        "contentHash": "9923c153b18cac39c67b5c163dd89833bda9e09f3385bfec473767d928a11d21",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -219,7 +219,7 @@
     },
     {
       "id": "scout-adio-df1efd65fd",
-      "title": "Fintech, assurance, numérique et actifs alternatifs (FIDA)",
+      "title": "Fintech, assurance, numérique et actifs alternatifs (FIDA Cluster)",
       "issuer": "ADIO",
       "opportunityKind": "GRANT",
       "discoveredFor": [
@@ -232,7 +232,7 @@
       "artifact": {
         "id": "scout-adio-df1efd65fd",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+        "contentHash": "9923c153b18cac39c67b5c163dd89833bda9e09f3385bfec473767d928a11d21",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -301,7 +301,7 @@
       "artifact": {
         "id": "scout-adio-3039bd54f0",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+        "contentHash": "9923c153b18cac39c67b5c163dd89833bda9e09f3385bfec473767d928a11d21",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -370,7 +370,7 @@
       "artifact": {
         "id": "scout-adio-7d70b12639",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+        "contentHash": "9923c153b18cac39c67b5c163dd89833bda9e09f3385bfec473767d928a11d21",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -425,506 +425,8 @@
       "warnings": []
     },
     {
-      "id": "scout-adio-bc9b3ad512",
-      "title": "Programmes de soutien (Trade & Industry)",
-      "issuer": "ADIO",
-      "opportunityKind": "GRANT",
-      "discoveredFor": [
-        "bawaba",
-        "myoolala"
-      ],
-      "linkedBy": "officialUrl",
-      "officialUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry/support-programmes",
-      "discoveryUrl": "https://adio.ae",
-      "artifact": {
-        "id": "scout-adio-bc9b3ad512",
-        "sourceFormat": "STATIC_HTML",
-        "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
-        "renderMethod": "HEADLESS",
-        "byteSize": 0,
-        "processing": "SUCCESS"
-      },
-      "liveFetch": {
-        "attemptedUrl": "https://adio.ae",
-        "status": "OK",
-        "egressDenied": false
-      },
-      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
-      "verificationEvidence": [
-        "Rendered https://adio.ae in a browser and read it with mistral-large-latest.",
-        "The call's link was confirmed to appear on that page before this record was created.",
-        "No quote was returned."
-      ],
-      "application": "UNKNOWN",
-      "award": "UNKNOWN",
-      "strategicRoute": "UNKNOWN",
-      "scores": {
-        "relevance": null,
-        "winPotential": null,
-        "infoConfidence": 15
-      },
-      "gate": {
-        "accessiblePrimarySource": true,
-        "verifiedSource": false,
-        "verifiedDeadline": false,
-        "notExpired": true,
-        "eligibilityAssessed": false,
-        "notAggregatorOnly": true,
-        "notClosedCall": true,
-        "hasExactNextAction": false,
-        "sufficientConfidence": false,
-        "pursueEligible": false,
-        "failedReasons": [
-          "read by a model, not verified by a human",
-          "eligibility not assessed against any project"
-        ]
-      },
-      "recommendation": "INVESTIGATE",
-      "humanReview": "PENDING",
-      "facts": [],
-      "deadlines": [],
-      "conflicts": [],
-      "discrepancies": [],
-      "expected": {},
-      "unresolvedQuestions": [
-        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
-        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
-      ],
-      "warnings": []
-    },
-    {
-      "id": "scout-adio-daca5e364e",
-      "title": "Accès au capital (Trade & Industry)",
-      "issuer": "ADIO",
-      "opportunityKind": "GRANT",
-      "discoveredFor": [
-        "bawaba",
-        "myoolala"
-      ],
-      "linkedBy": "officialUrl",
-      "officialUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry/support-programmes#access-to-capital",
-      "discoveryUrl": "https://adio.ae",
-      "artifact": {
-        "id": "scout-adio-daca5e364e",
-        "sourceFormat": "STATIC_HTML",
-        "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
-        "renderMethod": "HEADLESS",
-        "byteSize": 0,
-        "processing": "SUCCESS"
-      },
-      "liveFetch": {
-        "attemptedUrl": "https://adio.ae",
-        "status": "OK",
-        "egressDenied": false
-      },
-      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
-      "verificationEvidence": [
-        "Rendered https://adio.ae in a browser and read it with mistral-large-latest.",
-        "The call's link was confirmed to appear on that page before this record was created.",
-        "No quote was returned."
-      ],
-      "application": "UNKNOWN",
-      "award": "UNKNOWN",
-      "strategicRoute": "UNKNOWN",
-      "scores": {
-        "relevance": null,
-        "winPotential": null,
-        "infoConfidence": 15
-      },
-      "gate": {
-        "accessiblePrimarySource": true,
-        "verifiedSource": false,
-        "verifiedDeadline": false,
-        "notExpired": true,
-        "eligibilityAssessed": false,
-        "notAggregatorOnly": true,
-        "notClosedCall": true,
-        "hasExactNextAction": false,
-        "sufficientConfidence": false,
-        "pursueEligible": false,
-        "failedReasons": [
-          "read by a model, not verified by a human",
-          "eligibility not assessed against any project"
-        ]
-      },
-      "recommendation": "INVESTIGATE",
-      "humanReview": "PENDING",
-      "facts": [],
-      "deadlines": [],
-      "conflicts": [],
-      "discrepancies": [],
-      "expected": {},
-      "unresolvedQuestions": [
-        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
-        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
-      ],
-      "warnings": []
-    },
-    {
-      "id": "scout-adio-69f559289f",
-      "title": "Un référent unique vers le gouvernement",
-      "issuer": "ADIO",
-      "opportunityKind": "GRANT",
-      "discoveredFor": [
-        "bawaba",
-        "myoolala"
-      ],
-      "linkedBy": "officialUrl",
-      "officialUrl": "https://www.investwithabudhabi.com/fr",
-      "discoveryUrl": "https://adio.ae",
-      "artifact": {
-        "id": "scout-adio-69f559289f",
-        "sourceFormat": "STATIC_HTML",
-        "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
-        "renderMethod": "HEADLESS",
-        "byteSize": 0,
-        "processing": "SUCCESS"
-      },
-      "liveFetch": {
-        "attemptedUrl": "https://adio.ae",
-        "status": "OK",
-        "egressDenied": false
-      },
-      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
-      "verificationEvidence": [
-        "Rendered https://adio.ae in a browser and read it with mistral-large-latest.",
-        "The call's link was confirmed to appear on that page before this record was created.",
-        "Quoted from the page: \"Un référent unique coordonne licences, terrains, réseaux et autorisations auprès des entités publiques : un seul dossier, un seul fil.\""
-      ],
-      "application": "UNKNOWN",
-      "award": "UNKNOWN",
-      "strategicRoute": "UNKNOWN",
-      "scores": {
-        "relevance": null,
-        "winPotential": null,
-        "infoConfidence": 15
-      },
-      "gate": {
-        "accessiblePrimarySource": true,
-        "verifiedSource": false,
-        "verifiedDeadline": false,
-        "notExpired": true,
-        "eligibilityAssessed": false,
-        "notAggregatorOnly": true,
-        "notClosedCall": true,
-        "hasExactNextAction": false,
-        "sufficientConfidence": false,
-        "pursueEligible": false,
-        "failedReasons": [
-          "read by a model, not verified by a human",
-          "eligibility not assessed against any project"
-        ]
-      },
-      "recommendation": "INVESTIGATE",
-      "humanReview": "PENDING",
-      "facts": [],
-      "deadlines": [],
-      "conflicts": [],
-      "discrepancies": [],
-      "expected": {},
-      "unresolvedQuestions": [
-        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
-        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
-      ],
-      "warnings": []
-    },
-    {
-      "id": "scout-adio-69f559289f",
-      "title": "Un accompagnement pensé pour votre projet",
-      "issuer": "ADIO",
-      "opportunityKind": "GRANT",
-      "discoveredFor": [
-        "bawaba",
-        "myoolala"
-      ],
-      "linkedBy": "officialUrl",
-      "officialUrl": "https://www.investwithabudhabi.com/fr",
-      "discoveryUrl": "https://adio.ae",
-      "artifact": {
-        "id": "scout-adio-69f559289f",
-        "sourceFormat": "STATIC_HTML",
-        "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
-        "renderMethod": "HEADLESS",
-        "byteSize": 0,
-        "processing": "SUCCESS"
-      },
-      "liveFetch": {
-        "attemptedUrl": "https://adio.ae",
-        "status": "OK",
-        "egressDenied": false
-      },
-      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
-      "verificationEvidence": [
-        "Rendered https://adio.ae in a browser and read it with mistral-large-latest.",
-        "The call's link was confirmed to appear on that page before this record was created.",
-        "Quoted from the page: \"Les programmes de soutien s’articulent autour de votre projet, sans catalogue imposé.\""
-      ],
-      "application": "UNKNOWN",
-      "award": "UNKNOWN",
-      "strategicRoute": "UNKNOWN",
-      "scores": {
-        "relevance": null,
-        "winPotential": null,
-        "infoConfidence": 15
-      },
-      "gate": {
-        "accessiblePrimarySource": true,
-        "verifiedSource": false,
-        "verifiedDeadline": false,
-        "notExpired": true,
-        "eligibilityAssessed": false,
-        "notAggregatorOnly": true,
-        "notClosedCall": true,
-        "hasExactNextAction": false,
-        "sufficientConfidence": false,
-        "pursueEligible": false,
-        "failedReasons": [
-          "read by a model, not verified by a human",
-          "eligibility not assessed against any project"
-        ]
-      },
-      "recommendation": "INVESTIGATE",
-      "humanReview": "PENDING",
-      "facts": [],
-      "deadlines": [],
-      "conflicts": [],
-      "discrepancies": [],
-      "expected": {},
-      "unresolvedQuestions": [
-        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
-        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
-      ],
-      "warnings": []
-    },
-    {
-      "id": "scout-adio-69f559289f",
-      "title": "À vos côtés après l’implantation",
-      "issuer": "ADIO",
-      "opportunityKind": "GRANT",
-      "discoveredFor": [
-        "bawaba",
-        "myoolala"
-      ],
-      "linkedBy": "officialUrl",
-      "officialUrl": "https://www.investwithabudhabi.com/fr",
-      "discoveryUrl": "https://adio.ae",
-      "artifact": {
-        "id": "scout-adio-69f559289f",
-        "sourceFormat": "STATIC_HTML",
-        "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
-        "renderMethod": "HEADLESS",
-        "byteSize": 0,
-        "processing": "SUCCESS"
-      },
-      "liveFetch": {
-        "attemptedUrl": "https://adio.ae",
-        "status": "OK",
-        "egressDenied": false
-      },
-      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
-      "verificationEvidence": [
-        "Rendered https://adio.ae in a browser and read it with mistral-large-latest.",
-        "The call's link was confirmed to appear on that page before this record was created.",
-        "Quoted from the page: \"Accueil et suivi sur mesure tout au long du cycle d’investissement, de la première demande jusqu’à l’expansion.\""
-      ],
-      "application": "UNKNOWN",
-      "award": "UNKNOWN",
-      "strategicRoute": "UNKNOWN",
-      "scores": {
-        "relevance": null,
-        "winPotential": null,
-        "infoConfidence": 15
-      },
-      "gate": {
-        "accessiblePrimarySource": true,
-        "verifiedSource": false,
-        "verifiedDeadline": false,
-        "notExpired": true,
-        "eligibilityAssessed": false,
-        "notAggregatorOnly": true,
-        "notClosedCall": true,
-        "hasExactNextAction": false,
-        "sufficientConfidence": false,
-        "pursueEligible": false,
-        "failedReasons": [
-          "read by a model, not verified by a human",
-          "eligibility not assessed against any project"
-        ]
-      },
-      "recommendation": "INVESTIGATE",
-      "humanReview": "PENDING",
-      "facts": [],
-      "deadlines": [],
-      "conflicts": [],
-      "discrepancies": [],
-      "expected": {},
-      "unresolvedQuestions": [
-        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
-        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
-      ],
-      "warnings": []
-    },
-    {
-      "id": "scout-adio-35574470fd",
-      "title": "Abu Dhabi Investment Forum : Séoul",
-      "issuer": "ADIO",
-      "opportunityKind": "GRANT",
-      "discoveredFor": [
-        "bawaba",
-        "myoolala"
-      ],
-      "linkedBy": "officialUrl",
-      "officialUrl": "https://adif.abudhabi/south-korea/#register",
-      "discoveryUrl": "https://adio.ae",
-      "artifact": {
-        "id": "scout-adio-35574470fd",
-        "sourceFormat": "STATIC_HTML",
-        "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
-        "renderMethod": "HEADLESS",
-        "byteSize": 0,
-        "processing": "SUCCESS"
-      },
-      "liveFetch": {
-        "attemptedUrl": "https://adio.ae",
-        "status": "OK",
-        "egressDenied": false
-      },
-      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
-      "verificationEvidence": [
-        "Rendered https://adio.ae in a browser and read it with mistral-large-latest.",
-        "The call's link was confirmed to appear on that page before this record was created.",
-        "Quoted from the page: \"Le Bureau d’investissement d’Abu Dhabi (ADIO) a le plaisir de vous inviter à manifester votre intérêt pour participer à l’Abu Dhabi Investment Forum (ADIF) au JW Marriott Hotel Seoul, en Corée du Sud,\""
-      ],
-      "application": "UNKNOWN",
-      "award": "UNKNOWN",
-      "strategicRoute": "UNKNOWN",
-      "scores": {
-        "relevance": null,
-        "winPotential": null,
-        "infoConfidence": 20
-      },
-      "gate": {
-        "accessiblePrimarySource": true,
-        "verifiedSource": false,
-        "verifiedDeadline": false,
-        "notExpired": true,
-        "eligibilityAssessed": false,
-        "notAggregatorOnly": true,
-        "notClosedCall": true,
-        "hasExactNextAction": false,
-        "sufficientConfidence": false,
-        "pursueEligible": false,
-        "failedReasons": [
-          "read by a model, not verified by a human",
-          "eligibility not assessed against any project"
-        ]
-      },
-      "recommendation": "INVESTIGATE",
-      "humanReview": "PENDING",
-      "facts": [
-        {
-          "field": "deadline_text",
-          "normalizedValue": "2026-09-16",
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://adif.abudhabi/south-korea/#register"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "originalSourceText": "Le Bureau d’investissement d’Abu Dhabi (ADIO) a le plaisir de vous inviter à manifester votre intérêt pour participer à l’Abu Dhabi Investment Forum (ADIF) au JW Marriott Hotel Seoul, en Corée du Sud, un événement exclusif réunissant les plus grands dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi, la capitale des Émirats arabes unis"
-        }
-      ],
-      "deadlines": [],
-      "conflicts": [],
-      "discrepancies": [],
-      "expected": {},
-      "unresolvedQuestions": [
-        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
-        "The page states a deadline of \"2026-09-16\" — unparsed and unconfirmed.",
-        "No eligibility criteria were found on the page."
-      ],
-      "warnings": []
-    },
-    {
-      "id": "scout-adio-5a0dc0d8ec",
-      "title": "Abu Dhabi Investment Forum : Shanghai",
-      "issuer": "ADIO",
-      "opportunityKind": "GRANT",
-      "discoveredFor": [
-        "bawaba",
-        "myoolala"
-      ],
-      "linkedBy": "officialUrl",
-      "officialUrl": "https://adif.abudhabi/shanghai/",
-      "discoveryUrl": "https://adio.ae",
-      "artifact": {
-        "id": "scout-adio-5a0dc0d8ec",
-        "sourceFormat": "STATIC_HTML",
-        "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
-        "renderMethod": "HEADLESS",
-        "byteSize": 0,
-        "processing": "SUCCESS"
-      },
-      "liveFetch": {
-        "attemptedUrl": "https://adio.ae",
-        "status": "OK",
-        "egressDenied": false
-      },
-      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
-      "verificationEvidence": [
-        "Rendered https://adio.ae in a browser and read it with mistral-large-latest.",
-        "The call's link was confirmed to appear on that page before this record was created.",
-        "Quoted from the page: \"Le Bureau d’investissement d’Abu Dhabi (ADIO), en partenariat avec l’Abu Dhabi Global Market (ADGM), a le plaisir de vous inviter à manifester votre intérêt pour participer à l’Abu Dhabi Investment Fo\""
-      ],
-      "application": "UNKNOWN",
-      "award": "UNKNOWN",
-      "strategicRoute": "UNKNOWN",
-      "scores": {
-        "relevance": null,
-        "winPotential": null,
-        "infoConfidence": 15
-      },
-      "gate": {
-        "accessiblePrimarySource": true,
-        "verifiedSource": false,
-        "verifiedDeadline": false,
-        "notExpired": true,
-        "eligibilityAssessed": false,
-        "notAggregatorOnly": true,
-        "notClosedCall": true,
-        "hasExactNextAction": false,
-        "sufficientConfidence": false,
-        "pursueEligible": false,
-        "failedReasons": [
-          "read by a model, not verified by a human",
-          "eligibility not assessed against any project"
-        ]
-      },
-      "recommendation": "INVESTIGATE",
-      "humanReview": "PENDING",
-      "facts": [],
-      "deadlines": [],
-      "conflicts": [],
-      "discrepancies": [],
-      "expected": {},
-      "unresolvedQuestions": [
-        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
-        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
-      ],
-      "warnings": []
-    },
-    {
       "id": "scout-adio-873ee725b8",
-      "title": "Abu Dhabi Investment Forum : Milan",
+      "title": "Abu Dhabi Investment Forum: Milan",
       "issuer": "ADIO",
       "opportunityKind": "GRANT",
       "discoveredFor": [
@@ -937,7 +439,7 @@
       "artifact": {
         "id": "scout-adio-873ee725b8",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+        "contentHash": "9923c153b18cac39c67b5c163dd89833bda9e09f3385bfec473767d928a11d21",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -993,7 +495,7 @@
     },
     {
       "id": "scout-adio-b6bef59921",
-      "title": "Abu Dhabi Investment Forum : Mumbai",
+      "title": "Abu Dhabi Investment Forum: Mumbai",
       "issuer": "ADIO",
       "opportunityKind": "GRANT",
       "discoveredFor": [
@@ -1006,7 +508,7 @@
       "artifact": {
         "id": "scout-adio-b6bef59921",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
+        "contentHash": "9923c153b18cac39c67b5c163dd89833bda9e09f3385bfec473767d928a11d21",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -1020,145 +522,7 @@
       "verificationEvidence": [
         "Rendered https://adio.ae in a browser and read it with mistral-large-latest.",
         "The call's link was confirmed to appear on that page before this record was created.",
-        "Quoted from the page: \"L’Abu Dhabi Investment Forum a réuni dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi, la capitale des Émirats arabes unis.\""
-      ],
-      "application": "UNKNOWN",
-      "award": "UNKNOWN",
-      "strategicRoute": "UNKNOWN",
-      "scores": {
-        "relevance": null,
-        "winPotential": null,
-        "infoConfidence": 15
-      },
-      "gate": {
-        "accessiblePrimarySource": true,
-        "verifiedSource": false,
-        "verifiedDeadline": false,
-        "notExpired": true,
-        "eligibilityAssessed": false,
-        "notAggregatorOnly": true,
-        "notClosedCall": true,
-        "hasExactNextAction": false,
-        "sufficientConfidence": false,
-        "pursueEligible": false,
-        "failedReasons": [
-          "read by a model, not verified by a human",
-          "eligibility not assessed against any project"
-        ]
-      },
-      "recommendation": "INVESTIGATE",
-      "humanReview": "PENDING",
-      "facts": [],
-      "deadlines": [],
-      "conflicts": [],
-      "discrepancies": [],
-      "expected": {},
-      "unresolvedQuestions": [
-        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
-        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
-      ],
-      "warnings": []
-    },
-    {
-      "id": "scout-adio-cfb5f167cf",
-      "title": "Golden Visa et résidence",
-      "issuer": "ADIO",
-      "opportunityKind": "GRANT",
-      "discoveredFor": [
-        "bawaba",
-        "myoolala"
-      ],
-      "linkedBy": "officialUrl",
-      "officialUrl": "https://www.investwithabudhabi.com/fr/golden-visa-residency",
-      "discoveryUrl": "https://adio.ae",
-      "artifact": {
-        "id": "scout-adio-cfb5f167cf",
-        "sourceFormat": "STATIC_HTML",
-        "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
-        "renderMethod": "HEADLESS",
-        "byteSize": 0,
-        "processing": "SUCCESS"
-      },
-      "liveFetch": {
-        "attemptedUrl": "https://adio.ae",
-        "status": "OK",
-        "egressDenied": false
-      },
-      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
-      "verificationEvidence": [
-        "Rendered https://adio.ae in a browser and read it with mistral-large-latest.",
-        "The call's link was confirmed to appear on that page before this record was created.",
-        "No quote was returned."
-      ],
-      "application": "UNKNOWN",
-      "award": "UNKNOWN",
-      "strategicRoute": "UNKNOWN",
-      "scores": {
-        "relevance": null,
-        "winPotential": null,
-        "infoConfidence": 15
-      },
-      "gate": {
-        "accessiblePrimarySource": true,
-        "verifiedSource": false,
-        "verifiedDeadline": false,
-        "notExpired": true,
-        "eligibilityAssessed": false,
-        "notAggregatorOnly": true,
-        "notClosedCall": true,
-        "hasExactNextAction": false,
-        "sufficientConfidence": false,
-        "pursueEligible": false,
-        "failedReasons": [
-          "read by a model, not verified by a human",
-          "eligibility not assessed against any project"
-        ]
-      },
-      "recommendation": "INVESTIGATE",
-      "humanReview": "PENDING",
-      "facts": [],
-      "deadlines": [],
-      "conflicts": [],
-      "discrepancies": [],
-      "expected": {},
-      "unresolvedQuestions": [
-        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
-        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
-      ],
-      "warnings": []
-    },
-    {
-      "id": "scout-adio-1fdc10192d",
-      "title": "Le guide de l’investisseur d’Abou Dhabi (PDF)",
-      "issuer": "ADIO",
-      "opportunityKind": "GRANT",
-      "discoveredFor": [
-        "bawaba",
-        "myoolala"
-      ],
-      "linkedBy": "officialUrl",
-      "officialUrl": "https://www.investwithabudhabi.com/assets/Ebook-ADIO%20Investor%20Guide.pdf",
-      "discoveryUrl": "https://adio.ae",
-      "artifact": {
-        "id": "scout-adio-1fdc10192d",
-        "sourceFormat": "STATIC_HTML",
-        "contentHash": "0edf7fd115c89763c37e42f7d7409d52363fe6805a6092c5128ed5f8846349f9",
-        "renderMethod": "HEADLESS",
-        "byteSize": 0,
-        "processing": "SUCCESS"
-      },
-      "liveFetch": {
-        "attemptedUrl": "https://adio.ae",
-        "status": "OK",
-        "egressDenied": false
-      },
-      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
-      "verificationEvidence": [
-        "Rendered https://adio.ae in a browser and read it with mistral-large-latest.",
-        "The call's link was confirmed to appear on that page before this record was created.",
-        "Quoted from the page: \"Le cadre, les programmes et les parcours réunis en un seul document : la source qui étaye les repères de cette plateforme.\""
+        "Quoted from the page: \"L’Abu Dhabi Investment Forum a réuni dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi.\""
       ],
       "application": "UNKNOWN",
       "award": "UNKNOWN",
@@ -1379,7 +743,7 @@
       "scores": {
         "relevance": null,
         "winPotential": null,
-        "infoConfidence": 15
+        "infoConfidence": 20
       },
       "gate": {
         "accessiblePrimarySource": true,
@@ -1399,7 +763,22 @@
       },
       "recommendation": "INVESTIGATE",
       "humanReview": "PENDING",
-      "facts": [],
+      "facts": [
+        {
+          "field": "eligibility",
+          "normalizedValue": "Collectivités locales",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/action-cur-de-ville/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "Ce programme vise à faciliter et à soutenir le travail des collectivités locales, à inciter les acteurs du logement, du commerce et de l'urbanisme à réinvestir les centres-villes, à favoriser le maintien ou l'implantation d'activités en cœur de ville"
+        }
+      ],
       "deadlines": [],
       "conflicts": [],
       "discrepancies": [],
@@ -1407,7 +786,7 @@
       "unresolvedQuestions": [
         "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
         "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
+        "Eligibility text was extracted but NOT assessed against any project."
       ],
       "warnings": []
     },
@@ -1775,7 +1154,7 @@
       "scores": {
         "relevance": null,
         "winPotential": null,
-        "infoConfidence": 15
+        "infoConfidence": 20
       },
       "gate": {
         "accessiblePrimarySource": true,
@@ -1795,7 +1174,22 @@
       },
       "recommendation": "INVESTIGATE",
       "humanReview": "PENDING",
-      "facts": [],
+      "facts": [
+        {
+          "field": "eligibility",
+          "normalizedValue": "Jeunes, organismes",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/corps-europeen-de-solidarite/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "Le Corps européen de solidarité permet aux jeunes de s’engager et aux organismes de mettre en place des initiatives en Europe sur des activités variées, dans les domaines humanitaires, de la santé, de l’environnement, de l’intergénérationnel…"
+        }
+      ],
       "deadlines": [],
       "conflicts": [],
       "discrepancies": [],
@@ -1803,7 +1197,7 @@
       "unresolvedQuestions": [
         "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
         "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
+        "Eligibility text was extracted but NOT assessed against any project."
       ],
       "warnings": []
     },
@@ -1841,7 +1235,7 @@
       "scores": {
         "relevance": null,
         "winPotential": null,
-        "infoConfidence": 15
+        "infoConfidence": 20
       },
       "gate": {
         "accessiblePrimarySource": true,
@@ -1861,7 +1255,22 @@
       },
       "recommendation": "INVESTIGATE",
       "humanReview": "PENDING",
-      "facts": [],
+      "facts": [
+        {
+          "field": "eligibility",
+          "normalizedValue": "Petites et moyennes entreprises",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/cosme-fonds-europeens/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "Le programme pour la compétitivité des entreprises et des petites et moyennes entreprises (2014-2020), vise à promouvoir la croissance et à renforcer la compétitivité et la durabilité des entreprises dans l'Union européenne."
+        }
+      ],
       "deadlines": [],
       "conflicts": [],
       "discrepancies": [],
@@ -1869,7 +1278,7 @@
       "unresolvedQuestions": [
         "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
         "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
+        "Eligibility text was extracted but NOT assessed against any project."
       ],
       "warnings": []
     },
@@ -2039,7 +1448,7 @@
       "scores": {
         "relevance": null,
         "winPotential": null,
-        "infoConfidence": 15
+        "infoConfidence": 20
       },
       "gate": {
         "accessiblePrimarySource": true,
@@ -2059,7 +1468,22 @@
       },
       "recommendation": "INVESTIGATE",
       "humanReview": "PENDING",
-      "facts": [],
+      "facts": [
+        {
+          "field": "eligibility",
+          "normalizedValue": "Porteurs de projets",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/ecoquartier/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "La démarche ÉcoQuartier été lancée en 2009 en application de la loi Grenelle 2 dans le cadre du plan Ville durable. Elle vise à favoriser l'émergence d'une nouvelle façon de concevoir, de construire et de gérer la ville durablement, en outillant, sensibilisant et valorisant les porteurs de projets."
+        }
+      ],
       "deadlines": [],
       "conflicts": [],
       "discrepancies": [],
@@ -2067,7 +1491,7 @@
       "unresolvedQuestions": [
         "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
         "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
+        "Eligibility text was extracted but NOT assessed against any project."
       ],
       "warnings": []
     },
@@ -2105,7 +1529,7 @@
       "scores": {
         "relevance": null,
         "winPotential": null,
-        "infoConfidence": 15
+        "infoConfidence": 20
       },
       "gate": {
         "accessiblePrimarySource": true,
@@ -2125,7 +1549,22 @@
       },
       "recommendation": "INVESTIGATE",
       "humanReview": "PENDING",
-      "facts": [],
+      "facts": [
+        {
+          "field": "eligibility",
+          "normalizedValue": "Écoles, collèges, lycées, structures éducatives",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/edurenov/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "Le programme EduRénov, lancé en 2023 par la Banque des Territoires, vise à accélérer la rénovation énergétique des bâtiments scolaires en France. Il s’inscrit dans la stratégie nationale de transition écologique et cible les écoles, collèges, lycées, ainsi que d’autres structures éducatives."
+        }
+      ],
       "deadlines": [],
       "conflicts": [],
       "discrepancies": [],
@@ -2133,7 +1572,7 @@
       "unresolvedQuestions": [
         "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
         "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
+        "Eligibility text was extracted but NOT assessed against any project."
       ],
       "warnings": []
     },
@@ -2171,7 +1610,7 @@
       "scores": {
         "relevance": null,
         "winPotential": null,
-        "infoConfidence": 15
+        "infoConfidence": 20
       },
       "gate": {
         "accessiblePrimarySource": true,
@@ -2191,7 +1630,22 @@
       },
       "recommendation": "INVESTIGATE",
       "humanReview": "PENDING",
-      "facts": [],
+      "facts": [
+        {
+          "field": "eligibility",
+          "normalizedValue": "Innovateurs, entrepreneurs, étudiants",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/eit-food/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "EIT Food est un partenariat paneuropéen, axé sur le consommateur, qui permet aux innovateurs, aux entrepreneurs et aux étudiants de développer des solutions de classe mondiale aux défis de société, d'accélérer l'innovation, de créer des emplois et d'accroître la compétitivité de l'Europe."
+        }
+      ],
       "deadlines": [],
       "conflicts": [],
       "discrepancies": [],
@@ -2199,7 +1653,7 @@
       "unresolvedQuestions": [
         "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
         "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
+        "Eligibility text was extracted but NOT assessed against any project."
       ],
       "warnings": []
     },
@@ -2897,7 +2351,7 @@
       "scores": {
         "relevance": null,
         "winPotential": null,
-        "infoConfidence": 15
+        "infoConfidence": 20
       },
       "gate": {
         "accessiblePrimarySource": true,
@@ -2917,7 +2371,22 @@
       },
       "recommendation": "INVESTIGATE",
       "humanReview": "PENDING",
-      "facts": [],
+      "facts": [
+        {
+          "field": "eligibility",
+          "normalizedValue": "Territoires",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/fonds-biodiversite/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "Le fonds biodiversité a vocation à mobiliser les territoires pour contribuer à nos objectifs de biodiversité"
+        }
+      ],
       "deadlines": [],
       "conflicts": [],
       "discrepancies": [],
@@ -2925,7 +2394,7 @@
       "unresolvedQuestions": [
         "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
         "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
+        "Eligibility text was extracted but NOT assessed against any project."
       ],
       "warnings": []
     },
@@ -3161,7 +2630,7 @@
       "scores": {
         "relevance": null,
         "winPotential": null,
-        "infoConfidence": 15
+        "infoConfidence": 20
       },
       "gate": {
         "accessiblePrimarySource": true,
@@ -3181,7 +2650,22 @@
       },
       "recommendation": "INVESTIGATE",
       "humanReview": "PENDING",
-      "facts": [],
+      "facts": [
+        {
+          "field": "eligibility",
+          "normalizedValue": "Territoires concernés par de fortes émissions de CO2",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/fonds-pour-une-transition-juste-ftj/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "Le FTJ a été créé pour accompagner la transition énergétique et industrielle des territoires concernés par de fortes émissions de CO2 dans la transition vers une économie neutre en carbone, conformément aux objectifs de l’Union européenne dans le cadre de l’accord de Paris."
+        }
+      ],
       "deadlines": [],
       "conflicts": [],
       "discrepancies": [],
@@ -3189,7 +2673,7 @@
       "unresolvedQuestions": [
         "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
         "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
+        "Eligibility text was extracted but NOT assessed against any project."
       ],
       "warnings": []
     },
@@ -3587,7 +3071,7 @@
       "scores": {
         "relevance": null,
         "winPotential": null,
-        "infoConfidence": 15
+        "infoConfidence": 20
       },
       "gate": {
         "accessiblePrimarySource": true,
@@ -3607,7 +3091,22 @@
       },
       "recommendation": "INVESTIGATE",
       "humanReview": "PENDING",
-      "facts": [],
+      "facts": [
+        {
+          "field": "eligibility",
+          "normalizedValue": "Territoires ruraux",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/france-ruralites/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "Né en 2023, le Plan France Ruralités vise à soutenir les territoires ruraux"
+        }
+      ],
       "deadlines": [],
       "conflicts": [],
       "discrepancies": [],
@@ -3615,7 +3114,7 @@
       "unresolvedQuestions": [
         "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
         "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
+        "Eligibility text was extracted but NOT assessed against any project."
       ],
       "warnings": []
     },
@@ -4115,7 +3614,7 @@
       "scores": {
         "relevance": null,
         "winPotential": null,
-        "infoConfidence": 15
+        "infoConfidence": 20
       },
       "gate": {
         "accessiblePrimarySource": true,
@@ -4135,7 +3634,22 @@
       },
       "recommendation": "INVESTIGATE",
       "humanReview": "PENDING",
-      "facts": [],
+      "facts": [
+        {
+          "field": "eligibility",
+          "normalizedValue": "Projets publics ou privés en zones rurales",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/leader/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "LEADER est un programme d'initiative communautaire pour cofinancer des projets publics ou privés qui favorisent le développement des zones rurales."
+        }
+      ],
       "deadlines": [],
       "conflicts": [],
       "discrepancies": [],
@@ -4143,7 +3657,7 @@
       "unresolvedQuestions": [
         "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
         "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
+        "Eligibility text was extracted but NOT assessed against any project."
       ],
       "warnings": []
     },
@@ -4643,7 +4157,7 @@
       "scores": {
         "relevance": null,
         "winPotential": null,
-        "infoConfidence": 15
+        "infoConfidence": 20
       },
       "gate": {
         "accessiblePrimarySource": true,
@@ -4663,7 +4177,22 @@
       },
       "recommendation": "INVESTIGATE",
       "humanReview": "PENDING",
-      "facts": [],
+      "facts": [
+        {
+          "field": "eligibility",
+          "normalizedValue": "Services répressifs, judiciaires, banques, acteurs de la lutte contre le faux monnayage",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/pericles-iv/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "Le programme Pericles IV finance des échanges de personnel, des séminaires, des formations et des études à l’intention des services répressifs et judiciaires, des banques et des autres acteurs de la lutte contre le faux monnayage de l’euro."
+        }
+      ],
       "deadlines": [],
       "conflicts": [],
       "discrepancies": [],
@@ -4671,7 +4200,7 @@
       "unresolvedQuestions": [
         "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
         "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
+        "Eligibility text was extracted but NOT assessed against any project."
       ],
       "warnings": []
     },
@@ -4709,7 +4238,7 @@
       "scores": {
         "relevance": null,
         "winPotential": null,
-        "infoConfidence": 15
+        "infoConfidence": 20
       },
       "gate": {
         "accessiblePrimarySource": true,
@@ -4729,7 +4258,22 @@
       },
       "recommendation": "INVESTIGATE",
       "humanReview": "PENDING",
-      "facts": [],
+      "facts": [
+        {
+          "field": "eligibility",
+          "normalizedValue": "Communes de moins de 20 000 habitants exerçant des fonctions de centralité et présentant des signes de fragilité",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/petites-villes-de-demain/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "Le programme PVD est destiné aux communes de moins de 20 000 habitants exerçant des fonctions de centralité et présentant des signes de fragilité."
+        }
+      ],
       "deadlines": [],
       "conflicts": [],
       "discrepancies": [],
@@ -4737,7 +4281,7 @@
       "unresolvedQuestions": [
         "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
         "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
+        "Eligibility text was extracted but NOT assessed against any project."
       ],
       "warnings": []
     },
@@ -4775,7 +4319,7 @@
       "scores": {
         "relevance": null,
         "winPotential": null,
-        "infoConfidence": 15
+        "infoConfidence": 20
       },
       "gate": {
         "accessiblePrimarySource": true,
@@ -4795,14 +4339,29 @@
       },
       "recommendation": "INVESTIGATE",
       "humanReview": "PENDING",
-      "facts": [],
+      "facts": [
+        {
+          "field": "deadline_text",
+          "normalizedValue": "fin 2020 (bon haut débit), fin 2022 (très haut débit)",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/plan-france-tres-haut-debit/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "Le programme France Très Haut Débit vise à donner accès à tous les Français au bon haut débit fixe (minimum 8 Mbit/s) d’ici à fin 2020, et au très haut débit fixe (minimum 30 Mbit/s) d’ici à fin 2022."
+        }
+      ],
       "deadlines": [],
       "conflicts": [],
       "discrepancies": [],
       "expected": {},
       "unresolvedQuestions": [
         "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
-        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "The page states a deadline of \"fin 2020 (bon haut débit), fin 2022 (très haut débit)\" — unparsed and unconfirmed.",
         "No eligibility criteria were found on the page."
       ],
       "warnings": []
@@ -5120,7 +4679,7 @@
       "scores": {
         "relevance": null,
         "winPotential": null,
-        "infoConfidence": 15
+        "infoConfidence": 20
       },
       "gate": {
         "accessiblePrimarySource": true,
@@ -5140,7 +4699,22 @@
       },
       "recommendation": "INVESTIGATE",
       "humanReview": "PENDING",
-      "facts": [],
+      "facts": [
+        {
+          "field": "eligibility",
+          "normalizedValue": "Zones urbaines pauvres",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/qpv-quartiers-prioritaires-de-la-politique-de-la-ville/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "Les QPV sont entités définies par la loi de 2014, identifiant zones urbaines pauvres nécessitant des interventions publiques. Une nouvelle cartographie est entrée en vigueur le 1er janvier 2024 (décret 28/12/2023), actualisant périmètres et contrat ville"
+        }
+      ],
       "deadlines": [],
       "conflicts": [],
       "discrepancies": [],
@@ -5148,7 +4722,7 @@
       "unresolvedQuestions": [
         "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
         "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
+        "Eligibility text was extracted but NOT assessed against any project."
       ],
       "warnings": []
     },
@@ -5252,7 +4826,7 @@
       "scores": {
         "relevance": null,
         "winPotential": null,
-        "infoConfidence": 15
+        "infoConfidence": 20
       },
       "gate": {
         "accessiblePrimarySource": true,
@@ -5272,7 +4846,22 @@
       },
       "recommendation": "INVESTIGATE",
       "humanReview": "PENDING",
-      "facts": [],
+      "facts": [
+        {
+          "field": "eligibility",
+          "normalizedValue": "Acteurs de la montagne (collectivités, acteurs socio-économiques)",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://aides-territoires.beta.gouv.fr/programmes/ruralite-montagne-anct/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "Piloté par l’ANCT, le programme accompagnera les acteurs de la montagne (collectivités, acteurs socio-économiques) dans le développement économique, la préservation de leur patrimoine naturel et l’adaptation nécessaire au changement climatique."
+        }
+      ],
       "deadlines": [],
       "conflicts": [],
       "discrepancies": [],
@@ -5280,7 +4869,7 @@
       "unresolvedQuestions": [
         "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
         "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
+        "Eligibility text was extracted but NOT assessed against any project."
       ],
       "warnings": []
     },
@@ -5549,336 +5138,6 @@
       "warnings": []
     },
     {
-      "id": "scout-boamp-708ecbb8eb",
-      "title": "Avis publics à la concurrence (AAPC) nationaux et européens",
-      "issuer": "DILA (French state)",
-      "opportunityKind": "TENDER",
-      "discoveredFor": [],
-      "linkedBy": "officialUrl",
-      "officialUrl": "https://www.boamp.fr/pages/entreprise-accueil/",
-      "discoveryUrl": "https://www.boamp.fr",
-      "artifact": {
-        "id": "scout-boamp-708ecbb8eb",
-        "sourceFormat": "STATIC_HTML",
-        "contentHash": "a5677dceb19500fcb0577279cb72aeadedfc6bac2f7f17db4944a9b1c88a6b90",
-        "renderMethod": "HEADLESS",
-        "byteSize": 0,
-        "processing": "SUCCESS"
-      },
-      "liveFetch": {
-        "attemptedUrl": "https://www.boamp.fr",
-        "status": "OK",
-        "egressDenied": false
-      },
-      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
-      "verificationEvidence": [
-        "Rendered https://www.boamp.fr in a browser and read it with mistral-large-latest.",
-        "The call's link was confirmed to appear on that page before this record was created.",
-        "Quoted from the page: \"Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés\""
-      ],
-      "application": "UNKNOWN",
-      "award": "UNKNOWN",
-      "strategicRoute": "UNKNOWN",
-      "scores": {
-        "relevance": null,
-        "winPotential": null,
-        "infoConfidence": 15
-      },
-      "gate": {
-        "accessiblePrimarySource": true,
-        "verifiedSource": false,
-        "verifiedDeadline": false,
-        "notExpired": true,
-        "eligibilityAssessed": false,
-        "notAggregatorOnly": true,
-        "notClosedCall": true,
-        "hasExactNextAction": false,
-        "sufficientConfidence": false,
-        "pursueEligible": false,
-        "failedReasons": [
-          "read by a model, not verified by a human",
-          "eligibility not assessed against any project"
-        ]
-      },
-      "recommendation": "INVESTIGATE",
-      "humanReview": "PENDING",
-      "facts": [],
-      "deadlines": [],
-      "conflicts": [],
-      "discrepancies": [],
-      "expected": {},
-      "unresolvedQuestions": [
-        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
-        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
-      ],
-      "warnings": []
-    },
-    {
-      "id": "scout-boamp-708ecbb8eb",
-      "title": "Avis de concession",
-      "issuer": "DILA (French state)",
-      "opportunityKind": "TENDER",
-      "discoveredFor": [],
-      "linkedBy": "officialUrl",
-      "officialUrl": "https://www.boamp.fr/pages/entreprise-accueil/",
-      "discoveryUrl": "https://www.boamp.fr",
-      "artifact": {
-        "id": "scout-boamp-708ecbb8eb",
-        "sourceFormat": "STATIC_HTML",
-        "contentHash": "a5677dceb19500fcb0577279cb72aeadedfc6bac2f7f17db4944a9b1c88a6b90",
-        "renderMethod": "HEADLESS",
-        "byteSize": 0,
-        "processing": "SUCCESS"
-      },
-      "liveFetch": {
-        "attemptedUrl": "https://www.boamp.fr",
-        "status": "OK",
-        "egressDenied": false
-      },
-      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
-      "verificationEvidence": [
-        "Rendered https://www.boamp.fr in a browser and read it with mistral-large-latest.",
-        "The call's link was confirmed to appear on that page before this record was created.",
-        "Quoted from the page: \"Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés\""
-      ],
-      "application": "UNKNOWN",
-      "award": "UNKNOWN",
-      "strategicRoute": "UNKNOWN",
-      "scores": {
-        "relevance": null,
-        "winPotential": null,
-        "infoConfidence": 15
-      },
-      "gate": {
-        "accessiblePrimarySource": true,
-        "verifiedSource": false,
-        "verifiedDeadline": false,
-        "notExpired": true,
-        "eligibilityAssessed": false,
-        "notAggregatorOnly": true,
-        "notClosedCall": true,
-        "hasExactNextAction": false,
-        "sufficientConfidence": false,
-        "pursueEligible": false,
-        "failedReasons": [
-          "read by a model, not verified by a human",
-          "eligibility not assessed against any project"
-        ]
-      },
-      "recommendation": "INVESTIGATE",
-      "humanReview": "PENDING",
-      "facts": [],
-      "deadlines": [],
-      "conflicts": [],
-      "discrepancies": [],
-      "expected": {},
-      "unresolvedQuestions": [
-        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
-        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
-      ],
-      "warnings": []
-    },
-    {
-      "id": "scout-boamp-708ecbb8eb",
-      "title": "Avis d’attribution",
-      "issuer": "DILA (French state)",
-      "opportunityKind": "GRANT",
-      "discoveredFor": [],
-      "linkedBy": "officialUrl",
-      "officialUrl": "https://www.boamp.fr/pages/entreprise-accueil/",
-      "discoveryUrl": "https://www.boamp.fr",
-      "artifact": {
-        "id": "scout-boamp-708ecbb8eb",
-        "sourceFormat": "STATIC_HTML",
-        "contentHash": "a5677dceb19500fcb0577279cb72aeadedfc6bac2f7f17db4944a9b1c88a6b90",
-        "renderMethod": "HEADLESS",
-        "byteSize": 0,
-        "processing": "SUCCESS"
-      },
-      "liveFetch": {
-        "attemptedUrl": "https://www.boamp.fr",
-        "status": "OK",
-        "egressDenied": false
-      },
-      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
-      "verificationEvidence": [
-        "Rendered https://www.boamp.fr in a browser and read it with mistral-large-latest.",
-        "The call's link was confirmed to appear on that page before this record was created.",
-        "Quoted from the page: \"Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés\""
-      ],
-      "application": "UNKNOWN",
-      "award": "UNKNOWN",
-      "strategicRoute": "UNKNOWN",
-      "scores": {
-        "relevance": null,
-        "winPotential": null,
-        "infoConfidence": 15
-      },
-      "gate": {
-        "accessiblePrimarySource": true,
-        "verifiedSource": false,
-        "verifiedDeadline": false,
-        "notExpired": true,
-        "eligibilityAssessed": false,
-        "notAggregatorOnly": true,
-        "notClosedCall": true,
-        "hasExactNextAction": false,
-        "sufficientConfidence": false,
-        "pursueEligible": false,
-        "failedReasons": [
-          "read by a model, not verified by a human",
-          "eligibility not assessed against any project"
-        ]
-      },
-      "recommendation": "INVESTIGATE",
-      "humanReview": "PENDING",
-      "facts": [],
-      "deadlines": [],
-      "conflicts": [],
-      "discrepancies": [],
-      "expected": {},
-      "unresolvedQuestions": [
-        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
-        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
-      ],
-      "warnings": []
-    },
-    {
-      "id": "scout-boamp-708ecbb8eb",
-      "title": "Contrats de partenariat public-privé",
-      "issuer": "DILA (French state)",
-      "opportunityKind": "CONSORTIUM_CALL",
-      "discoveredFor": [],
-      "linkedBy": "officialUrl",
-      "officialUrl": "https://www.boamp.fr/pages/entreprise-accueil/",
-      "discoveryUrl": "https://www.boamp.fr",
-      "artifact": {
-        "id": "scout-boamp-708ecbb8eb",
-        "sourceFormat": "STATIC_HTML",
-        "contentHash": "a5677dceb19500fcb0577279cb72aeadedfc6bac2f7f17db4944a9b1c88a6b90",
-        "renderMethod": "HEADLESS",
-        "byteSize": 0,
-        "processing": "SUCCESS"
-      },
-      "liveFetch": {
-        "attemptedUrl": "https://www.boamp.fr",
-        "status": "OK",
-        "egressDenied": false
-      },
-      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
-      "verificationEvidence": [
-        "Rendered https://www.boamp.fr in a browser and read it with mistral-large-latest.",
-        "The call's link was confirmed to appear on that page before this record was created.",
-        "Quoted from the page: \"Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés\""
-      ],
-      "application": "UNKNOWN",
-      "award": "UNKNOWN",
-      "strategicRoute": "UNKNOWN",
-      "scores": {
-        "relevance": null,
-        "winPotential": null,
-        "infoConfidence": 15
-      },
-      "gate": {
-        "accessiblePrimarySource": true,
-        "verifiedSource": false,
-        "verifiedDeadline": false,
-        "notExpired": true,
-        "eligibilityAssessed": false,
-        "notAggregatorOnly": true,
-        "notClosedCall": true,
-        "hasExactNextAction": false,
-        "sufficientConfidence": false,
-        "pursueEligible": false,
-        "failedReasons": [
-          "read by a model, not verified by a human",
-          "eligibility not assessed against any project"
-        ]
-      },
-      "recommendation": "INVESTIGATE",
-      "humanReview": "PENDING",
-      "facts": [],
-      "deadlines": [],
-      "conflicts": [],
-      "discrepancies": [],
-      "expected": {},
-      "unresolvedQuestions": [
-        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
-        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
-      ],
-      "warnings": []
-    },
-    {
-      "id": "scout-boamp-5a8b927e97",
-      "title": "Service d'alerte BOAMP",
-      "issuer": "DILA (French state)",
-      "opportunityKind": "TENDER",
-      "discoveredFor": [],
-      "linkedBy": "officialUrl",
-      "officialUrl": "https://www.boamp.fr/pages/entreprise-service-dalerte/",
-      "discoveryUrl": "https://www.boamp.fr",
-      "artifact": {
-        "id": "scout-boamp-5a8b927e97",
-        "sourceFormat": "STATIC_HTML",
-        "contentHash": "a5677dceb19500fcb0577279cb72aeadedfc6bac2f7f17db4944a9b1c88a6b90",
-        "renderMethod": "HEADLESS",
-        "byteSize": 0,
-        "processing": "SUCCESS"
-      },
-      "liveFetch": {
-        "attemptedUrl": "https://www.boamp.fr",
-        "status": "OK",
-        "egressDenied": false
-      },
-      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
-      "verificationEvidence": [
-        "Rendered https://www.boamp.fr in a browser and read it with mistral-large-latest.",
-        "The call's link was confirmed to appear on that page before this record was created.",
-        "Quoted from the page: \"Le site boamp.fr propose une veille personnalisée et gratuite. Enregistrez vos recherches et paramétrez jusqu'à 10 alertes pour recevoir quotidiennement les nouveaux avis publiés au BOAMP.\""
-      ],
-      "application": "UNKNOWN",
-      "award": "UNKNOWN",
-      "strategicRoute": "UNKNOWN",
-      "scores": {
-        "relevance": null,
-        "winPotential": null,
-        "infoConfidence": 15
-      },
-      "gate": {
-        "accessiblePrimarySource": true,
-        "verifiedSource": false,
-        "verifiedDeadline": false,
-        "notExpired": true,
-        "eligibilityAssessed": false,
-        "notAggregatorOnly": true,
-        "notClosedCall": true,
-        "hasExactNextAction": false,
-        "sufficientConfidence": false,
-        "pursueEligible": false,
-        "failedReasons": [
-          "read by a model, not verified by a human",
-          "eligibility not assessed against any project"
-        ]
-      },
-      "recommendation": "INVESTIGATE",
-      "humanReview": "PENDING",
-      "facts": [],
-      "deadlines": [],
-      "conflicts": [],
-      "discrepancies": [],
-      "expected": {},
-      "unresolvedQuestions": [
-        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
-        "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "No eligibility criteria were found on the page."
-      ],
-      "warnings": []
-    },
-    {
       "id": "scout-cir-cii-jei-09dc03ff2c",
       "title": "Crédit d'impôt recherche (CIR)",
       "issuer": "French tax administration",
@@ -5890,7 +5149,7 @@
       "artifact": {
         "id": "scout-cir-cii-jei-09dc03ff2c",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "3d0f0fd73d03b56045751bf667dccff7660bd97af3350a41aba7427b9bbf2036",
+        "contentHash": "0f70036163570b25976275d159101d5174fba8dd082410e03947e525a8082afb",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -9600,7 +8859,7 @@
     },
     {
       "id": "scout-france-2030-ademe-d1637b6d70",
-      "title": "Aides gré à gré",
+      "title": "Appels à projets nationaux ou régionaux",
       "issuer": "French state / ADEME",
       "opportunityKind": "GRANT",
       "discoveredFor": [],
@@ -9624,7 +8883,7 @@
       "verificationEvidence": [
         "Rendered https://agirpourlatransition.ademe.fr/entreprises/appels-projets-offres in a browser and read it with mistral-large-latest.",
         "The call's link was confirmed to appear on that page before this record was created.",
-        "Quoted from the page: \"L’Agence peut proposer une aide financière dans le cadre d'appels à projets nationaux ou régionaux avec des cahiers des charges plus spécifiques, lorsque d'autres subventions s’inscrivent dans le cadr\""
+        "Quoted from the page: \"L’Agence peut proposer une aide financière dans le cadre d'appels à projets nationaux ou régionaux avec des cahiers des charges plus spécifiques.\""
       ],
       "application": "UNKNOWN",
       "award": "UNKNOWN",
@@ -9632,7 +8891,7 @@
       "scores": {
         "relevance": null,
         "winPotential": null,
-        "infoConfidence": 15
+        "infoConfidence": 10
       },
       "gate": {
         "accessiblePrimarySource": true,
@@ -9653,22 +8912,7 @@
       },
       "recommendation": "INVESTIGATE",
       "humanReview": "PENDING",
-      "facts": [
-        {
-          "field": "eligibility",
-          "normalizedValue": "Entreprises, associations, acteurs de la recherche",
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "originalSourceText": "L’Agence peut proposer une aide financière dans le cadre d'appels à projets nationaux ou régionaux avec des cahiers des charges plus spécifiques, lorsque d'autres subventions s’inscrivent dans le cadre d’une « Aide gré à gré », c’est-à-dire en appliquant les dispositifs classiques d’aide financière."
-        }
-      ],
+      "facts": [],
       "deadlines": [],
       "conflicts": [],
       "discrepancies": [],
@@ -9676,7 +8920,7 @@
       "unresolvedQuestions": [
         "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
         "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "Eligibility text was extracted but NOT assessed against any project."
+        "No eligibility criteria were found on the page."
       ],
       "warnings": [
         "Found on a listing page — the call's own page may say something different."
@@ -9698,7 +8942,7 @@
       "artifact": {
         "id": "scout-hub71-0d37144b7f",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "b8306daa6db14f60ae7594ce37b1fc5bd6dc0d85f8c8e5fd8eee64ee0fad89ab",
+        "contentHash": "d72babf9a528c5324171a37288c187211b56f58be9e3acef176f08a86fe12c46",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -9720,7 +8964,7 @@
       "scores": {
         "relevance": null,
         "winPotential": null,
-        "infoConfidence": 20
+        "infoConfidence": 15
       },
       "gate": {
         "accessiblePrimarySource": true,
@@ -9740,22 +8984,7 @@
       },
       "recommendation": "INVESTIGATE",
       "humanReview": "PENDING",
-      "facts": [
-        {
-          "field": "eligibility",
-          "normalizedValue": "Founders at the ideation or pre-MVP stage",
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.hub71.com/program/initiate"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "originalSourceText": "Initiate is Hub71’s early-stage programme that supports founders at the ideation or pre-MVP stage to turn their ideas into scalable startups. By joining, founders will be connected with experienced venture builders and gain the resources, mentorship, and ecosystem access needed to transform ideas into startups that can scale."
-        }
-      ],
+      "facts": [],
       "deadlines": [],
       "conflicts": [],
       "discrepancies": [],
@@ -9763,7 +8992,7 @@
       "unresolvedQuestions": [
         "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
         "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
-        "Eligibility text was extracted but NOT assessed against any project."
+        "No eligibility criteria were found on the page."
       ],
       "warnings": []
     },
@@ -9783,7 +9012,7 @@
       "artifact": {
         "id": "scout-hub71-a6e2e5033c",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "b8306daa6db14f60ae7594ce37b1fc5bd6dc0d85f8c8e5fd8eee64ee0fad89ab",
+        "contentHash": "d72babf9a528c5324171a37288c187211b56f58be9e3acef176f08a86fe12c46",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -9868,7 +9097,7 @@
       "artifact": {
         "id": "scout-hub71-ae5d925f4b",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "b8306daa6db14f60ae7594ce37b1fc5bd6dc0d85f8c8e5fd8eee64ee0fad89ab",
+        "contentHash": "d72babf9a528c5324171a37288c187211b56f58be9e3acef176f08a86fe12c46",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -9882,7 +9111,7 @@
       "verificationEvidence": [
         "Rendered https://hub71.com in a browser and read it with mistral-large-latest.",
         "The call's link was confirmed to appear on that page before this record was created.",
-        "Quoted from the page: \"The Hub71 Immersion Programme is a structured, in-market experience designed to support international startups as they explore and build connections within Abu Dhabi’s global tech ecosystem. Delivered\""
+        "Quoted from the page: \"The Hub71 Immersion Programme is a structured, in-market experience designed to support international startups as they explore and build connections within Abu Dhabi’s global tech ecosystem.\""
       ],
       "application": "UNKNOWN",
       "award": "UNKNOWN",
@@ -9923,7 +9152,7 @@
           "extractingProvider": "mistral",
           "extractingModel": "mistral-large-latest",
           "extractionConfidence": 0.5,
-          "originalSourceText": "The Hub71 Immersion Programme is a structured, in-market experience designed to support international startups as they explore and build connections within Abu Dhabi’s global tech ecosystem. Delivered in partnership with the UAE–India CEPA Council, the programme provides founders with direct access to key market stakeholders, including investors, corporates and government entities, enabling startups to assess and accelerate their expansion into the region."
+          "originalSourceText": "The Hub71 Immersion Programme is a structured, in-market experience designed to support international startups as they explore and build connections within Abu Dhabi’s global tech ecosystem."
         }
       ],
       "deadlines": [],
@@ -9953,7 +9182,7 @@
       "artifact": {
         "id": "scout-hub71-2381bf46c2",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "b8306daa6db14f60ae7594ce37b1fc5bd6dc0d85f8c8e5fd8eee64ee0fad89ab",
+        "contentHash": "d72babf9a528c5324171a37288c187211b56f58be9e3acef176f08a86fe12c46",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -10023,7 +9252,7 @@
       "artifact": {
         "id": "scout-hub71-51bdee4e7e",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "b8306daa6db14f60ae7594ce37b1fc5bd6dc0d85f8c8e5fd8eee64ee0fad89ab",
+        "contentHash": "d72babf9a528c5324171a37288c187211b56f58be9e3acef176f08a86fe12c46",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -10068,7 +9297,7 @@
       "facts": [
         {
           "field": "eligibility",
-          "normalizedValue": "Startups addressing early childhood development challenges",
+          "normalizedValue": "Startups addressing challenges across early childhood development",
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
           "locator": {
             "type": "DOCUMENT_SECTION",
@@ -10078,7 +9307,7 @@
           "extractingProvider": "mistral",
           "extractingModel": "mistral-large-latest",
           "extractionConfidence": 0.5,
-          "originalSourceText": "The ECA Anjal Z x Hub71 programme supports startups addressing challenges across early childhood development, from pregnancy through age eight, by providing direct access to government partners, pilot opportunities, and Hub71’s broader innovation ecosystem. Founders are supported to embed locally, demonstrate impact, and scale with confidence."
+          "originalSourceText": "The ECA Anjal Z x Hub71 programme supports startups addressing challenges across early childhood development, from pregnancy through age eight, by providing direct access to government partners, pilot opportunities, and Hub71’s broader innovation ecosystem."
         }
       ],
       "deadlines": [],
@@ -10108,7 +9337,7 @@
       "artifact": {
         "id": "scout-hub71-6a126663dc",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "b8306daa6db14f60ae7594ce37b1fc5bd6dc0d85f8c8e5fd8eee64ee0fad89ab",
+        "contentHash": "d72babf9a528c5324171a37288c187211b56f58be9e3acef176f08a86fe12c46",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -10163,7 +9392,7 @@
           "extractingProvider": "mistral",
           "extractingModel": "mistral-large-latest",
           "extractionConfidence": 0.5,
-          "originalSourceText": "Hub71 is your startup’s gateway into Abu Dhabi’s SAVI cluster. Smart and autonomous mobility startups joining Hub71 gain direct access to SAVI’s network of partners, regulators and testing environments. This enables founders to validate, deploy and scale solutions across land, air and sea."
+          "originalSourceText": "Hub71 is your startup’s gateway into Abu Dhabi’s SAVI cluster. Smart and autonomous mobility startups joining Hub71 gain direct access to SAVI’s network of partners, regulators and testing environments."
         }
       ],
       "deadlines": [],
@@ -10193,7 +9422,7 @@
       "artifact": {
         "id": "scout-hub71-a43e33316e",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "b8306daa6db14f60ae7594ce37b1fc5bd6dc0d85f8c8e5fd8eee64ee0fad89ab",
+        "contentHash": "d72babf9a528c5324171a37288c187211b56f58be9e3acef176f08a86fe12c46",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -10278,7 +9507,7 @@
       "artifact": {
         "id": "scout-hub71-6c0b692152",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "b8306daa6db14f60ae7594ce37b1fc5bd6dc0d85f8c8e5fd8eee64ee0fad89ab",
+        "contentHash": "d72babf9a528c5324171a37288c187211b56f58be9e3acef176f08a86fe12c46",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -10333,7 +9562,7 @@
           "extractingProvider": "mistral",
           "extractingModel": "mistral-large-latest",
           "extractionConfidence": 0.5,
-          "originalSourceText": "Hub71+ Digital Assets is a dedicated programme to promote Web3 startup growth from the heart of Abu Dhabi. We provide an integrated launchpad that unites builders, regulators, investors, foundations, corporate partners, and enthusiasts around Web3 including blockchain and cryptocurrency startups. No matter where you are in your journey, there’s something for you at Hub71."
+          "originalSourceText": "Hub71+ Digital Assets is a dedicated programme to promote Web3 startup growth from the heart of Abu Dhabi. We provide an integrated launchpad that unites builders, regulators, investors, foundations, corporate partners, and enthusiasts around Web3 including blockchain and cryptocurrency startups."
         }
       ],
       "deadlines": [],
@@ -10363,7 +9592,7 @@
       "artifact": {
         "id": "scout-hub71-f0c5f7bb84",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "b8306daa6db14f60ae7594ce37b1fc5bd6dc0d85f8c8e5fd8eee64ee0fad89ab",
+        "contentHash": "d72babf9a528c5324171a37288c187211b56f58be9e3acef176f08a86fe12c46",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -10408,7 +9637,7 @@
       "facts": [
         {
           "field": "eligibility",
-          "normalizedValue": "Sustainability startups driving decarbonization",
+          "normalizedValue": "Sustainability startups",
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
           "locator": {
             "type": "DOCUMENT_SECTION",
@@ -10448,7 +9677,7 @@
       "artifact": {
         "id": "scout-hub71-223a32c713",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "b8306daa6db14f60ae7594ce37b1fc5bd6dc0d85f8c8e5fd8eee64ee0fad89ab",
+        "contentHash": "d72babf9a528c5324171a37288c187211b56f58be9e3acef176f08a86fe12c46",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -10503,7 +9732,7 @@
           "extractingProvider": "mistral",
           "extractingModel": "mistral-large-latest",
           "extractionConfidence": 0.5,
-          "originalSourceText": "Hub71+ AI is a specialist ecosystem designed to support startups at the forefront of AI innovation. The ecosystem provides advanced technical resources, access to a robust network of AI researchers, industry practitioners, and strategic partners, and tailored expertise in AI-driven product development and scalability. With a focus on fostering collaboration and accelerating AI integration across sectors, Hub71+ AI empowers startups to develop and deploy sophisticated AI solutions, enabling founders to achieve operational efficiency, drive industry disruption, and deliver sustainable impact."
+          "originalSourceText": "Hub71+ AI is a specialist ecosystem designed to support startups at the forefront of AI innovation. The ecosystem provides advanced technical resources, access to a robust network of AI researchers, industry practitioners, and strategic partners, and tailored expertise in AI-driven product development and scalability."
         }
       ],
       "deadlines": [],
@@ -10513,6 +9742,101 @@
       "unresolvedQuestions": [
         "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
         "No deadline was stated on the page. Many aid schemes are permanently open; confirm which this is.",
+        "Eligibility text was extracted but NOT assessed against any project."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-uk-find-a-tender-a70078e139",
+      "title": "Digital Exposure Analysis",
+      "issuer": "UK Cabinet Office",
+      "opportunityKind": "TENDER",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773f2",
+      "discoveryUrl": "https://www.find-tender.service.gov.uk",
+      "artifact": {
+        "id": "scout-uk-find-a-tender-a70078e139",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://www.find-tender.service.gov.uk",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://www.find-tender.service.gov.uk in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "No quote was returned."
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 25
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [
+        {
+          "field": "eligibility",
+          "normalizedValue": "Suitable for SME",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773f2"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "Suitable for SME"
+        },
+        {
+          "field": "deadline_text",
+          "normalizedValue": "23 September 2026",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773f2"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "23 September 2026"
+        }
+      ],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "The page states a deadline of \"23 September 2026\" — unparsed and unconfirmed.",
         "Eligibility text was extracted but NOT assessed against any project."
       ],
       "warnings": []
@@ -10529,7 +9853,7 @@
       "artifact": {
         "id": "scout-uk-find-a-tender-98999a447f",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+        "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -10624,7 +9948,7 @@
       "artifact": {
         "id": "scout-uk-find-a-tender-807a83c821",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+        "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -10719,7 +10043,7 @@
       "artifact": {
         "id": "scout-uk-find-a-tender-ed8ca1178b",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+        "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -10814,7 +10138,7 @@
       "artifact": {
         "id": "scout-uk-find-a-tender-f074c7ea44",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+        "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -10909,7 +10233,7 @@
       "artifact": {
         "id": "scout-uk-find-a-tender-0146d1743d",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+        "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -11004,7 +10328,7 @@
       "artifact": {
         "id": "scout-uk-find-a-tender-5e744c8cf6",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+        "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -11099,7 +10423,7 @@
       "artifact": {
         "id": "scout-uk-find-a-tender-fb7dc4e3f8",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+        "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -11194,7 +10518,7 @@
       "artifact": {
         "id": "scout-uk-find-a-tender-82f7bf519e",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+        "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -11289,7 +10613,7 @@
       "artifact": {
         "id": "scout-uk-find-a-tender-47ef170f5d",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+        "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -11370,7 +10694,7 @@
       "artifact": {
         "id": "scout-uk-find-a-tender-2a07717451",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+        "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -11441,7 +10765,7 @@
     },
     {
       "id": "scout-uk-find-a-tender-525049f570",
-      "title": "Further Premarket Engagement exercise",
+      "title": "Further Premarket Engagement excerise",
       "issuer": "UK Cabinet Office",
       "opportunityKind": "GRANT",
       "discoveredFor": [],
@@ -11451,7 +10775,7 @@
       "artifact": {
         "id": "scout-uk-find-a-tender-525049f570",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+        "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -11532,7 +10856,7 @@
       "artifact": {
         "id": "scout-uk-find-a-tender-b3256aaef8",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+        "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -11613,7 +10937,7 @@
       "artifact": {
         "id": "scout-uk-find-a-tender-a37b095f3d",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+        "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -11708,7 +11032,7 @@
       "artifact": {
         "id": "scout-uk-find-a-tender-385114cd4d",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+        "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -11789,7 +11113,7 @@
       "artifact": {
         "id": "scout-uk-find-a-tender-9fd4e51cb0",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+        "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -11884,7 +11208,7 @@
       "artifact": {
         "id": "scout-uk-find-a-tender-6f0ccd348f",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+        "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -11965,7 +11289,7 @@
       "artifact": {
         "id": "scout-uk-find-a-tender-49cfbf27aa",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+        "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -12046,7 +11370,7 @@
       "artifact": {
         "id": "scout-uk-find-a-tender-a99d5ac553",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+        "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -12141,7 +11465,7 @@
       "artifact": {
         "id": "scout-uk-find-a-tender-3a37091831",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
+        "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -12225,182 +11549,6 @@
       "warnings": []
     },
     {
-      "id": "scout-uk-find-a-tender-5d42aa3321",
-      "title": "Reducing Parental Conflict Digital Support - Separating & Separated Parents",
-      "issuer": "UK Cabinet Office",
-      "opportunityKind": "GRANT",
-      "discoveredFor": [],
-      "linkedBy": "officialUrl",
-      "officialUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773d6",
-      "discoveryUrl": "https://www.find-tender.service.gov.uk",
-      "artifact": {
-        "id": "scout-uk-find-a-tender-5d42aa3321",
-        "sourceFormat": "STATIC_HTML",
-        "contentHash": "236e42d5971e6e68c914b942aa745829478eaa6227e220cccd8e55a00995b11b",
-        "renderMethod": "HEADLESS",
-        "byteSize": 0,
-        "processing": "SUCCESS"
-      },
-      "liveFetch": {
-        "attemptedUrl": "https://www.find-tender.service.gov.uk",
-        "status": "OK",
-        "egressDenied": false
-      },
-      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
-      "verificationEvidence": [
-        "Rendered https://www.find-tender.service.gov.uk in a browser and read it with mistral-large-latest.",
-        "The call's link was confirmed to appear on that page before this record was created.",
-        "No quote was returned."
-      ],
-      "application": "UNKNOWN",
-      "award": "UNKNOWN",
-      "strategicRoute": "UNKNOWN",
-      "scores": {
-        "relevance": null,
-        "winPotential": null,
-        "infoConfidence": 25
-      },
-      "gate": {
-        "accessiblePrimarySource": true,
-        "verifiedSource": false,
-        "verifiedDeadline": false,
-        "notExpired": true,
-        "eligibilityAssessed": false,
-        "notAggregatorOnly": true,
-        "notClosedCall": true,
-        "hasExactNextAction": false,
-        "sufficientConfidence": false,
-        "pursueEligible": false,
-        "failedReasons": [
-          "read by a model, not verified by a human",
-          "eligibility not assessed against any project"
-        ]
-      },
-      "recommendation": "INVESTIGATE",
-      "humanReview": "PENDING",
-      "facts": [
-        {
-          "field": "eligibility",
-          "normalizedValue": "Suitable for SME & VCSE",
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773d6"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "originalSourceText": "Suitable for SME & VCSE"
-        },
-        {
-          "field": "deadline_text",
-          "normalizedValue": "24 September 2026 (estimated tender or transparency notice publication date)",
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773d6"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "originalSourceText": "24 September 2026 (estimated tender or transparency notice publication date)"
-        }
-      ],
-      "deadlines": [],
-      "conflicts": [],
-      "discrepancies": [],
-      "expected": {},
-      "unresolvedQuestions": [
-        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
-        "The page states a deadline of \"24 September 2026 (estimated tender or transparency notice publication date)\" — unparsed and unconfirmed.",
-        "Eligibility text was extracted but NOT assessed against any project."
-      ],
-      "warnings": []
-    },
-    {
-      "id": "scout-ungm-eb777ed6de",
-      "title": "UNDP-HND-00663 Adquisición Equipo Medios Nacionales de Comunicación",
-      "issuer": "United Nations",
-      "opportunityKind": "GRANT",
-      "discoveredFor": [],
-      "linkedBy": "officialUrl",
-      "officialUrl": "https://www.ungm.org/Public/Notice",
-      "discoveryUrl": "https://www.ungm.org",
-      "artifact": {
-        "id": "scout-ungm-eb777ed6de",
-        "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
-        "renderMethod": "HEADLESS",
-        "byteSize": 0,
-        "processing": "SUCCESS"
-      },
-      "liveFetch": {
-        "attemptedUrl": "https://www.ungm.org",
-        "status": "OK",
-        "egressDenied": false
-      },
-      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
-      "verificationEvidence": [
-        "Rendered https://www.ungm.org in a browser and read it with mistral-large-latest.",
-        "The call's link was confirmed to appear on that page before this record was created.",
-        "No quote was returned."
-      ],
-      "application": "UNKNOWN",
-      "award": "UNKNOWN",
-      "strategicRoute": "UNKNOWN",
-      "scores": {
-        "relevance": null,
-        "winPotential": null,
-        "infoConfidence": 20
-      },
-      "gate": {
-        "accessiblePrimarySource": true,
-        "verifiedSource": false,
-        "verifiedDeadline": false,
-        "notExpired": true,
-        "eligibilityAssessed": false,
-        "notAggregatorOnly": true,
-        "notClosedCall": true,
-        "hasExactNextAction": false,
-        "sufficientConfidence": false,
-        "pursueEligible": false,
-        "failedReasons": [
-          "read by a model, not verified by a human",
-          "eligibility not assessed against any project"
-        ]
-      },
-      "recommendation": "INVESTIGATE",
-      "humanReview": "PENDING",
-      "facts": [
-        {
-          "field": "deadline_text",
-          "normalizedValue": "16-Sep-2026 15:00 (GMT -4.00) Expires within 24 hours",
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Public/Notice"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "originalSourceText": "16-Sep-2026 15:00 (GMT -4.00) Expires within 24 hours"
-        }
-      ],
-      "deadlines": [],
-      "conflicts": [],
-      "discrepancies": [],
-      "expected": {},
-      "unresolvedQuestions": [
-        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
-        "The page states a deadline of \"16-Sep-2026 15:00 (GMT -4.00) Expires within 24 hours\" — unparsed and unconfirmed.",
-        "No eligibility criteria were found on the page."
-      ],
-      "warnings": []
-    },
-    {
       "id": "scout-ungm-eb777ed6de",
       "title": "Réalisation d un forage d eau à Clercine (IGPNH)",
       "issuer": "United Nations",
@@ -12412,7 +11560,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -12493,7 +11641,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -12574,7 +11722,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -12655,7 +11803,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -12736,7 +11884,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -12817,7 +11965,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -12898,7 +12046,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -12979,7 +12127,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -13060,7 +12208,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -13141,7 +12289,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -13222,7 +12370,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -13303,7 +12451,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -13374,6 +12522,87 @@
     },
     {
       "id": "scout-ungm-eb777ed6de",
+      "title": "138200 SUMINISTRO DE ANIMALES DE PRODUCCIÓN PECUARIA – AVES DE POSTURA Y PORCINOS DE LEVANTE, DPTO. DE CÓRDOBA",
+      "issuer": "United Nations",
+      "opportunityKind": "GRANT",
+      "discoveredFor": [],
+      "linkedBy": "officialUrl",
+      "officialUrl": "https://www.ungm.org/Public/Notice",
+      "discoveryUrl": "https://www.ungm.org",
+      "artifact": {
+        "id": "scout-ungm-eb777ed6de",
+        "sourceFormat": "STATIC_HTML",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
+        "renderMethod": "HEADLESS",
+        "byteSize": 0,
+        "processing": "SUCCESS"
+      },
+      "liveFetch": {
+        "attemptedUrl": "https://www.ungm.org",
+        "status": "OK",
+        "egressDenied": false
+      },
+      "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+      "verificationEvidence": [
+        "Rendered https://www.ungm.org in a browser and read it with mistral-large-latest.",
+        "The call's link was confirmed to appear on that page before this record was created.",
+        "No quote was returned."
+      ],
+      "application": "UNKNOWN",
+      "award": "UNKNOWN",
+      "strategicRoute": "UNKNOWN",
+      "scores": {
+        "relevance": null,
+        "winPotential": null,
+        "infoConfidence": 20
+      },
+      "gate": {
+        "accessiblePrimarySource": true,
+        "verifiedSource": false,
+        "verifiedDeadline": false,
+        "notExpired": true,
+        "eligibilityAssessed": false,
+        "notAggregatorOnly": true,
+        "notClosedCall": true,
+        "hasExactNextAction": false,
+        "sufficientConfidence": false,
+        "pursueEligible": false,
+        "failedReasons": [
+          "read by a model, not verified by a human",
+          "eligibility not assessed against any project"
+        ]
+      },
+      "recommendation": "INVESTIGATE",
+      "humanReview": "PENDING",
+      "facts": [
+        {
+          "field": "deadline_text",
+          "normalizedValue": "16-Sep-2026 23:59 (GMT -5.00) Expires within 24 hours",
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.ungm.org/Public/Notice"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "originalSourceText": "16-Sep-2026 23:59 (GMT -5.00) Expires within 24 hours"
+        }
+      ],
+      "deadlines": [],
+      "conflicts": [],
+      "discrepancies": [],
+      "expected": {},
+      "unresolvedQuestions": [
+        "Read from the page by mistral-large-latest. Open the link and confirm this call exists and says what is recorded here.",
+        "The page states a deadline of \"16-Sep-2026 23:59 (GMT -5.00) Expires within 24 hours\" — unparsed and unconfirmed.",
+        "No eligibility criteria were found on the page."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "scout-ungm-eb777ed6de",
       "title": "Consultancy to support the development of a Framework of Action on Skills for a Just Energy Transition through Social Dialogue in Mpumalanga and the Eastern Cape",
       "issuer": "United Nations",
       "opportunityKind": "GRANT",
@@ -13384,7 +12613,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -13465,7 +12694,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -13546,7 +12775,7 @@
       "artifact": {
         "id": "scout-ungm-0553289095",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -13612,7 +12841,7 @@
       "artifact": {
         "id": "scout-ungm-d52bd45787",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -13678,7 +12907,7 @@
       "artifact": {
         "id": "scout-ungm-89995d7d05",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -13744,7 +12973,7 @@
       "artifact": {
         "id": "scout-ungm-324fd9ad8b",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -13810,7 +13039,7 @@
       "artifact": {
         "id": "scout-ungm-a0ad681001",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -13876,7 +13105,7 @@
       "artifact": {
         "id": "scout-ungm-86649dcb76",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -13942,7 +13171,7 @@
       "artifact": {
         "id": "scout-ungm-423c1eea48",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -14008,7 +13237,7 @@
       "artifact": {
         "id": "scout-ungm-11cfe32913",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -14074,7 +13303,7 @@
       "artifact": {
         "id": "scout-ungm-f1e164cc1b",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -14140,7 +13369,7 @@
       "artifact": {
         "id": "scout-ungm-8df1b55856",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -14206,7 +13435,7 @@
       "artifact": {
         "id": "scout-ungm-e5688f710d",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -14272,7 +13501,7 @@
       "artifact": {
         "id": "scout-ungm-dd1f80456d",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -14338,7 +13567,7 @@
       "artifact": {
         "id": "scout-ungm-28f90cd1c1",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -14404,7 +13633,7 @@
       "artifact": {
         "id": "scout-ungm-e0eebd8bdd",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -14470,7 +13699,7 @@
       "artifact": {
         "id": "scout-ungm-fa196d551d",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -14536,7 +13765,7 @@
       "artifact": {
         "id": "scout-ungm-436be37b15",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -14602,7 +13831,7 @@
       "artifact": {
         "id": "scout-ungm-fac64e77d0",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -14668,7 +13897,7 @@
       "artifact": {
         "id": "scout-ungm-b53c5649c5",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -14723,18 +13952,18 @@
       "warnings": []
     },
     {
-      "id": "scout-ungm-346ff9f4a4",
+      "id": "scout-ungm-7aea21281e",
       "title": "UN Business Meetings - May 2025",
       "issuer": "United Nations",
       "opportunityKind": "GRANT",
       "discoveredFor": [],
       "linkedBy": "officialUrl",
-      "officialUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS34_5_19_2025_to_5_20_2025",
+      "officialUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS40_6_5_2025_to_6_5_2025",
       "discoveryUrl": "https://www.ungm.org",
       "artifact": {
-        "id": "scout-ungm-346ff9f4a4",
+        "id": "scout-ungm-7aea21281e",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -14800,7 +14029,7 @@
       "artifact": {
         "id": "scout-ungm-8db3b8d597",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -14866,7 +14095,7 @@
       "artifact": {
         "id": "scout-ungm-6c5c016909",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -14932,7 +14161,7 @@
       "artifact": {
         "id": "scout-ungm-6479a2356f",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -14998,7 +14227,7 @@
       "artifact": {
         "id": "scout-ungm-68f482d0d7",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -15064,7 +14293,7 @@
       "artifact": {
         "id": "scout-ungm-e3c1c389f1",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -15130,7 +14359,7 @@
       "artifact": {
         "id": "scout-ungm-606c86948f",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -15196,7 +14425,7 @@
       "artifact": {
         "id": "scout-ungm-172d55262d",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -15251,18 +14480,18 @@
       "warnings": []
     },
     {
-      "id": "scout-ungm-eb777ed6de",
+      "id": "scout-ungm-ea1648387c",
       "title": "UN Virtual Business Seminar for Peruvian Vendors",
       "issuer": "United Nations",
       "opportunityKind": "GRANT",
       "discoveredFor": [],
       "linkedBy": "officialUrl",
-      "officialUrl": "https://www.ungm.org/Public/Notice",
+      "officialUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS35_5_28_2025_to_5_28_2025",
       "discoveryUrl": "https://www.ungm.org",
       "artifact": {
-        "id": "scout-ungm-eb777ed6de",
+        "id": "scout-ungm-ea1648387c",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -15317,18 +14546,18 @@
       "warnings": []
     },
     {
-      "id": "scout-ungm-eb777ed6de",
+      "id": "scout-ungm-7d8ad1078e",
       "title": "Burundi virtual business seminar",
       "issuer": "United Nations",
       "opportunityKind": "GRANT",
       "discoveredFor": [],
       "linkedBy": "officialUrl",
-      "officialUrl": "https://www.ungm.org/Public/Notice",
+      "officialUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS36_6_4_2025_to_6_4_2025",
       "discoveryUrl": "https://www.ungm.org",
       "artifact": {
-        "id": "scout-ungm-eb777ed6de",
+        "id": "scout-ungm-7d8ad1078e",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -15383,18 +14612,18 @@
       "warnings": []
     },
     {
-      "id": "scout-ungm-eb777ed6de",
+      "id": "scout-ungm-7dcc0d3e4a",
       "title": "UN Virtual Business Seminar for Côte d’Ivoire Vendors",
       "issuer": "United Nations",
       "opportunityKind": "GRANT",
       "discoveredFor": [],
       "linkedBy": "officialUrl",
-      "officialUrl": "https://www.ungm.org/Public/Notice",
+      "officialUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS39_11_19_2025_to_11_20_2025",
       "discoveryUrl": "https://www.ungm.org",
       "artifact": {
-        "id": "scout-ungm-eb777ed6de",
+        "id": "scout-ungm-7dcc0d3e4a",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -15460,7 +14689,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -15515,18 +14744,18 @@
       "warnings": []
     },
     {
-      "id": "scout-ungm-eb777ed6de",
+      "id": "scout-ungm-79b8cb5422",
       "title": "United Nations Business Seminar for Ghanaian Suppliers",
       "issuer": "United Nations",
       "opportunityKind": "GRANT",
       "discoveredFor": [],
       "linkedBy": "officialUrl",
-      "officialUrl": "https://www.ungm.org/Public/Notice",
+      "officialUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS41_7_17_2025_to_7_17_2025",
       "discoveryUrl": "https://www.ungm.org",
       "artifact": {
-        "id": "scout-ungm-eb777ed6de",
+        "id": "scout-ungm-79b8cb5422",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -15581,18 +14810,18 @@
       "warnings": []
     },
     {
-      "id": "scout-ungm-eb777ed6de",
+      "id": "scout-ungm-71fec71cc0",
       "title": "United Nations Virtual Business Seminar for Paraguayan Suppliers",
       "issuer": "United Nations",
       "opportunityKind": "GRANT",
       "discoveredFor": [],
       "linkedBy": "officialUrl",
-      "officialUrl": "https://www.ungm.org/Public/Notice",
+      "officialUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS42_7_24_2025_to_7_24_2025",
       "discoveryUrl": "https://www.ungm.org",
       "artifact": {
-        "id": "scout-ungm-eb777ed6de",
+        "id": "scout-ungm-71fec71cc0",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -15647,18 +14876,18 @@
       "warnings": []
     },
     {
-      "id": "scout-ungm-eb777ed6de",
+      "id": "scout-ungm-467394a253",
       "title": "United Nations Secretariat Virtual Business Seminar for Mozambique Suppliers",
       "issuer": "United Nations",
       "opportunityKind": "GRANT",
       "discoveredFor": [],
       "linkedBy": "officialUrl",
-      "officialUrl": "https://www.ungm.org/Public/Notice",
+      "officialUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS44_8_26_2025_to_8_26_2025",
       "discoveryUrl": "https://www.ungm.org",
       "artifact": {
-        "id": "scout-ungm-eb777ed6de",
+        "id": "scout-ungm-467394a253",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -15724,7 +14953,7 @@
       "artifact": {
         "id": "scout-ungm-fc66c74760",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -15790,7 +15019,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -15856,7 +15085,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -15922,7 +15151,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -15988,7 +15217,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -16054,7 +15283,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -16112,7 +15341,7 @@
       "id": "scout-ungm-eb777ed6de",
       "title": "UN Procurement Business Seminar for Tanzanian vendors 2026",
       "issuer": "United Nations",
-      "opportunityKind": "TENDER",
+      "opportunityKind": "GRANT",
       "discoveredFor": [],
       "linkedBy": "officialUrl",
       "officialUrl": "https://www.ungm.org/Public/Notice",
@@ -16120,7 +15349,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -16186,7 +15415,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -16252,7 +15481,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -16318,7 +15547,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -16384,7 +15613,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -16450,7 +15679,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -16516,7 +15745,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -16574,7 +15803,7 @@
       "id": "scout-ungm-eb777ed6de",
       "title": "UN Procurement Business Seminar for Nepalese Vendors 2026",
       "issuer": "United Nations",
-      "opportunityKind": "TENDER",
+      "opportunityKind": "GRANT",
       "discoveredFor": [],
       "linkedBy": "officialUrl",
       "officialUrl": "https://www.ungm.org/Public/Notice",
@@ -16582,7 +15811,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -16648,7 +15877,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -16714,7 +15943,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -16780,7 +16009,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -16846,7 +16075,7 @@
       "artifact": {
         "id": "scout-ungm-eb777ed6de",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "79e915cc380f7aa1c865770b8f72ff6d8a8b1c7d8913257fbdaa9a75384e0629",
+        "contentHash": "9355186b42807c47dcb9c18002edbb01305888bc99e285836a7e0f53d77944d1",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -16917,7 +16146,7 @@
       "artifact": {
         "id": "scout-worldbank-afdb-ebrd-cb0e86d54b",
         "sourceFormat": "STATIC_HTML",
-        "contentHash": "55d2559e2f319c1e0a8fc352580e89e3b6beef24e7c36dd8ce34105d209b15ed",
+        "contentHash": "25389454d123b989370dfc970b926d243445ce31eff550424c839f68f1544355",
         "renderMethod": "HEADLESS",
         "byteSize": 0,
         "processing": "SUCCESS"
@@ -16962,7 +16191,7 @@
       "facts": [
         {
           "field": "eligibility",
-          "normalizedValue": "Eligible consulting firms with required qualifications and relevant experience in the field of assignment, including core business and years in business, organizational, managerial, and technical capabilities. Firms may associate in joint ventures or sub-consultancies.",
+          "normalizedValue": "Eligible consulting firms with required qualifications and relevant experience in the field of assignment, including core business and years in business, organizational, managerial, and technical capabilities. Consultants may associate with other firms in the form of a joint venture or a sub-consultancy.",
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
           "locator": {
             "type": "DOCUMENT_SECTION",

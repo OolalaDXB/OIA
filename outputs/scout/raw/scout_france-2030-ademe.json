@@ -20,8 +20,8 @@
         "quote": "Découvrez vos aides éligibles parmi tous les financeurs"
       },
       {
-        "name": "France 2030",
-        "type": "Aides financières pour l'innovation et l'industrialisation",
+        "name": "France 2030 (via ADEME)",
+        "type": "Subventions, financements pour l'innovation et l'industrialisation",
         "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres/catalogue?target%5BEntreprise%5D=Entreprise&funding%5BFrance%202030%5D=France%202030",
         "amount": "",
         "deadline": "",
@@ -65,13 +65,31 @@
         "quote": "Retrouvez des aides financières pour vos projets de transition écologique via plusieurs leviers de financement comme les Fonds Chaleur, Fonds Économie Circulaire, Fonds Air Bois ou encore France 2030."
       },
       {
-        "name": "Aides gré à gré",
+        "name": "Subventions ADEME (forfaitaires ou taux d’aide)",
+        "type": "Subventions",
+        "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
+        "amount": "",
+        "deadline": "",
+        "eligibility": "Entreprises, associations, acteurs de la recherche (projets non commencés)",
+        "quote": "Les subventions de l’ADEME peuvent être forfaitaires ou calculées selon un taux d’aide, avec un plafonnement lié à l’analyse économique de votre projet."
+      },
+      {
+        "name": "Appels à projets nationaux ou régionaux",
+        "type": "Appels à projets",
+        "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
+        "amount": "",
+        "deadline": "",
+        "eligibility": "",
+        "quote": "L’Agence peut proposer une aide financière dans le cadre d'appels à projets nationaux ou régionaux avec des cahiers des charges plus spécifiques."
+      },
+      {
+        "name": "Aide gré à gré",
         "type": "Subvention",
         "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
         "amount": "",
         "deadline": "",
-        "eligibility": "Entreprises, associations, acteurs de la recherche",
-        "quote": "L’Agence peut proposer une aide financière dans le cadre d'appels à projets nationaux ou régionaux avec des cahiers des charges plus spécifiques, lorsque d'autres subventions s’inscrivent dans le cadre d’une « Aide gré à gré », c’est-à-dire en appliquant les dispositifs classiques d’aide financière."
+        "eligibility": "",
+        "quote": "D'autres subventions s’inscrivent dans le cadre d’une « Aide gré à gré », c’est-à-dire en appliquant les dispositifs classiques d’aide financière."
       },
       {
         "name": "ADEME Investissement",
