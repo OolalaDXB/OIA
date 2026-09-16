@@ -20,6 +20,8 @@ import { useLang } from "../lib/lang";
 import {
   freshnessLabel,
   ui,
+  verdictLabel,
+  verdictMeaning,
   type Phrase,
   gateConditionLabel,
   plainFailure,
@@ -307,6 +309,7 @@ export function Console({
 
   const [selectedId, setSelectedId] = useState<string>("");
   const [fBlocked, setFBlocked] = useState("");
+  const [fVerdict, setFVerdict] = useState("");
   const [fKind, setFKind] = useState("");
   const [fReco, setFReco] = useState("");
   const [fVerif, setFVerif] = useState("");
@@ -341,6 +344,7 @@ export function Console({
     set("review", setFReview);
     set("fresh", setFFresh);
     set("blocked", setFBlocked);
+    set("verdict", setFVerdict);
     set("id", setSelectedId);
   }, []);
 
@@ -348,6 +352,8 @@ export function Console({
     const xs = records.filter(
       (r) =>
         (!fBlocked || (r.gate?.failedReasons ?? []).includes(fBlocked)) &&
+        (!fVerdict ||
+          (fVerdict === "__none" ? !r.assessment : r.assessment?.verdict === fVerdict)) &&
         (!fKind || (r.opportunityKind ?? "GRANT") === fKind) &&
         (!fReco || r.recommendation === fReco) &&
         (!fVerif || r.verificationStatus === fVerif) &&
@@ -374,7 +380,7 @@ export function Console({
       if (field === "deadline") return mul * appDeadline(a).localeCompare(appDeadline(b));
       return mul * pubDate(a).localeCompare(pubDate(b)); // pubDate default
     });
-  }, [records, fBlocked, fKind, fReco, fVerif, fRoute, fReview, fProject, fFresh, sortKey, audit, projectTags.tags, nowIso]);
+  }, [records, fBlocked, fVerdict, fKind, fReco, fVerif, fRoute, fReview, fProject, fFresh, sortKey, audit, projectTags.tags, nowIso]);
 
   const selected = records.find((r) => r.id === selectedId) ?? filtered[0];
 
@@ -489,6 +495,16 @@ export function Console({
               </select>
             </label>
           )}
+          <label className="filter">
+            <span className="muted">{lang === "fr" ? "Éligibilité (analyste)" : "Eligibility (analyst)"}</span>
+            <select value={fVerdict} onChange={(e) => setFVerdict(e.target.value)}>
+              <option value="">{lang === "fr" ? "toutes" : "all"}</option>
+              {["ELIGIBLE", "LIKELY", "NEEDS_INFO", "NOT_ELIGIBLE"].map((v) => (
+                <option key={v} value={v}>{verdictLabel(v, lang)}</option>
+              ))}
+              <option value="__none">{lang === "fr" ? "pas encore analysé" : "not analysed yet"}</option>
+            </select>
+          </label>
           <Select label="Recommendation" value={fReco} onChange={setFReco} options={opt(records.map((r) => r.recommendation))} />
           <Select label="Verification" value={fVerif} onChange={setFVerif} options={opt(records.map((r) => r.verificationStatus))} />
           <Select label="Route" value={fRoute} onChange={setFRoute} options={opt(records.map((r) => r.strategicRoute))} />
@@ -557,7 +573,7 @@ export function Console({
                 >
                   <div className="rowTop">
                     <Badge text={recommendationLabel(r.recommendation)} color={RECO_COLOR[r.recommendation] ?? "#888"} />
-                    {kind && !fixedKind && <Badge text={plainKindLabel(kind)} color={kindColor(kind)} />}
+                    {kind && !fixedKind && <Badge text={plainKindLabel(kind, lang)} color={kindColor(kind)} />}
                     <span className="rowTitle">{r.title}</span>
                   </div>
                   <div className="rowMeta">
@@ -565,23 +581,36 @@ export function Console({
                     {pubDate(r) && <span className="pubChip">{pubDate(r)}</span>}
                     {(fresh.status === "CLOSING_SOON" || fresh.status === "EXPIRED") && (
                       <span className={fresh.status === "EXPIRED" ? "pubChip expiredChip" : "pubChip closingChip"}>
-                        {fresh.status === "EXPIRED" ? "closed" : `closes in ${fresh.daysToDeadline}d`}
+                        {fresh.status === "EXPIRED"
+                          ? lang === "fr" ? "clos" : "closed"
+                          : lang === "fr" ? `ferme dans ${fresh.daysToDeadline} j` : `closes in ${fresh.daysToDeadline}d`}
                       </span>
                     )}
-                    {aside && <span className="pubChip asideChip">not a call</span>}
+                    {r.assessment && (
+                      <span
+                        className={`pubChip verdictChip v-${r.assessment.verdict}`}
+                        title={verdictMeaning(r.assessment.verdict, lang)}
+                      >
+                        {verdictLabel(r.assessment.verdict, lang)}
+                      </span>
+                    )}
+                    {aside && <span className="pubChip asideChip">{lang === "fr" ? "pas un appel" : "not a call"}</span>}
                     {tag && <span className="pubChip tagChip">{projectName(tag)}</span>}
                   </div>
                   <div className="rowMeta small">
-                    <span>{verificationLabel(r.verificationStatus)}</span>
+                    <span>{verificationLabel(r.verificationStatus, lang)}</span>
                     {appDeadline(r) !== "—" && (
-                      <span>closes {appDeadline(r)}{fresh.daysToDeadline !== null ? ` · ${relativeDays(fresh.daysToDeadline)}` : ""}</span>
+                      <span>
+                        {lang === "fr" ? "ferme le" : "closes"} {appDeadline(r)}
+                        {fresh.daysToDeadline !== null ? ` · ${relativeDays(fresh.daysToDeadline, lang)}` : ""}
+                      </span>
                     )}
-                    <span className={rev === "PENDING" ? "muted" : "hrOn"}>{reviewLabel(rev)}</span>
+                    <span className={rev === "PENDING" ? "muted" : "hrOn"}>{reviewLabel(rev, lang)}</span>
                   </div>
                 </li>
               );
             })}
-            {filtered.length === 0 && <li className="row muted">No record matches (or none of this kind yet).</li>}
+            {filtered.length === 0 && <li className="row muted">{lang === "fr" ? "Aucune fiche ne correspond." : "No record matches."}</li>}
           </ul>
 
           {/* RIGHT — detail */}
@@ -686,6 +715,7 @@ function Detail({
   nowIso: string;
   onReview: (action: ReviewAction, comment: string) => void;
 }) {
+  const { lang } = useLang();
   const [comment, setComment] = useState("");
   const [noteDraft, setNoteDraft] = useState("");
   const [taskDraft, setTaskDraft] = useState("");
@@ -857,6 +887,59 @@ function Detail({
         <KV k="Relevance" v={r.scores.relevance ?? <span className="muted">not computed</span>} />
         <KV k="Win potential" v={r.scores.winPotential ?? <span className="muted">not computed</span>} />
       </Section>
+
+      {r.assessment && (
+        <Section
+          title={
+            lang === "fr"
+              ? `Éligibilité — ${verdictLabel(r.assessment.verdict, lang)}`
+              : `Eligibility — ${verdictLabel(r.assessment.verdict, lang)}`
+          }
+        >
+          <div className={`verdictBox v-${r.assessment.verdict}`}>
+            <div>{lang === "fr" ? r.assessment.reason.fr : r.assessment.reason.en}</div>
+            {r.assessment.entity && (
+              <div className="muted small">
+                {lang === "fr" ? "Entité qui candidaterait : " : "Entity that would apply: "}
+                <b>{r.assessment.entity}</b>
+              </div>
+            )}
+            <div className="ok small">
+              {lang === "fr" ? "Action suivante : " : "Next action: "}
+              {lang === "fr" ? r.assessment.nextAction.fr : r.assessment.nextAction.en}
+            </div>
+            {(r.assessment.missing ?? []).length > 0 && (
+              <div className="muted small">
+                {lang === "fr" ? "Manque : " : "Missing: "}
+                {(r.assessment.missing ?? []).join(" · ")}
+              </div>
+            )}
+          </div>
+
+          {r.assessment.citations.length > 0 && (
+            <>
+              <div className="muted small">
+                {lang === "fr"
+                  ? "Phrases tirées du document, chacune vérifiée comme présente :"
+                  : "Sentences from the document, each checked to be present:"}
+              </div>
+              {r.assessment.citations.map((c, i) => (
+                <blockquote key={i} className="citation">
+                  {c}
+                </blockquote>
+              ))}
+            </>
+          )}
+
+          {/* The sentence that keeps this product honest, on the screen where
+              it matters most — next to a confident-looking verdict. */}
+          <div className="muted small">
+            {lang === "fr"
+              ? `Jugé par ${r.assessment.model}, pas par un humain. Ce verdict ne débloque rien : il change l'ordre dans lequel tu regardes, pas ce que tu peux poursuivre.`
+              : `Judged by ${r.assessment.model}, not by a human. This verdict unblocks nothing: it changes the order you look in, not what you may pursue.`}
+          </div>
+        </Section>
+      )}
 
       {gate && (
         <Section title={`Deterministic gate · ${gate.pursueEligible ? "PURSUE-eligible" : "blocked"}`}>

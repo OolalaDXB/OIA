@@ -170,6 +170,25 @@ jobs:
       - name: Rebuild the console dataset
         run: pnpm --filter @oia/workers exec tsx src/ted-to-console.ts
 
+      # Can we actually apply? The scout leaves hundreds of records and no
+      # eligibility assessment; a shortlist nobody has time to read is the same
+      # as no shortlist. Runs after the console is rebuilt so it reads the full
+      # merged dataset, and writes its verdicts back onto it.
+      #
+      # continue-on-error: additive. A failed analysis must never cost the run
+      # its discovery results.
+      - name: Assess eligibility, project by project
+        id: analyse
+        continue-on-error: true
+        env:
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          ANALYST_LIMIT: ${{ vars.ANALYST_LIMIT || '40' }}
+        run: |
+          if [ -z "$MISTRAL_API_KEY" ]; then
+            echo "::warning::MISTRAL_API_KEY not set — no eligibility was assessed."
+          fi
+          pnpm --filter @oia/workers analyse
+
       # A refresh that breaks the suite must not reach the console. The data is
       # the product; shipping a dataset the invariants reject would be worse
       # than shipping last week's.
@@ -217,7 +236,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add apps/web/src/data/console.json outputs/sprint-1 outputs/scout outputs/link-check.md \
+          git add apps/web/src/data/console.json outputs/sprint-1 outputs/scout outputs/analyst outputs/link-check.md \
                   registry/sources registry/projects \
                   packages/registry/src/snapshot.json packages/registry/src/sources.snapshot.json
           if git diff --cached --quiet; then
@@ -259,4 +278,5 @@ jobs:
         run: |
           cat outputs/sprint-1/run-report.md >> "$GITHUB_STEP_SUMMARY" || true
           cat outputs/scout/report.md >> "$GITHUB_STEP_SUMMARY" || true
+          cat outputs/analyst/report.md >> "$GITHUB_STEP_SUMMARY" || true
           cat outputs/link-check.md >> "$GITHUB_STEP_SUMMARY" || true

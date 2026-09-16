@@ -153,6 +153,10 @@ export const GATE_FAILURE: Record<string, Phrase> = {
     fr: "l'éligibilité n'a été évaluée pour aucun projet",
     en: "eligibility not assessed against any project",
   },
+  "a model judged eligibility — you have not confirmed it": {
+    fr: "un modèle a jugé l'éligibilité — tu ne l'as pas confirmée",
+    en: "a model judged eligibility — you have not confirmed it",
+  },
   "eligibility not assessed": {
     fr: "l'éligibilité n'a pas été évaluée",
     en: "eligibility not assessed",
@@ -254,6 +258,40 @@ export function relativeDays(days: number | null, lang: Lang = DEFAULT_LANG): st
   if (days === 1) return "demain";
   if (days === -1) return "hier";
   return days > 0 ? `dans ${days} jours` : `il y a ${Math.abs(days)} jours`;
+}
+
+/** The analyst's four verdicts, as a person reads them. */
+export const VERDICT: Record<string, Term> = {
+  ELIGIBLE: {
+    label: { fr: "On peut candidater", en: "We can apply" },
+    meaning: {
+      fr: "Rien dans le document ne nous exclut, et l'entité est identifiée. À confirmer par toi.",
+      en: "Nothing in the document rules us out, and the entity is identified. Still yours to confirm.",
+    },
+  },
+  LIKELY: {
+    label: { fr: "Probablement pour nous", en: "Probably for us" },
+    meaning: { fr: "Un critère reste à confirmer.", en: "One criterion is still to confirm." },
+  },
+  NEEDS_INFO: {
+    label: { fr: "Indécidable en l'état", en: "Cannot be decided yet" },
+    meaning: {
+      fr: "Le document ne dit pas qui peut candidater.",
+      en: "The document does not say who may apply.",
+    },
+  },
+  NOT_ELIGIBLE: {
+    label: { fr: "Pas pour nous", en: "Not for us" },
+    meaning: { fr: "Exclu par un critère écrit dans le document.", en: "Ruled out by a criterion in the document." },
+  },
+};
+
+export function verdictLabel(value: string, lang: Lang = DEFAULT_LANG): string {
+  return VERDICT[value] ? VERDICT[value]!.label[lang] : value;
+}
+
+export function verdictMeaning(value: string, lang: Lang = DEFAULT_LANG): string {
+  return VERDICT[value] ? VERDICT[value]!.meaning[lang] : "";
 }
 
 /** Every fixed string the shell and the five destinations show. */

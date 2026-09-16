@@ -112,6 +112,28 @@ export interface ConsoleRecord {
    * generated before the registry existed.
    */
   discoveredFor?: string[];
+  /**
+   * What the analyst concluded, and why.
+   *
+   * A CLAIM, never a certification. It deliberately does not touch
+   * `gate.eligibilityAssessed`: a model judging is not a human judging, and a
+   * gate a model can open is not a gate. What it changes is the order you look
+   * in, and the reason a record is set aside — from "nobody has judged whether
+   * we can apply" to "a model judged, you have not confirmed".
+   */
+  assessment?: {
+    verdict: "ELIGIBLE" | "LIKELY" | "NEEDS_INFO" | "NOT_ELIGIBLE";
+    projectSlug: string;
+    reason: { fr: string; en: string };
+    nextAction: { fr: string; en: string };
+    entity?: string;
+    missing?: string[];
+    /** Sentences from the opportunity itself, each checked to be present. */
+    citations: string[];
+    by: "model";
+    model: string;
+    at: string;
+  };
   /** Cross-source identity key (see dedup.ts). Set when a dataset is deduped. */
   dedupKey?: string;
   /** Ids of duplicate records merged into this one — never silently dropped. */

@@ -4,17 +4,18 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "tsx src/run.ts",
-    "validate:seed": "tsx src/validate-seed.ts",
+    "analyse": "tsx src/analyse.ts",
+    "check:links": "tsx src/check-links.ts",
+    "discover:ted": "tsx src/discover-ted.ts",
     "ingest:artifact": "tsx src/ingest-artifact.ts",
     "m0:run": "tsx src/m0-run.ts",
-    "discover:ted": "tsx src/discover-ted.ts",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests",
     "publish:watch": "tsx src/publish-watch.ts",
-    "check:links": "tsx src/check-links.ts",
     "requests": "tsx src/process-requests.ts",
-    "scout:aid": "tsx src/scout-aid.ts"
+    "scout:aid": "tsx src/scout-aid.ts",
+    "start": "tsx src/run.ts",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit",
+    "validate:seed": "tsx src/validate-seed.ts"
   },
   "dependencies": {
     "@oia/audit": "workspace:*",

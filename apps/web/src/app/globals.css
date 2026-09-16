@@ -325,3 +325,24 @@ table.money a { color: inherit; text-decoration: none; border-bottom: 1px solid 
 table.money a:hover { border-bottom-color: var(--ink); }
 .factLink { display: block; text-decoration: none; color: inherit; }
 .factLink:hover { background: var(--hover, rgba(0, 0, 0, 0.04)); }
+
+/* The analyst's verdict, visible at a glance and never louder than the truth. */
+.verdictChip { font-weight: 600; }
+.verdictChip.v-ELIGIBLE { background: #e6f4ea; color: #1b5e20; }
+.verdictChip.v-LIKELY { background: #e8f0fe; color: #174ea6; }
+.verdictChip.v-NEEDS_INFO { background: #fef7e0; color: #7a5c00; }
+.verdictChip.v-NOT_ELIGIBLE { background: #f1f3f4; color: #5f6368; }
+
+/* The analyst's verdict in the detail pane, with the evidence under it. */
+.verdictBox { padding: 10px 12px; border-radius: 8px; border-left: 3px solid var(--line); margin-bottom: 8px; }
+.verdictBox.v-ELIGIBLE { border-left-color: #1b5e20; background: #f3faf5; }
+.verdictBox.v-LIKELY { border-left-color: #174ea6; background: #f4f8fe; }
+.verdictBox.v-NEEDS_INFO { border-left-color: #7a5c00; background: #fffcf2; }
+.verdictBox.v-NOT_ELIGIBLE { border-left-color: #9aa0a6; background: #fafafa; }
+.citation {
+  margin: 6px 0 6px 10px;
+  padding-left: 10px;
+  border-left: 2px solid var(--line);
+  font-size: 13px;
+  color: var(--ink);
+}
