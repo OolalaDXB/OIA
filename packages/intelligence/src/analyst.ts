@@ -50,7 +50,28 @@ export const VERDICT_MEANING: Record<Verdict, { fr: string; en: string }> = {
 
 const Bilingual = z.object({ fr: z.string().default(""), en: z.string().default("") });
 
-export const EligibilityVerdictSchema = z.object({
+/**
+ * Accept the singular where the schema asks for a list.
+ *
+ * A real response came back with `"citation": "…"` instead of
+ * `"citations": ["…"]`. One value where a list was expected is a shape
+ * disagreement, not a wrong answer, and rejecting the whole verdict over it
+ * loses the analysis.
+ */
+function acceptSingular(raw: unknown): unknown {
+  if (typeof raw !== "object" || raw === null || Array.isArray(raw)) return raw;
+  const obj = { ...(raw as Record<string, unknown>) };
+  if (obj["citations"] === undefined && typeof obj["citation"] === "string") {
+    obj["citations"] = [obj["citation"]];
+  }
+  if (obj["missing"] === undefined && typeof obj["missing_information"] === "string") {
+    obj["missing"] = [obj["missing_information"]];
+  }
+  if (typeof obj["missing"] === "string") obj["missing"] = [obj["missing"]];
+  return obj;
+}
+
+export const EligibilityVerdictSchema = z.preprocess(acceptSingular, z.object({
   verdict: z.enum(VERDICTS),
   /** Why, in the operator's language and in English. */
   reason: Bilingual,
@@ -66,7 +87,7 @@ export const EligibilityVerdictSchema = z.object({
    * in opinions.
    */
   citations: z.array(z.string()).default([]),
-});
+}));
 export type EligibilityVerdict = z.infer<typeof EligibilityVerdictSchema>;
 
 export interface AnalystInput {

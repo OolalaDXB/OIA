@@ -38,6 +38,31 @@ export interface MistralConfig {
   onRawResponse?: (raw: { purpose: string; text: string }) => void;
 }
 
+/**
+ * Unwrap the schema-name envelope.
+ *
+ * The system suffix below literally says 'a single JSON object for "X"', and
+ * models obey it exactly: they return {"X": {...}}. This cost a full run on the
+ * scout and another on the analyst before it was recognised as one problem
+ * rather than two — it is a quirk of how we ASK, so it belongs here, next to the
+ * asking, rather than being re-solved in every schema that meets it.
+ *
+ * Only a lone object-valued key is unwrapped. A response with real content
+ * beside the wrapper is left exactly as it came.
+ */
+export function unwrapEnvelope(value: unknown, schemaName: string): unknown {
+  if (typeof value !== "object" || value === null || Array.isArray(value)) return value;
+  const obj = value as Record<string, unknown>;
+  const keys = Object.keys(obj);
+  if (keys.length !== 1) return value;
+  const inner = obj[keys[0]!];
+  if (typeof inner !== "object" || inner === null || Array.isArray(inner)) return value;
+  // Unwrap whether or not the key matches the schema name: a model that wrapped
+  // in "result" or "response" made the same move for the same reason.
+  void schemaName;
+  return inner;
+}
+
 function extractJson(text: string): string {
   const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/i);
   const candidate = (fenced?.[1] ?? text).trim();
@@ -122,7 +147,7 @@ export function createMistralProvider(config: MistralConfig): MistralProvider {
         const { text, usage } = await call(system, req.input, model);
         config.onRawResponse?.({ purpose: req.purpose, text });
         try {
-          const data = req.schema.parse(JSON.parse(extractJson(text)));
+          const data = req.schema.parse(unwrapEnvelope(JSON.parse(extractJson(text)), req.schemaName));
           return {
             data,
             run: {

@@ -1,6 +1,8 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { z } from "zod";
-import { createMistralProvider } from "../src/mistral";
+import { createMistralProvider, unwrapEnvelope } from "../src/mistral";
 
 const Schema = z.object({ title: z.string(), amount: z.number().optional() });
 
@@ -150,5 +152,57 @@ describe("output truncation", () => {
     });
     await p.extract(req);
     expect(Number(sent["max_tokens"])).toBeGreaterThanOrEqual(16_000);
+  });
+});
+
+/**
+ * The envelope that cost two full runs before it was recognised as ONE problem.
+ *
+ * The system suffix says 'a single JSON object for "X"', and the model obeys
+ * exactly: {"X": {...}}. It broke the scout, was fixed there, then broke the
+ * analyst identically. It is a quirk of how we ASK, so it is handled next to the
+ * asking — and asserted against a real captured response.
+ */
+describe("the schema-name envelope", () => {
+  const real = JSON.parse(
+    readFileSync(join(__dirname, "fixtures", "mistral-envelope.json"), "utf8"),
+  ) as Record<string, unknown>;
+
+  it("unwraps a real captured response", () => {
+    expect(Object.keys(real)).toEqual(["EligibilityVerdict"]); // the shape that broke it
+    const inner = unwrapEnvelope(real, "EligibilityVerdict") as Record<string, unknown>;
+    expect(inner["verdict"]).toBe("NOT_ELIGIBLE");
+    expect(inner["reason"]).toBeTypeOf("object");
+  });
+
+  it("unwraps whatever the wrapper was called", () => {
+    const inner = unwrapEnvelope({ result: { a: 1 } }, "Thing") as Record<string, unknown>;
+    expect(inner["a"]).toBe(1);
+  });
+
+  it("leaves a correctly shaped response alone", () => {
+    const flat = { verdict: "ELIGIBLE", reason: { fr: "x", en: "x" } };
+    expect(unwrapEnvelope(flat, "EligibilityVerdict")).toBe(flat);
+  });
+
+  it("never unwraps when there is content beside the wrapper", () => {
+    // Two keys means the outer object is the answer, not an envelope.
+    const both = { EligibilityVerdict: { a: 1 }, note: "x" };
+    expect(unwrapEnvelope(both, "EligibilityVerdict")).toBe(both);
+  });
+
+  it("never unwraps a lone key holding an array — that is the payload", () => {
+    const list = { calls: [{ a: 1 }] };
+    expect(unwrapEnvelope(list, "ScoutResult")).toBe(list);
+  });
+
+  it("parses an enveloped response end to end", async () => {
+    const p = createMistralProvider({
+      apiKey: "k",
+      model: "m",
+      fetchImpl: fakeFetch(['{"Thing":{"title":"Wrapped"}}']) as unknown as typeof fetch,
+    });
+    expect((await p.extract(req)).data.title).toBe("Wrapped");
+    expect(p.usage().calls).toBe(1); // no retry needed
   });
 });
