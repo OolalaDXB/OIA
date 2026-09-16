@@ -19,3 +19,4 @@ export * from "./dedup";
 export * from "./freshness";
 export * from "./link-check";
 export * from "./ingest";
+export * from "./ted-notice-xml";

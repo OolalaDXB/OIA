@@ -21,6 +21,8 @@ import {
   safeFetch,
   ingestOfficialArtifact,
   extractTenderFacts,
+  readTedNoticeXml,
+  tedXmlToFacts,
   matchableTextLength,
   type ArtifactManifestEntry,
   type LiveFetchAttempt,
@@ -61,6 +63,29 @@ function median(xs: number[]): number {
   const sorted = [...xs].sort((a, b) => a - b);
   const mid = Math.floor(sorted.length / 2);
   return sorted.length % 2 ? sorted[mid]! : Math.round((sorted[mid - 1]! + sorted[mid]!) / 2);
+}
+
+/**
+ * Where this notice's XML lives.
+ *
+ * The search response already carries it under `links.xml.MUL` ("MUL" being
+ * TED's multilingual bundle). Derive it from the publication number only when
+ * the response omits the link, and never invent a host.
+ */
+export function noticeXmlUrl(raw: Record<string, unknown>, externalId: string): string | undefined {
+  const links = raw["links"];
+  const xml = links && typeof links === "object" ? (links as Record<string, unknown>)["xml"] : undefined;
+  if (xml && typeof xml === "object") {
+    const byLang = xml as Record<string, unknown>;
+    const preferred = byLang["MUL"] ?? Object.values(byLang).find((v) => typeof v === "string");
+    if (typeof preferred === "string" && preferred.startsWith("https://")) return preferred;
+  }
+  return /^\d+-\d{4}$/.test(externalId) ? `https://ted.europa.eu/en/notice/${externalId}/xml` : undefined;
+}
+
+/** True when a record carries eligibility text an analyst could actually read. */
+function hasEligibility(facts: MaterialFact[]): boolean {
+  return facts.some((f) => f.field === "eligibility" && f.normalizedValue.trim().length >= 40);
 }
 
 function arg(name: string): string | undefined {
@@ -130,6 +155,8 @@ interface CandidateRow {
   noticeFacts?: MaterialFact[];
   /** Characters the matcher can actually see for this record (the S2 measure). */
   matchableChars?: number;
+  /** Which schema the notice XML used, when it was read at all. */
+  xmlSchema?: string;
 }
 
 async function main() {
@@ -368,6 +395,13 @@ async function main() {
   const matchableLengths: number[] = [];
   let qualified = 0;
   let fetchFailures = 0;
+  // The eligibility hit rate is the measure this whole XML pass exists to move.
+  // It is printed and written to the report so the next run either proves the
+  // improvement or shows it did nothing.
+  let withEligibility = 0;
+  let withEligibilityFromXml = 0;
+  let xmlFetchFailures = 0;
+  const fetchXml = process.env.TED_FETCH_XML !== "0";
   const toProcess = unique.slice(0, maxProcess);
   const liveFetchFor = (attempt: LiveFetchAttempt) => async () => attempt;
 
@@ -417,7 +451,40 @@ async function main() {
       artifactId: ing.artifact.id,
       knownCpv: Array.isArray(knownCpv) ? knownCpv.map(String) : [],
     });
-    const noticeFacts = [...tenderFacts, ...ing.facts];
+    // The HTML page is a SUMMARY. After widening the section patterns to seven
+    // languages, eligibility text was found on 19 records out of 205 — the
+    // patterns were never the problem, the page simply does not carry the
+    // criteria. The notice's own XML does, as typed elements, and needs no
+    // account (unlike the tender documents, which sit behind national portals).
+    // So read it, and put its facts FIRST: they come from the publisher's
+    // structured record, not from prose under a heading a regex recognised.
+    let xmlFacts: MaterialFact[] = [];
+    let xmlSchema: string | undefined;
+    const xmlUrl = fetchXml ? noticeXmlUrl(c.raw as Record<string, unknown>, c.externalId) : undefined;
+    if (xmlUrl) {
+      // Two requests per notice instead of one, against a public EU service.
+      // A quarter-second between them costs 25 seconds over a full page and
+      // keeps the run from looking like a burst.
+      await new Promise((resolve) => setTimeout(resolve, 250));
+      const got = await safeFetch(xmlUrl, {
+        policy: { allowlist: ALLOW },
+        userAgent: ctx.env.userAgent,
+        timeoutMs: ctx.env.timeoutMs,
+      });
+      if (got.body && got.attempt.fetchStatus === "OK") {
+        const read = readTedNoticeXml(got.body.toString("utf8"));
+        xmlSchema = read.schema;
+        xmlFacts = tedXmlToFacts(read, ing.artifact.id, xmlUrl);
+      } else {
+        // Not fatal — the HTML facts still stand. But it is counted, because a
+        // silent XML failure would look exactly like a notice with no criteria.
+        xmlFetchFailures += 1;
+      }
+    }
+
+    const noticeFacts = [...xmlFacts, ...tenderFacts, ...ing.facts];
+    if (hasEligibility(xmlFacts)) withEligibilityFromXml += 1;
+    if (hasEligibility(noticeFacts)) withEligibility += 1;
     const matchableChars = matchableTextLength(noticeFacts, c.title, c.hints.funder ?? "");
     matchableLengths.push(matchableChars);
 
@@ -439,6 +506,7 @@ async function main() {
       noticeClass: classifyNoticeType(c.hints.noticeType),
       noticeFacts,
       matchableChars,
+      xmlSchema,
     });
   }
 
@@ -463,8 +531,13 @@ async function main() {
       `- matchable text per record (the S2 measure): median ${median(matchableLengths)} characters` +
         (matchableLengths.length ? ` over ${matchableLengths.length} record(s)` : " — nothing processed"),
       `- candidates processed (cap ${maxProcess}): ${toProcess.length}`,
+      `- **records carrying eligibility text: ${withEligibility}/${toProcess.length}**` +
+        (fetchXml
+          ? ` — ${withEligibilityFromXml} of them from the notice XML, which the HTML summary page does not carry`
+          : " — notice XML reading is OFF (TED_FETCH_XML=0), so this is the HTML summary alone"),
       `- qualified at MANUAL_REVIEW_REQUIRED: ${qualified}`,
       `- notice-page fetch failures: ${fetchFailures}`,
+      `- notice-XML fetch failures: ${xmlFetchFailures}`,
       "",
       "## Candidates (each with official source URL)",
       ...rows.map(
@@ -481,6 +554,10 @@ async function main() {
   console.log(
     `retained: ${toProcess.length} | qualified (MANUAL_REVIEW_REQUIRED): ${qualified} | ` +
       `fetch failures: ${fetchFailures} | median matchable text: ${median(matchableLengths)} chars`,
+  );
+  console.log(
+    `eligibility text: ${withEligibility}/${toProcess.length} record(s) ` +
+      `(${withEligibilityFromXml} from the notice XML, ${xmlFetchFailures} XML fetch failure(s))`,
   );
   console.log(`Outputs written to ${outDir}`);
 }

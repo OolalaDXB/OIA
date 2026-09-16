@@ -57,6 +57,13 @@ export const FETCH_CONTENT_TYPE_ALLOWLIST = [
   "application/xhtml+xml",
   "application/pdf",
   "text/plain",
+  // TED serves a notice's structured record as XML, and that record is where
+  // the selection criteria actually live — the HTML page is only a summary.
+  // Without these two every XML fetch came back UNSUPPORTED_CONTENT_TYPE, which
+  // would have looked exactly like a notice that states no criteria.
+  // Inert text: parsed by htmlparser2, which resolves no external entities.
+  "application/xml",
+  "text/xml",
 ] as const;
 
 /**

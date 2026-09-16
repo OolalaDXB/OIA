@@ -42,6 +42,13 @@ export const SCOPE_MAX = 1200;
  * live notice from this environment, which has no egress — so the worker
  * measures and prints the eligibility hit rate on every run, and the next real
  * run either proves this or shows it did nothing.
+ *
+ * The widening was done, and the measurement came back 19/205. The patterns
+ * were not the problem: TED's HTML page is a SUMMARY and carries no criteria
+ * section in any language. That is what `ted-notice-xml.ts` exists for — it
+ * reads the notice's structured record, where the criteria are typed elements.
+ * These patterns still earn their place on every non-TED source and on the
+ * older notices whose HTML does carry a LEFTI block.
  */
 const SECTION_PATTERNS: Array<{ field: string; re: RegExp; confidence: number }> = [
   {

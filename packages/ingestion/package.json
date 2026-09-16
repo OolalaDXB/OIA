@@ -11,7 +11,8 @@
     "./tender-facts": "./src/tender-facts.ts",
     "./opportunity-kinds": "./src/opportunity-kinds.ts",
     "./gate-profiles": "./src/gate-profiles.ts",
-    "./link-check": "./src/link-check.ts"
+    "./link-check": "./src/link-check.ts",
+    "./ted-notice-xml": "./src/ted-notice-xml.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { PROJECT_REGISTRY, discoverableProjects, findProject } from "@oia/registry";
 import { narrowQuery, queryFromLayers } from "@oia/connectors";
-import { selectProjects, projectTedQuery, projectQueryLayers } from "../src/discover-ted";
+import { selectProjects, projectTedQuery, projectQueryLayers, noticeXmlUrl } from "../src/discover-ted";
 import { mergeConsoleData, tedCandidatesToConsole } from "../src/ted-to-console";
 
 const SINCE = "20260618";
@@ -127,5 +127,36 @@ describe("the recency floor survives the environment", () => {
       const query = projectTedQuery(p, resolveSince(""));
       expect(query).toMatch(/publication-date>=\d{8}/);
     }
+  });
+});
+
+describe("noticeXmlUrl", () => {
+  it("prefers the multilingual XML link the search response already carried", () => {
+    const url = noticeXmlUrl(
+      { links: { xml: { MUL: "https://ted.europa.eu/en/notice/505248-2026/xml" }, pdf: { ENG: "x" } } },
+      "505248-2026",
+    );
+    expect(url).toBe("https://ted.europa.eu/en/notice/505248-2026/xml");
+  });
+
+  it("takes whatever language the response does carry when MUL is absent", () => {
+    const url = noticeXmlUrl({ links: { xml: { ENG: "https://ted.europa.eu/en/notice/1-2026/xml" } } }, "1-2026");
+    expect(url).toBe("https://ted.europa.eu/en/notice/1-2026/xml");
+  });
+
+  it("derives the canonical URL when the response omits the link", () => {
+    expect(noticeXmlUrl({}, "505248-2026")).toBe("https://ted.europa.eu/en/notice/505248-2026/xml");
+  });
+
+  it("invents nothing when the identifier is not a publication number", () => {
+    // Guessing a URL from an id of an unknown shape produces a 404 that reads
+    // as "this notice states no criteria" — the silent failure, again.
+    expect(noticeXmlUrl({}, "sedia-CREA-2026-CULT")).toBeUndefined();
+  });
+
+  it("refuses a link that is not https", () => {
+    expect(noticeXmlUrl({ links: { xml: { MUL: "ftp://ted.europa.eu/x.xml" } } }, "9-2026")).toBe(
+      "https://ted.europa.eu/en/notice/9-2026/xml",
+    );
   });
 });
