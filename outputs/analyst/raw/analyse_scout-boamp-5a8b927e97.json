@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify who may apply for or use the BOAMP alert service. It describes the service but does not outline eligibility criteria for recipients.",
+      "fr": "Le texte extrait ne précise pas qui peut demander ou utiliser le service d'alerte BOAMP. Il décrit le service mais ne détaille pas les critères d'éligibilité pour les bénéficiaires."
+    },
+    "nextAction": {
+      "en": "Contact the DILA or consult the official BOAMP website to confirm whether private companies like TheStudio MT are permitted to register for the alert service.",
+      "fr": "Contacter la DILA ou consulter le site officiel du BOAMP pour confirmer si les entreprises privées comme TheStudio MT sont autorisées à s'inscrire au service d'alerte."
+    }
+  }
+}

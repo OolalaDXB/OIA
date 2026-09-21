@@ -1,14 +1,16 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NOT_ELIGIBLE",
-    "citation": "eligibility: Smart and autonomous mobility startups",
+    "verdict": "LIKELY",
+    "citation": [
+      "Smart and autonomous mobility startups joining Hub71 gain direct access to SAVI’s network of partners, regulators and testing environments."
+    ],
     "reason": {
-      "en": "BAWABA operates as a 'Sovereign AI control plane for regulated industries' and is not described as a smart or autonomous mobility startup. The opportunity explicitly restricts eligibility to 'Smart and autonomous mobility startups.'",
-      "fr": "BAWABA fonctionne comme un 'plan de contrôle d'IA souveraine pour les industries réglementées' et n'est pas décrite comme une startup de mobilité intelligente ou autonome. L'opportunité restreint explicitement l'éligibilité aux 'startups de mobilité intelligente et autonome.'"
+      "en": "The opportunity explicitly targets 'smart and autonomous mobility startups,' but BAWABA's dossier describes it as a 'Sovereign AI control plane for regulated industries' without specifying mobility applications. The sectors (AI, data, cybersecurity) align, but the direct relevance to mobility is unclear.",
+      "fr": "L'opportunité cible explicitement les 'startups de mobilité intelligente et autonome', mais le dossier de BAWABA la décrit comme un 'plan de contrôle d'IA souveraine pour les industries réglementées' sans préciser d'applications dans la mobilité. Les secteurs (IA, données, cybersécurité) correspondent, mais la pertinence directe pour la mobilité n'est pas claire."
     },
     "nextAction": {
-      "en": "Review other funding opportunities that target AI, data, or cybersecurity startups in Abu Dhabi or the broader UAE.",
-      "fr": "Examiner d'autres opportunités de financement ciblant les startups en IA, données ou cybersécurité à Abu Dhabi ou dans les Émirats arabes unis en général."
+      "en": "Confirm with BAWABA whether their AI control plane includes or can be adapted to smart/autonomous mobility use cases (land, air, or sea).",
+      "fr": "Confirmer avec BAWABA si leur plan de contrôle d'IA inclut ou peut être adapté à des cas d'usage de mobilité intelligente/autonome (terre, air ou mer)."
     }
   }
 }

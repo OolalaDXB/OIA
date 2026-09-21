@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citation": "Startups addressing early childhood development challenges",
+    "citation": "The ECA Anjal Z x Hub71 programme supports startups addressing challenges across early childhood development, from pregnancy through age eight, by providing direct access to government partners, pilot opportunities, and Hub71’s broader innovation ecosystem.",
     "reason": {
-      "en": "The organisation's focus on 'Sovereign AI control plane for regulated industries' does not align with the specified scope of addressing early childhood development challenges.",
-      "fr": "L'organisation se concentre sur une 'plateforme de contrôle d'IA souveraine pour les industries réglementées', ce qui ne correspond pas au champ d'application spécifié concernant les défis du développement de la petite enfance."
+      "en": "BAWABA's focus on 'Sovereign AI control plane for regulated industries' does not align with the programme's scope of supporting startups addressing early childhood development challenges.",
+      "fr": "L'activité de BAWABA, centrée sur une 'plateforme de contrôle d'IA souveraine pour les industries réglementées', ne correspond pas au champ d'application du programme, qui soutient les startups s'attaquant aux défis du développement de la petite enfance."
     },
     "nextAction": {
-      "en": "Review other funding opportunities that align with the organisation's focus on AI, data, and cybersecurity.",
-      "fr": "Examiner d'autres opportunités de financement qui correspondent à l'orientation de l'organisation sur l'IA, les données et la cybersécurité."
+      "en": "Review other funding opportunities that align with BAWABA's focus on AI, data, and cybersecurity for regulated industries.",
+      "fr": "Examiner d'autres opportunités de financement qui correspondent à l'expertise de BAWABA en matière d'IA, de données et de cybersécurité pour les industries réglementées."
     }
   }
 }

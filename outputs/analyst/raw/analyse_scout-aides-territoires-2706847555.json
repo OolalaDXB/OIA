@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for the funding. It mentions support for judicial cooperation and access to justice but does not clarify eligibility criteria for applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent faire une demande de financement. Il mentionne le soutien à la coopération judiciaire et l'accès à la justice, mais ne clarifie pas les critères d'éligibilité des demandeurs."
+      "en": "The extracted text does not specify which types of organisations may apply for the funding. It mentions support for 'citizens and businesses' but does not clarify if associations are eligible.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au financement. Il mentionne un soutien pour les 'citoyens et les entreprises' mais ne clarifie pas si les associations sont éligibles."
     },
     "nextAction": {
-      "en": "Check the full call for proposals or programme guidelines to determine which types of organisations are eligible to apply.",
-      "fr": "Consulter l'appel à projets complet ou les directives du programme pour déterminer quels types d'organisations sont éligibles."
+      "en": "Check the full call for proposals or programme guidelines to confirm whether associations are eligible to apply.",
+      "fr": "Consulter l'appel à projets complet ou les lignes directrices du programme pour confirmer si les associations peuvent postuler."
     }
   }
 }

@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for the MIE grant. It only describes the scope of the mechanism.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à la subvention MIE. Il décrit uniquement le champ d'application du mécanisme."
+      "en": "The extracted text does not specify which types of organisations may apply for the MIE grant. There is no mention of eligibility criteria for applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à la subvention MIE. Il n'y a aucune mention des critères d'éligibilité pour les candidats."
     },
     "nextAction": {
-      "en": "Check the full call for proposals or the MIE programme guidelines to determine eligible applicants.",
-      "fr": "Consulter l'appel à propositions complet ou les lignes directrices du programme MIE pour déterminer les candidats éligibles."
+      "en": "Check the official MIE grant documentation or website to find the eligibility criteria for applicants.",
+      "fr": "Consulter la documentation officielle ou le site web de la subvention MIE pour trouver les critères d'éligibilité des candidats."
     }
   }
 }

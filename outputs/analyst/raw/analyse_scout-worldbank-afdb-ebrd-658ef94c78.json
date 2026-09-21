@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "MAITRISE D’ŒUVRE (SUIVI ET CONTROLE TECHNIQUE) DES TRAVAUX D’INFRASTRUCTURES SOCIOECONOMIQUES",
+    "reason": {
+      "en": "The opportunity explicitly targets technical supervision and control of socio-economic infrastructure works, which does not align with the organization's focus on advisory for padel club development in underserved markets.",
+      "fr": "L'opportunité cible explicitement la maîtrise d'œuvre et le contrôle technique des travaux d'infrastructures socioéconomiques, ce qui ne correspond pas à l'activité de l'organisation centrée sur le conseil pour le développement de clubs de padel dans des marchés mal desservis."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that specifically support sports infrastructure or advisory services in underserved markets.",
+      "fr": "Consulter d'autres opportunités de financement qui soutiennent spécifiquement les infrastructures sportives ou les services de conseil dans les marchés mal desservis."
+    }
+  }
+}

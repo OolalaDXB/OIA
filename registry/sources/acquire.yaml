@@ -9,7 +9,7 @@ kinds: ["ACQUISITION"]
 geographies: ["GLOBAL"]
 url: "https://acquire.com"
 urlVerified: true
-lastUrlCheck: "2026-09-16"
+lastUrlCheck: "2026-09-21"
 status: BLOCKED
 access:
   mode: SCRAPE

@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for the EU4Health programme. It only describes the programme's scope and objectives.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au programme EU4Health. Il décrit uniquement le champ d'application et les objectifs du programme."
+      "en": "The extracted text does not specify which types of organisations may apply for the EU4Health programme. It only describes the scope and purpose of the programme.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au programme EU4Health. Il décrit uniquement le champ d'application et l'objectif du programme."
     },
     "nextAction": {
-      "en": "Check the official EU4Health call for proposals or programme guidelines to determine eligible applicants.",
-      "fr": "Consulter l'appel à propositions officiel ou les lignes directrices du programme EU4Health pour déterminer les candidats éligibles."
+      "en": "Check the official EU4Health programme documentation or contact the issuer (beta.gouv.fr or the European Commission) to confirm eligibility criteria for applicants.",
+      "fr": "Consulter la documentation officielle du programme EU4Health ou contacter l'émetteur (beta.gouv.fr ou la Commission européenne) pour confirmer les critères d'éligibilité des candidats."
     }
   }
 }

@@ -1,14 +1,16 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NEEDS_INFO",
-    "citation": [],
+    "verdict": "NOT_ELIGIBLE",
+    "citations": [
+      "EIT Manufacturing a pour objectif de faire de l'Europe le leader de l'innovation industrielle internationale, grâce à son large écosystème d'acteurs de l'industrie."
+    ],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement."
+      "en": "The opportunity explicitly targets industrial innovation actors, while 'Les Vieilles Pierres' is a heritage hiking association with no recorded industrial or manufacturing focus.",
+      "fr": "L'opportunité cible explicitement les acteurs de l'innovation industrielle, alors que 'Les Vieilles Pierres' est une association de randonnée patrimoniale sans lien enregistré avec l'industrie ou la fabrication."
     },
     "nextAction": {
-      "en": "Contact the issuer (beta.gouv.fr) to ask which legal entities are eligible to apply.",
-      "fr": "Contacter l'émetteur (beta.gouv.fr) pour demander quelles entités légales sont éligibles à postuler."
+      "en": "Review other funding opportunities aligned with heritage, culture, or tourism sectors.",
+      "fr": "Consulter d'autres opportunités de financement adaptées aux secteurs du patrimoine, de la culture ou du tourisme."
     }
   }
 }

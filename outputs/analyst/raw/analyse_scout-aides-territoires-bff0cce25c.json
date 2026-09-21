@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citation": "le programme accompagnera les acteurs de la montagne (collectivités, acteurs socio-économiques)",
+    "citation": "le programme accompagnera les acteurs de la montagne (collectivités, acteurs socio-économiques) dans le développement économique, la préservation de leur patrimoine naturel et l’adaptation nécessaire au changement climatique.",
     "reason": {
-      "en": "The opportunity explicitly targets actors in mountainous regions, while 'Les Vieilles Pierres' operates in Bretagne, which is not a mountainous area.",
-      "fr": "L'opportunité cible explicitement les acteurs des zones de montagne, alors que 'Les Vieilles Pierres' opère en Bretagne, une région non montagneuse."
+      "en": "The opportunity explicitly targets actors in mountainous regions ('acteurs de la montagne'), while the organisation operates in Bretagne, which is not a mountainous area.",
+      "fr": "L'opportunité cible explicitement les acteurs des zones de montagne ('acteurs de la montagne'), alors que l'organisation opère en Bretagne, une région non montagneuse."
     },
     "nextAction": {
-      "en": "Verify if the association has any activities or projects specifically located in mountainous regions of France.",
-      "fr": "Vérifier si l'association mène des activités ou projets spécifiquement situés dans des zones montagneuses en France."
+      "en": "Review other funding opportunities that support heritage or tourism projects in non-mountainous regions.",
+      "fr": "Examiner d'autres opportunités de financement qui soutiennent des projets patrimoniaux ou touristiques dans des régions non montagneuses."
     }
   }
 }

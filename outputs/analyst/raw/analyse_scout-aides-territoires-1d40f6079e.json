@@ -1,14 +1,16 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NEEDS_INFO",
-    "citations": [],
+    "verdict": "LIKELY",
+    "citations": [
+      "Leader (pour Liaison entre actions de développement de l'économie rurale) est une initiative de l'Union européenne pour soutenir des projets de développement rural lancés au niveau local afin de revitaliser les zones rurales et de créer des emplois."
+    ],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for the FEADER Leader funding. It only describes the scope of the initiative.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent demander le financement FEADER Leader. Il décrit uniquement le champ d'application de l'initiative."
+      "en": "The opportunity supports rural development projects, which could include heritage and tourism initiatives like those of 'Les Vieilles Pierres.' However, the extracted text does not specify whether associations are explicitly eligible to apply.",
+      "fr": "L'opportunité soutient des projets de développement rural, ce qui pourrait inclure des initiatives patrimoniales et touristiques comme celles de 'Les Vieilles Pierres.' Cependant, le texte extrait ne précise pas si les associations sont explicitement éligibles pour postuler."
     },
     "nextAction": {
-      "en": "Contact the issuer (beta.gouv.fr or the relevant French state authority) to ask which legal entities are eligible to apply for this funding opportunity.",
-      "fr": "Contacter l'émetteur (beta.gouv.fr ou l'autorité compétente de l'État français) pour demander quelles entités juridiques sont éligibles à cette opportunité de financement."
+      "en": "Check the official FEADER documentation or contact the issuer to confirm whether associations are eligible to apply for this funding.",
+      "fr": "Consulter la documentation officielle du FEADER ou contacter l'émetteur pour confirmer si les associations sont éligibles à ce financement."
     }
   }
 }

@@ -1,14 +1,16 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citation": [],
+    "citations": [
+      "The opportunity text does not specify which types of organisations may apply or any eligibility criteria beyond the scope of the required deliverables (Microsoft license management software and related services)."
+    ],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of legal form, geographic restrictions, or other criteria that would confirm or exclude BAWABA.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles. Il n'y a aucune mention de la forme juridique, des restrictions géographiques ou d'autres critères qui confirmeraient ou excluraient BAWABA."
+      "en": "The document does not state who is eligible to apply for this tender. There is no mention of permitted applicant types, legal structures, or geographic restrictions beyond the delivery scope for Saarland and Saarlouis.",
+      "fr": "Le document ne précise pas qui peut déposer une candidature pour cet appel d'offres. Il n'y a aucune mention des types d'organisations autorisées, des structures juridiques ou des restrictions géographiques, en dehors de la portée de la livraison pour la Sarre et le Landkreis de Saarlouis."
     },
     "nextAction": {
-      "en": "Contact the buyer (IT-Dienstleistungszentrum Saarland) to ask for the full tender documents and clarify the eligibility criteria.",
-      "fr": "Contacter l'acheteur (IT-Dienstleistungszentrum Saarland) pour demander les documents complets de l'appel d'offres et clarifier les critères d'éligibilité."
+      "en": "Contact the buyer (IT-Dienstleistungszentrum Saarland) to confirm whether non-German entities, private companies, or specialised software providers like BAWABA are permitted to submit a bid.",
+      "fr": "Contacter l'acheteur (IT-Dienstleistungszentrum Saarland) pour confirmer si des entités non allemandes, des entreprises privées ou des fournisseurs spécialisés comme BAWABA sont autorisés à soumettre une offre."
     }
   }
 }

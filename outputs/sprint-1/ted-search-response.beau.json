@@ -2,141 +2,6 @@
   "notices": [
     {
       "notice-type": "cn-standard",
-      "publication-number": "421586-2026",
-      "classification-cpv": [
-        "71300000",
-        "66171000",
-        "71316000",
-        "71318000",
-        "71300000",
-        "66171000",
-        "71316000",
-        "71318000"
-      ],
-      "buyer-name": {
-        "fra": [
-          "Syndicat Mixte Périgord Numérique"
-        ]
-      },
-      "publication-date": "2026-06-19+02:00",
-      "links": {
-        "xml": {
-          "MUL": "https://ted.europa.eu/en/notice/421586-2026/xml"
-        },
-        "pdf": {
-          "BUL": "https://ted.europa.eu/bg/notice/421586-2026/pdf",
-          "SPA": "https://ted.europa.eu/es/notice/421586-2026/pdf",
-          "CES": "https://ted.europa.eu/cs/notice/421586-2026/pdf",
-          "DAN": "https://ted.europa.eu/da/notice/421586-2026/pdf",
-          "DEU": "https://ted.europa.eu/de/notice/421586-2026/pdf",
-          "EST": "https://ted.europa.eu/et/notice/421586-2026/pdf",
-          "ELL": "https://ted.europa.eu/el/notice/421586-2026/pdf",
-          "ENG": "https://ted.europa.eu/en/notice/421586-2026/pdf",
-          "FRA": "https://ted.europa.eu/fr/notice/421586-2026/pdf",
-          "GLE": "https://ted.europa.eu/ga/notice/421586-2026/pdf",
-          "HRV": "https://ted.europa.eu/hr/notice/421586-2026/pdf",
-          "ITA": "https://ted.europa.eu/it/notice/421586-2026/pdf",
-          "LAV": "https://ted.europa.eu/lv/notice/421586-2026/pdf",
-          "LIT": "https://ted.europa.eu/lt/notice/421586-2026/pdf",
-          "HUN": "https://ted.europa.eu/hu/notice/421586-2026/pdf",
-          "MLT": "https://ted.europa.eu/mt/notice/421586-2026/pdf",
-          "NLD": "https://ted.europa.eu/nl/notice/421586-2026/pdf",
-          "POL": "https://ted.europa.eu/pl/notice/421586-2026/pdf",
-          "POR": "https://ted.europa.eu/pt/notice/421586-2026/pdf",
-          "RON": "https://ted.europa.eu/ro/notice/421586-2026/pdf",
-          "SLK": "https://ted.europa.eu/sk/notice/421586-2026/pdf",
-          "SLV": "https://ted.europa.eu/sl/notice/421586-2026/pdf",
-          "FIN": "https://ted.europa.eu/fi/notice/421586-2026/pdf",
-          "SWE": "https://ted.europa.eu/sv/notice/421586-2026/pdf"
-        },
-        "pdfs": {
-          "FRA": "https://ted.europa.eu/fr/notice/421586-2026/pdfs"
-        },
-        "html": {
-          "BUL": "https://ted.europa.eu/bg/notice/-/detail/421586-2026",
-          "SPA": "https://ted.europa.eu/es/notice/-/detail/421586-2026",
-          "CES": "https://ted.europa.eu/cs/notice/-/detail/421586-2026",
-          "DAN": "https://ted.europa.eu/da/notice/-/detail/421586-2026",
-          "DEU": "https://ted.europa.eu/de/notice/-/detail/421586-2026",
-          "EST": "https://ted.europa.eu/et/notice/-/detail/421586-2026",
-          "ELL": "https://ted.europa.eu/el/notice/-/detail/421586-2026",
-          "ENG": "https://ted.europa.eu/en/notice/-/detail/421586-2026",
-          "FRA": "https://ted.europa.eu/fr/notice/-/detail/421586-2026",
-          "GLE": "https://ted.europa.eu/ga/notice/-/detail/421586-2026",
-          "HRV": "https://ted.europa.eu/hr/notice/-/detail/421586-2026",
-          "ITA": "https://ted.europa.eu/it/notice/-/detail/421586-2026",
-          "LAV": "https://ted.europa.eu/lv/notice/-/detail/421586-2026",
-          "LIT": "https://ted.europa.eu/lt/notice/-/detail/421586-2026",
-          "HUN": "https://ted.europa.eu/hu/notice/-/detail/421586-2026",
-          "MLT": "https://ted.europa.eu/mt/notice/-/detail/421586-2026",
-          "NLD": "https://ted.europa.eu/nl/notice/-/detail/421586-2026",
-          "POL": "https://ted.europa.eu/pl/notice/-/detail/421586-2026",
-          "POR": "https://ted.europa.eu/pt/notice/-/detail/421586-2026",
-          "RON": "https://ted.europa.eu/ro/notice/-/detail/421586-2026",
-          "SLK": "https://ted.europa.eu/sk/notice/-/detail/421586-2026",
-          "SLV": "https://ted.europa.eu/sl/notice/-/detail/421586-2026",
-          "FIN": "https://ted.europa.eu/fi/notice/-/detail/421586-2026",
-          "SWE": "https://ted.europa.eu/sv/notice/-/detail/421586-2026"
-        },
-        "htmlDirect": {
-          "BUL": "https://ted.europa.eu/bg/notice/421586-2026/html",
-          "SPA": "https://ted.europa.eu/es/notice/421586-2026/html",
-          "CES": "https://ted.europa.eu/cs/notice/421586-2026/html",
-          "DAN": "https://ted.europa.eu/da/notice/421586-2026/html",
-          "DEU": "https://ted.europa.eu/de/notice/421586-2026/html",
-          "EST": "https://ted.europa.eu/et/notice/421586-2026/html",
-          "ELL": "https://ted.europa.eu/el/notice/421586-2026/html",
-          "ENG": "https://ted.europa.eu/en/notice/421586-2026/html",
-          "FRA": "https://ted.europa.eu/fr/notice/421586-2026/html",
-          "GLE": "https://ted.europa.eu/ga/notice/421586-2026/html",
-          "HRV": "https://ted.europa.eu/hr/notice/421586-2026/html",
-          "ITA": "https://ted.europa.eu/it/notice/421586-2026/html",
-          "LAV": "https://ted.europa.eu/lv/notice/421586-2026/html",
-          "LIT": "https://ted.europa.eu/lt/notice/421586-2026/html",
-          "HUN": "https://ted.europa.eu/hu/notice/421586-2026/html",
-          "MLT": "https://ted.europa.eu/mt/notice/421586-2026/html",
-          "NLD": "https://ted.europa.eu/nl/notice/421586-2026/html",
-          "POL": "https://ted.europa.eu/pl/notice/421586-2026/html",
-          "POR": "https://ted.europa.eu/pt/notice/421586-2026/html",
-          "RON": "https://ted.europa.eu/ro/notice/421586-2026/html",
-          "SLK": "https://ted.europa.eu/sk/notice/421586-2026/html",
-          "SLV": "https://ted.europa.eu/sl/notice/421586-2026/html",
-          "FIN": "https://ted.europa.eu/fi/notice/421586-2026/html",
-          "SWE": "https://ted.europa.eu/sv/notice/421586-2026/html"
-        }
-      },
-      "notice-title": {
-        "hun": "Franciaország – Mérnöki szolgáltatások – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "lav": "Francija – Inženiertehniskie pakalpojumi – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "swe": "Frankrike – Ingenjörstjänster – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "gle": "An Fhrainc – Engineering services – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "ell": "Γαλλία – Υπηρεσίες μηχανικού – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "spa": "Francia – Servicios de ingeniería – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "est": "Prantsusmaa – Insener-tehnilised teenused – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "nld": "Frankrijk – Dienstverlening door ingenieurs – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "fin": "Ranska – Insinööripalvelut – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "pol": "Francja – Usługi inżynieryjne – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "hrv": "Francuska – Tehničke usluge – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "ces": "Francie – Technicko-inženýrské služby – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "dan": "Frankrig – Ingeniørvirksomhed – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "ron": "Franţa – Servicii de inginerie – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "por": "França – Serviços de engenharia – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "slk": "Francúzsko – Inžinierske služby – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "fra": "France – Services d'ingénierie – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "mlt": "Franza – Servizzi ta' l-inġinerija – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "deu": "Frankreich – Dienstleistungen von Ingenieurbüros – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "lit": "Prancūzija – Inžinerijos paslaugos – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "ita": "Francia – Servizi di ingegneria – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "bul": "Фpaнция – Инженерни услуги в строителството – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "slv": "Francija – Inženirske storitve – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne",
-        "eng": "France – Engineering services – Accord-cadre à bons de commande de Fourniture de Service : prestations intellectuelles - Assistance à Maîtrise d'Ouvrage technique, stratégique, financière et juridique, relatives à l'aménagement numérique sur le département de la Dordogne"
-      },
-      "buyer-country": [
-        "FRA"
-      ]
-    },
-    {
-      "notice-type": "cn-standard",
       "publication-number": "435008-2026",
       "classification-cpv": [
         "66171000",
@@ -1764,6 +1629,141 @@
       },
       "buyer-country": [
         "FRA"
+      ]
+    },
+    {
+      "notice-type": "cn-standard",
+      "publication-number": "648578-2026",
+      "classification-cpv": [
+        "66171000",
+        "66500000",
+        "66171000",
+        "66171000"
+      ],
+      "buyer-name": {
+        "fra": [
+          "EDF SA"
+        ]
+      },
+      "publication-date": "2026-09-21+02:00",
+      "links": {
+        "xml": {
+          "MUL": "https://ted.europa.eu/en/notice/648578-2026/xml"
+        },
+        "pdf": {
+          "BUL": "https://ted.europa.eu/bg/notice/648578-2026/pdf",
+          "SPA": "https://ted.europa.eu/es/notice/648578-2026/pdf",
+          "CES": "https://ted.europa.eu/cs/notice/648578-2026/pdf",
+          "DAN": "https://ted.europa.eu/da/notice/648578-2026/pdf",
+          "DEU": "https://ted.europa.eu/de/notice/648578-2026/pdf",
+          "EST": "https://ted.europa.eu/et/notice/648578-2026/pdf",
+          "ELL": "https://ted.europa.eu/el/notice/648578-2026/pdf",
+          "ENG": "https://ted.europa.eu/en/notice/648578-2026/pdf",
+          "FRA": "https://ted.europa.eu/fr/notice/648578-2026/pdf",
+          "GLE": "https://ted.europa.eu/ga/notice/648578-2026/pdf",
+          "HRV": "https://ted.europa.eu/hr/notice/648578-2026/pdf",
+          "ITA": "https://ted.europa.eu/it/notice/648578-2026/pdf",
+          "LAV": "https://ted.europa.eu/lv/notice/648578-2026/pdf",
+          "LIT": "https://ted.europa.eu/lt/notice/648578-2026/pdf",
+          "HUN": "https://ted.europa.eu/hu/notice/648578-2026/pdf",
+          "MLT": "https://ted.europa.eu/mt/notice/648578-2026/pdf",
+          "NLD": "https://ted.europa.eu/nl/notice/648578-2026/pdf",
+          "POL": "https://ted.europa.eu/pl/notice/648578-2026/pdf",
+          "POR": "https://ted.europa.eu/pt/notice/648578-2026/pdf",
+          "RON": "https://ted.europa.eu/ro/notice/648578-2026/pdf",
+          "SLK": "https://ted.europa.eu/sk/notice/648578-2026/pdf",
+          "SLV": "https://ted.europa.eu/sl/notice/648578-2026/pdf",
+          "FIN": "https://ted.europa.eu/fi/notice/648578-2026/pdf",
+          "SWE": "https://ted.europa.eu/sv/notice/648578-2026/pdf"
+        },
+        "pdfs": {
+          "FRA": "https://ted.europa.eu/fr/notice/648578-2026/pdfs"
+        },
+        "html": {
+          "BUL": "https://ted.europa.eu/bg/notice/-/detail/648578-2026",
+          "SPA": "https://ted.europa.eu/es/notice/-/detail/648578-2026",
+          "CES": "https://ted.europa.eu/cs/notice/-/detail/648578-2026",
+          "DAN": "https://ted.europa.eu/da/notice/-/detail/648578-2026",
+          "DEU": "https://ted.europa.eu/de/notice/-/detail/648578-2026",
+          "EST": "https://ted.europa.eu/et/notice/-/detail/648578-2026",
+          "ELL": "https://ted.europa.eu/el/notice/-/detail/648578-2026",
+          "ENG": "https://ted.europa.eu/en/notice/-/detail/648578-2026",
+          "FRA": "https://ted.europa.eu/fr/notice/-/detail/648578-2026",
+          "GLE": "https://ted.europa.eu/ga/notice/-/detail/648578-2026",
+          "HRV": "https://ted.europa.eu/hr/notice/-/detail/648578-2026",
+          "ITA": "https://ted.europa.eu/it/notice/-/detail/648578-2026",
+          "LAV": "https://ted.europa.eu/lv/notice/-/detail/648578-2026",
+          "LIT": "https://ted.europa.eu/lt/notice/-/detail/648578-2026",
+          "HUN": "https://ted.europa.eu/hu/notice/-/detail/648578-2026",
+          "MLT": "https://ted.europa.eu/mt/notice/-/detail/648578-2026",
+          "NLD": "https://ted.europa.eu/nl/notice/-/detail/648578-2026",
+          "POL": "https://ted.europa.eu/pl/notice/-/detail/648578-2026",
+          "POR": "https://ted.europa.eu/pt/notice/-/detail/648578-2026",
+          "RON": "https://ted.europa.eu/ro/notice/-/detail/648578-2026",
+          "SLK": "https://ted.europa.eu/sk/notice/-/detail/648578-2026",
+          "SLV": "https://ted.europa.eu/sl/notice/-/detail/648578-2026",
+          "FIN": "https://ted.europa.eu/fi/notice/-/detail/648578-2026",
+          "SWE": "https://ted.europa.eu/sv/notice/-/detail/648578-2026"
+        },
+        "htmlDirect": {
+          "BUL": "https://ted.europa.eu/bg/notice/648578-2026/html",
+          "SPA": "https://ted.europa.eu/es/notice/648578-2026/html",
+          "CES": "https://ted.europa.eu/cs/notice/648578-2026/html",
+          "DAN": "https://ted.europa.eu/da/notice/648578-2026/html",
+          "DEU": "https://ted.europa.eu/de/notice/648578-2026/html",
+          "EST": "https://ted.europa.eu/et/notice/648578-2026/html",
+          "ELL": "https://ted.europa.eu/el/notice/648578-2026/html",
+          "ENG": "https://ted.europa.eu/en/notice/648578-2026/html",
+          "FRA": "https://ted.europa.eu/fr/notice/648578-2026/html",
+          "GLE": "https://ted.europa.eu/ga/notice/648578-2026/html",
+          "HRV": "https://ted.europa.eu/hr/notice/648578-2026/html",
+          "ITA": "https://ted.europa.eu/it/notice/648578-2026/html",
+          "LAV": "https://ted.europa.eu/lv/notice/648578-2026/html",
+          "LIT": "https://ted.europa.eu/lt/notice/648578-2026/html",
+          "HUN": "https://ted.europa.eu/hu/notice/648578-2026/html",
+          "MLT": "https://ted.europa.eu/mt/notice/648578-2026/html",
+          "NLD": "https://ted.europa.eu/nl/notice/648578-2026/html",
+          "POL": "https://ted.europa.eu/pl/notice/648578-2026/html",
+          "POR": "https://ted.europa.eu/pt/notice/648578-2026/html",
+          "RON": "https://ted.europa.eu/ro/notice/648578-2026/html",
+          "SLK": "https://ted.europa.eu/sk/notice/648578-2026/html",
+          "SLV": "https://ted.europa.eu/sl/notice/648578-2026/html",
+          "FIN": "https://ted.europa.eu/fi/notice/648578-2026/html",
+          "SWE": "https://ted.europa.eu/sv/notice/648578-2026/html"
+        }
+      },
+      "notice-title": {
+        "hun": "Franciaország – Pénzügyi tanácsadó szolgáltatások – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "lav": "Francija – Finanšu konsultāciju pakalpojumi – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "swe": "Frankrike – Finansiell rådgivning – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "gle": "An Fhrainc – Financial consultancy services – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "ell": "Γαλλία – Υπηρεσίες παροχής οικονομικών συμβουλών – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "spa": "Francia – Servicios de asesoramiento financiero – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "est": "Prantsusmaa – Finantskonsultatsiooniteenused – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "nld": "Frankrijk – Diensten voor financieel advies – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "fin": "Ranska – Rahoitusneuvonta – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "pol": "Francja – Doradztwo finansowe – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "hrv": "Francuska – Usluge financijskog savjetovanja – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "ces": "Francie – Finanční poradenství – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "dan": "Frankrig – Finansielle konsulentydelser – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "ron": "Franţa – Servicii de consultanţă financiară – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "por": "França – Serviços de consultoria financeira – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "slk": "Francúzsko – Finančné poradenstvo – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "fra": "France – Services de conseils financiers – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "mlt": "Franza – Servizzi ta' konsulenza finanzjarja – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "deu": "Frankreich – Finanzberatung – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "lit": "Prancūzija – Finansų konsultacinės paslaugos – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "ita": "Francia – Servizi di consulenza finanziaria – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "bul": "Фpaнция – Финансови консултантски услуги – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "slv": "Francija – Storitve finančnega svetovanja – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite",
+        "eng": "France – Financial consultancy services – Accord-Cadre pour du conseil fiscal expatriés et réalisation de bilans retraite"
+      },
+      "buyer-country": [
+        "FRA"
+      ],
+      "deadline": [
+        "2026-10-05T16:00:00+02:00",
+        "2026-10-05T16:00:00+02:00"
       ]
     }
   ],

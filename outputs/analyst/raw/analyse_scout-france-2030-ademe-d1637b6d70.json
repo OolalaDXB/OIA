@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NEEDS_INFO",
-    "citations": [],
+    "verdict": "ELIGIBLE",
+    "citation": "eligibility: Entreprises, associations",
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply. There is no mention of eligibility criteria for applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité pour les candidats."
+      "en": "The opportunity explicitly lists 'Entreprises' (companies) as eligible applicants. BAWABA operates as a company in the EU and France, which aligns with the eligibility criteria.",
+      "fr": "L'opportunité mentionne explicitement que les 'Entreprises' sont éligibles. BAWABA opère en tant qu'entreprise dans l'UE et en France, ce qui correspond aux critères d'éligibilité."
     },
     "nextAction": {
-      "en": "Check the full call for projects document or the ADEME website to find the eligibility criteria for applicants.",
-      "fr": "Consulter le document complet de l'appel à projets ou le site de l'ADEME pour trouver les critères d'éligibilité des candidats."
+      "en": "Confirm the legal entity type of BAWABA (e.g., SAS, SARL) to ensure it qualifies as an 'Entreprise' under French law.",
+      "fr": "Vérifier le type d'entité juridique de BAWABA (par exemple, SAS, SARL) pour s'assurer qu'elle est bien considérée comme une 'Entreprise' selon le droit français."
     }
   }
 }

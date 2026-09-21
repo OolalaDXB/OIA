@@ -37,6 +37,12 @@ I AM A STARTUP
 I AM AN INVESTOR
 I AM A TALENT
 What's Happening?
+BLOG
+HUB71 STARTUP SYNAPSE ANALYTICS RAISES USD 13 MILLION TO SCALE AI POWERED DECISIONING FOR FINANCIAL INSTITUTIONS
+21
+Sep
+, 2026
+VIEW MORE
 PRESS RELEASE
 HUB71 EXPANDS INITIATE PROGRAMME AFTER ALMOST 5500 FOUNDERS REGISTER FOR EARLY-STAGE STARTUP SUPPORT
 26
@@ -46,12 +52,6 @@ VIEW MORE
 BLOG
 THE HARDEST THING ABOUT EARLY CHILDHOOD TECH ISN’T THE TECHNOLOGY
 25
-Aug
-, 2026
-VIEW MORE
-BLOG
-FROM INTRODUCTION TO CLINICAL TRIAL: HOW HUB71 CONNECTS INNOVATION TO ABU DHABI’S HEALTH AND LIFE SCIENCES ECOSYSTEM
-10
 Aug
 , 2026
 VIEW MORE
@@ -149,13 +149,13 @@ nationalities
 sectors
 SOME OF OUR STARTUPS:
 
-Smart Navigation Systems provides innovative location based solutions
-
-Lune is an AI-driven engagement and hyper-personalization platform for banks, built on insights from over 1 billion transactions. Our Transaction Enrichment API transforms raw transaction data into actionable insights, powering our core products: Enrichment, Personal Finance Engagement (PFE) SDK, Insights Dashboard, and Smart Nudges. (Supports Arabic transliteration)
-
-A community-based platform in outer space with blockchain technology
-
 We are currently on the Polygon (Matic) Network, which is an Ethereum-compatible blockchain network.
+
+Algocyte is the first Self-Monitoring Blood Count home device based on AI
+
+Mashvisor is a platform that combines all services needed for real estate investing, cutting three months’ worth of research down to only 15 minutes.
+
+Dapio Tap to Pay transforms the way you get paid
 
 ALL STARTUPS
 Our community says

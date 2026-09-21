@@ -1,14 +1,16 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citation": "scope: Hub71+ Life Sciences is Abu Dhabi’s specialist ecosystem driving innovation across biotechnology, MedTech, and digital health.",
+    "citations": [
+      "Hub71+ Life Sciences is Abu Dhabi’s specialist ecosystem driving innovation across biotechnology, MedTech, and digital health."
+    ],
     "reason": {
-      "en": "The opportunity explicitly targets 'biotechnology, MedTech, and digital health' sectors. BAWABA operates in AI, data, cybersecurity, and software, with no mention of biotechnology, MedTech, or digital health in its core activities.",
-      "fr": "L'opportunité cible explicitement les secteurs de la 'biotechnologie, MedTech et santé numérique'. BAWABA opère dans les domaines de l'IA, des données, de la cybersécurité et des logiciels, sans mention de la biotechnologie, MedTech ou santé numérique dans ses activités principales."
+      "en": "The opportunity explicitly targets organisations innovating in biotechnology, MedTech, and digital health. BAWABA operates in AI, data, cybersecurity, and software, with no mention of biotechnology, MedTech, or digital health in its core activities.",
+      "fr": "L'opportunité cible explicitement les organisations innovant dans les domaines de la biotechnologie, des technologies médicales (MedTech) et de la santé numérique. BAWABA opère dans les secteurs de l'IA, des données, de la cybersécurité et des logiciels, sans mention de la biotechnologie, des MedTech ou de la santé numérique dans ses activités principales."
     },
     "nextAction": {
-      "en": "Review other funding opportunities that explicitly include AI, data, or cybersecurity in healthcare or regulated industries.",
-      "fr": "Examiner d'autres opportunités de financement qui incluent explicitement l'IA, les données ou la cybersécurité dans le domaine de la santé ou des industries réglementées."
+      "en": "Review other funding opportunities that explicitly include AI, data, or cybersecurity for regulated industries.",
+      "fr": "Examiner d'autres opportunités de financement qui incluent explicitement l'IA, les données ou la cybersécurité pour les industries réglementées."
     }
   }
 }

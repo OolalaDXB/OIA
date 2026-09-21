@@ -1,498 +1,6 @@
 {
-  "generatedAt": "2026-09-16T21:12:40.380Z",
+  "generatedAt": "2026-09-21T12:22:06.207Z",
   "found": [
-    {
-      "title": "Industries des véhicules intelligents et autonomes (SAVI)",
-      "issuer": "ADIO",
-      "kind": "GRANT",
-      "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/savi",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "",
-      "quote": "Une nouvelle ère de mobilité intelligente",
-      "sourceId": "adio",
-      "contentHash": "d1fec551d3674f0ac2cc7b60cda3d9c9dcbe08328eca47cdd329618fb2f507b7",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-adio-d1fec551d367",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/savi"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "scope",
-          "normalizedValue": "Une nouvelle ère de mobilité intelligente",
-          "originalSourceText": "Une nouvelle ère de mobilité intelligente"
-        }
-      ]
-    },
-    {
-      "title": "Croissance agroalimentaire et abondance en eau (AGWA)",
-      "issuer": "ADIO",
-      "kind": "GRANT",
-      "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/agwa",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "",
-      "quote": "Cultiver l’avenir de l’alimentation et de l’eau",
-      "sourceId": "adio",
-      "contentHash": "d1fec551d3674f0ac2cc7b60cda3d9c9dcbe08328eca47cdd329618fb2f507b7",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-adio-d1fec551d367",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/agwa"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "scope",
-          "normalizedValue": "Cultiver l’avenir de l’alimentation et de l’eau",
-          "originalSourceText": "Cultiver l’avenir de l’alimentation et de l’eau"
-        }
-      ]
-    },
-    {
-      "title": "Santé, endurance, longévité et médecine (HELM)",
-      "issuer": "ADIO",
-      "kind": "GRANT",
-      "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/helm",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "",
-      "quote": "Propulser la prochaine ère des sciences de la vie",
-      "sourceId": "adio",
-      "contentHash": "d1fec551d3674f0ac2cc7b60cda3d9c9dcbe08328eca47cdd329618fb2f507b7",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-adio-d1fec551d367",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/helm"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "scope",
-          "normalizedValue": "Propulser la prochaine ère des sciences de la vie",
-          "originalSourceText": "Propulser la prochaine ère des sciences de la vie"
-        }
-      ]
-    },
-    {
-      "title": "Fintech, assurance, numérique et actifs alternatifs (FIDA)",
-      "issuer": "ADIO",
-      "kind": "GRANT",
-      "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/fida",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "",
-      "quote": "Construire l’avenir de la finance mondiale depuis Abou Dhabi",
-      "sourceId": "adio",
-      "contentHash": "d1fec551d3674f0ac2cc7b60cda3d9c9dcbe08328eca47cdd329618fb2f507b7",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-adio-d1fec551d367",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/fida"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "scope",
-          "normalizedValue": "Construire l’avenir de la finance mondiale depuis Abou Dhabi",
-          "originalSourceText": "Construire l’avenir de la finance mondiale depuis Abou Dhabi"
-        }
-      ]
-    },
-    {
-      "title": "Partenariats public-privé",
-      "issuer": "ADIO",
-      "kind": "CONSORTIUM_CALL",
-      "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/public-private-partnerships",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "",
-      "quote": "Des contrats de long terme qui réalisent des actifs publics avec des partenaires du secteur privé",
-      "sourceId": "adio",
-      "contentHash": "d1fec551d3674f0ac2cc7b60cda3d9c9dcbe08328eca47cdd329618fb2f507b7",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-adio-d1fec551d367",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.investwithabudhabi.com/fr/where-to-invest/public-private-partnerships"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "scope",
-          "normalizedValue": "Des contrats de long terme qui réalisent des actifs publics avec des partenaires du secteur privé",
-          "originalSourceText": "Des contrats de long terme qui réalisent des actifs publics avec des partenaires du secteur privé"
-        }
-      ]
-    },
-    {
-      "title": "Développement du commerce et de l’industrie",
-      "issuer": "ADIO",
-      "kind": "GRANT",
-      "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "",
-      "quote": "Stratégie industrielle, facilitation du commerce et promotion des exportations réunies sur une seule plateforme",
-      "sourceId": "adio",
-      "contentHash": "d1fec551d3674f0ac2cc7b60cda3d9c9dcbe08328eca47cdd329618fb2f507b7",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-adio-d1fec551d367",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "scope",
-          "normalizedValue": "Stratégie industrielle, facilitation du commerce et promotion des exportations réunies sur une seule plateforme",
-          "originalSourceText": "Stratégie industrielle, facilitation du commerce et promotion des exportations réunies sur une seule plateforme"
-        }
-      ]
-    },
-    {
-      "title": "Programmes de soutien (Trade & Industry)",
-      "issuer": "ADIO",
-      "kind": "GRANT",
-      "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry/support-programmes",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "",
-      "quote": "",
-      "sourceId": "adio",
-      "contentHash": "d1fec551d3674f0ac2cc7b60cda3d9c9dcbe08328eca47cdd329618fb2f507b7",
-      "facts": []
-    },
-    {
-      "title": "Accès au capital (Trade & Industry)",
-      "issuer": "ADIO",
-      "kind": "GRANT",
-      "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry/support-programmes#access-to-capital",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "",
-      "quote": "",
-      "sourceId": "adio",
-      "contentHash": "d1fec551d3674f0ac2cc7b60cda3d9c9dcbe08328eca47cdd329618fb2f507b7",
-      "facts": []
-    },
-    {
-      "title": "Référent unique (One-stop shop)",
-      "issuer": "ADIO",
-      "kind": "GRANT",
-      "sourceUrl": "https://www.investwithabudhabi.com/fr",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "",
-      "quote": "Un référent unique coordonne licences, terrains, réseaux et autorisations auprès des entités publiques : un seul dossier, un seul fil.",
-      "sourceId": "adio",
-      "contentHash": "d1fec551d3674f0ac2cc7b60cda3d9c9dcbe08328eca47cdd329618fb2f507b7",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-adio-d1fec551d367",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.investwithabudhabi.com/fr"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "scope",
-          "normalizedValue": "Un référent unique coordonne licences, terrains, réseaux et autorisations auprès des entités publiques : un seul dossier, un seul fil.",
-          "originalSourceText": "Un référent unique coordonne licences, terrains, réseaux et autorisations auprès des entités publiques : un seul dossier, un seul fil."
-        }
-      ]
-    },
-    {
-      "title": "Accompagnement pensé pour votre projet",
-      "issuer": "ADIO",
-      "kind": "GRANT",
-      "sourceUrl": "https://www.investwithabudhabi.com/fr",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "",
-      "quote": "Les programmes de soutien s’articulent autour de votre projet, sans catalogue imposé.",
-      "sourceId": "adio",
-      "contentHash": "d1fec551d3674f0ac2cc7b60cda3d9c9dcbe08328eca47cdd329618fb2f507b7",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-adio-d1fec551d367",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.investwithabudhabi.com/fr"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "scope",
-          "normalizedValue": "Les programmes de soutien s’articulent autour de votre projet, sans catalogue imposé.",
-          "originalSourceText": "Les programmes de soutien s’articulent autour de votre projet, sans catalogue imposé."
-        }
-      ]
-    },
-    {
-      "title": "Accueil et suivi sur mesure",
-      "issuer": "ADIO",
-      "kind": "GRANT",
-      "sourceUrl": "https://www.investwithabudhabi.com/fr",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "",
-      "quote": "Accueil et suivi sur mesure tout au long du cycle d’investissement, de la première demande jusqu’à l’expansion.",
-      "sourceId": "adio",
-      "contentHash": "d1fec551d3674f0ac2cc7b60cda3d9c9dcbe08328eca47cdd329618fb2f507b7",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-adio-d1fec551d367",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.investwithabudhabi.com/fr"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "scope",
-          "normalizedValue": "Accueil et suivi sur mesure tout au long du cycle d’investissement, de la première demande jusqu’à l’expansion.",
-          "originalSourceText": "Accueil et suivi sur mesure tout au long du cycle d’investissement, de la première demande jusqu’à l’expansion."
-        }
-      ]
-    },
-    {
-      "title": "Abu Dhabi Investment Forum : Séoul",
-      "issuer": "ADIO",
-      "kind": "GRANT",
-      "sourceUrl": "https://adif.abudhabi/south-korea/#register",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "2026-09-16",
-      "quote": "Le Bureau d’investissement d’Abu Dhabi (ADIO) a le plaisir de vous inviter à manifester votre intérêt pour participer à l’Abu Dhabi Investment Forum (ADIF) au JW Marriott Hotel Seoul, en Corée du Sud.",
-      "sourceId": "adio",
-      "contentHash": "d1fec551d3674f0ac2cc7b60cda3d9c9dcbe08328eca47cdd329618fb2f507b7",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-adio-d1fec551d367",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://adif.abudhabi/south-korea/#register"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "scope",
-          "normalizedValue": "Le Bureau d’investissement d’Abu Dhabi (ADIO) a le plaisir de vous inviter à manifester votre intérêt pour participer à l’Abu Dhabi Investment Forum (ADIF) au JW Marriott Hotel Seoul, en Corée du Sud.",
-          "originalSourceText": "Le Bureau d’investissement d’Abu Dhabi (ADIO) a le plaisir de vous inviter à manifester votre intérêt pour participer à l’Abu Dhabi Investment Forum (ADIF) au JW Marriott Hotel Seoul, en Corée du Sud."
-        },
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-adio-d1fec551d367",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://adif.abudhabi/south-korea/#register"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "2026-09-16",
-          "originalSourceText": "Le Bureau d’investissement d’Abu Dhabi (ADIO) a le plaisir de vous inviter à manifester votre intérêt pour participer à l’Abu Dhabi Investment Forum (ADIF) au JW Marriott Hotel Seoul, en Corée du Sud."
-        }
-      ]
-    },
-    {
-      "title": "Abu Dhabi Investment Forum : Shanghai",
-      "issuer": "ADIO",
-      "kind": "GRANT",
-      "sourceUrl": "https://adif.abudhabi/shanghai/",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "",
-      "quote": "Le Bureau d’investissement d’Abu Dhabi (ADIO), en partenariat avec l’Abu Dhabi Global Market (ADGM), a le plaisir de vous inviter à manifester votre intérêt pour participer à l’Abu Dhabi Investment Forum (ADIF).",
-      "sourceId": "adio",
-      "contentHash": "d1fec551d3674f0ac2cc7b60cda3d9c9dcbe08328eca47cdd329618fb2f507b7",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-adio-d1fec551d367",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://adif.abudhabi/shanghai/"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "scope",
-          "normalizedValue": "Le Bureau d’investissement d’Abu Dhabi (ADIO), en partenariat avec l’Abu Dhabi Global Market (ADGM), a le plaisir de vous inviter à manifester votre intérêt pour participer à l’Abu Dhabi Investment Forum (ADIF).",
-          "originalSourceText": "Le Bureau d’investissement d’Abu Dhabi (ADIO), en partenariat avec l’Abu Dhabi Global Market (ADGM), a le plaisir de vous inviter à manifester votre intérêt pour participer à l’Abu Dhabi Investment Forum (ADIF)."
-        }
-      ]
-    },
-    {
-      "title": "Abu Dhabi Investment Forum : Milan",
-      "issuer": "ADIO",
-      "kind": "GRANT",
-      "sourceUrl": "https://adif.abudhabi/milan/",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "",
-      "quote": "Ce forum exclusif, accessible uniquement sur invitation, réunira d’éminents dirigeants, entrepreneurs et décideurs afin d’explorer les opportunités stratégiques de collaboration entre les communautés d’affaires d’Abu Dhabi et d’Italie.",
-      "sourceId": "adio",
-      "contentHash": "d1fec551d3674f0ac2cc7b60cda3d9c9dcbe08328eca47cdd329618fb2f507b7",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-adio-d1fec551d367",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://adif.abudhabi/milan/"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "scope",
-          "normalizedValue": "Ce forum exclusif, accessible uniquement sur invitation, réunira d’éminents dirigeants, entrepreneurs et décideurs afin d’explorer les opportunités stratégiques de collaboration entre les communautés d’affaires d’Abu Dhabi et d’Italie.",
-          "originalSourceText": "Ce forum exclusif, accessible uniquement sur invitation, réunira d’éminents dirigeants, entrepreneurs et décideurs afin d’explorer les opportunités stratégiques de collaboration entre les communautés d’affaires d’Abu Dhabi et d’Italie."
-        }
-      ]
-    },
-    {
-      "title": "Abu Dhabi Investment Forum : Mumbai",
-      "issuer": "ADIO",
-      "kind": "GRANT",
-      "sourceUrl": "https://adif.abudhabi/mumbai/",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "",
-      "quote": "L’Abu Dhabi Investment Forum a réuni dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi.",
-      "sourceId": "adio",
-      "contentHash": "d1fec551d3674f0ac2cc7b60cda3d9c9dcbe08328eca47cdd329618fb2f507b7",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-adio-d1fec551d367",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://adif.abudhabi/mumbai/"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "scope",
-          "normalizedValue": "L’Abu Dhabi Investment Forum a réuni dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi.",
-          "originalSourceText": "L’Abu Dhabi Investment Forum a réuni dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi."
-        }
-      ]
-    },
-    {
-      "title": "Golden Visa et résidence",
-      "issuer": "ADIO",
-      "kind": "GRANT",
-      "sourceUrl": "https://www.investwithabudhabi.com/fr/golden-visa-residency",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "",
-      "quote": "",
-      "sourceId": "adio",
-      "contentHash": "d1fec551d3674f0ac2cc7b60cda3d9c9dcbe08328eca47cdd329618fb2f507b7",
-      "facts": []
-    },
-    {
-      "title": "Guide officiel de l’investisseur d’Abou Dhabi",
-      "issuer": "ADIO",
-      "kind": "GRANT",
-      "sourceUrl": "https://www.investwithabudhabi.com/assets/Ebook-ADIO%20Investor%20Guide.pdf",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "",
-      "quote": "Le cadre, les programmes et les parcours réunis en un seul document : la source qui étaye les repères de cette plateforme.",
-      "sourceId": "adio",
-      "contentHash": "d1fec551d3674f0ac2cc7b60cda3d9c9dcbe08328eca47cdd329618fb2f507b7",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-adio-d1fec551d367",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.investwithabudhabi.com/assets/Ebook-ADIO%20Investor%20Guide.pdf"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "scope",
-          "normalizedValue": "Le cadre, les programmes et les parcours réunis en un seul document : la source qui étaye les repères de cette plateforme.",
-          "originalSourceText": "Le cadre, les programmes et les parcours réunis en un seul document : la source qui étaye les repères de cette plateforme."
-        }
-      ]
-    },
     {
       "title": "4ème Programme d’investissements d’avenir - PIA 4",
       "issuer": "beta.gouv.fr / French state",
@@ -2573,21 +2081,83 @@
       ]
     },
     {
+      "title": "Consulter les offres de marché public (Avis publics à la concurrence - AAPC)",
+      "issuer": "DILA (French state)",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.boamp.fr/pages/entreprise-accueil/",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics.",
+      "sourceId": "boamp",
+      "contentHash": "a5677dceb19500fcb0577279cb72aeadedfc6bac2f7f17db4944a9b1c88a6b90",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-boamp-a5677dceb195",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.boamp.fr/pages/entreprise-accueil/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "scope",
+          "normalizedValue": "Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics.",
+          "originalSourceText": "Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics."
+        }
+      ]
+    },
+    {
+      "title": "Service d'alerte BOAMP (Veille personnalisée et gratuite)",
+      "issuer": "DILA (French state)",
+      "kind": "TENDER",
+      "sourceUrl": "https://www.boamp.fr/pages/entreprise-service-dalerte/",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "Le site boamp.fr propose une veille personnalisée et gratuite. Enregistrez vos recherches et paramétrez jusqu'à 10 alertes pour recevoir quotidiennement les nouveaux avis publiés au BOAMP.",
+      "sourceId": "boamp",
+      "contentHash": "a5677dceb19500fcb0577279cb72aeadedfc6bac2f7f17db4944a9b1c88a6b90",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-boamp-a5677dceb195",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.boamp.fr/pages/entreprise-service-dalerte/"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "scope",
+          "normalizedValue": "Le site boamp.fr propose une veille personnalisée et gratuite. Enregistrez vos recherches et paramétrez jusqu'à 10 alertes pour recevoir quotidiennement les nouveaux avis publiés au BOAMP.",
+          "originalSourceText": "Le site boamp.fr propose une veille personnalisée et gratuite. Enregistrez vos recherches et paramétrez jusqu'à 10 alertes pour recevoir quotidiennement les nouveaux avis publiés au BOAMP."
+        }
+      ]
+    },
+    {
       "title": "Crédit d'impôt recherche (CIR)",
       "issuer": "French tax administration",
       "kind": "TAX_INCENTIVE",
       "sourceUrl": "https://entreprendre.service-public.gouv.fr/vosdroits/F23533",
       "summary": "",
-      "eligibility": "Entreprises engageant des activités de recherche et développement (R&D).",
+      "eligibility": "Entreprises engageant des activités de recherche et développement (R&D)",
       "amountText": "",
       "deadlineText": "",
       "quote": "Le crédit d'impôt recherche (CIR) a pour but d'encourager les entreprises à engager des activités de recherche et développement (R&D).",
       "sourceId": "cir-cii-jei",
-      "contentHash": "3d0f0fd73d03b56045751bf667dccff7660bd97af3350a41aba7427b9bbf2036",
+      "contentHash": "0f70036163570b25976275d159101d5174fba8dd082410e03947e525a8082afb",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-cir-cii-jei-3d0f0fd73d03",
+          "sourceArtifactId": "scout-cir-cii-jei-0f7003616357",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://entreprendre.service-public.gouv.fr/vosdroits/F23533"
@@ -2603,7 +2173,7 @@
         },
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-cir-cii-jei-3d0f0fd73d03",
+          "sourceArtifactId": "scout-cir-cii-jei-0f7003616357",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://entreprendre.service-public.gouv.fr/vosdroits/F23533"
@@ -2614,7 +2184,7 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "eligibility",
-          "normalizedValue": "Entreprises engageant des activités de recherche et développement (R&D).",
+          "normalizedValue": "Entreprises engageant des activités de recherche et développement (R&D)",
           "originalSourceText": "Le crédit d'impôt recherche (CIR) a pour but d'encourager les entreprises à engager des activités de recherche et développement (R&D)."
         }
       ]
@@ -2791,15 +2361,15 @@
       ]
     },
     {
-      "title": "Appels à projets nationaux ou régionaux",
+      "title": "Aides gré à gré",
       "issuer": "French state / ADEME",
       "kind": "GRANT",
       "sourceUrl": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor",
       "summary": "",
-      "eligibility": "",
+      "eligibility": "Entreprises, associations",
       "amountText": "",
       "deadlineText": "",
-      "quote": "L’Agence peut proposer une aide financière dans le cadre d'appels à projets nationaux ou régionaux avec des cahiers des charges plus spécifiques.",
+      "quote": "L’Agence peut proposer une aide financière dans le cadre d'appels à projets nationaux ou régionaux avec des cahiers des charges plus spécifiques, lorsque d'autres subventions s’inscrivent dans le cadre d’une « Aide gré à gré », c’est-à-dire en appliquant les dispositifs classiques d’aide financière.",
       "sourceId": "france-2030-ademe",
       "contentHash": "49a9e9bbd309556116dd115ec2062fc160c524987d723eac638e9987aa9a2c0a",
       "facts": [
@@ -2816,8 +2386,24 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "scope",
-          "normalizedValue": "L’Agence peut proposer une aide financière dans le cadre d'appels à projets nationaux ou régionaux avec des cahiers des charges plus spécifiques.",
-          "originalSourceText": "L’Agence peut proposer une aide financière dans le cadre d'appels à projets nationaux ou régionaux avec des cahiers des charges plus spécifiques."
+          "normalizedValue": "L’Agence peut proposer une aide financière dans le cadre d'appels à projets nationaux ou régionaux avec des cahiers des charges plus spécifiques, lorsque d'autres subventions s’inscrivent dans le cadre d’une « Aide gré à gré », c’est-à-dire en appliquant les dispositifs classiques d’aide financière.",
+          "originalSourceText": "L’Agence peut proposer une aide financière dans le cadre d'appels à projets nationaux ou régionaux avec des cahiers des charges plus spécifiques, lorsque d'autres subventions s’inscrivent dans le cadre d’une « Aide gré à gré », c’est-à-dire en appliquant les dispositifs classiques d’aide financière."
+        },
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-france-2030-ademe-49a9e9bbd309",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://agirpourlatransition.ademe.fr/entreprises/aides-financieres#filter-anchor"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "eligibility",
+          "normalizedValue": "Entreprises, associations",
+          "originalSourceText": "L’Agence peut proposer une aide financière dans le cadre d'appels à projets nationaux ou régionaux avec des cahiers des charges plus spécifiques, lorsque d'autres subventions s’inscrivent dans le cadre d’une « Aide gré à gré », c’est-à-dire en appliquant les dispositifs classiques d’aide financière."
         }
       ]
     },
@@ -2832,11 +2418,11 @@
       "deadlineText": "",
       "quote": "Initiate is Hub71’s early-stage programme that supports founders at the ideation or pre-MVP stage to turn their ideas into scalable startups. By joining, founders will be connected with experienced venture builders and gain the resources, mentorship, and ecosystem access needed to transform ideas into startups that can scale.",
       "sourceId": "hub71",
-      "contentHash": "93597770b57a285608a824283751948fc0bfc9f7aa87a94746d2ff9716d020a4",
+      "contentHash": "c132aa561fd0a44454eebd18b519f52dca6ae577e4efce1ad7157e415ec33e8f",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-93597770b57a",
+          "sourceArtifactId": "scout-hub71-c132aa561fd0",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.hub71.com/program/initiate"
@@ -2858,16 +2444,16 @@
       "kind": "GRANT",
       "sourceUrl": "https://www.hub71.com/program/mzn-x-hub71-programme",
       "summary": "",
-      "eligibility": "Emirati founders",
+      "eligibility": "",
       "amountText": "",
       "deadlineText": "",
       "quote": "The MZN x Hub71 Programme is a three-month programme powered by Hub71 in partnership with the Khalifa Fund for Enterprise Development, designed to support Emirati founders in transforming innovative ideas into market-ready minimum viable products (MVPs).",
       "sourceId": "hub71",
-      "contentHash": "93597770b57a285608a824283751948fc0bfc9f7aa87a94746d2ff9716d020a4",
+      "contentHash": "c132aa561fd0a44454eebd18b519f52dca6ae577e4efce1ad7157e415ec33e8f",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-93597770b57a",
+          "sourceArtifactId": "scout-hub71-c132aa561fd0",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.hub71.com/program/mzn-x-hub71-programme"
@@ -2880,41 +2466,25 @@
           "field": "scope",
           "normalizedValue": "The MZN x Hub71 Programme is a three-month programme powered by Hub71 in partnership with the Khalifa Fund for Enterprise Development, designed to support Emirati founders in transforming innovative ideas into market-ready minimum viable products (MVPs).",
           "originalSourceText": "The MZN x Hub71 Programme is a three-month programme powered by Hub71 in partnership with the Khalifa Fund for Enterprise Development, designed to support Emirati founders in transforming innovative ideas into market-ready minimum viable products (MVPs)."
-        },
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-93597770b57a",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.hub71.com/program/mzn-x-hub71-programme"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "eligibility",
-          "normalizedValue": "Emirati founders",
-          "originalSourceText": "The MZN x Hub71 Programme is a three-month programme powered by Hub71 in partnership with the Khalifa Fund for Enterprise Development, designed to support Emirati founders in transforming innovative ideas into market-ready minimum viable products (MVPs)."
         }
       ]
     },
     {
-      "title": "Hub71 Immersion Programme (India)",
+      "title": "India (Hub71 Immersion Programme)",
       "issuer": "Abu Dhabi (Mubadala)",
       "kind": "GRANT",
       "sourceUrl": "https://www.hub71.com/program/india",
       "summary": "",
-      "eligibility": "International startups",
+      "eligibility": "",
       "amountText": "",
       "deadlineText": "",
       "quote": "The Hub71 Immersion Programme is a structured, in-market experience designed to support international startups as they explore and build connections within Abu Dhabi’s global tech ecosystem. Delivered in partnership with the UAE–India CEPA Council, the programme provides founders with direct access to key market stakeholders, including investors, corporates and government entities, enabling startups to assess and accelerate their expansion into the region.",
       "sourceId": "hub71",
-      "contentHash": "93597770b57a285608a824283751948fc0bfc9f7aa87a94746d2ff9716d020a4",
+      "contentHash": "c132aa561fd0a44454eebd18b519f52dca6ae577e4efce1ad7157e415ec33e8f",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-93597770b57a",
+          "sourceArtifactId": "scout-hub71-c132aa561fd0",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.hub71.com/program/india"
@@ -2926,22 +2496,6 @@
           "validationResult": "unchecked",
           "field": "scope",
           "normalizedValue": "The Hub71 Immersion Programme is a structured, in-market experience designed to support international startups as they explore and build connections within Abu Dhabi’s global tech ecosystem. Delivered in partnership with the UAE–India CEPA Council, the programme provides founders with direct access to key market stakeholders, including investors, corporates and government entities, enabling startups to assess and accelerate their expansion into the region.",
-          "originalSourceText": "The Hub71 Immersion Programme is a structured, in-market experience designed to support international startups as they explore and build connections within Abu Dhabi’s global tech ecosystem. Delivered in partnership with the UAE–India CEPA Council, the programme provides founders with direct access to key market stakeholders, including investors, corporates and government entities, enabling startups to assess and accelerate their expansion into the region."
-        },
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-93597770b57a",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.hub71.com/program/india"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "eligibility",
-          "normalizedValue": "International startups",
           "originalSourceText": "The Hub71 Immersion Programme is a structured, in-market experience designed to support international startups as they explore and build connections within Abu Dhabi’s global tech ecosystem. Delivered in partnership with the UAE–India CEPA Council, the programme provides founders with direct access to key market stakeholders, including investors, corporates and government entities, enabling startups to assess and accelerate their expansion into the region."
         }
       ]
@@ -2957,11 +2511,11 @@
       "deadlineText": "",
       "quote": "Get the support you need to take your business to the next level in Abu Dhabi. Our Access Program offers a comprehensive support package and a route into the UAE capital’s marketplace. The benefits include in-kind and cash incentives and access to our vibrant community of capital and corporate partners, and mentors.",
       "sourceId": "hub71",
-      "contentHash": "93597770b57a285608a824283751948fc0bfc9f7aa87a94746d2ff9716d020a4",
+      "contentHash": "c132aa561fd0a44454eebd18b519f52dca6ae577e4efce1ad7157e415ec33e8f",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-93597770b57a",
+          "sourceArtifactId": "scout-hub71-c132aa561fd0",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.hub71.com/program/access-programme"
@@ -2983,16 +2537,16 @@
       "kind": "GRANT",
       "sourceUrl": "https://www.hub71.com/program/eca-anjal-z-x-hub71",
       "summary": "",
-      "eligibility": "Startups addressing early childhood development challenges",
+      "eligibility": "",
       "amountText": "",
       "deadlineText": "",
       "quote": "The ECA Anjal Z x Hub71 programme supports startups addressing challenges across early childhood development, from pregnancy through age eight, by providing direct access to government partners, pilot opportunities, and Hub71’s broader innovation ecosystem. Founders are supported to embed locally, demonstrate impact, and scale with confidence.",
       "sourceId": "hub71",
-      "contentHash": "93597770b57a285608a824283751948fc0bfc9f7aa87a94746d2ff9716d020a4",
+      "contentHash": "c132aa561fd0a44454eebd18b519f52dca6ae577e4efce1ad7157e415ec33e8f",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-93597770b57a",
+          "sourceArtifactId": "scout-hub71-c132aa561fd0",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.hub71.com/program/eca-anjal-z-x-hub71"
@@ -3005,22 +2559,6 @@
           "field": "scope",
           "normalizedValue": "The ECA Anjal Z x Hub71 programme supports startups addressing challenges across early childhood development, from pregnancy through age eight, by providing direct access to government partners, pilot opportunities, and Hub71’s broader innovation ecosystem. Founders are supported to embed locally, demonstrate impact, and scale with confidence.",
           "originalSourceText": "The ECA Anjal Z x Hub71 programme supports startups addressing challenges across early childhood development, from pregnancy through age eight, by providing direct access to government partners, pilot opportunities, and Hub71’s broader innovation ecosystem. Founders are supported to embed locally, demonstrate impact, and scale with confidence."
-        },
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-93597770b57a",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.hub71.com/program/eca-anjal-z-x-hub71"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "eligibility",
-          "normalizedValue": "Startups addressing early childhood development challenges",
-          "originalSourceText": "The ECA Anjal Z x Hub71 programme supports startups addressing challenges across early childhood development, from pregnancy through age eight, by providing direct access to government partners, pilot opportunities, and Hub71’s broader innovation ecosystem. Founders are supported to embed locally, demonstrate impact, and scale with confidence."
         }
       ]
     },
@@ -3030,16 +2568,16 @@
       "kind": "GRANT",
       "sourceUrl": "https://www.hub71.com/program/savi",
       "summary": "",
-      "eligibility": "Smart and autonomous mobility startups",
+      "eligibility": "",
       "amountText": "",
       "deadlineText": "",
       "quote": "Hub71 is your startup’s gateway into Abu Dhabi’s SAVI cluster. Smart and autonomous mobility startups joining Hub71 gain direct access to SAVI’s network of partners, regulators and testing environments. This enables founders to validate, deploy and scale solutions across land, air and sea.",
       "sourceId": "hub71",
-      "contentHash": "93597770b57a285608a824283751948fc0bfc9f7aa87a94746d2ff9716d020a4",
+      "contentHash": "c132aa561fd0a44454eebd18b519f52dca6ae577e4efce1ad7157e415ec33e8f",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-93597770b57a",
+          "sourceArtifactId": "scout-hub71-c132aa561fd0",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.hub71.com/program/savi"
@@ -3051,22 +2589,6 @@
           "validationResult": "unchecked",
           "field": "scope",
           "normalizedValue": "Hub71 is your startup’s gateway into Abu Dhabi’s SAVI cluster. Smart and autonomous mobility startups joining Hub71 gain direct access to SAVI’s network of partners, regulators and testing environments. This enables founders to validate, deploy and scale solutions across land, air and sea.",
-          "originalSourceText": "Hub71 is your startup’s gateway into Abu Dhabi’s SAVI cluster. Smart and autonomous mobility startups joining Hub71 gain direct access to SAVI’s network of partners, regulators and testing environments. This enables founders to validate, deploy and scale solutions across land, air and sea."
-        },
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-93597770b57a",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.hub71.com/program/savi"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "eligibility",
-          "normalizedValue": "Smart and autonomous mobility startups",
           "originalSourceText": "Hub71 is your startup’s gateway into Abu Dhabi’s SAVI cluster. Smart and autonomous mobility startups joining Hub71 gain direct access to SAVI’s network of partners, regulators and testing environments. This enables founders to validate, deploy and scale solutions across land, air and sea."
         }
       ]
@@ -3082,11 +2604,11 @@
       "deadlineText": "",
       "quote": "Hub71+ Life Sciences is Abu Dhabi’s specialist ecosystem driving innovation across biotechnology, MedTech, and digital health. From precision medicine to biomanufacturing, we bring together founders, researchers, regulators, investors, and corporates to advance next-generation healthcare solutions from Abu Dhabi to the world.",
       "sourceId": "hub71",
-      "contentHash": "93597770b57a285608a824283751948fc0bfc9f7aa87a94746d2ff9716d020a4",
+      "contentHash": "c132aa561fd0a44454eebd18b519f52dca6ae577e4efce1ad7157e415ec33e8f",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-93597770b57a",
+          "sourceArtifactId": "scout-hub71-c132aa561fd0",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.hub71.com/program/hub71-plus-life-sciences"
@@ -3113,11 +2635,11 @@
       "deadlineText": "",
       "quote": "Hub71+ Digital Assets is a dedicated programme to promote Web3 startup growth from the heart of Abu Dhabi. We provide an integrated launchpad that unites builders, regulators, investors, foundations, corporate partners, and enthusiasts around Web3 including blockchain and cryptocurrency startups. No matter where you are in your journey, there’s something for you at Hub71.",
       "sourceId": "hub71",
-      "contentHash": "93597770b57a285608a824283751948fc0bfc9f7aa87a94746d2ff9716d020a4",
+      "contentHash": "c132aa561fd0a44454eebd18b519f52dca6ae577e4efce1ad7157e415ec33e8f",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-93597770b57a",
+          "sourceArtifactId": "scout-hub71-c132aa561fd0",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.hub71.com/program/hub71-plus-digital-assets"
@@ -3144,11 +2666,11 @@
       "deadlineText": "",
       "quote": "Hub71+ ClimateTech is a specialist ecosystem, where sustainability startups leverage technologies to drive decarbonization in supporting a net zero future. The programme offers a comprehensive support package and a route into the UAE capital's marketplace.",
       "sourceId": "hub71",
-      "contentHash": "93597770b57a285608a824283751948fc0bfc9f7aa87a94746d2ff9716d020a4",
+      "contentHash": "c132aa561fd0a44454eebd18b519f52dca6ae577e4efce1ad7157e415ec33e8f",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-93597770b57a",
+          "sourceArtifactId": "scout-hub71-c132aa561fd0",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.hub71.com/program/hub71-plus-climatetech"
@@ -3175,11 +2697,11 @@
       "deadlineText": "",
       "quote": "Hub71+ AI is a specialist ecosystem designed to support startups at the forefront of AI innovation. The ecosystem provides advanced technical resources, access to a robust network of AI researchers, industry practitioners, and strategic partners, and tailored expertise in AI-driven product development and scalability. With a focus on fostering collaboration and accelerating AI integration across sectors, Hub71+ AI empowers startups to develop and deploy sophisticated AI solutions, enabling founders to achieve operational efficiency, drive industry disruption, and deliver sustainable impact.",
       "sourceId": "hub71",
-      "contentHash": "93597770b57a285608a824283751948fc0bfc9f7aa87a94746d2ff9716d020a4",
+      "contentHash": "c132aa561fd0a44454eebd18b519f52dca6ae577e4efce1ad7157e415ec33e8f",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-hub71-93597770b57a",
+          "sourceArtifactId": "scout-hub71-c132aa561fd0",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.hub71.com/program/hub71-plus-ai"
@@ -3196,523 +2718,24 @@
       ]
     },
     {
-      "title": "Apply to Cohort 21",
-      "issuer": "Abu Dhabi (Mubadala)",
-      "kind": "GRANT",
-      "sourceUrl": "https://www.hub71.com/",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "",
-      "quote": "",
-      "sourceId": "hub71",
-      "contentHash": "93597770b57a285608a824283751948fc0bfc9f7aa87a94746d2ff9716d020a4",
-      "facts": []
-    },
-    {
-      "title": "Digital Exposure Analysis",
-      "issuer": "UK Cabinet Office",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773f2",
-      "summary": "",
-      "eligibility": "Suitable for SME",
-      "amountText": "",
-      "deadlineText": "23 September 2026",
-      "quote": "",
-      "sourceId": "uk-find-a-tender",
-      "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773f2"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "eligibility",
-          "normalizedValue": "Suitable for SME",
-          "originalSourceText": "Suitable for SME"
-        },
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773f2"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "23 September 2026",
-          "originalSourceText": "23 September 2026"
-        }
-      ]
-    },
-    {
-      "title": "Soft Market Testing-Sleep Service for Children and Young People",
+      "title": "Hostile Vehicle Mitigation Equipment",
       "issuer": "UK Cabinet Office",
       "kind": "GRANT",
-      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ef",
-      "summary": "",
-      "eligibility": "Suitable for SME & VCSE",
-      "amountText": "",
-      "deadlineText": "3 October 2026",
-      "quote": "",
-      "sourceId": "uk-find-a-tender",
-      "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ef"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "eligibility",
-          "normalizedValue": "Suitable for SME & VCSE",
-          "originalSourceText": "Suitable for SME & VCSE"
-        },
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ef"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "3 October 2026",
-          "originalSourceText": "3 October 2026"
-        }
-      ]
-    },
-    {
-      "title": "Post Office Branch - Cabin Lane",
-      "issuer": "UK Cabinet Office",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06e89d",
-      "summary": "",
-      "eligibility": "Suitable for SME & VCSE",
-      "amountText": "",
-      "deadlineText": "18 August 2027",
-      "quote": "",
-      "sourceId": "uk-find-a-tender",
-      "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06e89d"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "eligibility",
-          "normalizedValue": "Suitable for SME & VCSE",
-          "originalSourceText": "Suitable for SME & VCSE"
-        },
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06e89d"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "18 August 2027",
-          "originalSourceText": "18 August 2027"
-        }
-      ]
-    },
-    {
-      "title": "Post Office Branch - Kidwelly",
-      "issuer": "UK Cabinet Office",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ee",
-      "summary": "",
-      "eligibility": "Suitable for SME & VCSE",
-      "amountText": "",
-      "deadlineText": "30 September 2026",
-      "quote": "",
-      "sourceId": "uk-find-a-tender",
-      "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ee"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "eligibility",
-          "normalizedValue": "Suitable for SME & VCSE",
-          "originalSourceText": "Suitable for SME & VCSE"
-        },
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ee"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "30 September 2026",
-          "originalSourceText": "30 September 2026"
-        }
-      ]
-    },
-    {
-      "title": "Post Office branch - Perry Hall",
-      "issuer": "UK Cabinet Office",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ed",
-      "summary": "",
-      "eligibility": "Suitable for SME & VCSE",
-      "amountText": "",
-      "deadlineText": "30 September 2026",
-      "quote": "",
-      "sourceId": "uk-find-a-tender",
-      "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ed"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "eligibility",
-          "normalizedValue": "Suitable for SME & VCSE",
-          "originalSourceText": "Suitable for SME & VCSE"
-        },
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ed"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "30 September 2026",
-          "originalSourceText": "30 September 2026"
-        }
-      ]
-    },
-    {
-      "title": "Residential and Nursing Care Home Partnership Framework in Herefordshire",
-      "issuer": "UK Cabinet Office",
-      "kind": "GRANT",
-      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0669a0",
-      "summary": "",
-      "eligibility": "Suitable for SME & VCSE",
-      "amountText": "",
-      "deadlineText": "8 October 2026 (estimated tender or transparency notice publication date)",
-      "quote": "",
-      "sourceId": "uk-find-a-tender",
-      "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0669a0"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "eligibility",
-          "normalizedValue": "Suitable for SME & VCSE",
-          "originalSourceText": "Suitable for SME & VCSE"
-        },
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0669a0"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "8 October 2026 (estimated tender or transparency notice publication date)",
-          "originalSourceText": "8 October 2026 (estimated tender or transparency notice publication date)"
-        }
-      ]
-    },
-    {
-      "title": "Post Office Branch - Kingsway",
-      "issuer": "UK Cabinet Office",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ec",
-      "summary": "",
-      "eligibility": "Suitable for SME & VCSE",
-      "amountText": "",
-      "deadlineText": "30 September 2026",
-      "quote": "",
-      "sourceId": "uk-find-a-tender",
-      "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ec"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "eligibility",
-          "normalizedValue": "Suitable for SME & VCSE",
-          "originalSourceText": "Suitable for SME & VCSE"
-        },
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ec"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "30 September 2026",
-          "originalSourceText": "30 September 2026"
-        }
-      ]
-    },
-    {
-      "title": "Procurement of development viability training and bespoke support for Local Planning Authorities",
-      "issuer": "UK Cabinet Office",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ea",
-      "summary": "",
-      "eligibility": "Suitable for SME & VCSE",
-      "amountText": "",
-      "deadlineText": "16 October 2026",
-      "quote": "",
-      "sourceId": "uk-find-a-tender",
-      "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ea"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "eligibility",
-          "normalizedValue": "Suitable for SME & VCSE",
-          "originalSourceText": "Suitable for SME & VCSE"
-        },
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773ea"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "16 October 2026",
-          "originalSourceText": "16 October 2026"
-        }
-      ]
-    },
-    {
-      "title": "SONI089 – Software Licensing & Buying Services",
-      "issuer": "UK Cabinet Office",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e9",
-      "summary": "",
-      "eligibility": "Suitable for SME",
-      "amountText": "",
-      "deadlineText": "30 October 2026",
-      "quote": "",
-      "sourceId": "uk-find-a-tender",
-      "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e9"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "eligibility",
-          "normalizedValue": "Suitable for SME",
-          "originalSourceText": "Suitable for SME"
-        },
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e9"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "30 October 2026",
-          "originalSourceText": "30 October 2026"
-        }
-      ]
-    },
-    {
-      "title": "Trafford Youth Cabinet",
-      "issuer": "UK Cabinet Office",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e8",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "7 October 2026",
-      "quote": "",
-      "sourceId": "uk-find-a-tender",
-      "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e8"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "7 October 2026",
-          "originalSourceText": "7 October 2026"
-        }
-      ]
-    },
-    {
-      "title": "Multiple Needs Navigators",
-      "issuer": "UK Cabinet Office",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e7",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "13 October 2026",
-      "quote": "",
-      "sourceId": "uk-find-a-tender",
-      "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e7"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "13 October 2026",
-          "originalSourceText": "13 October 2026"
-        }
-      ]
-    },
-    {
-      "title": "Further Premarket Engagement excerise",
-      "issuer": "UK Cabinet Office",
-      "kind": "GRANT",
-      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e5",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-07766d",
       "summary": "",
       "eligibility": "",
       "amountText": "",
       "deadlineText": "5 October 2026",
       "quote": "",
       "sourceId": "uk-find-a-tender",
-      "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
+      "contentHash": "31339582d07ee41dbd87e71a3d617e888e326151166da32ad6f4b21ef879a256",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
+          "sourceArtifactId": "scout-uk-find-a-tender-31339582d07e",
           "locator": {
             "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e5"
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-07766d"
           },
           "extractionMethod": "llm",
           "extractingProvider": "mistral",
@@ -3726,102 +2749,24 @@
       ]
     },
     {
-      "title": "Procurement of Design Led Multi-Disciplinary Team – South of Romsey Town Centre Regeneration Project",
-      "issuer": "UK Cabinet Office",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e4",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "21 October 2026",
-      "quote": "",
-      "sourceId": "uk-find-a-tender",
-      "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e4"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "21 October 2026",
-          "originalSourceText": "21 October 2026"
-        }
-      ]
-    },
-    {
-      "title": "Webinar Invitation: Cyber Accelerator Programme - Design Partnerships",
+      "title": "Heparins & Anticoagulants",
       "issuer": "UK Cabinet Office",
       "kind": "GRANT",
-      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f26d",
-      "summary": "",
-      "eligibility": "Suitable for SME & VCSE",
-      "amountText": "",
-      "deadlineText": "23 September 2026",
-      "quote": "",
-      "sourceId": "uk-find-a-tender",
-      "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f26d"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "eligibility",
-          "normalizedValue": "Suitable for SME & VCSE",
-          "originalSourceText": "Suitable for SME & VCSE"
-        },
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f26d"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "23 September 2026",
-          "originalSourceText": "23 September 2026"
-        }
-      ]
-    },
-    {
-      "title": "D2 Dehumidification (L&A and Radiation Stores)",
-      "issuer": "UK Cabinet Office",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e1",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-07766b",
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "7 October 2026",
+      "deadlineText": "6 November 2026",
       "quote": "",
       "sourceId": "uk-find-a-tender",
-      "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
+      "contentHash": "31339582d07ee41dbd87e71a3d617e888e326151166da32ad6f4b21ef879a256",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
+          "sourceArtifactId": "scout-uk-find-a-tender-31339582d07e",
           "locator": {
             "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e1"
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-07766b"
           },
           "extractionMethod": "llm",
           "extractingProvider": "mistral",
@@ -3829,77 +2774,30 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "7 October 2026",
-          "originalSourceText": "7 October 2026"
+          "normalizedValue": "6 November 2026",
+          "originalSourceText": "6 November 2026"
         }
       ]
     },
     {
-      "title": "PR Agency Services",
+      "title": "Medical Aid Insurance for CBS Staff at the British High Commission Maputo",
       "issuer": "UK Cabinet Office",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773de",
-      "summary": "",
-      "eligibility": "Suitable for SME & VCSE",
-      "amountText": "",
-      "deadlineText": "12 October 2026",
-      "quote": "",
-      "sourceId": "uk-find-a-tender",
-      "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773de"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "eligibility",
-          "normalizedValue": "Suitable for SME & VCSE",
-          "originalSourceText": "Suitable for SME & VCSE"
-        },
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773de"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "12 October 2026",
-          "originalSourceText": "12 October 2026"
-        }
-      ]
-    },
-    {
-      "title": "PRN26119 Omagh Area Land, Design and Build",
-      "issuer": "UK Cabinet Office",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773df",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-07766a",
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "16 October 2026",
+      "deadlineText": "25 September 2026",
       "quote": "",
       "sourceId": "uk-find-a-tender",
-      "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
+      "contentHash": "31339582d07ee41dbd87e71a3d617e888e326151166da32ad6f4b21ef879a256",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
+          "sourceArtifactId": "scout-uk-find-a-tender-31339582d07e",
           "locator": {
             "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773df"
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-07766a"
           },
           "extractionMethod": "llm",
           "extractingProvider": "mistral",
@@ -3907,30 +2805,30 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "16 October 2026",
-          "originalSourceText": "16 October 2026"
+          "normalizedValue": "25 September 2026",
+          "originalSourceText": "25 September 2026"
         }
       ]
     },
     {
-      "title": "Green Roof Bike Stores RfQ",
+      "title": "Barbican Renewal Programme - Demolition and Structures",
       "issuer": "UK Cabinet Office",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773d2",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f01b",
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "7 October 2026",
+      "deadlineText": "19 October 2026",
       "quote": "",
       "sourceId": "uk-find-a-tender",
-      "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
+      "contentHash": "31339582d07ee41dbd87e71a3d617e888e326151166da32ad6f4b21ef879a256",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
+          "sourceArtifactId": "scout-uk-find-a-tender-31339582d07e",
           "locator": {
             "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773d2"
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f01b"
           },
           "extractionMethod": "llm",
           "extractingProvider": "mistral",
@@ -3938,46 +2836,30 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "7 October 2026",
-          "originalSourceText": "7 October 2026"
+          "normalizedValue": "19 October 2026",
+          "originalSourceText": "19 October 2026"
         }
       ]
     },
     {
-      "title": "LGS-Q-004-2026 Audio Visual System",
+      "title": "Post-16 SEND - Soft Market Engagement",
       "issuer": "UK Cabinet Office",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f946",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077661",
       "summary": "",
-      "eligibility": "Suitable for SME & VCSE",
+      "eligibility": "",
       "amountText": "",
       "deadlineText": "30 September 2026",
       "quote": "",
       "sourceId": "uk-find-a-tender",
-      "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
+      "contentHash": "31339582d07ee41dbd87e71a3d617e888e326151166da32ad6f4b21ef879a256",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
+          "sourceArtifactId": "scout-uk-find-a-tender-31339582d07e",
           "locator": {
             "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f946"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "eligibility",
-          "normalizedValue": "Suitable for SME & VCSE",
-          "originalSourceText": "Suitable for SME & VCSE"
-        },
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f946"
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077661"
           },
           "extractionMethod": "llm",
           "extractingProvider": "mistral",
@@ -3991,40 +2873,24 @@
       ]
     },
     {
-      "title": "TWBC - Assembly Hall Theatre Security",
+      "title": "Derby Diocesan Academy Trust - Supply of Electricity",
       "issuer": "UK Cabinet Office",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773d9",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-07765f",
       "summary": "",
-      "eligibility": "Suitable for SME & VCSE",
+      "eligibility": "",
       "amountText": "",
-      "deadlineText": "21 October 2026",
+      "deadlineText": "1 October 2026",
       "quote": "",
       "sourceId": "uk-find-a-tender",
-      "contentHash": "03f06632d34053e7a6cc9896e2d58dde1e933d6705c1368875f888358df32877",
+      "contentHash": "31339582d07ee41dbd87e71a3d617e888e326151166da32ad6f4b21ef879a256",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
+          "sourceArtifactId": "scout-uk-find-a-tender-31339582d07e",
           "locator": {
             "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773d9"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "eligibility",
-          "normalizedValue": "Suitable for SME & VCSE",
-          "originalSourceText": "Suitable for SME & VCSE"
-        },
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-uk-find-a-tender-03f06632d340",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773d9"
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-07765f"
           },
           "extractionMethod": "llm",
           "extractingProvider": "mistral",
@@ -4032,27 +2898,461 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "21 October 2026",
-          "originalSourceText": "21 October 2026"
+          "normalizedValue": "1 October 2026",
+          "originalSourceText": "1 October 2026"
         }
       ]
     },
     {
-      "title": "Producción de actividades deportivas, lúdicas y artísticas",
+      "title": "Derby Diocesan Academy Trust - Supply of Gas",
+      "issuer": "UK Cabinet Office",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-07765b",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "1 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "31339582d07ee41dbd87e71a3d617e888e326151166da32ad6f4b21ef879a256",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-31339582d07e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-07765b"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "1 October 2026",
+          "originalSourceText": "1 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "COV - West Midlands Children's Regional Residential Care Framework",
+      "issuer": "UK Cabinet Office",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077659",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "23 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "31339582d07ee41dbd87e71a3d617e888e326151166da32ad6f4b21ef879a256",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-31339582d07e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077659"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "23 October 2026",
+          "originalSourceText": "23 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "Financial Advisor",
+      "issuer": "UK Cabinet Office",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077630",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "5 October 2026 (estimated tender publication date)",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "31339582d07ee41dbd87e71a3d617e888e326151166da32ad6f4b21ef879a256",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-31339582d07e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077630"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "5 October 2026 (estimated tender publication date)",
+          "originalSourceText": "5 October 2026 (estimated tender publication date)"
+        }
+      ]
+    },
+    {
+      "title": "Distribution Board Replacement, heating works (environmental controls) and Replacement of Gymnasium Lighting, College of Policing Ryton",
+      "issuer": "UK Cabinet Office",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-07764d",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "8 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "31339582d07ee41dbd87e71a3d617e888e326151166da32ad6f4b21ef879a256",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-31339582d07e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-07764d"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "8 October 2026",
+          "originalSourceText": "8 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "SPC Grounds maintenance contract",
+      "issuer": "UK Cabinet Office",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-07764a",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "30 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "31339582d07ee41dbd87e71a3d617e888e326151166da32ad6f4b21ef879a256",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-31339582d07e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-07764a"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "30 October 2026",
+          "originalSourceText": "30 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "Terra Nova Construction Materials",
+      "issuer": "UK Cabinet Office",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-069f8b",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "19 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "31339582d07ee41dbd87e71a3d617e888e326151166da32ad6f4b21ef879a256",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-31339582d07e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-069f8b"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "19 October 2026",
+          "originalSourceText": "19 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "University of Huddersfield- Inspection & testing of emergency lighting systems",
+      "issuer": "UK Cabinet Office",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077649",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "19 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "31339582d07ee41dbd87e71a3d617e888e326151166da32ad6f4b21ef879a256",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-31339582d07e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077649"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "19 October 2026",
+          "originalSourceText": "19 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "Lancaster Farms - Therapeutic Community Plus Service",
+      "issuer": "UK Cabinet Office",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077644",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "30 October 2026 (estimated tender or transparency notice publication date)",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "31339582d07ee41dbd87e71a3d617e888e326151166da32ad6f4b21ef879a256",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-31339582d07e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077644"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "30 October 2026 (estimated tender or transparency notice publication date)",
+          "originalSourceText": "30 October 2026 (estimated tender or transparency notice publication date)"
+        }
+      ]
+    },
+    {
+      "title": "Rail Replacement Service - Bus and Coach Operators",
+      "issuer": "UK Cabinet Office",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773c0",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "28 September 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "31339582d07ee41dbd87e71a3d617e888e326151166da32ad6f4b21ef879a256",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-31339582d07e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773c0"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "28 September 2026",
+          "originalSourceText": "28 September 2026"
+        }
+      ]
+    },
+    {
+      "title": "External Planned Maintenance",
+      "issuer": "UK Cabinet Office",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077643",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "23 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "31339582d07ee41dbd87e71a3d617e888e326151166da32ad6f4b21ef879a256",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-31339582d07e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077643"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "23 October 2026",
+          "originalSourceText": "23 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "Hydrogen Peroxide Generator",
+      "issuer": "UK Cabinet Office",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06c6fe",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "19 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "31339582d07ee41dbd87e71a3d617e888e326151166da32ad6f4b21ef879a256",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-31339582d07e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06c6fe"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "19 October 2026",
+          "originalSourceText": "19 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "NHS National Framework for Generics Orals, Non-Parenteral & Housekeeping",
+      "issuer": "UK Cabinet Office",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f21e",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "19 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "31339582d07ee41dbd87e71a3d617e888e326151166da32ad6f4b21ef879a256",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-31339582d07e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f21e"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "19 October 2026",
+          "originalSourceText": "19 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "James Rennie School at Bishop Harvey Goodwin School, Carlisle - Consultancy Services",
+      "issuer": "UK Cabinet Office",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077640",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "19 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "31339582d07ee41dbd87e71a3d617e888e326151166da32ad6f4b21ef879a256",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-31339582d07e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077640"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "19 October 2026",
+          "originalSourceText": "19 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "Streetlighting Services - Maintenance & Capital programme",
+      "issuer": "UK Cabinet Office",
+      "kind": "GRANT",
+      "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-07763c",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "17 October 2026",
+      "quote": "",
+      "sourceId": "uk-find-a-tender",
+      "contentHash": "31339582d07ee41dbd87e71a3d617e888e326151166da32ad6f4b21ef879a256",
+      "facts": [
+        {
+          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
+          "sourceArtifactId": "scout-uk-find-a-tender-31339582d07e",
+          "locator": {
+            "type": "DOCUMENT_SECTION",
+            "value": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-07763c"
+          },
+          "extractionMethod": "llm",
+          "extractingProvider": "mistral",
+          "extractingModel": "mistral-large-latest",
+          "extractionConfidence": 0.5,
+          "validationResult": "unchecked",
+          "field": "deadline_text",
+          "normalizedValue": "17 October 2026",
+          "originalSourceText": "17 October 2026"
+        }
+      ]
+    },
+    {
+      "title": "Provision of Assessment and Design of IT Systems and Technical Supervision",
       "issuer": "United Nations",
       "kind": "GRANT",
       "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "16-Sep-2026 17:00 (GMT -5.00) Expires within 24 hours",
+      "deadlineText": "21-Sep-2026 09:00 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -4063,27 +3363,27 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "16-Sep-2026 17:00 (GMT -5.00) Expires within 24 hours",
-          "originalSourceText": "16-Sep-2026 17:00 (GMT -5.00) Expires within 24 hours"
+          "normalizedValue": "21-Sep-2026 09:00 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "21-Sep-2026 09:00 (GMT -4.00) Expires within 24 hours"
         }
       ]
     },
     {
-      "title": "Consultancy firm to provide Market Access and Commercialization Partner",
+      "title": "Preventive works at 2 sites",
       "issuer": "United Nations",
       "kind": "GRANT",
       "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "16-Sep-2026 17:59 (GMT -4.00) Expires within 24 hours",
+      "deadlineText": "21-Sep-2026 09:00 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -4094,27 +3394,27 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "16-Sep-2026 17:59 (GMT -4.00) Expires within 24 hours",
-          "originalSourceText": "16-Sep-2026 17:59 (GMT -4.00) Expires within 24 hours"
+          "normalizedValue": "21-Sep-2026 09:00 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "21-Sep-2026 09:00 (GMT -4.00) Expires within 24 hours"
         }
       ]
     },
     {
-      "title": "01 National Consultancy Firm for Conducting a survey and assessment",
+      "title": "Development of an Integrated Action Plan to Reduce Dust Emissions",
       "issuer": "United Nations",
       "kind": "GRANT",
       "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "16-Sep-2026 23:00 (GMT -4.00) Expires within 24 hours",
+      "deadlineText": "21-Sep-2026 09:00 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -4125,27 +3425,27 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "16-Sep-2026 23:00 (GMT -4.00) Expires within 24 hours",
-          "originalSourceText": "16-Sep-2026 23:00 (GMT -4.00) Expires within 24 hours"
+          "normalizedValue": "21-Sep-2026 09:00 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "21-Sep-2026 09:00 (GMT -4.00) Expires within 24 hours"
         }
       ]
     },
     {
-      "title": "RFQ_Procurement of market equipment for markets in Fiji",
+      "title": "GTP-ITB-Civil Works on Three Public Buildings in Bosnia and Herzegovina",
       "issuer": "United Nations",
       "kind": "GRANT",
       "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "16-Sep-2026 23:41 (GMT -4.00) Expires within 24 hours",
+      "deadlineText": "21-Sep-2026 09:00 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -4156,27 +3456,27 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "16-Sep-2026 23:41 (GMT -4.00) Expires within 24 hours",
-          "originalSourceText": "16-Sep-2026 23:41 (GMT -4.00) Expires within 24 hours"
+          "normalizedValue": "21-Sep-2026 09:00 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "21-Sep-2026 09:00 (GMT -4.00) Expires within 24 hours"
         }
       ]
     },
     {
-      "title": "RFP/AFRO/019/2026-Technical Support for Health Technology Access Pool (HTAP) and WHO AFRO Programs for In Vitro Diagnostics (IVDs)",
+      "title": "EUFRP-RFQ-Supervision of construction works in flood affected areas",
       "issuer": "United Nations",
       "kind": "GRANT",
       "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "16-Sep-2026 23:59 (GMT 1.00) Expires within 24 hours",
+      "deadlineText": "21-Sep-2026 09:00 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -4187,27 +3487,27 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "16-Sep-2026 23:59 (GMT 1.00) Expires within 24 hours",
-          "originalSourceText": "16-Sep-2026 23:59 (GMT 1.00) Expires within 24 hours"
+          "normalizedValue": "21-Sep-2026 09:00 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "21-Sep-2026 09:00 (GMT -4.00) Expires within 24 hours"
         }
       ]
     },
     {
-      "title": "Building the Technical Architecture of the General Education Certificate (GEC)",
+      "title": "Etude de capitalisation des expériences de gestion des risques d’inondations",
       "issuer": "United Nations",
       "kind": "GRANT",
       "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours",
+      "deadlineText": "21-Sep-2026 09:22 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -4218,27 +3518,27 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours",
-          "originalSourceText": "16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours"
+          "normalizedValue": "21-Sep-2026 09:22 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "21-Sep-2026 09:22 (GMT -4.00) Expires within 24 hours"
         }
       ]
     },
     {
-      "title": "137883 SEMOVIENTES HUILA",
+      "title": "ITB26/03280: JET/ Smart Electricity Meters and Data Concentrators",
       "issuer": "United Nations",
       "kind": "GRANT",
       "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "16-Sep-2026 23:59 (GMT -5.00) Expires within 24 hours",
+      "deadlineText": "21-Sep-2026 09:30 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -4249,27 +3549,27 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "16-Sep-2026 23:59 (GMT -5.00) Expires within 24 hours",
-          "originalSourceText": "16-Sep-2026 23:59 (GMT -5.00) Expires within 24 hours"
+          "normalizedValue": "21-Sep-2026 09:30 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "21-Sep-2026 09:30 (GMT -4.00) Expires within 24 hours"
         }
       ]
     },
     {
-      "title": "Intercultural Trainings Kompass II",
+      "title": "RfP26/03357:GTF/Company to Conduct Integrated Assessment of Information System",
       "issuer": "United Nations",
       "kind": "GRANT",
       "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "16-Sep-2026 23:59 (GMT 0.00) Expires within 24 hours",
+      "deadlineText": "21-Sep-2026 09:30 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -4280,27 +3580,27 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "16-Sep-2026 23:59 (GMT 0.00) Expires within 24 hours",
-          "originalSourceText": "16-Sep-2026 23:59 (GMT 0.00) Expires within 24 hours"
+          "normalizedValue": "21-Sep-2026 09:30 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "21-Sep-2026 09:30 (GMT -4.00) Expires within 24 hours"
         }
       ]
     },
     {
-      "title": "138200 SUMINISTRO DE ANIMALES DE PRODUCCIÓN PECUARIA – AVES DE POSTURA Y PORCINOS DE LEVANTE, DPTO. DE CÓRDOBA",
+      "title": "ITB26/03325:MFA-Support/Renovation and Modernization Works at the MFA Premises",
       "issuer": "United Nations",
       "kind": "GRANT",
       "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "16-Sep-2026 23:59 (GMT -5.00) Expires within 24 hours",
+      "deadlineText": "21-Sep-2026 09:30 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -4311,27 +3611,27 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "16-Sep-2026 23:59 (GMT -5.00) Expires within 24 hours",
-          "originalSourceText": "16-Sep-2026 23:59 (GMT -5.00) Expires within 24 hours"
+          "normalizedValue": "21-Sep-2026 09:30 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "21-Sep-2026 09:30 (GMT -4.00) Expires within 24 hours"
         }
       ]
     },
     {
-      "title": "Consultancy to support the development of a Framework of Action on Skills for a Just Energy Transition through Social Dialogue in Mpumalanga and the Eastern Cape",
+      "title": "Local Consultant – Applied AI and Digital Skills Trainer for Youth",
       "issuer": "United Nations",
       "kind": "GRANT",
       "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours",
+      "deadlineText": "21-Sep-2026 09:30 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -4342,27 +3642,27 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours",
-          "originalSourceText": "16-Sep-2026 23:59 (GMT 2.00) Expires within 24 hours"
+          "normalizedValue": "21-Sep-2026 09:30 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "21-Sep-2026 09:30 (GMT -4.00) Expires within 24 hours"
         }
       ]
     },
     {
-      "title": "Provision of Managed Print Services for ESCAP and Other Clients in Bangkok",
+      "title": "Skills Needs, Curriculum Development & Training for Solar-Powered Cold Storage",
       "issuer": "United Nations",
       "kind": "GRANT",
       "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "16-Sep-2026 23:59 (GMT -4.00) Expires within 24 hours",
+      "deadlineText": "21-Sep-2026 10:00 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -4373,27 +3673,27 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "16-Sep-2026 23:59 (GMT -4.00) Expires within 24 hours",
-          "originalSourceText": "16-Sep-2026 23:59 (GMT -4.00) Expires within 24 hours"
+          "normalizedValue": "21-Sep-2026 10:00 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "21-Sep-2026 10:00 (GMT -4.00) Expires within 24 hours"
         }
       ]
     },
     {
-      "title": "Provision of Chilled water Cenrtifugal Pump",
+      "title": "Policy & Regulatory Reviews to Promote Solar – Powered Cold Chain Development",
       "issuer": "United Nations",
       "kind": "GRANT",
       "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "16-Sep-2026 23:59 (GMT -4.00) Expires within 24 hours",
+      "deadlineText": "21-Sep-2026 10:00 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -4404,27 +3704,27 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "16-Sep-2026 23:59 (GMT -4.00) Expires within 24 hours",
-          "originalSourceText": "16-Sep-2026 23:59 (GMT -4.00) Expires within 24 hours"
+          "normalizedValue": "21-Sep-2026 10:00 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "21-Sep-2026 10:00 (GMT -4.00) Expires within 24 hours"
         }
       ]
     },
     {
-      "title": "Invitation to Bid – Long-Term Agreement (LTA) for Provision of Prepaid Stored-Value Cards (Gift Cards) in Poland",
+      "title": "Behaviour Change & Market Campaign for Solar-Powered Cold Storage in Kenya",
       "issuer": "United Nations",
       "kind": "GRANT",
       "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "17-Sep-2026 00:00 (GMT 1.00) Expires within 24 hours",
+      "deadlineText": "21-Sep-2026 10:00 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -4435,27 +3735,27 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "17-Sep-2026 00:00 (GMT 1.00) Expires within 24 hours",
-          "originalSourceText": "17-Sep-2026 00:00 (GMT 1.00) Expires within 24 hours"
+          "normalizedValue": "21-Sep-2026 10:00 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "21-Sep-2026 10:00 (GMT -4.00) Expires within 24 hours"
         }
       ]
     },
     {
-      "title": "FOR THE SUPPLY AND DELIVERY (DDP) OF VEHICLE, CONSUMABLES, AND SPARES TO UNHCR GEDAREF OPERATIONS-COR",
+      "title": "Applied AI and Digital Skill Trainer - Local Governments and NGO representatives",
       "issuer": "United Nations",
       "kind": "GRANT",
       "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "17-Sep-2026 00:00 (GMT -10.00) Expires within 24 hours",
+      "deadlineText": "21-Sep-2026 10:00 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -4466,27 +3766,27 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "17-Sep-2026 00:00 (GMT -10.00) Expires within 24 hours",
-          "originalSourceText": "17-Sep-2026 00:00 (GMT -10.00) Expires within 24 hours"
+          "normalizedValue": "21-Sep-2026 10:00 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "21-Sep-2026 10:00 (GMT -4.00) Expires within 24 hours"
         }
       ]
     },
     {
-      "title": "FOR THE SUPPLY AND DELIVERY (DDP) OF VEHICLE, CONSUMABLES, AND SPARE PARTS TO UNHCR GEDAREF OPERATIONS",
+      "title": "National Firm to support preparation of Uganda Tourism Development Master Plan",
       "issuer": "United Nations",
       "kind": "GRANT",
       "sourceUrl": "https://www.ungm.org/Public/Notice",
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "17-Sep-2026 00:00 (GMT -10.00) Expires within 24 hours",
+      "deadlineText": "21-Sep-2026 10:00 (GMT -4.00) Expires within 24 hours",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Public/Notice"
@@ -4497,61 +3797,30 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "17-Sep-2026 00:00 (GMT -10.00) Expires within 24 hours",
-          "originalSourceText": "17-Sep-2026 00:00 (GMT -10.00) Expires within 24 hours"
+          "normalizedValue": "21-Sep-2026 10:00 (GMT -4.00) Expires within 24 hours",
+          "originalSourceText": "21-Sep-2026 10:00 (GMT -4.00) Expires within 24 hours"
         }
       ]
     },
     {
-      "title": "International Procurement Seminars (IPS)",
+      "title": "Nordic UN Procurement Seminar 2025",
       "issuer": "United Nations",
       "kind": "TENDER",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/VBS_BusSeminar",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS38_6_3_2025_to_6_3_2025",
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "",
-      "quote": "International Procurement Seminars (IPS) provide a unique opportunity for vendors to learn about procurement processes and business opportunities within the UN system.",
-      "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/VBS_BusSeminar"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "scope",
-          "normalizedValue": "International Procurement Seminars (IPS) provide a unique opportunity for vendors to learn about procurement processes and business opportunities within the UN system.",
-          "originalSourceText": "International Procurement Seminars (IPS) provide a unique opportunity for vendors to learn about procurement processes and business opportunities within the UN system."
-        }
-      ]
-    },
-    {
-      "title": "IPS, Vienna, June 2026",
-      "issuer": "United Nations",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJUNE2026",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "June 2026",
+      "deadlineText": "03-Jun-2025",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJUNE2026"
+            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS38_6_3_2025_to_6_3_2025"
           },
           "extractionMethod": "llm",
           "extractingProvider": "mistral",
@@ -4559,504 +3828,8 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "June 2026",
-          "originalSourceText": "June 2026"
-        }
-      ]
-    },
-    {
-      "title": "IPS, Geneva, November 2025",
-      "issuer": "United Nations",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSNOVEMBER2025",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "November 2025",
-      "quote": "",
-      "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSNOVEMBER2025"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "November 2025",
-          "originalSourceText": "November 2025"
-        }
-      ]
-    },
-    {
-      "title": "IPS, Copenhagen, June 2025",
-      "issuer": "United Nations",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJUNE2025",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "June 2025",
-      "quote": "",
-      "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJUNE2025"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "June 2025",
-          "originalSourceText": "June 2025"
-        }
-      ]
-    },
-    {
-      "title": "IPS, Copenhagen, March 2025",
-      "issuer": "United Nations",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSMARCH2025",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "March 2025",
-      "quote": "",
-      "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSMARCH2025"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "March 2025",
-          "originalSourceText": "March 2025"
-        }
-      ]
-    },
-    {
-      "title": "IPS, China, November 2024",
-      "issuer": "United Nations",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSNovember2024",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "November 2024",
-      "quote": "",
-      "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSNovember2024"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "November 2024",
-          "originalSourceText": "November 2024"
-        }
-      ]
-    },
-    {
-      "title": "IPS, Copenhagen, June 2024",
-      "issuer": "United Nations",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJune2024",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "June 2024",
-      "quote": "",
-      "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJune2024"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "June 2024",
-          "originalSourceText": "June 2024"
-        }
-      ]
-    },
-    {
-      "title": "IPS, Copenhagen, November 2023",
-      "issuer": "United Nations",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSNovember2023",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "November 2023",
-      "quote": "",
-      "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSNovember2023"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "November 2023",
-          "originalSourceText": "November 2023"
-        }
-      ]
-    },
-    {
-      "title": "IPS, Copenhagen, March 2023",
-      "issuer": "United Nations",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSMarch2023",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "March 2023",
-      "quote": "",
-      "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSMarch2023"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "March 2023",
-          "originalSourceText": "March 2023"
-        }
-      ]
-    },
-    {
-      "title": "IPS, Turin, November 2022",
-      "issuer": "United Nations",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSNov2022",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "November 2022",
-      "quote": "",
-      "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSNov2022"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "November 2022",
-          "originalSourceText": "November 2022"
-        }
-      ]
-    },
-    {
-      "title": "IPS, Vienna, April 2022",
-      "issuer": "United Nations",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSApril2022",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "April 2022",
-      "quote": "",
-      "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSApril2022"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "April 2022",
-          "originalSourceText": "April 2022"
-        }
-      ]
-    },
-    {
-      "title": "IPS, European Consortium [2], June 2021",
-      "issuer": "United Nations",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJune2021",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "June 2021",
-      "quote": "",
-      "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJune2021"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "June 2021",
-          "originalSourceText": "June 2021"
-        }
-      ]
-    },
-    {
-      "title": "IPS, European Consortium [1], January 2021",
-      "issuer": "United Nations",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJan22021",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "January 2021",
-      "quote": "",
-      "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJan22021"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "January 2021",
-          "originalSourceText": "January 2021"
-        }
-      ]
-    },
-    {
-      "title": "IPS, Nordic Countries, January 2021",
-      "issuer": "United Nations",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJan2021",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "January 2021",
-      "quote": "",
-      "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJan2021"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "January 2021",
-          "originalSourceText": "January 2021"
-        }
-      ]
-    },
-    {
-      "title": "IPS, Argentina, November 2019",
-      "issuer": "United Nations",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSNov2019",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "November 2019",
-      "quote": "",
-      "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSNov2019"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "November 2019",
-          "originalSourceText": "November 2019"
-        }
-      ]
-    },
-    {
-      "title": "IPS, Copenhagen, June 2019",
-      "issuer": "United Nations",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJune2019",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "June 2019",
-      "quote": "",
-      "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPSJune2019"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "June 2019",
-          "originalSourceText": "June 2019"
-        }
-      ]
-    },
-    {
-      "title": "IPS, Rome, May 2019",
-      "issuer": "United Nations",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS_Rome",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "May 2019",
-      "quote": "",
-      "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS_Rome"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "May 2019",
-          "originalSourceText": "May 2019"
-        }
-      ]
-    },
-    {
-      "title": "Nordic UN Procurement Seminar 2025, June 2025",
-      "issuer": "United Nations",
-      "kind": "TENDER",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS32_6_10_2025_to_6_11_2025",
-      "summary": "",
-      "eligibility": "",
-      "amountText": "",
-      "deadlineText": "June 2025",
-      "quote": "",
-      "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS32_6_10_2025_to_6_11_2025"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "June 2025",
-          "originalSourceText": "June 2025"
+          "normalizedValue": "03-Jun-2025",
+          "originalSourceText": "03-Jun-2025"
         }
       ]
     },
@@ -5068,14 +3841,14 @@
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "May 2025",
+      "deadlineText": "19-May-2025 to 20-May-2025",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS34_5_19_2025_to_5_20_2025"
@@ -5086,8 +3859,8 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "May 2025",
-          "originalSourceText": "May 2025"
+          "normalizedValue": "19-May-2025 to 20-May-2025",
+          "originalSourceText": "19-May-2025 to 20-May-2025"
         }
       ]
     },
@@ -5099,14 +3872,14 @@
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "11-12 March 2025",
+      "deadlineText": "11-Mar-2025 to 12-Mar-2025",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS31_3_11_2025_to_3_12_2025"
@@ -5117,8 +3890,8 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "11-12 March 2025",
-          "originalSourceText": "11-12 March 2025"
+          "normalizedValue": "11-Mar-2025 to 12-Mar-2025",
+          "originalSourceText": "11-Mar-2025 to 12-Mar-2025"
         }
       ]
     },
@@ -5130,14 +3903,14 @@
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "November 2024",
+      "deadlineText": "13-Nov-2024 to 14-Nov-2024",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS30_11_13_2024_to_11_14_2024"
@@ -5148,8 +3921,8 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "November 2024",
-          "originalSourceText": "November 2024"
+          "normalizedValue": "13-Nov-2024 to 14-Nov-2024",
+          "originalSourceText": "13-Nov-2024 to 14-Nov-2024"
         }
       ]
     },
@@ -5161,14 +3934,14 @@
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "June 2024",
+      "deadlineText": "11-Jun-2024 to 12-Jun-2024",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS28_6_11_2024_to_6_12_2024"
@@ -5179,8 +3952,8 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "June 2024",
-          "originalSourceText": "June 2024"
+          "normalizedValue": "11-Jun-2024 to 12-Jun-2024",
+          "originalSourceText": "11-Jun-2024 to 12-Jun-2024"
         }
       ]
     },
@@ -5192,14 +3965,14 @@
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "March 2024",
+      "deadlineText": "20-Mar-2024 to 21-Mar-2024",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS27_3_20_2024_to_3_21_2024"
@@ -5210,8 +3983,8 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "March 2024",
-          "originalSourceText": "March 2024"
+          "normalizedValue": "20-Mar-2024 to 21-Mar-2024",
+          "originalSourceText": "20-Mar-2024 to 21-Mar-2024"
         }
       ]
     },
@@ -5223,14 +3996,14 @@
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "2024",
+      "deadlineText": "27-Feb-2024",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS29_2_27_2024_to_2_27_2024"
@@ -5241,8 +4014,8 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "2024",
-          "originalSourceText": "2024"
+          "normalizedValue": "27-Feb-2024",
+          "originalSourceText": "27-Feb-2024"
         }
       ]
     },
@@ -5250,21 +4023,21 @@
       "title": "Nordic UN Procurement Seminar 2023",
       "issuer": "United Nations",
       "kind": "TENDER",
-      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS24_11_14_2023_to_11_15_2023",
+      "sourceUrl": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS23_6_14_2023_to_6_14_2023",
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "2023",
+      "deadlineText": "14-Jun-2023 to 15-Jun-2023",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS24_11_14_2023_to_11_15_2023"
+            "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS23_6_14_2023_to_6_14_2023"
           },
           "extractionMethod": "llm",
           "extractingProvider": "mistral",
@@ -5272,8 +4045,8 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "2023",
-          "originalSourceText": "2023"
+          "normalizedValue": "14-Jun-2023 to 15-Jun-2023",
+          "originalSourceText": "14-Jun-2023 to 15-Jun-2023"
         }
       ]
     },
@@ -5285,14 +4058,14 @@
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "February 2025",
+      "deadlineText": "18-Feb-2025",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS33_2_18_2025_to_2_18_2025"
@@ -5303,8 +4076,8 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "February 2025",
-          "originalSourceText": "February 2025"
+          "normalizedValue": "18-Feb-2025",
+          "originalSourceText": "18-Feb-2025"
         }
       ]
     },
@@ -5319,7 +4092,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": []
     },
     {
@@ -5333,7 +4106,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": []
     },
     {
@@ -5347,7 +4120,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": []
     },
     {
@@ -5361,7 +4134,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": []
     },
     {
@@ -5375,7 +4148,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": []
     },
     {
@@ -5389,7 +4162,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": []
     },
     {
@@ -5403,7 +4176,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": []
     },
     {
@@ -5414,14 +4187,14 @@
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "June 2026",
+      "deadlineText": "09-Jun-2026 to 10-Jun-2026",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": [
         {
           "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
+          "sourceArtifactId": "scout-ungm-059eeca6070a",
           "locator": {
             "type": "DOCUMENT_SECTION",
             "value": "https://www.ungm.org/Shared/KnowledgeCenter/Pages/IPS45_6_9_2026_to_6_10_2026"
@@ -5432,8 +4205,8 @@
           "extractionConfidence": 0.5,
           "validationResult": "unchecked",
           "field": "deadline_text",
-          "normalizedValue": "June 2026",
-          "originalSourceText": "June 2026"
+          "normalizedValue": "09-Jun-2026 to 10-Jun-2026",
+          "originalSourceText": "09-Jun-2026 to 10-Jun-2026"
         }
       ]
     },
@@ -5448,7 +4221,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": []
     },
     {
@@ -5462,7 +4235,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": []
     },
     {
@@ -5476,7 +4249,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": []
     },
     {
@@ -5487,28 +4260,11 @@
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "2026",
+      "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Public/Notice"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "2026",
-          "originalSourceText": "2026"
-        }
-      ]
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
+      "facts": []
     },
     {
       "title": "Deep Wave 2026",
@@ -5518,28 +4274,11 @@
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "2026",
+      "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Public/Notice"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "2026",
-          "originalSourceText": "2026"
-        }
-      ]
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
+      "facts": []
     },
     {
       "title": "UN Procurement Business Seminar for Tanzanian vendors 2026",
@@ -5549,28 +4288,11 @@
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "2026",
+      "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Public/Notice"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "2026",
-          "originalSourceText": "2026"
-        }
-      ]
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
+      "facts": []
     },
     {
       "title": "Lesotho Business Seminar",
@@ -5583,7 +4305,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": []
     },
     {
@@ -5597,7 +4319,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": []
     },
     {
@@ -5611,7 +4333,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": []
     },
     {
@@ -5625,7 +4347,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": []
     },
     {
@@ -5639,7 +4361,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": []
     },
     {
@@ -5653,7 +4375,7 @@
       "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
       "facts": []
     },
     {
@@ -5664,28 +4386,11 @@
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "2026",
+      "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Public/Notice"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "2026",
-          "originalSourceText": "2026"
-        }
-      ]
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
+      "facts": []
     },
     {
       "title": "The United Nations International Procurement Seminar — Jordan 2026",
@@ -5695,28 +4400,11 @@
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "2026",
+      "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Public/Notice"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "2026",
-          "originalSourceText": "2026"
-        }
-      ]
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
+      "facts": []
     },
     {
       "title": "United Nations Virtual Business Seminar: Bangladesh 2026",
@@ -5726,28 +4414,11 @@
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "2026",
+      "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Public/Notice"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "2026",
-          "originalSourceText": "2026"
-        }
-      ]
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
+      "facts": []
     },
     {
       "title": "United Nations Virtual Business Seminar: Cambodia 2026",
@@ -5757,28 +4428,11 @@
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "2026",
+      "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Public/Notice"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "2026",
-          "originalSourceText": "2026"
-        }
-      ]
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
+      "facts": []
     },
     {
       "title": "Séminaire virtuel des Nations Unies à l'intention des fournisseurs algériens 2026",
@@ -5788,39 +4442,302 @@
       "summary": "",
       "eligibility": "",
       "amountText": "",
-      "deadlineText": "2026",
+      "deadlineText": "",
       "quote": "",
       "sourceId": "ungm",
-      "contentHash": "55e98d509841e2c1ef0765aa0bdc532832d081fe1b12976ae5c13d6ea14e8ebe",
-      "facts": [
-        {
-          "classification": "EXTRACTED_FROM_OFFICIAL_SOURCE",
-          "sourceArtifactId": "scout-ungm-55e98d509841",
-          "locator": {
-            "type": "DOCUMENT_SECTION",
-            "value": "https://www.ungm.org/Public/Notice"
-          },
-          "extractionMethod": "llm",
-          "extractingProvider": "mistral",
-          "extractingModel": "mistral-large-latest",
-          "extractionConfidence": 0.5,
-          "validationResult": "unchecked",
-          "field": "deadline_text",
-          "normalizedValue": "2026",
-          "originalSourceText": "2026"
-        }
-      ]
+      "contentHash": "059eeca6070abd278631d1df29bff952dbb6d08b2afd0a5642a166731828d104",
+      "facts": []
+    },
+    {
+      "title": "ADQUISICIÓN DE EQUIPAMIENTO PARA COLABORACIÓN DIGITAL, VIDEOCONFERENCIA Y GESTIÓN DOCUMENTAL INSTITUCIONAL",
+      "issuer": "Multilateral development banks",
+      "kind": "GRANT",
+      "sourceUrl": "https://projects.worldbank.org/en/projects-operations/opportunities?srce=both",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "worldbank-afdb-ebrd",
+      "contentHash": "29e800b246aef978e905ae8685bf26274d6ed3b9d5ef4338f50e411728000ae0",
+      "facts": []
+    },
+    {
+      "title": "Acquisition lots des meilleurs adoptants TMDH rural et urbain",
+      "issuer": "Multilateral development banks",
+      "kind": "GRANT",
+      "sourceUrl": "https://projects.worldbank.org/en/projects-operations/opportunities?srce=both",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "worldbank-afdb-ebrd",
+      "contentHash": "29e800b246aef978e905ae8685bf26274d6ed3b9d5ef4338f50e411728000ae0",
+      "facts": []
+    },
+    {
+      "title": "Construction of Shreebhawar Dogad-Garje Road and Dogad Khola Bridge, Baitadi District",
+      "issuer": "Multilateral development banks",
+      "kind": "GRANT",
+      "sourceUrl": "https://projects.worldbank.org/en/projects-operations/opportunities?srce=both",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "worldbank-afdb-ebrd",
+      "contentHash": "29e800b246aef978e905ae8685bf26274d6ed3b9d5ef4338f50e411728000ae0",
+      "facts": []
+    },
+    {
+      "title": "Procurement of BPNS commodity- Micronutrient Powder",
+      "issuer": "Multilateral development banks",
+      "kind": "GRANT",
+      "sourceUrl": "https://projects.worldbank.org/en/projects-operations/opportunities?srce=both",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "worldbank-afdb-ebrd",
+      "contentHash": "29e800b246aef978e905ae8685bf26274d6ed3b9d5ef4338f50e411728000ae0",
+      "facts": []
+    },
+    {
+      "title": "ADQUISICIÓN DE SISTEMA DE ALMACENAMIENTO CENTRALIZADO (NAS) PARA EL FORTALECIMIENTO DE LA INFRAESTRUCTURA TECNOLÓGICA INSTITUCIONAL",
+      "issuer": "Multilateral development banks",
+      "kind": "GRANT",
+      "sourceUrl": "https://projects.worldbank.org/en/projects-operations/opportunities?srce=both",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "worldbank-afdb-ebrd",
+      "contentHash": "29e800b246aef978e905ae8685bf26274d6ed3b9d5ef4338f50e411728000ae0",
+      "facts": []
+    },
+    {
+      "title": "Social Specialist (local)",
+      "issuer": "Multilateral development banks",
+      "kind": "GRANT",
+      "sourceUrl": "https://projects.worldbank.org/en/projects-operations/opportunities?srce=both",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "worldbank-afdb-ebrd",
+      "contentHash": "29e800b246aef978e905ae8685bf26274d6ed3b9d5ef4338f50e411728000ae0",
+      "facts": []
+    },
+    {
+      "title": "Procurement of BPNS commodity- Ready to Use Therapeutic food (RUTF)",
+      "issuer": "Multilateral development banks",
+      "kind": "GRANT",
+      "sourceUrl": "https://projects.worldbank.org/en/projects-operations/opportunities?srce=both",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "worldbank-afdb-ebrd",
+      "contentHash": "29e800b246aef978e905ae8685bf26274d6ed3b9d5ef4338f50e411728000ae0",
+      "facts": []
+    },
+    {
+      "title": "Travaux de reconstruction des infrastructures communautaires de base endommagées par des catastrophes naturelles répartis en huit (08) lots",
+      "issuer": "Multilateral development banks",
+      "kind": "GRANT",
+      "sourceUrl": "https://projects.worldbank.org/en/projects-operations/opportunities?srce=both",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "worldbank-afdb-ebrd",
+      "contentHash": "29e800b246aef978e905ae8685bf26274d6ed3b9d5ef4338f50e411728000ae0",
+      "facts": []
+    },
+    {
+      "title": "Maintenance of road through Piloting of Performance Based Maintenance Contract (PBMC) of Wangdue Zam to Chuserbu (76.3Km) and Lawala to Phobjikha (17.24Km)",
+      "issuer": "Multilateral development banks",
+      "kind": "GRANT",
+      "sourceUrl": "https://projects.worldbank.org/en/projects-operations/opportunities?srce=both",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "worldbank-afdb-ebrd",
+      "contentHash": "29e800b246aef978e905ae8685bf26274d6ed3b9d5ef4338f50e411728000ae0",
+      "facts": []
+    },
+    {
+      "title": "Supply of 29 Fully Equipped Ambulances for the Ministry of Public Health",
+      "issuer": "Multilateral development banks",
+      "kind": "GRANT",
+      "sourceUrl": "https://projects.worldbank.org/en/projects-operations/opportunities?srce=both",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "worldbank-afdb-ebrd",
+      "contentHash": "29e800b246aef978e905ae8685bf26274d6ed3b9d5ef4338f50e411728000ae0",
+      "facts": []
+    },
+    {
+      "title": "Recrutement d'un Spécialiste en Suivi Evaluation de la CPU",
+      "issuer": "Multilateral development banks",
+      "kind": "GRANT",
+      "sourceUrl": "https://projects.worldbank.org/en/projects-operations/opportunities?srce=both",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "worldbank-afdb-ebrd",
+      "contentHash": "29e800b246aef978e905ae8685bf26274d6ed3b9d5ef4338f50e411728000ae0",
+      "facts": []
+    },
+    {
+      "title": "RECRUTEMENT D'UNE FIRME POUR LA REALISATION DE L'ENQUETE SUR LA SECURITE SANITAIRE",
+      "issuer": "Multilateral development banks",
+      "kind": "GRANT",
+      "sourceUrl": "https://projects.worldbank.org/en/projects-operations/opportunities?srce=both",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "worldbank-afdb-ebrd",
+      "contentHash": "29e800b246aef978e905ae8685bf26274d6ed3b9d5ef4338f50e411728000ae0",
+      "facts": []
+    },
+    {
+      "title": "PROCUREMENT AND DISTRIBUTION OF 10KVA SOLAR POWER TO NEWLY CONSTRUCTED 26 SECONDARY SCHOOLS (13 JUNIOR AND 13 SENIOR SECONDARY SCHOOLS AND FOR ADDITIONAL 55 SENIOR SECONDARY SCHOOLS FOR DIGITAL SKILLS IN GOMBE STATE",
+      "issuer": "Multilateral development banks",
+      "kind": "GRANT",
+      "sourceUrl": "https://projects.worldbank.org/en/projects-operations/opportunities?srce=both",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "worldbank-afdb-ebrd",
+      "contentHash": "29e800b246aef978e905ae8685bf26274d6ed3b9d5ef4338f50e411728000ae0",
+      "facts": []
+    },
+    {
+      "title": "Consultancy Services for Supervision of Civil Works to Improve Road Safety at Schools and locations along the Nacala Corridor with iRAP Less Than Three Stars",
+      "issuer": "Multilateral development banks",
+      "kind": "GRANT",
+      "sourceUrl": "https://projects.worldbank.org/en/projects-operations/opportunities?srce=both",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "worldbank-afdb-ebrd",
+      "contentHash": "29e800b246aef978e905ae8685bf26274d6ed3b9d5ef4338f50e411728000ae0",
+      "facts": []
+    },
+    {
+      "title": "Risk Management Specialist (National)",
+      "issuer": "Multilateral development banks",
+      "kind": "GRANT",
+      "sourceUrl": "https://projects.worldbank.org/en/projects-operations/opportunities?srce=both",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "worldbank-afdb-ebrd",
+      "contentHash": "29e800b246aef978e905ae8685bf26274d6ed3b9d5ef4338f50e411728000ae0",
+      "facts": []
+    },
+    {
+      "title": "Rehabilitation of Calafat FIC",
+      "issuer": "Multilateral development banks",
+      "kind": "GRANT",
+      "sourceUrl": "https://projects.worldbank.org/en/projects-operations/opportunities?srce=both",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "worldbank-afdb-ebrd",
+      "contentHash": "29e800b246aef978e905ae8685bf26274d6ed3b9d5ef4338f50e411728000ae0",
+      "facts": []
+    },
+    {
+      "title": "PROCUREMENT, DISTRIBUTION AND INSTALLATION OF DIGITAL LITERACY DEVICES FOR 55 ADDITIONAL SCHOOLS (DESKTOPS, PROJECTORS, MOTORISED PROJECTOR SCREEN, AND PROVISION OF INTERNET FACILITIES ALSO TO 55 SENIOR SECONDARY SCHOOLS IN GOMBE STATE",
+      "issuer": "Multilateral development banks",
+      "kind": "GRANT",
+      "sourceUrl": "https://projects.worldbank.org/en/projects-operations/opportunities?srce=both",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "worldbank-afdb-ebrd",
+      "contentHash": "29e800b246aef978e905ae8685bf26274d6ed3b9d5ef4338f50e411728000ae0",
+      "facts": []
+    },
+    {
+      "title": "Task Manager for Logistics Corridor Infrastructure and Development of the Resilient Alternative N1 Road",
+      "issuer": "Multilateral development banks",
+      "kind": "GRANT",
+      "sourceUrl": "https://projects.worldbank.org/en/projects-operations/opportunities?srce=both",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "worldbank-afdb-ebrd",
+      "contentHash": "29e800b246aef978e905ae8685bf26274d6ed3b9d5ef4338f50e411728000ae0",
+      "facts": []
+    },
+    {
+      "title": "MAITRISE D’ŒUVRE (SUIVI ET CONTROLE TECHNIQUE) DES TRAVAUX D’INFRASTRUCTURES SOCIOECONOMIQUES DANS LES COMMUNES DE MORA, TOKOMBERE DANS LE MAYO SAVA ET WAZA DANS LE LOGONE ET CHARI",
+      "issuer": "Multilateral development banks",
+      "kind": "GRANT",
+      "sourceUrl": "https://projects.worldbank.org/en/projects-operations/opportunities?srce=both",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "worldbank-afdb-ebrd",
+      "contentHash": "29e800b246aef978e905ae8685bf26274d6ed3b9d5ef4338f50e411728000ae0",
+      "facts": []
+    },
+    {
+      "title": "Fourniture d'un contrat d'assurance maladie annuel pour le personnel du Projet Filets Sociaux Adaptatifs et d'Inclusion Economique et de leurs familles",
+      "issuer": "Multilateral development banks",
+      "kind": "GRANT",
+      "sourceUrl": "https://projects.worldbank.org/en/projects-operations/opportunities?srce=both",
+      "summary": "",
+      "eligibility": "",
+      "amountText": "",
+      "deadlineText": "",
+      "quote": "",
+      "sourceId": "worldbank-afdb-ebrd",
+      "contentHash": "29e800b246aef978e905ae8685bf26274d6ed3b9d5ef4338f50e411728000ae0",
+      "facts": []
     }
   ],
   "perSource": [
     {
       "id": "adio",
-      "status": "OK",
-      "kept": 17,
+      "status": "EMPTY_PAGE",
+      "kept": 0,
       "dropped": 0,
-      "note": "All listed opportunities are explicitly mentioned on the page or linked from it. Some programmes lack specific details (amounts, deadlines, or eligibility) but are included as named opportunities. · accepted the cookie banner (\"tout accepter\")",
-      "chars": 11009,
-      "links": 56
+      "note": "the page rendered almost no text",
+      "chars": 0,
+      "links": 0
     },
     {
       "id": "aides-territoires",
@@ -5834,9 +4751,9 @@
     {
       "id": "boamp",
       "status": "OK",
-      "kept": 0,
+      "kept": 2,
       "dropped": 0,
-      "note": "The page is a portal for public procurement notices (avis de marché public) and does not list specific funding opportunities, grants, subsidies, or programmes. It provides access to calls for tenders and public contracts, but these are not enumerated as individual opportunities on the page itself. The page directs users to search for active tenders rather than listing them explicitly. · tried \"https://www.boamp.fr/pages/aide/\" but it had less text — stayed on the entry page",
+      "note": "The page is a portal for public procurement notices (AAPC) and does not list specific funding opportunities, grants, or programmes by name. It provides access to calls for tenders and public contracts, but these are not enumerated as individual opportunities on the page itself. The page directs users to search for active tenders rather than listing them explicitly. · tried \"https://www.boamp.fr/pages/aide/\" but it had less text — stayed on the entry page",
       "chars": 1697,
       "links": 38
     },
@@ -5845,8 +4762,8 @@
       "status": "OK",
       "kept": 1,
       "dropped": 0,
-      "note": "accepted the cookie banner (\"accepter\")",
-      "chars": 3446,
+      "note": "",
+      "chars": 3349,
       "links": 106
     },
     {
@@ -5861,15 +4778,15 @@
       "status": "OK",
       "kept": 0,
       "dropped": 0,
-      "note": "The page is a marketplace for buying and selling online businesses, not a public funding body offering grants, subsidies, or funding opportunities. No funding opportunities as defined in the request are present.",
-      "chars": 15729,
+      "note": "The page is a marketplace for buying and selling online businesses, not a funding body offering grants, subsidies, or financial support. No funding opportunities (grants, loans, tax incentives, etc.) are listed.",
+      "chars": 15763,
       "links": 189
     },
     {
       "id": "france-2030-ademe",
       "status": "OK",
       "kept": 6,
-      "dropped": 5,
+      "dropped": 3,
       "note": "followed \"https://agirpourlatransition.ademe.fr/entreprises/aides-financieres\" (aides)",
       "chars": 7716,
       "links": 113
@@ -5877,10 +4794,10 @@
     {
       "id": "hub71",
       "status": "OK",
-      "kept": 11,
+      "kept": 10,
       "dropped": 2,
-      "note": "tried \"https://www.hub71.com/program/access-programme/apply\" but it had less text — stayed on the entry page",
-      "chars": 11295,
+      "note": "All listed programmes are explicitly mentioned on the page as funding or support opportunities for startups, with direct links or references provided. · tried \"https://www.hub71.com/program/access-programme/apply\" but it had less text — stayed on the entry page",
+      "chars": 11055,
       "links": 75
     },
     {
@@ -5898,26 +4815,26 @@
       "kept": 20,
       "dropped": 0,
       "note": "followed \"https://www.find-tender.service.gov.uk/search/opportunities?language=en_GB&cookies_accepted=unknown\" (opportunityieses)",
-      "chars": 10084,
+      "chars": 10816,
       "links": 43
     },
     {
       "id": "ungm",
       "status": "OK",
-      "kept": 66,
+      "kept": 49,
       "dropped": 0,
       "note": "followed \"https://www.ungm.org/Public/Notice\" (opportunityieses, procurement)",
-      "chars": 9368,
+      "chars": 9244,
       "links": 219
     },
     {
       "id": "worldbank-afdb-ebrd",
       "status": "OK",
-      "kept": 0,
+      "kept": 20,
       "dropped": 0,
-      "note": "followed \"https://projects.worldbank.org/en/projects-operations/procurement-detail/OP00468424\" (tenders, procurement)",
-      "chars": 8534,
-      "links": 356
+      "note": "Only the first 20 opportunities from the 'Current Opportunities' section are listed. The page contains 580 opportunities in total. · followed \"https://projects.worldbank.org/en/projects-operations/opportunities?srce=both\" (opportunityieses)",
+      "chars": 7068,
+      "links": 396
     }
   ]
 }

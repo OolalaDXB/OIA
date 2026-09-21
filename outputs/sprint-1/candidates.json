@@ -1,333 +1,5 @@
 [
   {
-    "externalId": "422623-2026",
-    "title": "France – Structural engineering consultancy services – Accord-cadre d'Assistance Technique à la Maîtrise d'Ouvrage (ATMO) pour le CHU de Strasbourg (HUS)",
-    "officialUrl": "https://ted.europa.eu/en/notice/422623-2026/html",
-    "issuer": "HUS-Etablissement support du GHT 10",
-    "discoveredFor": [
-      "bawaba",
-      "rls-guard"
-    ],
-    "liveFetch": "OK",
-    "sourceFormat": "STATIC_HTML",
-    "contentHash": "1875e439951812e215354f677666b9dae8a32d65231c33b9c4f7cd5fdeca431e",
-    "verificationStatus": "MANUAL_REVIEW_REQUIRED",
-    "verificationEvidence": [
-      "issuer domain recorded from official URL: ted.europa.eu",
-      "government/supranational domain: ted.europa.eu",
-      "artifact content does NOT clearly match the expected title — needs human review",
-      "content-consistency check failed → still requires human review, not auto-reject"
-    ],
-    "factCount": 1,
-    "provenance": [
-      {
-        "field": "publication-number",
-        "value": "422623-2026",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "publication-number"
-        }
-      },
-      {
-        "field": "notice-title",
-        "value": "France – Structural engineering consultancy services – Accord-cadre d'Assistance Technique à la Maîtrise d'Ouvrage (ATMO) pour le CHU de Strasbourg (HUS)",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "notice-title"
-        }
-      },
-      {
-        "field": "buyer-name",
-        "value": "HUS-Etablissement support du GHT 10",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "buyer-name"
-        }
-      },
-      {
-        "field": "buyer-country",
-        "value": "FRA",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "buyer-country"
-        }
-      },
-      {
-        "field": "publication-date",
-        "value": "2026-06-19+02:00",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "publication-date"
-        }
-      },
-      {
-        "field": "classification-cpv",
-        "value": "71312000, 71336000, 71356200, 71312000, 71312000, 71312000, 71312000, 71312000, 71312000, 71312000, 71312000, 71500000, 71336000, 71356200, 71334000, 71336000, 71356200, 71321400, 71336000, 71356200, 71325000, 71336000, 71356200, 71322100, 71336000, 71356200, 79417000, 71336000, 71356200, 71313200, 71336000, 71356200, 71400000, 71336000, 71356200",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "classification-cpv"
-        }
-      },
-      {
-        "field": "notice-type",
-        "value": "cn-standard",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "notice-type"
-        }
-      },
-      {
-        "field": "links",
-        "value": "https://ted.europa.eu/en/notice/422623-2026/xml",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "links"
-        }
-      }
-    ],
-    "noticeType": "cn-standard",
-    "noticeClass": "BIDDABLE",
-    "noticeFacts": [
-      {
-        "field": "expected_title",
-        "normalizedValue": "France – Structural engineering consultancy services – Accord-cadre d'Assistance Technique à la Maîtrise d'Ouvrage (ATMO) pour le CHU de Strasbourg (HUS)",
-        "originalSourceText": "France – Structural engineering consultancy services – Accord-cadre d'Assistance Technique à la Maîtrise d'Ouvrage (ATMO) pour le CHU de Strasbourg (HUS)",
-        "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_dd41570ce3d1e43c",
-        "locator": {
-          "type": "DOCUMENT_SECTION",
-          "value": "manifest"
-        },
-        "extractionMethod": "manifest",
-        "extractingProvider": "user",
-        "extractingModel": "none",
-        "extractionConfidence": 0.5,
-        "validationResult": "unchecked",
-        "reviewerCorrection": null,
-        "auditEventId": null
-      }
-    ],
-    "matchableChars": 357
-  },
-  {
-    "externalId": "422920-2026",
-    "title": "Germany – License management software package – Lizenzerweiterung Splunk",
-    "officialUrl": "https://ted.europa.eu/en/notice/422920-2026/html",
-    "issuer": "Nord Ost West Informationstechnik GmbH",
-    "discoveredFor": [
-      "bawaba"
-    ],
-    "liveFetch": "OK",
-    "sourceFormat": "STATIC_HTML",
-    "contentHash": "7f4401bc1c7fdb3d5a6eaaf325f81de2930fcea46d3f7797ae1b39afcd69646e",
-    "verificationStatus": "MANUAL_REVIEW_REQUIRED",
-    "verificationEvidence": [
-      "issuer domain recorded from official URL: ted.europa.eu",
-      "government/supranational domain: ted.europa.eu",
-      "artifact content does NOT clearly match the expected title — needs human review",
-      "content-consistency check failed → still requires human review, not auto-reject"
-    ],
-    "factCount": 1,
-    "provenance": [
-      {
-        "field": "publication-number",
-        "value": "422920-2026",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "publication-number"
-        }
-      },
-      {
-        "field": "notice-title",
-        "value": "Germany – License management software package – Lizenzerweiterung Splunk",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "notice-title"
-        }
-      },
-      {
-        "field": "buyer-name",
-        "value": "Nord Ost West Informationstechnik GmbH",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "buyer-name"
-        }
-      },
-      {
-        "field": "buyer-country",
-        "value": "DEU",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "buyer-country"
-        }
-      },
-      {
-        "field": "publication-date",
-        "value": "2026-06-19+02:00",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "publication-date"
-        }
-      },
-      {
-        "field": "classification-cpv",
-        "value": "48218000, 48218000",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "classification-cpv"
-        }
-      },
-      {
-        "field": "notice-type",
-        "value": "cn-standard",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "notice-type"
-        }
-      },
-      {
-        "field": "links",
-        "value": "https://ted.europa.eu/en/notice/422920-2026/xml",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "links"
-        }
-      }
-    ],
-    "noticeType": "cn-standard",
-    "noticeClass": "BIDDABLE",
-    "noticeFacts": [
-      {
-        "field": "expected_title",
-        "normalizedValue": "Germany – License management software package – Lizenzerweiterung Splunk",
-        "originalSourceText": "Germany – License management software package – Lizenzerweiterung Splunk",
-        "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_3a77394e292af82b",
-        "locator": {
-          "type": "DOCUMENT_SECTION",
-          "value": "manifest"
-        },
-        "extractionMethod": "manifest",
-        "extractingProvider": "user",
-        "extractingModel": "none",
-        "extractionConfidence": 0.5,
-        "validationResult": "unchecked",
-        "reviewerCorrection": null,
-        "auditEventId": null
-      }
-    ],
-    "matchableChars": 198
-  },
-  {
-    "externalId": "427373-2026",
-    "title": "Germany – IT services: consulting, software development, Internet and support – Rahmenvereinbarung über Externe Unterstützungsleistungen im Bereich IT-Infrastruktur und Endnutzer",
-    "officialUrl": "https://ted.europa.eu/en/notice/427373-2026/html",
-    "issuer": "Investitionsbank Schleswig-Holstein",
-    "discoveredFor": [
-      "bawaba"
-    ],
-    "liveFetch": "OK",
-    "sourceFormat": "STATIC_HTML",
-    "contentHash": "75279ad0213b9f29475318b833d1c04b4626c6b64e4f328f87a52e04ef6266e7",
-    "verificationStatus": "MANUAL_REVIEW_REQUIRED",
-    "verificationEvidence": [
-      "issuer domain recorded from official URL: ted.europa.eu",
-      "government/supranational domain: ted.europa.eu",
-      "artifact content does NOT clearly match the expected title — needs human review",
-      "content-consistency check failed → still requires human review, not auto-reject"
-    ],
-    "factCount": 1,
-    "provenance": [
-      {
-        "field": "publication-number",
-        "value": "427373-2026",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "publication-number"
-        }
-      },
-      {
-        "field": "notice-title",
-        "value": "Germany – IT services: consulting, software development, Internet and support – Rahmenvereinbarung über Externe Unterstützungsleistungen im Bereich IT-Infrastruktur und Endnutzer",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "notice-title"
-        }
-      },
-      {
-        "field": "buyer-name",
-        "value": "Investitionsbank Schleswig-Holstein",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "buyer-name"
-        }
-      },
-      {
-        "field": "buyer-country",
-        "value": "DEU",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "buyer-country"
-        }
-      },
-      {
-        "field": "publication-date",
-        "value": "2026-06-22+02:00",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "publication-date"
-        }
-      },
-      {
-        "field": "classification-cpv",
-        "value": "72000000, 72500000, 72600000, 72000000, 72500000, 72600000",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "classification-cpv"
-        }
-      },
-      {
-        "field": "notice-type",
-        "value": "cn-standard",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "notice-type"
-        }
-      },
-      {
-        "field": "links",
-        "value": "https://ted.europa.eu/en/notice/427373-2026/xml",
-        "locator": {
-          "type": "JSON_PATH",
-          "value": "links"
-        }
-      }
-    ],
-    "noticeType": "cn-standard",
-    "noticeClass": "BIDDABLE",
-    "noticeFacts": [
-      {
-        "field": "expected_title",
-        "normalizedValue": "Germany – IT services: consulting, software development, Internet and support – Rahmenvereinbarung über Externe Unterstützungsleistungen im Bereich IT-Infrastruktur und Endnutzer",
-        "originalSourceText": "Germany – IT services: consulting, software development, Internet and support – Rahmenvereinbarung über Externe Unterstützungsleistungen im Bereich IT-Infrastruktur und Endnutzer",
-        "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_c4f59d72504cf27f",
-        "locator": {
-          "type": "DOCUMENT_SECTION",
-          "value": "manifest"
-        },
-        "extractionMethod": "manifest",
-        "extractingProvider": "user",
-        "extractingModel": "none",
-        "extractionConfidence": 0.5,
-        "validationResult": "unchecked",
-        "reviewerCorrection": null,
-        "auditEventId": null
-      }
-    ],
-    "matchableChars": 407
-  },
-  {
     "externalId": "428975-2026",
     "title": "Germany – Health and safety services – Landkreis Northeim - sicherheitstechnische und brandschutzrechtliche Betreuung",
     "officialUrl": "https://ted.europa.eu/en/notice/428975-2026/html",
@@ -338,7 +10,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "e6cc7695689522f3dd26a91c4a9f2bd2753a82c254adf1130a5a5f6336c77c9b",
+    "contentHash": "5d20d3684ee2120de5de67b795ae393794820a9f55a0a56aa7c9710bbccd5cd1",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -429,7 +101,7 @@
         "normalizedValue": "Germany – Health and safety services – Landkreis Northeim - sicherheitstechnische und brandschutzrechtliche Betreuung",
         "originalSourceText": "Germany – Health and safety services – Landkreis Northeim - sicherheitstechnische und brandschutzrechtliche Betreuung",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_25e722c099202ed0",
+        "sourceArtifactId": "art_950de0f37b74660a",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -456,7 +128,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "259c9aac8b8d0c34649afee837af44a6e924d70592e3a8f1ed849e65efdabf50",
+    "contentHash": "6d2e1a6b674f5afdc2342b27ce83d2c76238b25fe1083b114f729dbba37e15a2",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -547,7 +219,7 @@
         "normalizedValue": "Germany – Computer support and consultancy services – RV Beratung Cybersicherheit- & Resilienzstärkung",
         "originalSourceText": "Germany – Computer support and consultancy services – RV Beratung Cybersicherheit- & Resilienzstärkung",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_ba7091fd037c411c",
+        "sourceArtifactId": "art_591214ac67a8a792",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -575,7 +247,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "0e2bdd781c3b2a94bcab12cf3facddf7e11816e3577017e4579b5945bfc05633",
+    "contentHash": "e8b10d921c0b39a3a18b633300d9d29fc37c201e0b265c1fddff031f0bc25829",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -666,7 +338,7 @@
         "normalizedValue": "Luxembourg – Data-processing services – ID 6246207 - SEUPB - Information Services - Data Protection Officer Advisory Services",
         "originalSourceText": "Luxembourg – Data-processing services – ID 6246207 - SEUPB - Information Services - Data Protection Officer Advisory Services",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_cdb16794a8d70c4e",
+        "sourceArtifactId": "art_0ae6a8ddc2ebe862",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -693,7 +365,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "5a88a96c75eb81c8b922ca5be21d2354913c915d964d32802664d39be522eab0",
+    "contentHash": "653a7f78d89057f1aebc1d1541d1d93819e494e8fd7e6532af14d5fbaf3faa94",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -784,7 +456,7 @@
         "normalizedValue": "Germany – License management software package – Handelspartner Rahmenvereinbarung über die Lieferung von Software des Lizenzgebers Microsoft sowie zugehörigen Services und Dienstleistungen für das Saarland und den Landkreis Saarlouis",
         "originalSourceText": "Germany – License management software package – Handelspartner Rahmenvereinbarung über die Lieferung von Software des Lizenzgebers Microsoft sowie zugehörigen Services und Dienstleistungen für das Saarland und den Landkreis Saarlouis",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_387d0ad41b0a99d1",
+        "sourceArtifactId": "art_335bc0f9021546f0",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -810,7 +482,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "89d4cdebb86b19275b1ad64984d4fca26303edee31e6f7cb2c44a177c4554525",
+    "contentHash": "08811db75fad38caeea8781155f065ebb62ca7a4d341009bb54daee88553e397",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -893,7 +565,7 @@
         "normalizedValue": "Germany – Services provided by medical personnel – Rahmenvertrag für die arbeitsmedizinische und sicherheitstechnische Betreuung 2027-2030",
         "originalSourceText": "Germany – Services provided by medical personnel – Rahmenvertrag für die arbeitsmedizinische und sicherheitstechnische Betreuung 2027-2030",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_9f31a4d4467fe267",
+        "sourceArtifactId": "art_56c87496612ff40e",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -920,7 +592,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "b48ab198d6757a572bb3105d9c5d8cde96dd9829ed240d98d5b6733cefeaad86",
+    "contentHash": "8d63a663a0cd1bf197181ee998b3f2a34a29861d396b79a01c6ab61b6fd069e3",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -1011,7 +683,7 @@
         "normalizedValue": "Germany – Health and safety services – Landkreis Northeim - sicherheitstechnische und brandschutzrechtliche Betreuung",
         "originalSourceText": "Germany – Health and safety services – Landkreis Northeim - sicherheitstechnische und brandschutzrechtliche Betreuung",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_eaeacd7d215b9c06",
+        "sourceArtifactId": "art_2a42e95e38a04618",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -1038,7 +710,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "eb0d892ee8601f2acdfe8195e05737b3a95e84fdf222812bfab8c07d78925b16",
+    "contentHash": "c87ae5d619d4589d85f7585372c32175e68826647d64c245829a25308a9443af",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -1129,7 +801,7 @@
         "normalizedValue": "Germany – Health and safety services – Landkreis Northeim - sicherheitstechnische und brandschutzrechtliche Betreuung",
         "originalSourceText": "Germany – Health and safety services – Landkreis Northeim - sicherheitstechnische und brandschutzrechtliche Betreuung",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_30d38acf92a79f0f",
+        "sourceArtifactId": "art_cdb3fe31af62e7f7",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -1156,7 +828,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "fda42545edba2f13d3ccc9bd3692f2f0b19cf2bc63983cdeca43cadcba04a7d3",
+    "contentHash": "bf7d866e5390350110be573e6fc96f19233fa563686ffb842029c3265f52bc57",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -1239,7 +911,7 @@
         "normalizedValue": "Belgium – Safety consultancy services – Raamovereenkomst voor veiligheidscoördinatie – ontwerp en verwezenlijking",
         "originalSourceText": "Belgium – Safety consultancy services – Raamovereenkomst voor veiligheidscoördinatie – ontwerp en verwezenlijking",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_8efaa89acfff6a96",
+        "sourceArtifactId": "art_1aebb7a4b336acec",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -1266,7 +938,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "8398cdc347d6bceaa10818a00e2e3ff278e31a54be15e1d43b11af164d812f1d",
+    "contentHash": "b6075ea8298c6a7a5e08d8f72a6859d7c9546713da70d06736fe0ed6201a03f2",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -1349,7 +1021,7 @@
         "normalizedValue": "France – Computer support and consultancy services – Contrat-cadre Conseil IT 2027",
         "originalSourceText": "France – Computer support and consultancy services – Contrat-cadre Conseil IT 2027",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_7229f383abce9a51",
+        "sourceArtifactId": "art_ca13ada5669be5c4",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -1375,7 +1047,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "ee740d2ecf7f0832224360ee394c82670d9ae11c9469e402073dfc8c8859beb4",
+    "contentHash": "e0f52a5d06d32602db53af421f193637188ae8d371321020e0a31e2d5de3129e",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -1458,7 +1130,7 @@
         "normalizedValue": "France – Computer-related services – Prestation d'infogérance et d'Hébergement : La présente consultation concerne la 1ère phase : présélection de 5 candidats admis à soumissionner",
         "originalSourceText": "France – Computer-related services – Prestation d'infogérance et d'Hébergement : La présente consultation concerne la 1ère phase : présélection de 5 candidats admis à soumissionner",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_96db33bec3325594",
+        "sourceArtifactId": "art_80b6296055fc90a2",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -1484,7 +1156,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "58a105ac1cc762236e7a6ec6e432a6350d6a1b70d3226fa24510ce7779e05814",
+    "contentHash": "76938400a13a241aa6884c3fa0d90964c2ee7e660eb5c1cd1b2770a91c169532",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -1567,7 +1239,7 @@
         "normalizedValue": "France – Computer back-up services – PRESTATIONS D'ASSISTANCE ET D'EXPERTISE INFORMATIQUE",
         "originalSourceText": "France – Computer back-up services – PRESTATIONS D'ASSISTANCE ET D'EXPERTISE INFORMATIQUE",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_e6ff18ca3e2675dd",
+        "sourceArtifactId": "art_e05097950eae4b0d",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -1593,7 +1265,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "d07b57b83c4f494f28723e2f393fdb28fe85de18e053633444234582de6ad773",
+    "contentHash": "f97041695c2c6ece680d04c51326df64ca300480ddcc334ffe15ca57cea4fb1e",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -1676,7 +1348,7 @@
         "normalizedValue": "France – Technical computer support services – AOO Prestation de développement pour la refonte du Système d’Information de l’US10-CépiDC Inserm",
         "originalSourceText": "France – Technical computer support services – AOO Prestation de développement pour la refonte du Système d’Information de l’US10-CépiDC Inserm",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_5181d49756f734d4",
+        "sourceArtifactId": "art_bc02972c11f922ed",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -1703,7 +1375,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "ffa1db1b2e63f80b42b3c1eb421c0b308e8215bc6ea4e322172e5fc45ef909fe",
+    "contentHash": "4ba5d91a05bba501ac8b2da5b9ecb45ffeea6232ab5f9aa1fc71d6a4673eed51",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -1786,7 +1458,7 @@
         "normalizedValue": "France – License management software package – Groupement de commandes pour l'externalisation des outils de communication interne",
         "originalSourceText": "France – License management software package – Groupement de commandes pour l'externalisation des outils de communication interne",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_40a592093216bf3d",
+        "sourceArtifactId": "art_80f662b994543b1f",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -1813,7 +1485,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "7284f1e33cab76a0b1f0349ebff51381ef1b05e09122ed6cff51bfb79678bcc5",
+    "contentHash": "f2cf42a7b5f12cc6d1756cff2885689d77859dab837f2c0e9af2084d7c1e156d",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -1896,7 +1568,7 @@
         "normalizedValue": "France – Health and safety consultancy services – Mission de Coordination SPS de Niveau 1 pour la desserte du Môle Central - RP 541 et RP 539",
         "originalSourceText": "France – Health and safety consultancy services – Mission de Coordination SPS de Niveau 1 pour la desserte du Môle Central - RP 541 et RP 539",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_567d101b984cca8a",
+        "sourceArtifactId": "art_9bd4ba14ed2cce8c",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -1923,7 +1595,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "7f42c9e06f91a7dc69122dacc7b6f961ac4c68db8ee9513e82b0c3d63e6ab60c",
+    "contentHash": "ad89ae750fc21d25ecae83c417c411a641af2d1cac03d1432e1e19ba163fd106",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -2014,7 +1686,7 @@
         "normalizedValue": "Germany – Systems consultancy services – SAP S/4HANA Utilities",
         "originalSourceText": "Germany – Systems consultancy services – SAP S/4HANA Utilities",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_4cc6d80c92d5cf72",
+        "sourceArtifactId": "art_7be7e2b9cbdf21aa",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -2041,7 +1713,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "1d99cd0c4520e95674e03ff04f34f7ef4632b42f73bf17dffbaea4dae5b56ab2",
+    "contentHash": "c7992170624b87c56c50eec8787060692508a2b0a7fca32a6b1e4bdecebbae7c",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -2132,7 +1804,7 @@
         "normalizedValue": "Germany – Health and safety services – Landkreis Northeim - sicherheitstechnische und brandschutzrechtliche Betreuung",
         "originalSourceText": "Germany – Health and safety services – Landkreis Northeim - sicherheitstechnische und brandschutzrechtliche Betreuung",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_dd39bafbab88219d",
+        "sourceArtifactId": "art_f6aae2ec6921cd5b",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -2158,7 +1830,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "c0aa56880d5d35a1391c32c9cd07d261dcc6cc46d1c130a7383a1408850c2389",
+    "contentHash": "e27089ceb78beb6b335c9de7041040ce5145084e0674970ad7e82c608dde317f",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -2241,7 +1913,7 @@
         "normalizedValue": "Germany – Services provided by medical personnel – Rahmenvertrag für die arbeitsmedizinische und sicherheitstechnische Betreuung 2027-2030",
         "originalSourceText": "Germany – Services provided by medical personnel – Rahmenvertrag für die arbeitsmedizinische und sicherheitstechnische Betreuung 2027-2030",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_b53fa82be096716d",
+        "sourceArtifactId": "art_95fdffa2cc707064",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -2267,7 +1939,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "d89ecd2c6c5c5368675807cd255a73df37b824c526f5e1334a439670323a90fb",
+    "contentHash": "bd8191c34c6e0ab28c02b0d7ac04c8fce07dec66f27ae65ecb952fd058541efa",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -2350,7 +2022,7 @@
         "normalizedValue": "France – Technical computer support services – Prestation de support et de maitrise d'ouvrage du système d'information bancaire de l'IEOM.",
         "originalSourceText": "France – Technical computer support services – Prestation de support et de maitrise d'ouvrage du système d'information bancaire de l'IEOM.",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_0b592fd951bcc17e",
+        "sourceArtifactId": "art_ed502df24a5e1256",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -2376,7 +2048,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "77188afea0d01bfb44141a3b3390432e98c937df952e094cdc298d39759d56d7",
+    "contentHash": "43781e43ae2bc9d88441efff5fe4d4052d904e7151361a900a1f231c85a20338",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -2459,7 +2131,7 @@
         "normalizedValue": "France – Computer back-up services – PRESTATIONS D'ASSISTANCE ET D'EXPERTISE INFORMATIQUE",
         "originalSourceText": "France – Computer back-up services – PRESTATIONS D'ASSISTANCE ET D'EXPERTISE INFORMATIQUE",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_5e8cdde1a0cfcafa",
+        "sourceArtifactId": "art_416391d27c3150aa",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -2486,7 +2158,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "4bc5f0ecda0fc0b7322eb3f3030182652698d8fc5785393e9872d416e6999e14",
+    "contentHash": "f5d05f126bfeadd54e88e6cfac6d006b6af5df2c542a346ff433e87d77711ac4",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -2569,7 +2241,7 @@
         "normalizedValue": "France – Systems consultancy services – Analyse de risques et accompagnement SMSI V2",
         "originalSourceText": "France – Systems consultancy services – Analyse de risques et accompagnement SMSI V2",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_80a88d0b07ee08b8",
+        "sourceArtifactId": "art_ddd00479ccfe288b",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -2595,7 +2267,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "57c71deba6cb6f7001294148c93927802ee20d1b4c3d792025f3327f7c2a1e0d",
+    "contentHash": "3b1d7f33df1d31b17d05219626bb9d6cdb4915657bb4580a46b0db44533a3887",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -2678,7 +2350,7 @@
         "normalizedValue": "France – Technical computer support services – Prestation d'assistance technique informatique pour l'agence IEDOM de Guadeloupe.",
         "originalSourceText": "France – Technical computer support services – Prestation d'assistance technique informatique pour l'agence IEDOM de Guadeloupe.",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_c6104352a21942db",
+        "sourceArtifactId": "art_5592181188708dbe",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -2705,7 +2377,7 @@
     ],
     "liveFetch": "OK",
     "sourceFormat": "STATIC_HTML",
-    "contentHash": "f0fd1bd1ec036b9d0dd44987afe7e3466ed85065524e6f324cea67419b945379",
+    "contentHash": "f2c44e2b421c42968cc13ec585b2922a1ce2752fae34f40c7928eedf483b01c5",
     "verificationStatus": "MANUAL_REVIEW_REQUIRED",
     "verificationEvidence": [
       "issuer domain recorded from official URL: ted.europa.eu",
@@ -2788,7 +2460,7 @@
         "normalizedValue": "France – Computer support and consultancy services – Contrat-cadre Conseil IT 2027",
         "originalSourceText": "France – Computer support and consultancy services – Contrat-cadre Conseil IT 2027",
         "classification": "USER_PROVIDED",
-        "sourceArtifactId": "art_02fcc867bf15fce1",
+        "sourceArtifactId": "art_fa24ab0b208e84de",
         "locator": {
           "type": "DOCUMENT_SECTION",
           "value": "manifest"
@@ -2803,5 +2475,341 @@
       }
     ],
     "matchableChars": 202
+  },
+  {
+    "externalId": "506669-2026",
+    "title": "France – Technical computer support services – Prestation d'assistance technique informatique pour l'agence IEDOM de Guyane",
+    "officialUrl": "https://ted.europa.eu/en/notice/506669-2026/html",
+    "issuer": "Institut d’Émission des Départements d’Outre-Mer (IEDOM)",
+    "discoveredFor": [
+      "bawaba"
+    ],
+    "liveFetch": "OK",
+    "sourceFormat": "STATIC_HTML",
+    "contentHash": "f163922321e40d2693a68ea131bb96ecf0fc0ad445d5eb98863310e850fff7b9",
+    "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+    "verificationEvidence": [
+      "issuer domain recorded from official URL: ted.europa.eu",
+      "government/supranational domain: ted.europa.eu",
+      "artifact content does NOT clearly match the expected title — needs human review",
+      "content-consistency check failed → still requires human review, not auto-reject"
+    ],
+    "factCount": 1,
+    "provenance": [
+      {
+        "field": "publication-number",
+        "value": "506669-2026",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "publication-number"
+        }
+      },
+      {
+        "field": "notice-title",
+        "value": "France – Technical computer support services – Prestation d'assistance technique informatique pour l'agence IEDOM de Guyane",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "notice-title"
+        }
+      },
+      {
+        "field": "buyer-name",
+        "value": "Institut d’Émission des Départements d’Outre-Mer (IEDOM)",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "buyer-name"
+        }
+      },
+      {
+        "field": "buyer-country",
+        "value": "FRA",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "buyer-country"
+        }
+      },
+      {
+        "field": "publication-date",
+        "value": "2026-07-22+02:00",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "publication-date"
+        }
+      },
+      {
+        "field": "classification-cpv",
+        "value": "72611000, 72611000",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "classification-cpv"
+        }
+      },
+      {
+        "field": "notice-type",
+        "value": "cn-standard",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "notice-type"
+        }
+      },
+      {
+        "field": "links",
+        "value": "https://ted.europa.eu/en/notice/506669-2026/xml",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "links"
+        }
+      }
+    ],
+    "noticeType": "cn-standard",
+    "noticeClass": "BIDDABLE",
+    "noticeFacts": [
+      {
+        "field": "expected_title",
+        "normalizedValue": "France – Technical computer support services – Prestation d'assistance technique informatique pour l'agence IEDOM de Guyane",
+        "originalSourceText": "France – Technical computer support services – Prestation d'assistance technique informatique pour l'agence IEDOM de Guyane",
+        "classification": "USER_PROVIDED",
+        "sourceArtifactId": "art_7dadbea4b4fc098c",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "manifest"
+        },
+        "extractionMethod": "manifest",
+        "extractingProvider": "user",
+        "extractingModel": "none",
+        "extractionConfidence": 0.5,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      }
+    ],
+    "matchableChars": 318
+  },
+  {
+    "externalId": "506980-2026",
+    "title": "Germany – Health and safety services – Landkreis Northeim - sicherheitstechnische und brandschutzrechtliche Betreuung",
+    "officialUrl": "https://ted.europa.eu/en/notice/506980-2026/html",
+    "issuer": "Landkreis Northeim",
+    "deadline": "2026-07-16T23:59:59+02:00",
+    "discoveredFor": [
+      "bawaba"
+    ],
+    "liveFetch": "OK",
+    "sourceFormat": "STATIC_HTML",
+    "contentHash": "ff77c23633bf7064fb0364c92a085c266f4df60ad31fd0bc4e3c83015344f1e8",
+    "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+    "verificationEvidence": [
+      "issuer domain recorded from official URL: ted.europa.eu",
+      "government/supranational domain: ted.europa.eu",
+      "artifact content does NOT clearly match the expected title — needs human review",
+      "content-consistency check failed → still requires human review, not auto-reject"
+    ],
+    "factCount": 1,
+    "provenance": [
+      {
+        "field": "publication-number",
+        "value": "506980-2026",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "publication-number"
+        }
+      },
+      {
+        "field": "notice-title",
+        "value": "Germany – Health and safety services – Landkreis Northeim - sicherheitstechnische und brandschutzrechtliche Betreuung",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "notice-title"
+        }
+      },
+      {
+        "field": "buyer-name",
+        "value": "Landkreis Northeim",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "buyer-name"
+        }
+      },
+      {
+        "field": "buyer-country",
+        "value": "DEU",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "buyer-country"
+        }
+      },
+      {
+        "field": "publication-date",
+        "value": "2026-07-22+02:00",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "publication-date"
+        }
+      },
+      {
+        "field": "deadline",
+        "value": "2026-07-16T23:59:59+02:00",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "deadline"
+        }
+      },
+      {
+        "field": "classification-cpv",
+        "value": "71317200, 71317210, 79417000, 71317200, 71317210, 79417000",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "classification-cpv"
+        }
+      },
+      {
+        "field": "notice-type",
+        "value": "cn-standard",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "notice-type"
+        }
+      },
+      {
+        "field": "links",
+        "value": "https://ted.europa.eu/en/notice/506980-2026/xml",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "links"
+        }
+      }
+    ],
+    "noticeType": "cn-standard",
+    "noticeClass": "BIDDABLE",
+    "noticeFacts": [
+      {
+        "field": "expected_title",
+        "normalizedValue": "Germany – Health and safety services – Landkreis Northeim - sicherheitstechnische und brandschutzrechtliche Betreuung",
+        "originalSourceText": "Germany – Health and safety services – Landkreis Northeim - sicherheitstechnische und brandschutzrechtliche Betreuung",
+        "classification": "USER_PROVIDED",
+        "sourceArtifactId": "art_3ad59ab29ca7b894",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "manifest"
+        },
+        "extractionMethod": "manifest",
+        "extractingProvider": "user",
+        "extractingModel": "none",
+        "extractionConfidence": 0.5,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      }
+    ],
+    "matchableChars": 268
+  },
+  {
+    "externalId": "507986-2026",
+    "title": "France – Computer-related services – Acquisition de prestation de sécurité pour le système d'information de Manche Numérique, ses membres et sa Centrale d'Achat",
+    "officialUrl": "https://ted.europa.eu/en/notice/507986-2026/html",
+    "issuer": "SM Manche Numérique",
+    "discoveredFor": [
+      "bawaba"
+    ],
+    "liveFetch": "OK",
+    "sourceFormat": "STATIC_HTML",
+    "contentHash": "461dd03165f75e7d4a257c6ce925d3e8e58251fd9e8b9c1bced09d708fee713a",
+    "verificationStatus": "MANUAL_REVIEW_REQUIRED",
+    "verificationEvidence": [
+      "issuer domain recorded from official URL: ted.europa.eu",
+      "government/supranational domain: ted.europa.eu",
+      "artifact content does NOT clearly match the expected title — needs human review",
+      "content-consistency check failed → still requires human review, not auto-reject"
+    ],
+    "factCount": 1,
+    "provenance": [
+      {
+        "field": "publication-number",
+        "value": "507986-2026",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "publication-number"
+        }
+      },
+      {
+        "field": "notice-title",
+        "value": "France – Computer-related services – Acquisition de prestation de sécurité pour le système d'information de Manche Numérique, ses membres et sa Centrale d'Achat",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "notice-title"
+        }
+      },
+      {
+        "field": "buyer-name",
+        "value": "SM Manche Numérique",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "buyer-name"
+        }
+      },
+      {
+        "field": "buyer-country",
+        "value": "FRA",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "buyer-country"
+        }
+      },
+      {
+        "field": "publication-date",
+        "value": "2026-07-22+02:00",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "publication-date"
+        }
+      },
+      {
+        "field": "classification-cpv",
+        "value": "72500000, 72600000, 72220000, 72222300, 72500000, 72500000, 72500000, 72600000, 72220000, 72222300, 72500000, 72600000, 72220000, 72222300",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "classification-cpv"
+        }
+      },
+      {
+        "field": "notice-type",
+        "value": "cn-standard",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "notice-type"
+        }
+      },
+      {
+        "field": "links",
+        "value": "https://ted.europa.eu/en/notice/507986-2026/xml",
+        "locator": {
+          "type": "JSON_PATH",
+          "value": "links"
+        }
+      }
+    ],
+    "noticeType": "cn-standard",
+    "noticeClass": "BIDDABLE",
+    "noticeFacts": [
+      {
+        "field": "expected_title",
+        "normalizedValue": "France – Computer-related services – Acquisition de prestation de sécurité pour le système d'information de Manche Numérique, ses membres et sa Centrale d'Achat",
+        "originalSourceText": "France – Computer-related services – Acquisition de prestation de sécurité pour le système d'information de Manche Numérique, ses membres et sa Centrale d'Achat",
+        "classification": "USER_PROVIDED",
+        "sourceArtifactId": "art_52e51dabeea4a978",
+        "locator": {
+          "type": "DOCUMENT_SECTION",
+          "value": "manifest"
+        },
+        "extractionMethod": "manifest",
+        "extractingProvider": "user",
+        "extractingModel": "none",
+        "extractionConfidence": 0.5,
+        "validationResult": "unchecked",
+        "reviewerCorrection": null,
+        "auditEventId": null
+      }
+    ],
+    "matchableChars": 355
   }
 ]

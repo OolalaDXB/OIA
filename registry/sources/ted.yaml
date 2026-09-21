@@ -9,7 +9,7 @@ kinds: ["TENDER", "PRE_SOLICITATION"]
 geographies: ["EU"]
 url: "https://ted.europa.eu"
 urlVerified: true
-lastUrlCheck: "2026-09-16"
+lastUrlCheck: "2026-09-21"
 status: LIVE
 connector: "ted"
 access:

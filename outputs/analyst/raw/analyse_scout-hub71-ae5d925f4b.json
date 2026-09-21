@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "ELIGIBLE",
-    "citation": "eligibility: International startups",
+    "citation": "The Hub71 Immersion Programme is a structured, in-market experience designed to support international startups as they explore and build connections within Abu Dhabi’s global tech ecosystem.",
     "reason": {
-      "en": "The opportunity explicitly states that 'International startups' are eligible. BAWABA operates as a startup in the AI, data, and cybersecurity sectors and is active in multiple regions, including the GCC and MENA, which aligns with the programme's focus on international expansion into Abu Dhabi.",
-      "fr": "L'opportunité indique explicitement que les 'startups internationales' sont éligibles. BAWABA opère en tant que startup dans les secteurs de l'IA, des données et de la cybersécurité et est active dans plusieurs régions, y compris le CCG et la MENA, ce qui correspond à l'objectif du programme de favoriser l'expansion internationale à Abu Dhabi."
+      "en": "The opportunity explicitly supports 'international startups' without geographic or sectoral restrictions that exclude BAWABA. BAWABA operates in the UAE (AE) and GCC, aligning with the programme's focus on Abu Dhabi’s tech ecosystem.",
+      "fr": "L'opportunité soutient explicitement les 'startups internationales' sans restrictions géographiques ou sectorielles excluant BAWABA. BAWABA opère aux Émirats arabes unis (AE) et dans le CCG, ce qui correspond à l'écosystème technologique d'Abou Dabi visé par le programme."
     },
     "nextAction": {
-      "en": "Confirm which of BAWABA’s legal entities will submit the application and ensure all required documentation is prepared for the Hub71 Immersion Programme.",
-      "fr": "Confirmer quelle entité légale de BAWABA soumettra la candidature et s'assurer que toute la documentation requise est préparée pour le programme Hub71 Immersion."
+      "en": "Confirm BAWABA’s legal entity in the UAE or GCC is eligible to apply and submit the application.",
+      "fr": "Vérifier que l'entité légale de BAWABA aux Émirats arabes unis ou dans le CCG est éligible pour postuler et soumettre la candidature."
     }
   }
 }

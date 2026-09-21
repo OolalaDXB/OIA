@@ -181,7 +181,7 @@ View
 
 USD $246,765	Ecommerce | Design and Style	
 Sebastien Stanley Jones
-	Ecommerce	Design and Style	$6,049	3.4x/2.2x	8 years	United Kingdom	Open	
+	Ecommerce	Design and Style	$3,945	5.2x/3.2x	8 years	United Kingdom	Open	
 View
 
 USD $790,000	Ecommerce | Sports and Outdoor	
@@ -194,14 +194,14 @@ Antonin Lucas
 	Ecommerce	Home and Garden	$28,680	5.0x/0.6x	13 years	France	Under LOI	
 View
 
-USD $119,000	Marketing Agency | Internet	
-Goran Duskic
-	Marketing Agency	Internet	$6,083	1.6x/1.0x	6 years	Bulgaria	Open	
-View
-
 USD $524,945	Content | General Knowledge	
 Jared Lauber
 	Content	General Knowledge	$15,845	2.8x/1.9x	10 years	United States	Open	
+View
+
+USD $35,640	Evergreen Publishing Portfolio	
+Karl Leyco
+	Amazon KDP	Entertainment	$837	3.6x/3.5x	4 years	Ireland	Open	
 View
 
 USD $150,000	SaaS | Business	
@@ -466,175 +466,183 @@ Last 12 months
 Total Keyword Search Volume
 0
 1000
-250
-500
-750
-1250
+200
+400
+600
+800
 Keyword
-1130​1130
-937​937
-647​647
-602​602
-592​592
+854​854
+727​727
+595​595
 554​554
-475​475
-465​465
-410​410
-409​409
-400​400
-372​372
-345​345
-333​333
-326​326
-316​316
-303​303
-293​293
-279​279
-270​270
-261​261
-225​225
+520​520
+494​494
+456​456
+453​453
+431​431
+419​419
+391​391
+378​378
+376​376
+362​362
+342​342
+306​306
+301​301
+300​300
+290​290
+254​254
+228​228
 222​222
-221​221
-217​217
-201​201
-192​192
-191​191
-187​187
-185​185
-184​184
+209​209
+207​207
+206​206
+202​202
+198​198
+195​195
+188​188
+178​178
 175​175
-171​171
-165​165
-163​163
-157​157
-157​157
-151​151
-150​150
-148​148
+175​175
+172​172
 145​145
 143​143
-142​142
-139​139
-134​134
-133​133
-131​131
+138​138
+138​138
+136​136
+129​129
+126​126
 124​124
-123​123
-123​123
-122​122
-119​119
-117​117
 116​116
-114​114
+112​112
+112​112
+110​110
+108​108
+107​107
+107​107
+105​105
+96​96
+96​96
 94​94
-90​90
-90​90
-Website
+91​91
+91​91
+91​91
+88​88
+84​84
+83​83
+82​82
+79​79
+78​78
+76​76
+76​76
+75​75
+75​75
+75​75
 Youtube
-Blog
-Shopify
-Adsense
 Saas
-Menu
+Shopify
+Website
+Blog
 App
 Ai
+Adsense
 Amazon
-Instagram
-Tiktok
-Apk
 Education
 Game
 Affiliate
 Travel
+Menu
+Instagram
+Apk
 Tool
+Tiktok
 Kdp
 Youtube Channel
-Content
-Food
-Facebook
-Ecommerce
 Pet
-E Commerce
-Playwright
-Etsy
+Sport
+Food
+Ecommerce
+Calculator
+Fashion
+Newsletter
+Facebook
+Fitness
 Finance
 Health
-Sport
-Vpn
-Calculator
-Golf
 Music
-Gaming
-Beauty
-Newsletter
-Digital
-Fashion
-Casino
-Facebook Page
-Job
-Seo
-Fba
-Speisekartemenus.De
-News
-Amazon Fba
-B2b
-Wordpress
-Digital Product
+Playwright
 Garden
+E Commerce
+Casino
+Real Estate
+Automotive
+Facebook Page
+Crypto
+Etsy
+Trading
+Agency
+Dog
+B2b
+Vpn
+Seo
+Beauty
+Digital Product
+Content
+Home
+Gaming
+Digital
+Marketing
+Fba
+News
+Recipe
+Amazon Fba
+Australia
+Nan
+Coffee
 Supplement
 Jewelry
-Nan
-Fitness
-Content Website
-Crypto
-Dog
-Shopify Seo
-Kid
-Real Estate
+Job
+Mobile Game
 Amazon Kdp
-Washing Machine
-Coffee
-Trading
-Android
-Iptv
-Fishing Kayak
-Automotive
-Agency
-Marketing
-Ebay
-Business
-Art
-Canada
-Fintech
-Australia
-Information
-Buy
-Home And Gardening
-Online Business
-Print
-Dating
-Mediavine
-Undefined
-Car
-France
-Football
-Anime
-Print On Demand
-Marketplace
 Facebook Group
-Home
-Pinterest
-Peptide
-Io
+Golf
+Ebay
+Owner Finance
+School
+Clothing
+Kid
+Converter
+Tech
+Google Merchant Center
+Shopify Seo
 Home Decor
+Medical
+Mediavine
+Directory
+Seller Financing
+Android
+Email
+Spain
+Home Improvement
+Football
+Fintech
+School Saas
+Tiktok Account
+Undefined
+Art
+Book
+Ad
+Pinterest
+Gift
+Speisekartemenus.De
 Tik Tok
-Christian
+Social Medium
+Google
 Share
 Download
 
 Source: Original search queries submitted by users on the Flippa Platform
 
-Website is the top search for this period. View Website businesses.
+Youtube is the top search for this period. View Youtube businesses.
 Explore Full Data Insights
 PARTNER DIRECTORY
 A handpicked network of service providers across the M&A deal cycle, and beyond.

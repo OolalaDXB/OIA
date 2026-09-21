@@ -1,14 +1,16 @@
 {
   "EligibilityVerdict": {
-    "verdict": "LIKELY",
-    "citation": "Hub71+ AI is a specialist ecosystem designed to support startups at the forefront of AI innovation.",
+    "verdict": "ELIGIBLE",
+    "citations": [
+      "Hub71+ AI is a specialist ecosystem designed to support startups at the forefront of AI innovation."
+    ],
     "reason": {
-      "en": "The opportunity explicitly targets 'startups,' but the organisation's dossier does not clarify if BAWABA is legally structured as a startup or meets the typical criteria of a startup (e.g., early-stage, high-growth potential).",
-      "fr": "L'opportunité cible explicitement les 'startups,' mais le dossier de l'organisation ne précise pas si BAWABA est légalement structurée comme une startup ou répond aux critères typiques d'une startup (par exemple, en phase de démarrage, avec un fort potentiel de croissance)."
+      "en": "The opportunity explicitly targets 'startups at the forefront of AI innovation,' and BAWABA operates in AI, aligning with the scope. No exclusion criteria are mentioned in the document.",
+      "fr": "L'opportunité cible explicitement les 'startups à la pointe de l'innovation en IA', et BAWABA opère dans le domaine de l'IA, ce qui correspond à la portée. Aucun critère d'exclusion n'est mentionné dans le document."
     },
     "nextAction": {
-      "en": "Confirm with BAWABA whether they are legally classified as a startup or meet the definition of a startup as per the opportunity's criteria.",
-      "fr": "Vérifier auprès de BAWABA s'ils sont légalement classés comme une startup ou s'ils répondent à la définition d'une startup selon les critères de l'opportunité."
+      "en": "Confirm BAWABA’s legal entity details and submit the application as a startup in AI innovation.",
+      "fr": "Confirmer les détails de l'entité légale de BAWABA et soumettre la candidature en tant que startup dans l'innovation en IA."
     }
   }
 }

@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "ELIGIBLE",
+    "citation": "Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics.",
+    "reason": {
+      "en": "The opportunity text does not restrict applicants to specific types of organisations. It explicitly mentions public tenders open to competition, including those at the national and European levels, which aligns with TheStudio MT's operations in France and the EU.",
+      "fr": "Le texte de l'opportunité ne restreint pas les candidats à des types d'organisations spécifiques. Il mentionne explicitement les marchés publics ouverts à la concurrence, y compris au niveau national et européen, ce qui correspond aux activités de TheStudio MT en France et dans l'UE."
+    },
+    "nextAction": {
+      "en": "Review the specific tender notices on boamp.fr to confirm the exact requirements and submission process for TheStudio MT.",
+      "fr": "Consulter les avis spécifiques de marché sur boamp.fr pour confirmer les exigences exactes et la procédure de candidature pour TheStudio MT."
+    }
+  }
+}

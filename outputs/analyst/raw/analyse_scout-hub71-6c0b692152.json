@@ -3,12 +3,12 @@
     "verdict": "LIKELY",
     "citation": "Hub71+ Digital Assets is a dedicated programme to promote Web3 startup growth from the heart of Abu Dhabi. We provide an integrated launchpad that unites builders, regulators, investors, foundations, corporate partners, and enthusiasts around Web3 including blockchain and cryptocurrency startups.",
     "reason": {
-      "en": "The opportunity explicitly targets Web3, blockchain, and cryptocurrency startups, while BAWABA operates in AI, data, cybersecurity, and software. The document does not clarify whether AI or cybersecurity startups with no explicit Web3 focus are eligible.",
-      "fr": "L'opportunité cible explicitement les startups Web3, blockchain et cryptomonnaies, tandis que BAWABA opère dans l'IA, les données, la cybersécurité et les logiciels. Le document ne précise pas si les startups en IA ou cybersécurité sans focus explicite sur le Web3 sont éligibles."
+      "en": "The opportunity explicitly targets Web3, blockchain, and cryptocurrency startups, while BAWABA operates in AI, data, and cybersecurity. The document does not clarify if AI control planes for regulated industries qualify as Web3 or blockchain-related. The overlap is unclear.",
+      "fr": "L'opportunité cible explicitement les startups Web3, blockchain et cryptomonnaies, tandis que BAWABA opère dans l'IA, les données et la cybersécurité. Le document ne précise pas si les plans de contrôle d'IA souveraine pour les industries réglementées relèvent du Web3 ou de la blockchain. Le chevauchement n'est pas clair."
     },
     "nextAction": {
-      "en": "Check with the issuer whether AI or cybersecurity startups without a clear Web3 focus are eligible for this programme.",
-      "fr": "Vérifier auprès de l'émetteur si les startups en IA ou cybersécurité sans focus clair sur le Web3 sont éligibles à ce programme."
+      "en": "Ask the issuer whether an AI control-plane startup that does not build on-chain protocols or issue tokens is considered a Web3 startup under this programme.",
+      "fr": "Demander à l'émetteur si une startup de plan de contrôle d'IA qui ne construit pas de protocoles on-chain ou n'émet pas de tokens est considérée comme une startup Web3 dans le cadre de ce programme."
     }
   }
 }
