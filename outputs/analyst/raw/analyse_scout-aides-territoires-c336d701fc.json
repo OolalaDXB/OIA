@@ -1,14 +1,16 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citation": "Le FTJ a été créé pour accompagner la transition énergétique et industrielle des territoires concernés par de fortes émissions de CO2 dans la transition vers une économie neutre en carbone, conformément aux objectifs de l’Union européenne dans le cadre de l’accord de Paris.",
+    "citations": [
+      "Territoires concernés par de fortes émissions de CO2"
+    ],
     "reason": {
-      "en": "The FTJ fund specifically targets territories with high CO2 emissions to support their transition to a carbon-neutral economy. The organisation 'Les Vieilles Pierres' operates in the heritage, culture, and tourism sectors, which are not directly related to industrial or high-emission activities.",
-      "fr": "Le fonds FTJ cible spécifiquement les territoires à fortes émissions de CO2 pour accompagner leur transition vers une économie neutre en carbone. L'association 'Les Vieilles Pierres' opère dans les secteurs du patrimoine, de la culture et du tourisme, qui ne sont pas directement liés aux activités industrielles ou à forte émission de CO2."
+      "en": "The funding opportunity is restricted to territories with high CO2 emissions. The organisation operates in Bretagne, which is not specified as a territory with high CO2 emissions in the context of this fund.",
+      "fr": "L'opportunité de financement est restreinte aux territoires concernés par de fortes émissions de CO2. L'organisation opère en Bretagne, qui n'est pas spécifiée comme un territoire à fortes émissions de CO2 dans le cadre de ce fonds."
     },
     "nextAction": {
-      "en": "Review other funding opportunities that align with heritage, culture, or tourism projects.",
-      "fr": "Consulter d'autres opportunités de financement adaptées aux projets dans les domaines du patrimoine, de la culture ou du tourisme."
+      "en": "Verify if Bretagne is listed as a territory with high CO2 emissions under the FTJ programme.",
+      "fr": "Vérifier si la Bretagne est répertoriée comme un territoire à fortes émissions de CO2 dans le cadre du programme FTJ."
     }
   }
 }

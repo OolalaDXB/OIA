@@ -4,6 +4,7 @@
       {
         "title": "Crédit d'impôt recherche (CIR)",
         "type": "Tax incentive",
+        "status": "Permanently open",
         "sourceUrl": "https://entreprendre.service-public.gouv.fr/vosdroits/F23533",
         "deadline": "",
         "amount": "",

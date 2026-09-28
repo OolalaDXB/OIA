@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations may apply for this tender. It only describes the service required (supply of temporary staff) but does not state eligibility criteria for applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent répondre à cet appel d'offres. Il décrit uniquement le service requis (mise à disposition de personnel intérimaire) mais ne mentionne pas les critères d'éligibilité des candidats."
+    },
+    "nextAction": {
+      "en": "Check the full tender documents on the provided link (https://ted.europa.eu/en/notice/524786-2026/xml) to confirm eligibility criteria for applicants.",
+      "fr": "Consulter les documents complets de l'appel d'offres sur le lien fourni (https://ted.europa.eu/en/notice/524786-2026/xml) pour vérifier les critères d'éligibilité des candidats."
+    }
+  }
+}

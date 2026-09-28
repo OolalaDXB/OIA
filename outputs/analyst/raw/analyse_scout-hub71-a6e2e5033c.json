@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citation": "The MZN x Hub71 Programme is a three-month programme powered by Hub71 in partnership with the Khalifa Fund for Enterprise Development, designed to support **Emirati founders** in transforming innovative ideas into market-ready minimum viable products (MVPs).",
+    "citation": "eligibility: Emirati founders",
     "reason": {
-      "en": "The opportunity explicitly restricts eligibility to 'Emirati founders.' The organisation's dossier does not indicate that its founders or legal entities are Emirati.",
-      "fr": "L'opportunité restreint explicitement l'éligibilité aux 'fondateurs émiratis.' Le dossier de l'organisation n'indique pas que ses fondateurs ou entités légales sont émiratis."
+      "en": "The opportunity explicitly restricts eligibility to 'Emirati founders,' and the organisation's dossier does not confirm that BAWABA is founded or led by Emirati individuals.",
+      "fr": "L'opportunité restreint explicitement l'éligibilité aux 'fondateurs émiratis,' et le dossier de l'organisation ne confirme pas que BAWABA est fondée ou dirigée par des individus émiratis."
     },
     "nextAction": {
-      "en": "Confirm the nationality of the organisation's founders or legal entities with the organisation's representative.",
-      "fr": "Confirmer la nationalité des fondateurs ou des entités légales de l'organisation avec un représentant de l'organisation."
+      "en": "Verify if any of BAWABA’s legal entities or founders hold Emirati nationality or residency and could qualify as 'Emirati founders.'",
+      "fr": "Vérifier si l'une des entités juridiques de BAWABA ou ses fondateurs possèdent la nationalité ou la résidence émiratie et pourraient être considérés comme des 'fondateurs émiratis'."
     }
   }
 }

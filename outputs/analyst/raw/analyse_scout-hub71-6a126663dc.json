@@ -1,16 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "LIKELY",
-    "citation": [
-      "Smart and autonomous mobility startups joining Hub71 gain direct access to SAVI’s network of partners, regulators and testing environments."
-    ],
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "eligibility: Smart and autonomous mobility startups",
     "reason": {
-      "en": "The opportunity explicitly targets 'smart and autonomous mobility startups,' but BAWABA's dossier describes it as a 'Sovereign AI control plane for regulated industries' without specifying mobility applications. The sectors (AI, data, cybersecurity) align, but the direct relevance to mobility is unclear.",
-      "fr": "L'opportunité cible explicitement les 'startups de mobilité intelligente et autonome', mais le dossier de BAWABA la décrit comme un 'plan de contrôle d'IA souveraine pour les industries réglementées' sans préciser d'applications dans la mobilité. Les secteurs (IA, données, cybersécurité) correspondent, mais la pertinence directe pour la mobilité n'est pas claire."
+      "en": "The opportunity explicitly restricts eligibility to 'Smart and autonomous mobility startups.' BAWABA operates in AI, data, cybersecurity, and software sectors, with no indication it is a smart or autonomous mobility startup.",
+      "fr": "L'opportunité restreint explicitement l'éligibilité aux 'startups de mobilité intelligente et autonome.' BAWABA opère dans les secteurs de l'IA, des données, de la cybersécurité et des logiciels, sans indication qu'il s'agit d'une startup de mobilité intelligente ou autonome."
     },
     "nextAction": {
-      "en": "Confirm with BAWABA whether their AI control plane includes or can be adapted to smart/autonomous mobility use cases (land, air, or sea).",
-      "fr": "Confirmer avec BAWABA si leur plan de contrôle d'IA inclut ou peut être adapté à des cas d'usage de mobilité intelligente/autonome (terre, air ou mer)."
+      "en": "Review other funding opportunities that align with BAWABA’s focus on AI, data, or cybersecurity sectors.",
+      "fr": "Examiner d'autres opportunités de financement qui correspondent aux secteurs d'activité de BAWABA, à savoir l'IA, les données ou la cybersécurité."
     }
   }
 }

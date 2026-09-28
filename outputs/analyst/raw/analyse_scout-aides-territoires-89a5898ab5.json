@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citations": [],
+    "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for this funding. There is no mention of eligibility criteria related to the legal status, sector, or activities of applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à ce financement. Il n'y a aucune mention des critères d'éligibilité liés au statut juridique, au secteur ou aux activités des candidats."
+      "en": "The extracted text does not specify which types of organisations are eligible to apply for this funding opportunity. There is no mention of whether associations, non-profits, or other legal entities can apply.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles pour cette opportunité de financement. Il n'est pas mentionné si les associations, les organisations à but non lucratif ou d'autres entités juridiques peuvent postuler."
     },
     "nextAction": {
-      "en": "Contact the issuer (beta.gouv.fr or the relevant French state authority) to request the full call for proposals or eligibility guidelines.",
-      "fr": "Contacter l'émetteur (beta.gouv.fr ou l'autorité compétente de l'État français) pour demander l'appel à projets complet ou les directives d'éligibilité."
+      "en": "Check the full call for proposals or official guidelines of the AMIF fund to determine the eligible types of organisations.",
+      "fr": "Consulter l'appel à projets complet ou les directives officielles du Fonds AMIF pour déterminer les types d'organisations éligibles."
     }
   }
 }

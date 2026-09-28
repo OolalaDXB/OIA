@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations may apply for this tender. It only describes the services required (surveillance and protection of buildings) but does not outline eligibility criteria for applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent répondre à cet appel d'offres. Il décrit uniquement les services requis (surveillance et protection des bâtiments) sans indiquer les critères d'éligibilité des candidats."
+    },
+    "nextAction": {
+      "en": "Contact the Département de la Loire to request the full tender documents and confirm the eligibility criteria for applicants.",
+      "fr": "Contacter le Département de la Loire pour demander les documents complets de l'appel d'offres et confirmer les critères d'éligibilité des candidats."
+    }
+  }
+}

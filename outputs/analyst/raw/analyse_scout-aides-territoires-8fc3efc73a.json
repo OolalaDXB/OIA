@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citation": "Le programme pour la compétitivité des entreprises et des petites et moyennes entreprises (2014-2020), vise à promouvoir la croissance et à renforcer la compétitivité et la durabilité des entreprises dans l'Union européenne.",
+    "citation": "Entreprises et petites et moyennes entreprises dans l'Union européenne",
     "reason": {
-      "en": "The opportunity explicitly targets 'entreprises' (businesses) and 'petites et moyennes entreprises' (SMEs). 'Les Vieilles Pierres' is a heritage hiking association, which is not classified as an enterprise or SME in the context of this programme.",
-      "fr": "L'opportunité cible explicitement les 'entreprises' et les 'petites et moyennes entreprises' (PME). 'Les Vieilles Pierres' est une association de randonnée patrimoniale, ce qui ne correspond pas à une entreprise ou une PME dans le cadre de ce programme."
+      "en": "The opportunity explicitly restricts eligibility to 'entreprises et petites et moyennes entreprises' (businesses and SMEs). 'Les Vieilles Pierres' is a heritage hiking association, which is not classified as a business or SME in the provided dossier.",
+      "fr": "L'opportunité restreint explicitement l'éligibilité aux 'entreprises et petites et moyennes entreprises'. 'Les Vieilles Pierres' est une association de randonnée patrimoniale, ce qui ne correspond pas à une entreprise ou une PME selon le dossier fourni."
     },
     "nextAction": {
-      "en": "Review other funding opportunities specifically designed for associations or cultural heritage organisations.",
-      "fr": "Consulter d'autres opportunités de financement spécifiquement destinées aux associations ou aux organisations du patrimoine culturel."
+      "en": "Confirm the legal status of 'Les Vieilles Pierres' to ensure it is not registered as a business or SME. If not, explore other funding opportunities open to associations.",
+      "fr": "Vérifier le statut juridique de 'Les Vieilles Pierres' pour confirmer qu'elle n'est pas enregistrée en tant qu'entreprise ou PME. Si ce n'est pas le cas, rechercher d'autres opportunités de financement ouvertes aux associations."
     }
   }
 }

@@ -38,6 +38,12 @@ I AM AN INVESTOR
 I AM A TALENT
 What's Happening?
 BLOG
+HIFI RAISES USD 37 MILLION TO SCALE THE INFRASTRUCTURE FOR TOKENISED MONEY
+25
+Sep
+, 2026
+VIEW MORE
+BLOG
 HUB71 STARTUP SYNAPSE ANALYTICS RAISES USD 13 MILLION TO SCALE AI POWERED DECISIONING FOR FINANCIAL INSTITUTIONS
 21
 Sep
@@ -46,12 +52,6 @@ VIEW MORE
 PRESS RELEASE
 HUB71 EXPANDS INITIATE PROGRAMME AFTER ALMOST 5500 FOUNDERS REGISTER FOR EARLY-STAGE STARTUP SUPPORT
 26
-Aug
-, 2026
-VIEW MORE
-BLOG
-THE HARDEST THING ABOUT EARLY CHILDHOOD TECH ISN’T THE TECHNOLOGY
-25
 Aug
 , 2026
 VIEW MORE
@@ -151,11 +151,11 @@ SOME OF OUR STARTUPS:
 
 We are currently on the Polygon (Matic) Network, which is an Ethereum-compatible blockchain network.
 
-Algocyte is the first Self-Monitoring Blood Count home device based on AI
+Dapio Tap to Pay transforms the way you get paid
 
 Mashvisor is a platform that combines all services needed for real estate investing, cutting three months’ worth of research down to only 15 minutes.
 
-Dapio Tap to Pay transforms the way you get paid
+On a mission to democratize AI for the Banking Industry
 
 ALL STARTUPS
 Our community says

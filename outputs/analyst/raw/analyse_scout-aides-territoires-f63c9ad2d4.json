@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citation": [],
+    "citations": [],
     "reason": {
       "en": "The extracted text does not specify which types of organisations may apply for the LIFE programme. It only describes the programme's scope.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent déposer une candidature au programme LIFE. Il décrit uniquement le champ d'application du programme."
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au programme LIFE. Il décrit uniquement le champ d'application du programme."
     },
     "nextAction": {
-      "en": "Check the official LIFE programme call for proposals to determine eligible applicants.",
-      "fr": "Consulter l'appel à projets officiel du programme LIFE pour identifier les candidats éligibles."
+      "en": "Check the official LIFE programme guidelines or call the issuing authority to confirm eligibility criteria for associations.",
+      "fr": "Consulter les directives officielles du programme LIFE ou contacter l'autorité émettrice pour confirmer les critères d'éligibilité pour les associations."
     }
   }
 }

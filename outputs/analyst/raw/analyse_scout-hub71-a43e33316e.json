@@ -1,16 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citations": [
-      "Hub71+ Life Sciences is Abu Dhabi’s specialist ecosystem driving innovation across biotechnology, MedTech, and digital health."
-    ],
+    "citation": "Startups in biotechnology, MedTech, and digital health",
     "reason": {
-      "en": "The opportunity explicitly targets organisations innovating in biotechnology, MedTech, and digital health. BAWABA operates in AI, data, cybersecurity, and software, with no mention of biotechnology, MedTech, or digital health in its core activities.",
-      "fr": "L'opportunité cible explicitement les organisations innovant dans les domaines de la biotechnologie, des technologies médicales (MedTech) et de la santé numérique. BAWABA opère dans les secteurs de l'IA, des données, de la cybersécurité et des logiciels, sans mention de la biotechnologie, des MedTech ou de la santé numérique dans ses activités principales."
+      "en": "The organisation operates in AI, data, cybersecurity, and software sectors, which do not align with the specified sectors of biotechnology, MedTech, or digital health as required by the funding opportunity.",
+      "fr": "L'organisation opère dans les secteurs de l'IA, des données, de la cybersécurité et des logiciels, qui ne correspondent pas aux secteurs spécifiés de la biotechnologie, des technologies médicales ou de la santé numérique requis par l'opportunité de financement."
     },
     "nextAction": {
-      "en": "Review other funding opportunities that explicitly include AI, data, or cybersecurity for regulated industries.",
-      "fr": "Examiner d'autres opportunités de financement qui incluent explicitement l'IA, les données ou la cybersécurité pour les industries réglementées."
+      "en": "Review other funding opportunities that explicitly include AI, data, or cybersecurity sectors.",
+      "fr": "Examiner d'autres opportunités de financement qui incluent explicitement les secteurs de l'IA, des données ou de la cybersécurité."
     }
   }
 }

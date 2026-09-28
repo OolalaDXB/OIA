@@ -164,11 +164,6 @@ Goran Duskic
 	iOS App	Education	$18,957	3.7x/1.5x	4 years	United Kingdom	Open	
 View
 
-USD $254,982	Content | Education	
-Nick Carlucci
-	Content	Education	$9,486	2.2x/2.1x	21 years	United States	Under LOI	
-View
-
 USD $600,000	Ecommerce | Design and Style	
 Jared Lauber
 	Ecommerce	Design and Style	$22,310	2.2x/1.4x	9 years	United States	Under LOI	
@@ -181,12 +176,7 @@ View
 
 USD $246,765	Ecommerce | Design and Style	
 Sebastien Stanley Jones
-	Ecommerce	Design and Style	$3,945	5.2x/3.2x	8 years	United Kingdom	Open	
-View
-
-USD $790,000	Ecommerce | Sports and Outdoor	
-Marco Reeves
-	Ecommerce	Sports and Outdoor	$37,754	1.7x/0.5x	4 years	Australia	Open	
+	Ecommerce	Design and Style	$5,282	3.9x/2.4x	8 years	United Kingdom	Open	
 View
 
 USD $1,721,937	Ecommerce | Home and Garden	
@@ -471,172 +461,176 @@ Total Keyword Search Volume
 600
 800
 Keyword
-854​854
-727​727
-595​595
-554​554
-520​520
-494​494
-456​456
-453​453
-431​431
-419​419
-391​391
-378​378
-376​376
-362​362
+827​827
+655​655
+579​579
+532​532
+509​509
+473​473
+462​462
+454​454
+408​408
+388​388
 342​342
-306​306
-301​301
-300​300
-290​290
-254​254
-228​228
-222​222
-209​209
-207​207
-206​206
-202​202
-198​198
-195​195
-188​188
+340​340
+331​331
+327​327
+323​323
+316​316
+311​311
+307​307
+239​239
+239​239
+229​229
+218​218
+211​211
+210​210
+196​196
+187​187
+180​180
+178​178
 178​178
 175​175
-175​175
 172​172
-145​145
-143​143
-138​138
-138​138
+166​166
+162​162
+156​156
+152​152
+147​147
+139​139
+139​139
+137​137
 136​136
-129​129
-126​126
+135​135
+127​127
 124​124
-116​116
+118​118
 112​112
-112​112
-110​110
+108​108
 108​108
 107​107
-107​107
 105​105
+100​100
+99​99
+99​99
+98​98
 96​96
-96​96
-94​94
-91​91
-91​91
-91​91
-88​88
+93​93
+93​93
+90​90
+89​89
+89​89
+87​87
+87​87
+85​85
 84​84
-83​83
-82​82
-79​79
+78​78
 78​78
 76​76
-76​76
 75​75
 75​75
-75​75
+72​72
+72​72
 Youtube
 Saas
 Shopify
-Website
-Blog
-App
 Ai
 Adsense
-Amazon
-Education
-Game
-Affiliate
+Blog
+Website
+App
 Travel
-Menu
 Instagram
+Youtube Channel
+Amazon
 Apk
-Tool
+Game
 Tiktok
 Kdp
-Youtube Channel
+Menu
+Facebook
 Pet
 Sport
-Food
 Ecommerce
-Calculator
+Education
+Affiliate
 Fashion
+Calculator
 Newsletter
-Facebook
-Fitness
-Finance
 Health
-Music
+Book
 Playwright
-Garden
-E Commerce
-Casino
-Real Estate
-Automotive
-Facebook Page
-Crypto
+Tool
+Music
+Food
+Finance
+Supplement
 Etsy
-Trading
-Agency
-Dog
-B2b
-Vpn
+E Commerce
 Seo
-Beauty
-Digital Product
-Content
 Home
 Gaming
-Digital
-Marketing
-Fba
-News
-Recipe
-Amazon Fba
-Australia
-Nan
-Coffee
-Supplement
-Jewelry
-Job
-Mobile Game
-Amazon Kdp
-Facebook Group
-Golf
 Ebay
-Owner Finance
-School
-Clothing
-Kid
-Converter
-Tech
-Google Merchant Center
-Shopify Seo
-Home Decor
-Medical
-Mediavine
-Directory
-Seller Financing
-Android
-Email
-Spain
-Home Improvement
-Football
-Fintech
+Trading
+News
+Amazon Kdp
+Automotive
+Fitness
+Content
+Recipe
+Dog
+Wordpress
+Golf
+Real Estate
+Amazon Fba
 School Saas
-Tiktok Account
-Undefined
-Art
-Book
-Ad
-Pinterest
-Gift
-Speisekartemenus.De
-Tik Tok
-Social Medium
+Jewelry
+Schoolcues
+Garden
 Google
+Digital
+Crypto
+Apparel
+Australia
+Marketing
+Tiktok Account
+Nan
+Digital Product
+Pinterest
+Car
+Lead Generation
+Agency
+Beauty
+Mobile App
+Casino
+Facebook Page
+Directory
+Undefined
+Ad
+Mediavine
+Twitter
+Fba
+Football
+Wellness
+Io App
+Canada
+B2b
+Speisekartemenus.De
+Tool Website
+Generator
+Digital Marketing
+Marketplace
+Vpn
+Print On Demand
+Peptide
+Uk
+Facebook Group
+Agent
+Converter
+Electronics
+Kid
+In
+Security
 Share
 Download
 

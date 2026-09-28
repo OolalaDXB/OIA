@@ -1,16 +1,16 @@
 {
   "EligibilityVerdict": {
     "verdict": "LIKELY",
-    "citations": [
+    "citation": [
       "Leader (pour Liaison entre actions de développement de l'économie rurale) est une initiative de l'Union européenne pour soutenir des projets de développement rural lancés au niveau local afin de revitaliser les zones rurales et de créer des emplois."
     ],
     "reason": {
-      "en": "The opportunity supports rural development projects, which could include heritage and tourism initiatives like those of 'Les Vieilles Pierres.' However, the extracted text does not specify whether associations are explicitly eligible to apply.",
-      "fr": "L'opportunité soutient des projets de développement rural, ce qui pourrait inclure des initiatives patrimoniales et touristiques comme celles de 'Les Vieilles Pierres.' Cependant, le texte extrait ne précise pas si les associations sont explicitement éligibles pour postuler."
+      "en": "The opportunity targets projects for rural development and job creation, but does not explicitly state whether non-agricultural associations like heritage or tourism organizations are eligible. The focus on 'rural economy' may include cultural or tourism initiatives, but this is not confirmed in the text.",
+      "fr": "L'opportunité cible les projets de développement rural et de création d'emplois, mais ne précise pas explicitement si les associations non agricoles comme celles du patrimoine ou du tourisme sont éligibles. L'accent sur 'l'économie rurale' pourrait inclure des initiatives culturelles ou touristiques, mais cela n'est pas confirmé dans le texte."
     },
     "nextAction": {
-      "en": "Check the official FEADER documentation or contact the issuer to confirm whether associations are eligible to apply for this funding.",
-      "fr": "Consulter la documentation officielle du FEADER ou contacter l'émetteur pour confirmer si les associations sont éligibles à ce financement."
+      "en": "Check the official FEADER/Leader programme guidelines or contact the issuing authority (beta.gouv.fr) to confirm if heritage or tourism associations qualify as 'local rural development' projects.",
+      "fr": "Consulter les directives officielles du programme FEADER/Leader ou contacter l'autorité émettrice (beta.gouv.fr) pour confirmer si les associations de patrimoine ou de tourisme peuvent être considérées comme des projets de 'développement rural local'."
     }
   }
 }

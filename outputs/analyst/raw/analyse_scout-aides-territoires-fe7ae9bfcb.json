@@ -1,14 +1,17 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NEEDS_INFO",
-    "citations": [],
+    "verdict": "ELIGIBLE",
+    "citations": [
+      "Le Corps européen de solidarité permet aux jeunes de s’engager et aux organismes de mettre en place des initiatives en Europe sur des activités variées, dans les domaines humanitaires, de la santé, de l’environnement, de l’intergénérationnel…",
+      "Jeunes et organismes en Europe"
+    ],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply. It only mentions that the European Solidarity Corps allows young people to engage and organisations to set up initiatives, but it does not clarify eligibility criteria for organisations.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il mentionne seulement que le Corps européen de solidarité permet aux jeunes de s'engager et aux organismes de mettre en place des initiatives, mais il ne clarifie pas les critères d'éligibilité pour les organisations."
+      "en": "The opportunity explicitly includes 'organismes en Europe' as eligible applicants, and the organisation operates in the EU and is an association in a relevant sector (heritage/culture).",
+      "fr": "L'opportunité inclut explicitement les 'organismes en Europe' comme candidats éligibles, et l'organisation opère dans l'UE et est une association dans un secteur pertinent (patrimoine/culture)."
     },
     "nextAction": {
-      "en": "Check the official call for proposals or the European Solidarity Corps website to confirm which types of organisations are eligible to apply.",
-      "fr": "Consulter l'appel à projets officiel ou le site du Corps européen de solidarité pour confirmer quels types d'organisations sont éligibles."
+      "en": "Confirm the legal entity status of 'Les Vieilles Pierres' to ensure it can formally apply as an organisation.",
+      "fr": "Vérifier le statut d'entité légale de 'Les Vieilles Pierres' pour s'assurer qu'elle peut officiellement postuler en tant qu'organisation."
     }
   }
 }

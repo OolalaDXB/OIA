@@ -1,16 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "ELIGIBLE",
-    "citations": [
-      "Hub71+ AI is a specialist ecosystem designed to support startups at the forefront of AI innovation."
-    ],
+    "citation": "eligibility: Startups at the forefront of AI innovation",
     "reason": {
-      "en": "The opportunity explicitly targets 'startups at the forefront of AI innovation,' and BAWABA operates in AI, aligning with the scope. No exclusion criteria are mentioned in the document.",
-      "fr": "L'opportunité cible explicitement les 'startups à la pointe de l'innovation en IA', et BAWABA opère dans le domaine de l'IA, ce qui correspond à la portée. Aucun critère d'exclusion n'est mentionné dans le document."
+      "en": "BAWABA is described as operating in AI and is positioned as a startup at the forefront of AI innovation, specifically in sovereign AI control planes for regulated industries.",
+      "fr": "BAWABA est décrite comme opérant dans le domaine de l'IA et se positionne comme une startup à la pointe de l'innovation en IA, notamment avec une plateforme de contrôle souverain pour les industries régulées."
     },
     "nextAction": {
-      "en": "Confirm BAWABA’s legal entity details and submit the application as a startup in AI innovation.",
-      "fr": "Confirmer les détails de l'entité légale de BAWABA et soumettre la candidature en tant que startup dans l'innovation en IA."
+      "en": "Submit the application on behalf of BAWABA to Hub71+ AI.",
+      "fr": "Soumettre la candidature au nom de BAWABA pour Hub71+ AI."
     }
   }
 }

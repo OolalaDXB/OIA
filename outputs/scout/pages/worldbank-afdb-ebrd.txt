@@ -1,6 +1,6 @@
 https://projects.worldbank.org/en/projects-operations/opportunities?srce=both
 
-20d/04h/08m/27s
+13d/03h/15m/53s
 
 Sign up for Updates
 
@@ -43,32 +43,32 @@ Notice Type
 Procurement Method
 Market Approach
 
-Showing 1 - 20 of 580 current opportunities matching the search criteria -
+Showing 1 - 20 of 631 current opportunities matching the search criteria -
 
 Download to Excel: 
 Notice 	Country 	Project Title 	Notice Type 	Procurement Type 	Language 	Published Date 	Submission Deadline 
 The submission deadline is based on the applicable country's date and time as specified in the tender document.
  
-ADQUISICIÓN DE EQUIPAMIENTO PARA COLABORACIÓN DIGITAL, VIDEOCONFERENCIA Y GESTIÓN DOCUMENTAL INSTITUCIONAL	Bolivia	Santa Cruz Road Corridor Connector Project (San Ignacio - San Jose) - P152281	Invitation for Bids	Goods	Spanish; Castilian	September 20, 2026	September 21, 2026
-Acquisition lots des meilleurs adoptants TMDH rural et urbain	Madagascar	Madagascar Safety Nets and Resilience Project - P179466	Invitation for Bids	Goods	French	September 20, 2026	September 21, 2026
-Construction of Shreebhawar Dogad-Garje Road and Dogad Khola Bridge, Baitadi District	Nepal	Provincial and Local Roads Improvement Program - Phase 1 - P171836	Invitation for Bids	Works	English	September 20, 2026	November 13, 2026
-Procurement of BPNS commodity- Micronutrient Powder	Nigeria	Accelerating Nutrition Results in Nigeria 2.0 - P507935	Invitation for Bids	Goods	English	September 20, 2026	November 4, 2026
-ADQUISICIÓN DE SISTEMA DE ALMACENAMIENTO CENTRALIZADO (NAS) PARA EL FORTALECIMIENTO DE LA INFRAESTRUCTURA TECNOLÓGICA INSTITUCIONAL	Bolivia	Santa Cruz Road Corridor Connector Project (San Ignacio - San Jose) - P152281	Invitation for Bids	Goods	Spanish; Castilian	September 20, 2026	September 21, 2026
-Social Specialist (local)	Fiji	Fiji Energy Transformation Project Preparation - P515153	Request for Expression of Interest	Consultant Services	English	September 20, 2026	October 5, 2026
-Procurement of BPNS commodity- Ready to Use Therapeutic food (RUTF)	Nigeria	Accelerating Nutrition Results in Nigeria 2.0 - P507935	Invitation for Bids	Goods	English	September 20, 2026	November 4, 2026
-Travaux de reconstruction des infrastructures communautaires de base endommagées par des catastrophes naturelles répartis en huit (08) lots	Madagascar	Madagascar Safety Nets and Resilience Project - P179466	Invitation for Bids	Works	French	September 20, 2026	September 29, 2026
-Maintenance of road through Piloting of Performance Based Maintenance Contract (PBMC) of Wangdue Zam to Chuserbu (76.3Km) and Lawala to Phobjikha (17.24Km)	Bhutan	Accelerating Transport and Trade Connectivity in Eastern South Asia Phase 2 - Bhutan Project - P181278	Invitation for Bids	Works	English	September 20, 2026	October 28, 2026
-Supply of 29 Fully Equipped Ambulances for the Ministry of Public Health	Lebanon	Lebanon Emergency Assistance Project - P509428	Invitation for Bids	Goods	English	September 20, 2026	October 12, 2026
-Recrutement d'un Spécialiste en Suivi Evaluation de la CPU	Congo, Democratic Republic of	Preparation Grant for DRC Secondary Cities Improvement Project - P517144	Request for Expression of Interest	Consultant Services	French	September 20, 2026	September 22, 2026
-RECRUTEMENT D'UNE FIRME POUR LA REALISATION DE L'ENQUETE SUR LA SECURITE SANITAIRE	Western and Central Africa	Health Security Program in Western and Central Africa - Phase III - P508837	Request for Expression of Interest	Consultant Services	French	September 19, 2026	October 1, 2026
-PROCUREMENT AND DISTRIBUTION OF 10KVA SOLAR POWER TO NEWLY CONSTRUCTED 26 SECONDARY SCHOOLS (13 JUNIOR AND 13 SENIOR SECONDARY SCHOOLS AND FOR ADDITIONAL 55 SENIOR SECONDARY SCHOOLS FOR DIGITAL SKILLS IN GOMBE STATE	Nigeria	Adolescent Girls Initiative for Learning and Empowerment - P170664	Invitation for Bids	Goods	English	September 19, 2026	September 30, 2026
-Consultancy Services for Supervision of Civil Works to Improve Road Safety at Schools and locations along the Nacala Corridor with iRAP Less Than Three Stars	Mozambique	Transport Corridors for Economic Resilience Mozambique SOP 2 Project - P510427	Request for Expression of Interest	Consultant Services	English	September 18, 2026	October 6, 2026
-Risk Management Specialist (National)	Timor-Leste	Second Timor-Leste Branch Roads Project - P517121	Request for Expression of Interest	Consultant Services	English	September 18, 2026	October 1, 2026
-Rehabilitation of Calafat FIC	Romania	Strengthening Foundations for Improved Justice Service Delivery - P178599	Invitation for Bids	Works	English	September 18, 2026	November 9, 2026
-PROCUREMENT, DISTRIBUTION AND INSTALLATION OF DIGITAL LITERACY DEVICES FOR 55 ADDITIONAL SCHOOLS (DESKTOPS, PROJECTORS, MOTORISED PROJECTOR SCREEN, AND PROVISION OF INTERNET FACILITIES ALSO TO 55 SENIOR SECONDARY SCHOOLS IN GOMBE STATE	Nigeria	Adolescent Girls Initiative for Learning and Empowerment - P170664	Invitation for Bids	Goods	English	September 18, 2026	September 28, 2026
-Task Manager for Logistics Corridor Infrastructure and Development of the Resilient Alternative N1 Road	Mozambique	Transport Corridors for Economic Resilience Mozambique SOP 2 Project - P510427	Request for Expression of Interest	Consultant Services	English	September 18, 2026	October 5, 2026
-MAITRISE D’ŒUVRE (SUIVI ET CONTROLE TECHNIQUE) DES TRAVAUX D’INFRASTRUCTURES SOCIOECONOMIQUES DANS LES COMMUNES DE MORA, TOKOMBERE DANS LE MAYO SAVA ET WAZA DANS LE LOGONE ET CHARI	Cameroon	Enhancing Connectivity and Resilience in the Far North of Cameroon for Inclusiveness Project - P178207	Request for Expression of Interest	Consultant Services	French	September 18, 2026	October 2, 2026
-Fourniture d'un contrat d'assurance maladie annuel pour le personnel du Projet Filets Sociaux Adaptatifs et d'Inclusion Economique et de leurs familles	Cameroon	Adaptive Safety Nets and Economic Inclusion Project - P175363	Invitation for Bids	Non-consulting Services	French	September 18, 2026	September 22, 2026
+Retrofitting and Strengthening/Upgrading of Public School Buildings in Preparation for "The Big One" under IBRD Loan No. 9251-PH: Philippines Seismic Risk Reduction and Resilience Project (PSRRRP) - Contract Package 8	Philippines	Philippines Seismic Risk Reduction and Resilience Project - P171419	Invitation for Bids	Works	English	September 27, 2026	October 20, 2026
+Supply and delivery of Mobile (smartphones), tablets, and Solar Charging Solutions for smartphones for Female Health Workers (FHW) – Ministry of Health	Somalia, Federal Republic of	Somalia Recurrent Cost & Reform Financing Project - Phase 3 - P173731	Invitation for Bids	Goods	English	September 27, 2026	October 19, 2026
+Consultancy Service for development of visualization and videos for online training materials to enhance users statistics capacity materials	Eastern and Southern Africa	Eastern Africa Regional Statistics Program-for-Results - P176371	Request for Expression of Interest	Consultant Services	English	September 27, 2026	October 12, 2026
+Preparation of Feasibility Study (FS), Environmental and Social Impact Assessment (ESIA), Detailed Design and Works Supervision of Hill Lakes	Lebanon	Lebanon Green Agrifood Transformation for Economic Recovery (GATE) - P180334	Request for Expression of Interest	Consultant Services	English	September 27, 2026	October 8, 2026
+MSR(Gauze, Cotton and Others)	Bangladesh	Inclusive Services and Opportunities for Host Communities and Displaced Rohingya Population - P500727	Invitation for Bids	Goods	English	September 27, 2026	September 28, 2026
+Fourniture de matériels de branchements pour le raccordement des nouveaux clients	Togo	Inclusive Development through Electricity Access - P176769	Invitation for Bids	Goods	French	September 27, 2026	November 9, 2026
+River Bank Protection work in Lower Meghna River from km 21.800 to km 22.800 = 1.000 km at Hatiya Upazila in Noakhali district.	Bangladesh	Bangladesh Sustainable Recovery, Emergency Preparedness and Response Project - P508058	Invitation for Bids	Works	English	September 26, 2026	October 15, 2026
+River Bank Protection work in Lower Meghna River from km 20.800 to km 21.800 = 1.000 km at Hatiya Upazila in Noakhali district.	Bangladesh	Bangladesh Sustainable Recovery, Emergency Preparedness and Response Project - P508058	Invitation for Bids	Works	English	September 26, 2026	October 15, 2026
+Recrutement d'un Responsable Comptabilité du Financement Additionnel PARN II	Madagascar	Phase 2 of Improving Nutrition Outcomes Using the Multiphase Programmatic Approach - P175110	Request for Expression of Interest	Consultant Services	French	September 26, 2026	October 9, 2026
+River Bank Protection work in Lower Meghna River from km 22.800 to km 23.800 = 1.000 km at Hatiya and Subornochar Upazila in Noakhali district.	Bangladesh	Bangladesh Sustainable Recovery, Emergency Preparedness and Response Project - P508058	Invitation for Bids	Works	English	September 26, 2026	October 15, 2026
+Consultancy services for the Development of ESIA & RAP for Balanga Irrigation Scheme	Nigeria	Sustainable Power and Irrigation for Nigeria Project - P179684	Request for Expression of Interest	Consultant Services	English	September 26, 2026	October 9, 2026
+Recrutement de deux (2) Superviseurs Régionaux du Financement Additionnel PARN II	Madagascar	Phase 2 of Improving Nutrition Outcomes Using the Multiphase Programmatic Approach - P175110	Request for Expression of Interest	Consultant Services	French	September 26, 2026	October 9, 2026
+Acquisition et acheminement de lots de démarrage de médicaments du système Voucher pour les régions Fitovinany et Vatovavy	Madagascar	Phase 2 of Improving Nutrition Outcomes Using the Multiphase Programmatic Approach - P175110	Invitation for Bids	Goods	French	September 26, 2026	November 6, 2026
+Technical audit of telecom operators	Western and Central Africa	Digital Transformation for Africa/ Western Africa Regional Digital Integration Program SOP1 - P176932	Request for Expression of Interest	Consultant Services	French	September 25, 2026	October 27, 2026
+Contrôle et surveillance des travaux de construction d'un nouveau captage sur le fleuve Congo pour l'usine de N'djili y compris la conduite de refoulement, de la réhabilitation et de la construction du 4ème module de l'usine de N'djili	Congo, Democratic Republic of	DRC: Scaling-Up Water Supply and Sanitation Access in Kinshasa Project - P513301	Request for Expression of Interest	Consultant Services	French	September 25, 2026	October 23, 2026
+Rehabilitation of Shelters (Public Schools) Batch 3: Lot 1, Lot 2, Lot 3 and Lot 4	Lebanon	Lebanon Emergency Assistance Project - P509428	Invitation for Bids	Works	English	September 25, 2026	October 6, 2026
+Procurement of supply, installation, testing and commssioning of center pivot irrigation system, submersible pumps, solar modules, battery storage systems, delivery pipelines for the development of 255 ha ground water based pressurized irrigation system.	Eastern and Southern Africa	Horn of Africa - Groundwater for Resilience Program - P174867	Invitation for Bids	Goods	English	September 25, 2026	November 2, 2026
+Supply, Delivery, Installation and Commissioning of 300 Public Wifi Hots Spot in Four (4) Lots: Lot 1: 51 Public Wifi Sites; Lot 2: 90 Public Wifi Sites; Lot 3: 82 Public Wifi Sites and Lot 4: 77 Public Wifi Sites	Kenya	Kenya Digital Economy Acceleration Project - P170941	Invitation for Bids	Goods	English	September 25, 2026	November 12, 2026
+PROCUREMENT OF ID CARD PRINTER	DRC - Angola	Great Lakes Trade Facilitation and Integration Project - P174814	Invitation for Bids	Goods	English	September 25, 2026	September 30, 2026
+Hiring of Senior Specialist Gender & Social Inclusion	Pakistan	Strengthening Social Protection Delivery System in Sindh - P178532	Request for Expression of Interest	Consultant Services	English	September 25, 2026	October 8, 2026
 Download to Excel: 
   12345678910  
 Back to top

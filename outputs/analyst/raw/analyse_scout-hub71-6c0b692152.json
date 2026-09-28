@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "LIKELY",
-    "citation": "Hub71+ Digital Assets is a dedicated programme to promote Web3 startup growth from the heart of Abu Dhabi. We provide an integrated launchpad that unites builders, regulators, investors, foundations, corporate partners, and enthusiasts around Web3 including blockchain and cryptocurrency startups.",
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "eligibility: Web3, blockchain, and cryptocurrency startups",
     "reason": {
-      "en": "The opportunity explicitly targets Web3, blockchain, and cryptocurrency startups, while BAWABA operates in AI, data, and cybersecurity. The document does not clarify if AI control planes for regulated industries qualify as Web3 or blockchain-related. The overlap is unclear.",
-      "fr": "L'opportunité cible explicitement les startups Web3, blockchain et cryptomonnaies, tandis que BAWABA opère dans l'IA, les données et la cybersécurité. Le document ne précise pas si les plans de contrôle d'IA souveraine pour les industries réglementées relèvent du Web3 ou de la blockchain. Le chevauchement n'est pas clair."
+      "en": "The organisation BAWABA operates in AI, data, cybersecurity, and software sectors, with no explicit mention of Web3, blockchain, or cryptocurrency in its dossier. The opportunity explicitly restricts eligibility to Web3, blockchain, and cryptocurrency startups.",
+      "fr": "L'organisation BAWABA opère dans les secteurs de l'IA, des données, de la cybersécurité et des logiciels, sans mention explicite de Web3, de la blockchain ou des cryptomonnaies dans son dossier. L'opportunité restreint explicitement l'éligibilité aux startups Web3, blockchain et cryptomonnaies."
     },
     "nextAction": {
-      "en": "Ask the issuer whether an AI control-plane startup that does not build on-chain protocols or issue tokens is considered a Web3 startup under this programme.",
-      "fr": "Demander à l'émetteur si une startup de plan de contrôle d'IA qui ne construit pas de protocoles on-chain ou n'émet pas de tokens est considérée comme une startup Web3 dans le cadre de ce programme."
+      "en": "Review the organisation’s activities to confirm whether any Web3, blockchain, or cryptocurrency initiatives exist that were not captured in the dossier.",
+      "fr": "Examiner les activités de l'organisation pour confirmer si des initiatives liées à Web3, à la blockchain ou aux cryptomonnaies existent mais n'ont pas été mentionnées dans le dossier."
     }
   }
 }

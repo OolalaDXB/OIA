@@ -1,14 +1,17 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NEEDS_INFO",
-    "citation": [],
+    "verdict": "LIKELY",
+    "citation": [
+      "Get the support you need to take your business to the next level in Abu Dhabi."
+    ],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply. There is no mention of eligibility criteria such as legal structure, location, or stage of business.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité tels que la structure juridique, la localisation ou le stade de développement de l'entreprise."
+      "en": "The opportunity targets businesses looking to expand in Abu Dhabi, but the extracted text does not specify the legal structure required for applicants. BAWABA operates in the UAE (AE) and GCC, which aligns with the geographic focus, but the document does not confirm whether sovereign AI control plane providers are explicitly included or excluded.",
+      "fr": "L'opportunité cible les entreprises cherchant à se développer à Abu Dhabi, mais le texte extrait ne précise pas la structure juridique requise pour les candidats. BAWABA opère aux Émirats arabes unis (AE) et dans le CCG, ce qui correspond à la zone géographique visée, mais le document ne confirme pas si les fournisseurs de plans de contrôle d'IA souveraine sont explicitement inclus ou exclus."
     },
     "nextAction": {
-      "en": "Contact the issuer (Mubadala) to ask for the full eligibility criteria document or webpage.",
-      "fr": "Contacter l'émetteur (Mubadala) pour demander le document ou la page web complète des critères d'éligibilité."
-    }
+      "en": "Check the full Access Programme guidelines to confirm whether sovereign AI control plane providers are eligible applicants.",
+      "fr": "Consulter les directives complètes du programme Access pour confirmer si les fournisseurs de plans de contrôle d'IA souveraine sont éligibles."
+    },
+    "entity": "BAWABA"
   }
 }

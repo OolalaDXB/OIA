@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify the types of organisations eligible to apply for this tender. There is no mention of legal form, geographic restrictions, or sector-specific requirements for applicants.",
-      "fr": "Le texte extrait ne précise pas les types d'organisations éligibles pour cet appel d'offres. Il n'y a aucune mention de la forme juridique, des restrictions géographiques ou des exigences sectorielles pour les candidats."
+      "en": "The extracted text does not specify the types of organisations eligible to apply for this tender. There is no mention of legal form, sector, or geographic requirements for applicants.",
+      "fr": "Le texte extrait ne précise pas les types d'organisations éligibles pour cet appel d'offres. Il n'y a aucune mention de la forme juridique, du secteur ou des exigences géographiques pour les candidats."
     },
     "nextAction": {
-      "en": "Check the full tender notice (link provided) for the section on 'Eligibility Criteria' or 'Conditions for Participation' to confirm who may apply.",
-      "fr": "Consulter l'avis complet de l'appel d'offres (lien fourni) dans la section 'Critères d'éligibilité' ou 'Conditions de participation' pour confirmer qui peut postuler."
+      "en": "Check the full tender documents (RFP) on the provided link to identify the eligibility criteria for applicants.",
+      "fr": "Consulter les documents complets de l'appel d'offres (RFP) sur le lien fourni pour identifier les critères d'éligibilité des candidats."
     }
   }
 }

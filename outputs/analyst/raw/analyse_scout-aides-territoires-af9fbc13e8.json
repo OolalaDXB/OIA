@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for the MIE grant. There is no mention of eligibility criteria for applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à la subvention MIE. Il n'y a aucune mention des critères d'éligibilité pour les candidats."
+      "en": "The extracted text does not specify which types of organisations may apply for the MIE funding. There is no mention of eligibility criteria for applicants such as legal status, sector, or geographic scope.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent demander le financement MIE. Il n'y a aucune mention des critères d'éligibilité pour les demandeurs, tels que le statut juridique, le secteur ou la portée géographique."
     },
     "nextAction": {
-      "en": "Check the official MIE grant documentation or website to find the eligibility criteria for applicants.",
-      "fr": "Consulter la documentation officielle ou le site web de la subvention MIE pour trouver les critères d'éligibilité des candidats."
+      "en": "Check the full call for proposals or the official MIE programme documentation to identify the eligibility criteria for applicants.",
+      "fr": "Consulter l'appel à projets complet ou la documentation officielle du programme MIE pour identifier les critères d'éligibilité des demandeurs."
     }
   }
 }

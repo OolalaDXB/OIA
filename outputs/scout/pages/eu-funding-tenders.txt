@@ -38,7 +38,6 @@ Videos
 Home
 Funding
 Calls for proposals
-with_Translation
 Calls for proposals
 
 Calls for proposals are funding opportunities issued by the European Union institutions, agencies and bodies. These are direct financial contributions, known as grants, that are awarded to third-party beneficiaries (e.g., research organisations, public entities, non-governmental organisations, and private companies) to engage in activities that serve EU policies.
@@ -54,29 +53,29 @@ All filters
 All filters
 Type of grants calls
 Direct calls for proposals (issued by the EU)
-10156
+10157
 EU External Actions
 18
 Calls for funding in cascade (issued by funded projects)
-1434
+1437
 Programming period
 2021 - 2027
-6995
+6999
 2014 - 2020
 4665
 Programme
 Horizon Europe (HORIZON)
-4286
+4288
 Horizon 2020 Framework Programme (H2020 - 2014-2020)
 3983
 Digital Europe Programme (DIGITAL)
-440
+441
 Erasmus (ERASMUS )
 285
 Connecting Europe Facility (CEF)
 262
 Single Market Programme (SMP)
-227
+228
 European Defence Fund (EDF)
 216
 Programme for the Environment and Climate Action (LIFE)
@@ -110,9 +109,9 @@ Submission status
 Forthcoming
 269
 sedia.global.openForSubmission
-401
+292
 Closed
-10938
+11051
 Opening date/Publication date
 –
 Deadline date

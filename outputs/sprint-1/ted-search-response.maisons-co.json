@@ -1,402 +1,6 @@
 {
   "notices": [
     {
-      "notice-type": "cn-social",
-      "publication-number": "431567-2026",
-      "classification-cpv": [
-        "55100000",
-        "55100000",
-        "55250000",
-        "55200000"
-      ],
-      "buyer-name": {
-        "fra": [
-          "ASSOCIATION TARMAC"
-        ]
-      },
-      "publication-date": "2026-06-24+02:00",
-      "links": {
-        "xml": {
-          "MUL": "https://ted.europa.eu/en/notice/431567-2026/xml"
-        },
-        "pdf": {
-          "BUL": "https://ted.europa.eu/bg/notice/431567-2026/pdf",
-          "SPA": "https://ted.europa.eu/es/notice/431567-2026/pdf",
-          "CES": "https://ted.europa.eu/cs/notice/431567-2026/pdf",
-          "DAN": "https://ted.europa.eu/da/notice/431567-2026/pdf",
-          "DEU": "https://ted.europa.eu/de/notice/431567-2026/pdf",
-          "EST": "https://ted.europa.eu/et/notice/431567-2026/pdf",
-          "ELL": "https://ted.europa.eu/el/notice/431567-2026/pdf",
-          "ENG": "https://ted.europa.eu/en/notice/431567-2026/pdf",
-          "FRA": "https://ted.europa.eu/fr/notice/431567-2026/pdf",
-          "GLE": "https://ted.europa.eu/ga/notice/431567-2026/pdf",
-          "HRV": "https://ted.europa.eu/hr/notice/431567-2026/pdf",
-          "ITA": "https://ted.europa.eu/it/notice/431567-2026/pdf",
-          "LAV": "https://ted.europa.eu/lv/notice/431567-2026/pdf",
-          "LIT": "https://ted.europa.eu/lt/notice/431567-2026/pdf",
-          "HUN": "https://ted.europa.eu/hu/notice/431567-2026/pdf",
-          "MLT": "https://ted.europa.eu/mt/notice/431567-2026/pdf",
-          "NLD": "https://ted.europa.eu/nl/notice/431567-2026/pdf",
-          "POL": "https://ted.europa.eu/pl/notice/431567-2026/pdf",
-          "POR": "https://ted.europa.eu/pt/notice/431567-2026/pdf",
-          "RON": "https://ted.europa.eu/ro/notice/431567-2026/pdf",
-          "SLK": "https://ted.europa.eu/sk/notice/431567-2026/pdf",
-          "SLV": "https://ted.europa.eu/sl/notice/431567-2026/pdf",
-          "FIN": "https://ted.europa.eu/fi/notice/431567-2026/pdf",
-          "SWE": "https://ted.europa.eu/sv/notice/431567-2026/pdf"
-        },
-        "pdfs": {
-          "FRA": "https://ted.europa.eu/fr/notice/431567-2026/pdfs"
-        },
-        "html": {
-          "BUL": "https://ted.europa.eu/bg/notice/-/detail/431567-2026",
-          "SPA": "https://ted.europa.eu/es/notice/-/detail/431567-2026",
-          "CES": "https://ted.europa.eu/cs/notice/-/detail/431567-2026",
-          "DAN": "https://ted.europa.eu/da/notice/-/detail/431567-2026",
-          "DEU": "https://ted.europa.eu/de/notice/-/detail/431567-2026",
-          "EST": "https://ted.europa.eu/et/notice/-/detail/431567-2026",
-          "ELL": "https://ted.europa.eu/el/notice/-/detail/431567-2026",
-          "ENG": "https://ted.europa.eu/en/notice/-/detail/431567-2026",
-          "FRA": "https://ted.europa.eu/fr/notice/-/detail/431567-2026",
-          "GLE": "https://ted.europa.eu/ga/notice/-/detail/431567-2026",
-          "HRV": "https://ted.europa.eu/hr/notice/-/detail/431567-2026",
-          "ITA": "https://ted.europa.eu/it/notice/-/detail/431567-2026",
-          "LAV": "https://ted.europa.eu/lv/notice/-/detail/431567-2026",
-          "LIT": "https://ted.europa.eu/lt/notice/-/detail/431567-2026",
-          "HUN": "https://ted.europa.eu/hu/notice/-/detail/431567-2026",
-          "MLT": "https://ted.europa.eu/mt/notice/-/detail/431567-2026",
-          "NLD": "https://ted.europa.eu/nl/notice/-/detail/431567-2026",
-          "POL": "https://ted.europa.eu/pl/notice/-/detail/431567-2026",
-          "POR": "https://ted.europa.eu/pt/notice/-/detail/431567-2026",
-          "RON": "https://ted.europa.eu/ro/notice/-/detail/431567-2026",
-          "SLK": "https://ted.europa.eu/sk/notice/-/detail/431567-2026",
-          "SLV": "https://ted.europa.eu/sl/notice/-/detail/431567-2026",
-          "FIN": "https://ted.europa.eu/fi/notice/-/detail/431567-2026",
-          "SWE": "https://ted.europa.eu/sv/notice/-/detail/431567-2026"
-        },
-        "htmlDirect": {
-          "BUL": "https://ted.europa.eu/bg/notice/431567-2026/html",
-          "SPA": "https://ted.europa.eu/es/notice/431567-2026/html",
-          "CES": "https://ted.europa.eu/cs/notice/431567-2026/html",
-          "DAN": "https://ted.europa.eu/da/notice/431567-2026/html",
-          "DEU": "https://ted.europa.eu/de/notice/431567-2026/html",
-          "EST": "https://ted.europa.eu/et/notice/431567-2026/html",
-          "ELL": "https://ted.europa.eu/el/notice/431567-2026/html",
-          "ENG": "https://ted.europa.eu/en/notice/431567-2026/html",
-          "FRA": "https://ted.europa.eu/fr/notice/431567-2026/html",
-          "GLE": "https://ted.europa.eu/ga/notice/431567-2026/html",
-          "HRV": "https://ted.europa.eu/hr/notice/431567-2026/html",
-          "ITA": "https://ted.europa.eu/it/notice/431567-2026/html",
-          "LAV": "https://ted.europa.eu/lv/notice/431567-2026/html",
-          "LIT": "https://ted.europa.eu/lt/notice/431567-2026/html",
-          "HUN": "https://ted.europa.eu/hu/notice/431567-2026/html",
-          "MLT": "https://ted.europa.eu/mt/notice/431567-2026/html",
-          "NLD": "https://ted.europa.eu/nl/notice/431567-2026/html",
-          "POL": "https://ted.europa.eu/pl/notice/431567-2026/html",
-          "POR": "https://ted.europa.eu/pt/notice/431567-2026/html",
-          "RON": "https://ted.europa.eu/ro/notice/431567-2026/html",
-          "SLK": "https://ted.europa.eu/sk/notice/431567-2026/html",
-          "SLV": "https://ted.europa.eu/sl/notice/431567-2026/html",
-          "FIN": "https://ted.europa.eu/fi/notice/431567-2026/html",
-          "SWE": "https://ted.europa.eu/sv/notice/431567-2026/html"
-        }
-      },
-      "notice-title": {
-        "hun": "Franciaország – Szállodaipari szolgáltatások – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "lav": "Francija – Viesnīcu pakalpojumi – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "swe": "Frankrike – Hotelltjänster – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "gle": "An Fhrainc – Hotel services – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "ell": "Γαλλία – Υπηρεσίες ξενοδοχείων – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "spa": "Francia – Servicios de hostelería – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "est": "Prantsusmaa – Hotelliteenused – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "nld": "Frankrijk – Hoteldiensten – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "fin": "Ranska – Hotellipalvelut – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "pol": "Francja – Usługi hotelarskie – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "hrv": "Francuska – Hotelske usluge – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "ces": "Francie – Hotelové služby – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "dan": "Frankrig – Hotelvirksomhed – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "ron": "Franţa – Servicii hoteliere – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "por": "França – Serviços de hotelaria – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "slk": "Francúzsko – Hotelové služby – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "fra": "France – Services d'hôtellerie – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "mlt": "Franza – Servizzi tal-lukandi – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "deu": "Frankreich – Dienstleistungen von Hotels – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "lit": "Prancūzija – Viešbučių paslaugos – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "ita": "Francia – Servizi alberghieri – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "bul": "Фpaнция – Услуги на хотели и мотели – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "slv": "Francija – Hotelske storitve – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles.",
-        "eng": "France – Hotel services – Achat de nuitées d'hébergement d'urgence auprès d'hôteliers pour la mise à l'abri des personnes ou des familles sans-domicile relevant de l'article L.345-2-2 du Code de l'action sociale et des familles."
-      },
-      "buyer-country": [
-        "FRA"
-      ]
-    },
-    {
-      "notice-type": "cn-standard",
-      "publication-number": "439126-2026",
-      "classification-cpv": [
-        "70330000",
-        "70110000",
-        "70110000"
-      ],
-      "buyer-name": {
-        "fra": [
-          "Société d'Habitations à Loyer Modéré de la Réunion"
-        ]
-      },
-      "publication-date": "2026-06-26+02:00",
-      "links": {
-        "xml": {
-          "MUL": "https://ted.europa.eu/en/notice/439126-2026/xml"
-        },
-        "pdf": {
-          "BUL": "https://ted.europa.eu/bg/notice/439126-2026/pdf",
-          "SPA": "https://ted.europa.eu/es/notice/439126-2026/pdf",
-          "CES": "https://ted.europa.eu/cs/notice/439126-2026/pdf",
-          "DAN": "https://ted.europa.eu/da/notice/439126-2026/pdf",
-          "DEU": "https://ted.europa.eu/de/notice/439126-2026/pdf",
-          "EST": "https://ted.europa.eu/et/notice/439126-2026/pdf",
-          "ELL": "https://ted.europa.eu/el/notice/439126-2026/pdf",
-          "ENG": "https://ted.europa.eu/en/notice/439126-2026/pdf",
-          "FRA": "https://ted.europa.eu/fr/notice/439126-2026/pdf",
-          "GLE": "https://ted.europa.eu/ga/notice/439126-2026/pdf",
-          "HRV": "https://ted.europa.eu/hr/notice/439126-2026/pdf",
-          "ITA": "https://ted.europa.eu/it/notice/439126-2026/pdf",
-          "LAV": "https://ted.europa.eu/lv/notice/439126-2026/pdf",
-          "LIT": "https://ted.europa.eu/lt/notice/439126-2026/pdf",
-          "HUN": "https://ted.europa.eu/hu/notice/439126-2026/pdf",
-          "MLT": "https://ted.europa.eu/mt/notice/439126-2026/pdf",
-          "NLD": "https://ted.europa.eu/nl/notice/439126-2026/pdf",
-          "POL": "https://ted.europa.eu/pl/notice/439126-2026/pdf",
-          "POR": "https://ted.europa.eu/pt/notice/439126-2026/pdf",
-          "RON": "https://ted.europa.eu/ro/notice/439126-2026/pdf",
-          "SLK": "https://ted.europa.eu/sk/notice/439126-2026/pdf",
-          "SLV": "https://ted.europa.eu/sl/notice/439126-2026/pdf",
-          "FIN": "https://ted.europa.eu/fi/notice/439126-2026/pdf",
-          "SWE": "https://ted.europa.eu/sv/notice/439126-2026/pdf"
-        },
-        "pdfs": {
-          "FRA": "https://ted.europa.eu/fr/notice/439126-2026/pdfs"
-        },
-        "html": {
-          "BUL": "https://ted.europa.eu/bg/notice/-/detail/439126-2026",
-          "SPA": "https://ted.europa.eu/es/notice/-/detail/439126-2026",
-          "CES": "https://ted.europa.eu/cs/notice/-/detail/439126-2026",
-          "DAN": "https://ted.europa.eu/da/notice/-/detail/439126-2026",
-          "DEU": "https://ted.europa.eu/de/notice/-/detail/439126-2026",
-          "EST": "https://ted.europa.eu/et/notice/-/detail/439126-2026",
-          "ELL": "https://ted.europa.eu/el/notice/-/detail/439126-2026",
-          "ENG": "https://ted.europa.eu/en/notice/-/detail/439126-2026",
-          "FRA": "https://ted.europa.eu/fr/notice/-/detail/439126-2026",
-          "GLE": "https://ted.europa.eu/ga/notice/-/detail/439126-2026",
-          "HRV": "https://ted.europa.eu/hr/notice/-/detail/439126-2026",
-          "ITA": "https://ted.europa.eu/it/notice/-/detail/439126-2026",
-          "LAV": "https://ted.europa.eu/lv/notice/-/detail/439126-2026",
-          "LIT": "https://ted.europa.eu/lt/notice/-/detail/439126-2026",
-          "HUN": "https://ted.europa.eu/hu/notice/-/detail/439126-2026",
-          "MLT": "https://ted.europa.eu/mt/notice/-/detail/439126-2026",
-          "NLD": "https://ted.europa.eu/nl/notice/-/detail/439126-2026",
-          "POL": "https://ted.europa.eu/pl/notice/-/detail/439126-2026",
-          "POR": "https://ted.europa.eu/pt/notice/-/detail/439126-2026",
-          "RON": "https://ted.europa.eu/ro/notice/-/detail/439126-2026",
-          "SLK": "https://ted.europa.eu/sk/notice/-/detail/439126-2026",
-          "SLV": "https://ted.europa.eu/sl/notice/-/detail/439126-2026",
-          "FIN": "https://ted.europa.eu/fi/notice/-/detail/439126-2026",
-          "SWE": "https://ted.europa.eu/sv/notice/-/detail/439126-2026"
-        },
-        "htmlDirect": {
-          "BUL": "https://ted.europa.eu/bg/notice/439126-2026/html",
-          "SPA": "https://ted.europa.eu/es/notice/439126-2026/html",
-          "CES": "https://ted.europa.eu/cs/notice/439126-2026/html",
-          "DAN": "https://ted.europa.eu/da/notice/439126-2026/html",
-          "DEU": "https://ted.europa.eu/de/notice/439126-2026/html",
-          "EST": "https://ted.europa.eu/et/notice/439126-2026/html",
-          "ELL": "https://ted.europa.eu/el/notice/439126-2026/html",
-          "ENG": "https://ted.europa.eu/en/notice/439126-2026/html",
-          "FRA": "https://ted.europa.eu/fr/notice/439126-2026/html",
-          "GLE": "https://ted.europa.eu/ga/notice/439126-2026/html",
-          "HRV": "https://ted.europa.eu/hr/notice/439126-2026/html",
-          "ITA": "https://ted.europa.eu/it/notice/439126-2026/html",
-          "LAV": "https://ted.europa.eu/lv/notice/439126-2026/html",
-          "LIT": "https://ted.europa.eu/lt/notice/439126-2026/html",
-          "HUN": "https://ted.europa.eu/hu/notice/439126-2026/html",
-          "MLT": "https://ted.europa.eu/mt/notice/439126-2026/html",
-          "NLD": "https://ted.europa.eu/nl/notice/439126-2026/html",
-          "POL": "https://ted.europa.eu/pl/notice/439126-2026/html",
-          "POR": "https://ted.europa.eu/pt/notice/439126-2026/html",
-          "RON": "https://ted.europa.eu/ro/notice/439126-2026/html",
-          "SLK": "https://ted.europa.eu/sk/notice/439126-2026/html",
-          "SLV": "https://ted.europa.eu/sl/notice/439126-2026/html",
-          "FIN": "https://ted.europa.eu/fi/notice/439126-2026/html",
-          "SWE": "https://ted.europa.eu/sv/notice/439126-2026/html"
-        }
-      },
-      "notice-title": {
-        "hun": "Franciaország – Ingatlankezelési szolgáltatások díjazásos vagy szerződéses alapon – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "lav": "Francija – Nekustamā īpašuma pārvaldīšanas pakalpojumi par noteiktu samaksu vai uz līguma pamata – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "swe": "Frankrike – Fastighetsförvaltning på arvodes- eller kontraktsbasis – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "gle": "An Fhrainc – Property management services of real estate on a fee or contract basis – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "ell": "Γαλλία – Υπηρεσίες διαχείρισης ακινήτων έναντι αμοιβής ή βάσει σύμβασης – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "spa": "Francia – Servicios de administración de bienes raíces a comisión o por contrato – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "est": "Prantsusmaa – Kinnisvara haldusteenused vahendustasu või lepingu alusel – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "nld": "Frankrijk – Beheer van onroerend goed op honorarium- of contractbasis – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "fin": "Ranska – Sopimuksen perusteella tai palkkiota vastaan suoritettavat kiinteistönhoitopalvelut – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "pol": "Francja – Usługi zarządzania nieruchomościami na zasadzie bezpośredniej płatności lub umowy – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "hrv": "Francuska – Usluge poslovanja nekretninama uz paušalnu naknadu ili na temelju ugovora – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "ces": "Francie – Správa nemovitého majetku za odměnu nebo na základě smlouvy – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "dan": "Frankrig – Forvaltning af fast ejendom på honorar- eller kontraktbasis – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "ron": "Franţa – Servicii de gestionare a bunurilor imobiliare pentru terţi – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "por": "França – Serviços de administração de bens imobiliários à comissão ou por contrato – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "slk": "Francúzsko – Služby realitných kancelárií pri správe nehnuteľností na základe honoráru alebo zmluvy – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "fra": "France – Services de gestion de biens immobiliers pour le compte de tiers – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "mlt": "Franza – Servizzi ta' amministrazzjoni ta' propjetà immobbli fuq bażi ta' miżata jew b'kuntratt – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "deu": "Frankreich – Immobilienverwaltung gegen Einzelhonorar oder auf Vertragsbasis – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "lit": "Prancūzija – Nekilnojamojo turto valdymo paslaugos už atlyginimą ar pagal sutartį – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "ita": "Francia – Servizi di amministrazione di beni immobili per conto terzi – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "bul": "Фpaнция – Посреднически услуги по управление на недвижими имоти – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "slv": "Francija – Storitve upravljanja nepremičnin za plačilo ali po pogodbi – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots",
-        "eng": "France – Property management services of real estate on a fee or contract basis – ACCORD-CADRE A BONS DE COMMANDE POUR LA REALISATION DE DIAGNOSTICS IMMOBILIERS DU PATRIMOINE DE LA SHLMR – 2 lots"
-      },
-      "buyer-country": [
-        "FRA"
-      ],
-      "deadline": [
-        "2026-07-21T16:00:00+04:00",
-        "2026-07-10T10:00:00+04:00"
-      ]
-    },
-    {
-      "notice-type": "cn-standard",
-      "publication-number": "444399-2026",
-      "classification-cpv": [
-        "70332100",
-        "70332100",
-        "70332100",
-        "70332100"
-      ],
-      "buyer-name": {
-        "fra": [
-          "GRAND POITIERS COMMUNAUTÉ URBAINE"
-        ]
-      },
-      "publication-date": "2026-06-29+02:00",
-      "links": {
-        "xml": {
-          "MUL": "https://ted.europa.eu/en/notice/444399-2026/xml"
-        },
-        "pdf": {
-          "BUL": "https://ted.europa.eu/bg/notice/444399-2026/pdf",
-          "SPA": "https://ted.europa.eu/es/notice/444399-2026/pdf",
-          "CES": "https://ted.europa.eu/cs/notice/444399-2026/pdf",
-          "DAN": "https://ted.europa.eu/da/notice/444399-2026/pdf",
-          "DEU": "https://ted.europa.eu/de/notice/444399-2026/pdf",
-          "EST": "https://ted.europa.eu/et/notice/444399-2026/pdf",
-          "ELL": "https://ted.europa.eu/el/notice/444399-2026/pdf",
-          "ENG": "https://ted.europa.eu/en/notice/444399-2026/pdf",
-          "FRA": "https://ted.europa.eu/fr/notice/444399-2026/pdf",
-          "GLE": "https://ted.europa.eu/ga/notice/444399-2026/pdf",
-          "HRV": "https://ted.europa.eu/hr/notice/444399-2026/pdf",
-          "ITA": "https://ted.europa.eu/it/notice/444399-2026/pdf",
-          "LAV": "https://ted.europa.eu/lv/notice/444399-2026/pdf",
-          "LIT": "https://ted.europa.eu/lt/notice/444399-2026/pdf",
-          "HUN": "https://ted.europa.eu/hu/notice/444399-2026/pdf",
-          "MLT": "https://ted.europa.eu/mt/notice/444399-2026/pdf",
-          "NLD": "https://ted.europa.eu/nl/notice/444399-2026/pdf",
-          "POL": "https://ted.europa.eu/pl/notice/444399-2026/pdf",
-          "POR": "https://ted.europa.eu/pt/notice/444399-2026/pdf",
-          "RON": "https://ted.europa.eu/ro/notice/444399-2026/pdf",
-          "SLK": "https://ted.europa.eu/sk/notice/444399-2026/pdf",
-          "SLV": "https://ted.europa.eu/sl/notice/444399-2026/pdf",
-          "FIN": "https://ted.europa.eu/fi/notice/444399-2026/pdf",
-          "SWE": "https://ted.europa.eu/sv/notice/444399-2026/pdf"
-        },
-        "pdfs": {
-          "FRA": "https://ted.europa.eu/fr/notice/444399-2026/pdfs"
-        },
-        "html": {
-          "BUL": "https://ted.europa.eu/bg/notice/-/detail/444399-2026",
-          "SPA": "https://ted.europa.eu/es/notice/-/detail/444399-2026",
-          "CES": "https://ted.europa.eu/cs/notice/-/detail/444399-2026",
-          "DAN": "https://ted.europa.eu/da/notice/-/detail/444399-2026",
-          "DEU": "https://ted.europa.eu/de/notice/-/detail/444399-2026",
-          "EST": "https://ted.europa.eu/et/notice/-/detail/444399-2026",
-          "ELL": "https://ted.europa.eu/el/notice/-/detail/444399-2026",
-          "ENG": "https://ted.europa.eu/en/notice/-/detail/444399-2026",
-          "FRA": "https://ted.europa.eu/fr/notice/-/detail/444399-2026",
-          "GLE": "https://ted.europa.eu/ga/notice/-/detail/444399-2026",
-          "HRV": "https://ted.europa.eu/hr/notice/-/detail/444399-2026",
-          "ITA": "https://ted.europa.eu/it/notice/-/detail/444399-2026",
-          "LAV": "https://ted.europa.eu/lv/notice/-/detail/444399-2026",
-          "LIT": "https://ted.europa.eu/lt/notice/-/detail/444399-2026",
-          "HUN": "https://ted.europa.eu/hu/notice/-/detail/444399-2026",
-          "MLT": "https://ted.europa.eu/mt/notice/-/detail/444399-2026",
-          "NLD": "https://ted.europa.eu/nl/notice/-/detail/444399-2026",
-          "POL": "https://ted.europa.eu/pl/notice/-/detail/444399-2026",
-          "POR": "https://ted.europa.eu/pt/notice/-/detail/444399-2026",
-          "RON": "https://ted.europa.eu/ro/notice/-/detail/444399-2026",
-          "SLK": "https://ted.europa.eu/sk/notice/-/detail/444399-2026",
-          "SLV": "https://ted.europa.eu/sl/notice/-/detail/444399-2026",
-          "FIN": "https://ted.europa.eu/fi/notice/-/detail/444399-2026",
-          "SWE": "https://ted.europa.eu/sv/notice/-/detail/444399-2026"
-        },
-        "htmlDirect": {
-          "BUL": "https://ted.europa.eu/bg/notice/444399-2026/html",
-          "SPA": "https://ted.europa.eu/es/notice/444399-2026/html",
-          "CES": "https://ted.europa.eu/cs/notice/444399-2026/html",
-          "DAN": "https://ted.europa.eu/da/notice/444399-2026/html",
-          "DEU": "https://ted.europa.eu/de/notice/444399-2026/html",
-          "EST": "https://ted.europa.eu/et/notice/444399-2026/html",
-          "ELL": "https://ted.europa.eu/el/notice/444399-2026/html",
-          "ENG": "https://ted.europa.eu/en/notice/444399-2026/html",
-          "FRA": "https://ted.europa.eu/fr/notice/444399-2026/html",
-          "GLE": "https://ted.europa.eu/ga/notice/444399-2026/html",
-          "HRV": "https://ted.europa.eu/hr/notice/444399-2026/html",
-          "ITA": "https://ted.europa.eu/it/notice/444399-2026/html",
-          "LAV": "https://ted.europa.eu/lv/notice/444399-2026/html",
-          "LIT": "https://ted.europa.eu/lt/notice/444399-2026/html",
-          "HUN": "https://ted.europa.eu/hu/notice/444399-2026/html",
-          "MLT": "https://ted.europa.eu/mt/notice/444399-2026/html",
-          "NLD": "https://ted.europa.eu/nl/notice/444399-2026/html",
-          "POL": "https://ted.europa.eu/pl/notice/444399-2026/html",
-          "POR": "https://ted.europa.eu/pt/notice/444399-2026/html",
-          "RON": "https://ted.europa.eu/ro/notice/444399-2026/html",
-          "SLK": "https://ted.europa.eu/sk/notice/444399-2026/html",
-          "SLV": "https://ted.europa.eu/sl/notice/444399-2026/html",
-          "FIN": "https://ted.europa.eu/fi/notice/444399-2026/html",
-          "SWE": "https://ted.europa.eu/sv/notice/444399-2026/html"
-        }
-      },
-      "notice-title": {
-        "hun": "Franciaország – Földkezelési szolgáltatások – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "lav": "Francija – Zemes pārvaldīšanas pakalpojumi – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "swe": "Frankrike – Fysisk planering – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "gle": "An Fhrainc – Land management services – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "ell": "Γαλλία – Υπηρεσίες διαχείρισης έγγειας ιδιοκτησίας – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "spa": "Francia – Servicios de administración de terrenos – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "est": "Prantsusmaa – Maa haldusteenused – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "nld": "Frankrijk – Beheer van grond – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "fin": "Ranska – Maaomaisuuden hoitopalvelut – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "pol": "Francja – Usługi zarządzania gruntami – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "hrv": "Francuska – Usluge upravljanja zemljištem – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "ces": "Francie – Správa pozemků – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "dan": "Frankrig – Forvaltning af jord – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "ron": "Franţa – Servicii de gestionare a terenurilor – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "por": "França – Serviços de gestão de terrenos – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "slk": "Francúzsko – Služby spojené so správou pozemkov – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "fra": "France – Services de gestion de terrains – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "mlt": "Franza – Servizzi ta' l-amministrazzjoni ta' l-artijiet – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "deu": "Frankreich – Verwaltung von Grundstücken – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "lit": "Prancūzija – Žemės valdymo paslaugos – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "ita": "Francia – Servizi di amministrazione di terreni – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "bul": "Фpaнция – Посреднически услуги по управление на земя – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "slv": "Francija – Storitve upravljanja zemljišč – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages",
-        "eng": "France – Land management services – Gestion des aires d'accueil des gens du voyage et de deux Terrains de Grands Passages"
-      },
-      "buyer-country": [
-        "FRA"
-      ]
-    },
-    {
       "notice-type": "cn-standard",
       "publication-number": "450600-2026",
       "classification-cpv": [
@@ -1335,135 +939,6 @@
     },
     {
       "notice-type": "cn-standard",
-      "publication-number": "480571-2026",
-      "classification-cpv": [
-        "70332100",
-        "70332100"
-      ],
-      "buyer-name": {
-        "fra": [
-          "Vendée Eau (85)"
-        ]
-      },
-      "publication-date": "2026-07-13+02:00",
-      "links": {
-        "xml": {
-          "MUL": "https://ted.europa.eu/en/notice/480571-2026/xml"
-        },
-        "pdf": {
-          "BUL": "https://ted.europa.eu/bg/notice/480571-2026/pdf",
-          "SPA": "https://ted.europa.eu/es/notice/480571-2026/pdf",
-          "CES": "https://ted.europa.eu/cs/notice/480571-2026/pdf",
-          "DAN": "https://ted.europa.eu/da/notice/480571-2026/pdf",
-          "DEU": "https://ted.europa.eu/de/notice/480571-2026/pdf",
-          "EST": "https://ted.europa.eu/et/notice/480571-2026/pdf",
-          "ELL": "https://ted.europa.eu/el/notice/480571-2026/pdf",
-          "ENG": "https://ted.europa.eu/en/notice/480571-2026/pdf",
-          "FRA": "https://ted.europa.eu/fr/notice/480571-2026/pdf",
-          "GLE": "https://ted.europa.eu/ga/notice/480571-2026/pdf",
-          "HRV": "https://ted.europa.eu/hr/notice/480571-2026/pdf",
-          "ITA": "https://ted.europa.eu/it/notice/480571-2026/pdf",
-          "LAV": "https://ted.europa.eu/lv/notice/480571-2026/pdf",
-          "LIT": "https://ted.europa.eu/lt/notice/480571-2026/pdf",
-          "HUN": "https://ted.europa.eu/hu/notice/480571-2026/pdf",
-          "MLT": "https://ted.europa.eu/mt/notice/480571-2026/pdf",
-          "NLD": "https://ted.europa.eu/nl/notice/480571-2026/pdf",
-          "POL": "https://ted.europa.eu/pl/notice/480571-2026/pdf",
-          "POR": "https://ted.europa.eu/pt/notice/480571-2026/pdf",
-          "RON": "https://ted.europa.eu/ro/notice/480571-2026/pdf",
-          "SLK": "https://ted.europa.eu/sk/notice/480571-2026/pdf",
-          "SLV": "https://ted.europa.eu/sl/notice/480571-2026/pdf",
-          "FIN": "https://ted.europa.eu/fi/notice/480571-2026/pdf",
-          "SWE": "https://ted.europa.eu/sv/notice/480571-2026/pdf"
-        },
-        "pdfs": {
-          "FRA": "https://ted.europa.eu/fr/notice/480571-2026/pdfs"
-        },
-        "html": {
-          "BUL": "https://ted.europa.eu/bg/notice/-/detail/480571-2026",
-          "SPA": "https://ted.europa.eu/es/notice/-/detail/480571-2026",
-          "CES": "https://ted.europa.eu/cs/notice/-/detail/480571-2026",
-          "DAN": "https://ted.europa.eu/da/notice/-/detail/480571-2026",
-          "DEU": "https://ted.europa.eu/de/notice/-/detail/480571-2026",
-          "EST": "https://ted.europa.eu/et/notice/-/detail/480571-2026",
-          "ELL": "https://ted.europa.eu/el/notice/-/detail/480571-2026",
-          "ENG": "https://ted.europa.eu/en/notice/-/detail/480571-2026",
-          "FRA": "https://ted.europa.eu/fr/notice/-/detail/480571-2026",
-          "GLE": "https://ted.europa.eu/ga/notice/-/detail/480571-2026",
-          "HRV": "https://ted.europa.eu/hr/notice/-/detail/480571-2026",
-          "ITA": "https://ted.europa.eu/it/notice/-/detail/480571-2026",
-          "LAV": "https://ted.europa.eu/lv/notice/-/detail/480571-2026",
-          "LIT": "https://ted.europa.eu/lt/notice/-/detail/480571-2026",
-          "HUN": "https://ted.europa.eu/hu/notice/-/detail/480571-2026",
-          "MLT": "https://ted.europa.eu/mt/notice/-/detail/480571-2026",
-          "NLD": "https://ted.europa.eu/nl/notice/-/detail/480571-2026",
-          "POL": "https://ted.europa.eu/pl/notice/-/detail/480571-2026",
-          "POR": "https://ted.europa.eu/pt/notice/-/detail/480571-2026",
-          "RON": "https://ted.europa.eu/ro/notice/-/detail/480571-2026",
-          "SLK": "https://ted.europa.eu/sk/notice/-/detail/480571-2026",
-          "SLV": "https://ted.europa.eu/sl/notice/-/detail/480571-2026",
-          "FIN": "https://ted.europa.eu/fi/notice/-/detail/480571-2026",
-          "SWE": "https://ted.europa.eu/sv/notice/-/detail/480571-2026"
-        },
-        "htmlDirect": {
-          "BUL": "https://ted.europa.eu/bg/notice/480571-2026/html",
-          "SPA": "https://ted.europa.eu/es/notice/480571-2026/html",
-          "CES": "https://ted.europa.eu/cs/notice/480571-2026/html",
-          "DAN": "https://ted.europa.eu/da/notice/480571-2026/html",
-          "DEU": "https://ted.europa.eu/de/notice/480571-2026/html",
-          "EST": "https://ted.europa.eu/et/notice/480571-2026/html",
-          "ELL": "https://ted.europa.eu/el/notice/480571-2026/html",
-          "ENG": "https://ted.europa.eu/en/notice/480571-2026/html",
-          "FRA": "https://ted.europa.eu/fr/notice/480571-2026/html",
-          "GLE": "https://ted.europa.eu/ga/notice/480571-2026/html",
-          "HRV": "https://ted.europa.eu/hr/notice/480571-2026/html",
-          "ITA": "https://ted.europa.eu/it/notice/480571-2026/html",
-          "LAV": "https://ted.europa.eu/lv/notice/480571-2026/html",
-          "LIT": "https://ted.europa.eu/lt/notice/480571-2026/html",
-          "HUN": "https://ted.europa.eu/hu/notice/480571-2026/html",
-          "MLT": "https://ted.europa.eu/mt/notice/480571-2026/html",
-          "NLD": "https://ted.europa.eu/nl/notice/480571-2026/html",
-          "POL": "https://ted.europa.eu/pl/notice/480571-2026/html",
-          "POR": "https://ted.europa.eu/pt/notice/480571-2026/html",
-          "RON": "https://ted.europa.eu/ro/notice/480571-2026/html",
-          "SLK": "https://ted.europa.eu/sk/notice/480571-2026/html",
-          "SLV": "https://ted.europa.eu/sl/notice/480571-2026/html",
-          "FIN": "https://ted.europa.eu/fi/notice/480571-2026/html",
-          "SWE": "https://ted.europa.eu/sv/notice/480571-2026/html"
-        }
-      },
-      "notice-title": {
-        "hun": "Franciaország – Földkezelési szolgáltatások – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "lav": "Francija – Zemes pārvaldīšanas pakalpojumi – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "swe": "Frankrike – Fysisk planering – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "gle": "An Fhrainc – Land management services – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "ell": "Γαλλία – Υπηρεσίες διαχείρισης έγγειας ιδιοκτησίας – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "spa": "Francia – Servicios de administración de terrenos – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "est": "Prantsusmaa – Maa haldusteenused – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "nld": "Frankrijk – Beheer van grond – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "fin": "Ranska – Maaomaisuuden hoitopalvelut – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "pol": "Francja – Usługi zarządzania gruntami – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "hrv": "Francuska – Usluge upravljanja zemljištem – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "ces": "Francie – Správa pozemků – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "dan": "Frankrig – Forvaltning af jord – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "ron": "Franţa – Servicii de gestionare a terenurilor – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "por": "França – Serviços de gestão de terrenos – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "slk": "Francúzsko – Služby spojené so správou pozemkov – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "fra": "France – Services de gestion de terrains – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "mlt": "Franza – Servizzi ta' l-amministrazzjoni ta' l-artijiet – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "deu": "Frankreich – Verwaltung von Grundstücken – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "lit": "Prancūzija – Žemės valdymo paslaugos – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "ita": "Francia – Servizi di amministrazione di terreni – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "bul": "Фpaнция – Посреднически услуги по управление на земя – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "slv": "Francija – Storitve upravljanja zemljišč – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON",
-        "eng": "France – Land management services – 26PI094-PROCÉDURES ADMINISTRATIVES RELATIVES À LA MISE EN ŒUVRE DES PÉRIMÈTRES DE PROTECTION pour la retenue de Moulin PAPON"
-      },
-      "buyer-country": [
-        "FRA"
-      ]
-    },
-    {
-      "notice-type": "cn-standard",
       "publication-number": "487130-2026",
       "classification-cpv": [
         "55110000",
@@ -2390,138 +1865,6 @@
       },
       "buyer-country": [
         "FRA"
-      ]
-    },
-    {
-      "notice-type": "cn-standard",
-      "publication-number": "539763-2026",
-      "classification-cpv": [
-        "70330000",
-        "79212000"
-      ],
-      "buyer-name": {
-        "fra": [
-          "Ile de France Mobilités"
-        ]
-      },
-      "publication-date": "2026-08-04+02:00",
-      "links": {
-        "xml": {
-          "MUL": "https://ted.europa.eu/en/notice/539763-2026/xml"
-        },
-        "pdf": {
-          "BUL": "https://ted.europa.eu/bg/notice/539763-2026/pdf",
-          "SPA": "https://ted.europa.eu/es/notice/539763-2026/pdf",
-          "CES": "https://ted.europa.eu/cs/notice/539763-2026/pdf",
-          "DAN": "https://ted.europa.eu/da/notice/539763-2026/pdf",
-          "DEU": "https://ted.europa.eu/de/notice/539763-2026/pdf",
-          "EST": "https://ted.europa.eu/et/notice/539763-2026/pdf",
-          "ELL": "https://ted.europa.eu/el/notice/539763-2026/pdf",
-          "ENG": "https://ted.europa.eu/en/notice/539763-2026/pdf",
-          "FRA": "https://ted.europa.eu/fr/notice/539763-2026/pdf",
-          "GLE": "https://ted.europa.eu/ga/notice/539763-2026/pdf",
-          "HRV": "https://ted.europa.eu/hr/notice/539763-2026/pdf",
-          "ITA": "https://ted.europa.eu/it/notice/539763-2026/pdf",
-          "LAV": "https://ted.europa.eu/lv/notice/539763-2026/pdf",
-          "LIT": "https://ted.europa.eu/lt/notice/539763-2026/pdf",
-          "HUN": "https://ted.europa.eu/hu/notice/539763-2026/pdf",
-          "MLT": "https://ted.europa.eu/mt/notice/539763-2026/pdf",
-          "NLD": "https://ted.europa.eu/nl/notice/539763-2026/pdf",
-          "POL": "https://ted.europa.eu/pl/notice/539763-2026/pdf",
-          "POR": "https://ted.europa.eu/pt/notice/539763-2026/pdf",
-          "RON": "https://ted.europa.eu/ro/notice/539763-2026/pdf",
-          "SLK": "https://ted.europa.eu/sk/notice/539763-2026/pdf",
-          "SLV": "https://ted.europa.eu/sl/notice/539763-2026/pdf",
-          "FIN": "https://ted.europa.eu/fi/notice/539763-2026/pdf",
-          "SWE": "https://ted.europa.eu/sv/notice/539763-2026/pdf"
-        },
-        "pdfs": {
-          "FRA": "https://ted.europa.eu/fr/notice/539763-2026/pdfs"
-        },
-        "html": {
-          "BUL": "https://ted.europa.eu/bg/notice/-/detail/539763-2026",
-          "SPA": "https://ted.europa.eu/es/notice/-/detail/539763-2026",
-          "CES": "https://ted.europa.eu/cs/notice/-/detail/539763-2026",
-          "DAN": "https://ted.europa.eu/da/notice/-/detail/539763-2026",
-          "DEU": "https://ted.europa.eu/de/notice/-/detail/539763-2026",
-          "EST": "https://ted.europa.eu/et/notice/-/detail/539763-2026",
-          "ELL": "https://ted.europa.eu/el/notice/-/detail/539763-2026",
-          "ENG": "https://ted.europa.eu/en/notice/-/detail/539763-2026",
-          "FRA": "https://ted.europa.eu/fr/notice/-/detail/539763-2026",
-          "GLE": "https://ted.europa.eu/ga/notice/-/detail/539763-2026",
-          "HRV": "https://ted.europa.eu/hr/notice/-/detail/539763-2026",
-          "ITA": "https://ted.europa.eu/it/notice/-/detail/539763-2026",
-          "LAV": "https://ted.europa.eu/lv/notice/-/detail/539763-2026",
-          "LIT": "https://ted.europa.eu/lt/notice/-/detail/539763-2026",
-          "HUN": "https://ted.europa.eu/hu/notice/-/detail/539763-2026",
-          "MLT": "https://ted.europa.eu/mt/notice/-/detail/539763-2026",
-          "NLD": "https://ted.europa.eu/nl/notice/-/detail/539763-2026",
-          "POL": "https://ted.europa.eu/pl/notice/-/detail/539763-2026",
-          "POR": "https://ted.europa.eu/pt/notice/-/detail/539763-2026",
-          "RON": "https://ted.europa.eu/ro/notice/-/detail/539763-2026",
-          "SLK": "https://ted.europa.eu/sk/notice/-/detail/539763-2026",
-          "SLV": "https://ted.europa.eu/sl/notice/-/detail/539763-2026",
-          "FIN": "https://ted.europa.eu/fi/notice/-/detail/539763-2026",
-          "SWE": "https://ted.europa.eu/sv/notice/-/detail/539763-2026"
-        },
-        "htmlDirect": {
-          "BUL": "https://ted.europa.eu/bg/notice/539763-2026/html",
-          "SPA": "https://ted.europa.eu/es/notice/539763-2026/html",
-          "CES": "https://ted.europa.eu/cs/notice/539763-2026/html",
-          "DAN": "https://ted.europa.eu/da/notice/539763-2026/html",
-          "DEU": "https://ted.europa.eu/de/notice/539763-2026/html",
-          "EST": "https://ted.europa.eu/et/notice/539763-2026/html",
-          "ELL": "https://ted.europa.eu/el/notice/539763-2026/html",
-          "ENG": "https://ted.europa.eu/en/notice/539763-2026/html",
-          "FRA": "https://ted.europa.eu/fr/notice/539763-2026/html",
-          "GLE": "https://ted.europa.eu/ga/notice/539763-2026/html",
-          "HRV": "https://ted.europa.eu/hr/notice/539763-2026/html",
-          "ITA": "https://ted.europa.eu/it/notice/539763-2026/html",
-          "LAV": "https://ted.europa.eu/lv/notice/539763-2026/html",
-          "LIT": "https://ted.europa.eu/lt/notice/539763-2026/html",
-          "HUN": "https://ted.europa.eu/hu/notice/539763-2026/html",
-          "MLT": "https://ted.europa.eu/mt/notice/539763-2026/html",
-          "NLD": "https://ted.europa.eu/nl/notice/539763-2026/html",
-          "POL": "https://ted.europa.eu/pl/notice/539763-2026/html",
-          "POR": "https://ted.europa.eu/pt/notice/539763-2026/html",
-          "RON": "https://ted.europa.eu/ro/notice/539763-2026/html",
-          "SLK": "https://ted.europa.eu/sk/notice/539763-2026/html",
-          "SLV": "https://ted.europa.eu/sl/notice/539763-2026/html",
-          "FIN": "https://ted.europa.eu/fi/notice/539763-2026/html",
-          "SWE": "https://ted.europa.eu/sv/notice/539763-2026/html"
-        }
-      },
-      "notice-title": {
-        "hun": "Franciaország – Ingatlankezelési szolgáltatások díjazásos vagy szerződéses alapon – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "lav": "Francija – Nekustamā īpašuma pārvaldīšanas pakalpojumi par noteiktu samaksu vai uz līguma pamata – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "swe": "Frankrike – Fastighetsförvaltning på arvodes- eller kontraktsbasis – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "gle": "An Fhrainc – Property management services of real estate on a fee or contract basis – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "ell": "Γαλλία – Υπηρεσίες διαχείρισης ακινήτων έναντι αμοιβής ή βάσει σύμβασης – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "spa": "Francia – Servicios de administración de bienes raíces a comisión o por contrato – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "est": "Prantsusmaa – Kinnisvara haldusteenused vahendustasu või lepingu alusel – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "nld": "Frankrijk – Beheer van onroerend goed op honorarium- of contractbasis – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "fin": "Ranska – Sopimuksen perusteella tai palkkiota vastaan suoritettavat kiinteistönhoitopalvelut – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "pol": "Francja – Usługi zarządzania nieruchomościami na zasadzie bezpośredniej płatności lub umowy – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "hrv": "Francuska – Usluge poslovanja nekretninama uz paušalnu naknadu ili na temelju ugovora – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "ces": "Francie – Správa nemovitého majetku za odměnu nebo na základě smlouvy – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "dan": "Frankrig – Forvaltning af fast ejendom på honorar- eller kontraktbasis – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "ron": "Franţa – Servicii de gestionare a bunurilor imobiliare pentru terţi – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "por": "França – Serviços de administração de bens imobiliários à comissão ou por contrato – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "slk": "Francúzsko – Služby realitných kancelárií pri správe nehnuteľností na základe honoráru alebo zmluvy – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "fra": "France – Services de gestion de biens immobiliers pour le compte de tiers – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "mlt": "Franza – Servizzi ta' amministrazzjoni ta' propjetà immobbli fuq bażi ta' miżata jew b'kuntratt – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "deu": "Frankreich – Immobilienverwaltung gegen Einzelhonorar oder auf Vertragsbasis – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "lit": "Prancūzija – Nekilnojamojo turto valdymo paslaugos už atlyginimą ar pagal sutartį – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "ita": "Francia – Servizi di amministrazione di beni immobili per conto terzi – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "bul": "Фpaнция – Посреднически услуги по управление на недвижими имоти – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "slv": "Francija – Storitve upravljanja nepremičnin za plačilo ali po pogodbi – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités",
-        "eng": "France – Property management services of real estate on a fee or contract basis – 2025-092 _ Agent foncier pour les projets d'Île-de-France Mobilités"
-      },
-      "buyer-country": [
-        "FRA"
-      ],
-      "deadline": [
-        "2026-09-14T17:00:00+02:00"
       ]
     },
     {
@@ -5066,9 +4409,273 @@
       "buyer-country": [
         "FRA"
       ]
+    },
+    {
+      "notice-type": "cn-standard",
+      "publication-number": "655845-2026",
+      "classification-cpv": [
+        "71621000",
+        "71621000",
+        "71621000",
+        "71621000",
+        "70333000",
+        "98390000"
+      ],
+      "buyer-name": {
+        "fra": [
+          "ESTEREL Cote d'azur agglomération"
+        ]
+      },
+      "publication-date": "2026-09-23+02:00",
+      "links": {
+        "xml": {
+          "MUL": "https://ted.europa.eu/en/notice/655845-2026/xml"
+        },
+        "pdf": {
+          "BUL": "https://ted.europa.eu/bg/notice/655845-2026/pdf",
+          "SPA": "https://ted.europa.eu/es/notice/655845-2026/pdf",
+          "CES": "https://ted.europa.eu/cs/notice/655845-2026/pdf",
+          "DAN": "https://ted.europa.eu/da/notice/655845-2026/pdf",
+          "DEU": "https://ted.europa.eu/de/notice/655845-2026/pdf",
+          "EST": "https://ted.europa.eu/et/notice/655845-2026/pdf",
+          "ELL": "https://ted.europa.eu/el/notice/655845-2026/pdf",
+          "ENG": "https://ted.europa.eu/en/notice/655845-2026/pdf",
+          "FRA": "https://ted.europa.eu/fr/notice/655845-2026/pdf",
+          "GLE": "https://ted.europa.eu/ga/notice/655845-2026/pdf",
+          "HRV": "https://ted.europa.eu/hr/notice/655845-2026/pdf",
+          "ITA": "https://ted.europa.eu/it/notice/655845-2026/pdf",
+          "LAV": "https://ted.europa.eu/lv/notice/655845-2026/pdf",
+          "LIT": "https://ted.europa.eu/lt/notice/655845-2026/pdf",
+          "HUN": "https://ted.europa.eu/hu/notice/655845-2026/pdf",
+          "MLT": "https://ted.europa.eu/mt/notice/655845-2026/pdf",
+          "NLD": "https://ted.europa.eu/nl/notice/655845-2026/pdf",
+          "POL": "https://ted.europa.eu/pl/notice/655845-2026/pdf",
+          "POR": "https://ted.europa.eu/pt/notice/655845-2026/pdf",
+          "RON": "https://ted.europa.eu/ro/notice/655845-2026/pdf",
+          "SLK": "https://ted.europa.eu/sk/notice/655845-2026/pdf",
+          "SLV": "https://ted.europa.eu/sl/notice/655845-2026/pdf",
+          "FIN": "https://ted.europa.eu/fi/notice/655845-2026/pdf",
+          "SWE": "https://ted.europa.eu/sv/notice/655845-2026/pdf"
+        },
+        "pdfs": {
+          "FRA": "https://ted.europa.eu/fr/notice/655845-2026/pdfs"
+        },
+        "html": {
+          "BUL": "https://ted.europa.eu/bg/notice/-/detail/655845-2026",
+          "SPA": "https://ted.europa.eu/es/notice/-/detail/655845-2026",
+          "CES": "https://ted.europa.eu/cs/notice/-/detail/655845-2026",
+          "DAN": "https://ted.europa.eu/da/notice/-/detail/655845-2026",
+          "DEU": "https://ted.europa.eu/de/notice/-/detail/655845-2026",
+          "EST": "https://ted.europa.eu/et/notice/-/detail/655845-2026",
+          "ELL": "https://ted.europa.eu/el/notice/-/detail/655845-2026",
+          "ENG": "https://ted.europa.eu/en/notice/-/detail/655845-2026",
+          "FRA": "https://ted.europa.eu/fr/notice/-/detail/655845-2026",
+          "GLE": "https://ted.europa.eu/ga/notice/-/detail/655845-2026",
+          "HRV": "https://ted.europa.eu/hr/notice/-/detail/655845-2026",
+          "ITA": "https://ted.europa.eu/it/notice/-/detail/655845-2026",
+          "LAV": "https://ted.europa.eu/lv/notice/-/detail/655845-2026",
+          "LIT": "https://ted.europa.eu/lt/notice/-/detail/655845-2026",
+          "HUN": "https://ted.europa.eu/hu/notice/-/detail/655845-2026",
+          "MLT": "https://ted.europa.eu/mt/notice/-/detail/655845-2026",
+          "NLD": "https://ted.europa.eu/nl/notice/-/detail/655845-2026",
+          "POL": "https://ted.europa.eu/pl/notice/-/detail/655845-2026",
+          "POR": "https://ted.europa.eu/pt/notice/-/detail/655845-2026",
+          "RON": "https://ted.europa.eu/ro/notice/-/detail/655845-2026",
+          "SLK": "https://ted.europa.eu/sk/notice/-/detail/655845-2026",
+          "SLV": "https://ted.europa.eu/sl/notice/-/detail/655845-2026",
+          "FIN": "https://ted.europa.eu/fi/notice/-/detail/655845-2026",
+          "SWE": "https://ted.europa.eu/sv/notice/-/detail/655845-2026"
+        },
+        "htmlDirect": {
+          "BUL": "https://ted.europa.eu/bg/notice/655845-2026/html",
+          "SPA": "https://ted.europa.eu/es/notice/655845-2026/html",
+          "CES": "https://ted.europa.eu/cs/notice/655845-2026/html",
+          "DAN": "https://ted.europa.eu/da/notice/655845-2026/html",
+          "DEU": "https://ted.europa.eu/de/notice/655845-2026/html",
+          "EST": "https://ted.europa.eu/et/notice/655845-2026/html",
+          "ELL": "https://ted.europa.eu/el/notice/655845-2026/html",
+          "ENG": "https://ted.europa.eu/en/notice/655845-2026/html",
+          "FRA": "https://ted.europa.eu/fr/notice/655845-2026/html",
+          "GLE": "https://ted.europa.eu/ga/notice/655845-2026/html",
+          "HRV": "https://ted.europa.eu/hr/notice/655845-2026/html",
+          "ITA": "https://ted.europa.eu/it/notice/655845-2026/html",
+          "LAV": "https://ted.europa.eu/lv/notice/655845-2026/html",
+          "LIT": "https://ted.europa.eu/lt/notice/655845-2026/html",
+          "HUN": "https://ted.europa.eu/hu/notice/655845-2026/html",
+          "MLT": "https://ted.europa.eu/mt/notice/655845-2026/html",
+          "NLD": "https://ted.europa.eu/nl/notice/655845-2026/html",
+          "POL": "https://ted.europa.eu/pl/notice/655845-2026/html",
+          "POR": "https://ted.europa.eu/pt/notice/655845-2026/html",
+          "RON": "https://ted.europa.eu/ro/notice/655845-2026/html",
+          "SLK": "https://ted.europa.eu/sk/notice/655845-2026/html",
+          "SLV": "https://ted.europa.eu/sl/notice/655845-2026/html",
+          "FIN": "https://ted.europa.eu/fi/notice/655845-2026/html",
+          "SWE": "https://ted.europa.eu/sv/notice/655845-2026/html"
+        }
+      },
+      "notice-title": {
+        "hun": "Franciaország – Műszaki elemzési vagy tanácsadó szolgáltatások – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "lav": "Francija – Tehniskās analīzes vai konsultāciju pakalpojumi – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "swe": "Frankrike – Teknisk analys eller konsulttjänster – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "gle": "An Fhrainc – Technical analysis or consultancy services – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "ell": "Γαλλία – Υπηρεσίες τεχνικής ανάλυσης ή παροχής συμβουλών – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "spa": "Francia – Servicios de ensayo o consultoría técnicos – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "est": "Prantsusmaa – Tehnilise analüüsi ja nõuandeteenused – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "nld": "Frankrijk – Diensten voor technische analyse of adviezen – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "fin": "Ranska – Tekniset analysointi- tai neuvontapalvelut – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "pol": "Francja – Usługi w zakresie analizy lub konsultacji technicznej – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "hrv": "Francuska – Usluge tehničke analize ili savjetovanja – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "ces": "Francie – Technické testování a poradenství – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "dan": "Frankrig – Tekniske undersøgelser eller rådgivning – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "ron": "Franţa – Servicii de analiză sau consultanţă tehnică – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "por": "França – Serviços técnicos de análise ou consultoria – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "slk": "Francúzsko – Služby v oblasti technickej analýzy alebo technického poradenstva – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "fra": "France – Services d'analyse technique ou services de conseil – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "mlt": "Franza – Analiżi teknika jew servizzi ta' konsulenza – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "deu": "Frankreich – Technische Analysen oder Beratung – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "lit": "Prancūzija – Techninės analizės arba konsultavimo paslaugos – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "ita": "Francia – Servizi di analisi o consulenza tecnica – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "bul": "Фpaнция – Услуги по технически анализ и консултантски услуги – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "slv": "Francija – Storitve tehnične analize ali svetovanja – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots",
+        "eng": "France – Technical analysis or consultancy services – Dispositif ALABRI - Réalisation de diagnostics de vulnérabilité sur le territoire d'Estérel Côte d'Azur Agglomération en deux lots"
+      },
+      "buyer-country": [
+        "FRA"
+      ]
+    },
+    {
+      "notice-type": "cn-standard",
+      "publication-number": "656041-2026",
+      "classification-cpv": [
+        "70332200",
+        "70330000",
+        "70332200",
+        "70330000"
+      ],
+      "buyer-name": {
+        "fra": [
+          "CIRAD"
+        ]
+      },
+      "publication-date": "2026-09-23+02:00",
+      "links": {
+        "xml": {
+          "MUL": "https://ted.europa.eu/en/notice/656041-2026/xml"
+        },
+        "pdf": {
+          "BUL": "https://ted.europa.eu/bg/notice/656041-2026/pdf",
+          "SPA": "https://ted.europa.eu/es/notice/656041-2026/pdf",
+          "CES": "https://ted.europa.eu/cs/notice/656041-2026/pdf",
+          "DAN": "https://ted.europa.eu/da/notice/656041-2026/pdf",
+          "DEU": "https://ted.europa.eu/de/notice/656041-2026/pdf",
+          "EST": "https://ted.europa.eu/et/notice/656041-2026/pdf",
+          "ELL": "https://ted.europa.eu/el/notice/656041-2026/pdf",
+          "ENG": "https://ted.europa.eu/en/notice/656041-2026/pdf",
+          "FRA": "https://ted.europa.eu/fr/notice/656041-2026/pdf",
+          "GLE": "https://ted.europa.eu/ga/notice/656041-2026/pdf",
+          "HRV": "https://ted.europa.eu/hr/notice/656041-2026/pdf",
+          "ITA": "https://ted.europa.eu/it/notice/656041-2026/pdf",
+          "LAV": "https://ted.europa.eu/lv/notice/656041-2026/pdf",
+          "LIT": "https://ted.europa.eu/lt/notice/656041-2026/pdf",
+          "HUN": "https://ted.europa.eu/hu/notice/656041-2026/pdf",
+          "MLT": "https://ted.europa.eu/mt/notice/656041-2026/pdf",
+          "NLD": "https://ted.europa.eu/nl/notice/656041-2026/pdf",
+          "POL": "https://ted.europa.eu/pl/notice/656041-2026/pdf",
+          "POR": "https://ted.europa.eu/pt/notice/656041-2026/pdf",
+          "RON": "https://ted.europa.eu/ro/notice/656041-2026/pdf",
+          "SLK": "https://ted.europa.eu/sk/notice/656041-2026/pdf",
+          "SLV": "https://ted.europa.eu/sl/notice/656041-2026/pdf",
+          "FIN": "https://ted.europa.eu/fi/notice/656041-2026/pdf",
+          "SWE": "https://ted.europa.eu/sv/notice/656041-2026/pdf"
+        },
+        "pdfs": {
+          "FRA": "https://ted.europa.eu/fr/notice/656041-2026/pdfs"
+        },
+        "html": {
+          "BUL": "https://ted.europa.eu/bg/notice/-/detail/656041-2026",
+          "SPA": "https://ted.europa.eu/es/notice/-/detail/656041-2026",
+          "CES": "https://ted.europa.eu/cs/notice/-/detail/656041-2026",
+          "DAN": "https://ted.europa.eu/da/notice/-/detail/656041-2026",
+          "DEU": "https://ted.europa.eu/de/notice/-/detail/656041-2026",
+          "EST": "https://ted.europa.eu/et/notice/-/detail/656041-2026",
+          "ELL": "https://ted.europa.eu/el/notice/-/detail/656041-2026",
+          "ENG": "https://ted.europa.eu/en/notice/-/detail/656041-2026",
+          "FRA": "https://ted.europa.eu/fr/notice/-/detail/656041-2026",
+          "GLE": "https://ted.europa.eu/ga/notice/-/detail/656041-2026",
+          "HRV": "https://ted.europa.eu/hr/notice/-/detail/656041-2026",
+          "ITA": "https://ted.europa.eu/it/notice/-/detail/656041-2026",
+          "LAV": "https://ted.europa.eu/lv/notice/-/detail/656041-2026",
+          "LIT": "https://ted.europa.eu/lt/notice/-/detail/656041-2026",
+          "HUN": "https://ted.europa.eu/hu/notice/-/detail/656041-2026",
+          "MLT": "https://ted.europa.eu/mt/notice/-/detail/656041-2026",
+          "NLD": "https://ted.europa.eu/nl/notice/-/detail/656041-2026",
+          "POL": "https://ted.europa.eu/pl/notice/-/detail/656041-2026",
+          "POR": "https://ted.europa.eu/pt/notice/-/detail/656041-2026",
+          "RON": "https://ted.europa.eu/ro/notice/-/detail/656041-2026",
+          "SLK": "https://ted.europa.eu/sk/notice/-/detail/656041-2026",
+          "SLV": "https://ted.europa.eu/sl/notice/-/detail/656041-2026",
+          "FIN": "https://ted.europa.eu/fi/notice/-/detail/656041-2026",
+          "SWE": "https://ted.europa.eu/sv/notice/-/detail/656041-2026"
+        },
+        "htmlDirect": {
+          "BUL": "https://ted.europa.eu/bg/notice/656041-2026/html",
+          "SPA": "https://ted.europa.eu/es/notice/656041-2026/html",
+          "CES": "https://ted.europa.eu/cs/notice/656041-2026/html",
+          "DAN": "https://ted.europa.eu/da/notice/656041-2026/html",
+          "DEU": "https://ted.europa.eu/de/notice/656041-2026/html",
+          "EST": "https://ted.europa.eu/et/notice/656041-2026/html",
+          "ELL": "https://ted.europa.eu/el/notice/656041-2026/html",
+          "ENG": "https://ted.europa.eu/en/notice/656041-2026/html",
+          "FRA": "https://ted.europa.eu/fr/notice/656041-2026/html",
+          "GLE": "https://ted.europa.eu/ga/notice/656041-2026/html",
+          "HRV": "https://ted.europa.eu/hr/notice/656041-2026/html",
+          "ITA": "https://ted.europa.eu/it/notice/656041-2026/html",
+          "LAV": "https://ted.europa.eu/lv/notice/656041-2026/html",
+          "LIT": "https://ted.europa.eu/lt/notice/656041-2026/html",
+          "HUN": "https://ted.europa.eu/hu/notice/656041-2026/html",
+          "MLT": "https://ted.europa.eu/mt/notice/656041-2026/html",
+          "NLD": "https://ted.europa.eu/nl/notice/656041-2026/html",
+          "POL": "https://ted.europa.eu/pl/notice/656041-2026/html",
+          "POR": "https://ted.europa.eu/pt/notice/656041-2026/html",
+          "RON": "https://ted.europa.eu/ro/notice/656041-2026/html",
+          "SLK": "https://ted.europa.eu/sk/notice/656041-2026/html",
+          "SLV": "https://ted.europa.eu/sl/notice/656041-2026/html",
+          "FIN": "https://ted.europa.eu/fi/notice/656041-2026/html",
+          "SWE": "https://ted.europa.eu/sv/notice/656041-2026/html"
+        }
+      },
+      "notice-title": {
+        "hun": "Franciaország – Kereskedelmi ingatlankezelési szolgáltatások – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "lav": "Francija – Komercīpašumu pārvaldīšanas pakalpojumi – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "swe": "Frankrike – Förvaltning av affärsfastigheter – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "gle": "An Fhrainc – Commercial property management services – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "ell": "Γαλλία – Υπηρεσίες διαχείρισης εμπορικών ιδιοκτησιών – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "spa": "Francia – Servicios de administración de propiedades comerciales – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "est": "Prantsusmaa – Kommertsvara haldusteenused – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "nld": "Frankrijk – Beheer van onroerend goed voor commerciële doeleinden – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "fin": "Ranska – Liikeomaisuuden hoitopalvelut – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "pol": "Francja – Usługi zarządzania nieruchomościami komercyjnymi – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "hrv": "Francuska – Usluge upravljanja poslovnim nekretninama – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "ces": "Francie – Správa komerčního vlastnictví – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "dan": "Frankrig – Forvaltning af erhvervsejendom – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "ron": "Franţa – Servicii de gestionare a proprietăţii comerciale – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "por": "França – Serviços de administração de propriedades comerciais – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "slk": "Francúzsko – Služby spojené so správou komerčných nehnuteľností – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "fra": "France – Services de gestion de biens immobiliers à usage commercial – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "mlt": "Franza – Servizzi ta' l-amministrazzjoni ta' propjetà kummerċjali – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "deu": "Frankreich – Verwaltung von gewerblichen Immobilien – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "lit": "Prancūzija – Komercinės nuosavybės valdymo paslaugos – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "ita": "Francia – Servizi di amministrazione di proprietà commerciali – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "bul": "Фpaнция – Посреднически услуги по управление на търговски сгради – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "slv": "Francija – Storitve upravljanja poslovnih nepremičnin – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne",
+        "eng": "France – Commercial property management services – Gestion locative de locaux à caractère commercial (bureaux et commerce) ainsi que d'appartements particuliers, chambre de service et annexes en région parisienne"
+      },
+      "buyer-country": [
+        "FRA"
+      ]
     }
   ],
-  "totalNoticeCount": 38,
+  "totalNoticeCount": 35,
   "iterationNextToken": null,
   "timedOut": false
 }

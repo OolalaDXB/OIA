@@ -1,16 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citations": [
-      "EIT Manufacturing a pour objectif de faire de l'Europe le leader de l'innovation industrielle internationale, grâce à son large écosystème d'acteurs de l'industrie."
-    ],
+    "citation": "Acteurs de l'industrie",
     "reason": {
-      "en": "The opportunity explicitly targets industrial innovation actors, while 'Les Vieilles Pierres' is a heritage hiking association with no recorded industrial or manufacturing focus.",
-      "fr": "L'opportunité cible explicitement les acteurs de l'innovation industrielle, alors que 'Les Vieilles Pierres' est une association de randonnée patrimoniale sans lien enregistré avec l'industrie ou la fabrication."
+      "en": "The funding opportunity is restricted to 'industry actors,' and the organisation is a heritage hiking association, not an industrial entity.",
+      "fr": "L'opportunité de financement est réservée aux 'acteurs de l'industrie', et l'organisation est une association de randonnée patrimoniale, pas une entité industrielle."
     },
     "nextAction": {
-      "en": "Review other funding opportunities aligned with heritage, culture, or tourism sectors.",
-      "fr": "Consulter d'autres opportunités de financement adaptées aux secteurs du patrimoine, de la culture ou du tourisme."
+      "en": "Review other funding opportunities that explicitly include cultural or tourism associations.",
+      "fr": "Consulter d'autres opportunités de financement qui incluent explicitement les associations culturelles ou touristiques."
     }
   }
 }

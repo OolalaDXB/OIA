@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text of the opportunity does not specify the types of organisations eligible to apply. There is no mention of legal form, geographic restrictions, or other criteria that would confirm or exclude BAWABA.",
-      "fr": "Le texte extrait de l'opportunité ne précise pas les types d'organisations éligibles. Il n'y a aucune mention de la forme juridique, des restrictions géographiques ou d'autres critères qui confirmeraient ou excluraient BAWABA."
+      "en": "The extracted text of the opportunity does not specify which types of organisations are eligible to apply. There is no mention of legal form, geographic restrictions, or other criteria that would confirm or exclude BAWABA.",
+      "fr": "Le texte extrait de l'opportunité ne précise pas quels types d'organisations sont éligibles. Il n'y a aucune mention de la forme juridique, des restrictions géographiques ou d'autres critères qui confirmeraient ou excluraient BAWABA."
     },
     "nextAction": {
-      "en": "Contact the buyer (IEDOM) to request the full tender documents and confirm eligibility criteria.",
-      "fr": "Contacter l'acheteur (IEDOM) pour demander les documents complets de l'appel d'offres et confirmer les critères d'éligibilité."
+      "en": "Contact the buyer (IEDOM) to ask for the full tender documents and confirm the eligibility criteria for applicants.",
+      "fr": "Contacter l'acheteur (IEDOM) pour demander les documents complets de l'appel d'offres et confirmer les critères d'éligibilité des candidats."
     }
   }
 }

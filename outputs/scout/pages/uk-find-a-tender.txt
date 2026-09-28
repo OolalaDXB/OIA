@@ -49,231 +49,241 @@ Export is limited to 15,000 results.
 
 Save search
 
-We've found 15,396 result(s)
+We've found 15,469 result(s)
 
 Sort by
 Newest
 Oldest
-Hostile Vehicle Mitigation Equipment
+Income Tax Self-Assessment Ecosystem Data and Integration - Innovation-Led Proof of Concept
 Active tender Suitable for SME
-Contracting authority type: Regional and local public authority
-Contracting authority name: East Staffordshire Borough Council
-Procurement identifier: ocds-h6vhtk-07766d
-Submission deadline date: 5 October 2026
-Total value including VAT: £108,000.00
-Delivery location: Shropshire and Staffordshire
-CPV code(s):
-34923000 - Road traffic-control equipment
-Heparins & Anticoagulants
-Preliminary Market Engagement Suitable for SME & VCSE
 Contracting authority type: Central government
-Contracting authority name: NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)
-Procurement identifier: ocds-h6vhtk-07766b
-Engagement deadline date: 6 November 2026
-Total value including VAT: £28,192,927.00
-Delivery location: Wales
-CPV code(s):
-33600000 - Pharmaceutical products
-Medical Aid Insurance for CBS Staff at the British High Commission Maputo
-Preliminary Market Engagement
-Contracting authority type: Central government
-Contracting authority name: Foreign, Commonwealth and Development Office
-Procurement identifier: ocds-h6vhtk-07766a
-Engagement deadline date: 25 September 2026
-Total value including VAT: £0.00
-Delivery location: Mozambique
-CPV code(s):
-66512220 - Medical insurance services
-Barbican Renewal Programme - Demolition and Structures
-Active tender Suitable for SME
-Contracting authority type: Regional and local public authority
-Contracting authority name: The Mayor and Commonalty and Citizens of the City of London
-Procurement identifier: ocds-h6vhtk-06f01b
-Submission deadline date: 19 October 2026
-Total value including VAT: £19,200,000.00
-Delivery location: London
-CPV code(s):
-45111100 - Demolition work
-Post-16 SEND - Soft Market Engagement
-Preliminary Market Engagement Suitable for SME & VCSE
-Contracting authority type: Regional and local public authority
-Contracting authority name: Cornwall Council
-Procurement identifier: ocds-h6vhtk-077661
-Engagement deadline date: 30 September 2026
-Total value including VAT: £1,500,000.00
-Delivery location: Cornwall and Isles of Scilly
-CPV code(s):
-80000000 - Education and training services
-Derby Diocesan Academy Trust - Supply of Electricity
-Active tender Suitable for SME
-Contracting authority type: Regional and local public authority
-Contracting authority name: Derby Diocesan Academy Trust
-Procurement identifier: ocds-h6vhtk-07765f
-Submission deadline date: 1 October 2026
-Total value including VAT: £304,200.00
+Contracting authority name: HM Revenue & Customs
+Procurement identifier: ocds-h6vhtk-06b96c
+Submission deadline date: 12 October 2026
+Total value including VAT: £350,000.00
 Delivery location: United Kingdom
 CPV code(s):
-09310000 - Electricity
-31682000 - Electricity supplies
-Derby Diocesan Academy Trust - Supply of Gas
-Active tender Suitable for SME
-Contracting authority type: Regional and local public authority
-Contracting authority name: Derby Diocesan Academy Trust
-Procurement identifier: ocds-h6vhtk-07765b
-Submission deadline date: 1 October 2026
-Total value including VAT: £127,000.00
+48000000 - Software package and information systems
+72000000 - IT services: consulting, software development, Internet and support
+Hartpury University & Hartpury College of Further Education - Total Waste Management Services
+Active tender Suitable for SME & VCSE
+Contracting authority type: Public undertaking
+Contracting authority name: Hartpury College
+Procurement identifier: ocds-h6vhtk-06f5d0
+Submission deadline date: 15 October 2026
+Total value including VAT: £720,000.00
 Delivery location: United Kingdom
 CPV code(s):
-09121200 - Mains gas
-09123000 - Natural gas
-COV - West Midlands Children's Regional Residential Care Framework
-Active tender Suitable for SME
-Contracting authority type: Regional and local public authority
-Contracting authority name: Coventry City Council
-Procurement identifier: ocds-h6vhtk-077659
-Submission deadline date: 23 October 2026
-Total value including VAT: £5,935,200,000.00
-Delivery location: Birmingham; Coventry; Dudley; Herefordshire, County of; Sandwell; and 9 more
-CPV code(s):
-85000000 - Health and social work services
-Financial Advisor.
-Planned procurement
-Contracting authority type: Regional and local public authority
-Contracting authority name: Great British Energy - Nuclear
-Procurement identifier: ocds-h6vhtk-077630
-Tender publication date (estimated): 5 October 2026
-Total value including VAT: £500,000.00
-Delivery location: United Kingdom
-CPV code(s):
-66171000 - Financial consultancy services
-79412000 - Financial management consultancy services
-66120000 - Investment banking services and related services
-Distribution Board Replacement, heating works (environmental controls) and Replacement of Gymnasium Lighting, College of Policing Ryton
-Active tender Suitable for SME
-Contracting authority type: Regional and local public authority
-Contracting authority name: COLLEGE OF POLICING LIMITED
-Procurement identifier: ocds-h6vhtk-07764d
-Submission deadline date: 8 October 2026
-Total value including VAT: £82,000.00
-Delivery location: West Midlands (England)
-CPV code(s):
-31213100 - Distribution boxes
-31213400 - Distribution system
-39715200 - Heating equipment
-45311000 - Electrical wiring and fitting work
-45315000 - Electrical installation work of heating and other electrical building-equipment
-and 2 more
-SPC Grounds maintenance contract
-Active tender Suitable for SME
-Contracting authority type: Regional and local public authority
-Contracting authority name: Stanwick Parish Council
-Procurement identifier: ocds-h6vhtk-07764a
-Submission deadline date: 30 October 2026
-Total value including VAT: £120,000.00
-Delivery location: Leicestershire, Rutland and Northamptonshire
-CPV code(s):
-77300000 - Horticultural services
-Terra Nova Construction Materials
+90500000 - Refuse and waste related services
+Contract for Roofing and Solar Panels at Heol Emrys and Tudno, Lavender Court
 Active tender Suitable for SME & VCSE
 Contracting authority type: Regional and local public authority
-Contracting authority name: Great Places Housing Group
-Procurement identifier: ocds-h6vhtk-069f8b
-Submission deadline date: 19 October 2026
-Total value including VAT: £15,000,000.00
-Delivery location: North West (England); South Yorkshire
+Contracting authority name: City & County of Swansea
+Procurement identifier: ocds-h6vhtk-077b91
+Submission deadline date: 12 October 2026
+Total value including VAT: £105,600.00
+Delivery location: Swansea
 CPV code(s):
-44111100 - Bricks
-44111600 - Blocks
-44220000 - Builders' joinery
-44230000 - Builders' carpentry
-University of Huddersfield- Inspection & testing of emergency lighting systems
+45261215 - Solar panel roof-covering work
+45261211 - Roof-tiling work
+45000000 - Construction work
+Hired Driver Services for the British Embassy Brussels
+Active tender
+Contracting authority type: Central government
+Contracting authority name: Foreign, Commonwealth and Development Office
+Procurement identifier: ocds-h6vhtk-077b8c
+Submission deadline date: 25 October 2026
+Total value including VAT: £1,900,000.00
+Delivery location: Not specified
+CPV code(s):
+63520000 - Transport agency services
+PRO005084-Services-Framework-DNM Linear Monitor Installs
+Active tender Suitable for SME
+Contracting authority type: Private utility
+Contracting authority name: United Utilities Water Limited
+Procurement identifier: ocds-h6vhtk-077b8b
+Submission deadline date: 16 December 2026
+Total value including VAT: £30,000,000.00
+Delivery location: North West (England)
+CPV code(s):
+71700000 - Monitoring and control services
+32441200 - Telemetry and control equipment
+38810000 - Industrial process control equipment
+48610000 - Database systems
+50000000 - Repair and maintenance services
+and 13 more
+Modern Fire Fighting Phase 2- Specialist Training Facility
+Pipeline
+Contracting authority type: Regional and local public authority
+Contracting authority name: London Fire Commissioner
+Procurement identifier: ocds-h6vhtk-077b84
+Tender or transparency notice publication date (estimated): 4 January 2027
+Total value including VAT: £0.00
+Delivery location: Not specified
+CPV code(s):
+45214800 - Training facilities building
+80510000 - Specialist training services
+Workwear
+Pipeline
+Contracting authority type: Regional and local public authority
+Contracting authority name: London Fire Commissioner
+Procurement identifier: ocds-h6vhtk-06ad72
+Tender or transparency notice publication date (estimated): 1 March 2027
+Total value including VAT: £0.00
+Delivery location: Not specified
+CPV code(s):
+35811100 - Fire-brigade uniforms
+Future Generation of PPE
+Pipeline
+Contracting authority type: Regional and local public authority
+Contracting authority name: London Fire Commissioner
+Procurement identifier: ocds-h6vhtk-06ad70
+Tender or transparency notice publication date (estimated): 1 May 2027
+Total value including VAT: £0.00
+Delivery location: Not specified
+CPV code(s):
+35113400 - Protective and safety clothing
+Canvey Lake Dredging
+Active tender Suitable for SME & VCSE
+Contracting authority type: Regional and local public authority
+Contracting authority name: Castle Point Borough Council
+Procurement identifier: ocds-h6vhtk-068ca1
+Submission deadline date: 2 November 2026
+Total value including VAT: £1,200,000.00
+Delivery location: East of England; Essex
+CPV code(s):
+45252124 - Dredging and pumping works
+45262640 - Environmental improvement works
+Procurement of Modular A-Frame - PMEN (UK2)
+Preliminary Market Engagement Suitable for SME
+Contracting authority type: Central government
+Contracting authority name: Ministry of Defence
+Procurement identifier: ocds-h6vhtk-06f348
+Engagement deadline date: 6 October 2026
+Total value including VAT: £9,600,000.00
+Delivery location: United Kingdom
+CPV code(s):
+35521000 - Hull and mechanical spare parts for warships
+34510000 - Ships
+44142000 - Frames
+35520000 - Parts for warships
+42414000 - Cranes, mobile lifting frames and works trucks fitted with a crane
+Griffin Park Bowls Green
 Active tender Suitable for SME
 Contracting authority type: Regional and local public authority
-Contracting authority name: University of Huddersfield
-Procurement identifier: ocds-h6vhtk-077649
-Submission deadline date: 19 October 2026
-Total value including VAT: £150,000.00
-Delivery location: Bradford; Calderdale and Kirklees; Leeds; Wakefield
+Contracting authority name: Porthcawl Town Council
+Procurement identifier: ocds-h6vhtk-077b81
+Submission deadline date: 8 October 2026
+Total value including VAT: £84,000.00
+Delivery location: United Kingdom
 CPV code(s):
-31518200 - Emergency lighting equipment
-31527260 - Lighting systems
-50000000 - Repair and maintenance services
-Lancaster Farms - Therapeutic Community Plus Service
+77300000 - Horticultural services
+Welsh Government Energy Service (WGES) Interim Framework
 Pipeline Suitable for SME & VCSE
 Contracting authority type: Central government
-Contracting authority name: Ministry of Justice
-Procurement identifier: ocds-h6vhtk-077644
-Tender or transparency notice publication date (estimated): 30 October 2026
-Total value including VAT: £399,495.60
-Delivery location: United Kingdom
+Contracting authority name: Llywodraeth Cymru / Welsh Government
+Procurement identifier: ocds-h6vhtk-077b80
+Tender or transparency notice publication date (estimated): 1 April 2027
+Total value including VAT: £36,000,000.00
+Delivery location: Wales
 CPV code(s):
-85000000 - Health and social work services
-Rail Replacement Service - Bus and Coach Operators
-Preliminary Market Engagement Suitable for SME & VCSE
-Contracting authority type: Regional and local public authority; Public undertaking
-Contracting authority name: Transport for Wales Rail Limited (Utility Buyer); Transport for Wales
-Procurement identifier: ocds-h6vhtk-0773c0
-Engagement deadline date: 28 September 2026
-Total value including VAT: £85,892,229.00
-Delivery location: East Midlands (England); East of England; London; North East (England); North West (England); and 3 more
-CPV code(s):
-60100000 - Road transport services
-External Planned Maintenance
-Active tender Suitable for SME
+71314000 - Energy and related services
+ONLINE EVIDENCE BASED TREATMENT/RECOVERY SERVICE
+Active tender Suitable for SME & VCSE
 Contracting authority type: Regional and local public authority
-Contracting authority name: Town and Country Housing
-Procurement identifier: ocds-h6vhtk-077643
-Submission deadline date: 23 October 2026
-Total value including VAT: £7,200,000.00
-Delivery location: United Kingdom
+Contracting authority name: Police and Crime Commissioner for Dyfed-Powys
+Procurement identifier: ocds-h6vhtk-077b7f
+Submission deadline date: 12 October 2026
+Total value including VAT: £43,200.00
+Delivery location: Powys; South West Wales
 CPV code(s):
+33693300 - Addiction treatment
+98000000 - Other community, social and personal services
+Multidisciplinary Consultancy Services Framework
+Pipeline
+Contracting authority type: Central government
+Contracting authority name: The Crown Estate
+Procurement identifier: ocds-h6vhtk-077b7d
+Tender or transparency notice publication date (estimated): 17 October 2026
+Total value including VAT: £85,181,600.00
+Delivery location: Not specified
+CPV code(s):
+71315300 - Building surveying services
+Painting - External and Internal Communal Areas
+Preliminary Market Engagement Suitable for SME
+Contracting authority type: Regional and local public authority
+Contracting authority name: BELIEVE HOUSING LIMITED
+Procurement identifier: ocds-h6vhtk-077b7b
+Engagement deadline date: 12 October 2026
+Total value including VAT: £3,300,000.00
+Delivery location: Durham CC
+CPV code(s):
+45261220 - Roof-painting and other coating work
+45261221 - Roof-painting work
 45442100 - Painting work
-45451000 - Decoration work
-45453100 - Refurbishment work
-50000000 - Repair and maintenance services
-Hydrogen Peroxide Generator
-Active tender Suitable for SME
+45442110 - Painting work of buildings
+D2 Dehumidification (L&A and Radiation Stores)
+Active tender
 Contracting authority type: Central government
-Contracting authority name: Secretary of State for Health and Social Care acting as part of the Crown through UK Health Security Agency
-Procurement identifier: ocds-h6vhtk-06c6fe
-Submission deadline date: 19 October 2026
-Total value including VAT: £112,800.00
+Contracting authority name: Science Museum Group
+Procurement identifier: ocds-h6vhtk-0773e1
+Submission deadline date: 14 October 2026
+Total value including VAT: £600,000.00
+Delivery location: Not specified
+CPV code(s):
+42512300 - HVAC packages
+45261420 - Waterproofing work
+45331200 - Ventilation and air-conditioning installation work
+TfL 97139 - Bus Driver Quality Monitoring
+Planned procurement Suitable for SME
+Contracting authority type: Public undertaking
+Contracting authority name: Transport for London
+Procurement identifier: ocds-h6vhtk-069989
+Tender publication date (estimated): 2 October 2026
+Total value including VAT: £2,200,000.00
 Delivery location: United Kingdom
 CPV code(s):
-42924720 - Decontamination equipment
-NHS National Framework for Generics Orals, Non-Parenteral & Housekeeping
-Active tender Suitable for SME
-Contracting authority type: Central government
-Contracting authority name: NHS England
-Procurement identifier: ocds-h6vhtk-06f21e
-Submission deadline date: 19 October 2026
-Total value including VAT: £518,739,710.00
-Delivery location: East Midlands (England); East of England; London; North East (England); North West (England); and 4 more
-CPV code(s):
-33600000 - Pharmaceutical products
-James Rennie School at Bishop Harvey Goodwin School, Carlisle - Consultancy Services
-Active tender Suitable for SME
+80000000 - Education and training services
+Special Educational Needs and Disabilities (SEND) Mediation and Disagreement Resolution Service.
+Active tender Suitable for SME & VCSE
 Contracting authority type: Regional and local public authority
-Contracting authority name: Cumberland Council
-Procurement identifier: ocds-h6vhtk-077640
-Submission deadline date: 19 October 2026
+Contracting authority name: Blackpool Borough Council
+Procurement identifier: ocds-h6vhtk-06f6f9
+Submission deadline date: 3 November 2026
 Total value including VAT: £180,000.00
-Delivery location: Cumbria
+Delivery location: Blackpool
 CPV code(s):
-71000000 - Architectural, construction, engineering and inspection services
-Streetlighting Services - Maintenance & Capital programme
-Preliminary Market Engagement
+80340000 - Special education services
+85000000 - Health and social work services
+Building Surveying Services Framework
+Pipeline
+Contracting authority type: Central government
+Contracting authority name: The Crown Estate
+Procurement identifier: ocds-h6vhtk-077b76
+Tender or transparency notice publication date (estimated): 7 December 2026
+Total value including VAT: £100,800,000.00
+Delivery location: Not specified
+CPV code(s):
+71315300 - Building surveying services
+Statutory Servicing, Reactive and Remedial Works
+Active tender Suitable for SME
 Contracting authority type: Regional and local public authority
-Contracting authority name: Stoke on Trent City Council; Staffordshire County Council
-Procurement identifier: ocds-h6vhtk-07763c
-Engagement deadline date: 17 October 2026
-Delivery location: Staffordshire CC; Stoke-on-Trent
+Contracting authority name: Gloucestershire County Council
+Procurement identifier: ocds-h6vhtk-0694b4
+Submission deadline date: 21 October 2026
+Total value including VAT: £9,000,000.00
+Delivery location: Gloucestershire, Wiltshire and Bristol/Bath area
 CPV code(s):
-50230000 - Repair, maintenance and associated services related to roads and other equipment
+50750000 - Lift-maintenance services
+31216000 - Lightning arrestors
+42500000 - Cooling and ventilation equipment
+34928300 - Safety barriers
+44221200 - Doors
+and 19 more
 Next
  page
 :
-2 of 770
+2 of 774
 Support links
 Contact us
 Accessibility statement

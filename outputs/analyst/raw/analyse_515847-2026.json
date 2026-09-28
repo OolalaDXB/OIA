@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citations": [],
+    "reason": {
+      "en": "The extracted text of the opportunity does not specify which types of organisations may apply. There is no mention of eligibility criteria such as legal form, location, or sector.",
+      "fr": "Le texte extrait de l'opportunité ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité tels que la forme juridique, la localisation ou le secteur d'activité."
+    },
+    "nextAction": {
+      "en": "Check the full tender documents (RFP) on the provided link to identify the eligibility criteria.",
+      "fr": "Consulter les documents complets de l'appel d'offres (RFP) sur le lien fourni pour identifier les critères d'éligibilité."
+    }
+  }
+}

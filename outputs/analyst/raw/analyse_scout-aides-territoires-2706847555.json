@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citation": [],
+    "citations": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for the funding. It mentions support for 'citizens and businesses' but does not clarify if associations are eligible.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au financement. Il mentionne un soutien pour les 'citoyens et les entreprises' mais ne clarifie pas si les associations sont éligibles."
+      "en": "The extracted text does not specify which types of organisations may apply for the funding. It mentions supporting access to justice for citizens and businesses but does not clarify if associations like 'Les Vieilles Pierres' are eligible applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent déposer une candidature. Il mentionne le soutien à l'accès à la justice pour les citoyens et les entreprises, mais ne clarifie pas si les associations comme 'Les Vieilles Pierres' sont éligibles."
     },
     "nextAction": {
-      "en": "Check the full call for proposals or programme guidelines to confirm whether associations are eligible to apply.",
-      "fr": "Consulter l'appel à projets complet ou les lignes directrices du programme pour confirmer si les associations peuvent postuler."
+      "en": "Check the full call for proposals or programme guidelines to determine the eligible types of applicants.",
+      "fr": "Consulter l’appel à projets complet ou les lignes directrices du programme pour déterminer les types d’organisations éligibles."
     }
   }
 }

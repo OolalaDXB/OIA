@@ -1,14 +1,16 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citations": [],
+    "citations": [
+      "The extracted text does not specify eligibility criteria regarding who may apply for this tender."
+    ],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria regarding the legal form, location, or sector of applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, la localisation ou le secteur des candidats."
+      "en": "The document does not state which types of organisations are eligible to apply for this tender. There is no mention of restrictions or required qualifications for applicants.",
+      "fr": "Le document ne précise pas quels types d'organisations sont éligibles pour répondre à cet appel d'offres. Il n'y a aucune mention de restrictions ou de qualifications requises pour les candidats."
     },
     "nextAction": {
-      "en": "Contact BEW Berliner Energie und Wärme GmbH or consult the full tender documents to obtain the eligibility criteria.",
-      "fr": "Contacter BEW Berliner Energie und Wärme GmbH ou consulter les documents complets de l'appel d'offres pour obtenir les critères d'éligibilité."
+      "en": "Contact BEW Berliner Energie und Wärme GmbH or consult the full tender documents to confirm eligibility requirements.",
+      "fr": "Contacter BEW Berliner Energie und Wärme GmbH ou consulter les documents complets de l'appel d'offres pour confirmer les critères d'éligibilité."
     }
   }
 }

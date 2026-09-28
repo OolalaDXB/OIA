@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citations": [],
+    "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria such as legal form, location, or sector.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité tels que la forme juridique, la localisation ou le secteur d'activité."
+      "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of legal form, geographic restrictions, or other criteria that would confirm or exclude BAWABA.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles. Il n'y a aucune mention de la forme juridique, des restrictions géographiques ou d'autres critères qui confirmeraient ou excluraient BAWABA."
     },
     "nextAction": {
-      "en": "Check the full tender notice at the provided link to identify the eligibility criteria.",
-      "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni pour identifier les critères d'éligibilité."
+      "en": "Check the full tender notice at the provided link to find the section on eligibility criteria.",
+      "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni pour trouver la section sur les critères d'éligibilité."
     }
   }
 }

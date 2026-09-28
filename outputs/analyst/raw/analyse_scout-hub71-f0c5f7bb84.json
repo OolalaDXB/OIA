@@ -1,16 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "LIKELY",
-    "citation": [
-      "Hub71+ ClimateTech is a specialist ecosystem, where sustainability startups leverage technologies to drive decarbonization in supporting a net zero future."
-    ],
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "eligibility: Sustainability startups",
     "reason": {
-      "en": "The opportunity explicitly targets 'sustainability startups' focused on decarbonization and a net-zero future. BAWABA's dossier does not clarify whether its AI control plane for regulated industries directly contributes to climate technology or decarbonization efforts. The alignment with the scope is not confirmed by the provided document.",
-      "fr": "L'opportunité cible explicitement les 'startups de durabilité' axées sur la décarbonisation et un avenir net-zéro. Le dossier de BAWABA ne précise pas si sa plateforme de contrôle d'IA pour les industries réglementées contribue directement aux technologies climatiques ou aux efforts de décarbonisation. L'alignement avec le champ d'application n'est pas confirmé par le document fourni."
+      "en": "BAWABA's primary focus is on AI, data, digital, cybersecurity, and software for regulated industries, not specifically on sustainability or technologies driving decarbonization.",
+      "fr": "L'activité principale de BAWABA se concentre sur l'IA, les données, le numérique, la cybersécurité et les logiciels pour les industries réglementées, et non spécifiquement sur la durabilité ou les technologies favorisant la décarbonisation."
     },
     "nextAction": {
-      "en": "Contact Hub71+ ClimateTech to confirm whether BAWABA's AI control plane for regulated industries qualifies as a climate technology solution under their definition of decarbonization.",
-      "fr": "Contacter Hub71+ ClimateTech pour confirmer si la plateforme de contrôle d'IA de BAWABA pour les industries réglementées est considérée comme une solution technologique climatique selon leur définition de la décarbonisation."
+      "en": "Review other funding opportunities that explicitly target AI, data, or digital infrastructure startups.",
+      "fr": "Examiner d'autres opportunités de financement qui ciblent explicitement les startups en IA, données ou infrastructures numériques."
     }
   }
 }
