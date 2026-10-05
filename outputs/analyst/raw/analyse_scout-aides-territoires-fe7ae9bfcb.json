@@ -2,16 +2,15 @@
   "EligibilityVerdict": {
     "verdict": "ELIGIBLE",
     "citations": [
-      "Le Corps européen de solidarité permet aux jeunes de s’engager et aux organismes de mettre en place des initiatives en Europe sur des activités variées, dans les domaines humanitaires, de la santé, de l’environnement, de l’intergénérationnel…",
-      "Jeunes et organismes en Europe"
+      "Le Corps européen de solidarité permet aux jeunes de s’engager et aux organismes de mettre en place des initiatives en Europe sur des activités variées, dans les domaines humanitaires, de la santé, de l’environnement, de l’intergénérationnel…"
     ],
     "reason": {
-      "en": "The opportunity explicitly includes 'organismes en Europe' as eligible applicants, and the organisation operates in the EU and is an association in a relevant sector (heritage/culture).",
-      "fr": "L'opportunité inclut explicitement les 'organismes en Europe' comme candidats éligibles, et l'organisation opère dans l'UE et est une association dans un secteur pertinent (patrimoine/culture)."
+      "en": "The opportunity explicitly allows 'organismes' (organizations) to implement initiatives in Europe, and the organization operates in the EU. The sectors (heritage, culture) align with the broad scope of activities mentioned.",
+      "fr": "L'opportunité permet explicitement aux 'organismes' de mettre en place des initiatives en Europe, et l'organisation opère dans l'UE. Les secteurs (patrimoine, culture) correspondent au large champ d'activités mentionné."
     },
     "nextAction": {
-      "en": "Confirm the legal entity status of 'Les Vieilles Pierres' to ensure it can formally apply as an organisation.",
-      "fr": "Vérifier le statut d'entité légale de 'Les Vieilles Pierres' pour s'assurer qu'elle peut officiellement postuler en tant qu'organisation."
+      "en": "Confirm with the issuer whether the association 'Les Vieilles Pierres' can formally apply as an organization under this program.",
+      "fr": "Vérifier auprès de l'émetteur si l'association 'Les Vieilles Pierres' peut officiellement déposer une candidature en tant qu'organisme dans le cadre de ce programme."
     }
   }
 }

@@ -1,16 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citation": [
-      "EUROPE - Interreg France-Suisse est un programme de l’Union européenne cofinancé par le Fonds européen de développement régional (FEDER), la Confédération suisse et les cantons, pour soutenir la Coopération territoriale européenne (CTE) qui s’inscrit dans le cadre de la politique de cohésion européenne."
-    ],
+    "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply. It only describes the scope and funding sources of the programme.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il décrit uniquement le champ d'application et les sources de financement du programme."
+      "en": "The extracted text does not specify which types of organisations may apply for the Interreg France-Suisse programme. It only describes the scope and funding sources.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au programme Interreg France-Suisse. Il décrit uniquement le champ d'application et les sources de financement."
     },
     "nextAction": {
-      "en": "Check the full call for proposals or programme guidelines to determine eligible applicants.",
-      "fr": "Consulter l'appel à projets complet ou les directives du programme pour déterminer les candidats éligibles."
+      "en": "Check the official Interreg France-Suisse programme documents or website to confirm the eligibility criteria for applicants.",
+      "fr": "Consulter les documents officiels ou le site web du programme Interreg France-Suisse pour confirmer les critères d'éligibilité des candidats."
     }
   }
 }

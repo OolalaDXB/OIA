@@ -1,0 +1,16 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [
+      "scope: International Procurement Seminars (IPS) provide a unique opportunity for vendors to learn about the procurement processes of the UN system."
+    ],
+    "reason": {
+      "en": "The opportunity text does not specify which types of organisations or legal entities are eligible to apply. It only mentions 'vendors' without further clarification.",
+      "fr": "Le texte de l'opportunité ne précise pas quels types d'organisations ou d'entités légales sont éligibles. Il mentionne uniquement les 'fournisseurs' sans plus de détails."
+    },
+    "nextAction": {
+      "en": "Check the official tender documents or contact the United Nations procurement office to confirm if private companies like TheStudio MT are eligible to participate.",
+      "fr": "Consulter les documents officiels de l'appel d'offres ou contacter le bureau des achats des Nations Unies pour confirmer si des entreprises privées comme TheStudio MT sont éligibles."
+    }
+  }
+}

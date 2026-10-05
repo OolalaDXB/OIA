@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify who may apply for this tender. There is no mention of eligible applicants, such as companies, public entities, or specific sectors.",
-      "fr": "Le texte extrait ne précise pas qui peut postuler à cet appel d'offres. Il n'y a aucune mention des candidats éligibles, tels que les entreprises, les entités publiques ou les secteurs spécifiques."
+      "en": "The opportunity text does not specify who may apply for this tender. It only describes the buyer, the procedure, and the scope of the license renewal but does not mention eligible applicants or required qualifications.",
+      "fr": "Le texte de l'opportunité ne précise pas qui peut soumettre une candidature pour cet appel d'offres. Il décrit uniquement l'acheteur, la procédure et le périmètre du renouvellement des licences, mais ne mentionne pas les candidats éligibles ou les qualifications requises."
     },
     "nextAction": {
-      "en": "Contact the buyer (Stadt Aalen - Amt für IT und Digitalisierung) to clarify the eligibility criteria for applicants.",
-      "fr": "Contacter l'acheteur (Stadt Aalen - Amt für IT und Digitalisierung) pour clarifier les critères d'éligibilité des candidats."
+      "en": "Contact the buyer (Stadt Aalen - Amt für IT und Digitalisierung) at it@aalen.de to confirm whether BAWABA or its legal entities are eligible to apply for this tender.",
+      "fr": "Contacter l'acheteur (Stadt Aalen - Amt für IT und Digitalisierung) à l'adresse it@aalen.de pour confirmer si BAWABA ou ses entités légales peuvent soumettre une candidature pour cet appel d'offres."
     }
   }
 }

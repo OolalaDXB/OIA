@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NEEDS_INFO",
-    "citation": [],
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Supply services of personnel including temporary staff – Prestations de mise à disposition de personnel intérimaire pour le compte du Centre Départemental Enfance Familles (CDEF)",
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for this tender. It only describes the service required (supply of temporary staff) but does not state eligibility criteria for applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent répondre à cet appel d'offres. Il décrit uniquement le service requis (mise à disposition de personnel intérimaire) mais ne mentionne pas les critères d'éligibilité des candidats."
+      "en": "The opportunity explicitly requests the supply of temporary staffing services for a child and family services department. BAWABA's core activity is described as a 'Sovereign AI control plane for regulated industries,' which does not align with the provision of temporary personnel services.",
+      "fr": "L'opportunité demande explicitement la fourniture de services de personnel intérimaire pour un service départemental dédié à l'enfance et aux familles. L'activité principale de BAWABA, décrite comme un 'plan de contrôle d'IA souverain pour les industries réglementées,' ne correspond pas à la fourniture de services de personnel intérimaire."
     },
     "nextAction": {
-      "en": "Check the full tender documents on the provided link (https://ted.europa.eu/en/notice/524786-2026/xml) to confirm eligibility criteria for applicants.",
-      "fr": "Consulter les documents complets de l'appel d'offres sur le lien fourni (https://ted.europa.eu/en/notice/524786-2026/xml) pour vérifier les critères d'éligibilité des candidats."
+      "en": "Review other funding opportunities that align with BAWABA's core activities in AI, data, or cybersecurity.",
+      "fr": "Examiner d'autres opportunités de financement qui correspondent aux activités principales de BAWABA dans les domaines de l'IA, des données ou de la cybersécurité."
     }
   }
 }

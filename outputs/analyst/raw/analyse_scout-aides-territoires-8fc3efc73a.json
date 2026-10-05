@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NOT_ELIGIBLE",
-    "citation": "Entreprises et petites et moyennes entreprises dans l'Union européenne",
+    "verdict": "NEEDS_INFO",
+    "citation": [],
     "reason": {
-      "en": "The opportunity explicitly restricts eligibility to 'entreprises et petites et moyennes entreprises' (businesses and SMEs). 'Les Vieilles Pierres' is a heritage hiking association, which is not classified as a business or SME in the provided dossier.",
-      "fr": "L'opportunité restreint explicitement l'éligibilité aux 'entreprises et petites et moyennes entreprises'. 'Les Vieilles Pierres' est une association de randonnée patrimoniale, ce qui ne correspond pas à une entreprise ou une PME selon le dossier fourni."
+      "en": "The extracted text does not specify which types of organisations are eligible to apply. It only describes the programme's objectives without detailing applicant criteria.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il décrit uniquement les objectifs du programme sans détailler les critères des candidats."
     },
     "nextAction": {
-      "en": "Confirm the legal status of 'Les Vieilles Pierres' to ensure it is not registered as a business or SME. If not, explore other funding opportunities open to associations.",
-      "fr": "Vérifier le statut juridique de 'Les Vieilles Pierres' pour confirmer qu'elle n'est pas enregistrée en tant qu'entreprise ou PME. Si ce n'est pas le cas, rechercher d'autres opportunités de financement ouvertes aux associations."
+      "en": "Check the official COSME programme documentation or contact the issuer to confirm whether associations like 'Les Vieilles Pierres' are eligible to apply.",
+      "fr": "Consulter la documentation officielle du programme COSME ou contacter l'émetteur pour confirmer si des associations comme 'Les Vieilles Pierres' peuvent postuler."
     }
   }
 }

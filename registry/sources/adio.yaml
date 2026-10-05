@@ -10,7 +10,7 @@ geographies: ["AE", "GCC"]
 forProjects: ["bawaba", "myoolala"]
 url: "https://adio.ae"
 urlVerified: true
-lastUrlCheck: "2026-09-28"
+lastUrlCheck: "2026-10-05"
 status: DECLARED
 access:
   mode: MANUAL

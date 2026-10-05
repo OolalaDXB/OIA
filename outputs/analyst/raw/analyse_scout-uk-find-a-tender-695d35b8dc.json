@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Suitable for SME & VCSE",
+    "reason": {
+      "en": "The opportunity explicitly states it is suitable for SMEs and VCSEs (Voluntary, Community, and Social Enterprises). TheStudio MT is a commercial software and digital services contractor, not a VCSE, and its operations outside the UK (FR, EU, AE, GCC) may not align with the geographic focus implied by 'Mid Wales'.",
+      "fr": "L'opportunité indique explicitement qu'elle est adaptée aux PME et aux entreprises sociales, communautaires et bénévoles (VCSE). TheStudio MT est un prestataire commercial en logiciels et services numériques, et non une VCSE, et ses activités en dehors du Royaume-Uni (FR, UE, AE, CCG) peuvent ne pas correspondre à la zone géographique implicite du 'Mid Wales'."
+    },
+    "nextAction": {
+      "en": "Confirm whether TheStudio MT has a UK-based legal entity (e.g., a subsidiary or branch) that qualifies as an SME and operates in Mid Wales. If not, explore other funding opportunities aligned with its profile.",
+      "fr": "Vérifier si TheStudio MT dispose d'une entité juridique basée au Royaume-Uni (par exemple, une filiale ou une succursale) qualifiée comme PME et opérant dans le Mid Wales. Sinon, explorer d'autres opportunités de financement adaptées à son profil."
+    }
+  }
+}

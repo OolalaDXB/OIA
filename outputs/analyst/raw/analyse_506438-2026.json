@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify eligibility criteria for applicants. There is no mention of who may or may not apply, including legal structure, geographic restrictions, or other requirements.",
-      "fr": "Le texte extrait ne précise pas les critères d'éligibilité pour les candidats. Il n'est pas mentionné qui peut ou ne peut pas postuler, y compris la structure juridique, les restrictions géographiques ou d'autres exigences."
+      "en": "The extracted text does not specify eligibility criteria regarding who may apply for this tender. There is no mention of restrictions or requirements related to the type of organization, legal status, or geographic location of applicants.",
+      "fr": "Le texte extrait ne précise pas les critères d'éligibilité concernant les entités pouvant postuler à cet appel d'offres. Il n'y a aucune mention de restrictions ou d'exigences liées au type d'organisation, au statut juridique ou à la localisation géographique des candidats."
     },
     "nextAction": {
-      "en": "Request the full tender documents from SNCF or the publication link provided to identify eligibility criteria.",
-      "fr": "Demander les documents complets de l'appel d'offres à la SNCF ou via le lien de publication fourni pour identifier les critères d'éligibilité."
+      "en": "Consult the full notice on the TED website (link provided) to identify the eligibility criteria for applicants.",
+      "fr": "Consulter l'avis complet sur le site TED (lien fourni) pour identifier les critères d'éligibilité des candidats."
     }
   }
 }

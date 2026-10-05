@@ -161,7 +161,7 @@ STATUS
 	ACTION
 USD $840,000	iOS App | Education	
 Goran Duskic
-	iOS App	Education	$18,957	3.7x/1.5x	4 years	United Kingdom	Open	
+	iOS App	Education	$20,242	3.5x/1.5x	4 years	United Kingdom	Open	
 View
 
 USD $600,000	Ecommerce | Design and Style	
@@ -191,7 +191,7 @@ View
 
 USD $35,640	Evergreen Publishing Portfolio	
 Karl Leyco
-	Amazon KDP	Entertainment	$837	3.6x/3.5x	4 years	Ireland	Open	
+	Amazon KDP	Entertainment	$901	3.3x/3.2x	4 years	Ireland	Open	
 View
 
 USD $150,000	SaaS | Business	
@@ -455,182 +455,188 @@ Last 3 months
 Last 12 months
 Total Keyword Search Volume
 0
-1000
 200
 400
 600
 800
 Keyword
-827​827
-655​655
-579​579
-532​532
-509​509
-473​473
-462​462
-454​454
-408​408
-388​388
-342​342
-340​340
-331​331
-327​327
-323​323
-316​316
-311​311
-307​307
-239​239
-239​239
-229​229
-218​218
-211​211
-210​210
-196​196
+669​669
+497​497
+429​429
+355​355
+348​348
+306​306
+296​296
+295​295
+279​279
+275​275
+273​273
+256​256
+246​246
+245​245
+223​223
+206​206
+202​202
+190​190
 187​187
-180​180
-178​178
-178​178
-175​175
-172​172
-166​166
-162​162
-156​156
-152​152
-147​147
-139​139
-139​139
-137​137
-136​136
-135​135
-127​127
-124​124
+179​179
+177​177
+159​159
+146​146
+144​144
+142​142
+141​141
+131​131
+130​130
+126​126
+122​122
 118​118
-112​112
-108​108
-108​108
+116​116
+114​114
+110​110
 107​107
-105​105
+104​104
+103​103
+102​102
 100​100
-99​99
-99​99
-98​98
-96​96
+97​97
+97​97
+95​95
 93​93
 93​93
+91​91
 90​90
-89​89
-89​89
+88​88
 87​87
-87​87
-85​85
-84​84
-78​78
-78​78
-76​76
-75​75
-75​75
-72​72
-72​72
+83​83
+81​81
+81​81
+79​79
+77​77
+74​74
+71​71
+70​70
+69​69
+69​69
+68​68
+67​67
+65​65
+64​64
+63​63
+63​63
+61​61
+60​60
+60​60
+60​60
+60​60
+58​58
+57​57
+57​57
+56​56
+55​55
+55​55
+55​55
+54​54
 Youtube
-Saas
-Shopify
-Ai
 Adsense
+Saas
 Blog
-Website
-App
+Ai
+Shopify
+Kdp
 Travel
+Facebook
 Instagram
-Youtube Channel
-Amazon
-Apk
+Ecommerce
+App
 Game
 Tiktok
-Kdp
-Menu
-Facebook
-Pet
-Sport
-Ecommerce
-Education
-Affiliate
-Fashion
-Calculator
-Newsletter
-Health
-Book
-Playwright
 Tool
-Music
-Food
+Website
+Pet
+Amazon
+Playwright
+Education
+Calculator
+Sport
 Finance
-Supplement
-Etsy
-E Commerce
-Seo
-Home
-Gaming
-Ebay
-Trading
-News
-Amazon Kdp
-Automotive
-Fitness
-Content
-Recipe
-Dog
-Wordpress
-Golf
-Real Estate
-Amazon Fba
-School Saas
+Health
+Youtube Channel
+Menu
+Fashion
+Apk
+Music
 Jewelry
-Schoolcues
-Garden
-Google
-Digital
-Crypto
-Apparel
-Australia
-Marketing
-Tiktok Account
+Supplement
+E Commerce
+Affiliate
+Automated
+In
+Automotive
 Nan
+Book
+Vpn
+Amazon Kdp
+Gaming
+Food
+Golf
+Ebay
+Etsy
+Facebook+Page
+Crypto
+Woocommerce
+Seo
+Mediavine
+You
+Marketplace
+Wordpress
+Google
+Peptide
+Dog
+Newsletter
+Fba
+Marketing
+Trading
+Ca
+Garden
+Ad
+Twitter
+Fa
+Home
+B2b
+News
 Digital Product
-Pinterest
+Directory
+Digital
 Car
-Lead Generation
-Agency
-Beauty
+Football
 Mobile App
 Casino
-Facebook Page
-Directory
-Undefined
-Ad
-Mediavine
-Twitter
-Fba
-Football
-Wellness
-Io App
-Canada
-B2b
-Speisekartemenus.De
-Tool Website
-Generator
-Digital Marketing
-Marketplace
-Vpn
-Print On Demand
-Peptide
-Uk
-Facebook Group
-Agent
-Converter
-Electronics
+Agency
+Recipe
+Tra
+Apparel
+Content
 Kid
-In
-Security
+Uk
+Lead Generation
+Coffee
+Beauty
+Face
+Ai Tool
+Web
+Event
+Tik
+Amazon Fba
+Re
+Me
+Print+On+Demand
+Dating
+Ga
+Real Estate
+Android Apps
+Canada
+Crm
 Share
 Download
 

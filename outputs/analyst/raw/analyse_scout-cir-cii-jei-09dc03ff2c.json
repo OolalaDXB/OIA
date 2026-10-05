@@ -1,14 +1,17 @@
 {
   "EligibilityVerdict": {
     "verdict": "ELIGIBLE",
-    "citation": "Entreprises engageant des activités de recherche et développement (R&D)",
+    "organisation": "BAWABA",
+    "citations": [
+      "Le crédit d'impôt recherche (CIR) a pour but d'encourager les entreprises à engager des activités de recherche et développement (R&D)."
+    ],
     "reason": {
-      "en": "BAWABA is an enterprise engaging in research and development (R&D) activities, as indicated by its focus on AI, data, and software sectors, which typically involve R&D.",
-      "fr": "BAWABA est une entreprise qui engage des activités de recherche et développement (R&D), comme l'indique son focus sur les secteurs de l'IA, des données et des logiciels, qui impliquent généralement de la R&D."
+      "en": "The opportunity explicitly targets 'entreprises' (companies) engaged in research and development (R&D) activities. BAWABA operates in sectors like AI, software, and cybersecurity, which typically involve R&D, and it is an enterprise.",
+      "fr": "L'opportunité cible explicitement les 'entreprises' engagées dans des activités de recherche et développement (R&D). BAWABA opère dans des secteurs comme l'IA, les logiciels et la cybersécurité, qui impliquent généralement de la R&D, et il s'agit d'une entreprise."
     },
     "nextAction": {
-      "en": "Confirm with BAWABA that their specific activities qualify as R&D under the French tax administration's definition for the CIR.",
-      "fr": "Confirmer avec BAWABA que leurs activités spécifiques qualifient comme R&D selon la définition de l'administration fiscale française pour le CIR."
+      "en": "Confirm with BAWABA’s legal team which of their French legal entities will submit the CIR claim.",
+      "fr": "Confirmer avec l’équipe juridique de BAWABA quelle entité légale française déposera la demande de CIR."
     }
   }
 }

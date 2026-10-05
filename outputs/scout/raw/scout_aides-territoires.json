@@ -1,525 +1,525 @@
 {
   "ScoutResult": {
     "calls": [
-      {
+       {
         "name": "4ème Programme d’investissements d’avenir - PIA 4",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/4eme-programme-dinvestissements-davenir-pia-4/",
         "amount": "20 milliards d’euros",
         "deadline": "",
         "eligibility": "",
-        "quote": "20 milliards d’euros pour l’innovation dont plus de la moitié mobilisée pour la relance économique"
+        "quote": "20 milliards d’euros pour l’innovation dont plus de la moitié mobilisée pour la relance économique",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/4eme-programme-dinvestissements-davenir-pia-4/"
       },
       {
         "name": "ACTEE - Action des Collectivités Territoriales pour l’Efficacité Energétique",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/actee-action-des-collectivites-territoriales-pour/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "ACTEE – Action des Collectivités Territoriales pour l’Efficacité Energétique"
+        "quote": "ACTEE – Action des Collectivités Territoriales pour l’Efficacité Energétique",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/actee-action-des-collectivites-territoriales-pour/"
       },
       {
         "name": "Action cœur de ville",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/action-cur-de-ville/",
         "amount": "",
         "deadline": "",
-        "eligibility": "Collectivités locales, acteurs du logement, du commerce et de l'urbanisme",
-        "quote": "Ce programme vise à faciliter et à soutenir le travail des collectivités locales, à inciter les acteurs du logement, du commerce et de l'urbanisme à réinvestir les centres-villes, à favoriser le maintien ou l'implantation d'activités en cœur de ville"
+        "eligibility": "",
+        "quote": "Ce programme vise à faciliter et à soutenir le travail des collectivités locales, à inciter les acteurs du logement, du commerce et de l'urbanisme à réinvestir les centres-villes, à favoriser le maintien ou l'implantation d'activités en cœur de ville",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/action-cur-de-ville/"
       },
       {
         "name": "Actions pour la Relance (complémentaires à France Relance)",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/actions-pour-la-relance-hors-france-relance/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Actions pour la relance - hors France Relance"
+        "quote": "Actions pour la relance - hors France Relance",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/actions-pour-la-relance-hors-france-relance/"
       },
       {
         "name": "EUROPE - AGRIP - Promotion des produits agricoles",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/agrip-promotion-des-produits-agricoles/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Le programme de promotion des produits agricoles (AGRIP) joue un rôle essentiel dans la concrétisation des objectifs politiques de la Commission européenne pour la période 2019-2024, en soutenant le Green Deal européen, la stratégie « Farm to Fork » et le plan européen de lutte contre le cancer."
+        "quote": "Le programme de promotion des produits agricoles (AGRIP) joue un rôle essentiel dans la concrétisation des objectifs politiques de la Commission européenne pour la période 2019-2024, en soutenant le Green Deal européen, la stratégie « Farm to Fork » et le plan européen de lutte contre le cancer.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/agrip-promotion-des-produits-agricoles/"
       },
       {
         "name": "EUROPE - Biodiversa +",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/biodiversa/",
         "amount": "",
         "deadline": "",
-        "eligibility": "74 programmeurs et bailleurs de fonds de recherche et acteurs de la politique environnementale de 37 pays différents",
-        "quote": "Biodiversa + est le Partenariat européen sur la biodiversité. Dans la continuité de Biodiversa, il a été développé conjointement avec la Commission européenne et regroupe 74 programmeurs et bailleurs de fonds de recherche et acteurs de la politique environnementale de 37 pays différents."
+        "eligibility": "",
+        "quote": "Biodiversa + est le Partenariat européen sur la biodiversité. Dans la continuité de Biodiversa, il a été développé conjointement avec la Commission européenne et regroupe 74 programmeurs et bailleurs de fonds de recherche et acteurs de la politique environnementale de 37 pays différents.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/biodiversa/"
       },
       {
         "name": "Cités éducatives",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/cites-educatives/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Les Cités éducatives consistent en une meilleure coordination des dispositifs afin de parvenir à des \"Territoires à haute qualité éducative\"."
+        "quote": "Les Cités éducatives consistent en une meilleure coordination des dispositifs afin de parvenir à des \"Territoires à haute qualité éducative\".",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/cites-educatives/"
       },
       {
         "name": "EUROPE - CERV - Citoyenneté, Egalité, Droits et Valeurs",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/citoyennete-egalite-droits-et-valeurs/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Le programme CERV vise à soutenir et à développer des sociétés ouvertes, démocratiques, égalitaires, inclusives et fondées sur les droits et l’état de droit."
+        "quote": "Le programme CERV vise à soutenir et à développer des sociétés ouvertes, démocratiques, égalitaires, inclusives et fondées sur les droits et l’état de droit.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/citoyennete-egalite-droits-et-valeurs/"
       },
       {
         "name": "EUROPE - CES - Corps européen de solidarité",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/corps-europeen-de-solidarite/",
         "amount": "",
         "deadline": "",
-        "eligibility": "Jeunes et organismes en Europe",
-        "quote": "Le Corps européen de solidarité permet aux jeunes de s’engager et aux organismes de mettre en place des initiatives en Europe sur des activités variées, dans les domaines humanitaires, de la santé, de l’environnement, de l’intergénérationnel…"
+        "eligibility": "",
+        "quote": "Le Corps européen de solidarité permet aux jeunes de s’engager et aux organismes de mettre en place des initiatives en Europe sur des activités variées, dans les domaines humanitaires, de la santé, de l’environnement, de l’intergénérationnel…",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/corps-europeen-de-solidarite/"
       },
       {
         "name": "EUROPE - COSME - Programme européen pour la compétitivité des entreprises",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/cosme-fonds-europeens/",
         "amount": "",
         "deadline": "",
-        "eligibility": "Entreprises et petites et moyennes entreprises dans l'Union européenne",
-        "quote": "Le programme pour la compétitivité des entreprises et des petites et moyennes entreprises (2014-2020), vise à promouvoir la croissance et à renforcer la compétitivité et la durabilité des entreprises dans l'Union européenne."
+        "eligibility": "",
+        "quote": "Le programme pour la compétitivité des entreprises et des petites et moyennes entreprises (2014-2020), vise à promouvoir la croissance et à renforcer la compétitivité et la durabilité des entreprises dans l'Union européenne.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/cosme-fonds-europeens/"
       },
       {
         "name": "Destination France",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/destination-france/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Le plan Destination France vise à renforcer le secteur et garantir la place de notre pays en tête du tourisme mondial."
+        "quote": "Le plan Destination France vise à renforcer le secteur et garantir la place de notre pays en tête du tourisme mondial.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/destination-france/"
       },
       {
         "name": "EUROPE - EaSI - Programme européen pour l'emploi et l'innovation sociale",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/easi-programme-europeen-pour-lemploi-et-linnovatio/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Le programme pour l'emploi et l'innovation sociale (EaSI) est un instrument de financement européen visant à promouvoir un niveau élevé d'emplois durables et de qualité, à garantir une protection sociale correcte et adéquate, à lutter contre la pauvreté et l'exclusion sociale."
+        "quote": "Le programme pour l'emploi et l'innovation sociale (EaSI) est un instrument de financement européen visant à promouvoir un niveau élevé d'emplois durables et de qualité, à garantir une protection sociale correcte et adéquate, à lutter contre la pauvreté et l'exclusion sociale.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/easi-programme-europeen-pour-lemploi-et-linnovatio/"
       },
       {
         "name": "ÉcoQuartier",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/ecoquartier/",
         "amount": "",
         "deadline": "",
-        "eligibility": "Porteurs de projets",
-        "quote": "La démarche ÉcoQuartier été lancée en 2009 en application de la loi Grenelle 2 dans le cadre du plan Ville durable. Elle vise à favoriser l'émergence d'une nouvelle façon de concevoir, de construire et de gérer la ville durablement, en outillant, sensibilisant et valorisant les porteurs de projets."
+        "eligibility": "",
+        "quote": "La démarche ÉcoQuartier été lancée en 2009 en application de la loi Grenelle 2 dans le cadre du plan Ville durable. Elle vise à favoriser l'émergence d'une nouvelle façon de concevoir, de construire et de gérer la ville durablement, en outillant, sensibilisant et valorisant les porteurs de projets.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/ecoquartier/"
       },
       {
         "name": "EduRénov",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/edurenov/",
         "amount": "",
         "deadline": "",
-        "eligibility": "Écoles, collèges, lycées, et autres structures éducatives en France",
-        "quote": "Le programme EduRénov, lancé en 2023 par la Banque des Territoires, vise à accélérer la rénovation énergétique des bâtiments scolaires en France. Il s’inscrit dans la stratégie nationale de transition écologique et cible les écoles, collèges, lycées, ainsi que d’autres structures éducatives."
+        "eligibility": "",
+        "quote": "Le programme EduRénov, lancé en 2023 par la Banque des Territoires, vise à accélérer la rénovation énergétique des bâtiments scolaires en France. Il s’inscrit dans la stratégie nationale de transition écologique et cible les écoles, collèges, lycées, ainsi que d’autres structures éducatives.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/edurenov/"
       },
       {
         "name": "EUROPE - EIT Food",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/eit-food/",
         "amount": "",
         "deadline": "",
-        "eligibility": "Innovateurs, entrepreneurs et étudiants",
-        "quote": "EIT Food est un partenariat paneuropéen, axé sur le consommateur, qui permet aux innovateurs, aux entrepreneurs et aux étudiants de développer des solutions de classe mondiale aux défis de société, d'accélérer l'innovation, de créer des emplois et d'accroître la compétitivité de l'Europe."
+        "eligibility": "",
+        "quote": "EIT Food est un partenariat paneuropéen, axé sur le consommateur, qui permet aux innovateurs, aux entrepreneurs et aux étudiants de développer des solutions de classe mondiale aux défis de société, d'accélérer l'innovation, de créer des emplois et d'accroître la compétitivité de l'Europe.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/eit-food/"
       },
       {
         "name": "EUROPE - EIT Manufacturing",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/eit-manufacturing/",
         "amount": "",
         "deadline": "",
-        "eligibility": "Acteurs de l'industrie",
-        "quote": "EIT Manufacturing a pour objectif de faire de l'Europe le leader de l'innovation industrielle internationale, grâce à son large écosystème d'acteurs de l'industrie."
+        "eligibility": "",
+        "quote": "EIT Manufacturing a pour objectif de faire de l'Europe le leader de l'innovation industrielle internationale, grâce à son large écosystème d'acteurs de l'industrie.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/eit-manufacturing/"
       },
       {
         "name": "EUROPE - Erasmus +",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/erasmus/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Erasmus+ est le programme de l'UE en faveur de l'éducation, de la formation, de la jeunesse et du sport en Europe."
+        "quote": "Erasmus+ est le programme de l'UE en faveur de l'éducation, de la formation, de la jeunesse et du sport en Europe.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/erasmus/"
       },
       {
         "name": "EUROPE - EUCF - EU City Facility",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/eu-city-facility/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "EU City Facility est une initiative européenne visant à soutenir les investissements dans les énergies durables."
+        "quote": "EU City Facility est une initiative européenne visant à soutenir les investissements dans les énergies durables.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/eu-city-facility/"
       },
       {
         "name": "EUROPE - EPSON - European Observation Network for Territorial Development and Cohesion",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/european-observation-network-for-territorial-development-and-cohesion-epson/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "ESPON, European Observation Network for Territorial Development and Cohesion, est un programme de recherche sur le développement territorial européen."
+        "quote": "ESPON, European Observation Network for Territorial Development and Cohesion, est un programme de recherche sur le développement territorial européen.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/european-observation-network-for-territorial-development-and-cohesion-epson/"
       },
       {
         "name": "EUROPE - Europe Créative",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/europe-creative/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Europe Créative est le programme de l'Union Européenne qui soutient les secteurs de la culture et de la création."
+        "quote": "Europe Créative est le programme de l'Union Européenne qui soutient les secteurs de la culture et de la création.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/europe-creative/"
       },
       {
         "name": "EUROPE - Digital Europe - Europe Numérique",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/europe-numerique/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Le nouveau programme pour une Europe numérique (Digital Europe programme) ouvre la voie à la transformation numérique de la société et de l’économie européennes et y apporte un soutien, pour le bénéfice des citoyens et des entreprises. Il vise également à accélérer la reprise."
+        "quote": "Le nouveau programme pour une Europe numérique (Digital Europe programme) ouvre la voie à la transformation numérique de la société et de l’économie européennes et y apporte un soutien, pour le bénéfice des citoyens et des entreprises. Il vise également à accélérer la reprise.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/europe-numerique/"
       },
       {
         "name": "EUROPE - FEADER - Fonds européen agricole pour le développement rural",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/feader/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Leader (pour Liaison entre actions de développement de l'économie rurale) est une initiative de l'Union européenne pour soutenir des projets de développement rural lancés au niveau local afin de revitaliser les zones rurales et de créer des emplois."
+        "quote": "Leader (pour Liaison entre actions de développement de l'économie rurale) est une initiative de l'Union européenne pour soutenir des projets de développement rural lancés au niveau local afin de revitaliser les zones rurales et de créer des emplois.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/feader/"
       },
       {
         "name": "EUROPE - FEAMPA - Fonds européen pour les affaires maritimes, la pêche et l'aquaculture",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/feamp-fonds-europeen-pour-les-affaires-maritimes-e/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Le Fonds européen pour les affaires maritimes et l'aquaculture, qui finance la politique de la pêche et des affaires maritimes."
+        "quote": "Le Fonds européen pour les affaires maritimes et l'aquaculture, qui finance la politique de la pêche et des affaires maritimes.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/feamp-fonds-europeen-pour-les-affaires-maritimes-e/"
       },
       {
         "name": "EUROPE - FEDER - Fonds européen de développement régional",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/feder-fonds-europeens-de-developpement-regional/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Le Fonds européen de développement régional (FEDER), aussi appelés fonds structurels, financent la politique de cohésion économique, sociale et territoriale."
+        "quote": "Le Fonds européen de développement régional (FEDER), aussi appelés fonds structurels, financent la politique de cohésion économique, sociale et territoriale.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/feder-fonds-europeens-de-developpement-regional/"
       },
       {
         "name": "EUROPE - AMIF - Fonds Asile, Migration et Intégration",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-asile-migration-et-integration/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Le Fonds Asile, migrations et intégration vise à contribuer à une gestion efficace des flux migratoires intégrée au niveau de l’Union européenne."
+        "quote": "Le Fonds Asile, migrations et intégration vise à contribuer à une gestion efficace des flux migratoires intégrée au niveau de l’Union européenne.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-asile-migration-et-integration/"
       },
       {
         "name": "Fonds Biodiversité",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-biodiversite/",
         "amount": "",
         "deadline": "",
-        "eligibility": "Territoires",
-        "quote": "Le fonds biodiversité a vocation à mobiliser les territoires pour contribuer à nos objectifs de biodiversité"
+        "eligibility": "",
+        "quote": "Le fonds biodiversité a vocation à mobiliser les territoires pour contribuer à nos objectifs de biodiversité",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-biodiversite/"
       },
       {
         "name": "EUROPE - FED - Fonds Européen de Défense",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-europeen-de-defense/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Le Fonds européen de défense (FED, ou FEDef) est un programme de l’Union européenne destiné à financer la recherche et le développement de programmes industriels dans le domaine de la défense."
+        "quote": "Le Fonds européen de défense (FED, ou FEDef) est un programme de l’Union européenne destiné à financer la recherche et le développement de programmes industriels dans le domaine de la défense.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-europeen-de-defense/"
       },
       {
         "name": "EUROPE - FSI - Fonds pour la Sécurité Intérieure",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-pour-la-securite-interieure/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Le FSI a pour objectif général de contribuer à assurer un niveau élevé de sécurité dans l’Union."
+        "quote": "Le FSI a pour objectif général de contribuer à assurer un niveau élevé de sécurité dans l’Union.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-pour-la-securite-interieure/"
       },
       {
         "name": "EUROPE - InnovFund - Fonds pour l'innovation 2020-2030",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-pour-linnovation-2020-2030/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Le Fonds d’innovation (InnovFund) est le programme-cadre 2020-2030 de l’UE pour la démonstration de technologies innovantes à faible émission carbone."
+        "quote": "Le Fonds d’innovation (InnovFund) est le programme-cadre 2020-2030 de l’UE pour la démonstration de technologies innovantes à faible émission carbone.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-pour-linnovation-2020-2030/"
       },
       {
         "name": "EUROPE - FTJ - Fonds pour une transition juste",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-pour-une-transition-juste-ftj/",
         "amount": "",
         "deadline": "",
-        "eligibility": "Territoires concernés par de fortes émissions de CO2",
-        "quote": "Le FTJ a été créé pour accompagner la transition énergétique et industrielle des territoires concernés par de fortes émissions de CO2 dans la transition vers une économie neutre en carbone, conformément aux objectifs de l’Union européenne dans le cadre de l’accord de Paris."
+        "eligibility": "",
+        "quote": "Le FTJ a été créé pour accompagner la transition énergétique et industrielle des territoires concernés par de fortes émissions de CO2 dans la transition vers une économie neutre en carbone, conformément aux objectifs de l’Union européenne dans le cadre de l’accord de Paris.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-pour-une-transition-juste-ftj/"
       },
       {
         "name": "Fonds vert - Édition 2026",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-vert/",
         "amount": "200 millions d'euros",
         "deadline": "",
         "eligibility": "",
-        "quote": "Doté d'une enveloppe de 200 millions d'euros d'aides financières, le fonds vert a pour but d'accélérer la transition écologique dans les territoires."
+        "quote": "Doté d'une enveloppe de 200 millions d'euros d'aides financières, le fonds vert a pour but d'accélérer la transition écologique dans les territoires.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-vert/"
       },
       {
         "name": "Fonds vert Ingénierie",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-vert-ingenierie/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Toutes les offres en ingénierie pour réaliser vos projets de transition écologique"
+        "quote": "Toutes les offres en ingénierie pour réaliser vos projets de transition écologique",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/fonds-vert-ingenierie/"
       },
       {
         "name": "France 2030",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/france-2030/",
         "amount": "30 milliards d’euros",
         "deadline": "",
         "eligibility": "",
-        "quote": "Le plan « France 2030 », doté de 30 milliards d’euros déployés sur 5 ans, vise à développer la compétitivité industrielle et les technologies d’avenir."
+        "quote": "Le plan « France 2030 », doté de 30 milliards d’euros déployés sur 5 ans, vise à développer la compétitivité industrielle et les technologies d’avenir.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/france-2030/"
       },
       {
         "name": "France Mobilités",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/france-mobilites/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Améliorer durablement les mobilités du quotidien pour tous et dans tous les territoires"
+        "quote": "Améliorer durablement les mobilités du quotidien pour tous et dans tous les territoires",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/france-mobilites/"
       },
       {
         "name": "France Relance",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/france-relance/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "France Relance"
+        "quote": "France Relance",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/france-relance/"
       },
       {
         "name": "France Ruralités",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/france-ruralites/",
         "amount": "",
         "deadline": "",
-        "eligibility": "Territoires ruraux",
-        "quote": "Né en 2023, le Plan France Ruralités vise à soutenir les territoires ruraux"
+        "eligibility": "",
+        "quote": "Né en 2023, le Plan France Ruralités vise à soutenir les territoires ruraux",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/france-ruralites/"
       },
       {
         "name": "EUROPE - FSE + - Fonds social européen",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/fse-fonds-social-europeen/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Le Fonds social européen, aussi appelés fonds structurels, financent la politique de cohésion économique, sociale et territoriale."
+        "quote": "Le Fonds social européen, aussi appelés fonds structurels, financent la politique de cohésion économique, sociale et territoriale.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/fse-fonds-social-europeen/"
       },
       {
         "name": "EUROPE - Horizon Europe",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/horizon-europe/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Horizon Europe est le programme-cadre de l'Union européenne pour la recherche et l'innovation pour la période allant de 2021 à 2027. Horizon Europe prend ainsi la suite du programme Horizon 2020."
+        "quote": "Horizon Europe est le programme-cadre de l'Union européenne pour la recherche et l'innovation pour la période allant de 2021 à 2027. Horizon Europe prend ainsi la suite du programme Horizon 2020.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/horizon-europe/"
       },
       {
         "name": "EUROPE - IVCDCI - Instrument de Voisinage, de Coopération au Développement et de Coopération Internationale",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/instrument-de-voisinage-de-cooperation-au-developp/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "L’instrument de voisinage, de développement et de coopération internationale (NDICI) – « Global Europe » pour la période 2021-2027 est le principal instrument de l’UE pour les partenariats internationaux sur le développement durable, le changement climatique, la démocratie et la gouvernance."
+        "quote": "L’instrument de voisinage, de développement et de coopération internationale (NDICI) – « Global Europe » pour la période 2021-2027 est le principal instrument de l’UE pour les partenariats internationaux sur le développement durable, le changement climatique, la démocratie et la gouvernance.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/instrument-de-voisinage-de-cooperation-au-developp/"
       },
       {
         "name": "EUROPE - Interreg - Fonds européens",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/interreg/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Interreg est un programme européen visant à promouvoir la coopération entre les régions européennes."
+        "quote": "Interreg est un programme européen visant à promouvoir la coopération entre les régions européennes.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/interreg/"
       },
       {
         "name": "EUROPE - Interreg Europe",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/interreg-europe/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Interreg Europe est un programme de coopération internationale"
+        "quote": "Interreg Europe est un programme de coopération internationale",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/interreg-europe/"
       },
       {
         "name": "EUROPE - Interreg France-Suisse",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/interreg-france-suisse/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Interreg France-Suisse est un programme de l’Union européenne cofinancé par le Fonds européen de développement régional (FEDER), la Confédération suisse et les cantons, pour soutenir la Coopération territoriale européenne (CTE) qui s’inscrit dans le cadre de la politique de cohésion européenne."
+        "quote": "Interreg France-Suisse est un programme de l’Union européenne cofinancé par le Fonds européen de développement régional (FEDER), la Confédération suisse et les cantons, pour soutenir la Coopération territoriale européenne (CTE) qui s’inscrit dans le cadre de la politique de cohésion européenne.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/interreg-france-suisse/"
       },
       {
         "name": "EUROPE - InvestEU",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/investeu/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Promotion de la reprise, d'une croissance verte, des emplois de qualité et du bien-être dans toute l’Europe"
+        "quote": "Promotion de la reprise, d'une croissance verte, des emplois de qualité et du bien-être dans toute l’Europe",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/investeu/"
       },
       {
         "name": "EUROPE - LEADER - Liaison entre Actions de Développement de l’Économie Rurale",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/leader/",
         "amount": "",
         "deadline": "",
-        "eligibility": "Projets publics ou privés en zones rurales",
-        "quote": "LEADER est un programme d'initiative communautaire pour cofinancer des projets publics ou privés qui favorisent le développement des zones rurales."
+        "eligibility": "",
+        "quote": "LEADER est un programme d'initiative communautaire pour cofinancer des projets publics ou privés qui favorisent le développement des zones rurales.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/leader/"
       },
       {
         "name": "EUROPE - LIFE - Programme européen pour l'environnement et le climat",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/life/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Le programme LIFE est l'instrument financier de la Commission européenne de soutien aux projets dans les domaines de l'environnement et du climat."
+        "quote": "Le programme LIFE est l'instrument financier de la Commission européenne de soutien aux projets dans les domaines de l'environnement et du climat.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/life/"
       },
       {
         "name": "EUROPE - Lignes de prérogatives sociales et de compétences spécifiques - 2021-2027",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/lignes-de-prerogatives-sociales-et-de-competences/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Lignes de prérogatives sociales et de compétences spécifiques - 2021-2027"
+        "quote": "Lignes de prérogatives sociales et de compétences spécifiques - 2021-2027",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/lignes-de-prerogatives-sociales-et-de-competences/"
       },
       {
         "name": "EUROPE - EU4Health - L'UE pour la santé",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/lue-pour-la-sante/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Le programme «L’UE pour la santé» (EU4Health) a été adopté en réaction à la pandémie de COVID-19 et afin de renforcer la préparation aux crises dans l’UE. La pandémie a mis en évidence la fragilité des systèmes de santé nationaux."
+        "quote": "Le programme «L’UE pour la santé» (EU4Health) a été adopté en réaction à la pandémie de COVID-19 et afin de renforcer la préparation aux crises dans l’UE. La pandémie a mis en évidence la fragilité des systèmes de santé nationaux.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/lue-pour-la-sante/"
       },
       {
         "name": "EUROPE - Mécanisme de protection civile",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/mecanisme-de-protection-civile/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Le mécanisme européen de protection civile a pour objectif de renforcer la coopération en matière de protection civile."
+        "quote": "Le mécanisme européen de protection civile a pour objectif de renforcer la coopération en matière de protection civile.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/mecanisme-de-protection-civile/"
       },
       {
         "name": "EUROPE - MIE - Mécanisme pour l'interconnexion en Europe",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/mecanisme-pour-linterconnexion-en-europe/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Le mécanisme pour l’interconnexion en Europe (MIE) est le principal instrument de financement de l’Union pour promouvoir la croissance, l’emploi et la compétitivité grâce à des investissements ciblés dans les infrastructures au niveau européen"
+        "quote": "Le mécanisme pour l’interconnexion en Europe (MIE) est le principal instrument de financement de l’Union pour promouvoir la croissance, l’emploi et la compétitivité grâce à des investissements ciblés dans les infrastructures au niveau européen",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/mecanisme-pour-linterconnexion-en-europe/"
       },
       {
         "name": "Mission Société Numérique",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/mission-societe-numerique/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Mission Société Numérique"
+        "quote": "Mission Société Numérique",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/mission-societe-numerique/"
       },
       {
         "name": "Nouveaux lieux, nouveaux liens",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/nouveaux-lieux-nouveaux-liens/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "ANCT"
+        "quote": "ANCT",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/nouveaux-lieux-nouveaux-liens/"
       },
       {
         "name": "EUROPE - PERICLES IV",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/pericles-iv/",
         "amount": "",
         "deadline": "",
-        "eligibility": "Services répressifs et judiciaires, banques et autres acteurs de la lutte contre le faux monnayage de l’euro",
-        "quote": "Le programme Pericles IV finance des échanges de personnel, des séminaires, des formations et des études à l’intention des services répressifs et judiciaires, des banques et des autres acteurs de la lutte contre le faux monnayage de l’euro."
+        "eligibility": "",
+        "quote": "Le programme Pericles IV finance des échanges de personnel, des séminaires, des formations et des études à l’intention des services répressifs et judiciaires, des banques et des autres acteurs de la lutte contre le faux monnayage de l’euro.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/pericles-iv/"
       },
       {
         "name": "Petites villes de demain",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/petites-villes-de-demain/",
         "amount": "",
         "deadline": "",
-        "eligibility": "Communes de moins de 20 000 habitants exerçant des fonctions de centralité et présentant des signes de fragilité",
-        "quote": "Le programme PVD est destiné aux communes de moins de 20 000 habitants exerçant des fonctions de centralité et présentant des signes de fragilité."
+        "eligibility": "",
+        "quote": "Le programme PVD est destiné aux communes de moins de 20 000 habitants exerçant des fonctions de centralité et présentant des signes de fragilité.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/petites-villes-de-demain/"
       },
       {
         "name": "Plan France Très Haut Débit",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/plan-france-tres-haut-debit/",
         "amount": "",
-        "deadline": "fin 2020 (bon haut débit), fin 2022 (très haut débit)",
+        "deadline": "",
         "eligibility": "",
-        "quote": "Le programme France Très Haut Débit vise à donner accès à tous les Français au bon haut débit fixe (minimum 8 Mbit/s) d’ici à fin 2020, et au très haut débit fixe (minimum 30 Mbit/s) d’ici à fin 2022."
+        "quote": "Le programme France Très Haut Débit vise à donner accès à tous les Français au bon haut débit fixe (minimum 8 Mbit/s) d’ici à fin 2020, et au très haut débit fixe (minimum 30 Mbit/s) d’ici à fin 2022.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/plan-france-tres-haut-debit/"
       },
       {
         "name": "EUROPE - EUAF - Programme Anti-Fraude 2021-2027",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/programme-anti-fraude-2021-2027/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Le programme antifraude de l’UE vise à protéger les intérêts financiers de l’UE en fournissant un financement, sous forme de subventions et de marchés publics, pour des équipements d’investigation techniques et opérationnels, des formations spécialisées et des activités de recherche."
+        "quote": "Le programme antifraude de l’UE vise à protéger les intérêts financiers de l’UE en fournissant un financement, sous forme de subventions et de marchés publics, pour des équipements d’investigation techniques et opérationnels, des formations spécialisées et des activités de recherche.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/programme-anti-fraude-2021-2027/"
       },
       {
         "name": "EUROPE - SMP - Programme du marché unique",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/programme-du-marche-unique/",
         "amount": "4,2 milliards d’euros",
         "deadline": "",
         "eligibility": "",
-        "quote": "Doté d’un budget de 4,2 milliards d’euros, le programme de l’UE en faveur du marché unique est une nouveauté de la programmation 2021-2027. Son principal objectif est d’assurer le bon fonctionnement du marché unique et de poursuivre sa mise en œuvre pour atteindre son plein potentiel."
+        "quote": "Doté d’un budget de 4,2 milliards d’euros, le programme de l’UE en faveur du marché unique est une nouveauté de la programmation 2021-2027. Son principal objectif est d’assurer le bon fonctionnement du marché unique et de poursuivre sa mise en œuvre pour atteindre son plein potentiel.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/programme-du-marche-unique/"
       },
       {
         "name": "EUROPE - Programme Justice 2021-2027",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/programme-justice-2021-2027/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Le programme Justice 2021-2027 prévoit un financement pour soutenir la coopération judiciaire en matière civile et pénale et l’accès effectif des citoyens et des entreprises à la justice."
+        "quote": "Le programme Justice 2021-2027 prévoit un financement pour soutenir la coopération judiciaire en matière civile et pénale et l’accès effectif des citoyens et des entreprises à la justice.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/programme-justice-2021-2027/"
       },
       {
         "name": "EUROPE - Promotion des produits agricoles",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/promotion-des-produits-agricoles/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "L’objectif général est de renforcer la compétitivité du secteur agricole de l’UE."
+        "quote": "L’objectif général est de renforcer la compétitivité du secteur agricole de l’UE.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/promotion-des-produits-agricoles/"
       },
       {
         "name": "QPV - Quartiers Prioritaires de la politique de la Ville",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/qpv-quartiers-prioritaires-de-la-politique-de-la-ville/",
         "amount": "",
         "deadline": "",
-        "eligibility": "Zones urbaines pauvres nécessitant des interventions publiques",
-        "quote": "Les QPV sont entités définies par la loi de 2014, identifiant zones urbaines pauvres nécessitant des interventions publiques. Une nouvelle cartographie est entrée en vigueur le 1er janvier 2024 (décret 28/12/2023), actualisant périmètres et contrat ville"
+        "eligibility": "",
+        "quote": "Les QPV sont entités définies par la loi de 2014, identifiant zones urbaines pauvres nécessitant des interventions publiques. Une nouvelle cartographie est entrée en vigueur le 1er janvier 2024 (décret 28/12/2023), actualisant périmètres et contrat ville",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/qpv-quartiers-prioritaires-de-la-politique-de-la-ville/"
       },
       {
         "name": "Renaturation des villes",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/renaturation-des-villes/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Cofinancer des solutions d’adaptation au changement climatique, fondées sur la présence de la nature en ville."
+        "quote": "Cofinancer des solutions d’adaptation au changement climatique, fondées sur la présence de la nature en ville.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/renaturation-des-villes/"
       },
       {
         "name": "Avenir Montagnes",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/ruralite-montagne-anct/",
         "amount": "",
         "deadline": "",
-        "eligibility": "Acteurs de la montagne (collectivités, acteurs socio-économiques)",
-        "quote": "Piloté par l’ANCT, le programme accompagnera les acteurs de la montagne (collectivités, acteurs socio-économiques) dans le développement économique, la préservation de leur patrimoine naturel et l’adaptation nécessaire au changement climatique."
+        "eligibility": "",
+        "quote": "Piloté par l’ANCT, le programme accompagnera les acteurs de la montagne (collectivités, acteurs socio-économiques) dans le développement économique, la préservation de leur patrimoine naturel et l’adaptation nécessaire au changement climatique.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/ruralite-montagne-anct/"
       },
       {
         "name": "Terres Mers Ultra-Marines (Te Me Um)",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/terres-mers-ultra-marines-te-me-um/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "« Terres Mers Ultra-Marines » (Te Me Um)"
+        "quote": "« Terres Mers Ultra-Marines » (Te Me Um)",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/terres-mers-ultra-marines-te-me-um/"
       },
       {
         "name": "Territoires d'industrie",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/territoires-dindustrie/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Le programme vise à apporter, dans et par les territoires, des réponses concrètes aux enjeux de soutien à l’industrie"
+        "quote": "Le programme vise à apporter, dans et par les territoires, des réponses concrètes aux enjeux de soutien à l’industrie",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/territoires-dindustrie/"
       },
       {
         "name": "Tourisme Ingénierie Développement",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/tourisme-ingenierie-developpement/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "Programme Tourisme Ingénierie Développement"
+        "quote": "Programme Tourisme Ingénierie Développement",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/tourisme-ingenierie-developpement/"
       },
       {
         "name": "EUROPE - URBACT",
-        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/urbact/",
         "amount": "",
         "deadline": "",
         "eligibility": "",
-        "quote": "URBACT est un programme de coopération territoriale européen qui promeut le développement urbain intégré."
+        "quote": "URBACT est un programme de coopération territoriale européen qui promeut le développement urbain intégré.",
+        "sourceUrl": "https://aides-territoires.beta.gouv.fr/programmes/urbact/"
       }
     ],
     "note": ""

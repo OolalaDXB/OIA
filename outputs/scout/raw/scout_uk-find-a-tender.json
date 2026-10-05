@@ -2,293 +2,334 @@
   "ScoutResult": {
     "calls": [
       {
-        "title": "Income Tax Self-Assessment Ecosystem Data and Integration - Innovation-Led Proof of Concept",
+        "title": "RONB 166 - Provision of Architectural Services for Repairs to Shrewsbury Castle Walls",
         "status": "Active tender",
         "eligibility": "Suitable for SME",
-        "contractingAuthority": "HM Revenue & Customs",
-        "deadline": "12 October 2026",
-        "value": "£350,000.00",
-        "location": "United Kingdom",
-        "cpvCodes": ["48000000 - Software package and information systems", "72000000 - IT services: consulting, software development, Internet and support"],
-        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06b96c",
-        "quote": ""
-      },
-      {
-        "title": "Hartpury University & Hartpury College of Further Education - Total Waste Management Services",
-        "status": "Active tender",
-        "eligibility": "Suitable for SME & VCSE",
-        "contractingAuthority": "Hartpury College",
-        "deadline": "15 October 2026",
-        "value": "£720,000.00",
-        "location": "United Kingdom",
-        "cpvCodes": ["90500000 - Refuse and waste related services"],
-        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f5d0",
-        "quote": ""
-      },
-      {
-        "title": "Contract for Roofing and Solar Panels at Heol Emrys and Tudno, Lavender Court",
-        "status": "Active tender",
-        "eligibility": "Suitable for SME & VCSE",
-        "contractingAuthority": "City & County of Swansea",
-        "deadline": "12 October 2026",
-        "value": "£105,600.00",
-        "location": "Swansea",
+        "contractingAuthority": "Shropshire Council",
+        "contractingAuthorityType": "Regional and local public authority",
+        "deadline": "29 October 2026",
+        "value": "£120,000.00",
+        "location": "Shropshire CC",
         "cpvCodes": [
-          "45261215 - Solar panel roof-covering work",
-          "45261211 - Roof-tiling work",
-          "45000000 - Construction work"
+          "45212350 - Buildings of particular historical or architectural interest",
+          "71220000 - Architectural design services"
         ],
-        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077b91",
+        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0780ee",
         "quote": ""
       },
       {
-        "title": "Hired Driver Services for the British Embassy Brussels",
-        "status": "Active tender",
+        "title": "Automated Distribution and Manufacturing Centre (ADMC)",
+        "status": "Preliminary Market Engagement",
         "eligibility": "",
-        "contractingAuthority": "Foreign, Commonwealth and Development Office",
-        "deadline": "25 October 2026",
-        "value": "£1,900,000.00",
-        "location": "Not specified",
-        "cpvCodes": ["63520000 - Transport agency services"],
-        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077b8c",
-        "quote": ""
-      },
-      {
-        "title": "PRO005084-Services-Framework-DNM Linear Monitor Installs",
-        "status": "Active tender",
-        "eligibility": "Suitable for SME",
-        "contractingAuthority": "United Utilities Water Limited",
-        "deadline": "16 December 2026",
-        "value": "£30,000,000.00",
-        "location": "North West (England)",
-        "cpvCodes": [
-          "71700000 - Monitoring and control services",
-          "32441200 - Telemetry and control equipment",
-          "38810000 - Industrial process control equipment",
-          "48610000 - Database systems",
-          "50000000 - Repair and maintenance services"
-        ],
-        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077b8b",
-        "quote": ""
-      },
-      {
-        "title": "Modern Fire Fighting Phase 2- Specialist Training Facility",
-        "status": "Pipeline",
-        "eligibility": "",
-        "contractingAuthority": "London Fire Commissioner",
-        "deadline": "",
-        "value": "£0.00",
-        "location": "Not specified",
-        "cpvCodes": [
-          "45214800 - Training facilities building",
-          "80510000 - Specialist training services"
-        ],
-        "estimatedPublicationDate": "4 January 2027",
-        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077b84",
-        "quote": ""
-      },
-      {
-        "title": "Workwear",
-        "status": "Pipeline",
-        "eligibility": "",
-        "contractingAuthority": "London Fire Commissioner",
-        "deadline": "",
-        "value": "£0.00",
-        "location": "Not specified",
-        "cpvCodes": ["35811100 - Fire-brigade uniforms"],
-        "estimatedPublicationDate": "1 March 2027",
-        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06ad72",
-        "quote": ""
-      },
-      {
-        "title": "Future Generation of PPE",
-        "status": "Pipeline",
-        "eligibility": "",
-        "contractingAuthority": "London Fire Commissioner",
-        "deadline": "",
-        "value": "£0.00",
-        "location": "Not specified",
-        "cpvCodes": ["35113400 - Protective and safety clothing"],
-        "estimatedPublicationDate": "1 May 2027",
-        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06ad70",
-        "quote": ""
-      },
-      {
-        "title": "Canvey Lake Dredging",
-        "status": "Active tender",
-        "eligibility": "Suitable for SME & VCSE",
-        "contractingAuthority": "Castle Point Borough Council",
-        "deadline": "2 November 2026",
+        "contractingAuthority": "Ashfield District Council",
+        "contractingAuthorityType": "Regional and local public authority",
+        "deadline": "6 November 2026",
         "value": "£1,200,000.00",
-        "location": "East of England; Essex",
+        "location": "North Nottinghamshire",
         "cpvCodes": [
-          "45252124 - Dredging and pumping works",
-          "45262640 - Environmental improvement works"
+          "70332200 - Commercial property management services",
+          "73000000 - Research and development services and related consultancy services",
+          "79411100 - Business development consultancy services"
         ],
-        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-068ca1",
+        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077a58",
         "quote": ""
       },
       {
-        "title": "Procurement of Modular A-Frame - PMEN (UK2)",
+        "title": "Vibration Monitoring",
         "status": "Preliminary Market Engagement",
-        "eligibility": "Suitable for SME",
-        "contractingAuthority": "Ministry of Defence",
-        "deadline": "6 October 2026",
-        "value": "£9,600,000.00",
-        "location": "United Kingdom",
-        "cpvCodes": [
-          "35521000 - Hull and mechanical spare parts for warships",
-          "34510000 - Ships",
-          "44142000 - Frames",
-          "35520000 - Parts for warships",
-          "42414000 - Cranes, mobile lifting frames and works trucks fitted with a crane"
-        ],
-        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f348",
-        "quote": ""
-      },
-      {
-        "title": "Griffin Park Bowls Green",
-        "status": "Active tender",
-        "eligibility": "Suitable for SME",
-        "contractingAuthority": "Porthcawl Town Council",
-        "deadline": "8 October 2026",
-        "value": "£84,000.00",
-        "location": "United Kingdom",
-        "cpvCodes": ["77300000 - Horticultural services"],
-        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077b81",
-        "quote": ""
-      },
-      {
-        "title": "Welsh Government Energy Service (WGES) Interim Framework",
-        "status": "Pipeline",
-        "eligibility": "Suitable for SME & VCSE",
-        "contractingAuthority": "Llywodraeth Cymru / Welsh Government",
-        "deadline": "",
-        "value": "£36,000,000.00",
-        "location": "Wales",
-        "cpvCodes": ["71314000 - Energy and related services"],
-        "estimatedPublicationDate": "1 April 2027",
-        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077b80",
-        "quote": ""
-      },
-      {
-        "title": "ONLINE EVIDENCE BASED TREATMENT/RECOVERY SERVICE",
-        "status": "Active tender",
-        "eligibility": "Suitable for SME & VCSE",
-        "contractingAuthority": "Police and Crime Commissioner for Dyfed-Powys",
-        "deadline": "12 October 2026",
-        "value": "£43,200.00",
-        "location": "Powys; South West Wales",
-        "cpvCodes": [
-          "33693300 - Addiction treatment",
-          "98000000 - Other community, social and personal services"
-        ],
-        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077b7f",
-        "quote": ""
-      },
-      {
-        "title": "Multidisciplinary Consultancy Services Framework",
-        "status": "Pipeline",
         "eligibility": "",
-        "contractingAuthority": "The Crown Estate",
-        "deadline": "",
-        "value": "£85,181,600.00",
-        "location": "Not specified",
-        "cpvCodes": ["71315300 - Building surveying services"],
-        "estimatedPublicationDate": "17 October 2026",
-        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077b7d",
-        "quote": ""
-      },
-      {
-        "title": "Painting - External and Internal Communal Areas",
-        "status": "Preliminary Market Engagement",
-        "eligibility": "Suitable for SME",
-        "contractingAuthority": "BELIEVE HOUSING LIMITED",
-        "deadline": "12 October 2026",
-        "value": "£3,300,000.00",
-        "location": "Durham CC",
-        "cpvCodes": [
-          "45261220 - Roof-painting and other coating work",
-          "45261221 - Roof-painting work",
-          "45442100 - Painting work",
-          "45442110 - Painting work of buildings"
-        ],
-        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077b7b",
-        "quote": ""
-      },
-      {
-        "title": "D2 Dehumidification (L&A and Radiation Stores)",
-        "status": "Active tender",
-        "eligibility": "",
-        "contractingAuthority": "Science Museum Group",
-        "deadline": "14 October 2026",
-        "value": "£600,000.00",
+        "contractingAuthority": "Southern Water Services Limited",
+        "contractingAuthorityType": "Private utility",
+        "deadline": "23 October 2026",
+        "value": "£0.00",
         "location": "Not specified",
         "cpvCodes": [
-          "42512300 - HVAC packages",
-          "45261420 - Waterproofing work",
-          "45331200 - Ventilation and air-conditioning installation work"
+          "38434400 - Vibration analysers"
         ],
-        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0773e1",
+        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0780ea",
         "quote": ""
       },
       {
-        "title": "TfL 97139 - Bus Driver Quality Monitoring",
+        "title": "DBC (EE) Provision of a Waste Haulage Service for Dacorum Borough Council",
+        "status": "Active tender",
+        "eligibility": "",
+        "contractingAuthority": "Dacorum Borough Council",
+        "contractingAuthorityType": "Regional and local public authority",
+        "deadline": "5 November 2026",
+        "value": "£360,000.00",
+        "location": "Not specified",
+        "cpvCodes": [
+          "90500000 - Refuse and waste related services"
+        ],
+        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0780e7",
+        "quote": ""
+      },
+      {
+        "title": "CSP26751 - Delegates for International Energy Agency Technology Collaboration Programme",
+        "status": "Active tender",
+        "eligibility": "Suitable for SME & VCSE",
+        "contractingAuthority": "Department for Energy Security & Net Zero; UKSBS",
+        "contractingAuthorityType": "Central government; Regional and local public authority",
+        "deadline": "13 October 2026",
+        "value": "£177,520.80",
+        "location": "United Kingdom",
+        "cpvCodes": [
+          "73110000 - Research services",
+          "73210000 - Research consultancy services",
+          "71314000 - Energy and related services",
+          "71314300 - Energy-efficiency consultancy services",
+          "72222300 - Information technology services"
+        ],
+        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0775ad",
+        "quote": ""
+      },
+      {
+        "title": "260027 Supply, delivery, commission, installation, consumables, & maintenance of a Femtosecond Laser Workstation for applications in metals",
+        "status": "Preliminary Market Engagement",
+        "eligibility": "",
+        "contractingAuthority": "Queen's University Belfast",
+        "contractingAuthorityType": "Regional and local public authority",
+        "deadline": "1 November 2026",
+        "value": "£900,000.00",
+        "location": "Not specified",
+        "cpvCodes": [
+          "38636100 - Lasers",
+          "38636110 - Industrial lasers"
+        ],
+        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077fd3",
+        "quote": ""
+      },
+      {
+        "title": "Case Management System Review - Preliminary Market Engagement",
+        "status": "Preliminary Market Engagement",
+        "eligibility": "",
+        "contractingAuthority": "London Borough of Waltham Forest",
+        "contractingAuthorityType": "Regional and local public authority",
+        "deadline": "19 October 2026",
+        "value": "£207,720.00",
+        "location": "Redbridge and Waltham Forest",
+        "cpvCodes": [
+          "72000000 - IT services: consulting, software development, Internet and support"
+        ],
+        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0780e5",
+        "quote": ""
+      },
+      {
+        "title": "Grimsby River Terminal – Civils Package",
+        "status": "Active tender",
+        "eligibility": "",
+        "contractingAuthority": "ASSOCIATED BRITISH PORTS",
+        "contractingAuthorityType": "Private utility",
+        "deadline": "30 October 2026",
+        "value": "£0.00",
+        "location": "Yorkshire and the Humber",
+        "cpvCodes": [
+          "45231300 - Construction work for water and sewage pipelines",
+          "45233120 - Road construction works",
+          "45233222 - Paving and asphalting works",
+          "45240000 - Construction work for water projects",
+          "45241000 - Harbour construction works"
+        ],
+        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0780e4",
+        "quote": ""
+      },
+      {
+        "title": "Growing Mid Wales Datgloi Project - Specialist Consultancy Services / Prosiect Datgloi Canolbarth Cymru sy'n Tyfu - Gwasanaethau Ymgynghori Arbenigol",
+        "status": "Preliminary Market Engagement",
+        "eligibility": "Suitable for SME & VCSE",
+        "contractingAuthority": "Cyngor Sir Ceredigion County Council",
+        "contractingAuthorityType": "Regional and local public authority",
+        "deadline": "30 September 2026",
+        "value": "£1.20",
+        "location": "South West Wales",
+        "cpvCodes": [
+          "71314300 - Energy-efficiency consultancy services",
+          "71356000 - Technical services",
+          "71314200 - Energy-management services",
+          "79314000 - Feasibility study",
+          "77231000 - Forestry management services"
+        ],
+        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0780df",
+        "quote": ""
+      },
+      {
+        "title": "Places for People Group Insurance",
+        "status": "Preliminary Market Engagement",
+        "eligibility": "",
+        "contractingAuthority": "Places for People Group Limited",
+        "contractingAuthorityType": "Regional and local public authority",
+        "deadline": "21 May 2026",
+        "value": "£105,000,000.00",
+        "location": "United Kingdom",
+        "cpvCodes": [
+          "66000000 - Financial and insurance services",
+          "66500000 - Insurance and pension services",
+          "66510000 - Insurance services",
+          "66512100 - Accident insurance services",
+          "66513000 - Legal insurance and all-risk insurance services"
+        ],
+        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0694fa",
+        "quote": ""
+      },
+      {
+        "title": "Direct Payment Support Service",
         "status": "Planned procurement",
-        "eligibility": "Suitable for SME",
-        "contractingAuthority": "Transport for London",
-        "deadline": "",
-        "value": "£2,200,000.00",
-        "location": "United Kingdom",
-        "cpvCodes": ["80000000 - Education and training services"],
-        "estimatedPublicationDate": "2 October 2026",
-        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-069989",
-        "quote": ""
-      },
-      {
-        "title": "Special Educational Needs and Disabilities (SEND) Mediation and Disagreement Resolution Service",
-        "status": "Active tender",
         "eligibility": "Suitable for SME & VCSE",
-        "contractingAuthority": "Blackpool Borough Council",
-        "deadline": "3 November 2026",
-        "value": "£180,000.00",
-        "location": "Blackpool",
+        "contractingAuthority": "Newcastle City Council",
+        "contractingAuthorityType": "Regional and local public authority",
+        "deadline": "Tender publication date (estimated): 15 November 2026",
+        "value": "£794,300.00",
+        "location": "Tyneside",
         "cpvCodes": [
-          "80340000 - Special education services",
           "85000000 - Health and social work services"
         ],
-        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06f6f9",
+        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0780d6",
         "quote": ""
       },
       {
-        "title": "Building Surveying Services Framework",
-        "status": "Pipeline",
+        "title": "APX058 - Framework for the Provision of Agency Nursing, Care, Support and Ancillary Staff",
+        "status": "Active tender",
         "eligibility": "",
-        "contractingAuthority": "The Crown Estate",
-        "deadline": "",
-        "value": "£100,800,000.00",
-        "location": "Not specified",
-        "cpvCodes": ["71315300 - Building surveying services"],
-        "estimatedPublicationDate": "7 December 2026",
-        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077b76",
+        "contractingAuthority": "Apex Housing Association",
+        "contractingAuthorityType": "Regional and local public authority",
+        "deadline": "30 October 2026",
+        "value": "£17,000,000.00",
+        "location": "Northern Ireland",
+        "cpvCodes": [
+          "79624000 - Supply services of nursing personnel",
+          "85300000 - Social work and related services",
+          "79620000 - Supply services of personnel including temporary staff",
+          "79622000 - Supply services of domestic help personnel"
+        ],
+        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0780d5",
         "quote": ""
       },
       {
-        "title": "Statutory Servicing, Reactive and Remedial Works",
+        "title": "Link14 Construction & Building Services Framework",
         "status": "Active tender",
         "eligibility": "Suitable for SME",
-        "contractingAuthority": "Gloucestershire County Council",
-        "deadline": "21 October 2026",
-        "value": "£9,000,000.00",
-        "location": "Gloucestershire, Wiltshire and Bristol/Bath area",
+        "contractingAuthority": "CONCERTUS SUFFOLK LIMITED",
+        "contractingAuthorityType": "Public undertaking",
+        "deadline": "5 November 2026",
+        "value": "£1,200,000,000.00",
+        "location": "Berkshire, Buckinghamshire and Oxfordshire; East Midlands (England); East of England; Gloucestershire, Wiltshire and Bristol/Bath area; North and North East Lincolnshire; and 1 more",
         "cpvCodes": [
-          "50750000 - Lift-maintenance services",
-          "31216000 - Lightning arrestors",
-          "42500000 - Cooling and ventilation equipment",
-          "34928300 - Safety barriers",
-          "44221200 - Doors"
+          "44000000 - Construction structures and materials; auxiliary products to construction (except electric apparatus)",
+          "45000000 - Construction work",
+          "50000000 - Repair and maintenance services",
+          "51000000 - Installation services (except software)",
+          "70000000 - Real estate services"
         ],
-        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0694b4",
+        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-06aec7",
+        "quote": ""
+      },
+      {
+        "title": "Air Conditioning Service & Maintenance",
+        "status": "Preliminary Market Engagement",
+        "eligibility": "Suitable for SME",
+        "contractingAuthority": "Cardiff University",
+        "contractingAuthorityType": "Regional and local public authority",
+        "deadline": "12 October 2026",
+        "value": "£10,605,000.00",
+        "location": "Cardiff and Vale of Glamorgan",
+        "cpvCodes": [
+          "50712000 - Repair and maintenance services of mechanical building installations"
+        ],
+        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0780d1",
+        "quote": ""
+      },
+      {
+        "title": "Senior Leadership Development Programme",
+        "status": "Preliminary Market Engagement",
+        "eligibility": "Suitable for SME",
+        "contractingAuthority": "Greater Manchester Combined Authority",
+        "contractingAuthorityType": "Regional and local public authority",
+        "deadline": "20 October 2026",
+        "value": "",
+        "location": "United Kingdom",
+        "cpvCodes": [
+          "75000000 - Administration, defence and social security services",
+          "80532000 - Management training services",
+          "80570000 - Personal development training services"
+        ],
+        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0780ce",
+        "quote": ""
+      },
+      {
+        "title": "Transport for London (TfL) Digital Traffic Enforcement System (DTES) Replacement",
+        "status": "Preliminary Market Engagement",
+        "eligibility": "Suitable for SME",
+        "contractingAuthority": "Transport for London",
+        "contractingAuthorityType": "Public undertaking",
+        "deadline": "18 December 2026",
+        "value": "",
+        "location": "United Kingdom",
+        "cpvCodes": [
+          "72000000 - IT services: consulting, software development, Internet and support"
+        ],
+        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0780cc",
+        "quote": ""
+      },
+      {
+        "title": "Domestic Build Works (Disability Adaptations)",
+        "status": "Active tender",
+        "eligibility": "Suitable for SME",
+        "contractingAuthority": "Cheshire East Council",
+        "contractingAuthorityType": "Regional and local public authority",
+        "deadline": "2 November 2026",
+        "value": "£4,800,000.00",
+        "location": "Cheshire East",
+        "cpvCodes": [
+          "45000000 - Construction work"
+        ],
+        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-05dc31",
+        "quote": ""
+      },
+      {
+        "title": "Impacts of Groundwater Abstraction on the Environment",
+        "status": "Active tender",
+        "eligibility": "Suitable for SME",
+        "contractingAuthority": "Environment Agency",
+        "contractingAuthorityType": "Central government",
+        "deadline": "9 October 2026",
+        "value": "£59,998.80",
+        "location": "United Kingdom",
+        "cpvCodes": [
+          "80531200 - Technical training services"
+        ],
+        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-077685",
+        "quote": ""
+      },
+      {
+        "title": "Delivery Management Team (DMT)",
+        "status": "Pipeline",
+        "eligibility": "",
+        "contractingAuthority": "Post Office Limited",
+        "contractingAuthorityType": "Public undertaking",
+        "deadline": "Contract start date (estimated): 1 April 2027",
+        "value": "£14,400,000.00",
+        "location": "United Kingdom",
+        "cpvCodes": [
+          "71541000 - Construction project management services"
+        ],
+        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0780c9",
+        "quote": ""
+      },
+      {
+        "title": "Turnkey General Contractors (TGC)",
+        "status": "Pipeline",
+        "eligibility": "Suitable for SME",
+        "contractingAuthority": "Post Office Limited",
+        "contractingAuthorityType": "Public undertaking",
+        "deadline": "Tender or transparency notice publication date (estimated): 1 December 2026",
+        "value": "£96,000,000.00",
+        "location": "United Kingdom",
+        "cpvCodes": [
+          "45262700 - Building alteration work",
+          "45300000 - Building installation work",
+          "45453000 - Overhaul and refurbishment work"
+        ],
+        "sourceUrl": "https://www.find-tender.service.gov.uk/procurement/ocds-h6vhtk-0780c8",
         "quote": ""
       }
     ],

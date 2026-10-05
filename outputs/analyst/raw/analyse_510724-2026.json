@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NEEDS_INFO",
-    "citation": [],
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Legal type of the buyer: Local authority. Activity of the contracting authority: General public services",
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for this tender. It only describes the services required (surveillance and protection of buildings) but does not outline eligibility criteria for applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent répondre à cet appel d'offres. Il décrit uniquement les services requis (surveillance et protection des bâtiments) sans indiquer les critères d'éligibilité des candidats."
+      "en": "The tender specifies that the buyer is a local authority (Département de la Loire) and the activity is related to general public services. The opportunity does not explicitly state that private companies, especially those in AI, data, or software sectors, are eligible to apply for security services contracts of this nature. The scope is limited to surveillance and protection of public buildings, which typically requires specialized security service providers, not AI or digital infrastructure companies.",
+      "fr": "L'appel d'offres précise que l'acheteur est une collectivité territoriale (Département de la Loire) et que l'activité relève des services publics généraux. L'opportunité ne mentionne pas explicitement que les entreprises privées, en particulier celles des secteurs de l'IA, des données ou des logiciels, sont éligibles pour des contrats de services de sécurité de ce type. Le périmètre se limite à la surveillance et à la protection de bâtiments publics, ce qui nécessite généralement des prestataires spécialisés en sécurité, et non des entreprises en IA ou en infrastructures numériques."
     },
     "nextAction": {
-      "en": "Contact the Département de la Loire to request the full tender documents and confirm the eligibility criteria for applicants.",
-      "fr": "Contacter le Département de la Loire pour demander les documents complets de l'appel d'offres et confirmer les critères d'éligibilité des candidats."
+      "en": "Review the full tender notice on the TED website (link provided) to confirm if there are any specific clauses allowing non-security specialized companies to apply.",
+      "fr": "Consulter l'avis complet de l'appel d'offres sur le site TED (lien fourni) pour vérifier s'il existe des clauses spécifiques autorisant les entreprises non spécialisées en sécurité à candidater."
     }
   }
 }

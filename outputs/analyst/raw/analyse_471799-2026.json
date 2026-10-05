@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify the eligibility criteria for applicants. There is no mention of who may or may not apply for this tender.",
-      "fr": "Le texte extrait ne précise pas les critères d'éligibilité des candidats. Il n'est pas mentionné qui peut ou ne peut pas postuler à cet appel d'offres."
+      "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of legal forms, geographic restrictions beyond the place of performance, or other criteria that would confirm or exclude BAWABA.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles. Il n'y a aucune mention des formes juridiques, des restrictions géographiques au-delà du lieu d'exécution, ou d'autres critères qui confirmeraient ou excluraient BAWABA."
     },
     "nextAction": {
-      "en": "Request the full tender documentation from Inserm Délégation Régionale Paris Ile de France Sud to confirm eligibility requirements.",
-      "fr": "Demander la documentation complète de l'appel d'offres auprès de l'Inserm Délégation Régionale Paris Ile de France Sud pour confirmer les critères d'éligibilité."
+      "en": "Check the full notice on the TED website (link provided) for eligibility criteria regarding the types of organisations that may apply.",
+      "fr": "Consulter l'avis complet sur le site TED (lien fourni) pour vérifier les critères d'éligibilité concernant les types d'organisations pouvant postuler."
     }
   }
 }

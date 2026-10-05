@@ -1,16 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citations": [
-      "Le programme de promotion des produits agricoles (AGRIP) joue un rôle essentiel dans la concrétisation des objectifs politiques de la Commission européenne pour la période 2019-2024, en soutenant le Green Deal européen, la stratégie « Farm to Fork » et le plan européen de lutte contre le cancer."
-    ],
+    "citation": "Le programme de promotion des produits agricoles (AGRIP) joue un rôle essentiel dans la concrétisation des objectifs politiques de la Commission européenne pour la période 2019-2024, en soutenant le Green Deal européen, la stratégie « Farm to Fork » et le plan européen de lutte contre le cancer.",
     "reason": {
-      "en": "The AGRIP program specifically supports the promotion of agricultural products, aligning with the European Green Deal, Farm to Fork strategy, and cancer fight plan. The organization 'Les Vieilles Pierres' operates in heritage, culture, and tourism, which are not related to agricultural product promotion.",
-      "fr": "Le programme AGRIP soutient spécifiquement la promotion des produits agricoles, en alignement avec le Green Deal européen, la stratégie « De la ferme à la fourchette » et le plan européen de lutte contre le cancer. L'organisation « Les Vieilles Pierres » opère dans les secteurs du patrimoine, de la culture et du tourisme, qui ne sont pas liés à la promotion des produits agricoles."
+      "en": "The AGRIP program specifically supports the promotion of agricultural products. The organization 'Les Vieilles Pierres' is a heritage hiking association, which does not align with the agricultural focus of this funding opportunity.",
+      "fr": "Le programme AGRIP soutient spécifiquement la promotion des produits agricoles. L'association 'Les Vieilles Pierres', dédiée à la randonnée patrimoniale, ne correspond pas à l'objectif agricole de cette opportunité de financement."
     },
     "nextAction": {
       "en": "Review other funding opportunities that align with heritage, culture, or tourism sectors.",
-      "fr": "Consulter d'autres opportunités de financement alignées avec les secteurs du patrimoine, de la culture ou du tourisme."
+      "fr": "Consulter d'autres opportunités de financement qui correspondent aux secteurs du patrimoine, de la culture ou du tourisme."
     }
   }
 }

@@ -53,19 +53,19 @@ All filters
 All filters
 Type of grants calls
 Direct calls for proposals (issued by the EU)
-10157
+10200
 EU External Actions
-18
+15
 Calls for funding in cascade (issued by funded projects)
 1437
 Programming period
 2021 - 2027
-6999
+7039
 2014 - 2020
-4665
+4662
 Programme
 Horizon Europe (HORIZON)
-4288
+4315
 Horizon 2020 Framework Programme (H2020 - 2014-2020)
 3983
 Digital Europe Programme (DIGITAL)
@@ -78,12 +78,12 @@ Single Market Programme (SMP)
 228
 European Defence Fund (EDF)
 216
+Creative Europe Programme (CREA)
+200
 Programme for the Environment and Climate Action (LIFE)
 199
-Creative Europe Programme (CREA)
-189
 Citizens, Equality, Rights and Values programme (CERV)
-135
+140
 Call
 H2020-LC-SC3-2018-2019-2020
 133
@@ -107,11 +107,11 @@ H2020-CS2-CFP04-2016-02
 57
 Submission status
 Forthcoming
-269
-sedia.global.openForSubmission
-292
+302
+Open for submission
+242
 Closed
-11051
+11108
 Opening date/Publication date
 –
 Deadline date
@@ -129,8 +129,8 @@ Relevance
 Submission status
 Title
 Results exceed the limit. Please refine your search criteria. Max: 10000
-Demonstration of hydropower technologies for efficient and forward-looking refurbishment of existing hydropower plants
-HORIZON-CL5-2027-07-D3-11 | Calls for proposals
+Industrial processes and equipment for innovative, reliable and scalable tandem technologies (EUPI-PV Partnership)
+HORIZON-CL5-2027-07-D3-16 | Calls for proposals
 Opening date: 04 August 2027 | Deadline date: 01 December 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Innovation Actions
@@ -144,8 +144,8 @@ HORIZON-CL5-2027-07-D3-17 | Calls for proposals
 Opening date: 04 August 2027 | Deadline date: 01 December 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Innovation Actions
-Advanced TSO control rooms to enhance grid observability, stability and resilience
-HORIZON-CL5-2027-07-D3-25 | Calls for proposals
+Integrated Approaches for Retrofitting Infrastructures with Innovative Energy Storage Technologies
+HORIZON-CL5-2027-07-D3-27 | Calls for proposals
 Opening date: 04 August 2027 | Deadline date: 01 December 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Innovation Actions
@@ -159,19 +159,14 @@ HORIZON-CL5-2027-07-D3-28 | Calls for proposals
 Opening date: 04 August 2027 | Deadline date: 01 December 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Coordination and Support Actions
-Industrial processes and equipment for innovative, reliable and scalable tandem technologies (EUPI-PV Partnership)
-HORIZON-CL5-2027-07-D3-16 | Calls for proposals
+Advanced TSO control rooms to enhance grid observability, stability and resilience
+HORIZON-CL5-2027-07-D3-25 | Calls for proposals
 Opening date: 04 August 2027 | Deadline date: 01 December 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Innovation Actions
-Integrated Approaches for Retrofitting Infrastructures with Innovative Energy Storage Technologies
-HORIZON-CL5-2027-07-D3-27 | Calls for proposals
+Demonstration of hydropower technologies for efficient and forward-looking refurbishment of existing hydropower plants
+HORIZON-CL5-2027-07-D3-11 | Calls for proposals
 Opening date: 04 August 2027 | Deadline date: 01 December 2027 | Single-stage
-Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Innovation Actions
-Enhancing Resilience and Accuracy in Positioning, Navigation, and Timing (PNT) Systems and e-conspicuity solutions
-HORIZON-CL5-2027-06-D6-11 | Calls for proposals
-Opening date: 03 June 2027 | Deadline date: 07 October 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Innovation Actions
 European CCAM knowledge hub and tools for safe and scalable deployment (CCAM Partnership)
@@ -179,19 +174,39 @@ HORIZON-CL5-2027-06-D6-05 | Calls for proposals
 Opening date: 03 June 2027 | Deadline date: 07 October 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Coordination and Support Actions
+Enhancing Resilience and Accuracy in Positioning, Navigation, and Timing (PNT) Systems and e-conspicuity solutions
+HORIZON-CL5-2027-06-D6-11 | Calls for proposals
+Opening date: 03 June 2027 | Deadline date: 07 October 2027 | Single-stage
+Forthcoming
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Innovation Actions
 Holistic solutions for CCAM integration in critical scenarios (CCAM Partnership)
 HORIZON-CL5-2027-06-D6-04 | Calls for proposals
 Opening date: 03 June 2027 | Deadline date: 07 October 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
-Advancing bio-printing of living cells for regenerative medicine
-HORIZON-HLTH-2027-03-TOOL-02 | Calls for proposals
-Opening date: 03 June 2027 | Deadline date: 22 September 2027 | Single-stage
+Enhancing Mobility for All: affordable, reliable, and accessible multimodal transport for inclusive rural and urban connectivity – Societal Readiness pilot
+HORIZON-CL5-2027-06-D6-08 | Calls for proposals
+Opening date: 03 June 2027 | Deadline date: 07 October 2027 | Single-stage
+Forthcoming
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Innovation Actions
+Advancing interdisciplinary, data-driven research at the biodiversity- health interface under a One Health approach
+HORIZON-NATURE-2027-03-01 | Calls for proposals
+Opening date: 03 June 2027 | Deadline date: 16 September 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
-Towards Artificial General Intelligence (AGI) for healthcare
+Advancing bio-printing of living cells for regenerative medicine
+HORIZON-HLTH-2027-03-TOOL-02 | Calls for proposals
+Opening date: 03 June 2027 | Deadline date: 16 September 2027 | Single-stage
+Forthcoming
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
+Virtual Human Twins (VHTs) for integrated clinical decision support in prevention and diagnosis
+HORIZON-HLTH-2027-03-TOOL-04 | Calls for proposals
+Opening date: 03 June 2027 | Deadline date: 16 September 2027 | Single-stage
+Forthcoming
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
+Towards the next generation of frontier Artificial Intelligence models for healthcare
 HORIZON-HLTH-2027-03-TOOL-08 | Calls for proposals
-Opening date: 03 June 2027 | Deadline date: 22 September 2027 | Single-stage
+Opening date: 03 June 2027 | Deadline date: 16 September 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Coordination and Support Actions
 Support for dissemination events in the field of Transport Research
@@ -199,53 +214,33 @@ HORIZON-CL5-2027-06-D6-12 | Calls for proposals
 Opening date: 03 June 2027 | Deadline date: 07 October 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Coordination and Support Actions
-Enhancing Mobility for All: affordable, reliable, and accessible multimodal transport for inclusive rural and urban connectivity – Societal Readiness pilot
-HORIZON-CL5-2027-06-D6-08 | Calls for proposals
-Opening date: 03 June 2027 | Deadline date: 07 October 2027 | Single-stage
-Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Innovation Actions
-Virtual Human Twins (VHTs) for integrated clinical decision support in prevention and diagnosis
-HORIZON-HLTH-2027-03-TOOL-04 | Calls for proposals
-Opening date: 03 June 2027 | Deadline date: 22 September 2027 | Single-stage
-Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
-Startup Europe
-HORIZON-EIE-2027-01-CONNECT-01 | Calls for proposals
-Opening date: 01 June 2027 | Deadline date: 15 September 2027 | Single-stage
-Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Coordination and Support Actions
-Enhancing the involvement of philanthropic organisations in innovation ecosystems
-HORIZON-EIE-2027-01-CONNECT-03 | Calls for proposals
-Opening date: 01 June 2027 | Deadline date: 15 September 2027 | Single-stage
-Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Coordination and Support Actions
 Reinforcing synergies between experimentation spaces and innovation procurement
 HORIZON-EIE-2027-01-CONNECT-02 | Calls for proposals
 Opening date: 01 June 2027 | Deadline date: 15 September 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Pre-commercial Procurement
+Enhancing the involvement of philanthropic organisations in innovation ecosystems
+HORIZON-EIE-2027-01-CONNECT-03 | Calls for proposals
+Opening date: 01 June 2027 | Deadline date: 15 September 2027 | Single-stage
+Forthcoming
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Coordination and Support Actions
+Startup Europe - CANCELLED
+HORIZON-EIE-2027-01-CONNECT-01-CANCELLED | Calls for proposals
+Opening date: 01 June 2027 | Deadline date: 15 September 2027 | Single-stage
+Forthcoming
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Coordination and Support Actions
 MSCA Doctoral Networks 2027
 HORIZON-MSCA-2027-DN-01-01 | Calls for proposals
 Opening date: 26 May 2027 | Deadline date: 23 November 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON TMA MSCA Doctoral Networks,HORIZON TMA MSCA Doctoral Networks - Joint Doctorates,HORIZON TMA MSCA Doctoral Networks - Industrial Doctorates
-The impact of EU labour mobility on the Member States of the EU
-HORIZON-CL2-2027-01-TRANSFO-04 | Calls for proposals
+Global Human Rights and EU values
+HORIZON-CL2-2027-01-DEMOCRACY-08 | Calls for proposals
 Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
-Societal impact of cultural heritage
-HORIZON-CL2-2027-01-HERITAGE-07 | Calls for proposals
-Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
-Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
-Impact of access to nature-positive environments in promoting social cohesion and reducing inequalities in urban and peri-urban settings
-HORIZON-CL2-2027-01-TRANSFO-01 | Calls for proposals
-Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
-Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
-Rethinking sustainable competitiveness beyond traditional perspectives: role and contribution of the Social Economy
-HORIZON-CL2-2027-01-TRANSFO-03 | Calls for proposals
+Culture, heritage and creative industries for health and well-being
+HORIZON-CL2-2027-01-HERITAGE-04 | Calls for proposals
 Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
@@ -254,13 +249,13 @@ HORIZON-CL2-2027-01-HERITAGE-06 | Calls for proposals
 Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
-Addressing the impact of artificial intelligence, cyberviolence, and deepfakes on equality, democracy and inclusive societies
-HORIZON-CL2-2027-01-DEMOCRACY-04 | Calls for proposals
+Scaling and deploying innovations in migration management
+HORIZON-CL2-2027-01-TRANSFO-08 | Calls for proposals
 Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
 Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
-Re-imagining the creative economy: the interplay between the cultural and creative sectors and industries and the social economy
-HORIZON-CL2-2027-01-HERITAGE-05 | Calls for proposals
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Innovation Actions
+Safeguarding & transmission of intangible cultural heritage
+HORIZON-CL2-2027-01-HERITAGE-08 | Calls for proposals
 Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
@@ -269,23 +264,33 @@ HORIZON-CL2-2027-01-DEMOCRACY-05 | Calls for proposals
 Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
+Student and family engagement for developing a culture of democratic/civic participation
+HORIZON-CL2-2027-01-DEMOCRACY-03 | Calls for proposals
+Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
+Forthcoming
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
+The impact of EU labour mobility on the Member States of the EU
+HORIZON-CL2-2027-01-TRANSFO-04 | Calls for proposals
+Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
+Forthcoming
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
 The role of private companies in democracy
 HORIZON-CL2-2027-01-DEMOCRACY-07 | Calls for proposals
 Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
-AI4Creatives Support Platform: embracing a fair AI revolution
-HORIZON-CL2-2027-01-HERITAGE-02 | Calls for proposals
+Re-imagining the creative economy: the interplay between the cultural and creative sectors and industries and the social economy
+HORIZON-CL2-2027-01-HERITAGE-05 | Calls for proposals
 Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
 Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Coordination and Support Actions
-Scaling and deploying innovations in migration management
-HORIZON-CL2-2027-01-TRANSFO-08 | Calls for proposals
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
+Addressing the impact of artificial intelligence, cyberviolence, and deepfakes on equality, democracy and inclusive societies
+HORIZON-CL2-2027-01-DEMOCRACY-04 | Calls for proposals
 Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
 Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Innovation Actions
-Crafting routes to a circular economy
-HORIZON-CL2-2027-01-HERITAGE-03 | Calls for proposals
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
+Persons with disabilities: opportunities for labour inclusion and social protection through the life course
+HORIZON-CL2-2027-01-TRANSFO-07 | Calls for proposals
 Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
@@ -294,8 +299,43 @@ HORIZON-CL2-2027-01-DEMOCRACY-02 | Calls for proposals
 Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
+Rethinking sustainable competitiveness beyond traditional perspectives: role and contribution of the Social Economy
+HORIZON-CL2-2027-01-TRANSFO-03 | Calls for proposals
+Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
+Forthcoming
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
 The effective use of artificial intelligence in learning environments in pre-primary and primary education
 HORIZON-CL2-2027-01-TRANSFO-05 | Calls for proposals
+Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
+Forthcoming
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
+Impact of in-kind benefits on income distribution and on vulnerable populations
+HORIZON-CL2-2027-01-TRANSFO-02 | Calls for proposals
+Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
+Forthcoming
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
+Advisory support and network for countering and preventing radicalisation, extremism, hate speech and polarisation
+HORIZON-CL2-2027-01-DEMOCRACY-01 | Calls for proposals
+Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
+Forthcoming
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Coordination and Support Actions
+AI4Creatives Support Platform: embracing a fair AI revolution
+HORIZON-CL2-2027-01-HERITAGE-02 | Calls for proposals
+Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
+Forthcoming
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Coordination and Support Actions
+Identifying user-focused solutions to support news media freedom
+HORIZON-CL2-2027-01-DEMOCRACY-06 | Calls for proposals
+Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
+Forthcoming
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
+Impact of access to nature-positive environments in promoting social cohesion and reducing inequalities in urban and peri-urban settings
+HORIZON-CL2-2027-01-TRANSFO-01 | Calls for proposals
+Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
+Forthcoming
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
+Societal impact of cultural heritage
+HORIZON-CL2-2027-01-HERITAGE-07 | Calls for proposals
 Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
@@ -309,66 +349,11 @@ HORIZON-CL2-2027-01-TRANSFO-06 | Calls for proposals
 Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
-Identifying user-focused solutions to support news media freedom
-HORIZON-CL2-2027-01-DEMOCRACY-06 | Calls for proposals
+Crafting routes to a circular economy
+HORIZON-CL2-2027-01-HERITAGE-03 | Calls for proposals
 Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
-Global Human Rights and EU values
-HORIZON-CL2-2027-01-DEMOCRACY-08 | Calls for proposals
-Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
-Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
-Safeguarding & transmission of intangible cultural heritage
-HORIZON-CL2-2027-01-HERITAGE-08 | Calls for proposals
-Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
-Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
-Student and family engagement for developing a culture of democratic/civic participation
-HORIZON-CL2-2027-01-DEMOCRACY-03 | Calls for proposals
-Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
-Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
-Culture, heritage and creative industries for health and well-being
-HORIZON-CL2-2027-01-HERITAGE-04 | Calls for proposals
-Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
-Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
-Advisory support and network for countering and preventing radicalisation, extremism, hate speech and polarisation
-HORIZON-CL2-2027-01-DEMOCRACY-01 | Calls for proposals
-Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
-Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Coordination and Support Actions
-Persons with disabilities: opportunities for labour inclusion and social protection through the life course
-HORIZON-CL2-2027-01-TRANSFO-07 | Calls for proposals
-Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
-Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
-Impact of in-kind benefits on income distribution and on vulnerable populations
-HORIZON-CL2-2027-01-TRANSFO-02 | Calls for proposals
-Opening date: 13 May 2027 | Deadline date: 23 September 2027 | Single-stage
-Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
-Integrating circularity in LCA-based modelling frameworks for renovation of buildings (Built4People Partnership)
-HORIZON-CL5-2027-05-D4-07 | Calls for proposals
-Opening date: 05 May 2027 | Deadline date: 15 September 2027 | Single-stage
-Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Innovation Actions
-On-site robotic and automated techniques for building renovation and new construction
-HORIZON-CL5-2027-05-D4-05 | Calls for proposals
-Opening date: 05 May 2027 | Deadline date: 15 September 2027 | Single-stage
-Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Innovation Actions
-Demonstration for Long-duration Battery Energy Storage Systems (BATT4EU Partnership)
-HORIZON-CL5-2027-05-D2-08 | Calls for proposals
-Opening date: 05 May 2027 | Deadline date: 15 September 2027 | Single-stage
-Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Innovation Actions
-Thermal energy optimisation and waste heat recovery of high energy demand IT rooms in buildings or small edge data centres
-HORIZON-CL5-2027-05-D4-06 | Calls for proposals
-Opening date: 05 May 2027 | Deadline date: 15 September 2027 | Single-stage
-Forthcoming
-Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Innovation Actions
 Demonstration of industrial excess/waste heat conversion to mechanical or electrical power
 HORIZON-CL5-2027-05-D4-09 | Calls for proposals
 Opening date: 05 May 2027 | Deadline date: 15 September 2027 | Single-stage
@@ -379,6 +364,21 @@ HORIZON-CL3-2027-01-BM-03 | Calls for proposals
 Opening date: 05 May 2027 | Deadline date: 04 November 2027 | Single-stage
 Forthcoming
 Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Research and Innovation Actions
+Open Topic on advanced protective gear optimized for CBRN-E (Chemical, Biological, Radiological, Nuclear, Explosives) environments and new generation of smart protective equipment for disaster responders
+HORIZON-CL3-2027-01-DRS-01 | Calls for proposals
+Opening date: 05 May 2027 | Deadline date: 04 November 2027 | Single-stage
+Forthcoming
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Innovation Actions
+Impact of malicious use of Open-Source Intelligence on critical infrastructure business continuity
+HORIZON-CL3-2027-01-INFRA-02 | Calls for proposals
+Opening date: 05 May 2027 | Deadline date: 04 November 2027 | Single-stage
+Forthcoming
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Innovation Actions
+Community policing in diverse societies in Europe
+HORIZON-CL3-2027-01-FCT-02 | Calls for proposals
+Opening date: 05 May 2027 | Deadline date: 04 November 2027 | Single-stage
+Forthcoming
+Programme: Horizon Europe (HORIZON) | Type of action: HORIZON Innovation Actions
 Items per page:
 10
 50

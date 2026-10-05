@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The opportunity text does not specify which types of organisations may apply. It only describes the scope of services required (maintenance and supervision of video surveillance systems) and the procedure details, but does not state eligibility criteria for applicants.",
+      "fr": "Le texte de l'opportunité ne précise pas quels types d'organisations peuvent postuler. Il décrit uniquement le périmètre des services requis (maintenance et supervision des systèmes de vidéosurveillance) et les détails de la procédure, mais ne mentionne pas les critères d'éligibilité des candidats."
+    },
+    "nextAction": {
+      "en": "Contact Logirep at contact.aapc@polylogis.fr to confirm whether private companies, including those in AI and cybersecurity, are eligible to apply for this tender.",
+      "fr": "Contacter Logirep à l'adresse contact.aapc@polylogis.fr pour confirmer si les entreprises privées, y compris celles spécialisées en IA et cybersécurité, sont éligibles pour ce marché."
+    }
+  }
+}

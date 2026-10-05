@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify who may apply to the UN International Procurement Seminar. It describes the seminar's purpose but does not list eligibility criteria for participants.",
+      "fr": "Le texte extrait ne précise pas qui peut postuler au Séminaire international des marchés des Nations Unies. Il décrit l'objectif du séminaire mais ne mentionne pas les critères d'éligibilité pour les participants."
+    },
+    "nextAction": {
+      "en": "Check the full tender notice or the UN Procurement Division website for the section titled 'Eligibility' or 'Who may apply'.",
+      "fr": "Consulter l'avis complet de l'appel d'offres ou le site de la Division des achats des Nations Unies pour la section intitulée 'Éligibilité' ou 'Qui peut postuler'."
+    }
+  }
+}

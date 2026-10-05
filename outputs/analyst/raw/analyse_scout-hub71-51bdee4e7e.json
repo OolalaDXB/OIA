@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citation": "Startups addressing challenges across early childhood development, from pregnancy through age eight",
+    "citation": "Startups addressing early childhood development challenges",
     "reason": {
-      "en": "BAWABA's focus on 'Sovereign AI control plane for regulated industries' does not address challenges in early childhood development (pregnancy through age eight). The opportunity explicitly requires startups to work in this specific scope.",
-      "fr": "BAWABA se concentre sur une 'plateforme de contrôle d'IA souveraine pour les industries réglementées', ce qui ne répond pas aux défis du développement de la petite enfance (de la grossesse jusqu'à l'âge de huit ans). L'opportunité exige explicitement que les startups travaillent dans ce domaine spécifique."
+      "en": "The organisation's focus on 'Sovereign AI control plane for regulated industries' does not align with the programme's scope of addressing early childhood development challenges.",
+      "fr": "L'organisation se concentre sur un 'plan de contrôle d'IA souveraine pour les industries réglementées', ce qui ne correspond pas à l'objectif du programme visant à relever les défis du développement de la petite enfance."
     },
     "nextAction": {
-      "en": "Review other funding opportunities that align with BAWABA’s focus on AI, data, or cybersecurity for regulated industries.",
-      "fr": "Examiner d'autres opportunités de financement qui correspondent à l'expertise de BAWABA en IA, données ou cybersécurité pour les industries réglementées."
+      "en": "Review other funding opportunities that align with the organisation's focus on AI, data, or cybersecurity.",
+      "fr": "Examiner d'autres opportunités de financement qui correspondent à l'orientation de l'organisation en matière d'IA, de données ou de cybersécurité."
     }
   }
 }

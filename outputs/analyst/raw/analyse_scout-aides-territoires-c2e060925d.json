@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citation": "Collectivités locales, acteurs du logement, du commerce et de l'urbanisme",
+    "citation": "Ce programme vise à faciliter et à soutenir le travail des collectivités locales, à inciter les acteurs du logement, du commerce et de l'urbanisme à réinvestir les centres-villes, à favoriser le maintien ou l'implantation d'activités en cœur de ville",
     "reason": {
-      "en": "The organisation is a heritage hiking association, which does not fall under the categories of local authorities, housing actors, commerce, or urban planning as specified in the eligibility criteria.",
-      "fr": "L'organisation est une association de randonnée patrimoniale, ce qui ne correspond pas aux catégories des collectivités locales, des acteurs du logement, du commerce ou de l'urbanisme, telles que définies dans les critères d'éligibilité."
+      "en": "The program explicitly targets local authorities and actors in housing, commerce, and urban planning. An association focused on heritage hiking does not fall into these categories.",
+      "fr": "Le programme cible explicitement les collectivités locales et les acteurs du logement, du commerce et de l'urbanisme. Une association centrée sur la randonnée patrimoniale ne correspond pas à ces catégories."
     },
     "nextAction": {
-      "en": "Review other funding opportunities that explicitly include heritage or cultural associations.",
-      "fr": "Consulter d'autres opportunités de financement qui incluent explicitement les associations patrimoniales ou culturelles."
+      "en": "Review other funding opportunities specifically open to heritage or tourism associations.",
+      "fr": "Consulter d'autres opportunités de financement ouvertes spécifiquement aux associations patrimoniales ou touristiques."
     }
   }
 }

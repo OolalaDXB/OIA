@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NEEDS_INFO",
-    "citations": [],
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Le programme Justice 2021-2027 prévoit un financement pour soutenir la coopération judiciaire en matière civile et pénale et l’accès effectif des citoyens et des entreprises à la justice.",
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for the funding. It mentions supporting access to justice for citizens and businesses but does not clarify if associations like 'Les Vieilles Pierres' are eligible applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent déposer une candidature. Il mentionne le soutien à l'accès à la justice pour les citoyens et les entreprises, mais ne clarifie pas si les associations comme 'Les Vieilles Pierres' sont éligibles."
+      "en": "The funding opportunity explicitly targets judicial cooperation in civil and criminal matters and effective access to justice for citizens and businesses. The organisation's activities in heritage, culture, and tourism do not align with these objectives.",
+      "fr": "L'opportunité de financement cible explicitement la coopération judiciaire en matière civile et pénale ainsi que l'accès effectif des citoyens et des entreprises à la justice. Les activités de l'organisation dans les domaines du patrimoine, de la culture et du tourisme ne correspondent pas à ces objectifs."
     },
     "nextAction": {
-      "en": "Check the full call for proposals or programme guidelines to determine the eligible types of applicants.",
-      "fr": "Consulter l’appel à projets complet ou les lignes directrices du programme pour déterminer les types d’organisations éligibles."
+      "en": "Review other funding opportunities that support heritage, culture, or tourism projects.",
+      "fr": "Consulter d'autres opportunités de financement qui soutiennent des projets dans les domaines du patrimoine, de la culture ou du tourisme."
     }
   }
 }

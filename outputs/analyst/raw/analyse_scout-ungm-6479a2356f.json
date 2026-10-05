@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations or legal entities are eligible to apply for the International Procurement Seminars (IPS). It only describes the purpose of the seminars.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations ou d'entités juridiques sont éligibles pour postuler aux Séminaires de Passation des Marchés Internationaux (IPS). Il décrit uniquement l'objectif des séminaires."
+    },
+    "nextAction": {
+      "en": "Contact the United Nations procurement office to clarify which types of organisations (e.g., companies, NGOs, government entities) are permitted to participate in the IPS.",
+      "fr": "Contacter le bureau des marchés des Nations Unies pour clarifier quels types d'organisations (par exemple, entreprises, ONG, entités gouvernementales) sont autorisés à participer aux IPS."
+    }
+  }
+}

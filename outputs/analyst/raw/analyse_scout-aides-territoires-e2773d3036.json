@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citation": "Écoles, collèges, lycées, et autres structures éducatives en France",
+    "citation": "Il vise à accélérer la rénovation énergétique des bâtiments scolaires en France. Il s’inscrit dans la stratégie nationale de transition écologique et cible les écoles, collèges, lycées, ainsi que d’autres structures éducatives.",
     "reason": {
-      "en": "The organisation 'Les Vieilles Pierres' is a heritage hiking association, not an educational structure such as a school, college, or lycée.",
-      "fr": "L'organisation 'Les Vieilles Pierres' est une association de randonnée patrimoniale, et non une structure éducative telle qu'une école, un collège ou un lycée."
+      "en": "The funding opportunity specifically targets educational buildings such as schools, colleges, and high schools. The organisation 'Les Vieilles Pierres' is a heritage hiking association and does not manage or own educational buildings.",
+      "fr": "L'opportunité de financement cible spécifiquement les bâtiments scolaires comme les écoles, collèges et lycées. L'organisation 'Les Vieilles Pierres' est une association de randonnée patrimoniale et ne gère ni ne possède de bâtiments éducatifs."
     },
     "nextAction": {
-      "en": "Review other funding opportunities that target heritage, culture, or tourism associations.",
-      "fr": "Consulter d'autres opportunités de financement destinées aux associations patrimoniales, culturelles ou touristiques."
+      "en": "Confirm whether the organisation manages or owns any educational buildings that could qualify under this programme.",
+      "fr": "Vérifier si l'organisation gère ou possède des bâtiments éducatifs qui pourraient être éligibles dans le cadre de ce programme."
     }
   }
 }

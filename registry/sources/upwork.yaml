@@ -10,7 +10,7 @@ geographies: ["GLOBAL"]
 forProjects: ["thestudio-mt"]
 url: "https://www.upwork.com"
 urlVerified: false
-lastUrlCheck: "2026-09-28"
+lastUrlCheck: "2026-10-05"
 status: BLOCKED
 access:
   mode: API

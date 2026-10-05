@@ -38,21 +38,21 @@ I AM AN INVESTOR
 I AM A TALENT
 What's Happening?
 BLOG
-HIFI RAISES USD 37 MILLION TO SCALE THE INFRASTRUCTURE FOR TOKENISED MONEY
-25
-Sep
+HUB71 STARTUPS ABHI AND NYMCARD JOIN FORCES TO ADVANCE SME CREDIT IN THE UAE
+05
+Oct
 , 2026
 VIEW MORE
-BLOG
-HUB71 STARTUP SYNAPSE ANALYTICS RAISES USD 13 MILLION TO SCALE AI POWERED DECISIONING FOR FINANCIAL INSTITUTIONS
-21
+PRESS RELEASE
+ADREC AND HUB71 SIGN MOU TO CONNECT ABU DHABI'S REAL ESTATE SECTOR WITH TECHNOLOGY STARTUPS
+30
 Sep
 , 2026
 VIEW MORE
 PRESS RELEASE
-HUB71 EXPANDS INITIATE PROGRAMME AFTER ALMOST 5500 FOUNDERS REGISTER FOR EARLY-STAGE STARTUP SUPPORT
-26
-Aug
+HUB71 AND EUROPEAN DIAGNOSTICS LEADER UNILABS MIDDLE EAST PARTNER TO ADVANCE HEALTHCARE INNOVATION AND COMMERCIAL ADOPTION IN ABU DHABI
+29
+Sep
 , 2026
 VIEW MORE
 Join our next Info Session
@@ -151,20 +151,20 @@ SOME OF OUR STARTUPS:
 
 We are currently on the Polygon (Matic) Network, which is an Ethereum-compatible blockchain network.
 
-Dapio Tap to Pay transforms the way you get paid
+Jade Autism is an app for ASD (Autistic Spectrum Disorder) that stimulates and develops children's cognitive functions.
 
-Mashvisor is a platform that combines all services needed for real estate investing, cutting three months’ worth of research down to only 15 minutes.
+Lune is an AI-driven engagement and hyper-personalization platform for banks, built on insights from over 1 billion transactions. Our Transaction Enrichment API transforms raw transaction data into actionable insights, powering our core products: Enrichment, Personal Finance Engagement (PFE) SDK, Insights Dashboard, and Smart Nudges. (Supports Arabic transliteration)
 
-On a mission to democratize AI for the Banking Industry
+A community-based platform in outer space with blockchain technology
 
 ALL STARTUPS
 Our community says
-The Hub71 team and program have been invaluable in helping Kinderly become established in the UAE, with their generous Company Building Program allowing us to recruit the best employees and quickly grow the team in Abu Dhabi.
-Founder & CEO
-Geraint Barton
 When I first came to visit the UAE I met with the Hub71 team and I was very impressed by them, and so I applied to the Company Building Program, and I was fortunate enough to be accepted.
 Founder & CEO
 Derick Smith
+The Hub71 team and program have been invaluable in helping Kinderly become established in the UAE, with their generous Company Building Program allowing us to recruit the best employees and quickly grow the team in Abu Dhabi.
+Founder & CEO
+Geraint Barton
 Our partners
 
 We’re more powerful when we work together. We’re growing our diverse community of partners to accelerate business growth in Abu Dhabi’s flourishing tech sector.
@@ -244,5 +244,3 @@ REPORTS
 PRIVACY NOTICETERMS OF USE
 
 © Copyright 2026
-
-Chat with us

@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NOT_ELIGIBLE",
-    "citation": "Consultancy to support the development of a Framework of Action on Skills for a Just Energy Transition through Social Dialogue in **Mpumalanga and the Eastern Cape**",
+    "verdict": "NEEDS_INFO",
+    "citations": [],
     "reason": {
-      "en": "The opportunity explicitly targets activities in Mpumalanga and the Eastern Cape, which are provinces in South Africa. TheStudio MT operates in France, the European Union, the United Arab Emirates, and the Gulf Cooperation Council countries, with no indication of presence or operations in South Africa.",
-      "fr": "L'opportunité cible explicitement des activités dans le Mpumalanga et l'Eastern Cape, qui sont des provinces d'Afrique du Sud. TheStudio MT opère en France, dans l'Union européenne, aux Émirats arabes unis et dans les pays du Conseil de coopération du Golfe, sans indication de présence ou d'opérations en Afrique du Sud."
+      "en": "The opportunity text does not specify which types of organisations may apply. There is no mention of eligibility criteria related to the legal form, location, or sector of applicants.",
+      "fr": "Le texte de l'opportunité ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité relatifs à la forme juridique, à la localisation ou au secteur des candidats."
     },
     "nextAction": {
-      "en": "Confirm whether TheStudio MT has a legal entity or operational presence in South Africa that could qualify for this opportunity.",
-      "fr": "Vérifier si TheStudio MT dispose d'une entité légale ou d'une présence opérationnelle en Afrique du Sud qui pourrait être éligible pour cette opportunité."
+      "en": "Contact the issuer (United Nations) to request the full terms of reference or eligibility guidelines for this opportunity.",
+      "fr": "Contacter l'émetteur (Nations Unies) pour demander le cahier des charges complet ou les directives d'éligibilité pour cette opportunité."
     }
   }
 }

@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citations": [],
+    "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for this funding. It only mentions that funding is provided in the form of grants and public contracts for technical and operational investigation equipment, specialized training, and research activities.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent faire une demande de financement. Il mentionne uniquement que le financement est fourni sous forme de subventions et de marchés publics pour des équipements d'investigation techniques et opérationnels, des formations spécialisées et des activités de recherche."
+      "en": "The extracted text does not specify which types of organisations may apply for this funding. It only describes the scope of the programme.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à ce financement. Il décrit uniquement le champ d'application du programme."
     },
     "nextAction": {
-      "en": "Contact the issuer (beta.gouv.fr / French state) to ask which types of organisations are eligible to apply for this funding opportunity.",
-      "fr": "Contacter l'émetteur (beta.gouv.fr / État français) pour demander quels types d'organisations sont éligibles à cette opportunité de financement."
+      "en": "Contact the issuer (beta.gouv.fr) to ask which legal entities are eligible to apply for the EUAF Programme Anti-Fraude 2021-2027.",
+      "fr": "Contacter l'émetteur (beta.gouv.fr) pour demander quelles entités juridiques sont éligibles à postuler pour le Programme Anti-Fraude EUAF 2021-2027."
     }
   }
 }

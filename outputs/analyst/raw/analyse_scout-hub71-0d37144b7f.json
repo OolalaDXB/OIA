@@ -3,12 +3,12 @@
     "verdict": "NOT_ELIGIBLE",
     "citation": "Initiate is Hub71’s early-stage programme that supports founders at the ideation or pre-MVP stage to turn their ideas into scalable startups.",
     "reason": {
-      "en": "The opportunity explicitly targets founders at the 'ideation or pre-MVP stage,' implying the organisation must be in a very early phase of development. BAWABA is described as operating in multiple regions and sectors with a developed product (Sovereign AI control plane), which suggests it is beyond the pre-MVP stage.",
-      "fr": "L'opportunité cible explicitement les fondateurs au stade de l'« idéation ou pré-MVP », ce qui implique que l'organisation doit être à un stade très précoce de développement. BAWABA est décrite comme opérant dans plusieurs régions et secteurs avec un produit développé (plan de contrôle d'IA souveraine), ce qui suggère qu'elle dépasse le stade pré-MVP."
+      "en": "The opportunity explicitly targets founders at the ideation or pre-MVP stage. BAWABA is described as operating in multiple regions and sectors with a developed product (Sovereign AI control plane), which suggests it is beyond the pre-MVP stage.",
+      "fr": "L'opportunité cible explicitement les fondateurs au stade de l'idéation ou pré-MVP. BAWABA est décrit comme opérant dans plusieurs régions et secteurs avec un produit développé (plan de contrôle d'IA souverain), ce qui suggère qu'il dépasse le stade pré-MVP."
     },
     "nextAction": {
-      "en": "Review other Hub71 programmes or funding opportunities that target later-stage startups or scale-ups.",
-      "fr": "Examiner d'autres programmes de Hub71 ou opportunités de financement ciblant les startups en phase ultérieure ou les scale-ups."
+      "en": "Review other funding opportunities that target growth-stage or established startups.",
+      "fr": "Examiner d'autres opportunités de financement ciblant les startups en phase de croissance ou déjà établies."
     }
   }
 }

@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The opportunity text does not specify who may apply or what types of organizations are eligible to participate in the UN International Procurement Seminar.",
+      "fr": "Le texte de l'opportunité ne précise pas qui peut postuler ou quels types d'organisations sont éligibles à participer au Séminaire international des marchés des Nations Unies."
+    },
+    "nextAction": {
+      "en": "Contact the United Nations procurement office to clarify eligibility criteria for the seminar.",
+      "fr": "Contacter le bureau des marchés des Nations Unies pour clarifier les critères d'éligibilité pour le séminaire."
+    }
+  }
+}

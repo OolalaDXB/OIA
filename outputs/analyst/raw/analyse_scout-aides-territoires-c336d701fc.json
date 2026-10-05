@@ -1,16 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NOT_ELIGIBLE",
-    "citations": [
-      "Territoires concernés par de fortes émissions de CO2"
-    ],
+    "verdict": "NEEDS_INFO",
+    "citation": [],
     "reason": {
-      "en": "The funding opportunity is restricted to territories with high CO2 emissions. The organisation operates in Bretagne, which is not specified as a territory with high CO2 emissions in the context of this fund.",
-      "fr": "L'opportunité de financement est restreinte aux territoires concernés par de fortes émissions de CO2. L'organisation opère en Bretagne, qui n'est pas spécifiée comme un territoire à fortes émissions de CO2 dans le cadre de ce fonds."
+      "en": "The extracted text does not specify which types of organisations may apply for the FTJ fund. There is no mention of eligibility criteria regarding legal status, sector, or organisational form.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au fonds FTJ. Il n'y a aucune mention des critères d'éligibilité concernant le statut juridique, le secteur ou la forme organisationnelle."
     },
     "nextAction": {
-      "en": "Verify if Bretagne is listed as a territory with high CO2 emissions under the FTJ programme.",
-      "fr": "Vérifier si la Bretagne est répertoriée comme un territoire à fortes émissions de CO2 dans le cadre du programme FTJ."
+      "en": "Contact the issuer (beta.gouv.fr) to ask for the official eligibility rules of the FTJ fund.",
+      "fr": "Contacter l'émetteur (beta.gouv.fr) pour demander les règles officielles d'éligibilité du fonds FTJ."
     }
   }
 }

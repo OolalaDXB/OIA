@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Open Topic on advanced protective gear optimized for CBRN-E (Chemical, Biological, Radiological, Nuclear, Explosives) environments and new generation of smart protective equipment for disaster responders",
+    "reason": {
+      "en": "The opportunity explicitly targets developers of advanced protective gear for CBRN-E environments and smart protective equipment for disaster responders. BAWABA's focus on AI, data, digital, cybersecurity, and software for regulated industries does not align with the specified technical domain of protective equipment for CBRN-E or disaster response.",
+      "fr": "L'opportunité cible explicitement les développeurs d'équipements de protection avancés pour les environnements CBRN-E et d'équipements de protection intelligents pour les intervenants en cas de catastrophe. L'activité de BAWABA, centrée sur l'IA, les données, le numérique, la cybersécurité et les logiciels pour les industries réglementées, ne correspond pas au domaine technique spécifié des équipements de protection pour les environnements CBRN-E ou les interventions en cas de catastrophe."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that align with BAWABA's focus on AI, data, or cybersecurity for regulated industries.",
+      "fr": "Examiner d'autres opportunités de financement qui correspondent à l'expertise de BAWABA en IA, données ou cybersécurité pour les industries réglementées."
+    }
+  }
+}
