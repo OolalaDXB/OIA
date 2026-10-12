@@ -10,7 +10,7 @@ geographies: ["EMEA", "GLOBAL", "Africa"]
 forProjects: ["padel-design", "district-267", "live-great-foundation", "thestudio-mt"]
 url: "https://projects.worldbank.org/en/projects-operations/procurement"
 urlVerified: true
-lastUrlCheck: "2026-10-05"
+lastUrlCheck: "2026-10-12"
 status: DECLARED
 access:
   mode: MANUAL

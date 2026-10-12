@@ -1,16 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citations": [
-      "Le Fonds européen de défense (FED, ou FEDef) est un programme de l’Union européenne destiné à financer la recherche et le développement de programmes industriels dans le domaine de la défense."
-    ],
+    "citation": "Le Fonds européen de défense (FED, ou FEDef) est un programme de l’Union européenne destiné à financer la recherche et le développement de programmes industriels dans le domaine de la défense.",
     "reason": {
-      "en": "The funding opportunity explicitly targets research and development of industrial programs in the defense sector. Les Vieilles Pierres is a heritage hiking association operating in heritage, culture, and tourism, which does not align with the defense sector.",
-      "fr": "L'opportunité de financement cible explicitement la recherche et le développement de programmes industriels dans le domaine de la défense. Les Vieilles Pierres est une association de randonnée patrimoniale opérant dans les secteurs du patrimoine, de la culture et du tourisme, ce qui ne correspond pas au secteur de la défense."
+      "en": "The opportunity explicitly funds research and development of industrial programs in the defense sector. Les Vieilles Pierres is a heritage hiking association in the sectors of heritage, culture, and tourism, which does not align with the defense sector.",
+      "fr": "L'opportunité finance explicitement la recherche et le développement de programmes industriels dans le domaine de la défense. Les Vieilles Pierres est une association de randonnée patrimoniale dans les secteurs du patrimoine, de la culture et du tourisme, ce qui ne correspond pas au secteur de la défense."
     },
     "nextAction": {
       "en": "Review other funding opportunities that align with the heritage, culture, or tourism sectors.",
-      "fr": "Examiner d'autres opportunités de financement qui correspondent aux secteurs du patrimoine, de la culture ou du tourisme."
+      "fr": "Consulter d'autres opportunités de financement qui correspondent aux secteurs du patrimoine, de la culture ou du tourisme."
     }
   }
 }

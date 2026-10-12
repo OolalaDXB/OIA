@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citations": [],
+    "citation": [],
     "reason": {
-      "en": "The opportunity text does not specify which types of organisations may apply. There is no mention of eligibility criteria related to the legal form, location, or sector of applicants.",
-      "fr": "Le texte de l'opportunité ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité relatifs à la forme juridique, à la localisation ou au secteur des candidats."
+      "en": "The extracted text of the opportunity does not specify which types of organisations may apply. There is no mention of eligibility criteria such as legal form, location, or sector.",
+      "fr": "Le texte extrait de l'opportunité ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité tels que la forme juridique, la localisation ou le secteur d'activité."
     },
     "nextAction": {
-      "en": "Check the full tender documents on the TED website for eligibility requirements.",
-      "fr": "Consulter les documents complets de l'appel d'offres sur le site TED pour connaître les exigences d'éligibilité."
+      "en": "Contact the buyer (LE HAVRE SEINE METROPOLE) to request the full tender documents and confirm eligibility requirements.",
+      "fr": "Contacter l'acheteur (LE HAVRE SEINE METROPOLE) pour demander les documents complets de l'appel d'offres et confirmer les critères d'éligibilité."
     }
   }
 }

@@ -1,8 +1,8 @@
 # Link check
 
-Checked 221 distinct URL(s).
+Checked 236 distinct URL(s).
 
-- resolving: 212
+- resolving: 227
 - **broken: 2**
 - refused us (not broken): 7
 - inconclusive: 0
@@ -64,6 +64,8 @@ Checked 221 distinct URL(s).
   - https://hub71.com/
 - **opportunity scout-aides-territoires-4f0e193d06** — now redirects to https://aides-territoires.beta.gouv.fr/portails/ecoquartier/
   - https://aides-territoires.beta.gouv.fr/programmes/ecoquartier/
+- **opportunity scout-hub71-752f31c14a** — now redirects to https://www.hub71.com/info-sessions
+  - https://www.hub71.com/info-sessions#formPopup
 
 ## Refused us
 

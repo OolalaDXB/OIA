@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citation": [],
+    "citations": [],
     "reason": {
-      "en": "The opportunity text does not specify who may apply for this tender. There is no mention of eligible applicants, such as legal entity types, geographic restrictions beyond the place of performance, or other criteria that would confirm or exclude BAWABA.",
-      "fr": "Le texte de l'opportunité ne précise pas qui peut postuler à cet appel d'offres. Il n'y a aucune mention des types d'entités juridiques éligibles, des restrictions géographiques au-delà du lieu d'exécution, ou d'autres critères qui confirmeraient ou excluraient BAWABA."
+      "en": "The extracted text does not specify which types of organisations are eligible to apply for this tender. There is no mention of eligibility criteria such as legal form, location, or sector.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles pour cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité tels que la forme juridique, la localisation ou le secteur d'activité."
     },
     "nextAction": {
-      "en": "Contact the buyer (Stadtwerke Bielefeld GmbH) at einkauf@stadtwerke-bielefeld.de to clarify the eligibility criteria for applicants.",
-      "fr": "Contacter l'acheteur (Stadtwerke Bielefeld GmbH) à l'adresse einkauf@stadtwerke-bielefeld.de pour clarifier les critères d'éligibilité des candidats."
+      "en": "Contact the buyer (Stadtwerke Bielefeld GmbH) to request the full tender documentation and confirm eligibility requirements.",
+      "fr": "Contacter l'acheteur (Stadtwerke Bielefeld GmbH) pour demander la documentation complète de l'appel d'offres et confirmer les critères d'éligibilité."
     }
   }
 }

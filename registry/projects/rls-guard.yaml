@@ -11,7 +11,7 @@ status: LIVE
 oneLiner: "Security CI for multi-tenant Postgres. Catches tenant isolation breaks before they merge."
 url: "https://github.com/OolalaDXB/rls-guard/releases/tag/v1.0.0"
 urlVerified: true
-lastUrlCheck: "2026-10-05"
+lastUrlCheck: "2026-10-12"
 active: true
 legalEntities:
   - name: "Oolala France SAS"

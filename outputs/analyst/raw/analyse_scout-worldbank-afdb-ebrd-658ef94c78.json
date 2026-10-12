@@ -1,14 +1,16 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citation": "Consultancy Services for Feasibility Studies and Detailed Designs for Dogi and Mako River Bridges in Bulen and Sedal Woredas and Gravel Access Roads in Wombera, Buldigilu, Mao-Komo and Dembe Woredas",
+    "citations": [
+      "Hanshan Sub-district Office, Zhongshiying Sub-district Office, Dagukan Town, Liangshan Town - Equipment Procurement for the Promotion and Popularization of Waste Classification Campaign"
+    ],
     "reason": {
-      "en": "The opportunity explicitly targets consultancy services for feasibility studies and detailed designs related to infrastructure projects (bridges and gravel access roads). padel.design specializes in advisory for padel club development, which is unrelated to the required expertise in civil engineering, bridge design, or road infrastructure.",
-      "fr": "L'opportunité cible explicitement des services de conseil pour des études de faisabilité et des conceptions détaillées liées à des projets d'infrastructure (ponts et routes d'accès en gravier). padel.design se spécialise dans le conseil pour le développement de clubs de padel, ce qui n'a aucun rapport avec l'expertise requise en ingénierie civile, conception de ponts ou infrastructure routière."
+      "en": "The opportunity explicitly names the eligible applicants as Hanshan Sub-district Office, Zhongshiying Sub-district Office, Dagukan Town, and Liangshan Town. padel.design is not listed among these entities.",
+      "fr": "L'opportunité nomme explicitement les candidats éligibles comme étant le Bureau du sous-district de Hanshan, le Bureau du sous-district de Zhongshiying, la ville de Dagukan et la ville de Liangshan. padel.design n'est pas mentionné parmi ces entités."
     },
     "nextAction": {
-      "en": "Review other funding opportunities that align with padel.design’s expertise in sport, advisory, or real estate sectors.",
-      "fr": "Examiner d'autres opportunités de financement qui correspondent à l'expertise de padel.design dans les secteurs du sport, du conseil ou de l'immobilier."
+      "en": "Confirm with the issuer whether non-listed entities may apply or if the opportunity is restricted to the named applicants.",
+      "fr": "Vérifier auprès de l'émetteur si des entités non listées peuvent postuler ou si l'opportunité est réservée aux candidats nommés."
     }
   }
 }

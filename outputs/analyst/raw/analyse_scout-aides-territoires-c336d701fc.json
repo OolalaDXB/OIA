@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NEEDS_INFO",
-    "citation": [],
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Le FTJ a été créé pour accompagner la transition énergétique et industrielle des territoires concernés par de fortes émissions de CO2 dans la transition vers une économie neutre en carbone, conformément aux objectifs de l’Union européenne dans le cadre de l’accord de Paris.",
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for the FTJ fund. There is no mention of eligibility criteria regarding legal status, sector, or organisational form.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au fonds FTJ. Il n'y a aucune mention des critères d'éligibilité concernant le statut juridique, le secteur ou la forme organisationnelle."
+      "en": "The fund targets territories with high CO2 emissions for energy and industrial transition. The organisation operates in heritage, culture, and tourism, which are not mentioned as eligible sectors in the opportunity text.",
+      "fr": "Le fonds cible les territoires à fortes émissions de CO2 pour la transition énergétique et industrielle. L'organisation opère dans les secteurs du patrimoine, de la culture et du tourisme, qui ne sont pas mentionnés comme éligibles dans le texte de l'opportunité."
     },
     "nextAction": {
-      "en": "Contact the issuer (beta.gouv.fr) to ask for the official eligibility rules of the FTJ fund.",
-      "fr": "Contacter l'émetteur (beta.gouv.fr) pour demander les règles officielles d'éligibilité du fonds FTJ."
+      "en": "Review other funding opportunities that explicitly support heritage, culture, or tourism projects.",
+      "fr": "Consulter d'autres opportunités de financement qui soutiennent explicitement les projets liés au patrimoine, à la culture ou au tourisme."
     }
   }
 }

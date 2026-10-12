@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NEEDS_INFO",
-    "citations": [],
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Achat, remplacement et mise en service des équipements de la buanderie (électricité, plomberie, machines à laver) en Haïti",
     "reason": {
-      "en": "The opportunity text does not specify which types of organisations may apply. There is no mention of eligibility criteria related to the legal form, location, or sector of applicants.",
-      "fr": "Le texte de l'opportunité ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité relatifs à la forme juridique, à la localisation ou au secteur des candidats."
+      "en": "The opportunity is for the purchase, replacement, and commissioning of laundry equipment (electricity, plumbing, washing machines) in Haiti. The organisation's activities (software, digital, design, advisory, AI) and sectors do not align with the physical infrastructure and equipment requirements specified in the opportunity.",
+      "fr": "L'opportunité concerne l'achat, le remplacement et la mise en service d'équipements de buanderie (électricité, plomberie, machines à laver) en Haïti. Les activités de l'organisation (logiciels, numérique, design, conseil, IA) et ses secteurs d'intervention ne correspondent pas aux exigences d'infrastructure physique et d'équipements spécifiées dans l'opportunité."
     },
     "nextAction": {
-      "en": "Contact the issuer (United Nations) to request the full terms of reference or eligibility guidelines for this opportunity.",
-      "fr": "Contacter l'émetteur (Nations Unies) pour demander le cahier des charges complet ou les directives d'éligibilité pour cette opportunité."
+      "en": "Review other funding opportunities that align with the organisation's expertise in software, digital, design, or AI.",
+      "fr": "Consulter d'autres opportunités de financement qui correspondent à l'expertise de l'organisation en logiciels, numérique, design ou IA."
     }
   }
 }

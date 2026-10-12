@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citation": [],
+    "citations": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of whether associations, non-profits, or other legal entities can participate.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles. Il n'est pas mentionné si les associations, les organismes à but non lucratif ou d'autres entités juridiques peuvent participer."
+      "en": "The extracted text does not specify which types of organisations are eligible to apply for this funding opportunity. There is no mention of eligible applicants such as associations, NGOs, public bodies, or private entities.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles pour cette opportunité de financement. Il n'est pas fait mention des demandeurs éligibles tels que les associations, les ONG, les organismes publics ou les entités privées."
     },
     "nextAction": {
-      "en": "Contact the issuer (beta.gouv.fr or the relevant French state authority) to ask which legal entities are permitted to apply for this funding opportunity.",
-      "fr": "Contacter l'émetteur (beta.gouv.fr ou l'autorité compétente de l'État français) pour demander quelles entités juridiques sont autorisées à postuler à cette opportunité de financement."
+      "en": "Contact the issuer (beta.gouv.fr or the relevant French state authority) to ask for the official call for proposals or guidelines document that details eligible applicants.",
+      "fr": "Contacter l'émetteur (beta.gouv.fr ou l'autorité compétente de l'État français) pour demander le document officiel de l'appel à projets ou les lignes directrices détaillant les demandeurs éligibles."
     }
   }
 }

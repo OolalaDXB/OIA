@@ -1,16 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "LIKELY",
-    "citations": [
-      "Get the support you need to take your business to the next level in Abu Dhabi."
-    ],
+    "verdict": "NEEDS_INFO",
+    "citations": [],
     "reason": {
-      "en": "The opportunity targets businesses looking to expand in Abu Dhabi, but the extracted text does not specify the legal structure or origin of eligible applicants. BAWABA operates in the UAE (AE) and GCC, which aligns geographically, but the document does not confirm whether foreign entities or specific legal forms (e.g., sovereign-backed entities) are permitted.",
-      "fr": "L'opportunité cible les entreprises cherchant à se développer à Abu Dhabi, mais le texte extrait ne précise pas la structure juridique ou l'origine des candidats éligibles. BAWABA opère aux Émirats arabes unis (AE) et dans le CCG, ce qui correspond géographiquement, mais le document ne confirme pas si les entités étrangères ou certaines formes juridiques (par exemple, les entités soutenues par un État souverain) sont autorisées."
+      "en": "The extracted text does not specify which types of organisations may apply to the Access Programme. There is no mention of eligibility criteria such as legal structure, location, or sector.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au programme Access. Il n'y a aucune mention des critères d'éligibilité tels que la structure juridique, la localisation ou le secteur d'activité."
     },
     "nextAction": {
-      "en": "Check the full Access Programme guidelines or contact Mubadala to confirm whether foreign entities or sovereign-backed AI control plane providers are eligible to apply.",
-      "fr": "Consulter les directives complètes du programme Access ou contacter Mubadala pour confirmer si les entités étrangères ou les fournisseurs de plans de contrôle d'IA soutenus par un État souverain sont éligibles."
+      "en": "Contact the issuer (Mubadala) to request the full eligibility criteria for the Access Programme.",
+      "fr": "Contacter l'émetteur (Mubadala) pour demander les critères d'éligibilité complets du programme Access."
     }
   }
 }

@@ -1,16 +1,16 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NOT_ELIGIBLE",
+    "verdict": "NEEDS_INFO",
     "citations": [
-      "EIT Manufacturing a pour objectif de faire de l'Europe le leader de l'innovation industrielle internationale, grâce à son large écosystème d'acteurs de l'industrie."
+      "EUROPE - EIT Manufacturing a pour objectif de faire de l'Europe le leader de l'innovation industrielle internationale, grâce à son large écosystème d'acteurs de l'industrie."
     ],
     "reason": {
-      "en": "The funding opportunity explicitly targets industrial innovation actors, which excludes heritage, culture, and tourism associations like Les Vieilles Pierres.",
-      "fr": "L'opportunité de financement cible explicitement les acteurs de l'innovation industrielle, ce qui exclut les associations du patrimoine, de la culture et du tourisme comme Les Vieilles Pierres."
+      "en": "The extracted text does not specify which types of organisations may apply. It only describes the scope of EIT Manufacturing, which focuses on industrial innovation, but does not exclude or include associations or other entities.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il décrit uniquement l'objectif de l'EIT Manufacturing, axé sur l'innovation industrielle, mais n'exclut ni n'inclut explicitement les associations ou autres entités."
     },
     "nextAction": {
-      "en": "Review other funding opportunities that specifically support heritage, culture, or tourism associations.",
-      "fr": "Consulter d'autres opportunités de financement qui soutiennent spécifiquement les associations du patrimoine, de la culture ou du tourisme."
+      "en": "Check the official EIT Manufacturing call for proposals or guidelines to determine the eligible applicants.",
+      "fr": "Consulter l'appel à projets ou les directives officielles de l'EIT Manufacturing pour identifier les candidats éligibles."
     }
   }
 }

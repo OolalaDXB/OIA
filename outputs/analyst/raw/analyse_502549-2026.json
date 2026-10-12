@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of legal form, geographic restrictions beyond the place of performance, or other criteria that would confirm or exclude BAWABA.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles. Il n'y a aucune mention de la forme juridique, des restrictions géographiques au-delà du lieu d'exécution, ou d'autres critères qui confirmeraient ou excluraient BAWABA."
+      "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria related to legal structure, location, or sector.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Aucun critère d'éligibilité concernant la structure juridique, la localisation ou le secteur n'est mentionné."
     },
     "nextAction": {
-      "en": "Request the full tender notice from TED (Tenders Electronic Daily) using the link provided to identify the eligibility criteria.",
-      "fr": "Demander l'avis complet de l'appel d'offres sur TED (Tenders Electronic Daily) en utilisant le lien fourni pour identifier les critères d'éligibilité."
+      "en": "Check the full tender notice at the provided link to identify the eligibility criteria for applicants.",
+      "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni pour identifier les critères d'éligibilité des candidats."
     }
   }
 }

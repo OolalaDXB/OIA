@@ -3,12 +3,12 @@
     "verdict": "NOT_ELIGIBLE",
     "citation": "Le programme France Très Haut Débit vise à donner accès à tous les Français au bon haut débit fixe (minimum 8 Mbit/s) d’ici à fin 2020, et au très haut débit fixe (minimum 30 Mbit/s) d’ici à fin 2022.",
     "reason": {
-      "en": "The opportunity explicitly targets the deployment of high-speed broadband infrastructure for all French citizens. The organisation 'Les Vieilles Pierres' is a heritage hiking association, which does not align with the infrastructure deployment objectives of this programme.",
-      "fr": "L'opportunité cible explicitement le déploiement de l'infrastructure à très haut débit pour tous les Français. L'organisation 'Les Vieilles Pierres' est une association de randonnée patrimoniale, ce qui ne correspond pas aux objectifs de déploiement d'infrastructure de ce programme."
+      "en": "The opportunity targets infrastructure deployment for broadband and very high-speed internet access for all French citizens. The organisation is a heritage hiking association, which does not align with the infrastructure deployment scope of this grant.",
+      "fr": "L'opportunité cible le déploiement d'infrastructures pour l'accès à internet haut débit et très haut débit pour tous les Français. L'organisation est une association de randonnée patrimoniale, ce qui ne correspond pas à l'objectif de déploiement d'infrastructures de cette subvention."
     },
     "nextAction": {
-      "en": "Review other funding opportunities related to heritage, culture, or tourism sectors.",
-      "fr": "Consulter d'autres opportunités de financement liées aux secteurs du patrimoine, de la culture ou du tourisme."
+      "en": "Review other funding opportunities that support cultural, heritage, or tourism associations.",
+      "fr": "Consulter d'autres opportunités de financement qui soutiennent les associations culturelles, patrimoniales ou touristiques."
     }
   }
 }

@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NOT_ELIGIBLE",
-    "citation": "Le programme de promotion des produits agricoles (AGRIP) joue un rôle essentiel dans la concrétisation des objectifs politiques de la Commission européenne pour la période 2019-2024, en soutenant le Green Deal européen, la stratégie « Farm to Fork » et le plan européen de lutte contre le cancer.",
+    "verdict": "NEEDS_INFO",
+    "citation": [],
     "reason": {
-      "en": "The AGRIP program specifically supports the promotion of agricultural products. The organization 'Les Vieilles Pierres' is a heritage hiking association, which does not align with the agricultural focus of this funding opportunity.",
-      "fr": "Le programme AGRIP soutient spécifiquement la promotion des produits agricoles. L'association 'Les Vieilles Pierres', dédiée à la randonnée patrimoniale, ne correspond pas à l'objectif agricole de cette opportunité de financement."
+      "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria regarding the legal status or sector of applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il n'y a aucune mention des critères d'éligibilité concernant le statut juridique ou le secteur des candidats."
     },
     "nextAction": {
-      "en": "Review other funding opportunities that align with heritage, culture, or tourism sectors.",
-      "fr": "Consulter d'autres opportunités de financement qui correspondent aux secteurs du patrimoine, de la culture ou du tourisme."
+      "en": "Contact the issuer (beta.gouv.fr) to ask for the official call for proposals or eligibility guidelines.",
+      "fr": "Contacter l'émetteur (beta.gouv.fr) pour demander l'appel à projets officiel ou les directives d'éligibilité."
     }
   }
 }

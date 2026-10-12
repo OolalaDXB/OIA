@@ -38,6 +38,12 @@ I AM AN INVESTOR
 I AM A TALENT
 What's Happening?
 BLOG
+INSIDE INITIATE: WHAT BACKING FOUNDERS AT THE EARLIEST STAGE ACTUALLY LOOKS LIKE
+08
+Oct
+, 2026
+VIEW MORE
+BLOG
 HUB71 STARTUPS ABHI AND NYMCARD JOIN FORCES TO ADVANCE SME CREDIT IN THE UAE
 05
 Oct
@@ -46,12 +52,6 @@ VIEW MORE
 PRESS RELEASE
 ADREC AND HUB71 SIGN MOU TO CONNECT ABU DHABI'S REAL ESTATE SECTOR WITH TECHNOLOGY STARTUPS
 30
-Sep
-, 2026
-VIEW MORE
-PRESS RELEASE
-HUB71 AND EUROPEAN DIAGNOSTICS LEADER UNILABS MIDDLE EAST PARTNER TO ADVANCE HEALTHCARE INNOVATION AND COMMERCIAL ADOPTION IN ABU DHABI
-29
 Sep
 , 2026
 VIEW MORE
@@ -149,13 +149,13 @@ nationalities
 sectors
 SOME OF OUR STARTUPS:
 
-We are currently on the Polygon (Matic) Network, which is an Ethereum-compatible blockchain network.
+Smart Navigation Systems provides innovative location based solutions
 
 Jade Autism is an app for ASD (Autistic Spectrum Disorder) that stimulates and develops children's cognitive functions.
 
-Lune is an AI-driven engagement and hyper-personalization platform for banks, built on insights from over 1 billion transactions. Our Transaction Enrichment API transforms raw transaction data into actionable insights, powering our core products: Enrichment, Personal Finance Engagement (PFE) SDK, Insights Dashboard, and Smart Nudges. (Supports Arabic transliteration)
+Redefining the work-life experience by making automated HR, payroll, employee benefits and insurance a possibility for all businesses in UAE.
 
-A community-based platform in outer space with blockchain technology
+Expand your medical business worldwide with OnEx
 
 ALL STARTUPS
 Our community says

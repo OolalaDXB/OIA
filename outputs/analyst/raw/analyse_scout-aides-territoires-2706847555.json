@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NOT_ELIGIBLE",
-    "citation": "Le programme Justice 2021-2027 prévoit un financement pour soutenir la coopération judiciaire en matière civile et pénale et l’accès effectif des citoyens et des entreprises à la justice.",
+    "verdict": "NEEDS_INFO",
+    "citation": [],
     "reason": {
-      "en": "The funding opportunity explicitly targets judicial cooperation in civil and criminal matters and effective access to justice for citizens and businesses. The organisation's activities in heritage, culture, and tourism do not align with these objectives.",
-      "fr": "L'opportunité de financement cible explicitement la coopération judiciaire en matière civile et pénale ainsi que l'accès effectif des citoyens et des entreprises à la justice. Les activités de l'organisation dans les domaines du patrimoine, de la culture et du tourisme ne correspondent pas à ces objectifs."
+      "en": "The extracted text does not specify which types of organisations may apply for the funding. It mentions supporting 'citizens and businesses' but does not clarify if associations like 'Les Vieilles Pierres' are eligible.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent demander ce financement. Il mentionne le soutien aux 'citoyens et aux entreprises' mais ne clarifie pas si les associations comme 'Les Vieilles Pierres' sont éligibles."
     },
     "nextAction": {
-      "en": "Review other funding opportunities that support heritage, culture, or tourism projects.",
-      "fr": "Consulter d'autres opportunités de financement qui soutiennent des projets dans les domaines du patrimoine, de la culture ou du tourisme."
+      "en": "Check the full call for proposals or official programme documentation to confirm the types of organisations eligible to apply.",
+      "fr": "Consulter l'appel à projets complet ou la documentation officielle du programme pour confirmer les types d'organisations éligibles."
     }
   }
 }

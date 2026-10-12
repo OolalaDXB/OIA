@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify who may apply for this tender. There is no mention of eligible applicants, legal status requirements, or geographic restrictions.",
+      "fr": "Le texte extrait ne précise pas qui peut postuler à cet appel d'offres. Il n'y a aucune mention des candidats éligibles, des exigences de statut juridique ou des restrictions géographiques."
+    },
+    "nextAction": {
+      "en": "Contact the buyer (GIP OKANTIS) to request the full tender documentation and confirm eligibility criteria.",
+      "fr": "Contacter l'acheteur (GIP OKANTIS) pour demander le dossier complet de l'appel d'offres et confirmer les critères d'éligibilité."
+    }
+  }
+}

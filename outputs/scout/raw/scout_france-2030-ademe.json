@@ -1,6 +1,6 @@
 {
   "ScoutResult": {
-    "note": "The page is a Cloudflare security challenge page, not a funding opportunities listing. No funding opportunities are displayed.",
+    "note": "The provided page is a Cloudflare security verification page and does not contain any funding opportunities.",
     "calls": []
   }
 }

@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citation": [],
+    "citations": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations are eligible to apply. It only describes the programme's objectives without detailing applicant criteria.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il décrit uniquement les objectifs du programme sans détailler les critères des candidats."
+      "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. It only describes the scope of the programme.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il décrit uniquement le champ d'application du programme."
     },
     "nextAction": {
-      "en": "Check the official COSME programme documentation or contact the issuer to confirm whether associations like 'Les Vieilles Pierres' are eligible to apply.",
-      "fr": "Consulter la documentation officielle du programme COSME ou contacter l'émetteur pour confirmer si des associations comme 'Les Vieilles Pierres' peuvent postuler."
+      "en": "Check the full call for proposals or programme guidelines to determine the eligible applicants.",
+      "fr": "Consulter l'appel à propositions complet ou les lignes directrices du programme pour déterminer les candidats éligibles."
     }
   }
 }

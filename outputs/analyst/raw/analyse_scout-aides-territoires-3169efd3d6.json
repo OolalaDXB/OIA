@@ -1,16 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citations": [
-      "Les QPV sont entités définies par la loi de 2014, identifiant zones urbaines pauvres nécessitant des interventions publiques."
-    ],
+    "citation": "Les QPV sont entités définies par la loi de 2014, identifiant zones urbaines pauvres nécessitant des interventions publiques.",
     "reason": {
-      "en": "The opportunity targets specific urban areas (QPV) defined by law for public intervention in disadvantaged zones. The organisation operates in Bretagne and does not mention any activity or presence in QPV zones.",
-      "fr": "L'opportunité cible des zones urbaines spécifiques (QPV) définies par la loi pour des interventions publiques dans des quartiers défavorisés. L'organisation opère en Bretagne et ne mentionne aucune activité ou présence dans les zones QPV."
+      "en": "The funding opportunity targets specific urban areas defined as 'Quartiers Prioritaires de la Ville' (QPV), which are disadvantaged urban zones. The organisation operates in Bretagne and focuses on heritage hiking, which is not tied to these designated urban areas.",
+      "fr": "L'opportunité de financement cible des zones urbaines spécifiques définies comme 'Quartiers Prioritaires de la Ville' (QPV), qui sont des zones urbaines défavorisées. L'organisation opère en Bretagne et se concentre sur la randonnée patrimoniale, ce qui n'est pas lié à ces zones urbaines désignées."
     },
     "nextAction": {
-      "en": "Verify if the organisation has any projects or activities located within a QPV zone as defined by the 2024 cartography.",
-      "fr": "Vérifier si l'organisation a des projets ou activités situés dans une zone QPV telle que définie par la cartographie 2024."
+      "en": "Verify if any of the association's activities or projects are located within a QPV zone as defined by the 2024 cartography.",
+      "fr": "Vérifier si une partie des activités ou projets de l'association se situe dans un QPV tel que défini par la cartographie 2024."
     }
   }
 }

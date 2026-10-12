@@ -1,14 +1,16 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citations": [],
+    "citations": [
+      "The extracted text does not specify eligibility criteria regarding who may apply for this tender."
+    ],
     "reason": {
-      "en": "The opportunity text does not specify which types of organisations (e.g., legal forms, geographic restrictions, or sector-specific requirements) are eligible to apply. It only describes the services sought and the buyer's identity.",
-      "fr": "Le texte de l'opportunité ne précise pas quels types d'organisations (par exemple, formes juridiques, restrictions géographiques ou exigences sectorielles) sont éligibles. Il décrit uniquement les services recherchés et l'identité de l'acheteur."
+      "en": "The document does not state which types of organisations are eligible to apply for this funding opportunity. There is no mention of restrictions or required qualifications for applicants.",
+      "fr": "Le document ne précise pas quels types d'organisations sont éligibles pour cette opportunité de financement. Il n'y a aucune mention de restrictions ou de qualifications requises pour les candidats."
     },
     "nextAction": {
-      "en": "Contact the buyer (SM Manche Numérique) to confirm whether private companies, including those based outside France but operating in the EU, are permitted to submit a tender.",
-      "fr": "Contacter l'acheteur (SM Manche Numérique) pour confirmer si les entreprises privées, y compris celles basées hors de France mais opérant dans l'UE, sont autorisées à soumettre une offre."
+      "en": "Contact the buyer (SM Manche Numérique) to request the full tender documentation or eligibility criteria.",
+      "fr": "Contacter l'acheteur (SM Manche Numérique) pour demander le dossier complet de l'appel d'offres ou les critères d'éligibilité."
     }
   }
 }

@@ -1,14 +1,17 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citation": "Supply services of personnel including temporary staff – Prestations de mise à disposition de personnel intérimaire pour le compte du Centre Départemental Enfance Familles (CDEF)",
+    "citation": [
+      "Supply services of personnel including temporary staff – Prestations de mise à disposition de personnel intérimaire pour le compte du Centre Départemental Enfance Familles (CDEF)",
+      "classification-cpv: 79620000, 79620000, 79620000, 79620000, 79625000, 72611000"
+    ],
     "reason": {
-      "en": "The opportunity explicitly requests the supply of temporary staffing services for a child and family services department. BAWABA's core activity is described as a 'Sovereign AI control plane for regulated industries,' which does not align with the provision of temporary personnel services.",
-      "fr": "L'opportunité demande explicitement la fourniture de services de personnel intérimaire pour un service départemental dédié à l'enfance et aux familles. L'activité principale de BAWABA, décrite comme un 'plan de contrôle d'IA souverain pour les industries réglementées,' ne correspond pas à la fourniture de services de personnel intérimaire."
+      "en": "The opportunity specifically calls for the supply of temporary staffing services (CPV codes 79620000 and 79625000), which involves providing personnel for child and family services. BAWABA's core activity is a sovereign AI control plane for regulated industries, which does not align with the provision of temporary staffing or personnel services.",
+      "fr": "L'opportunité concerne spécifiquement la fourniture de services de personnel intérimaire (codes CPV 79620000 et 79625000), impliquant la mise à disposition de personnel pour les services enfance et famille. L'activité principale de BAWABA, une plateforme de contrôle souverain pour l'IA dans les industries régulées, ne correspond pas à la fourniture de services de personnel intérimaire."
     },
     "nextAction": {
-      "en": "Review other funding opportunities that align with BAWABA's core activities in AI, data, or cybersecurity.",
-      "fr": "Examiner d'autres opportunités de financement qui correspondent aux activités principales de BAWABA dans les domaines de l'IA, des données ou de la cybersécurité."
+      "en": "Review other funding opportunities that align with BAWABA's expertise in AI, data, or cybersecurity sectors.",
+      "fr": "Consulter d'autres opportunités de financement qui correspondent aux domaines d'expertise de BAWABA, tels que l'IA, les données ou la cybersécurité."
     }
   }
 }

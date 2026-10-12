@@ -10,7 +10,7 @@ forProjects: ["lesvieillespierres", "live-great-foundation", "oolala-social-foun
 geographies: ["FR"]
 url: "https://aides-territoires.beta.gouv.fr"
 urlVerified: true
-lastUrlCheck: "2026-10-05"
+lastUrlCheck: "2026-10-12"
 status: DECLARED
 access:
   mode: API

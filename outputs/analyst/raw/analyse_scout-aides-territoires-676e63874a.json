@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. It describes the scope of the instrument but does not detail eligibility criteria for applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il décrit le champ d'application de l'instrument mais ne détaille pas les critères d'éligibilité des candidats."
+      "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria for applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il n'y a aucune mention des critères d'éligibilité pour les candidats."
     },
     "nextAction": {
-      "en": "Check the official call for proposals or guidelines document to identify the eligible types of organisations.",
-      "fr": "Consulter l'appel à propositions officiel ou le document de lignes directrices pour identifier les types d'organisations éligibles."
+      "en": "Check the full call for proposals or official guidelines to determine which types of organisations are eligible to apply.",
+      "fr": "Consulter l'appel à propositions complet ou les directives officielles pour déterminer quels types d'organisations sont éligibles à postuler."
     }
   }
 }

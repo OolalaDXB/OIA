@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "LIKELY",
+    "verdict": "NOT_ELIGIBLE",
     "citation": "eligibility: Smart and autonomous mobility startups",
     "reason": {
-      "en": "The opportunity is explicitly for 'Smart and autonomous mobility startups'. BAWABA operates in AI and cybersecurity but does not explicitly state it is a mobility startup or works in smart/autonomous mobility.",
-      "fr": "L'opportunité est explicitement destinée aux 'startups de mobilité intelligente et autonome'. BAWABA opère dans l'IA et la cybersécurité mais ne précise pas explicitement qu'elle est une startup de mobilité ou qu'elle travaille dans la mobilité intelligente/autonome."
+      "en": "The opportunity explicitly restricts eligibility to 'Smart and autonomous mobility startups.' BAWABA operates in AI, data, cybersecurity, and software sectors, with no indication it is a smart or autonomous mobility startup.",
+      "fr": "L'opportunité restreint explicitement l'éligibilité aux 'startups de mobilité intelligente et autonome.' BAWABA opère dans les secteurs de l'IA, des données, de la cybersécurité et des logiciels, sans indication qu'il s'agit d'une startup de mobilité intelligente ou autonome."
     },
     "nextAction": {
-      "en": "Confirm with BAWABA whether their AI control plane is specifically designed for or applied to smart/autonomous mobility solutions (land, air, or sea).",
-      "fr": "Vérifier auprès de BAWABA si leur plan de contrôle IA est spécifiquement conçu pour ou appliqué aux solutions de mobilité intelligente/autonome (terre, air ou mer)."
+      "en": "Confirm with BAWABA whether they have a dedicated smart or autonomous mobility product or division that could qualify under this opportunity.",
+      "fr": "Vérifier auprès de BAWABA s'ils disposent d'un produit ou d'une division dédiée à la mobilité intelligente ou autonome qui pourrait être éligible à cette opportunité."
     }
   }
 }

@@ -3,12 +3,12 @@
     "verdict": "NOT_ELIGIBLE",
     "citation": "eligibility: Sustainability startups",
     "reason": {
-      "en": "BAWABA's primary focus is on AI, data, cybersecurity, and software for regulated industries, not specifically on sustainability or decarbonization technologies as required by the opportunity.",
-      "fr": "L'activité principale de BAWABA se concentre sur l'IA, les données, la cybersécurité et les logiciels pour les industries réglementées, et non spécifiquement sur les technologies de durabilité ou de décarbonation comme l'exige l'opportunité."
+      "en": "BAWABA's primary focus is on AI, data, cybersecurity, and software for regulated industries, not explicitly on sustainability or decarbonization technologies. The opportunity explicitly targets 'Sustainability startups.'",
+      "fr": "L'activité principale de BAWABA se concentre sur l'IA, les données, la cybersécurité et les logiciels pour les industries réglementées, et non explicitement sur les technologies de durabilité ou de décarbonation. L'opportunité cible explicitement les 'startups de durabilité.'"
     },
     "nextAction": {
-      "en": "Review other funding opportunities that align with BAWABA's focus on AI, data, and cybersecurity.",
-      "fr": "Examiner d'autres opportunités de financement qui correspondent à l'orientation de BAWABA en matière d'IA, de données et de cybersécurité."
+      "en": "Review other funding opportunities that specifically target AI, data, or cybersecurity startups.",
+      "fr": "Examiner d'autres opportunités de financement ciblant spécifiquement les startups en IA, données ou cybersécurité."
     }
   }
 }

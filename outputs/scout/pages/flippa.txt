@@ -166,12 +166,12 @@ View
 
 USD $600,000	Ecommerce | Design and Style	
 Jared Lauber
-	Ecommerce	Design and Style	$22,310	2.2x/1.4x	9 years	United States	Under LOI	
+	Ecommerce	Design and Style	$23,412	2.1x/1.4x	9 years	United States	Under LOI	
 View
 
 USD $180,612	iOS App | Food and Drink	
 Jared Lauber
-	iOS App	Food and Drink	$6,012	2.5x/1.4x	2 years	United States	Open	
+	iOS App	Food and Drink	$6,386	2.4x/1.3x	2 years	United States	Open	
 View
 
 USD $246,765	Ecommerce | Design and Style	
@@ -201,7 +201,7 @@ View
 
 USD $220,500	Ecommerce | Business	
 Nick Carlucci
-	Ecommerce	Business	$8,683	2.1x/1.4x	4 years	United States	Open	
+	Ecommerce	Business	$4,702	3.9x/1.7x	4 years	United States	Open	
 View
 See More Businesses
 Global brokers powered by AI technology. Your exit, accelerated.
@@ -455,188 +455,213 @@ Last 3 months
 Last 12 months
 Total Keyword Search Volume
 0
+500
+100
 200
+300
 400
 600
-800
 Keyword
-669​669
-497​497
-429​429
-355​355
-348​348
-306​306
-296​296
-295​295
-279​279
-275​275
-273​273
-256​256
-246​246
-245​245
-223​223
-206​206
-202​202
-190​190
-187​187
+545​545
+390​390
+324​324
+286​286
+274​274
+238​238
+237​237
+233​233
+233​233
+228​228
+221​221
+191​191
+189​189
 179​179
-177​177
-159​159
-146​146
+165​165
+156​156
+151​151
 144​144
-142​142
-141​141
 131​131
-130​130
+127​127
 126​126
-122​122
-118​118
-116​116
-114​114
+120​120
+117​117
+115​115
 110​110
 107​107
+105​105
 104​104
-103​103
-102​102
 100​100
 97​97
-97​97
-95​95
-93​93
-93​93
+94​94
+92​92
 91​91
 90​90
-88​88
-87​87
+89​89
+89​89
+84​84
 83​83
-81​81
-81​81
+83​83
+83​83
 79​79
-77​77
+78​78
 74​74
-71​71
+74​74
+74​74
+72​72
+72​72
+70​70
 70​70
 69​69
-69​69
 68​68
-67​67
+68​68
+66​66
 65​65
-64​64
-63​63
-63​63
+65​65
+65​65
+62​62
+61​61
+61​61
 61​61
 60​60
-60​60
-60​60
-60​60
+59​59
+58​58
 58​58
 57​57
 57​57
+57​57
+57​57
+57​57
+57​57
 56​56
-55​55
-55​55
-55​55
-54​54
+53​53
+53​53
+53​53
+52​52
+52​52
+51​51
+50​50
+49​49
+49​49
+49​49
+48​48
+48​48
+48​48
+47​47
+47​47
+47​47
+47​47
+46​46
+46​46
+45​45
+44​44
+44​44
+44​44
+44​44
+44​44
+44​44
+43​43
+42​42
+42​42
 Youtube
-Adsense
-Saas
-Blog
-Ai
 Shopify
-Kdp
-Travel
-Facebook
-Instagram
-Ecommerce
+Saas
 App
+Adsense
+Facebook
 Game
+Ai
+Travel
 Tiktok
-Tool
+Instagram
 Website
-Pet
 Amazon
-Playwright
-Education
+Blog
+Kdp
 Calculator
-Sport
-Finance
-Health
-Youtube Channel
-Menu
-Fashion
-Apk
-Music
-Jewelry
-Supplement
-E Commerce
-Affiliate
-Automated
-In
-Automotive
-Nan
-Book
-Vpn
-Amazon Kdp
-Gaming
-Food
-Golf
-Ebay
+Ecommerce
+Pet
 Etsy
-Facebook+Page
-Crypto
-Woocommerce
-Seo
-Mediavine
+Nan
+Sport
+Playwright
+Tool
+Education
+In
+Health
+Music
 You
-Marketplace
-Wordpress
-Google
-Peptide
-Dog
-Newsletter
-Fba
-Marketing
-Trading
-Ca
-Garden
-Ad
-Twitter
+Crypto
+Youtube+Channel
+E+Commerce
 Fa
-Home
-B2b
-News
-Digital Product
-Directory
-Digital
-Car
-Football
-Mobile App
-Casino
-Agency
-Recipe
-Tra
-Apparel
-Content
-Kid
-Uk
-Lead Generation
-Coffee
+Finance
+Digital+Product
+Educa
+Golf
+Gaming
+Trading
 Beauty
-Face
-Ai Tool
-Web
-Event
-Tik
-Amazon Fba
+Digital
+Fashion
+Ca
+Mediavine
+Ebay
+Jewelry
+Food
+Affiliate
+Tra
+Startup
+Newsletter
+Menu
 Re
-Me
-Print+On+Demand
-Dating
+Face
+Fitness
+News
+Facebook+Page
+Car
+Amazon+Kdp
+Ad
+Casino
+Amazon+Fba
+Mobile+App
 Ga
-Real Estate
-Android Apps
-Canada
-Crm
+Yout
+Real+Estate
+Book
+Dating
+Coffee
+Sh
+Google
+Agency
+Tr
+Sa
+Kid
+Gam
+Me
+Vpn
+Fba
+Trave
+Pinterest
+Web
+Fi
+Co
+Subscription
+Apk
+Dog
+Shopi
+Wordpress
+Directory
+Ama
+Youtu
+Website+
+Yo
+We
+B2b
+Automated
+Ai+
+Content
+Pa
+Amazon+
 Share
 Download
 
@@ -680,7 +705,7 @@ Go to Flippa Help Center
 
 Read Flippa’s Customer Guide
 
-Learn how we can help you buy and sell online busineses.
+Learn how we can help you buy and sell online businesses.
 
 Learn more
 SELL
@@ -747,9 +772,7 @@ Amazon KDP Businesses for Sale
 Amazon Affiliate Websites for Sale
 SaaS Businesses for Sale
 eBay Stores for Sale
-Blogs for Sale
-Affiliate Websites for Sale
-Wordpress Websites for Sale
+Blogs, Wordpress & Content Sites for Sale
 Ready Made Websites for Sale
 Internet Businesses for Sale
 Social Media Accounts for Sale

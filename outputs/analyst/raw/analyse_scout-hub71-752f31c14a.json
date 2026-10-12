@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify who may apply or what types of organisations are eligible for this opportunity. There is no mention of eligibility criteria.",
+      "fr": "Le texte extrait ne précise pas qui peut postuler ou quels types d'organisations sont éligibles pour cette opportunité. Aucun critère d'éligibilité n'est mentionné."
+    },
+    "nextAction": {
+      "en": "Check the full opportunity documentation or contact the issuer (Abu Dhabi/Mubadala) to confirm eligibility requirements.",
+      "fr": "Consulter la documentation complète de l'opportunité ou contacter l'émetteur (Abu Dhabi/Mubadala) pour confirmer les critères d'éligibilité."
+    }
+  }
+}

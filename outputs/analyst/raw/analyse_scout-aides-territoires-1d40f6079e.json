@@ -1,16 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "LIKELY",
-    "citations": [
-      "Leader (pour Liaison entre actions de développement de l'économie rurale) est une initiative de l'Union européenne pour soutenir des projets de développement rural lancés au niveau local afin de revitaliser les zones rurales et de créer des emplois."
-    ],
+    "verdict": "NEEDS_INFO",
+    "citation": [],
     "reason": {
-      "en": "The opportunity supports rural development projects, and the organisation operates in a rural area (Bretagne) with a focus on heritage and tourism, which could align with rural revitalisation. However, the extracted text does not specify whether non-agricultural associations are explicitly eligible.",
-      "fr": "L'opportunité soutient des projets de développement rural, et l'organisation opère dans une zone rurale (Bretagne) avec un focus sur le patrimoine et le tourisme, ce qui pourrait correspondre à la revitalisation rurale. Cependant, le texte extrait ne précise pas si les associations non agricoles sont explicitement éligibles."
+      "en": "The extracted text does not specify which types of organisations may apply for the FEADER Leader funding. It only describes the scope of the initiative.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au financement FEADER Leader. Il décrit uniquement le champ d'application de l'initiative."
     },
     "nextAction": {
-      "en": "Check the full FEADER Leader call for proposals to confirm if heritage and tourism associations are explicitly listed as eligible applicants.",
-      "fr": "Consulter l'appel à projets complet FEADER Leader pour confirmer si les associations de patrimoine et de tourisme sont explicitement mentionnées comme candidats éligibles."
+      "en": "Check the official FEADER Leader call for proposals or guidelines to confirm the eligibility criteria for applicants.",
+      "fr": "Consulter l'appel à projets ou les directives officielles du FEADER Leader pour confirmer les critères d'éligibilité des candidats."
     }
   }
 }
