@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citations": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations may apply for the ADIO Accompaniment. There is no mention of eligibility criteria such as legal form, sector, or geographic location.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à l'accompagnement ADIO. Il n'y a aucune mention des critères d'éligibilité tels que la forme juridique, le secteur ou la localisation géographique."
+    },
+    "nextAction": {
+      "en": "Contact ADIO to ask which legal entities (e.g., companies, public bodies, associations) are eligible to apply.",
+      "fr": "Contacter l'ADIO pour demander quelles entités juridiques (par exemple, entreprises, organismes publics, associations) sont éligibles à cette opportunité."
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": "The extracted text does not specify eligible applicants or types of organisations that may apply for this funding opportunity.",
+    "reason": {
+      "en": "The document does not state which types of organisations are eligible to apply for the 3D, 2D, and Lighting Exhibition Design Services grant.",
+      "fr": "Le document ne précise pas quels types d'organisations sont éligibles pour demander cette subvention pour les services de conception d'exposition en 3D, 2D et éclairage."
+    },
+    "nextAction": {
+      "en": "Contact the UK Cabinet Office or the Science Museum to clarify the eligibility criteria for applicants.",
+      "fr": "Contacter le UK Cabinet Office ou le Science Museum pour clarifier les critères d'éligibilité des candidats."
+    }
+  }
+}

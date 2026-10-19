@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citation": "eligibility: Sustainability startups",
+    "citation": "eligibility: Sustainability startups driving decarbonization",
     "reason": {
-      "en": "BAWABA's primary focus is on AI, data, cybersecurity, and software for regulated industries, not explicitly on sustainability or decarbonization technologies. The opportunity explicitly targets 'Sustainability startups.'",
-      "fr": "L'activité principale de BAWABA se concentre sur l'IA, les données, la cybersécurité et les logiciels pour les industries réglementées, et non explicitement sur les technologies de durabilité ou de décarbonation. L'opportunité cible explicitement les 'startups de durabilité.'"
+      "en": "BAWABA's core activity ('Sovereign AI control plane for regulated industries') is not described as a sustainability startup driving decarbonization. The opportunity explicitly restricts eligibility to startups focused on decarbonization and a net zero future.",
+      "fr": "L'activité principale de BAWABA ('Souverain AI control plane pour les industries réglementées') n'est pas décrite comme une startup de durabilité axée sur la décarbonisation. L'opportunité restreint explicitement l'éligibilité aux startups travaillant sur la décarbonisation et un avenir net zéro."
     },
     "nextAction": {
-      "en": "Review other funding opportunities that specifically target AI, data, or cybersecurity startups.",
-      "fr": "Examiner d'autres opportunités de financement ciblant spécifiquement les startups en IA, données ou cybersécurité."
+      "en": "Review other Hub71+ programmes or Abu Dhabi/Mubadala grants that target AI, data, or digital infrastructure startups.",
+      "fr": "Examiner d'autres programmes Hub71+ ou subventions d'Abou Dhabi/Mubadala ciblant les startups en IA, données ou infrastructures numériques."
     }
   }
 }

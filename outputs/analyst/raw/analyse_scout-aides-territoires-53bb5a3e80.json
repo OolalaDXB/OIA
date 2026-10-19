@@ -1,16 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "ELIGIBLE",
-    "citation": [
-      "LEADER est un programme d'initiative communautaire pour cofinancer des projets publics ou privés qui favorisent le développement des zones rurales."
-    ],
+    "citation": "LEADER est un programme d'initiative communautaire pour cofinancer des projets publics ou privés qui favorisent le développement des zones rurales.",
     "reason": {
-      "en": "The opportunity explicitly states that both public and private projects are eligible, and the organisation is a private association operating in rural areas (Bretagne) with a focus on heritage, culture, and tourism, which aligns with the scope of rural development.",
-      "fr": "L'opportunité indique explicitement que les projets publics ou privés sont éligibles, et l'organisation est une association privée opérant dans des zones rurales (Bretagne) avec un focus sur le patrimoine, la culture et le tourisme, ce qui correspond à l'objectif de développement rural."
+      "en": "The opportunity explicitly allows private projects, and the organisation is a private association operating in rural areas (Bretagne) with activities that align with rural development (heritage, culture, tourism).",
+      "fr": "L'opportunité permet explicitement les projets privés, et l'organisation est une association privée opérant dans des zones rurales (Bretagne) avec des activités en lien avec le développement rural (patrimoine, culture, tourisme)."
     },
     "nextAction": {
-      "en": "Confirm with the issuer whether an association without a recorded legal entity can formally apply as a private project under this grant.",
-      "fr": "Confirmer auprès de l'émetteur si une association sans entité juridique enregistrée peut officiellement déposer une demande en tant que projet privé dans le cadre de cette subvention."
+      "en": "Confirm with the issuer whether an unincorporated association ('association non déclarée') can be the formal applicant or if a legal entity (e.g., local authority or registered association) must be involved.",
+      "fr": "Vérifier auprès de l'émetteur si une association non déclarée peut être le demandeur formel ou si une entité légale (par exemple, une collectivité locale ou une association déclarée) doit être impliquée."
     }
   }
 }

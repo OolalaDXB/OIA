@@ -3,12 +3,12 @@
     "verdict": "NOT_ELIGIBLE",
     "citation": "le programme accompagnera les acteurs de la montagne (collectivités, acteurs socio-économiques) dans le développement économique, la préservation de leur patrimoine naturel et l’adaptation nécessaire au changement climatique.",
     "reason": {
-      "en": "The opportunity explicitly targets actors in mountainous regions ('acteurs de la montagne'), while the organization operates in Bretagne, which is not a mountainous area.",
-      "fr": "L'opportunité cible explicitement les acteurs des zones de montagne ('acteurs de la montagne'), alors que l'organisation opère en Bretagne, une région non montagneuse."
+      "en": "The opportunity explicitly targets actors in mountainous regions, while 'Les Vieilles Pierres' operates in Bretagne, which is not a mountainous area.",
+      "fr": "L'opportunité cible explicitement les acteurs des zones de montagne, alors que 'Les Vieilles Pierres' opère en Bretagne, une région non montagneuse."
     },
     "nextAction": {
-      "en": "Verify if the organization has any activities or projects specifically located in mountainous regions in France.",
-      "fr": "Vérifier si l'organisation a des activités ou des projets situés spécifiquement dans des zones montagneuses en France."
+      "en": "Confirm with the issuer whether heritage associations outside mountainous regions may exceptionally apply.",
+      "fr": "Vérifier auprès de l'émetteur si les associations patrimoniales en dehors des zones de montagne peuvent exceptionnellement postuler."
     }
   }
 }

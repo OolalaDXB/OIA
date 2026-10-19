@@ -37,22 +37,22 @@ I AM A STARTUP
 I AM AN INVESTOR
 I AM A TALENT
 What's Happening?
+PRESS RELEASE
+HUB71 AND KEY CAPITAL STRENGTHEN PARTNERSHIP TO EXPAND GLOBAL INVESTOR ACCESS FOR STARTUPS
+19
+Oct
+, 2026
+VIEW MORE
+BLOG
+TWO WAYS INTO ABU DHABI’S SME ECONOMY: HOW HUB71 CONNECTS FINTECHS TO THE MARKET
+13
+Oct
+, 2026
+VIEW MORE
 BLOG
 INSIDE INITIATE: WHAT BACKING FOUNDERS AT THE EARLIEST STAGE ACTUALLY LOOKS LIKE
 08
 Oct
-, 2026
-VIEW MORE
-BLOG
-HUB71 STARTUPS ABHI AND NYMCARD JOIN FORCES TO ADVANCE SME CREDIT IN THE UAE
-05
-Oct
-, 2026
-VIEW MORE
-PRESS RELEASE
-ADREC AND HUB71 SIGN MOU TO CONNECT ABU DHABI'S REAL ESTATE SECTOR WITH TECHNOLOGY STARTUPS
-30
-Sep
 , 2026
 VIEW MORE
 Join our next Info Session
@@ -149,22 +149,22 @@ nationalities
 sectors
 SOME OF OUR STARTUPS:
 
-Smart Navigation Systems provides innovative location based solutions
-
-Jade Autism is an app for ASD (Autistic Spectrum Disorder) that stimulates and develops children's cognitive functions.
-
 Redefining the work-life experience by making automated HR, payroll, employee benefits and insurance a possibility for all businesses in UAE.
+
+Lune is an AI-driven engagement and hyper-personalization platform for banks, built on insights from over 1 billion transactions. Our Transaction Enrichment API transforms raw transaction data into actionable insights, powering our core products: Enrichment, Personal Finance Engagement (PFE) SDK, Insights Dashboard, and Smart Nudges. (Supports Arabic transliteration)
+
+Smart Navigation Systems provides innovative location based solutions
 
 Expand your medical business worldwide with OnEx
 
 ALL STARTUPS
 Our community says
-When I first came to visit the UAE I met with the Hub71 team and I was very impressed by them, and so I applied to the Company Building Program, and I was fortunate enough to be accepted.
-Founder & CEO
-Derick Smith
 The Hub71 team and program have been invaluable in helping Kinderly become established in the UAE, with their generous Company Building Program allowing us to recruit the best employees and quickly grow the team in Abu Dhabi.
 Founder & CEO
 Geraint Barton
+When I first came to visit the UAE I met with the Hub71 team and I was very impressed by them, and so I applied to the Company Building Program, and I was fortunate enough to be accepted.
+Founder & CEO
+Derick Smith
 Our partners
 
 We’re more powerful when we work together. We’re growing our diverse community of partners to accelerate business growth in Abu Dhabi’s flourishing tech sector.

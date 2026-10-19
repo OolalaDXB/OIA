@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citations": [],
+    "citation": [],
     "reason": {
-      "en": "The extracted text of the opportunity does not specify who may apply or any eligibility criteria for applicants. There is no information to determine if BAWABA or its legal entities are eligible.",
-      "fr": "Le texte extrait de l'opportunité ne précise pas qui peut postuler ni les critères d'éligibilité pour les candidats. Il n'y a aucune information permettant de déterminer si BAWABA ou ses entités légales sont éligibles."
+      "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria related to the applicant's legal form, sector, or geographic location.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, le secteur ou la localisation géographique du demandeur."
     },
     "nextAction": {
-      "en": "Contact the buyer (Universitätsklinikum Schleswig-Holstein AöR) to request the full tender documents and confirm eligibility requirements.",
-      "fr": "Contacter l'acheteur (Universitätsklinikum Schleswig-Holstein AöR) pour demander les documents complets de l'appel d'offres et confirmer les critères d'éligibilité."
+      "en": "Contact the buyer (Universitätsklinikum Schleswig-Holstein AöR) to request the full tender documentation and confirm eligibility requirements.",
+      "fr": "Contacter l'acheteur (Universitätsklinikum Schleswig-Holstein AöR) pour demander la documentation complète de l'appel d'offres et confirmer les critères d'éligibilité."
     }
   }
 }

@@ -2,137 +2,6 @@
   "notices": [
     {
       "notice-type": "cn-standard",
-      "publication-number": "492932-2026",
-      "classification-cpv": [
-        "72413000",
-        "72413000",
-        "72413000",
-        "72413000"
-      ],
-      "buyer-name": {
-        "fra": [
-          "NEOMA REIMS"
-        ]
-      },
-      "publication-date": "2026-07-16+02:00",
-      "links": {
-        "xml": {
-          "MUL": "https://ted.europa.eu/en/notice/492932-2026/xml"
-        },
-        "pdf": {
-          "BUL": "https://ted.europa.eu/bg/notice/492932-2026/pdf",
-          "SPA": "https://ted.europa.eu/es/notice/492932-2026/pdf",
-          "CES": "https://ted.europa.eu/cs/notice/492932-2026/pdf",
-          "DAN": "https://ted.europa.eu/da/notice/492932-2026/pdf",
-          "DEU": "https://ted.europa.eu/de/notice/492932-2026/pdf",
-          "EST": "https://ted.europa.eu/et/notice/492932-2026/pdf",
-          "ELL": "https://ted.europa.eu/el/notice/492932-2026/pdf",
-          "ENG": "https://ted.europa.eu/en/notice/492932-2026/pdf",
-          "FRA": "https://ted.europa.eu/fr/notice/492932-2026/pdf",
-          "GLE": "https://ted.europa.eu/ga/notice/492932-2026/pdf",
-          "HRV": "https://ted.europa.eu/hr/notice/492932-2026/pdf",
-          "ITA": "https://ted.europa.eu/it/notice/492932-2026/pdf",
-          "LAV": "https://ted.europa.eu/lv/notice/492932-2026/pdf",
-          "LIT": "https://ted.europa.eu/lt/notice/492932-2026/pdf",
-          "HUN": "https://ted.europa.eu/hu/notice/492932-2026/pdf",
-          "MLT": "https://ted.europa.eu/mt/notice/492932-2026/pdf",
-          "NLD": "https://ted.europa.eu/nl/notice/492932-2026/pdf",
-          "POL": "https://ted.europa.eu/pl/notice/492932-2026/pdf",
-          "POR": "https://ted.europa.eu/pt/notice/492932-2026/pdf",
-          "RON": "https://ted.europa.eu/ro/notice/492932-2026/pdf",
-          "SLK": "https://ted.europa.eu/sk/notice/492932-2026/pdf",
-          "SLV": "https://ted.europa.eu/sl/notice/492932-2026/pdf",
-          "FIN": "https://ted.europa.eu/fi/notice/492932-2026/pdf",
-          "SWE": "https://ted.europa.eu/sv/notice/492932-2026/pdf"
-        },
-        "pdfs": {
-          "FRA": "https://ted.europa.eu/fr/notice/492932-2026/pdfs"
-        },
-        "html": {
-          "BUL": "https://ted.europa.eu/bg/notice/-/detail/492932-2026",
-          "SPA": "https://ted.europa.eu/es/notice/-/detail/492932-2026",
-          "CES": "https://ted.europa.eu/cs/notice/-/detail/492932-2026",
-          "DAN": "https://ted.europa.eu/da/notice/-/detail/492932-2026",
-          "DEU": "https://ted.europa.eu/de/notice/-/detail/492932-2026",
-          "EST": "https://ted.europa.eu/et/notice/-/detail/492932-2026",
-          "ELL": "https://ted.europa.eu/el/notice/-/detail/492932-2026",
-          "ENG": "https://ted.europa.eu/en/notice/-/detail/492932-2026",
-          "FRA": "https://ted.europa.eu/fr/notice/-/detail/492932-2026",
-          "GLE": "https://ted.europa.eu/ga/notice/-/detail/492932-2026",
-          "HRV": "https://ted.europa.eu/hr/notice/-/detail/492932-2026",
-          "ITA": "https://ted.europa.eu/it/notice/-/detail/492932-2026",
-          "LAV": "https://ted.europa.eu/lv/notice/-/detail/492932-2026",
-          "LIT": "https://ted.europa.eu/lt/notice/-/detail/492932-2026",
-          "HUN": "https://ted.europa.eu/hu/notice/-/detail/492932-2026",
-          "MLT": "https://ted.europa.eu/mt/notice/-/detail/492932-2026",
-          "NLD": "https://ted.europa.eu/nl/notice/-/detail/492932-2026",
-          "POL": "https://ted.europa.eu/pl/notice/-/detail/492932-2026",
-          "POR": "https://ted.europa.eu/pt/notice/-/detail/492932-2026",
-          "RON": "https://ted.europa.eu/ro/notice/-/detail/492932-2026",
-          "SLK": "https://ted.europa.eu/sk/notice/-/detail/492932-2026",
-          "SLV": "https://ted.europa.eu/sl/notice/-/detail/492932-2026",
-          "FIN": "https://ted.europa.eu/fi/notice/-/detail/492932-2026",
-          "SWE": "https://ted.europa.eu/sv/notice/-/detail/492932-2026"
-        },
-        "htmlDirect": {
-          "BUL": "https://ted.europa.eu/bg/notice/492932-2026/html",
-          "SPA": "https://ted.europa.eu/es/notice/492932-2026/html",
-          "CES": "https://ted.europa.eu/cs/notice/492932-2026/html",
-          "DAN": "https://ted.europa.eu/da/notice/492932-2026/html",
-          "DEU": "https://ted.europa.eu/de/notice/492932-2026/html",
-          "EST": "https://ted.europa.eu/et/notice/492932-2026/html",
-          "ELL": "https://ted.europa.eu/el/notice/492932-2026/html",
-          "ENG": "https://ted.europa.eu/en/notice/492932-2026/html",
-          "FRA": "https://ted.europa.eu/fr/notice/492932-2026/html",
-          "GLE": "https://ted.europa.eu/ga/notice/492932-2026/html",
-          "HRV": "https://ted.europa.eu/hr/notice/492932-2026/html",
-          "ITA": "https://ted.europa.eu/it/notice/492932-2026/html",
-          "LAV": "https://ted.europa.eu/lv/notice/492932-2026/html",
-          "LIT": "https://ted.europa.eu/lt/notice/492932-2026/html",
-          "HUN": "https://ted.europa.eu/hu/notice/492932-2026/html",
-          "MLT": "https://ted.europa.eu/mt/notice/492932-2026/html",
-          "NLD": "https://ted.europa.eu/nl/notice/492932-2026/html",
-          "POL": "https://ted.europa.eu/pl/notice/492932-2026/html",
-          "POR": "https://ted.europa.eu/pt/notice/492932-2026/html",
-          "RON": "https://ted.europa.eu/ro/notice/492932-2026/html",
-          "SLK": "https://ted.europa.eu/sk/notice/492932-2026/html",
-          "SLV": "https://ted.europa.eu/sl/notice/492932-2026/html",
-          "FIN": "https://ted.europa.eu/fi/notice/492932-2026/html",
-          "SWE": "https://ted.europa.eu/sv/notice/492932-2026/html"
-        }
-      },
-      "notice-title": {
-        "hun": "Franciaország – Weboldal-tervezési szolgáltatások – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "lav": "Francija – Globālā tīmekļa www lapu projektēšanas pakalpojumi – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "swe": "Frankrike – Webbsideutformningstjänster – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "gle": "An Fhrainc – World wide web (www) site design services – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "ell": "Γαλλία – Υπηρεσίες σχεδιασμού τοποθεσιών Παγκόσμιου Ιστού (WWW) – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "spa": "Francia – Servicios de diseño de sitios web www – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "est": "Prantsusmaa – WWW-veebilehtede kujundusteenused – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "nld": "Frankrijk – Diensten voor het ontwerpen van websites – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "fin": "Ranska – WWW-sivustojen suunnittelupalvelut – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "pol": "Francja – Usługi w zakresie projektowania stron WWW – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "hrv": "Francuska – Usluge oblikovanja www portala – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "ces": "Francie – Návrh webových (www) stránek – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "dan": "Frankrig – WWW-netstedsdesigntjenester – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "ron": "Franţa – Servicii de proiectare de site-uri WWW (World Wide Web) – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "por": "França – Serviços de concepção de sítios da World Wide Web (WWW) – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "slk": "Francúzsko – Návrh webových (www) sídiel – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "fra": "France – Services de conception de sites WWW (World Wide Web) – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "mlt": "Franza – Servizzi ta' disinn ta' siti web WWW – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "deu": "Frankreich – Website-Gestaltung – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "lit": "Prancūzija – Visuotinio žiniatinklio (WWW) tinklaviečių projektavimo paslaugos – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "ita": "Francia – Servizi di progettazione di siti per il World wide web (WWW) – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "bul": "Фpaнция – Услуги по уебдизайн – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "slv": "Francija – Storitve načrtovanja spletnih mest na svetovnem spletu omrežij (WWW) – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique",
-        "eng": "France – World wide web (www) site design services – Création du nouveau site web de NEOMA BUSINESS SCHOOL avec accompagnement technique"
-      },
-      "buyer-country": [
-        "FRA"
-      ]
-    },
-    {
-      "notice-type": "cn-standard",
       "publication-number": "521291-2026",
       "classification-cpv": [
         "71351920",
@@ -1506,6 +1375,135 @@
         "bul": "Фpaнция – Услуги по уебдизайн – Mise en place d'un site web, d'une plateforme évènementielle, et d'une application mobile et back-office dans le cadre du \"Forum de Paris pour la Défense et la Stratégie\"",
         "slv": "Francija – Storitve načrtovanja spletnih mest na svetovnem spletu omrežij (WWW) – Mise en place d'un site web, d'une plateforme évènementielle, et d'une application mobile et back-office dans le cadre du \"Forum de Paris pour la Défense et la Stratégie\"",
         "eng": "France – World wide web (www) site design services – Mise en place d'un site web, d'une plateforme évènementielle, et d'une application mobile et back-office dans le cadre du \"Forum de Paris pour la Défense et la Stratégie\""
+      },
+      "buyer-country": [
+        "FRA"
+      ]
+    },
+    {
+      "notice-type": "cn-standard",
+      "publication-number": "708553-2026",
+      "classification-cpv": [
+        "72413000",
+        "72413000"
+      ],
+      "buyer-name": {
+        "fra": [
+          "Mairie de Clichy-la-Garenne"
+        ]
+      },
+      "publication-date": "2026-10-14+02:00",
+      "links": {
+        "xml": {
+          "MUL": "https://ted.europa.eu/en/notice/708553-2026/xml"
+        },
+        "pdf": {
+          "BUL": "https://ted.europa.eu/bg/notice/708553-2026/pdf",
+          "SPA": "https://ted.europa.eu/es/notice/708553-2026/pdf",
+          "CES": "https://ted.europa.eu/cs/notice/708553-2026/pdf",
+          "DAN": "https://ted.europa.eu/da/notice/708553-2026/pdf",
+          "DEU": "https://ted.europa.eu/de/notice/708553-2026/pdf",
+          "EST": "https://ted.europa.eu/et/notice/708553-2026/pdf",
+          "ELL": "https://ted.europa.eu/el/notice/708553-2026/pdf",
+          "ENG": "https://ted.europa.eu/en/notice/708553-2026/pdf",
+          "FRA": "https://ted.europa.eu/fr/notice/708553-2026/pdf",
+          "GLE": "https://ted.europa.eu/ga/notice/708553-2026/pdf",
+          "HRV": "https://ted.europa.eu/hr/notice/708553-2026/pdf",
+          "ITA": "https://ted.europa.eu/it/notice/708553-2026/pdf",
+          "LAV": "https://ted.europa.eu/lv/notice/708553-2026/pdf",
+          "LIT": "https://ted.europa.eu/lt/notice/708553-2026/pdf",
+          "HUN": "https://ted.europa.eu/hu/notice/708553-2026/pdf",
+          "MLT": "https://ted.europa.eu/mt/notice/708553-2026/pdf",
+          "NLD": "https://ted.europa.eu/nl/notice/708553-2026/pdf",
+          "POL": "https://ted.europa.eu/pl/notice/708553-2026/pdf",
+          "POR": "https://ted.europa.eu/pt/notice/708553-2026/pdf",
+          "RON": "https://ted.europa.eu/ro/notice/708553-2026/pdf",
+          "SLK": "https://ted.europa.eu/sk/notice/708553-2026/pdf",
+          "SLV": "https://ted.europa.eu/sl/notice/708553-2026/pdf",
+          "FIN": "https://ted.europa.eu/fi/notice/708553-2026/pdf",
+          "SWE": "https://ted.europa.eu/sv/notice/708553-2026/pdf"
+        },
+        "pdfs": {
+          "FRA": "https://ted.europa.eu/fr/notice/708553-2026/pdfs"
+        },
+        "html": {
+          "BUL": "https://ted.europa.eu/bg/notice/-/detail/708553-2026",
+          "SPA": "https://ted.europa.eu/es/notice/-/detail/708553-2026",
+          "CES": "https://ted.europa.eu/cs/notice/-/detail/708553-2026",
+          "DAN": "https://ted.europa.eu/da/notice/-/detail/708553-2026",
+          "DEU": "https://ted.europa.eu/de/notice/-/detail/708553-2026",
+          "EST": "https://ted.europa.eu/et/notice/-/detail/708553-2026",
+          "ELL": "https://ted.europa.eu/el/notice/-/detail/708553-2026",
+          "ENG": "https://ted.europa.eu/en/notice/-/detail/708553-2026",
+          "FRA": "https://ted.europa.eu/fr/notice/-/detail/708553-2026",
+          "GLE": "https://ted.europa.eu/ga/notice/-/detail/708553-2026",
+          "HRV": "https://ted.europa.eu/hr/notice/-/detail/708553-2026",
+          "ITA": "https://ted.europa.eu/it/notice/-/detail/708553-2026",
+          "LAV": "https://ted.europa.eu/lv/notice/-/detail/708553-2026",
+          "LIT": "https://ted.europa.eu/lt/notice/-/detail/708553-2026",
+          "HUN": "https://ted.europa.eu/hu/notice/-/detail/708553-2026",
+          "MLT": "https://ted.europa.eu/mt/notice/-/detail/708553-2026",
+          "NLD": "https://ted.europa.eu/nl/notice/-/detail/708553-2026",
+          "POL": "https://ted.europa.eu/pl/notice/-/detail/708553-2026",
+          "POR": "https://ted.europa.eu/pt/notice/-/detail/708553-2026",
+          "RON": "https://ted.europa.eu/ro/notice/-/detail/708553-2026",
+          "SLK": "https://ted.europa.eu/sk/notice/-/detail/708553-2026",
+          "SLV": "https://ted.europa.eu/sl/notice/-/detail/708553-2026",
+          "FIN": "https://ted.europa.eu/fi/notice/-/detail/708553-2026",
+          "SWE": "https://ted.europa.eu/sv/notice/-/detail/708553-2026"
+        },
+        "htmlDirect": {
+          "BUL": "https://ted.europa.eu/bg/notice/708553-2026/html",
+          "SPA": "https://ted.europa.eu/es/notice/708553-2026/html",
+          "CES": "https://ted.europa.eu/cs/notice/708553-2026/html",
+          "DAN": "https://ted.europa.eu/da/notice/708553-2026/html",
+          "DEU": "https://ted.europa.eu/de/notice/708553-2026/html",
+          "EST": "https://ted.europa.eu/et/notice/708553-2026/html",
+          "ELL": "https://ted.europa.eu/el/notice/708553-2026/html",
+          "ENG": "https://ted.europa.eu/en/notice/708553-2026/html",
+          "FRA": "https://ted.europa.eu/fr/notice/708553-2026/html",
+          "GLE": "https://ted.europa.eu/ga/notice/708553-2026/html",
+          "HRV": "https://ted.europa.eu/hr/notice/708553-2026/html",
+          "ITA": "https://ted.europa.eu/it/notice/708553-2026/html",
+          "LAV": "https://ted.europa.eu/lv/notice/708553-2026/html",
+          "LIT": "https://ted.europa.eu/lt/notice/708553-2026/html",
+          "HUN": "https://ted.europa.eu/hu/notice/708553-2026/html",
+          "MLT": "https://ted.europa.eu/mt/notice/708553-2026/html",
+          "NLD": "https://ted.europa.eu/nl/notice/708553-2026/html",
+          "POL": "https://ted.europa.eu/pl/notice/708553-2026/html",
+          "POR": "https://ted.europa.eu/pt/notice/708553-2026/html",
+          "RON": "https://ted.europa.eu/ro/notice/708553-2026/html",
+          "SLK": "https://ted.europa.eu/sk/notice/708553-2026/html",
+          "SLV": "https://ted.europa.eu/sl/notice/708553-2026/html",
+          "FIN": "https://ted.europa.eu/fi/notice/708553-2026/html",
+          "SWE": "https://ted.europa.eu/sv/notice/708553-2026/html"
+        }
+      },
+      "notice-title": {
+        "hun": "Franciaország – Weboldal-tervezési szolgáltatások – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "lav": "Francija – Globālā tīmekļa www lapu projektēšanas pakalpojumi – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "swe": "Frankrike – Webbsideutformningstjänster – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "gle": "An Fhrainc – World wide web (www) site design services – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "ell": "Γαλλία – Υπηρεσίες σχεδιασμού τοποθεσιών Παγκόσμιου Ιστού (WWW) – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "spa": "Francia – Servicios de diseño de sitios web www – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "est": "Prantsusmaa – WWW-veebilehtede kujundusteenused – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "nld": "Frankrijk – Diensten voor het ontwerpen van websites – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "fin": "Ranska – WWW-sivustojen suunnittelupalvelut – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "pol": "Francja – Usługi w zakresie projektowania stron WWW – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "hrv": "Francuska – Usluge oblikovanja www portala – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "ces": "Francie – Návrh webových (www) stránek – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "dan": "Frankrig – WWW-netstedsdesigntjenester – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "ron": "Franţa – Servicii de proiectare de site-uri WWW (World Wide Web) – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "por": "França – Serviços de concepção de sítios da World Wide Web (WWW) – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "slk": "Francúzsko – Návrh webových (www) sídiel – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "fra": "France – Services de conception de sites WWW (World Wide Web) – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "mlt": "Franza – Servizzi ta' disinn ta' siti web WWW – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "deu": "Frankreich – Website-Gestaltung – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "lit": "Prancūzija – Visuotinio žiniatinklio (WWW) tinklaviečių projektavimo paslaugos – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "ita": "Francia – Servizi di progettazione di siti per il World wide web (WWW) – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "bul": "Фpaнция – Услуги по уебдизайн – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "slv": "Francija – Storitve načrtovanja spletnih mest na svetovnem spletu omrežij (WWW) – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY",
+        "eng": "France – World wide web (www) site design services – REFONTE DU SITE INTERNET DE LA VILLE DE CLICHY"
       },
       "buyer-country": [
         "FRA"

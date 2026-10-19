@@ -1,17 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NOT_ELIGIBLE",
-    "citation": [
-      "Supply services of personnel including temporary staff – Prestations de mise à disposition de personnel intérimaire pour le compte du Centre Départemental Enfance Familles (CDEF)",
-      "classification-cpv: 79620000, 79620000, 79620000, 79620000, 79625000, 72611000"
-    ],
+    "verdict": "NEEDS_INFO",
+    "citation": [],
     "reason": {
-      "en": "The opportunity specifically calls for the supply of temporary staffing services (CPV codes 79620000 and 79625000), which involves providing personnel for child and family services. BAWABA's core activity is a sovereign AI control plane for regulated industries, which does not align with the provision of temporary staffing or personnel services.",
-      "fr": "L'opportunité concerne spécifiquement la fourniture de services de personnel intérimaire (codes CPV 79620000 et 79625000), impliquant la mise à disposition de personnel pour les services enfance et famille. L'activité principale de BAWABA, une plateforme de contrôle souverain pour l'IA dans les industries régulées, ne correspond pas à la fourniture de services de personnel intérimaire."
+      "en": "The extracted text does not specify which types of organisations may apply for this tender. It only describes the service required (supply of temporary staff) but does not state eligibility criteria for applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent répondre à cet appel d'offres. Il décrit uniquement le service requis (mise à disposition de personnel intérimaire) sans indiquer les critères d'éligibilité des candidats."
     },
     "nextAction": {
-      "en": "Review other funding opportunities that align with BAWABA's expertise in AI, data, or cybersecurity sectors.",
-      "fr": "Consulter d'autres opportunités de financement qui correspondent aux domaines d'expertise de BAWABA, tels que l'IA, les données ou la cybersécurité."
+      "en": "Check the full tender notice at the provided link to identify the eligibility criteria for applicants.",
+      "fr": "Consulter l'avis complet d'appel d'offres via le lien fourni pour identifier les critères d'éligibilité des candidats."
     }
   }
 }

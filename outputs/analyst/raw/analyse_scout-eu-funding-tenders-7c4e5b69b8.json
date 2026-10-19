@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text of the opportunity does not specify which types of organisations are eligible to apply. There is no mention of criteria related to the applicant's sector, activities, or legal structure.",
-      "fr": "Le texte extrait de l'opportunité ne précise pas quels types d'organisations sont éligibles. Aucun critère lié au secteur, aux activités ou à la structure juridique du demandeur n'est mentionné."
+      "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of legal forms, sectors, or geographic restrictions that would confirm or exclude BAWABA.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles. Aucune mention des formes juridiques, des secteurs ou des restrictions géographiques qui confirmeraient ou excluraient BAWABA."
     },
     "nextAction": {
-      "en": "Check the full call document or the European Commission's official page for this grant to find the eligibility criteria for applicants.",
-      "fr": "Consulter le document complet de l'appel ou la page officielle de la Commission européenne pour cette subvention afin de trouver les critères d'éligibilité des demandeurs."
+      "en": "Contact the European Commission or the opportunity's point of contact to clarify the eligibility criteria for applicants.",
+      "fr": "Contacter la Commission européenne ou le point de contact de l'opportunité pour clarifier les critères d'éligibilité des candidats."
     }
   }
 }

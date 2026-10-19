@@ -1,16 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citations": [
-      "eligibility: Web3, blockchain, and cryptocurrency startups"
-    ],
+    "citation": "eligibility: Web3, blockchain, and cryptocurrency startups",
     "reason": {
-      "en": "The opportunity explicitly restricts applicants to Web3, blockchain, and cryptocurrency startups. BAWABA operates in AI, data, cybersecurity, and software sectors without mention of Web3, blockchain, or cryptocurrency.",
-      "fr": "L'opportunité restreint explicitement les candidats aux startups Web3, blockchain et cryptomonnaie. BAWABA opère dans les secteurs de l'IA, des données, de la cybersécurité et des logiciels sans mentionner Web3, blockchain ou cryptomonnaie."
+      "en": "BAWABA operates in AI, data, cybersecurity, and software sectors, with no explicit mention of Web3, blockchain, or cryptocurrency in its dossier. The opportunity explicitly restricts eligibility to 'Web3, blockchain, and cryptocurrency startups.'",
+      "fr": "BAWABA opère dans les secteurs de l'IA, des données, de la cybersécurité et des logiciels, sans mention explicite de Web3, de la blockchain ou des cryptomonnaies dans son dossier. L'opportunité restreint explicitement l'éligibilité aux 'startups Web3, blockchain et cryptomonnaies.'"
     },
     "nextAction": {
-      "en": "Review other funding opportunities that explicitly target AI, data, or cybersecurity startups.",
-      "fr": "Examiner d'autres opportunités de financement ciblant explicitement les startups en IA, données ou cybersécurité."
+      "en": "Review the opportunity's full eligibility criteria to confirm if there are any exceptions or broader interpretations of 'Web3' that could include AI or cybersecurity startups.",
+      "fr": "Examiner les critères d'éligibilité complets de l'opportunité pour confirmer s'il existe des exceptions ou des interprétations plus larges de 'Web3' qui pourraient inclure les startups en IA ou en cybersécurité."
     }
   }
 }

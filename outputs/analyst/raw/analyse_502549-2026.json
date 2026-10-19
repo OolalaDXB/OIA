@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citation": [],
+    "citations": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria related to legal structure, location, or sector.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Aucun critère d'éligibilité concernant la structure juridique, la localisation ou le secteur n'est mentionné."
+      "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria related to the legal form, sector, or geographic location of applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cet appel d'offres. Aucun critère d'éligibilité concernant la forme juridique, le secteur ou la localisation géographique des candidats n'est mentionné."
     },
     "nextAction": {
-      "en": "Check the full tender notice at the provided link to identify the eligibility criteria for applicants.",
-      "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni pour identifier les critères d'éligibilité des candidats."
+      "en": "Check the full tender notice at the provided link (https://ted.europa.eu/en/notice/502549-2026/xml) to identify the eligibility criteria for applicants.",
+      "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni (https://ted.europa.eu/en/notice/502549-2026/xml) pour identifier les critères d'éligibilité des candidats."
     }
   }
 }

@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Suitable for SME",
+    "reason": {
+      "en": "The opportunity explicitly states it is 'Suitable for SME', and TheStudio MT operates in sectors unrelated to roofing services or construction. The organisation's activities (software, digital, design, advisory, AI) do not align with the scope of planned capital works and responsive repairs for roofing.",
+      "fr": "L'opportunité indique explicitement qu'elle est 'Adaptée aux PME', et TheStudio MT opère dans des secteurs sans rapport avec les services de toiture ou la construction. Les activités de l'organisation (logiciels, numérique, design, conseil, IA) ne correspondent pas au champ des travaux de capital planifiés et des réparations réactives pour les toitures."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that align with TheStudio MT’s sectors (software, digital, design, advisory, AI).",
+      "fr": "Examiner d'autres opportunités de financement qui correspondent aux secteurs de TheStudio MT (logiciels, numérique, design, conseil, IA)."
+    }
+  }
+}

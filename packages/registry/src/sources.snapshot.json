@@ -12,7 +12,7 @@
       ],
       "url": "https://acquire.com",
       "urlVerified": true,
-      "lastUrlCheck": "2026-10-12",
+      "lastUrlCheck": "2026-10-19",
       "status": "BLOCKED",
       "access": {
         "mode": "SCRAPE",
@@ -37,7 +37,7 @@
       ],
       "url": "https://adio.ae",
       "urlVerified": true,
-      "lastUrlCheck": "2026-10-12",
+      "lastUrlCheck": "2026-10-19",
       "status": "DECLARED",
       "access": {
         "mode": "MANUAL",
@@ -64,7 +64,7 @@
       ],
       "url": "https://aides-territoires.beta.gouv.fr",
       "urlVerified": true,
-      "lastUrlCheck": "2026-10-12",
+      "lastUrlCheck": "2026-10-19",
       "status": "DECLARED",
       "access": {
         "mode": "API",
@@ -93,7 +93,7 @@
       ],
       "url": "https://www.boamp.fr",
       "urlVerified": true,
-      "lastUrlCheck": "2026-10-12",
+      "lastUrlCheck": "2026-10-19",
       "status": "DECLARED",
       "access": {
         "mode": "API",
@@ -123,7 +123,7 @@
       ],
       "url": "https://www.bpifrance.fr/nos-appels-a-projets-concours",
       "urlVerified": false,
-      "lastUrlCheck": "2026-10-12",
+      "lastUrlCheck": "2026-10-19",
       "status": "BLOCKED",
       "access": {
         "mode": "MANUAL",
@@ -146,7 +146,7 @@
       ],
       "url": "https://www.service-public.fr/professionnels-entreprises/vosdroits/F23533",
       "urlVerified": true,
-      "lastUrlCheck": "2026-10-12",
+      "lastUrlCheck": "2026-10-19",
       "status": "DECLARED",
       "access": {
         "mode": "MANUAL",
@@ -178,7 +178,7 @@
       ],
       "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home",
       "urlVerified": true,
-      "lastUrlCheck": "2026-10-12",
+      "lastUrlCheck": "2026-10-19",
       "status": "FIXTURE_ONLY",
       "access": {
         "mode": "API",
@@ -207,7 +207,7 @@
       ],
       "url": "https://flippa.com",
       "urlVerified": true,
-      "lastUrlCheck": "2026-10-12",
+      "lastUrlCheck": "2026-10-19",
       "status": "DECLARED",
       "access": {
         "mode": "MANUAL",
@@ -232,7 +232,7 @@
       ],
       "url": "https://agirpourlatransition.ademe.fr/entreprises/appels-projets-offres",
       "urlVerified": false,
-      "lastUrlCheck": "2026-10-12",
+      "lastUrlCheck": "2026-10-19",
       "status": "DECLARED",
       "access": {
         "mode": "MANUAL",
@@ -263,7 +263,7 @@
       ],
       "url": "https://hub71.com",
       "urlVerified": true,
-      "lastUrlCheck": "2026-10-12",
+      "lastUrlCheck": "2026-10-19",
       "status": "DECLARED",
       "access": {
         "mode": "MANUAL",
@@ -291,7 +291,7 @@
       ],
       "url": "https://www.malt.fr",
       "urlVerified": false,
-      "lastUrlCheck": "2026-10-12",
+      "lastUrlCheck": "2026-10-19",
       "status": "BLOCKED",
       "access": {
         "mode": "SCRAPE",
@@ -319,7 +319,7 @@
       ],
       "url": "https://www.bretagne.bzh/aides/",
       "urlVerified": false,
-      "lastUrlCheck": "2026-10-12",
+      "lastUrlCheck": "2026-10-19",
       "status": "BLOCKED",
       "access": {
         "mode": "MANUAL",
@@ -349,7 +349,7 @@
       ],
       "url": "https://ted.europa.eu",
       "urlVerified": true,
-      "lastUrlCheck": "2026-10-12",
+      "lastUrlCheck": "2026-10-19",
       "status": "LIVE",
       "access": {
         "mode": "API",
@@ -373,7 +373,7 @@
       ],
       "url": "https://www.mof.gov.ae",
       "urlVerified": true,
-      "lastUrlCheck": "2026-10-12",
+      "lastUrlCheck": "2026-10-19",
       "status": "DECLARED",
       "access": {
         "mode": "MANUAL",
@@ -402,7 +402,7 @@
       ],
       "url": "https://www.find-tender.service.gov.uk",
       "urlVerified": true,
-      "lastUrlCheck": "2026-10-12",
+      "lastUrlCheck": "2026-10-19",
       "status": "DECLARED",
       "access": {
         "mode": "API",
@@ -430,7 +430,7 @@
       ],
       "url": "https://www.ungm.org",
       "urlVerified": true,
-      "lastUrlCheck": "2026-10-12",
+      "lastUrlCheck": "2026-10-19",
       "status": "DECLARED",
       "access": {
         "mode": "MANUAL",
@@ -458,7 +458,7 @@
       ],
       "url": "https://www.upwork.com",
       "urlVerified": false,
-      "lastUrlCheck": "2026-10-12",
+      "lastUrlCheck": "2026-10-19",
       "status": "BLOCKED",
       "access": {
         "mode": "API",
@@ -486,7 +486,7 @@
       ],
       "url": "https://projects.worldbank.org/en/projects-operations/procurement",
       "urlVerified": true,
-      "lastUrlCheck": "2026-10-12",
+      "lastUrlCheck": "2026-10-19",
       "status": "DECLARED",
       "access": {
         "mode": "MANUAL",

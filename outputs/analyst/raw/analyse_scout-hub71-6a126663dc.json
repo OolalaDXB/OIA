@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NOT_ELIGIBLE",
+    "verdict": "LIKELY",
     "citation": "eligibility: Smart and autonomous mobility startups",
     "reason": {
-      "en": "The opportunity explicitly restricts eligibility to 'Smart and autonomous mobility startups.' BAWABA operates in AI, data, cybersecurity, and software sectors, with no indication it is a smart or autonomous mobility startup.",
-      "fr": "L'opportunité restreint explicitement l'éligibilité aux 'startups de mobilité intelligente et autonome.' BAWABA opère dans les secteurs de l'IA, des données, de la cybersécurité et des logiciels, sans indication qu'il s'agit d'une startup de mobilité intelligente ou autonome."
+      "en": "The opportunity explicitly targets 'Smart and autonomous mobility startups,' but the organisation's dossier does not clarify whether its AI control plane for regulated industries qualifies as a smart or autonomous mobility solution. The sectors listed (AI, data, digital, cybersecurity, software) are broad and could overlap with mobility, but this is not confirmed.",
+      "fr": "L'opportunité cible explicitement les 'startups de mobilité intelligente et autonome,' mais le dossier de l'organisation ne précise pas si sa plateforme d'IA pour les industries réglementées relève de la mobilité intelligente ou autonome. Les secteurs mentionnés (IA, données, numérique, cybersécurité, logiciel) sont larges et pourraient se recouper avec la mobilité, mais cela n'est pas confirmé."
     },
     "nextAction": {
-      "en": "Confirm with BAWABA whether they have a dedicated smart or autonomous mobility product or division that could qualify under this opportunity.",
-      "fr": "Vérifier auprès de BAWABA s'ils disposent d'un produit ou d'une division dédiée à la mobilité intelligente ou autonome qui pourrait être éligible à cette opportunité."
+      "en": "Contact Hub71 or Mubadala to confirm whether BAWABA’s AI control plane for regulated industries falls under 'smart and autonomous mobility.'",
+      "fr": "Contacter Hub71 ou Mubadala pour confirmer si la plateforme d'IA de BAWABA pour les industries réglementées relève de la 'mobilité intelligente et autonome.'"
     }
   }
 }

@@ -1,6 +1,57 @@
 {
   "ScoutResult": {
-    "note": "The page is a portal for public procurement notices (AAPC) and does not list specific funding opportunities, grants, subsidies, or named programmes. It directs users to search for active public tenders but does not display individual calls or opportunities directly.",
-    "calls": []
+    "note": "The page is the Bulletin Officiel des Annonces des Marchés Publics (BOAMP), which lists public procurement notices (calls for tenders, concessions, and contract awards). However, the provided page text does not explicitly list individual funding opportunities or programmes. It describes the platform's purpose and provides links to search for public procurement notices, but no specific opportunities are named or detailed here. The actual opportunities would be found by searching the BOAMP database.",
+    "calls": [
+      {
+        "title": "Avis publics à la concurrence (AAPC) nationaux et européens",
+        "description": "Diffusion des avis publics à la concurrence lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics.",
+        "type": "Call for tenders",
+        "deadline": "",
+        "amount": "",
+        "eligibility": "",
+        "quote": "Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics.",
+        "sourceUrl": "https://www.boamp.fr/pages/recherche/"
+      },
+      {
+        "title": "Avis de concession",
+        "description": "Diffusion des avis de concession lancés par les acheteurs publics.",
+        "type": "Call for concessions",
+        "deadline": "",
+        "amount": "",
+        "eligibility": "",
+        "quote": "Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics.",
+        "sourceUrl": "https://www.boamp.fr/pages/recherche/"
+      },
+      {
+        "title": "Avis d’attribution",
+        "description": "Diffusion des avis d’attribution de marchés publics.",
+        "type": "Contract award notice",
+        "deadline": "",
+        "amount": "",
+        "eligibility": "",
+        "quote": "Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics.",
+        "sourceUrl": "https://www.boamp.fr/pages/recherche/"
+      },
+      {
+        "title": "Contrats de partenariat public-privé",
+        "description": "Diffusion des avis relatifs aux contrats de partenariat public-privé.",
+        "type": "Public-private partnership contract",
+        "deadline": "",
+        "amount": "",
+        "eligibility": "",
+        "quote": "Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics.",
+        "sourceUrl": "https://www.boamp.fr/pages/recherche/"
+      },
+      {
+        "title": "Service d'alerte BOAMP",
+        "description": "Veille personnalisée et gratuite pour recevoir quotidiennement les nouveaux avis publiés au BOAMP.",
+        "type": "Alert service for public procurement notices",
+        "deadline": "",
+        "amount": "",
+        "eligibility": "",
+        "quote": "Le site boamp.fr propose une veille personnalisée et gratuite. Enregistrez vos recherches et paramétrez jusqu'à 10 alertes pour recevoir quotidiennement les nouveaux avis publiés au BOAMP.",
+        "sourceUrl": "https://www.boamp.fr/pages/entreprise-service-dalerte/"
+      }
+    ]
   }
 }

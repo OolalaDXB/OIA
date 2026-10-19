@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of eligibility criteria related to the applicant's legal form, sector, or geographic location.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles à cette opportunité. Il n'y a aucune mention des critères d'éligibilité liés à la forme juridique, au secteur ou à la localisation géographique du demandeur."
+      "en": "The extracted text does not specify who may apply for this tender. There is no mention of eligible applicants, legal forms, or geographic restrictions that would confirm or exclude BAWABA.",
+      "fr": "Le texte extrait ne précise pas qui peut postuler à cet appel d'offres. Il n'y a aucune mention des candidats éligibles, des formes juridiques ou des restrictions géographiques qui confirmeraient ou excluraient BAWABA."
     },
     "nextAction": {
-      "en": "Contact Mobil Krankenkasse or consult the full tender documents to confirm eligibility requirements for applicants.",
-      "fr": "Contacter Mobil Krankenkasse ou consulter les documents complets de l'appel d'offres pour confirmer les critères d'éligibilité des candidats."
+      "en": "Check the full tender notice at the provided link to identify the eligibility criteria for applicants.",
+      "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni pour identifier les critères d'éligibilité des candidats."
     }
   }
 }

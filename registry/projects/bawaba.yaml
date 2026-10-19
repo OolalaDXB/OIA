@@ -11,7 +11,7 @@ status: DOSSIER_ON_REQUEST
 oneLiner: "Sovereign AI control plane for regulated industries. MCP reverse proxy."
 url: "https://bawaba.systems"
 urlVerified: true
-lastUrlCheck: "2026-10-12"
+lastUrlCheck: "2026-10-19"
 active: true
 legalEntities:
   - name: "Oolala France SAS"

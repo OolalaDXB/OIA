@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citation": [],
+    "citations": [],
     "reason": {
       "en": "The extracted text does not specify which types of organisations may apply for the FEADER Leader funding. It only describes the scope of the initiative.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au financement FEADER Leader. Il décrit uniquement le champ d'application de l'initiative."
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent déposer une candidature pour le financement FEADER Leader. Il décrit uniquement le champ d'application de l'initiative."
     },
     "nextAction": {
-      "en": "Check the official FEADER Leader call for proposals or guidelines to confirm the eligibility criteria for applicants.",
-      "fr": "Consulter l'appel à projets ou les directives officielles du FEADER Leader pour confirmer les critères d'éligibilité des candidats."
+      "en": "Check the official FEADER Leader call for proposals or guidelines to confirm eligible applicants.",
+      "fr": "Consulter l'appel à projets ou les directives officielles du FEADER Leader pour confirmer les candidats éligibles."
     }
   }
 }

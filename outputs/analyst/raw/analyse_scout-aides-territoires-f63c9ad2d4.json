@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply to the LIFE programme. There is no mention of eligibility criteria for applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au programme LIFE. Il n'y a aucune mention des critères d'éligibilité pour les candidats."
+      "en": "The extracted text does not specify which types of organisations may apply for the LIFE programme. It only describes the programme's scope.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au programme LIFE. Il décrit uniquement le champ d'application du programme."
     },
     "nextAction": {
-      "en": "Consult the official LIFE programme guidelines or call the programme contact to confirm which legal entities are eligible to apply.",
-      "fr": "Consulter les directives officielles du programme LIFE ou contacter le responsable du programme pour confirmer quelles entités juridiques sont éligibles."
+      "en": "Check the official LIFE programme guidelines or call the issuer to confirm whether heritage associations are eligible applicants.",
+      "fr": "Consulter les directives officielles du programme LIFE ou contacter l'émetteur pour confirmer si les associations patrimoniales sont éligibles."
     }
   }
 }

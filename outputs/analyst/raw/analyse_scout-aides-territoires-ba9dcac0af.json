@@ -1,14 +1,16 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NEEDS_INFO",
-    "citation": [],
+    "verdict": "NOT_ELIGIBLE",
+    "citations": [
+      "Le programme antifraude de l’UE vise à protéger les intérêts financiers de l’UE en fournissant un financement, sous forme de subventions et de marchés publics, pour des équipements d’investigation techniques et opérationnels, des formations spécialisées et des activités de recherche."
+    ],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for this funding. It mentions financing for 'equipment, training, and research activities' but does not clarify eligibility criteria for applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d’organisations peuvent postuler à ce financement. Il mentionne un financement pour « des équipements, des formations et des activités de recherche » mais ne clarifie pas les critères d’éligibilité des candidats."
+      "en": "The funding is strictly for technical and operational investigation equipment, specialized training, and research activities related to protecting the EU's financial interests. A heritage hiking association does not align with these objectives.",
+      "fr": "Le financement est strictement destiné aux équipements d’investigation techniques et opérationnels, aux formations spécialisées et aux activités de recherche visant à protéger les intérêts financiers de l’UE. Une association de randonnée patrimoniale ne correspond pas à ces objectifs."
     },
     "nextAction": {
-      "en": "Contact the issuer (beta.gouv.fr) to ask for the official call for proposals or eligibility guidelines.",
-      "fr": "Contacter l’émetteur (beta.gouv.fr) pour demander l’appel à projets officiel ou les directives d’éligibilité."
+      "en": "Review other funding opportunities that support heritage, culture, or tourism initiatives.",
+      "fr": "Consulter d’autres opportunités de financement qui soutiennent les initiatives liées au patrimoine, à la culture ou au tourisme."
     }
   }
 }

@@ -1,16 +1,16 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citations": [
-      "Hanshan Sub-district Office, Zhongshiying Sub-district Office, Dagukan Town, Liangshan Town - Equipment Procurement for the Promotion and Popularization of Waste Classification Campaign"
+    "citation": [
+      "Serviços de Consultoria para Diagnóstico dos Laboratórios de Análises e Testes de Mercadorias e Simplificação dos Procedimentos de Controlo Laboratorial no Comércio Internacional"
     ],
     "reason": {
-      "en": "The opportunity explicitly names the eligible applicants as Hanshan Sub-district Office, Zhongshiying Sub-district Office, Dagukan Town, and Liangshan Town. padel.design is not listed among these entities.",
-      "fr": "L'opportunité nomme explicitement les candidats éligibles comme étant le Bureau du sous-district de Hanshan, le Bureau du sous-district de Zhongshiying, la ville de Dagukan et la ville de Liangshan. padel.design n'est pas mentionné parmi ces entités."
+      "en": "The opportunity specifically targets consultancy services for diagnostics of laboratories for goods analysis and testing, and simplification of laboratory control procedures in international trade. padel.design's focus on advisory for padel club development in underserved markets does not align with the technical and sectoral requirements of this grant.",
+      "fr": "L'opportunité cible spécifiquement des services de consultance pour le diagnostic des laboratoires d'analyse et de test de marchandises, ainsi que la simplification des procédures de contrôle en laboratoire dans le commerce international. L'activité de padel.design, centrée sur le conseil pour le développement de clubs de padel dans des marchés mal desservis, ne correspond pas aux exigences techniques et sectorielles de cette subvention."
     },
     "nextAction": {
-      "en": "Confirm with the issuer whether non-listed entities may apply or if the opportunity is restricted to the named applicants.",
-      "fr": "Vérifier auprès de l'émetteur si des entités non listées peuvent postuler ou si l'opportunité est réservée aux candidats nommés."
+      "en": "Review other funding opportunities that align with advisory services in sport, real estate, or underserved markets.",
+      "fr": "Examiner d'autres opportunités de financement qui correspondent aux services de conseil dans les secteurs du sport, de l'immobilier ou des marchés mal desservis."
     }
   }
 }

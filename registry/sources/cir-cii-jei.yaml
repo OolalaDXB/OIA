@@ -10,7 +10,7 @@ forProjects: ["bawaba", "sillon", "rls-guard", "myoolala", "ludography", "thestu
 geographies: ["FR"]
 url: "https://www.service-public.fr/professionnels-entreprises/vosdroits/F23533"
 urlVerified: true
-lastUrlCheck: "2026-10-12"
+lastUrlCheck: "2026-10-19"
 status: DECLARED
 access:
   mode: MANUAL

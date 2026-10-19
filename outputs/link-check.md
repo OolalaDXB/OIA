@@ -1,18 +1,24 @@
 # Link check
 
-Checked 236 distinct URL(s).
+Checked 253 distinct URL(s).
 
-- resolving: 227
-- **broken: 2**
-- refused us (not broken): 7
+- resolving: 243
+- **broken: 5**
+- refused us (not broken): 5
 - inconclusive: 0
 
 ## Broken — these need fixing
 
 - **project live-great-foundation** — DEAD · HTTP 404 — the page is gone
   - https://livegreatfoundation.netlify.app
+- **source bpifrance** — UNREACHABLE · fetch failed
+  - https://www.bpifrance.fr/nos-appels-a-projets-concours
+- **opportunity bpifrance-aide-developpement-deeptech** — UNREACHABLE · fetch failed
+  - https://www.bpifrance.fr/nos-solutions/financement/aides-au-financement-de-linnovation
 - **opportunity startup-qatar-qdb-start (application)** — UNREACHABLE · fetch failed
   - https://startupqatar.qa/en/investment-program
+- **opportunity scout-adio-7dba563501** — UNREACHABLE · This operation was aborted
+  - https://www.investwithabudhabi.com/fr/where-to-invest/clusters/agwa
 
 ## Moved — still work, but the published URL is stale
 
@@ -54,7 +60,7 @@ Checked 236 distinct URL(s).
   - https://hub71.com
 - **source ted** — now redirects to https://ted.europa.eu/
   - https://ted.europa.eu
-- **source uae-federal-procurement** — now redirects to https://www.mof.gov.ae/
+- **source uae-federal-procurement** — now redirects to https://mof.gov.ae/ar/home/
   - https://www.mof.gov.ae
 - **source uk-find-a-tender** — now redirects to https://www.find-tender.service.gov.uk/Search
   - https://www.find-tender.service.gov.uk
@@ -71,10 +77,8 @@ Checked 236 distinct URL(s).
 
 These returned 401/403/429. The server declined our request; the page itself may be perfectly fine in a browser.
 
-- https://www.bpifrance.fr/nos-appels-a-projets-concours — HTTP 403 — the server refused us, which is not the same as the link being broken
 - https://agirpourlatransition.ademe.fr/entreprises/appels-projets-offres — HTTP 403 — the server refused us, which is not the same as the link being broken
 - https://www.malt.fr — HTTP 403 — the server refused us, which is not the same as the link being broken
 - https://www.bretagne.bzh/aides/ — HTTP 403 — the server refused us, which is not the same as the link being broken
 - https://api.ted.europa.eu/v3/notices/search — HTTP 405
 - https://www.upwork.com — HTTP 403 — the server refused us, which is not the same as the link being broken
-- https://www.bpifrance.fr/nos-solutions/financement/aides-au-financement-de-linnovation — HTTP 403 — the server refused us, which is not the same as the link being broken

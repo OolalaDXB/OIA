@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citations": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for the Biodiversa + funding. There is no mention of eligibility criteria for applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au financement Biodiversa +. Il n'y a aucune mention des critères d'éligibilité pour les candidats."
+      "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria for applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Aucun critère d'éligibilité pour les candidats n'est mentionné."
     },
     "nextAction": {
-      "en": "Check the official Biodiversa + call for proposals or guidelines to determine who is eligible to apply.",
-      "fr": "Consulter l'appel à projets officiel ou les directives de Biodiversa + pour déterminer qui est éligible à postuler."
+      "en": "Contact the issuer (beta.gouv.fr / French state) to request the full call for proposals document or eligibility guidelines.",
+      "fr": "Contacter l'émetteur (beta.gouv.fr / État français) pour demander le document complet de l'appel à projets ou les directives d'éligibilité."
     }
   }
 }

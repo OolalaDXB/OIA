@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Suitable for SME & VCSE",
+    "reason": {
+      "en": "The opportunity explicitly states it is suitable for SMEs and VCSEs (Voluntary, Community and Social Enterprises). TheStudio MT operates in software, digital, design, advisory, and AI sectors, which do not align with the typical activities of a VCSE. Additionally, there is no indication that TheStudio MT is a VCSE or operates in the maintenance or renovation of sports surfaces, which is the focus of this tender.",
+      "fr": "L'opportunité indique explicitement qu'elle est adaptée aux PME et aux entreprises sociales, communautaires et bénévoles (VCSE). TheStudio MT opère dans les secteurs du logiciel, du numérique, du design, du conseil et de l'IA, ce qui ne correspond pas aux activités typiques d'une VCSE. De plus, rien n'indique que TheStudio MT est une VCSE ou qu'elle intervient dans la maintenance ou la rénovation de surfaces sportives, qui est l'objet de cet appel d'offres."
+    },
+    "nextAction": {
+      "en": "Review the full tender documentation to confirm if there are any exceptions or additional criteria that might allow non-VCSE or non-sports-related organisations to apply.",
+      "fr": "Consulter l'intégralité du dossier d'appel d'offres pour vérifier s'il existe des exceptions ou des critères supplémentaires permettant à des organisations non-VCSE ou non liées au sport de postuler."
+    }
+  }
+}

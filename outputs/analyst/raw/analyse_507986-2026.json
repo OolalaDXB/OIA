@@ -1,16 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citations": [
-      "The extracted text does not specify eligibility criteria regarding who may apply for this tender."
-    ],
+    "citation": [],
     "reason": {
-      "en": "The document does not state which types of organisations are eligible to apply for this funding opportunity. There is no mention of restrictions or required qualifications for applicants.",
-      "fr": "Le document ne précise pas quels types d'organisations sont éligibles pour cette opportunité de financement. Il n'y a aucune mention de restrictions ou de qualifications requises pour les candidats."
+      "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of legal form, geographic restrictions, or other criteria that would confirm or exclude BAWABA.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles. Il n'y a aucune mention de la forme juridique, des restrictions géographiques ou d'autres critères qui confirmeraient ou excluraient BAWABA."
     },
     "nextAction": {
-      "en": "Contact the buyer (SM Manche Numérique) to request the full tender documentation or eligibility criteria.",
-      "fr": "Contacter l'acheteur (SM Manche Numérique) pour demander le dossier complet de l'appel d'offres ou les critères d'éligibilité."
+      "en": "Contact the buyer (SM Manche Numérique) to ask for the full tender documents and confirm eligibility requirements.",
+      "fr": "Contacter l'acheteur (SM Manche Numérique) pour demander les documents complets de l'appel d'offres et confirmer les critères d'éligibilité."
     }
   }
 }

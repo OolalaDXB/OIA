@@ -3,12 +3,12 @@
     "verdict": "NOT_ELIGIBLE",
     "citation": "Les QPV sont entités définies par la loi de 2014, identifiant zones urbaines pauvres nécessitant des interventions publiques.",
     "reason": {
-      "en": "The funding opportunity targets specific urban areas defined as 'Quartiers Prioritaires de la Ville' (QPV), which are disadvantaged urban zones. The organisation operates in Bretagne and focuses on heritage hiking, which is not tied to these designated urban areas.",
-      "fr": "L'opportunité de financement cible des zones urbaines spécifiques définies comme 'Quartiers Prioritaires de la Ville' (QPV), qui sont des zones urbaines défavorisées. L'organisation opère en Bretagne et se concentre sur la randonnée patrimoniale, ce qui n'est pas lié à ces zones urbaines désignées."
+      "en": "The opportunity is restricted to 'Quartiers Prioritaires de la Ville' (QPV), which are defined as urban zones requiring public intervention. The organisation operates in Bretagne and focuses on heritage hiking, not in designated QPV zones.",
+      "fr": "L'opportunité est réservée aux 'Quartiers Prioritaires de la Ville' (QPV), définis comme des zones urbaines nécessitant des interventions publiques. L'organisation opère en Bretagne et se concentre sur la randonnée patrimoniale, et non dans des zones QPV désignées."
     },
     "nextAction": {
-      "en": "Verify if any of the association's activities or projects are located within a QPV zone as defined by the 2024 cartography.",
-      "fr": "Vérifier si une partie des activités ou projets de l'association se situe dans un QPV tel que défini par la cartographie 2024."
+      "en": "Verify if the organisation operates or plans to operate in a QPV zone as defined by the 2024 decree.",
+      "fr": "Vérifier si l'organisation opère ou prévoit d'opérer dans une zone QPV telle que définie par le décret de 2024."
     }
   }
 }

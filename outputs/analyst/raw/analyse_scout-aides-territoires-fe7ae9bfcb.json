@@ -1,16 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "ELIGIBLE",
-    "citations": [
-      "Le Corps européen de solidarité permet aux jeunes de s’engager et aux organismes de mettre en place des initiatives en Europe sur des activités variées, dans les domaines humanitaires, de la santé, de l’environnement, de l’intergénérationnel…"
-    ],
+    "verdict": "NEEDS_INFO",
+    "citation": [],
     "reason": {
-      "en": "The opportunity explicitly allows 'organismes' (organizations) to implement initiatives in Europe, and the organization operates in the EU. The sectors (heritage, culture) align with the broad scope of activities mentioned.",
-      "fr": "L'opportunité permet explicitement aux 'organismes' de mettre en place des initiatives en Europe, et l'organisation opère dans l'UE. Les secteurs (patrimoine, culture) correspondent au large éventail d'activités mentionné."
+      "en": "The extracted text does not specify which types of organisations may apply. It only mentions that the programme allows young people to engage and organisations to set up initiatives, but it does not clarify eligibility criteria for organisations.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il mentionne uniquement que le programme permet aux jeunes de s'engager et aux organismes de mettre en place des initiatives, sans clarifier les critères d'éligibilité pour les organisations."
     },
     "nextAction": {
-      "en": "Confirm with the issuer whether the association 'Les Vieilles Pierres' can formally apply as an organization under this program.",
-      "fr": "Vérifier auprès de l'émetteur si l'association 'Les Vieilles Pierres' peut officiellement postuler en tant qu'organisme dans le cadre de ce programme."
+      "en": "Check the official call for proposals or programme guidelines to determine which legal entities are eligible to apply.",
+      "fr": "Consulter l'appel à projets officiel ou les directives du programme pour déterminer quelles entités juridiques sont éligibles à postuler."
     }
   }
 }

@@ -1378,9 +1378,142 @@
       "buyer-country": [
         "LUX"
       ]
+    },
+    {
+      "notice-type": "cn-standard",
+      "publication-number": "720471-2026",
+      "classification-cpv": [
+        "48410000",
+        "66170000",
+        "66171000",
+        "48410000",
+        "66170000",
+        "66171000"
+      ],
+      "buyer-name": {
+        "fra": [
+          "Centrale D'achats Habitat Réuni (75)"
+        ]
+      },
+      "publication-date": "2026-10-19+02:00",
+      "links": {
+        "xml": {
+          "MUL": "https://ted.europa.eu/en/notice/720471-2026/xml"
+        },
+        "pdf": {
+          "BUL": "https://ted.europa.eu/bg/notice/720471-2026/pdf",
+          "SPA": "https://ted.europa.eu/es/notice/720471-2026/pdf",
+          "CES": "https://ted.europa.eu/cs/notice/720471-2026/pdf",
+          "DAN": "https://ted.europa.eu/da/notice/720471-2026/pdf",
+          "DEU": "https://ted.europa.eu/de/notice/720471-2026/pdf",
+          "EST": "https://ted.europa.eu/et/notice/720471-2026/pdf",
+          "ELL": "https://ted.europa.eu/el/notice/720471-2026/pdf",
+          "ENG": "https://ted.europa.eu/en/notice/720471-2026/pdf",
+          "FRA": "https://ted.europa.eu/fr/notice/720471-2026/pdf",
+          "GLE": "https://ted.europa.eu/ga/notice/720471-2026/pdf",
+          "HRV": "https://ted.europa.eu/hr/notice/720471-2026/pdf",
+          "ITA": "https://ted.europa.eu/it/notice/720471-2026/pdf",
+          "LAV": "https://ted.europa.eu/lv/notice/720471-2026/pdf",
+          "LIT": "https://ted.europa.eu/lt/notice/720471-2026/pdf",
+          "HUN": "https://ted.europa.eu/hu/notice/720471-2026/pdf",
+          "MLT": "https://ted.europa.eu/mt/notice/720471-2026/pdf",
+          "NLD": "https://ted.europa.eu/nl/notice/720471-2026/pdf",
+          "POL": "https://ted.europa.eu/pl/notice/720471-2026/pdf",
+          "POR": "https://ted.europa.eu/pt/notice/720471-2026/pdf",
+          "RON": "https://ted.europa.eu/ro/notice/720471-2026/pdf",
+          "SLK": "https://ted.europa.eu/sk/notice/720471-2026/pdf",
+          "SLV": "https://ted.europa.eu/sl/notice/720471-2026/pdf",
+          "FIN": "https://ted.europa.eu/fi/notice/720471-2026/pdf",
+          "SWE": "https://ted.europa.eu/sv/notice/720471-2026/pdf"
+        },
+        "pdfs": {
+          "FRA": "https://ted.europa.eu/fr/notice/720471-2026/pdfs"
+        },
+        "html": {
+          "BUL": "https://ted.europa.eu/bg/notice/-/detail/720471-2026",
+          "SPA": "https://ted.europa.eu/es/notice/-/detail/720471-2026",
+          "CES": "https://ted.europa.eu/cs/notice/-/detail/720471-2026",
+          "DAN": "https://ted.europa.eu/da/notice/-/detail/720471-2026",
+          "DEU": "https://ted.europa.eu/de/notice/-/detail/720471-2026",
+          "EST": "https://ted.europa.eu/et/notice/-/detail/720471-2026",
+          "ELL": "https://ted.europa.eu/el/notice/-/detail/720471-2026",
+          "ENG": "https://ted.europa.eu/en/notice/-/detail/720471-2026",
+          "FRA": "https://ted.europa.eu/fr/notice/-/detail/720471-2026",
+          "GLE": "https://ted.europa.eu/ga/notice/-/detail/720471-2026",
+          "HRV": "https://ted.europa.eu/hr/notice/-/detail/720471-2026",
+          "ITA": "https://ted.europa.eu/it/notice/-/detail/720471-2026",
+          "LAV": "https://ted.europa.eu/lv/notice/-/detail/720471-2026",
+          "LIT": "https://ted.europa.eu/lt/notice/-/detail/720471-2026",
+          "HUN": "https://ted.europa.eu/hu/notice/-/detail/720471-2026",
+          "MLT": "https://ted.europa.eu/mt/notice/-/detail/720471-2026",
+          "NLD": "https://ted.europa.eu/nl/notice/-/detail/720471-2026",
+          "POL": "https://ted.europa.eu/pl/notice/-/detail/720471-2026",
+          "POR": "https://ted.europa.eu/pt/notice/-/detail/720471-2026",
+          "RON": "https://ted.europa.eu/ro/notice/-/detail/720471-2026",
+          "SLK": "https://ted.europa.eu/sk/notice/-/detail/720471-2026",
+          "SLV": "https://ted.europa.eu/sl/notice/-/detail/720471-2026",
+          "FIN": "https://ted.europa.eu/fi/notice/-/detail/720471-2026",
+          "SWE": "https://ted.europa.eu/sv/notice/-/detail/720471-2026"
+        },
+        "htmlDirect": {
+          "BUL": "https://ted.europa.eu/bg/notice/720471-2026/html",
+          "SPA": "https://ted.europa.eu/es/notice/720471-2026/html",
+          "CES": "https://ted.europa.eu/cs/notice/720471-2026/html",
+          "DAN": "https://ted.europa.eu/da/notice/720471-2026/html",
+          "DEU": "https://ted.europa.eu/de/notice/720471-2026/html",
+          "EST": "https://ted.europa.eu/et/notice/720471-2026/html",
+          "ELL": "https://ted.europa.eu/el/notice/720471-2026/html",
+          "ENG": "https://ted.europa.eu/en/notice/720471-2026/html",
+          "FRA": "https://ted.europa.eu/fr/notice/720471-2026/html",
+          "GLE": "https://ted.europa.eu/ga/notice/720471-2026/html",
+          "HRV": "https://ted.europa.eu/hr/notice/720471-2026/html",
+          "ITA": "https://ted.europa.eu/it/notice/720471-2026/html",
+          "LAV": "https://ted.europa.eu/lv/notice/720471-2026/html",
+          "LIT": "https://ted.europa.eu/lt/notice/720471-2026/html",
+          "HUN": "https://ted.europa.eu/hu/notice/720471-2026/html",
+          "MLT": "https://ted.europa.eu/mt/notice/720471-2026/html",
+          "NLD": "https://ted.europa.eu/nl/notice/720471-2026/html",
+          "POL": "https://ted.europa.eu/pl/notice/720471-2026/html",
+          "POR": "https://ted.europa.eu/pt/notice/720471-2026/html",
+          "RON": "https://ted.europa.eu/ro/notice/720471-2026/html",
+          "SLK": "https://ted.europa.eu/sk/notice/720471-2026/html",
+          "SLV": "https://ted.europa.eu/sl/notice/720471-2026/html",
+          "FIN": "https://ted.europa.eu/fi/notice/720471-2026/html",
+          "SWE": "https://ted.europa.eu/sv/notice/720471-2026/html"
+        }
+      },
+      "notice-title": {
+        "hun": "Franciaország – Beruházási és adóbevallási szoftvercsomag – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "lav": "Francija – Investīciju pārvaldības un nodokļu aprēķina programmatūras pakotne – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "swe": "Frankrike – Programvara för investeringshantering och deklaration – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "gle": "An Fhrainc – Investment management and tax preparation software package – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "ell": "Γαλλία – Πακέτα λογισμικού διαχείρισης επενδύσεων και συμπλήρωσης φορολογικής δήλωσης – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "spa": "Francia – Paquetes de software de gestión de inversiones y elaboración de declaraciones fiscales – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "est": "Prantsusmaa – Investeerimistegevuse juhtimise ja tuludeklaratsioonide koostamise tarkvarapakett – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "nld": "Frankrijk – Software voor investeringsmanagement en belastingaangifte – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "fin": "Ranska – Sijoitustenhallinta- ja verovalmisteluohjelmatuotteet – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "pol": "Francja – Pakiety oprogramowania do zarządzania inwestycjami i przygotowywania deklaracji podatkowych – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "hrv": "Francuska – Programski paket za upravljanje ulaganjem i pripremu poreza – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "ces": "Francie – Balík programů pro správu investic a plánování daní – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "dan": "Frankrig – Programpakke til forvaltning af investeringer og udarbejdelse af selvangivelse – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "ron": "Franţa – Pachete software de gestionare a investiţiilor şi pregătire a declaraţiilor fiscale – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "por": "França – Pacote de software para gestão de investimentos e apoio fiscal – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "slk": "Francúzsko – Softvérový balík na riadenie investícií a spracovanie daní – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "fra": "France – Logiciels de gestion des investissements et d'établissement des déclarations fiscales – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "mlt": "Franza – Pakkett ta' softwer għall-ġestjoni ta' l-investimenti u t-tħejjija għat-taxxa – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "deu": "Frankreich – Investitionsmanagement- und Steuersoftwarepaket – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "lit": "Prancūzija – Investicijų valdymo ir mokesčių deklaracijų rengimo programinės įrangos paketai – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "ita": "Francia – Pacchetti software di gestione degli investimenti e la preparazione di dichiarazioni fiscali – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "bul": "Фpaнция – Софтуерни пакети за управление на инвестициите и изготвяне на данъчни декларации – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "slv": "Francija – Programski paket za upravljanje naložb in pripravo davčnih prijav – EXTERNALISATION DE LA GESTION DE LA TFPB",
+        "eng": "France – Investment management and tax preparation software package – EXTERNALISATION DE LA GESTION DE LA TFPB"
+      },
+      "buyer-country": [
+        "FRA"
+      ]
     }
   ],
-  "totalNoticeCount": 10,
+  "totalNoticeCount": 11,
   "iterationNextToken": null,
   "timedOut": false
 }

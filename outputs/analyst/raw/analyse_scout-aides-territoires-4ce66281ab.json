@@ -1,16 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citations": [
-      "EUROPE - EIT Manufacturing a pour objectif de faire de l'Europe le leader de l'innovation industrielle internationale, grâce à son large écosystème d'acteurs de l'industrie."
-    ],
+    "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply. It only describes the scope of EIT Manufacturing, which focuses on industrial innovation, but does not exclude or include associations or other entities.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il décrit uniquement l'objectif de l'EIT Manufacturing, axé sur l'innovation industrielle, mais n'exclut ni n'inclut explicitement les associations ou autres entités."
+      "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria for applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Aucun critère d'éligibilité pour les candidats n'est mentionné."
     },
     "nextAction": {
-      "en": "Check the official EIT Manufacturing call for proposals or guidelines to determine the eligible applicants.",
-      "fr": "Consulter l'appel à projets ou les directives officielles de l'EIT Manufacturing pour identifier les candidats éligibles."
+      "en": "Contact the issuer (beta.gouv.fr) to ask for the official eligibility criteria for this grant.",
+      "fr": "Contacter l'émetteur (beta.gouv.fr) pour demander les critères officiels d'éligibilité pour cette subvention."
     }
   }
 }

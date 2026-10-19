@@ -10,7 +10,7 @@ forProjects: ["thestudio-mt", "live-great-foundation", "oolala-social-foundation
 geographies: ["EMEA", "GLOBAL"]
 url: "https://www.ungm.org"
 urlVerified: true
-lastUrlCheck: "2026-10-12"
+lastUrlCheck: "2026-10-19"
 status: DECLARED
 access:
   mode: MANUAL

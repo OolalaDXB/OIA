@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citation": [],
+    "citations": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of associations, non-profits, or any other entity types.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles. Il n'est fait mention d'aucune association, organisation à but non lucratif ou autre type d'entité."
+      "en": "The extracted text does not specify which types of organisations are eligible to apply for the Fonds vert - Édition 2026. There is no mention of eligible applicants, such as associations, companies, or public entities.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles pour le Fonds vert - Édition 2026. Il n'est pas mentionné quels demandeurs (associations, entreprises, entités publiques) peuvent postuler."
     },
     "nextAction": {
-      "en": "Contact the issuer (beta.gouv.fr) to ask which types of organisations can apply for the Fonds vert 2026.",
-      "fr": "Contacter l'émetteur (beta.gouv.fr) pour demander quels types d'organisations peuvent postuler au Fonds vert 2026."
+      "en": "Check the official Fonds vert 2026 guidelines or website to confirm whether associations like Les Vieilles Pierres are eligible to apply.",
+      "fr": "Consulter le règlement officiel ou le site web du Fonds vert 2026 pour vérifier si les associations comme Les Vieilles Pierres sont éligibles."
     }
   }
 }

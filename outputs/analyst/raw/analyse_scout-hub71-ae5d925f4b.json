@@ -1,16 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "ELIGIBLE",
-    "citations": [
-      "International startups"
-    ],
+    "citation": "eligibility: International startups",
     "reason": {
-      "en": "The opportunity explicitly states that 'International startups' are eligible. BAWABA operates in multiple regions, including the GCC and MENA, and is described as a startup in the AI and software sectors.",
-      "fr": "L'opportunité indique explicitement que les 'startups internationales' sont éligibles. BAWABA opère dans plusieurs régions, y compris le CCG et la MENA, et est décrite comme une startup dans les secteurs de l'IA et des logiciels."
+      "en": "The opportunity explicitly states that 'International startups' are eligible. BAWABA operates internationally (EU, FR, AE, GCC, MENA) and fits the definition of a startup in the tech sector (AI, data, cybersecurity, software).",
+      "fr": "L'opportunité indique explicitement que les 'startups internationales' sont éligibles. BAWABA opère à l'international (UE, FR, AE, CCG, MENA) et correspond à la définition d'une startup dans le secteur technologique (IA, données, cybersécurité, logiciels)."
     },
     "nextAction": {
-      "en": "Submit the application using the most appropriate legal entity from the provided list.",
-      "fr": "Soumettre la candidature en utilisant l'entité juridique la plus appropriée parmi celles fournies."
+      "en": "Submit the application on behalf of BAWABA’s legal entity registered in a jurisdiction outside the UAE (e.g., EU or FR).",
+      "fr": "Soumettre la candidature au nom de l'entité légale de BAWABA enregistrée dans une juridiction en dehors des Émirats arabes unis (par exemple, UE ou FR)."
     }
   }
 }

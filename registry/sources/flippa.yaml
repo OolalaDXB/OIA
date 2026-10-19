@@ -10,7 +10,7 @@ forProjects: ["thestudio-mt"]
 geographies: ["GLOBAL"]
 url: "https://flippa.com"
 urlVerified: true
-lastUrlCheck: "2026-10-12"
+lastUrlCheck: "2026-10-19"
 status: DECLARED
 access:
   mode: MANUAL

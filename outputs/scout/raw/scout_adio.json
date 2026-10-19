@@ -1,1 +1,97 @@
-{"ScoutResult": {"note": "The page contains general information about Abu Dhabi's investment environment, clusters, and support programs but does not explicitly list specific funding opportunities, grants, subsidies, or calls for proposals with direct links or details. Most sections describe broad initiatives or clusters without actionable funding details. The closest items are the ADIO clusters and public-private partnerships, but no direct funding amounts, deadlines, or application links are provided on this page.", "calls": []}}
+{
+  "ScoutResult": {
+    "note": "The page lists clusters, support programmes, and public-private partnerships as frameworks for investment and growth, but does not explicitly detail specific funding opportunities (e.g., open calls, grants, subsidies, loans, or competitions) with dedicated application processes or financial incentives. The closest elements are the four ADIO clusters and the public-private partnerships, which are described as investment frameworks rather than direct funding opportunities. No deadlines, amounts, or application links are provided for these.",
+    "calls": [
+      {
+        "title": "Industries des véhicules intelligents et autonomes (SAVI Cluster)",
+        "type": "Investment framework / Cluster programme",
+        "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/savi",
+        "deadline": "",
+        "amount": "",
+        "eligibility": "",
+        "quote": "Une nouvelle ère de mobilité intelligente"
+      },
+      {
+        "title": "Croissance agroalimentaire et abondance en eau (AGWA Cluster)",
+        "type": "Investment framework / Cluster programme",
+        "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/agwa",
+        "deadline": "",
+        "amount": "",
+        "eligibility": "",
+        "quote": "Cultiver l’avenir de l’alimentation et de l’eau"
+      },
+      {
+        "title": "Santé, endurance, longévité et médecine (HELM Cluster)",
+        "type": "Investment framework / Cluster programme",
+        "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/helm",
+        "deadline": "",
+        "amount": "",
+        "eligibility": "",
+        "quote": "Propulser la prochaine ère des sciences de la vie"
+      },
+      {
+        "title": "Fintech, assurance, numérique et actifs alternatifs (FIDA Cluster)",
+        "type": "Investment framework / Cluster programme",
+        "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/fida",
+        "deadline": "",
+        "amount": "",
+        "eligibility": "",
+        "quote": "Construire l’avenir de la finance mondiale depuis Abou Dhabi"
+      },
+      {
+        "title": "Partenariats public-privé",
+        "type": "Public-private partnership framework",
+        "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/public-private-partnerships",
+        "deadline": "",
+        "amount": "",
+        "eligibility": "",
+        "quote": "Des contrats de long terme qui réalisent des actifs publics avec des partenaires du secteur privé"
+      },
+      {
+        "title": "Programmes de soutien (Commerce et Industrie)",
+        "type": "Support programmes",
+        "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry/support-programmes",
+        "deadline": "",
+        "amount": "",
+        "eligibility": "",
+        "quote": "Stratégie industrielle, facilitation du commerce et promotion des exportations réunies sur une seule plateforme"
+      },
+      {
+        "title": "Accompagnement ADIO (porte unique vers le gouvernement)",
+        "type": "Support programme",
+        "sourceUrl": "https://www.investwithabudhabi.com/fr",
+        "deadline": "",
+        "amount": "",
+        "eligibility": "",
+        "quote": "Un référent unique coordonne licences, terrains, réseaux et autorisations auprès des entités publiques : un seul dossier, un seul fil."
+      },
+      {
+        "title": "Accompagnement personnalisé pour les projets",
+        "type": "Support programme",
+        "sourceUrl": "https://www.investwithabudhabi.com/fr",
+        "deadline": "",
+        "amount": "",
+        "eligibility": "",
+        "quote": "Les programmes de soutien s’articulent autour de votre projet, sans catalogue imposé."
+      },
+      {
+        "title": "Soutien post-implantation",
+        "type": "Support programme",
+        "sourceUrl": "https://www.investwithabudhabi.com/fr",
+        "deadline": "",
+        "amount": "",
+        "eligibility": "",
+        "quote": "Accueil et suivi sur mesure tout au long du cycle d’investissement, de la première demande jusqu’à l’expansion."
+      },
+      {
+        "title": "1,36 milliard USD d’engagements supplémentaires au PIB (programme de clusters 2025-2026)",
+        "type": "Economic commitment / Investment framework",
+        "sourceUrl": "https://www.investwithabudhabi.com/fr/reports",
+        "deadline": "",
+        "amount": "1,36 milliard USD",
+        "eligibility": "",
+        "quote": "d’engagements supplémentaires au PIB grâce au programme de clusters"
+      }
+    ]
+  }
+}

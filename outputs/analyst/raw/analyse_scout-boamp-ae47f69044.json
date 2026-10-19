@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations may apply for this tender. It only describes the scope of the opportunity without detailing eligibility criteria.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent répondre à cet avis. Il décrit uniquement le périmètre de l'opportunité sans détailler les critères d'éligibilité."
+    },
+    "nextAction": {
+      "en": "Check the full tender documents or the official DILA website to find the eligibility criteria for applicants.",
+      "fr": "Consulter les documents complets de l'appel d'offres ou le site officiel de la DILA pour identifier les critères d'éligibilité des candidats."
+    }
+  }
+}
