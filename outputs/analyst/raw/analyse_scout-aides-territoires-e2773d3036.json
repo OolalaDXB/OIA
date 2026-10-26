@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citation": "Le programme EduRénov [...] vise à accélérer la rénovation énergétique des bâtiments scolaires en France. Il [...] cible les écoles, collèges, lycées, ainsi que d’autres structures éducatives.",
+    "citation": "Il s’inscrit dans la stratégie nationale de transition écologique et cible les écoles, collèges, lycées, ainsi que d’autres structures éducatives.",
     "reason": {
-      "en": "The organisation 'Les Vieilles Pierres' is a heritage hiking association, not an educational institution or a school building owner/operator. The opportunity explicitly targets schools and educational structures.",
-      "fr": "L'organisation 'Les Vieilles Pierres' est une association de randonnée patrimoniale, et non une institution éducative ou propriétaire/gestionnaire de bâtiments scolaires. L'opportunité cible explicitement les écoles et les structures éducatives."
+      "en": "The funding opportunity specifically targets educational structures such as schools, colleges, and high schools. 'Les Vieilles Pierres' is a heritage hiking association, which does not fall under the category of educational structures mentioned in the opportunity.",
+      "fr": "L'opportunité de financement cible spécifiquement les structures éducatives comme les écoles, collèges et lycées. 'Les Vieilles Pierres' est une association de randonnée patrimoniale, ce qui ne correspond pas aux structures éducatives mentionnées dans l'opportunité."
     },
     "nextAction": {
-      "en": "Confirm with the issuer whether non-educational associations managing heritage sites could be considered under 'other educational structures.'",
-      "fr": "Vérifier auprès de l'émetteur si les associations non éducatives gérant des sites patrimoniaux pourraient être considérées comme 'autres structures éducatives'."
+      "en": "Review other funding opportunities that support heritage, culture, or tourism associations.",
+      "fr": "Consulter d'autres opportunités de financement qui soutiennent les associations patrimoniales, culturelles ou touristiques."
     }
   }
 }

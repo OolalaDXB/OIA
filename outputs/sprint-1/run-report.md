@@ -2,69 +2,33 @@
 
 ## Per project
 - **bawaba** — OK · 100 biddable of 100 retrieved
-  - query: `classification-cpv IN (72212190 72224100 72226000 72254000 72600000 48218000 79417000) AND buyer-country IN (FRA LUX BEL DEU) AND publication-date>=20260721 AND notice-type IN (cn-standard cn-social)`
-- **beau** — OK · 11 biddable of 11 retrieved
-  - query: `classification-cpv IN (48812000 66170000 72212443 72212190) AND buyer-country IN (FRA LUX) AND publication-date>=20260721 AND notice-type IN (cn-standard cn-social)`
-- **lesvieillespierres** — OK · 65 biddable of 65 retrieved
-  - query: `classification-cpv IN (92522000 92521000 45212350 79952000) AND buyer-country IN (FRA) AND publication-date>=20260721 AND notice-type IN (cn-standard cn-social)`
-- **ludography** — OK · 85 biddable of 85 retrieved
-  - query: `classification-cpv IN (48520000 92312000 79822500 92500000) AND buyer-country IN (FRA) AND publication-date>=20260721 AND notice-type IN (cn-standard cn-social)`
+  - query: `classification-cpv IN (72212190 72224100 72226000 72254000 72600000 48218000 79417000) AND buyer-country IN (FRA LUX BEL DEU) AND publication-date>=20260728 AND notice-type IN (cn-standard cn-social)`
+- **beau** — OK · 9 biddable of 9 retrieved
+  - query: `classification-cpv IN (48812000 66170000 72212443 72212190) AND buyer-country IN (FRA LUX) AND publication-date>=20260728 AND notice-type IN (cn-standard cn-social)`
+- **lesvieillespierres** — OK · 67 biddable of 67 retrieved
+  - query: `classification-cpv IN (92522000 92521000 45212350 79952000) AND buyer-country IN (FRA) AND publication-date>=20260728 AND notice-type IN (cn-standard cn-social)`
+- **ludography** — OK · 84 biddable of 84 retrieved
+  - query: `classification-cpv IN (48520000 92312000 79822500 92500000) AND buyer-country IN (FRA) AND publication-date>=20260728 AND notice-type IN (cn-standard cn-social)`
 - **maisons-co** — OK · 35 biddable of 35 retrieved
-  - query: `classification-cpv IN (72212517 48812000 55100000 70330000) AND buyer-country IN (FRA) AND publication-date>=20260721 AND notice-type IN (cn-standard cn-social)`
-- **myoolala** — OK · 11 biddable of 11 retrieved
-  - query: `classification-cpv IN (72212517 48219700 72413000 72212224) AND buyer-country IN (FRA) AND publication-date>=20260721 AND notice-type IN (cn-standard cn-social)`
+  - query: `classification-cpv IN (72212517 48812000 55100000 70330000) AND buyer-country IN (FRA) AND publication-date>=20260728 AND notice-type IN (cn-standard cn-social)`
+- **myoolala** — OK · 12 biddable of 12 retrieved
+  - query: `classification-cpv IN (72212517 48219700 72413000 72212224) AND buyer-country IN (FRA) AND publication-date>=20260728 AND notice-type IN (cn-standard cn-social)`
 - **padel-design** — OK · 100 biddable of 100 retrieved
-  - query: `classification-cpv IN (71241000 79314000 79419000 92600000) AND buyer-country IN (ESP FRA ITA PRT BEL NLD DEU SWE) AND publication-date>=20260721 AND notice-type IN (cn-standard cn-social)`
-- **rls-guard** — OK · 73 biddable of 73 retrieved
-  - query: `classification-cpv IN (72212730 79417000 72267000 48218000) AND buyer-country IN (FRA LUX BEL) AND publication-date>=20260721 AND notice-type IN (cn-standard cn-social)`
+  - query: `classification-cpv IN (71241000 79314000 79419000 92600000) AND buyer-country IN (ESP FRA ITA PRT BEL NLD DEU SWE) AND publication-date>=20260728 AND notice-type IN (cn-standard cn-social)`
+- **rls-guard** — OK · 66 biddable of 66 retrieved
+  - query: `classification-cpv IN (72212730 79417000 72267000 48218000) AND buyer-country IN (FRA LUX BEL) AND publication-date>=20260728 AND notice-type IN (cn-standard cn-social)`
 - **sillon** — OK · 40 biddable of 40 retrieved
-  - query: `classification-cpv IN (48451000 72212450 72212443 48812000 92500000) AND buyer-country IN (FRA) AND publication-date>=20260721 AND notice-type IN (cn-standard cn-social)`
+  - query: `classification-cpv IN (48451000 72212450 72212443 48812000 92500000) AND buyer-country IN (FRA) AND publication-date>=20260728 AND notice-type IN (cn-standard cn-social)`
 - **thestudio-mt** — OK · 100 biddable of 100 retrieved
-  - query: `classification-cpv IN (72212517 72230000 72267000 72413000 79421000 72224000) AND buyer-country IN (FRA LUX BEL) AND publication-date>=20260721 AND notice-type IN (cn-standard cn-social)`
+  - query: `classification-cpv IN (72212517 72230000 72267000 72413000 79421000 72224000) AND buyer-country IN (FRA LUX BEL) AND publication-date>=20260728 AND notice-type IN (cn-standard cn-social)`
 
-- unique notices across projects: 467
-- matchable text per record (the S2 measure): median 262 characters over 25 record(s)
+- unique notices across projects: 458
+- matchable text per record (the S2 measure): median 257 characters over 25 record(s)
 - candidates processed (cap 25): 25
 - qualified at MANUAL_REVIEW_REQUIRED: 25
 - notice-page fetch failures: 0
 
 ## Candidates (each with official source URL)
-- **502549-2026** — France – Systems consultancy services – Analyse de risques et accompagnement SMSI V2
-  - source: https://ted.europa.eu/en/notice/502549-2026/html
-  - discovered for: bawaba, rls-guard
-  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **505248-2026** — France – Technical computer support services – Prestation d'assistance technique informatique pour l'agence IEDOM de Guadeloupe.
-  - source: https://ted.europa.eu/en/notice/505248-2026/html
-  - discovered for: bawaba
-  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **506438-2026** — France – Computer support and consultancy services – Contrat-cadre Conseil IT 2027
-  - source: https://ted.europa.eu/en/notice/506438-2026/html
-  - discovered for: bawaba, thestudio-mt
-  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **506669-2026** — France – Technical computer support services – Prestation d'assistance technique informatique pour l'agence IEDOM de Guyane
-  - source: https://ted.europa.eu/en/notice/506669-2026/html
-  - discovered for: bawaba
-  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **506980-2026** — Germany – Health and safety services – Landkreis Northeim - sicherheitstechnische und brandschutzrechtliche Betreuung
-  - source: https://ted.europa.eu/en/notice/506980-2026/html
-  - discovered for: bawaba
-  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **507986-2026** — France – Computer-related services – Acquisition de prestation de sécurité pour le système d'information de Manche Numérique, ses membres et sa Centrale d'Achat
-  - source: https://ted.europa.eu/en/notice/507986-2026/html
-  - discovered for: bawaba
-  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **510724-2026** — France – Security services – Prestations de surveillance et de protection des bâtiments du Département
-  - source: https://ted.europa.eu/en/notice/510724-2026/html
-  - discovered for: bawaba, rls-guard
-  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **515847-2026** — France – Safety consultancy services – PRESTATIONS DE SECURISATION DES SYSTEMES D'INFORMATION
-  - source: https://ted.europa.eu/en/notice/515847-2026/html
-  - discovered for: bawaba, rls-guard
-  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **516067-2026** — Germany – Software-related services – Beschaffung einer Beratungsdienstleistung zur Leitung eines Identity and Access Management (IAM) Projektes für die Stadtwerke Bielefeld (SWB)
-  - source: https://ted.europa.eu/en/notice/516067-2026/html
-  - discovered for: bawaba
-  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
 - **522668-2026** — France – Computer back-up services – PRESTATIONS D'ASSISTANCE ET D'EXPERTISE INFORMATIQUE
   - source: https://ted.europa.eu/en/notice/522668-2026/html
   - discovered for: bawaba
@@ -113,10 +77,6 @@
   - source: https://ted.europa.eu/en/notice/538572-2026/html
   - discovered for: bawaba
   - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **546656-2026** — France – Computer support services – Massification des opérations de maintenance d’une partie du patrimoine applicatif de l’Agence de services et de paiement (ASP)
-  - source: https://ted.europa.eu/en/notice/546656-2026/html
-  - discovered for: bawaba
-  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
 - **547955-2026** — France – Computer support services – Prestations d'infogérance du système d'information du Paris Saclay Cancer Cluster
   - source: https://ted.europa.eu/en/notice/547955-2026/html
   - discovered for: bawaba
@@ -127,6 +87,46 @@
   - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
 - **557689-2026** — Germany – Software-related services – Beschaffung einer Beratungsdienstleistung zur Fachberatung im Rahmen eines Identity and Access Management (IAM) Projektes für die Stadtwerke Bielefeld (SWB)
   - source: https://ted.europa.eu/en/notice/557689-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **571406-2026** — France – Safety consultancy services – DIJON METROPOLE - Réalisation d'une troisième ligne de Tramway (T3) - Mission d'organisme qualifié agréé (OQA)
+  - source: https://ted.europa.eu/en/notice/571406-2026/html
+  - discovered for: bawaba, rls-guard
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **572582-2026** — France – Computer support services – Centre de support informatique
+  - source: https://ted.europa.eu/en/notice/572582-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **574505-2026** — France – Facilities management services for computer systems maintenance – ACCORD-CADRE COMPOSITE DE PRESTATIONS D’INFOGÉRANCE, SUPPORT UTILISATEURS, HEBERGEMENT, SAUVEGARDES, LIENS DATACENTER ET PRA
+  - source: https://ted.europa.eu/en/notice/574505-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **581337-2026** — Germany – Systems consultancy services – Application Management
+  - source: https://ted.europa.eu/en/notice/581337-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **587785-2026** — France – Facilities management services for computer systems maintenance – Infogérance et maintenance des serveurs du système d'information de la Ville de Soisy-sous-Montmorency
+  - source: https://ted.europa.eu/en/notice/587785-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **588358-2026** — Germany – Educational software package – VR-Trainingsumgebung inkl. VR-Endgeräte, sowie Eyetracking
+  - source: https://ted.europa.eu/en/notice/588358-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **595917-2026** — Germany – Security software package – Bitdefender Lizenzen und Support, Kassel, LWV Hessen
+  - source: https://ted.europa.eu/en/notice/595917-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **596488-2026** — France – Computer support services – Marché régie développeur fullstack
+  - source: https://ted.europa.eu/en/notice/596488-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **601753-2026** — France – Various school services – Prestations éducatives et pédagogiques pour l'orientation et la découverte de l'industrie auprès des publics scolaires (animations pédagogiques, formations de prescripteurs, créations et diffusions de contenus pédagogiques, organisations d'immersion en entreprise pour les élèves ...)
+  - source: https://ted.europa.eu/en/notice/601753-2026/html
+  - discovered for: bawaba, beau, ludography
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **612012-2026** — France – Computer support services – Centre de support informatique
+  - source: https://ted.europa.eu/en/notice/612012-2026/html
   - discovered for: bawaba
   - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
 

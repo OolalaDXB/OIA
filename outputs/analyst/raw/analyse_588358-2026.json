@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of legal form, geographic restrictions, or sector requirements that would confirm or exclude BAWABA.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles. Il n'y a aucune mention de la forme juridique, des restrictions géographiques ou des exigences sectorielles qui confirmeraient ou excluraient BAWABA."
+    },
+    "nextAction": {
+      "en": "Contact the buyer (Universitätsklinikum Schleswig-Holstein AöR) to ask for the full tender documents and confirm eligibility criteria.",
+      "fr": "Contacter l'acheteur (Universitätsklinikum Schleswig-Holstein AöR) pour demander les documents complets de l'appel d'offres et confirmer les critères d'éligibilité."
+    }
+  }
+}

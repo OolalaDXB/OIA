@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NEEDS_INFO",
-    "citation": [],
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "EIT Food est un partenariat paneuropéen, axé sur le consommateur, qui permet aux innovateurs, aux entrepreneurs et aux étudiants de développer des solutions de classe mondiale aux défis de société, d'accélérer l'innovation, de créer des emplois et d'accroître la compétitivité de l'Europe.",
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. It mentions innovators, entrepreneurs, and students but does not clarify if associations like Les Vieilles Pierres are eligible.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il mentionne les innovateurs, les entrepreneurs et les étudiants, mais ne clarifie pas si les associations comme Les Vieilles Pierres sont éligibles."
+      "en": "The opportunity explicitly targets 'innovators, entrepreneurs, and students' to develop world-class solutions. An association focused on heritage hiking does not align with these categories.",
+      "fr": "L'opportunité cible explicitement les 'innovateurs, entrepreneurs et étudiants' pour développer des solutions de classe mondiale. Une association axée sur la randonnée patrimoniale ne correspond pas à ces catégories."
     },
     "nextAction": {
-      "en": "Contact the issuer (beta.gouv.fr) to ask if heritage associations are eligible to apply for EIT Food funding.",
-      "fr": "Contacter l'émetteur (beta.gouv.fr) pour demander si les associations patrimoniales sont éligibles à un financement EIT Food."
+      "en": "Review other funding opportunities that explicitly support heritage or cultural associations.",
+      "fr": "Consulter d'autres opportunités de financement qui soutiennent explicitement les associations patrimoniales ou culturelles."
     }
   }
 }

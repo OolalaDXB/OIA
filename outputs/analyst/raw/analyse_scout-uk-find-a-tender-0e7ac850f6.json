@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Suitable for SME & VCSE",
+    "reason": {
+      "en": "The opportunity explicitly states it is suitable for SMEs (Small and Medium-sized Enterprises) and VCSEs (Voluntary, Community, and Social Enterprises). TheStudio MT operates in software, digital, design, advisory, and AI sectors, which do not align with the service group described (Mental Health and Learning Disabilities transportation services). No indication is provided that TheStudio MT is a VCSE or operates in the healthcare transportation sector.",
+      "fr": "L'opportunité indique explicitement qu'elle est adaptée aux PME (Petites et Moyennes Entreprises) et aux organisations VCSE (Volontaires, Communautaires et Sociales). TheStudio MT opère dans les secteurs du logiciel, du numérique, du design, du conseil et de l'IA, ce qui ne correspond pas au groupe de services décrit (transport de patients en santé mentale et handicaps intellectuels). Aucun élément ne montre que TheStudio MT est une VCSE ou qu'elle opère dans le secteur du transport médicalisé."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that align with TheStudio MT’s sectors of activity (software, digital, design, advisory, AI).",
+      "fr": "Examiner d'autres opportunités de financement qui correspondent aux secteurs d'activité de TheStudio MT (logiciel, numérique, design, conseil, IA)."
+    }
+  }
+}

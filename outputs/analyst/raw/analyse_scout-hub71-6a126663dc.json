@@ -3,12 +3,12 @@
     "verdict": "LIKELY",
     "citation": "eligibility: Smart and autonomous mobility startups",
     "reason": {
-      "en": "The opportunity explicitly targets 'Smart and autonomous mobility startups,' but the organisation's dossier does not clarify whether its AI control plane for regulated industries qualifies as a smart or autonomous mobility solution. The sectors listed (AI, data, digital, cybersecurity, software) are broad and could overlap with mobility, but this is not confirmed.",
-      "fr": "L'opportunité cible explicitement les 'startups de mobilité intelligente et autonome,' mais le dossier de l'organisation ne précise pas si sa plateforme d'IA pour les industries réglementées relève de la mobilité intelligente ou autonome. Les secteurs mentionnés (IA, données, numérique, cybersécurité, logiciel) sont larges et pourraient se recouper avec la mobilité, mais cela n'est pas confirmé."
+      "en": "The opportunity is explicitly for 'Smart and autonomous mobility startups'. BAWABA operates in AI and software but does not explicitly state it is a smart or autonomous mobility startup. The connection to mobility is not confirmed in the provided dossier.",
+      "fr": "L'opportunité est explicitement destinée aux 'startups de mobilité intelligente et autonome'. BAWABA opère dans l'IA et les logiciels, mais il n'est pas explicitement indiqué qu'il s'agit d'une startup de mobilité intelligente ou autonome. Le lien avec la mobilité n'est pas confirmé dans le dossier fourni."
     },
     "nextAction": {
-      "en": "Contact Hub71 or Mubadala to confirm whether BAWABA’s AI control plane for regulated industries falls under 'smart and autonomous mobility.'",
-      "fr": "Contacter Hub71 ou Mubadala pour confirmer si la plateforme d'IA de BAWABA pour les industries réglementées relève de la 'mobilité intelligente et autonome.'"
+      "en": "Confirm with BAWABA whether their AI control plane is specifically designed for or applied in smart/autonomous mobility use cases.",
+      "fr": "Vérifier auprès de BAWABA si leur plan de contrôle IA est spécifiquement conçu pour ou appliqué dans des cas d'usage de mobilité intelligente/autonome."
     }
   }
 }

@@ -1,56 +1,51 @@
 {
   "ScoutResult": {
-    "note": "The page is the Bulletin Officiel des Annonces des Marchés Publics (BOAMP), which lists public procurement notices (calls for tenders, concessions, and contract awards). However, the provided page text does not explicitly list individual funding opportunities or programmes. It describes the platform's purpose and provides links to search for public procurement notices, but no specific opportunities are named or detailed here. The actual opportunities would be found by searching the BOAMP database.",
+    "note": "The page is a portal for public procurement notices (avis de marché public) and does not list specific funding opportunities, grants, or programmes by name. It provides access to calls for tenders (AAPC) and public contracts, but these are not enumerated as individual opportunities on the page itself. The page directs users to search for active tenders rather than listing them explicitly.",
     "calls": [
       {
         "title": "Avis publics à la concurrence (AAPC) nationaux et européens",
-        "description": "Diffusion des avis publics à la concurrence lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics.",
         "type": "Call for tenders",
+        "sourceUrl": "https://www.boamp.fr/pages/entreprise-accueil/",
         "deadline": "",
         "amount": "",
-        "eligibility": "",
-        "quote": "Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics.",
-        "sourceUrl": "https://www.boamp.fr/pages/recherche/"
+        "eligibility": "Entreprises, associations, et autres entités éligibles à répondre aux marchés publics en France et dans l'Union européenne.",
+        "quote": "Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics."
       },
       {
         "title": "Avis de concession",
-        "description": "Diffusion des avis de concession lancés par les acheteurs publics.",
-        "type": "Call for concessions",
+        "type": "Call for tenders",
+        "sourceUrl": "https://www.boamp.fr/pages/entreprise-accueil/",
         "deadline": "",
         "amount": "",
         "eligibility": "",
-        "quote": "Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics.",
-        "sourceUrl": "https://www.boamp.fr/pages/recherche/"
+        "quote": "Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics."
       },
       {
         "title": "Avis d’attribution",
-        "description": "Diffusion des avis d’attribution de marchés publics.",
-        "type": "Contract award notice",
+        "type": "Public contract award notice",
+        "sourceUrl": "https://www.boamp.fr/pages/entreprise-accueil/",
         "deadline": "",
         "amount": "",
         "eligibility": "",
-        "quote": "Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics.",
-        "sourceUrl": "https://www.boamp.fr/pages/recherche/"
+        "quote": "Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics."
       },
       {
         "title": "Contrats de partenariat public-privé",
-        "description": "Diffusion des avis relatifs aux contrats de partenariat public-privé.",
         "type": "Public-private partnership contract",
+        "sourceUrl": "https://www.boamp.fr/pages/entreprise-accueil/",
         "deadline": "",
         "amount": "",
         "eligibility": "",
-        "quote": "Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics.",
-        "sourceUrl": "https://www.boamp.fr/pages/recherche/"
+        "quote": "Le site boamp.fr diffuse les avis publics à la concurrence (AAPC) nationaux et européens, les avis de concession, les avis d’attribution, contrats de partenariat public-privé et des avis divers lancés par l’État, l’armée, les collectivités territoriales et leurs établissements publics."
       },
       {
         "title": "Service d'alerte BOAMP",
-        "description": "Veille personnalisée et gratuite pour recevoir quotidiennement les nouveaux avis publiés au BOAMP.",
         "type": "Alert service for public procurement notices",
+        "sourceUrl": "https://www.boamp.fr/pages/entreprise-service-dalerte/",
         "deadline": "",
         "amount": "",
-        "eligibility": "",
-        "quote": "Le site boamp.fr propose une veille personnalisée et gratuite. Enregistrez vos recherches et paramétrez jusqu'à 10 alertes pour recevoir quotidiennement les nouveaux avis publiés au BOAMP.",
-        "sourceUrl": "https://www.boamp.fr/pages/entreprise-service-dalerte/"
+        "eligibility": "Ouvert à toute entreprise ou association souhaitant recevoir des alertes personnalisées sur les nouveaux avis de marché public.",
+        "quote": "Le site boamp.fr propose une veille personnalisée et gratuite. Enregistrez vos recherches et paramétrez jusqu'à 10 alertes pour recevoir quotidiennement les nouveaux avis publiés au BOAMP."
       }
     ]
   }

@@ -159,9 +159,24 @@ COUNTRY
 	
 STATUS
 	ACTION
+USD $208,949	Ecommerce | Health and Beauty	
+Lawrence Fidel
+	Ecommerce	Health and Beauty	$5,973	2.9x/0.6x	23 years	Australia	Open	
+View
+
+USD $700,000	Ecommerce | Home and Garden	
+Nick Carlucci
+	Ecommerce	Home and Garden	$21,726	2.7x/0.5x	2 years	United States	Open	
+View
+
 USD $840,000	iOS App | Education	
 Goran Duskic
 	iOS App	Education	$20,242	3.5x/1.5x	4 years	United Kingdom	Open	
+View
+
+USD $2,520,000	SaaS | Internet	
+Nick Carlucci
+	SaaS	Internet	$51,720	4.1x/1.3x	12 years	Canada	Open	
 View
 
 USD $600,000	Ecommerce | Design and Style	
@@ -179,9 +194,9 @@ Sebastien Stanley Jones
 	Ecommerce	Design and Style	$5,282	3.9x/2.4x	8 years	United Kingdom	Open	
 View
 
-USD $1,721,937	Ecommerce | Home and Garden	
-Antonin Lucas
-	Ecommerce	Home and Garden	$28,680	5.0x/0.6x	13 years	France	Under LOI	
+USD $900,000	iOS App | Electronics	
+Nick Carlucci
+	iOS App	Electronics	$18,370	4.1x/1.2x	11 years	Canada	Under LOI	
 View
 
 USD $524,945	Content | General Knowledge	
@@ -189,14 +204,24 @@ Jared Lauber
 	Content	General Knowledge	$15,845	2.8x/1.9x	10 years	United States	Open	
 View
 
-USD $29,500	Evergreen Publishing Portfolio	
-Karl Leyco
-	Amazon KDP	Entertainment	$901	2.7x/2.7x	4 years	Ireland	Open	
+USD $1,721,937	Ecommerce | Home and Garden	
+Antonin Lucas
+	Ecommerce	Home and Garden	$28,680	5.0x/0.6x	13 years	France	Under LOI	
+View
+
+USD $107,370	Ecommerce | Sports and Outdoor	
+Lawrence Fidel
+	Ecommerce	Sports and Outdoor	$3,209	2.8x/0.4x	6 years	Australia	Open	
 View
 
 USD $220,500	Ecommerce | Business	
 Nick Carlucci
 	Ecommerce	Business	$4,702	3.9x/1.7x	4 years	United States	Open	
+View
+
+USD $399,000	Ecommerce | Home and Garden	
+Goran Duskic
+	Ecommerce	Home and Garden	$26,269	1.3x/0.4x	3 years	United States	Open	
 View
 See More Businesses
 Global brokers powered by AI technology. Your exit, accelerated.
@@ -456,207 +481,192 @@ Total Keyword Search Volume
 300
 400
 600
+700
 Keyword
-538​538
+591​591
+349​349
+324​324
 302​302
-297​297
-278​278
-273​273
-273​273
+272​272
+267​267
 262​262
-257​257
+253​253
 247​247
-232​232
-222​222
-207​207
-184​184
-179​179
-177​177
-169​169
-168​168
-167​167
-167​167
+230​230
+226​226
+211​211
+202​202
+180​180
+147​147
+145​145
 143​143
-125​125
+138​138
+132​132
+124​124
 123​123
-123​123
-119​119
-116​116
+120​120
+120​120
+118​118
+114​114
 113​113
-112​112
-108​108
-108​108
-106​106
-100​100
+113​113
+111​111
+109​109
+107​107
+102​102
+102​102
+98​98
 97​97
-97​97
-92​92
-91​91
-90​90
-90​90
+89​89
 88​88
-85​85
+88​88
+87​87
 83​83
-82​82
+81​81
+81​81
+80​80
+80​80
+79​79
 79​79
 78​78
 77​77
+77​77
+76​76
 74​74
-74​74
-73​73
-73​73
+71​71
 71​71
 70​70
-70​70
+69​69
 69​69
 68​68
 68​68
-68​68
-68​68
-66​66
 66​66
 65​65
-63​63
-63​63
-63​63
+65​65
+65​65
+64​64
 62​62
-60​60
-59​59
+61​61
+61​61
 58​58
-57​57
-57​57
-57​57
-57​57
-56​56
-56​56
+58​58
 55​55
 55​55
-55​55
-55​55
+54​54
 53​53
 53​53
 52​52
 52​52
-52​52
+51​51
 51​51
 51​51
 50​50
 50​50
-49​49
 49​49
 49​49
 48​48
 47​47
-46​46
-46​46
-45​45
-45​45
-45​45
-45​45
-43​43
-43​43
-42​42
-41​41
+47​47
 Youtube
 Shopify
+Adsense
 Game
-Tiktok
 Instagram
 App
-Adsense
-Saas
 Facebook
+Tiktok
+Saas
 Ai
-Blog
 Website
-Playwright
-Pet
+Blog
 Travel
-Etsy
-Kdp
 Amazon
 Ecommerce
+Calculator
+Kdp
 Nan
-Sport
-You
 Music
-In
+Etsy
 Youtube+Channel
+Health
+Tool
+In
 Crypto
+You
+Sport
+Pet
+E Commerce
+Education
+Ebay
+Gaming
+Newsletter
+Trading
 Amazon+Fba
 Fashion
-Tool
-Education
-Digital+Product
 Facebook+Page
 Finance
-Gaming
-Fa
-Ad
-Fitness
-Ebay
-Trading
-Health
-Food
-Car
-Ca
-News
-Dog
-Real+Estate
 Website+
-Startup
-E Commerce
-Directory
-Casino
-Menu
-Ai+
-Digital
-Calculator
-Affiliate
-Kid
-Golf
-Seo
-Agency
-Amazon+
-We
-Adse
-Hosting
-Subscription
-Dating
-Vpn
-Tra
-Co
-Newsletter
-Ga
-Wordpress
-Tr
-Re
-Coffee
-Yout
-Mediavine
-Gam
-Face
-Google
-Educa
-Yo
-Tik
 Web
-Beauty
-Youtu
-Fba
-Ma
-Supplement
-Me
-Con
-Stripe
-Marketing
-Jewelry
-Io
+Playwright
+Seo
+Real+Estate
+Ai+
+Golf
+Affiliate
 Clothing
-B2b
-So
+Ad
+Casino
+Startup
+Food
+Directory
+Supplement
+Digital+Product
+Ca
+Beauty
+Tra
+News
+We
+Digital
+Re
+Agency
 Book
+Fa
+Amazon+Kdp
+Car
+Fitness
+Vpn
+Adse
+Kid
+Youtu
+Google
+Dog
+Co
+Menu
+Jewelry
+Face
+Home
+Wordpress
+Tik
+Marketing
+Tr
+Apk
+Ma
+Yout
+Amazon+
+Coffee
+Sh
+Yo
+Mediavine
+Google+Ads
+Dating
+Insta
+Lead
+Accounting
+Automotive
+Content
 Tikt
+Lead+Generation
+Ga
 Share
 Download
 

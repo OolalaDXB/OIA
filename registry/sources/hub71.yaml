@@ -10,7 +10,7 @@ geographies: ["AE", "GCC"]
 forProjects: ["bawaba", "myoolala", "beau"]
 url: "https://hub71.com"
 urlVerified: true
-lastUrlCheck: "2026-10-19"
+lastUrlCheck: "2026-10-26"
 status: DECLARED
 access:
   mode: MANUAL

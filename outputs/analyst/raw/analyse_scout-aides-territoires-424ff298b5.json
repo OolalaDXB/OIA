@@ -1,13 +1,13 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citations": [],
+    "citation": [],
     "reason": {
       "en": "The extracted text does not specify which types of organisations may apply for FEDER funding. There is no mention of eligibility criteria for applicants.",
       "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent demander un financement FEDER. Il n'y a aucune mention des critères d'éligibilité pour les candidats."
     },
     "nextAction": {
-      "en": "Check the official FEDER documentation or contact the issuer (beta.gouv.fr) to confirm whether heritage associations are eligible applicants.",
+      "en": "Check the official FEDER documentation or contact the issuer (beta.gouv.fr) to confirm whether heritage associations are eligible to apply.",
       "fr": "Consulter la documentation officielle du FEDER ou contacter l'émetteur (beta.gouv.fr) pour confirmer si les associations patrimoniales sont éligibles."
     }
   }

@@ -1,9 +1,8 @@
 {
   "ScoutResult": {
     "calls": [
-      6
-        ],
-        "name": "Crédit d'impôt recherche (CIR)",
+      {
+        "title": "Crédit d'impôt recherche (CIR)",
         "type": "Tax incentive",
         "sourceUrl": "https://entreprendre.service-public.gouv.fr/vosdroits/F23533",
         "deadline": "",
@@ -11,6 +10,7 @@
         "eligibility": "Entreprises engageant des activités de recherche et développement (R&D)",
         "quote": "Le crédit d'impôt recherche (CIR) a pour but d'encourager les entreprises à engager des activités de recherche et développement (R&D)."
       }
-    ,
-      	"note": "Only one funding opportunity (CIR) is explicitly listed on this page."
+    ],
+    "note": ""
   }
+}

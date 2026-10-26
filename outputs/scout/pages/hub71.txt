@@ -37,21 +37,21 @@ I AM A STARTUP
 I AM AN INVESTOR
 I AM A TALENT
 What's Happening?
+BLOG
+HUB71 STARTUP BIOSAPIEN OPENS FIRST GLOBAL CLINICAL SITE FOR MEDICHIP™
+23
+Oct
+, 2026
+VIEW MORE
+PRESS RELEASE
+MEDICLINIC MIDDLE EAST JOINS HUB71+ LIFESCIENCES TO ADVANCE HEALTHCARE INNOVATION IN ABU DHABI
+22
+Oct
+, 2026
+VIEW MORE
 PRESS RELEASE
 HUB71 AND KEY CAPITAL STRENGTHEN PARTNERSHIP TO EXPAND GLOBAL INVESTOR ACCESS FOR STARTUPS
 19
-Oct
-, 2026
-VIEW MORE
-BLOG
-TWO WAYS INTO ABU DHABI’S SME ECONOMY: HOW HUB71 CONNECTS FINTECHS TO THE MARKET
-13
-Oct
-, 2026
-VIEW MORE
-BLOG
-INSIDE INITIATE: WHAT BACKING FOUNDERS AT THE EARLIEST STAGE ACTUALLY LOOKS LIKE
-08
 Oct
 , 2026
 VIEW MORE
@@ -149,13 +149,13 @@ nationalities
 sectors
 SOME OF OUR STARTUPS:
 
+On a mission to democratize AI for the Banking Industry
+
 Redefining the work-life experience by making automated HR, payroll, employee benefits and insurance a possibility for all businesses in UAE.
 
-Lune is an AI-driven engagement and hyper-personalization platform for banks, built on insights from over 1 billion transactions. Our Transaction Enrichment API transforms raw transaction data into actionable insights, powering our core products: Enrichment, Personal Finance Engagement (PFE) SDK, Insights Dashboard, and Smart Nudges. (Supports Arabic transliteration)
+We are currently on the Polygon (Matic) Network, which is an Ethereum-compatible blockchain network.
 
-Smart Navigation Systems provides innovative location based solutions
-
-Expand your medical business worldwide with OnEx
+Jade Autism is an app for ASD (Autistic Spectrum Disorder) that stimulates and develops children's cognitive functions.
 
 ALL STARTUPS
 Our community says

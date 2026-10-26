@@ -1,14 +1,16 @@
 {
   "EligibilityVerdict": {
     "verdict": "ELIGIBLE",
-    "citation": "LEADER est un programme d'initiative communautaire pour cofinancer des projets publics ou privés qui favorisent le développement des zones rurales.",
+    "citations": [
+      "LEADER est un programme d'initiative communautaire pour cofinancer des projets publics ou privés qui favorisent le développement des zones rurales."
+    ],
     "reason": {
-      "en": "The opportunity explicitly allows private projects, and the organisation is a private association operating in rural areas (Bretagne) with activities that align with rural development (heritage, culture, tourism).",
-      "fr": "L'opportunité permet explicitement les projets privés, et l'organisation est une association privée opérant dans des zones rurales (Bretagne) avec des activités en lien avec le développement rural (patrimoine, culture, tourisme)."
+      "en": "The opportunity explicitly states that both public and private projects promoting rural development are eligible. The organisation is a private association operating in rural areas (Bretagne) and works in heritage, culture, and tourism, which aligns with rural development.",
+      "fr": "L'opportunité indique explicitement que les projets publics ou privés favorisant le développement des zones rurales sont éligibles. L'organisation est une association privée opérant dans des zones rurales (Bretagne) et travaillant dans les domaines du patrimoine, de la culture et du tourisme, ce qui correspond au développement rural."
     },
     "nextAction": {
-      "en": "Confirm with the issuer whether an unincorporated association ('association non déclarée') can be the formal applicant or if a legal entity (e.g., local authority or registered association) must be involved.",
-      "fr": "Vérifier auprès de l'émetteur si une association non déclarée peut être le demandeur formel ou si une entité légale (par exemple, une collectivité locale ou une association déclarée) doit être impliquée."
+      "en": "Confirm with the organisation that they have a legal entity capable of receiving public funds, as none is currently recorded.",
+      "fr": "Vérifier auprès de l'organisation qu'elle dispose d'une entité juridique capable de recevoir des fonds publics, car aucune n'est actuellement enregistrée."
     }
   }
 }

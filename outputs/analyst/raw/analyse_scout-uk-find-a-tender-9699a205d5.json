@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "Best Start in Life - School Based Commission to provide strategic leadership, expertise and co-ordination to strengthen early years practice across the City of York",
+    "reason": {
+      "en": "The opportunity explicitly targets early years practice and strategic leadership within the City of York. The organisation's activities (software, digital, design, advisory, AI) and operational geography (FR, EU, AE, GCC) do not align with the stated focus on school-based early years practice in York.",
+      "fr": "L'opportunité cible explicitement la pratique de la petite enfance et le leadership stratégique au sein de la ville de York. Les activités de l'organisation (logiciels, numérique, design, conseil, IA) et sa zone d'opération (FR, UE, AE, CCG) ne correspondent pas à l'objectif déclaré de renforcer la pratique de la petite enfance en milieu scolaire à York."
+    },
+    "nextAction": {
+      "en": "Review other funding opportunities that align with the organisation's sectors and geographic focus.",
+      "fr": "Examiner d'autres opportunités de financement qui correspondent aux secteurs et à la zone géographique de l'organisation."
+    }
+  }
+}

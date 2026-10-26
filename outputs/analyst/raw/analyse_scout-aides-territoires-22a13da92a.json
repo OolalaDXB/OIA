@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for the EU4Health programme. There is no mention of eligibility criteria for applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au programme EU4Health. Aucun critère d'éligibilité pour les candidats n'est mentionné."
+      "en": "The extracted text does not specify which types of organisations may apply for the EU4Health programme. It only describes the programme's scope and objectives.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au programme EU4Health. Il décrit uniquement le champ d'application et les objectifs du programme."
     },
     "nextAction": {
-      "en": "Check the official EU4Health programme documentation or contact the issuer (beta.gouv.fr) to confirm the eligibility criteria for applicants.",
-      "fr": "Consulter la documentation officielle du programme EU4Health ou contacter l'émetteur (beta.gouv.fr) pour confirmer les critères d'éligibilité des candidats."
+      "en": "Check the official EU4Health programme documentation or contact the issuer to confirm eligibility criteria for associations like Les Vieilles Pierres.",
+      "fr": "Consulter la documentation officielle du programme EU4Health ou contacter l'émetteur pour confirmer les critères d'éligibilité pour les associations comme Les Vieilles Pierres."
     }
   }
 }

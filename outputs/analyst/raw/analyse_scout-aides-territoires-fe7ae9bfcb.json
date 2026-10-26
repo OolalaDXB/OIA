@@ -1,14 +1,16 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NEEDS_INFO",
-    "citation": [],
+    "verdict": "LIKELY",
+    "citations": [
+      "Le Corps européen de solidarité permet aux jeunes de s’engager et aux organismes de mettre en place des initiatives en Europe sur des activités variées, dans les domaines humanitaires, de la santé, de l’environnement, de l’intergénérationnel…"
+    ],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply. It only mentions that the programme allows young people to engage and organisations to set up initiatives, but it does not clarify eligibility criteria for organisations.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il mentionne uniquement que le programme permet aux jeunes de s'engager et aux organismes de mettre en place des initiatives, sans clarifier les critères d'éligibilité pour les organisations."
+      "en": "The opportunity text does not explicitly state whether non-profit associations like 'Les Vieilles Pierres' are eligible. It mentions 'organismes' (organizations) but does not specify legal forms or types of entities allowed to apply.",
+      "fr": "Le texte de l'opportunité ne précise pas explicitement si les associations à but non lucratif comme 'Les Vieilles Pierres' sont éligibles. Il mentionne les 'organismes' mais ne détaille pas les formes juridiques ou types d'entités autorisés à candidater."
     },
     "nextAction": {
-      "en": "Check the official call for proposals or programme guidelines to determine which legal entities are eligible to apply.",
-      "fr": "Consulter l'appel à projets officiel ou les directives du programme pour déterminer quelles entités juridiques sont éligibles à postuler."
+      "en": "Check the official European Solidarity Corps guidelines or contact the issuer (beta.gouv.fr) to confirm if heritage and cultural associations are eligible.",
+      "fr": "Consulter les directives officielles du Corps européen de solidarité ou contacter l'émetteur (beta.gouv.fr) pour confirmer si les associations patrimoniales et culturelles sont éligibles."
     }
   }
 }

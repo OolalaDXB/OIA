@@ -9,8 +9,8 @@ kinds: ["GRANT", "TENDER", "CONSORTIUM_CALL"]
 forProjects: ["bawaba", "sillon", "ludography", "rls-guard", "thestudio-mt"]
 geographies: ["EU"]
 url: "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home"
-urlVerified: true
-lastUrlCheck: "2026-10-19"
+urlVerified: false
+lastUrlCheck: "2026-10-26"
 status: FIXTURE_ONLY
 connector: "eu-funding-tenders"
 access:

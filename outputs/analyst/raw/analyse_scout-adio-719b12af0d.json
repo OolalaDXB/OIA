@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citations": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria related to the applicant's legal form, sector, or operational scope.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Aucun critère d'éligibilité concernant la forme juridique, le secteur ou le champ d'activité du demandeur n'est mentionné."
+    },
+    "nextAction": {
+      "en": "Contact the issuer (ADIO) to request the full call for proposals document or eligibility guidelines.",
+      "fr": "Contacter l'émetteur (ADIO) pour demander le document complet de l'appel à projets ou les directives d'éligibilité."
+    }
+  }
+}

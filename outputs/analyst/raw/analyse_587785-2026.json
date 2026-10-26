@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations may apply for this tender. There is no mention of eligibility criteria regarding the legal form, location, or sector of applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent répondre à cet appel d'offres. Il n'y a aucune mention des critères d'éligibilité concernant la forme juridique, la localisation ou le secteur des candidats."
+    },
+    "nextAction": {
+      "en": "Contact the buyer (COMMUNE DE SOISY-SOUS-MONTMORENCY) to request the full tender documents and confirm eligibility requirements.",
+      "fr": "Contacter l'acheteur (COMMUNE DE SOISY-SOUS-MONTMORENCY) pour demander les documents complets de l'appel d'offres et confirmer les critères d'éligibilité."
+    }
+  }
+}

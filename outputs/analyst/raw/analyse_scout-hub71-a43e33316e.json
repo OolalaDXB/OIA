@@ -1,10 +1,12 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citation": "Startups in biotechnology, MedTech, and digital health",
+    "citations": [
+      "Startups in biotechnology, MedTech, and digital health"
+    ],
     "reason": {
-      "en": "The organisation operates in AI, data, cybersecurity, and software sectors, which do not align with the specified sectors of biotechnology, MedTech, or digital health as required by the opportunity.",
-      "fr": "L'organisation opère dans les secteurs de l'IA, des données, de la cybersécurité et des logiciels, qui ne correspondent pas aux secteurs spécifiés de la biotechnologie, des technologies médicales ou de la santé numérique requis par l'opportunité."
+      "en": "The opportunity explicitly restricts applicants to startups in biotechnology, MedTech, and digital health. BAWABA operates in AI, data, cybersecurity, and software, which are not listed as eligible sectors.",
+      "fr": "L'opportunité restreint explicitement les candidats aux startups en biotechnologie, MedTech et santé numérique. BAWABA opère dans les domaines de l'IA, des données, de la cybersécurité et des logiciels, qui ne sont pas mentionnés comme secteurs éligibles."
     },
     "nextAction": {
       "en": "Review other funding opportunities that explicitly include AI, data, or cybersecurity sectors.",

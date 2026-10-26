@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria related to the applicant's sector, legal structure, or operational focus.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à cette opportunité de financement. Il n'y a aucune mention des critères d'éligibilité liés au secteur, à la structure juridique ou à l'activité de l'entité candidate."
+    },
+    "nextAction": {
+      "en": "Request the full tender documentation from OPCO 2i to confirm the eligibility criteria for applicants.",
+      "fr": "Demander la documentation complète de l'appel d'offres à OPCO 2i pour confirmer les critères d'éligibilité des candidats."
+    }
+  }
+}

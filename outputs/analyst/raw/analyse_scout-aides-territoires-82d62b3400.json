@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for funding under France 2030. There is no mention of eligibility criteria for applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent demander un financement dans le cadre de France 2030. Aucun critère d'éligibilité pour les candidats n'est mentionné."
+      "en": "The extracted text does not specify which types of organisations may apply for funding under France 2030. It only describes the scope and objectives of the plan.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent demander un financement dans le cadre de France 2030. Il décrit uniquement le périmètre et les objectifs du plan."
     },
     "nextAction": {
-      "en": "Check the official France 2030 documentation or website to find the eligibility criteria for applicants.",
-      "fr": "Consulter la documentation officielle ou le site web de France 2030 pour trouver les critères d'éligibilité des candidats."
+      "en": "Check the official France 2030 documentation or website to determine the eligibility criteria for applicants.",
+      "fr": "Consulter la documentation officielle ou le site web de France 2030 pour connaître les critères d'éligibilité des demandeurs."
     }
   }
 }

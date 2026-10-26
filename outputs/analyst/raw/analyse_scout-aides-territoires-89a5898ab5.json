@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for the AMIF fund. There is no mention of eligibility criteria for applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent déposer une candidature pour le Fonds AMIF. Aucun critère d'éligibilité des demandeurs n'est mentionné."
+      "en": "The extracted text does not specify which types of organisations may apply for this funding. There is no mention of eligibility criteria related to legal status, sector, or organisational form.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à ce financement. Il n'y a aucune mention des critères d'éligibilité liés au statut juridique, au secteur ou à la forme organisationnelle."
     },
     "nextAction": {
-      "en": "Check the official AMIF call for proposals or guidelines to determine which types of organisations are eligible to apply.",
-      "fr": "Consulter l'appel à propositions officiel ou les lignes directrices du Fonds AMIF pour déterminer quels types d'organisations sont éligibles."
+      "en": "Contact the issuer (beta.gouv.fr or the relevant French state authority) to ask for the official eligibility criteria for this funding opportunity.",
+      "fr": "Contacter l'émetteur (beta.gouv.fr ou l'autorité compétente de l'État français) pour demander les critères officiels d'éligibilité pour cette opportunité de financement."
     }
   }
 }

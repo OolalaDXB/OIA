@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for the CERV programme. There is no mention of eligibility criteria related to legal status, sector, or geographic scope.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au programme CERV. Il n'y a aucune mention des critères d'éligibilité relatifs au statut juridique, au secteur d'activité ou à la portée géographique."
+      "en": "The extracted text does not specify which types of organisations may apply. There is no mention of eligibility criteria for applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité pour les candidats."
     },
     "nextAction": {
-      "en": "Check the official CERV programme guidelines or call the issuer to confirm whether unincorporated associations like 'Les Vieilles Pierres' are eligible to apply.",
-      "fr": "Consulter les directives officielles du programme CERV ou contacter l'émetteur pour confirmer si les associations non constituées en personne morale, comme 'Les Vieilles Pierres', sont éligibles."
+      "en": "Check the full call for proposals document to find the section on eligible applicants.",
+      "fr": "Consulter le document complet de l'appel à projets pour trouver la section sur les candidats éligibles."
     }
   }
 }
