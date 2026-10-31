@@ -8,9 +8,10 @@ import {
   dateISO, dayNumber, emptyEntry, intention, weekNumber,
   type DailyEntry, type IntakeKind, type IntakeItem,
 } from "./plan";
+import { SchedulePlanner } from "./SchedulePlanner";
 import "./transformation.css";
 
-type Tab = "today" | "journal" | "weeks" | "photos" | "care";
+type Tab = "today" | "schedule" | "journal" | "weeks" | "photos" | "care";
 type PhotoRecord = { id: string; date: string; category: string; blob: Blob; type: string };
 type Preview = { id: string; date: string; category: string; url: string };
 const STORE_KEY = "oia:personal:transformation90:v1";
@@ -173,7 +174,7 @@ export function TransformationDashboard() {
     <div className="t90-progress"><div style={{width:Math.min(100,(day/93)*100)+"%"}} /></div>
     <div className="t90-privacy"><strong>Données privées sur cet appareil.</strong> Les mesures, prises et notes sont conservées dans ce navigateur ; les photos dans son stockage local IndexedDB. Pas de synchronisation inter-appareils ni de connexion Apple Santé/Health Connect pour le moment. Sur un appareil partagé, ce stockage n'est pas confidentiel. {state.status==="UNCONFIGURED" ? "L'authentification Supabase n'est pas configurée : n'y dépose aucune donnée sensible sur un ordinateur partagé." : "Le compte OIA ne synchronise pas encore ce module."}</div>
     <nav className="t90-nav" aria-label="Navigation Transformation">
-      {([["today","Aujourd'hui"],["journal","Journal & prises"],["weeks","13 semaines"],["photos","Photos"],["care","Soins & budget"]] as [Tab,string][]).map(([key,label])=><button key={key} type="button" className={tab===key?"selected":""} onClick={()=>setTab(key)}>{label}</button>)}
+      {([["today","Aujourd'hui"],["schedule","Mon planning"],["journal","Journal & prises"],["weeks","13 semaines"],["photos","Photos"],["care","Soins & budget"]] as [Tab,string][]).map(([key,label])=><button key={key} type="button" className={tab===key?"selected":""} onClick={()=>setTab(key)}>{label}</button>)}
     </nav>
     <div className="t90-content">
       <section className="t90-top">
@@ -213,6 +214,7 @@ export function TransformationDashboard() {
           <button className="t90-btn" onClick={()=>{setWeekFilter(week);setTab("weeks");}}>Voir le calendrier</button>
         </section>
       </>}
+      {tab==="schedule" && <SchedulePlanner />}
       {tab==="journal" && <>
         <section className="t90-panel">
           <div className="t90-section-head"><span>JOURNAL QUOTIDIEN</span><label>DATE <input type="date" min={START} max={END} value={currentDate} onChange={e=>setSelectedDate(e.target.value)} /></label></div>
