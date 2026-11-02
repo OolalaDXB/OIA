@@ -1,14 +1,16 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citations": [],
+    "citation": [
+      "The extracted text does not specify who may apply to the Access Programme."
+    ],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply. There is no mention of eligibility criteria such as legal structure, location, or sector.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité tels que la structure juridique, la localisation ou le secteur d'activité."
+      "en": "The opportunity text does not state which types of organisations are eligible to apply. There is no mention of legal structure, location, or sector requirements.",
+      "fr": "Le texte de l'opportunité ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des exigences en matière de structure juridique, de localisation ou de secteur d'activité."
     },
     "nextAction": {
-      "en": "Contact the issuer (Mubadala) to ask for the full eligibility criteria document or guidelines.",
-      "fr": "Contacter l'émetteur (Mubadala) pour demander le document complet des critères d'éligibilité ou les directives."
+      "en": "Contact the issuer (Mubadala) to confirm whether BAWABA’s legal entities are eligible to apply.",
+      "fr": "Contacter l'émetteur (Mubadala) pour confirmer si les entités juridiques de BAWABA peuvent postuler."
     }
   }
 }

@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text of the opportunity does not specify which types of organisations may apply. There is no mention of eligibility criteria related to the applicant's legal form, sector, or geographic location.",
+      "fr": "Le texte extrait de l'opportunité ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité relatifs à la forme juridique, au secteur ou à la localisation géographique du demandeur."
+    },
+    "nextAction": {
+      "en": "Contact the buyer (FWU Institut für Film und Bild in Wissenschaft und Unterricht gGmbH) to request the full tender documents and confirm eligibility requirements.",
+      "fr": "Contacter l'acheteur (FWU Institut für Film und Bild in Wissenschaft und Unterricht gGmbH) pour demander les documents complets de l'appel d'offres et confirmer les critères d'éligibilité."
+    }
+  }
+}

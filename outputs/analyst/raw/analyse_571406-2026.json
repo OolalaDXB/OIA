@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text specifies that applicants must be an 'organisme qualifié agréé (OQA)' but does not define what qualifies an entity as an OQA or provide criteria for eligibility beyond this requirement.",
-      "fr": "Le texte extrait précise que les candidats doivent être un 'organisme qualifié agréé (OQA)', mais ne définit pas ce qui qualifie une entité en tant qu'OQA ni ne fournit de critères d'éligibilité au-delà de cette exigence."
+      "en": "The extracted text does not specify the eligibility criteria for applicants. It does not state who may apply or what qualifications are required for the 'organisme qualifié agréé (OQA)' mission.",
+      "fr": "Le texte extrait ne précise pas les critères d'éligibilité pour les candidats. Il n'indique pas qui peut postuler ni quelles qualifications sont requises pour la mission d'« organisme qualifié agréé (OQA) »."
     },
     "nextAction": {
-      "en": "Contact Dijon Métropole or consult the full tender documents to confirm the definition and requirements for an 'organisme qualifié agréé (OQA)'.",
-      "fr": "Contacter Dijon Métropole ou consulter les documents complets de l'appel d'offres pour confirmer la définition et les exigences d'un 'organisme qualifié agréé (OQA)'."
+      "en": "Contact Dijon Métropole or consult the full tender documents to obtain the eligibility criteria for this mission.",
+      "fr": "Contacter Dijon Métropole ou consulter les documents complets de l'appel d'offres pour obtenir les critères d'éligibilité pour cette mission."
     }
   }
 }

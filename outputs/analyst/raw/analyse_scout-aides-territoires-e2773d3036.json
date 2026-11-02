@@ -1,14 +1,12 @@
-{
-  "EligibilityVerdict": {
-    "verdict": "NOT_ELIGIBLE",
-    "citation": "Il s’inscrit dans la stratégie nationale de transition écologique et cible les écoles, collèges, lycées, ainsi que d’autres structures éducatives.",
-    "reason": {
-      "en": "The funding opportunity specifically targets educational structures such as schools, colleges, and high schools. 'Les Vieilles Pierres' is a heritage hiking association, which does not fall under the category of educational structures mentioned in the opportunity.",
-      "fr": "L'opportunité de financement cible spécifiquement les structures éducatives comme les écoles, collèges et lycées. 'Les Vieilles Pierres' est une association de randonnée patrimoniale, ce qui ne correspond pas aux structures éducatives mentionnées dans l'opportunité."
-    },
-    "nextAction": {
-      "en": "Review other funding opportunities that support heritage, culture, or tourism associations.",
-      "fr": "Consulter d'autres opportunités de financement qui soutiennent les associations patrimoniales, culturelles ou touristiques."
-    }
+{"EligibilityVerdict": {
+  "verdict": "NOT_ELIGIBLE",
+  "citation": "Écoles, collèges, lycées, structures éducatives",
+  "reason": {
+    "en": "The funding opportunity explicitly targets educational structures such as schools, colleges, and high schools. 'Les Vieilles Pierres' is a heritage hiking association, not an educational institution or structure.",
+    "fr": "L'opportunité de financement cible explicitement les structures éducatives comme les écoles, collèges et lycées. « Les Vieilles Pierres » est une association de randonnée patrimoniale, et non une institution ou structure éducative."
+  },
+  "nextAction": {
+    "en": "Confirm with the issuer whether heritage associations managing public sites could be considered 'educational structures' under this programme.",
+    "fr": "Vérifier auprès de l'émetteur si les associations patrimoniales gérant des sites publics pourraient être considérées comme des 'structures éducatives' dans le cadre de ce programme."
   }
-}
+}}

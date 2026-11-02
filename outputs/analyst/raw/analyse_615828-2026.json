@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of restrictions or permitted applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles pour postuler. Aucune restriction ou autorisation concernant les candidats n'est mentionnée."
+    },
+    "nextAction": {
+      "en": "Contact the buyer (GIP OKANTIS) to ask who may submit a tender for this opportunity.",
+      "fr": "Contacter l'acheteur (GIP OKANTIS) pour demander quels types d'organisations peuvent soumettre une offre pour cette opportunité."
+    }
+  }
+}

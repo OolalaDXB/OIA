@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for the funding. It mentions support for 'citizens and businesses' but does not clarify if associations like 'Les Vieilles Pierres' are eligible.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent demander ce financement. Il mentionne un soutien pour les 'citoyens et les entreprises' mais ne clarifie pas si les associations comme 'Les Vieilles Pierres' sont éligibles."
+      "en": "The extracted text does not specify which types of organisations may apply for the funding. It mentions supporting 'citizens and businesses' but does not clarify if associations like 'Les Vieilles Pierres' are eligible.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent faire une demande de financement. Il mentionne le soutien aux 'citoyens et aux entreprises' mais ne clarifie pas si les associations comme 'Les Vieilles Pierres' sont éligibles."
     },
     "nextAction": {
-      "en": "Contact the issuer (beta.gouv.fr / French state) to confirm whether non-profit associations are eligible to apply for this grant.",
-      "fr": "Contacter l'émetteur (beta.gouv.fr / État français) pour confirmer si les associations à but non lucratif peuvent postuler à cette subvention."
+      "en": "Contact the issuer (beta.gouv.fr) to ask if non-profit associations are eligible to apply for this grant.",
+      "fr": "Contacter l'émetteur (beta.gouv.fr) pour demander si les associations à but non lucratif sont éligibles à cette subvention."
     }
   }
 }

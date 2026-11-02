@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citation": "Ce programme vise à faciliter et à soutenir le travail des collectivités locales, à inciter les acteurs du logement, du commerce et de l'urbanisme à réinvestir les centres-villes, à favoriser le maintien ou l'implantation d'activités en cœur de ville",
+    "citation": "eligibility: Collectivités locales",
     "reason": {
-      "en": "The program explicitly targets local authorities and actors in housing, commerce, and urban planning. The organisation is a heritage hiking association, which does not fall into these categories.",
-      "fr": "Le programme cible explicitement les collectivités locales et les acteurs du logement, du commerce et de l'urbanisme. L'organisation est une association de randonnée patrimoniale, ce qui ne correspond pas à ces catégories."
+      "en": "The funding opportunity explicitly restricts eligibility to 'Collectivités locales,' which excludes associations like Les Vieilles Pierres.",
+      "fr": "L'opportunité de financement restreint explicitement l'éligibilité aux 'Collectivités locales,' ce qui exclut les associations comme Les Vieilles Pierres."
     },
     "nextAction": {
-      "en": "Review other funding opportunities that support heritage or cultural associations.",
-      "fr": "Consulter d'autres opportunités de financement qui soutiennent les associations patrimoniales ou culturelles."
+      "en": "Confirm with the issuer whether any exceptions exist for heritage or cultural associations working in partnership with local authorities.",
+      "fr": "Vérifier auprès de l'émetteur s'il existe des exceptions pour les associations patrimoniales ou culturelles travaillant en partenariat avec les collectivités locales."
     }
   }
 }

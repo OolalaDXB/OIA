@@ -3,8 +3,8 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply. There is no mention of eligibility criteria for applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité pour les candidats."
+      "en": "The extracted text does not specify which types of organisations may apply. There is no mention of eligibility criteria for applicants such as legal status, sector, or location.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler. Il n'y a aucune mention des critères d'éligibilité pour les candidats, tels que le statut juridique, le secteur ou la localisation."
     },
     "nextAction": {
       "en": "Check the full call for proposals document to find the section on eligible applicants.",

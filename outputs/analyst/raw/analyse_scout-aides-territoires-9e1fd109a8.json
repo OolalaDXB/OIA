@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NOT_ELIGIBLE",
-    "citation": "Le programme France Très Haut Débit vise à donner accès à tous les Français au bon haut débit fixe (minimum 8 Mbit/s) d’ici à fin 2020, et au très haut débit fixe (minimum 30 Mbit/s) d’ici à fin 2022.",
+    "verdict": "NEEDS_INFO",
+    "citation": [],
     "reason": {
-      "en": "The opportunity explicitly targets the deployment of high-speed broadband infrastructure for all French citizens. An association focused on heritage hiking does not align with the infrastructure deployment objectives of this program.",
-      "fr": "L'opportunité cible explicitement le déploiement d'infrastructures à très haut débit pour tous les Français. Une association centrée sur la randonnée patrimoniale ne correspond pas aux objectifs de déploiement d'infrastructure de ce programme."
+      "en": "The extracted text does not specify which types of organisations may apply for the Plan France Très Haut Débit. There is no mention of eligibility criteria for applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au Plan France Très Haut Débit. Il n'y a aucune mention des critères d'éligibilité pour les candidats."
     },
     "nextAction": {
-      "en": "Review other funding opportunities related to heritage, culture, or tourism in France or the EU.",
-      "fr": "Consulter d'autres opportunités de financement liées au patrimoine, à la culture ou au tourisme en France ou dans l'UE."
+      "en": "Contact the issuer (beta.gouv.fr) to ask which legal entities are eligible to apply for this grant.",
+      "fr": "Contacter l'émetteur (beta.gouv.fr) pour demander quelles entités légales sont éligibles à cette subvention."
     }
   }
 }

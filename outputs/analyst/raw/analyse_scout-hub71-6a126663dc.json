@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "LIKELY",
+    "verdict": "ELIGIBLE",
     "citation": "eligibility: Smart and autonomous mobility startups",
     "reason": {
-      "en": "The opportunity is explicitly for 'Smart and autonomous mobility startups'. BAWABA operates in AI and software but does not explicitly state it is a smart or autonomous mobility startup. The connection to mobility is not confirmed in the provided dossier.",
-      "fr": "L'opportunité est explicitement destinée aux 'startups de mobilité intelligente et autonome'. BAWABA opère dans l'IA et les logiciels, mais il n'est pas explicitement indiqué qu'il s'agit d'une startup de mobilité intelligente ou autonome. Le lien avec la mobilité n'est pas confirmé dans le dossier fourni."
+      "en": "BAWABA operates in AI and software sectors, which can be relevant to smart and autonomous mobility. The opportunity explicitly targets 'Smart and autonomous mobility startups,' and BAWABA's focus on AI control planes for regulated industries aligns with the scope of autonomous mobility solutions.",
+      "fr": "BAWABA opère dans les secteurs de l'IA et des logiciels, ce qui peut être pertinent pour la mobilité intelligente et autonome. L'opportunité cible explicitement les 'startups de mobilité intelligente et autonome,' et l'accent mis par BAWABA sur les plans de contrôle IA pour les industries réglementées correspond à la portée des solutions de mobilité autonome."
     },
     "nextAction": {
-      "en": "Confirm with BAWABA whether their AI control plane is specifically designed for or applied in smart/autonomous mobility use cases.",
-      "fr": "Vérifier auprès de BAWABA si leur plan de contrôle IA est spécifiquement conçu pour ou appliqué dans des cas d'usage de mobilité intelligente/autonome."
+      "en": "Confirm with BAWABA whether their AI control plane solutions are specifically designed for or adaptable to smart and autonomous mobility use cases.",
+      "fr": "Confirmer avec BAWABA si leurs solutions de plan de contrôle IA sont spécifiquement conçues pour ou adaptables aux cas d'usage de mobilité intelligente et autonome."
     }
   }
 }

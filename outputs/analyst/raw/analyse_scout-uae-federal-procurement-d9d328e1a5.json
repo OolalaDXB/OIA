@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NOT_ELIGIBLE",
+    "citation": "الموردين المسجلين في سجل الموردين الاتحادي",
+    "reason": {
+      "en": "The opportunity explicitly requires suppliers to be registered in the Federal Suppliers Register. The organisation's dossier does not confirm that BAWABA is registered in this specific register.",
+      "fr": "L'opportunité exige explicitement que les fournisseurs soient enregistrés dans le registre fédéral des fournisseurs. Le dossier de l'organisation ne confirme pas que BAWABA est enregistré dans ce registre spécifique."
+    },
+    "nextAction": {
+      "en": "Check if BAWABA is registered in the UAE Federal Suppliers Register and obtain proof of registration.",
+      "fr": "Vérifier si BAWABA est enregistré dans le registre fédéral des fournisseurs des Émirats arabes unis et obtenir une preuve d'enregistrement."
+    }
+  }
+}

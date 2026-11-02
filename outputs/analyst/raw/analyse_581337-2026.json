@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations are eligible to apply for this tender. There is no mention of legal form, geographic restrictions, or other criteria that would confirm or exclude BAWABA.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles pour cet appel d'offres. Il n'y a aucune mention de la forme juridique, des restrictions géographiques ou d'autres critères qui confirmeraient ou excluraient BAWABA."
+      "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of legal form, geographic restrictions, or other criteria that would confirm or exclude BAWABA.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles. Il n'y a aucune mention de la forme juridique, des restrictions géographiques ou d'autres critères qui confirmeraient ou excluraient BAWABA."
     },
     "nextAction": {
-      "en": "Contact BEW Berliner Energie und Wärme GmbH or consult the full tender documents to confirm eligibility requirements for applicants.",
-      "fr": "Contacter BEW Berliner Energie und Wärme GmbH ou consulter les documents complets de l'appel d'offres pour confirmer les critères d'éligibilité des candidats."
+      "en": "Check the full tender notice at the provided link to identify the eligibility criteria for applicants.",
+      "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni pour identifier les critères d'éligibilité des candidats."
     }
   }
 }

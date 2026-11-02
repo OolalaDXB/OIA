@@ -1,142 +1,142 @@
 {
   "ScoutResult": {
     "calls": [
-       {
-        "name": "Industries des véhicules intelligents et autonomes (SAVI)",
+      {
+        "title": "Industries des véhicules intelligents et autonomes (SAVI)",
         "type": "Cluster programme",
         "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/savi",
-        "deadline": "",
         "amount": "",
+        "deadline": "",
         "eligibility": "",
         "quote": "Une nouvelle ère de mobilité intelligente"
       },
       {
-        "name": "Croissance agroalimentaire et abondance en eau (AGWA)",
+        "title": "Croissance agroalimentaire et abondance en eau (AGWA)",
         "type": "Cluster programme",
         "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/agwa",
-        "deadline": "",
         "amount": "",
+        "deadline": "",
         "eligibility": "",
         "quote": "Cultiver l’avenir de l’alimentation et de l’eau"
       },
       {
-        "name": "Santé, endurance, longévité et médecine (HELM)",
+        "title": "Santé, endurance, longévité et médecine (HELM)",
         "type": "Cluster programme",
         "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/helm",
-        "deadline": "",
         "amount": "",
+        "deadline": "",
         "eligibility": "",
         "quote": "Propulser la prochaine ère des sciences de la vie"
       },
       {
-        "name": "Fintech, assurance, numérique et actifs alternatifs (FIDA)",
+        "title": "Fintech, assurance, numérique et actifs alternatifs (FIDA)",
         "type": "Cluster programme",
         "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/clusters/fida",
-        "deadline": "",
         "amount": "",
+        "deadline": "",
         "eligibility": "",
         "quote": "Construire l’avenir de la finance mondiale depuis Abou Dhabi"
       },
       {
-        "name": "Partenariats public-privé",
+        "title": "Partenariats public-privé",
         "type": "Partnership programme",
         "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/public-private-partnerships",
-        "deadline": "",
         "amount": "",
+        "deadline": "",
         "eligibility": "",
         "quote": "Des contrats de long terme qui réalisent des actifs publics avec des partenaires du secteur privé"
       },
       {
-        "name": "Développement du commerce et de l’industrie",
+        "title": "Développement du commerce et de l’industrie",
         "type": "Support programme",
         "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry",
-        "deadline": "",
         "amount": "",
+        "deadline": "",
         "eligibility": "",
         "quote": "Stratégie industrielle, facilitation du commerce et promotion des exportations réunies sur une seule plateforme"
       },
       {
-        "name": "Programmes de soutien (accès au capital et autres)",
-        "type": "Support programme",
+        "title": "Programmes de soutien (Trade & Industry)",
+        "type": "Support programmes",
         "sourceUrl": "https://www.investwithabudhabi.com/fr/where-to-invest/trade-industry/support-programmes",
-        "deadline": "",
         "amount": "",
+        "deadline": "",
         "eligibility": "",
         "quote": ""
       },
       {
-        "name": "Référent unique (One-stop shop pour licences, terrains, réseaux et autorisations)",
+        "title": "Un référent unique vers le gouvernement",
         "type": "Support service",
-        "sourceUrl": "https://www.investwithabudhabi.com/fr/setup/support-at-every-step",
-        "deadline": "",
+        "sourceUrl": "https://www.investwithabudhabi.com/fr",
         "amount": "",
+        "deadline": "",
         "eligibility": "",
         "quote": "Un référent unique coordonne licences, terrains, réseaux et autorisations auprès des entités publiques : un seul dossier, un seul fil."
       },
       {
-        "name": "Accompagnement sur mesure pour les projets (sans catalogue imposé)",
+        "title": "Un accompagnement pensé pour votre projet",
         "type": "Support programme",
-        "sourceUrl": "https://www.investwithabudhabi.com/fr/setup/support-at-every-step",
-        "deadline": "",
+        "sourceUrl": "https://www.investwithabudhabi.com/fr",
         "amount": "",
+        "deadline": "",
         "eligibility": "",
         "quote": "Les programmes de soutien s’articulent autour de votre projet, sans catalogue imposé."
       },
       {
-        "name": "Accueil et suivi sur mesure tout au long du cycle d’investissement",
+        "title": "À vos côtés après l’implantation",
         "type": "Support service",
-        "sourceUrl": "https://www.investwithabudhabi.com/fr/setup/support-at-every-step",
-        "deadline": "",
+        "sourceUrl": "https://www.investwithabudhabi.com/fr",
         "amount": "",
+        "deadline": "",
         "eligibility": "",
         "quote": "Accueil et suivi sur mesure tout au long du cycle d’investissement, de la première demande jusqu’à l’expansion."
       },
       {
-        "name": "Golden Visa et résidence",
-        "type": "Residency incentive",
-        "sourceUrl": "https://www.investwithabudhabi.com/fr/golden-visa-residency",
+        "title": "Engagements 2025-2026 (Clusters programme)",
+        "type": "Funding commitment",
+        "sourceUrl": "https://www.investwithabudhabi.com/fr",
+        "amount": "1,36 milliard USD d’engagements supplémentaires au PIB grâce au programme de clusters",
         "deadline": "",
-        "amount": "",
         "eligibility": "",
         "quote": ""
       },
       {
-        "name": "Programme de clusters (engagements supplémentaires au PIB)",
-        "type": "Funding programme",
-        "sourceUrl": "https://www.investwithabudhabi.com/fr",
+        "title": "Le guide de l’investisseur d’Abou Dhabi",
+        "type": "Investor guide (support resource)",
+        "sourceUrl": "https://www.investwithabudhabi.com/assets/Ebook-ADIO%20Investor%20Guide.pdf",
+        "amount": "",
         "deadline": "",
-        "amount": "1,36 milliard USD (engagements supplémentaires au PIB pour 2025-2026)",
         "eligibility": "",
-        "quote": "1,36 milliard USD d’engagements supplémentaires au PIB grâce au programme de clusters"
+        "quote": "Le cadre, les programmes et les parcours réunis en un seul document : la source qui étaye les repères de cette plateforme."
       },
       {
-        "name": "Abu Dhabi Investment Forum : Londres",
-        "type": "Investment forum/event",
+        "title": "Abu Dhabi Investment Forum : Londres",
+        "type": "Investment forum (event-based opportunity)",
         "sourceUrl": "https://adif.abudhabi/london/",
-        "deadline": "",
         "amount": "",
+        "deadline": "",
         "eligibility": "",
         "quote": "Un rassemblement exclusif réunissant dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi."
       },
       {
-        "name": "Abu Dhabi Investment Forum : Séoul",
-        "type": "Investment forum/event",
+        "title": "Abu Dhabi Investment Forum : Séoul",
+        "type": "Investment forum (event-based opportunity)",
         "sourceUrl": "https://adif.abudhabi/south-korea/",
-        "deadline": "",
         "amount": "",
+        "deadline": "",
         "eligibility": "",
         "quote": "L’ADIF Séoul a mis directement en relation des investisseurs et des entreprises coréens avec l’écosystème d’investissement d’Abu Dhabi."
       },
       {
-        "name": "Abu Dhabi Investment Forum : Shanghai",
-        "type": "Investment forum/event",
+        "title": "Abu Dhabi Investment Forum : Shanghai",
+        "type": "Investment forum (event-based opportunity)",
         "sourceUrl": "https://adif.abudhabi/shanghai/",
-        "deadline": "",
         "amount": "",
+        "deadline": "",
         "eligibility": "",
         "quote": "Un événement exclusif réunissant les plus grands dirigeants d’entreprise, conseillers et investisseurs afin d’explorer le paysage d’investissement dynamique d’Abu Dhabi."
       }
     ],
-    "note": "All listed opportunities are explicitly mentioned on the page or linked from it. No external schemes were added."
+    "note": "All listed opportunities are explicitly mentioned on the page or linked from it. Some are support programmes or services rather than direct funding, but they are included as they represent opportunities for financial or operational support."
   }
 }

@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for this funding. It only describes the scope of the programme without detailing eligibility criteria.",
-      "fr": "Le texte extrait ne précise pas quels types d’organisations peuvent postuler à ce financement. Il décrit uniquement le champ d’application du programme sans détailler les critères d’éligibilité."
+      "en": "The extracted text does not specify which types of organisations are eligible to apply for this funding opportunity. It only describes the scope of the programme.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles pour cette opportunité de financement. Il décrit uniquement le champ d'application du programme."
     },
     "nextAction": {
-      "en": "Contact the issuer (beta.gouv.fr or the relevant French state authority) to ask for the official eligibility criteria document.",
-      "fr": "Contacter l’émetteur (beta.gouv.fr ou l’autorité compétente de l’État français) pour demander le document officiel des critères d’éligibilité."
+      "en": "Contact the issuer (beta.gouv.fr or the French state) to ask which legal entities may submit an application.",
+      "fr": "Contacter l'émetteur (beta.gouv.fr ou l'État français) pour demander quelles entités juridiques peuvent déposer une candidature."
     }
   }
 }

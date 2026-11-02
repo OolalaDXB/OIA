@@ -10,7 +10,7 @@ forProjects: ["thestudio-mt", "padel-design", "bawaba", "rls-guard"]
 geographies: ["FR"]
 url: "https://www.boamp.fr"
 urlVerified: true
-lastUrlCheck: "2026-10-26"
+lastUrlCheck: "2026-11-02"
 status: DECLARED
 access:
   mode: API

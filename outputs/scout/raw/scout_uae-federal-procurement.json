@@ -2,8 +2,8 @@
   "ScoutResult": {
     "calls": [
       {
-        "title": "برنامج الاقتصاديين (Economist Program - EP)",
-        "type": "Training Programme",
+        "title": "برنامج الاقتصاديين (EP) في صندوق النقد الدولي",
+        "type": "برنامج تدريب وتوظيف",
         "sourceUrl": "https://imf.wd5.myworkdayjobs.com/en-US/IMF/job/USA-Washington-DC/Economist-Program-2027_26-R9861",
         "deadline": "",
         "amount": "",
@@ -11,8 +11,8 @@
         "quote": "يتيح صندوق النقد الدولي فرصًا مميزة للاقتصاديين وطلبة الدراسات العليا من خلال برنامج الاقتصاديين (EP)."
       },
       {
-        "title": "برنامج التدريب في الصندوق (Fund Internship Program - FIP)",
-        "type": "Internship Programme",
+        "title": "برنامج التدريب في الصندوق (FIP) في صندوق النقد الدولي",
+        "type": "برنامج تدريب",
         "sourceUrl": "https://imf.wd5.myworkdayjobs.com/en-US/IMF/job/USA-Washington-DC/XMLNAME-2027-Fund-Internship-Program--FIP----Economists_26-R9863",
         "deadline": "",
         "amount": "",
@@ -21,7 +21,7 @@
       },
       {
         "title": "برنامج صكوك الخزينة الحكومية للأفراد",
-        "type": "Sukuk Programme",
+        "type": "برنامج استثمار",
         "sourceUrl": "https://mof.gov.ae/ar/public-finance/public-debt/retail-t-sukuk/",
         "deadline": "",
         "amount": "",
@@ -30,30 +30,39 @@
       },
       {
         "title": "التسجيل في سجل الموردين الاتحادي",
-        "type": "Supplier Registration",
+        "type": "فرصة تسجيل",
         "sourceUrl": "https://procurement.gov.ae/page.aspx/ar/usr/login",
         "deadline": "",
         "amount": "",
-        "eligibility": "",
-        "quote": "يمكن للمورد التسجيل في سجل الموردين الاتحادي عبر منصة المشتريات"
+        "eligibility": "الموردين",
+        "quote": "يمكن للمورد التسجيل في سجل الموردين الاتحادي عبر منصة المشتريات..."
       },
       {
         "title": "اعتماد مقدمي خدمات الفوترة الإلكترونية",
-        "type": "Accreditation Programme",
+        "type": "اعتماد",
         "sourceUrl": "https://mofservices.mof.gov.ae/Services/?_gl=1*abs4q9*_ga*NDY1ODI0MDUzLjE3NTMxNjI3OTE.*_ga_NQX4VHRPBH*czE3NTU0MTM5NzYkbzI2JGcxJHQxNzU1NDE4MjczJGo2MCRsMCRoMA..#/startRequest?id=WBG-01",
         "deadline": "",
         "amount": "",
-        "eligibility": "",
+        "eligibility": "مزودي الخدمات المؤهلين",
         "quote": "تتيح الخدمة لمزودي الخدمات المؤهلين التقدم بطلب للحصول على اعتماد..."
       },
       {
         "title": "التعاقد مع البنك الدولي للخدمات الاستشارية",
-        "type": "Consulting Services Programme",
-        "sourceUrl": "https://mofservices.mof.gov.ae/Services/?_gl=1*12k782s*_ga*NDY1ODI0MDUzLjE3NTMxNjI3OTE.*_ga_NQX4VHRPBH*czE3NTUzNTM4ODYkbzI1JGcxJHQxNzU1MzU0NTg2JGo2MCRsMCRoMA..#/startRequest?id=WB-01",
+        "type": "دعم فني وبرامج متخصصة",
+        "sourceUrl": "https://mofservices.mof.gov.ae/Services/?_gl=1*s1wtjh*_ga*NDY1ODI0MDUzLjE3NTMxNjI3OTE.*_ga_NQX4VHRPBH*czE3NTUzNTM4ODYkbzI1JGcxJHQxNzU1MzU0OTc4JGo1NiRsMCRoMA..#/startRequest?id=INQ-01",
         "deadline": "",
         "amount": "",
         "eligibility": "",
         "quote": "يقدم البنك الدولي دعماً فنياً متكاملاً وبرامج متخصصة لبناء القدرات..."
+      },
+      {
+        "title": "منصة المشتريات الرقمية (التوريد للجهات الحكومية)",
+        "type": "فرصة تعاقد",
+        "sourceUrl": "https://mof.gov.ae/ar/public-finance/government-procurement/digital-procurement-platform/",
+        "deadline": "",
+        "amount": "",
+        "eligibility": "الموردين المسجلين في سجل الموردين الاتحادي",
+        "quote": "تسهل منصة المشتريات الرقمية عمليات الشراء على مستوى الجهات الاتحادية وتتيح التعاقد إلكترونياً مع الموردين المسجلين في سجل الموردين الاتحادي من خلال الممارسات أو عبر كتالوج السلع."
       }
     ],
     "note": ""

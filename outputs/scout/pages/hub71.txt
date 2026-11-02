@@ -37,6 +37,12 @@ I AM A STARTUP
 I AM AN INVESTOR
 I AM A TALENT
 What's Happening?
+PRESS RELEASE
+HUB71 SELECTS RECORD 40 STARTUPS FOR COHORT 19 FOLLOWING HIGHEST-EVER APPLICATION INTAKE
+29
+Oct
+, 2026
+VIEW MORE
 BLOG
 HUB71 STARTUP BIOSAPIEN OPENS FIRST GLOBAL CLINICAL SITE FOR MEDICHIP™
 23
@@ -46,12 +52,6 @@ VIEW MORE
 PRESS RELEASE
 MEDICLINIC MIDDLE EAST JOINS HUB71+ LIFESCIENCES TO ADVANCE HEALTHCARE INNOVATION IN ABU DHABI
 22
-Oct
-, 2026
-VIEW MORE
-PRESS RELEASE
-HUB71 AND KEY CAPITAL STRENGTHEN PARTNERSHIP TO EXPAND GLOBAL INVESTOR ACCESS FOR STARTUPS
-19
 Oct
 , 2026
 VIEW MORE
@@ -109,7 +109,7 @@ Apply NowRead More
 Your gateway to SAVI
 Hub71 is your startup’s gateway into Abu Dhabi’s SAVI cluster. Smart and autonomous mobility startups joining Hub71 gain direct access to SAVI’s network of partners, regulators and testing environments. This enables founders to validate, deploy and scale solutions across land, air and sea.
 Apply NowRead More
-Life Sciences
+Hub71+ Life Sciences
 Hub71+ Life Sciences is Abu Dhabi’s specialist ecosystem driving innovation across biotechnology, MedTech, and digital health. From precision medicine to biomanufacturing, we bring together founders, researchers, regulators, investors, and corporates to advance next-generation healthcare solutions from Abu Dhabi to the world.
 Apply NowRead More
 Hub71+ Digital Assets
@@ -149,22 +149,22 @@ nationalities
 sectors
 SOME OF OUR STARTUPS:
 
-On a mission to democratize AI for the Banking Industry
-
-Redefining the work-life experience by making automated HR, payroll, employee benefits and insurance a possibility for all businesses in UAE.
+Dapio Tap to Pay transforms the way you get paid
 
 We are currently on the Polygon (Matic) Network, which is an Ethereum-compatible blockchain network.
 
-Jade Autism is an app for ASD (Autistic Spectrum Disorder) that stimulates and develops children's cognitive functions.
+A community-based platform in outer space with blockchain technology
+
+Smart Navigation Systems provides innovative location based solutions
 
 ALL STARTUPS
 Our community says
-The Hub71 team and program have been invaluable in helping Kinderly become established in the UAE, with their generous Company Building Program allowing us to recruit the best employees and quickly grow the team in Abu Dhabi.
-Founder & CEO
-Geraint Barton
 When I first came to visit the UAE I met with the Hub71 team and I was very impressed by them, and so I applied to the Company Building Program, and I was fortunate enough to be accepted.
 Founder & CEO
 Derick Smith
+The Hub71 team and program have been invaluable in helping Kinderly become established in the UAE, with their generous Company Building Program allowing us to recruit the best employees and quickly grow the team in Abu Dhabi.
+Founder & CEO
+Geraint Barton
 Our partners
 
 We’re more powerful when we work together. We’re growing our diverse community of partners to accelerate business growth in Abu Dhabi’s flourishing tech sector.

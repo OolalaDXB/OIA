@@ -1,16 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NEEDS_INFO",
-    "citation": [
-      "The extracted text does not specify eligible applicants or types of organisations that may apply."
-    ],
+    "citation": [],
     "reason": {
-      "en": "The opportunity text does not state which types of organisations are eligible to apply. There is no mention of whether private companies, research institutions, or other entities are permitted.",
-      "fr": "Le texte de l'opportunité ne précise pas quels types d'organisations sont éligibles. Il n'est pas indiqué si les entreprises privées, les institutions de recherche ou d'autres entités sont autorisées à postuler."
+      "en": "The extracted text does not specify which types of organisations are eligible to apply. There is no mention of legal forms, sectors, or geographic restrictions that would confirm or exclude BAWABA.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations sont éligibles. Il n'y a aucune mention des formes juridiques, des secteurs ou des restrictions géographiques qui confirmeraient ou excluraient BAWABA."
     },
     "nextAction": {
-      "en": "Contact the European Commission or the programme manager to clarify the eligibility criteria for applicants.",
-      "fr": "Contacter la Commission européenne ou le responsable du programme pour clarifier les critères d'éligibilité des candidats."
+      "en": "Contact the European Commission or consult the full call document to determine the eligibility criteria for applicants.",
+      "fr": "Contacter la Commission européenne ou consulter le document complet de l'appel pour déterminer les critères d'éligibilité des candidats."
     }
   }
 }

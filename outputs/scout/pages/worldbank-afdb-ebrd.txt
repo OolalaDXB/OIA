@@ -1,4 +1,4 @@
-https://projects.worldbank.org/en/projects-operations/procurement
+https://projects.worldbank.org/en/projects-operations/opportunities?srce=both
 
 News & Events 
 
@@ -11,47 +11,61 @@ What We Do Projects & Operations
 This page in:_
 English Français العربية Русский 中文 Português
 dropdown
-Procurement Notices
-PROCUREMENT
+Business Opportunities
+CURRENT OPPORTUNITIES 
 
-Subscribe to receive email alerts for new procurement notices.
+Specific Procurement Notices advertising current opportunities seeking bids/proposals to be submitted prior to a specified deadline date.
 
-Please click here to see the Current Opportunities.
+UPCOMING OPPORTUNITIES 
+
+General Procurement Notices providing advance notice of procurement opportunities which will be advertised shortly as Specific Procurement Notices (under the "Current Opportunities" tab)
+
+POTENTIAL OPPORTUNITIES 
+
+Potential procurement opportunities drawn from Procurement Plans. These are subject to final decisions before the procurement can proceed. Opportunities listed here are indicative only and may be subject to change or may not proceed at all.
+
+ 
+
+Subscribe to receive email alerts for new procurement notices.
+
+To search all notices, current and archived, go to Procurement Notices.
 
 FILTER
+Procurement Type
 Country
 Region
+Sector
 Notice Type
 Procurement Method
-Procurement Group
-NOTICES
-CONTRACTS
-PLANS
+Market Approach
 
-Showing 1 - 20 of 424,135 procurement notices matching the search criteria -
+Showing 1 - 20 of 674 current opportunities matching the search criteria -
 
 Download to Excel: 
-Description 	Country 	Project Title 	Notice Type 	Language 	Published Date 
-Construction of Multi-purpose Shelter in Likoma	Malawi	Regional Climate Resilience Program for Eastern and Southern Africa 2 Project (RCRP2) - P181308	Contract Award	English	October 23, 2026
-étude de faisabilité pour la modernisation des transports sur le lac Tchad et les fleuves Chari et Logone	Chad	Chad Connectivity and Integration Project - P180915	Request for Expression of Interest	French	October 23, 2026
-Preparation of an Energy Sector Investment Program for the Marshall Islands	Marshall Islands	Renewable Energy Generation and Access Increase Project - P181250	Request for Expression of Interest	English	October 23, 2026
-Acquisition and Implementation of the Picture Archiving and Communication System (PACS) for Health Structures of the Ministry of Health of Cabo Verde	Western and Central Africa	Health Security Program in Western and Central Africa - P179078	Invitation for Bids	English	October 23, 2026
-Design, Development, Integration, Migration, Testing, Deployment, and Support of the Preferential Agro-Credit Project System (PACPS)	Georgia	Georgia Resilient Agriculture, Irrigation, and Land Project - P175629	Invitation for Bids	English	October 23, 2026
-FOURNITURE DES POTEAUX BETONS POUR 50 900 BRANCHEMENTS CLASSIQUES EN HUIT LOTS	Madagascar	Digital and Energy Connectivity for Inclusion in Madagascar Project - P178701	Invitation for Bids	French	October 23, 2026
-Construction Supervision Consultant for Jezkazgan–Karagandy Section of the Trans-Caspian International Transport Route (Middle Corridor)	Kazakhstan	Transport Resilience and Connectivity Enhancement Project (Jezkazgan-Karagandy Section of TCITR (Mid - P500565	Request for Expression of Interest	English	October 23, 2026
-Consultoría para el apoyo a la gestión y a la supervisión de determinadas actividades de obras	Dominican Republic	Distribution Efficiency Improvement and Utility Strengthening Project - P180512	Request for Expression of Interest	Spanish; Castilian	October 23, 2026
-Public Financial Management Specialist for Hirshabelle State	Somalia, Federal Republic of	Bulsho: Strengthening Community and Local Institutions for Social Cohesion, Inclusion, and Resilienc - P508408	Request for Expression of Interest	English	October 23, 2026
-Électrification et connectivités des établissements publics de Santé hors réseau à Madagascar repartis en 4 Lots	Madagascar	Digital and Energy Connectivity for Inclusion in Madagascar Project - P178701	Invitation for Bids	French	October 23, 2026
-Contract Advisor	Micronesia, Federated States of	Pacific Islands Regional Oceanscape Program - Second Phase for Economic Resilience: Federated States - P178237	Request for Expression of Interest	English	October 23, 2026
-International PR and Media Outreach Campaign for IT Park Uzbekistan	Uzbekistan	Uzbekistan Digital Inclusion Project - P179108	Contract Award	English	October 23, 2026
-SUPPLY ,DELIVERY OF LAPTOPS ,DESKTOP COMPUTERS AND AUDIO VISUAL EQUIPMENT	Eastern and Southern Africa	East Africa Skills for Transformation and Regional Integration Project (EASTRIP) - P163399	Contract Award	English	October 23, 2026
-Procurement of Laptop and Desktop Computers, Multi-Functional Printer, Interactive Smart Board with Video Conferencing Facilities, External Hard Disk, Pen Drives, Mouse, USB Drive, Voice Recorder, Camera and Multimedia	Sri Lanka	Social Protection Project - P178973	Contract Award	English	October 23, 2026
-Hiring of Third Party Validation (TPV) Firm for Verification of PBC-7 Target	Pakistan	Getting Results: Access and Delivery of Quality Education Services in Punjab Project - P176594	Contract Award	English	October 23, 2026
-Procurement of Laptop and Desktop Computers, Multi-Functional Printer, Interactive Smart Board with Video Conferencing Facilities, External Hard Disk, Pen Drives, Mouse, USB Drive, Voice Recorder, Camera and Multimedia	Sri Lanka	Social Protection Project - P178973	Contract Award	English	October 23, 2026
-Procurement of Laptop and Desktop Computers, Multi-Functional Printer, Interactive Smart Board with Video Conferencing Facilities, External Hard Disk, Pen Drives, Mouse, USB Drive, Voice Recorder, Camera and Multimedia	Sri Lanka	Social Protection Project - P178973	Contract Award	English	October 23, 2026
-Procurement of Laptop and Desktop Computers, Multi-Functional Printer, Interactive Smart Board with Video Conferencing Facilities, External Hard Disk, Pen Drives, Mouse, USB Drive, Voice Recorder, Camera and Multimedia	Sri Lanka	Social Protection Project - P178973	Contract Award	English	October 23, 2026
-Procurement of Laptop and Desktop Computers, Multi-Functional Printer, Interactive Smart Board with Video Conferencing Facilities, External Hard Disk, Pen Drives, Mouse, USB Drive, Voice Recorder, Camera and Multimedia	Sri Lanka	Social Protection Project - P178973	Contract Award	English	October 23, 2026
-Procurement of Laptop and Desktop Computers, Multi-Functional Printer, Interactive Smart Board with Video Conferencing Facilities, External Hard Disk, Pen Drives, Mouse, USB Drive, Voice Recorder, Camera and Multimedia	Sri Lanka	Social Protection Project - P178973	Contract Award	English	October 23, 2026
+Notice 	Country 	Project Title 	Notice Type 	Procurement Type 	Language 	Published Date 	Submission Deadline 
+The submission deadline is based on the applicable country's date and time as specified in the tender document.
+ 
+Consulting Services for Technical Assistance in the Customization of Human Resources Management Instruments for Seventy-Nine (79) Cities/Municipalities in Kenya	Kenya	Second Kenya Urban Support Program - P177048	Request for Expression of Interest	Consultant Services	English	October 31, 2026	December 2, 2026
+Direct RFP - Hiring Firm/ Agency for Design, Development, Implementation, and Maintenance of Education Management Information System (EMIS) and Integration, Enhancement and Maintenance of Existing Modules in The School Information Management System (SIMS)	India	Tripura Rural Economic Growth and Service Delivery Project - P178418	Request for Expression of Interest	Consultant Services	English	October 31, 2026	December 4, 2026
+Construction d'une salle de conférence équipée à l’ETAG	Cameroon	Valorization of Investments in the Valley of the Benue - P166072	Invitation for Bids	Works	French	October 31, 2026	November 2, 2026
+Construction works on a connection line between Subotica - Bogojevo - State Border rail line and Novi Sad - Odzaci - Bogojevo rail line with reconstruction of Bogojevo railway station	Serbia	Serbia Railway Sector Modernization Project - P170868	Invitation for Bids	Works	English	October 31, 2026	December 14, 2026
+Procurement of Dignity Kits for women and girls	South Sudan	South Sudan Women's Social and Economic Empowerment Project - P176900	Invitation for Bids	Goods	English	October 31, 2026	November 13, 2026
+Consulting Services for Municipality-Wide Road and Storm Water Infrastructure Master Planning and Identification of Two (2) Priority Road Corridors And Associated Storm Water Drainage & NMT Systems for Dadaab-Hagadera and Kakuma Municipalities in Kenya	Kenya	Second Kenya Urban Support Program - P177048	Request for Expression of Interest	Consultant Services	English	October 31, 2026	December 2, 2026
+Fourniture et livraison d'engrais organiques au profit des bénéficiaires de la Grande Saison rizicole 2026-2027 – Régions Alaotra Mangoro et Sofia	Madagascar	Rural Livelihoods Productivity and Resilience Project - P175269	Invitation for Bids	Goods	French	October 30, 2026	November 13, 2026
+Upgrading the Ministry of Agricultural Kfarshima Laboratories (Supply of Spare Parts and New Machinery, Maintenance Services, and Execution of Minor Rehabilitation Works).	Lebanon	Lebanon Green Agrifood Transformation for Economic Recovery (GATE) - P180334	Invitation for Bids	Goods	English	October 30, 2026	November 25, 2026
+Especialista em Micro Pequenas e Médias Empresas	Angola	Accelerating Economic Diversification and Job Creation Project - P178035	Request for Expression of Interest	Consultant Services	English	October 30, 2026	November 18, 2026
+Environmental social impact assessment for Zenica-Raspotocje	Bosnia and Herzegovina	Just Transition in Select Coal Regions of Bosnia and Herzegovina - P179990	Request for Expression of Interest	Consultant Services	English	October 30, 2026	November 11, 2026
+Consulting Services for the Preparation of Functional and Technical Requirements and Procurement-Ready Technical Specification for the RVS Mobile Application and Data Collection Workflow	Moldova	Strengthening Moldova's Disaster Risk Management and Resilience Project - P504278	Request for Expression of Interest	Consultant Services	English	October 30, 2026	November 16, 2026
+Delivery Unit 2 : Recrutement d'un Expert-Head of Portfolio Management Office (PMO)	Congo, Republic of	Congo Digital Acceleration Project - P175592	Request for Expression of Interest	Consultant Services	English	October 30, 2026	November 11, 2026
+Delivery Unit 4 : Recrutement d'un Expert-Chief Data & AI Officer	Congo, Republic of	Congo Digital Acceleration Project - P175592	Request for Expression of Interest	Consultant Services	French	October 30, 2026	November 11, 2026
+ASISTENTE OPERATIVO	El Salvador	El Salvador Transport and Resilient Infrastructure Project - P178720	Request for Expression of Interest	Consultant Services	Spanish; Castilian	October 30, 2026	November 16, 2026
+Desenvolvimento e implementacao do sistema informatico de medicao do grau de satisfacao dos formandos	Angola	Enhancing the Social Protection System for Human Capital and Resilience Project - P181495	Request for Expression of Interest	Consultant Services	Portuguese	October 30, 2026	November 16, 2026
+Supply and Installation of Specialized Museum Showcases at Peshawar Museum	Pakistan	Khyber Pass Economic Corridor Project - P159577	Invitation for Bids	Goods	English	October 30, 2026	November 25, 2026
+FIRMA CONSULTORA PARA APOYAR LA PREPARACION DE SUBPROYECTOS DE ELECTRIFICACION MEDIANTE EXTENSION DE REDES	Bolivia	Bolivia Improving Sustainable Access to Electricity Project (IDTR III) - P180027	Request for Expression of Interest	Consultant Services	Spanish; Castilian	October 30, 2026	November 16, 2026
+Consultancy Service for Contract Management Specialist	Malawi	Water and Sanitation Project - I - P178954	Request for Expression of Interest	Consultant Services	English	October 30, 2026	November 13, 2026
+Preparation of an Environmental and Social Impact Assessment and Associated Environmental and Social Instruments for the Proposed Hazardous Waste Treatment and Landfill Facility in Georgia	Georgia	Georgia Water Supply, Sanitation, Wastewater, and Hazardous Waste GFPP - P518850	Request for Expression of Interest	Consultant Services	English	October 30, 2026	November 20, 2026
+Aquisicao e instalacao de software de gestao da formacao	Angola	Enhancing the Social Protection System for Human Capital and Resilience Project - P181495	Request for Expression of Interest	Consultant Services	Portuguese	October 30, 2026	November 16, 2026
+Download to Excel: 
   12345678910  
 Back to top
 IBRD

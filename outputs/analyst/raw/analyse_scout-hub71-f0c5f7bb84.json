@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
     "verdict": "NOT_ELIGIBLE",
-    "citation": "eligibility: Sustainability startups leveraging technologies to drive decarbonization",
+    "citation": "eligibility: Sustainability startups",
     "reason": {
-      "en": "BAWABA's primary focus is on AI, data, cybersecurity, and software for regulated industries, not explicitly on sustainability or decarbonization technologies as required by the opportunity.",
-      "fr": "L'activité principale de BAWABA se concentre sur l'IA, les données, la cybersécurité et les logiciels pour les industries réglementées, et non explicitement sur les technologies de durabilité ou de décarbonation, comme l'exige l'opportunité."
+      "en": "BAWABA is described as a 'Sovereign AI control plane for regulated industries' focusing on AI, data, digital, cybersecurity, and software sectors, which does not explicitly align with the definition of a 'sustainability startup' focused on decarbonization and a net zero future.",
+      "fr": "BAWABA est décrite comme une 'plateforme de contrôle d'IA souveraine pour les industries réglementées' axée sur les secteurs de l'IA, des données, du numérique, de la cybersécurité et des logiciels, ce qui ne correspond pas explicitement à la définition d'une 'startup de durabilité' centrée sur la décarbonisation et un avenir neutre en carbone."
     },
     "nextAction": {
-      "en": "Review other funding opportunities that align with BAWABA's focus on AI, data, and cybersecurity.",
-      "fr": "Examiner d'autres opportunités de financement qui correspondent à l'orientation de BAWABA en matière d'IA, de données et de cybersécurité."
+      "en": "Review the opportunity's detailed eligibility criteria or contact the issuer to confirm if AI-driven solutions for regulated industries qualify as 'sustainability startups' under this programme.",
+      "fr": "Examiner les critères d'éligibilité détaillés de l'opportunité ou contacter l'émetteur pour confirmer si les solutions basées sur l'IA pour les industries réglementées peuvent être considérées comme des 'startups de durabilité' dans le cadre de ce programme."
     }
   }
 }

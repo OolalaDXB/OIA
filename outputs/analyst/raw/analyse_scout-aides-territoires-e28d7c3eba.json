@@ -1,0 +1,17 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "ELIGIBLE",
+    "citations": [
+      "EUROPE - Europe Créative\nscope: Europe Créative est le programme de l'Union Européenne qui soutient les secteurs de la culture et de la création.",
+      "eligibility: Secteurs de la culture et de la création"
+    ],
+    "reason": {
+      "en": "The organisation operates in the cultural sector, which is explicitly mentioned as eligible in the opportunity text.",
+      "fr": "L'organisation opère dans le secteur culturel, qui est explicitement mentionné comme éligible dans le texte de l'opportunité."
+    },
+    "nextAction": {
+      "en": "Confirm with the issuer that an association without a recorded legal entity can apply for this grant.",
+      "fr": "Confirmer auprès de l'émetteur qu'une association sans entité juridique enregistrée peut postuler à cette subvention."
+    }
+  }
+}

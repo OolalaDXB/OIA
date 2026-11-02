@@ -1,0 +1,14 @@
+{
+  "EligibilityVerdict": {
+    "verdict": "NEEDS_INFO",
+    "citation": [],
+    "reason": {
+      "en": "The extracted text does not specify who may apply for this tender. There are no eligibility criteria or conditions mentioned for applicants.",
+      "fr": "Le texte extrait ne précise pas qui peut postuler à cet appel d'offres. Aucun critère d'éligibilité ou condition pour les candidats n'est mentionné."
+    },
+    "nextAction": {
+      "en": "Check the full tender notice at the provided link to find the section on eligibility criteria.",
+      "fr": "Consulter l'avis complet de l'appel d'offres via le lien fourni pour trouver la section sur les critères d'éligibilité."
+    }
+  }
+}

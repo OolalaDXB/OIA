@@ -3,13 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria related to the legal status or nature of applicants.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent présenter une demande pour cette opportunité de financement. Il n'y a aucune mention des critères d'éligibilité relatifs au statut juridique ou à la nature des demandeurs."
+      "en": "The extracted text does not specify which types of organisations may apply for this funding opportunity. There is no mention of eligibility criteria related to the legal form or sector of applicants.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent déposer une candidature pour cette opportunité de financement. Il n'y a aucune mention des critères d'éligibilité liés à la forme juridique ou au secteur des demandeurs."
     },
     "nextAction": {
-      "en": "Contact the issuer (beta.gouv.fr) to request the full call for proposals document or eligibility guidelines.",
-      "fr": "Contacter l'émetteur (beta.gouv.fr) pour demander le document complet de l'appel à projets ou les directives d'éligibilité."
-    },
-    "namedEntity": null
+      "en": "Contact the issuer (beta.gouv.fr) to ask for the official call for proposals document or the eligibility criteria.",
+      "fr": "Contacter l'émetteur (beta.gouv.fr) pour demander le document officiel de l'appel à projets ou les critères d'éligibilité."
+    }
   }
 }

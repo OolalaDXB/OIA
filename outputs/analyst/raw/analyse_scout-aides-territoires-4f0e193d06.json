@@ -3,12 +3,12 @@
     "verdict": "NEEDS_INFO",
     "citation": [],
     "reason": {
-      "en": "The extracted text does not specify which types of organisations may apply for the ÉcoQuartier grant. It mentions 'porteurs de projets' but does not define whether associations like Les Vieilles Pierres are eligible.",
-      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler à la subvention ÉcoQuartier. Il mentionne les 'porteurs de projets' sans définir si les associations comme Les Vieilles Pierres sont éligibles."
+      "en": "The extracted text states 'Porteurs de projets' as the eligibility criterion, but it does not specify what types of entities qualify as 'porteurs de projets'. There is no information to determine whether an association like 'Les Vieilles Pierres' is eligible.",
+      "fr": "Le texte extrait indique « Porteurs de projets » comme critère d'éligibilité, mais il ne précise pas quels types d'entités peuvent être considérés comme « porteurs de projets ». Il n'y a pas d'information permettant de déterminer si une association comme « Les Vieilles Pierres » est éligible."
     },
     "nextAction": {
-      "en": "Check the official ÉcoQuartier call for applications or contact beta.gouv.fr to confirm whether heritage associations are eligible applicants.",
-      "fr": "Consulter l'appel à projets officiel ÉcoQuartier ou contacter beta.gouv.fr pour confirmer si les associations patrimoniales peuvent postuler."
+      "en": "Contact the issuer (beta.gouv.fr) to clarify whether heritage associations are considered eligible 'porteurs de projets' under this opportunity.",
+      "fr": "Contacter l'émetteur (beta.gouv.fr) pour clarifier si les associations patrimoniales sont considérées comme des « porteurs de projets » éligibles dans le cadre de cette opportunité."
     }
   }
 }

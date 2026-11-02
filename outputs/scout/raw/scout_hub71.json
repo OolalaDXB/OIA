@@ -1,21 +1,19 @@
 {
   "ScoutResult": {
     "calls": [
-       {
+      {
         "title": "Initiate",
         "type": "Programme",
         "sourceUrl": "https://www.hub71.com/program/initiate",
-        "applyUrl": "https://www.hub71.com/program/initiate/apply",
         "deadline": "",
         "amount": "",
-        "eligibility": "Founders at the ideation or pre-MVP stage",
-        "quote": "Initiate is Hub71’s early-stage programme that supports founders at the ideation or pre-MVP stage to turn their ideas into scalable startups."
+        "eligibility": "",
+        "quote": "Initiate is Hub71’s early-stage programme that supports founders at the ideation or pre-MVP stage to turn their ideas into scalable startups. By joining, founders will be connected with experienced venture builders and gain the resources, mentorship, and ecosystem access needed to transform ideas into startups that can scale."
       },
       {
         "title": "MZN x Hub71 Programme",
         "type": "Programme",
         "sourceUrl": "https://www.hub71.com/program/mzn-x-hub71-programme",
-        "applyUrl": "https://airtable.com/app58upkP7sGrjdWX/shr4tDyAOlWv1nW3A",
         "deadline": "",
         "amount": "",
         "eligibility": "Emirati founders",
@@ -25,7 +23,6 @@
         "title": "Hub71 Sandbox Programme",
         "type": "Programme",
         "sourceUrl": "https://www.hub71.com/program/sandbox-programme",
-        "applyUrl": "https://apply.startupseries.ae/",
         "deadline": "",
         "amount": "",
         "eligibility": "",
@@ -35,7 +32,6 @@
         "title": "Hub71 Immersion Programme (India)",
         "type": "Programme",
         "sourceUrl": "https://www.hub71.com/program/india",
-        "applyUrl": "https://www.hub71.com/program/india",
         "deadline": "",
         "amount": "",
         "eligibility": "International startups",
@@ -45,7 +41,6 @@
         "title": "Access Programme",
         "type": "Programme",
         "sourceUrl": "https://www.hub71.com/program/access-programme",
-        "applyUrl": "https://www.hub71.com/program/access-programme/apply",
         "deadline": "",
         "amount": "",
         "eligibility": "",
@@ -55,7 +50,6 @@
         "title": "ECA Anjal Z x Hub71",
         "type": "Programme",
         "sourceUrl": "https://www.hub71.com/program/eca-anjal-z-x-hub71",
-        "applyUrl": "https://airtable.com/app58upkP7sGrjdWX/shrV4DoOZLLFIVwjn?prefill_Lead+source=Website&hide_Lead+source=true",
         "deadline": "",
         "amount": "",
         "eligibility": "Startups addressing challenges across early childhood development",
@@ -65,7 +59,6 @@
         "title": "Your gateway to SAVI",
         "type": "Programme",
         "sourceUrl": "https://www.hub71.com/program/savi",
-        "applyUrl": "https://www.hub71.com/program/savi",
         "deadline": "",
         "amount": "",
         "eligibility": "Smart and autonomous mobility startups",
@@ -75,61 +68,46 @@
         "title": "Hub71+ Life Sciences",
         "type": "Programme",
         "sourceUrl": "https://www.hub71.com/program/hub71-plus-life-sciences",
-        "applyUrl": "https://www.hub71.com/program/hub71-plus-life-sciences/apply",
         "deadline": "",
         "amount": "",
         "eligibility": "Startups in biotechnology, MedTech, and digital health",
-        "quote": "Hub71+ Life Sciences is Abu Dhabi’s specialist ecosystem driving innovation across biotechnology, MedTech, and digital health."
+        "quote": "Hub71+ Life Sciences is Abu Dhabi’s specialist ecosystem driving innovation across biotechnology, MedTech, and digital health. From precision medicine to biomanufacturing, we bring together founders, researchers, regulators, investors, and corporates to advance next-generation healthcare solutions from Abu Dhabi to the world."
       },
       {
         "title": "Hub71+ Digital Assets",
         "type": "Programme",
         "sourceUrl": "https://www.hub71.com/program/hub71-plus-digital-assets",
-        "applyUrl": "https://www.hub71.com/program/hub71-plus-digital-assets/apply",
         "deadline": "",
         "amount": "",
         "eligibility": "Web3, blockchain, and cryptocurrency startups",
-        "quote": "Hub71+ Digital Assets is a dedicated programme to promote Web3 startup growth from the heart of Abu Dhabi."
+        "quote": "Hub71+ Digital Assets is a dedicated programme to promote Web3 startup growth from the heart of Abu Dhabi. We provide an integrated launchpad that unites builders, regulators, investors, foundations, corporate partners, and enthusiasts around Web3 including blockchain and cryptocurrency startups."
       },
       {
         "title": "Hub71+ ClimateTech",
         "type": "Programme",
         "sourceUrl": "https://www.hub71.com/program/hub71-plus-climatetech",
-        "applyUrl": "https://www.hub71.com/program/hub71-plus-climatetech/apply",
         "deadline": "",
         "amount": "",
-        "eligibility": "Sustainability startups leveraging technologies to drive decarbonization",
-        "quote": "Hub71+ ClimateTech is a specialist ecosystem, where sustainability startups leverage technologies to drive decarbonization in supporting a net zero future."
+        "eligibility": "Sustainability startups",
+        "quote": "Hub71+ ClimateTech is a specialist ecosystem, where sustainability startups leverage technologies to drive decarbonization in supporting a net zero future. The programme offers a comprehensive support package and a route into the UAE capital's marketplace."
       },
       {
         "title": "Hub71+ AI",
         "type": "Programme",
         "sourceUrl": "https://www.hub71.com/program/hub71-plus-ai",
-        "applyUrl": "https://www.hub71.com/program/hub71-plus-ai#widget-programs",
         "deadline": "",
         "amount": "",
         "eligibility": "Startups at the forefront of AI innovation",
-        "quote": "Hub71+ AI is a specialist ecosystem designed to support startups at the forefront of AI innovation."
+        "quote": "Hub71+ AI is a specialist ecosystem designed to support startups at the forefront of AI innovation. The ecosystem provides advanced technical resources, access to a robust network of AI researchers, industry practitioners, and strategic partners, and tailored expertise in AI-driven product development and scalability."
       },
       {
-        "title": "Company Building Program",
-        "type": "Programme",
+        "title": "Apply to Cohort 21",
+        "type": "Call for Startups",
         "sourceUrl": "https://www.hub71.com/",
-        "applyUrl": "",
         "deadline": "",
         "amount": "",
         "eligibility": "",
-        "quote": "Company building program with flexible incentives"
-      },
-      {
-        "title": "Info Session: A Deep Dive into the Hub71 Ecosystem",
-        "type": "Event",
-        "sourceUrl": "https://www.hub71.com/info-sessions#formPopup",
-        "applyUrl": "https://www.hub71.com/info-sessions#formPopup",
-        "deadline": "",
-        "amount": "",
-        "eligibility": "",
-        "quote": "Don’t miss this opportunity to connect with our team, explore the benefits of joining Hub71, and get your questions answered live."
+        "quote": ""
       }
     ],
     "note": ""

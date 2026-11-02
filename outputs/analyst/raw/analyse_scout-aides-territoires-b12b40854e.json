@@ -1,14 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "NOT_ELIGIBLE",
-    "citation": "EIT Food est un partenariat paneuropéen, axé sur le consommateur, qui permet aux innovateurs, aux entrepreneurs et aux étudiants de développer des solutions de classe mondiale aux défis de société, d'accélérer l'innovation, de créer des emplois et d'accroître la compétitivité de l'Europe.",
+    "verdict": "LIKELY",
+    "citation": "eligibility: Innovateurs, entrepreneurs, étudiants",
     "reason": {
-      "en": "The opportunity explicitly targets 'innovators, entrepreneurs, and students' to develop world-class solutions. An association focused on heritage hiking does not align with these categories.",
-      "fr": "L'opportunité cible explicitement les 'innovateurs, entrepreneurs et étudiants' pour développer des solutions de classe mondiale. Une association axée sur la randonnée patrimoniale ne correspond pas à ces catégories."
+      "en": "The opportunity explicitly targets 'innovators, entrepreneurs, students,' but does not clarify whether non-profit associations like Les Vieilles Pierres qualify as 'innovateurs.' The document does not exclude associations, but it does not confirm their eligibility either.",
+      "fr": "L'opportunité cible explicitement les 'innovateurs, entrepreneurs, étudiants,' mais ne précise pas si les associations à but non lucratif comme Les Vieilles Pierres peuvent être considérées comme des 'innovateurs.' Le document n'exclut pas les associations, mais ne confirme pas non plus leur éligibilité."
     },
     "nextAction": {
-      "en": "Review other funding opportunities that explicitly support heritage or cultural associations.",
-      "fr": "Consulter d'autres opportunités de financement qui soutiennent explicitement les associations patrimoniales ou culturelles."
+      "en": "Contact the issuer (beta.gouv.fr) to confirm whether a heritage hiking association qualifies as an 'innovateur' under this opportunity.",
+      "fr": "Contacter l'émetteur (beta.gouv.fr) pour confirmer si une association de randonnée patrimoniale peut être considérée comme un 'innovateur' dans le cadre de cette opportunité."
     }
   }
 }

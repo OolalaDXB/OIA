@@ -1,16 +1,16 @@
 {
   "EligibilityVerdict": {
-    "verdict": "LIKELY",
-    "citations": [
-      "Le Corps européen de solidarité permet aux jeunes de s’engager et aux organismes de mettre en place des initiatives en Europe sur des activités variées, dans les domaines humanitaires, de la santé, de l’environnement, de l’intergénérationnel…"
+    "verdict": "NEEDS_INFO",
+    "citation": [
+      "eligibility: Jeunes, organismes"
     ],
     "reason": {
-      "en": "The opportunity text does not explicitly state whether non-profit associations like 'Les Vieilles Pierres' are eligible. It mentions 'organismes' (organizations) but does not specify legal forms or types of entities allowed to apply.",
-      "fr": "Le texte de l'opportunité ne précise pas explicitement si les associations à but non lucratif comme 'Les Vieilles Pierres' sont éligibles. Il mentionne les 'organismes' mais ne détaille pas les formes juridiques ou types d'entités autorisés à candidater."
+      "en": "The extracted text states that 'Jeunes, organismes' are eligible, but it does not specify what types of organisations are included or excluded. It is unclear whether an association like 'Les Vieilles Pierres' qualifies as an eligible 'organisme' under this opportunity.",
+      "fr": "Le texte extrait indique que « Jeunes, organismes » sont éligibles, mais il ne précise pas quels types d’organismes sont inclus ou exclus. Il n’est pas clair si une association comme « Les Vieilles Pierres » est éligible en tant qu’« organisme » dans le cadre de cette opportunité."
     },
     "nextAction": {
-      "en": "Check the official European Solidarity Corps guidelines or contact the issuer (beta.gouv.fr) to confirm if heritage and cultural associations are eligible.",
-      "fr": "Consulter les directives officielles du Corps européen de solidarité ou contacter l'émetteur (beta.gouv.fr) pour confirmer si les associations patrimoniales et culturelles sont éligibles."
+      "en": "Contact the issuer (beta.gouv.fr / French state) to confirm whether heritage associations are eligible to apply for this funding opportunity.",
+      "fr": "Contacter l’émetteur (beta.gouv.fr / État français) pour confirmer si les associations patrimoniales sont éligibles à cette opportunité de financement."
     }
   }
 }

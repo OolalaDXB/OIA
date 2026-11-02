@@ -1,16 +1,14 @@
 {
   "EligibilityVerdict": {
-    "verdict": "LIKELY",
-    "citations": [
-      "Leader (pour Liaison entre actions de développement de l'économie rurale) est une initiative de l'Union européenne pour soutenir des projets de développement rural lancés au niveau local afin de revitaliser les zones rurales et de créer des emplois."
-    ],
+    "verdict": "NEEDS_INFO",
+    "citation": [],
     "reason": {
-      "en": "The opportunity targets projects for rural development and job creation, which could include heritage and tourism initiatives. However, the extracted text does not explicitly state whether associations like 'Les Vieilles Pierres' are eligible to apply. The focus is on 'local projects' but does not specify the types of legal entities allowed.",
-      "fr": "L'opportunité cible des projets de développement rural et de création d'emplois, ce qui pourrait inclure des initiatives patrimoniales et touristiques. Cependant, le texte extrait ne précise pas explicitement si des associations comme 'Les Vieilles Pierres' sont éligibles. L'accent est mis sur les 'projets locaux' mais ne spécifie pas les types d'entités légales autorisées."
+      "en": "The extracted text does not specify which types of organisations may apply for the FEADER Leader funding. It only describes the scope of the initiative.",
+      "fr": "Le texte extrait ne précise pas quels types d'organisations peuvent postuler au financement FEADER Leader. Il décrit uniquement le champ d'application de l'initiative."
     },
     "nextAction": {
-      "en": "Check the official FEADER-Leader call for proposals or guidelines to confirm whether associations are explicitly listed as eligible applicants.",
-      "fr": "Consulter l'appel à projets ou les directives officielles du FEADER-Leader pour confirmer si les associations sont explicitement mentionnées comme candidats éligibles."
+      "en": "Check the official FEADER Leader call for proposals or guidelines to confirm the eligibility criteria for applicants.",
+      "fr": "Consulter l'appel à projets ou les directives officielles du FEADER Leader pour confirmer les critères d'éligibilité des candidats."
     }
   }
 }

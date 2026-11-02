@@ -1,74 +1,34 @@
 # TED discovery run (multi-project)
 
 ## Per project
-- **bawaba** — OK · 100 biddable of 100 retrieved
-  - query: `classification-cpv IN (72212190 72224100 72226000 72254000 72600000 48218000 79417000) AND buyer-country IN (FRA LUX BEL DEU) AND publication-date>=20260728 AND notice-type IN (cn-standard cn-social)`
-- **beau** — OK · 9 biddable of 9 retrieved
-  - query: `classification-cpv IN (48812000 66170000 72212443 72212190) AND buyer-country IN (FRA LUX) AND publication-date>=20260728 AND notice-type IN (cn-standard cn-social)`
-- **lesvieillespierres** — OK · 67 biddable of 67 retrieved
-  - query: `classification-cpv IN (92522000 92521000 45212350 79952000) AND buyer-country IN (FRA) AND publication-date>=20260728 AND notice-type IN (cn-standard cn-social)`
-- **ludography** — OK · 84 biddable of 84 retrieved
-  - query: `classification-cpv IN (48520000 92312000 79822500 92500000) AND buyer-country IN (FRA) AND publication-date>=20260728 AND notice-type IN (cn-standard cn-social)`
-- **maisons-co** — OK · 35 biddable of 35 retrieved
-  - query: `classification-cpv IN (72212517 48812000 55100000 70330000) AND buyer-country IN (FRA) AND publication-date>=20260728 AND notice-type IN (cn-standard cn-social)`
-- **myoolala** — OK · 12 biddable of 12 retrieved
-  - query: `classification-cpv IN (72212517 48219700 72413000 72212224) AND buyer-country IN (FRA) AND publication-date>=20260728 AND notice-type IN (cn-standard cn-social)`
+- **bawaba** — OK · 94 biddable of 94 retrieved
+  - query: `classification-cpv IN (72212190 72224100 72226000 72254000 72600000 48218000 79417000) AND buyer-country IN (FRA LUX BEL DEU) AND publication-date>=20260804 AND notice-type IN (cn-standard cn-social)`
+- **beau** — OK · 10 biddable of 10 retrieved
+  - query: `classification-cpv IN (48812000 66170000 72212443 72212190) AND buyer-country IN (FRA LUX) AND publication-date>=20260804 AND notice-type IN (cn-standard cn-social)`
+- **lesvieillespierres** — OK · 61 biddable of 61 retrieved
+  - query: `classification-cpv IN (92522000 92521000 45212350 79952000) AND buyer-country IN (FRA) AND publication-date>=20260804 AND notice-type IN (cn-standard cn-social)`
+- **ludography** — OK · 81 biddable of 81 retrieved
+  - query: `classification-cpv IN (48520000 92312000 79822500 92500000) AND buyer-country IN (FRA) AND publication-date>=20260804 AND notice-type IN (cn-standard cn-social)`
+- **maisons-co** — OK · 32 biddable of 32 retrieved
+  - query: `classification-cpv IN (72212517 48812000 55100000 70330000) AND buyer-country IN (FRA) AND publication-date>=20260804 AND notice-type IN (cn-standard cn-social)`
+- **myoolala** — OK · 10 biddable of 10 retrieved
+  - query: `classification-cpv IN (72212517 48219700 72413000 72212224) AND buyer-country IN (FRA) AND publication-date>=20260804 AND notice-type IN (cn-standard cn-social)`
 - **padel-design** — OK · 100 biddable of 100 retrieved
-  - query: `classification-cpv IN (71241000 79314000 79419000 92600000) AND buyer-country IN (ESP FRA ITA PRT BEL NLD DEU SWE) AND publication-date>=20260728 AND notice-type IN (cn-standard cn-social)`
+  - query: `classification-cpv IN (71241000 79314000 79419000 92600000) AND buyer-country IN (ESP FRA ITA PRT BEL NLD DEU SWE) AND publication-date>=20260804 AND notice-type IN (cn-standard cn-social)`
 - **rls-guard** — OK · 66 biddable of 66 retrieved
-  - query: `classification-cpv IN (72212730 79417000 72267000 48218000) AND buyer-country IN (FRA LUX BEL) AND publication-date>=20260728 AND notice-type IN (cn-standard cn-social)`
-- **sillon** — OK · 40 biddable of 40 retrieved
-  - query: `classification-cpv IN (48451000 72212450 72212443 48812000 92500000) AND buyer-country IN (FRA) AND publication-date>=20260728 AND notice-type IN (cn-standard cn-social)`
+  - query: `classification-cpv IN (72212730 79417000 72267000 48218000) AND buyer-country IN (FRA LUX BEL) AND publication-date>=20260804 AND notice-type IN (cn-standard cn-social)`
+- **sillon** — OK · 37 biddable of 37 retrieved
+  - query: `classification-cpv IN (48451000 72212450 72212443 48812000 92500000) AND buyer-country IN (FRA) AND publication-date>=20260804 AND notice-type IN (cn-standard cn-social)`
 - **thestudio-mt** — OK · 100 biddable of 100 retrieved
-  - query: `classification-cpv IN (72212517 72230000 72267000 72413000 79421000 72224000) AND buyer-country IN (FRA LUX BEL) AND publication-date>=20260728 AND notice-type IN (cn-standard cn-social)`
+  - query: `classification-cpv IN (72212517 72230000 72267000 72413000 79421000 72224000) AND buyer-country IN (FRA LUX BEL) AND publication-date>=20260804 AND notice-type IN (cn-standard cn-social)`
 
-- unique notices across projects: 458
-- matchable text per record (the S2 measure): median 257 characters over 25 record(s)
+- unique notices across projects: 444
+- matchable text per record (the S2 measure): median 279 characters over 25 record(s)
 - candidates processed (cap 25): 25
 - qualified at MANUAL_REVIEW_REQUIRED: 25
 - notice-page fetch failures: 0
 
 ## Candidates (each with official source URL)
-- **522668-2026** — France – Computer back-up services – PRESTATIONS D'ASSISTANCE ET D'EXPERTISE INFORMATIQUE
-  - source: https://ted.europa.eu/en/notice/522668-2026/html
-  - discovered for: bawaba
-  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **524786-2026** — France – Supply services of personnel including temporary staff – Prestations de mise à disposition de personnel intérimaire pour le compte du Centre Départemental Enfance Familles (CDEF)
-  - source: https://ted.europa.eu/en/notice/524786-2026/html
-  - discovered for: bawaba
-  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **524958-2026** — Germany – License management software package – Verlängerung VMware Lizenzen 2026-2029
-  - source: https://ted.europa.eu/en/notice/524958-2026/html
-  - discovered for: bawaba
-  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **525961-2026** — Germany – Computer-related management services – Sachbezugskarte
-  - source: https://ted.europa.eu/en/notice/525961-2026/html
-  - discovered for: bawaba
-  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **529129-2026** — Germany – Safety consultancy services – "Koordination von Projekten im Bereich Informationssicherheit"
-  - source: https://ted.europa.eu/en/notice/529129-2026/html
-  - discovered for: bawaba
-  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **529497-2026** — France – System maintenance services – Maintenance et supervision des systèmes de vidéosurveillance de LOGIREP
-  - source: https://ted.europa.eu/en/notice/529497-2026/html
-  - discovered for: bawaba, rls-guard
-  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **534338-2026** — Germany – Educational software package – VR-Trainingsumgebung inkl. VR-Endgeräte, sowie Eyetracking
-  - source: https://ted.europa.eu/en/notice/534338-2026/html
-  - discovered for: bawaba
-  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **534356-2026** — France – Software development services – Réalisation de prestations de conception, de développement, de maintenance, d'évolution et d'assistance technique relatives à la solution KOATY éditées par le GIP OKANTIS
-  - source: https://ted.europa.eu/en/notice/534356-2026/html
-  - discovered for: bawaba
-  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **534755-2026** — Germany – License management software package – Verlängerung VMware Lizenzen 2026-2029
-  - source: https://ted.europa.eu/en/notice/534755-2026/html
-  - discovered for: bawaba
-  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
-- **535140-2026** — France – Technical computer support services – PRESTATIONS DE SERVICES DE SUPPORT, D’INGENIERIE ET DE GESTION DE PARC POUR LES ENVIRONNEMENTS POSTE DE TRAVAIL
-  - source: https://ted.europa.eu/en/notice/535140-2026/html
-  - discovered for: bawaba
-  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
 - **537689-2026** — France – Technical computer support services – Prestation de maitrise d'uvre sur XRPU et ODOO.
   - source: https://ted.europa.eu/en/notice/537689-2026/html
   - discovered for: bawaba
@@ -127,6 +87,46 @@
   - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
 - **612012-2026** — France – Computer support services – Centre de support informatique
   - source: https://ted.europa.eu/en/notice/612012-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **614548-2026** — France – Computer support and consultancy services – Mise à jour, renouvellement et acquisition de produits AUTODESK et prestations associées
+  - source: https://ted.europa.eu/en/notice/614548-2026/html
+  - discovered for: bawaba, rls-guard, thestudio-mt
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **614801-2026** — Germany – Software-related services – Beschaffung einer Beratungsdienstleistung zur Fachberatung im Rahmen eines Identity and Access Management (IAM) Projektes für die Stadtwerke Bielefeld (SWB)
+  - source: https://ted.europa.eu/en/notice/614801-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **615828-2026** — France – Software development services – Réalisation de prestations de conception, de développement, de maintenance, d'évolution et d'assistance technique relatives à la solution KOATY éditées par le GIP OKANTIS
+  - source: https://ted.europa.eu/en/notice/615828-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **616200-2026** — France – Technical computer support services – PRESTATIONS DE SERVICES DE SUPPORT, D’INGENIERIE ET DE GESTION DE PARC POUR LES ENVIRONNEMENTS POSTE DE TRAVAIL
+  - source: https://ted.europa.eu/en/notice/616200-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **616535-2026** — France – Educational software development services – Fourniture logicielle, hébergement, exploitation et maintenance applicative d'un service espace numérique de travail pour la communauté éducative des établissements scolaires du 2d degré de la région Occitanie, et prestations associées
+  - source: https://ted.europa.eu/en/notice/616535-2026/html
+  - discovered for: bawaba, beau
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **620293-2026** — Germany – Educational software package – VR-Trainingsumgebung inkl. VR-Endgeräte, sowie Eyetracking
+  - source: https://ted.europa.eu/en/notice/620293-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **624820-2026** — France – Computer support services – Prestations d'infogérance du système d'information du Paris Saclay Cancer Cluster
+  - source: https://ted.europa.eu/en/notice/624820-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **627143-2026** — France – Computer support services – PRESTATIONS D'ASSISTANCE TECHNIQUE ET D'ACCOMPAGNEMENT AU DEVELOPPEMENT
+  - source: https://ted.europa.eu/en/notice/627143-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **629342-2026** — Germany – Software testing – AIS Abnahmeprozess
+  - source: https://ted.europa.eu/en/notice/629342-2026/html
+  - discovered for: bawaba
+  - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
+- **632552-2026** — Germany – Software supply services – Verlängerung VMware Cloud Foundation für 3 Jahre und VxRail Prosupport Plus für 1 Jahr
+  - source: https://ted.europa.eu/en/notice/632552-2026/html
   - discovered for: bawaba
   - verification: MANUAL_REVIEW_REQUIRED · live fetch: OK
 
