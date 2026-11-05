@@ -1,0 +1,75 @@
+# CrawlSEO — OIA Visibility P1. Upstream image used as-is.
+# Pinned to v0.3.6 (git 25e3c31, 2026-11-02) by tag AND multi-arch index digest
+# (linux/arm64 + linux/amd64, checked 2026-11-05). Mirrors upstream
+# docker-compose.yml (app + worker + db) with:
+#   - host port 3100 (not 3000), bound to 127.0.0.1;
+#   - Postgres not published on the host (upstream publishes 127.0.0.1:5432,
+#     which collides with any other local Postgres);
+#   - no default password: compose refuses to start if it is unset.
+#
+# Run from this directory:  docker compose --env-file .env -f compose.yaml up -d
+name: oia-crawlseo
+
+x-crawlseo-db-url: &db_url "postgresql://crawlseo:${CRAWLSEO_POSTGRES_PASSWORD:?set CRAWLSEO_POSTGRES_PASSWORD in .env}@db:5432/crawlseo"
+x-crawlseo-image: &image ghcr.io/crawlseo/crawlseo:0.3.6@sha256:51c6af82e6196e51e6306d5c5012cbeb6b6ac6277aa3c1b7cca258c2b9fbf384
+
+services:
+  app:
+    image: *image
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${CRAWLSEO_PORT:-3100}:3000"
+    env_file:
+      - path: .env
+        required: true
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3000/api/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: *db_url
+      WORKER_MODE: "off"
+
+  worker:
+    image: *image
+    restart: unless-stopped
+    command: ["node", "worker.cjs"]
+    env_file:
+      - path: .env
+        required: true
+    depends_on:
+      app:
+        condition: service_healthy
+    stop_grace_period: 40s
+    healthcheck:
+      test: ["CMD", "node", "-e", "process.exit(Date.now()-require('fs').statSync('/tmp/worker-alive').mtimeMs<60000?0:1)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: *db_url
+      WORKER_MODE: worker
+
+  db:
+    image: postgres:16-alpine@sha256:e0e53cfa0884f3cc216a621033e4f38dceb49e52218ac77facc8e48f02973093
+    restart: unless-stopped
+    volumes:
+      - crawlseo_pg:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: crawlseo
+      POSTGRES_USER: crawlseo
+      POSTGRES_PASSWORD: ${CRAWLSEO_POSTGRES_PASSWORD:?set CRAWLSEO_POSTGRES_PASSWORD in .env}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U crawlseo -d crawlseo"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  crawlseo_pg:

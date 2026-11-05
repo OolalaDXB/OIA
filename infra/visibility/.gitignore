@@ -1,0 +1,15 @@
+# Secrets — never commit. Only *.env.example files (no values) are tracked.
+.env
+*.env
+!*.env.example
+.env.*
+!.env.example
+
+# Runtime output: dumps, J0 exports and Crawlie reports live OUTSIDE the repo
+# (see BACKUP_DIR / OIA_VIS_DATA in scripts). Belt and braces in case one lands here.
+*.sql
+*.sql.gz
+*.dump
+backups/
+exports/
+crawlie-out/

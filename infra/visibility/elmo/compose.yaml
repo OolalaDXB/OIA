@@ -1,0 +1,75 @@
+# Elmo — OIA Visibility P1. Upstream images used as-is (no fork, no rebuild).
+#
+# Pinned to Elmo v0.7.7 (git 5e76f422, 2026-10-28) by tag AND multi-arch index
+# digest; linux/arm64 and linux/amd64 are both in the index (checked 2026-11-05).
+# Equivalent to what `elmo init` (CLI 0.7.7) renders, with three deliberate
+# differences, listed in RAPPORT-ETAPE-0.md:
+#   - Postgres is NOT published on the host (the CLI publishes 0.0.0.0:5432);
+#   - the Postgres password comes from .env (the CLI hard-codes "postgres");
+#   - the web port is bound to 127.0.0.1 only.
+#
+# Run from this directory:  docker compose --env-file .env -f compose.yaml up -d
+name: oia-elmo
+
+x-elmo-db-url: &db_url "postgres://elmo:${ELMO_POSTGRES_PASSWORD:?set ELMO_POSTGRES_PASSWORD in .env}@postgres:5432/elmo"
+
+services:
+  postgres:
+    image: postgres:18-alpine@sha256:eaef288f54a90a909e49f0121d5d047a5e974e922699de4249625cf7cde34f36
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: elmo
+      POSTGRES_PASSWORD: ${ELMO_POSTGRES_PASSWORD:?set ELMO_POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: elmo
+    volumes:
+      # Postgres 18 keeps PGDATA in a version subdirectory under this parent
+      # (see Elmo docs "Upgrading Postgres"). Mounting .../data here would
+      # silently write to an anonymous volume.
+      - elmo_pg:/var/lib/postgresql
+    # No `ports:` on purpose: nothing on the host needs Postgres. Backups go
+    # through `docker compose exec` (scripts/backup.sh).
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U elmo -d elmo"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  db-migrate:
+    image: elmohq/elmo-db-migrate:0.7.7@sha256:eb8bef5fa0022d78012f4bb7b4013ed042b49751b5161f6b9d6d23cd183a8db1
+    environment:
+      DATABASE_URL: *db_url
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  web:
+    image: elmohq/elmo-web:0.7.7@sha256:684fc310ffffc2a577076664f4d868fdb25a93e6ebcb571b1c97b97621a7fe6b
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: true
+    environment:
+      DATABASE_URL: *db_url
+    ports:
+      - "127.0.0.1:${ELMO_PORT:-1515}:3000"
+    depends_on:
+      db-migrate:
+        condition: service_completed_successfully
+
+  worker:
+    image: elmohq/elmo-worker:0.7.7@sha256:c185639c95055669bba2a185aeb411defa8e793acc5b9a2e6a2f1af8084738c9
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: true
+    environment:
+      DATABASE_URL: *db_url
+    # Upstream value: lets pg-boss finish an in-flight (already paid) provider call.
+    stop_grace_period: 35s
+    depends_on:
+      db-migrate:
+        condition: service_completed_successfully
+
+volumes:
+  elmo_pg:
