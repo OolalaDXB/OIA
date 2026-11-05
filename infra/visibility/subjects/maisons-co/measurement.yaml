@@ -1,0 +1,9 @@
+schemaVersion: 1
+windows:
+  - id: j0
+    kind: baseline
+    days: 5
+    panelVersion: 1
+    status: planned
+    note: "Mesure de départ. Dates fixées au démarrage du worker, après validation du panel."
+freezes: []

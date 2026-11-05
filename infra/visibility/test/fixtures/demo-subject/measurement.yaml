@@ -1,0 +1,10 @@
+schemaVersion: 1
+windows:
+  - { id: j0, kind: baseline, days: 5, panelVersion: 1, status: planned }
+freezes:
+  - id: freeze-j0
+    scope: [site]
+    rule: "Nothing published that changes what search engines and AI assistants see."
+    untilEndOfWindow: j0
+    decidedBy: Owner
+    decidedAt: "2026-01-01"

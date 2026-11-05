@@ -31,3 +31,21 @@ facts:
       sourceId: repo-pages, status: extracted, note: "corporate-wellness-dubai.html" }
   - { id: f-price-entry, statement: "Prix d'entrée à partir de 80 AED / 20 USD (service concerné non précisé).", language: fr, category: price,
       sourceId: repo-seo-aeo-plan, status: extracted, note: "Réponse du 2026-09-30 citée en annexe A ; service à préciser" }
+  - { id: f-plan-markets, statement: "Quatre marchés visés : coaching de padel à Dubaï, personal training à Dubaï, corporate wellness à Dubaï, coaching en ligne avec pour niche le Zimbabwe, l'Afrique australe et la diaspora.", language: fr, category: audience,
+      sourceId: repo-seo-aeo-plan, status: extracted, note: "section 2, « Cibles »" }
+  - { id: f-plan-zone, statement: "Zone de service en présentiel : Dubaï, sans adresse publique (prestataire qui se déplace).", language: fr, category: location,
+      sourceId: repo-seo-aeo-plan, status: extracted, note: "action 1.3 (fiche Google prévue en « service-area business », adresse masquée, zone Dubaï) ; lieux exacts non confirmés (annexe A, questions 1 et 4)" }
+  - { id: f-plan-language, statement: "Le coaching est proposé en anglais ; aucune autre langue n'est proposée.", language: fr, category: offer,
+      sourceId: repo-seo-aeo-plan, status: extracted, note: "action 3.6 : pas d'arabe, de russe ni de français tant que le coach ne coache pas dans ces langues" }
+  - { id: f-plan-padel-format, statement: "Le coaching de padel se fait en individuel ou en petit groupe ; la taille du groupe, les clubs et le prêt de raquettes ne sont pas confirmés.", language: fr, category: offer,
+      sourceId: repo-seo-aeo-plan, status: extracted, note: "annexe A, questions 1 à 3, en attente de réponse au 2026-09-30" }
+  - { id: f-plan-tours, statement: "Des sessions live en tournée au Zimbabwe et en Afrique australe sont envisagées, pas encore proposées.", language: fr, category: offer,
+      sourceId: repo-seo-aeo-plan, status: extracted, note: "action 3.2 (P3) : projet, pas une offre actuelle" }
+  - { id: f-plan-no-gbp, statement: "Pas de fiche Google Business Profile au 2026-09-30.", language: fr, category: other,
+      sourceId: repo-seo-aeo-plan, status: extracted, note: "section 1, point 2 ; état à revérifier au début de J0" }
+  - { id: f-plan-no-reviews, statement: "Aucun avis client public au 2026-09-30.", language: fr, category: other,
+      sourceId: repo-seo-aeo-plan, status: extracted, note: "section 1, point 3 ; sert à repérer des avis inventés dans les réponses" }
+  - { id: f-plan-profiles, statement: "Profils publics reliés au site au 2026-09-30 : Instagram et TikTok uniquement (sameAs).", language: fr, category: identity,
+      sourceId: repo-seo-aeo-plan, status: extracted, note: "section 1, point 3" }
+  - { id: f-site-service-pages-noindex, statement: "Les quatre pages de service (padel, personal training, coaching en ligne, corporate wellness) sont des brouillons non indexables (noindex) ; seule la page d'accueil est une page commerciale indexable.", language: fr, category: other,
+      sourceId: repo-pages, status: extracted, note: "plan section 1, point 1, confirmé dans le code au commit 73e1967 (meta robots noindex)" }

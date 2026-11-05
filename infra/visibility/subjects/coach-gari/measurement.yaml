@@ -1,0 +1,26 @@
+schemaVersion: 1
+windows:
+  - id: j0
+    kind: baseline
+    days: 5
+    panelVersion: 2
+    status: planned
+    note: "Mesure de départ. Dates fixées au démarrage du worker, après validation du panel."
+freezes:
+  - id: freeze-j0
+    scope: [site, repository]
+    rule: "Le site ne publie rien qui change ce que voient Google et les assistants IA avant la fin de la fenêtre J0."
+    untilEndOfWindow: j0
+    covers:
+      - "Pages publiques : texte, titres, meta, données structurées (JSON-LD), images et attributs alt"
+      - "Indexabilité : noindex / index, robots.txt, sitemap.xml, canonicals, redirections, en-têtes HTTP"
+      - "Nouvelles pages ou pages retirées, y compris la publication des pages de service en brouillon (plan, action 1.2)"
+      - "Fichiers lus par les IA : llms.txt (plan, action 2.8), prix ajoutés au HTML (plan, action 2.1)"
+      - "Annonces aux moteurs : soumission IndexNow, sitemap ou URL dans Search Console / Bing Webmaster Tools"
+      - "Réglages du pare-feu ou de la protection anti-bots de l'hébergeur"
+    allowed:
+      - "Travail sur une branche non déployée en production"
+      - "Back-office et code qui ne modifient aucune page publique ni aucun en-tête public"
+      - "Correctif de sécurité urgent : autorisé, à consigner dans le journal de la fenêtre comme perturbation"
+    decidedBy: "Mickaël THOMAS"
+    decidedAt: "2026-11-05"

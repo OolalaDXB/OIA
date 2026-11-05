@@ -27,9 +27,14 @@ Tous suivent le même schéma (`src/schema.ts`).
 | `subject.yaml` | URL, langues, marchés, alias, concurrents, dépôt (facultatif), documents sources (facultatifs), questions ouvertes |
 | `panel.yaml` | Panel versionné. Changer une formulation crée `version + 1` et retire l'ancienne version, qui n'est jamais supprimée. `panelVersion` augmente à chaque changement de l'ensemble actif. |
 | `facts.yaml` | Faits de référence. Un fait reste `extracted` tant que le propriétaire ne l'a pas validé (`validated`, avec auteur et date). |
+| `measurement.yaml` | Plan de mesure : fenêtres (J0, puis suivi), jours manquants, et **gels**. Un gel interdit, sur son périmètre, toute publication qui change ce que voient les moteurs et les IA, jusqu'à la fin de la fenêtre qu'il nomme. |
 | `REVIEW.md` | Fiche de revue générée, à ne pas éditer à la main (un test vérifie qu'elle est à jour). |
 
-Pour ajouter un sujet : créer `subjects/<id>/` avec les trois fichiers YAML,
+Les questions du panel sont `active` (envoyées à Elmo), `candidate` (gardées
+pour un panel élargi) ou `retired`. Une question reprise d'un document cite sa
+source (`sourceId`, `sourceRef`).
+
+Pour ajouter un sujet : créer `subjects/<id>/` avec les quatre fichiers YAML,
 puis lancer les commandes ci-dessous. Statuts : alias, concurrents et marchés
 sont `proposed` ou `confirmed` ; le panel est `draft`, puis `validated` (avec
 `validatedBy` et `validatedAt`) avant toute mesure.
@@ -39,6 +44,7 @@ pnpm install                                         # à la racine du repo, une
 pnpm --filter @oia/visibility-infra validate         # schéma + règles (versions, nombre de questions marquées…)
 pnpm --filter @oia/visibility-infra subjects review <id> --write   # régénère REVIEW.md
 pnpm --filter @oia/visibility-infra subjects elmo-brief <id>       # fiche JSON pour configurer la marque dans Elmo
+pnpm --filter @oia/visibility-infra subjects freezes [<id>]        # gels en vigueur (code 1 s'il y en a)
 pnpm --filter @oia/visibility-infra test             # dont le test « aucun sujet dans le code »
 ```
 
@@ -46,6 +52,11 @@ Elmo se configure à la main à partir de `elmo-brief` : marque, domaines, alias
 concurrents, et prompts avec leurs tags de traçabilité
 (`oia:<id>@v<version>`, `panel:v<n>`, `lang:<xx>`, `family:<…>`). Aucun code
 n'écrit dans Elmo en P1.
+
+## Agents
+
+Documentation des agents (P2) et checklist générique de visibilité d'un site,
+avec la brique qui mesure chaque contrôle : [agents/](agents/README.md).
 
 ## Ordre d'installation sur le Mac
 

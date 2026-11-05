@@ -7,6 +7,7 @@ import { z } from "zod";
  *                 optional repository, optional source documents
  *   panel.yaml    the versioned question panel
  *   facts.yaml    reference facts (extracted until the owner validates them)
+ *   measurement.yaml  measurement windows and the freezes they impose
  * Nothing in the tool's code refers to a subject by name (see
  * test/no-hardcoded-subjects.test.ts).
  */
@@ -94,6 +95,9 @@ export const SubjectSchema = z
  * entry with the same `id` and `version + 1`, and retiring the old one
  * (`status: retired`, `supersededBy`). Old versions are never deleted, so a
  * before/after comparison can always tell which wording a run used.
+ * `candidate` = kept for a later, larger panel; never sent to Elmo.
+ * `sourceId` / `sourceRef` = where the wording comes from (a declared source
+ * document and the place in it), for prompts with origin "document".
  */
 export const PromptSchema = z
   .object({
@@ -106,7 +110,10 @@ export const PromptSchema = z
     pairId: z.string().optional(),
     text: z.string().min(10),
     origin: z.enum(["claude", "elmo-assistant", "owner", "document"]),
-    status: z.enum(["active", "retired"]),
+    sourceId: z.string().optional(),
+    sourceRef: z.string().optional(),
+    note: z.string().optional(),
+    status: z.enum(["active", "candidate", "retired"]),
     supersededBy: z.number().int().optional(),
     createdAt: isoDate,
   })
@@ -151,8 +158,52 @@ export const FactsSchema = z
   .object({ schemaVersion: z.literal(SCHEMA_VERSION), facts: z.array(FactSchema) })
   .strict();
 
+/**
+ * Measurement plan. A window is N consecutive days, 1 run per day per target.
+ * A freeze forbids, for its scope, any publication that changes what search
+ * engines and AI assistants see, until the end of the window it names. Agents
+ * read active freezes before proposing any execution.
+ */
+export const WindowSchema = z
+  .object({
+    id: z.string().regex(/^[a-z0-9][a-z0-9-]*$/),
+    kind: z.enum(["baseline", "follow-up"]),
+    days: z.number().int().min(1).max(31),
+    panelVersion: z.number().int().min(1),
+    status: z.enum(["planned", "running", "done", "aborted"]),
+    start: isoDate.optional(),
+    end: isoDate.optional(),
+    missingDays: z.array(z.object({ date: isoDate, reason: z.string().min(3) }).strict()).default([]),
+    note: z.string().optional(),
+  })
+  .strict();
+
+export const FreezeSchema = z
+  .object({
+    id: z.string().regex(/^[a-z0-9][a-z0-9-]*$/),
+    /** What must not publish changes: the subject's own site, its repository, off-site profiles. */
+    scope: z.array(z.enum(["site", "repository", "off-site"])).min(1),
+    rule: z.string().min(10),
+    /** Freeze lasts until the end of this window (status done or aborted). */
+    untilEndOfWindow: z.string(),
+    covers: z.array(z.string()).default([]),
+    allowed: z.array(z.string()).default([]),
+    decidedBy: z.string().min(2),
+    decidedAt: isoDate,
+  })
+  .strict();
+
+export const MeasurementSchema = z
+  .object({
+    schemaVersion: z.literal(SCHEMA_VERSION),
+    windows: z.array(WindowSchema).min(1),
+    freezes: z.array(FreezeSchema).default([]),
+  })
+  .strict();
+
 export type Subject = z.infer<typeof SubjectSchema>;
 export type Panel = z.infer<typeof PanelSchema>;
 export type Prompt = z.infer<typeof PromptSchema>;
 export type Facts = z.infer<typeof FactsSchema>;
-export type SubjectBundle = { dir: string; subject: Subject; panel: Panel; facts: Facts };
+export type Measurement = z.infer<typeof MeasurementSchema>;
+export type SubjectBundle = { dir: string; subject: Subject; panel: Panel; facts: Facts; measurement: Measurement };

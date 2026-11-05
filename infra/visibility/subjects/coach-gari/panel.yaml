@@ -21,23 +21,49 @@ prompts:
       text: "Affordable online coach for muscle gain with weekly check-ins, available to clients in Zimbabwe or South Africa" }
   - { id: en-09, version: 1, family: branded, language: en, markets: [AE, ZW], origin: claude, status: retired, supersededBy: 2, createdAt: "2026-11-05",
       text: "What does Coach Gari (coachgari28.com) offer, and how does the online coaching work?" }
-  - { id: en-10, version: 1, family: branded, language: en, markets: [AE, ZW], origin: claude, status: active, createdAt: "2026-11-05",
+  - { id: en-10, version: 1, family: branded, language: en, markets: [AE, ZW], origin: claude, note: "seule question gardée de la proposition v1 : vérifie offres et prix", status: active, createdAt: "2026-11-05",
       text: "Is Coach Gari a good choice for online training and nutrition coaching? What formats and prices are available?" }
-  - { id: en-01, version: 2, family: unbranded, language: en, markets: [AE], origin: document, status: active, createdAt: "2026-11-05",
+  - { id: en-01, version: 2, family: unbranded, language: en, markets: [AE], origin: document, sourceId: repo-seo-aeo-plan, sourceRef: "annexe B, n° 2", status: active, createdAt: "2026-11-05",
       text: "Best padel coach in Dubai" }
-  - { id: en-02, version: 2, family: unbranded, language: en, markets: [AE], origin: document, status: active, createdAt: "2026-11-05",
+  - { id: en-02, version: 2, family: unbranded, language: en, markets: [AE], origin: document, sourceId: repo-seo-aeo-plan, sourceRef: "annexe B, n° 3", status: active, createdAt: "2026-11-05",
       text: "How much do padel lessons cost in Dubai?" }
-  - { id: en-03, version: 2, family: unbranded, language: en, markets: [AE], origin: document, status: active, createdAt: "2026-11-05",
+  - { id: en-03, version: 2, family: unbranded, language: en, markets: [AE], origin: document, sourceId: repo-seo-aeo-plan, sourceRef: "annexe B, n° 7", status: active, createdAt: "2026-11-05",
       text: "Personal trainer in Dubai who focuses on mobility" }
-  - { id: en-04, version: 2, family: unbranded, language: en, markets: [AE], origin: document, status: active, createdAt: "2026-11-05",
+  - { id: en-04, version: 2, family: unbranded, language: en, markets: [AE], origin: document, sourceId: repo-seo-aeo-plan, sourceRef: "annexe B, n° 10", status: active, createdAt: "2026-11-05",
       text: "Corporate wellness sessions for a team in Dubai" }
-  - { id: en-05, version: 2, family: unbranded, language: en, markets: [AE, ZW, ZA], origin: document, status: active, createdAt: "2026-11-05",
+  - { id: en-05, version: 2, family: unbranded, language: en, markets: [AE, ZW, ZA], origin: document, sourceId: repo-seo-aeo-plan, sourceRef: "annexe B, n° 12", status: active, createdAt: "2026-11-05",
       text: "Online fitness coach with live video sessions, not just a PDF plan" }
-  - { id: en-06, version: 2, family: unbranded, language: en, markets: [ZW, ZA, AE], origin: document, status: active, createdAt: "2026-11-05",
+  - { id: en-06, version: 2, family: unbranded, language: en, markets: [ZW, ZA, AE], origin: document, sourceId: repo-seo-aeo-plan, sourceRef: "annexe B, n° 13", status: active, createdAt: "2026-11-05",
       text: "Online personal trainer who does meal planning based on where you live" }
-  - { id: en-07, version: 2, family: unbranded, language: en, markets: [ZW], origin: document, status: active, createdAt: "2026-11-05",
+  - { id: en-07, version: 2, family: unbranded, language: en, markets: [ZW], origin: document, sourceId: repo-seo-aeo-plan, sourceRef: "annexe B, n° 14", status: active, createdAt: "2026-11-05",
       text: "Zimbabwean fitness coach" }
-  - { id: en-08, version: 2, family: unbranded, language: en, markets: [ZW], origin: document, status: active, createdAt: "2026-11-05",
+  - { id: en-08, version: 2, family: unbranded, language: en, markets: [ZW], origin: document, sourceId: repo-seo-aeo-plan, sourceRef: "annexe B, n° 15", note: "« Harare / Zimbabwe » écrit « Harare, Zimbabwe »", status: active, createdAt: "2026-11-05",
       text: "Fitness coach in Harare, Zimbabwe" }
-  - { id: en-09, version: 2, family: branded, language: en, markets: [AE, ZW], origin: document, status: active, createdAt: "2026-11-05",
+  - { id: en-09, version: 2, family: branded, language: en, markets: [AE, ZW], origin: document, sourceId: repo-seo-aeo-plan, sourceRef: "annexe B, n° 1", status: active, createdAt: "2026-11-05",
       text: "Who is Coach Gari?" }
+  - { id: en-11, version: 1, family: unbranded, language: en, markets: [AE], origin: document, sourceId: repo-seo-aeo-plan, sourceRef: "annexe B, n° 4", status: candidate, createdAt: "2026-11-05",
+      text: "Padel coach Dubai for beginners" }
+  - { id: en-12, version: 1, family: unbranded, language: en, markets: [AE], origin: document, sourceId: repo-seo-aeo-plan, sourceRef: "annexe B, n° 5", status: candidate, createdAt: "2026-11-05",
+      text: "PadelMBA certified coach in Dubai" }
+  - { id: en-13, version: 1, family: unbranded, language: en, markets: [AE], origin: document, sourceId: repo-seo-aeo-plan, sourceRef: "annexe B, n° 6", status: candidate, createdAt: "2026-11-05",
+      text: "Padel coaching for a pair in Dubai" }
+  - { id: en-14, version: 1, family: unbranded, language: en, markets: [AE], origin: document, sourceId: repo-seo-aeo-plan, sourceRef: "annexe B, n° 8", status: candidate, createdAt: "2026-11-05",
+      text: "How much does a personal trainer cost in Dubai?" }
+  - { id: en-15, version: 1, family: unbranded, language: en, markets: [AE], origin: document, sourceId: repo-seo-aeo-plan, sourceRef: "annexe B, n° 9", note: "quartier à confirmer : le plan écrit « ou le quartier confirmé »", status: candidate, createdAt: "2026-11-05",
+      text: "Personal trainer Dubai Marina" }
+  - { id: en-16, version: 1, family: unbranded, language: en, markets: [AE], origin: document, sourceId: repo-seo-aeo-plan, sourceRef: "annexe B, n° 11", status: candidate, createdAt: "2026-11-05",
+      text: "Team fitness activity for employees Dubai" }
+  - { id: en-17, version: 1, family: unbranded, language: en, markets: [ZW, ZA], origin: document, sourceId: repo-seo-aeo-plan, sourceRef: "annexe B, n° 16", status: candidate, createdAt: "2026-11-05",
+      text: "Outdoor group fitness sessions in Southern Africa" }
+  - { id: en-18, version: 1, family: unbranded, language: en, markets: [AE], origin: document, sourceId: repo-seo-aeo-plan, sourceRef: "annexe B, n° 17", note: "question informative (citation de contenu), pas de recherche de prestataire", status: candidate, createdAt: "2026-11-05",
+      text: "How to improve court positioning in padel" }
+  - { id: en-19, version: 1, family: unbranded, language: en, markets: [AE], origin: document, sourceId: repo-seo-aeo-plan, sourceRef: "annexe B, n° 18", note: "question informative (citation de contenu)", status: candidate, createdAt: "2026-11-05",
+      text: "Why do I lose the point after a good serve in padel?" }
+  - { id: en-20, version: 1, family: unbranded, language: en, markets: [AE, ZW, ZA], origin: document, sourceId: repo-seo-aeo-plan, sourceRef: "annexe B, n° 19", note: "question informative (citation de contenu)", status: candidate, createdAt: "2026-11-05",
+      text: "Online coaching vs a training plan PDF — which works better?" }
+  - { id: en-21, version: 1, family: branded, language: en, markets: [AE, ZW], origin: document, sourceId: repo-seo-aeo-plan, sourceRef: "annexe B, n° 20", note: "utile pour détecter des avis inventés : aucun avis public au 2026-09-30 (fait f-plan-no-reviews)", status: candidate, createdAt: "2026-11-05",
+      text: "Coach Gari reviews" }
+  - { id: en-22, version: 1, family: unbranded, language: en, markets: [AE], origin: claude, note: "reprise de la proposition v1 (en-07@v1)", status: candidate, createdAt: "2026-11-05",
+      text: "Who offers physical preparation and fitness coaching for padel players in Dubai?" }
+  - { id: en-23, version: 1, family: unbranded, language: en, markets: [ZW, ZA], origin: claude, note: "reprise de la proposition v1 (en-08@v1)", status: candidate, createdAt: "2026-11-05",
+      text: "Affordable online coach for muscle gain with weekly check-ins, available to clients in Zimbabwe or South Africa" }

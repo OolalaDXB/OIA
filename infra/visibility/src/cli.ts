@@ -1,6 +1,6 @@
 import { writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { defaultSubjectsDir, loadSubject, loadSubjects, listSubjectDirs } from "./load";
+import { activeFreezes, defaultSubjectsDir, loadSubject, loadSubjects, listSubjectDirs } from "./load";
 import { renderElmoBrief, renderReview } from "./render";
 
 /**
@@ -10,6 +10,7 @@ import { renderElmoBrief, renderReview } from "./render";
  *   tsx src/cli.ts urls [<id>]           primary + confirmed URLs (all subjects if no id), "id<TAB>url"
  *   tsx src/cli.ts review <id> [--write] review sheet (Markdown); --write saves REVIEW.md in the subject folder
  *   tsx src/cli.ts elmo-brief <id>       JSON sheet to configure the brand in Elmo
+ *   tsx src/cli.ts freezes [<id>]        freezes in force (exit 1 if any): read before proposing an execution
  * The subjects folder is OIA_VIS_SUBJECTS_DIR or infra/visibility/subjects.
  */
 const [cmd, arg, flag] = process.argv.slice(2);
@@ -47,10 +48,22 @@ switch (cmd) {
     else process.stdout.write(md);
     break;
   }
+  case "freezes": {
+    const bundles = arg ? [byId(arg)] : loadSubjects(root);
+    let n = 0;
+    for (const b of bundles)
+      for (const f of activeFreezes(b)) {
+        n++;
+        console.log(`${b.subject.id}\t${f.id}\t${f.scope.join(",")}\tjusqu'à la fin de ${f.untilEndOfWindow}\t${f.rule}`);
+      }
+    if (n === 0) console.log("aucun gel en vigueur");
+    process.exitCode = n > 0 ? 1 : 0;
+    break;
+  }
   case "elmo-brief":
     process.stdout.write(renderElmoBrief(byId(arg)));
     break;
   default:
-    console.error("usage: cli.ts validate | list | urls [<id>] | review <id> [--write] | elmo-brief <id>");
+    console.error("usage: cli.ts validate | list | urls [<id>] | review <id> [--write] | elmo-brief <id> | freezes [<id>]");
     process.exit(2);
 }

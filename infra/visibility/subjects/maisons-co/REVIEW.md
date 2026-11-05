@@ -31,7 +31,7 @@
 
 ## Panel
 
-### FR (10 questions, dont 2 marquées)
+### FR — actives (10 questions, dont 2 marquées)
 
 | ID | Famille | Marchés | Question | Origine |
 |---|---|---|---|---|
@@ -46,7 +46,7 @@
 | fr-09@v1 | marquée | GE | Que propose Maisons.co à Gudauri ? | claude |
 | fr-10@v1 | marquée | FR | Que propose Maisons.co en Bretagne, en location de maisons et en conciergerie ? | claude |
 
-### EN (10 questions, dont 2 marquées)
+### EN — actives (10 questions, dont 2 marquées)
 
 | ID | Famille | Marchés | Question | Origine |
 |---|---|---|---|---|
@@ -70,6 +70,12 @@
 | f-loc-gudauri | Maisons.co loue à Gudauri, en Géorgie. | ✅ validated | owner-2026-11-05 |
 | f-concierge | Maisons.co propose un service de conciergerie en Bretagne. | ✅ validated | owner-2026-11-05 |
 | f-houses | Noms, capacités et prix des maisons : à fournir. | ❓ extracted | owner-2026-11-05 |
+
+## Plan de mesure
+
+| Fenêtre | Type | Jours | Panel | Statut | Début | Fin | Jours manquants |
+|---|---|---|---|---|---|---|---|
+| j0 | baseline | 5 | v1 | planned | — | — | — |
 
 ## Questions ouvertes
 

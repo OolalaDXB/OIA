@@ -8,7 +8,7 @@ urls:
   additional:
     - url: https://coachgari.com
       status: proposed
-      note: "à confirmer ; le dépôt le prévoit comme redirection vers coachgari28.com (README)"
+      note: "à confirmer ; selon le plan SEO/AEO (action 1.4), coachgari.com et www redirigent en 308 vers coachgari28.com, vérifié sur Vercel le 2026-09-30"
 languages: [en]
 markets:
   - { country: AE, label: "Dubaï (base)", languages: [en], status: confirmed }
@@ -52,7 +52,7 @@ sources:
   - id: repo-seo-aeo-plan
     kind: file
     ref: "OolalaDXB/CoachGari@73e1967:docs/SEO_AEO_PLAN.md"
-    description: "Plan SEO et AEO : marchés cibles (padel, PT et corporate à Dubaï ; coaching en ligne, niche Zimbabwe), 20 questions d'audit IA (annexe B)"
+    description: "Plan SEO/AEO établi le 2026-09-30 : état du site, marchés cibles, plan par priorité, mesure, 20 questions fixes de suivi IA (annexe B), baseline Lighthouse (section 4bis). Lecture seule."
     addedAt: "2026-11-05"
   - id: repo-pages
     kind: file
@@ -70,7 +70,8 @@ sources:
     description: "Fiche registre (statut DRAFT) : coaching, partenariats d'influence, back-office"
     addedAt: "2026-11-05"
 openQuestions:
-  - "Panel v2 : 8 questions sur 10 reprises de l'annexe B du plan SEO/AEO du dépôt. Les 10 autres questions de l'annexe B restent candidates pour un panel à 20"
+  - "Panel v2 : 9 questions actives sur 10 viennent de l'annexe B du plan SEO/AEO, la 10e (offres et prix) de la proposition Claude. Les 11 autres questions de l'annexe B et 2 questions de la proposition v1 sont candidates pour un panel élargi (20 au plus)"
+  - "Le gel J0 (measurement.yaml) couvre le site. Les actions hors site du plan (création de la fiche Google Business Profile, demandes d'avis, mentions tierces, fiches Playtomic) changent aussi ce que voient Google et les IA : faut-il les geler aussi jusqu'à la fin de J0 ?"
   - "Équilibre Dubaï / Zimbabwe : le dépôt cible surtout Dubaï (padel, PT, corporate) et le Zimbabwe en niche ; la décision du 2026-11-05 dit « audience surtout en Afrique australe ». Panel v2 = 4 questions Dubaï, 2 mixtes, 2 Zimbabwe, 2 marquées : à confirmer"
   - "coachgari.com : domaine détenu et actif ? (alias proposé, à confirmer)"
   - "Afrique du Sud : marché visé ou seulement le Zimbabwe ?"

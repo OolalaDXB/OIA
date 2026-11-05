@@ -2,7 +2,7 @@ import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse } from "yaml";
-import { FactsSchema, PanelSchema, SubjectSchema, type SubjectBundle } from "./schema";
+import { FactsSchema, MeasurementSchema, PanelSchema, SubjectSchema, type SubjectBundle } from "./schema";
 
 /**
  * Subjects live outside the tool's code: by default `infra/visibility/subjects/`,
@@ -30,7 +30,7 @@ export function listSubjectDirs(root: string = defaultSubjectsDir()): string[] {
 /** Cross-file rules a schema alone cannot express. Returns human-readable problems. */
 export function checkBundle(b: SubjectBundle): string[] {
   const problems: string[] = [];
-  const { subject, panel, facts } = b;
+  const { subject, panel, facts, measurement } = b;
   const folder = b.dir.split(/[\\/]/).pop();
   if (folder !== subject.id) problems.push(`folder "${folder}" must equal id "${subject.id}"`);
 
@@ -43,14 +43,16 @@ export function checkBundle(b: SubjectBundle): string[] {
     const markets = new Set(subject.markets.map((m) => m.country));
     for (const m of p.markets) if (!markets.has(m)) problems.push(`prompt ${key}: market ${m} not in subject.markets`);
     if (p.status === "retired" && p.supersededBy === undefined) problems.push(`prompt ${key}: retired without supersededBy`);
+    if (p.origin === "document" && !p.sourceId) problems.push(`prompt ${key}: origin document without sourceId`);
+    if (p.sourceId && !subject.sources.some((s) => s.id === p.sourceId)) problems.push(`prompt ${key}: unknown sourceId "${p.sourceId}"`);
   }
   const ids = new Set(panel.prompts.map((p) => p.id));
   for (const id of ids) {
     const versions = panel.prompts.filter((p) => p.id === id);
-    const active = versions.filter((p) => p.status === "active");
-    if (active.length !== 1) problems.push(`prompt ${id}: ${active.length} active versions (exactly 1 expected)`);
+    const live = versions.filter((p) => p.status !== "retired");
+    if (live.length !== 1) problems.push(`prompt ${id}: ${live.length} non-retired versions (exactly 1 expected)`);
     const max = Math.max(...versions.map((p) => p.version));
-    if (active[0] && active[0].version !== max) problems.push(`prompt ${id}: active version is not the latest`);
+    if (live[0] && live[0].version !== max) problems.push(`prompt ${id}: current version is not the latest`);
     for (let v = 1; v <= max; v++)
       if (!versions.some((p) => p.version === v)) problems.push(`prompt ${id}: version ${v} missing (old versions are never deleted)`);
   }
@@ -65,6 +67,17 @@ export function checkBundle(b: SubjectBundle): string[] {
   }
   if (panel.status === "validated" && (!panel.validatedBy || !panel.validatedAt))
     problems.push("panel validated without validatedBy / validatedAt");
+
+  const windowIds = new Set(measurement.windows.map((w) => w.id));
+  if (windowIds.size !== measurement.windows.length) problems.push("measurement: duplicate window id");
+  for (const w of measurement.windows) {
+    if (w.panelVersion > panel.panelVersion) problems.push(`window ${w.id}: panelVersion ${w.panelVersion} does not exist yet`);
+    if (w.status !== "planned" && panel.status !== "validated" && w.panelVersion === panel.panelVersion)
+      problems.push(`window ${w.id}: ${w.status} while panel v${panel.panelVersion} is not validated`);
+    if ((w.status === "done" || w.status === "aborted") && (!w.start || !w.end)) problems.push(`window ${w.id}: ${w.status} without start/end`);
+  }
+  for (const f of measurement.freezes)
+    if (!windowIds.has(f.untilEndOfWindow)) problems.push(`freeze ${f.id}: unknown window "${f.untilEndOfWindow}"`);
 
   const sourceIds = new Set(subject.sources.map((s) => s.id));
   for (const f of facts.facts) {
@@ -86,6 +99,7 @@ export function loadSubject(dir: string): SubjectBundle {
     subject: parseOrThrow("subject.yaml", SubjectSchema),
     panel: parseOrThrow("panel.yaml", PanelSchema),
     facts: parseOrThrow("facts.yaml", FactsSchema),
+    measurement: parseOrThrow("measurement.yaml", MeasurementSchema),
   };
   const problems = checkBundle(bundle);
   if (problems.length) throw new Error(`${dir}:\n  - ${problems.join("\n  - ")}`);
@@ -94,6 +108,12 @@ export function loadSubject(dir: string): SubjectBundle {
 
 export function loadSubjects(root: string = defaultSubjectsDir()): SubjectBundle[] {
   return listSubjectDirs(root).map(loadSubject);
+}
+
+/** Freezes still in force: their window is not done or aborted. */
+export function activeFreezes(b: SubjectBundle) {
+  const ended = new Set(b.measurement.windows.filter((w) => w.status === "done" || w.status === "aborted").map((w) => w.id));
+  return b.measurement.freezes.filter((f) => !ended.has(f.untilEndOfWindow));
 }
 
 /** Strings that identify a subject; none of them may appear in the tool's code. */
