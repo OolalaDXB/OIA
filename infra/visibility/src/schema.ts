@@ -193,9 +193,26 @@ export const FreezeSchema = z
   })
   .strict();
 
+/**
+ * Engines measured for this subject, as Elmo model ids (the first segment of a
+ * SCRAPE_TARGETS entry: chatgpt, claude, gemini, perplexity, mistral…).
+ * `languages` restricts an engine to the panel languages it is measured on.
+ * Elmo 0.7.7 selects engines per brand, not per prompt: an engine restricted
+ * to some languages of a multilingual subject still answers the other prompts,
+ * and those answers are excluded from reporting, never deleted.
+ */
+export const EngineSchema = z
+  .object({
+    model: z.string().regex(/^[a-z0-9-]+$/),
+    languages: z.array(lang).optional(),
+    note: z.string().optional(),
+  })
+  .strict();
+
 export const MeasurementSchema = z
   .object({
     schemaVersion: z.literal(SCHEMA_VERSION),
+    engines: z.array(EngineSchema).min(1),
     windows: z.array(WindowSchema).min(1),
     freezes: z.array(FreezeSchema).default([]),
   })

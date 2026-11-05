@@ -110,6 +110,13 @@
 
 ## Plan de mesure
 
+| Moteur (Elmo) | Langues comptées | Note |
+|---|---|---|
+| chatgpt | en | OpenAI en direct (API Responses + web_search) |
+| claude | en | Anthropic en direct (outil web_search) |
+| gemini | en | via OpenRouter (recherche native Google) |
+| perplexity | en | via OpenRouter (Sonar, recherche native) |
+
 | Fenêtre | Type | Jours | Panel | Statut | Début | Fin | Jours manquants |
 |---|---|---|---|---|---|---|---|
 | j0 | baseline | 5 | v2 | planned | — | — | — |

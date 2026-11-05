@@ -6,7 +6,7 @@
 # Coût retenu = max(estimation Elmo du jour, coût réel connu du jour), où :
 #   - estimation Elmo : somme de usage_events.estimated_cost_usd (tous fournisseurs, Jev compris) ;
 #   - réel OpenRouter : GET /api/v1/key -> usage_daily (Gemini, Perplexity et Jev) ;
-#   - réel OpenAI / Anthropic : non lisible sans clé d'administration -> relevé à la main
+#   - réel OpenAI / Anthropic / Mistral : pas lu par ce script -> relevé à la main
 #     dans les consoles, à reporter dans le journal (colonne manual_usd, voir README).
 # Plafond : OIA_VIS_DAILY_CAP_USD dans elmo/.env (défaut 5).
 # N'affiche ni ne journalise aucune clé.

@@ -1,4 +1,6 @@
 schemaVersion: 1
+engines:
+  - { model: chatgpt }
 windows:
   - { id: j0, kind: baseline, days: 5, panelVersion: 1, status: planned }
 freezes:

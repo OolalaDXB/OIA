@@ -1,4 +1,4 @@
-import { activeFreezes } from "./load";
+import { activeFreezes, enginePlan } from "./load";
 import type { Prompt, SubjectBundle } from "./schema";
 
 const GENERATED = "<!-- Généré par `pnpm --filter @oia/visibility-infra subjects review <id>` : ne pas éditer à la main. -->";
@@ -45,7 +45,11 @@ export function renderReview(b: SubjectBundle): string {
   }
   L.push("## Faits de référence", "", "| ID | Fait | Statut | Source |", "|---|---|---|---|");
   for (const f of facts.facts) L.push(`| ${f.id} | ${f.statement} | ${mark(f.status)} ${f.status} | ${f.sourceId} |`);
-  L.push("", "## Plan de mesure", "", "| Fenêtre | Type | Jours | Panel | Statut | Début | Fin | Jours manquants |", "|---|---|---|---|---|---|---|---|");
+  L.push("", "## Plan de mesure", "", "| Moteur (Elmo) | Langues comptées | Note |", "|---|---|---|");
+  const plan = enginePlan(b);
+  for (const e of measurement.engines)
+    L.push(`| ${e.model}${plan.enabledModels.includes(e.model) ? "" : " (non activé : aucune langue du sujet)"} | ${(plan.reportLanguages[e.model] ?? []).join(", ") || "—"} | ${e.note ?? ""} |`);
+  L.push("", "| Fenêtre | Type | Jours | Panel | Statut | Début | Fin | Jours manquants |", "|---|---|---|---|---|---|---|---|");
   for (const w of measurement.windows)
     L.push(`| ${w.id} | ${w.kind} | ${w.days} | v${w.panelVersion} | ${w.status} | ${w.start ?? "—"} | ${w.end ?? "—"} | ${w.missingDays.map((d) => `${d.date} (${d.reason})`).join(" ; ") || "—"} |`);
   const live = new Set(activeFreezes(b).map((f) => f.id));
@@ -66,6 +70,7 @@ export function renderReview(b: SubjectBundle): string {
  */
 export function renderElmoBrief(b: SubjectBundle): string {
   const { subject: s, panel } = b;
+  const plan = enginePlan(b);
   const host = (u: string) => new URL(u).hostname.replace(/^www\./, "");
   const usable = <T extends { status: string }>(xs: T[]) => xs.filter((x) => x.status !== "rejected");
   const brief = {
@@ -75,7 +80,11 @@ export function renderElmoBrief(b: SubjectBundle): string {
       website: s.urls.primary,
       additionalDomains: usable(s.urls.additional).map((a) => host(a.url)),
       aliases: usable(s.aliases).filter((a) => a.kind !== "domain").map((a) => a.value),
+      /** Brand > LLM settings in Elmo. Every model must be in SCRAPE_TARGETS. */
+      enabledModels: plan.enabledModels,
     },
+    /** Answers outside these languages are kept but not reported, per engine. */
+    reportLanguages: plan.reportLanguages,
     competitors: usable(s.competitors).map((c) => ({ name: c.name, domains: c.domains, aliases: c.aliases })),
     prompts: panel.prompts
       .filter((p) => p.status === "active")

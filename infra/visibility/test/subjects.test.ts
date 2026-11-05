@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
-import { activeFreezes, checkBundle, loadSubject, loadSubjects } from "../src/load";
+import { activeFreezes, checkBundle, enginePlan, loadSubject, loadSubjects } from "../src/load";
 import { renderReview } from "../src/render";
 import type { SubjectBundle } from "../src/schema";
 
@@ -95,5 +95,23 @@ describe("measurement plan", () => {
     b.measurement.windows[0] = { ...b.measurement.windows[0]!, status: "done", start: "2026-01-02", end: "2026-01-06" };
     expect(checkBundle(b)).toEqual([]);
     expect(activeFreezes(b)).toEqual([]);
+  });
+});
+
+describe("engines", () => {
+  it("an engine restricted to one language of a bilingual subject is enabled on the brand, reported on that language only", () => {
+    const b = clone(fixture());
+    b.subject.languages = ["en", "fr"];
+    b.subject.markets[0] = { ...b.subject.markets[0]!, languages: ["en", "fr"] };
+    b.panel.prompts.push({ ...b.panel.prompts[1]!, id: "fr-01", language: "fr", text: "Que propose Demo Subject ?" });
+    b.measurement.engines.push({ model: "mistral", languages: ["fr"] });
+    expect(checkBundle(b)).toEqual([]);
+    expect(enginePlan(b)).toEqual({ enabledModels: ["chatgpt", "mistral"], reportLanguages: { chatgpt: ["en", "fr"], mistral: ["fr"] } });
+  });
+
+  it("an engine cannot target a language the subject does not have", () => {
+    const b = clone(fixture());
+    b.measurement.engines.push({ model: "mistral", languages: ["fr"] });
+    expect(checkBundle(b)).toContain("engine mistral: language fr not in subject.languages");
   });
 });

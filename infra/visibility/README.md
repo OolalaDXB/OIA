@@ -53,6 +53,12 @@ concurrents, et prompts avec leurs tags de traçabilité
 (`oia:<id>@v<version>`, `panel:v<n>`, `lang:<xx>`, `family:<…>`). Aucun code
 n'écrit dans Elmo en P1.
 
+## Fournisseurs
+
+Moteurs mesurés (dont Mistral, recherche web comprise), règle « traitements
+LLM de la couche OIA = `packages/providers` (Mistral) », réponse sur Jev, et
+liste de ce qui part hors d'Europe : [FOURNISSEURS.md](FOURNISSEURS.md).
+
 ## Agents
 
 Documentation des agents (P2) et checklist générique de visibilité d'un site,

@@ -68,6 +68,14 @@ export function checkBundle(b: SubjectBundle): string[] {
   if (panel.status === "validated" && (!panel.validatedBy || !panel.validatedAt))
     problems.push("panel validated without validatedBy / validatedAt");
 
+  const models = measurement.engines.map((e) => e.model);
+  if (new Set(models).size !== models.length) problems.push("measurement: engine listed twice");
+  for (const e of measurement.engines) {
+    for (const l of e.languages ?? [])
+      if (!subject.languages.includes(l)) problems.push(`engine ${e.model}: language ${l} not in subject.languages`);
+    if (e.languages && e.languages.length === 0) problems.push(`engine ${e.model}: empty languages (remove the engine instead)`);
+  }
+
   const windowIds = new Set(measurement.windows.map((w) => w.id));
   if (windowIds.size !== measurement.windows.length) problems.push("measurement: duplicate window id");
   for (const w of measurement.windows) {
@@ -108,6 +116,19 @@ export function loadSubject(dir: string): SubjectBundle {
 
 export function loadSubjects(root: string = defaultSubjectsDir()): SubjectBundle[] {
   return listSubjectDirs(root).map(loadSubject);
+}
+
+/**
+ * Engines to enable on the subject's Elmo brand (Elmo selects per brand), and,
+ * per engine, the languages whose answers count in reporting.
+ */
+export function enginePlan(b: SubjectBundle): { enabledModels: string[]; reportLanguages: Record<string, string[]> } {
+  const langs = b.subject.languages;
+  const engines = b.measurement.engines.filter((e) => !e.languages || e.languages.some((l) => langs.includes(l)));
+  return {
+    enabledModels: engines.map((e) => e.model),
+    reportLanguages: Object.fromEntries(engines.map((e) => [e.model, e.languages ?? langs])),
+  };
 }
 
 /** Freezes still in force: their window is not done or aborted. */

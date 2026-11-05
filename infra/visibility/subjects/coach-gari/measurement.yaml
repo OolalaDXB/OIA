@@ -1,4 +1,10 @@
 schemaVersion: 1
+engines:
+  - { model: chatgpt, note: "OpenAI en direct (API Responses + web_search)" }
+  - { model: claude, note: "Anthropic en direct (outil web_search)" }
+  - { model: gemini, note: "via OpenRouter (recherche native Google)" }
+  - { model: perplexity, note: "via OpenRouter (Sonar, recherche native)" }
+# Mistral n'est pas mesuré ici : il l'est pour les panels en français (décision 2026-11-05) et ce panel est en anglais.
 windows:
   - id: j0
     kind: baseline

@@ -17,7 +17,7 @@ correctement.
 | `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | crawlseo/.env | Client OAuth Google Cloud (Search Console) | On peut les récupérer dans la console Google Cloud |
 | `GOOGLE_PAGESPEED_KEY` (facultatif) | crawlseo/.env | Quota PageSpeed | On peut la recréer |
 | `TYPESAFE_API_KEY` **ou** `OPENROUTER_API_KEY` | elmo/.env | Jev (juge des mentions) : sans l'une des deux, le worker ne démarre pas | On peut la recréer chez le fournisseur |
-| `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `OPENROUTER_API_KEY` (selon les cibles retenues) | elmo/.env | Fournisseurs en mode API | On peut les recréer chez le fournisseur |
+| `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `MISTRAL_API_KEY`, `OPENROUTER_API_KEY` | elmo/.env | Fournisseurs en mode API | On peut les recréer chez le fournisseur |
 
 Le plus simple est de sauvegarder les deux fichiers `.env` entiers dans le coffre.
 C'est ce qu'attend `restore.sh` sur une machine vierge.

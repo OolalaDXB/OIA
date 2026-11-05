@@ -73,6 +73,14 @@
 
 ## Plan de mesure
 
+| Moteur (Elmo) | Langues comptées | Note |
+|---|---|---|
+| chatgpt | fr, en | OpenAI en direct (API Responses + web_search) |
+| claude | fr, en | Anthropic en direct (outil web_search) |
+| gemini | fr, en | via OpenRouter (recherche native Google) |
+| perplexity | fr, en | via OpenRouter (Sonar, recherche native) |
+| mistral | fr | Mistral en direct (API Conversations bêta + web_search) ; mesuré pour les panels en français uniquement (décision 2026-11-05) |
+
 | Fenêtre | Type | Jours | Panel | Statut | Début | Fin | Jours manquants |
 |---|---|---|---|---|---|---|---|
 | j0 | baseline | 5 | v1 | planned | — | — | — |

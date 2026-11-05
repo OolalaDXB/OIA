@@ -1,0 +1,129 @@
+# Fournisseurs : moteurs mesurés, traitements LLM, flux hors d'Europe
+
+État au 5 novembre 2026, vérifié dans le code des versions épinglées (Elmo
+0.7.7, CrawlSEO 0.3.6, Crawlie 0.5.3) et dans `packages/providers` d'OIA.
+
+## 1. Moteurs mesurés par Elmo (mode API uniquement)
+
+| Moteur (modèle Elmo) | Accès | Cible `SCRAPE_TARGETS` | Recherche web | URL citées extraites |
+|---|---|---|---|---|
+| chatgpt | OpenAI en direct | `chatgpt:openai-api:gpt-6-luna:online` | Oui (outil `web_search`) | Oui |
+| claude | Anthropic en direct | `claude:anthropic-api:claude-haiku-5-5:online` | Oui (outil `web_search`) | Oui |
+| gemini | via OpenRouter | `gemini:openrouter:google/gemini-2.5-flash:online` | Oui (recherche native Google) | Oui (`url_citation`) |
+| perplexity | via OpenRouter | `perplexity:openrouter:perplexity/sonar:online` | Oui (Sonar) | Oui |
+| **mistral** | **Mistral en direct** | `mistral:mistral-api:mistral-medium-latest:online` | **Oui**, voir ci-dessous | Oui (`tool_reference`) |
+
+### Mistral (Le Chat)
+- **L'API permet la recherche web.** Avec `:online`, Elmo appelle l'API
+  Conversations de Mistral (`POST /v1/conversations`) avec l'outil intégré
+  `tools: [{type: "web_search"}]`. Le modèle décide lui-même de chercher. Elmo
+  relève les requêtes lancées (`tool.execution` / `web_search`) et les URL
+  citées (morceaux `tool_reference`). Sans `:online`, Elmo passe par
+  `/v1/chat/completions`, sans recherche ni citations.
+- **Réserves** :
+  - l'API Conversations est marquée **bêta** par Mistral : son format peut
+    changer, et une mise à jour d'Elmo peut être nécessaire ;
+  - aucun réglage ne limite le nombre de recherches par appel, seul le plafond
+    de tokens borne le coût ;
+  - **l'API n'est pas Le Chat.** L'application ajoute sa mémoire, sa
+    localisation et ses propres choix de modèle et de recherche. On mesure
+    `mistral-medium-latest` avec recherche, ce qui est une approximation de
+    Le Chat (même limite que pour les autres moteurs) ;
+  - `-latest` est un alias qui évolue : la version exacte servie est stockée
+    par Elmo (`prompt_runs.version`), et un changement rend une comparaison
+    fragile.
+- **Réservé aux panels en français.** Elmo 0.7.7 choisit les moteurs **par
+  marque** (`brands.enabled_models`), pas par question. Chaque sujet déclare
+  ses moteurs et leurs langues dans `measurement.yaml` (`engines`) :
+  - sujet entièrement anglophone : Mistral n'est pas activé sur sa marque ;
+  - sujet bilingue : Mistral est activé sur la marque et répond donc aussi aux
+    questions en anglais (une dizaine d'appels de plus par jour). Ces réponses
+    sont conservées mais **exclues des rapports** (`reportLanguages` dans
+    `subjects elmo-brief <id>`). La seule autre option serait de couper le
+    sujet en deux marques Elmo, ce qui casserait la part de voix par sujet.
+- Coût : Elmo estime environ 0,005 $ par appel Mistral (`usage_events`). Le
+  coût réel se relève dans la console Mistral (non lu par `cost-guard.sh`).
+
+## 2. Traitements LLM de la couche OIA Visibility
+
+**Règle : tout traitement par LLM de la couche OIA Visibility (extraction de
+faits, classification, recommandations) passe par `packages/providers`,
+adaptateur Mistral. Aucun nouveau fournisseur, aucun SDK supplémentaire.**
+
+Ce que l'interface fournit déjà (`LLMProvider.extract<T>`) :
+- une sortie structurée et validée par un schéma Zod, avec une nouvelle
+  tentative si le JSON est invalide ;
+- côté Mistral : JSON natif (`response_format: json_object`), température 0,
+  budget d'appels par processus (`maxCalls`, l'appel est refusé plutôt que
+  facturé), reprise sur 429 et 5xx, détection des sorties tronquées, accès au
+  texte brut (`onRawResponse`) et au compte de tokens (`usage()`) ;
+- des métadonnées par appel : fournisseur, modèle, empreinte du prompt, tokens.
+  Elles alimentent la provenance de chaque extraction, qui reste « extraite »
+  et n'est jamais présentée comme un fait.
+
+Points à traiter quand la couche OIA sera écrite (P3, après validation des
+livrables avant code) :
+1. **Instancier Mistral explicitement** (`createMistralProvider`, comme
+   `apps/workers/src/analyse.ts`), et non `createProviderFromEnv`. Le
+   `.env.example` racine indique `LLM_PROVIDER="anthropic"` et
+   `LLM_MODEL="claude-sonnet-5"`, alors que le code met Mistral par défaut :
+   une copie telle quelle de ce fichier enverrait les traitements chez
+   Anthropic (États-Unis). Ce fichier relève d'OIA Funding V0 (en pause) et
+   n'est pas modifié ici.
+2. **`costUsd` n'est pas rempli** par l'adaptateur Mistral (tokens seulement).
+   Le coût se calculera dans la couche OIA à partir des tokens et d'une table
+   de prix datée, sans toucher au fournisseur.
+3. L'adaptateur n'utilise pas la recherche web, et la couche OIA n'en a pas
+   besoin : elle traite des réponses déjà collectées.
+
+## 3. Jev peut-il utiliser un modèle Mistral via OpenRouter ? Non.
+
+- Jev n'est pas un réglage de modèle : c'est **le modèle propre de TypeSafe**.
+  Elmo l'épingle en dur (`apps/worker/src/mention-judge/jev.ts`) :
+  `jev-1.13.0` chez TypeSafe (`api.typesafe.ai/v1/systemone`) ou
+  `typesafe/jev-1.13` via OpenRouter (`openrouter.ai/api/v1/systemone`). C'est
+  un point d'accès dédié, pas l'API de chat. OpenRouter ne fait que relayer
+  vers TypeSafe ; aucun modèle Mistral ne peut répondre à cet appel.
+- Elmo ne prévoit aucune variable pour changer de juge. Le remplacer
+  demanderait un fork, que les règles du projet excluent. Le worker ne démarre
+  pas sans clé Jev : on ne peut pas non plus l'éteindre.
+- Ce qui reste possible sans fork : la couche OIA (P3) peut **re-juger** les
+  mentions avec Mistral via `packages/providers`, en méthode « LLM, extrait »,
+  pour comparaison ou contrôle. Les réponses partent quand même chez TypeSafe,
+  puisque Elmo les envoie à Jev.
+- Le routage européen d'OpenRouter (`eu.openrouter.ai`, offres Business et
+  Enterprise) ne règle rien ici : Elmo code `openrouter.ai` en dur (Jev et
+  fournisseur OpenRouter), et une requête régionale échoue s'il n'existe pas
+  de fournisseur dans la région, ce qui est le cas de Jev, servi par TypeSafe.
+
+## 4. Ce qui part hors d'Europe dans la chaîne actuelle
+
+Localisations : liste des sous-traitants publiée par Elmo
+(`packages/docs/content/legal/subprocessors.mdx`, mise à jour le 2026-10-27),
+complétée par les fournisseurs propres à CrawlSEO.
+
+| Flux | Destinataire | Pays | Données envoyées |
+|---|---|---|---|
+| Moteur chatgpt | OpenAI | États-Unis | Texte des questions (marques et concurrents dans les questions marquées) ; réponses générées là-bas |
+| Moteur claude | Anthropic | États-Unis | Idem |
+| Moteurs gemini et perplexity | OpenRouter, puis Google et Perplexity | États-Unis | Idem, en passant par la passerelle OpenRouter |
+| **Juge Jev** | OpenRouter, puis TypeSafe | **États-Unis** | **Chaque réponse qui nomme une entreprise suivie**, avec les noms, alias et domaines de la marque et des concurrents. C'est le flux le plus riche. |
+| Moteur mistral | Mistral | France (UE) | Questions en français. **Moteur de la recherche web de Mistral : non documenté**, à vérifier dans le DPA et la liste des sous-traitants de Mistral avant de le déclarer « entièrement UE ». |
+| Onboarding, assistant de prompts, Opportunités d'Elmo | Mistral (`ONBOARDING_LLM_TARGET=mistral:mistral-api`) | France (UE) | Texte du site, marque, concurrents. Ce flux était épinglé sur Anthropic (États-Unis) jusqu'à ce changement. |
+| CrawlSEO : Search Console, PageSpeed, connexion Google | Google | États-Unis | URL des propriétés, appels API sur des données que Google détient déjà |
+| CrawlSEO : Bing Webmaster (si clé) | Microsoft | États-Unis | Idem pour Bing |
+| Crawlie | aucun tiers | — | Requêtes directes vers les sites audités |
+| Agents (P2) dans Claude Code | Anthropic | États-Unis | **Tout ce que les agents lisent par MCP** (réponses, crawls, Search Console) passe dans le contexte du modèle. À garder en tête pour un client externe. |
+| Téléchargements (images Docker, npm) | Docker Hub, GHCR, npm | États-Unis | Code seulement, aucune donnée |
+| Télémétrie | — | — | Désactivée (`DISABLE_TELEMETRY=1`, `CRAWLSEO_UPDATE_CHECK=false`) |
+
+**Où sont stockées les données** : dans les bases Postgres des outils, sur la
+machine qui les fait tourner (Mac Studio en P1-P2, VPS en P3). Pour un
+stockage UE, la région du VPS et celle de Supabase pour la couche OIA sont à
+choisir en conséquence (décision « serveur P3 » encore ouverte).
+
+**Données personnelles** : les questions sont des requêtes de type étude de
+marché. Une **marque personnelle** (nom d'une personne) fait toutefois des
+noms, alias et faits du sujet des données personnelles, envoyées aux
+fournisseurs américains ci-dessus. À couvrir dans le contrat avec un client
+externe.
