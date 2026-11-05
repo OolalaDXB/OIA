@@ -1,6 +1,6 @@
 <!-- Généré par `pnpm --filter @oia/visibility-infra subjects review <id>` : ne pas éditer à la main. -->
 
-# Coach Gari — revue (panel v2, draft)
+# Coach Gari — revue (panel v2, validated)
 
 ✅ confirmé · ❓ proposé, à confirmer · ❌ rejeté
 

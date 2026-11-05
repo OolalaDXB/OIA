@@ -1,6 +1,8 @@
 schemaVersion: 1
 panelVersion: 2
-status: draft
+status: validated
+validatedBy: "Mickaël THOMAS"
+validatedAt: "2026-11-05"
 limits: { maxPerLanguage: 10, minBrandedPerLanguage: 2 }
 prompts:
   - { id: en-01, version: 1, family: unbranded, language: en, markets: [ZW], origin: claude, status: retired, supersededBy: 2, createdAt: "2026-11-05",

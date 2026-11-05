@@ -48,6 +48,9 @@ pnpm --filter @oia/visibility-infra subjects freezes [<id>]        # gels en vig
 pnpm --filter @oia/visibility-infra test             # dont le test « aucun sujet dans le code »
 ```
 
+**Ne jamais supprimer une question dans Elmo** : la suppression efface aussi
+toutes ses réponses brutes. On la désactive.
+
 Elmo se configure à la main à partir de `elmo-brief` : marque, domaines, alias,
 concurrents, et prompts avec leurs tags de traçabilité
 (`oia:<id>@v<version>`, `panel:v<n>`, `lang:<xx>`, `family:<…>`). Aucun code
