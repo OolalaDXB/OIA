@@ -1,0 +1,23 @@
+{
+  "name": "@oia/visibility-infra",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "OIA Visibility P1 — subject definitions (schema, loader, CLI) for the Elmo / CrawlSEO / Crawlie stack. No subject is hard-coded.",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "validate": "tsx src/cli.ts validate",
+    "subjects": "tsx src/cli.ts"
+  },
+  "dependencies": {
+    "yaml": "^2.6.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

@@ -1,0 +1,43 @@
+schemaVersion: 1
+panelVersion: 2
+status: draft
+limits: { maxPerLanguage: 10, minBrandedPerLanguage: 2 }
+prompts:
+  - { id: en-01, version: 1, family: unbranded, language: en, markets: [ZW], origin: claude, status: retired, supersededBy: 2, createdAt: "2026-11-05",
+      text: "Who are the best online fitness coaches for people living in Zimbabwe?" }
+  - { id: en-02, version: 1, family: unbranded, language: en, markets: [ZW], origin: claude, status: retired, supersededBy: 2, createdAt: "2026-11-05",
+      text: "I live in Harare and want an online personal trainer who also gives me a nutrition plan. Who do you recommend?" }
+  - { id: en-03, version: 1, family: unbranded, language: en, markets: [AE], origin: claude, status: retired, supersededBy: 2, createdAt: "2026-11-05",
+      text: "Which personal trainers based in Dubai offer online coaching for clients abroad?" }
+  - { id: en-04, version: 1, family: unbranded, language: en, markets: [ZW, ZA], origin: claude, status: retired, supersededBy: 2, createdAt: "2026-11-05",
+      text: "Best online coaching programs combining training and nutrition for fat loss in Southern Africa" }
+  - { id: en-05, version: 1, family: unbranded, language: en, markets: [ZW, ZA, AE], origin: claude, status: retired, supersededBy: 2, createdAt: "2026-11-05",
+      text: "How do I choose a good online fitness coach, and which coaches would you recommend for African clients?" }
+  - { id: en-06, version: 1, family: unbranded, language: en, markets: [AE, ZW], origin: claude, status: retired, supersededBy: 2, createdAt: "2026-11-05",
+      text: "Recommend a strength and conditioning coach who trains clients remotely with personalised programs" }
+  - { id: en-07, version: 1, family: unbranded, language: en, markets: [AE], origin: claude, status: retired, supersededBy: 2, createdAt: "2026-11-05",
+      text: "Who offers physical preparation and fitness coaching for padel players in Dubai?" }
+  - { id: en-08, version: 1, family: unbranded, language: en, markets: [ZW, ZA], origin: claude, status: retired, supersededBy: 2, createdAt: "2026-11-05",
+      text: "Affordable online coach for muscle gain with weekly check-ins, available to clients in Zimbabwe or South Africa" }
+  - { id: en-09, version: 1, family: branded, language: en, markets: [AE, ZW], origin: claude, status: retired, supersededBy: 2, createdAt: "2026-11-05",
+      text: "What does Coach Gari (coachgari28.com) offer, and how does the online coaching work?" }
+  - { id: en-10, version: 1, family: branded, language: en, markets: [AE, ZW], origin: claude, status: active, createdAt: "2026-11-05",
+      text: "Is Coach Gari a good choice for online training and nutrition coaching? What formats and prices are available?" }
+  - { id: en-01, version: 2, family: unbranded, language: en, markets: [AE], origin: document, status: active, createdAt: "2026-11-05",
+      text: "Best padel coach in Dubai" }
+  - { id: en-02, version: 2, family: unbranded, language: en, markets: [AE], origin: document, status: active, createdAt: "2026-11-05",
+      text: "How much do padel lessons cost in Dubai?" }
+  - { id: en-03, version: 2, family: unbranded, language: en, markets: [AE], origin: document, status: active, createdAt: "2026-11-05",
+      text: "Personal trainer in Dubai who focuses on mobility" }
+  - { id: en-04, version: 2, family: unbranded, language: en, markets: [AE], origin: document, status: active, createdAt: "2026-11-05",
+      text: "Corporate wellness sessions for a team in Dubai" }
+  - { id: en-05, version: 2, family: unbranded, language: en, markets: [AE, ZW, ZA], origin: document, status: active, createdAt: "2026-11-05",
+      text: "Online fitness coach with live video sessions, not just a PDF plan" }
+  - { id: en-06, version: 2, family: unbranded, language: en, markets: [ZW, ZA, AE], origin: document, status: active, createdAt: "2026-11-05",
+      text: "Online personal trainer who does meal planning based on where you live" }
+  - { id: en-07, version: 2, family: unbranded, language: en, markets: [ZW], origin: document, status: active, createdAt: "2026-11-05",
+      text: "Zimbabwean fitness coach" }
+  - { id: en-08, version: 2, family: unbranded, language: en, markets: [ZW], origin: document, status: active, createdAt: "2026-11-05",
+      text: "Fitness coach in Harare, Zimbabwe" }
+  - { id: en-09, version: 2, family: branded, language: en, markets: [AE, ZW], origin: document, status: active, createdAt: "2026-11-05",
+      text: "Who is Coach Gari?" }

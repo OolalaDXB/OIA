@@ -1,0 +1,12 @@
+schemaVersion: 1
+facts:
+  - { id: f-activity, statement: "Maisons.co est un loueur de maisons et une conciergerie.", language: fr, category: identity,
+      sourceId: owner-2026-11-05, status: validated, validatedBy: "Mickaël THOMAS", validatedAt: "2026-11-05" }
+  - { id: f-loc-morbihan, statement: "Maisons.co loue des maisons à Quistinic et dans le Morbihan.", language: fr, category: location,
+      sourceId: owner-2026-11-05, status: validated, validatedBy: "Mickaël THOMAS", validatedAt: "2026-11-05" }
+  - { id: f-loc-gudauri, statement: "Maisons.co loue à Gudauri, en Géorgie.", language: fr, category: location,
+      sourceId: owner-2026-11-05, status: validated, validatedBy: "Mickaël THOMAS", validatedAt: "2026-11-05" }
+  - { id: f-concierge, statement: "Maisons.co propose un service de conciergerie en Bretagne.", language: fr, category: offer,
+      sourceId: owner-2026-11-05, status: validated, validatedBy: "Mickaël THOMAS", validatedAt: "2026-11-05" }
+  - { id: f-houses, statement: "Noms, capacités et prix des maisons : à fournir.", language: fr, category: offer,
+      sourceId: owner-2026-11-05, status: extracted, note: "Nécessaire pour mesurer l'exactitude des réponses aux questions marquées" }

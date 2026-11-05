@@ -1,7 +1,10 @@
 # OIA Visibility, P1 : outils open source installés tels quels
 
-Aucun code OIA ici, seulement de la configuration et des scripts. Les trois
-outils sont épinglés par version, et par digest pour les images.
+Ce dossier contient de la configuration, des scripts et les définitions de
+sujets. Il n'y a pas de code applicatif OIA. Les trois outils sont épinglés par
+version, et par digest pour les images. **Aucun sujet n'est codé en dur** : les
+scripts et la CLI lisent les sujets dans `subjects/`. Un test échoue dès qu'un
+nom, un alias ou un domaine de sujet apparaît ailleurs.
 
 | Outil | Version | Accès | Base |
 |---|---|---|---|
@@ -12,6 +15,37 @@ outils sont épinglés par version, et par digest pour les images.
 Les deux bases Postgres ne sont pas publiées sur l'hôte. Le port 5432 reste donc
 libre et aucun conflit n'est possible. Les sauvegardes passent par
 `docker compose exec`.
+
+## Sujets
+
+Il y a un dossier par sujet, `subjects/<id>/`, ou ailleurs avec
+`OIA_VIS_SUBJECTS_DIR` (par exemple un dossier privé pour un client externe).
+Tous suivent le même schéma (`src/schema.ts`).
+
+| Fichier | Contenu |
+|---|---|
+| `subject.yaml` | URL, langues, marchés, alias, concurrents, dépôt (facultatif), documents sources (facultatifs), questions ouvertes |
+| `panel.yaml` | Panel versionné. Changer une formulation crée `version + 1` et retire l'ancienne version, qui n'est jamais supprimée. `panelVersion` augmente à chaque changement de l'ensemble actif. |
+| `facts.yaml` | Faits de référence. Un fait reste `extracted` tant que le propriétaire ne l'a pas validé (`validated`, avec auteur et date). |
+| `REVIEW.md` | Fiche de revue générée, à ne pas éditer à la main (un test vérifie qu'elle est à jour). |
+
+Pour ajouter un sujet : créer `subjects/<id>/` avec les trois fichiers YAML,
+puis lancer les commandes ci-dessous. Statuts : alias, concurrents et marchés
+sont `proposed` ou `confirmed` ; le panel est `draft`, puis `validated` (avec
+`validatedBy` et `validatedAt`) avant toute mesure.
+
+```bash
+pnpm install                                         # à la racine du repo, une fois
+pnpm --filter @oia/visibility-infra validate         # schéma + règles (versions, nombre de questions marquées…)
+pnpm --filter @oia/visibility-infra subjects review <id> --write   # régénère REVIEW.md
+pnpm --filter @oia/visibility-infra subjects elmo-brief <id>       # fiche JSON pour configurer la marque dans Elmo
+pnpm --filter @oia/visibility-infra test             # dont le test « aucun sujet dans le code »
+```
+
+Elmo se configure à la main à partir de `elmo-brief` : marque, domaines, alias,
+concurrents, et prompts avec leurs tags de traçabilité
+(`oia:<id>@v<version>`, `panel:v<n>`, `lang:<xx>`, `family:<…>`). Aucun code
+n'écrit dans Elmo en P1.
 
 ## Ordre d'installation sur le Mac
 
@@ -57,8 +91,29 @@ depuis l'app web. Cet appel est facturé, mais ce n'est pas un run de mesure.
   avec `:online`.
 - Coût : Elmo écrit une estimation par appel dans la table `usage_events`. Le
   coût réel se relève chaque jour dans la console de chaque fournisseur.
-- Crawlie : `./scripts/crawlie-audit.sh`. Les rapports JSON sont écrits dans
-  `~/oia-visibility-data/crawlie/<horodatage>/`.
+- **Le démarrage de J0 se fait à la main**, une fois les panels `validated` :
+  1. Désactiver la veille du Mac pour 5 jours, par exemple
+     `caffeinate -dimsu -t 432000 &`.
+  2. Renseigner `SCRAPE_TARGETS` dans `elmo/.env` (la valeur est donnée en
+     commentaire dans `.env.example`).
+  3. Démarrer le worker : `docker compose -p oia-elmo --env-file elmo/.env -f elmo/compose.yaml up -d`.
+  4. Lancer le plafond en continu : `./scripts/cost-guard.sh --watch 60`
+     (`OIA_VIS_DAILY_CAP_USD`, 5 $ par défaut).
+- Plafond de coût : `scripts/cost-guard.sh` arrête le worker dès que le coût du
+  jour (UTC) atteint le plafond. Le coût retenu est le plus élevé entre
+  l'estimation d'Elmo (`usage_events`) et la consommation réelle du jour chez
+  OpenRouter (`usage_daily`, qui couvre Gemini, Perplexity et Jev). Le script
+  **échoue en sécurité** : si le coût est illisible, il arrête aussi le worker.
+  Le coût réel chez OpenAI et Anthropic n'est lisible qu'avec une clé
+  d'administration ; il se relève chaque jour dans les consoles et s'ajoute au
+  journal `~/oia-visibility-data/cost-journal.csv`.
+- Relevé quotidien : `./scripts/window-day.sh [YYYY-MM-DD]` donne les réponses
+  par sujet et par cible, les questions restées sans réponse et le coût estimé.
+  Le résultat va dans `~/oia-visibility-data/window/`. Un jour sans run est
+  consigné, jamais comblé.
+- Crawlie : `./scripts/crawlie-audit.sh [<id>]`. Le script lit les URL des
+  sujets et écrit les rapports JSON dans
+  `~/oia-visibility-data/crawlie/<horodatage>/<sujet>/`.
 
 ## Portabilité
 
@@ -97,5 +152,8 @@ l'installation de test avec `docker compose -p oia-crawlseo-restoretest … down
   suivis (voir `.gitignore`).
 - Elmo en mode API uniquement : aucune clé de prestataire de scraping (Cloro,
   BrightData, Oxylabs, SearchApi, Olostep, DataForSEO).
-- Aucune modification de coachgari28.com ni de maisons.co : Crawlie et CrawlSEO
-  ne font que des lectures, et Crawlie respecte robots.txt.
+- Aucune modification des sites ni des dépôts des sujets : Crawlie et CrawlSEO
+  ne font que des lectures, et Crawlie respecte robots.txt. Un dépôt déclaré
+  dans `subject.yaml` sert de document source, en lecture seule.
+- Les rapports de mesure, qui nomment forcément les sujets, vont dans
+  `reports/`, hors du périmètre du test de généricité.

@@ -1,0 +1,80 @@
+schemaVersion: 1
+id: coach-gari
+displayName: Coach Gari
+status: draft
+ownership: internal
+urls:
+  primary: https://coachgari28.com
+  additional:
+    - url: https://coachgari.com
+      status: proposed
+      note: "à confirmer ; le dépôt le prévoit comme redirection vers coachgari28.com (README)"
+languages: [en]
+markets:
+  - { country: AE, label: "Dubaï (base)", languages: [en], status: confirmed }
+  - { country: ZW, label: "Zimbabwe (audience principale)", languages: [en], status: confirmed }
+  - { country: ZA, label: "Afrique du Sud (Afrique australe)", languages: [en], status: proposed }
+aliases:
+  - { value: Coach Gari, kind: name, status: confirmed }
+  - { value: "@coach_gari28", kind: handle, status: confirmed, note: "Instagram / TikTok" }
+  - { value: coach_gari28, kind: handle, status: proposed, note: "graphie sans @, utilisée dans docs/SEO_AEO_PLAN.md du dépôt" }
+  - { value: coachgari28.com, kind: domain, status: confirmed }
+  - { value: coachgari.com, kind: domain, status: proposed, note: "à confirmer" }
+competitors:
+  - name: Playtomic
+    domains: [playtomic.io]
+    category: "plateforme de réservation de padel (cours et coachs)"
+    markets: [AE]
+    status: proposed
+    rationale: "Cité comme levier dans le plan SEO du dépôt ; les assistants renvoient souvent vers les coachs de padel listés sur Playtomic."
+  - name: Ultimate Performance
+    domains: [upfitness.com]
+    category: "coaching personnel premium avec salle à Dubaï"
+    markets: [AE]
+    status: proposed
+    rationale: "Chaîne de personal training présente à Dubaï, souvent citée pour « personal trainer Dubai ». Domaine à vérifier."
+  - name: Future
+    domains: [future.co]
+    category: "application de coaching en ligne avec coach dédié"
+    markets: [AE, ZA, ZW]
+    status: proposed
+    rationale: "Coaching en ligne un-à-un par abonnement : concurrent direct du format en ligne."
+  - name: Caliber
+    domains: [caliberstrong.com]
+    category: "coaching en ligne musculation et nutrition"
+    markets: [AE, ZA, ZW]
+    status: proposed
+    rationale: "Coaching en ligne entraînement + nutrition, fréquemment recommandé par les assistants."
+repository:
+  url: https://github.com/OolalaDXB/CoachGari
+  branch: main
+sources:
+  - id: repo-seo-aeo-plan
+    kind: file
+    ref: "OolalaDXB/CoachGari@73e1967:docs/SEO_AEO_PLAN.md"
+    description: "Plan SEO et AEO : marchés cibles (padel, PT et corporate à Dubaï ; coaching en ligne, niche Zimbabwe), 20 questions d'audit IA (annexe B)"
+    addedAt: "2026-11-05"
+  - id: repo-pages
+    kind: file
+    ref: "OolalaDXB/CoachGari@73e1967: index.html, online-coaching.html, personal-training-dubai.html, padel-coaching-dubai.html, corporate-wellness-dubai.html"
+    description: "Titres et descriptions des pages publiques (lecture seule, aucune modification)"
+    addedAt: "2026-11-05"
+  - id: owner-2026-11-05
+    kind: owner-statement
+    ref: "Mandat 1, suite : décisions (Mickaël THOMAS, 2026-11-05)"
+    description: "Activité, base, audience, alias et langue du panel donnés par le propriétaire"
+    addedAt: "2026-11-05"
+  - id: oia-registry
+    kind: file
+    ref: "registry/projects (fiche du projet dans le registre OIA Funding)"
+    description: "Fiche registre (statut DRAFT) : coaching, partenariats d'influence, back-office"
+    addedAt: "2026-11-05"
+openQuestions:
+  - "Panel v2 : 8 questions sur 10 reprises de l'annexe B du plan SEO/AEO du dépôt. Les 10 autres questions de l'annexe B restent candidates pour un panel à 20"
+  - "Équilibre Dubaï / Zimbabwe : le dépôt cible surtout Dubaï (padel, PT, corporate) et le Zimbabwe en niche ; la décision du 2026-11-05 dit « audience surtout en Afrique australe ». Panel v2 = 4 questions Dubaï, 2 mixtes, 2 Zimbabwe, 2 marquées : à confirmer"
+  - "coachgari.com : domaine détenu et actif ? (alias proposé, à confirmer)"
+  - "Afrique du Sud : marché visé ou seulement le Zimbabwe ?"
+  - "Coachs personnels indépendants à Dubaï : à fournir (je n'ai pas de nom fiable)"
+  - "Concurrents locaux au Zimbabwe (coachs en ligne ou salles de Harare / Bulawayo) : à fournir, aucun nom fiable trouvé"
+  - "Faut-il suivre le nom civil du coach comme alias ?"
+  - "Proposition de l'assistant d'Elmo : à générer sur le Mac (web démarré, worker arrêté), puis à fusionner dans panel.yaml avec origin: elmo-assistant"

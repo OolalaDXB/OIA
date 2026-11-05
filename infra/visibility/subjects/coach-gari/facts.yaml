@@ -1,0 +1,33 @@
+schemaVersion: 1
+facts:
+  - { id: f-identity, statement: "Coach Gari est coach sportif et préparateur physique.", language: fr, category: identity,
+      sourceId: owner-2026-11-05, status: validated, validatedBy: "Mickaël THOMAS", validatedAt: "2026-11-05" }
+  - { id: f-offer-online, statement: "Coach Gari propose du coaching en ligne : entraînement et nutrition.", language: fr, category: offer,
+      sourceId: owner-2026-11-05, status: validated, validatedBy: "Mickaël THOMAS", validatedAt: "2026-11-05" }
+  - { id: f-offer-padel, statement: "Coach Gari propose du padel en complément.", language: fr, category: offer,
+      sourceId: owner-2026-11-05, status: validated, validatedBy: "Mickaël THOMAS", validatedAt: "2026-11-05",
+      note: "Préciser : cours de padel, ou préparation physique pour joueurs de padel ?" }
+  - { id: f-location, statement: "Coach Gari est basé à Dubaï.", language: fr, category: location,
+      sourceId: owner-2026-11-05, status: validated, validatedBy: "Mickaël THOMAS", validatedAt: "2026-11-05" }
+  - { id: f-audience, statement: "L'audience de Coach Gari est surtout en Afrique australe, en particulier au Zimbabwe.", language: fr, category: audience,
+      sourceId: owner-2026-11-05, status: validated, validatedBy: "Mickaël THOMAS", validatedAt: "2026-11-05" }
+  - { id: f-partnerships, statement: "L'activité comprend des partenariats d'influence avec des marques.", language: fr, category: offer,
+      sourceId: oia-registry, status: extracted, note: "Extrait de la fiche registre (DRAFT), pas encore validé" }
+  - { id: f-prices, statement: "Prix et formules : à fournir.", language: fr, category: price,
+      sourceId: owner-2026-11-05, status: extracted, note: "Nécessaire pour mesurer l'exactitude des réponses à la question en-10" }
+  - { id: f-padelmba, statement: "Coach Gari est certifié PadelMBA.", language: fr, category: identity,
+      sourceId: repo-pages, status: extracted, note: "index.html, padel-coaching-dubai.html" }
+  - { id: f-ten-years, statement: "Coach Gari coache à Dubaï depuis dix ans.", language: fr, category: identity,
+      sourceId: repo-pages, status: extracted, note: "« ten years coaching in Dubai » (index.html)" }
+  - { id: f-origin-zw, statement: "Coach Gari est originaire du Zimbabwe.", language: fr, category: identity,
+      sourceId: repo-seo-aeo-plan, status: extracted, note: "Bio prévue pour /about (« Zimbabwe, 10 ans à Dubaï »)" }
+  - { id: f-online-format, statement: "Le coaching en ligne comprend des séances vidéo en direct deux fois par mois, un plan adapté au lieu d'entraînement et un plan de repas adapté au pays.", language: fr, category: offer,
+      sourceId: repo-pages, status: extracted, note: "online-coaching.html" }
+  - { id: f-pt-dubai, statement: "Personal training individuel à Dubaï, séances de soixante minutes (force, mobilité, conditionnement).", language: fr, category: offer,
+      sourceId: repo-pages, status: extracted, note: "personal-training-dubai.html" }
+  - { id: f-padel-dubai, statement: "Coaching de padel à Dubaï, en individuel ou en petit groupe, avec analyse en ligne possible.", language: fr, category: offer,
+      sourceId: repo-pages, status: extracted, note: "padel-coaching-dubai.html" }
+  - { id: f-corporate, statement: "Séances de corporate wellness et de coaching d'équipe à Dubaï ou en ligne.", language: fr, category: offer,
+      sourceId: repo-pages, status: extracted, note: "corporate-wellness-dubai.html" }
+  - { id: f-price-entry, statement: "Prix d'entrée à partir de 80 AED / 20 USD (service concerné non précisé).", language: fr, category: price,
+      sourceId: repo-seo-aeo-plan, status: extracted, note: "Réponse du 2026-09-30 citée en annexe A ; service à préciser" }

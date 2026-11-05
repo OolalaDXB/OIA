@@ -1,0 +1,46 @@
+schemaVersion: 1
+id: maisons-co
+displayName: Maisons.co
+status: draft
+ownership: internal
+urls:
+  primary: https://maisons.co
+languages: [fr, en]
+markets:
+  - { country: FR, label: "Quistinic, Morbihan et Bretagne (location et conciergerie)", languages: [fr, en], status: confirmed }
+  - { country: GE, label: "Gudauri, Géorgie (location)", languages: [en, fr], status: confirmed }
+aliases:
+  - { value: Maisons.co, kind: name, status: confirmed }
+  - { value: maisons.co, kind: domain, status: confirmed }
+  - { value: Maisons co, kind: name, status: proposed, note: "graphie sans point, fréquente dans les réponses" }
+competitors:
+  - { name: Airbnb, domains: [airbnb.com, airbnb.fr], category: "plateforme de location courte durée", markets: [FR, GE], status: proposed,
+      rationale: "Canal dominant cité pour la location de maisons, en Bretagne comme à Gudauri." }
+  - { name: Booking.com, domains: [booking.com], category: "plateforme de réservation", markets: [FR, GE], status: proposed,
+      rationale: "Très cité pour l'hébergement à Gudauri." }
+  - { name: Abritel, domains: [abritel.fr, vrbo.com], aliases: [Vrbo], category: "plateforme de location de maisons", markets: [FR], status: proposed,
+      rationale: "Référence de la location de maisons de vacances en France." }
+  - { name: Gîtes de France, domains: [gites-de-france.com], category: "réseau de gîtes labellisés", markets: [FR], status: proposed,
+      rationale: "Cité systématiquement pour les gîtes du Morbihan intérieur." }
+  - { name: Clévacances, domains: [clevacances.com], category: "réseau de locations labellisées", markets: [FR], status: proposed,
+      rationale: "Label de location saisonnière très présent en Bretagne." }
+  - { name: HostnFly, domains: [hostnfly.com], category: "conciergerie de location courte durée", markets: [FR], status: proposed,
+      rationale: "Conciergerie nationale souvent citée pour « conciergerie Airbnb ». Présence en Morbihan à vérifier." }
+sources:
+  - id: owner-2026-11-05
+    kind: owner-statement
+    ref: "Mandat 1, suite : décisions (Mickaël THOMAS, 2026-11-05)"
+    description: "Mesuré comme loueur de maisons et conciergerie (Quistinic et Morbihan, Gudauri, conciergerie en Bretagne) ; 10 questions FR + 10 EN"
+    addedAt: "2026-11-05"
+  - id: oia-brief-2026-11-05
+    kind: owner-statement
+    ref: "Brief OIA Visibility, module AEO (2026-11-05)"
+    description: "Exemple de question marquée « Que propose Maisons.co à Gudauri ? » ; URL hors sujet déjà repérée dans l'index ; séparation Collection / Géorgie non tranchée"
+    addedAt: "2026-11-05"
+openQuestions:
+  - "Noms des maisons (Quistinic, Morbihan, Gudauri) à suivre comme alias : à fournir"
+  - "Noms commerciaux des offres (location, conciergerie, Collection ?) : à fournir"
+  - "Autres domaines ou fiches (Airbnb, Booking, site d'une maison) : à fournir"
+  - "Conciergeries locales concurrentes dans le Morbihan, et agences ou résidences concurrentes à Gudauri : à fournir"
+  - "La séparation Collection / Géorgie change-t-elle le sujet (un sujet, ou deux) ? À trancher avant la fenêtre suivante, pas avant J0"
+  - "Proposition de l'assistant d'Elmo : à générer sur le Mac, puis à fusionner dans panel.yaml avec origin: elmo-assistant"

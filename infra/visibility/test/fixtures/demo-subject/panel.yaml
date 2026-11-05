@@ -1,0 +1,7 @@
+schemaVersion: 1
+panelVersion: 1
+status: draft
+limits: { maxPerLanguage: 10, minBrandedPerLanguage: 1 }
+prompts:
+  - { id: en-01, version: 1, family: unbranded, language: en, markets: [GB], text: "Which demo tools are best?", origin: claude, status: active, createdAt: "2026-01-01" }
+  - { id: en-02, version: 1, family: branded, language: en, markets: [GB], text: "What does Demo Subject offer?", origin: claude, status: active, createdAt: "2026-01-01" }

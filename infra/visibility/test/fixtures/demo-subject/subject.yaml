@@ -1,0 +1,14 @@
+schemaVersion: 1
+id: demo-subject
+displayName: Demo Subject
+status: draft
+ownership: external
+urls:
+  primary: https://demo.example
+languages: [en]
+markets:
+  - { country: GB, label: United Kingdom, languages: [en], status: confirmed }
+aliases:
+  - { value: Demo Subject, kind: name, status: confirmed }
+sources:
+  - { id: owner, kind: owner-statement, ref: kickoff, description: Owner brief, addedAt: "2026-01-01" }

@@ -1,0 +1,45 @@
+schemaVersion: 1
+panelVersion: 1
+status: draft
+limits: { maxPerLanguage: 10, minBrandedPerLanguage: 2 }
+prompts:
+  - { id: fr-01, version: 1, family: unbranded, language: fr, markets: [FR], pairId: q01, origin: claude, status: active, createdAt: "2026-11-05",
+      text: "Où louer une maison de vacances à Quistinic ou dans les environs, dans le Morbihan ?" }
+  - { id: fr-02, version: 1, family: unbranded, language: fr, markets: [FR], pairId: q02, origin: claude, status: active, createdAt: "2026-11-05",
+      text: "Quels sont les meilleurs gîtes et maisons à louer dans le Morbihan intérieur, près de la vallée du Blavet ?" }
+  - { id: fr-03, version: 1, family: unbranded, language: fr, markets: [FR], pairId: q03, origin: claude, status: active, createdAt: "2026-11-05",
+      text: "Je cherche une grande maison à louer dans le Morbihan pour un week-end en famille ou entre amis : que recommandes-tu ?" }
+  - { id: fr-04, version: 1, family: unbranded, language: fr, markets: [FR], pairId: q04, origin: claude, status: active, createdAt: "2026-11-05",
+      text: "Quelle conciergerie choisir dans le Morbihan pour gérer ma maison en location saisonnière ?" }
+  - { id: fr-05, version: 1, family: unbranded, language: fr, markets: [FR], pairId: q05, origin: claude, status: active, createdAt: "2026-11-05",
+      text: "Quelles sont les meilleures conciergeries de location courte durée en Bretagne ?" }
+  - { id: fr-06, version: 1, family: unbranded, language: fr, markets: [GE], pairId: q06, origin: claude, status: active, createdAt: "2026-11-05",
+      text: "Où loger à Gudauri pour un séjour au ski : quelles locations recommandes-tu ?" }
+  - { id: fr-07, version: 1, family: unbranded, language: fr, markets: [GE], pairId: q07, origin: claude, status: active, createdAt: "2026-11-05",
+      text: "Location de chalet ou d'appartement à Gudauri, en Géorgie : quelles adresses fiables ?" }
+  - { id: fr-08, version: 1, family: unbranded, language: fr, markets: [GE], pairId: q08, origin: claude, status: active, createdAt: "2026-11-05",
+      text: "Qui peut gérer la location de mon bien à Gudauri quand je ne suis pas sur place ?" }
+  - { id: fr-09, version: 1, family: branded, language: fr, markets: [GE], pairId: q09, origin: claude, status: active, createdAt: "2026-11-05",
+      text: "Que propose Maisons.co à Gudauri ?" }
+  - { id: fr-10, version: 1, family: branded, language: fr, markets: [FR], pairId: q10, origin: claude, status: active, createdAt: "2026-11-05",
+      text: "Que propose Maisons.co en Bretagne, en location de maisons et en conciergerie ?" }
+  - { id: en-01, version: 1, family: unbranded, language: en, markets: [FR], pairId: q01, origin: claude, status: active, createdAt: "2026-11-05",
+      text: "Where can I rent a holiday house in or near Quistinic, in Morbihan, Brittany?" }
+  - { id: en-02, version: 1, family: unbranded, language: en, markets: [FR], pairId: q02, origin: claude, status: active, createdAt: "2026-11-05",
+      text: "What are the best gîtes and houses to rent in inland Morbihan, near the Blavet valley?" }
+  - { id: en-03, version: 1, family: unbranded, language: en, markets: [FR], pairId: q03, origin: claude, status: active, createdAt: "2026-11-05",
+      text: "I am looking for a large house to rent in Morbihan for a weekend with family or friends: what do you recommend?" }
+  - { id: en-04, version: 1, family: unbranded, language: en, markets: [FR], pairId: q04, origin: claude, status: active, createdAt: "2026-11-05",
+      text: "Which property concierge service should I choose in Morbihan to manage my house as a holiday rental?" }
+  - { id: en-05, version: 1, family: unbranded, language: en, markets: [FR], pairId: q05, origin: claude, status: active, createdAt: "2026-11-05",
+      text: "What are the best short-term rental concierge services in Brittany?" }
+  - { id: en-06, version: 1, family: unbranded, language: en, markets: [GE], pairId: q06, origin: claude, status: active, createdAt: "2026-11-05",
+      text: "Where should I stay in Gudauri for a ski trip: which rentals do you recommend?" }
+  - { id: en-07, version: 1, family: unbranded, language: en, markets: [GE], pairId: q07, origin: claude, status: active, createdAt: "2026-11-05",
+      text: "Chalet or apartment rental in Gudauri, Georgia: which places are reliable?" }
+  - { id: en-08, version: 1, family: unbranded, language: en, markets: [GE], pairId: q08, origin: claude, status: active, createdAt: "2026-11-05",
+      text: "Who can manage the rental of my property in Gudauri when I am not there?" }
+  - { id: en-09, version: 1, family: branded, language: en, markets: [GE], pairId: q09, origin: claude, status: active, createdAt: "2026-11-05",
+      text: "What does Maisons.co offer in Gudauri?" }
+  - { id: en-10, version: 1, family: branded, language: en, markets: [FR], pairId: q10, origin: claude, status: active, createdAt: "2026-11-05",
+      text: "What does Maisons.co offer in Brittany, for house rentals and concierge services?" }

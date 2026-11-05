@@ -3,7 +3,7 @@
 # Pinned to Elmo v0.7.7 (git 5e76f422, 2026-10-28) by tag AND multi-arch index
 # digest; linux/arm64 and linux/amd64 are both in the index (checked 2026-11-05).
 # Equivalent to what `elmo init` (CLI 0.7.7) renders, with three deliberate
-# differences, listed in RAPPORT-ETAPE-0.md:
+# differences, listed in reports/2026-11-05-etape-0.md:
 #   - Postgres is NOT published on the host (the CLI publishes 0.0.0.0:5432);
 #   - the Postgres password comes from .env (the CLI hard-codes "postgres");
 #   - the web port is bound to 127.0.0.1 only.
