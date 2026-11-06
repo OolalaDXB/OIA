@@ -1,0 +1,263 @@
+schemaVersion: 1
+panelVersion: 2
+status: draft
+limits:
+  maxPerLanguage: 10
+  minBrandedPerLanguage: 2
+prompts:
+  - id: fr-01
+    version: 1
+    family: unbranded
+    intent: decouverte
+    targetOffer: the service
+    language: fr
+    markets:
+      - FR
+    text: Quelles sont les meilleures options pour the service à Quistinic, Morbihan
+      et Bretagne (location et conciergerie) ?
+    origin: generator
+    status: proposed
+    createdAt: 2026-11-08
+  - id: fr-02
+    version: 1
+    family: unbranded
+    intent: decouverte
+    targetOffer: the service
+    language: fr
+    markets:
+      - FR
+    text: Quels prestataires proposent the service pour les habitants de Quistinic,
+      Morbihan et Bretagne (location et conciergerie) ?
+    origin: generator
+    status: proposed
+    createdAt: 2026-11-08
+  - id: fr-03
+    version: 1
+    family: unbranded
+    intent: decouverte
+    targetOffer: the service
+    language: fr
+    markets:
+      - FR
+    text: À qui m'adresser pour the service si je suis à Quistinic, Morbihan et
+      Bretagne (location et conciergerie) ?
+    origin: generator
+    status: proposed
+    createdAt: 2026-11-08
+  - id: fr-04
+    version: 1
+    family: unbranded
+    intent: prix_offre
+    targetOffer: the service
+    language: fr
+    markets:
+      - FR
+    text: Combien coûte the service à Quistinic, Morbihan et Bretagne (location et
+      conciergerie) ?
+    origin: generator
+    status: proposed
+    createdAt: 2026-11-08
+  - id: fr-05
+    version: 1
+    family: unbranded
+    intent: prix_offre
+    targetOffer: the service
+    language: fr
+    markets:
+      - FR
+    text: Qu'est-ce qui est inclus dans the service pour une personne à Quistinic,
+      Morbihan et Bretagne (location et conciergerie) ?
+    origin: generator
+    status: proposed
+    createdAt: 2026-11-08
+  - id: fr-06
+    version: 1
+    family: unbranded
+    intent: comparaison
+    targetOffer: the service
+    language: fr
+    markets:
+      - FR
+    text: Comment comparer les offres de the service à Quistinic, Morbihan et
+      Bretagne (location et conciergerie) ?
+    origin: generator
+    status: proposed
+    createdAt: 2026-11-08
+  - id: fr-07
+    version: 1
+    family: unbranded
+    intent: niche_local
+    targetOffer: the service
+    language: fr
+    markets:
+      - FR
+    text: Qui propose the service spécifiquement à Quistinic, Morbihan et Bretagne
+      (location et conciergerie) ?
+    origin: generator
+    status: proposed
+    createdAt: 2026-11-08
+  - id: fr-08
+    version: 1
+    family: unbranded
+    intent: niche_local
+    targetOffer: the service
+    language: fr
+    markets:
+      - FR
+    text: Y a-t-il une option locale pour the service à Quistinic, Morbihan et
+      Bretagne (location et conciergerie) ?
+    origin: generator
+    status: proposed
+    createdAt: 2026-11-08
+  - id: fr-09
+    version: 1
+    family: branded
+    intent: marquee
+    targetOffer: the service
+    language: fr
+    markets:
+      - FR
+    text: Que propose Maisons.co pour the service ?
+    origin: generator
+    status: proposed
+    createdAt: 2026-11-08
+  - id: fr-10
+    version: 1
+    family: branded
+    intent: marquee
+    targetOffer: the service
+    language: fr
+    markets:
+      - FR
+    text: Maisons.co est-il un bon choix pour the service ?
+    origin: generator
+    status: proposed
+    createdAt: 2026-11-08
+  - id: en-11
+    version: 1
+    family: unbranded
+    intent: decouverte
+    targetOffer: the service
+    language: en
+    markets:
+      - FR
+    text: What are the best options for the service in Quistinic, Morbihan et
+      Bretagne (location et conciergerie)?
+    origin: generator
+    status: proposed
+    createdAt: 2026-11-08
+  - id: en-12
+    version: 1
+    family: unbranded
+    intent: decouverte
+    targetOffer: the service
+    language: en
+    markets:
+      - FR
+    text: Which providers offer the service aimed at people in Quistinic, Morbihan
+      et Bretagne (location et conciergerie)?
+    origin: generator
+    status: proposed
+    createdAt: 2026-11-08
+  - id: en-13
+    version: 1
+    family: unbranded
+    intent: decouverte
+    targetOffer: the service
+    language: en
+    markets:
+      - FR
+    text: Who should I look at for the service if I live in Quistinic, Morbihan et
+      Bretagne (location et conciergerie)?
+    origin: generator
+    status: proposed
+    createdAt: 2026-11-08
+  - id: en-14
+    version: 1
+    family: unbranded
+    intent: prix_offre
+    targetOffer: the service
+    language: en
+    markets:
+      - FR
+    text: How much does the service typically cost in Quistinic, Morbihan et
+      Bretagne (location et conciergerie)?
+    origin: generator
+    status: proposed
+    createdAt: 2026-11-08
+  - id: en-15
+    version: 1
+    family: unbranded
+    intent: prix_offre
+    targetOffer: the service
+    language: en
+    markets:
+      - FR
+    text: What is included in the service for clients in Quistinic, Morbihan et
+      Bretagne (location et conciergerie)?
+    origin: generator
+    status: proposed
+    createdAt: 2026-11-08
+  - id: en-16
+    version: 1
+    family: unbranded
+    intent: comparaison
+    targetOffer: the service
+    language: en
+    markets:
+      - FR
+    text: How do providers of the service compare in Quistinic, Morbihan et Bretagne
+      (location et conciergerie)?
+    origin: generator
+    status: proposed
+    createdAt: 2026-11-08
+  - id: en-17
+    version: 1
+    family: unbranded
+    intent: niche_local
+    targetOffer: the service
+    language: en
+    markets:
+      - FR
+    text: Who runs the service in Quistinic, Morbihan et Bretagne (location et
+      conciergerie) specifically?
+    origin: generator
+    status: proposed
+    createdAt: 2026-11-08
+  - id: en-18
+    version: 1
+    family: unbranded
+    intent: niche_local
+    targetOffer: the service
+    language: en
+    markets:
+      - FR
+    text: Is there a local option for the service in Quistinic, Morbihan et Bretagne
+      (location et conciergerie)?
+    origin: generator
+    status: proposed
+    createdAt: 2026-11-08
+  - id: en-19
+    version: 1
+    family: branded
+    intent: marquee
+    targetOffer: the service
+    language: en
+    markets:
+      - FR
+    text: What does Maisons.co offer for the service?
+    origin: generator
+    status: proposed
+    createdAt: 2026-11-08
+  - id: en-20
+    version: 1
+    family: branded
+    intent: marquee
+    targetOffer: the service
+    language: en
+    markets:
+      - FR
+    text: Is Maisons.co a good choice for the service?
+    origin: generator
+    status: proposed
+    createdAt: 2026-11-08
