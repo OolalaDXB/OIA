@@ -18,8 +18,10 @@ PASS="$(openssl rand -hex 16)"
 VIS_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 MIG="$VIS_ROOT/migrations/0001_evidence.sql"
 MIG_E3="$VIS_ROOT/migrations/0002_decision_journal.sql"
+MIG_C1="$VIS_ROOT/migrations/0003_client_action_log.sql"
 [ -f "$MIG" ] || { echo "migration introuvable : $MIG" >&2; exit 2; }
 [ -f "$MIG_E3" ] || { echo "migration introuvable : $MIG_E3" >&2; exit 2; }
+[ -f "$MIG_C1" ] || { echo "migration introuvable : $MIG_C1" >&2; exit 2; }
 
 cleanup() {
   docker rm -f "$CONTAINER" >/dev/null 2>&1 || true
@@ -51,6 +53,8 @@ echo "## applying migration 0001"
 $PSQLL < "$MIG" >/dev/null
 echo "## applying migration 0002"
 $PSQLL < "$MIG_E3" >/dev/null
+echo "## applying migration 0003"
+$PSQLL < "$MIG_C1" >/dev/null
 
 # Rôle app : simule un service qui ne doit jamais contourner la RLS.
 $PSQLL <<'SQL' >/dev/null
@@ -224,5 +228,53 @@ SQL
 )
 [ "$seen" = "0" ] || { echo "FAIL: client B voit $seen lignes de recommendation+decision"; exit 1; }
 echo "  OK client B isolé sur recommendation + decision + execution"
+
+echo "## test 8 — vis.action_log append-only et scope par client"
+docker exec -i -e PGPASSWORD=app-pass "$CONTAINER" \
+  psql -U oia_vis_app -d visdb -v ON_ERROR_STOP=1 <<'SQL' >/dev/null
+begin;
+set local vis.client_id = 'fictive-a';
+insert into vis.action_log (who, what, client_id, mission_id, details)
+  values ('seo-command-orchestrator','mission.start','fictive-a','msn-fictive-1','{}');
+commit;
+SQL
+if docker exec -i -e PGPASSWORD=app-pass "$CONTAINER" \
+     psql -U oia_vis_app -d visdb -v ON_ERROR_STOP=1 <<'SQL' >/dev/null 2>&1
+begin;
+set local vis.client_id = 'fictive-a';
+update vis.action_log set what = 'edited';
+commit;
+SQL
+then
+  echo "FAIL: UPDATE sur vis.action_log a réussi"; exit 1
+fi
+echo "  OK action_log append-only + RLS"
+
+echo "## test 9 — vis.client_summary (security definer) ne fuit pas entre clients"
+# Autorise app à appeler la fonction (sinon elle ne peut pas).
+$PSQLL -c "grant execute on function vis.client_summary(text) to oia_vis_app" >/dev/null
+# Client A appelle avec son id : OK
+out_a=$(docker exec -i -e PGPASSWORD=app-pass "$CONTAINER" \
+  psql -U oia_vis_app -d visdb -v ON_ERROR_STOP=1 -tA -q <<'SQL' | awk 'NF' | tail -1
+begin;
+set local vis.client_id = 'fictive-a';
+select (vis.client_summary('fictive-a'))->>'evidence_count';
+commit;
+SQL
+)
+[ "$out_a" = "1" ] || [ "$out_a" = "2" ] || { echo "FAIL: client A ne lit pas son résumé (got '$out_a')"; exit 1; }
+echo "  OK client A lit son résumé ($out_a preuves)"
+# Client A appelle avec un target différent : REFUSÉ par la fonction.
+if docker exec -i -e PGPASSWORD=app-pass "$CONTAINER" \
+     psql -U oia_vis_app -d visdb -v ON_ERROR_STOP=1 <<'SQL' >/dev/null 2>&1
+begin;
+set local vis.client_id = 'fictive-a';
+select vis.client_summary('fictive-b');
+commit;
+SQL
+then
+  echo "FAIL: vis.client_summary a répondu pour un autre client"; exit 1
+fi
+echo "  OK client A ne peut PAS lire le résumé de B via la fonction security definer"
 
 echo "## tous les tests passent"
