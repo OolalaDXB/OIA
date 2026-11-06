@@ -3,12 +3,43 @@
 État au 5 novembre 2026, vérifié dans le code des versions épinglées (Elmo
 0.7.7, CrawlSEO 0.3.6, Crawlie 0.5.3) et dans `packages/providers` d'OIA.
 
-## 0. Décision du 2026-11-06 : configuration à zéro coût
+## 0. Décision du 2026-11-08 : configuration payante plafonnée
 
-Aucune dépense, aucune carte bancaire, aucun abonnement. Elle remplace pour J0
-la configuration décrite aux sections 1 et 4. Ces sections restent la
-référence si un budget est ouvert plus tard. Le détail des vérifications est
-dans `reports/2026-11-05-zero-cout.md`.
+Annule la bascule zéro coût du 2026-11-06. Les cinq moteurs mesurés
+reviennent en mode API, dans la limite d'un plafond mensuel global de
+**30 $ par mois UTC**, avec une alerte à 24 $ (80 %). `cost-guard.sh`
+bascule à un plafond mensuel ; arrêt immédiat du worker Elmo si le plafond
+est atteint ou si le coût du mois devient illisible. Les comptes et les
+clés sont à ouvrir par Mickaël (hors nuit). La saisie manuelle (`subjects
+capture-template` / `capture-check`) reste disponible, pour les moteurs non
+branchés en API ou en complément.
+
+### Plafond logiciel et plafond réel
+
+`cost-guard.sh` est un **contrôle logiciel** et non une garantie.
+
+- Il lit l'estimation d'Elmo (`usage_events.estimated_cost_usd`), qui est
+  une estimation et non une facture.
+- Il lit le coût réel OpenRouter (cumul `usage` via `/api/v1/key`). OpenAI,
+  Anthropic et Mistral ne sont **pas** interrogés : leur coût réel doit
+  être reporté à la main dans la colonne `manual_usd` du journal
+  (`OIA_VIS_MANUAL_COST_USD`).
+- Le script s'arrête après lecture d'une dépense déjà engagée ; il ne
+  refuse rien par avance.
+- Il échoue en sécurité (worker arrêté) si le coût du mois est illisible.
+
+**Le vrai plafond opposable** est double : crédits prépayés **et** recharge
+automatique désactivée chez chaque fournisseur (OpenAI, Anthropic, Mistral,
+OpenRouter), plus une réserve de budget avant chaque lot de mesure. Sans
+cette double précaution, un dépassement peut passer sous le radar du
+script le temps que l'estimation ou l'API de solde se mette à jour.
+
+## 0 bis. Historique : la configuration à zéro coût (2026-11-06, annulée le 2026-11-08)
+
+Aucune dépense, aucune carte bancaire, aucun abonnement. Elle a remplacé la
+configuration des sections 1 et 4 pendant deux jours. Ces sections
+redeviennent la référence. Le détail des vérifications est dans
+`reports/2026-11-05-zero-cout.md`.
 
 | Moteur | Collecte | Recherche web | Coût |
 |---|---|---|---|

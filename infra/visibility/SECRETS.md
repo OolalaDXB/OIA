@@ -21,3 +21,16 @@ correctement.
 
 Le plus simple est de sauvegarder les deux fichiers `.env` entiers dans le coffre.
 C'est ce qu'attend `restore.sh` sur une machine vierge.
+
+## Mise en garde : ne jamais exporter `ANTHROPIC_API_KEY` dans le shell
+
+`ANTHROPIC_API_KEY` sert à Elmo et aux outils OIA uniquement, via les `.env`
+qu'ils lisent explicitement. **Ne jamais l'exporter au niveau du shell**
+(`export ANTHROPIC_API_KEY=…` dans `~/.zshrc`, `~/.zprofile`, un `.envrc` lu
+par direnv, un `dotenv` chargé par un launcher). La raison est qu'une
+variable exportée de cette façon est aussi lue par Claude Code quand il
+démarre : chaque session d'aide au développement ferait alors des appels
+réels sur cette clé, qui ne sont ni mesurés par `cost-guard.sh`, ni attribués
+à Visibility. La clé reste lisible dans le fichier `elmo/.env` que
+`init-env.sh` génère et que `restore.sh` restaure ; elle n'a aucune raison
+de vivre ailleurs. La même règle s'applique à toute clé de modèle d'IA.

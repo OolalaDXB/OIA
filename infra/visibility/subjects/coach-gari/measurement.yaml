@@ -1,11 +1,14 @@
 schemaVersion: 1
-# Configuration à zéro coût (décision 2026-11-06) : aucune dépense, aucune carte, aucun abonnement.
+# Configuration payante plafonnée (annulation de la bascule zéro coût du 2026-11-06,
+# décision 2026-11-08). Les comptes et les clés sont à ouvrir par Mickaël ; cost-guard.sh
+# arrête le worker au plafond mensuel de 30 $ (pour le mois UTC), avec une alerte à 24 $.
 engines:
-  - { model: gemini, collection: api, webSearch: true, note: "Gemini via OpenRouter, clé Google AI Studio gratuite en BYOK ; recherche Google gratuite à confirmer (scripts/zero-cost-check.sh)" }
-  - { model: chatgpt-app, collection: manual, webSearch: true, note: "ChatGPT, application gratuite, saisie manuelle" }
-  - { model: claude-app, collection: manual, webSearch: true, note: "Claude, application gratuite, saisie manuelle" }
-  - { model: perplexity-app, collection: manual, webSearch: true, note: "Perplexity, application gratuite, saisie manuelle" }
-# Mistral non mesuré : réservé aux panels en français.
+  - { model: chatgpt,    collection: api, webSearch: true, note: "OpenAI en direct (:online, outil web_search)" }
+  - { model: claude,     collection: api, webSearch: true, note: "Anthropic en direct (:online, outil web_search)" }
+  - { model: gemini,     collection: api, webSearch: true, note: "via OpenRouter (recherche Google native)" }
+  - { model: perplexity, collection: api, webSearch: true, note: "via OpenRouter (Sonar)" }
+# Mistral non mesuré : panel entièrement anglophone. Jev reste activé via OpenRouter
+# (TYPESAFE_API_KEY vide, OPENROUTER_API_KEY renseignée — voir elmo/.env.example).
 windows:
   - id: j0
     kind: baseline

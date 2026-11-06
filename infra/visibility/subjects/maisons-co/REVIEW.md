@@ -75,11 +75,11 @@
 
 | Moteur | Collecte | Recherche web | Langues comptées | Note |
 |---|---|---|---|---|
-| gemini | API (Elmo) | oui | fr, en | Gemini via OpenRouter, clé Google AI Studio gratuite en BYOK ; recherche Google gratuite à confirmer (scripts/zero-cost-check.sh) |
-| mistral | API (Elmo) | non | fr | Mistral, offre gratuite, SANS recherche web (payante) : pas d'URL citées attendues ; panels en français uniquement |
-| chatgpt-app | manuelle (app) | oui | fr, en | ChatGPT, application gratuite, saisie manuelle |
-| claude-app | manuelle (app) | oui | fr, en | Claude, application gratuite, saisie manuelle |
-| perplexity-app | manuelle (app) | oui | fr, en | Perplexity, application gratuite, saisie manuelle |
+| chatgpt | API (Elmo) | oui | fr, en | OpenAI en direct (:online, outil web_search) |
+| claude | API (Elmo) | oui | fr, en | Anthropic en direct (:online, outil web_search) |
+| gemini | API (Elmo) | oui | fr, en | via OpenRouter (recherche Google native) |
+| perplexity | API (Elmo) | oui | fr, en | via OpenRouter (Sonar) |
+| mistral | API (Elmo) | oui | fr | Mistral en direct (:online, Conversations + tool web_search) ; panels en français seulement |
 
 | Fenêtre | Type | Jours | Panel | Statut | Début | Fin | Jours manquants |
 |---|---|---|---|---|---|---|---|

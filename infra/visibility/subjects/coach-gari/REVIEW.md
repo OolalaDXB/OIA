@@ -112,10 +112,10 @@
 
 | Moteur | Collecte | Recherche web | Langues comptées | Note |
 |---|---|---|---|---|
-| gemini | API (Elmo) | oui | en | Gemini via OpenRouter, clé Google AI Studio gratuite en BYOK ; recherche Google gratuite à confirmer (scripts/zero-cost-check.sh) |
-| chatgpt-app | manuelle (app) | oui | en | ChatGPT, application gratuite, saisie manuelle |
-| claude-app | manuelle (app) | oui | en | Claude, application gratuite, saisie manuelle |
-| perplexity-app | manuelle (app) | oui | en | Perplexity, application gratuite, saisie manuelle |
+| chatgpt | API (Elmo) | oui | en | OpenAI en direct (:online, outil web_search) |
+| claude | API (Elmo) | oui | en | Anthropic en direct (:online, outil web_search) |
+| gemini | API (Elmo) | oui | en | via OpenRouter (recherche Google native) |
+| perplexity | API (Elmo) | oui | en | via OpenRouter (Sonar) |
 
 | Fenêtre | Type | Jours | Panel | Statut | Début | Fin | Jours manquants |
 |---|---|---|---|---|---|---|---|
