@@ -13,3 +13,6 @@
 backups/
 exports/
 crawlie-out/
+
+# Versioned SQL migrations are the exception.
+!migrations/0001_evidence.sql
