@@ -1,0 +1,21 @@
+{
+  "name": "@oia/visibility-console",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Console locale d'OIA Visibility (CLI). NON DÉPLOYÉE : vercel.json cible @oia/web seulement. À exécuter en local uniquement.",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "console": "tsx src/cli.ts"
+  },
+  "dependencies": {
+    "@oia/visibility-infra": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}
