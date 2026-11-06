@@ -1,5 +1,9 @@
 # OIA — roadmap
 
+> **Pour la roadmap consolidée OIA × Shyrka × Souffleur (version 3.3), voir
+> `docs/roadmap-oia-shyrka-souffleur.md`.** Elle couvre P0 à P9, OIA Visibility,
+> OIA SEO Command et Shyrka. Le présent document reste la roadmap d'OIA Funding.
+
 Écrite le 16/09/2026, après mesure sur les données réelles du dépôt. Elle
 remplace, comme document vivant, le plan Milestone 1
 (`docs/architecture/06-milestone-1-plan.md`, conservé comme trace historique).
