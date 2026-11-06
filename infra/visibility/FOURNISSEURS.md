@@ -34,6 +34,62 @@ OpenRouter), plus une réserve de budget avant chaque lot de mesure. Sans
 cette double précaution, un dépassement peut passer sous le radar du
 script le temps que l'estimation ou l'API de solde se mette à jour.
 
+## 0 ter. Modèles mesurés, proches des applications grand public (A6, 2026-11-08)
+
+Proposition de cinq modèles API, chacun aussi proche que possible du
+comportement de l'application grand public du fournisseur (ChatGPT,
+Claude, Le Chat, Gemini, Perplexity). Les identifiants proviennent de la
+documentation officielle aux adresses citées, consultées le 2026-11-08.
+**Aucun appel réel** n'a été fait pour les confirmer : ce qui est marqué
+« non vérifié » demande un appel réel plus tard.
+
+| Modèle (nom Elmo) | Plus proche de | Identifiant API | Source de l'identifiant | Recherche web | Statut de vérification |
+|---|---|---|---|---|---|
+| chatgpt (OpenAI) | ChatGPT | `gpt-6-luna` (Responses API, outil `web_search`) | HANDOFF §2.1 (code Elmo 0.7.7, `openai-api.ts`) | Oui | Nom d'identifiant **non vérifié** côté OpenAI docs — à rejouer quand les docs seront accessibles. |
+| claude (Anthropic) | Claude.ai | `claude-haiku-5-5` (Messages, outil `web_search`) | HANDOFF §2.1 | Oui | Idem : **non vérifié** côté Anthropic docs. |
+| gemini (via OpenRouter) | Gemini app | `google/gemini-2.5-flash` avec `:online` | HANDOFF §2.1 ; AI Studio annonce `gemini-2.5-flash` comme offre gratuite courante | Oui (Google natif) | Identifiant côté OpenRouter : **vérifié dans le code Elmo**, pas sur docs OpenRouter (accès bloqué dans la session précédente). |
+| perplexity (via OpenRouter) | Perplexity | `perplexity/sonar` avec `:online` | HANDOFF §2.1 ; Perplexity annonce Sonar comme son modèle « base » | Oui (Sonar) | **Vérifié dans le code Elmo** ; Perplexity peut l'étiqueter autrement côté console. |
+| mistral (Mistral direct, FR) | Le Chat FR | `mistral-medium-latest` avec `:online` (Conversations API, outil `web_search`) | HANDOFF §2.1, Mistral annonce Conversations en bêta | Oui | Alias `-latest` qui évolue ; la version exacte est stockée par Elmo (`prompt_runs.version`). |
+
+Jev (juge des mentions) : `typesafe/jev-1.13` via OpenRouter. Pas modifié
+depuis le 2026-11-05.
+
+### Coûts estimés face au plafond mensuel de 30 $
+
+Sources des prix : tableau du HANDOFF §2.3 (non vérifié, documenté à partir
+des tarifs de la doc Elmo) + estimations OIA. Les nombres sont donnés en
+USD, arrondis. Par appel, recherche web comprise.
+
+| Moteur | Coût unitaire estimé |
+|---|---|
+| ChatGPT (OpenAI) | 0,015 à 0,02 $ |
+| Claude (Anthropic) | ≈ 0,03 $ (≈ 40 % de la facture) |
+| Gemini (via OpenRouter) | 0,01 à 0,035 $ |
+| Perplexity (Sonar) | ≈ 0,007 $ |
+| Mistral (avec recherche web) | ≈ 0,03 $ |
+| Jev (par 1 000 réponses) | 0,15 à 0,35 $ |
+
+**Volumétrie des deux pilotes (fenêtre J0 = 5 jours à 1 run par jour par cible)** :
+
+| Pilote | Questions × moteurs × jours | Appels fournisseurs | Plafond 30 $ compatible ? |
+|---|---|---|---|
+| Coach Gari | 10 × 4 × 5 = 200 | ≈ 0,5 à 0,9 $/jour → **2,5 à 4,5 $/fenêtre** | oui, confortablement |
+| Maisons.co | 20 × 5 × 5 = 500 | ≈ 1,1 à 2,2 $/jour → **5,5 à 11 $/fenêtre** | oui |
+| Les deux ensemble, 1 fenêtre/mois | — | **8 à 16 $/mois** | oui, marge 14 à 22 $ |
+| Les deux ensemble, mesure quotidienne (hors scénario) | — | 48 à 95 $/mois | **non** — le plafond 30 $ arrêterait le worker vers J12-J15. |
+
+Conclusion : **une fenêtre de 5 jours par mois tient dans le plafond 30 $
+avec marge**. Une mesure quotidienne permanente ne tient pas ; elle n'est
+pas au programme (roadmap 3.3 : fenêtres ponctuelles). Les crédits
+prépayés à placer chez chaque fournisseur avant la première fenêtre : 5 $
+minimum chez OpenAI, Anthropic, Mistral, OpenRouter, soit environ 20 à
+25 $ immobilisés en avance.
+
+Reste à vérifier par Mickaël avant J0 réel :
+- identifiants exacts (deux `non vérifié` ci-dessus) ;
+- disponibilité de la recherche web en formule prépayée sur chaque compte ;
+- recharge automatique **désactivée** partout.
+
 ## 0 bis. Historique : la configuration à zéro coût (2026-11-06, annulée le 2026-11-08)
 
 Aucune dépense, aucune carte bancaire, aucun abonnement. Elle a remplacé la
