@@ -99,21 +99,36 @@ export const SubjectSchema = z
  * `sourceId` / `sourceRef` = where the wording comes from (a declared source
  * document and the place in it), for prompts with origin "document".
  */
+/**
+ * Intent of a prompt. Five buckets borrowed from B1:
+ *   decouverte     : « What are the options for X ? »
+ *   prix_offre     : « What does X cost / what does X include ? »
+ *   comparaison    : « X vs Y »
+ *   niche_local    : a geographic or vertical niche
+ *   marquee        : a branded question (the subject's name is in the text)
+ */
+export const PromptIntent = z.enum(["decouverte", "prix_offre", "comparaison", "niche_local", "marquee"]);
+export type PromptIntent = z.infer<typeof PromptIntent>;
+
 export const PromptSchema = z
   .object({
     id: z.string().regex(/^[a-z0-9][a-z0-9-]*$/),
     version: z.number().int().min(1),
     family: z.enum(["unbranded", "branded"]),
+    /** Intent bucket. Optional in v1 to stay compatible with the panels already validated. */
+    intent: PromptIntent.optional(),
+    /** Offer id the prompt targets (free string, matched against the subject's offers list in C1). Optional. */
+    targetOffer: z.string().optional(),
     language: lang,
     markets: z.array(country).min(1),
     /** Same pairId across languages = translations of one question. */
     pairId: z.string().optional(),
     text: z.string().min(10),
-    origin: z.enum(["claude", "elmo-assistant", "owner", "document"]),
+    origin: z.enum(["claude", "elmo-assistant", "owner", "document", "generator"]),
     sourceId: z.string().optional(),
     sourceRef: z.string().optional(),
     note: z.string().optional(),
-    status: z.enum(["active", "candidate", "retired"]),
+    status: z.enum(["active", "candidate", "retired", "proposed"]),
     supersededBy: z.number().int().optional(),
     createdAt: isoDate,
   })

@@ -34,6 +34,23 @@ export function checkBundle(b: SubjectBundle): string[] {
   const folder = b.dir.split(/[\\/]/).pop();
   if (folder !== subject.id) problems.push(`folder "${folder}" must equal id "${subject.id}"`);
 
+  // Alias terms the subject uses to refer to itself. `unbranded` prompts must
+  // not contain any of them; `branded` prompts must contain at least one.
+  const brandTerms = (() => {
+    const t = [
+      subject.displayName,
+      ...subject.aliases.filter((a) => a.status !== "rejected").map((a) => a.value),
+    ]
+      .map((s) => s.trim())
+      .filter((s) => s.length >= 2);
+    return Array.from(new Set(t));
+  })();
+  const containsBrand = (text: string): string | null => {
+    const haystack = text.toLowerCase();
+    for (const t of brandTerms) if (haystack.includes(t.toLowerCase())) return t;
+    return null;
+  };
+
   const seen = new Set<string>();
   for (const p of panel.prompts) {
     const key = `${p.id}@${p.version}`;
@@ -45,6 +62,23 @@ export function checkBundle(b: SubjectBundle): string[] {
     if (p.status === "retired" && p.supersededBy === undefined) problems.push(`prompt ${key}: retired without supersededBy`);
     if (p.origin === "document" && !p.sourceId) problems.push(`prompt ${key}: origin document without sourceId`);
     if (p.sourceId && !subject.sources.some((s) => s.id === p.sourceId)) problems.push(`prompt ${key}: unknown sourceId "${p.sourceId}"`);
+    // Branded ⇔ brand mentioned. A reviewer-generated prompt that mis-labels a
+    // branded question is the exact failure mode B2 must prevent (contrôles).
+    const brandHit = containsBrand(p.text);
+    if (p.family === "unbranded" && brandHit) {
+      problems.push(`prompt ${key}: unbranded prompt contains brand term "${brandHit}"`);
+    }
+    if (p.family === "branded" && !brandHit) {
+      problems.push(`prompt ${key}: branded prompt does not mention any alias of the subject`);
+    }
+    // Intent consistency: a `marquee` intent must be a branded prompt, and
+    // vice-versa (an unbranded prompt cannot carry intent `marquee`).
+    if (p.intent === "marquee" && p.family !== "branded") {
+      problems.push(`prompt ${key}: intent "marquee" must have family "branded"`);
+    }
+    if (p.family === "branded" && p.intent && p.intent !== "marquee") {
+      problems.push(`prompt ${key}: branded prompt has intent "${p.intent}" (expected "marquee")`);
+    }
   }
   const ids = new Set(panel.prompts.map((p) => p.id));
   for (const id of ids) {
