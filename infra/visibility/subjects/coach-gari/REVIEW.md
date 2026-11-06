@@ -110,12 +110,12 @@
 
 ## Plan de mesure
 
-| Moteur (Elmo) | Langues comptées | Note |
-|---|---|---|
-| chatgpt | en | OpenAI en direct (API Responses + web_search) |
-| claude | en | Anthropic en direct (outil web_search) |
-| gemini | en | via OpenRouter (recherche native Google) |
-| perplexity | en | via OpenRouter (Sonar, recherche native) |
+| Moteur | Collecte | Recherche web | Langues comptées | Note |
+|---|---|---|---|---|
+| gemini | API (Elmo) | oui | en | Gemini via OpenRouter, clé Google AI Studio gratuite en BYOK ; recherche Google gratuite à confirmer (scripts/zero-cost-check.sh) |
+| chatgpt-app | manuelle (app) | oui | en | ChatGPT, application gratuite, saisie manuelle |
+| claude-app | manuelle (app) | oui | en | Claude, application gratuite, saisie manuelle |
+| perplexity-app | manuelle (app) | oui | en | Perplexity, application gratuite, saisie manuelle |
 
 | Fenêtre | Type | Jours | Panel | Statut | Début | Fin | Jours manquants |
 |---|---|---|---|---|---|---|---|

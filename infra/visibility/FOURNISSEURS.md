@@ -3,6 +3,25 @@
 État au 5 novembre 2026, vérifié dans le code des versions épinglées (Elmo
 0.7.7, CrawlSEO 0.3.6, Crawlie 0.5.3) et dans `packages/providers` d'OIA.
 
+## 0. Décision du 2026-11-06 : configuration à zéro coût
+
+Aucune dépense, aucune carte bancaire, aucun abonnement. Elle remplace pour J0
+la configuration décrite aux sections 1 et 4. Ces sections restent la
+référence si un budget est ouvert plus tard. Le détail des vérifications est
+dans `reports/2026-11-05-zero-cout.md`.
+
+| Moteur | Collecte | Recherche web | Coût |
+|---|---|---|---|
+| Gemini | Elmo, via OpenRouter (compte gratuit, clé Google AI Studio en BYOK) | Oui si le test d'un appel le confirme gratuit | 0 € attendu, vérifié par `scripts/zero-cost-check.sh` |
+| Mistral | Elmo, API Mistral (offre gratuite), panels en français | **Non** (facturée par appel) | 0 € |
+| ChatGPT, Claude, Perplexity | **Saisie manuelle** depuis les applications gratuites (`subjects capture-template` / `capture-check`) | Selon l'application | 0 € |
+| Jev | `TYPESAFE_API_KEY=stub`, juge local intégré à Elmo | — | 0 € ; sentiment et position non exploitables |
+
+Flux hors d'Europe dans cette configuration : Gemini (OpenRouter puis Google,
+États-Unis ; les données de l'offre gratuite peuvent servir à Google) et les
+applications grand public consultées à la main. Jev ne sort plus du Mac, et
+OpenAI, Anthropic et Perplexity ne reçoivent plus rien par API.
+
 ## 1. Moteurs mesurés par Elmo (mode API uniquement)
 
 | Moteur (modèle Elmo) | Accès | Cible `SCRAPE_TARGETS` | Recherche web | URL citées extraites |

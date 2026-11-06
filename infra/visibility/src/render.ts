@@ -45,10 +45,12 @@ export function renderReview(b: SubjectBundle): string {
   }
   L.push("## Faits de référence", "", "| ID | Fait | Statut | Source |", "|---|---|---|---|");
   for (const f of facts.facts) L.push(`| ${f.id} | ${f.statement} | ${mark(f.status)} ${f.status} | ${f.sourceId} |`);
-  L.push("", "## Plan de mesure", "", "| Moteur (Elmo) | Langues comptées | Note |", "|---|---|---|");
+  L.push("", "## Plan de mesure", "", "| Moteur | Collecte | Recherche web | Langues comptées | Note |", "|---|---|---|---|---|");
   const plan = enginePlan(b);
-  for (const e of measurement.engines)
-    L.push(`| ${e.model}${plan.enabledModels.includes(e.model) ? "" : " (non activé : aucune langue du sujet)"} | ${(plan.reportLanguages[e.model] ?? []).join(", ") || "—"} | ${e.note ?? ""} |`);
+  for (const e of measurement.engines) {
+    const on = plan.enabledModels.includes(e.model) || plan.manualEngines.includes(e.model);
+    L.push(`| ${e.model}${on ? "" : " (non activé : aucune langue du sujet)"} | ${e.collection === "api" ? "API (Elmo)" : "manuelle (app)"} | ${e.webSearch ? "oui" : "non"} | ${(plan.reportLanguages[e.model] ?? []).join(", ") || "—"} | ${e.note ?? ""} |`);
+  }
   L.push("", "| Fenêtre | Type | Jours | Panel | Statut | Début | Fin | Jours manquants |", "|---|---|---|---|---|---|---|---|");
   for (const w of measurement.windows)
     L.push(`| ${w.id} | ${w.kind} | ${w.days} | v${w.panelVersion} | ${w.status} | ${w.start ?? "—"} | ${w.end ?? "—"} | ${w.missingDays.map((d) => `${d.date} (${d.reason})`).join(" ; ") || "—"} |`);
@@ -85,6 +87,8 @@ export function renderElmoBrief(b: SubjectBundle): string {
     },
     /** Answers outside these languages are kept but not reported, per engine. */
     reportLanguages: plan.reportLanguages,
+    /** Not configured in Elmo: captured by hand (subjects capture-template). */
+    manualEngines: plan.manualEngines,
     competitors: usable(s.competitors).map((c) => ({ name: c.name, domains: c.domains, aliases: c.aliases })),
     prompts: panel.prompts
       .filter((p) => p.status === "active")

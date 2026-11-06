@@ -204,6 +204,14 @@ export const FreezeSchema = z
 export const EngineSchema = z
   .object({
     model: z.string().regex(/^[a-z0-9-]+$/),
+    /**
+     * api = collected by Elmo through a provider API (model = Elmo model id);
+     * manual = answers copied by hand from a consumer app (model = e.g. chatgpt-app),
+     * captured with `subjects capture-template` / `capture-check`, never sent to Elmo.
+     */
+    collection: z.enum(["api", "manual"]).default("api"),
+    /** Web search on for this engine (false = no cited URLs to expect). */
+    webSearch: z.boolean().default(true),
     languages: z.array(lang).optional(),
     note: z.string().optional(),
   })

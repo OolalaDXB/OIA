@@ -104,14 +104,19 @@ describe("engines", () => {
     b.subject.languages = ["en", "fr"];
     b.subject.markets[0] = { ...b.subject.markets[0]!, languages: ["en", "fr"] };
     b.panel.prompts.push({ ...b.panel.prompts[1]!, id: "fr-01", language: "fr", text: "Que propose Demo Subject ?" });
-    b.measurement.engines.push({ model: "mistral", languages: ["fr"] });
+    b.measurement.engines.push({ model: "mistral", collection: "api", webSearch: false, languages: ["fr"] });
     expect(checkBundle(b)).toEqual([]);
-    expect(enginePlan(b)).toEqual({ enabledModels: ["chatgpt", "mistral"], reportLanguages: { chatgpt: ["en", "fr"], mistral: ["fr"] } });
+    b.measurement.engines.push({ model: "chatgpt-app", collection: "manual", webSearch: true });
+    expect(enginePlan(b)).toEqual({
+      enabledModels: ["chatgpt", "mistral"],
+      manualEngines: ["chatgpt-app"],
+      reportLanguages: { chatgpt: ["en", "fr"], mistral: ["fr"], "chatgpt-app": ["en", "fr"] },
+    });
   });
 
   it("an engine cannot target a language the subject does not have", () => {
     const b = clone(fixture());
-    b.measurement.engines.push({ model: "mistral", languages: ["fr"] });
+    b.measurement.engines.push({ model: "mistral", collection: "api", webSearch: false, languages: ["fr"] });
     expect(checkBundle(b)).toContain("engine mistral: language fr not in subject.languages");
   });
 });

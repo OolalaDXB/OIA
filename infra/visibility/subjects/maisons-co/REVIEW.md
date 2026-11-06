@@ -73,13 +73,13 @@
 
 ## Plan de mesure
 
-| Moteur (Elmo) | Langues comptées | Note |
-|---|---|---|
-| chatgpt | fr, en | OpenAI en direct (API Responses + web_search) |
-| claude | fr, en | Anthropic en direct (outil web_search) |
-| gemini | fr, en | via OpenRouter (recherche native Google) |
-| perplexity | fr, en | via OpenRouter (Sonar, recherche native) |
-| mistral | fr | Mistral en direct (API Conversations bêta + web_search) ; mesuré pour les panels en français uniquement (décision 2026-11-05) |
+| Moteur | Collecte | Recherche web | Langues comptées | Note |
+|---|---|---|---|---|
+| gemini | API (Elmo) | oui | fr, en | Gemini via OpenRouter, clé Google AI Studio gratuite en BYOK ; recherche Google gratuite à confirmer (scripts/zero-cost-check.sh) |
+| mistral | API (Elmo) | non | fr | Mistral, offre gratuite, SANS recherche web (payante) : pas d'URL citées attendues ; panels en français uniquement |
+| chatgpt-app | manuelle (app) | oui | fr, en | ChatGPT, application gratuite, saisie manuelle |
+| claude-app | manuelle (app) | oui | fr, en | Claude, application gratuite, saisie manuelle |
+| perplexity-app | manuelle (app) | oui | fr, en | Perplexity, application gratuite, saisie manuelle |
 
 | Fenêtre | Type | Jours | Panel | Statut | Début | Fin | Jours manquants |
 |---|---|---|---|---|---|---|---|

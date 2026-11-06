@@ -122,11 +122,16 @@ export function loadSubjects(root: string = defaultSubjectsDir()): SubjectBundle
  * Engines to enable on the subject's Elmo brand (Elmo selects per brand), and,
  * per engine, the languages whose answers count in reporting.
  */
-export function enginePlan(b: SubjectBundle): { enabledModels: string[]; reportLanguages: Record<string, string[]> } {
+export function enginePlan(b: SubjectBundle): {
+  enabledModels: string[];
+  manualEngines: string[];
+  reportLanguages: Record<string, string[]>;
+} {
   const langs = b.subject.languages;
   const engines = b.measurement.engines.filter((e) => !e.languages || e.languages.some((l) => langs.includes(l)));
   return {
-    enabledModels: engines.map((e) => e.model),
+    enabledModels: engines.filter((e) => e.collection === "api").map((e) => e.model),
+    manualEngines: engines.filter((e) => e.collection === "manual").map((e) => e.model),
     reportLanguages: Object.fromEntries(engines.map((e) => [e.model, e.languages ?? langs])),
   };
 }

@@ -8,13 +8,19 @@
 #   - réel OpenRouter : GET /api/v1/key -> usage_daily (Gemini, Perplexity et Jev) ;
 #   - réel OpenAI / Anthropic / Mistral : pas lu par ce script -> relevé à la main
 #     dans les consoles, à reporter dans le journal (colonne manual_usd, voir README).
-# Plafond : OIA_VIS_DAILY_CAP_USD dans elmo/.env (défaut 5).
+# Plafond : OIA_VIS_DAILY_CAP_USD dans elmo/.env (défaut 5). Le worker est arrêté
+# dès que le coût retenu DÉPASSE le plafond (0 = arrêt au premier centime réel).
+# Source du coût retenu : OIA_VIS_COST_SOURCE = max (défaut : max des deux),
+# estimate (estimation Elmo seule) ou real (coût réel OpenRouter seul ; à utiliser
+# en configuration zéro coût, où Elmo estime un coût pour des appels gratuits).
 # N'affiche ni ne journalise aucune clé.
 set -euo pipefail
 source "$(dirname "$0")/lib.sh"
 require_env "$ELMO_ENV_FILE"
 envval() { awk -F= -v k="$1" '$1==k{sub(/^[^=]*=/,""); print; exit}' "$ELMO_ENV_FILE"; }
 cap="$(envval OIA_VIS_DAILY_CAP_USD)"; cap="${cap:-5}"
+source_mode="${OIA_VIS_COST_SOURCE:-$(envval OIA_VIS_COST_SOURCE)}"; source_mode="${source_mode:-max}"
+case "$source_mode" in max|estimate|real) ;; *) echo "OIA_VIS_COST_SOURCE: max, estimate ou real" >&2; exit 2;; esac
 data="${OIA_VIS_DATA:-$HOME/oia-visibility-data}"; mkdir -p "$data"
 journal="$data/cost-journal.csv"
 [ -s "$journal" ] || echo "utc_time,elmo_estimate_usd,openrouter_daily_usd,retained_usd,cap_usd,action" > "$journal"
@@ -38,8 +44,20 @@ once() {
       node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{const v=JSON.parse(s).data?.usage_daily;process.stdout.write(typeof v==="number"?String(v):"")}catch{}})' || true)"
   fi
   unset key
-  retained="$(node -e 'const a=process.argv.slice(1).filter(x=>x!=="").map(Number);console.log(Math.max(0,...a).toFixed(4))' "$est" "$orr")"
-  if node -e 'process.exit(Number(process.argv[1])>=Number(process.argv[2])?0:1)' "$retained" "$cap"; then
+  case "$source_mode" in
+    estimate) pick=("$est") ;;
+    real)
+      # Fails closed: in "real" mode an unreadable OpenRouter cost stops the worker.
+      if [ -z "$orr" ]; then
+        elmo_dc stop worker >/dev/null 2>&1 || true
+        echo "$(date -u +%Y-%m-%dT%H:%M:%SZ),$est,unreadable,n/a,$cap,stop-worker(cost-unreadable)" | tee -a "$journal"
+        return 4
+      fi
+      pick=("$orr") ;;
+    *) pick=("$est" "$orr") ;;
+  esac
+  retained="$(node -e 'const a=process.argv.slice(1).filter(x=>x!=="").map(Number);console.log(Math.max(0,...a).toFixed(4))' "${pick[@]}")"
+  if node -e 'process.exit(Number(process.argv[1])>Number(process.argv[2])?0:1)' "$retained" "$cap"; then
     action="stop-worker"
     elmo_dc stop worker >/dev/null 2>&1 || true
   fi

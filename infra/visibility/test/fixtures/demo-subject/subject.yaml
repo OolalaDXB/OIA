@@ -10,5 +10,8 @@ markets:
   - { country: GB, label: United Kingdom, languages: [en], status: confirmed }
 aliases:
   - { value: Demo Subject, kind: name, status: confirmed }
+  - { value: demo.example, kind: domain, status: confirmed }
+competitors:
+  - { name: Rival Co, domains: [rival.example], aliases: [Rival], category: demo rival, status: proposed, rationale: "Fixture competitor" }
 sources:
   - { id: owner, kind: owner-statement, ref: kickoff, description: Owner brief, addedAt: "2026-01-01" }

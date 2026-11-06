@@ -79,9 +79,19 @@ Ensuite :
 1. Sauvegarder hors machine les secrets listés dans [SECRETS.md](SECRETS.md).
 2. Renseigner `crawlseo/.env` : client OAuth Google, avec l'URI de redirection
    `http://localhost:3100/api/auth/callback/google`.
-3. Renseigner `elmo/.env` : la clé Jev (TypeSafe ou OpenRouter) et une clé LLM
-   directe pour l'assistant d'onboarding. **Laisser `SCRAPE_TARGETS` vide
-   jusqu'à la validation des panels.**
+3. Renseigner `elmo/.env` en **configuration zéro coût** (décision du
+   2026-11-06, voir `elmo/.env.example`) :
+   - `TYPESAFE_API_KEY=stub` : juge Jev local ;
+   - `MISTRAL_API_KEY` : offre gratuite ;
+   - `OPENROUTER_API_KEY` : compte gratuit sans crédit, avec la clé Google AI
+     Studio gratuite enregistrée en BYOK ;
+   - OpenAI et Anthropic restent vides.
+   **Laisser `SCRAPE_TARGETS` vide jusqu'au démarrage de J0.**
+4. Vérifier, avant tout démarrage du worker :
+   `./scripts/zero-cost-check.sh`. Le script fait un appel Gemini avec
+   recherche et un appel Mistral sans recherche. Ajouter `--mistral-search`
+   pour savoir si l'offre gratuite Mistral accepte la recherche web. Sans carte
+   ni crédit, un appel payant est refusé, jamais facturé.
 
 ```bash
 docker compose -p oia-crawlseo --env-file crawlseo/.env -f crawlseo/compose.yaml up -d
@@ -101,14 +111,30 @@ exécute ces runs. S'il ne tourne pas, rien ne part et rien n'est facturé. Le
 worker refuse d'ailleurs de démarrer tant que `SCRAPE_TARGETS` est vide (constaté
 lors du test). Démarrer le worker revient donc à démarrer J0.
 
-Attention, l'assistant de prompts (onboarding) appelle bien la clé LLM directe
-depuis l'app web. Cet appel est facturé, mais ce n'est pas un run de mesure.
+Attention, l'assistant de prompts (onboarding) appelle bien la clé Mistral
+depuis l'app web. Ce n'est pas un run de mesure ; avec la clé gratuite, il
+peut échouer, ce qui est sans gravité puisque les panels sont déjà écrits.
 
 ## Mesure J0 (après validation)
 
 - `.env` d'Elmo : `RUNS_PER_PROMPT=1` et `DEFAULT_DELAY_HOURS=24`. On obtient
-  1 run par jour et par cible. `SCRAPE_TARGETS` ne contient que des cibles API
-  avec `:online`.
+  1 run par jour et par cible. En zéro coût, `SCRAPE_TARGETS` ne contient que
+  Gemini (via OpenRouter, avec recherche si le test l'a confirmée gratuite) et
+  Mistral (sans recherche).
+- **Moteurs en saisie manuelle** (`collection: manual` dans
+  `measurement.yaml` : ChatGPT, Claude et Perplexity, applications gratuites).
+  Chaque jour de la fenêtre, pour chaque sujet et chaque application :
+  ```bash
+  pnpm --filter @oia/visibility-infra subjects capture-template <id> <moteur> [YYYY-MM-DD]
+  # coller réponses et sources dans le fichier créé sous ~/oia-visibility-data/manual/<date>/<id>/
+  pnpm --filter @oia/visibility-infra subjects capture-check <fichier.md>
+  ```
+  `capture-check` refuse un fichier incomplet. Une question non posée
+  s'écrit « NON CAPTURÉ : <raison> » et est consignée. Le fichier JSON produit
+  contient, par réponse : mention de la marque (correspondance d'alias et de
+  domaines), URL citées, concurrents cités, empreinte SHA-256. La source de
+  collecte vaut `manual-app` : ces réponses ne sont jamais mélangées aux
+  réponses API. Le modèle n'est jamais appelé pour les analyser.
 - Coût : Elmo écrit une estimation par appel dans la table `usage_events`. Le
   coût réel se relève chaque jour dans la console de chaque fournisseur.
 - **Le démarrage de J0 se fait à la main**, une fois les panels `validated` :
@@ -117,16 +143,19 @@ depuis l'app web. Cet appel est facturé, mais ce n'est pas un run de mesure.
   2. Renseigner `SCRAPE_TARGETS` dans `elmo/.env` (la valeur est donnée en
      commentaire dans `.env.example`).
   3. Démarrer le worker : `docker compose -p oia-elmo --env-file elmo/.env -f elmo/compose.yaml up -d`.
-  4. Lancer le plafond en continu : `./scripts/cost-guard.sh --watch 60`
-     (`OIA_VIS_DAILY_CAP_USD`, 5 $ par défaut).
+  4. Lancer le plafond en continu : `./scripts/cost-guard.sh --watch 60`.
 - Plafond de coût : `scripts/cost-guard.sh` arrête le worker dès que le coût du
-  jour (UTC) atteint le plafond. Le coût retenu est le plus élevé entre
-  l'estimation d'Elmo (`usage_events`) et la consommation réelle du jour chez
-  OpenRouter (`usage_daily`, qui couvre Gemini, Perplexity et Jev). Le script
-  **échoue en sécurité** : si le coût est illisible, il arrête aussi le worker.
-  Le coût réel chez OpenAI et Anthropic n'est lisible qu'avec une clé
-  d'administration ; il se relève chaque jour dans les consoles et s'ajoute au
-  journal `~/oia-visibility-data/cost-journal.csv`.
+  jour (UTC) **dépasse** `OIA_VIS_DAILY_CAP_USD`. La source du coût est
+  `OIA_VIS_COST_SOURCE` :
+  - `max` (défaut) : le plus élevé entre l'estimation d'Elmo et le réel chez
+    OpenRouter ;
+  - `estimate` : l'estimation d'Elmo seule ;
+  - `real` : le réel OpenRouter seul.
+  En zéro coût : plafond `0` et source `real`, car Elmo estime environ
+  0,005 $ par appel Mistral même gratuit. Le script **échoue en sécurité** :
+  coût illisible, worker arrêté. Le réel chez Mistral, Google et TypeSafe se
+  relève dans leurs consoles et s'ajoute au journal
+  `~/oia-visibility-data/cost-journal.csv`.
 - Relevé quotidien : `./scripts/window-day.sh [YYYY-MM-DD]` donne les réponses
   par sujet et par cible, les questions restées sans réponse et le coût estimé.
   Le résultat va dans `~/oia-visibility-data/window/`. Un jour sans run est
