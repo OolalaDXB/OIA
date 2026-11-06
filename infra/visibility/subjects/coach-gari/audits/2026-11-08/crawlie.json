@@ -1,0 +1,854 @@
+{
+  "config": {
+    "url": "https://coachgari28.com",
+    "mode": "site",
+    "urls": [],
+    "maxPages": 5000,
+    "maxDepth": 16,
+    "concurrency": 4,
+    "timeoutSecs": 15,
+    "userAgent": "crawlie (+https://crawlie.dev)",
+    "checkExternal": true,
+    "respectRobots": true,
+    "useSitemap": true,
+    "resolveHost": true,
+    "include": [],
+    "exclude": [],
+    "extract": [],
+    "excludeHosts": [],
+    "excludePaths": [],
+    "render": false,
+    "renderWaitMs": 0
+  },
+  "pages": [
+    {
+      "url": "https://coachgari28.com/",
+      "finalUrl": "https://coachgari28.com/",
+      "status": 200,
+      "redirectChain": [],
+      "contentType": "text/html; charset=utf-8",
+      "responseTimeMs": 40,
+      "sizeBytes": 34731,
+      "depth": 0,
+      "server": "Vercel",
+      "contentEncoding": "br",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "xRobotsTag": null,
+      "hsts": true,
+      "title": "Coach Gari | Online coaching, programmes and live sessions",
+      "metaDescription": "Online coaching, video programmes and live sessions with Coach Gari — PadelMBA certified, ten years coaching in Dubai. Train at home, in the gym or anywhere.",
+      "h1": [
+        "Train with me from anywhere"
+      ],
+      "h2Count": 8,
+      "h3Count": 9,
+      "wordCount": 950,
+      "textRatio": 0.15651724,
+      "text": "Coach Gari . Programmes Online coaching Live & onsite Book About Support Get started → Coach Gari. Your Chief Energy Officer. Train with me from anywhere Build the energy to move better, perform better and live better. Online coaching, video programmes and live sessions for people training at home, in a local gym, or wherever they can find a floor. See the programmes → How online coaching works PadelMBA certified coach · Ten years coaching in Dubai · Zimbabwean Programmes Four programmes All of it works online. Fitness at the touch of your screen. Online coaching — live sessions rather than a PDF you never open. We meet on video twice a month, the plan is built around the gym, home or outdoors you actually have, and meal planning starts from where you live. How online coaching works A conversation with Coach Gari — an hour to talk it through, when what is in the way is not the training. It does not have to end in a workout. About the conversation Live group sessions — in person a few times a year, in Zimbabwe, across Southern Africa and wherever else the travelling goes. Small groups, outdoors where possible. Where and when Padel coaching — movement, positioning, shot selection and match play, shaped to your level, in person in Dubai or online, with a PadelMBA certified coach. About padel coaching Loading prices and availability… Online coaching Live sessions, not a PDF you never open Let me monitor, push and encourage you to be more, in real time. We meet on video Let's touch base in real time twice a month and track your progress. Works with what you have Your plan is built around your reality, whether it's in the gym, at home or simply outdoors. Meal planning A simple shift in meal prepping and shopping habits, based on your location. Talk to Coach Gari Sometimes the session is the conversation Not every call has to end in a workout. Some people book an hour just to talk it through: what's blocking them, why the last three attempts stopped, what they actually want out of this. It's the part of coaching I like most, and it works the same whether you're down the road or six time zones away. Book a conversation → Live & onsite When I'm on your side of the world A few times a year I run sessions in person, in Zimbabwe, across Southern Africa and wherever else I'm travelling. Small groups, outdoors where possible, everyone is welcome. Dates to come Harare: outdoor group session A morning session in the park, all levels, bring water and a friend. Join the list → Dates to come Southern Africa: weekend camp Two days of training, food and conversation. Numbers kept small on purpose. Join the list → On request Somewhere else entirely If there are enough of you in one city, tell me. I travel more than I plan to. Tell me where → Padel & corporate Work together from anywhere Coaching also happens on a padel court and inside companies. In person in Dubai, or online. Padel Padel coaching Move better, read the game earlier and play with more control. Coaching can focus on movement, positioning, shot selection and match play, depending on your level and what you want to improve. PadelMBA certified coach Talk to Coach Gari about padel → Corporate Coaching for teams Bring movement, energy and better habits into the working day. Sessions can be shaped around the team, the setting and what you want to achieve. Let's energise your team → About Zimbabwe to Dubai Proudly born and raised in Zimbabwe, with a short stint in Johannesburg for university and my early career, before relocating to Dubai. Ten years later I've had the privilege of working with individuals from all over the world, which has given me a deeper insight into health and wellness. Most of the people I coach now are nowhere near me, which suits both of us fine. • PadelMBA certified coach • Ten years coaching in Dubai • Athletic development and premium client engagement • Active padel and tennis player Book a session Pick a time Choose a session, a day and a time. Times are shown in your timezone; the session's own timezone is always spelled out. A time is held for ten minutes while you pay. Start Now Tell me where you are, the equipment at your disposal, and what you are trying to achieve. Get an immediate response on what would work for you. Your name Email or WhatsApp City optional Country Where you are shapes the answer — your timezone for live sessions, and what's actually in the shops for meal planning. The city is optional. What you're after Help me choose Online coaching The 12-week programme Live group sessions A conversation Padel coaching Corporate session Live event near me In person in Dubai Anything useful to know Website Send → or contact Coach Gari directly WhatsApp Email Coach Gari Get Energized Book a session → The Programme Online coaching The Conversation Personal training Padel Corporate Going Beyond About Coach Gari Contact Collaborate with Coach Gari Support Coach Gari → Next live session Drop your email and I'll tell you when the next group session or live event opens. ↗ © 2026 Coach Gari Terms · Privacy Follow me on my socials Design & build by The Studio MT × Support Coach Gari. A small thank-you for the free content and the community work. No reason needed. Country Amount Message to Coach Gari Optional Continue to payment → By paying you agree to the terms . A voluntary payment, not a donation. Cancel card payment",
+      "canonical": "https://coachgari28.com/",
+      "metaRobots": null,
+      "lang": "en",
+      "hasViewport": true,
+      "rendered": false,
+      "preRenderWordCount": 950,
+      "indexable": true,
+      "indexability": null,
+      "canonicalized": false,
+      "imagesTotal": 6,
+      "imagesMissingAlt": 2,
+      "internalLinks": [
+        "https://coachgari28.com/collab",
+        "https://coachgari28.com/admin",
+        "https://coachgari28.com/legal",
+        "https://coachgari28.com/privacy"
+      ],
+      "externalLinks": [
+        "https://www.tiktok.com/@coach_gari28",
+        "https://www.instagram.com/coach_gari28"
+      ],
+      "inlinks": 3,
+      "linkScore": 100.0,
+      "seoScore": 48,
+      "ogTitle": "Coach Gari | Online coaching, programmes and live sessions",
+      "ogImage": "https://coachgari28.com/assets/img/shoot/coach-gari-movement.jpg",
+      "twitterCard": "summary_large_image",
+      "schemaTypes": [
+        "WebSite",
+        "Person",
+        "EducationalOccupationalCredential",
+        "Country",
+        "ProfessionalService",
+        "PostalAddress",
+        "City",
+        "Place",
+        "OfferCatalog",
+        "Offer",
+        "Service"
+      ],
+      "schemaValidations": [
+        {
+          "typeName": "Offer",
+          "missingRequired": [
+            "price",
+            "priceCurrency"
+          ],
+          "missingRecommended": [
+            "availability",
+            "url",
+            "priceValidUntil"
+          ]
+        },
+        {
+          "typeName": "Offer",
+          "missingRequired": [
+            "price",
+            "priceCurrency"
+          ],
+          "missingRecommended": [
+            "availability",
+            "url",
+            "priceValidUntil"
+          ]
+        },
+        {
+          "typeName": "Offer",
+          "missingRequired": [
+            "price",
+            "priceCurrency"
+          ],
+          "missingRecommended": [
+            "availability",
+            "url",
+            "priceValidUntil"
+          ]
+        },
+        {
+          "typeName": "Offer",
+          "missingRequired": [
+            "price",
+            "priceCurrency"
+          ],
+          "missingRecommended": [
+            "availability",
+            "url",
+            "priceValidUntil"
+          ]
+        },
+        {
+          "typeName": "Offer",
+          "missingRequired": [
+            "price",
+            "priceCurrency"
+          ],
+          "missingRecommended": [
+            "availability",
+            "url",
+            "priceValidUntil"
+          ]
+        }
+      ],
+      "invalidJsonld": 0,
+      "hreflang": [],
+      "mixedContent": 0,
+      "a11y": {
+        "linksNoText": 0,
+        "linksTotal": 41,
+        "buttonsNoText": 0,
+        "buttonsTotal": 5,
+        "inputsNoLabel": 0,
+        "controlsTotal": 11,
+        "iframesNoTitle": 0,
+        "positiveTabindex": 0,
+        "skippedHeading": false,
+        "viewportBlocksZoom": false,
+        "score": 100
+      },
+      "geo": {
+        "semanticHtml": true,
+        "structuredData": true,
+        "hasAuthor": false,
+        "hasDate": false,
+        "faqSchema": false,
+        "questionHeadings": 0,
+        "structuredBlocks": 4,
+        "answerable": false,
+        "score": 48
+      },
+      "extractions": [],
+      "contentHash": "6ec80b4b50b318dc",
+      "duplicateOf": null,
+      "error": null
+    },
+    {
+      "url": "https://coachgari28.com/privacy",
+      "finalUrl": "https://coachgari28.com/privacy",
+      "status": 200,
+      "redirectChain": [],
+      "contentType": "text/html; charset=utf-8",
+      "responseTimeMs": 442,
+      "sizeBytes": 6720,
+      "depth": 0,
+      "server": "Vercel",
+      "contentEncoding": "br",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "xRobotsTag": null,
+      "hsts": true,
+      "title": "Privacy policy | Coach Gari",
+      "metaDescription": "How Coach Gari collects, uses, stores and protects your personal data, what you consent to, and how to ask for a copy or a deletion.",
+      "h1": [
+        "Privacy policy"
+      ],
+      "h2Count": 9,
+      "h3Count": 0,
+      "wordCount": 640,
+      "textRatio": 0.56294644,
+      "text": "Coach Gari . ← Back to the site Legal Privacy policy Last updated 9 September 2026 · Terms & legal notice 1. Who is responsible for your data Oolala Next FZ-LLC Licence 47017963, RAK (U.A.E.) PO Box 644762, The Sustainable City, Dubai (U.A.E.) Email: letsgo@coachgari28.com Coach Gari, who delivers the coaching, accesses the data needed to coach you. Both act under this policy. 2. What we collect and why Enquiries : your name, email or phone, city and country, what you are interested in and your message. Used to answer you. Attachments you add are kept with your enquiry. Bookings : your name, email or phone, the session, its time and any note you add. Used to run the session, confirm it, and contact you about changes. Payments : the amount, currency, method, date and a reference. Card details never reach us: they are entered on Stripe's secure form and processed by Stripe. For a bank transfer, Aani or cash payment we keep the reference Coach Gari records. Support Coach Gari : the amount, a reference, the email you give Stripe, and the optional message you write. Coaching data (measurements, progress, session notes): only with your consent, given on the consent page we send you, and only for your coaching. You can withdraw that consent at any time. Technical data : a salted hash of your IP address for a short time, to limit abuse of the forms. Our analytics (Plausible) are cookie-free and aggregate; they never identify you. We do not sell your data, and we do not use it for advertising. 3. Legal basis We process your data to perform the service you ask for (enquiry, booking, payment), to meet legal and accounting obligations (payment records), on your consent (coaching data, optional messages), and for our legitimate interest in keeping the site secure and running. 4. Who handles data for us Supabase — database and secure functions (hosting in the EU). Stripe — card payments. Stripe's own privacy policy applies to the card transaction. Resend — sending transactional emails (confirmations, receipts, replies). Vercel — hosting of the website. Plausible — cookie-free analytics. Migadu — our email mailbox. Each of them processes data on our instructions and under a contract. Some are outside the U.A.E.; where data leaves the country it is protected by contractual safeguards. 5. How long we keep it Enquiries: up to 24 months after the last exchange. Bookings and coaching data: for as long as you are a client and up to 24 months after, unless you ask for deletion earlier. Payment records: 5 years, as required for accounting. Technical logs: a few days. 6. Your rights You can ask to see the data we hold about you, receive a copy, correct it, delete it, or withdraw a consent. Write to letsgo@coachgari28.com from the email address you used with us; we answer within 30 days. Payment records we must keep by law are kept even after a deletion request, with everything else removed. 7. Security Data is stored in access-controlled systems with encryption in transit. Coaching data is separated from booking and payment data, and only the people who need it to coach you can read it. Links we email you for payments, reports or consent are unique and expire. 8. Cookies The public site sets no tracking cookies. Stripe's payment form sets the cookies it needs to process the payment securely. The coach's private back-office uses a session cookie for login only. 9. Changes We may update this policy; the date at the top tells you when. Questions about your data: letsgo@coachgari28.com . © 2026 Coach Gari · Operated by Oolala Next FZ-LLC · Licence 47017963 RAK (U.A.E.) · PO Box 644762 The Sustainable City, Dubai (U.A.E.) Photography by Charlotte Mutuswa · Design & build by The Studio MT Terms · Privacy · coachgari28.com",
+      "canonical": "https://coachgari28.com/privacy",
+      "metaRobots": null,
+      "lang": "en",
+      "hasViewport": true,
+      "rendered": false,
+      "preRenderWordCount": 640,
+      "indexable": true,
+      "indexability": null,
+      "canonicalized": false,
+      "imagesTotal": 0,
+      "imagesMissingAlt": 0,
+      "internalLinks": [
+        "https://coachgari28.com/",
+        "https://coachgari28.com/legal",
+        "https://coachgari28.com/privacy"
+      ],
+      "externalLinks": [],
+      "inlinks": 4,
+      "linkScore": 90.05848,
+      "seoScore": 96,
+      "ogTitle": "Privacy policy | Coach Gari",
+      "ogImage": "https://coachgari28.com/assets/img/shoot/coach-gari-movement.jpg",
+      "twitterCard": "summary_large_image",
+      "schemaTypes": [],
+      "schemaValidations": [],
+      "invalidJsonld": 0,
+      "hreflang": [],
+      "mixedContent": 0,
+      "a11y": {
+        "linksNoText": 0,
+        "linksTotal": 9,
+        "buttonsNoText": 0,
+        "buttonsTotal": 0,
+        "inputsNoLabel": 0,
+        "controlsTotal": 0,
+        "iframesNoTitle": 0,
+        "positiveTabindex": 0,
+        "skippedHeading": false,
+        "viewportBlocksZoom": false,
+        "score": 100
+      },
+      "geo": {
+        "semanticHtml": true,
+        "structuredData": false,
+        "hasAuthor": false,
+        "hasDate": false,
+        "faqSchema": false,
+        "questionHeadings": 0,
+        "structuredBlocks": 3,
+        "answerable": false,
+        "score": 28
+      },
+      "extractions": [],
+      "contentHash": "7e81897cca8add38",
+      "duplicateOf": null,
+      "error": null
+    },
+    {
+      "url": "https://coachgari28.com/collab",
+      "finalUrl": "https://coachgari28.com/collab",
+      "status": 200,
+      "redirectChain": [],
+      "contentType": "text/html; charset=utf-8",
+      "responseTimeMs": 520,
+      "sizeBytes": 8558,
+      "depth": 1,
+      "server": "Vercel",
+      "contentEncoding": "br",
+      "cacheControl": "no-store",
+      "xRobotsTag": "noindex, nofollow",
+      "hsts": true,
+      "title": "Collaborate with Coach Gari",
+      "metaDescription": null,
+      "h1": [
+        "Collaborate with me.",
+        "That's with Coach Gari."
+      ],
+      "h2Count": 0,
+      "h3Count": 0,
+      "wordCount": 182,
+      "textRatio": 0.13075484,
+      "text": "Coach Gari . Collaborations Collaborate with me. Have an idea for a collaboration, event, campaign or partnership? Tell us a little about it and we can explore whether there is a good fit. Contact Your name optional Company or organisation optional Email Phone or WhatsApp Everything is optional, except one way to reply: an email or a phone. Website or social profile optional Collaboration Type of collaboration optional Brand partnership Sponsored content Event appearance Corporate activation Padel or sport collaboration Affiliate or ambassador Product collaboration Something else Short subject optional What would you like to explore together? optional Proposed dates optional to optional Location optional Website Send Or write to collab@coachgari28.com . Thank you That's with Coach Gari. We'll take a look and come back to you about whether there is a good fit. Your reference is . This is your private collaboration room. Keep the link — it is where any proposal will appear and where you can reply or accept. Copy © 2026 Coach Gari Terms · Privacy Follow me on my socials Design & build by The Studio MT",
+      "canonical": null,
+      "metaRobots": "noindex, nofollow",
+      "lang": "en",
+      "hasViewport": true,
+      "rendered": false,
+      "preRenderWordCount": 182,
+      "indexable": false,
+      "indexability": "Noindex",
+      "canonicalized": false,
+      "imagesTotal": 1,
+      "imagesMissingAlt": 1,
+      "internalLinks": [
+        "https://coachgari28.com/",
+        "https://coachgari28.com/admin",
+        "https://coachgari28.com/legal",
+        "https://coachgari28.com/privacy"
+      ],
+      "externalLinks": [
+        "https://www.tiktok.com/@coach_gari28",
+        "https://www.instagram.com/coach_gari28"
+      ],
+      "inlinks": 1,
+      "linkScore": 40.350876,
+      "seoScore": 69,
+      "ogTitle": null,
+      "ogImage": null,
+      "twitterCard": null,
+      "schemaTypes": [],
+      "schemaValidations": [],
+      "invalidJsonld": 0,
+      "hreflang": [],
+      "mixedContent": 0,
+      "a11y": {
+        "linksNoText": 0,
+        "linksTotal": 9,
+        "buttonsNoText": 0,
+        "buttonsTotal": 2,
+        "inputsNoLabel": 1,
+        "controlsTotal": 13,
+        "iframesNoTitle": 0,
+        "positiveTabindex": 0,
+        "skippedHeading": false,
+        "viewportBlocksZoom": false,
+        "score": 98
+      },
+      "geo": {
+        "semanticHtml": true,
+        "structuredData": false,
+        "hasAuthor": false,
+        "hasDate": false,
+        "faqSchema": false,
+        "questionHeadings": 0,
+        "structuredBlocks": 0,
+        "answerable": true,
+        "score": 30
+      },
+      "extractions": [],
+      "contentHash": "2ad826673617a422",
+      "duplicateOf": null,
+      "error": null
+    },
+    {
+      "url": "https://coachgari28.com/legal",
+      "finalUrl": "https://coachgari28.com/legal",
+      "status": 200,
+      "redirectChain": [],
+      "contentType": "text/html; charset=utf-8",
+      "responseTimeMs": 600,
+      "sizeBytes": 7848,
+      "depth": 0,
+      "server": "Vercel",
+      "contentEncoding": "br",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "xRobotsTag": null,
+      "hsts": true,
+      "title": "Terms & legal notice | Coach Gari",
+      "metaDescription": "Legal notice, terms of service, booking, cancellation and refund policy for coachgari28.com.",
+      "h1": [
+        "Terms & legal notice"
+      ],
+      "h2Count": 10,
+      "h3Count": 0,
+      "wordCount": 858,
+      "textRatio": 0.625,
+      "text": "Coach Gari . ← Back to the site Legal Terms & legal notice Last updated 9 September 2026 · Privacy policy 1. Who operates this site coachgari28.com and the payments taken on it are operated by: Oolala Next FZ-LLC Licence 47017963, RAK (U.A.E.) PO Box 644762, The Sustainable City, Dubai (U.A.E.) Email: letsgo@coachgari28.com Coaching is delivered by Coach Gari, a certified personal trainer and padel coach based in Dubai. \"Coach Gari\", \"we\" and \"us\" in these terms refer to the operator and the coach together. 2. What you can buy Sessions booked on the site: online sessions (video), personal training and padel coaching in Dubai. Programmes and packages of several sessions, agreed with Coach Gari and paid through a secure page we send you. Live and group events , announced separately with their own dates and conditions. The catalogue on the site is the reference for what is offered, in which format and at what price. A service marked \"on request\" is priced with you before anything is due. 3. Booking a session Choosing a time places a hold on it for ten minutes. The booking is confirmed only once the payment is complete. If the payment is not completed, the hold expires and the time becomes available again. Times are shown in your timezone; the session's own timezone is always spelled out. It is your responsibility to check both. You receive a confirmation email with the session, the date, the time, the timezone and a booking reference. Keep it: replying to that email is the fastest way to reach Coach Gari about that booking. Online sessions take place on the video link sent to you before the session. In-person sessions take place at the venue agreed with Coach Gari. 4. Prices and payment Prices are shown in the currency indicated. Where you pay in another currency, the amount charged is shown to you before you confirm; the exchange rate applied is the one shown at that moment. Card payments are processed by Stripe. We never see or store your card details. Other methods (Aani, bank transfer, cash) are offered where available and are confirmed by Coach Gari once the money is received. Where U.A.E. VAT applies, it is included in the price shown. A booking is confirmed only when the payment is confirmed by the payment provider, not when you close the payment window. 5. Cancellation, rescheduling and refunds You can cancel a booked session from your confirmation email or by contacting us. More than 24 hours before the session: you can reschedule at no cost or receive a full refund. Less than 24 hours before the session, or if you do not attend: the session is due and is not refunded. If Coach Gari has to cancel, you choose between a new time and a full refund. Refunds go back to the payment method used. Card refunds take 5 to 10 working days to appear, depending on your bank. Packages: sessions are used within the period agreed with Coach Gari. Unused sessions are not refunded unless Coach Gari is unable to deliver them. 6. Support Coach Gari. \"Support Coach Gari\" lets you make a voluntary payment to the operator to support Coach Gari's work. It is a payment for that purpose only: it is not a donation to a charity, it is not tax-deductible, it does not buy a session, a package or any other entitlement, and it is not refundable except where a payment was made in error, in which case contact us within 14 days. 7. Health and safety Coaching is not medical advice. Consult a doctor before starting any training programme, especially if you have a medical condition, an injury, or are pregnant. You are responsible for training within your limits, for the equipment and space you use at home, and for telling Coach Gari about anything that affects your ability to train safely. You must be 18 or older to book and pay. A person under 18 may train only with the written agreement of a parent or guardian, who takes responsibility for the booking. 8. Liability We deliver the sessions with reasonable care and skill. To the extent permitted by law, our liability for any claim relating to a session or a purchase is limited to the amount you paid for it. Nothing in these terms excludes liability that cannot be excluded by law. 9. Content and conduct Programmes, videos and materials shared with you are for your personal use and may not be copied, resold or redistributed. We may refuse or end a session where behaviour is abusive or unsafe; in that case no refund is due. 10. Law and changes These terms are governed by the laws of the United Arab Emirates. We may update them; the date at the top tells you when. The version in force when you book applies to that booking. Questions: letsgo@coachgari28.com . © 2026 Coach Gari · Operated by Oolala Next FZ-LLC · Licence 47017963 RAK (U.A.E.) · PO Box 644762 The Sustainable City, Dubai (U.A.E.) Photography by Charlotte Mutuswa · Design & build by The Studio MT Terms · Privacy · coachgari28.com",
+      "canonical": "https://coachgari28.com/legal",
+      "metaRobots": null,
+      "lang": "en",
+      "hasViewport": true,
+      "rendered": false,
+      "preRenderWordCount": 858,
+      "indexable": true,
+      "indexability": null,
+      "canonicalized": false,
+      "imagesTotal": 0,
+      "imagesMissingAlt": 0,
+      "internalLinks": [
+        "https://coachgari28.com/",
+        "https://coachgari28.com/privacy",
+        "https://coachgari28.com/legal"
+      ],
+      "externalLinks": [],
+      "inlinks": 4,
+      "linkScore": 90.05847,
+      "seoScore": 98,
+      "ogTitle": "Terms & legal notice | Coach Gari",
+      "ogImage": "https://coachgari28.com/assets/img/shoot/coach-gari-movement.jpg",
+      "twitterCard": "summary_large_image",
+      "schemaTypes": [],
+      "schemaValidations": [],
+      "invalidJsonld": 0,
+      "hreflang": [],
+      "mixedContent": 0,
+      "a11y": {
+        "linksNoText": 0,
+        "linksTotal": 8,
+        "buttonsNoText": 0,
+        "buttonsTotal": 0,
+        "inputsNoLabel": 0,
+        "controlsTotal": 0,
+        "iframesNoTitle": 0,
+        "positiveTabindex": 0,
+        "skippedHeading": false,
+        "viewportBlocksZoom": false,
+        "score": 100
+      },
+      "geo": {
+        "semanticHtml": true,
+        "structuredData": false,
+        "hasAuthor": false,
+        "hasDate": false,
+        "faqSchema": false,
+        "questionHeadings": 0,
+        "structuredBlocks": 5,
+        "answerable": false,
+        "score": 28
+      },
+      "extractions": [],
+      "contentHash": "20620b0b0d9f36e4",
+      "duplicateOf": null,
+      "error": null
+    }
+  ],
+  "issues": [
+    {
+      "rule": "image-missing-alt",
+      "title": "Images Missing Alt Text",
+      "category": "images",
+      "severity": "warning",
+      "url": "https://coachgari28.com/",
+      "detail": "2 of 6 images"
+    },
+    {
+      "rule": "schema-missing-required",
+      "title": "Schema Missing Required Field",
+      "category": "structured-data",
+      "severity": "warning",
+      "url": "https://coachgari28.com/",
+      "detail": "Offer: missing price, priceCurrency"
+    },
+    {
+      "rule": "schema-missing-recommended",
+      "title": "Schema Missing Recommended Field",
+      "category": "structured-data",
+      "severity": "notice",
+      "url": "https://coachgari28.com/",
+      "detail": "Offer: missing availability, url, priceValidUntil"
+    },
+    {
+      "rule": "schema-missing-required",
+      "title": "Schema Missing Required Field",
+      "category": "structured-data",
+      "severity": "warning",
+      "url": "https://coachgari28.com/",
+      "detail": "Offer: missing price, priceCurrency"
+    },
+    {
+      "rule": "schema-missing-recommended",
+      "title": "Schema Missing Recommended Field",
+      "category": "structured-data",
+      "severity": "notice",
+      "url": "https://coachgari28.com/",
+      "detail": "Offer: missing availability, url, priceValidUntil"
+    },
+    {
+      "rule": "schema-missing-required",
+      "title": "Schema Missing Required Field",
+      "category": "structured-data",
+      "severity": "warning",
+      "url": "https://coachgari28.com/",
+      "detail": "Offer: missing price, priceCurrency"
+    },
+    {
+      "rule": "schema-missing-recommended",
+      "title": "Schema Missing Recommended Field",
+      "category": "structured-data",
+      "severity": "notice",
+      "url": "https://coachgari28.com/",
+      "detail": "Offer: missing availability, url, priceValidUntil"
+    },
+    {
+      "rule": "schema-missing-required",
+      "title": "Schema Missing Required Field",
+      "category": "structured-data",
+      "severity": "warning",
+      "url": "https://coachgari28.com/",
+      "detail": "Offer: missing price, priceCurrency"
+    },
+    {
+      "rule": "schema-missing-recommended",
+      "title": "Schema Missing Recommended Field",
+      "category": "structured-data",
+      "severity": "notice",
+      "url": "https://coachgari28.com/",
+      "detail": "Offer: missing availability, url, priceValidUntil"
+    },
+    {
+      "rule": "schema-missing-required",
+      "title": "Schema Missing Required Field",
+      "category": "structured-data",
+      "severity": "warning",
+      "url": "https://coachgari28.com/",
+      "detail": "Offer: missing price, priceCurrency"
+    },
+    {
+      "rule": "schema-missing-recommended",
+      "title": "Schema Missing Recommended Field",
+      "category": "structured-data",
+      "severity": "notice",
+      "url": "https://coachgari28.com/",
+      "detail": "Offer: missing availability, url, priceValidUntil"
+    },
+    {
+      "rule": "geo-not-answerable",
+      "title": "GEO: Not Answer-Ready",
+      "category": "geo",
+      "severity": "notice",
+      "url": "https://coachgari28.com/",
+      "detail": null
+    },
+    {
+      "rule": "geo-no-author",
+      "title": "GEO: Missing Authorship / E-E-A-T",
+      "category": "geo",
+      "severity": "notice",
+      "url": "https://coachgari28.com/",
+      "detail": null
+    },
+    {
+      "rule": "title-too-short",
+      "title": "Title Too Short",
+      "category": "titles-meta",
+      "severity": "notice",
+      "url": "https://coachgari28.com/privacy",
+      "detail": "27 chars"
+    },
+    {
+      "rule": "structured-data-missing",
+      "title": "No Structured Data",
+      "category": "structured-data",
+      "severity": "notice",
+      "url": "https://coachgari28.com/privacy",
+      "detail": null
+    },
+    {
+      "rule": "geo-no-structured-data",
+      "title": "GEO: No Machine-Readable Structure",
+      "category": "geo",
+      "severity": "warning",
+      "url": "https://coachgari28.com/privacy",
+      "detail": null
+    },
+    {
+      "rule": "geo-not-answerable",
+      "title": "GEO: Not Answer-Ready",
+      "category": "geo",
+      "severity": "notice",
+      "url": "https://coachgari28.com/privacy",
+      "detail": null
+    },
+    {
+      "rule": "geo-no-author",
+      "title": "GEO: Missing Authorship / E-E-A-T",
+      "category": "geo",
+      "severity": "notice",
+      "url": "https://coachgari28.com/privacy",
+      "detail": null
+    },
+    {
+      "rule": "title-too-short",
+      "title": "Title Too Short",
+      "category": "titles-meta",
+      "severity": "notice",
+      "url": "https://coachgari28.com/collab",
+      "detail": "27 chars"
+    },
+    {
+      "rule": "description-missing",
+      "title": "Missing Meta Description",
+      "category": "titles-meta",
+      "severity": "warning",
+      "url": "https://coachgari28.com/collab",
+      "detail": null
+    },
+    {
+      "rule": "h1-multiple",
+      "title": "Multiple H1",
+      "category": "headings",
+      "severity": "notice",
+      "url": "https://coachgari28.com/collab",
+      "detail": "2 H1s"
+    },
+    {
+      "rule": "noindex",
+      "title": "Noindex",
+      "category": "indexability",
+      "severity": "warning",
+      "url": "https://coachgari28.com/collab",
+      "detail": null
+    },
+    {
+      "rule": "nofollow",
+      "title": "Nofollow",
+      "category": "indexability",
+      "severity": "notice",
+      "url": "https://coachgari28.com/collab",
+      "detail": null
+    },
+    {
+      "rule": "canonical-missing",
+      "title": "Missing Canonical",
+      "category": "canonical",
+      "severity": "notice",
+      "url": "https://coachgari28.com/collab",
+      "detail": null
+    },
+    {
+      "rule": "image-missing-alt",
+      "title": "Images Missing Alt Text",
+      "category": "images",
+      "severity": "warning",
+      "url": "https://coachgari28.com/collab",
+      "detail": "1 of 1 images"
+    },
+    {
+      "rule": "thin-content",
+      "title": "Thin Content",
+      "category": "content",
+      "severity": "notice",
+      "url": "https://coachgari28.com/collab",
+      "detail": "182 words"
+    },
+    {
+      "rule": "a11y-input-no-label",
+      "title": "Form Controls Without a Label",
+      "category": "accessibility",
+      "severity": "warning",
+      "url": "https://coachgari28.com/collab",
+      "detail": "1 of 13 controls"
+    },
+    {
+      "rule": "structured-data-missing",
+      "title": "No Structured Data",
+      "category": "structured-data",
+      "severity": "notice",
+      "url": "https://coachgari28.com/legal",
+      "detail": null
+    },
+    {
+      "rule": "geo-no-structured-data",
+      "title": "GEO: No Machine-Readable Structure",
+      "category": "geo",
+      "severity": "warning",
+      "url": "https://coachgari28.com/legal",
+      "detail": null
+    },
+    {
+      "rule": "geo-not-answerable",
+      "title": "GEO: Not Answer-Ready",
+      "category": "geo",
+      "severity": "notice",
+      "url": "https://coachgari28.com/legal",
+      "detail": null
+    },
+    {
+      "rule": "geo-no-author",
+      "title": "GEO: Missing Authorship / E-E-A-T",
+      "category": "geo",
+      "severity": "notice",
+      "url": "https://coachgari28.com/legal",
+      "detail": null
+    },
+    {
+      "rule": "blocked-by-robots",
+      "title": "Blocked by robots.txt",
+      "category": "indexability",
+      "severity": "warning",
+      "url": "https://coachgari28.com/admin",
+      "detail": null
+    },
+    {
+      "rule": "blocked-by-robots",
+      "title": "Blocked by robots.txt",
+      "category": "indexability",
+      "severity": "warning",
+      "url": "https://coachgari28.com/admin",
+      "detail": null
+    },
+    {
+      "rule": "geo-no-llms-txt",
+      "title": "No llms.txt",
+      "category": "geo",
+      "severity": "notice",
+      "url": "https://coachgari28.com/",
+      "detail": null
+    }
+  ],
+  "summary": {
+    "totalPages": 4,
+    "errors": 0,
+    "warnings": 14,
+    "notices": 20,
+    "good": 0,
+    "healthScore": 57,
+    "geoScore": 34,
+    "a11yScore": 99,
+    "avgResponseMs": 400,
+    "indexablePages": 3,
+    "duplicatePages": 0,
+    "byStatus": {
+      "200": 4
+    },
+    "byCategory": {
+      "Accessibility": 1,
+      "Canonicals": 1,
+      "Content": 1,
+      "Generative Engine Optimization": 9,
+      "Headings": 1,
+      "Images": 2,
+      "Indexability": 4,
+      "Structured Data": 12,
+      "Titles & Meta": 3
+    },
+    "byDepth": {
+      "0": 3,
+      "1": 1
+    },
+    "durationMs": 3031
+  },
+  "robotsFound": true,
+  "sitemapUrls": 3,
+  "sitemapFound": true,
+  "robotsBlocked": [
+    "https://coachgari28.com/admin",
+    "https://coachgari28.com/admin"
+  ],
+  "llmsTxtFound": false,
+  "linkGraph": {
+    "nodes": [
+      {
+        "url": "https://coachgari28.com/",
+        "depth": 0,
+        "inlinks": 3,
+        "outlinks": 3,
+        "linkScore": 100.0,
+        "indexable": true,
+        "status": 200,
+        "orphan": false,
+        "deadEnd": false
+      },
+      {
+        "url": "https://coachgari28.com/privacy",
+        "depth": 0,
+        "inlinks": 4,
+        "outlinks": 2,
+        "linkScore": 90.05848,
+        "indexable": true,
+        "status": 200,
+        "orphan": false,
+        "deadEnd": false
+      },
+      {
+        "url": "https://coachgari28.com/collab",
+        "depth": 1,
+        "inlinks": 1,
+        "outlinks": 3,
+        "linkScore": 40.350876,
+        "indexable": false,
+        "status": 200,
+        "orphan": false,
+        "deadEnd": false
+      },
+      {
+        "url": "https://coachgari28.com/legal",
+        "depth": 0,
+        "inlinks": 4,
+        "outlinks": 2,
+        "linkScore": 90.05847,
+        "indexable": true,
+        "status": 200,
+        "orphan": false,
+        "deadEnd": false
+      }
+    ],
+    "edges": [
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        3,
+        1
+      ]
+    ],
+    "orphans": 0,
+    "deadEnds": 0,
+    "maxDepth": 1,
+    "avgOutlinks": 2.5,
+    "reciprocalPairs": 4,
+    "topAuthorities": [
+      0,
+      1,
+      3,
+      2
+    ],
+    "topHubs": [
+      0,
+      2,
+      1,
+      3
+    ]
+  },
+  "seedRedirectedFrom": null,
+  "startedAt": 1794003750988
+}

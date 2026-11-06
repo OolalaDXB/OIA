@@ -73,8 +73,8 @@ USD, arrondis. Par appel, recherche web comprise.
 
 | Pilote | Questions × moteurs × jours | Appels fournisseurs | Plafond 30 $ compatible ? |
 |---|---|---|---|
-| Coach Gari | 10 × 4 × 5 = 200 | ≈ 0,5 à 0,9 $/jour → **2,5 à 4,5 $/fenêtre** | oui, confortablement |
-| Maisons.co | 20 × 5 × 5 = 500 | ≈ 1,1 à 2,2 $/jour → **5,5 à 11 $/fenêtre** | oui |
+| Pilote 1 (anglophone, 10 questions × 4 moteurs × 5 jours) | 200 | ≈ 0,5 à 0,9 $/jour → **2,5 à 4,5 $/fenêtre** | oui, confortablement |
+| Pilote 2 (bilingue FR+EN, 20 questions × 5 moteurs × 5 jours) | 500 | ≈ 1,1 à 2,2 $/jour → **5,5 à 11 $/fenêtre** | oui |
 | Les deux ensemble, 1 fenêtre/mois | — | **8 à 16 $/mois** | oui, marge 14 à 22 $ |
 | Les deux ensemble, mesure quotidienne (hors scénario) | — | 48 à 95 $/mois | **non** — le plafond 30 $ arrêterait le worker vers J12-J15. |
 

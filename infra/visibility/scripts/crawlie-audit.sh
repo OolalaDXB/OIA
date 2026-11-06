@@ -20,7 +20,7 @@ targets="$(cd "$here" && pnpm -s subjects urls ${1:+"$1"})"
 while IFS=$'\t' read -r subject url; do
   host="$(echo "$url" | sed -E 's#https?://##; s#/.*##')"
   mkdir -p "$out/$subject"
-  echo "[$subject] crawl $url…"
+  echo "[$subject] crawl ${url}..."
   npx -y "$CRAWLIE" crawl "$url" --format json --max-pages 5000 --concurrency 4 \
       -o "$out/$subject/$host.json" 2> "$out/$subject/$host.stderr.log" \
     && echo "  -> $out/$subject/$host.json" \
