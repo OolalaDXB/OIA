@@ -1,0 +1,22 @@
+{
+  "id": "rec-mco-content-title-desc-dupl",
+  "schemaVersion": 1,
+  "type": "CONTENT_GAP",
+  "clientId": "fictive-client-mco",
+  "siteId": "fictive-site-mco",
+  "subjectId": "maisons-co",
+  "title": "190 titres dupliqués et 181 meta descriptions dupliquées",
+  "statement": "Les pages maison partagent probablement un gabarit avec un nom de maison et un paramètre statique. Ajouter une variable discriminante (ville, nombre de chambres ou prix si le fact existe) pour désambiguïser côté titre et meta description, sans invention (règle 12).",
+  "evidence": [
+    { "kind": "crawlie-report", "ref": "infra/visibility/subjects/maisons-co/audits/2026-11-08/crawlie.json#issues[rule=title-duplicate]" },
+    { "kind": "crawlie-report", "ref": "infra/visibility/subjects/maisons-co/audits/2026-11-08/crawlie.json#issues[rule=description-duplicate]" }
+  ],
+  "impact": { "level": "medium" },
+  "effort": { "level": "M", "note": "Modification d'un gabarit, pas de 190 pages." },
+  "risk": "low",
+  "confidence": "medium",
+  "fix": { "kind": "manual", "generator": "manual", "notes": "Dépend du cadre du dépôt maisons.co, non lu cette nuit. À confirmer avec Mickaël + propriétaire avant proposition." },
+  "decision": { "status": "pending" },
+  "createdBy": "seo-command-contenu",
+  "createdAt": "2026-11-08"
+}

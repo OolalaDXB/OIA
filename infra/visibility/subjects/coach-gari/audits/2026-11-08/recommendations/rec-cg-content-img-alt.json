@@ -1,0 +1,21 @@
+{
+  "id": "rec-cg-content-img-alt",
+  "schemaVersion": 1,
+  "type": "CONTENT_GAP",
+  "clientId": "fictive-client-cg",
+  "siteId": "fictive-site-cg",
+  "subjectId": "coach-gari",
+  "title": "Deux images sans attribut alt sur la page d'accueil",
+  "statement": "Crawlie signale 2/6 images sans texte alternatif sur `/`. Impact direct sur l'accessibilité et sur la compréhension du contenu par les IA (pour celles qui exploitent les attributs alt). Simple à corriger, hors gel J0 (le contenu alt n'est pas une publication qui change ce que voient Google ni les IA de façon mesurable à l'échelle de la fenêtre).",
+  "evidence": [
+    { "kind": "crawlie-report", "ref": "infra/visibility/subjects/coach-gari/audits/2026-11-08/crawlie.json#issues[rule=image-missing-alt]" }
+  ],
+  "impact": { "level": "low" },
+  "effort": { "level": "XS" },
+  "risk": "low",
+  "confidence": "high",
+  "fix": { "kind": "manual", "generator": "manual", "notes": "Alt texts à écrire par un humain à partir du contenu des images, pas d'invention." },
+  "decision": { "status": "pending" },
+  "createdBy": "seo-command-contenu",
+  "createdAt": "2026-11-08"
+}

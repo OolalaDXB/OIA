@@ -1,0 +1,25 @@
+{
+  "id": "rec-cg-watch-noindex",
+  "schemaVersion": 1,
+  "type": "WATCH",
+  "clientId": "fictive-client-cg",
+  "siteId": "fictive-site-cg",
+  "subjectId": "coach-gari",
+  "title": "Vérifier le retrait des `noindex` / `cg-draft` à la levée du gel J0",
+  "statement": "Les 4 pages de service (`online-coaching.html`, `personal-training-dubai.html`, `padel-coaching-dubai.html`, `corporate-wellness-dubai.html`) portent `noindex, nofollow` + `cg-draft=true`. C'est voulu pendant le gel J0. À la fin de la fenêtre, un retrait coordonné (meta robots + cg-draft + ajout dans sitemap) sera à faire. Ne pas appliquer avant décision explicite (risque haut).",
+  "evidence": [
+    { "kind": "repo-file", "ref": "~/CoachGari:origin/main/online-coaching.html" },
+    { "kind": "repo-file", "ref": "~/CoachGari:origin/main/personal-training-dubai.html" },
+    { "kind": "repo-file", "ref": "~/CoachGari:origin/main/padel-coaching-dubai.html" },
+    { "kind": "repo-file", "ref": "~/CoachGari:origin/main/corporate-wellness-dubai.html" }
+  ],
+  "impact": { "level": "high", "note": "Retirer un noindex met une page en prod aux yeux des IA. Jamais automatique (D1, risk high)." },
+  "effort": { "level": "S" },
+  "risk": "high",
+  "confidence": "high",
+  "fix": { "kind": "noindex-removal", "generator": "src/repo/fixers.ts#fixNoindexRemoval", "notes": "À exécuter uniquement après validation humaine et fin de la fenêtre J0." },
+  "decision": { "status": "pending" },
+  "createdBy": "seo-command-technique",
+  "createdAt": "2026-11-08",
+  "windowId": "j0"
+}

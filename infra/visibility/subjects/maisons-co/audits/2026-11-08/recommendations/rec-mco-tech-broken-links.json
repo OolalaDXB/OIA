@@ -1,0 +1,21 @@
+{
+  "id": "rec-mco-tech-broken-links",
+  "schemaVersion": 1,
+  "type": "TECH_FIX",
+  "clientId": "fictive-client-mco",
+  "siteId": "fictive-site-mco",
+  "subjectId": "maisons-co",
+  "title": "Six liens cassés dans l'arborescence",
+  "statement": "Crawlie signale 6 `broken-link` sur maisons.co. Chaque lien cassé coûte un hit pour un visiteur et un robot ; les IA pénalisent la fiabilité d'une source sur la base de la santé technique. Les URLs exactes doivent être extraites du JSON Crawlie avant toute proposition de correctif (listées manuellement par l'agent avant d'ouvrir la PR).",
+  "evidence": [
+    { "kind": "crawlie-report", "ref": "infra/visibility/subjects/maisons-co/audits/2026-11-08/crawlie.json#issues[rule=broken-link]" }
+  ],
+  "impact": { "level": "medium" },
+  "effort": { "level": "S", "note": "Dépend du nombre de liens et de leur type (relatif ou absolu)." },
+  "risk": "low",
+  "confidence": "medium",
+  "fix": { "kind": "manual", "generator": "manual", "notes": "Analyse manuelle des 6 URLs, puis correctifs ciblés dans le dépôt du site." },
+  "decision": { "status": "pending" },
+  "createdBy": "seo-command-technique",
+  "createdAt": "2026-11-08"
+}

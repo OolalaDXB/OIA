@@ -1,0 +1,22 @@
+{
+  "id": "rec-mco-watch-canonicals",
+  "schemaVersion": 1,
+  "type": "WATCH",
+  "clientId": "fictive-client-mco",
+  "siteId": "fictive-site-mco",
+  "subjectId": "maisons-co",
+  "title": "0 page indexable à l'échelle du crawl : canonicalisation à auditer",
+  "statement": "Sur 237 pages crawlées, aucune n'est indexable : chacune porte un canonical vers une autre URL (Crawlie : 236 `canonicalised`). Si c'est voulu (architecture normalisée `/p/<id>` vers `/<slug>`), la stratégie doit être documentée dans facts.yaml. Sinon, il y a une erreur structurelle qui rend le site invisible à Google. Trop d'incertitude pour ouvrir une recommandation d'écriture.",
+  "evidence": [
+    { "kind": "crawlie-report", "ref": "infra/visibility/subjects/maisons-co/audits/2026-11-08/crawlie.json#summary.indexablePages" },
+    { "kind": "crawlie-report", "ref": "infra/visibility/subjects/maisons-co/audits/2026-11-08/crawlie.json#issues[rule=canonicalised]" }
+  ],
+  "impact": { "level": "high", "note": "Si c'est un bug, c'est le problème SEO numéro 1 du site." },
+  "effort": { "level": "L", "note": "Dépend de la source du canonical (CMS, code front, middleware)." },
+  "risk": "medium",
+  "confidence": "low",
+  "fix": { "kind": "manual", "generator": "manual", "notes": "Pas de correctif avant levée de doute : Mickaël et le propriétaire du site." },
+  "decision": { "status": "pending" },
+  "createdBy": "seo-command-seo",
+  "createdAt": "2026-11-08"
+}

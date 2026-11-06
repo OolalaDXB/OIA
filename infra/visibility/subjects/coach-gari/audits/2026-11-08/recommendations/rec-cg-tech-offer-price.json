@@ -1,0 +1,23 @@
+{
+  "id": "rec-cg-tech-offer-price",
+  "schemaVersion": 1,
+  "type": "TECH_FIX",
+  "clientId": "fictive-client-cg",
+  "siteId": "fictive-site-cg",
+  "subjectId": "coach-gari",
+  "title": "JSON-LD Offer sans price ni priceCurrency",
+  "statement": "La page d'accueil de coachgari28.com publie des blocs Offer sans price ni priceCurrency (5 avertissements `schema-missing-required` dans Crawlie). Google et les assistants IA ne peuvent pas lire le prix dans les données structurées. Gel J0 interdit la publication cette nuit ; la recommandation attend la fin de la fenêtre.",
+  "evidence": [
+    { "kind": "crawlie-report", "ref": "infra/visibility/subjects/coach-gari/audits/2026-11-08/crawlie.json#issues[rule=schema-missing-required]" },
+    { "kind": "repo-file", "ref": "~/CoachGari:origin/main/index.html", "note": "analyse statique, aucune exécution (règle 14)" }
+  ],
+  "impact": { "level": "medium", "note": "Les prix invisibles aux IA font baisser la précision des réponses marquées." },
+  "effort": { "level": "S" },
+  "risk": "low",
+  "confidence": "high",
+  "fix": { "kind": "jsonld-product", "generator": "src/repo/fixers.ts#fixJsonLdProduct", "notes": "price et priceCurrency à remplir à partir d'un fact `price` validé ; sinon __TO_FILL__." },
+  "decision": { "status": "pending" },
+  "createdBy": "seo-command-technique",
+  "createdAt": "2026-11-08",
+  "windowId": "j0"
+}

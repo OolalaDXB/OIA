@@ -1,0 +1,21 @@
+{
+  "id": "rec-mco-tech-a11y-label",
+  "schemaVersion": 1,
+  "type": "TECH_FIX",
+  "clientId": "fictive-client-mco",
+  "siteId": "fictive-site-mco",
+  "subjectId": "maisons-co",
+  "title": "Un composant partagé publie 236 champs sans <label>",
+  "statement": "Crawlie signale 236 `a11y-input-no-label` sur presque toutes les pages. Un seul composant partagé est très probablement en cause : un <label> ajouté une fois corrige à l'échelle du site. Impact a11y + lisibilité pour les IA qui citent une interface (champs de recherche, filtres).",
+  "evidence": [
+    { "kind": "crawlie-report", "ref": "infra/visibility/subjects/maisons-co/audits/2026-11-08/crawlie.json#issues[rule=a11y-input-no-label]" }
+  ],
+  "impact": { "level": "medium" },
+  "effort": { "level": "XS" },
+  "risk": "low",
+  "confidence": "medium",
+  "fix": { "kind": "manual", "generator": "manual", "notes": "Repérer le composant partagé dans le dépôt du site (non lu cette nuit)." },
+  "decision": { "status": "pending" },
+  "createdBy": "seo-command-technique",
+  "createdAt": "2026-11-08"
+}
