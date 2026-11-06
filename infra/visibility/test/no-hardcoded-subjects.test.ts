@@ -7,8 +7,9 @@ import { identifyingTerms, loadSubjects } from "../src/load";
 import { findTerms, listTextFiles } from "../src/scan";
 
 const toolRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
-/** Not code: the subject definitions themselves, and run reports about them. */
-const EXCLUDED = ["subjects", "reports"];
+/** Not code: the subject definitions themselves, run reports about them, and
+ *  Mickaël's briefs / handoffs which refer to each subject by name. */
+const EXCLUDED = ["subjects", "reports", "mandats"];
 
 describe("genericity: no subject is named in the tool", () => {
   it("no identifying term of any defined subject appears outside subjects/ and reports/", () => {
