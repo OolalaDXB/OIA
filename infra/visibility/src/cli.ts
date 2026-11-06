@@ -1,9 +1,11 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { dirname, join, resolve } from "node:path";
-import { parse } from "yaml";
+import { parse, stringify as yamlStringify } from "yaml";
 import { checkCapture, renderCaptureTemplate } from "./capture";
 import { activeFreezes, defaultSubjectsDir, loadSubject, loadSubjects, listSubjectDirs } from "./load";
+import { diffPanels, proposePanel, resolveHumanValidator, type HumanIdentity } from "./panel-generator";
+import { PanelSchema } from "./schema";
 import { renderElmoBrief, renderReview } from "./render";
 
 /**
@@ -119,9 +121,73 @@ try {
     case "elmo-brief":
       process.stdout.write(renderElmoBrief(byId(arg)));
       break;
+    case "panel": {
+      const sub = argv[1];
+      const subjectId = argv[2];
+      switch (sub) {
+        case "propose": {
+          const b = byId(subjectId);
+          const today = argv.find((a) => /^\d{4}-\d{2}-\d{2}$/.test(a)) ?? new Date().toISOString().slice(0, 10);
+          const panel = await proposePanel(b.subject, { today, panelVersion: b.panel.panelVersion + 1 });
+          const out = argv.includes("--write")
+            ? join(b.dir, `panel.proposal.v${panel.panelVersion}.yaml`)
+            : "";
+          const yaml = yamlStringify(panel);
+          if (out) {
+            if (existsSync(out)) throw new Error(`${out} already exists: never overwritten`);
+            writeFileSync(out, yaml, { flag: "wx" });
+            console.log(`proposition écrite : ${out}  (${panel.prompts.length} questions)`);
+          } else {
+            process.stdout.write(yaml);
+          }
+          break;
+        }
+        case "diff": {
+          if (!subjectId) throw new Error("usage: panel diff <id> <proposalFile>");
+          const b = byId(subjectId);
+          const proposalFile = argv[3];
+          if (!proposalFile) throw new Error("usage: panel diff <id> <proposalFile>");
+          const proposal = PanelSchema.parse(parse(readFileSync(proposalFile, "utf8")));
+          const lines = diffPanels(b.panel, proposal);
+          if (lines.length === 0) console.log("aucune différence");
+          else process.stdout.write(lines.join("\n") + "\n");
+          break;
+        }
+        case "validate": {
+          if (!subjectId) throw new Error("usage: panel validate <id> <proposalFile>");
+          const b = byId(subjectId);
+          const proposalFile = argv[3];
+          if (!proposalFile) throw new Error("usage: panel validate <id> <proposalFile>");
+          const humansFile = resolve(dirname(defaultSubjectsDir()), "humans.yaml");
+          if (!existsSync(humansFile)) throw new Error(`humans.yaml absent : ${humansFile}`);
+          const humans = ((parse(readFileSync(humansFile, "utf8")) as { humans?: HumanIdentity[] })?.humans ?? []);
+          const who = resolveHumanValidator(humans, {
+            OIA_SEO_HUMAN_IDENTITY: process.env.OIA_SEO_HUMAN_IDENTITY,
+            OIA_SEO_IS_AGENT: process.env.OIA_SEO_IS_AGENT,
+          });
+          const proposal = PanelSchema.parse(parse(readFileSync(proposalFile, "utf8")));
+          const today = new Date().toISOString().slice(0, 10);
+          const validated = PanelSchema.parse({
+            ...proposal,
+            status: "validated",
+            validatedBy: who.email,
+            validatedAt: today,
+            prompts: proposal.prompts.map((p) => (p.status === "proposed" ? { ...p, status: "active" as const } : p)),
+          });
+          const destination = join(b.dir, `panel.validated.v${validated.panelVersion}.yaml`);
+          if (existsSync(destination)) throw new Error(`${destination} already exists: never overwritten`);
+          writeFileSync(destination, yamlStringify(validated), { flag: "wx" });
+          console.log(`panel validé par ${who.email} (${who.id}) écrit : ${destination}`);
+          break;
+        }
+        default:
+          throw new Error("usage: panel propose <id> [date] [--write] | panel diff <id> <proposalFile> | panel validate <id> <proposalFile>");
+      }
+      break;
+    }
     default:
       console.error(
-        "usage: cli.ts validate | list | urls [<id>] | review <id> [--write] | elmo-brief <id> | freezes [<id>] | capture-template <id> <engine> [date] [--draft] | capture-check <file>",
+        "usage: cli.ts validate | list | urls [<id>] | review <id> [--write] | elmo-brief <id> | freezes [<id>] | capture-template <id> <engine> [date] [--draft] | capture-check <file> | panel propose|diff|validate <id> [args]",
       );
       process.exit(2);
   }

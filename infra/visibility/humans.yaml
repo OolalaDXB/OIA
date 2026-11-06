@@ -1,0 +1,14 @@
+# Identités humaines autorisées à valider un panel, approuver un correctif,
+# activer une mission récurrente (règle 16 du mandat).
+#
+# Les exécuteurs d'agents SEO Command ne tournent JAMAIS avec une entrée de ce
+# fichier comme identité : tests à l'appui (panel-generator.test.ts et
+# seo-command.test.ts le prouvent).
+#
+# `role: owner` autorise la validation ; `role: member` autorise la rédaction
+# mais pas la validation.
+humans:
+  - id: mt
+    email: mickael@example.test
+    role: owner
+    note: "Identité par défaut de Mickaël, à renseigner avec sa vraie adresse quand il validera."
