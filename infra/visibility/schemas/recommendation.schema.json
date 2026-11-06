@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://oia.example/schemas/recommendation.schema.json",
+  "title": "OIA Visibility · Recommendation",
+  "description": "Recommandation produite par un agent SEO Command. Jamais exécutée sans validation humaine (règle 16).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "schemaVersion",
+    "type",
+    "clientId",
+    "subjectId",
+    "title",
+    "statement",
+    "evidence",
+    "impact",
+    "effort",
+    "risk",
+    "confidence",
+    "decision",
+    "createdBy",
+    "createdAt"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^rec-[a-z0-9-]{6,}$" },
+    "schemaVersion": { "const": 1 },
+    "type": {
+      "type": "string",
+      "enum": [
+        "FIX_FACT",
+        "CONTENT_GAP",
+        "ENTITY_INCONSISTENCY",
+        "SOURCE_TARGET",
+        "TECH_FIX",
+        "WATCH"
+      ],
+      "description": "Nature de la recommandation. FIX_FACT corrige une erreur factuelle citée par une IA ; CONTENT_GAP ajoute un contenu absent ; ENTITY_INCONSISTENCY aligne une information entre deux surfaces ; SOURCE_TARGET pousse à être cité sur une source identifiée ; TECH_FIX corrige une surface SEO ; WATCH signale sans proposer d'action."
+    },
+    "clientId": { "type": "string", "minLength": 1 },
+    "siteId": { "type": "string" },
+    "subjectId": { "type": "string", "minLength": 1 },
+    "title": { "type": "string", "minLength": 3, "maxLength": 140 },
+    "statement": { "type": "string", "minLength": 10 },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "ref"],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "evidence-row",
+              "crawlie-report",
+              "crawlseo-row",
+              "repo-file",
+              "panel-prompt",
+              "fact",
+              "manual-capture",
+              "other"
+            ]
+          },
+          "ref": { "type": "string", "minLength": 1 },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "impact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level"],
+      "properties": {
+        "level": { "type": "string", "enum": ["low", "medium", "high"] },
+        "note": { "type": "string" }
+      }
+    },
+    "effort": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level"],
+      "properties": {
+        "level": { "type": "string", "enum": ["XS", "S", "M", "L", "XL"] },
+        "note": { "type": "string" }
+      }
+    },
+    "risk": {
+      "type": "string",
+      "enum": ["low", "medium", "high"],
+      "description": "Risque de régression. `high` exclut toute exécution automatique."
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["low", "medium", "high"],
+      "description": "Confiance de l'agent dans ses preuves. Un `low` doit déclencher une revue croisée (F4)."
+    },
+    "fix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "generator"],
+      "properties": {
+        "kind": { "type": "string", "enum": [
+          "robots-txt","sitemap-xml","llms-txt",
+          "jsonld-organization","jsonld-local-business","jsonld-product",
+          "title","meta-description","price-ssr-placeholder","noindex-removal",
+          "manual"
+        ] },
+        "generator": { "type": "string", "description": "Identifiant du générateur D3, ou 'manual' si à écrire humainement." },
+        "notes": { "type": "string" }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": { "type": "string", "enum": ["pending", "accepted", "rejected", "obsolete"] },
+        "by": { "type": "string" },
+        "at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "reason": { "type": "string" }
+      }
+    },
+    "createdBy": { "type": "string", "description": "Agent (orchestrator | technique | seo | contenu | aeo | conversion) ou identité humaine." },
+    "createdAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "windowId": { "type": "string" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "risk": { "const": "high" } } },
+      "then": {
+        "properties": {
+          "decision": {
+            "properties": { "status": { "enum": ["pending", "rejected", "obsolete"] } }
+          }
+        },
+        "description": "Un risque `high` ne peut pas être `accepted` par un agent ; seule une identité humaine owner peut passer à `accepted` (contrainte vérifiée par E3, pas ici)."
+      }
+    }
+  ]
+}
