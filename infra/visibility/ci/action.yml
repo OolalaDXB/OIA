@@ -1,0 +1,40 @@
+# Garde-fou SEO en intégration continue · OIA Visibility · D5
+# GitHub Action réutilisable : le client l'installe dans le workflow de sa PR,
+# OIA n'a pas besoin de secret ni d'accès pour qu'elle tourne. Elle refuse une
+# PR qui casserait la visibilité : titre manquant, noindex oublié, prix sans JS,
+# JSON-LD invalide, robots.txt ou sitemap.xml cassés.
+#
+# Utilisation (côté dépôt client) :
+#   jobs:
+#     seo-check:
+#       runs-on: ubuntu-latest
+#       steps:
+#         - uses: actions/checkout@v4
+#         - uses: oia-visibility/seo-ci@v1
+#           with:
+#             repo-root: '.'
+#             site-url: 'https://example.test/'
+#
+# L'action est publique, sans secret OIA. En interne, elle appelle
+# `infra/visibility/ci/check.ts` en mode CLI.
+name: OIA Visibility · SEO guardrail
+description: 'Refuse une PR qui dégrade la visibilité (titre, noindex, prix sans JS, JSON-LD, robots, sitemap).'
+inputs:
+  repo-root:
+    description: 'Racine du dépôt à auditer, relatif à $GITHUB_WORKSPACE.'
+    required: false
+    default: '.'
+  site-url:
+    description: 'URL canonique du site, pour la sitemap et la validation JSON-LD.'
+    required: true
+  fail-on:
+    description: 'Niveau minimal qui fait échouer l''étape : low | medium | high (défaut : medium).'
+    required: false
+    default: 'medium'
+runs:
+  using: node20
+  main: dist/action.js
+# Note : `dist/action.js` serait produit par un bundler avant publication. Pour
+# le moment, le script TypeScript `infra/visibility/ci/check.ts` est exécuté via
+# `tsx` dans les tests OIA ; la publication en Action réutilisable viendra plus
+# tard (adaptateur D6).
