@@ -16,3 +16,4 @@ crawlie-out/
 
 # Versioned SQL migrations are the exception.
 !migrations/0001_evidence.sql
+!migrations/0002_decision_journal.sql

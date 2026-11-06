@@ -15,8 +15,11 @@ set -euo pipefail
 CONTAINER="${OIA_VIS_TEST_PG_CONTAINER:-oia-vis-test-pg}"
 PORT="${OIA_VIS_TEST_PG_PORT:-55432}"
 PASS="$(openssl rand -hex 16)"
-MIG="$(cd "$(dirname "$0")/.." && pwd)/migrations/0001_evidence.sql"
+VIS_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+MIG="$VIS_ROOT/migrations/0001_evidence.sql"
+MIG_E3="$VIS_ROOT/migrations/0002_decision_journal.sql"
 [ -f "$MIG" ] || { echo "migration introuvable : $MIG" >&2; exit 2; }
+[ -f "$MIG_E3" ] || { echo "migration introuvable : $MIG_E3" >&2; exit 2; }
 
 cleanup() {
   docker rm -f "$CONTAINER" >/dev/null 2>&1 || true
@@ -44,13 +47,20 @@ done
 PSQL="docker exec -i -e PGPASSWORD=$PASS $CONTAINER psql -U visadmin -d visdb -v ON_ERROR_STOP=1 -qt"
 PSQLL="docker exec -i -e PGPASSWORD=$PASS $CONTAINER psql -U visadmin -d visdb -v ON_ERROR_STOP=1"
 
-echo "## applying migration"
+echo "## applying migration 0001"
 $PSQLL < "$MIG" >/dev/null
+echo "## applying migration 0002"
+$PSQLL < "$MIG_E3" >/dev/null
 
 # Rôle app : simule un service qui ne doit jamais contourner la RLS.
 $PSQLL <<'SQL' >/dev/null
 create role oia_vis_app login password 'app-pass' nobypassrls;
 grant usage on schema vis to oia_vis_app;
+grant select, insert on all tables in schema vis to oia_vis_app;
+grant usage on all sequences in schema vis to oia_vis_app;
+SQL
+# Repasse les grants sur les tables de 0002 (créées après le grant générique).
+$PSQLL <<'SQL' >/dev/null
 grant select, insert on all tables in schema vis to oia_vis_app;
 grant usage on all sequences in schema vis to oia_vis_app;
 SQL
@@ -168,5 +178,51 @@ then
   echo "FAIL: client B a pu insérer une ligne pour le client A"; exit 1
 fi
 echo "  OK client B ne peut pas poser une ligne pour A"
+
+echo "## test 6 — vis.recommendation est append-only"
+docker exec -i -e PGPASSWORD=app-pass "$CONTAINER" \
+  psql -U oia_vis_app -d visdb -v ON_ERROR_STOP=1 <<'SQL' >/dev/null
+begin;
+set local vis.client_id = 'fictive-a';
+insert into vis.recommendation (id, client_id, subject_id, type, title, statement,
+  impact_level, effort_level, risk, confidence, created_by, payload)
+  values ('rec-fictive-1','fictive-a','a-subj','TECH_FIX','robots','manquante',
+          'medium','XS','low','high','seo-command-technique','{"fictive":true}'::jsonb);
+commit;
+SQL
+if docker exec -i -e PGPASSWORD=app-pass "$CONTAINER" \
+     psql -U oia_vis_app -d visdb -v ON_ERROR_STOP=1 <<'SQL' >/dev/null 2>&1
+begin;
+set local vis.client_id = 'fictive-a';
+update vis.recommendation set title = 'edited' where id = 'rec-fictive-1';
+commit;
+SQL
+then
+  echo "FAIL: UPDATE sur vis.recommendation a réussi"; exit 1
+fi
+echo "  OK UPDATE rejetée sur vis.recommendation"
+
+echo "## test 7 — vis.decision et vis.execution sont append-only, RLS tenue"
+docker exec -i -e PGPASSWORD=app-pass "$CONTAINER" \
+  psql -U oia_vis_app -d visdb -v ON_ERROR_STOP=1 <<'SQL' >/dev/null
+begin;
+set local vis.client_id = 'fictive-a';
+insert into vis.decision (recommendation_id, status, decided_by, client_id)
+  values ('rec-fictive-1','accepted','mt','fictive-a');
+insert into vis.execution (recommendation_id, client_id, kind, ref)
+  values ('rec-fictive-1','fictive-a','pr-opened','https://github.test/fictive/html/pull/1');
+commit;
+SQL
+# Client B ne voit ni la recommandation ni la décision de A.
+seen=$(docker exec -i -e PGPASSWORD=app-pass "$CONTAINER" \
+  psql -U oia_vis_app -d visdb -v ON_ERROR_STOP=1 -tA -q <<'SQL' | awk 'NF' | tail -1
+begin;
+set local vis.client_id = 'fictive-b';
+select (select count(*) from vis.recommendation) + (select count(*) from vis.decision);
+commit;
+SQL
+)
+[ "$seen" = "0" ] || { echo "FAIL: client B voit $seen lignes de recommendation+decision"; exit 1; }
+echo "  OK client B isolé sur recommendation + decision + execution"
 
 echo "## tous les tests passent"
