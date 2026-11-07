@@ -1,5 +1,5 @@
 import { spawnSync } from "node:child_process";
-import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import { chmodSync, existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
@@ -134,10 +134,18 @@ describe("cost-guard.sh avec la grille (à blanc : ni Docker, ni réseau, ni bas
     const dir = mkdtempSync(join(tmpdir(), "cost-guard-"));
     const runs = join(dir, "runs.jsonl");
     writeFileSync(runs, lines.map((l) => JSON.stringify(l)).join("\n"));
+    // Faux `docker` en tête du PATH : à blanc, le script ne doit JAMAIS l'appeler
+    // (le 2026-11-07, ce test a arrêté le vrai worker d'Elmo pendant J0).
+    const bin = join(dir, "bin");
+    const calls = join(dir, "docker-calls.log");
+    mkdirSync(bin);
+    writeFileSync(join(bin, "docker"), `#!/bin/sh\necho "$@" >> "${calls}"\nexit 0\n`);
+    chmodSync(join(bin, "docker"), 0o755);
     const r = spawnSync("bash", [join(ROOT, "scripts/cost-guard.sh")], {
       encoding: "utf8",
       env: {
         ...process.env,
+        PATH: `${bin}:${process.env.PATH ?? ""}`,
         OIA_VIS_DATA: dir,
         OIA_VIS_COST_GUARD_DRYRUN: "1",
         OIA_VIS_COST_GUARD_DRYRUN_EST: est,
@@ -150,7 +158,8 @@ describe("cost-guard.sh avec la grille (à blanc : ni Docker, ni réseau, ni bas
       },
     });
     const journal = readFileSync(join(dir, "cost-journal.csv"), "utf8").trim().split("\n");
-    return { status: r.status, header: journal[0] ?? "", last: (journal[journal.length - 1] ?? "").split(",") };
+    const dockerCalls = existsSync(calls) ? readFileSync(calls, "utf8").trim().split("\n") : [];
+    return { status: r.status, header: journal[0] ?? "", last: (journal[journal.length - 1] ?? "").split(","), dockerCalls };
   }
 
   it("retient la grille quand l'estimation d'Elmo sous-estime Sonnet 5.5", () => {
@@ -162,6 +171,16 @@ describe("cost-guard.sh avec la grille (à blanc : ni Docker, ni réseau, ni bas
     expect(Number(last[6])).toBeCloseTo(2.75, 4);
   });
 
+  it("à blanc, n'appelle jamais Docker, quel que soit le verdict", () => {
+    const cases: [CostLine[], string][] = [
+      [Array(50).fill(sonnetRun), "1.0"],
+      [Array(600).fill({ ...sonnetRun, usage: null }), "12"],
+      [[{ ...sonnetRun, version: "claude-opus-5-5" } as CostLine], "0"],
+      [[{ kind: "failed", provider: "provider-inconnu", count: 1 }], "0"],
+    ];
+    for (const [lines, est] of cases) expect(guard(lines, est).dockerCalls).toEqual([]);
+  });
+
   it("arrête le worker (à blanc) quand la grille seule dépasse le plafond", () => {
     // 600 runs Sonnet au majorant (0,14 $) = 84 $ ; l'estimation d'Elmo reste à 12 $.
     const { status, last } = guard(Array(600).fill({ ...sonnetRun, usage: null }), "12");
@@ -170,8 +189,9 @@ describe("cost-guard.sh avec la grille (à blanc : ni Docker, ni réseau, ni bas
   });
 
   it("arrête le worker quand un modèle n'est pas dans la grille", () => {
-    const { status, last } = guard([{ ...sonnetRun, version: "claude-opus-5-5" } as CostLine], "0");
+    const { status, last, dockerCalls } = guard([{ ...sonnetRun, version: "claude-opus-5-5" } as CostLine], "0");
     expect(status).toBe(4);
     expect(last[last.length - 1]).toBe("stop-worker(model-not-in-price-grid)");
+    expect(dockerCalls).toEqual([]);
   });
 });

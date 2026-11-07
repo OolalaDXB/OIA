@@ -64,7 +64,8 @@ runs_sql="select json_build_object('kind','run','provider',provider,'version',ve
   from usage_events where event_type='prompt_run_failed' and created_at >= $month_start group by provider"
 
 stop_unreadable() { # reason est grid
-  elmo_dc stop worker >/dev/null 2>&1 || true
+  # À blanc : jamais de Docker (les tests passent par ici).
+  [ -n "$dryrun" ] || elmo_dc stop worker >/dev/null 2>&1 || true
   echo "$(date -u +%Y-%m-%dT%H:%M:%SZ),$(month_tag),$2,$3,n/a,n/a,n/a,$cap,$alert,stop-worker($1)" | tee -a "$journal"
 }
 
