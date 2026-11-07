@@ -40,8 +40,13 @@ export function refuserDansLeDepot(chemin: string, depot: string = RACINE_DEPOT)
   return cheminReel(chemin);
 }
 
-/** Shyrka n'appelle aucun modèle en ligne : seul un modèle local (Ollama) ou simulé est accepté. */
-export function assertModeleLocal(model: TextModel): void {
+/**
+ * Shyrka n'appelle aucun modèle en ligne : seul un modèle local (Ollama) ou simulé est accepté.
+ * Exception unique (mandat v9, G5) : la conversation en texte peut passer par Mistral quand
+ * Ollama est absent, si l'appelant le déclare (`mistralAutorise`). Jamais pour les entretiens.
+ */
+export function assertModeleLocal(model: TextModel, opts: { mistralAutorise?: boolean } = {}): void {
+  if (opts.mistralAutorise && /^mistral:/.test(model.name)) return;
   if (!/^(ollama|simule):/.test(model.name)) {
     throw new Error(`Modèle « ${model.name} » refusé : Shyrka v0 n'appelle que des modèles locaux.`);
   }

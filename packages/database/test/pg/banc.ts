@@ -1,4 +1,4 @@
-import { execFileSync, spawnSync } from "node:child_process";
+import { execFile, execFileSync, spawnSync } from "node:child_process";
 import { chmodSync, existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -24,6 +24,8 @@ export const postgresDisponible = BIN !== null;
 
 export interface Banc {
   sql(requete: string, opts?: { role?: string; utilisateur?: string }): string;
+  /** Même chose dans une session parallèle : sert aux tests de concurrence. */
+  sqlAsync(requete: string, opts?: { role?: string; utilisateur?: string }): Promise<string>;
   fichier(chemin: string): void;
   arreter(): void;
 }
@@ -43,13 +45,19 @@ export function demarrer(): Banc {
   exec(join(BIN, "initdb"), ["-D", data, "-U", "postgres", "--auth=trust", "-E", "UTF8", "--no-locale"]);
   exec(join(BIN, "pg_ctl"), ["-D", data, "-o", `-p ${port} -k ${dossier} -c listen_addresses='' -c timezone=UTC`, "-w", "start", "-l", join(dossier, "log")]);
   const psql = (args: string[], input?: string) => exec(join(BIN, "psql"), ["-h", dossier, "-p", port, "-U", "postgres", "-d", "postgres", "-v", "ON_ERROR_STOP=1", "-X", "-q", "-t", "-A", ...args], input);
+  const prefixe = (opts: { role?: string; utilisateur?: string }) =>
+    [opts.role ? `set role ${opts.role};` : "", opts.utilisateur ? `set request.jwt.claim.sub = '${opts.utilisateur}';` : ""].join("");
+  const argsPsql = ["-h", dossier, "-p", port, "-U", "postgres", "-d", "postgres", "-v", "ON_ERROR_STOP=1", "-X", "-q", "-t", "-A"];
   return {
     sql(requete, opts = {}) {
-      const prefixe = [
-        opts.role ? `set role ${opts.role};` : "",
-        opts.utilisateur ? `set request.jwt.claim.sub = '${opts.utilisateur}';` : "",
-      ].join("");
-      return psql([], `${prefixe}\n${requete}`).trim();
+      return psql([], `${prefixe(opts)}\n${requete}`).trim();
+    },
+    sqlAsync(requete, opts = {}) {
+      const [c, a] = enUtilisateur(join(BIN!, "psql"), argsPsql);
+      return new Promise((ok, ko) => {
+        const p = execFile(c, a, { encoding: "utf8" }, (e, out, err) => (e ? ko(Object.assign(e, { stderr: err })) : ok(out.trim())));
+        p.stdin!.end(`${prefixe(opts)}\n${requete}`);
+      });
     },
     fichier(chemin) {
       // Par l'entrée standard : l'utilisateur postgres n'a pas à lire le dépôt.

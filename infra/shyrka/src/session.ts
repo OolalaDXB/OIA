@@ -21,6 +21,8 @@ export interface TurnResult {
 }
 
 export interface SessionDeps {
+  /** Mistral accepté comme modèle de conversation (Ollama absent, mandat v9 G5). */
+  mistralAutorise?: boolean;
   microphone?: Microphone;
   transcriber?: Transcriber;
   model: TextModel;
@@ -66,7 +68,7 @@ export class ShyrkaSession {
   }
 
   constructor(private readonly deps: SessionDeps) {
-    assertModeleLocal(deps.model);
+    assertModeleLocal(deps.model, { mistralAutorise: deps.mistralAutorise === true });
     if (deps.compareModel) assertModeleLocal(deps.compareModel);
     this.clock = deps.clock ?? Date.now;
   }

@@ -5,6 +5,7 @@ import { createInterface } from "node:readline";
 import { fileURLToPath } from "node:url";
 import { EnregistreurFfmpeg, EnregistreurSimule, type Enregistreur } from "./adapters/enregistreur.js";
 import { MacSaySpeaker } from "./adapters/macos-say.js";
+import { lireCleMistral, MistralTextModel, ollamaPresent } from "./adapters/mistral.js";
 import { MAX_ENTRETIEN_SECONDS, MAX_RECORD_SECONDS } from "./adapters/microphone-ffmpeg.js";
 import { COMPARISON_OLLAMA_MODEL, DEFAULT_OLLAMA_MODEL, OllamaTextModel } from "./adapters/ollama.js";
 import { RecordingSpeaker, SimulatedTextModel, SimulatedTranscriber } from "./adapters/simulated.js";
@@ -112,6 +113,23 @@ function timings(r: TurnResult): string {
   return r.events.filter((e) => e.ms > 0).map((e) => `${e.step} ${e.ms} ms`).join(" · ");
 }
 
+/**
+ * Ollama d'abord (local). S'il est absent, ou si SHYRKA_MODELE=mistral, Mistral
+ * par son API (mandat v9, G5), avec la clé de ~/.oia/mistral.env.
+ */
+async function modeleTexte() {
+  const forcer = env.SHYRKA_MODELE === "mistral";
+  if (!forcer && (await ollamaPresent(cfg.ollamaUrl))) return new OllamaTextModel({ model: cfg.ollamaModel, url: cfg.ollamaUrl, think: cfg.think });
+  const cle = lireCleMistral();
+  if (!cle) {
+    throw new Error(
+      `${forcer ? "Mistral demandé" : "Ollama absent"} et aucune clé Mistral : poser MISTRAL_API_KEY=… dans ~/.oia/mistral.env (chmod 600), ou lancer Ollama.`,
+    );
+  }
+  console.log(forcer ? "Modèle : Mistral (demandé)." : "Ollama absent : modèle Mistral (API). Le texte de la conversation part chez Mistral ; rien de ce qui touche à Swift.");
+  return new MistralTextModel({ cle });
+}
+
 async function parler(flags: Set<string>): Promise<void> {
   const simule = flags.has("--simule");
   const texte = flags.has("--texte");
@@ -121,7 +139,8 @@ async function parler(flags: Set<string>): Promise<void> {
   const transcriber: Transcriber | undefined = simule ? new SimulatedTranscriber(["Bonjour Shyrka, tu m'entends ?", "Où en est J0 ?"]) : whisper ?? undefined;
   const enregistreur: Enregistreur = simule ? new EnregistreurSimule() : new EnregistreurFfmpeg({ device: cfg.device, plafondSecondes: MAX_RECORD_SECONDS, ffmpeg: cfg.ffmpeg });
   const session = new ShyrkaSession({
-    model: simule ? new SimulatedTextModel((m) => `Réponse simulée à : « ${m[m.length - 1]?.content ?? ""} »`) : new OllamaTextModel({ model: cfg.ollamaModel, url: cfg.ollamaUrl, think: cfg.think }),
+    model: simule ? new SimulatedTextModel((m) => `Réponse simulée à : « ${m[m.length - 1]?.content ?? ""} »`) : await modeleTexte(),
+    mistralAutorise: true,
     ...(flags.has("--comparer") && !simule ? { compareModel: new OllamaTextModel({ model: cfg.compareModel, url: cfg.ollamaUrl, think: cfg.think }) } : {}),
     ...(transcriber ? { transcriber } : {}),
     speaker,

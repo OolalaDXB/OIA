@@ -1,6 +1,6 @@
 # ADR 0003 · Shyrka autonome et intégrable
 
-- Statut : proposé le 2026-11-08, à valider par Mickaël.
+- Statut : proposé le 2026-11-08, à valider par Mickaël. Évolution du 8 novembre 2026 (mandat v9) en fin de document : stockage en base et Mistral pour la conversation du cockpit.
 - Références : mandat v8, bloc C, exigences 9 à 12 ; `docs/shyrka/CADRE.md` ;
   code : `packages/shyrka` (paquet `@oia/shyrka-noyau`), interfaces et
   versions simulées ; contrat : `docs/interface/contrat-donnees-shyrka.md`.
@@ -151,3 +151,45 @@ Shyrka.
 4. Le nom de paquet : le mandat demande `packages/shyrka` ; le nom
    `@oia/shyrka` étant pris par `infra/shyrka`, le paquet s'appelle
    `@oia/shyrka-noyau`.
+
+## Évolution du 8 novembre 2026 · Shyrka dans le cockpit (mandat v9, bloc G)
+
+**Ce qui change.** Le principe « local par défaut » de cette décision connaît
+une évolution assumée : pour parler à Mickaël dans le cockpit en ligne,
+Shyrka conserve ses conversations dans la base OIA et envoie ses messages à
+Mistral. Cette évolution est limitée à la conversation en texte du cockpit ;
+tout le reste reste local.
+
+### Flux de données
+
+| Où | Quoi | Règles |
+| --- | --- | --- |
+| **Sur le Mac seulement** | Voix (Whisper, voix Aurélie), entretiens et leurs enregistrements, corpus, courrier, `pnpm shyrka:parler` avec Ollama | Rien ne quitte le Mac. Les entretiens n'acceptent qu'un modèle local, sans exception |
+| **Base OIA (Supabase)** | Conversations et messages (`shy_conversation`, `shy_message`), éléments de contexte (`shy_contexte`), empreintes des oublis (`shy_oubli`), brouillons (`shy_brouillon`), journal des actions (`shy_journal`), journal des appels au modèle sans texte (`oia_ia_appel`) | Lignes privées par compte (`user_id = auth.uid()`), lisibles seulement par un propriétaire du studio ; écriture par fonctions `shy_*` seulement (migration `0007_shyrka.sql`) |
+| **Mistral (API)** | Le message de Mickaël, les derniers tours de la conversation, et les extraits de données d'OIA rendus par les outils pour répondre | Rien d'autre. Clé du projet, côté serveur (`shyrka-chat`), jamais dans le navigateur. 4 000 jetons d'entrée au plus par appel, 3 appels au plus par message |
+
+**Exclusions avant tout envoi** (`packages/shyrka/src/serveur/filtre.ts`,
+tests adverses) : un message qui touche à Swift n'est ni envoyé ni
+conservé ; une ligne de données qui touche à Swift est retirée entière ; les
+numéros de compte, de carte et de document sont masqués. Agenda, Santé et
+Famille ne sont pas connectés.
+
+**Mode privé** : rien n'est conservé (ni message, ni brouillon, ni journal
+d'actions). Seule la ligne de dépense de l'appel reste, sans texte.
+
+**Oubli** (`shy_oublier`) : la conversation ou l'élément est supprimé, son
+empreinte est gardée pour qu'il ne revienne pas, et les entrées du journal
+qui le désignaient ne portent plus que l'empreinte.
+
+**Garde des faits** : toute date d'une réponse absente des données rendues
+par les outils est signalée à Mickaël dans la réponse et journalisée
+(`packages/shyrka/src/serveur/garde.ts`). Ajoutée après une recette où le
+modèle avait inventé des échéances.
+
+**Sur le Mac**, `pnpm shyrka:parler -- --texte` utilise Ollama. Si Ollama est
+absent (ou `SHYRKA_MODELE=mistral`), la conversation passe par Mistral avec
+la clé de `~/.oia/mistral.env`, mêmes exclusions. Les entretiens restent
+exclusivement locaux.
+
+**Dépense** : plafond commun de 5 $ par mois avec la recherche assistée,
+réservé en base de façon atomique avant chaque appel (`oia_ia_reserver`).

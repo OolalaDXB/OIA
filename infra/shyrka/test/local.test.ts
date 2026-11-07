@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { mkdtempSync, mkdirSync, symlinkSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { basename } from "node:path";
 import { RACINE_DEPOT, assertModeleLocal, estDans, refuserDansLeDepot } from "../src/local.js";
 
 describe("rien de personnel dans le dépôt (amendement, § 4)", () => {
@@ -32,11 +33,16 @@ describe("rien de personnel dans le dépôt (amendement, § 4)", () => {
   });
 
   it("refuse un chemin qui remonte dans le dépôt par ..", () => {
-    expect(() => refuserDansLeDepot(join(tmpdir(), "..", RACINE_DEPOT, "x"))).toThrow(/dans le dépôt/);
+    // Chemin non normalisé qui ressort puis rentre dans le dépôt (portable : ne dépend pas de TMPDIR).
+    expect(() => refuserDansLeDepot(`${RACINE_DEPOT}x/../../${basename(RACINE_DEPOT)}/y`)).toThrow(/dans le dépôt/);
   });
 
   it("n'accepte que des modèles locaux", () => {
     expect(() => assertModeleLocal({ name: "openai:gpt", chat: async () => "" })).toThrow(/locaux/);
     expect(() => assertModeleLocal({ name: "ollama:qwen3:8b", chat: async () => "" })).not.toThrow();
+    // Mistral : seulement déclaré par l'appelant (conversation en texte, Ollama absent).
+    expect(() => assertModeleLocal({ name: "mistral:mistral-large-latest", chat: async () => "" })).toThrow(/locaux/);
+    expect(() => assertModeleLocal({ name: "mistral:mistral-large-latest", chat: async () => "" }, { mistralAutorise: true })).not.toThrow();
+    expect(() => assertModeleLocal({ name: "openai:gpt", chat: async () => "" }, { mistralAutorise: true })).toThrow(/locaux/);
   });
 });

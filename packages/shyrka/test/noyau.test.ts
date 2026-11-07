@@ -155,10 +155,19 @@ describe("noyau de Shyrka", () => {
 
   it("le noyau ne dépend d'aucune application hôte et n'appelle aucun réseau", () => {
     const dossier = fileURLToPath(new URL("../src/", import.meta.url));
-    for (const f of readdirSync(dossier)) {
+    for (const f of readdirSync(dossier, { withFileTypes: true }).filter((e) => e.isFile()).map((e) => e.name)) {
       const code = readFileSync(`${dossier}${f}`, "utf8");
       expect(code, f).not.toMatch(/from "@oia\/(?!shyrka-noyau)/);
       expect(code, f).not.toMatch(/\bfetch\(|node:https?|node:net|supabase/);
+    }
+  });
+
+  it("côté serveur (src/serveur, mandat v9), seul l'adaptateur Mistral appelle le réseau, et rien n'importe Node", () => {
+    const dossier = fileURLToPath(new URL("../src/serveur/", import.meta.url));
+    for (const f of readdirSync(dossier)) {
+      const code = readFileSync(`${dossier}${f}`, "utf8");
+      expect(code, f).not.toMatch(/from "node:|from "@oia\/|supabase/);
+      expect((code.match(/\bfetchFn\(|\bfetch\(/g) ?? []).length, f).toBe(f === "conversation.ts" ? 1 : 0);
     }
   });
 });
