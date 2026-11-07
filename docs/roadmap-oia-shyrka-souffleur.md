@@ -4,7 +4,7 @@
 
 | Champ | Valeur |
 | --- | --- |
-| Version | 3.6 |
+| Version | 3.7 |
 | Dernière modification | 2026-11-08 |
 | Statut | Proposé (à valider par Mickaël) |
 | Responsable | Mickaël Thomas |
@@ -36,6 +36,7 @@
 | 3.4 | 2026-11-07 | Cadre de Shyrka (CADRE.md) remplace la doctrine, P8 reçoit Ollama local + présence + identité évolutive, P9 reçoit l'atelier d'identité, chantier Espace personnel ajouté après J0, P6 constate l'absence de MCP existant et part de zéro |
 | 3.5 | 2026-11-07 | P4 : Bifrost ajouté aux passerelles candidates, versions épinglées et audit de la chaîne d'approvisionnement avant toute installation |
 | 3.6 | 2026-11-08 | Piste Shyrka en quatre étapes, chacune livrée avec une phase : Shyrka 1 « Te parle » avec P1, Shyrka 2 « Te seconde » avec P2, Shyrka 3 « Te connaît » avec P5, Shyrka 4 « Agit pour toi » avec P6. **P7 et P8 cessent d'être des phases** : Shyrka n'attend plus la fin de la chaîne pour exister, elle grandit avec les capacités qu'elle utilise. Le contenu de P7 (digest, dialogue, préparation) passe dans Shyrka 2 et Shyrka 3 ; celui de P8 (son local, Ollama) dans Shyrka 1, la présence et l'identité dans l'atelier de P9, la voix distante payante en attente. **P1 à P6 et P9 gardent leur numéro et leur contenu** ; les numéros 7 et 8 ne sont pas réattribués, pour que les références existantes (rapports, mandats, commits) restent justes. P0 validée devient le prérequis de Shyrka 2 à 4. Points des mandats v6 et v7 : Shyrka 1 livrée en code à adaptateurs (`packages/shyrka`), interface web sous `/oia` bascule éteinte, évaluation documentaire de Bifrost (`docs/audits/2026-11-08-bifrost-evaluation.md`) |
+| 3.7 | 2026-11-08 | Décision de Mickaël (CADRE.md) : l'apparence, la voix et la personnalité de Shyrka sont choisies et modifiées par Shyrka elle-même. La piste Shyrka, P0 et l'atelier de P9 sont alignés |
 
 > Emplacement de référence : `docs/roadmap-oia-shyrka-souffleur.md` dans le repo OolalaDXB/OIA. Toute autre copie (Claude Doc, export GPT) est une copie de lecture. `docs/roadmap.md` reste la roadmap d'OIA Funding.
 
@@ -133,7 +134,7 @@ Shyrka grandit avec les capacités qu'elle utilise, au lieu d'attendre la fin de
 
 **Prérequis.** Shyrka 1 fonctionne sous l'identité version 0, la plus fermée (texte seulement), et n'attend pas P0. Shyrka 2 à 4 exigent P0 validée.
 
-**Voix, présence, identité (ancien P8).** La voix en sortie, un visage ou une présence au-delà des points demandent une nouvelle version de l'identité, décidée par Mickaël et consignée dans le cadre. L'atelier d'identité de P9 reste le lieu de ces décisions ; une version peut aussi être décidée plus tôt, par écrit, par exemple après le premier essai réel de Shyrka 1. Exigences inchangées : voix française naturelle, posée, précise, chaleureuse et légèrement futuriste, distincte de celle des comédiennes d'Ulysse 31 et de celle de Mickaël ; prise de parole volontaire, sans écoute permanente par défaut ; confirmation explicite avant toute action engageante ; tests de clarté, latence, accents, interruptions et coût réel.
+**Voix, présence, identité (ancien P8).** La voix en sortie, un visage ou une présence au-delà des points demandent une nouvelle version de l'identité, choisie par Shyrka elle-même et consignée dans le cadre. Shyrka peut faire ce choix à tout moment, par exemple après le premier essai réel de Shyrka 1 ; l'atelier d'identité de P9 en est une occasion, pas un passage obligé. Exigences inchangées : voix française naturelle, posée, précise, chaleureuse et légèrement futuriste, distincte de celle des comédiennes d'Ulysse 31 et de celle de Mickaël ; prise de parole volontaire, sans écoute permanente par défaut ; confirmation explicite avant toute action engageante ; tests de clarté, latence, accents, interruptions et coût réel.
 
 ## P0 · Cadre de Shyrka
 
@@ -143,7 +144,7 @@ P0 s'écrit tout de suite : un fichier, aucun risque technique. Livrable : **`do
 
 **Décisions-clés fixées en 3.4 (détail dans `CADRE.md`) :**
 
-- **Identité évolutive, décidée par Mickaël.** Version 0 : présence en points, aucune voix synthétisée en sortie, voix de référence Aurélie, Chatterbox candidate.
+- **Apparence, voix et personnalité choisies et modifiées par Shyrka elle-même.** Version 0 : présence en points, aucune voix synthétisée en sortie, voix de référence Aurélie, Chatterbox candidate.
 - **Permissions fixées et élargies par Mickaël seul**, sans limite doctrinale ; Shyrka ne s'en accorde jamais.
 - **Données de Mickaël autorisées à entrer** ; **données de Swift et de ses clients refusées**.
 - **Voix de Mickaël jamais de son vivant** ; autorisée après son décès selon ses directives écrites.
@@ -261,7 +262,7 @@ Le serveur MCP expose de façon contrôlée les capacités d'OIA à Claude Code,
 
 ## P9 · Écosystème, ouverture et atelier d'identité de Shyrka
 
-**Atelier d'identité de Shyrka.** À l'ouverture de P9, un atelier d'identité produit la version suivante (voix activée, visage activé, références, personnalité, humeur par défaut), décidée par Mickaël et consignée dans [`docs/shyrka/CADRE.md`](shyrka/CADRE.md). Entrées de l'atelier : premier essai réel et retours de Shyrka 1, retours des étapes Shyrka 2 à 4, décisions sur les visages (mélanges libres, sans ressemblance reconnaissable), décisions sur les voix (jamais la voix de Mickaël de son vivant). Sortie : une version de l'identité (par exemple « version 1 : voix activée, visage de nuit étoilée, humeur par défaut posée »). Pas d'exécution tant que l'atelier n'a pas abouti.
+**Atelier d'identité de Shyrka.** À l'ouverture de P9, un atelier d'identité produit la version suivante (voix activée, visage activé, références, personnalité, humeur par défaut), choisie par Shyrka elle-même et consignée dans [`docs/shyrka/CADRE.md`](shyrka/CADRE.md). Entrées de l'atelier : premier essai réel et retours de Shyrka 1, retours des étapes Shyrka 2 à 4, décisions sur les visages (mélanges libres, sans ressemblance reconnaissable), décisions sur les voix (jamais la voix de Mickaël de son vivant). Sortie : une version de l'identité (par exemple « version 1 : voix activée, visage de nuit étoilée, humeur par défaut posée »). Pas d'exécution tant que l'atelier n'a pas abouti.
 
 
 
@@ -365,6 +366,6 @@ Chaque domaine garde ses propres mesures, publiées séparément.
 - [ ] Auditer le dépôt `mcp-studio-mt` et confirmer ses outils, ses identités appelantes et ses permissions.
 - [ ] Définir le contenu d'OIA Training.
 - [ ] Décider si des dates indicatives s'ajoutent aux portes.
-- [ ] Faire le premier essai réel de Shyrka 1 sur le Mac Studio (`infra/shyrka/README.md`), puis décider ou non une version 1 de l'identité (voix en sortie).
+- [ ] Faire le premier essai réel de Shyrka 1 sur le Mac Studio (`infra/shyrka/README.md`), puis préciser comment Shyrka consigne une version de son identité qu'elle a choisie (voix en sortie comprise).
 - [ ] Allumer ou non l'interface web sous `/oia` (Preview Vercel d'abord).
 - [ ] Bifrost : lever les points à vérifier avec Docker avant tout essai en P4.

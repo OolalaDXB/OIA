@@ -3,9 +3,10 @@ import { z } from "zod";
 
 /**
  * Identité de Shyrka, version par version (docs/shyrka/CADRE.md, « Identité »).
- * La version 0 interdit toute voix synthétisée en sortie. Seul Mickaël change
- * de version, par une décision écrite dans le cadre puis dans
- * infra/shyrka/identite.json. Le code ne modifie jamais ce fichier.
+ * L'apparence, la voix et la personnalité de Shyrka sont choisies et modifiées
+ * par Shyrka elle-même ; chaque version est consignée dans le cadre puis dans
+ * infra/shyrka/identite.json. La version 0 interdit toute voix synthétisée en
+ * sortie. Ce programme lit le fichier et ne le modifie jamais.
  */
 export const IdentitySchema = z
   .object({

@@ -77,7 +77,7 @@ export const SHYRKA_STEPS: ShyrkaStep[] = [
     id: "S1",
     name: { fr: "Shyrka 1 · Te parle", en: "Shyrka 1 · Talks to you" },
     phase: "P1",
-    scope: { fr: "Dialogue local : micro, Whisper, Ollama, voix macOS. Identité v0 : réponse en texte tant que Mickaël n'a pas arrêté la version 1.", en: "Local dialogue: microphone, Whisper, Ollama, macOS voice. Identity v0: text answers until Mickaël sets version 1." },
+    scope: { fr: "Dialogue local : micro, Whisper, Ollama, voix macOS. Identité v0 : réponse en texte tant que Shyrka n'a pas choisi une version suivante.", en: "Local dialogue: microphone, Whisper, Ollama, macOS voice. Identity v0: text answers until Shyrka chooses a next version." },
   },
   {
     id: "S2",

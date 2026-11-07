@@ -13,8 +13,8 @@ export function OiaView() {
       title="OIA"
       note={
         lang === "fr"
-          ? "Vue de lecture tirée de la roadmap 3.6 et du cadre de Shyrka. Aucune action, aucun appel à un fournisseur."
-          : "Read-only view drawn from roadmap 3.6 and Shyrka's framework. No action, no provider call."
+          ? "Vue de lecture tirée de la roadmap et du cadre de Shyrka. Aucune action, aucun appel à un fournisseur."
+          : "Read-only view drawn from the roadmap and Shyrka's framework. No action, no provider call."
       }
     >
       <section className="oiaSection" data-oia-interface="on">

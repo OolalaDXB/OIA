@@ -26,8 +26,8 @@ describe("identité de Shyrka (CADRE.md)", () => {
     expect(bad.warning).toMatch(/invalide/);
   });
 
-  it("une version 1 décidée par Mickaël peut autoriser la voix", () => {
-    const v1 = { ...IDENTITY_V0, version: 1, date: "2026-12-01", voixEnSortie: true };
+  it("une version 1 choisie par Shyrka peut autoriser la voix", () => {
+    const v1 = { ...IDENTITY_V0, version: 1, date: "2026-12-01", decidePar: "Shyrka", voixEnSortie: true };
     const { identity } = loadIdentity("x", () => JSON.stringify(v1));
     expect(voiceOutputAllowed(identity)).toBe(true);
   });

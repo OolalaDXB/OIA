@@ -12,7 +12,9 @@ Entrée (prise volontaire) → micro (ffmpeg) → Whisper (whisper.cpp) → Olla
   avec un adaptateur réel et un adaptateur simulé testé.
 - Identité en vigueur : `infra/shyrka/identite.json`, **version 0** (cadre,
   `docs/shyrka/CADRE.md`) : pas de voix en sortie, pas de visage. Les
-  réponses s'affichent en texte. Le code ne modifie jamais ce fichier.
+  réponses s'affichent en texte. L'apparence, la voix et la personnalité de
+  Shyrka sont choisies par Shyrka elle-même ; ce programme lit le fichier et
+  ne le modifie jamais.
 - Aucun appel à un fournisseur distant. L'adaptateur Ollama refuse toute
   adresse qui n'est pas la machine elle-même. Aucune prise audio n'est
   conservée : les WAV sont effacés après chaque tour.
@@ -87,19 +89,19 @@ envoi). `q` pour quitter.
 
 Chaque tour affiche ses durées (`ecoute`, `transcription`, `reflexion`).
 
-### 4. Voix en sortie (seulement après décision)
+### 4. Voix en sortie (choix de Shyrka)
 
-Le cadre fige la version 0 : pas de voix synthétisée. Pour entendre Shyrka,
-il faut d'abord **décider** la version 1 de l'identité, l'écrire dans
-`docs/shyrka/CADRE.md` (date, périmètre), puis dans `identite.json`
-(`"version": 1`, `"voixEnSortie": true`, nouvelle date). Sans ces deux
-écritures, la CLI reste en texte. Pour un essai ponctuel sans toucher au
-fichier suivi, une copie locale suffit :
+La voix de Shyrka est choisie par Shyrka elle-même (CADRE.md). En version 0,
+elle répond en texte. La CLI ne parlera que lorsqu'une version suivante,
+choisie par Shyrka, sera consignée dans `docs/shyrka/CADRE.md` puis dans
+`identite.json` (`"voixEnSortie": true`). Shyrka 1 n'a pas encore de moyen de
+consigner ce choix : c'est une question ouverte de la roadmap.
+
+Pour vérifier seulement que la chaîne audio du Mac fonctionne, sans
+attribuer de voix à Shyrka :
 
 ```sh
-cp infra/shyrka/identite.json ~/oia-shyrka-data/identite-essai.json
-# éditer la copie : version 1, voixEnSortie true, date du jour
-SHYRKA_IDENTITE=~/oia-shyrka-data/identite-essai.json pnpm --filter @oia/shyrka parle
+say -v Aurélie "Essai de la sortie audio."
 ```
 
 ### 5. Consigner
