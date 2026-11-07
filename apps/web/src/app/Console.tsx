@@ -33,6 +33,7 @@ import {
 } from "../lib/vocabulary";
 import { useAlerts, useLedger } from "../lib/watchData";
 import { useAuth } from "../lib/supabase";
+import { oiaInterfaceEnabled } from "../lib/oiaFlag";
 import {
   download,
   useAttachedNotes,
@@ -95,7 +96,7 @@ const KIND_COLOR: Record<string, string> = {
 };
 const kindColor = (kind: string | undefined) => KIND_COLOR[kind ?? ""] ?? "var(--muted)";
 
-export type RailKey = "today" | "opportunities" | "projects" | "money" | "workspace";
+export type RailKey = "today" | "opportunities" | "projects" | "money" | "workspace" | "oia";
 
 /**
  * Five destinations, down from eleven.
@@ -148,6 +149,17 @@ export function Rail({ active, onExportAudit }: { active: RailKey; onExportAudit
       href: "/workspace/",
       hint: { fr: "Tâches, notes, contacts", en: "Tasks, notes, people" },
     },
+    // Interface OIA : absente du rail tant que la bascule est éteinte.
+    ...(oiaInterfaceEnabled()
+      ? [
+          {
+            key: "oia" as const,
+            label: { fr: "OIA", en: "OIA" },
+            href: "/oia/",
+            hint: { fr: "Identités, phases, piste Shyrka", en: "Identities, phases, Shyrka track" },
+          },
+        ]
+      : []),
   ];
   return (
     <aside className="rail">

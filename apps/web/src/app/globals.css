@@ -346,3 +346,11 @@ table.money a:hover { border-bottom-color: var(--ink); }
   font-size: 13px;
   color: var(--ink);
 }
+
+/* Interface OIA (/oia), derrière la bascule NEXT_PUBLIC_OIA_INTERFACE. */
+.oiaSection { margin: 0; padding: 18px 26px 6px; }
+.oiaSection h2 { font-size: 15px; font-weight: 500; margin: 0 0 10px; }
+.oiaGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.oiaGrid p { margin: 6px 0 0; font-size: 13px; }
+.oiaTable { border-collapse: collapse; width: 100%; font-size: 13px; }
+.oiaTable td { padding: 6px 10px 6px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
