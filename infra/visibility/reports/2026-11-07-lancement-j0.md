@@ -147,3 +147,55 @@ Sur `main` : `scripts/j0-launch.sh`, `scripts/j0-first-run.sh`,
 branche `lovable/oia-visibility-prototype`.
 
 Tests : 254 passent, typage propre.
+
+## Lancement effectif et premier run (2026-11-07)
+
+- Compte créé par Mickaël. La marque « OIA » que l'écran d'accueil avait
+  créée a été supprimée de la base, après vérification qu'aucune ligne n'y
+  était liée (Elmo 0.7.7 n'a pas de route de suppression). Copie de la
+  ligne : `~/oia-visibility-data/j0/brand-oia-supprimee-2026-11-07.json`.
+- `j0-launch.sh coach-gari` à 15:27 UTC : 4 concurrents et 10 questions
+  chargés, worker démarré à 15:27:30 UTC, `caffeinate` et
+  `cost-guard.sh --watch 60` actifs, clé admin retirée.
+  `measurement.yaml` : j0 en `running`, début le 2026-11-07.
+
+Premier passage, environ deux minutes après le démarrage :
+
+| Moteur | Runs réussis | Version servie | Recherches par run | Coût selon la grille | Jev |
+|---|---|---|---|---|---|
+| chatgpt | 10/10 | `gpt-6-luna` | inconnu | 0,26 $ (majorant) | 10/10 |
+| claude | 10/10 | `claude-sonnet-5-5` | 1 | 0,48 $ | 8/10 |
+| gemini | 10/10 | `google/gemini-3-flash-preview` | 4,4 | 0,64 $ (facturé par OpenRouter) | 10/10 |
+| mistral | 7/10 (en cours) | `mistral-large-4` | 5,7 | 1,36 $ (recherche au prix provisoire) | 2/7 |
+| perplexity | 10/10 | `perplexity/sonar` | — | 0,15 $ (facturé) | 9/10 |
+
+Aucun échec. Coût retenu du mois : **2,88 $** (grille ; estimation
+d'Elmo : 0,44 $ ; solde OpenRouter : 0,79 $).
+
+**Points à surveiller (rien changé pendant la fenêtre) :**
+
+1. **ChatGPT : compteurs absents.** Elmo garde pour OpenAI une réponse
+   reconstruite, sans `usage` ni éléments de recherche. La grille compte
+   donc chaque run au majorant (0,026 $). Le coût réel se lit dans la
+   console OpenAI.
+2. **Gemini et Mistral cherchent beaucoup plus que prévu**, en moyenne
+   4,4 et 5,7 recherches par réponse, contre 1 dans le budget. Gemini
+   coûte environ 0,058 $ par réponse (montant facturé par OpenRouter),
+   soit ≈ 2,9 $ sur la fenêtre. Mistral, au prix provisoire de 0,03 $
+   par recherche, coûte ≈ 0,19 $ par réponse, soit ≈ 9,7 $ sur la
+   fenêtre : **au-delà de la limite de 8 $**. Si ce prix est le bon,
+   Mistral refusera les derniers appels vers le quatrième jour. Le vrai
+   prix se lit dès maintenant dans la console Mistral (Usage).
+3. **Projection de la fenêtre :** ≈ 3,4 $ par jour, soit ≈ 17 $ sur cinq
+   jours, sous le plafond de 30 $. C'est plus que le budget typique
+   (7,9 $), à cause des recherches.
+4. **Claude :** Elmo a refait deux appels après `max_uses_exceeded`. La
+   première tentative n'est pas comptée par la grille ; la limite de 12 $
+   de l'espace Anthropic la couvre.
+5. **Grille :** les plafonds de recherche du majorant (1 pour Gemini,
+   3 pour Mistral) sont sous les valeurs observées. Ils ne servent
+   qu'aux runs sans compteurs ou échoués. À relever si Mickaël le
+   décide ; je n'ai rien modifié pendant la fenêtre.
+
+Contrôle suivant : `./scripts/j0-first-run.sh coach-gari` à tout moment
+(lecture seule).
