@@ -4,9 +4,10 @@
 # reconfigure jamais Elmo : lecture seule, et cost-guard.sh en --check.
 #  1. fiche du jour : subjects/<sujet>/reports/<fenêtre>/jour-N.md ;
 #  2. visibility.json mis à jour (vis-export.sh) ;
-#  3. dépense vérifiée (cost-guard.sh --check, sans arrêt du worker) ;
-#  4. notification macOS SEULEMENT en cas de problème ;
-#  5. après la fin de la fenêtre : la tâche se retire d'elle-même.
+#  3. preuves du jour synchronisées vers la base OIA (vis-sync.sh, mandat v9) ;
+#  4. dépense vérifiée (cost-guard.sh --check, sans arrêt du worker) ;
+#  5. notification macOS SEULEMENT en cas de problème ;
+#  6. après la fin de la fenêtre : la tâche se retire d'elle-même.
 set -uo pipefail
 source "$(dirname "$0")/lib.sh"
 subject="${1:-}"
@@ -35,6 +36,9 @@ printf '%s' "$out" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end"
 echo "fiche : $dir/jour-$day.md"
 
 if [ -z "${OIA_VIS_SKIP_EXPORT:-}" ]; then "$VIS_ROOT/scripts/vis-export.sh" "$subject" >/dev/null || notify "visibility.json non mis à jour."; fi
+if [ -z "${OIA_VIS_SKIP_SYNC:-}" ] && [ -z "${OIA_VIS_SKIP_EXPORT:-}" ]; then
+  "$VIS_ROOT/scripts/vis-sync.sh" "$subject" >/dev/null || notify "Base OIA non mise à jour (vis-sync)."
+fi
 if [ -z "${OIA_VIS_SKIP_COST:-}" ]; then
   "$VIS_ROOT/scripts/cost-guard.sh" --check >/dev/null 2>&1; crc=$?
   case $crc in 2|3) notify "Dépense : seuil d'alerte ou plafond atteint (voir cost-journal.csv).";; 4) notify "Dépense du mois illisible.";; esac
