@@ -1,37 +1,36 @@
-import { Link } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import { Link, useRouter } from "@tanstack/react-router";
+import { useId, useRef, useState, type ReactNode } from "react";
 import type { Etat } from "@/data/demo";
+import { modulesPersonnels, modules, depenses } from "@/data/demo";
+import { Button } from "@/components/ui/button";
+import { LockKeyhole, Menu, X } from "lucide-react";
+import { BarreColoree } from "@/components/oia/graphiques";
 
-const nav = [
-  { to: "/", label: "Accueil" },
-  { to: "/sites/$slug", params: { slug: "studio-ardoise" }, label: "Visibility" },
-  { to: "/seo-command", label: "SEO Command" },
-  { to: "/funding", label: "Funding" },
-  { to: "/reglages", label: "Réglages" },
-] as const;
-
-export function Shell({ children }: { children: ReactNode }) {
-  return (
-    <div className="min-h-screen bg-background text-foreground">
-      <header className="border-b border-border">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-8 px-5 md:px-10">
-          <Link to="/" className="flex min-h-11 items-center text-[15px] font-medium tracking-[-0.02em]">OIA</Link>
-          <nav aria-label="Navigation principale" className="-mx-3 flex flex-1 overflow-x-auto">
-            {nav.map((n) => (
-              <Link key={n.to} to={n.to} {...("params" in n ? { params: n.params } : {})}
-                className="flex min-h-11 items-center whitespace-nowrap px-3 text-sm text-muted-foreground hover:text-foreground"
-                activeProps={{ className: "text-foreground underline underline-offset-[6px]" }}
-                activeOptions={{ exact: n.to === "/" }}>
-                {n.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      </header>
-      <main className="mx-auto max-w-6xl px-5 py-10 md:px-10 md:py-14">{children}</main>
-      <footer className="mx-auto max-w-6xl px-5 pb-10 text-xs text-tertiary md:px-10">Exemple fictif — données de démonstration.</footer>
-    </div>
-  );
+export function Shell({ children, large = false, fictif = true }: { children: ReactNode; large?: boolean; fictif?: boolean }) {
+  const [menuOuvert, setMenuOuvert] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
+  const contenuId = useId();
+  const router = useRouter();
+  return <div className="oia-shell min-h-dvh bg-background text-foreground md:grid md:grid-cols-[230px_minmax(0,1fr)]">
+    <a href={`#${contenuId}`} className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-background focus:p-3">Aller au contenu principal</a>
+    <header className="sticky top-0 z-30 bg-background border-b border-border md:sticky md:top-0 md:h-dvh md:overflow-y-auto md:border-r md:border-b-0" onKeyDown={(e) => { if (e.key === "Escape" && menuOuvert) { e.preventDefault(); setMenuOuvert(false); menuButton.current?.focus(); } }}>
+      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center px-5 py-2 md:hidden"><Link to="/" aria-label="OIA, accueil" className="flex min-h-12 min-w-12 items-center text-[15px] font-medium">OIA</Link><Button ref={menuButton} variant="ghost" size="icon" className="size-12 shrink-0" aria-label={menuOuvert ? "Fermer le menu de navigation" : "Ouvrir le menu de navigation"} aria-expanded={menuOuvert} aria-controls="oia-navigation" onClick={() => setMenuOuvert((v) => !v)}>{menuOuvert ? <X /> : <Menu />}</Button></div>
+      <div id="oia-navigation" className={`${menuOuvert ? "flex" : "hidden"} max-h-[calc(100dvh-64px)] overflow-y-auto flex-col px-5 pb-5 md:flex md:min-h-full md:max-h-none md:py-5`} onClickCapture={(e) => { if (e.target instanceof Element && e.target.closest("a")) { setMenuOuvert(false); if (window.matchMedia("(max-width: 767px)").matches) { const unsubscribe = router.subscribe("onResolved", () => { unsubscribe(); requestAnimationFrame(() => document.querySelector<HTMLElement>("main")?.focus()); }); } } }}>
+        <Link to="/" className="mb-5 hidden min-h-11 items-center text-[15px] font-medium md:flex">OIA</Link>
+        <nav aria-label="Navigation principale" className="flex flex-col">
+          <Link to="/" className="flex min-h-11 items-center px-2 text-sm text-muted-foreground" activeProps={{ className: "text-foreground underline underline-offset-4" }} activeOptions={{ exact: true }}>Accueil</Link>
+          {modules.map((m) => <Link key={m.slug} to={`/${m.slug}`} className="flex min-h-11 items-center gap-2 px-2 text-sm text-muted-foreground hover:text-foreground" activeProps={{ className: "text-foreground underline underline-offset-4" }}>
+            <span aria-hidden="true" className={`size-2 shrink-0 bg-${m.couleur}`} /><span>{m.nom}</span><span className="sr-only">, {m.etat}</span><span className="ml-auto flex size-6 items-center justify-center" title={m.etat} aria-hidden="true"><span className={`size-1.5 rounded-full ${m.statut === "conforme" ? "bg-ok" : "bg-warn"}`} /></span>
+          </Link>)}
+        </nav>
+        <section className="mt-5 border-t border-border pt-5"><h2 className="mb-2 flex items-center gap-2 text-xs text-tertiary">Personnel <LockKeyhole className="size-3" aria-label="Espace privé" /></h2>
+          <nav aria-label="Personnel" className="flex flex-col">{modulesPersonnels.map((m) => <Link key={m.slug} to="/personnel/$module" params={{ module: m.slug }} className="flex min-h-11 flex-wrap items-center gap-2 px-2 text-sm text-muted-foreground" activeProps={{ className: "text-foreground underline underline-offset-4" }}><span className="size-2 bg-module-personnel" aria-hidden="true" /><span>{m.nom}</span><span className="ml-auto text-[10px] text-tertiary">En préparation</span></Link>)}</nav>
+        </section>
+        <nav aria-label="Assistante et réglages" className="mt-5 border-t border-border pt-3 md:mt-auto"><Link to="/shyrka" className="flex min-h-11 items-center px-2 text-sm text-muted-foreground" activeProps={{ className: "text-foreground underline underline-offset-4" }}>Shyrka</Link><Link to="/reglages" className="flex min-h-11 items-center px-2 text-sm text-muted-foreground" activeProps={{ className: "text-foreground underline underline-offset-4" }}>Réglages</Link></nav><p className="num mt-3 px-2 text-xs text-tertiary">Dépense du mois : {depenses.montant} $ <span className="block">plafond Visibility : {depenses.plafond} $</span></p>
+      </div>
+    </header>
+    <div className="min-w-0"><main id={contenuId} tabIndex={-1} className={`mx-auto px-5 py-10 md:px-10 md:py-14 ${large ? "max-w-[1600px]" : "max-w-6xl"}`}>{children}</main>{fictif && <footer className="mx-auto max-w-6xl px-5 pb-20 text-xs text-tertiary md:px-10">Exemple fictif, données de démonstration.</footer>}</div>
+  </div>;
 }
 
 export function Fictif() {
@@ -51,7 +50,7 @@ export function Statut({ etat, label }: { etat: Etat; label?: string }) {
 
 export function Section({ titre, aside, children }: { titre: string; aside?: ReactNode; children: ReactNode }) {
   return (
-    <section className="card p-5 md:p-6">
+    <section className="card min-w-0 p-5 md:p-6">
       <div className="mb-5 flex items-baseline justify-between gap-4">
         <h2 className="text-base">{titre}</h2>
         {aside}
@@ -65,9 +64,7 @@ export function Barre({ label, v, max = 100 }: { label: string; v: number; max?:
   return (
     <div className="grid grid-cols-[minmax(6rem,11rem)_1fr_3rem] items-center gap-4 py-2 text-sm">
       <span className="truncate text-muted-foreground">{label}</span>
-      <span className="h-1.5 rounded-full bg-track">
-        <span className="block h-full rounded-full bg-bar" style={{ width: `${(v / max) * 100}%` }} />
-      </span>
+      <BarreColoree label={label} largeur={(v / max) * 100} detail={`${v} %`} />
       <span className="num text-right">{v} %</span>
     </div>
   );

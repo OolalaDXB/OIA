@@ -12,6 +12,10 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { DonneesProvider } from "@/lib/donnees-visibility";
+import { ShyrkaProvider, ShyrkaGlobale } from "@/components/oia/shyrka";
+import { FiltresProvider } from "@/components/oia/mesure";
+import { ContexteProvider } from "@/lib/shyrka-contexte";
 
 function NotFoundComponent() {
   return (
@@ -78,7 +82,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "OIA Visibility" },
+      { title: "OIA" },
       { name: "description", content: "Console de visibilité dans Google et les assistants d'IA." },
       { property: "og:title", content: "OIA Visibility" },
       { property: "og:description", content: "Console de visibilité dans Google et les assistants d'IA." },
@@ -119,7 +123,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <DonneesProvider><FiltresProvider><ContexteProvider><ShyrkaProvider><Outlet /><ShyrkaGlobale /></ShyrkaProvider></ContexteProvider></FiltresProvider></DonneesProvider>
     </QueryClientProvider>
   );
 }

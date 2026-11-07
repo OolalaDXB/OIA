@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "events": {
+    "project.money_export_requested": {
+      "event_schema_version": 1,
+      "description": "Un export CSV ou Markdown de la liste filtrée Money Lookup est déclenché.",
+      "privacy": {
+        "contains_pii": false,
+        "purpose": "product_analytics"
+      },
+      "properties_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "format",
+          "count",
+          "view"
+        ],
+        "properties": {
+          "format": {
+            "type": "string",
+            "enum": [
+              "csv",
+              "markdown"
+            ]
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "view": {
+            "type": "string",
+            "enum": [
+              "Toutes",
+              "Financement",
+              "Appel d'offres",
+              "Investisseur"
+            ]
+          }
+        }
+      }
+    },
+    "project.money_filter_changed": {
+      "event_schema_version": 1,
+      "description": "Un filtre, tri ou une vue enregistrée est appliqué dans Money Lookup, sans enregistrer sa valeur.",
+      "privacy": {
+        "contains_pii": false,
+        "purpose": "product_analytics"
+      },
+      "properties_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "view",
+          "filter",
+          "active"
+        ],
+        "properties": {
+          "view": {
+            "type": "string",
+            "enum": [
+              "Toutes",
+              "Financement",
+              "Appel d'offres",
+              "Investisseur",
+              "Montants"
+            ]
+          },
+          "filter": {
+            "type": "string",
+            "enum": [
+              "type",
+              "eligibilite",
+              "recommandation",
+              "verification",
+              "entite",
+              "projet",
+              "fraicheur",
+              "tri",
+              "vue_enregistree",
+              "type_montant",
+              "devise"
+            ]
+          },
+          "active": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "project.money_opportunity_opened": {
+      "event_schema_version": 1,
+      "description": "La fiche d'une opportunité fictive Money Lookup est ouverte.",
+      "privacy": {
+        "contains_pii": false,
+        "purpose": "product_analytics"
+      },
+      "properties_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "opportunity_id",
+          "type",
+          "verified"
+        ],
+        "properties": {
+          "opportunity_id": {
+            "type": "string",
+            "enum": [
+              "m1",
+              "m2",
+              "m3",
+              "m4",
+              "m5",
+              "m6",
+              "m7"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Financement",
+              "Appel d'offres",
+              "Investisseur"
+            ]
+          },
+          "verified": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "project.money_tab_selected": {
+      "event_schema_version": 1,
+      "description": "Un onglet Money Lookup différent est sélectionné.",
+      "privacy": {
+        "contains_pii": false,
+        "purpose": "product_analytics"
+      },
+      "properties_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "tab"
+        ],
+        "properties": {
+          "tab": {
+            "type": "string",
+            "enum": [
+              "aujourdhui",
+              "toutes",
+              "financements",
+              "appels-offres",
+              "investisseurs",
+              "signals",
+              "montants"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

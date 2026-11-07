@@ -1,14 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
-import { Shell, Fictif, Statut, Check, btnPrimary, btnSecondary, field } from "@/components/oia/ui";
-import { onboarding as o } from "@/data/demo";
+import { Statut, Check, btnPrimary, btnSecondary, field } from "@/components/oia/ui";
+import { VisibilityShell } from "@/components/oia/visibility";
+import { useDonnees } from "@/lib/donnees-visibility";
 
 export const Route = createFileRoute("/nouveau-compte")({
   head: () => ({
     meta: [
-      { title: "Nouveau compte — OIA Visibility" },
+      { title: "Nouveau compte , OIA Visibility" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { name: "description", content: "Ajoutez un site en cinq étapes : analyse, compréhension, connexions, questions, lancement." },
-      { property: "og:title", content: "Nouveau compte — OIA Visibility" },
+      { property: "og:title", content: "Nouveau compte , OIA Visibility" },
       { property: "og:description", content: "Cinq étapes, une décision par étape." },
     ],
   }),
@@ -18,7 +21,7 @@ export const Route = createFileRoute("/nouveau-compte")({
 function Etape({ n, titre, actif, fait, children }: { n: number; titre: string; actif: boolean; fait: boolean; children: ReactNode }) {
   return (
     <section className={`grid gap-4 border-t border-border py-8 md:grid-cols-[5rem_1fr] ${!actif && !fait ? "opacity-40" : ""}`} aria-current={actif ? "step" : undefined}>
-      <div className="num text-3xl font-normal tracking-[-0.03em] text-tertiary">{String(n).padStart(2, "0")}</div>
+      <div className="num text-3xl font-normal  text-tertiary">{String(n).padStart(2, "0")}</div>
       <div>
         <h2 className="text-xl">{titre}</h2>
         {(actif || fait) && <div className="mt-5">{children}</div>}
@@ -29,10 +32,13 @@ function Etape({ n, titre, actif, fait, children }: { n: number; titre: string; 
 
 function Toggle<T extends string>(list: T[]) {
   const [sel, setSel] = useState<Set<T>>(new Set(list));
+  const cle = list.join("\u0000");
+  useEffect(() => { setSel(new Set(list)); }, [cle]); // eslint-disable-line react-hooks/exhaustive-deps
   return { sel, flip: (x: T) => setSel((s) => { const n = new Set(s); n.has(x) ? n.delete(x) : n.add(x); return n; }) };
 }
 
 function NouveauCompte() {
+  const o = useDonnees().onboarding;
   const [step, setStep] = useState(1);
   const [url, setUrl] = useState(o.url);
   const [shown, setShown] = useState(0);
@@ -45,6 +51,7 @@ function NouveauCompte() {
   const qs = Toggle(o.questions.map((q) => q.q));
   const [detail, setDetail] = useState(false);
   const [lance, setLance] = useState(false);
+  useEffect(() => { setUrl(o.url); setInfos({ activite: o.activite, lieu: o.lieu, langues: o.langues }); }, [o]);
 
   useEffect(() => {
     if (!analyse || shown >= o.constats.length) return;
@@ -57,8 +64,7 @@ function NouveauCompte() {
   );
 
   return (
-    <Shell>
-      <Fictif />
+    <VisibilityShell page="Nouveau compte" active="sites">
       <h1 className="mt-2 text-3xl md:text-4xl">Nouveau compte</h1>
       <p className="mt-2 mb-10 text-muted-foreground">Cinq étapes. Une décision à chaque fois.</p>
 
@@ -157,7 +163,7 @@ function NouveauCompte() {
             ))}
           </ul>
           <button className="mt-2 min-h-11 text-sm underline underline-offset-4" aria-expanded={detail} onClick={() => setDetail(!detail)}>
-            {detail ? "Masquer le détail" : "Voir le détail des 85 contrôles"}
+            {detail ? "Masquer le détail" : `Voir le détail des ${o.familles.reduce((t, f) => t + f[1] + f[2] + f[3], 0)} contrôles`}
           </button>
           {detail && (
             <div className="-mx-5 overflow-x-auto px-5">
@@ -179,6 +185,6 @@ function NouveauCompte() {
           <p className="mt-6 text-sm"><Statut etat="conforme" label="Mesure lancée. Premiers résultats dans cinq jours." /> <Link to="/sites/$slug" params={{ slug: "studio-ardoise" }} className="ml-3 underline underline-offset-4">Voir le site</Link></p>
         ) : <button className={`${btnPrimary} mt-6`} onClick={() => setLance(true)}>Lancer la première mesure</button>}
       </Etape>
-    </Shell>
+    </VisibilityShell>
   );
 }

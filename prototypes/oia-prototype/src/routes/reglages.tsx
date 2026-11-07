@@ -4,9 +4,11 @@ import { Shell, Section, Fictif } from "@/components/oia/ui";
 export const Route = createFileRoute("/reglages")({
   head: () => ({
     meta: [
-      { title: "Réglages — OIA Visibility" },
+      { title: "Réglages , OIA Visibility" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { name: "description", content: "Compte, plafonds de dépenses et cadre de l'assistant." },
-      { property: "og:title", content: "Réglages — OIA Visibility" },
+      { property: "og:title", content: "Réglages , OIA Visibility" },
       { property: "og:description", content: "Compte, plafonds de dépenses et cadre de l'assistant." },
     ],
   }),
