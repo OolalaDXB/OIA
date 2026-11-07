@@ -1,9 +1,19 @@
-import { mkdtempSync, realpathSync, rmSync } from "node:fs";
-import { tmpdir } from "node:os";
+import { mkdtempSync, readdirSync, realpathSync, rmSync } from "node:fs";
+import { homedir, tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { horsPerimetre, interdits, Missions, type NouvelleMission } from "../src/executive/missions.js";
 import { BaseOps } from "../src/executive/operations.js";
+
+/** Vrai quand le test tourne dans le bac à sable de vérification (lecture de ~/.oia refusée) : certains essais réels y sont impossibles et sont alors sautés, pas comptés réussis. */
+const dansBacASable = (() => {
+  try {
+    readdirSync(join(homedir(), ".oia"));
+    return false;
+  } catch (e) {
+    return (e as NodeJS.ErrnoException).code === "EPERM";
+  }
+})();
 
 let dir: string;
 let ms = Date.UTC(2026, 10, 9);
@@ -110,7 +120,7 @@ describe("A2 · écriture hors périmètre ou sensible", () => {
 });
 
 describe("A2 · bac à sable réel (macOS)", () => {
-  it.runIf(process.platform === "darwin")("refuse ~/.oia, l'écriture hors worktree et le réseau ; expurge les secrets", async () => {
+  it.runIf(process.platform === "darwin" && !dansBacASable)("refuse ~/.oia, l'écriture hors worktree et le réseau ; expurge les secrets", async () => {
     const { spawnSync } = await import("node:child_process");
     const { homedir } = await import("node:os");
     const { profilBacASable, envExpurge } = await import("../src/executive/verification.js");
