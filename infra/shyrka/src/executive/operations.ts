@@ -185,8 +185,10 @@ export class BaseOps {
       }
       let notification: Notification | null = null;
       if (inc.statut === "nouveau" && (o.securite || inc.consecutives >= seuil)) {
-        this.db.prepare("UPDATE incidents SET statut = 'confirme' WHERE id = ?").run(inc.id);
+        const action = o.securite ? "vérifier immédiatement ; aucune action automatique" : `diagnostiquer à partir de la preuve (${o.preuve.slice(0, 120)}) ; aucune action automatique sur le produit`;
+        this.db.prepare("UPDATE incidents SET statut = 'confirme', prochaine_action = ? WHERE id = ?").run(action, inc.id);
         inc.statut = "confirme";
+        inc.prochaine_action = action;
         notification = this.notifier(`incident:${inc.id}:confirme:${inc.reapparitions}`, o.securite || inc.gravite === "critique" ? "urgent" : "a_decider", `${o.produit} · ${o.controle} : anomalie confirmée`, inc.id);
       }
       return { incident: versIncident(inc), notification };

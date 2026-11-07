@@ -95,7 +95,14 @@ export function construireBrief(deps: { ops: BaseOps; missions: Missions; produi
   for (const i of ops.incidents(["confirme", "en_traitement"]).sort((a, b) => PRIORITE[a.gravite] - PRIORITE[b.gravite])) {
     sujets.push({
       titre: `${i.produit} · ${i.source}`, nature: "fait_observe", impact: `${i.impact} (${i.gravite}), ${i.occurrences} observation(s) depuis ${i.premiere.slice(0, 16)}Z`,
-      preuve: `${i.observation} — ${i.preuve}`, recommandation: i.prochaineAction, action: `pnpm shyrka:executive incident show ${i.id.slice(0, 8)}`, cible: i.id,
+      preuve: `${i.observation} — ${i.preuve}`, recommandation: i.prochaineAction, action: `pnpm shyrka:executive incidents show ${i.id.slice(0, 8)}`, cible: i.id,
+    });
+  }
+  for (const m of missions.lister().filter((x) => x.statut === "bloquee")) {
+    const r = m.resultats as { pr?: string; revue?: { verdict?: string } };
+    sujets.push({
+      titre: `Mission bloquée : ${m.objectif}`, nature: "fait_observe", impact: `aucun correctif utilisable (${m.causeBlocage ?? "cause consignée au journal"})`, preuve: r.pr ?? "journal de mission",
+      recommandation: "autoriser une troisième tentative avec la correction proposée par la revue, ou refuser", action: `pnpm shyrka:executive missions show ${m.id.slice(0, 8)}`, cible: m.id,
     });
   }
   for (const m of missions.lister().filter((x) => x.statut === "attente_validation")) {

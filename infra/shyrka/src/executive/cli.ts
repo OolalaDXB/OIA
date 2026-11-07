@@ -172,7 +172,7 @@ function cherche(question: string, pour: Demandeur = { type: "mickael" }): numbe
         console.log(`- mémoire : indisponible (${(e as Error).message})`);
       }
       const o = ops();
-      const missions = new Missions(o).lister().filter((x) => ["proposee", "attente_validation"].includes(x.statut));
+      const missions = new Missions(o).lister().filter((x) => ["proposee", "attente_validation", "bloquee"].includes(x.statut));
       console.log(`- missions : ${missions.length ? missions.map((x) => `${x.id.slice(0, 8)} ${x.statut} « ${x.objectif} »`).join(" ; ") : "aucune en attente de toi"}`);
       o.fermer();
       const d = (readFileSync(join(RACINE_DEPOT, "docs/roadmap-oia-shyrka-souffleur.md"), "utf8").split(/^## Décisions ouvertes\s*$/m)[1]?.split(/^## /m)[0] ?? "").match(/^- \[ \] .+$/gm) ?? [];
