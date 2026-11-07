@@ -190,7 +190,7 @@ P1 installe Elmo, CrawlSEO et Crawlie sur le Mac Studio et prend la mesure de d�
 **Avec P1 :**
 
 - **Shyrka 1 · Te parle (Shyrka v0, mandat v6 bloc B).** Code livré le 2026-11-08, tout en local, testé avec des adaptateurs simulés : voix (`infra/shyrka`, `pnpm --filter @oia/shyrka parler` et `resume`) avec le serveur Whisper local, Ollama `qwen3:8b` et la voix Aurélie ; contexte en lecture seule (rapports, J0, décisions, budget) ; mode entretien (`infra/shyrka/ENTRETIEN.md`), réponses enregistrées sur le volume chiffré ; agent courrier en brouillons uniquement (`packages/shyrka-mail`, exclusions Swift avant tout modèle) ; WhatsApp professionnel cadré (`docs/shyrka/adr/0002-whatsapp.md`) ; paliers de permission 0, 1, 2 (`infra/shyrka/permissions.json`). Reste : le premier essai réel sur le Mac Studio, la connexion Gmail et `docs/shyrka/style.md`, par Mickaël.
-- **Données de Visibility pour l'interface** (mandat v8, bloc B) : contrat `docs/interface/contrat-donnees-visibility.md` (quatre indicateurs avec intervalles, « mesure en cours, jour N sur 5 », « non mesurable » distinct de zéro), vues `packages/database/supabase/migrations/0006_visibility_vues.sql` lisibles par les seuls membres du client, démonstration fictive pour Lovable. Prérequis : `infra/visibility/migrations/0004` corrigée pour Supabase (`auth.uid()` y rend un uuid).
+- **Données de Visibility pour l'interface** (mandat v8, bloc B) : contrat `docs/interface/contrat-donnees-visibility.md` (quatre indicateurs avec intervalles, « mesure en cours, jour N sur 5 », « non mesurable » distinct de zéro), vues `packages/database/supabase/migrations/0006_visibility_vues.sql` lisibles par les seuls membres du client, démonstration fictive pour Lovable. Prérequis : `infra/visibility/migrations/0001` à `0004` appliquées (0004 corrigée pour Supabase le 2026-11-08).
 - **Interface :** Lovable possède l'interface. L'interface `/oia` du mandat v7 (bloc F) est retirée le 2026-11-08 ; la console d'origine est rétablie à l'identique.
 
 **Porte P1 :** un rapport J0 réel et reproductible (réponses, citations, sources, métadonnées, coûts, limites de mesure), sans aucun chiffre inventé ou reconstruit.
@@ -392,7 +392,8 @@ Chaque domaine garde ses propres mesures, publiées séparément.
 - [ ] Relire puis appliquer `0002a_comptes_de_mickael.sql` (`packages/database/supabase/migrations/README.md`), avec les e-mails des deux comptes.
 - [x] Console : elle garde son stockage local ; 0003 à 0005 attendent l'application Lovable (2026-11-08).
 - [ ] Supprimer les trois compartiments de stockage vides restés sur la base (`asset-images`, `documents`, `email-assets`) s'ils viennent de BEAU.
-- [ ] Faire corriger `infra/visibility/migrations/0004` pour Supabase par la session Visibility, puis relire et appliquer 0006.
+- [x] `infra/visibility/migrations/0004` corrigée pour Supabase par la session Visibility (commit `7093687`).
+- [ ] Relire et appliquer `vis` 0001 à 0004, puis 0006, quand les écrans Visibility de Lovable seront prêts.
 - [x] Base Supabase réservée à OIA, pas de projet séparé (2026-11-08).
 - [ ] Shyrka autonome : choisir le stockage réel du noyau et la durée des sauvegardes (`docs/shyrka/adr/0003-shyrka-autonome.md`).
 - [ ] Espace personnel : purger l'historique de la branche `feature/transformation-90-personal` et fermer la PR #3 avant toute publication (`docs/audits/2026-11-08-espace-personnel.md`).

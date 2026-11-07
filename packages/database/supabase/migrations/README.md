@@ -12,7 +12,7 @@ La base OIA (`iywmvyebuikxyvnrcnoy`) est réservée à OIA depuis le 7 novembre
 | `0003_membres_et_politiques.sql` | **Attend l'application Lovable** (décision du 2026-11-08) : elle coupe les écritures directes de la console |
 | `0004_money_lookup.sql` | Après 0003 |
 | `0005_reprise_navigateur.sql` | Après 0004 |
-| `0006_visibility_vues.sql` | Après le schéma `vis` de Visibility (`infra/visibility/migrations/0001` à `0004`), avec `0004` corrigée pour Supabase |
+| `0006_visibility_vues.sql` | Après le schéma `vis` de Visibility (`infra/visibility/migrations/0001` à `0004`), `0004` corrigée pour Supabase par la session Visibility (commit `7093687`) |
 
 Archive : `../archive/0001_init.sql`, schéma M0 jamais appliqué (copie de
 conception : `docs/architecture/schema/0001_init.sql`).
@@ -67,11 +67,8 @@ select set_config('oia.comptes_mickael', '<e-mail du premier compte>, <e-mail du
    connecté avec son compte. Le retour arrière se fait par
    `select oia_annuler_import('<import_id>')`.
 4. **0006** seulement quand le schéma `vis` de Visibility sera sur la base.
-   **Constat bloquant** : `infra/visibility/migrations/0004_auth_identity.sql`
-   compare `vis.client_member.user_id` (text) à `auth.uid()`, qui rend un uuid
-   sur Supabase ; elle échoue telle quelle (« operator does not exist: text =
-   uuid », test témoin dans `test/visibility.test.ts`). La correction
-   appartient à la session Visibility. 0006 pose aussi une politique RLS sur
+   `infra/visibility/migrations/0004_auth_identity.sql` a été corrigée pour Supabase par la session Visibility (commit `7093687`),
+   test dans `test/visibility.test.ts`. 0006 pose aussi une politique RLS sur
    `vis.client_member` (un compte de l'interface ne voit que ses propres
    appartenances) : à relire avec elle. Les tables `vis` appartenant à
    `vis_admin`, 0006 s'applique avec un rôle qui peut accorder leurs droits.

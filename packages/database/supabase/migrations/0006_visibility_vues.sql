@@ -3,11 +3,9 @@
 --
 -- Prérequis : le schéma `vis` de Visibility, migrations
 -- infra/visibility/migrations/0001 à 0004, appliquées d'abord. Ces fichiers
--- sont lus, jamais modifiés ici. Attention : 0004 compare `vis.client_member.user_id`
--- (text) à `auth.uid()`, qui rend un uuid sur Supabase ; en l'état, 0004 échoue
--- sur Supabase (« operator does not exist: text = uuid »). La correction
--- appartient à la session Visibility. Ce fichier-ci compare toujours
--- `auth.uid()::text`, et fonctionne avec les deux types.
+-- sont lus, jamais modifiés ici. 0004 a été corrigée pour Supabase par la
+-- session Visibility (comparaisons en `auth.uid()::text`). Ce fichier-ci
+-- compare aussi `auth.uid()::text`, et fonctionne avec les deux types.
 --
 -- Principes :
 --  * les vues sont dans `public`, en `security_invoker = true` : elles

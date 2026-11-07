@@ -427,15 +427,12 @@ l'arrivée des vraies données. Le test vérifie que ce fichier est à jour et q
 chaque vue a exactement les colonnes de ce contrat, dans l'ordre. Pour le
 régénérer : `pnpm --filter @oia/database demo:visibility`.
 
-## Prérequis et constat bloquant
+## Prérequis
 
-- `infra/visibility/migrations/0004_auth_identity.sql` compare
-  `vis.client_member.user_id` (text) à `auth.uid()`. Sur Supabase,
-  `auth.uid()` rend un uuid : la migration échoue (« operator does not exist:
-  text = uuid »). Un test témoin le montre. La correction appartient à la
-  session Visibility (par exemple `auth.uid()::text`). Les tests de 0006
-  émulent un `auth.uid()` en texte, comme 0004 l'exige ; 0006 compare toujours
-  `auth.uid()::text` et fonctionne dans les deux cas.
+- `infra/visibility/migrations/0001` à `0004` appliquées d'abord. `0004` a été
+  corrigée pour Supabase par la session Visibility (commit `7093687`) : elle compare `auth.uid()::text` et cède les tables à
+  `vis_admin` sous un rôle non superutilisateur. Les tests de 0006 tournent
+  désormais avec un `auth.uid()` en uuid, comme sur Supabase.
 - 0006 pose une politique RLS sur `vis.client_member`, limitée aux rôles de
   l'interface (`anon`, `authenticated`) : un compte ne voit que ses propres
   appartenances. Les autres rôles gardent leur accès. À relire avec la session

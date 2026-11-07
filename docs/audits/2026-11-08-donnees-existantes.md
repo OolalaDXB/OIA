@@ -123,8 +123,8 @@ reprise.
 4. `0005_reprise_navigateur.sql` : identifiants d'origine, journal d'import et
    retour arrière.
 5. `0006_visibility_vues.sql` : vues de lecture sur le schéma `vis`, après
-   `infra/visibility/migrations/0001` à `0004`, `0004` corrigée pour
-   Supabase.
+   `infra/visibility/migrations/0001` à `0004` (`0004` corrigée pour
+   Supabase par la session Visibility, commit `7093687`).
 
 Toutes sont testées sur un Postgres 16 jetable, sans Docker, avec une
 émulation d'`auth.uid()` et des rôles Supabase.
