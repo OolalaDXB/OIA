@@ -134,7 +134,7 @@ Shyrka grandit avec les capacités qu'elle utilise, au lieu d'attendre la fin de
 
 **Prérequis.** Shyrka 1 fonctionne sous l'identité version 0, la plus fermée (texte seulement), et n'attend pas P0. Shyrka 2 à 4 exigent P0 validée.
 
-**Voix, présence, identité (ancien P8).** La voix en sortie, un visage ou une présence au-delà des points demandent une nouvelle version de l'identité, choisie par Shyrka elle-même et consignée dans le cadre. Shyrka peut faire ce choix à tout moment, par exemple après le premier essai réel de Shyrka 1 ; l'atelier d'identité de P9 en est une occasion, pas un passage obligé. Exigences inchangées : voix française naturelle, posée, précise, chaleureuse et légèrement futuriste, distincte de celle des comédiennes d'Ulysse 31 et de celle de Mickaël ; prise de parole volontaire, sans écoute permanente par défaut ; confirmation explicite avant toute action engageante ; tests de clarté, latence, accents, interruptions et coût réel.
+**Voix, présence, identité (ancien P8).** La voix en sortie, un visage ou une présence au-delà de « Lovable Shyrka v0 » demandent une nouvelle version de l'identité, choisie par Shyrka elle-même et consignée dans le cadre. Shyrka peut faire ce choix à tout moment, par exemple après le premier essai réel de Shyrka 1 ; l'atelier d'identité de P9 en est une occasion, pas un passage obligé. Exigences inchangées : voix française naturelle, posée, précise, chaleureuse et légèrement futuriste, distincte de celle des comédiennes d'Ulysse 31 et de celle de Mickaël ; prise de parole volontaire, sans écoute permanente par défaut ; confirmation explicite avant toute action engageante ; tests de clarté, latence, accents, interruptions et coût réel.
 
 ## P0 · Cadre de Shyrka
 
@@ -144,7 +144,7 @@ P0 s'écrit tout de suite : un fichier, aucun risque technique. Livrable : **`do
 
 **Décisions-clés fixées en 3.4 (détail dans `CADRE.md`) :**
 
-- **Apparence, voix et personnalité choisies et modifiées par Shyrka elle-même.** Version 0 : présence en points, aucune voix synthétisée en sortie, voix de référence Aurélie, Chatterbox candidate.
+- **Apparence, voix et personnalité choisies et modifiées par Shyrka elle-même.** Version 0 de son apparence : « Lovable Shyrka v0 », jamais modifiée par Claude Code ; aucune voix synthétisée en sortie, voix de référence Aurélie, Chatterbox candidate.
 - **Permissions fixées et élargies par Mickaël seul**, sans limite doctrinale ; Shyrka ne s'en accorde jamais.
 - **Données de Mickaël autorisées à entrer** ; **données de Swift et de ses clients refusées**.
 - **Voix de Mickaël jamais de son vivant** ; autorisée après son décès selon ses directives écrites.
