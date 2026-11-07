@@ -4,7 +4,7 @@
 
 | Champ | Valeur |
 | --- | --- |
-| Version | 3.7 |
+| Version | 3.8 |
 | Dernière modification | 2026-11-08 |
 | Statut | Proposé (à valider par Mickaël) |
 | Responsable | Mickaël Thomas |
@@ -37,6 +37,7 @@
 | 3.5 | 2026-11-07 | P4 : Bifrost ajouté aux passerelles candidates, versions épinglées et audit de la chaîne d'approvisionnement avant toute installation |
 | 3.6 | 2026-11-08 | Piste Shyrka en quatre étapes, chacune livrée avec une phase : Shyrka 1 « Te parle » avec P1, Shyrka 2 « Te seconde » avec P2, Shyrka 3 « Te connaît » avec P5, Shyrka 4 « Agit pour toi » avec P6. **P7 et P8 cessent d'être des phases** : Shyrka n'attend plus la fin de la chaîne pour exister, elle grandit avec les capacités qu'elle utilise. Le contenu de P7 (digest, dialogue, préparation) passe dans Shyrka 2 et Shyrka 3 ; celui de P8 (son local, Ollama) dans Shyrka 1, la présence et l'identité dans l'atelier de P9, la voix distante payante en attente. **P1 à P6 et P9 gardent leur numéro et leur contenu** ; les numéros 7 et 8 ne sont pas réattribués, pour que les références existantes (rapports, mandats, commits) restent justes. P0 validée devient le prérequis de Shyrka 2 à 4. Points des mandats v6 et v7 : Shyrka 1 livrée en code à adaptateurs (`packages/shyrka`), interface web sous `/oia` bascule éteinte, évaluation documentaire de Bifrost (`docs/audits/2026-11-08-bifrost-evaluation.md`) |
 | 3.7 | 2026-11-08 | Décision de Mickaël (CADRE.md) : l'apparence, la voix et la personnalité de Shyrka sont choisies et modifiées par Shyrka elle-même. La piste Shyrka, P0 et l'atelier de P9 sont alignés |
+| 3.8 | 2026-11-08 | Réponses de Mickaël et suite des mandats v6 et v7. Interface web OIA refaite d'après le prototype Lovable (colonne des modules, accueil, Visibility, Shyrka en panneau et en plein écran, pages existantes réutilisées), allumée en Preview Vercel seulement. Shyrka : Ollama `qwen3:8b` par défaut et `mistral-small` en comparaison ; bloc B livré en code simulé (paliers de permission, agent courrier et WhatsApp, mode entretien) ; Aurélie devient une proposition de départ. Blocs C et E du mandat v6 non traités : leur texte n'est pas dans le dépôt |
 
 > Emplacement de référence : `docs/roadmap-oia-shyrka-souffleur.md` dans le repo OolalaDXB/OIA. Toute autre copie (Claude Doc, export GPT) est une copie de lecture. `docs/roadmap.md` reste la roadmap d'OIA Funding.
 
@@ -176,8 +177,8 @@ P1 installe Elmo, CrawlSEO et Crawlie sur le Mac Studio et prend la mesure de d�
 
 **Avec P1 :**
 
-- **Shyrka 1 · Te parle.** Code livré le 2026-11-08 avec des adaptateurs réels et simulés (`packages/shyrka`, guide d'essai `infra/shyrka/README.md`) : micro par ffmpeg, Whisper par whisper.cpp, Ollama limité à l'adresse locale, voix macOS par `say` (Aurélie, voix de départ proposée), identité version 0 donc réponses en texte. 30 tests sur adaptateurs simulés. Reste : le premier essai réel sur le Mac Studio, consigné dans `infra/shyrka/reports/`.
-- **Interface web OIA sous `/oia`**, bascule éteinte (`NEXT_PUBLIC_OIA_INTERFACE`, `docs/interface/oia-interface-web.md`) : vue de lecture des identités, des phases et de la piste Shyrka, allumée seulement sur décision de Mickaël.
+- **Shyrka 1 · Te parle.** Code livré le 2026-11-08 avec des adaptateurs réels et simulés (`packages/shyrka`, guide d'essai `infra/shyrka/README.md`) : micro par ffmpeg, Whisper par whisper.cpp, Ollama limité à l'adresse locale, voix macOS par `say` (Aurélie, voix de départ proposée), identité version 0 donc réponses en texte. Modèle Ollama par défaut `qwen3:8b`, `mistral-small` en option de comparaison (`--comparer`). Mode entretien (`docs/shyrka/entretiens.md`, séances menées en local, fiches « à valider » écrites hors du dépôt), qui prépare le corpus de Shyrka 3. 56 tests sur adaptateurs simulés. Reste : le premier essai réel sur le Mac Studio, consigné dans `infra/shyrka/reports/`.
+- **Interface web OIA sous `/oia`** (`docs/interface/oia-interface-web.md`) : portage du prototype Lovable « OIA Dashoard », avec la colonne des modules, l'accueil OIA, Visibility, Shyrka en page, en panneau et en plein écran (présence « Lovable Shyrka v0 », jamais modifiée par Claude Code), et des modules qui renvoient aux pages existantes de la console. Données de démonstration. Allumée sur les déploiements Preview de Vercel, jamais en production pour l'instant (décision de Mickaël du 2026-11-08).
 
 **Porte P1 :** un rapport J0 réel et reproductible (réponses, citations, sources, métadonnées, coûts, limites de mesure), sans aucun chiffre inventé ou reconstruit.
 
@@ -256,7 +257,7 @@ Le serveur MCP expose de façon contrôlée les capacités d'OIA à Claude Code,
 - Le garde-fou SEO de P2 est un cas particulier des contrôles de qualité Souffleur ; son exécution reste indépendante du serveur MCP. À P6, MCP rend les **résultats** d'audit accessibles aux agents, sans accorder par défaut le droit de modifier les dépôts.
 - Le verdict d'assurance des dépôts est distinct d'un avis LLM : toute condition P0 critique non évaluée interdit un verdict GO jusqu'à évaluation explicite.
 
-- **Shyrka 4 · Agit pour toi** (voir « Piste Shyrka ») : premières actions par les outils MCP autorisés, chaque engagement confirmé par Mickaël, refus journalisés.
+- **Shyrka 4 · Agit pour toi** (voir « Piste Shyrka ») : premières actions par les outils MCP autorisés, chaque engagement confirmé par Mickaël, refus journalisés. Préparé dès le 2026-11-08 en code simulé (`packages/shyrka`) : paliers de permission par canal (`infra/shyrka/permissions.json`, tout fermé, signé par Mickaël seul), agent courrier et WhatsApp (modèle local imposé, Swift exclu sans lecture, validation liée au texte exact du brouillon, journal d'audit). Les adaptateurs réels d'e-mail et de WhatsApp restent à choisir.
 
 **Porte P6 :** un client MCP recherche et synthétise des informations autorisées, consulte un rapport d'audit de dépôt, et toute tentative hors périmètre est refusée et journalisée. Le moteur d'audit a été localisé, inspecté et testé avant activation de ses outils.
 
@@ -367,5 +368,9 @@ Chaque domaine garde ses propres mesures, publiées séparément.
 - [ ] Définir le contenu d'OIA Training.
 - [ ] Décider si des dates indicatives s'ajoutent aux portes.
 - [ ] Faire le premier essai réel de Shyrka 1 sur le Mac Studio (`infra/shyrka/README.md`), puis préciser comment Shyrka consigne une version de son identité qu'elle a choisie (voix en sortie comprise).
-- [ ] Allumer ou non l'interface web sous `/oia` (Preview Vercel d'abord).
+- [x] Interface web sous `/oia` : allumée en Preview Vercel seulement (2026-11-08).
+- [ ] Déposer l'image de profondeur du visage de Shyrka (`apps/web/public/oia/shyrka-face-depth.jpg`, à exporter depuis Lovable).
+- [ ] Choisir l'accès réel à l'e-mail (IMAP via Proton Mail Bridge, API Gmail ou Mail.app) et la voie WhatsApp (API Business avec un numéro dédié, ou rien), avant tout adaptateur réel.
+- [ ] Ouvrir les premiers paliers (lecture) et fixer les catégories déléguées, après la séance 7 d'entretien.
+- [ ] Pousser les mandats v6 et v7 dans `infra/visibility/mandats/`, pour traiter les blocs C et E.
 - [ ] Bifrost : lever les points à vérifier avec Docker avant tout essai en P4.
