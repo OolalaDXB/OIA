@@ -1,8 +1,35 @@
 # Interface web OIA sous `/oia`
 
-2026-11-08 · session web parallèle · mandat v7, bloc F, refait d'après les
-réponses de Mickaël. **Allumée sur les déploiements Preview de Vercel
-seulement, jamais en production.**
+2026-11-08 · session web · mandat v7, bloc F, avec l'amendement du
+7 novembre (§ 6). **Allumée sur les déploiements Preview de Vercel seulement,
+jamais en production.** La bascule en production reste une décision de
+Mickaël.
+
+## Réception, écran par écran, contre le prototype et le mandat
+
+| Écran | Mandat v7 | État |
+| --- | --- | --- |
+| Colonne des modules | F2 : Accueil, Visibility, Opportunités, CRM, Portefeuille, Data, Training ; Personnel ; Shyrka et Réglages en bas ; dépense du mois sous la colonne ; couleur sourde et point d'état par module ; navigation dans un seul fichier de configuration | fait, testé ; fichier `apps/web/src/oia/config/navigation.ts` |
+| Opportunités | F2 : onglets Financements, Appels d'offres, Investisseurs, Veille, Montants, à partir des pages actuelles | fait : les pages `/grants`, `/tenders`, `/investors`, `/alerts`, `/money` sont affichées telles quelles dans un cadre de même origine, rail masqué |
+| CRM, Portefeuille | F2 : pages Contacts et Projets réutilisées | fait, même méthode |
+| Data, Training | F2 : « Module en préparation » | fait |
+| Accueil | F3 : « Bonjour Mickaël », À décider, grille des modules, dépense du mois, activité récente, depuis les sources existantes | fait : À décider tiré de la veille du jour de la console (`buildDigest` : tâches, éléments à trier, approbations bloquées) ; activité récente tirée du journal de revue. **Partiel** : les décisions de Visibility et la dépense du mois sont des données de démonstration signalées |
+| Visibility | F4 : vue d'ensemble, sites, vue d'un site, SEO Command, rapports ; « Préparer les corrections » ouvre la fiche de décision, sans rien publier | fait, en données de démonstration signalées (amendement § 6). La fiche de décision en ligne est fictive ; la vraie se lit en local |
+| Shyrka | F5 : panneau, page plein écran, présence en points, réponses simulées signalées, mode présence (micro simulé, pause, quitter) | fait. **Partiel** : l'image de profondeur du visage manque (voir plus bas) |
+| Bascule | F6 : une ligne de configuration, désactivée | fait : `BASCULE_ACCUEIL = false`, table de redirections, testé |
+| Connexion | F1 : derrière `AuthGate` | fait |
+| Jetons | F1 : `packages/ui-tokens` | fait : variables de base, états et modules tirées des jetons |
+| Données de client | Amendement § 6 : aucune donnée réelle de client dans les fichiers publics | fait : test qui cherche les noms des clients dans les sources de `/oia` et dans `public/` |
+
+## Pourquoi Visibility reste en démonstration
+
+L'écran de connexion d'une console statique ne protège pas les fichiers
+servis : tout ce qui est dans `apps/web/out` est lisible par qui obtient l'URL
+du déploiement. Les réponses des assistants et le rapport J0 de Coach Gari ne
+sont donc pas embarqués. Ils restent dans `pnpm vis:j0-view`, en local,
+jusqu'à ce qu'un accès protégé côté serveur existe. La protection Vercel
+Authentication du projet ne suffit pas pour des données de client : elle
+dépend d'un réglage du projet, pas du code.
 
 ## Source
 
@@ -29,21 +56,14 @@ référence.
 | Vue d'un site, ajout d'un compte en cinq étapes | `/oia/sites/studio-ardoise/`, `/oia/nouveau-compte/` | `routes/sites/$slug.tsx`, `routes/nouveau-compte.tsx` |
 | Shyrka en page (présence, conversation, journal) | `/oia/shyrka/` | `routes/shyrka.tsx` |
 | Shyrka en panneau (bouton « Shyrka » en bas à droite) et en plein écran | toutes les pages | `components/oia/shyrka.tsx` |
-| Funding, Tenders, Ventures, Signals, CRM, Data, Training | `/oia/<module>/` | `routes/<module>.tsx`, `module-page.tsx` |
+| Opportunités, CRM, Portefeuille, Data, Training | `/oia/<module>/` | navigation du mandat v7 (F2), au lieu des modules du prototype |
 | Personnel : Agenda, Santé, Famille (en préparation) | `/oia/personnel/<module>/` | `routes/personnel/$module.tsx` |
 
-**Pages existantes réutilisées.** Chaque module qui a déjà des pages dans la
-console les cite dans une rubrique « Dans la console ». Ce sont des liens
-simples, qui ouvrent les vraies pages avec leurs vraies données :
-
-- Funding : Opportunités `/`, Argent `/money/`, Aujourd'hui `/digest/` ;
-- Tenders : `/tenders/` ;
-- Ventures : Projets `/projects/`, Investisseurs `/investors/` ;
-- Signals : `/digest/` ;
-- CRM : Espace de travail `/workspace/`.
-
-La table de correspondance est dans `src/oia/data/console-existante.ts`. La
-console garde aussi son rail ; en Preview, il contient une entrée « OIA ».
+**Pages existantes réutilisées.** Les pages actuelles de la console
+s'affichent dans la nouvelle coquille, sans être réécrites ni modifiées
+(`components/oia/page-existante.tsx`). Elles passent par un cadre de même
+origine dont on masque seulement le rail. Elles gardent leurs données, leur
+connexion, leurs exports, leur stockage local et leur bouton de langue.
 
 La page de lecture précédente (identités, phases) est supprimée.
 
@@ -58,7 +78,9 @@ La page de lecture précédente (identités, phases) est supprimée.
     place toutes les routes sous `/oia` ;
   - routes TanStack transformées en vues (`src/oia/pages/`) appelées par des
     pages Next (`src/app/(oia)/oia/**/page.tsx`) ;
-  - rubrique « Dans la console » ajoutée à Funding et aux pages de module ;
+  - navigation, accueil, Opportunités, CRM, Portefeuille, Data et Training
+    selon le mandat v7 (le prototype avait Funding, Tenders, Ventures,
+    Signals) ;
   - données réelles facultatives lues à `/oia/data/visibility.json`, au lieu
     de `/data/visibility.json` ; absentes, les données fictives s'affichent ;
   - un seul changement dans la présence de Shyrka : l'import Vite de l'image

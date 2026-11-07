@@ -3,11 +3,8 @@ export type Etat = "conforme" | "verifier" | "bloquant";
 
 export const utilisateur = { prenom: "Mickaël" };
 
-export const modulesPersonnels = [
-  { slug: "agenda", nom: "Agenda" },
-  { slug: "sante", nom: "Santé" },
-  { slug: "famille", nom: "Famille" },
-] as const;
+// Navigation : apps/web/src/oia/config/navigation.ts (fichier unique, mandat v7, F2).
+export { modulesPersonnels } from "@/config/navigation";
 
 export const commandesShyrka = [
   "Résumer la journée",
@@ -135,16 +132,7 @@ export const vueSite = {
   ],
 };
 
-export const modules = [
-  { slug: "visibility", nom: "Visibility", etat: "Priorité", statut: "verifier", role: "Mesurer et améliorer la présence des sites dans Google et les IA.", cle: "3 sites suivis · présence IA : 12 %", couleur: "module-visibility" },
-  { slug: "funding", nom: "Funding", etat: "En pause", statut: "verifier", role: "Identifier et préparer les opportunités de financement.", cle: "Reprise après la première boucle complète de Visibility", couleur: "module-funding" },
-  { slug: "tenders", nom: "Tenders", etat: "Briques en place", statut: "conforme", role: "Repérer les appels d’offres et préparer les candidatures.", cle: "Cadre de suivi posé", couleur: "module-tenders" },
-  { slug: "ventures", nom: "Ventures", etat: "Briques en place", statut: "conforme", role: "Explorer et structurer les projets entrepreneuriaux.", cle: "Cadre des projets posé", couleur: "module-ventures" },
-  { slug: "signals", nom: "Signals", etat: "Briques en place", statut: "conforme", role: "Suivre les signaux utiles aux décisions.", cle: "Cadre de veille posé", couleur: "module-signals" },
-  { slug: "crm", nom: "CRM", etat: "Briques en place", statut: "conforme", role: "Organiser les relations et leur suivi.", cle: "Cadre relationnel posé", couleur: "module-crm" },
-  { slug: "data", nom: "Data", etat: "À cadrer", statut: "verifier", role: "Rassembler et rendre les données exploitables.", cle: "Périmètre à définir", couleur: "module-data" },
-  { slug: "training", nom: "Training", etat: "À cadrer", statut: "verifier", role: "Structurer les apprentissages et les parcours de formation.", cle: "Parcours à définir", couleur: "module-training" },
-] as const;
+export { modules } from "@/config/navigation";
 export const activiteRecente = [
   { heure: "09:40", module: "Visibility", texte: "Fenêtre de mesure de Studio Ardoise terminée." },
   { heure: "09:15", module: "Visibility", texte: "Quatre corrections préparées pour relecture." },

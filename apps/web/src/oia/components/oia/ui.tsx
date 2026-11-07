@@ -4,6 +4,7 @@ import { Link, useRouter } from "@/lib/router";
 import { useId, useRef, useState, type ReactNode } from "react";
 import type { Etat } from "@/data/demo";
 import { modulesPersonnels, modules } from "@/data/demo";
+import { depenseDuMois } from "@/config/navigation";
 import { Button } from "@/components/ui/button";
 import { LockKeyhole, Menu, X } from "lucide-react";
 
@@ -28,6 +29,7 @@ export function Shell({ children, large = false, fictif = true }: { children: Re
           <nav aria-label="Personnel" className="flex flex-col">{modulesPersonnels.map((m) => <Link key={m.slug} to="/personnel/$module" params={{ module: m.slug }} className="flex min-h-11 flex-wrap items-center gap-2 px-2 text-sm text-muted-foreground" activeProps={{ className: "text-foreground underline underline-offset-4" }}><span className="size-2 bg-module-personnel" aria-hidden="true" /><span>{m.nom}</span><span className="ml-auto text-[10px] text-tertiary">En préparation</span></Link>)}</nav>
         </section>
         <nav aria-label="Assistante et réglages" className="mt-5 border-t border-border pt-3 md:mt-auto"><Link to="/shyrka" className="flex min-h-11 items-center px-2 text-sm text-muted-foreground" activeProps={{ className: "text-foreground underline underline-offset-4" }}>Shyrka</Link><Link to="/reglages" className="flex min-h-11 items-center px-2 text-sm text-muted-foreground" activeProps={{ className: "text-foreground underline underline-offset-4" }}>Réglages</Link></nav>
+        <DepenseMois />
       </div>
     </header>
     <div className="min-w-0"><main id={contenuId} tabIndex={-1} className={`mx-auto px-5 py-10 md:px-10 md:py-14 ${large ? "max-w-[1600px]" : "max-w-6xl"}`}>{children}</main>{fictif && <footer className="mx-auto max-w-6xl px-5 pb-20 text-xs text-tertiary md:px-10">Exemple fictif, données de démonstration.</footer>}</div>
@@ -84,5 +86,18 @@ export function Check({ label, checked, onChange, extra }: { label: string; chec
       <span className="flex-1">{label}</span>
       {extra}
     </label>
+  );
+}
+
+/** Dépense du mois, toujours visible sous la colonne (mandat v7, F2). Démonstration signalée tant qu'aucune source sûre n'existe. */
+export function DepenseMois() {
+  const { montant, plafond, source } = depenseDuMois;
+  return (
+    <section aria-label="Dépense du mois" className="mt-3 border-t border-border px-2 pt-3">
+      <p className="text-xs text-tertiary">Dépense du mois</p>
+      <p className="num mt-1 text-sm"><span className="text-foreground">{montant} $</span><span className="text-tertiary"> sur {plafond} $</span></p>
+      <div className="mt-2 h-1 rounded-full bg-track"><span className="block h-full rounded-full bg-bar" style={{ width: `${Math.min(100, (montant / plafond) * 100)}%` }} /></div>
+      {source === "démonstration" && <p className="mt-1 text-[10px] text-tertiary">Exemple fictif · dépense réelle chez chaque fournisseur</p>}
+    </section>
   );
 }

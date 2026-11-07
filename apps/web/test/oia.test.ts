@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { oiaInterfaceEnabled } from "../src/lib/oiaFlag";
 // @ts-expect-error module JavaScript sans déclaration de types
@@ -55,14 +55,64 @@ describe("[OIA_INTERFACE] interface portée du prototype Lovable", () => {
   });
 
   it("les pages existantes réutilisées existent bien dans la console", async () => {
-    const { consoleExistante } = await import("../src/oia/data/console-existante");
+    const { modules } = await import("../src/oia/config/navigation");
     const { existsSync } = await import("node:fs");
-    for (const pages of Object.values(consoleExistante)) {
-      for (const p of pages) {
-        const dossier = p.href === "/" ? "" : p.href.replace(/^\/|\/$/g, "");
-        expect(existsSync(fileURLToPath(new URL(`../src/app/(console)/${dossier ? `${dossier}/` : ""}page.tsx`, import.meta.url)))).toBe(true);
-      }
+    const pages = modules.flatMap((m) => m.pages ?? []);
+    expect(pages.map((p) => p.href).sort()).toEqual(["/alerts/", "/contacts/", "/grants/", "/investors/", "/money/", "/projects/", "/tenders/"]);
+    for (const p of pages) {
+      const dossier = p.href.replace(/^\/|\/$/g, "");
+      expect(existsSync(fileURLToPath(new URL(`../src/app/(console)/${dossier}/page.tsx`, import.meta.url))), p.href).toBe(true);
     }
+  });
+
+  it("navigation proposée par le mandat v7 (F2), dans un fichier unique", async () => {
+    const { modules, modulesPersonnels } = await import("../src/oia/config/navigation");
+    expect(modules.map((m) => m.nom)).toEqual(["Visibility", "Opportunités", "CRM", "Portefeuille", "Data", "Training"]);
+    expect(modules.find((m) => m.slug === "opportunites")?.pages?.map((p) => p.label)).toEqual(["Financements", "Appels d'offres", "Investisseurs", "Veille", "Montants"]);
+    expect(modulesPersonnels.map((m) => m.nom)).toEqual(["Agenda", "Santé", "Famille"]);
+    for (const m of modules) expect(existsSync(fileURLToPath(new URL(`../src/app/(oia)/oia/${m.slug}/page.tsx`, import.meta.url))), m.slug).toBe(true);
+  });
+
+  it("bascule F6 désactivée, sans effet même /oia allumée ; elle ne redirige jamais tant qu'elle est éteinte", async () => {
+    const { BASCULE_ACCUEIL, REDIRECTIONS } = await import("../src/oia/config/navigation");
+    const { destinationApresBascule } = await import("../src/oia/lib/bascule");
+    expect(BASCULE_ACCUEIL).toBe(false);
+    for (const ancienne of Object.keys(REDIRECTIONS)) {
+      expect(destinationApresBascule(ancienne)).toBeNull();
+      expect(destinationApresBascule(ancienne, false, true)).toBeNull();
+    }
+    expect(destinationApresBascule("/grants", true, false)).toBeNull();
+    expect(destinationApresBascule("/grants", true, true)).toBe("/oia/opportunites/?onglet=financements");
+    expect(read("../src/oia/lib/bascule.tsx")).toContain("window.self !== window.top");
+  });
+
+  it("/oia passe derrière l'écran de connexion de la console et prend les jetons de ui-tokens", () => {
+    const layout = read("../src/app/(oia)/layout.tsx");
+    expect(layout).toMatch(/<AuthGate>/);
+    expect(layout).toContain('import "@oia/ui-tokens/tokens.css"');
+    expect(read("../src/app/(oia)/oia.css")).toContain("var(--oia-module-visibility)");
+  });
+
+  it("aucune donnée réelle de client dans les fichiers publics de /oia (amendement, § 6)", async () => {
+    const { readdirSync, statSync } = await import("node:fs");
+    const { join } = await import("node:path");
+    const racines = ["../src/oia", "../src/app/(oia)", "../public"].map((r) => fileURLToPath(new URL(r, import.meta.url)));
+    const fichiers: string[] = [];
+    const parcourir = (d: string) => {
+      if (!existsSync(d)) return;
+      for (const n of readdirSync(d)) {
+        const p = join(d, n);
+        if (statSync(p).isDirectory()) parcourir(p);
+        else if (/\.(tsx?|css|json|md|html)$/.test(n)) fichiers.push(p);
+      }
+    };
+    racines.forEach(parcourir);
+    expect(fichiers.length).toBeGreaterThan(10);
+    for (const f of fichiers) {
+      const s = readFileSync(f, "utf8").toLowerCase();
+      for (const client of ["coach gari", "coach-gari", "coachgari", "maisons.co", "maisons-co", "moë-kan", "moe-kan"]) expect(s.includes(client), `${f} cite ${client}`).toBe(false);
+    }
+    expect(existsSync(fileURLToPath(new URL("../public/oia/data/visibility.json", import.meta.url)))).toBe(false);
   });
 
   it("la cale de routage place toutes les routes sous /oia", async () => {

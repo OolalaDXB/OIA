@@ -61,6 +61,8 @@
   --color-block: var(--block);
   --color-module-visibility: var(--module-visibility);
   --color-module-funding: var(--module-funding);
+  --color-module-opportunites: var(--oia-module-opportunites);
+  --color-module-portefeuille: var(--oia-module-portefeuille);
   --color-module-tenders: var(--module-tenders);
   --color-module-ventures: var(--module-ventures);
   --color-module-signals: var(--module-signals);
@@ -83,45 +85,45 @@
 }
 
 :root {
-  --module-visibility: oklch(0.462373 0.055433 245.539226);
+  --module-visibility: var(--oia-module-visibility);
   --module-funding: oklch(0.564883 0.049636 156.519703);
   --module-tenders: oklch(0.602318 0.071609 75.419472);
   --module-ventures: oklch(0.518526 0.071025 38.498519);
   --module-signals: oklch(0.509286 0.052596 202.538812);
-  --module-crm: oklch(0.529808 0.051113 268.175454);
-  --module-data: oklch(0.561963 0.028981 84.557025);
-  --module-training: oklch(0.562271 0.046249 59.523245);
-  --module-personnel: oklch(0.538275 0.043548 291.412159);
+  --module-crm: var(--oia-module-crm);
+  --module-data: var(--oia-module-data);
+  --module-training: var(--oia-module-training);
+  --module-personnel: var(--oia-module-personnel);
 
   --shyrka-night: oklch(0.191770 0.035371 261.303071);
   --shyrka-light: oklch(0.88 0.065 215);
   --shyrka-particle: oklch(0.66 0.18 250);
   --radius: 6px;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.207 0.031 265);      /* #101828 */
+  --background: var(--oia-fond);
+  --foreground: var(--oia-encre);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.207 0.031 265);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.207 0.031 265);
-  --primary: oklch(0.278 0.03 257);          /* #1D2939 */
+  --primary: var(--oia-primaire);
   --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.97 0.004 265);
   --secondary-foreground: oklch(0.207 0.031 265);
   --muted: oklch(0.97 0.004 265);            /* #F2F4F7 */
-  --muted-foreground: oklch(0.446 0.03 257); /* #475467 */
-  --tertiary: oklch(0.551 0.027 264);        /* #667085 */
+  --muted-foreground: var(--oia-texte-attenue);
+  --tertiary: var(--oia-tertiaire);
   --accent: oklch(0.97 0.004 265);
   --accent-foreground: oklch(0.207 0.031 265);
   --destructive: oklch(0.55 0.09 25);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.928 0.006 265);          /* #E4E7EC */
+  --border: var(--oia-bordure);
   --input: oklch(0.87 0.012 265);            /* #D0D5DD */
   --ring: oklch(0.372 0.03 260);
   --track: oklch(0.97 0.004 265);
   --bar: oklch(0.372 0.03 260);              /* #344054 */
-  --ok: oklch(0.62 0.045 160);               /* #6E8F7B */
-  --warn: oklch(0.65 0.06 75);               /* #A88A5B */
-  --block: oklch(0.53 0.09 25);              /* #A6564F */
+  --ok: var(--oia-etat-conforme);
+  --warn: var(--oia-etat-verifier);
+  --block: var(--oia-etat-bloquant);
   --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.06);
   --chart-1: var(--bar); --chart-2: var(--bar); --chart-3: var(--bar); --chart-4: var(--bar); --chart-5: var(--bar);
   --sidebar: oklch(1 0 0); --sidebar-foreground: var(--foreground); --sidebar-primary: var(--primary);
@@ -162,7 +164,7 @@
 .shyrka-particles { position:absolute; inset:0; }
 .shyrka-particles canvas { display:block; width:100%; height:100%; }
 
-@source inline("bg-module-visibility bg-module-funding bg-module-tenders bg-module-ventures bg-module-signals bg-module-crm bg-module-data bg-module-training border-module-visibility border-t-module-visibility border-t-module-funding border-t-module-tenders border-t-module-ventures border-t-module-signals border-t-module-crm border-t-module-data border-t-module-training");
+@source inline("bg-module-opportunites bg-module-portefeuille border-module-opportunites border-module-portefeuille border-t-module-opportunites border-t-module-portefeuille bg-module-visibility bg-module-funding bg-module-tenders bg-module-ventures bg-module-signals bg-module-crm bg-module-data bg-module-training border-module-visibility border-t-module-visibility border-t-module-funding border-t-module-tenders border-t-module-ventures border-t-module-signals border-t-module-crm border-t-module-data border-t-module-training");
 .shyrka-fullscreen { position:fixed; inset:0; z-index:100; background:var(--shyrka-night); color:var(--shyrka-light); display:flex; align-items:center; justify-content:center; }
 .shyrka-fullscreen .shyrka-presence { width:min(90vw,80dvh); max-width:none; }
 
@@ -180,3 +182,12 @@
 @media (min-width:1280px) { .shyrka-transcription { height:650px; } }
 @media (pointer:coarse) { .shyrka-controls[data-visible="false"] { opacity:1; } }
 @media (max-height:500px) { .shyrka-sheet .shyrka-presence-small { display:none; } .shyrka-fullscreen .shyrka-presence { width:min(80vw,65dvh); } }
+
+/* Écran de connexion (AuthGate) : mêmes classes que la console, dans le style de /oia. */
+.gate { min-height: 100dvh; display: grid; place-items: center; padding: 24px; background: var(--color-muted); }
+.gateCard { width: min(420px, 100%); background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 28px 30px 24px; display: flex; flex-direction: column; gap: 12px; box-shadow: var(--shadow-card); }
+.gateCard h1 { margin: 0; font-size: 20px; }
+.gateField { display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+.gateField input { min-height: 44px; border: 1px solid var(--color-input); border-radius: var(--radius); padding: 0 12px; }
+.gateBtn { align-self: flex-start; min-height: 44px; padding: 0 20px; border-radius: var(--radius); background: var(--color-primary); color: var(--color-primary-foreground); }
+.gateFoot { border-top: 1px solid var(--color-border); padding-top: 10px; font-size: 12px; color: var(--color-tertiary); }

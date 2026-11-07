@@ -55,6 +55,9 @@ importers:
       '@oia/registry':
         specifier: workspace:*
         version: link:../../packages/registry
+      '@oia/ui-tokens':
+        specifier: workspace:*
+        version: link:../../packages/ui-tokens
       '@oia/workspace':
         specifier: workspace:*
         version: link:../../packages/workspace

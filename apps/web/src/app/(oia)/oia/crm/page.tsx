@@ -1,7 +1,7 @@
-import { ModulePage } from "@/components/oia/module-page";
+import { ModuleAvecPages } from "@/pages/modules";
 
-export const metadata = { title: "CRM, OIA", description: "CRM, module de démonstration OIA." };
+export const metadata = { title: "CRM, OIA", description: "CRM : pages actuelles de la console, reprises telles quelles." };
 
 export default function Page() {
-  return <ModulePage slug="crm" />;
+  return <ModuleAvecPages slug="crm" />;
 }

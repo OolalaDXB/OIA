@@ -1,10 +1,10 @@
 "use client";
 
 // Porté du prototype Lovable « OIA Dashoard » (commit c6470e86), route TanStack devenue vue Next.
+import { Link } from "@/lib/router";
 import { Section, Statut, Barre } from "@/components/oia/ui";
 import { VisibilityShell } from "@/components/oia/visibility";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import { useDonnees } from "@/lib/donnees-visibility";
 
 
@@ -12,7 +12,6 @@ import { useDonnees } from "@/lib/donnees-visibility";
 const ordre = { bloquant: 0, verifier: 1, conforme: 2 };
 
 export function VueSite() {
-  const [prepare, setPrepare] = useState(false);
   const d = useDonnees().vueSite;
   const maxSrc = Math.max(...d.sources.map((s) => s.n));
   return (
@@ -22,7 +21,7 @@ export function VueSite() {
           <h1 className="text-3xl md:text-4xl">{d.nom}</h1>
           <p className="mt-1 text-tertiary">{d.url}</p>
         </div>
-        <div><Button className="min-h-11" onClick={() => setPrepare(true)}>Préparer les corrections</Button><p className="mt-2 text-xs text-tertiary">Rien n'est publié sans votre validation.</p>{prepare && <p role="status" className="mt-2 text-xs text-muted-foreground">Corrections préparées, simulation en attente de validation.</p>}</div>
+        <div><Button asChild className="min-h-11"><Link to="/visibility/corrections">Préparer les corrections</Link></Button><p className="mt-2 text-xs text-tertiary">Ouvre la fiche de décision. Rien n'est publié.</p></div>
       </div>
 
       <div className="grid gap-6 md:grid-cols-[1fr_1.4fr]">

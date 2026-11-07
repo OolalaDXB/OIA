@@ -1,7 +1,7 @@
-import { ModulePage } from "@/components/oia/module-page";
+import { ModuleEnPreparation } from "@/pages/modules";
 
-export const metadata = { title: "Training, OIA", description: "Training, module de démonstration OIA." };
+export const metadata = { title: "Training, OIA", description: "Training, module en préparation." };
 
 export default function Page() {
-  return <ModulePage slug="training" />;
+  return <ModuleEnPreparation slug="training" />;
 }
