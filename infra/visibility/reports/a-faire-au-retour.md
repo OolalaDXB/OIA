@@ -24,6 +24,14 @@
 > (Vercel) ? Faut-il annuler, laisser et consigner comme perturbation, ou
 > relancer une mesure de départ après stabilisation ? Le fait
 > `f-site-service-pages-noindex` de `facts.yaml` n'est plus vrai.
+>
+> **Mandat v7 (blocs A à E) : fait.** Rapport :
+> `reports/2026-11-08-mandat-v7.md`. Commandes, dans l'ordre :
+> pendant la fenêtre `pnpm vis:j0-status` et `pnpm vis:j0-view` ; après
+> le cinquième run (à partir du 11 nov. vers 17:30 UTC) `pnpm vis:j0-close`,
+> puis `pnpm vis:j0-report`, puis `pnpm vis:j0-verify` ; ensuite la
+> relecture du rapport et de `subjects/coach-gari/p2/decisions.md`. Une
+> notification macOS ne viendra qu'en cas de problème.
 
 
 **J0 n'est pas lancé.** Il bloque sur une seule étape que toi seul peux
