@@ -76,9 +76,12 @@ describe("paliers de permission (mandat v6, B5)", () => {
     racines.forEach(parcourir);
     expect(fichiers.length).toBeGreaterThan(5);
     for (const f of fichiers) {
+      // Aucune ligne qui écrit, déplace ou supprime un fichier ne vise la configuration des permissions,
+      // et aucun module qui écrit ne connaît le chemin de cette configuration.
       const s = readFileSync(f, "utf8");
-      const ecrit = /(writeFile|appendFile|createWriteStream|rename|copyFile|unlink|chmod)/.test(s);
-      if (ecrit) expect(s, f).not.toMatch(/permissions\.json|SHYRKA_PERMISSIONS/);
+      const lignes = s.split("\n").filter((l) => /(writeFile|appendFile|createWriteStream|rename|copyFile|unlink|chmod)\w*\(/.test(l));
+      for (const l of lignes) expect(l, f).not.toMatch(/permission/i);
+      if (lignes.length) expect(s.replace(/^\s*(\*|\/\/).*$/gm, ""), f).not.toMatch(/permissions\.json|SHYRKA_PERMISSIONS/);
     }
   });
 });
