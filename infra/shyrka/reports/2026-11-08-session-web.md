@@ -185,3 +185,145 @@ n'est pas dans mon périmètre.
    pour ne pas casser les références.
 7. **CI rouge sur `visibility-console`** : qui la répare ? La session Mac,
    puisque c'est hors de ma zone ?
+
+---
+
+# Suite de la session · réponses de Mickaël
+
+Mickaël a répondu aux questions ci-dessus et a indiqué que les mandats étaient
+désormais sur `main`. Tout a été poussé directement sur `main`.
+
+## Les mandats v6 et v7 sont toujours absents
+
+`infra/visibility/mandats/` contient trois fichiers, tous déjà exécutés : les
+mandats de nuit du 2026-11-08 en versions 1, v3 et v5.2 (commit `7a79b8b`). Les
+fichiers `MANDAT-2026-11-07-v7-suite-J0.md` et `MANDAT-2026-11-07-v6.md` ne sont
+ni sur `main` ni sur une autre branche. Je n'ai donc toujours pas pu comparer
+mon travail à leur texte. J'ai travaillé à partir des réponses de Mickaël, qui
+décrivent le bloc F et le bloc B.
+
+- **Blocs C et E du mandat v6 : non traités.** Aucun texte ne les décrit, et je
+  n'ai rien inventé. Ils restent à faire dès que le mandat v6 sera poussé.
+- Les blocs B et F sont faits d'après les descriptions de Mickaël. Ils restent
+  à confronter au texte des mandats.
+
+## Commits de cette suite
+
+| Commit | Contenu |
+|---|---|
+| `6ad2d67`, `fd20668` | CADRE.md : identité choisie par Shyrka ; apparence v0 « Lovable Shyrka v0 », jamais modifiée par Claude Code |
+| `80c07c9` | CADRE.md, réponse 4 : phrase complète (« dans les limites de ce cadre. Personne ne les retouche à sa place. ») ; Aurélie devient une proposition de départ ; ajouts marqués « à valider » |
+| `fadc98e` | Ollama : `qwen3:8b` par défaut, `mistral-small` en comparaison (`--comparer`) |
+| `18d2a9f` | Bloc B : paliers de permission, agent courrier et WhatsApp, mode entretien |
+| `9407833` | Bloc F refait : interface OIA portée du prototype Lovable, Preview seulement |
+| `e5bc2e2` | Roadmap 3.8, CADRE.md (renvoi aux paliers, « à valider ») |
+| ce commit | Ce rapport |
+
+## Réponses appliquées
+
+1. **Bloc F refait d'après le prototype Lovable.** Détail dans
+   `docs/interface/oia-interface-web.md`.
+   - **Source.** La branche `lovable/oia-visibility-prototype` ne contient ni la
+     colonne des modules ni Shyrka. Ces éléments n'existent que dans le projet
+     Lovable « OIA Dashoard » lui-même. Je l'ai lu sans le modifier, au commit
+     `c6470e86` ; seul l'outil `read_file` a servi.
+   - **Ce qui est porté.** La colonne des modules, l'accueil OIA, Visibility
+     (onglets, vue d'un site, ajout d'un compte), Shyrka en page, en panneau et
+     en plein écran, les modules et l'espace Personnel.
+   - **Pages existantes réutilisées.** Les modules Funding, Tenders, Ventures,
+     Signals et CRM renvoient aux vraies pages de la console.
+   - La page de lecture précédente est supprimée.
+   - **Séparation des styles.** La console et `/oia` ont chacune leur layout
+     racine (groupes de routes Next). Les styles Tailwind du prototype ne
+     touchent donc jamais la console, et les URL de la console ne changent pas.
+2. **`/oia` allumée en Preview seulement.**
+   - La règle est dans le code (`apps/web/oia-flag.mjs`) et figée au build :
+     production éteinte même si la variable est posée, Preview allumée, local
+     et CI éteints.
+   - Vérifié sur Vercel : en production, `/oia/` répond « Interface OIA
+     désactivée », avec `noindex`.
+   - Un push sur la branche de session ne déclenchait pas de Preview, parce que
+     Vercel ne redéploie pas un commit déjà déployé sur `main`. J'ai donc créé
+     un déploiement Preview de la branche `claude/magical-ptolemy-pi6g34` par
+     l'API Vercel. Il est protégé par l'authentification Vercel.
+   - **Résultat, vérifié le 2026-11-07 à 17:13 UTC.** Sur le déploiement
+     Preview `oia-ppgl9i3ig-mickaels-projects-6a9e3bf2.vercel.app`
+     (alias `oia-git-claude-magical-ptolem-29dbec-…`), `/oia/shyrka/` affiche
+     l'interface complète : colonne des modules, présence, conversation et
+     journal. En production (`oia-r4x56brjl-…`), `/oia/` reste éteinte. La
+     variable `VERCEL_ENV` est donc bien lue au build.
+3. **Ollama.** `qwen3:8b` par défaut, `mistral-small` en comparaison.
+   - Je n'ai pas pu vérifier les noms dans la bibliothèque : `ollama.com` et
+     `registry.ollama.ai` sont bloqués par le réseau de la session.
+   - `qwen3:8b` est confirmé par des sources secondaires (environ 5,2 Go).
+     Pour Mistral Small, `mistral-small` est le nom de la famille ; le README
+     explique comment vérifier les deux noms sur le Mac (`ollama list`,
+     `ollama show`).
+   - Le raisonnement de qwen3 est coupé par défaut, pour des réponses courtes.
+4. **Identité.** Pas de version 1 imposée. La phrase est ajoutée à CADRE.md et
+   marquée « à valider ».
+   - **Écart volontaire, à trancher.** Ta réponse 4 donne « Version 0 de son
+     apparence : une sphère de points cyan ». Ton message précédent disait au
+     contraire « on ne l'appelle pas "une sphère de points cyan", mais
+     "Lovable Shyrka v0" ; elle ne doit pas être changée par Code ». J'ai
+     gardé le nom « Lovable Shyrka v0 », sans la description. Dis-moi si tu
+     veux les deux.
+   - Aurélie devient « simple proposition et voix de départ ; Shyrka choisira
+     sa voix dans le futur ».
+5. **Ajouts à CADRE.md** : tous marqués « à valider ».
+6. **P9** n'est pas renumérotée.
+7. **CI de visibility-console** : réparée par l'autre session (`a268cd1`). Le
+   monorepo passe entièrement, 34 tâches sur 34.
+
+## Bloc B (mandat v6) : d'après tes intitulés
+
+Code dans `packages/shyrka`, documentation dans `infra/shyrka/README.md`,
+56 tests.
+
+- **Paliers de permission** (`infra/shyrka/permissions.json`).
+  - Cinq paliers par canal : aucun, lire, préparer, répondre après
+    validation, envoyer seule.
+  - Tout est fermé. Le fichier est signé par Mickaël seul : un autre
+    signataire le rend invalide, et tout reste fermé.
+  - Une validation porte sur le texte exact du brouillon (empreinte SHA-256).
+  - Les délégations écrites se font par catégorie. Les catégories listées
+    dans `toujoursRemonter` demandent toujours une validation.
+  - Swift (`swift.com`) est exclu sans lecture. Domaine à confirmer.
+- **Agent courrier et WhatsApp.**
+  - Un agent commun aux deux canaux : il lit, trie (les douze catégories de
+    la séance 7), résume, prépare et envoie à travers les paliers.
+  - Il refuse tout modèle non local et consigne chaque action dans un journal
+    d'audit.
+  - Seuls des adaptateurs simulés existent. La CLI `courrier` en fait la
+    démonstration sur une boîte fictive.
+- **Mode entretien.**
+  - Les séances sont lues dans `docs/shyrka/entretiens.md`, qui reste la seule
+    source.
+  - Une séance suit quatre temps, avec des relances prévues ou générées. On
+    peut dire « passer » ou « retirer » à tout moment.
+  - L'extraction (règles, exemples, formules) est « à valider ». Les mentions
+    de Swift sont signalées.
+  - La fiche de séance est écrite dans le volume chiffré ou dans
+    `~/oia-shyrka-data`, jamais dans le dépôt, et jamais par-dessus une
+    séance existante.
+
+## Limites et points à faire par Mickaël
+
+- **Image du visage de Shyrka.** Elle est introuvable depuis la session :
+  l'outil Lovable rend le texte, pas les octets, et l'aperçu Lovable est
+  bloqué par le réseau. Il faut l'exporter depuis l'éditeur Lovable
+  (`src/assets/shyrka-face-depth.jpg`) et la déposer dans
+  `apps/web/public/oia/shyrka-face-depth.jpg`. Sans elle, la présence reste
+  un fond nuit vide. Avec une image de substitution locale, non commitée, la
+  sphère de particules cyan s'affiche bien.
+- **Copie du prototype.** Un agent a recopié les fichiers Lovable depuis les
+  résultats de lecture, sans somme de contrôle. À comparer une fois avec
+  Lovable, `shyrka-particles.tsx` en priorité. Une fois portés, ces fichiers
+  sont figés par un test d'empreinte.
+- **Adaptateurs réels à choisir**, avant tout code réel :
+  - e-mail : Proton Mail Bridge, API Gmail ou Mail.app ;
+  - WhatsApp : l'API Business demande un numéro dédié ; les bibliothèques non
+    officielles exposent le compte à un blocage.
+- **Dépendances.** Tailwind 4, three, lucide et Radix sont ajoutés à
+  `apps/web` en versions exactes, celles du prototype. Le prototype tourne
+  avec React 19 ; la console reste en React 18.
