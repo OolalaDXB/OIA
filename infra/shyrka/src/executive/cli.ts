@@ -360,7 +360,9 @@ async function tick(): Promise<number> {
   const o0 = ops();
   const pidf = join(REGLAGES.dossierOps, "tick.pid");
   try {
-    if (attendu && (rev.sha !== attendu || rev.modifie)) {
+    // La révision installée fait foi pour le code de Shyrka : un commit ailleurs dans le dépôt (rapport, roadmap) ne l'arrête pas.
+    const codeChange = attendu ? spawnSync("git", ["-C", RACINE_DEPOT, "diff", "--quiet", attendu, "HEAD", "--", "infra/shyrka", "packages/shyrka"]).status !== 0 : false;
+    if (attendu && (codeChange || rev.modifie)) {
       o0.notifier(`service:revision:${rev.sha}`, "a_connaitre", "Shyrka : révision changée, réinstaller le service", "service");
       console.log(`${new Date().toISOString()} refus : révision ${rev.sha.slice(0, 12)}${rev.modifie ? " modifiée" : ""} ≠ installée ${attendu.slice(0, 12)}`);
       return 1;
