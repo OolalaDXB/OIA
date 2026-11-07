@@ -45,6 +45,8 @@ export class OllamaTextModel implements TextModel {
       fetch?: FetchLike;
       /** Raisonnement visible des modèles qui en ont un (qwen3). Coupé par défaut : réponses courtes, latence basse. */
       think?: boolean;
+      /** Fenêtre de contexte demandée à Ollama. Assez large pour le cadre lu en entier et la liste des décisions. */
+      numCtx?: number;
     },
   ) {
     if (!opts.model) throw new Error("Ollama : nom de modèle requis (voir `ollama list`).");
@@ -61,7 +63,7 @@ export class OllamaTextModel implements TextModel {
       res = await f(new URL("/api/chat", this.base).toString(), {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ model: this.opts.model, messages, stream: false, think: this.opts.think ?? false, options: { temperature: this.opts.temperature ?? 0.4 } }),
+        body: JSON.stringify({ model: this.opts.model, messages, stream: false, think: this.opts.think ?? false, options: { temperature: this.opts.temperature ?? 0.4, num_ctx: this.opts.numCtx ?? 16_384 } }),
         signal: ctrl.signal,
       });
     } catch (e) {

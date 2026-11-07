@@ -2,6 +2,7 @@ import { voiceOutputAllowed, type Identity } from "./identity.js";
 import { applyStyle, SHYRKA_SYSTEM_PROMPT } from "./persona.js";
 import type { AudioClip, ChatMessage, Microphone, Speaker, TextModel, Transcriber } from "./types.js";
 import { assertModeleLocal } from "./local.js";
+import { detecterDemande, detecterOffre, estAccord, estRefus, executer, questions, refusDocument, sansRepetition, sourcesDuDepot, type Execution, type Offre, type Operation, type Sources } from "./dialogue.js";
 
 export interface TurnEvent {
   at: string;
@@ -36,6 +37,8 @@ export interface SessionDeps {
   /** Tours gardés en mémoire de conversation (mémoire de session seulement). */
   historyTurns?: number;
   clock?: () => number;
+  /** Sources lues par la liste blanche (cadre, roadmap, rapports). Par défaut : le dépôt. */
+  sources?: Sources;
 }
 
 /**
@@ -50,6 +53,17 @@ export interface SessionDeps {
 export class ShyrkaSession {
   private history: ChatMessage[] = [];
   private readonly clock: () => number;
+  /** Offre faite au tour précédent, en attente d'un accord. Gérée par le code, pas par le modèle. */
+  private offre: Offre | null = null;
+  /** Questions posées au tour précédent : jamais reposées au tour suivant. */
+  private dernieresQuestions: string[] = [];
+  /** Opérations déjà faites dans la session : leur offre n'est plus reproposée. */
+  private readonly faites: Operation[] = [];
+
+  /** Offre en attente, pour l'affichage et les tests. */
+  get offreEnAttente(): Offre | null {
+    return this.offre;
+  }
 
   constructor(private readonly deps: SessionDeps) {
     assertModeleLocal(deps.model);
@@ -92,11 +106,32 @@ export class ShyrkaSession {
       this.deps.print("Shyrka · (rien entendu)");
       return { heard, answer: null, output: "aucune", events };
     }
-    const messages: ChatMessage[] = [{ role: "system", content: this.deps.system ?? SHYRKA_SYSTEM_PROMPT }, ...this.history, { role: "user", content: heard }];
-    const raw = await this.step(events, "reflexion", () => this.deps.model.chat(messages), this.deps.model.name);
-    const answer = applyStyle(raw);
+    const system = this.deps.system ?? SHYRKA_SYSTEM_PROMPT;
+    const messages: ChatMessage[] = [{ role: "system", content: system }, ...this.history, { role: "user", content: heard }];
+    const decision = this.decider(heard);
+    let answer: string;
+    let parModele = false;
+    if ("texte" in decision) answer = decision.texte;
+    else if ("execution" in decision && "texte" in decision.execution) answer = decision.execution.texte;
+    else if ("execution" in decision && "synthese" in decision.execution) {
+      const { fichier, texte, consigne } = decision.execution.synthese;
+      const lecture: ChatMessage[] = [
+        { role: "system", content: system },
+        { role: "user", content: `Voici le texte intégral de ${fichier}, que tu viens de lire.\n\n${texte}\n\n${consigne} N'ajoute rien qui n'y figure pas. Ne pose aucune question.` },
+      ];
+      const raw = await this.step(events, "reflexion", () => this.deps.model.chat(lecture), this.deps.model.name);
+      answer = `J'ai lu ${fichier}. ${sansRepetition(applyStyle(raw), this.dernieresQuestions, [...this.faites, ...(decision.operation ? [decision.operation] : [])])}`.trim();
+    } else {
+      parModele = true;
+      const raw = await this.step(events, "reflexion", () => this.deps.model.chat(messages), this.deps.model.name);
+      answer = sansRepetition(applyStyle(raw), this.dernieresQuestions, this.faites) || "Je n'ai rien à ajouter. Dis-moi ce que tu veux voir.";
+    }
+    if ("execution" in decision && decision.operation) this.faites.push(decision.operation);
+    // Une offre ne se retient que d'une réponse du modèle ; elle attend la réplique suivante, pas plus.
+    this.offre = parModele ? detecterOffre(answer) : null;
+    this.dernieresQuestions = questions(answer);
     let comparison: TurnResult["comparison"];
-    if (this.deps.compareModel) {
+    if (parModele && this.deps.compareModel) {
       const cm = this.deps.compareModel;
       const t0 = this.clock();
       const other = applyStyle(await cm.chat(messages));
@@ -112,6 +147,29 @@ export class ShyrkaSession {
     }
     events.push({ at: new Date(this.clock()).toISOString(), step: "texte", ms: 0, detail: `identité v${this.deps.identity.version}` });
     return { heard, answer, output: "texte", events, ...(comparison ? { comparison } : {}) };
+  }
+
+  /**
+   * Ce que le code fait de la réplique, avant tout modèle : exécuter l'offre
+   * acceptée, répondre à un refus, exécuter une demande de lecture, refuser
+   * un document hors liste. Sinon, le modèle répond.
+   */
+  private decider(heard: string): { texte: string } | { execution: Execution; operation: Operation | null } | { modele: true } {
+    const offre = this.offre;
+    this.offre = null;
+    if (offre && estAccord(heard)) return { execution: executer(offre, this.sources()), operation: { type: offre.type, sujet: offre.sujet } };
+    if (offre && estRefus(heard)) return { texte: "Entendu, je laisse ça de côté." };
+    const d = detecterDemande(heard);
+    if (d && !d.ok) return { texte: refusDocument(d.document) };
+    if (d && "operation" in d) return { execution: executer(d.operation, this.sources()), operation: d.operation };
+    if (d) return { execution: executer({ type: d.type, fichier: d.fichier }, this.sources()), operation: null };
+    if (estAccord(heard)) return { texte: "Rien n'est en attente de mon côté. Dis-moi ce que tu veux voir." };
+    return { modele: true };
+  }
+
+  private sourcesCache: Sources | undefined;
+  private sources(): Sources {
+    return (this.sourcesCache ??= this.deps.sources ?? sourcesDuDepot());
   }
 
   private remember(user: string, assistant: string): void {

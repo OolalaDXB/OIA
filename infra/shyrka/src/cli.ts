@@ -9,7 +9,7 @@ import { MAX_ENTRETIEN_SECONDS, MAX_RECORD_SECONDS } from "./adapters/microphone
 import { COMPARISON_OLLAMA_MODEL, DEFAULT_OLLAMA_MODEL, OllamaTextModel } from "./adapters/ollama.js";
 import { RecordingSpeaker, SimulatedTextModel, SimulatedTranscriber } from "./adapters/simulated.js";
 import { PROMPT_WHISPER, WhisperServer } from "./adapters/whisper-server.js";
-import { etatOia, resumeDuJour } from "./contexte.js";
+import { contexteModele, etatOia, resumeDuJour } from "./contexte.js";
 import { diagnose, formatChecks } from "./doctor.js";
 import { preparerDossierSeance, ecrireFiche } from "./entretien/fiche.js";
 import { chargerProgramme } from "./entretien/programme.js";
@@ -83,10 +83,20 @@ function voix(simule: boolean, dir: string): Speaker {
   return new MacSaySpeaker(execFileRunner, { voice: identity.voix, dir });
 }
 
-function contexte(): string {
+function etatDuJour() {
   const e = etatOia();
   const courrier = dernierResumeCourrier();
-  return resumeDuJour(courrier ? { ...e, resumeCourrier: courrier } : e);
+  return courrier ? { ...e, resumeCourrier: courrier } : e;
+}
+
+/** Résumé lu à voix haute. */
+function contexte(): string {
+  return resumeDuJour(etatDuJour());
+}
+
+/** Contexte donné au modèle : résumé, puis intitulés exacts et identifiants des décisions, rapports. */
+function contexteDuModele(): string {
+  return contexteModele(etatDuJour());
 }
 
 /** Dernier résumé du matin de l'agent courrier (packages/shyrka-mail), s'il existe. Hors du dépôt. */
@@ -116,7 +126,7 @@ async function parler(flags: Set<string>): Promise<void> {
     ...(transcriber ? { transcriber } : {}),
     speaker,
     identity: loadIdentity(cfg.identityPath).identity,
-    system: promptSysteme(contexte()),
+    system: promptSysteme(contexteDuModele()),
     print: (l) => console.log(simule ? `${l}  [simulé]` : l),
   });
   const k = clavier();

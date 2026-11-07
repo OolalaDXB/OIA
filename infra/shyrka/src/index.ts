@@ -15,6 +15,7 @@ export * from "./entretien/session.js";
 export * from "./entretien/fiche.js";
 export * from "./local.js";
 export * from "./contexte.js";
+export * from "./dialogue.js";
 export * from "./whatsapp.js";
 export * from "./adapters/whisper-server.js";
 export * from "./adapters/enregistreur.js";
