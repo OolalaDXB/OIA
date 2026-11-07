@@ -313,8 +313,12 @@ export function routerDecision(texte: string, decisions: Decision[], derniere: E
     }
     return { texte: "Je ne sais pas de quelle décision tu parles : donne-moi son identifiant, de D01 à D" + String(decisions.length).padStart(2, "0") + "." };
   }
-  if (!/\bdecisions?\b/.test(n) || (type !== "lister" && type !== "presenter")) return null;
+  if (!/\bdecisions?\b/.test(n)) return null;
   const nb = nombreDemande(texte);
+  // « Donne-moi les 3 premières décisions » : un nombre de décisions, sans verbe de liste, est une demande de
+  // liste — sauf s'il s'agit d'une question (« pourquoi », « comment »), qui reste au modèle.
+  const listeSansVerbe = type === null && nb !== null && !/\b(pourquoi|comment)\b/.test(n);
+  if (type !== "lister" && type !== "presenter" && !listeSansVerbe) return null;
   if (nb) {
     const liste = nb.depuis === "fin" ? decisions.slice(-nb.n) : decisions.slice(0, nb.n);
     const mot = nb.depuis === "fin" ? "dernières" : "premières";
