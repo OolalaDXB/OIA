@@ -191,6 +191,7 @@ export class ShyrkaSession {
   }
 
   private remember(user: string, assistant: string): void {
+    if (this.deps.memoire?.modePriveActif) return;
     this.history.push({ role: "user", content: user }, { role: "assistant", content: assistant });
     const keep = (this.deps.historyTurns ?? 6) * 2;
     if (this.history.length > keep) this.history = this.history.slice(-keep);
