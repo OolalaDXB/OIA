@@ -16,7 +16,7 @@ begin;
 
 do $$ begin
   create type public.ml_categorie as enum
-    ('subvention', 'chiffre_affaires_potentiel', 'investissement_capital', 'pret', 'aide_fiscale', 'montant_inconnu');
+    ('subvention', 'chiffre_affaires_contractuel_potentiel', 'investissement_capital', 'pret', 'aide_fiscale', 'montant_inconnu');
 exception when duplicate_object then null; end $$;
 do $$ begin
   create type public.ml_sens as enum ('entrant', 'sortant');
@@ -42,9 +42,9 @@ language sql immutable as $$
   select (case p_nature
     when 'GRANT' then 'subvention'
     when 'PRIZE' then 'subvention'
-    when 'TENDER' then 'chiffre_affaires_potentiel'
-    when 'PRE_SOLICITATION' then 'chiffre_affaires_potentiel'
-    when 'MARKETPLACE_PROJECT' then 'chiffre_affaires_potentiel'
+    when 'TENDER' then 'chiffre_affaires_contractuel_potentiel'
+    when 'PRE_SOLICITATION' then 'chiffre_affaires_contractuel_potentiel'
+    when 'MARKETPLACE_PROJECT' then 'chiffre_affaires_contractuel_potentiel'
     when 'EQUITY' then 'investissement_capital'
     when 'ACQUISITION' then 'investissement_capital'
     when 'DEBT_GUARANTEE' then 'pret'

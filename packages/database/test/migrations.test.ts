@@ -118,14 +118,14 @@ describe.skipIf(!postgresDisponible)("migrations OIA 0003 à 0005 (Postgres jeta
 
   it("typologie financière : catégorie par nature, montant inconnu jamais zéro", () => {
     const lignes = b.sql(`select record_id || '|' || categorie || '|' || coalesce(montant::text, 'inconnu') from ml_toutes_v1 order by record_id`, en(A)).split("\n");
-    expect(lignes).toEqual(["rec-a1|subvention|50000", "rec-a2|chiffre_affaires_potentiel|120000", "rec-a3|investissement_capital|inconnu", "rec-deja-la|subvention|inconnu"]);
+    expect(lignes).toEqual(["rec-a1|subvention|50000", "rec-a2|chiffre_affaires_contractuel_potentiel|120000", "rec-a3|investissement_capital|inconnu", "rec-deja-la|subvention|inconnu"]);
     expect(erreur(b, `insert into ml_montant (opportunity_id, espace_id, valeur, devise) values ('11111111-0000-4000-8000-000000000003', '${STUDIO}', 0, 'EUR')`)).toMatch(/check constraint/);
     expect(erreur(b, `insert into ml_montant (opportunity_id, espace_id, valeur) values ('11111111-0000-4000-8000-000000000003', '${STUDIO}', 10)`)).toMatch(/check constraint/);
   });
 
   it("aucun total global : chaque ligne de Montants porte une seule catégorie et une seule devise", () => {
     const lignes = b.sql(`select categorie || '|' || coalesce(devise, '-') || '|' || coalesce(somme_connue::text, '-') from ml_montants_v1 order by 1`, en(A)).split("\n");
-    expect(lignes).toEqual(["chiffre_affaires_potentiel|EUR|120000", "investissement_capital|-|-", "subvention|-|-", "subvention|EUR|50000"]);
+    expect(lignes).toEqual(["chiffre_affaires_contractuel_potentiel|EUR|120000", "investissement_capital|-|-", "subvention|-|-", "subvention|EUR|50000"]);
     expect(b.sql(`select count(*) from (select espace_id, categorie, sens, devise, verifie_par_humain from ml_montants_v1 group by 1,2,3,4,5 having count(*) > 1) d`, en(A))).toBe("0");
   });
 

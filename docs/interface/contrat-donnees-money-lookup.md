@@ -23,7 +23,7 @@ est le seul lien entre les deux.
     par un humain.
   - `decision_humaine` vaut `PENDING` tant que personne n'a tranché.
 - **Typologie financière obligatoire** (`categorie`) : `subvention`,
-  `chiffre_affaires_potentiel`, `investissement_capital`, `pret`,
+  `chiffre_affaires_contractuel_potentiel`, `investissement_capital`, `pret`,
   `aide_fiscale`, `montant_inconnu`.
   - `sens` vaut `entrant`, ou `sortant` pour une acquisition.
   - Aucun écran n'additionne deux catégories, deux sens ou deux devises.

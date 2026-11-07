@@ -83,7 +83,7 @@ describe.skipIf(!postgresDisponible)("chargeur sur Postgres jetable", () => {
     expect(n(`select count(*) from ml_lot`)).toBe(1);
     expect(b.sql(`select last_seen_at from watch_opportunities where record_id = 'r1'`)).toBe(vu);
     expect(b.sql(`select categorie || '|' || coalesce(montant::text, 'inconnu') from ml_toutes_v1 order by record_id`, { role: "authenticated", utilisateur: A }).split("\n"))
-      .toEqual(["subvention|50000", "chiffre_affaires_potentiel|inconnu"]);
+      .toEqual(["subvention|50000", "chiffre_affaires_contractuel_potentiel|inconnu"]);
   });
 
   it("un contenu modifié met la ligne à jour, sans doublon", () => {

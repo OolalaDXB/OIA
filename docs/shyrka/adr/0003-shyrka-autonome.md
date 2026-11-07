@@ -107,8 +107,8 @@ contenu. Elles servent à ne plus jamais le servir :
 - **Aucun contexte d'une application transmis à une autre** sans une
   capacité `lire:<application>` accordée par Mickaël.
 - **Mode privé**, activé et arrêté par Mickaël :
-  - **rien n'est conservé** : une fourniture rend `conserve: false`, sans
-    identifiant ;
+  - **rien n'est conservé** : ni la conversation, ni les éléments fournis
+    (une fourniture rend `conserve: false`, sans identifiant), ni la mémoire ;
   - **rien n'est appris** : aucune copie dérivée, aucune entrée d'index ;
   - **aucune télémétrie** : le noyau n'en a pas ;
   - **ce qui reste**, le journal technique minimal : la date de début et de
