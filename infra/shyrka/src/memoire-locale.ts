@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { chmodSync, existsSync, lstatSync, mkdirSync, realpathSync } from "node:fs";
+import { chmodSync, existsSync, lstatSync, mkdirSync, realpathSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 
@@ -41,6 +41,7 @@ export class MemoireLocale {
     if (!this.disponible) throw new Error("Le volume chiffre /Volumes/Shyrka-corpus n'est pas monte. Aucun souvenir enregistre.");
     const racine = realpathSync(this.racine);
     if (!this.pourTests && racine !== VOLUME) throw new Error("Point de montage inattendu : acces refuse.");
+    if (!this.pourTests && statSync(VOLUME).dev === statSync("/Volumes").dev) throw new Error("Shyrka-corpus est un dossier ordinaire, pas un volume monte : refus pour proteger les donnees.");
     if (this.base) return this.base;
     const dossier = join(racine, "valide");
     if (existsSync(dossier) && lstatSync(dossier).isSymbolicLink()) throw new Error("Lien symbolique interdit pour la memoire.");
