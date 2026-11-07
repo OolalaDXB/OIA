@@ -1,0 +1,313 @@
+{
+  "format": "shyrka.catalogue",
+  "version": 1,
+  "regles": "Catalogue de références, pas de contenu. Version = SHA du blob Git au moment de l'indexation ; fraîcheur = date du dernier commit du fichier. Un document révoqué (statut revoque) est retiré de l'index au passage suivant et filtré immédiatement. Aucun document client, personnel, Swift, messagerie ou export d'IA.",
+  "sources": [
+    {
+      "id": "cadre-shyrka",
+      "application": "oia",
+      "compartiment": "module:shyrka",
+      "proprietaire": "Mickaël Thomas",
+      "connecteur": "depot-git",
+      "chemin": "docs/shyrka/CADRE.md",
+      "confidentialite": "interne",
+      "lecteurs": [
+        "mickael",
+        "conversation",
+        "cockpit",
+        "agent"
+      ],
+      "statut": "valide",
+      "objet": "Cadre de Shyrka : rôle, identité, mémoire, données, permissions."
+    },
+    {
+      "id": "roadmap-oia-shyrka-souffleur",
+      "application": "oia",
+      "compartiment": "projet:oia",
+      "proprietaire": "Mickaël Thomas",
+      "connecteur": "depot-git",
+      "chemin": "docs/roadmap-oia-shyrka-souffleur.md",
+      "confidentialite": "interne",
+      "lecteurs": [
+        "mickael",
+        "conversation",
+        "cockpit",
+        "agent"
+      ],
+      "statut": "valide",
+      "objet": "Roadmap OIA, Shyrka, Souffleur, et décisions ouvertes."
+    },
+    {
+      "id": "adr-0003",
+      "application": "oia",
+      "compartiment": "module:shyrka",
+      "proprietaire": "Mickaël Thomas",
+      "connecteur": "depot-git",
+      "chemin": "docs/shyrka/adr/0003-shyrka-autonome.md",
+      "confidentialite": "interne",
+      "lecteurs": [
+        "mickael",
+        "conversation",
+        "cockpit",
+        "agent"
+      ],
+      "statut": "valide",
+      "objet": "ADR 0003 : noyau autonome, oubli, mode privé."
+    },
+    {
+      "id": "adr-0004",
+      "application": "oia",
+      "compartiment": "module:shyrka",
+      "proprietaire": "Mickaël Thomas",
+      "connecteur": "depot-git",
+      "chemin": "docs/shyrka/adr/0004-memoire-et-connaissances.md",
+      "confidentialite": "interne",
+      "lecteurs": [
+        "mickael",
+        "conversation",
+        "cockpit",
+        "agent"
+      ],
+      "statut": "valide",
+      "objet": "ADR 0004 : mémoire et connaissances, validée le 2026-11-08."
+    },
+    {
+      "id": "corpus-inventaire",
+      "application": "oia",
+      "compartiment": "module:shyrka",
+      "proprietaire": "Mickaël Thomas",
+      "connecteur": "depot-git",
+      "chemin": "docs/shyrka/corpus-inventaire.md",
+      "confidentialite": "interne",
+      "lecteurs": [
+        "mickael",
+        "conversation",
+        "cockpit",
+        "agent"
+      ],
+      "statut": "valide",
+      "objet": "Inventaire du corpus : brut, extrait, validé ; exclusions."
+    },
+    {
+      "id": "style-shyrka",
+      "application": "oia",
+      "compartiment": "module:shyrka",
+      "proprietaire": "Mickaël Thomas",
+      "connecteur": "depot-git",
+      "chemin": "docs/shyrka/style.md",
+      "confidentialite": "interne",
+      "lecteurs": [
+        "mickael",
+        "conversation",
+        "cockpit",
+        "agent"
+      ],
+      "statut": "valide",
+      "objet": "Style d'expression de Shyrka."
+    },
+    {
+      "id": "contrat-donnees-v1",
+      "application": "oia",
+      "compartiment": "projet:oia",
+      "proprietaire": "Mickaël Thomas",
+      "connecteur": "depot-git",
+      "chemin": "docs/interface/contrat-donnees-v1.md",
+      "confidentialite": "interne",
+      "lecteurs": [
+        "mickael",
+        "conversation",
+        "cockpit",
+        "agent"
+      ],
+      "statut": "valide",
+      "objet": "Contrat de données v1 du cockpit (figé au mandat v9)."
+    },
+    {
+      "id": "contrat-money-lookup",
+      "application": "oia",
+      "compartiment": "module:money-lookup",
+      "proprietaire": "Mickaël Thomas",
+      "connecteur": "depot-git",
+      "chemin": "docs/interface/contrat-donnees-money-lookup.md",
+      "confidentialite": "interne",
+      "lecteurs": [
+        "mickael",
+        "conversation",
+        "cockpit",
+        "agent"
+      ],
+      "statut": "valide",
+      "objet": "Contrat de données Money Lookup."
+    },
+    {
+      "id": "contrat-visibility",
+      "application": "oia",
+      "compartiment": "module:visibility",
+      "proprietaire": "Mickaël Thomas",
+      "connecteur": "depot-git",
+      "chemin": "docs/interface/contrat-donnees-visibility.md",
+      "confidentialite": "interne",
+      "lecteurs": [
+        "mickael",
+        "conversation",
+        "cockpit",
+        "agent"
+      ],
+      "statut": "valide",
+      "objet": "Contrat de données Visibility."
+    },
+    {
+      "id": "contrat-shyrka",
+      "application": "oia",
+      "compartiment": "module:shyrka",
+      "proprietaire": "Mickaël Thomas",
+      "connecteur": "depot-git",
+      "chemin": "docs/interface/contrat-donnees-shyrka.md",
+      "confidentialite": "interne",
+      "lecteurs": [
+        "mickael",
+        "conversation",
+        "cockpit",
+        "agent"
+      ],
+      "statut": "valide",
+      "objet": "Contrat de données Shyrka (cockpit)."
+    },
+    {
+      "id": "brief-lovable-v1",
+      "application": "oia",
+      "compartiment": "projet:oia",
+      "proprietaire": "Mickaël Thomas",
+      "connecteur": "depot-git",
+      "chemin": "docs/interface/brief-lovable-branchement-v1.md",
+      "confidentialite": "interne",
+      "lecteurs": [
+        "mickael",
+        "conversation",
+        "cockpit",
+        "agent"
+      ],
+      "statut": "valide",
+      "objet": "Brief de branchement Lovable v1."
+    },
+    {
+      "id": "mise-en-production-v1",
+      "application": "oia",
+      "compartiment": "projet:oia",
+      "proprietaire": "Mickaël Thomas",
+      "connecteur": "depot-git",
+      "chemin": "docs/interface/mise-en-production-v1.md",
+      "confidentialite": "interne",
+      "lecteurs": [
+        "mickael",
+        "conversation",
+        "cockpit",
+        "agent"
+      ],
+      "statut": "a_valider",
+      "objet": "Liste de mise en production du cockpit : étapes restantes."
+    },
+    {
+      "id": "integration-console",
+      "application": "oia",
+      "compartiment": "projet:oia",
+      "proprietaire": "Mickaël Thomas",
+      "connecteur": "depot-git",
+      "chemin": "docs/interface/integration-console.md",
+      "confidentialite": "interne",
+      "lecteurs": [
+        "mickael",
+        "conversation",
+        "cockpit",
+        "agent"
+      ],
+      "statut": "valide",
+      "objet": "Intégration de la console."
+    },
+    {
+      "id": "acces-et-donnees",
+      "application": "oia",
+      "compartiment": "projet:oia",
+      "proprietaire": "Mickaël Thomas",
+      "connecteur": "depot-git",
+      "chemin": "docs/access-and-data.md",
+      "confidentialite": "interne",
+      "lecteurs": [
+        "mickael",
+        "conversation",
+        "cockpit",
+        "agent"
+      ],
+      "statut": "a_valider",
+      "objet": "Accès et données d'OIA (ancien, à revérifier)."
+    },
+    {
+      "id": "rapport-v9",
+      "application": "oia",
+      "compartiment": "projet:oia",
+      "proprietaire": "Mickaël Thomas",
+      "connecteur": "depot-git",
+      "chemin": "infra/visibility/reports/2026-11-08-mandat-v9.md",
+      "confidentialite": "interne",
+      "lecteurs": [
+        "mickael",
+        "conversation",
+        "cockpit",
+        "agent"
+      ],
+      "statut": "observe",
+      "objet": "Rapport du mandat v9 : cockpit en production, ce qui reste à faire."
+    },
+    {
+      "id": "rapport-v8-shyrka",
+      "application": "oia",
+      "compartiment": "module:shyrka",
+      "proprietaire": "Mickaël Thomas",
+      "connecteur": "depot-git",
+      "chemin": "infra/shyrka/reports/2026-11-08-mandat-v8.md",
+      "confidentialite": "interne",
+      "lecteurs": [
+        "mickael",
+        "conversation",
+        "cockpit",
+        "agent"
+      ],
+      "statut": "observe",
+      "objet": "Rapport du mandat v8 de Shyrka."
+    },
+    {
+      "id": "a-faire-au-retour",
+      "application": "oia",
+      "compartiment": "module:visibility",
+      "proprietaire": "Mickaël Thomas",
+      "connecteur": "depot-git",
+      "chemin": "infra/visibility/reports/a-faire-au-retour.md",
+      "confidentialite": "interne",
+      "lecteurs": [
+        "mickael",
+        "conversation",
+        "cockpit",
+        "agent"
+      ],
+      "statut": "observe",
+      "objet": "Actions à faire au retour (Visibility)."
+    },
+    {
+      "id": "runbook-j0",
+      "application": "oia",
+      "compartiment": "module:visibility",
+      "proprietaire": "Mickaël Thomas",
+      "connecteur": "depot-git",
+      "chemin": "infra/visibility/reports/runbook-j0.md",
+      "confidentialite": "interne",
+      "lecteurs": [
+        "mickael",
+        "conversation",
+        "cockpit",
+        "agent"
+      ],
+      "statut": "valide",
+      "objet": "Runbook de la mesure J0."
+    }
+  ]
+}
