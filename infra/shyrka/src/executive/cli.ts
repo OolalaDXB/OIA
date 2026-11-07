@@ -14,6 +14,7 @@ import { Missions, RefusMission } from "./missions.js";
 import { BaseOps, type Notification } from "./operations.js";
 import { collecter } from "./veille.js";
 import { verifier } from "./verification.js";
+import { commandeEval } from "./eval/cli.js";
 
 /**
  * pnpm shyrka:executive <commande> — Shyrka exécutive (mandat v10).
@@ -38,7 +39,8 @@ function aide(): number {
   pause | resume | stop          suspendre les départs / reprendre / arrêter le service (et seulement lui)
   service install | status | uninstall
   acceptance                     recette automatisée, sans appel payant ni mutation de production
-  memoire …                      retenir | lister | chercher | corriger | oublier | exporter | restaurer | etat`);
+  memoire …                      retenir | lister | chercher | corriger | oublier | exporter | restaurer | etat
+  eval run [capacite] | report   banc d'évaluation (développement, régression, tenu à l'écart) et registre des capacités`);
   return 2;
 }
 
@@ -534,6 +536,8 @@ async function main(): Promise<number> {
     }
     case "memoire":
       return commandeMemoire(rest);
+    case "eval":
+      return commandeEval(rest);
     default:
       return aide();
   }

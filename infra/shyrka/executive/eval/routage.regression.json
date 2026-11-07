@@ -1,0 +1,102 @@
+{
+ "format": "shyrka.eval.routage",
+ "version": 1,
+ "ensemble": "regression",
+ "cas": [
+  {
+   "id": "reg-01",
+   "famille": "positif",
+   "texte": "Liste les décisions",
+   "attendu": {
+    "genre": "liste_complete"
+   },
+   "note": "v10"
+  },
+  {
+   "id": "reg-02",
+   "famille": "positif",
+   "texte": "Liste les 3 premières décisions",
+   "attendu": {
+    "genre": "liste",
+    "depuis": "debut",
+    "n": 3
+   },
+   "note": "v10"
+  },
+  {
+   "id": "reg-03",
+   "famille": "positif",
+   "texte": "Présente les 5 dernières décisions",
+   "attendu": {
+    "genre": "liste",
+    "depuis": "fin",
+    "n": 5
+   },
+   "note": "v10"
+  },
+  {
+   "id": "reg-04",
+   "famille": "positif",
+   "texte": "Explique D01",
+   "attendu": {
+    "genre": "explication",
+    "id": "D01"
+   },
+   "note": "v10"
+  },
+  {
+   "id": "reg-05",
+   "famille": "positif",
+   "texte": "Pourquoi D04 ?",
+   "attendu": {
+    "genre": "explication",
+    "id": "D04"
+   },
+   "note": "v10"
+  },
+  {
+   "id": "reg-06",
+   "famille": "negatif",
+   "texte": "J'ai une décision à prendre sur le budget",
+   "attendu": {
+    "genre": "pas_liste"
+   }
+  },
+  {
+   "id": "reg-07",
+   "famille": "negatif",
+   "texte": "Quelle décision recommandes-tu en premier ?",
+   "attendu": {
+    "genre": "pas_liste"
+   }
+  },
+  {
+   "id": "reg-08",
+   "famille": "positif",
+   "texte": "Montre-moi la première décision",
+   "attendu": {
+    "genre": "liste",
+    "depuis": "debut",
+    "n": 1
+   }
+  },
+  {
+   "id": "reg-09",
+   "famille": "negatif",
+   "texte": "D99",
+   "attendu": {
+    "genre": "pas_liste"
+   },
+   "note": "identifiant inexistant : texte, pas liste"
+  },
+  {
+   "id": "reg-10",
+   "famille": "negatif",
+   "texte": "Quelles décisions sont urgentes ?",
+   "attendu": {
+    "genre": "pas_liste"
+   },
+   "note": "question de jugement"
+  }
+ ]
+}

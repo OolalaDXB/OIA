@@ -1,0 +1,71 @@
+{
+ "format": "shyrka.eval.memoire",
+ "version": 1,
+ "ensemble": "regression",
+ "faits": [
+  {
+   "id": "m01",
+   "contenu": "Recette fictive : le banc d'essai de Shyrka s'appelle Héron",
+   "requete": "nom banc essai",
+   "indice": "Héron"
+  },
+  {
+   "id": "m02",
+   "contenu": "Recette fictive : la réunion fictive Zéphyr a lieu le mardi",
+   "requete": "réunion Zéphyr jour",
+   "indice": "mardi"
+  },
+  {
+   "id": "m03",
+   "contenu": "Recette fictive : le code couleur du projet fictif Lagune est turquoise",
+   "requete": "couleur Lagune",
+   "indice": "turquoise"
+  },
+  {
+   "id": "m04",
+   "contenu": "Recette fictive : le prestataire fictif de traduction s'appelle Polyglotte SARL",
+   "requete": "prestataire traduction",
+   "indice": "Polyglotte"
+  },
+  {
+   "id": "m05",
+   "contenu": "Recette fictive : la limite fictive du banc est de 42 essais",
+   "requete": "limite banc essais",
+   "indice": "42"
+  },
+  {
+   "id": "m06",
+   "contenu": "Recette fictive : le nom de code fictif du prototype vocal est Alouette",
+   "requete": "nom code prototype vocal",
+   "indice": "Alouette"
+  },
+  {
+   "id": "m07",
+   "contenu": "Recette fictive : la ville fictive du séminaire est Ouarzazate",
+   "requete": "ville séminaire",
+   "indice": "Ouarzazate"
+  },
+  {
+   "id": "m08",
+   "contenu": "Recette fictive : le chiffre fétiche fictif de l'équipe est 17",
+   "requete": "chiffre fétiche équipe",
+   "indice": "17"
+  },
+  {
+   "id": "m09",
+   "contenu": "Recette fictive : le fournisseur fictif de cafés est Arabica Nord",
+   "requete": "fournisseur cafés",
+   "indice": "Arabica"
+  },
+  {
+   "id": "m10",
+   "contenu": "Recette fictive : la mascotte fictive s'appelle Gribouille",
+   "requete": "mascotte",
+   "indice": "Gribouille"
+  }
+ ],
+ "oublier": [
+  "m03",
+  "m08"
+ ]
+}

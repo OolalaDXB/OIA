@@ -1,0 +1,145 @@
+{
+ "format": "shyrka.eval.routage",
+ "version": 1,
+ "ensemble": "developpement",
+ "cas": [
+  {
+   "id": "dev-01",
+   "famille": "positif",
+   "texte": "Donne-moi les 3 premières décisions",
+   "attendu": {
+    "genre": "liste",
+    "depuis": "debut",
+    "n": 3
+   },
+   "note": "cas obligatoire PR #6"
+  },
+  {
+   "id": "dev-02",
+   "famille": "positif",
+   "texte": "Donne moi les trois premières décisions",
+   "attendu": {
+    "genre": "liste",
+    "depuis": "debut",
+    "n": 3
+   }
+  },
+  {
+   "id": "dev-03",
+   "famille": "positif",
+   "texte": "Quelles sont les 3 premières décisions ?",
+   "attendu": {
+    "genre": "liste",
+    "depuis": "debut",
+    "n": 3
+   },
+   "note": "question d'énumération"
+  },
+  {
+   "id": "dev-04",
+   "famille": "positif",
+   "texte": "Les 2 dernières décisions",
+   "attendu": {
+    "genre": "liste",
+    "depuis": "fin",
+    "n": 2
+   },
+   "note": "phrase nominale courte"
+  },
+  {
+   "id": "dev-05",
+   "famille": "negatif",
+   "texte": "J'ai pris une décision",
+   "attendu": {
+    "genre": "pas_liste"
+   },
+   "note": "cas obligatoire PR #6 : « une » n'est pas un nombre demandé"
+  },
+  {
+   "id": "dev-06",
+   "famille": "negatif",
+   "texte": "Les 3 premières décisions sont-elles urgentes ?",
+   "attendu": {
+    "genre": "pas_liste"
+   },
+   "note": "cas obligatoire PR #6 : question, pas liste"
+  },
+  {
+   "id": "dev-07",
+   "famille": "negatif",
+   "texte": "Pourquoi les 3 premières décisions sont-elles bloquées ?",
+   "attendu": {
+    "genre": "pas_liste"
+   }
+  },
+  {
+   "id": "dev-08",
+   "famille": "positif",
+   "texte": "Explique pourquoi la décision D01 a été prise",
+   "attendu": {
+    "genre": "explication",
+    "id": "D01"
+   },
+   "note": "cas obligatoire PR #6 : explication sourcée"
+  },
+  {
+   "id": "dev-09",
+   "famille": "negatif",
+   "texte": "Une décision a été prise hier sur le budget",
+   "attendu": {
+    "genre": "pas_liste"
+   }
+  },
+  {
+   "id": "dev-10",
+   "famille": "negatif",
+   "texte": "Combien de décisions sont ouvertes ?",
+   "attendu": {
+    "genre": "pas_liste"
+   }
+  },
+  {
+   "id": "dev-11",
+   "famille": "adverse",
+   "texte": "Ne me donne pas les 3 premières décisions, explique plutôt D03",
+   "attendu": {
+    "genre": "explication",
+    "id": "D03"
+   }
+  },
+  {
+   "id": "dev-12",
+   "famille": "negatif",
+   "texte": "Est-ce que les deux dernières décisions dépendent de moi ?",
+   "attendu": {
+    "genre": "pas_liste"
+   }
+  },
+  {
+   "id": "cont-01",
+   "famille": "continuite",
+   "avant": [
+    "Explique D02"
+   ],
+   "texte": "Et pourquoi celle-là ?",
+   "attendu": {
+    "genre": "explication",
+    "id": "D02"
+   },
+   "note": "défaut v10 n°3 : « celle-là » non reconnu"
+  },
+  {
+   "id": "cont-02",
+   "famille": "continuite",
+   "avant": [
+    "Explique D05"
+   ],
+   "texte": "Pourquoi cette décision ?",
+   "attendu": {
+    "genre": "explication",
+    "id": "D05"
+   },
+   "note": "v10"
+  }
+ ]
+}

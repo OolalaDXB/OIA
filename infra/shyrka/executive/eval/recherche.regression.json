@@ -1,0 +1,139 @@
+{
+ "format": "shyrka.eval.recherche",
+ "version": 1,
+ "ensemble": "regression",
+ "cas": [
+  {
+   "id": "rech-01",
+   "famille": "positif",
+   "question": "Quelles sont les quatre formes de mémoire ?",
+   "attendu": {
+    "source": "docs/shyrka/adr/0004-memoire-et-connaissances.md",
+    "rang_max": 3
+   }
+  },
+  {
+   "id": "rech-02",
+   "famille": "positif",
+   "question": "Quelles sont les permissions de Shyrka dans son cadre ?",
+   "attendu": {
+    "source": "docs/shyrka/CADRE.md",
+    "rang_max": 3
+   }
+  },
+  {
+   "id": "rech-03",
+   "famille": "positif",
+   "question": "Comment poser les clés sur le Mac avant le J0 ?",
+   "attendu": {
+    "source": "infra/visibility/reports/runbook-j0.md",
+    "rang_max": 3
+   }
+  },
+  {
+   "id": "rech-04",
+   "famille": "positif",
+   "question": "Quelles colonnes a la vue ml_toutes_v1 de Money Lookup ?",
+   "attendu": {
+    "source": "docs/interface/contrat-donnees-money-lookup.md",
+    "rang_max": 3
+   }
+  },
+  {
+   "id": "rech-05",
+   "famille": "positif",
+   "question": "Que contient la vue vis_mesure_v1 de Visibility ?",
+   "attendu": {
+    "source": "docs/interface/contrat-donnees-visibility.md",
+    "rang_max": 3
+   }
+  },
+  {
+   "id": "rech-06",
+   "famille": "positif",
+   "question": "Quel message pour Lovable sur la connexion du cockpit à Supabase ?",
+   "attendu": {
+    "source": "docs/interface/brief-lovable-branchement-v1.md",
+    "rang_max": 3
+   }
+  },
+  {
+   "id": "rech-07",
+   "famille": "positif",
+   "question": "Quelle liste à cocher pour l'hébergement de la mise en production du cockpit ?",
+   "attendu": {
+    "source": "docs/interface/mise-en-production-v1.md",
+    "rang_max": 3
+   }
+  },
+  {
+   "id": "rech-08",
+   "famille": "positif",
+   "question": "Quels paliers dans l'inventaire du corpus de Shyrka ?",
+   "attendu": {
+    "source": "docs/shyrka/corpus-inventaire.md",
+    "rang_max": 3
+   }
+  },
+  {
+   "id": "rech-09",
+   "famille": "positif",
+   "question": "Quel est le style de Mickaël pour les brouillons ?",
+   "attendu": {
+    "source": "docs/shyrka/style.md",
+    "rang_max": 3
+   }
+  },
+  {
+   "id": "rech-10",
+   "famille": "positif",
+   "question": "Que dit l'ADR sur Shyrka autonome et intégrable, le noyau ?",
+   "attendu": {
+    "source": "docs/shyrka/adr/0003-shyrka-autonome.md",
+    "rang_max": 3
+   }
+  },
+  {
+   "id": "rech-11",
+   "famille": "positif",
+   "question": "Quel inventaire des écrans et composants du prototype Lovable pour la console ?",
+   "attendu": {
+    "source": "docs/interface/integration-console.md",
+    "rang_max": 3
+   }
+  },
+  {
+   "id": "rech-12",
+   "famille": "positif",
+   "question": "Who can see the console, and what is the evidence layer?",
+   "attendu": {
+    "source": "docs/access-and-data.md",
+    "rang_max": 3
+   }
+  },
+  {
+   "id": "rech-n1",
+   "famille": "negatif",
+   "question": "Quelle est la recette du tajine aux pruneaux ?",
+   "attendu": {
+    "aucune_source": true
+   }
+  },
+  {
+   "id": "rech-n2",
+   "famille": "negatif",
+   "question": "Quel est le numéro de passeport du locataire ?",
+   "attendu": {
+    "aucune_source": true
+   }
+  },
+  {
+   "id": "rech-n3",
+   "famille": "negatif",
+   "question": "Quelle est la météo prévue à Tbilissi demain ?",
+   "attendu": {
+    "aucune_source": true
+   }
+  }
+ ]
+}
