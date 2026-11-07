@@ -1,0 +1,1148 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
+import type { ConsoleData, ConsoleRecord, OpportunityKind } from "@oia/ingestion/console";
+import {
+  PROJECT_ENTRIES,
+  projectName,
+  recordsToCsv,
+  recordsToMarkdown,
+  scoreProject,
+  toProfile,
+  type ProjectSuggestion,
+  type ReviewAction,
+  type TaskItem,
+} from "@oia/workspace";
+import { applyFreshnessAll, assessFreshness } from "@oia/ingestion/freshness";
+import { classifyNoticeType, skipReason } from "@oia/connectors/notice-type";
+import { useLang } from "../lib/lang";
+import {
+  freshnessLabel,
+  ui,
+  verdictLabel,
+  verdictMeaning,
+  type Phrase,
+  gateConditionLabel,
+  plainFailure,
+  recommendationLabel,
+  relativeDays,
+  reviewLabel,
+  verificationLabel,
+  kindLabel as plainKindLabel,
+} from "../lib/vocabulary";
+import { useAlerts, useLedger } from "../lib/watchData";
+import { useAuth } from "../lib/supabase";
+import {
+  download,
+  useAttachedNotes,
+  useAuditLog,
+  useProjectTags,
+  useSavedViews,
+  useStorageInfo,
+  useTasks,
+  useWorkspaceBackup,
+} from "../lib/workspaceStore";
+
+type FactClass =
+  | "CONFIRMED_OFFICIAL"
+  | "EXTRACTED_FROM_OFFICIAL_SOURCE"
+  | "INFERRED"
+  | "USER_PROVIDED"
+  | "UNKNOWN";
+
+const RECO_COLOR: Record<string, string> = {
+  PURSUE: "var(--pursue)",
+  PARTNER: "var(--partner)",
+  INVESTIGATE: "var(--investigate)",
+  MONITOR: "var(--monitor)",
+  REJECT: "var(--reject)",
+};
+const PROV_COLOR: Record<FactClass, string> = {
+  CONFIRMED_OFFICIAL: "var(--pursue)",
+  EXTRACTED_FROM_OFFICIAL_SOURCE: "var(--partner)",
+  INFERRED: "var(--investigate)",
+  USER_PROVIDED: "var(--muted)",
+  UNKNOWN: "var(--muted)",
+};
+const CONFIRMED: FactClass[] = ["CONFIRMED_OFFICIAL", "EXTRACTED_FROM_OFFICIAL_SOURCE"];
+const FACT_ORDER: FactClass[] = ["CONFIRMED_OFFICIAL", "EXTRACTED_FROM_OFFICIAL_SOURCE", "INFERRED", "USER_PROVIDED", "UNKNOWN"];
+
+/**
+ * Kept for callers that import it. It renders in FRENCH whatever the toggle
+ * says, because a Proxy has no way to receive the current language — which is
+ * exactly how "SUBVENTION" and "TENDER" ended up side by side in the same list.
+ * Nothing user-facing should use it; `plainKindLabel(kind, lang)` is the way.
+ */
+export const KIND_LABEL = new Proxy({} as Record<string, string>, {
+  get: (_t, key: string) => plainKindLabel(key, "fr"),
+});
+
+const KIND_COLOR: Record<string, string> = {
+  GRANT: "var(--pursue)",
+  TENDER: "var(--partner)",
+  TENDER_RFP: "var(--partner)",
+  PRE_SOLICITATION: "var(--aqua-ink)",
+  EQUITY: "var(--monitor)",
+  VC_INVESTOR: "var(--monitor)",
+  TAX_INCENTIVE: "var(--pursue)",
+  DEBT_GUARANTEE: "var(--partner)",
+  PRIZE: "var(--pursue)",
+  CONSORTIUM_CALL: "var(--muted)",
+  MARKETPLACE_PROJECT: "var(--partner)",
+  ACQUISITION: "var(--reject)",
+  REGULATORY: "var(--investigate)",
+};
+const kindColor = (kind: string | undefined) => KIND_COLOR[kind ?? ""] ?? "var(--muted)";
+
+export type RailKey = "today" | "opportunities" | "projects" | "money" | "workspace";
+
+/**
+ * Five destinations, down from eleven.
+ *
+ * The console had a separate route for grants, tenders, investors, alerts,
+ * tasks, notes, contacts and metrics. Each was reasonable on its own; together
+ * they made a tool nobody could hold in their head — the complaint was "ultra
+ * le bordel", and it was correct.
+ *
+ * What changed is grouping, not capability. Kinds are a filter inside
+ * Opportunities rather than three routes. Alerts belong with the digest, since
+ * both answer "what needs me". Tasks, notes and contacts are one Workspace with
+ * tabs. Metrics and the money table are one page, because "how much is in play"
+ * and "why is it blocked" are the same conversation.
+ */
+export function Rail({ active, onExportAudit }: { active: RailKey; onExportAudit?: () => void }) {
+  const { open } = useAlerts();
+  const { lang } = useLang();
+  // The five destinations and, on hover, what each is FOR. The hint matters as
+  // much as the label: a rail of nouns tells you where things are, not what to
+  // do with them.
+  const nav: { key: RailKey; label: Phrase; href: string; hint: Phrase }[] = [
+    {
+      key: "today",
+      label: { fr: "Aujourd'hui", en: "Today" },
+      href: "/digest/",
+      hint: { fr: "Ce qui demande ton attention maintenant", en: "What needs you now" },
+    },
+    {
+      key: "opportunities",
+      label: { fr: "Opportunités", en: "Opportunities" },
+      href: "/",
+      hint: { fr: "Tout ce qui a été trouvé, à trier", en: "Everything found, to triage" },
+    },
+    {
+      key: "projects",
+      label: { fr: "Projets", en: "Projects" },
+      href: "/projects/",
+      hint: { fr: "Pour qui on cherche", en: "Who we are looking for" },
+    },
+    {
+      key: "money",
+      label: { fr: "Argent", en: "Money" },
+      href: "/money/",
+      hint: { fr: "Combien est en jeu, et ce qui bloque", en: "How much is in play, and what blocks it" },
+    },
+    {
+      key: "workspace",
+      label: { fr: "Espace de travail", en: "Workspace" },
+      href: "/workspace/",
+      hint: { fr: "Tâches, notes, contacts", en: "Tasks, notes, people" },
+    },
+  ];
+  return (
+    <aside className="rail">
+      <div className="railBrand">OIA</div>
+      {nav.map((n) => (
+        <Link
+          key={n.key}
+          href={n.href}
+          className={active === n.key ? "railItem active" : "railItem"}
+          title={n.hint[lang]}
+        >
+          <span>{n.label[lang]}</span>
+          {n.key === "today" && open.length > 0 && <span className="railBadge">{open.length}</span>}
+        </Link>
+      ))}
+      {onExportAudit && (
+        <div className="railFoot">
+          <button className="ghostBtn" onClick={onExportAudit}>{ui("exportAudit", lang)}</button>
+        </div>
+      )}
+    </aside>
+  );
+}
+
+/** Where the human layer lives — stated, never implied. */
+export function StorageNote() {
+  const { lang } = useLang();
+  const info = useStorageInfo();
+  const backup = useWorkspaceBackup();
+  const { state, signOut } = useAuth();
+  const [pending, setPending] = useState(0);
+  const [migration, setMigration] = useState<string | null>(null);
+
+  // Only offered when this browser still holds decisions the database does not.
+  useEffect(() => {
+    if (info.remote) setPending(backup.localCount());
+  }, [info.remote, backup]);
+
+  return (
+    <div className="storageNote">
+      <span className="muted small">
+        {info.remote
+          ? lang === "fr"
+            ? "Décisions, étiquettes, notes, tâches et contacts sont dans la base permanente — durables, et lisibles depuis un autre appareil."
+            : "Reviews, tags, notes, tasks and contacts are stored in the watch database — durable, and readable from another device."
+          : info.durability === "BROWSER_LOCAL"
+            ? lang === "fr"
+              ? "Décisions, étiquettes, notes, tâches et contacts sont stockés dans CE navigateur uniquement — pas de serveur, pas de synchronisation. Pense à sauvegarder."
+              : "Reviews, tags, notes, tasks and contacts are stored in THIS browser only — no server, no sync. Back them up."
+            : lang === "fr"
+              ? "Aucun stockage navigateur disponible : cette session ne garde rien."
+              : "No browser storage available: this session keeps nothing."}
+        {migration && <span className="ok"> · {migration}</span>}
+      </span>
+      <span className="viewsRow">
+        {info.remote && pending > 0 && (
+          <button
+            className="ghostBtn"
+            onClick={async () => {
+              setMigration("migrating…");
+              try {
+                const r = await backup.migrateLocalToDatabase();
+                setMigration(
+                  `migrated ${r.reviews} review(s), ${r.tags} tag(s), ${r.notes} note(s), ${r.tasks} task(s), ${r.contacts} contact(s)`,
+                );
+                setPending(0);
+              } catch (e) {
+                setMigration(`migration failed: ${(e as Error).message}`);
+              }
+            }}
+          >
+            move {pending} local item(s) to the database
+          </button>
+        )}
+        <button className="ghostBtn" onClick={backup.exportAll}>{lang === "fr" ? "sauvegarder" : "backup"}</button>
+        {!info.remote && (
+          <label className="ghostBtn restoreBtn">
+            {lang === "fr" ? "restaurer" : "restore"}
+            <input
+              type="file"
+              accept="application/json"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) void backup.importAll(file);
+              }}
+            />
+          </label>
+        )}
+        {state.status === "SIGNED_IN" && (
+          <button className="ghostBtn" onClick={() => void signOut()} title={state.email}>
+            sign out
+          </button>
+        )}
+      </span>
+    </div>
+  );
+}
+
+function Badge({ text, color }: { text: string; color: string }) {
+  return (
+    <span className="badge" style={{ borderColor: color, color }}>
+      {text}
+    </span>
+  );
+}
+
+function appDeadline(r: ConsoleRecord): string {
+  const app = r.deadlines.find((d) => d.deadlineType === "APPLICATION" && d.normalized);
+  return app?.normalized ?? r.deadlines.find((d) => d.normalized)?.normalized ?? "—";
+}
+
+/** Publication date read from the provenance-typed facts (TED metadata). */
+function pubDate(r: ConsoleRecord): string {
+  const f = r.facts.find((x) => x.field === "publication-date");
+  return f ? f.normalizedValue.slice(0, 10) : "";
+}
+
+const uniq = (xs: string[]) => [...new Set(xs)];
+
+/**
+ * What TED said this notice is. Records discovered before the classification
+ * existed still carry the raw `notice-type` fact, so the console can now name
+ * what it is — rather than rewriting a real run's output to look tidier.
+ */
+function noticeAside(r: ConsoleRecord): string | null {
+  const noticeType = r.facts.find((f) => f.field === "notice-type")?.normalizedValue;
+  return noticeType ? skipReason(noticeType) : null;
+}
+
+export function Console({
+  data,
+  fixedKind,
+  active,
+  title,
+}: {
+  data: ConsoleData;
+  /** Set on /grants, /tenders, /investors — same shell, kind-scoped queue. */
+  fixedKind?: OpportunityKind;
+  active: RailKey;
+  title: string | Phrase;
+}) {
+  const { lang, toggle: toggleLang } = useLang();
+  // One clock for the whole render: freshness must not shift between the row
+  // and the detail of the same record.
+  const nowIso = useMemo(() => new Date().toISOString(), []);
+  const audit = useAuditLog();
+  const savedViews = useSavedViews();
+  const projectTags = useProjectTags();
+  const notes = useAttachedNotes();
+  const tasks = useTasks();
+
+  // The permanent ledger when there is one, the bundled snapshot otherwise —
+  // and the header says which, because a stale snapshot presented as live data
+  // is the failure this product exists to avoid.
+  const ledger = useLedger(data);
+
+  // Expiry is re-checked on every read, not at generation time: a shortlist
+  // generated last month must not still present a closed call as pursuable.
+  // applyFreshness only ever removes — it can close a gate condition, never open one.
+  const records = useMemo(() => {
+    const scoped = fixedKind ? ledger.records.filter((r) => r.opportunityKind === fixedKind) : ledger.records;
+    return applyFreshnessAll(scoped, nowIso);
+  }, [ledger.records, fixedKind, nowIso]);
+
+  const [selectedId, setSelectedId] = useState<string>("");
+  const [fBlocked, setFBlocked] = useState("");
+  const [fVerdict, setFVerdict] = useState("");
+  const [fKind, setFKind] = useState("");
+  const [fReco, setFReco] = useState("");
+  const [fVerif, setFVerif] = useState("");
+  const [fRoute, setFRoute] = useState("");
+  const [fReview, setFReview] = useState("");
+  const [fProject, setFProject] = useState("");
+  const [fFresh, setFFresh] = useState("");
+  const [sortKey, setSortKey] = useState("pubDate:desc");
+
+  /**
+   * The queue is addressable.
+   *
+   * Money and Today could show a figure and a count and then leave you
+   * stranded: nothing on either screen was a link, so "EUR 128,900,000" and
+   * "29 blocked on an unconfirmed source" were dead ends. A number you cannot
+   * click is a number you cannot act on.
+   *
+   * So every filter can arrive in the URL — ?project=bawaba,
+   * ?blocked=verifiedSource, ?id=422623-2026 — and the other screens link here
+   * instead of restating what they cannot reach.
+   */
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    const set = (key: string, apply: (v: string) => void) => {
+      const v = q.get(key);
+      if (v) apply(v);
+    };
+    set("project", setFProject);
+    set("kind", setFKind);
+    set("reco", setFReco);
+    set("verif", setFVerif);
+    set("review", setFReview);
+    set("fresh", setFFresh);
+    set("blocked", setFBlocked);
+    set("verdict", setFVerdict);
+    set("id", setSelectedId);
+  }, []);
+
+  const filtered = useMemo(() => {
+    const xs = records.filter(
+      (r) =>
+        (!fBlocked || (r.gate?.failedReasons ?? []).includes(fBlocked)) &&
+        (!fVerdict ||
+          (fVerdict === "__none" ? !r.assessment : r.assessment?.verdict === fVerdict)) &&
+        (!fKind || (r.opportunityKind ?? "GRANT") === fKind) &&
+        (!fReco || r.recommendation === fReco) &&
+        (!fVerif || r.verificationStatus === fVerif) &&
+        (!fRoute || r.strategicRoute === fRoute) &&
+        (!fReview || audit.statusFor(r.id) === fReview) &&
+        // A record belongs to a project when a human tagged it OR — until a
+        // human decides otherwise — when that project's own query surfaced it.
+        // Money counts it that way; this filter used to count only the tag, so
+        // Money said BAWABA had 19 records, you clicked, and the queue showed
+        // zero. Two screens disagreeing about the same number is worse than
+        // either being wrong alone.
+        (!fProject ||
+          (fProject === "__untagged"
+            ? !projectTags.tags[r.id] && (r.discoveredFor ?? []).length === 0
+            : projectTags.tags[r.id] === fProject ||
+              (!projectTags.tags[r.id] && (r.discoveredFor ?? []).includes(fProject)))) &&
+        (!fFresh || assessFreshness(r, nowIso).status === fFresh),
+    );
+    const [field, dir] = sortKey.split(":");
+    const mul = dir === "asc" ? 1 : -1;
+    return [...xs].sort((a, b) => {
+      if (field === "confidence") return mul * (a.scores.infoConfidence - b.scores.infoConfidence);
+      if (field === "title") return mul * a.title.localeCompare(b.title);
+      if (field === "deadline") return mul * appDeadline(a).localeCompare(appDeadline(b));
+      return mul * pubDate(a).localeCompare(pubDate(b)); // pubDate default
+    });
+  }, [records, fBlocked, fVerdict, fKind, fReco, fVerif, fRoute, fReview, fProject, fFresh, sortKey, audit, projectTags.tags, nowIso]);
+
+  const selected = records.find((r) => r.id === selectedId) ?? filtered[0];
+
+  const opt = (xs: string[]) => uniq(xs).sort();
+
+  const applyView = (id: string) => {
+    const v = savedViews.views.find((x) => x.id === id);
+    if (!v) return;
+    setFKind(v.filters.kind ?? "");
+    setFReco(v.filters.reco ?? "");
+    setFVerif(v.filters.verif ?? "");
+    setFRoute(v.filters.route ?? "");
+    setFReview(v.filters.review ?? "");
+    setFProject(v.filters.project ?? "");
+    setFFresh(v.filters.fresh ?? "");
+    setSortKey(`${v.sortField}:${v.sortDirection}`);
+  };
+
+  const saveCurrentView = () => {
+    const name = window.prompt("Name this view");
+    if (!name?.trim()) return;
+    const [sortField, sortDirection] = sortKey.split(":");
+    savedViews.saveView(
+      name.trim(),
+      { kind: fKind, reco: fReco, verif: fVerif, route: fRoute, review: fReview, project: fProject, fresh: fFresh },
+      sortField ?? "pubDate",
+      (sortDirection as "asc" | "desc") ?? "desc",
+    );
+  };
+
+  const exportCtx = {
+    auditLog: audit.log,
+    tags: projectTags.tags,
+    projectName,
+    nowIso,
+  };
+  const stamp = nowIso.slice(0, 10);
+  const exportCsv = () =>
+    download(`oia-shortlist-${stamp}.csv`, recordsToCsv(filtered, exportCtx), "text/csv");
+  const exportMarkdown = () =>
+    download(
+      `oia-shortlist-${stamp}.md`,
+      recordsToMarkdown(filtered, exportCtx, `${title} — ${stamp}`),
+      "text/markdown",
+    );
+
+  return (
+    <div className="shell">
+      <Rail active={active} onExportAudit={audit.exportLog} />
+
+      <div className="app">
+        {/* Envelope: hero band gets the treatment; the triage table below stays native. */}
+        <header className="hero">
+          <div className="heroRow">
+            <h1>{typeof title === "string" ? title : title[lang]}</h1>
+            <span className="heroStats">
+              <button
+                className="langBtn"
+                onClick={toggleLang}
+                title={lang === "fr" ? "Switch to English" : "Passer en français"}
+              >
+                {lang === "fr" ? "EN" : "FR"}
+              </button>{" "}
+              {ledger.source === "LEDGER"
+                ? lang === "fr" ? "registre permanent" : "watch ledger"
+                : lang === "fr" ? "instantané embarqué" : "bundled snapshot"} ·{" "}
+              {records.length} shown / {ledger.records.length} total · {data.run.discrepancies} discrepancies ·{" "}
+              {Object.entries(data.run.recommendationCounts)
+                .map(([k, v]) => `${k}:${v}`)
+                .join("  ")}
+            </span>
+          </div>
+          {data.note && <p className="heroNote">{data.note}</p>}
+        </header>
+
+        {/* A filter that arrived in the URL must be visible and undoable. An
+            invisible filter is worse than no link at all: the queue looks
+            empty and nothing on screen says why. */}
+        {(fBlocked || fProject || selectedId) && (
+          <div className="activeFilter">
+            <span>
+              {lang === "fr" ? "Vue filtrée :" : "Filtered view:"}{" "}
+              {fBlocked && <b>{plainFailure(fBlocked, lang)}</b>}
+              {fProject && <b>{fProject === "__untagged" ? (lang === "fr" ? "sans projet" : "no project") : fProject}</b>}
+              {selectedId && !fBlocked && !fProject && <b>{selectedId}</b>}
+              {" · "}
+              {filtered.length} {lang === "fr" ? "fiche(s)" : "record(s)"}
+            </span>
+            <button
+              className="ghostBtn"
+              onClick={() => {
+                setFBlocked("");
+                setFProject("");
+                setSelectedId("");
+                window.history.replaceState({}, "", window.location.pathname);
+              }}
+            >
+              {lang === "fr" ? "tout afficher" : "show everything"}
+            </button>
+          </div>
+        )}
+
+        <div className="filters">
+          {!fixedKind && (
+            <label className="filter">
+              <span className="muted">{lang === "fr" ? "Type" : "Kind"}</span>
+              <select value={fKind} onChange={(e) => setFKind(e.target.value)}>
+                <option value="">all</option>
+                {(Object.keys(KIND_LABEL) as OpportunityKind[]).map((k) => (
+                  <option key={k} value={k}>{KIND_LABEL[k]}</option>
+                ))}
+              </select>
+            </label>
+          )}
+          <label className="filter">
+            <span className="muted">{lang === "fr" ? "Éligibilité (analyste)" : "Eligibility (analyst)"}</span>
+            <select value={fVerdict} onChange={(e) => setFVerdict(e.target.value)}>
+              <option value="">{lang === "fr" ? "toutes" : "all"}</option>
+              {["ELIGIBLE", "LIKELY", "NEEDS_INFO", "NOT_ELIGIBLE"].map((v) => (
+                <option key={v} value={v}>{verdictLabel(v, lang)}</option>
+              ))}
+              <option value="__none">{lang === "fr" ? "pas encore analysé" : "not analysed yet"}</option>
+            </select>
+          </label>
+          <Select label={lang === "fr" ? "Recommandation" : "Recommendation"} value={fReco} onChange={setFReco} options={opt(records.map((r) => r.recommendation))} />
+          <Select label={lang === "fr" ? "Vérification" : "Verification"} value={fVerif} onChange={setFVerif} options={opt(records.map((r) => r.verificationStatus))} />
+          <Select label={lang === "fr" ? "Entité" : "Route"} value={fRoute} onChange={setFRoute} options={opt(records.map((r) => r.strategicRoute))} />
+          <Select label={lang === "fr" ? "Ton avis" : "Human review"} value={fReview} onChange={setFReview} options={["PENDING", "APPROVE", "REJECT", "NEEDS_VERIFICATION"]} />
+          <label className="filter">
+            <span className="muted">{lang === "fr" ? "Projet" : "Project"}</span>
+            <select value={fProject} onChange={(e) => setFProject(e.target.value)}>
+              <option value="">all</option>
+              <option value="__untagged">untagged</option>
+              {PROJECT_ENTRIES.map((p) => (
+                <option key={p.slug} value={p.slug}>{p.name}</option>
+              ))}
+            </select>
+          </label>
+          <label className="filter">
+            <span className="muted">{lang === "fr" ? "Tri" : "Sort"}</span>
+            <select value={sortKey} onChange={(e) => setSortKey(e.target.value)}>
+              <option value="pubDate:desc">publication ↓ (recent first)</option>
+              <option value="pubDate:asc">publication ↑</option>
+              <option value="deadline:asc">deadline ↑</option>
+              <option value="confidence:desc">confidence ↓</option>
+              <option value="title:asc">title A→Z</option>
+            </select>
+          </label>
+          <Select
+            label="Freshness"
+            value={fFresh}
+            onChange={setFFresh}
+            options={["FRESH", "CLOSING_SOON", "EXPIRED", "NO_DEADLINE"]}
+          />
+          <label className="filter">
+            <span className="muted">{lang === "fr" ? "Exporter" : "Export"} ({filtered.length})</span>
+            <span className="viewsRow">
+              <button className="ghostBtn" onClick={exportCsv}>csv</button>
+              <button className="ghostBtn" onClick={exportMarkdown}>markdown</button>
+            </span>
+          </label>
+          <label className="filter">
+            <span className="muted">{lang === "fr" ? "Vues enregistrées" : "Saved views"}</span>
+            <span className="viewsRow">
+              <select defaultValue="" onChange={(e) => { applyView(e.target.value); e.target.value = ""; }}>
+                <option value="" disabled>{savedViews.views.length ? "apply…" : "none yet"}</option>
+                {savedViews.views.map((v) => (
+                  <option key={v.id} value={v.id}>{v.name}</option>
+                ))}
+              </select>
+              <button className="ghostBtn" onClick={saveCurrentView}>save view</button>
+            </span>
+          </label>
+        </div>
+
+        <div className="split">
+          {/* LEFT — triage queue: dense, native scroll, no animation. */}
+          <ul className="queue">
+            {filtered.map((r) => {
+              const rev = audit.statusFor(r.id);
+              const tag = projectTags.tags[r.id];
+              const kind = r.opportunityKind;
+              const fresh = assessFreshness(r, nowIso);
+              const aside = noticeAside(r);
+              return (
+                <li
+                  key={r.id}
+                  className={r.id === selected?.id ? "row selected" : "row"}
+                  onClick={() => setSelectedId(r.id)}
+                >
+                  <div className="rowTop">
+                    <Badge text={recommendationLabel(r.recommendation, lang)} color={RECO_COLOR[r.recommendation] ?? "#888"} />
+                    {kind && !fixedKind && <Badge text={plainKindLabel(kind, lang)} color={kindColor(kind)} />}
+                    <span className="rowTitle">{r.title}</span>
+                  </div>
+                  <div className="rowMeta">
+                    <span>{r.issuer}</span>
+                    {pubDate(r) && <span className="pubChip">{pubDate(r)}</span>}
+                    {(fresh.status === "CLOSING_SOON" || fresh.status === "EXPIRED") && (
+                      <span className={fresh.status === "EXPIRED" ? "pubChip expiredChip" : "pubChip closingChip"}>
+                        {fresh.status === "EXPIRED"
+                          ? lang === "fr" ? "clos" : "closed"
+                          : lang === "fr" ? `ferme dans ${fresh.daysToDeadline} j` : `closes in ${fresh.daysToDeadline}d`}
+                      </span>
+                    )}
+                    {r.assessment && (
+                      <span
+                        className={`pubChip verdictChip v-${r.assessment.verdict}`}
+                        title={verdictMeaning(r.assessment.verdict, lang)}
+                      >
+                        {verdictLabel(r.assessment.verdict, lang)}
+                      </span>
+                    )}
+                    {aside && <span className="pubChip asideChip">{lang === "fr" ? "pas un appel" : "not a call"}</span>}
+                    {tag && <span className="pubChip tagChip">{projectName(tag)}</span>}
+                  </div>
+                  <div className="rowMeta small">
+                    <span>{verificationLabel(r.verificationStatus, lang)}</span>
+                    {appDeadline(r) !== "—" && (
+                      <span>
+                        {lang === "fr" ? "ferme le" : "closes"} {appDeadline(r)}
+                        {fresh.daysToDeadline !== null ? ` · ${relativeDays(fresh.daysToDeadline, lang)}` : ""}
+                      </span>
+                    )}
+                    <span className={rev === "PENDING" ? "muted" : "hrOn"}>{reviewLabel(rev, lang)}</span>
+                  </div>
+                </li>
+              );
+            })}
+            {filtered.length === 0 && <li className="row muted">{lang === "fr" ? "Aucune fiche ne correspond." : "No record matches."}</li>}
+          </ul>
+
+          {/* RIGHT — detail */}
+          {selected && (
+            <div className="detail">
+              <Detail
+                record={selected}
+                reviewStatus={audit.statusFor(selected.id)}
+                events={audit.eventsFor(selected.id)}
+                projectTag={projectTags.tags[selected.id] ?? ""}
+                onTag={(slug) => {
+                  projectTags.setTag(selected.id, slug);
+                  audit.append(
+                    selected.id,
+                    "COMMENT",
+                    `project tag → ${slug || "(untagged)"}`,
+                    !!selected.gate?.pursueEligible,
+                  );
+                }}
+                notes={notes.notesFor(selected.id)}
+                onAddNote={(text) => notes.addNote(selected.id, text)}
+                tasks={tasks.tasksFor(selected.id)}
+                onAddTask={(title, due) =>
+                  tasks.addTask(title, {
+                    recordId: selected.id,
+                    ...(due ? { due } : {}),
+                    ...(projectTags.tags[selected.id] ? { projectSlug: projectTags.tags[selected.id]! } : {}),
+                  })
+                }
+                onToggleTask={tasks.toggle}
+                nowIso={nowIso}
+                onReview={(action, comment) =>
+                  audit.append(selected.id, action, comment, !!selected.gate?.pursueEligible)
+                }
+              />
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Select({ label, value, onChange, options }: { label: string; value: string; onChange: (v: string) => void; options: string[] }) {
+  return (
+    <label className="filter">
+      <span className="muted">{label}</span>
+      <select value={value} onChange={(e) => onChange(e.target.value)}>
+        <option value="">all</option>
+        {options.map((o) => (
+          <option key={o} value={o}>
+            {o}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+}
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <section className="sec">
+      <h3>{title}</h3>
+      {children}
+    </section>
+  );
+}
+
+function KV({ k, v }: { k: string; v: React.ReactNode }) {
+  return (
+    <div className="kv">
+      <span className="k">{k}</span>
+      <span className="v">{v}</span>
+    </div>
+  );
+}
+
+function Detail({
+  record: r,
+  reviewStatus,
+  events,
+  projectTag,
+  onTag,
+  notes,
+  onAddNote,
+  tasks,
+  onAddTask,
+  onToggleTask,
+  nowIso,
+  onReview,
+}: {
+  record: ConsoleRecord;
+  reviewStatus: ReviewAction | "PENDING";
+  events: { id: string; action: string; comment: string; at: string; actor: string; gatePursueEligibleAtDecision: boolean }[];
+  projectTag: string;
+  onTag: (slug: string) => void;
+  notes: { id: string; text: string; at: string; actor: string }[];
+  onAddNote: (text: string) => void;
+  tasks: TaskItem[];
+  onAddTask: (title: string, due: string) => void;
+  onToggleTask: (task: TaskItem) => void;
+  nowIso: string;
+  onReview: (action: ReviewAction, comment: string) => void;
+}) {
+  const { lang } = useLang();
+  const [comment, setComment] = useState("");
+  const [noteDraft, setNoteDraft] = useState("");
+  const [taskDraft, setTaskDraft] = useState("");
+  const [taskDue, setTaskDue] = useState("");
+  const gate = r.gate;
+  const canPursue = !!gate?.pursueEligible;
+  const freshness = assessFreshness(r, nowIso);
+
+  const suggestions: ProjectSuggestion[] = useMemo(
+    () =>
+      PROJECT_ENTRIES.map((p) => scoreProject(r, toProfile(p)))
+        .filter((x): x is ProjectSuggestion => x !== null)
+        .sort((a, b) => b.confidence - a.confidence)
+        .slice(0, 5),
+    [r],
+  );
+
+  const factsBy = (c: FactClass) => r.facts.filter((f) => (f.classification as FactClass) === c);
+
+  return (
+    <div>
+      <div className="detailHead">
+        <Badge text={recommendationLabel(r.recommendation, lang)} color={RECO_COLOR[r.recommendation] ?? "#888"} />
+        {r.opportunityKind && <Badge text={plainKindLabel(r.opportunityKind, lang)} color={kindColor(r.opportunityKind)} />}
+        <h2>{r.title}</h2>
+        <span className="muted">{r.issuer}</span>
+        {pubDate(r) && <span className="pubChip">{lang === "fr" ? "publié" : "published"} {pubDate(r)}</span>}
+        <span
+          className={
+            freshness.status === "EXPIRED"
+              ? "pubChip expiredChip"
+              : freshness.status === "CLOSING_SOON"
+                ? "pubChip closingChip"
+                : "pubChip"
+          }
+        >
+          {freshnessLabel(freshness.status, lang)}
+        </span>
+      </div>
+
+      {noticeAside(r) && (
+        <div className="warn small">
+          TED notice type <code>{r.facts.find((f) => f.field === "notice-type")?.normalizedValue}</code> —{" "}
+          {noticeAside(r)}. Discovery now filters these out at the source; this record predates that filter and is
+          kept rather than deleted, because it is the real output of a real run.
+        </div>
+      )}
+      {freshness.reasons.length > 0 && (
+        <div className={freshness.status === "EXPIRED" ? "warn small" : "muted small"}>
+          {freshness.reasons.join(" · ")}
+        </div>
+      )}
+
+      {r.discrepancies.length > 0 && (
+        <Section title={`Discrepancies (seed vs observed) · ${r.discrepancies.length}`}>
+          {r.discrepancies.map((d, i) => (
+            <div key={i} className="disc">
+              <b>{d.field}</b>: seed <code>{d.seedExpectation}</code> vs observed <code>{d.observed}</code>
+              <div className="muted small">{d.evidence} · rule {d.ruleApplied} · human review {d.humanReviewRequired ? "YES" : "no"}</div>
+            </div>
+          ))}
+        </Section>
+      )}
+
+      <Section title={lang === "fr" ? "Projet du studio" : "TheStudio project"}>
+        {r.discoveredFor && r.discoveredFor.length > 0 && (
+          <KV
+            k="Discovered for"
+            v={
+              <span>
+                {r.discoveredFor.map((slug) => projectName(slug)).join(", ")}
+                <div className="muted small">
+                  The project queries that surfaced this notice — discovery provenance, not a match verdict.
+                </div>
+              </span>
+            }
+          />
+        )}
+        <KV
+          k="Tagged project"
+          v={
+            <span className="viewsRow">
+              <select value={projectTag} onChange={(e) => onTag(e.target.value)}>
+                <option value="">— untagged —</option>
+                {PROJECT_ENTRIES.map((p) => (
+                  <option key={p.slug} value={p.slug}>{p.name}</option>
+                ))}
+              </select>
+              <span className="muted small">(a human decision — tagging is audit-logged)</span>
+            </span>
+          }
+        />
+        {suggestions.length === 0 ? (
+          <div className="muted small">No suggestion: no project profile signal matches this record (honest silence).</div>
+        ) : (
+          suggestions.map((s) => {
+            const p = PROJECT_ENTRIES.find((x) => x.slug === s.projectSlug);
+            return (
+              <div key={s.projectSlug} className="fact">
+                <div>
+                  <b>{p?.name ?? s.projectSlug}</b> · suggested {s.confidence}/100
+                  {p?.profileReview.status === "DRAFT" && (
+                    <span className="muted small"> · profile unconfirmed</span>
+                  )}
+                  {projectTag !== s.projectSlug && (
+                    <button className="ghostBtn applyBtn" onClick={() => onTag(s.projectSlug)}>tag it</button>
+                  )}
+                </div>
+                <div className="muted small">{s.rationale}</div>
+              </div>
+            );
+          })
+        )}
+      </Section>
+
+      <Section title={lang === "fr" ? "Sources" : "Sources"}>
+        <KV k={lang === "fr" ? "Source officielle" : "Official source"} v={r.officialUrl ? <a href={r.officialUrl} target="_blank" rel="noreferrer">{r.officialUrl}</a> : <span className="muted">—</span>} />
+        <KV k={lang === "fr" ? "Source de découverte" : "Discovery source"} v={r.discoveryUrl ? <a href={r.discoveryUrl} target="_blank" rel="noreferrer">{r.discoveryUrl}</a> : <span className="muted">—</span>} />
+        <KV k={lang === "fr" ? "Portail de candidature" : "Application portal"} v={r.applicationUrl ? <a href={r.applicationUrl} target="_blank" rel="noreferrer">{r.applicationUrl}</a> : <span className="muted">—</span>} />
+        <KV k={lang === "fr" ? "Rattaché par" : "Linked by"} v={r.linkedBy} />
+      </Section>
+
+      <Section title={lang === "fr" ? "Document source et ingestion (technique)" : "Source artifact & ingestion (technical)"}>
+        {r.artifact ? (
+          <>
+            <KV k={lang === "fr" ? "Identifiant du document" : "Artifact id"} v={<code>{r.artifact.id}</code>} />
+            <KV k="Format" v={r.artifact.sourceFormat} />
+            <KV k={lang === "fr" ? "Méthode de rendu" : "Render method"} v={r.artifact.renderMethod} />
+            <KV k={lang === "fr" ? "Empreinte de la source (sha256)" : "Source hash (sha256)"} v={<code>{r.artifact.contentHash}</code>} />
+            <KV k={lang === "fr" ? "Taille / pages" : "Size / pages"} v={`${r.artifact.byteSize} bytes${r.artifact.pageCount ? ` · ${r.artifact.pageCount} pages` : ""}`} />
+            <KV k={lang === "fr" ? "Traitement" : "Processing"} v={r.artifact.processing + (r.artifact.processingError ? ` (${r.artifact.processingError})` : "")} />
+          </>
+        ) : (
+          <div className="muted">No official artifact supplied for this record.</div>
+        )}
+        <KV
+          k={lang === "fr" ? "Récupération en direct" : "Live fetch"}
+          v={
+            r.liveFetch ? (
+              <span>
+                <b>{r.liveFetch.status}</b>
+                {r.liveFetch.egressDenied ? " · egress denied" : ""} {r.liveFetch.error ? `· ${r.liveFetch.error}` : ""}
+                <div className="muted small">{r.liveFetch.attemptedUrl}</div>
+              </span>
+            ) : (
+              <span className="muted">not attempted</span>
+            )
+          }
+        />
+      </Section>
+
+      <Section title={lang === "fr" ? "Vérification" : "Verification"}>
+        <KV k={lang === "fr" ? "Statut" : "Status"} v={<Badge text={r.verificationStatus} color={r.verificationStatus === "VERIFIED" ? "var(--pursue)" : "var(--investigate)"} />} />
+        <ul className="evi">
+          {r.verificationEvidence.map((e, i) => (
+            <li key={i} className="muted">{e}</li>
+          ))}
+        </ul>
+      </Section>
+
+      <Section title={lang === "fr" ? "Éligibilité (deux étapes) et entité porteuse" : "Eligibility (two-stage) & entity route"}>
+        <KV k="Application eligibility" v={r.application} />
+        <KV k="Award/onboarding eligibility" v={r.award} />
+        <KV k="Strategic route" v={<b>{r.strategicRoute}</b>} />
+      </Section>
+
+      <Section title={lang === "fr" ? "Scores" : "Scores"}>
+        <KV k="Information confidence" v={`${r.scores.infoConfidence} / 100`} />
+        <KV k="Relevance" v={r.scores.relevance ?? <span className="muted">not computed</span>} />
+        <KV k="Win potential" v={r.scores.winPotential ?? <span className="muted">not computed</span>} />
+      </Section>
+
+      {r.assessment && (
+        <Section
+          title={
+            lang === "fr"
+              ? `Éligibilité — ${verdictLabel(r.assessment.verdict, lang)}`
+              : `Eligibility — ${verdictLabel(r.assessment.verdict, lang)}`
+          }
+        >
+          <div className={`verdictBox v-${r.assessment.verdict}`}>
+            <div>{lang === "fr" ? r.assessment.reason.fr : r.assessment.reason.en}</div>
+            {r.assessment.entity && (
+              <div className="muted small">
+                {lang === "fr" ? "Entité qui candidaterait : " : "Entity that would apply: "}
+                <b>{r.assessment.entity}</b>
+              </div>
+            )}
+            <div className="ok small">
+              {lang === "fr" ? "Action suivante : " : "Next action: "}
+              {lang === "fr" ? r.assessment.nextAction.fr : r.assessment.nextAction.en}
+            </div>
+            {(r.assessment.missing ?? []).length > 0 && (
+              <div className="muted small">
+                {lang === "fr" ? "Manque : " : "Missing: "}
+                {(r.assessment.missing ?? []).join(" · ")}
+              </div>
+            )}
+          </div>
+
+          {r.assessment.citations.length > 0 && (
+            <>
+              <div className="muted small">
+                {lang === "fr"
+                  ? "Phrases tirées du document, chacune vérifiée comme présente :"
+                  : "Sentences from the document, each checked to be present:"}
+              </div>
+              {r.assessment.citations.map((c, i) => (
+                <blockquote key={i} className="citation">
+                  {c}
+                </blockquote>
+              ))}
+            </>
+          )}
+
+          {/* The sentence that keeps this product honest, on the screen where
+              it matters most — next to a confident-looking verdict. */}
+          <div className="muted small">
+            {lang === "fr"
+              ? `Jugé par ${r.assessment.model}, pas par un humain. Ce verdict ne débloque rien : il change l'ordre dans lequel tu regardes, pas ce que tu peux poursuivre.`
+              : `Judged by ${r.assessment.model}, not by a human. This verdict unblocks nothing: it changes the order you look in, not what you may pursue.`}
+          </div>
+        </Section>
+      )}
+
+      {gate && (
+        <Section title={`Deterministic gate · ${gate.pursueEligible ? "PURSUE-eligible" : "blocked"}`}>
+          <div className="gate">
+            {(
+              [
+                ["accessible primary source", gate.accessiblePrimarySource],
+                ["source human-VERIFIED", gate.verifiedSource],
+                ["verified deadline", gate.verifiedDeadline],
+                ["not expired", gate.notExpired],
+                ["eligibility assessed", gate.eligibilityAssessed],
+                ["not aggregator-only", gate.notAggregatorOnly],
+                ["not closed call", gate.notClosedCall],
+                ["exact next action", gate.hasExactNextAction],
+                ["sufficient confidence", gate.sufficientConfidence],
+              ] as [string, boolean][]
+            ).map(([label, ok]) => (
+              <span key={label} className={ok ? "gpass" : "gfail"}>
+                {ok ? "✓" : "✗"} {label}
+              </span>
+            ))}
+          </div>
+          {gate.failedReasons.length > 0 && <div className="muted small">Failed: {gate.failedReasons.join("; ")}</div>}
+        </Section>
+      )}
+
+      <Section title={`Facts · ${r.facts.length} (provenance-typed)`}>
+        {r.facts.length === 0 && <div className="muted">No facts extracted (no official artifact processed).</div>}
+        {FACT_ORDER.map((cls) => {
+          const fs = factsBy(cls);
+          if (fs.length === 0) return null;
+          const attenuate = !CONFIRMED.includes(cls);
+          return (
+            <div key={cls} className="factGroup" style={{ opacity: attenuate ? 0.55 : 1 }}>
+              <div className="factGroupHead">
+                <Badge text={cls} color={PROV_COLOR[cls]} /> <span className="muted small">{fs.length}</span>
+              </div>
+              {fs.map((f, i) => (
+                <div key={i} className="fact">
+                  <div>
+                    <span className="factKey">{f.field}</span> {f.normalizedValue}
+                  </div>
+                  <div className="muted small">
+                    {f.locator.type}
+                    {f.locator.page ? ` p.${f.locator.page}` : ""}
+                    {f.locator.value && f.locator.type !== "PDF_PAGE" ? ` ${f.locator.value}` : ""} · {f.extractionMethod} · conf {f.extractionConfidence}
+                  </div>
+                  {f.originalSourceText && f.originalSourceText !== f.normalizedValue && (
+                    <div className="src small">“{f.originalSourceText}”</div>
+                  )}
+                </div>
+              ))}
+            </div>
+          );
+        })}
+      </Section>
+
+      {r.deadlines.length > 0 && (
+        <Section title={`Deadlines · ${r.deadlines.length}`}>
+          {r.deadlines.map((d, i) => (
+            <div key={i} className="fact">
+              <div>
+                <b>{d.normalized ?? d.originalSourceString}</b> · {d.deadlineType}
+                {d.isConfirmPending && <span className="warn"> · to-be-confirmed (cannot verify)</span>}
+              </div>
+              <div className="muted small">
+                {d.locator.type}
+                {d.locator.page ? ` p.${d.locator.page}` : ""} · “{d.originalSourceString}”
+                {d.conflicts.length > 0 && ` · conflicts: ${d.conflicts.join(", ")}`}
+              </div>
+            </div>
+          ))}
+        </Section>
+      )}
+
+      {r.unresolvedQuestions.length > 0 && (
+        <Section title={lang === "fr" ? "Questions en suspens" : "Unresolved questions"}>
+          <ul className="evi">
+            {r.unresolvedQuestions.map((q, i) => (
+              <li key={i}>{q}</li>
+            ))}
+          </ul>
+        </Section>
+      )}
+
+      <Section title={`Notes · ${notes.length}`}>
+        {notes.map((n) => (
+          <div key={n.id} className="fact">
+            <div>{n.text}</div>
+            <div className="muted small">{n.at} · {n.actor}</div>
+          </div>
+        ))}
+        <div className="viewsRow noteRow">
+          <textarea className="comment" placeholder="Attach a note to this opportunity…" value={noteDraft} onChange={(e) => setNoteDraft(e.target.value)} />
+          <button
+            className="ghostBtn"
+            onClick={() => {
+              onAddNote(noteDraft);
+              setNoteDraft("");
+            }}
+          >
+            add note
+          </button>
+        </div>
+      </Section>
+
+      <Section title={`Tasks · ${tasks.filter((t) => t.status === "OPEN").length} open`}>
+        {tasks.length === 0 && <div className="muted">No task on this opportunity yet.</div>}
+        {tasks.map((t) => (
+          <div key={t.id} className="fact">
+            <div className="viewsRow">
+              <button className="ghostBtn" onClick={() => onToggleTask(t)}>
+                {t.status === "DONE" ? "done" : "mark done"}
+              </button>
+              <span className={t.status === "DONE" ? "muted" : undefined}>{t.title}</span>
+            </div>
+            <div className="muted small">
+              {t.due ? `due ${t.due}` : "no due date"}
+              {t.completedAt ? ` · completed ${t.completedAt.slice(0, 10)}` : ""}
+            </div>
+          </div>
+        ))}
+        <div className="viewsRow noteRow">
+          <input
+            className="comment inputLine"
+            placeholder="What has to happen next…"
+            value={taskDraft}
+            onChange={(e) => setTaskDraft(e.target.value)}
+          />
+          <input
+            className="comment inputLine dateInput"
+            type="date"
+            value={taskDue}
+            onChange={(e) => setTaskDue(e.target.value)}
+          />
+          <button
+            className="ghostBtn"
+            onClick={() => {
+              onAddTask(taskDraft, taskDue);
+              setTaskDraft("");
+              setTaskDue("");
+            }}
+          >
+            add task
+          </button>
+        </div>
+      </Section>
+
+      <Section title={lang === "fr" ? "Ton avis" : "Human review"}>
+        <div className="reviewBtns">
+          {(["APPROVE", "REJECT", "NEEDS_VERIFICATION"] as const).map((s) => (
+            <button
+              key={s}
+              className={reviewStatus === s ? "btn on" : "btn"}
+              onClick={() => {
+                onReview(s, comment);
+                setComment("");
+              }}
+            >
+              {s}
+            </button>
+          ))}
+        </div>
+        <textarea className="comment" placeholder="Reviewer comment (recorded with the decision)…" value={comment} onChange={(e) => setComment(e.target.value)} />
+        {reviewStatus === "APPROVE" && (
+          <div className={canPursue ? "ok small" : "warn small"}>
+            {canPursue
+              ? "APPROVE would promote to PURSUE (all hard gate conditions pass)."
+              : "APPROVE recorded in the audit trail, but the hard gate is NOT satisfied → it CANNOT become PURSUE. A human sign-off never overrides a failed deterministic condition."}
+          </div>
+        )}
+        <div className="muted small">
+          Every decision appends an immutable audit event (local to this browser in Phase 1-2; server store returns with auth).
+        </div>
+      </Section>
+
+      <Section title={`Audit trail (append-only) · ${events.length}`}>
+        {events.length === 0 && <div className="muted">No review event yet for this record.</div>}
+        {events.map((e) => (
+          <div key={e.id} className="fact">
+            <div>
+              <b>{e.action}</b>
+              {e.comment ? ` — “${e.comment}”` : ""}
+            </div>
+            <div className="muted small">
+              {e.at} · {e.actor} · gate at decision: {e.gatePursueEligibleAtDecision ? "PURSUE-eligible" : "blocked"}
+            </div>
+          </div>
+        ))}
+        <ul className="evi small">
+          {r.verificationEvidence.map((e, i) => (
+            <li key={`v${i}`} className="muted">verification: {e}</li>
+          ))}
+          {r.warnings.map((w, i) => (
+            <li key={`w${i}`} className="muted">warning: {w}</li>
+          ))}
+        </ul>
+      </Section>
+    </div>
+  );
+}

@@ -1,7 +1,16 @@
 # Intégration du prototype Lovable dans la console OIA
 
 2026-11-08 · session web · mandat v6, bloc C (C1 et C3), avec l'amendement du
-7 novembre. Statut : **proposition à valider par Mickaël**.
+7 novembre.
+
+> **Statut au 2026-11-08 : en grande partie caduc.** Décision de Mickaël du
+> 7 novembre et mandat v8 : le design appartient à Lovable, et Claude Code
+> n'importe, ne copie et n'exporte aucun fichier du projet Lovable. Le bloc C2
+> du mandat v6 (jetons de design) et le bloc F du mandat v7 (interface sous
+> `/oia`) sont annulés. `packages/ui-tokens` et `/oia` sont retirés, et la
+> console est revenue à son état d'avant la session. Ce document ne reste
+> qu'à titre d'inventaire. Le lien entre Lovable et OIA passe désormais par
+> les contrats de données du mandat v8 (`docs/interface/contrat-donnees-*.md`).
 
 ## 1. Sources lues
 
@@ -53,13 +62,12 @@ Visibility. L'inventaire ci-dessous distingue les deux.
   Kerlo, Le Comptoir Iodé). Dans Lovable, un fournisseur facultatif lit
   `visibility.json` s'il existe.
 - **Styles** : `styles.css` (Tailwind 4, couleurs en oklch, Helvetica Neue,
-  rayon 6 px, couleurs sourdes par module). Repris dans `packages/ui-tokens`.
+  rayon 6 px, couleurs sourdes par module).
 
 ## 3. Correspondance proposée (C1)
 
-Proposition, à valider par Mickaël. La navigation est décrite dans un seul
-fichier de configuration (`apps/web/src/oia/config/navigation.ts`), pour être
-changée sans toucher au code.
+Proposition faite pendant la session, sans objet désormais : la navigation
+relève de Lovable.
 
 | Nouveau module | Contenu | Pages actuelles reprises |
 | --- | --- | --- |
@@ -121,29 +129,10 @@ Réponses retenues :
 
 ## 4. Plan de mise en œuvre (C3)
 
-Chaque étape est courte, testable et déployable seule, et se défait par un
-`git revert` du commit de l'étape.
-
-| Étape | Changement | Pour l'utilisateur | Retour arrière |
-| --- | --- | --- | --- |
-| 1 | `packages/ui-tokens` (jetons) | rien de visible | revert, aucun import ailleurs |
-| 2 | Groupes de routes `(console)` et `(oia)` | rien : les URL restent identiques | revert du déplacement |
-| 3 | `/oia` : coquille, navigation par fichier de configuration, accueil, dépense sous la colonne ; allumée en Preview seulement, derrière `AuthGate` | en Preview, une nouvelle interface sous `/oia` ; en production, « Interface OIA désactivée » | `oia-flag.mjs` (production toujours éteinte) ou revert |
-| 4 | Visibility en données de démonstration signalées ; « Préparer les corrections » ouvre une fiche de décision fictive | en Preview seulement | revert de l'étape |
-| 5 | Opportunités, CRM, Portefeuille : les pages actuelles affichées sans réécriture dans la nouvelle coquille | en Preview seulement ; les pages actuelles ne changent pas | revert de l'étape |
-| 6 | Shyrka : page, panneau, plein écran, réponses simulées | en Preview seulement | revert de l'étape |
-| 7 | Bascule préparée : une ligne de configuration fait de `/oia` l'accueil et redirige les anciennes adresses, **désactivée** | rien | la ligne reste à `false` |
-| 8 | Décision de Mickaël : allumer `/oia` en production | tout le monde voit `/oia` | `oia-flag.mjs` |
-| 9 | Décision de Mickaël : basculer | `/` mène à `/oia` | la ligne repasse à `false` |
-| 10 | Traduction anglaise de `/oia`, puis données Visibility réelles derrière un accès protégé côté serveur | selon décision | revert |
-
-Les étapes 1 à 7 sont faites (voir `docs/interface/oia-interface-web.md`). Les
-étapes 8 à 10 attendent une décision de Mickaël.
+Caduc. Le plan prévoyait de porter le prototype dans `apps/web`. Ce portage a
+été fait puis retiré le 2026-11-08, sur décision de Mickaël. L'interface se
+construit dans Lovable, à partir des contrats de données du mandat v8.
 
 ## 5. Questions pour Mickaël
 
-1. Valider la navigation proposée, ou la modifier dans
-   `apps/web/src/oia/config/navigation.ts`.
-2. « Veille » : l'actuelle page `/alerts` affiche « Aujourd'hui ». Faut-il une
-   vraie page de veille, ou garder « Aujourd'hui » ?
-3. Faut-il traduire `/oia` en anglais avant de la mettre en production ?
+Sans objet depuis la décision du 7 novembre.

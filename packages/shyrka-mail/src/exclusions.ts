@@ -5,13 +5,17 @@ import type { EnteteMessage, Message } from "./types.js";
  * qu'un contenu n'atteigne un modèle, même local :
  *
  * - par domaine de l'expéditeur et des destinataires ;
- * - par mention de Swift dans l'objet, le corps, les messages transférés et
+ * - par mention d'un mot de la liste dans l'objet, le corps, les messages transférés et
  *   les noms de pièces jointes ;
  * - dans tous les en-têtes (Reply-To, Sender, Return-Path, Received…), pour
  *   déjouer un expéditeur falsifié.
  *
  * En cas de doute, le message est exclu. Un message exclu n'est jamais lu par
  * un modèle, classé ni résumé : seul son nombre est compté.
+ *
+ * La liste est décidée uniquement par Mickaël (décision du 7 novembre) : elle
+ * est vide par défaut, sans aucun domaine prérempli, et se configure dans un
+ * fichier hors du dépôt (chargerExclusions).
  */
 export interface ConfigExclusions {
   /** Domaines exclus, sous-domaines compris. */
@@ -20,10 +24,24 @@ export interface ConfigExclusions {
   mots: string[];
 }
 
-export const EXCLUSIONS_PAR_DEFAUT: ConfigExclusions = {
-  domaines: ["swift.com"],
-  mots: ["swift"],
-};
+export const EXCLUSIONS_PAR_DEFAUT: ConfigExclusions = { domaines: [], mots: [] };
+
+/**
+ * Lit la liste de Mickaël : `{ "domaines": [...], "mots": [...] }`, dans un
+ * fichier hors du dépôt. Fichier absent : liste vide. Fichier illisible ou mal
+ * formé : erreur, pour ne jamais trier avec une liste que Mickaël n'a pas
+ * voulue.
+ */
+export function chargerExclusions(contenu: string | null): ConfigExclusions {
+  if (contenu === null) return EXCLUSIONS_PAR_DEFAUT;
+  const j = JSON.parse(contenu) as { domaines?: unknown; mots?: unknown };
+  const liste = (v: unknown, nom: string): string[] => {
+    if (v === undefined) return [];
+    if (!Array.isArray(v) || !v.every((x) => typeof x === "string" && x.trim() !== "")) throw new Error(`Liste d'exclusion : « ${nom} » doit être une liste de textes non vides.`);
+    return v.map((x: string) => x.trim().toLowerCase());
+  };
+  return { domaines: liste(j.domaines, "domaines"), mots: liste(j.mots, "mots") };
+}
 
 const ADRESSE = /[^\s<>"',;:()]+@[^\s<>"',;:()]+/g;
 
@@ -58,7 +76,7 @@ function verifierTexte(nom: string, texte: string, cfg: ConfigExclusions): Verdi
 
 /** Contrôle sur les seuls en-têtes, avant toute lecture du corps. */
 export function verifierEntete(e: EnteteMessage, cfg: ConfigExclusions = EXCLUSIONS_PAR_DEFAUT): Verdict {
-  // Doute : expéditeur absent ou illisible.
+  // Doute : expéditeur absent ou illisible. Cette règle ne dépend pas de la liste.
   if (adresses(e.de).length === 0) return { exclu: true, raison: "expéditeur illisible (doute)" };
   const champs: [string, string][] = [
     ["expéditeur", e.de],

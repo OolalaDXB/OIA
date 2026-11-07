@@ -6,9 +6,13 @@ Mandat v6, bloc B3, avec l'amendement du 7 novembre 2026. Décisions :
 Chaque matin, l'agent :
 
 1. liste les messages non lus et écarte les exclus, sur leurs seuls
-   en-têtes ;
+   en-têtes. La liste d'exclusion est décidée par Mickaël seul : elle est vide
+   par défaut et se configure hors du dépôt, dans
+   `~/oia-shyrka-data/courrier-exclusions.json` (`{"domaines": [], "mots": []}`,
+   ou un autre chemin par `SHYRKA_EXCLUSIONS`). Un expéditeur illisible est
+   exclu dans tous les cas ;
 2. lit les autres, puis écarte ceux dont le corps, un message transféré ou
-   une pièce jointe mentionne Swift ;
+   une pièce jointe contient un mot de la liste d'exclusion ;
 3. classe le reste en quatre groupes, avec qwen3:8b en local : pour toi,
    réponse simple, information, bruit ;
 4. prépare un brouillon pour chaque « réponse simple », dans le style de
@@ -35,7 +39,7 @@ pnpm --filter @oia/shyrka-mail test
 | --- | --- | --- |
 | Lister, lire, créer un brouillon ; aucune fonction d'envoi | `test/courrier.test.ts` : méthodes, examen du code, exécution avec faux réseau | testé |
 | Quatre groupes, brouillons pour les réponses simples, résumé Markdown | `test/courrier.test.ts` | testé (classeur fictif) |
-| Exclusions avant tout modèle : domaine, objet, corps, transferts, pièces jointes, en-têtes falsifiés, doute | 15 cas adverses dans `test/courrier.test.ts` | testé |
+| Exclusions avant tout modèle : domaine, objet, corps, transferts, pièces jointes, en-têtes falsifiés, doute ; liste vide par défaut, sans domaine prérempli | 15 cas adverses sur une liste fictive, et tests de la liste vide dans `test/courrier.test.ts` | testé |
 | Jeton et résumés hors du dépôt, lien symbolique compris | `test/courrier.test.ts` | testé |
 | Classement et rédaction en local seulement | `test/courrier.test.ts` | testé |
 | Connexion à la vraie boîte Gmail | OAuth par Mickaël | non fait : connexion à faire par Mickaël |
@@ -45,5 +49,6 @@ pnpm --filter @oia/shyrka-mail test
 
 1. **Connexion Gmail** : suivre l'ADR 0001, rubrique « Conséquences ».
 2. **Style** : remplir `docs/shyrka/style.md`.
-3. **Premier essai** : `pnpm --filter @oia/shyrka-mail matin`, puis relire
+3. **Liste d'exclusion** : la remplir dans `~/oia-shyrka-data/courrier-exclusions.json`.
+4. **Premier essai** : `pnpm --filter @oia/shyrka-mail matin`, puis relire
    le résumé et les brouillons dans Gmail.

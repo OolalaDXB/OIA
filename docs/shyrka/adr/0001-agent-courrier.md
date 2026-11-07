@@ -9,7 +9,7 @@
 
 Mickaël veut que Shyrka trie son courrier chaque matin et prépare les
 réponses simples. Le courrier contient des données personnelles et,
-potentiellement, des données de Swift, qui ne doivent jamais entrer.
+potentiellement, des données qui ne doivent jamais entrer (CADRE.md, « Données »).
 
 ## Décision
 
@@ -41,19 +41,21 @@ potentiellement, des données de Swift, qui ne doivent jamais entrer.
      bruit) et la rédaction passent par Ollama, à l'adresse locale seulement.
    - Aucun fournisseur en ligne ne reçoit de message.
    - En cas de doute, le message est classé « pour toi ».
-5. **Exclusions, avant tout modèle.** Un message est exclu sur :
-   - le domaine de l'expéditeur ou d'un destinataire (`swift.com`,
-     sous-domaines compris) ;
-   - une mention de Swift dans l'objet, le corps, un message transféré, le
-     nom d'une pièce jointe ou un en-tête (Reply-To, Sender, Return-Path,
-     Received) ;
-   - un mot écrit en morceaux ou en pleine chasse.
+5. **Exclusions, avant tout modèle.** La liste est décidée uniquement par
+   Mickaël (décision du 7 novembre 2026). Elle est vide par défaut, sans aucun
+   domaine prérempli, et se configure hors du dépôt
+   (`~/oia-shyrka-data/courrier-exclusions.json`). Un message est exclu sur :
+   - le domaine de l'expéditeur ou d'un destinataire, sous-domaines compris ;
+   - un mot de la liste dans l'objet, le corps, un message transféré, le nom
+     d'une pièce jointe ou un en-tête (Reply-To, Sender, Return-Path,
+     Received), y compris écrit en morceaux ou en pleine chasse ;
+   - le doute : expéditeur illisible ou message impossible à lire. Ce cas
+     s'applique même avec une liste vide.
 
-   En cas de doute, le message est exclu, par exemple si l'expéditeur est
-   illisible ou si le message ne peut pas être lu. Un message exclu n'est
-   jamais lu par un modèle, ni classé, ni résumé : seul son nombre apparaît
-   dans le résumé. Le contrôle des en-têtes a lieu avant même la lecture du
-   corps.
+   Un message exclu n'est jamais lu par un modèle, ni classé, ni résumé :
+   seul son nombre apparaît dans le résumé. Le contrôle des en-têtes a lieu
+   avant même la lecture du corps. Un fichier de liste mal formé arrête le
+   tri : l'agent ne trie jamais avec une liste que Mickaël n'a pas voulue.
 6. **Hors du dépôt.**
    - Le jeton d'accès Gmail (`~/oia-shyrka-data/gmail-jeton.json`) et les
      résumés du matin (`~/oia-shyrka-data/courrier/`) vivent hors du dépôt.

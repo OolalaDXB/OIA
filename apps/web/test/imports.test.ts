@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const read = (rel: string) => readFileSync(fileURLToPath(new URL(rel, import.meta.url)), "utf8");
 
 describe("[UI_INTEGRATION] web imports domain types, does not redefine DTOs", () => {
-  const consoleTsx = read("../src/app/(console)/Console.tsx");
+  const consoleTsx = read("../src/app/Console.tsx");
   const loadData = read("../src/lib/loadData.ts");
 
   it("imports ConsoleData/ConsoleRecord from @oia/ingestion", () => {

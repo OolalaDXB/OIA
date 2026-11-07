@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 import { ecrireResume, lireStyle, resumeMarkdown, trierLeMatin } from "../src/agent.js";
 import { palierCourrier } from "../src/palier.js";
 import { RACINE_DEPOT, horsDepot } from "../src/chemins.js";
-import { verifierEntete, verifierMessage } from "../src/exclusions.js";
+import { EXCLUSIONS_PAR_DEFAUT, chargerExclusions, verifierEntete, verifierMessage, type ConfigExclusions } from "../src/exclusions.js";
 import { BoiteFictive, ClasseurFictif, MESSAGES_FICTIFS, RedacteurFictif } from "../src/fictif.js";
 import { BoiteGmail, GMAIL_API, PERIMETRES_GMAIL } from "../src/gmail.js";
 import { ClasseurOllama, urlLocale } from "../src/ollama.js";
@@ -14,58 +14,85 @@ import type { Message } from "../src/types.js";
 
 const msg = (p: Partial<Message>): Message => ({ id: "x", de: "Ami <ami@exemple.fr>", a: ["moi@exemple.fr"], cc: [], objet: "Bonjour", date: "2026-11-08", piecesJointes: [], autresEntetes: {}, corps: "Salut.", ...p });
 
-async function trier(messages: Message[], palier: 0 | 1 | 2 = 1) {
+/** Liste configurée pour les tests (fictive). La vraie liste est décidée par Mickaël seul. */
+const LISTE: ConfigExclusions = { domaines: ["employeur.example"], mots: ["employeur"] };
+
+async function trier(messages: Message[], palier: 0 | 1 | 2 = 1, exclusions: ConfigExclusions = LISTE) {
   const boite = new BoiteFictive(messages);
   const classeur = new ClasseurFictif();
   const redacteur = new RedacteurFictif();
-  const r = await trierLeMatin({ boite, classeur, redacteur, style: "", palier, date: "2026-11-08" });
+  const r = await trierLeMatin({ boite, classeur, redacteur, style: "", palier, date: "2026-11-08", exclusions });
   return { r, boite, classeur, redacteur };
 }
 
 describe("exclusions avant tout modèle (amendement, § 4) : tests adverses", () => {
   const cas: [string, Partial<Message>][] = [
-    ["expéditeur Swift", { de: "X <x@swift.com>" }],
-    ["sous-domaine Swift", { de: "x@mail.swift.com" }],
-    ["destinataire Swift", { a: ["moi@exemple.fr", "equipe@swift.com"] }],
-    ["copie Swift", { cc: ["y@swift.com"] }],
-    ["Swift dans l'objet", { objet: "Re: réunion Swift" }],
-    ["Swift dans le corps", { corps: "Comme convenu chez Swift, voici…" }],
-    ["message transféré depuis une adresse Swift", { corps: "---------- Forwarded message ---------\nFrom: Collègue <c@swift.com>\nSubject: point" }],
-    ["adresse personnelle évoquant Swift", { de: "Moi <mickael.swift.work@gmail.com>" }],
-    ["pièce jointe au nom révélateur", { piecesJointes: ["budget-SWIFT-2027.xlsx"] }],
-    ["en-tête falsifié : From propre, Reply-To Swift", { autresEntetes: { "Reply-To": ["x@swift.com"] } }],
-    ["en-tête falsifié : Return-Path Swift", { autresEntetes: { "Return-Path": ["<bounce@swift.com>"] } }],
-    ["en-tête falsifié : Received depuis Swift", { autresEntetes: { Received: ["from smtp.swift.com by mx.exemple.fr"] } }],
-    ["mot écrit en morceaux", { corps: "réunion s.w.i.f.t demain" }],
-    ["mot en pleine chasse", { objet: "ＳＷＩＦＴ" }],
+    ["expéditeur exclu", { de: "X <x@employeur.example>" }],
+    ["sous-domaine exclu", { de: "x@mail.employeur.example" }],
+    ["destinataire exclu", { a: ["moi@exemple.fr", "equipe@employeur.example"] }],
+    ["copie exclue", { cc: ["y@employeur.example"] }],
+    ["mot exclu dans l'objet", { objet: "Re: réunion Employeur" }],
+    ["mot exclu dans le corps", { corps: "Comme convenu chez Employeur, voici…" }],
+    ["message transféré depuis une adresse exclue", { corps: "---------- Forwarded message ---------\nFrom: Collègue <c@employeur.example>\nSubject: point" }],
+    ["adresse personnelle évoquant le mot exclu", { de: "Moi <mickael.employeur.work@gmail.com>" }],
+    ["pièce jointe au nom révélateur", { piecesJointes: ["budget-EMPLOYEUR-2027.xlsx"] }],
+    ["en-tête falsifié : From propre, Reply-To exclu", { autresEntetes: { "Reply-To": ["x@employeur.example"] } }],
+    ["en-tête falsifié : Return-Path exclu", { autresEntetes: { "Return-Path": ["<bounce@employeur.example>"] } }],
+    ["en-tête falsifié : Received depuis un domaine exclu", { autresEntetes: { Received: ["from smtp.employeur.example by mx.exemple.fr"] } }],
+    ["mot écrit en morceaux", { corps: "réunion e.m.p.l.o.y.e.u.r demain" }],
+    ["mot en pleine chasse", { objet: "ＥＭＰＬＯＹＥＵＲ" }],
     ["expéditeur illisible (doute)", { de: "" }],
   ];
   it.each(cas)("%s : exclu, jamais lu par le classeur ni le rédacteur, ni résumé", async (_nom, p) => {
     const m = msg({ id: "piege", objet: "Question piège", ...p });
-    expect(verifierMessage(m).exclu).toBe(true);
+    expect(verifierMessage(m, LISTE).exclu).toBe(true);
     const { r, classeur, redacteur } = await trier([m, msg({ id: "ok", objet: "Question normale" })]);
     expect(r.exclus).toBe(1);
     expect(classeur.vus.map((x) => x.id)).toEqual(["ok"]);
     expect(redacteur.vus.map((x) => x.id)).toEqual(["ok"]);
     const md = resumeMarkdown(r);
     expect(md).not.toContain("piège");
-    expect(md).not.toMatch(/swift/i);
+    expect(md).not.toMatch(/employeur/i);
   });
 
   it("un en-tête exclu n'entraîne même pas la lecture du corps", async () => {
-    const { boite } = await trier([msg({ id: "a", de: "x@swift.com" })]);
+    const { boite } = await trier([msg({ id: "a", de: "x@employeur.example" })]);
     expect(boite.lus).toEqual([]);
-    expect(verifierEntete(msg({ de: "x@swift.com" })).exclu).toBe(true);
+    expect(verifierEntete(msg({ de: "x@employeur.example" }), LISTE).exclu).toBe(true);
   });
 
   it("un message ordinaire passe", () => {
-    expect(verifierMessage(msg({})).exclu).toBe(false);
+    expect(verifierMessage(msg({}), LISTE).exclu).toBe(false);
+  });
+});
+
+describe("liste d'exclusion décidée par Mickaël seul", () => {
+  it("vide par défaut, sans aucun domaine prérempli", () => {
+    expect(EXCLUSIONS_PAR_DEFAUT).toEqual({ domaines: [], mots: [] });
+    const dossier = fileURLToPath(new URL("../src", import.meta.url));
+    for (const f of readdirSync(dossier)) {
+      if (f === "fictif.ts") continue; // données fictives des démonstrations
+      expect(readFileSync(join(dossier, f), "utf8"), f).not.toMatch(/swift/i);
+    }
+  });
+
+  it("liste vide : seul le doute (expéditeur illisible) exclut", () => {
+    expect(verifierMessage(msg({ de: "x@employeur.example" })).exclu).toBe(false);
+    expect(verifierMessage(msg({ de: "" })).exclu).toBe(true);
+  });
+
+  it("fichier de Mickaël : absent, liste vide ; valide, chargé ; mal formé, erreur", () => {
+    expect(chargerExclusions(null)).toEqual({ domaines: [], mots: [] });
+    expect(chargerExclusions('{"domaines":["Exemple.org"],"mots":["Projet"]}')).toEqual({ domaines: ["exemple.org"], mots: ["projet"] });
+    expect(() => chargerExclusions('{"domaines":"exemple.org"}')).toThrow(/liste de textes/);
+    expect(() => chargerExclusions('{"mots":[""]}')).toThrow(/liste de textes/);
+    expect(() => chargerExclusions("{")).toThrow();
   });
 });
 
 describe("tri du matin", () => {
   it("quatre groupes, brouillons pour les réponses simples, résumé Markdown", async () => {
-    const { r, boite } = await trier(MESSAGES_FICTIFS);
+    const { r, boite } = await trier(MESSAGES_FICTIFS, 1, { domaines: ["domaine-exclu.example"], mots: [] });
     expect(Object.fromEntries(Object.entries(r.groupes).map(([g, l]) => [g, l.length]))).toEqual({ "pour-toi": 1, "reponse-simple": 1, information: 1, bruit: 1 });
     expect(r.exclus).toBe(1);
     expect(boite.brouillons).toHaveLength(1);
@@ -74,7 +101,7 @@ describe("tri du matin", () => {
   });
 
   it("palier 0 : aucun brouillon", async () => {
-    const { r, boite } = await trier(MESSAGES_FICTIFS, 0);
+    const { r, boite } = await trier(MESSAGES_FICTIFS, 0, { domaines: ["domaine-exclu.example"], mots: [] });
     expect(r.brouillons).toBe(0);
     expect(boite.brouillons).toHaveLength(0);
   });

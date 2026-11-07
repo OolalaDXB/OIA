@@ -49,5 +49,8 @@ export const MESSAGES_FICTIFS: Message[] = [
   { id: "m2", de: "Lettre <newsletter@exemple.com>", a: ["moi@exemple.fr"], cc: [], objet: "Newsletter de novembre", date: "2026-11-08", piecesJointes: [], autresEntetes: {}, corps: "Nos nouveautés." },
   { id: "m3", de: "Compta <compta@exemple.fr>", a: ["moi@exemple.fr"], cc: [], objet: "Facture disponible", date: "2026-11-08", piecesJointes: ["facture-novembre.pdf"], autresEntetes: {}, corps: "Votre facture est en ligne." },
   { id: "m4", de: "Associé <associe@exemple.fr>", a: ["moi@exemple.fr"], cc: [], objet: "Décision à prendre sur le projet", date: "2026-11-08", piecesJointes: [], autresEntetes: {}, corps: "Il faut trancher avant lundi." },
-  { id: "m5", de: "Collègue <collegue@swift.com>", a: ["moi@exemple.fr"], cc: [], objet: "Point interne", date: "2026-11-08", piecesJointes: [], autresEntetes: {}, corps: "Contenu qui ne doit jamais être lu." },
+  { id: "m5", de: "Collègue <collegue@domaine-exclu.example>", a: ["moi@exemple.fr"], cc: [], objet: "Point interne", date: "2026-11-08", piecesJointes: [], autresEntetes: {}, corps: "Contenu qui ne doit jamais être lu." },
 ];
+
+/** Liste de démonstration, pour le mode simulé seulement. La vraie liste est celle de Mickaël. */
+export const EXCLUSIONS_DE_DEMONSTRATION = { domaines: ["domaine-exclu.example"], mots: ["motexclu"] };

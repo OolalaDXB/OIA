@@ -4,7 +4,9 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { ecrireResume, lireStyle, resumeMarkdown, trierLeMatin } from "./agent.js";
 import { palierCourrier } from "./palier.js";
-import { BoiteFictive, ClasseurFictif, MESSAGES_FICTIFS, RedacteurFictif } from "./fictif.js";
+import { BoiteFictive, ClasseurFictif, EXCLUSIONS_DE_DEMONSTRATION, MESSAGES_FICTIFS, RedacteurFictif } from "./fictif.js";
+import { chargerExclusions } from "./exclusions.js";
+import { horsDepot } from "./chemins.js";
 import { BoiteGmail } from "./gmail.js";
 import { ClasseurOllama, RedacteurOllama } from "./ollama.js";
 
@@ -30,7 +32,11 @@ async function main(): Promise<void> {
   if (!simule && !existsSync(jeton)) {
     throw new Error(`Gmail non connecté : jeton absent (${jeton}). Voir docs/shyrka/adr/0001-agent-courrier.md.`);
   }
+  // Liste d'exclusion de Mickaël, hors du dépôt. Absente : liste vide.
+  const cheminExclusions = horsDepot(env.SHYRKA_EXCLUSIONS ?? join(homedir(), "oia-shyrka-data", "courrier-exclusions.json"));
+  const exclusions = simule ? EXCLUSIONS_DE_DEMONSTRATION : chargerExclusions(existsSync(cheminExclusions) ? readFileSync(cheminExclusions, "utf8") : null);
   const r = await trierLeMatin({
+    exclusions,
     boite: simule ? new BoiteFictive(MESSAGES_FICTIFS) : new BoiteGmail({ jeton: BoiteGmail.jetonDepuisFichier(jeton) }),
     classeur: simule ? new ClasseurFictif() : new ClasseurOllama({ ...(env.SHYRKA_OLLAMA_MODEL ? { model: env.SHYRKA_OLLAMA_MODEL } : {}) }),
     redacteur: simule ? new RedacteurFictif() : new RedacteurOllama({ ...(env.SHYRKA_OLLAMA_MODEL ? { model: env.SHYRKA_OLLAMA_MODEL } : {}) }),

@@ -6,7 +6,7 @@ import { GROUPES, LIBELLES, type BoiteAuxLettres, type Classeur, type Groupe, ty
 
 export interface ResultatMatin {
   date: string;
-  /** Nombre de messages exclus (Swift) : ni lus par un modèle, ni classés, ni résumés. */
+  /** Nombre de messages exclus (liste de Mickaël, ou doute) : ni lus par un modèle, ni classés, ni résumés. */
   exclus: number;
   groupes: Record<Groupe, { id: string; de: string; objet: string; brouillon?: string }[]>;
   brouillons: number;
