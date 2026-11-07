@@ -27,6 +27,16 @@ export function commandeMemoire(args: string[]): number {
         console.log(JSON.stringify({ id: e.id, ref: refCourte(e.id), compartiment: e.compartiment, forme: e.forme, statut: e.statut, version: e.version }));
         return 0;
       }
+      case "proposer": {
+        // Proposition d'un agent ou d'un outil (voie 2) : reste « à confirmer », jamais validée par son auteur.
+        const [compartiment, forme, auteur, ...mots] = reste;
+        const e = m.enregistrer(
+          { compartiment: compartiment as never, forme: forme as never, contenu: mots.join(" "), source: { voie: "proposition", ref: `agent ${auteur} ${new Date().toISOString().slice(0, 16)}Z`, affirmeParIA: true } },
+          { type: "agent", id: auteur ?? "inconnu" },
+        );
+        console.log(JSON.stringify({ id: e.id, statut: e.statut, compartiment: e.compartiment, forme: e.forme }));
+        return 0;
+      }
       case "lister":
       case "chercher": {
         const r = m.retrouver(sous === "chercher" ? { texte, limite: 20 } : { limite: 50 }, { type: "mickael" });
@@ -61,7 +71,7 @@ export function commandeMemoire(args: string[]): number {
         return 0;
       }
       default:
-        console.log("Usage : memoire retenir <texte> | lister | chercher <mots> | corriger <réf> <texte> | oublier <réf> | exporter <fichier> | restaurer <fichier> | etat");
+        console.log("Usage : memoire retenir <texte> | proposer <compartiment> <forme> <auteur> <texte> | lister | chercher <mots> | corriger <réf> <texte> | oublier <réf> | exporter <fichier> | restaurer <fichier> | etat");
         return 2;
     }
   } finally {
