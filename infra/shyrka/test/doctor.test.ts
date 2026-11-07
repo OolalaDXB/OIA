@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { diagnose, formatChecks } from "../src/doctor.js";
 import { fakeRunner } from "./fakes.js";
 
-const cfg = { ffmpeg: "ffmpeg", whisperBin: "whisper-cli", whisperModel: "/m/ggml-large-v3-turbo.bin", ollamaUrl: "http://127.0.0.1:11434", ollamaModel: "qwen3:8b", compareModel: "mistral-small", voice: "Aurélie" };
+const cfg = { ffmpeg: "ffmpeg", whisperBin: "whisper-server", whisperModel: "/m/ggml-large-v3-turbo.bin", ollamaUrl: "http://127.0.0.1:11434", ollamaModel: "qwen3:8b", compareModel: "mistral-small", voice: "Aurélie" };
 
 describe("diagnostic du Mac (lecture seule)", () => {
   it("tout présent : tout est ok", async () => {
@@ -31,7 +31,7 @@ describe("diagnostic du Mac (lecture seule)", () => {
     expect(text).toContain("brew install whisper-cpp");
     expect(text).toContain("ollama pull");
     // Lecture seule : seules des commandes d'inspection sont lancées.
-    expect(calls.map((c) => [c.cmd, ...c.args].join(" "))).toEqual(["ffmpeg -hide_banner -version", "whisper-cli -h", "say -v ?"]);
+    expect(calls.map((c) => [c.cmd, ...c.args].join(" "))).toEqual(["ffmpeg -hide_banner -version", "whisper-server -h", "say -v ?"]);
   });
 
   it("refuse une adresse Ollama distante", async () => {

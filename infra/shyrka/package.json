@@ -3,17 +3,17 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Shyrka 1 « Te parle » : boucle de dialogue locale (micro, Whisper, Ollama, voix macOS) derrière des adaptateurs. Aucun appel à un fournisseur distant.",
+  "description": "Shyrka v0 : voix locale (Whisper, Ollama, voix Aurélie), mode entretien, paliers de permission, WhatsApp en cadrage. Tout est local.",
   "exports": {
     ".": "./src/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "parle": "tsx src/cli.ts parle",
-    "diagnostic": "tsx src/cli.ts diagnostic",
+    "parler": "tsx src/cli.ts parler",
+    "resume": "tsx src/cli.ts resume",
     "entretien": "tsx src/cli.ts entretien",
-    "courrier": "tsx src/cli.ts courrier"
+    "diagnostic": "tsx src/cli.ts diagnostic"
   },
   "dependencies": {
     "zod": "^3.24.1"

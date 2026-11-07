@@ -23,8 +23,8 @@ function setup(identity = IDENTITY_V0, lines = ["Bonjour Shyrka", "Et demain ?"]
 }
 
 describe("Shyrka 1 « Te parle », boucle simulée", () => {
-  it("version 0 : entend, répond en texte, ne parle jamais", async () => {
-    const { session, printed, speaker } = setup();
+  it("sans voix en sortie (repli) : entend, répond en texte, ne parle pas", async () => {
+    const { session, printed, speaker } = setup({ ...IDENTITY_V0, voixEnSortie: false });
     expect(session.voiceOutput).toBe(false);
     const r = await session.listenTurn();
     expect(r.heard).toBe("Bonjour Shyrka");
@@ -35,15 +35,15 @@ describe("Shyrka 1 « Te parle », boucle simulée", () => {
     expect(r.events.map((e) => e.step)).toEqual(["ecoute", "transcription", "reflexion", "texte"]);
   });
 
-  it("version 1 avec voix autorisée : parle la réponse", async () => {
-    const { session, speaker } = setup({ ...IDENTITY_V0, version: 1, voixEnSortie: true });
+  it("version 0 : voix Aurélie en sortie, la réponse est parlée", async () => {
+    const { session, speaker } = setup();
     const r = await session.listenTurn();
     expect(r.output).toBe("voix");
     expect(speaker.spoken).toEqual(["Réponse 1, courte."]);
   });
 
   it("prise de parole volontaire : un tour = une prise, durée par défaut 8 s", async () => {
-    const { session, mic } = setup();
+    const { session, mic } = setup({ ...IDENTITY_V0, voixEnSortie: false });
     await session.listenTurn();
     expect(mic.takes).toEqual([8]);
   });
@@ -81,9 +81,19 @@ describe("Shyrka 1 « Te parle », boucle simulée", () => {
     expect(applyStyle("Oui — et non  —  peut-être")).toBe("Oui, et non, peut-être");
   });
 
-  it("les consignes n'accordent aucun outil ni engagement", () => {
-    expect(SHYRKA_SYSTEM_PROMPT).toMatch(/aucun outil/);
-    expect(SHYRKA_SYSTEM_PROMPT).toMatch(/n'envoies rien/);
+  it("les consignes n'accordent aucune action", () => {
+    expect(SHYRKA_SYSTEM_PROMPT).toMatch(/aucune action, aucun envoi, aucune écriture/);
+    expect(SHYRKA_SYSTEM_PROMPT).toMatch(/tutoies/);
+  });
+
+  it("tour « pousser pour parler » : la prise fournie est transcrite puis traitée", async () => {
+    const { session } = setup();
+    const r = await session.clipTurn({ path: "/x.wav", durationMs: 1 });
+    expect(r.heard).toBe("Bonjour Shyrka");
+  });
+
+  it("refuse un modèle distant", () => {
+    expect(() => new ShyrkaSession({ model: { name: "anthropic:claude", chat: async () => "" }, identity: IDENTITY_V0, print: () => {} })).toThrow(/locaux/);
   });
 });
 

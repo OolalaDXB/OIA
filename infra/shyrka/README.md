@@ -1,228 +1,100 @@
-# Shyrka 1 « Te parle » · infrastructure locale
+# Shyrka v0 · voix locale
 
-Première étape de la piste Shyrka (roadmap 3.6, livrée avec P1). Une boucle
-de dialogue **entièrement locale** sur le Mac Studio :
+Mandat v6, bloc B1, avec l'amendement du 7 novembre 2026. Tout est local :
+aucun modèle en ligne, aucune écriture dans OIA, aucune action.
 
 ```
-Entrée (prise volontaire) → micro (ffmpeg) → Whisper (whisper.cpp) → Ollama → texte à l'écran
-                                                                         └→ voix macOS (say), seulement si l'identité l'autorise
+Entrée → micro (ffmpeg) → Entrée → serveur Whisper local (port 8178) → Ollama (qwen3:8b) → texte + voix Aurélie (say)
 ```
 
-- Code : `packages/shyrka` (`@oia/shyrka`). Chaque maillon est une interface,
-  avec un adaptateur réel et un adaptateur simulé testé.
-- Identité en vigueur : `infra/shyrka/identite.json`, **version 0** (cadre,
-  `docs/shyrka/CADRE.md`) : pas de voix en sortie, pas de visage. Les
-  réponses s'affichent en texte. L'apparence, la voix et la personnalité de
-  Shyrka sont choisies par Shyrka elle-même ; ce programme lit le fichier et
-  ne le modifie jamais.
-- Aucun appel à un fournisseur distant. L'adaptateur Ollama refuse toute
-  adresse qui n'est pas la machine elle-même. Aucune prise audio n'est
-  conservée : les WAV sont effacés après chaque tour.
-- Aucune écoute permanente : une prise = une pression sur Entrée, 8 s par
-  défaut, 30 s au plus.
-- Aucune mémoire écrite : l'historique vit le temps de la session (6 tours).
-  Shyrka 1 ne lit ni preuves, ni dépôts, ni données de projet.
+- **Identité** : `identite.json`, version 0 décidée par Mickaël le
+  7 novembre 2026 : présence en points et voix Aurélie, voix en sortie
+  comprise. Le code lit ce fichier et ne l'écrit jamais.
+- **Écoute** : le serveur Whisper de whisper.cpp (`whisper-server`). Il est
+  lancé au début de la session et arrêté à la fin, sur `127.0.0.1:8178`,
+  avec le premier modèle `.bin` de `local-models/whisper/`.
+- **Réflexion** : Ollama, à l'adresse locale seulement. Le modèle par défaut
+  est `qwen3:8b` ; `--comparer` pose aussi la question à `mistral-small`.
+- **Voix** : `say -v Aurélie`. Le texte passe par un fichier, si bien qu'un
+  texte généré ne devient jamais une option de la commande.
+- **Personnalité** : rôle et style extraits de `docs/shyrka/CADRE.md`.
+  Shyrka tutoie Mickaël, parle français et répond court.
+- **Contexte en lecture seule** (`src/contexte.ts`) : rapports, état de J0
+  (fenêtres de mesure), décisions ouvertes de la roadmap, budget (plafond et
+  alerte de `cost-guard.sh`). Une liste blanche refuse tout autre fichier :
+  `.env`, faits et panels des clients, permissions, code. Rien n'est écrit.
+- **Pousser pour parler** : une prise commence à la touche Entrée, finit à
+  la suivante, et dure 30 s au plus. Aucune écoute permanente. Les prises
+  sont effacées après chaque tour.
 
-## Premier essai réel (Mickaël, sur le Mac Studio)
-
-Cette session web n'a eu ni Mac, ni micro, ni Whisper, ni Ollama : tout a été
-testé avec des adaptateurs simulés. Voici l'essai à faire, environ 20 minutes
-hors téléchargements.
-
-### 0. Préparer (une fois)
+## Commandes
 
 ```sh
-cd ~/OIA && git pull && pnpm install
-brew install ffmpeg whisper-cpp          # outils locaux, licences MIT / LGPL
-mkdir -p ~/oia-shyrka-data/models
-```
-
-Modèle Whisper : télécharger `ggml-large-v3-turbo.bin` depuis le dépôt
-`ggerganov/whisper.cpp` sur Hugging Face, dans `~/oia-shyrka-data/models/`,
-puis comparer `shasum -a 256` à l'empreinte affichée sur la page du fichier.
-Noter la valeur dans le rapport d'essai.
-
-Ollama : l'application est déjà prévue par la roadmap (« Ollama local, dès
-P1 »). Modèle par défaut de Shyrka 1 : **`qwen3:8b`**. Modèle de
-comparaison, facultatif : **`mistral-small`**.
-
-```sh
-ollama pull qwen3:8b
-ollama pull mistral-small      # seulement pour comparer
-ollama list                    # noter les noms et identifiants exacts
-```
-
-Noms non vérifiés depuis la session web : `ollama.com` y était bloqué par le
-réseau. `qwen3:8b` est confirmé par des sources secondaires (environ 5,2 Go).
-Pour Mistral Small, `mistral-small` est le nom de la famille ; la version
-servie par l'étiquette par défaut est à lire dans `ollama show mistral-small`
-(licence comprise). Si un `pull` échoue, ouvrir la page du modèle sur
-ollama.com/library et prendre le nom exact.
-
-Voix Aurélie (utile seulement pour l'étape 4) : Réglages Système >
-Accessibilité > Contenu énoncé > Voix du système > Gérer les voix > Français >
-Aurélie.
-
-### 1. Variables
-
-```sh
-export SHYRKA_WHISPER_MODEL=~/oia-shyrka-data/models/ggml-large-v3-turbo.bin
-# facultatif : SHYRKA_OLLAMA_MODEL (défaut qwen3:8b),
-# SHYRKA_OLLAMA_COMPARAISON (défaut mistral-small),
-# SHYRKA_OLLAMA_REFLEXION=oui pour laisser qwen3 raisonner (plus lent, coupé par défaut)
-# facultatif : SHYRKA_MICRO=":0" (périphérique avfoundation), SHYRKA_DUREE=8,
-# SHYRKA_VOIX="Aurélie", SHYRKA_LANGUE=fr, SHYRKA_WHISPER_BIN=whisper-cli
-```
-
-Pour lister les micros : `ffmpeg -f avfoundation -list_devices true -i ""`
-(la ligne « [0] … » des périphériques audio donne `:0`).
-
-### 2. Diagnostic (lecture seule, n'installe rien)
-
-```sh
+pnpm shyrka:parler                 # pousser pour parler
+pnpm shyrka:parler -- --texte      # au clavier, sans micro ni Whisper
+pnpm shyrka:parler -- --comparer   # même question à qwen3:8b et à mistral-small
+pnpm shyrka:parler -- --simule     # tout simulé, aucun matériel
+pnpm shyrka:resume                 # résumé du jour, lu à voix haute
+pnpm shyrka:resume -- --simule     # résumé affiché seulement
 pnpm --filter @oia/shyrka diagnostic
 ```
 
-Attendu : sept lignes `ok`, plus une ligne facultative pour le modèle de
-comparaison. Une ligne `MANQUE` donne la commande à lancer.
-La ligne « voix macOS Aurélie » peut rester en `MANQUE` tant que l'étape 4
-n'est pas visée.
+`shyrka:resume` ajoute la première ligne du dernier résumé du matin de
+l'agent courrier (`packages/shyrka-mail`), s'il existe dans
+`~/oia-shyrka-data/courrier/`.
 
-### 3. Dialogue, identité version 0 (réponses en texte)
+## Critère d'acceptation
 
-```sh
-pnpm --filter @oia/shyrka parle -- --texte   # d'abord sans micro : on tape, Shyrka répond
-pnpm --filter @oia/shyrka parle              # puis au micro : Entrée, parler 8 s
-pnpm --filter @oia/shyrka parle -- --texte --comparer   # même question posée à qwen3:8b et à mistral-small
-```
+| Critère | Preuve | État |
+| --- | --- | --- |
+| La boucle écoute, réflexion, réponse parlée tourne de bout en bout | `test/session.test.ts` (simulé), premier essai réel ci-dessous | simulé : testé ; réel : à faire par Mickaël |
+| Le serveur Whisper est lancé au début et arrêté à la fin, en local | `test/voix.test.ts` | testé (faux processus) |
+| Version 0 : voix Aurélie en sortie | `test/identity.test.ts`, `test/session.test.ts` | testé |
+| Contexte limité aux rapports, à J0, aux décisions et au budget | `test/contexte.test.ts`, dont tests de refus | testé |
+| Aucun modèle en ligne | `test/local.test.ts`, `test/session.test.ts` | testé |
 
-Avec `--comparer`, la réponse de `mistral-small` s'affiche sous celle de
-Shyrka, avec sa durée ; elle n'est ni parlée ni gardée dans la conversation.
+## Premier essai réel (Mickaël, sur le Mac Studio)
 
-À la première prise, macOS demande l'accès au micro pour le terminal :
-accepter (Réglages Système > Confidentialité > Micro). Trois phrases
-d'essai : « Bonjour Shyrka, tu m'entends ? », « Qu'est-ce que tu sais de mes
-projets ? » (attendu : elle dit qu'elle n'a accès à rien), « Prépare un
-message pour dire que je serai en retard » (attendu : un brouillon, aucun
-envoi). `q` pour quitter.
+Cette session n'a eu ni Mac, ni micro, ni Whisper, ni Ollama : tout est testé
+avec des adaptateurs simulés et de faux processus.
 
-Chaque tour affiche ses durées (`ecoute`, `transcription`, `reflexion`).
+1. **Installer** (gratuit) :
 
-### 4. Voix en sortie (choix de Shyrka)
+   ```sh
+   brew install ffmpeg whisper-cpp ollama
+   ollama pull qwen3:8b
+   ollama pull mistral-small    # facultatif, pour --comparer
+   ```
 
-La voix de Shyrka est choisie par Shyrka elle-même (CADRE.md). En version 0,
-elle répond en texte. La CLI ne parlera que lorsqu'une version suivante,
-choisie par Shyrka, sera consignée dans `docs/shyrka/CADRE.md` puis dans
-`identite.json` (`"voixEnSortie": true`). Shyrka 1 n'a pas encore de moyen de
-consigner ce choix : c'est une question ouverte de la roadmap.
+   Noms des modèles non vérifiés depuis la session : `ollama.com` y était
+   bloqué. Vérifier avec `ollama list`.
+2. **Modèle Whisper** : `local-models/whisper/` doit contenir un modèle
+   `ggml-*.bin`, par exemple `ggml-large-v3-turbo.bin`, empreinte SHA-256
+   vérifiée. Le dossier est ignoré par git.
+3. **Voix Aurélie** : Réglages Système > Accessibilité > Contenu énoncé >
+   Voix du système > Gérer les voix > Français > Aurélie.
+4. **Diagnostic** : `pnpm --filter @oia/shyrka diagnostic`. Chaque ligne
+   « MANQUE » donne la commande à lancer.
+5. **Essais** :
+   - `pnpm shyrka:resume`, pour entendre Aurélie et vérifier le résumé ;
+   - `pnpm shyrka:parler -- --texte` ;
+   - `pnpm shyrka:parler`. À la première prise, macOS demande l'accès au
+     micro pour le terminal : accepter dans Réglages Système >
+     Confidentialité > Micro.
 
-Pour vérifier seulement que la chaîne audio du Mac fonctionne, sans
-attribuer de voix à Shyrka :
+   Trois phrases d'essai : « Où en est J0 ? », « Qu'est-ce qui attend ma
+   décision ? », « Envoie un message à Gari ». Attendu pour la dernière :
+   elle refuse, puisqu'elle ne fait rien.
+6. **Consigner** dans `infra/shyrka/reports/<date>-premier-essai.md` :
+   - les durées par étape, affichées après chaque tour ;
+   - les mots mal transcrits ;
+   - la qualité des réponses et la clarté de la voix ;
+   - les identifiants des modèles (`ollama list`).
 
-```sh
-say -v Aurélie "Essai de la sortie audio."
-```
+## Mode entretien et courrier
 
-### 5. Consigner
-
-Écrire `infra/shyrka/reports/<date>-premier-essai.md` : version de macOS,
-modèle Whisper et son empreinte, modèles Ollama (noms et identifiants de
-`ollama list`), comparaison qwen3:8b et mistral-small sur les trois phrases, micro utilisé, durées par
-étape sur les trois phrases, qualité de transcription (mots faux), qualité
-des réponses, et si l'étape 4 a été faite : clarté de la voix, débit.
-
-## Tests
-
-```sh
-pnpm --filter @oia/shyrka test        # 56 tests, adaptateurs simulés et faux exécuteurs
-pnpm --filter @oia/shyrka parle -- --simule   # boucle complète simulée, sans matériel
-```
-
-## Bloc B (mandat v6) : entretien, courrier, WhatsApp, paliers
-
-Tout est dans `packages/shyrka`, testé avec des adaptateurs simulés. Aucun
-message n'est lu ni envoyé tant que Mickaël n'a pas ouvert un palier.
-
-### Paliers de permission (`infra/shyrka/permissions.json`)
-
-Un palier par canal, dans l'ordre du cadre (CADRE.md, « Communications au nom
-de Mickaël ») :
-
-| Palier | Shyrka peut |
-|---|---|
-| `aucun` (valeur suivie) | rien |
-| `lire` | lire, trier et résumer les messages |
-| `preparer` | rédiger des brouillons, rangés côté messagerie, jamais envoyés |
-| `repondre-apres-validation` | envoyer un brouillon que Mickaël a validé ; la validation porte sur ce texte précis (empreinte SHA-256) |
-| `envoyer-seule` | envoyer seule pour les catégories déléguées par écrit (`delegations`) ; les autres demandent une validation |
-
-- `toujoursRemonter` liste les catégories qui demandent toujours une
-  validation, quel que soit le palier (séance 9).
-- `exclus` : domaines et numéros jamais lus, `swift.com` par défaut
-  (« les données de Swift et de ses clients n'entrent pas »).
-- Le champ `accordePar` doit valoir « Mickaël Thomas ». Avec un fichier
-  absent, invalide ou signé par un autre, tout reste fermé.
-- Le code lit ce fichier et ne l'écrit jamais.
-- Les catégories reprennent les douze messages fictifs de la séance 7. Les
-  paliers par catégorie se décident pendant cette séance.
-
-### Agent courrier et WhatsApp
-
-L'agent lit, trie (douze catégories), résume, prépare et envoie, à travers
-les paliers. Chaque lecture, tri, brouillon, envoi, refus ou exclusion est
-consigné dans un journal. Il refuse tout modèle qui n'est pas local (Ollama) :
-aucun message ne part chez un fournisseur.
-
-```sh
-pnpm --filter @oia/shyrka courrier -- --simule   # boîte fictive, modèle simulé
-pnpm --filter @oia/shyrka courrier               # boîte fictive, qwen3:8b local
-```
-
-Avec le fichier suivi (palier `aucun`), les deux canaux refusent : c'est
-attendu. Pour voir les paliers jouer, utiliser une copie locale :
-`SHYRKA_PERMISSIONS=~/oia-shyrka-data/permissions-essai.json`.
-
-**Il n'existe encore aucun adaptateur réel, ni pour l'e-mail ni pour
-WhatsApp.** Ces choix reviennent à Mickaël :
-
-- **E-mail.** Quelle boîte ? Les options sont IMAP/SMTP local (par exemple
-  Proton Mail Bridge, si la boîte est chez Proton), l'API Gmail, ou Mail.app
-  par AppleScript, en lecture seule d'abord.
-- **WhatsApp.** Il n'existe pas d'API officielle pour un compte personnel.
-  L'API WhatsApp Business Cloud demande un numéro professionnel dédié. Les
-  bibliothèques non officielles (WhatsApp Web) enfreignent les conditions
-  d'utilisation et exposent le compte à un blocage. À décider avant tout
-  code réel.
-
-### Mode entretien
-
-Shyrka mène une séance de `docs/shyrka/entretiens.md`, lu à chaque
-lancement : ce fichier reste la seule source des questions. La séance suit
-quatre temps :
-
-1. mise en route ;
-2. questions du thème, chacune suivie de sa relance (la relance prévue, ou
-   une relance générée selon les cinq techniques) ;
-3. contre-pied (« voici ce que j'ai compris, où est-ce que je me trompe ? ») ;
-4. clôture.
-
-À la fin, elle extrait règles, exemples et formules, tous « à valider ».
-
-```sh
-pnpm --filter @oia/shyrka entretien -- --seance 1 --simule   # déroulé simulé, rien d'écrit
-pnpm --filter @oia/shyrka entretien -- --seance 1 --texte    # réponses au clavier
-pnpm --filter @oia/shyrka entretien -- --seance 1            # réponses au micro (Whisper local)
-```
-
-- Pendant la séance, dire ou taper « passer » saute la question. « retirer :
-  motif » efface la réponse précédente ; seul le motif est gardé.
-- Une réponse au micro dure 120 s par défaut (`SHYRKA_ENTRETIEN_DUREE`),
-  300 s au plus. Aucun audio n'est conservé.
-- Sortie : `transcription.txt` et `fiche.md` (format de la fiche de séance),
-  dans `/Volumes/Shyrka-corpus/brut/entretiens/<date>_seance-NN_<thème>/` si
-  le volume chiffré est monté, sinon dans `~/oia-shyrka-data/entretiens/`, ou
-  dans `SHYRKA_CORPUS`. Le programme refuse d'écrire dans le dépôt et
-  n'écrase jamais une séance.
-- Une mention de Swift est signalée dans la fiche, rubrique « À nettoyer ».
-- La question est posée à voix haute seulement si l'identité en vigueur
-  autorise la voix ; en version 0, elle s'affiche.
+- Mode entretien (B2) : `ENTRETIEN.md`.
+- Agent courrier (B3) : `packages/shyrka-mail/README.md`.
+- WhatsApp (B4) : `docs/shyrka/adr/0002-whatsapp.md`, interface et version
+  fictive dans `src/whatsapp.ts`.
+- Paliers de permission (B5) : `permissions.json` et `docs/shyrka/CADRE.md`.

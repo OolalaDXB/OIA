@@ -1,6 +1,7 @@
 import { voiceOutputAllowed, type Identity } from "./identity.js";
 import { applyStyle, SHYRKA_SYSTEM_PROMPT } from "./persona.js";
-import type { ChatMessage, Microphone, Speaker, TextModel, Transcriber } from "./types.js";
+import type { AudioClip, ChatMessage, Microphone, Speaker, TextModel, Transcriber } from "./types.js";
+import { assertModeleLocal } from "./local.js";
 
 export interface TurnEvent {
   at: string;
@@ -26,6 +27,8 @@ export interface SessionDeps {
   compareModel?: TextModel;
   speaker?: Speaker;
   identity: Identity;
+  /** Consignes système (rôle, style, contexte en lecture seule). Par défaut : le cadre sans contexte. */
+  system?: string;
   /** Affichage texte : toujours disponible, c'est la sortie de la version 0. */
   print: (line: string) => void;
   language?: string;
@@ -49,6 +52,8 @@ export class ShyrkaSession {
   private readonly clock: () => number;
 
   constructor(private readonly deps: SessionDeps) {
+    assertModeleLocal(deps.model);
+    if (deps.compareModel) assertModeleLocal(deps.compareModel);
     this.clock = deps.clock ?? Date.now;
   }
 
@@ -66,6 +71,15 @@ export class ShyrkaSession {
     return this.answer(transcript.text, events);
   }
 
+  /** Tour « pousser pour parler » : la prise a été faite par l'appelant, on la transcrit. */
+  async clipTurn(clip: AudioClip): Promise<TurnResult> {
+    const { transcriber } = this.deps;
+    if (!transcriber) throw new Error("Transcription non configurée.");
+    const events: TurnEvent[] = [];
+    const transcript = await this.step(events, "transcription", () => transcriber.transcribe(clip, { language: this.deps.language ?? "fr" }));
+    return this.answer(transcript.text, events);
+  }
+
   /** Tour écrit : utile sans micro, et pour les tests. */
   async textTurn(text: string): Promise<TurnResult> {
     return this.answer(text, []);
@@ -78,7 +92,7 @@ export class ShyrkaSession {
       this.deps.print("Shyrka · (rien entendu)");
       return { heard, answer: null, output: "aucune", events };
     }
-    const messages: ChatMessage[] = [{ role: "system", content: SHYRKA_SYSTEM_PROMPT }, ...this.history, { role: "user", content: heard }];
+    const messages: ChatMessage[] = [{ role: "system", content: this.deps.system ?? SHYRKA_SYSTEM_PROMPT }, ...this.history, { role: "user", content: heard }];
     const raw = await this.step(events, "reflexion", () => this.deps.model.chat(messages), this.deps.model.name);
     const answer = applyStyle(raw);
     let comparison: TurnResult["comparison"];

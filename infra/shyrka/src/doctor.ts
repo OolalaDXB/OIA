@@ -41,14 +41,14 @@ export async function diagnose(
   checks.push({ name: "ffmpeg (micro)", ok: ff.code === 0, detail: ff.code === 0 ? (ff.stdout.split("\n")[0] ?? "").trim() : "absent", fix: "brew install ffmpeg" });
 
   const wh = await deps.run(cfg.whisperBin, ["-h"], { timeoutMs: 10_000 });
-  checks.push({ name: "whisper.cpp", ok: wh.code === 0, detail: wh.code === 0 ? cfg.whisperBin : "absent", fix: "brew install whisper-cpp" });
+  checks.push({ name: "serveur Whisper (whisper.cpp)", ok: wh.code === 0, detail: wh.code === 0 ? cfg.whisperBin : "absent", fix: "brew install whisper-cpp (fournit whisper-server)" });
 
   const hasModel = cfg.whisperModel !== "" && exists(cfg.whisperModel);
   checks.push({
     name: "modèle Whisper",
     ok: hasModel,
-    detail: cfg.whisperModel || "SHYRKA_WHISPER_MODEL non défini",
-    fix: "Télécharger ggml-large-v3-turbo.bin (dépôt ggerganov/whisper.cpp sur Hugging Face), vérifier son empreinte SHA-256, puis SHYRKA_WHISPER_MODEL=<chemin>",
+    detail: cfg.whisperModel || "aucun modèle dans local-models/whisper",
+    fix: "Déposer ggml-large-v3-turbo.bin (dépôt ggerganov/whisper.cpp sur Hugging Face, empreinte SHA-256 vérifiée) dans local-models/whisper/, ou SHYRKA_WHISPER_MODEL=<chemin>",
   });
 
   let ollamaOk = false;

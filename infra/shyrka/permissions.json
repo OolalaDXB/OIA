@@ -1,11 +1,9 @@
 {
-  "version": 0,
+  "version": 1,
   "date": "2026-11-08",
   "accordePar": "Mickaël Thomas",
-  "canaux": {
-    "email": { "palier": "aucun", "delegations": [] },
-    "whatsapp": { "palier": "aucun", "delegations": [] }
-  },
-  "toujoursRemonter": [],
-  "exclus": { "domaines": ["swift.com"], "numeros": [] }
+  "agents": {
+    "courrier": { "palier": 1, "envoiSeul": [] },
+    "whatsapp": { "palier": 0, "envoiSeul": [] }
+  }
 }
