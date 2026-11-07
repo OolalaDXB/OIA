@@ -33,7 +33,7 @@ describe("grille de prix", () => {
   it("couvre les cinq moteurs retenus pour J0, et eux seuls", () => {
     expect(PRICE_GRID.map((e) => `${e.provider}:${e.id}`).sort()).toEqual([
       "anthropic-api:claude-sonnet-5-5",
-      "mistral-api:mistral-medium-latest",
+      "mistral-api:mistral-large-4",
       "openai-api:gpt-6-luna",
       "openrouter:google/gemini-3-flash-preview",
       "openrouter:perplexity/sonar",
@@ -45,8 +45,12 @@ describe("grille de prix", () => {
     expect(findPrice("openrouter", "perplexity/sonar-pro")).toBeUndefined();
     expect(findPrice("openrouter", "google/gemini-3-flash-preview")?.id).toBe("google/gemini-3-flash-preview");
     expect(findPrice("openrouter", "google/gemini-3.5-flash")).toBeUndefined();
-    expect(findPrice("mistral-api", "mistral-medium-latest")?.id).toBe("mistral-medium-latest");
+    expect(findPrice("mistral-api", "mistral-large-4")?.id).toBe("mistral-large-4");
+    expect(findPrice("mistral-api", "mistral-large-4-0")?.id).toBe("mistral-large-4");
+    // Modèle abandonné le 2026-11-07, et alias dont la cible n'est pas documentée : hors grille.
+    expect(findPrice("mistral-api", "mistral-medium-latest")).toBeUndefined();
     expect(findPrice("mistral-api", "mistral-large-latest")).toBeUndefined();
+    expect(findPrice("mistral-api", "mistral-large-3")).toBeUndefined();
     expect(findPrice("anthropic-api", "claude-haiku-5-5")).toBeUndefined();
     expect(findPrice("anthropic-api", "claude-opus-5-5")).toBeUndefined();
   });
@@ -62,7 +66,7 @@ describe("grille de prix", () => {
     expect(openai?.usd).toBeCloseTo(0.001 + 0.00075 + 0.02, 6);
     const mistral = runCostUsd({
       provider: "mistral-api",
-      version: "mistral-medium-latest",
+      version: "mistral-large-4",
       webSearch: true,
       usage: { prompt_tokens: 3_000, completion_tokens: 1_000, connector_tokens: 7_000, connectors: { web_search: 1 } },
       searchItems: 1,
@@ -102,9 +106,24 @@ describe("grille de prix", () => {
     expect(m.unknown).toEqual(["anthropic-api:claude-opus-5-5"]);
   });
 
-  it("signale les prix provisoires (Mistral Medium non tarifé par Mistral)", () => {
+  it("mistral-large-4 est au prix officiel : 0,70 $ en entrée, 2,10 $ en sortie par million de tokens", () => {
+    const e = findPrice("mistral-api", "mistral-large-4");
+    expect(e?.inputPerMTok).toBe(0.7);
+    expect(e?.outputPerMTok).toBe(2.1);
+    // 10 000 × 0,70 $/M + 1 500 × 2,10 $/M + 1 recherche × 0,03 $ (provisoire)
+    const run = runCostUsd({
+      provider: "mistral-api",
+      version: "mistral-large-4",
+      webSearch: true,
+      usage: { prompt_tokens: 10_000, completion_tokens: 1_500 },
+      searchItems: 1,
+    });
+    expect(run?.usd).toBeCloseTo(0.007 + 0.00315 + 0.03, 6);
+  });
+
+  it("signale les prix provisoires (outil web_search de Mistral non tarifé)", () => {
     const m = monthCostUsd([
-      { kind: "run", provider: "mistral-api", version: "mistral-medium-latest", webSearch: false, usage: { prompt_tokens: 1, completion_tokens: 1 }, searchItems: 0 },
+      { kind: "run", provider: "mistral-api", version: "mistral-large-4", webSearch: false, usage: { prompt_tokens: 1, completion_tokens: 1 }, searchItems: 0 },
     ]);
     expect(m.provisional).toHaveLength(1);
   });

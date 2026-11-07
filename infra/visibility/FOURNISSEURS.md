@@ -51,7 +51,7 @@ crédit, clé plafonnée à 5 $ par mois) ; aucun adaptateur maison avant P3.
 |---|---|---|---|
 | chatgpt | OpenAI direct | `gpt-6-luna` | retenu |
 | claude | Anthropic direct | `claude-sonnet-5-5` (vérifié sur platform.claude.com : 2 $ / 10 $ par M, recherche web acceptée) | retenu |
-| mistral | Mistral direct | `mistral-medium-latest` (voir réserve ci-dessous) | retenu |
+| mistral | Mistral direct | `mistral-large-4` (décision 2026-11-07 ; 0,70 $ / 2,10 $ par M, fiche docs.mistral.ai/models/mistral-large-4-0 ; recherche web non tarifée) | retenu |
 | gemini | OpenRouter seulement | `google/gemini-3-flash-preview` (confirmé par Mickaël ; 0,50 $ / 3 $ par M + 0,014 $ par recherche). Le slug `google/gemini-3-flash` cité au § 0 ter n'existe pas (404). | retenu |
 | perplexity | OpenRouter seulement | `perplexity/sonar` (1 $ / 1 $ par M + 0,005 $ par recherche) | retenu |
 | grok | OpenRouter seulement | `x-ai/grok-4.5` (seul slug Grok testé par Elmo) | **pas pour J0** : candidat pour une fenêtre ultérieure, avec sa propre mesure de départ |
@@ -60,15 +60,18 @@ crédit, clé plafonnée à 5 $ par mois) ; aucun adaptateur maison avant P3.
 Les clés Google (Gemini), Perplexity et xAI créées par Mickaël ne sont lues
 par aucun fournisseur d'Elmo 0.7.7 : elles restent dans Proton Pass.
 
-**Réserve Mistral (à trancher par Mickaël, aucun modèle remplacé).** Au
+**Mistral : `mistral-large-4` retenu le 2026-11-07** (option A). Contexte : au
 2026-11-07, la page de Mistral Medium 3.5 sur docs.mistral.ai l'indique
 déprécié au 2026-10-31, avec Mistral Large 4 pour remplaçant, et la page
 de tarifs ne publie plus de prix pour Medium ni pour l'outil `web_search`.
 Ce que sert l'alias `mistral-medium-latest` n'est pas documenté ; seul le
 premier appel le dira (Elmo enregistre la version servie dans
-`prompt_runs.version`). La grille de `cost-guard.sh` compte Mistral au prix
-de Large 4 (0,70 $ / 2,10 $ par M) et 0,03 $ par recherche : majorant
-provisoire, signalé à chaque relevé.
+`prompt_runs.version`). Large 4 est le remplaçant désigné par Mistral. La
+grille de `cost-guard.sh` le compte à son prix officiel (0,70 $ / 2,10 $
+par M) et à 0,03 $ par recherche, prix provisoire signalé à chaque relevé :
+le vrai prix de la recherche se lira sur la première facture. Le modèle de
+l'onboarding reste codé en dur dans Elmo (`mistral-large-latest`), à
+vérifier au premier appel (runbook, étape 3).
 
 ### Grille de prix de `cost-guard.sh`
 
@@ -97,7 +100,7 @@ plafond) ; pour Claude, nouvelle tentative complète en plus.
 |---|---|---|---|---|---|
 | chatgpt `gpt-6-luna` | 0,10 / 0,50 $ par M ; recherche 10 $ / 1 000 (developers.openai.com) | 0,022 $ | 0,026 $ | 1,10 $ | 1,30 $ |
 | claude `claude-sonnet-5-5` | 2 / 10 $ par M ; recherche 10 $ / 1 000 (platform.claude.com) | 0,055 $ | 0,22 $ | 2,75 $ | 11,00 $ |
-| mistral `mistral-medium-latest` | majorant provisoire : prix de Large 4, 0,03 $ / recherche | 0,040 $ | 0,121 $ | 2,00 $ | 6,05 $ |
+| mistral `mistral-large-4` | 0,70 / 2,10 $ par M (docs.mistral.ai) ; recherche 0,03 $ provisoire | 0,040 $ | 0,121 $ | 2,00 $ | 6,05 $ |
 | gemini `google/gemini-3-flash-preview` | 0,50 / 3 $ par M + 0,014 $ / recherche (openrouter.ai) | 0,024 $ | 0,048 $ | 1,20 $ | 2,40 $ |
 | perplexity `perplexity/sonar` | 1 / 1 $ par M + 0,005 $ / recherche (openrouter.ai) | 0,010 $ | 0,033 $ | 0,50 $ | 1,65 $ |
 | Jev (≈ 250 réponses à juger) | 0,15 à 0,35 $ / 1 000 (§ 0 ter) | — | — | < 0,10 $ | < 0,10 $ |
@@ -122,17 +125,16 @@ crédit.
 | Fournisseur | Crédit prépayé | Recharge automatique | Limite supplémentaire | Besoin J0 (pire cas) |
 |---|---|---|---|---|
 | OpenAI | 5 $ | coupée | limite mensuelle du projet `oia-visibility` | 1,30 $ |
-| Anthropic | 12 $ | coupée | **espace de travail dédié `oia-visibility`, limite de dépense 12 $ / mois**, clé créée dans cet espace | 11,00 $ |
-| Mistral | 5 $ | coupée | clé dédiée `oia-visibility` | 6,55 $ (prix provisoire) |
+| Anthropic | 10 $ | coupée | **espace de travail dédié `oia-visibility`, limite de dépense 10 $ / mois**, clé créée dans cet espace | 11,00 $ |
+| Mistral | 8 $ | coupée | **limite de dépense 8 $**, clé dédiée `oia-visibility` | 6,55 $ (recherche au prix provisoire) |
 | OpenRouter | 5 $ | coupée | **clé plafonnée à 5 $ par mois** | 4,05 $ |
-| TypeSafe (Jev) | minimum proposé, au plus 3 $ | coupée | — | < 0,10 $ |
+| TypeSafe (Jev) | minimum proposé, au plus 2 $ | coupée | — | < 0,10 $ |
 | **Total immobilisé** | **≤ 30 $** | | | |
 
-Mistral : le pire cas provisoire (6,55 $) dépasse les 5 $ prépayés. Si le
-crédit s'épuise, Mistral refuse les derniers appels : la fenêtre perd des
-mesures, rien n'est dépensé au-delà. Le typique (≈ 2,20 $) tient
-largement. Pour l'éviter quand même, passer Mistral à 7 $ et Anthropic à
-10 $, toujours dans les 30 $.
+Mistral à 8 $ (décision 2026-11-07) couvre son pire cas. Pour rester sous
+les 30 $, Anthropic descend à 10 $ : son pire cas (≈ 11 $, nouvelle
+tentative complète sur chaque appel) dépasserait légèrement la limite, et
+les derniers appels seraient refusés, sans dépense au-delà.
 
 ## 0 ter. Modèles mesurés, proches des applications grand public (A6, mis à jour 2026-11-07)
 
@@ -256,10 +258,10 @@ OpenAI, Anthropic et Perplexity ne reçoivent plus rien par API.
 | Moteur (modèle Elmo) | Accès | Cible `SCRAPE_TARGETS` | Recherche web | URL citées extraites |
 |---|---|---|---|---|
 | chatgpt | OpenAI en direct | `chatgpt:openai-api:gpt-6-luna:online` | Oui (outil `web_search`) | Oui |
-| claude | Anthropic en direct | `claude:anthropic-api:claude-haiku-5-5:online` | Oui (outil `web_search`) | Oui |
-| gemini | via OpenRouter | `gemini:openrouter:google/gemini-2.5-flash:online` | Oui (recherche native Google) | Oui (`url_citation`) |
+| claude | Anthropic en direct | `claude:anthropic-api:claude-sonnet-5-5:online` | Oui (outil `web_search`) | Oui |
+| gemini | via OpenRouter | `gemini:openrouter:google/gemini-3-flash-preview:online` | Oui (recherche native Google) | Oui (`url_citation`) |
 | perplexity | via OpenRouter | `perplexity:openrouter:perplexity/sonar:online` | Oui (Sonar) | Oui |
-| **mistral** | **Mistral en direct** | `mistral:mistral-api:mistral-medium-latest:online` | **Oui**, voir ci-dessous | Oui (`tool_reference`) |
+| **mistral** | **Mistral en direct** | `mistral:mistral-api:mistral-large-4:online` | **Oui**, voir ci-dessous | Oui (`tool_reference`) |
 
 ### Mistral (Le Chat)
 - **L'API permet la recherche web.** Avec `:online`, Elmo appelle l'API
@@ -275,9 +277,10 @@ OpenAI, Anthropic et Perplexity ne reçoivent plus rien par API.
     de tokens borne le coût ;
   - **l'API n'est pas Le Chat.** L'application ajoute sa mémoire, sa
     localisation et ses propres choix de modèle et de recherche. On mesure
-    `mistral-medium-latest` avec recherche, ce qui est une approximation de
+    `mistral-large-4` avec recherche, ce qui est une approximation de
     Le Chat (même limite que pour les autres moteurs) ;
-  - `-latest` est un alias qui évolue : la version exacte servie est stockée
+  - la version exacte servie (identifiant épinglé `mistral-large-4` depuis le
+    2026-11-07, plus d'alias `-latest`) est stockée
     par Elmo (`prompt_runs.version`), et un changement rend une comparaison
     fragile.
 - **Réservé aux panels en français.** Elmo 0.7.7 choisit les moteurs **par

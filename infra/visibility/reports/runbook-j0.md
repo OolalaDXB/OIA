@@ -24,25 +24,31 @@ réelle (et l'estimation d'Elmo sous-estime Claude Sonnet 5.5).
 | Fournisseur | Clé | Crédit prépayé | Limite supplémentaire |
 |---|---|---|---|
 | OpenAI | `oia-visibility` | 5 $ | limite mensuelle du projet |
-| Anthropic | `oia-visibility`, créée **dans l'espace de travail dédié** | 12 $ | limite de dépense de l'espace : 12 $ / mois |
-| Mistral | `oia-visibility` (compte existant, séparée d'OIA Funding) | 5 $ | — |
+| Anthropic | `oia-visibility`, créée **dans l'espace de travail dédié** | 10 $ | limite de dépense de l'espace : 10 $ / mois |
+| Mistral | `oia-visibility` (compte existant, séparée d'OIA Funding) | 8 $ | **limite recommandée : 8 $** |
 | OpenRouter | `oia-visibility` | 5 $ | **clé plafonnée à 5 $ par mois** |
-| TypeSafe (Jev) | `oia-visibility` | minimum proposé, au plus 3 $ | — |
+| TypeSafe (Jev) | `oia-visibility` | minimum proposé, au plus 2 $ | — |
 
-Mistral : son pire cas, calculé avec des prix provisoires (Medium n'est
-plus tarifé par Mistral), dépasse les 5 $. Si le crédit s'épuise, les
-derniers appels sont refusés, sans dépense au-delà. Pour l'éviter : Mistral
-à 7 $ et Anthropic à 10 $ (`FOURNISSEURS.md` § 0 quater).
+Total ≤ 30 $. Mistral passe à 8 $ (modèle `mistral-large-4`, pire cas
+≈ 6,55 $ onboarding compris) ; pour rester sous les 30 $, Anthropic
+descend à 10 $ et TypeSafe à 2 $ au plus. Le pire cas Claude (≈ 11 $,
+nouvelle tentative complète sur chaque appel) dépasse alors légèrement
+les 10 $ : les derniers appels seraient refusés, sans dépense au-delà.
+
+**Le prix de la recherche web de Mistral n'est pas publié** (page de
+tarifs : « facturé par appel », sans montant). La grille compte 0,03 $
+par recherche, à titre provisoire ; **le vrai prix se lira sur la première
+facture Mistral**, à reporter alors dans `src/cost-grid.ts`.
 
 Cases à cocher avant de poser la première clé :
 
 - [ ] OpenAI : recharge automatique coupée (Billing → Auto recharge).
 - [ ] OpenAI : limite mensuelle posée sur le projet de la clé.
 - [ ] Anthropic : espace de travail dédié `oia-visibility` créé.
-- [ ] Anthropic : limite de dépense posée sur cet espace (12 $ / mois).
+- [ ] Anthropic : limite de dépense posée sur cet espace (10 $ / mois).
 - [ ] Anthropic : clé créée dans cet espace, pas dans l'espace par défaut.
 - [ ] Anthropic : recharge automatique coupée (Billing).
-- [ ] Mistral : recharge automatique coupée, clé dédiée `oia-visibility`.
+- [ ] Mistral : 8 $ de crédit, limite de dépense à 8 $, recharge automatique coupée, clé dédiée `oia-visibility`.
 - [ ] TypeSafe : recharge automatique coupée (ou facturation sans carte enregistrée).
 - [ ] OpenRouter : 5 $ de crédit, recharge automatique coupée.
 - [ ] OpenRouter : clé `oia-visibility` plafonnée à 5 $ par mois (limite de crédit de la clé).
@@ -97,8 +103,9 @@ La colonne `grid_usd` recalcule chaque run avec la grille de prix des
 modèles retenus (`src/cost-grid.ts`). Si `action` vaut
 `stop-worker(model-not-in-price-grid)`, un modèle de `SCRAPE_TARGETS` n'est
 pas dans la grille : mettre la grille à jour avant de relancer. Le message
-« Prix provisoire » sur Mistral est attendu (voir `FOURNISSEURS.md` § 0
-quater). TypeSafe et les factures réelles se relèvent dans les consoles
+« Prix provisoire » sur `mistral-large-4` est attendu : les tokens sont au
+prix officiel (0,70 $ / 2,10 $ par M), seule la recherche web est
+provisoire (0,03 $) jusqu'à la première facture Mistral. TypeSafe et les factures réelles se relèvent dans les consoles
 (`OIA_VIS_MANUAL_COST_USD`).
 
 Un journal au format antérieur (sans `grid_usd`) est mis de côté sous
@@ -118,6 +125,21 @@ docker compose ps
 
 Ouvrir http://localhost:1515 dans le navigateur. Créer le compte
 administrateur Elmo. **Ne pas** encore saisir la marque Coach Gari.
+
+**Point à vérifier au premier appel : le modèle de l'onboarding.** Elmo
+0.7.7 lit seulement le fournisseur dans `ONBOARDING_LLM_TARGET`
+(`packages/lib/src/onboarding/llm.ts:39-46`). Le modèle est codé en dur :
+`mistral-large-latest` (`packages/lib/src/providers/registry/mistral-api.ts:17`,
+commenté « Mistral Large 3 » dans le code). Aucun réglage ne le fixe à
+`mistral-large-4` sans modifier Elmo. Cet alias n'apparaît plus dans la
+documentation actuelle de Mistral. Au premier onboarding ou à la première
+analyse « Opportunités » :
+- si l'appel échoue (modèle inconnu), le noter et décider ensuite (aucun
+  fork d'Elmo) ;
+- s'il réussit, relever dans la console Mistral (Usage) le modèle
+  réellement facturé et le consigner dans le journal de la fenêtre.
+Ces appels ne passent pas par `prompt_runs` : la grille ne les compte
+pas, la limite Mistral à 8 $ les couvre.
 
 Mémoire Docker recommandée : 6 Go minimum alloués à Docker Desktop
 (Elmo web + Postgres + migration + worker ≈ 3 Go en charge ; Crawlie
@@ -168,21 +190,22 @@ cochées) à sauvegarder dans `~/oia-visibility-data/j0/elmo-prompts.png`.
 ## 5 · Modèles (décidés le 2026-11-07)
 
 Cinq moteurs : `gpt-6-luna`, `claude-sonnet-5-5` (identifiant vérifié sur
-platform.claude.com), `mistral-medium-latest`, et via OpenRouter
+platform.claude.com), `mistral-large-4` (remplaçant désigné par Mistral de
+Medium 3.5, déprécié au 2026-10-31), et via OpenRouter
 `google/gemini-3-flash-preview` et `perplexity/sonar`. Poser dans `.env` :
 
 ```
-SCRAPE_TARGETS=chatgpt:openai-api:gpt-6-luna:online,claude:anthropic-api:claude-sonnet-5-5:online,mistral:mistral-api:mistral-medium-latest:online,gemini:openrouter:google/gemini-3-flash-preview:online,perplexity:openrouter:perplexity/sonar:online
+SCRAPE_TARGETS=chatgpt:openai-api:gpt-6-luna:online,claude:anthropic-api:claude-sonnet-5-5:online,mistral:mistral-api:mistral-large-4:online,gemini:openrouter:google/gemini-3-flash-preview:online,perplexity:openrouter:perplexity/sonar:online
 ```
 
 Chaque modèle doit figurer dans la grille de prix de `cost-guard.sh`
 (`src/cost-grid.ts`). Grok n'est pas ajouté : il fera l'objet d'une
 fenêtre ultérieure, avec sa propre mesure de départ.
 
-Après le premier run Mistral, relever `prompt_runs.version` : c'est la
-version réellement servie derrière `mistral-medium-latest` (Medium 3.5
-annoncé déprécié au 2026-10-31 par Mistral). La consigner dans le journal
-de la fenêtre.
+Après le premier run Mistral, relever `prompt_runs.version` (la version
+que Mistral déclare avoir servie) et la consigner dans le journal de la
+fenêtre. Si elle n'est pas reconnue par la grille, `cost-guard.sh` arrête
+le worker : ajouter cette version à la grille avant de relancer.
 
 ## 6 · Démarrer le worker
 

@@ -22,7 +22,7 @@ engines:
   # propre mesure de départ : l'ajouter à une fenêtre en cours casserait la comparaison avec J0.
   # Via OpenRouter seulement dans Elmo 0.7.7 (x-ai/grok-4.5, seul Grok testé par Elmo).
   # - { model: grok,       collection: api, webSearch: true, note: "via OpenRouter, x-ai/grok-4.5" }
-  - { model: mistral,    collection: api, webSearch: true, note: "Mistral en direct (Conversations API + outil web_search). Mesuré en anglais pour le pilote J0 (langue unique du panel)." }
+  - { model: mistral,    collection: api, webSearch: true, note: "Mistral en direct, mistral-large-4 (Conversations API + outil web_search). Mesuré en anglais pour le pilote J0 (langue unique du panel)." }
 # Jev en direct chez TypeSafe (TYPESAFE_API_KEY, décision 2026-11-07 — voir elmo/.env.example).
 windows:
   - id: j0

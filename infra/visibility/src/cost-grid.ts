@@ -69,15 +69,16 @@ export const PRICE_GRID: PriceEntry[] = [
   },
   {
     provider: "mistral-api",
-    id: "mistral-medium-latest",
-    versions: /^mistral-medium(-latest|-\d{4}|-3-5(-\d{2}-\d{2})?)?$/,
+    id: "mistral-large-4",
+    // Mistral renvoie la version servie (`model` de la réponse), que garde Elmo.
+    versions: /^mistral-large-(4(-0)?(-\d{2}-\d{2})?|2610)$/,
     inputPerMTok: 0.7,
     outputPerMTok: 2.1,
     perSearchUsd: 0.03,
     maxSearchesPerRun: 3,
-    source: "docs.mistral.ai/inference/pricing : Medium absent, prix de Mistral Large 4 (remplaçant désigné) ; outil web_search non tarifé",
+    source: "docs.mistral.ai/models/mistral-large-4-0 et docs.mistral.ai/inference/pricing (0,70 $ / 2,10 $ par M) ; outil web_search : 0,03 $ provisoire",
     verifiedAt: "2026-11-07",
-    provisional: "prix de Mistral Medium et de l'outil web_search non publiés par Mistral au 2026-11-07",
+    provisional: "prix de l'outil web_search non publié par Mistral au 2026-11-07 ; se lira sur la première facture",
   },
   {
     provider: "openrouter",

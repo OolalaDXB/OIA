@@ -143,3 +143,29 @@ relevé. À ce prix, le pire cas Mistral (6,55 $) dépasse les 5 $ prépayés :
 les derniers appels seraient refusés, sans dépense au-delà.
 
 Tests : 230 passent, typage propre.
+
+## 6 · Mistral : `mistral-large-4` (option A, décision de Mickaël)
+
+- Cible : `mistral:mistral-api:mistral-large-4:online` dans
+  `.env.example`, `measurement.yaml`, `runbook-j0.md` (étapes 0, 2 et 5)
+  et `FOURNISSEURS.md` (§ 0 quater et § 1).
+- Grille de `cost-guard.sh` : l'entrée `mistral-medium-latest` est
+  remplacée par `mistral-large-4`, au prix officiel de 0,70 $ / 2,10 $ par M
+  (fiche docs.mistral.ai/models/mistral-large-4-0). Recherche web à 0,03 $,
+  prix provisoire signalé à chaque relevé. Un run encore servi en
+  `mistral-medium-latest` arrêterait le worker. Test ajouté (prix officiel,
+  coût d'un run type) ; les versions hors grille sont testées.
+- **Onboarding : non configurable.** Dans Elmo 0.7.7,
+  `ONBOARDING_LLM_TARGET` ne sert qu'à choisir le fournisseur
+  (`packages/lib/src/onboarding/llm.ts:39-46`). Le modèle est codé en dur,
+  `mistral-large-latest` (`packages/lib/src/providers/registry/mistral-api.ts:17`).
+  Je ne l'ai pas fixé, puisqu'il faudrait modifier Elmo. C'est signalé dans
+  le runbook (étape 3) comme point à vérifier au premier appel.
+- Limites : Mistral à 8 $. Pour rester sous les 30 $ au total, Anthropic
+  passe à 10 $ et TypeSafe à 2 $ au plus. Le pire cas Claude (≈ 11 $)
+  dépasserait légèrement la limite d'Anthropic : les derniers appels
+  seraient refusés, sans dépense au-delà.
+- Le prix de la recherche web de Mistral se lira sur la première facture,
+  à reporter alors dans `src/cost-grid.ts`.
+
+Tests : 231 passent, typage propre.
