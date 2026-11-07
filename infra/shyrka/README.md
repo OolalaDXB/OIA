@@ -134,6 +134,95 @@ des réponses, et si l'étape 4 a été faite : clarté de la voix, débit.
 ## Tests
 
 ```sh
-pnpm --filter @oia/shyrka test        # 34 tests, adaptateurs simulés et faux exécuteurs
+pnpm --filter @oia/shyrka test        # 56 tests, adaptateurs simulés et faux exécuteurs
 pnpm --filter @oia/shyrka parle -- --simule   # boucle complète simulée, sans matériel
 ```
+
+## Bloc B (mandat v6) : entretien, courrier, WhatsApp, paliers
+
+Tout est dans `packages/shyrka`, testé avec des adaptateurs simulés. Aucun
+message n'est lu ni envoyé tant que Mickaël n'a pas ouvert un palier.
+
+### Paliers de permission (`infra/shyrka/permissions.json`)
+
+Un palier par canal, dans l'ordre du cadre (CADRE.md, « Communications au nom
+de Mickaël ») :
+
+| Palier | Shyrka peut |
+|---|---|
+| `aucun` (valeur suivie) | rien |
+| `lire` | lire, trier et résumer les messages |
+| `preparer` | rédiger des brouillons, rangés côté messagerie, jamais envoyés |
+| `repondre-apres-validation` | envoyer un brouillon que Mickaël a validé ; la validation porte sur ce texte précis (empreinte SHA-256) |
+| `envoyer-seule` | envoyer seule pour les catégories déléguées par écrit (`delegations`) ; les autres demandent une validation |
+
+- `toujoursRemonter` liste les catégories qui demandent toujours une
+  validation, quel que soit le palier (séance 9).
+- `exclus` : domaines et numéros jamais lus, `swift.com` par défaut
+  (« les données de Swift et de ses clients n'entrent pas »).
+- Le champ `accordePar` doit valoir « Mickaël Thomas ». Avec un fichier
+  absent, invalide ou signé par un autre, tout reste fermé.
+- Le code lit ce fichier et ne l'écrit jamais.
+- Les catégories reprennent les douze messages fictifs de la séance 7. Les
+  paliers par catégorie se décident pendant cette séance.
+
+### Agent courrier et WhatsApp
+
+L'agent lit, trie (douze catégories), résume, prépare et envoie, à travers
+les paliers. Chaque lecture, tri, brouillon, envoi, refus ou exclusion est
+consigné dans un journal. Il refuse tout modèle qui n'est pas local (Ollama) :
+aucun message ne part chez un fournisseur.
+
+```sh
+pnpm --filter @oia/shyrka courrier -- --simule   # boîte fictive, modèle simulé
+pnpm --filter @oia/shyrka courrier               # boîte fictive, qwen3:8b local
+```
+
+Avec le fichier suivi (palier `aucun`), les deux canaux refusent : c'est
+attendu. Pour voir les paliers jouer, utiliser une copie locale :
+`SHYRKA_PERMISSIONS=~/oia-shyrka-data/permissions-essai.json`.
+
+**Il n'existe encore aucun adaptateur réel, ni pour l'e-mail ni pour
+WhatsApp.** Ces choix reviennent à Mickaël :
+
+- **E-mail.** Quelle boîte ? Les options sont IMAP/SMTP local (par exemple
+  Proton Mail Bridge, si la boîte est chez Proton), l'API Gmail, ou Mail.app
+  par AppleScript, en lecture seule d'abord.
+- **WhatsApp.** Il n'existe pas d'API officielle pour un compte personnel.
+  L'API WhatsApp Business Cloud demande un numéro professionnel dédié. Les
+  bibliothèques non officielles (WhatsApp Web) enfreignent les conditions
+  d'utilisation et exposent le compte à un blocage. À décider avant tout
+  code réel.
+
+### Mode entretien
+
+Shyrka mène une séance de `docs/shyrka/entretiens.md`, lu à chaque
+lancement : ce fichier reste la seule source des questions. La séance suit
+quatre temps :
+
+1. mise en route ;
+2. questions du thème, chacune suivie de sa relance (la relance prévue, ou
+   une relance générée selon les cinq techniques) ;
+3. contre-pied (« voici ce que j'ai compris, où est-ce que je me trompe ? ») ;
+4. clôture.
+
+À la fin, elle extrait règles, exemples et formules, tous « à valider ».
+
+```sh
+pnpm --filter @oia/shyrka entretien -- --seance 1 --simule   # déroulé simulé, rien d'écrit
+pnpm --filter @oia/shyrka entretien -- --seance 1 --texte    # réponses au clavier
+pnpm --filter @oia/shyrka entretien -- --seance 1            # réponses au micro (Whisper local)
+```
+
+- Pendant la séance, dire ou taper « passer » saute la question. « retirer :
+  motif » efface la réponse précédente ; seul le motif est gardé.
+- Une réponse au micro dure 120 s par défaut (`SHYRKA_ENTRETIEN_DUREE`),
+  300 s au plus. Aucun audio n'est conservé.
+- Sortie : `transcription.txt` et `fiche.md` (format de la fiche de séance),
+  dans `/Volumes/Shyrka-corpus/brut/entretiens/<date>_seance-NN_<thème>/` si
+  le volume chiffré est monté, sinon dans `~/oia-shyrka-data/entretiens/`, ou
+  dans `SHYRKA_CORPUS`. Le programme refuse d'écrire dans le dépôt et
+  n'écrase jamais une séance.
+- Une mention de Swift est signalée dans la fiche, rubrique « À nettoyer ».
+- La question est posée à voix haute seulement si l'identité en vigueur
+  autorise la voix ; en version 0, elle s'affiche.
