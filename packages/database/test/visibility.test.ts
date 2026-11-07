@@ -55,19 +55,29 @@ describe.skipIf(!postgresDisponible)("Visibility 0006 (Postgres jetable)", () =>
   });
   afterAll(() => b?.arreter());
 
-  it("témoin : vis 0004 échoue tel quel sur Supabase, où auth.uid() rend un uuid", () => {
+  it("vis 0004 s'applique comme sur Supabase : auth.uid() en uuid, migration par un rôle non superutilisateur", () => {
     b.sql("create database temoin");
-    // Base séparée : on rejoue l'émulation puis vis 0001 à 0004 dans une transaction annulée.
-    const sql = [readFileSync(chemin("./pg/supabase-emulation.sql"), "utf8").replace(/^create role .*$/gm, "").replace(/^grant anon.*$/gm, ""),
-      ...["0001_evidence", "0002_decision_journal", "0003_client_action_log", "0004_auth_identity"].map((n) => readFileSync(VIS(n), "utf8"))].join("\n");
-    expect(erreur(b, `\\c temoin\nbegin;\n${sql}\nrollback;`)).toMatch(/operator does not exist: text = uuid/);
+    // Base séparée, transaction annulée. Comme sur Supabase : le schéma auth appartient à un autre
+    // rôle, et le rôle qui migre a CREATEROLE et BYPASSRLS sans être superutilisateur.
+    const emulation = readFileSync(chemin("./pg/supabase-emulation.sql"), "utf8").replace(/^create role .*$/gm, "").replace(/^grant anon.*$/gm, "");
+    const vis = ["0001_evidence", "0002_decision_journal", "0003_client_action_log", "0004_auth_identity"].map((n) => readFileSync(VIS(n), "utf8"));
+    const sortie = b.sql(`\\c temoin
+      begin;
+      ${emulation}
+      create role migrateur nologin createrole bypassrls;
+      grant create on database temoin to migrateur;
+      grant create on schema public to migrateur;
+      grant usage on schema auth to migrateur;
+      set role migrateur;
+      ${vis.join("\n")}
+      select string_agg(distinct pg_get_userbyid(c.relowner), ',') from pg_class c join pg_namespace n on n.oid = c.relnamespace where n.nspname = 'vis' and c.relkind = 'r';
+      -- Le rôle qui migre garde l'accès aux tables cédées (ses fonctions security definer en dépendent).
+      select count(*) from vis.client_member;
+      rollback;`);
+    expect(sortie.split("\n").slice(-2)).toEqual(["vis_admin", "0"]);
   });
 
-  it("installation : vis 0001 à 0004 (auth.uid() en texte, comme 0004 l'exige), puis 0006 et la démonstration", () => {
-    // vis 0004 suppose auth.uid() de type texte. On l'émule ainsi, en lisant le même JWT.
-    b.sql(`drop function auth.uid();
-      create function auth.uid() returns text language sql stable as $$ select nullif(current_setting('request.jwt.claim.sub', true), '') $$;
-      grant execute on function auth.uid() to anon, authenticated, service_role;`);
+  it("installation : vis 0001 à 0004 (auth.uid() en uuid, comme sur Supabase), puis 0006 et la démonstration", () => {
     for (const n of ["0001_evidence", "0002_decision_journal", "0003_client_action_log", "0004_auth_identity"]) b.fichier(VIS(n));
     b.fichier(chemin("../supabase/migrations/0006_visibility_vues.sql"));
     b.fichier(chemin("../demo/visibility-demo.sql"));

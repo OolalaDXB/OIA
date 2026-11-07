@@ -18,6 +18,14 @@
 --     fichier **émule** `auth.uid()` : une fonction qui lit le GUC
 --     `vis.test_user_id` (clairement documentée comme utilisée seulement
 --     en test, et neutralisée en production par un commentaire).
+--   * sur Supabase, `auth.uid()` rend un **uuid** ; `vis.client_member.user_id`
+--     est du texte. Toutes les comparaisons et affectations utilisent donc
+--     `auth.uid()::text`, qui marche avec les deux types (uuid sur Supabase,
+--     texte dans l'émulation locale) ;
+--   * sur Supabase, la migration tourne sous `postgres`, qui n'est pas
+--     superutilisateur et ne possède pas le schéma `auth` : rien ici ne
+--     modifie `auth` hors de l'émulation, et le rôle qui migre reçoit
+--     `vis_admin` (section 5) avant de lui céder les tables ;
 --   * la migration est rejouable (`IF NOT EXISTS`, `CREATE OR REPLACE`).
 --   * aucune table de 0001-0003 n'est renommée ni supprimée ;
 --     `vis.current_client_id()` reste présente pour compatibilité, mais
@@ -49,6 +57,8 @@ begin
       $body$;
     comment on function auth.uid() is
       'Émulation locale pour tests : lit vis.test_user_id. Sur Supabase, auth.uid() est déjà fourni par la plateforme et lit le JWT.';
+    -- Seulement ici : sur Supabase, le schéma auth appartient à la plateforme.
+    comment on schema auth is 'Supabase auth schema (émulé localement pour tests).';
   end if;
 end $$;
 
@@ -79,13 +89,13 @@ create or replace function vis.caller_role(target_client text) returns text
 language sql stable security invoker as $$
   select role
     from vis.client_member
-   where user_id = auth.uid()
+   where user_id = auth.uid()::text
      and client_id = target_client
 $$;
 
 create or replace function vis.caller_is_service() returns boolean
 language sql stable security invoker as $$
-  select exists(select 1 from vis.service_identity where user_id = auth.uid())
+  select exists(select 1 from vis.service_identity where user_id = auth.uid()::text)
 $$;
 
 -- ------------------------------------------------------------------
@@ -122,45 +132,45 @@ end $$;
 create policy tenant_isolation_auth on vis.evidence
   for all
   using  (exists (select 1 from vis.client_member m
-                   where m.user_id = auth.uid() and m.client_id = vis.evidence.client_id))
+                   where m.user_id = auth.uid()::text and m.client_id = vis.evidence.client_id))
   with check (exists (select 1 from vis.client_member m
-                       where m.user_id = auth.uid() and m.client_id = vis.evidence.client_id
+                       where m.user_id = auth.uid()::text and m.client_id = vis.evidence.client_id
                          and m.role in ('owner','approver')));
 
 create policy tenant_isolation_auth on vis.subject
   for all
   using  (exists (select 1 from vis.client_member m
-                   where m.user_id = auth.uid() and m.client_id = vis.subject.client_id))
+                   where m.user_id = auth.uid()::text and m.client_id = vis.subject.client_id))
   with check (exists (select 1 from vis.client_member m
-                       where m.user_id = auth.uid() and m.client_id = vis.subject.client_id
+                       where m.user_id = auth.uid()::text and m.client_id = vis.subject.client_id
                          and m.role in ('owner','approver')));
 
 create policy tenant_isolation_auth on vis.site
   for all
   using  (exists (select 1 from vis.client_member m
-                   where m.user_id = auth.uid() and m.client_id = vis.site.client_id))
+                   where m.user_id = auth.uid()::text and m.client_id = vis.site.client_id))
   with check (exists (select 1 from vis.client_member m
-                       where m.user_id = auth.uid() and m.client_id = vis.site.client_id
+                       where m.user_id = auth.uid()::text and m.client_id = vis.site.client_id
                          and m.role in ('owner','approver')));
 
 create policy tenant_isolation_auth on vis.window
   for all
   using  (exists (select 1 from vis.subject s
                    join vis.client_member m on m.client_id = s.client_id
-                   where s.id = vis.window.subject_id and m.user_id = auth.uid()))
+                   where s.id = vis.window.subject_id and m.user_id = auth.uid()::text))
   with check (exists (select 1 from vis.subject s
                        join vis.client_member m on m.client_id = s.client_id
-                       where s.id = vis.window.subject_id and m.user_id = auth.uid()
+                       where s.id = vis.window.subject_id and m.user_id = auth.uid()::text
                          and m.role in ('owner','approver')));
 
 create policy tenant_isolation_auth on vis.subject_site
   for all
   using  (exists (select 1 from vis.subject s
                    join vis.client_member m on m.client_id = s.client_id
-                   where s.id = vis.subject_site.subject_id and m.user_id = auth.uid()))
+                   where s.id = vis.subject_site.subject_id and m.user_id = auth.uid()::text))
   with check (exists (select 1 from vis.subject s
                        join vis.client_member m on m.client_id = s.client_id
-                       where s.id = vis.subject_site.subject_id and m.user_id = auth.uid()
+                       where s.id = vis.subject_site.subject_id and m.user_id = auth.uid()::text
                          and m.role in ('owner','approver')));
 
 create policy tenant_isolation_auth on vis.window_missing_day
@@ -168,43 +178,43 @@ create policy tenant_isolation_auth on vis.window_missing_day
   using  (exists (select 1 from vis.window w
                    join vis.subject s on s.id = w.subject_id
                    join vis.client_member m on m.client_id = s.client_id
-                   where w.id = vis.window_missing_day.window_id and m.user_id = auth.uid()))
+                   where w.id = vis.window_missing_day.window_id and m.user_id = auth.uid()::text))
   with check (exists (select 1 from vis.window w
                        join vis.subject s on s.id = w.subject_id
                        join vis.client_member m on m.client_id = s.client_id
-                       where w.id = vis.window_missing_day.window_id and m.user_id = auth.uid()
+                       where w.id = vis.window_missing_day.window_id and m.user_id = auth.uid()::text
                          and m.role in ('owner','approver')));
 
 create policy tenant_isolation_auth on vis.recommendation
   for all
   using  (exists (select 1 from vis.client_member m
-                   where m.user_id = auth.uid() and m.client_id = vis.recommendation.client_id))
+                   where m.user_id = auth.uid()::text and m.client_id = vis.recommendation.client_id))
   with check (exists (select 1 from vis.client_member m
-                       where m.user_id = auth.uid() and m.client_id = vis.recommendation.client_id
+                       where m.user_id = auth.uid()::text and m.client_id = vis.recommendation.client_id
                          and m.role in ('owner','approver')));
 
 create policy tenant_isolation_auth on vis.decision
   for all
   using  (exists (select 1 from vis.client_member m
-                   where m.user_id = auth.uid() and m.client_id = vis.decision.client_id))
+                   where m.user_id = auth.uid()::text and m.client_id = vis.decision.client_id))
   with check (exists (select 1 from vis.client_member m
-                       where m.user_id = auth.uid() and m.client_id = vis.decision.client_id
+                       where m.user_id = auth.uid()::text and m.client_id = vis.decision.client_id
                          and m.role in ('owner','approver')));
 
 create policy tenant_isolation_auth on vis.execution
   for all
   using  (exists (select 1 from vis.client_member m
-                   where m.user_id = auth.uid() and m.client_id = vis.execution.client_id))
+                   where m.user_id = auth.uid()::text and m.client_id = vis.execution.client_id))
   with check (exists (select 1 from vis.client_member m
-                       where m.user_id = auth.uid() and m.client_id = vis.execution.client_id
+                       where m.user_id = auth.uid()::text and m.client_id = vis.execution.client_id
                          and m.role in ('owner','approver')));
 
 create policy tenant_isolation_auth on vis.action_log
   for all
   using  (exists (select 1 from vis.client_member m
-                   where m.user_id = auth.uid() and m.client_id = vis.action_log.client_id))
+                   where m.user_id = auth.uid()::text and m.client_id = vis.action_log.client_id))
   with check (exists (select 1 from vis.client_member m
-                       where m.user_id = auth.uid() and m.client_id = vis.action_log.client_id
+                       where m.user_id = auth.uid()::text and m.client_id = vis.action_log.client_id
                          and m.role in ('owner','approver')));
 
 -- ------------------------------------------------------------------
@@ -230,7 +240,7 @@ declare
   cid         text;
   new_id      bigint;
 begin
-  caller_uid := auth.uid();
+  caller_uid := auth.uid()::text;
   if caller_uid is null then
     raise exception 'validate_recommendation refusée : aucun auth.uid()' using errcode = 'insufficient_privilege';
   end if;
@@ -275,7 +285,7 @@ drop policy if exists tenant_isolation_auth on vis.scheduler_switch;
 create policy tenant_isolation_auth on vis.scheduler_switch
   for select
   using (exists (select 1 from vis.client_member m
-                  where m.user_id = auth.uid() and m.client_id = vis.scheduler_switch.client_id));
+                  where m.user_id = auth.uid()::text and m.client_id = vis.scheduler_switch.client_id));
 
 create or replace function vis.toggle_scheduler(
   target_client text,
@@ -291,7 +301,7 @@ declare
   caller_uid text;
   role_       text;
 begin
-  caller_uid := auth.uid();
+  caller_uid := auth.uid()::text;
   if caller_uid is null then
     raise exception 'toggle_scheduler refusée : aucun auth.uid()' using errcode = 'insufficient_privilege';
   end if;
@@ -327,7 +337,7 @@ drop policy if exists tenant_isolation_auth on vis.client;
 create policy tenant_isolation_auth on vis.client
   for select
   using (exists (select 1 from vis.client_member m
-                  where m.user_id = auth.uid() and m.client_id = vis.client.id));
+                  where m.user_id = auth.uid()::text and m.client_id = vis.client.id));
 
 -- Rôles : crée `vis_admin` (propriétaire des tables) et retire TRUNCATE,
 -- ALTER, TRIGGER ... aux rôles applicatifs. En production (Supabase), on
@@ -346,7 +356,25 @@ end $$;
 -- de la contrainte, c'est-à-dire le propriétaire de la table cible. Il
 -- faut donc que vis_admin ait USAGE sur le schéma, sinon un INSERT fera
 -- « permission denied for schema vis » à l'évaluation de la FK.
-grant usage on schema vis to vis_admin;
+-- CREATE : Postgres exige que le nouveau propriétaire d'une table puisse
+-- créer dans son schéma (un superutilisateur passe outre, pas Supabase).
+grant usage, create on schema vis to vis_admin;
+-- Céder une table exige de pouvoir prendre le rôle cible (SET ROLE). Sur
+-- Supabase, `postgres` n'est pas superutilisateur : depuis Postgres 16, le
+-- créateur d'un rôle n'en reçoit que l'option ADMIN, sans SET ni INHERIT.
+-- On lui accorde donc vis_admin avec héritage : il garde l'accès aux tables
+-- cédées, et les fonctions security definer qu'il possède continuent de
+-- fonctionner. Sans effet pour un superutilisateur (tests locaux).
+do $$
+begin
+  if not (select rolsuper from pg_roles where rolname = current_user) then
+    if current_setting('server_version_num')::int >= 160000 then
+      execute format('grant vis_admin to %I with inherit true, set true', current_user);
+    else
+      execute format('grant vis_admin to %I', current_user);
+    end if;
+  end if;
+end $$;
 do $$
 declare
   t text;
@@ -456,7 +484,7 @@ declare
   caller_role text;
   result     jsonb;
 begin
-  caller_uid := auth.uid();
+  caller_uid := auth.uid()::text;
   if caller_uid is null then
     raise exception 'vis.client_summary refusée : aucun auth.uid()' using errcode = 'insufficient_privilege';
   end if;
@@ -475,6 +503,5 @@ begin
 end;
 $$;
 
-comment on schema auth is 'Supabase auth schema (émulé localement pour tests).';
 comment on table vis.client_member is 'S1 : table d''appartenance. Remplace current_setting(vis.client_id) par une vérification fondée sur auth.uid().';
 comment on table vis.service_identity is 'S2 : identités de service déclarées explicitement. Les fonctions d''approbation refusent toute user_id listée ici.';

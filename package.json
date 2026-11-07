@@ -20,7 +20,9 @@
     "vis:j0-watch:remove": "bash infra/visibility/scripts/j0-watch.sh remove coach-gari",
     "vis:j0-close": "bash infra/visibility/scripts/j0-close.sh coach-gari",
     "vis:j0-report": "bash infra/visibility/scripts/j0-report.sh report coach-gari",
-    "vis:j0-verify": "bash infra/visibility/scripts/j0-report.sh verify coach-gari"
+    "vis:j0-verify": "bash infra/visibility/scripts/j0-report.sh verify coach-gari",
+    "shyrka:parler": "pnpm --filter @oia/shyrka parler",
+    "shyrka:resume": "pnpm --filter @oia/shyrka resume"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
