@@ -49,7 +49,8 @@ function lancer(copie: Copie, cmd: string[], delaiMs: number): Commande {
   const t0 = Date.now();
   const r = spawnSync("sandbox-exec", ["-p", profilBacASable(copie.dossier), ...cmd], { cwd: copie.racine, env: { ...envExpurge(), TMPDIR: copie.dossier }, encoding: "utf8", timeout: delaiMs, maxBuffer: 32 * 1024 * 1024 });
   const sortie = `${r.stdout ?? ""}${r.stderr ?? ""}`.replace(/\x1b\[[0-9;]*m/g, "");
-  const echecs = [...new Set([...sortie.matchAll(/^\s*(?:×|FAIL)\s+(.+?)(?:\s+\d+ms)?$/gm)].map((m) => m[1]!.trim()))];
+  // Un même échec apparaît sous deux formes (« × nom » et « FAIL fichier > nom ») : on garde le nom sans le fichier.
+  const echecs = [...new Set([...sortie.matchAll(/^\s*(?:×|FAIL)\s+(.+?)(?:\s+\d+ms)?$/gm)].map((m) => m[1]!.trim().replace(/^[\w./-]+\.test\.ts > /, "")))];
   const resume = (sortie.match(/^\s*(Tests|Test Files)\s+.+$/gm) ?? []).map((l) => l.trim()).join(" ; ") || (sortie.match(/error TS\d+/g) ?? []).slice(0, 3).join(", ");
   return { commande: cmd.join(" "), code: r.status ?? -1, duree_ms: Date.now() - t0, echecs, resume };
 }
@@ -90,8 +91,19 @@ export function verifierCandidat(m: Mission, patch: string, opts: { executer?: b
       rapport.commandes.reference.push(lancer(reference, c, opts.delaiMs ?? 600_000));
       rapport.commandes.candidat.push(lancer(candidat, c, opts.delaiMs ?? 600_000));
     }
-    const echecsRef = new Set(rapport.commandes.reference.flatMap((c) => c.echecs));
-    rapport.nouveauxEchecs = rapport.commandes.candidat.flatMap((c) => c.echecs).filter((e) => !echecsRef.has(e));
+    let echecsRef = new Set(rapport.commandes.reference.flatMap((c) => c.echecs));
+    rapport.nouveauxEchecs = [...new Set(rapport.commandes.candidat.flatMap((c) => c.echecs))].filter((e) => !echecsRef.has(e));
+    if (rapport.nouveauxEchecs.length) {
+      // Un échec nouveau est rejoué une fois sur les deux copies : il ne compte que s'il échoue de nouveau
+      // sur le candidat et jamais sur la référence. Sinon il est déclaré instable (et non ignoré en silence).
+      const ref2 = m.perimetre.commandes.map((c) => lancer(reference, c, opts.delaiMs ?? 600_000));
+      const cand2 = m.perimetre.commandes.map((c) => lancer(candidat, c, opts.delaiMs ?? 600_000));
+      echecsRef = new Set([...echecsRef, ...ref2.flatMap((c) => c.echecs)]);
+      const encore = new Set(cand2.flatMap((c) => c.echecs));
+      const instables = rapport.nouveauxEchecs.filter((e) => echecsRef.has(e) || !encore.has(e));
+      rapport.nouveauxEchecs = rapport.nouveauxEchecs.filter((e) => !instables.includes(e));
+      if (instables.length) rapport.limites.push(`test(s) instable(s) dans le bac à sable, rejoués une fois et écartés : ${instables.join(" | ")}`);
+    }
     const typecheckCasse = rapport.commandes.candidat.some((c, i) => c.code !== 0 && rapport.commandes.reference[i]!.code === 0 && c.echecs.length === 0);
     rapport.garde.push({ regle: "tests et typecheck sans échec nouveau", ok: rapport.nouveauxEchecs.length === 0 && !typecheckCasse, detail: rapport.nouveauxEchecs.length ? rapport.nouveauxEchecs.join(" | ").slice(0, 600) : typecheckCasse ? "une commande échoue sans échec de test nommé (typecheck ?)" : `référence : ${rapport.commandes.reference.map((c) => c.resume).join(" / ")} ; candidat : ${rapport.commandes.candidat.map((c) => c.resume).join(" / ")}` });
     if (!rapport.garde.at(-1)!.ok) {

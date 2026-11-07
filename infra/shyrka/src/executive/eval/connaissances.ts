@@ -29,7 +29,7 @@ export const JeuRecherche = z.object({
   })).min(1),
 });
 
-function cli(args: string[], env: NodeJS.ProcessEnv = {}): { code: number; sortie: string } {
+export function cli(args: string[], env: NodeJS.ProcessEnv = {}): { code: number; sortie: string } {
   const tsx = `${RACINE_DEPOT}/infra/shyrka/node_modules/.bin/tsx`;
   const r = spawnSync(tsx, [`${RACINE_DEPOT}/infra/shyrka/src/executive/cli.ts`, ...args], { cwd: RACINE_DEPOT, encoding: "utf8", env: { ...process.env, ...env }, timeout: 60_000 });
   return { code: r.status ?? -1, sortie: (r.stdout ?? "").trim() };

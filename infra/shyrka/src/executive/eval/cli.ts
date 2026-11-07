@@ -3,6 +3,9 @@ import { join } from "node:path";
 import { REGLAGES } from "../config.js";
 import { Missions } from "../missions.js";
 import { BaseOps } from "../operations.js";
+import { comparerMethodes, texteComparaison } from "./modeles.js";
+import { evaluerLangues, texteMatrice } from "./langues.js";
+import { cli } from "./connaissances.js";
 import { chargerCapacites, executerCapacite, resultats, statutCapacite, texteResultat, type EtatCapacite, type StatutCapacite } from "./registre.js";
 
 /**
@@ -55,7 +58,7 @@ export function rapportCapacites(): EtatCapacite[] {
   return chargerCapacites().map((c) => statutCapacite(c, tous, EXECUTABLES.includes(c.id) || c.id === "routage.continuite" ? undefined : externes[c.id]));
 }
 
-export function commandeEval(args: string[]): number {
+export async function commandeEval(args: string[]): Promise<number> {
   const [sous, ...reste] = args;
   const opt = (k: string) => {
     const i = reste.indexOf(k);
@@ -81,6 +84,22 @@ export function commandeEval(args: string[]): number {
     if (json) console.log(JSON.stringify(sortie, null, 2));
     return 0;
   }
+  if (sous === "modeles") {
+    const ensemble = opt("--ensemble");
+    const r = await comparerMethodes(ensemble ? [ensemble] : undefined);
+    console.log(json ? JSON.stringify(r, null, 2) : r.map(texteComparaison).join("\n"));
+    return 0;
+  }
+  if (sous === "langues") {
+    // Rappel multilingue mesuré sur le vrai volume : un fait fictif retenu en français, demandé dans chaque langue.
+    const env = { SHYRKA_MEMOIRE_SOUS_DOSSIER: `recette/langues-${Date.now()}` };
+    const r = cli(["memoire", "retenir", "Recette fictive : le banc d'essai de Shyrka s'appelle Héron"], env);
+    const id = r.code === 0 ? (JSON.parse(r.sortie) as { id: string }).id : null;
+    const rappel = id ? (q: string) => cli(["memoire", "chercher", q], env).sortie.includes(id) : undefined;
+    const m = await evaluerLangues({ ...(rappel ? { rappel } : {}), ...(opt("--langue") ? { langues: [opt("--langue")!] } : {}) });
+    console.log(json ? JSON.stringify(m, null, 2) : texteMatrice(m));
+    return 0;
+  }
   if (sous === "report") {
     const r = rapportCapacites();
     if (json) {
@@ -94,6 +113,6 @@ export function commandeEval(args: string[]): number {
     }
     return 0;
   }
-  console.log("Usage : pnpm shyrka:executive eval run [routage.decisions|memoire.rappel|recherche.sourcee] [--ensemble developpement|regression|tenu] [--code <copie>] [--json]\n        pnpm shyrka:executive eval report [--json]");
+  console.log("Usage : pnpm shyrka:executive eval run [routage.decisions|memoire.rappel|recherche.sourcee] [--ensemble developpement|regression|tenu] [--code <copie>] [--json]\n        pnpm shyrka:executive eval report [--json]\n        pnpm shyrka:executive eval modeles [--ensemble e]   règles du code vs modèle local, mêmes jeux");
   return 2;
 }

@@ -16,6 +16,7 @@ import { collecter } from "./veille.js";
 import { verifier } from "./verification.js";
 import { commandeEval } from "./eval/cli.js";
 import { commandeDispatch } from "./dispatch-cli.js";
+import { commandeExperiences } from "./experiences-cli.js";
 
 /**
  * pnpm shyrka:executive <commande> — Shyrka exécutive (mandat v10).
@@ -42,6 +43,7 @@ function aide(): number {
   acceptance                     recette automatisée, sans appel payant ni mutation de production
   memoire …                      retenir | lister | chercher | corriger | oublier | exporter | restaurer | etat
   dispatch executeurs | diagnostic | preparer | soumettre | revue | approuver   dispatcher borné, copie isolée, aucune intégration à main
+  experiences list | show | rappeler | comparer | statut | invalider | correction   carnet d'apprentissage (volume chiffré)
   eval run [capacite] | report   banc d'évaluation (développement, régression, tenu à l'écart) et registre des capacités`);
   return 2;
 }
@@ -542,6 +544,8 @@ async function main(): Promise<number> {
       return commandeEval(rest);
     case "dispatch":
       return commandeDispatch(rest);
+    case "experiences":
+      return commandeExperiences(rest);
     default:
       return aide();
   }
