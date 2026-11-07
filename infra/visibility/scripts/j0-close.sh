@@ -66,7 +66,10 @@ freeze() {
 stop_worker() { elmo_dc stop worker; }
 backup() {
   local out
-  out="$(OIA_VIS_ONLY=elmo "$VIS_ROOT/backup.sh" | tee /dev/stderr | sed -n 's/^Sauvegarde : //p' | tail -1)"
+  # Journal plutôt que `tee /dev/stderr`, indisponible hors terminal (CI, launchd).
+  OIA_VIS_ONLY=elmo "$VIS_ROOT/backup.sh" > "$state/backup.log" 2>&1 || { cat "$state/backup.log" >&2; return 1; }
+  cat "$state/backup.log"
+  out="$(sed -n 's/^Sauvegarde : //p' "$state/backup.log" | tail -1)"
   [ -n "$out" ] && [ -s "$out/elmo.dump" ] || { echo "sauvegarde introuvable ou vide" >&2; return 1; }
   echo "$out" > "$state/backup-dir.txt"
 }
