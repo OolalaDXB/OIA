@@ -41,7 +41,7 @@ est le seul lien entre les deux.
   servie au moins 30 jours. Le changement est consigné dans ce document.
 - **Exemples fictifs** : les valeurs ci-dessous sont inventées.
 
-Migrations : `packages/database/supabase/migrations/0003` à `0005`, à relire
+Migrations : `packages/database/supabase/migrations/0003` à `0005`, appliquées en production le 8 novembre 2026 (mandat v9). Texte d'origine :
 par Mickaël, non appliquées. Décision du 2026-11-08 : elles attendent
 l'application Lovable ; d'ici là, `0002a` réserve les tables aux comptes de
 Mickaël et la console garde son stockage local.
