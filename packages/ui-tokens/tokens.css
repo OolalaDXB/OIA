@@ -1,0 +1,43 @@
+/* Jetons de design d'OIA, style « Salon, version sobre ».
+ * Fichier généré depuis packages/ui-tokens/src/tokens.ts : ne pas modifier à la main.
+ * Régénérer : pnpm --filter @oia/ui-tokens css */
+:root {
+  --oia-fond: oklch(1 0 0);
+  --oia-encre: oklch(0.207 0.031 265);
+  --oia-carte: oklch(1 0 0);
+  --oia-primaire: oklch(0.278 0.03 257);
+  --oia-primaire-texte: oklch(1 0 0);
+  --oia-attenue: oklch(0.97 0.004 265);
+  --oia-texte-attenue: oklch(0.446 0.03 257);
+  --oia-tertiaire: oklch(0.551 0.027 264);
+  --oia-bordure: oklch(0.928 0.006 265);
+  --oia-champ: oklch(0.87 0.012 265);
+  --oia-anneau: oklch(0.372 0.03 260);
+  --oia-piste: oklch(0.97 0.004 265);
+  --oia-barre: oklch(0.372 0.03 260);
+  --oia-destructif: oklch(0.55 0.09 25);
+  --oia-etat-conforme: oklch(0.62 0.045 160);
+  --oia-etat-verifier: oklch(0.65 0.06 75);
+  --oia-etat-bloquant: oklch(0.53 0.09 25);
+  --oia-module-visibility: oklch(0.462373 0.055433 245.539226);
+  --oia-module-opportunites: oklch(0.564883 0.049636 156.519703);
+  --oia-module-crm: oklch(0.529808 0.051113 268.175454);
+  --oia-module-portefeuille: oklch(0.518526 0.071025 38.498519);
+  --oia-module-data: oklch(0.561963 0.028981 84.557025);
+  --oia-module-training: oklch(0.562271 0.046249 59.523245);
+  --oia-module-personnel: oklch(0.538275 0.043548 291.412159);
+  --oia-module-tenders: oklch(0.602318 0.071609 75.419472);
+  --oia-module-signals: oklch(0.509286 0.052596 202.538812);
+  --oia-shyrka-nuit: oklch(0.191770 0.035371 261.303071);
+  --oia-shyrka-lumiere: oklch(0.88 0.065 215);
+  --oia-shyrka-particule: oklch(0.66 0.18 250);
+  --oia-police-famille: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --oia-police-graisse-titre: 500;
+  --oia-police-approche-titre: 0;
+  --oia-police-chiffres: tabular-nums;
+  --oia-rayon-base: 6px;
+  --oia-rayon-petit: 2px;
+  --oia-rayon-moyen: 4px;
+  --oia-rayon-grand: 10px;
+  --oia-ombre-carte: 0 1px 2px rgba(16, 24, 40, 0.06);
+}
