@@ -1,5 +1,31 @@
 # À faire au retour · J0 Coach Gari · 2026-11-07
 
+> **Mise à jour du 2026-11-07, 18 h UTC : J0 tourne** (démarré à 15:27
+> UTC, premier passage complet, tâche quotidienne installée). Les étapes
+> 1 à 4 ci-dessous sont faites ; elles restent ici pour l'historique.
+>
+> **À lire en premier : le gel du site est rompu.** Le contrôle
+> d'intégrité (`scripts/freeze-check.sh`), en lecture seule de
+> `~/CoachGari`, trouve trois commits après la décision du gel (5 nov.),
+> poussés par une autre session Claude :
+>
+> - **`710b4dd`** (7 nov., 08:54 UTC, avant J0) : « Publish the four service
+>   pages: indexable, in the sitemap ». Le `noindex` des quatre pages de
+>   service est retiré et elles entrent dans le sitemap.
+> - **`d89380b`** (7 nov., 09:24 UTC, avant J0) : section « District 267 »
+>   ajoutée à la page padel.
+> - **`a7ac6a7`** (7 nov., 15:56 UTC, **pendant J0**, 29 min après le
+>   démarrage) : texte « About » de la page d'accueil réécrit.
+>
+> J0 mesure donc un site dont les pages de service sont indexables depuis
+> quelques heures (Google ne les a sans doute pas encore vues), et dont la
+> page d'accueil a changé pendant la fenêtre. Rien n'a été modifié côté
+> OIA ni dans le dépôt du site. À décider : ces commits sont-ils en ligne
+> (Vercel) ? Faut-il annuler, laisser et consigner comme perturbation, ou
+> relancer une mesure de départ après stabilisation ? Le fait
+> `f-site-service-pages-noindex` de `facts.yaml` n'est plus vrai.
+
+
 **J0 n'est pas lancé.** Il bloque sur une seule étape que toi seul peux
 faire : **créer ton compte dans Elmo** (ton email, ton mot de passe). Tout
 le reste est prêt et vérifié. Ensuite, deux commandes suffisent.

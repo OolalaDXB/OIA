@@ -1,0 +1,25 @@
+# Surface publique du site gelée pendant une fenêtre de mesure (contrôle de
+# fin de fenêtre de vis:j0-close, mandat v7 bloc C). Liste reprise de l'audit
+# audits/2026-11-08/integrite-j0.md. Lecture seule du dépôt local du site.
+repoPath: "~/CoachGari"
+branch: main
+# Début du gel (measurement.yaml, freeze-j0, decidedAt) : toute publication de la
+# surface publique entre cette date et la fin de la fenêtre rompt le gel.
+freezeSince: "2026-11-05"
+publicFiles:
+  - index.html
+  - online-coaching.html
+  - personal-training-dubai.html
+  - padel-coaching-dubai.html
+  - corporate-wellness-dubai.html
+  - robots.txt
+  - sitemap.xml
+  - manifest.webmanifest
+  - legal.html
+  - privacy.html
+# Pages de service qui doivent rester en noindex jusqu'à la décision de Mickaël.
+noindexFiles:
+  - online-coaching.html
+  - personal-training-dubai.html
+  - padel-coaching-dubai.html
+  - corporate-wellness-dubai.html

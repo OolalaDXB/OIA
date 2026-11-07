@@ -1,0 +1,13 @@
+# Mots-clés du contrôle des faits en première passe déterministe (src/j0-report.ts),
+# par fait VALIDÉ de facts.yaml. Les réponses sont en anglais : mots-clés anglais.
+# Aucune contradiction déclarée : à compléter par Mickaël s'il en connaît (ex. une
+# ville où Coach Gari n'exerce pas).
+facts:
+  - { id: f-identity, keywords: ["personal trainer", "fitness coach", "strength coach", "coach"] }
+  - { id: f-offer-online, keywords: ["online coaching", "online training", "online coach"] }
+  - { id: f-offer-padel, keywords: ["padel"] }
+  - { id: f-location, keywords: ["Dubai"] }
+  - { id: f-audience, keywords: ["Zimbabwe", "southern Africa", "Harare"] }
+  - { id: f-profile-instagram, keywords: ["instagram.com/coach_gari28", "@coach_gari28"] }
+  - { id: f-profile-tiktok, keywords: ["tiktok.com/@coach_gari28"] }
+  - { id: f-profile-myoolala, keywords: ["myoolala.com/u/coachgari28"] }
