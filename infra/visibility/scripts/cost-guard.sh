@@ -5,8 +5,13 @@
 #   ./scripts/cost-guard.sh             un relevé
 #   ./scripts/cost-guard.sh --watch 60  relevé toutes les 60 s (pendant une fenêtre)
 #
-# Coût retenu = max(estimation Elmo du mois, coût réel connu du mois), où :
-#   - estimation Elmo : somme de usage_events.estimated_cost_usd du mois UTC ;
+# Coût retenu = max(estimation Elmo, grille de prix, coût réel connu), où :
+#   - estimation Elmo : somme de usage_events.estimated_cost_usd du mois UTC
+#     (forfait par fournisseur : sous-estime claude-sonnet-5-5) ;
+#   - grille de prix : coût de chaque run du mois recalculé à partir de ses
+#     compteurs de tokens et de recherches (prompt_runs.raw_output) et des prix
+#     officiels des modèles retenus (src/cost-grid.ts). Un modèle absent de la
+#     grille arrête le worker ; un run échoué compte au majorant ;
 #   - réel OpenRouter : GET /api/v1/key -> usage (Gemini, Perplexity, Jev).
 #     OpenRouter ne distingue pas aujourd'hui "mois en cours" sur /key : la
 #     valeur lue est le cumul retourné par l'API, utilisé comme borne basse.
@@ -25,17 +30,55 @@
 # automatique chez chaque fournisseur (voir FOURNISSEURS.md).
 set -euo pipefail
 source "$(dirname "$0")/lib.sh"
-require_env "$ELMO_ENV_FILE"
+[ -n "${OIA_VIS_COST_GUARD_DRYRUN:-}" ] || require_env "$ELMO_ENV_FILE"
 envval() { awk -F= -v k="$1" '$1==k{sub(/^[^=]*=/,""); print; exit}' "$ELMO_ENV_FILE"; }
 cap="${OIA_VIS_MONTHLY_CAP_USD:-$(envval OIA_VIS_MONTHLY_CAP_USD)}"; cap="${cap:-30}"
 alert="${OIA_VIS_MONTHLY_ALERT_USD:-$(envval OIA_VIS_MONTHLY_ALERT_USD)}"; alert="${alert:-24}"
 source_mode="${OIA_VIS_COST_SOURCE:-$(envval OIA_VIS_COST_SOURCE)}"; source_mode="${source_mode:-max}"
 case "$source_mode" in max|estimate|real) ;; *) echo "OIA_VIS_COST_SOURCE: max, estimate ou real" >&2; exit 2;; esac
 # Dry run: no docker, no network, no DB. Just evaluate the policy on fake inputs.
+# OIA_VIS_COST_GUARD_DRYRUN_RUNS = fichier de lignes JSON (format de src/cost-grid.ts)
+# passé à la grille de prix à la place des runs lus dans Postgres.
 dryrun="${OIA_VIS_COST_GUARD_DRYRUN:-}"
 data="${OIA_VIS_DATA:-$HOME/oia-visibility-data}"; mkdir -p "$data"
 journal="$data/cost-journal.csv"
-[ -s "$journal" ] || echo "utc_time,month_utc,elmo_estimate_usd,openrouter_cum_usd,manual_usd,retained_usd,cap_usd,alert_usd,action" > "$journal"
+header="utc_time,month_utc,elmo_estimate_usd,grid_usd,openrouter_cum_usd,manual_usd,retained_usd,cap_usd,alert_usd,action"
+# Journal d'un format antérieur : mis de côté, jamais réécrit.
+if [ -s "$journal" ] && [ "$(head -n 1 "$journal")" != "$header" ]; then
+  mv "$journal" "$data/cost-journal.$(date -u +%Y%m%dT%H%M%SZ).old.csv"
+fi
+[ -s "$journal" ] || echo "$header" > "$journal"
+tsx_bin="$VIS_ROOT/node_modules/.bin/tsx"
+month_start="date_trunc('month', now() at time zone 'utc') at time zone 'utc'"
+# Une ligne JSON par run du mois, puis une par fournisseur pour les runs échoués.
+runs_sql="select json_build_object('kind','run','provider',provider,'version',version,'webSearch',web_search_enabled,
+  'usage',raw_output->'usage',
+  'searchItems',(select count(*) from json_array_elements(case
+      when json_typeof(raw_output->'output')='array' then raw_output->'output'
+      when json_typeof(raw_output->'outputs')='array' then raw_output->'outputs'
+      else '[]'::json end) e
+    where e->>'type'='web_search_call' or (e->>'type'='tool.execution' and e->>'name'='web_search')))::text
+  from prompt_runs where created_at >= $month_start
+  union all
+  select json_build_object('kind','failed','provider',provider,'count',count(*))::text
+  from usage_events where event_type='prompt_run_failed' and created_at >= $month_start group by provider"
+
+stop_unreadable() { # reason est grid
+  elmo_dc stop worker >/dev/null 2>&1 || true
+  echo "$(date -u +%Y-%m-%dT%H:%M:%SZ),$(month_tag),$2,$3,n/a,n/a,n/a,$cap,$alert,stop-worker($1)" | tee -a "$journal"
+}
+
+# Coût du mois selon la grille de prix. Sort 3 si un modèle est absent de la grille.
+grid_cost() {
+  if [ -n "$dryrun" ]; then
+    [ -n "${OIA_VIS_COST_GUARD_DRYRUN_RUNS:-}" ] || { printf '0'; return 0; }
+    "$tsx_bin" "$VIS_ROOT/src/cost-grid.ts" < "$OIA_VIS_COST_GUARD_DRYRUN_RUNS"
+  else
+    local lines
+    lines="$(elmo_dc exec -T postgres psql -U elmo -d elmo -tAc "$runs_sql" 2>/dev/null)" || return 4
+    printf '%s\n' "$lines" | "$tsx_bin" "$VIS_ROOT/src/cost-grid.ts"
+  fi
+}
 
 month_tag() { date -u +%Y-%m; }
 
@@ -43,17 +86,16 @@ month_tag() { date -u +%Y-%m; }
 #         3 = cap reached (worker stopped), 4 = cost unreadable (worker stopped).
 # Fails CLOSED: if the monthly cost cannot be read, the worker is stopped too.
 once() {
-  local est orr manual retained action="none" status=0
+  local est grid grid_rc orr manual retained action="none" status=0
   if [ -n "$dryrun" ]; then
     est="${OIA_VIS_COST_GUARD_DRYRUN_EST:-0}"
     orr="${OIA_VIS_COST_GUARD_DRYRUN_ORR:-0}"
     manual="${OIA_VIS_COST_GUARD_DRYRUN_MANUAL:-0}"
   else
     est="$(elmo_dc exec -T postgres psql -U elmo -d elmo -tAc \
-      "select coalesce(sum(estimated_cost_usd),0) from usage_events where created_at >= date_trunc('month', now() at time zone 'utc') at time zone 'utc'" 2>/dev/null | tr -d '[:space:]')" || est=""
+      "select coalesce(sum(estimated_cost_usd),0) from usage_events where created_at >= $month_start" 2>/dev/null | tr -d '[:space:]')" || est=""
     if ! [[ "$est" =~ ^[0-9]+(\.[0-9]+)?$ ]]; then
-      elmo_dc stop worker >/dev/null 2>&1 || true
-      echo "$(date -u +%Y-%m-%dT%H:%M:%SZ),$(month_tag),unreadable,n/a,n/a,n/a,$cap,$alert,stop-worker(cost-unreadable)" | tee -a "$journal"
+      stop_unreadable cost-unreadable unreadable n/a
       return 4
     fi
     orr=""
@@ -65,16 +107,26 @@ once() {
     unset key
     manual="${OIA_VIS_MANUAL_COST_USD:-0}"
   fi
+  grid_rc=0
+  grid="$(grid_cost)" || grid_rc=$?
+  if [ "$grid_rc" = 3 ]; then
+    stop_unreadable model-not-in-price-grid "$est" unreadable
+    return 4
+  fi
+  if [ "$grid_rc" != 0 ] || ! [[ "$grid" =~ ^[0-9]+(\.[0-9]+)?$ ]]; then
+    stop_unreadable cost-unreadable "$est" unreadable
+    return 4
+  fi
   case "$source_mode" in
-    estimate) pick=("$est" "$manual") ;;
+    estimate) pick=("$est" "$grid" "$manual") ;;
     real)
       if [ -z "$orr" ] && [ -z "$dryrun" ]; then
         elmo_dc stop worker >/dev/null 2>&1 || true
-        echo "$(date -u +%Y-%m-%dT%H:%M:%SZ),$(month_tag),$est,unreadable,$manual,n/a,$cap,$alert,stop-worker(cost-unreadable)" | tee -a "$journal"
+        echo "$(date -u +%Y-%m-%dT%H:%M:%SZ),$(month_tag),$est,$grid,unreadable,$manual,n/a,$cap,$alert,stop-worker(cost-unreadable)" | tee -a "$journal"
         return 4
       fi
       pick=("$orr" "$manual") ;;
-    *) pick=("$est" "$orr" "$manual") ;;
+    *) pick=("$est" "$grid" "$orr" "$manual") ;;
   esac
   retained="$(node -e 'const a=process.argv.slice(1).filter(x=>x!=="").map(Number);console.log(Math.max(0,...a).toFixed(4))' "${pick[@]}")"
   if node -e 'process.exit(Number(process.argv[1])>Number(process.argv[2])?0:1)' "$retained" "$cap"; then
@@ -86,7 +138,7 @@ once() {
     echo "ALERTE : coût mensuel $retained $ > $alert $ (plafond $cap $). Journal : $journal" >&2
     status=2
   fi
-  echo "$(date -u +%Y-%m-%dT%H:%M:%SZ),$(month_tag),$est,${orr:-n/a},$manual,$retained,$cap,$alert,$action" | tee -a "$journal"
+  echo "$(date -u +%Y-%m-%dT%H:%M:%SZ),$(month_tag),$est,$grid,${orr:-n/a},$manual,$retained,$cap,$alert,$action" | tee -a "$journal"
   return $status
 }
 

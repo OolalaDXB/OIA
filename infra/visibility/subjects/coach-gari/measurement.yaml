@@ -10,16 +10,18 @@ schemaVersion: 1
 # cinq moteurs soit homogène sur J0.
 #
 # Décisions du 2026-11-07 : API directe partout où Elmo 0.7.7 la gère (OpenAI, Anthropic,
-# Mistral) ; Jev en direct chez TypeSafe. Gemini et Perplexity ne passent que par OpenRouter
-# dans Elmo : lignes mises en commentaire EN ATTENTE DE DÉCISION de Mickaël (OpenRouter à 5 $
-# ou moteurs retirés de J0). Grok idem, en sixième moteur. Voir FOURNISSEURS.md § 0 quater.
+# Mistral) ; Jev en direct chez TypeSafe. Gemini et Perplexity passent par OpenRouter (seule
+# voie dans Elmo), retenu par Mickaël avec 5 $ de crédit et une clé plafonnée à 5 $ par mois.
+# J0 sur cinq moteurs. Voir FOURNISSEURS.md § 0 quater.
 engines:
   - { model: chatgpt,    collection: api, webSearch: true, note: "OpenAI en direct (:online, outil web_search)" }
   - { model: claude,     collection: api, webSearch: true, note: "Anthropic en direct, claude-sonnet-5-5 (:online, outil web_search)" }
-  # En attente de décision (OpenRouter seulement dans Elmo 0.7.7) :
-  # - { model: gemini,     collection: api, webSearch: true, note: "via OpenRouter, google/gemini-3-flash-preview" }
-  # - { model: perplexity, collection: api, webSearch: true, note: "via OpenRouter (Sonar)" }
-  # - { model: grok,       collection: api, webSearch: true, note: "via OpenRouter, x-ai/grok-4.5 (sixième moteur)" }
+  - { model: gemini,     collection: api, webSearch: true, note: "via OpenRouter, google/gemini-3-flash-preview (recherche Google native)" }
+  - { model: perplexity, collection: api, webSearch: true, note: "via OpenRouter, perplexity/sonar" }
+  # Grok : PAS pour J0 (décision 2026-11-07). Candidat pour une fenêtre ultérieure, avec sa
+  # propre mesure de départ : l'ajouter à une fenêtre en cours casserait la comparaison avec J0.
+  # Via OpenRouter seulement dans Elmo 0.7.7 (x-ai/grok-4.5, seul Grok testé par Elmo).
+  # - { model: grok,       collection: api, webSearch: true, note: "via OpenRouter, x-ai/grok-4.5" }
   - { model: mistral,    collection: api, webSearch: true, note: "Mistral en direct (Conversations API + outil web_search). Mesuré en anglais pour le pilote J0 (langue unique du panel)." }
 # Jev en direct chez TypeSafe (TYPESAFE_API_KEY, décision 2026-11-07 — voir elmo/.env.example).
 windows:
@@ -28,7 +30,7 @@ windows:
     days: 5
     panelVersion: 2
     status: planned
-    note: "Mesure de départ, 3 moteurs directs (5 ou 6 si OpenRouter est retenu). Dates fixées au démarrage du worker, après validation du panel."
+    note: "Mesure de départ, 5 moteurs (3 directs + Gemini et Perplexity via OpenRouter). Dates fixées au démarrage du worker, après validation du panel."
 freezes:
   - id: freeze-j0
     scope: [site, repository]

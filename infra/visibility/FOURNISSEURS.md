@@ -20,6 +20,9 @@ branchés en API ou en complément.
 
 - Il lit l'estimation d'Elmo (`usage_events.estimated_cost_usd`), qui est
   une estimation et non une facture.
+- Il recalcule le coût de chaque run avec la grille de prix des modèles
+  retenus (`src/cost-grid.ts`, § 0 quater), à partir des compteurs de
+  tokens et de recherches enregistrés par Elmo. Toujours pas une facture.
 - Il lit le coût réel OpenRouter (cumul `usage` via `/api/v1/key`). OpenAI,
   Anthropic et Mistral ne sont **pas** interrogés : leur coût réel doit
   être reporté à la main dans la colonne `manual_usd` du journal
@@ -34,64 +37,81 @@ OpenRouter), plus une réserve de budget avant chaque lot de mesure. Sans
 cette double précaution, un dépassement peut passer sous le radar du
 script le temps que l'estimation ou l'API de solde se mette à jour.
 
-## 0 quater. Décision du 2026-11-07 : API directes, J0 recalculé
+## 0 quater. Décisions du 2026-11-07 : API directes, OpenRouter pour Gemini et Perplexity, J0 sur cinq moteurs
 
-Remplace les identifiants et le budget du § 0 ter pour la fenêtre J0 du premier pilote. Le
-tableau de compatibilité (fournisseur et modèle, fichier et ligne d'Elmo
-0.7.7) est dans `reports/2026-11-07-decisions-mickael.md`.
+Remplace les identifiants et le budget du § 0 ter pour la fenêtre J0 du
+premier pilote. Le tableau de compatibilité (fournisseur et modèle, fichier
+et ligne d'Elmo 0.7.7) est dans `reports/2026-11-07-decisions-mickael.md`.
 
-**Règle** : API directe partout où Elmo la gère ; un moteur qu'Elmo
-n'appelle que via OpenRouter attend la décision de Mickaël (OpenRouter à
-5 $ ou moteur retiré de J0) ; aucun adaptateur maison avant P3.
+**Règle** : API directe partout où Elmo la gère ; OpenRouter seulement pour
+les moteurs qu'Elmo n'appelle que par lui (retenu par Mickaël : 5 $ de
+crédit, clé plafonnée à 5 $ par mois) ; aucun adaptateur maison avant P3.
 
 | Moteur | Accès dans Elmo 0.7.7 | Modèle | Statut J0 |
 |---|---|---|---|
 | chatgpt | OpenAI direct | `gpt-6-luna` | retenu |
 | claude | Anthropic direct | `claude-sonnet-5-5` (vérifié sur platform.claude.com : 2 $ / 10 $ par M, recherche web acceptée) | retenu |
-| mistral | Mistral direct | `mistral-medium-latest` | retenu |
-| gemini | OpenRouter seulement | Gemini 3 Flash = `google/gemini-3-flash-preview` sur OpenRouter (0,50 $ / 3 $ par M + 0,014 $ par recherche). Le slug `google/gemini-3-flash` cité au § 0 ter n'existe pas (404). | **décision Mickaël** |
-| perplexity | OpenRouter seulement | `perplexity/sonar` | **décision Mickaël** |
-| grok | OpenRouter seulement | `x-ai/grok-4.5` (seul slug Grok testé par Elmo) | **décision Mickaël** (sixième moteur) |
+| mistral | Mistral direct | `mistral-medium-latest` (voir réserve ci-dessous) | retenu |
+| gemini | OpenRouter seulement | `google/gemini-3-flash-preview` (confirmé par Mickaël ; 0,50 $ / 3 $ par M + 0,014 $ par recherche). Le slug `google/gemini-3-flash` cité au § 0 ter n'existe pas (404). | retenu |
+| perplexity | OpenRouter seulement | `perplexity/sonar` (1 $ / 1 $ par M + 0,005 $ par recherche) | retenu |
+| grok | OpenRouter seulement | `x-ai/grok-4.5` (seul slug Grok testé par Elmo) | **pas pour J0** : candidat pour une fenêtre ultérieure, avec sa propre mesure de départ |
 | Jev | TypeSafe direct (`TYPESAFE_API_KEY`) | `jev-1.13.0`, épinglé par Elmo | retenu |
 
 Les clés Google (Gemini), Perplexity et xAI créées par Mickaël ne sont lues
 par aucun fournisseur d'Elmo 0.7.7 : elles restent dans Proton Pass.
 
-### Budget J0 du premier pilote (10 questions × moteurs × 5 jours)
+**Réserve Mistral (à trancher par Mickaël, aucun modèle remplacé).** Au
+2026-11-07, la page de Mistral Medium 3.5 sur docs.mistral.ai l'indique
+déprécié au 2026-10-31, avec Mistral Large 4 pour remplaçant, et la page
+de tarifs ne publie plus de prix pour Medium ni pour l'outil `web_search`.
+Ce que sert l'alias `mistral-medium-latest` n'est pas documenté ; seul le
+premier appel le dira (Elmo enregistre la version servie dans
+`prompt_runs.version`). La grille de `cost-guard.sh` compte Mistral au prix
+de Large 4 (0,70 $ / 2,10 $ par M) et 0,03 $ par recherche : majorant
+provisoire, signalé à chaque relevé.
 
-`RUNS_PER_PROMPT=1`, `DEFAULT_DELAY_HOURS=24` : 50 appels par moteur sur
-la fenêtre. Hypothèses par appel : 10 k tokens d'entrée (question +
-résultats de recherche facturés comme entrée), 1,5 k de sortie en typique
-(2,5 k pour Claude, dont la réflexion adaptative de Sonnet 5.5) ;
-le **pire cas** prend la sortie au plafond d'Elmo (8 000 tokens, réflexion
-comprise) et, pour Claude, la nouvelle tentative qu'Elmo fait après une
-erreur de recherche. Plafonds de recherche fixés par Elmo : 2 appels
-d'outil par run chez OpenAI, 1 chez Anthropic.
+### Grille de prix de `cost-guard.sh`
+
+`src/cost-grid.ts` recalcule le coût de chaque run du mois à partir des
+compteurs de la réponse brute (`prompt_runs.raw_output`) et des prix
+officiels ci-dessus. `cost-guard.sh` retient le maximum entre cette grille,
+l'estimation d'Elmo, le solde OpenRouter et le relevé manuel. Un modèle
+absent de la grille arrête le worker (`stop-worker(model-not-in-price-grid)`) :
+changer de modèle impose de mettre la grille à jour d'abord. Un run sans
+compteurs, ou échoué, est compté au majorant (20 000 tokens d'entrée,
+8 000 de sortie, recherches au plafond d'Elmo). Limite connue : quand Elmo
+relance un appel Anthropic après une erreur de recherche, seule la seconde
+réponse est gardée ; la première n'est pas dans la grille (la limite de
+dépense de l'espace de travail Anthropic la couvre).
+
+### Budget J0 du premier pilote (10 questions × 5 moteurs × 5 jours)
+
+`RUNS_PER_PROMPT=1`, `DEFAULT_DELAY_HOURS=24` : 50 appels par moteur, 250
+au total. Typique : 10 k tokens d'entrée (question + résultats de recherche
+facturés comme entrée), 1,5 k de sortie (2,5 k pour Claude, dont la
+réflexion adaptative de Sonnet 5.5), une recherche par appel (deux chez
+OpenAI). Pire cas : majorant de la grille (20 k / 8 k, recherches au
+plafond) ; pour Claude, nouvelle tentative complète en plus.
 
 | Poste | Prix (source, 2026-11-07) | Typique / appel | Pire cas / appel | Fenêtre typique | Fenêtre pire cas |
 |---|---|---|---|---|---|
-| chatgpt `gpt-6-luna` | 0,10 / 0,50 $ par M ; recherche 10 $ / 1 000 (developers.openai.com) | 0,022 $ | 0,025 $ | 1,10 $ | 1,25 $ |
+| chatgpt `gpt-6-luna` | 0,10 / 0,50 $ par M ; recherche 10 $ / 1 000 (developers.openai.com) | 0,022 $ | 0,026 $ | 1,10 $ | 1,30 $ |
 | claude `claude-sonnet-5-5` | 2 / 10 $ par M ; recherche 10 $ / 1 000 (platform.claude.com) | 0,055 $ | 0,22 $ | 2,75 $ | 11,00 $ |
-| mistral `mistral-medium-latest` | estimation du § 0 ter (prix de l'outil web_search non publié sur la page tarifs) | 0,030 $ | 0,050 $ | 1,50 $ | 2,50 $ |
-| Jev (≈ 150 réponses à juger) | 0,15 à 0,35 $ / 1 000 (§ 0 ter) | — | — | < 0,10 $ | < 0,10 $ |
+| mistral `mistral-medium-latest` | majorant provisoire : prix de Large 4, 0,03 $ / recherche | 0,040 $ | 0,121 $ | 2,00 $ | 6,05 $ |
+| gemini `google/gemini-3-flash-preview` | 0,50 / 3 $ par M + 0,014 $ / recherche (openrouter.ai) | 0,024 $ | 0,048 $ | 1,20 $ | 2,40 $ |
+| perplexity `perplexity/sonar` | 1 / 1 $ par M + 0,005 $ / recherche (openrouter.ai) | 0,010 $ | 0,033 $ | 0,50 $ | 1,65 $ |
+| Jev (≈ 250 réponses à juger) | 0,15 à 0,35 $ / 1 000 (§ 0 ter) | — | — | < 0,10 $ | < 0,10 $ |
 | Onboarding Mistral (une fois) | `mistral-large-latest` | — | — | < 0,20 $ | < 0,50 $ |
-| **Total, trois moteurs directs** | | | | **≈ 5,6 $** | **≈ 15,4 $** |
-| + gemini `google/gemini-3-flash-preview` (si OpenRouter) | 0,50 / 3 $ par M + 0,014 $ / recherche (openrouter.ai) | 0,024 $ | 0,043 $ | 1,20 $ | 2,15 $ |
-| + perplexity `perplexity/sonar` (si OpenRouter) | 1 / 1 $ par M + 0,005 $ / recherche | 0,010 $ | 0,016 $ | 0,50 $ | 0,80 $ |
-| + grok `x-ai/grok-4.5` (si OpenRouter et sixième moteur) | 2 / 6 $ par M + 0,005 $ / recherche | 0,034 $ | 0,073 $ | 1,70 $ | 3,65 $ |
-| **Total, six moteurs** | | | | **≈ 9,0 $** | **≈ 22,0 $** |
+| **Total J0, cinq moteurs** | | | | **≈ 7,9 $** | **≈ 23,0 $** |
 
-Recherches web comprises dans les lignes ci-dessus : au plus 100 chez
-OpenAI (1 $), 100 chez Anthropic avec les nouvelles tentatives (1 $), 50
-chez Google via OpenRouter (0,70 $), 50 chez Perplexity et 50 chez xAI
-(0,25 $ chacun). Tous les scénarios restent sous le plafond de 30 $, pire
-cas compris.
+Recherches web comprises : au plus 100 chez OpenAI (1 $), 100 chez
+Anthropic avec les nouvelles tentatives (1 $), 150 chez Mistral (4,50 $,
+prix provisoire), 50 chez Google via OpenRouter (0,70 $), 50 chez
+Perplexity (0,25 $). Sous le plafond de 30 $, pire cas compris.
 
-**Écart avec l'estimation d'Elmo** : Elmo compte 0,02 $ par run Anthropic
-avec recherche (`packages/lib/src/usage/cost.ts:24,33`), quel que soit le
-modèle. Avec Sonnet 5.5, le coût réel typique est près de 3 fois plus élevé :
-`cost-guard.sh` sous-estimera Claude. D'où la protection par fournisseur
-ci-dessous, qui ne dépend pas de l'estimation.
+Pour mémoire, Grok (`x-ai/grok-4.5`, 2 / 6 $ par M + 0,005 $ / recherche) :
+≈ 1,70 $ par fenêtre de 50 appels, 3,65 $ au pire, à budgéter avec sa
+propre mesure de départ.
 
 ### Protection par fournisseur (plafond opposable)
 
@@ -101,18 +121,18 @@ crédit.
 
 | Fournisseur | Crédit prépayé | Recharge automatique | Limite supplémentaire | Besoin J0 (pire cas) |
 |---|---|---|---|---|
-| OpenAI | 5 $ | coupée | limite mensuelle du projet `oia-visibility` | 1,25 $ |
+| OpenAI | 5 $ | coupée | limite mensuelle du projet `oia-visibility` | 1,30 $ |
 | Anthropic | 12 $ | coupée | **espace de travail dédié `oia-visibility`, limite de dépense 12 $ / mois**, clé créée dans cet espace | 11,00 $ |
-| Mistral | 5 $ | coupée | clé dédiée `oia-visibility` | 3,00 $ |
+| Mistral | 5 $ | coupée | clé dédiée `oia-visibility` | 6,55 $ (prix provisoire) |
+| OpenRouter | 5 $ | coupée | **clé plafonnée à 5 $ par mois** | 4,05 $ |
 | TypeSafe (Jev) | minimum proposé, au plus 3 $ | coupée | — | < 0,10 $ |
-| OpenRouter (si retenu) | 5 $ | coupée | limite de crédit sur la clé | 6,60 $ avec Grok, 2,95 $ sans |
 | **Total immobilisé** | **≤ 30 $** | | | |
 
-Si OpenRouter est retenu **avec** Grok, le pire cas (6,60 $) dépasse les
-5 $ : OpenRouter refuserait les derniers appels (la fenêtre perd des
-mesures, mais rien n'est dépensé au-delà). Pour l'éviter, passer
-OpenRouter à 7 $ et Anthropic à 10 $ (pire cas Claude à 11 $ peu
-probable), toujours dans les 30 $.
+Mistral : le pire cas provisoire (6,55 $) dépasse les 5 $ prépayés. Si le
+crédit s'épuise, Mistral refuse les derniers appels : la fenêtre perd des
+mesures, rien n'est dépensé au-delà. Le typique (≈ 2,20 $) tient
+largement. Pour l'éviter quand même, passer Mistral à 7 $ et Anthropic à
+10 $, toujours dans les 30 $.
 
 ## 0 ter. Modèles mesurés, proches des applications grand public (A6, mis à jour 2026-11-07)
 

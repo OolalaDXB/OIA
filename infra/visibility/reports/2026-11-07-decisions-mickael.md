@@ -103,3 +103,43 @@ Espace personnel : reporté à l'audit après J0, rien n'a changé.
 Tests : `pnpm --filter @oia/visibility-infra test`, 218 passent.
 `subjects validate` : 2 sujets valides. `elmo-brief coach-gari` :
 `enabledModels = chatgpt, claude, mistral`.
+
+## 5 · Suite : décisions de Mickaël (deuxième série)
+
+1. **OpenRouter retenu** (5 $ de crédit, clé plafonnée à 5 $ par mois) :
+   Gemini et Perplexity actifs dans `measurement.yaml` et
+   `.env.example`. J0 sur cinq moteurs ; `elmo-brief coach-gari` donne
+   `chatgpt, claude, mistral, gemini, perplexity`.
+2. **Grok : pas pour J0.** Noté dans `measurement.yaml`,
+   `.env.example` et `FOURNISSEURS.md` § 0 quater comme candidat pour une
+   fenêtre ultérieure, avec sa propre mesure de départ.
+3. **Gemini : `google/gemini-3-flash-preview`** confirmé.
+4. **`cost-guard.sh` a maintenant une grille de prix.** `src/cost-grid.ts`
+   recalcule chaque run du mois à partir des compteurs de tokens et de
+   recherches gardés par Elmo (`prompt_runs.raw_output`), aux prix
+   officiels : Sonnet 5.5 à 2 $ / 10 $ par M (+ 0,01 $ par recherche),
+   `gpt-6-luna` à 0,10 $ / 0,50 $ (+ 0,01 $), Gemini 3 Flash Preview à
+   0,50 $ / 3 $ (+ 0,014 $), Sonar à 1 $ / 1 $ (+ 0,005 $). Le coût
+   retenu est le maximum entre la grille, l'estimation d'Elmo, le solde
+   OpenRouter et le relevé manuel. Un modèle absent de la grille arrête
+   le worker. Un run sans compteurs ou échoué est compté au majorant.
+   Nouvelle colonne `grid_usd` dans le journal (l'ancien journal est mis
+   de côté, jamais réécrit). Tests : `test/cost-grid.test.ts` (12), dont
+   trois qui exécutent `cost-guard.sh` à blanc. Exemple : 50 runs Sonnet
+   typiques donnent 2,75 $ selon la grille, contre 1 $ estimé par Elmo.
+   Le script retient bien 2,75 $.
+5. **Budget et runbook pour cinq moteurs** : ≈ 7,9 $ en typique, ≈ 23 $
+   au pire, sous le plafond de 30 $. Crédits : OpenAI 5, Anthropic 12,
+   Mistral 5, OpenRouter 5, TypeSafe ≤ 3.
+
+**À trancher par Mickaël : Mistral Medium.** La documentation de Mistral
+(2026-11-07) indique Medium 3.5 déprécié au 2026-10-31, avec Mistral
+Large 4 pour remplaçant. Sa page de tarifs ne publie plus de prix ni pour
+Medium ni pour l'outil `web_search`. On ne sait pas ce que sert l'alias
+`mistral-medium-latest` : seul le premier appel le dira. Je n'ai remplacé
+aucun modèle. La grille compte Mistral au prix de Large 4 (0,70 $ /
+2,10 $) et 0,03 $ par recherche, en majorant provisoire signalé à chaque
+relevé. À ce prix, le pire cas Mistral (6,55 $) dépasse les 5 $ prépayés :
+les derniers appels seraient refusés, sans dépense au-delà.
+
+Tests : 230 passent, typage propre.
