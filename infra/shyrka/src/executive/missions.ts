@@ -25,7 +25,8 @@ const TRANSITIONS: Record<StatutMission, StatutMission[]> = {
   en_file: ["en_cours", "annulee", "bloquee"],
   en_cours: ["en_verification", "bloquee", "echouee", "en_file", "annulee"],
   en_verification: ["attente_validation", "en_cours", "echouee", "bloquee"],
-  attente_validation: ["terminee", "en_cours", "annulee"],
+  // v11 : une revue indépendante qui rejette le patch le bloque, sans consommer de tentative.
+  attente_validation: ["terminee", "en_cours", "annulee", "bloquee"],
   bloquee: ["en_file", "annulee"],
   terminee: [],
   echouee: [],
