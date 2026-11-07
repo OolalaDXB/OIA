@@ -1,4 +1,141 @@
-# Rapport de la session web parallèle · 2026-11-08
+# Rapport de la session web · mandats v6 et v7 · 2026-11-08
+
+Session cloud, sans Mac : ni micro, ni Whisper, ni Ollama, ni voix macOS, ni
+démon Docker. Mandats lus sur `main` au commit `8219e45`
+(`infra/visibility/mandats/`). L'amendement du 7 novembre prime. Part de la
+session web, dans l'ordre : v6 C, puis B, puis E ; ensuite v7 F. Commits
+directs sur `main`, avec `git pull --rebase` avant chaque push.
+`infra/visibility/` n'a pas été modifié.
+
+**Emplacement du rapport.** Le mandat v6 (Z) demande
+`infra/visibility/reports/2026-11-08-mandat-v6.md`. Ce dossier appartient à
+la session Mac (amendement, § 2). Le bilan de la part web est donc ici.
+
+## Bilan, livrable par livrable (amendement, § 7)
+
+Légende : **fait** (critère vérifié, tests à l'appui) · **partiel** (une
+partie manque, dite ici) · **non fait** (avec la raison).
+
+### Mandat v6, bloc C · console, préparation
+
+| Livrable | État | Preuve |
+| --- | --- | --- |
+| C1 · audit du prototype Lovable, correspondance des pages, redirections, ce qui doit être conservé, écarts techniques | fait | `docs/interface/integration-console.md` (document, rien à tester) |
+| C2 · `packages/ui-tokens` : couleurs, typographie, rayons, couleurs sourdes par module, points d'état désaturés, en CSS et en TypeScript | fait | 5 tests (CSS généré à jour, oklch, saturation bornée) |
+| C3 · plan en étapes courtes et réversibles | fait | même document, § 4 |
+
+Commit `29ee5d7`.
+
+### Mandat v6, bloc B · Shyrka v0
+
+| Livrable | État | Preuve, ou raison |
+| --- | --- | --- |
+| B1 · boucle écoute, réflexion, réponse parlée : serveur Whisper local lancé puis arrêté (port 8178, `local-models/whisper`), Ollama `qwen3:8b`, voix Aurélie, personnalité tirée du cadre, contexte en lecture seule (rapports, J0, décisions, budget), pousser pour parler | **partiel** | Code et tests (`infra/shyrka`, 73 tests au total). Ollama n'a pas pu être installé (pas de Mac) : adaptateur fictif, comme le prévoit le mandat. Tests avec un enregistreur et une transcription simulés, pas avec de vrais fichiers audio. Essai réel : `infra/shyrka/README.md` |
+| B1 · commandes `pnpm shyrka:parler` et `pnpm shyrka:resume` | **partiel** | Les raccourcis racine ne sont pas ajoutés. Le commit a rencontré un conflit sur `package.json`, fichier hors de ma zone, et j'ai abandonné cette modification comme le veut la règle. Commandes équivalentes : `pnpm --filter @oia/shyrka parler` et `resume` |
+| B2 · mode entretien : questions lues à voix haute, réponses enregistrées dans des fichiers, transcription locale à la fin, fiche « à valider », sortie par défaut sur `/Volumes/Shyrka-corpus/brut/entretiens/`, refus d'écrire dans le dépôt (lien symbolique compris), refus de démarrer sans le volume chiffré | fait (simulé) | `infra/shyrka/ENTRETIEN.md` (critère d'acceptation), `test/entretien.test.ts`, `test/local.test.ts`. Écart assumé avec `entretiens.md` : la transcription n'a lieu qu'à la fin, donc les relances sont celles du programme et le contre-pied est préparé pour la séance suivante. Séance réelle : à faire par Mickaël |
+| B3 · `packages/shyrka-mail` : lister, lire, créer un brouillon, aucune fonction d'envoi (vérifié), boîte fictive, adaptateur Gmail écrit et non connecté, quatre groupes par Ollama, brouillons pour les réponses simples, `docs/shyrka/style.md` (gabarit vide), résumé du matin lu par B1, exclusions | fait (simulé) | 28 tests, dont 15 cas adverses : transfert depuis Swift, adresse personnelle évoquant Swift, pièce jointe, en-têtes falsifiés, mot écrit en morceaux, doute. ADR `docs/shyrka/adr/0001-agent-courrier.md`. README avec critère d'acceptation. Non fait : le renouvellement du jeton Gmail ; la connexion OAuth revient à Mickaël |
+| B4 · WhatsApp : ADR, interface d'adaptateur et version fictive | fait | `docs/shyrka/adr/0002-whatsapp.md`, `infra/shyrka/src/whatsapp.ts`, test |
+| B5 · paliers 0, 1, 2 dans `CADRE.md` et dans une configuration testée ; palier 2 désactivé, activable par Mickaël seul, catégorie par catégorie ; aucun agent ne modifie la configuration | fait | `infra/shyrka/permissions.json`, 8 configurations adverses qui retombent au palier 0, test qui vérifie qu'aucun code n'écrit la configuration |
+| Amendement § 3 : version 0 = présence en points et voix Aurélie, voix en sortie comprise | fait | `identite.json`, `CADRE.md`, `test/identity.test.ts` |
+
+Commits `36dcfee` (B1, B2, B4, B5) et `9204ae0` (B3).
+
+### Mandat v6, bloc E · espace personnel
+
+| Livrable | État | Preuve |
+| --- | --- | --- |
+| Audit en lecture seule de `feature/transformation-90-personal` : existant, failles, réutilisable | fait | `docs/audits/2026-11-08-espace-personnel.md`. La structure seule est décrite : contrôle des unités, des noms et des nombres. Rien n'est fusionné |
+
+À retenir : la branche contient des données de santé commitées dans le code et
+compilées dans le bundle public, et la PR #3 est ouverte. Il faut purger
+l'historique et fermer la PR avant toute publication.
+
+### Mandat v7, bloc F · interface web OIA
+
+| Livrable | État | Preuve, ou raison |
+| --- | --- | --- |
+| F1 · `/oia` derrière `AuthGate`, style du prototype, jetons de `ui-tokens`, build statique, `vercel.json` inchangé | fait | `test/oia.test.ts`, build Preview et production |
+| F1 · aucune donnée de client publiée (amendement, § 6) | fait | Visibility en démonstration signalée. Un test cherche les noms des clients dans les sources de `/oia` et dans `public/` |
+| F1 · aucune page existante modifiée | **partiel** | Contenu des pages inchangé. Mais elles ont été déplacées dans un groupe de routes `(console)`, avec les mêmes URL et seuls leurs chemins d'import changés, et le layout de la console reçoit le composant de bascule, sans effet tant qu'elle est désactivée |
+| F2 · colonne, couleurs sourdes, points d'état, dépense sous la colonne, fichier de navigation unique, Opportunités (5 onglets), CRM et Portefeuille sur les pages existantes, autres modules « en préparation » | fait | Les pages existantes sont affichées telles quelles dans un cadre de même origine, rail masqué. Captures dans Chromium |
+| F3 · accueil : Bonjour, À décider, modules, dépense, activité récente, depuis les sources existantes | **partiel** | Les tâches, éléments à trier et approbations bloquées viennent de la veille de la console (`buildDigest`), et l'activité récente du journal de revue. Les décisions de Visibility et la dépense du mois sont des données de démonstration signalées : aucune source sûre en ligne |
+| F4 · Visibility (vue d'ensemble, sites, vue d'un site, SEO Command, rapports), « Préparer les corrections » ouvre la fiche de décision | fait (démonstration) | Fiche de décision fictive en ligne, rien n'est publié. La vraie fiche se lit en local |
+| F5 · Shyrka : panneau, page, plein écran, micro simulé, pause | **partiel** | Fonctionne. L'image de profondeur du visage manque (voir plus bas) : sans elle, la présence ne s'affiche pas |
+| F6 · bascule en une ligne, désactivée | fait | `BASCULE_ACCUEIL = false`, redirections testées, aucun effet dans un cadre |
+| Amendement § 6 : Preview seulement | fait | Vérifié sur Vercel le 2026-11-07 vers 18 h UTC : en Preview, `/oia/opportunites/` sert l'interface derrière l'écran de connexion ; en production, `/oia/` affiche « Interface OIA désactivée » |
+
+Commit `8c276b6`. Réception écran par écran : `docs/interface/oia-interface-web.md`.
+
+### Clôtures (v6 Z, v7 Z)
+
+| Livrable | État | Remarque |
+| --- | --- | --- |
+| Roadmap : décisions (J0 sur cinq moteurs, Grok reporté, branche Lovable autorisée, Shyrka v0), règle d'intégration reformulée, navigation en proposition, P1 et P2, chantier Interface web, historique, Mermaid | fait | Version 3.9 (commit `9cabedf`). Le mandat v6 parlait de 3.6 ; la roadmap avait déjà dépassé ce numéro |
+| Tests | fait | Monorepo : 38 tâches sur 38 (typecheck et tests). Les tests Postgres n'ont pas été lancés : pas de Docker |
+| Rapports `infra/visibility/reports/2026-11-08-mandat-v6.md` et `-v7.md` | non fait (côté web) | Zone de la session Mac ; ce rapport-ci les remplace pour la part web |
+
+### Hors de ma part, pour mémoire
+
+- **v6 D, Bifrost.** L'amendement ne l'attribue à aucune session. Mon
+  évaluation est documentaire (`docs/audits/2026-11-08-bifrost-evaluation.md`).
+  Elle est **partielle** au regard du mandat : sans Docker, il n'y a eu ni bac
+  à sable, ni faux fournisseur, ni test du routage, des clés virtuelles, des
+  budgets ou de l'absence de bascule, et le fichier ne porte pas le nom
+  attendu (`2026-11-08-bifrost.md`).
+- **v6 A et v7 A à E** : session Mac.
+
+## Comparaison avec mon travail poussé avant les mandats
+
+| Déjà poussé | Écart avec les mandats | Suite donnée |
+| --- | --- | --- |
+| Première page `/oia` de lecture (identités, phases) | Le bloc F demande la vraie interface | Remplacée (`9407833`), puis alignée sur F1 à F6 (`8c276b6`) |
+| Shyrka dans `packages/shyrka`, identité v0 sans voix | B demande `infra/shyrka` ; l'amendement met la voix Aurélie dans la version 0 | Déplacé et corrigé (`36dcfee`) |
+| Paliers à cinq niveaux et agent de messages capable d'envoyer | B3 interdit toute fonction d'envoi ; B5 fixe trois paliers | Agent retiré, remplacé par `packages/shyrka-mail` sans envoi ; paliers 0, 1, 2 |
+| Entretien en transcription continue, avec repli sur un dossier personnel si le volume manquait | B2 exige le refus si le volume chiffré n'est pas monté, et la transcription à la fin | Refait |
+| Évaluation documentaire de Bifrost | v6 D demande un bac à sable Docker | Partiel, voir plus haut |
+| Branche `claude/magical-ptolemy-pi6g34` poussée pour obtenir un Preview | v6, règle 1 : « Aucune branche `claude/*` » | Branche toujours présente sur GitHub, tout son contenu est sur `main`. Je ne l'ai pas supprimée sans accord. Le dernier Preview a été créé sans branche, par l'API Vercel, depuis le commit de `main` |
+| Interface en ligne poussée sans revue préalable | Amendement, § 2 : un changement important de l'interface en ligne passe par une revue de Mickaël avant le push | La production n'a pas changé (`/oia` éteinte), seule la Preview l'a. À relire par Mickaël avant toute bascule |
+
+## Ce que Mickaël fait lui-même
+
+1. **Premier essai vocal** (`infra/shyrka/README.md`) : installer whisper-cpp
+   et Ollama, déposer le modèle Whisper dans `local-models/whisper/`, installer
+   la voix Aurélie, puis lancer `diagnostic`, `resume` et `parler`.
+2. **Premier entretien** (`infra/shyrka/ENTRETIEN.md`) : créer et monter le
+   volume chiffré, puis faire la séance 1.
+3. **Connexion Gmail** (ADR 0001), puis `pnpm --filter @oia/shyrka-mail matin`.
+4. **Remplir `docs/shyrka/style.md`.**
+5. **Image de Shyrka** : exporter `src/assets/shyrka-face-depth.jpg` depuis
+   l'éditeur Lovable vers `apps/web/public/oia/shyrka-face-depth.jpg`. La
+   session ne pouvait pas la lire : l'outil Lovable rend du texte, et l'aperçu
+   est bloqué par le réseau.
+6. **Relire `/oia` en Preview**, puis décider de l'allumer en production
+   (`apps/web/oia-flag.mjs`) et de basculer (`BASCULE_ACCUEIL`).
+
+## Questions pour Mickaël
+
+1. **Raccourcis racine.** Ajouter `shyrka:parler` et `shyrka:resume` au
+   `package.json` racine, fichier hors de ma zone. Qui s'en charge ?
+2. **Gmail.** Accepter le périmètre `gmail.compose` ? Il autorise l'envoi
+   côté Google, même si le code n'a aucune route d'envoi. Sinon, les
+   brouillons seront écrits dans un fichier local.
+3. **Exclusions.** `swift.com` et le mot « swift » suffisent-ils, ou faut-il
+   d'autres domaines liés à Swift ?
+4. **Branche `claude/magical-ptolemy-pi6g34`.** Peut-on la supprimer ?
+5. **Navigation.** Valider la proposition, et dire ce que « Veille » doit
+   montrer (aujourd'hui : la page « Aujourd'hui »).
+6. **Pages existantes.** Le déplacement dans un groupe de routes et le
+   composant de bascule sans effet sont-ils acceptables au regard de la
+   règle « aucune page existante modifiée » ?
+7. **Bifrost.** Qui fait le bac à sable Docker du bloc D ?
+8. **Lien `oia-git-main` sur Vercel.** Le Preview créé depuis `main` a pris
+   l'alias de branche `oia-git-main-…`. Il est protégé par Vercel
+   Authentication, et le prochain déploiement de production le reprendra. À
+   confirmer que cela ne gêne pas.
+
+---
+
+## Annexe · déroulé de la session avant l'arrivée des mandats
 
 Session cloud, sans accès au Mac : ni micro, ni Whisper, ni Ollama, ni voix
 macOS, ni démon Docker. Exécutée sans attendre de réponse (Mickaël absent) ;
@@ -188,7 +325,7 @@ n'est pas dans mon périmètre.
 
 ---
 
-# Suite de la session · réponses de Mickaël
+### Suite de la session · réponses de Mickaël
 
 Mickaël a répondu aux questions ci-dessus et a indiqué que les mandats étaient
 désormais sur `main`. Tout a été poussé directement sur `main`.
