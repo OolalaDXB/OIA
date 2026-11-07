@@ -75,7 +75,9 @@ export const PRICE_GRID: PriceEntry[] = [
     inputPerMTok: 0.7,
     outputPerMTok: 2.1,
     perSearchUsd: 0.03,
-    maxSearchesPerRun: 3,
+    // Elmo ne plafonne pas les recherches de Mistral : jusqu'à 37 observées sur un
+    // run le 2026-11-07 (moyenne 9,4 sur les 10 premiers runs de J0).
+    maxSearchesPerRun: 40,
     source: "docs.mistral.ai/models/mistral-large-4-0 et docs.mistral.ai/inference/pricing (0,70 $ / 2,10 $ par M) ; outil web_search : 0,03 $ provisoire",
     verifiedAt: "2026-11-07",
     provisional: "prix de l'outil web_search non publié par Mistral au 2026-11-07 ; se lira sur la première facture",
@@ -87,7 +89,8 @@ export const PRICE_GRID: PriceEntry[] = [
     inputPerMTok: 0.5,
     outputPerMTok: 3,
     perSearchUsd: 0.014,
-    maxSearchesPerRun: 1,
+    // Observé le 2026-11-07 sur J0 : 4 à 6 recherches par run (moyenne 4,4).
+    maxSearchesPerRun: 8,
     source: "openrouter.ai/api/v1/models (pricing.prompt, completion, web_search)",
     verifiedAt: "2026-11-07",
   },
@@ -168,11 +171,13 @@ function readUsage(run: RunRecord): { input: number; output: number; searches: n
     }
     case "openrouter":
       if (u.prompt_tokens === undefined && u.completion_tokens === undefined && u.cost === undefined) return null;
+      const tool = isObj(u.server_tool_use_details) ? u.server_tool_use_details : {};
       return {
         input: num(u.prompt_tokens),
         output: num(u.completion_tokens),
-        // OpenRouter ne dit pas combien de recherches ont tourné : une par run en ligne.
-        searches: run.webSearch ? 1 : 0,
+        // Recherches déclarées par OpenRouter quand il les donne (Gemini) ;
+        // sinon une par run en ligne (Perplexity les facture par requête).
+        searches: tool.web_search_requests !== undefined ? num(tool.web_search_requests) : run.webSearch ? 1 : 0,
         // Montant facturé par OpenRouter, quand la réponse le donne.
         billedUsd: typeof u.cost === "number" && Number.isFinite(u.cost) ? u.cost : undefined,
       };

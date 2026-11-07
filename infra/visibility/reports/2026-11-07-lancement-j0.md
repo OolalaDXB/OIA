@@ -199,3 +199,41 @@ d'Elmo : 0,44 $ ; solde OpenRouter : 0,79 $).
 
 Contrôle suivant : `./scripts/j0-first-run.sh coach-gari` à tout moment
 (lecture seule).
+
+## Perturbation du jour 1 : worker arrêté par erreur (15:28 → 17:20 UTC)
+
+- **Ce qui s'est passé.** À 15:28:20 UTC, 50 s après le démarrage, le
+  worker d'Elmo a reçu un arrêt normal (SIGTERM, code 0). Ce n'était ni
+  un manque de mémoire, ni une décision de `cost-guard.sh`. Il est resté
+  arrêté jusqu'à sa relance, à 17:20:16 UTC, sur décision de Mickaël.
+- **Cause : mon code.** Dans `cost-guard.sh`, `stop_unreadable()`
+  arrêtait le worker même à blanc (`OIA_VIS_COST_GUARD_DRYRUN`). Le test
+  « modèle absent de la grille » de `test/cost-grid.test.ts` passe par
+  ce chemin. Quand j'ai lancé la suite de tests juste après le
+  démarrage, elle a arrêté le vrai worker.
+- **Correctif : `bc7a230`.** À blanc, le script n'appelle plus jamais
+  Docker. Un test place un faux `docker` en tête du PATH et échoue au
+  moindre appel. Je l'ai vérifié en échec sur l'ancien code, puis vert
+  avec le correctif.
+- **Effet sur la mesure.** 47 runs sur 50 étaient enregistrés avant
+  l'arrêt. Les 3 runs Mistral interrompus et les jugements de Jev ont
+  été retardés, puis terminés dès la relance (premier run repris à
+  17:20:25 UTC). Premier passage complet : 50 runs, 50 jugés, 0 échec.
+  **Aucun jour manquant.** C'est consigné dans la note de la fenêtre
+  j0 (`measurement.yaml`).
+
+## Grille : pire cas relevé (décision de Mickaël)
+
+Gemini passe de 1 à 8 recherches par run (observé : 4 à 6) ; Mistral de
+3 à 40 (observé : jusqu'à 37, moyenne 9,4 sur les 10 premiers runs). Ce
+réglage ne sert qu'aux runs sans compteurs ou échoués. La grille lit
+aussi le nombre de recherches déclaré par OpenRouter (Gemini). Le montant
+facturé par OpenRouter reste retenu quand il est plus élevé.
+
+**Mistral cherche beaucoup.** Au prix provisoire de 0,03 $ par
+recherche, ses runs vont de 0,10 à 1,10 $. Coût retenu du mois après le
+premier passage : **3,46 $**. Si chaque jour ressemble au premier, la
+fenêtre coûtera ≈ 17 $, et Mistral pourrait atteindre sa limite de 8 $
+avant le cinquième jour (appels refusés, rien dépensé au-delà). Le vrai
+prix d'une recherche Mistral se lit dans la console Mistral (Usage) :
+c'est le chiffre à relever en premier.

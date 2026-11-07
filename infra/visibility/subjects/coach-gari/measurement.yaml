@@ -31,7 +31,7 @@ windows:
     panelVersion: 2
     status: running
     start: "2026-11-07"
-    note: "Mesure de départ, 5 moteurs (3 directs + Gemini et Perplexity via OpenRouter). Dates fixées au démarrage du worker, après validation du panel. Démarrée le 2026-11-07 à 15:27 UTC (démarrage du worker)."
+    note: "Mesure de départ, 5 moteurs (3 directs + Gemini et Perplexity via OpenRouter). Dates fixées au démarrage du worker, après validation du panel. Démarrée le 2026-11-07 à 15:27 UTC (démarrage du worker). Perturbation jour 1 : worker arrêté par erreur de 15:28:20 à 17:20:16 UTC (test de cost-guard.sh à blanc qui arrêtait le vrai worker ; correctif bc7a230) ; 3 runs Mistral et des jugements de Jev retardés, terminés à la relance ; premier passage complet (50/50, jugés 50/50), aucun jour manquant."
 freezes:
   - id: freeze-j0
     scope: [site, repository]

@@ -101,6 +101,22 @@ describe("grille de prix", () => {
     expect(m.worstCaseRuns).toBe(2);
   });
 
+  it("le pire cas couvre les recherches observées sur J0 (Gemini 6, Mistral 37 par run)", () => {
+    expect(findPrice("openrouter", "google/gemini-3-flash-preview")?.maxSearchesPerRun).toBeGreaterThanOrEqual(6);
+    expect(findPrice("mistral-api", "mistral-large-4")?.maxSearchesPerRun).toBeGreaterThanOrEqual(37);
+  });
+
+  it("lit le nombre de recherches déclaré par OpenRouter (Gemini) quand il est donné", () => {
+    const run = runCostUsd({
+      provider: "openrouter",
+      version: "google/gemini-3-flash-preview",
+      webSearch: true,
+      usage: { prompt_tokens: 21, completion_tokens: 663, server_tool_use_details: { web_search_requests: 4 } },
+      searchItems: 0,
+    });
+    expect(run?.usd).toBeCloseTo((21 * 0.5 + 663 * 3) / 1e6 + 4 * 0.014, 6);
+  });
+
   it("signale un modèle absent de la grille au lieu de le compter à zéro", () => {
     const m = monthCostUsd([{ ...sonnetRun, version: "claude-opus-5-5" } as CostLine]);
     expect(m.unknown).toEqual(["anthropic-api:claude-opus-5-5"]);
