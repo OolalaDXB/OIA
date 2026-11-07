@@ -41,7 +41,7 @@ export function demarrer(): Banc {
     return execFileSync(c, a, { encoding: "utf8", input, stdio: ["pipe", "pipe", "pipe"] });
   };
   exec(join(BIN, "initdb"), ["-D", data, "-U", "postgres", "--auth=trust", "-E", "UTF8", "--no-locale"]);
-  exec(join(BIN, "pg_ctl"), ["-D", data, "-o", `-p ${port} -k ${dossier} -c listen_addresses=''`, "-w", "start", "-l", join(dossier, "log")]);
+  exec(join(BIN, "pg_ctl"), ["-D", data, "-o", `-p ${port} -k ${dossier} -c listen_addresses='' -c timezone=UTC`, "-w", "start", "-l", join(dossier, "log")]);
   const psql = (args: string[], input?: string) => exec(join(BIN, "psql"), ["-h", dossier, "-p", port, "-U", "postgres", "-d", "postgres", "-v", "ON_ERROR_STOP=1", "-X", "-q", "-t", "-A", ...args], input);
   return {
     sql(requete, opts = {}) {

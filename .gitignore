@@ -32,3 +32,4 @@ local-models/
 # OIA Visibility : données de client servies au prototype, jamais commitées
 prototypes/oia-prototype/public/data/
 visibility.json
+**/supabase/.temp/

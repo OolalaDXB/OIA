@@ -5,90 +5,96 @@ Emplacement canonique, confirmé par l'audit A0
 La base OIA (`iywmvyebuikxyvnrcnoy`) est réservée à OIA depuis le 7 novembre
 2026 (décision de Mickaël) : il n'y aura pas de projet Supabase séparé.
 
-| Fichier | État sur la base OIA |
-| --- | --- |
-| `0002_watch_and_workspace.sql` | **Migration de départ, déjà déployée** le 16 septembre 2026, en trois migrations Supabase. Ne jamais la rejouer sur cette base ; elle sert aux tests et à une base neuve |
-| `0002a_comptes_de_mickael.sql` | À relire, puis à appliquer **maintenant** : réserve les tables aux comptes de Mickaël, la console garde ses droits |
-| `0003_membres_et_politiques.sql` | **Attend l'application Lovable** (décision du 2026-11-08) : elle coupe les écritures directes de la console |
-| `0004_money_lookup.sql` | Après 0003 |
-| `0005_reprise_navigateur.sql` | Après 0004 |
-| `0006_visibility_vues.sql` | Après le schéma `vis` de Visibility (`infra/visibility/migrations/0001` à `0004`), `0004` corrigée pour Supabase par la session Visibility (commit `7093687`) |
+## État de la base OIA (mandat v9, nuit du 8 novembre 2026)
 
-Archive : `../archive/0001_init.sql`, schéma M0 jamais appliqué (copie de
-conception : `docs/architecture/schema/0001_init.sql`).
+Sauvegarde de référence, prise avant toute migration :
+`~/oia-sauvegardes/avant-v9/` (vidage complet `oia-complet.dump`, schéma,
+données, `SHA256SUMS`), relue sur un Postgres jetable.
 
-`0002a` s'appelle ainsi pour se ranger entre `0002`, déjà déployée, et `0003`,
-sans renuméroter les fichiers suivants.
+| Ordre | Fichier | Version inscrite dans `supabase_migrations.schema_migrations` |
+| --- | --- | --- |
+| — | `0002_watch_and_workspace.sql` | Migration de départ, déployée le 16 septembre 2026 (trois versions `20260916…`). Ne jamais la rejouer sur cette base |
+| 1 | `0002a_comptes_de_mickael.sql` | `20261108010000` |
+| 2 | `0003_membres_et_politiques.sql` | `20261108010100` |
+| 3 | `0003a_transition_console.sql` (**transitoire**) | `20261108010200` |
+| 4 | `0004_money_lookup.sql` | `20261108010300` |
+| 5 | `0005_reprise_navigateur.sql` | `20261108010400` |
+| 6 | `infra/visibility/migrations/0001` à `0004` | `20261108010500` à `20261108010800` |
+| 7 | `0006_visibility_vues.sql` | `20261108010900` |
+| 8 | `0007_shyrka.sql` (bloc G) | voir le rapport du mandat v9 |
 
-Rien n'a été appliqué par Claude Code. Chaque fichier est testé sur un
-Postgres jetable : `pnpm --filter @oia/database test` (tests adverses dans
-`packages/database/test/`). Les tests s'ignorent eux-mêmes si Postgres n'est
-pas installé (`initdb` introuvable).
+Données posées après les migrations (pas de structure) :
+`../production/a3_membres.sql` (A3).
 
-## Maintenant : 0002a, par Mickaël
+Archive : `../archive/0001_init.sql`, schéma M0 jamais appliqué.
 
-Dans l'éditeur SQL de Supabase, en une seule exécution :
+**Pourquoi pas `supabase db push`.** Le registre des migrations de ce projet
+contient environ 150 versions héritées d'un autre produit (décembre 2025 à
+juin 2026), absentes du dépôt ; `db push` exigerait de les « réparer » une à
+une. Chaque fichier a donc été appliqué par `psql`, **en une transaction**, et
+inscrit dans `supabase_migrations.schema_migrations` dans la même transaction
+(script local `~/.oia/bin/oia-appliquer`, hors dépôt). Avant l'application
+réelle, toute la séquence a été rejouée en production dans une seule
+transaction terminée par `rollback` (répétition générale).
 
-```sql
-select set_config('oia.comptes_mickael', '<e-mail du premier compte>, <e-mail du second compte>', false);
--- puis tout le contenu de 0002a_comptes_de_mickael.sql
-```
+## Un seul modèle d'appartenance
 
-- Les identifiants sont lus dans `auth.users` par e-mail, en lecture seule.
-  Les e-mails ne sont pas écrits dans le dépôt.
-- Un e-mail introuvable, ou aucun e-mail : la migration s'arrête et rien ne
-  change (transaction).
-- Effet : chaque politique « authenticated … true » de 0002 devient la même
-  politique, réservée à ces comptes. La console, connectée avec un de ces
-  comptes, garde exactement ses droits (lecture, décisions en ajout seul,
-  étiquettes, notes, tâches, contacts, vues, acquittement des alertes,
-  demandes `QUEUED`, brouillons `PENDING`). Tout autre compte connecté ne lit
-  ni n'écrit plus rien. Le rôle de service des workers n'est pas concerné.
-- Vérification après application :
+Toute la base décide des accès de la même façon : **une ligne d'appartenance
+lue avec `auth.uid()`**, jamais un paramètre fourni par l'appelant, jamais un
+second système d'identité.
 
-  ```sql
-  select count(*) from public.oia_compte_autorise;          -- 2
-  select policyname, tablename from pg_policies where schemaname = 'public' order by 2, 1;
-  ```
+| Portée | Table | Rôles | Fonctions |
+| --- | --- | --- | --- |
+| Espaces d'OIA (Money Lookup, Shyrka, travail de tri) | `public.oia_membre` | `proprietaire`, `editeur`, `lecteur` | `oia_est_membre`, `oia_role`, `oia_exiger_editeur`, `oia_proprietaire` |
+| Clients de Visibility | `vis.client_member` (`user_id` en texte : `auth.uid()::text`) | `owner`, `approver`, `viewer` | `vis.caller_role` |
 
-- Ajouter un compte plus tard :
-  `insert into public.oia_compte_autorise (user_id) select id from auth.users where email = '<e-mail>';`
+- Les deux comptes de Mickaël sont `proprietaire` du studio
+  (`00000000-0000-4000-8000-000000000001`) et `owner` des clients `oia` et
+  `coach-gari`.
+- La liste `oia_compte_autorise` de 0002a n'a servi qu'à amorcer
+  `oia_membre` (0003) ; 0003a la retire avec sa fonction.
+- Les tables `vis` appartiennent à `vis_admin` ; le rôle `postgres` en est
+  membre (vis 0004), ce qui lui permet d'appliquer 0006 et d'écrire les
+  preuves de la synchronisation.
+- Ajouter un compte plus tard : une ligne dans `oia_membre` et, pour
+  Visibility, dans `vis.client_member` (rôle d'administration).
 
-## Plus tard : quand l'application Lovable appellera les fonctions `oia_*`
+## 0003a · transition de la console (à retirer)
 
-1. **Appliquer 0003, 0004 et 0005**, dans cet ordre, chacune dans sa
-   transaction. 0003 retire les politiques de 0002a et fait des comptes de
-   `oia_compte_autorise` les propriétaires du studio : pas d'ajout de membre à
-   la main.
-2. **Charger les opportunités** (`packages/money-lookup`, A3). Le chargeur
-   refuse une adresse Supabase sans `OIA_CHARGEMENT_SUPABASE=oui`.
-3. **Reprendre le travail du navigateur** (A4) : `select
-   oia_importer_sauvegarde('<espace>', '<contenu du fichier>'::jsonb)`,
-   connecté avec son compte. Le retour arrière se fait par
-   `select oia_annuler_import('<import_id>')`.
-4. **0006** seulement quand le schéma `vis` de Visibility sera sur la base.
-   `infra/visibility/migrations/0004_auth_identity.sql` a été corrigée pour Supabase par la session Visibility (commit `7093687`),
-   test dans `test/visibility.test.ts`. 0006 pose aussi une politique RLS sur
-   `vis.client_member` (un compte de l'interface ne voit que ses propres
-   appartenances) : à relire avec elle. Les tables `vis` appartenant à
-   `vis_admin`, 0006 s'applique avec un rôle qui peut accorder leurs droits.
+La console en ligne écrit encore directement dans les tables. 0003a lui rend
+exactement les écritures de 0002a, réservées aux propriétaires du studio,
+sous des politiques nommées « transitoire console … ». **À retirer quand
+Mickaël aura validé le cockpit Lovable** : le bloc SQL de retrait est en tête
+du fichier. Les tables nouvelles (`ml_*`, `oia_*`, `vis*`, `shy_*`) ne
+s'écrivent que par fonctions, pour tout le monde.
+
+## Tests
+
+Chaque fichier est testé sur un Postgres jetable :
+`pnpm --filter @oia/database test`. `test/production-v9.test.ts` rejoue la
+séquence exacte de production, puis les tests adverses du bloc A4.
 
 ## Retour arrière
 
+Le plus sûr : restaurer la sauvegarde `~/oia-sauvegardes/avant-v9/oia-complet.dump`
+(`pg_restore --clean`), après avoir sauvegardé l'état courant. Sinon, à
+l'unité, en ordre inverse, chaque fois dans une transaction, puis
+`delete from supabase_migrations.schema_migrations where version = '…'` :
+
+- 0007 : voir l'en-tête de `0007_shyrka.sql`.
 - 0006 : `drop view` des vues `vis_*_v1`, `drop function vis_valider_recommandation,
   vis_rejeter_recommandation`, `drop schema vis_ui cascade`, puis
   `alter table vis.client_member disable row level security` et
   `drop policy interface_ses_lignes on vis.client_member`.
+- vis 0001 à 0004 : `drop schema vis cascade`, puis `drop role vis_admin`.
 - 0005 : `oia_annuler_import` pour un import. Pour la migration elle-même :
   `drop function oia_importer_sauvegarde, oia_annuler_import`, puis
-  `drop table oia_import cascade`. Les colonnes `id_origine`,
-  `auteur_origine` et `import_id` peuvent rester.
+  `drop table oia_import cascade`.
 - 0004 : `drop view` des vues `ml_*`, puis `drop table ml_montant, ml_lot`,
   puis `alter table watch_opportunities drop column lot_initial`.
-- 0003 : recréer les politiques de 0002a (ou de 0002). Les colonnes
-  `espace_id` restent, avec une valeur par défaut.
-- 0002a : pour chaque table, `drop policy` des politiques `mickael …`, puis
-  recréer celles de 0002 (`0002_watch_and_workspace.sql`, section des
-  politiques), puis `drop function oia_compte_de_mickael` et
-  `drop table oia_compte_autorise`. **Déconseillé** : cela rouvre les tables à
-  tout compte connecté.
+- 0003a : bloc de retrait en tête du fichier (la console perd alors ses
+  écritures directes).
+- 0003 : recréer les politiques de 0002 (section des politiques de
+  `0002_watch_and_workspace.sql`) et rendre les droits d'écriture à
+  `authenticated`. Les colonnes `espace_id` restent, avec une valeur par
+  défaut. **Déconseillé** : cela rouvre les tables à tout compte connecté.
