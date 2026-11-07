@@ -14,7 +14,10 @@
     "lint": "turbo run lint",
     "build": "turbo run build",
     "worker:bawaba": "pnpm --filter @oia/workers run start -- --project bawaba",
-    "vis:j0-view": "bash infra/visibility/scripts/j0-view.sh coach-gari"
+    "vis:j0-view": "bash infra/visibility/scripts/j0-view.sh coach-gari",
+    "vis:j0-status": "bash infra/visibility/scripts/j0-status.sh coach-gari",
+    "vis:j0-watch:install": "bash infra/visibility/scripts/j0-watch.sh install coach-gari",
+    "vis:j0-watch:remove": "bash infra/visibility/scripts/j0-watch.sh remove coach-gari"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",

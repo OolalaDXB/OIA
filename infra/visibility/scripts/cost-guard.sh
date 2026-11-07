@@ -4,6 +4,8 @@
 # OIA_VIS_MONTHLY_ALERT_USD. Chaque relevé est ajouté au journal (hors repo).
 #   ./scripts/cost-guard.sh             un relevé
 #   ./scripts/cost-guard.sh --watch 60  relevé toutes les 60 s (pendant une fenêtre)
+#   ./scripts/cost-guard.sh --check     relevé et alerte, SANS JAMAIS arrêter le worker
+#                                       (tâche quotidienne : seul vis:j0-close arrête Elmo)
 #
 # Coût retenu = max(estimation Elmo, grille de prix, coût réel connu), où :
 #   - estimation Elmo : somme de usage_events.estimated_cost_usd du mois UTC
@@ -40,6 +42,9 @@ case "$source_mode" in max|estimate|real) ;; *) echo "OIA_VIS_COST_SOURCE: max, 
 # OIA_VIS_COST_GUARD_DRYRUN_RUNS = fichier de lignes JSON (format de src/cost-grid.ts)
 # passé à la grille de prix à la place des runs lus dans Postgres.
 dryrun="${OIA_VIS_COST_GUARD_DRYRUN:-}"
+checkonly=""; [ "${1:-}" = "--check" ] && checkonly=1
+# Arrêt du worker : jamais à blanc, jamais en contrôle seul.
+stop_worker() { [ -n "$dryrun" ] || [ -n "$checkonly" ] || elmo_dc stop worker >/dev/null 2>&1 || true; }
 data="${OIA_VIS_DATA:-$HOME/oia-visibility-data}"; mkdir -p "$data"
 journal="$data/cost-journal.csv"
 header="utc_time,month_utc,elmo_estimate_usd,grid_usd,openrouter_cum_usd,manual_usd,retained_usd,cap_usd,alert_usd,action"
@@ -65,8 +70,8 @@ runs_sql="select json_build_object('kind','run','provider',provider,'version',ve
 
 stop_unreadable() { # reason est grid
   # À blanc : jamais de Docker (les tests passent par ici).
-  [ -n "$dryrun" ] || elmo_dc stop worker >/dev/null 2>&1 || true
-  echo "$(date -u +%Y-%m-%dT%H:%M:%SZ),$(month_tag),$2,$3,n/a,n/a,n/a,$cap,$alert,stop-worker($1)" | tee -a "$journal"
+  stop_worker
+  echo "$(date -u +%Y-%m-%dT%H:%M:%SZ),$(month_tag),$2,$3,n/a,n/a,n/a,$cap,$alert,$([ -n "$checkonly" ] && echo "check-only" || echo "stop-worker")($1)" | tee -a "$journal"
 }
 
 # Coût du mois selon la grille de prix. Sort 3 si un modèle est absent de la grille.
@@ -122,8 +127,8 @@ once() {
     estimate) pick=("$est" "$grid" "$manual") ;;
     real)
       if [ -z "$orr" ] && [ -z "$dryrun" ]; then
-        elmo_dc stop worker >/dev/null 2>&1 || true
-        echo "$(date -u +%Y-%m-%dT%H:%M:%SZ),$(month_tag),$est,$grid,unreadable,$manual,n/a,$cap,$alert,stop-worker(cost-unreadable)" | tee -a "$journal"
+        stop_worker
+        echo "$(date -u +%Y-%m-%dT%H:%M:%SZ),$(month_tag),$est,$grid,unreadable,$manual,n/a,$cap,$alert,$([ -n "$checkonly" ] && echo "check-only" || echo "stop-worker")(cost-unreadable)" | tee -a "$journal"
         return 4
       fi
       pick=("$orr" "$manual") ;;
@@ -131,8 +136,8 @@ once() {
   esac
   retained="$(node -e 'const a=process.argv.slice(1).filter(x=>x!=="").map(Number);console.log(Math.max(0,...a).toFixed(4))' "${pick[@]}")"
   if node -e 'process.exit(Number(process.argv[1])>Number(process.argv[2])?0:1)' "$retained" "$cap"; then
-    action="stop-worker(cap-reached)"
-    [ -z "$dryrun" ] && elmo_dc stop worker >/dev/null 2>&1 || true
+    action="$([ -n "$checkonly" ] && echo "check-only" || echo "stop-worker")(cap-reached)"
+    stop_worker
     status=3
   elif [ "$alert" != "0" ] && node -e 'process.exit(Number(process.argv[1])>Number(process.argv[2])?0:1)' "$retained" "$alert"; then
     action="alert(monthly-80pct)"

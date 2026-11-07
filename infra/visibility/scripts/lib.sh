@@ -8,7 +8,8 @@ CRAWLSEO_PROJECT="oia-crawlseo${SUFFIX}"
 # Compose reads `env_file: .env` next to each compose file, so each install
 # (main, or a restore test) is its own checkout of the repo with its own .env
 # files. A test checkout on the same Mac also sets OIA_VIS_SUFFIX.
-ELMO_ENV_FILE="$VIS_ROOT/elmo/.env"
+# OIA_VIS_ELMO_ENV_FILE : seulement pour les tests (faux .env, faux docker).
+ELMO_ENV_FILE="${OIA_VIS_ELMO_ENV_FILE:-$VIS_ROOT/elmo/.env}"
 CRAWLSEO_ENV_FILE="$VIS_ROOT/crawlseo/.env"
 # OIA_VIS_ONLY=elmo|crawlseo restricts backup/restore/verify to one tool.
 ONLY="${OIA_VIS_ONLY:-}"
