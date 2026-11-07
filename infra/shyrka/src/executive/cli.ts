@@ -14,9 +14,10 @@ import { Missions, RefusMission } from "./missions.js";
 import { BaseOps, type Notification } from "./operations.js";
 import { collecter } from "./veille.js";
 import { verifier } from "./verification.js";
-import { commandeEval } from "./eval/cli.js";
+import { commandeEval, rapportCapacites } from "./eval/cli.js";
 import { commandeDispatch } from "./dispatch-cli.js";
-import { commandeExperiences } from "./experiences-cli.js";
+import { commandeExperiences, ouvrirCarnet } from "./experiences-cli.js";
+import { comparerAuPrecedent, construireProgres } from "./progres.js";
 
 /**
  * pnpm shyrka:executive <commande> — Shyrka exécutive (mandat v10).
@@ -44,6 +45,7 @@ function aide(): number {
   memoire …                      retenir | lister | chercher | corriger | oublier | exporter | restaurer | etat
   dispatch executeurs | diagnostic | preparer | soumettre | revue | approuver   dispatcher borné, copie isolée, aucune intégration à main
   experiences list | show | rappeler | comparer | statut | invalider | correction   carnet d'apprentissage (volume chiffré)
+  progres [--json]               appris / candidat / rejeté, limites, décisions, valeur mesurée, coûts
   eval run [capacite] | report   banc d'évaluation (développement, régression, tenu à l'écart) et registre des capacités`);
   return 2;
 }
@@ -143,6 +145,14 @@ function brief(args: string[]): number {
   const b = construireBrief({ ops: o, missions: new Missions(o), produits: chargerPortefeuille(), corpus: etatsCorpus() });
   const texte = texteBrief(b);
   console.log(texte);
+  // Section v11 : état des capacités (banc), sans contenu du carnet ; le détail est dans `progres`.
+  try {
+    const caps = rapportCapacites();
+    const n = caps.reduce<Record<string, number>>((a, c) => ((a[c.statut] = (a[c.statut] ?? 0) + 1), a), {});
+    console.log(`\n6. Apprentissage et capacités\n   - ${Object.entries(n).map(([k, v]) => `${v} ${k}`).join(", ")} (pnpm shyrka:executive eval report) ; détail : pnpm shyrka:executive progres`);
+  } catch {
+    /* banc jamais lancé */
+  }
   mkdirSync(join(REGLAGES.dossierOps, "briefs"), { recursive: true, mode: 0o700 });
   writeFileSync(join(REGLAGES.dossierOps, "briefs", `${b.le.slice(0, 16).replace(/:/g, "")}.txt`), texte, { mode: 0o600 });
   if (args.includes("--marquer")) o.ecrireControle("dernier_brief", b.le);
@@ -234,13 +244,14 @@ function missionsCmd(args: string[]): number {
       return 0;
     }
     if (sous === "proposer") {
-      // missions proposer <clé> <objectif> --fichiers a,b/ --commande "pnpm --filter x test" [--commande …] --sha <base> --agent <rôle>
+      // missions proposer <clé> <objectif> --fichiers a,b/ --commande "pnpm --filter x test" [--commande …] --sha <base> --agent <rôle> [--preuve <texte>…]
       const opt = (k: string) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : undefined; };
       const commandes = args.flatMap((a, i) => (a === "--commande" ? [args[i + 1]!.split(" ")] : []));
       const r = m.proposer({
         cle: ref ?? "", objectif: reste.filter((_, i, t) => !t[i]!.startsWith("--") && !(i > 0 && t[i - 1]!.startsWith("--"))).join(" "), demandeur: "shyrka", shaBase: opt("--sha") ?? revision().sha,
         agent: opt("--agent") ?? "developpement", automatisation: (opt("--automatisation") as "assiste") ?? "assiste",
-        perimetre: { repo: "OolalaDXB/OIA", fichiers: (opt("--fichiers") ?? "").split(",").filter(Boolean), commandes }, preuvesEntree: (opt("--preuves") ?? "").split(",").filter(Boolean),
+        perimetre: { repo: "OolalaDXB/OIA", fichiers: (opt("--fichiers") ?? "").split(",").filter(Boolean), commandes }, // --preuve (répétable) garde chaque preuve entière ; --preuves a,b reste accepté (sans virgule dans les preuves).
+        preuvesEntree: [...(opt("--preuves") ?? "").split(",").filter(Boolean), ...args.flatMap((a, i) => (a === "--preuve" ? [args[i + 1]!] : []))],
         outils: ["git", "pnpm", "sandbox-exec"], budgetUsd: 0, tentativesMax: 2, dureeMaxMin: 120,
       });
       console.log(`${r.creee ? "Mission proposée" : "Mission déjà connue (même clé)"} : ${r.mission.id}`);
@@ -546,6 +557,22 @@ async function main(): Promise<number> {
       return commandeDispatch(rest);
     case "experiences":
       return commandeExperiences(rest);
+    case "progres": {
+      // Le carnet est dans le volume chiffré : sans lui, le rapport le dit et continue.
+      let carnet = null;
+      try {
+        carnet = ouvrirCarnet();
+      } catch (e) {
+        console.log(`(carnet d'expériences indisponible : ${(e as Error).message})`);
+      }
+      const p = construireProgres(carnet);
+      carnet?.fermer();
+      if (rest.includes("--json")) return console.log(JSON.stringify(p, null, 2)), 0;
+      console.log("Progrès de Shyrka — chaque ligne porte sa nature ; « non mesuré » n'est jamais estimé.");
+      for (const [n, t] of p.lignes) console.log(`${n.padEnd(17)} ${t}`);
+      console.log(["", "Comparaison longitudinale :", ...comparerAuPrecedent(p.instantane).map((x) => `  ${x}`)].join("\n"));
+      return 0;
+    }
     default:
       return aide();
   }

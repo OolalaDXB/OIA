@@ -42,7 +42,7 @@ export function statutsParMissions(dossierOps = REGLAGES.dossierOps): Record<str
   const exp = join(dossierOps, "eval", "experiences-resume.json");
   if (existsSync(exp)) {
     const r = JSON.parse(readFileSync(exp, "utf8")) as { revuesRejetantUnFauxPositif?: number; revues?: number };
-    if (r.revues) out.revue = { statut: "LIMITE", raison: `${r.revuesRejetantUnFauxPositif ?? 0} faux positif(s) rejeté(s) sur ${r.revues} revue(s) — effectif < 10` };
+    if (r.revues) out.revue = { statut: "LIMITE", raison: `${r.revuesRejetantUnFauxPositif ?? 0} patch(s) verts aux tests habituels rejeté(s) sur ${r.revues} vérification(s) indépendante(s) — effectif < 10` };
   }
   const lang = join(dossierOps, "eval", "langues.json");
   if (existsSync(lang)) {
