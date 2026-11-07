@@ -2,6 +2,7 @@ import { voiceOutputAllowed, type Identity } from "./identity.js";
 import { applyStyle, SHYRKA_SYSTEM_PROMPT } from "./persona.js";
 import type { AudioClip, ChatMessage, Microphone, Speaker, TextModel, Transcriber } from "./types.js";
 import { assertModeleLocal } from "./local.js";
+import type { MemoireLocale } from "./memoire-locale.js";
 import { detecterDemande, detecterOffre, estAccord, estRefus, executer, questions, refusDocument, sansRepetition, sourcesDuDepot, type Execution, type Offre, type Operation, type Sources } from "./dialogue.js";
 
 export interface TurnEvent {
@@ -41,6 +42,8 @@ export interface SessionDeps {
   clock?: () => number;
   /** Sources lues par la liste blanche (cadre, roadmap, rapports). Par défaut : le dépôt. */
   sources?: Sources;
+  /** Memoire explicite locale ; jamais transmise a un modele cloud. */
+  memoire?: MemoireLocale;
 }
 
 /**
@@ -108,7 +111,20 @@ export class ShyrkaSession {
       this.deps.print("Shyrka · (rien entendu)");
       return { heard, answer: null, output: "aucune", events };
     }
-    const system = this.deps.system ?? SHYRKA_SYSTEM_PROMPT;
+    const commandeMemoire = this.deps.memoire?.traiter(heard);
+    if (commandeMemoire !== null && commandeMemoire !== undefined) {
+      if (/mode prive/i.test(commandeMemoire)) this.history = [];
+      this.deps.print(`Shyrka · ${commandeMemoire}`);
+      if (this.voiceOutput && this.deps.speaker) {
+        await this.step(events, "voix", () => this.deps.speaker!.speak(commandeMemoire));
+        return { heard, answer: commandeMemoire, output: "voix", events };
+      }
+      events.push({ at: new Date(this.clock()).toISOString(), step: "texte", ms: 0 });
+      return { heard, answer: commandeMemoire, output: "texte", events };
+    }
+    const systemBase = this.deps.system ?? SHYRKA_SYSTEM_PROMPT;
+    // Memorisation exclusivement pour le modele local, jamais pour un fournisseur externe.
+    const system = systemBase + (this.deps.model.name.startsWith("ollama:") ? (this.deps.memoire?.contextePour(heard) ?? "") : "");
     const messages: ChatMessage[] = [{ role: "system", content: system }, ...this.history, { role: "user", content: heard }];
     const decision = this.decider(heard);
     let answer: string;
