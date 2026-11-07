@@ -17,6 +17,7 @@ import { chargerProgramme } from "./entretien/programme.js";
 import { SessionEntretien } from "./entretien/session.js";
 import { loadIdentity, voiceOutputAllowed } from "./identity.js";
 import { RACINE_DEPOT } from "./local.js";
+import { MemoireLocale } from "./memoire-locale.js";
 import { promptSysteme } from "./persona.js";
 import { execFileRunner } from "./runner.js";
 import { ShyrkaSession, type TurnResult } from "./session.js";
@@ -138,7 +139,9 @@ async function parler(flags: Set<string>): Promise<void> {
   const whisper = simule || texte ? null : new WhisperServer({ model: cfg.whisperModel, bin: cfg.whisperBin, prompt: PROMPT_WHISPER });
   const transcriber: Transcriber | undefined = simule ? new SimulatedTranscriber(["Bonjour Shyrka, tu m'entends ?", "Où en est J0 ?"]) : whisper ?? undefined;
   const enregistreur: Enregistreur = simule ? new EnregistreurSimule() : new EnregistreurFfmpeg({ device: cfg.device, plafondSecondes: MAX_RECORD_SECONDS, ffmpeg: cfg.ffmpeg });
+  const memoire = new MemoireLocale();
   const session = new ShyrkaSession({
+    memoire,
     model: simule ? new SimulatedTextModel((m) => `Réponse simulée à : « ${m[m.length - 1]?.content ?? ""} »`) : await modeleTexte(),
     mistralAutorise: true,
     ...(flags.has("--comparer") && !simule ? { compareModel: new OllamaTextModel({ model: cfg.compareModel, url: cfg.ollamaUrl, think: cfg.think }) } : {}),
@@ -183,6 +186,7 @@ async function parler(flags: Set<string>): Promise<void> {
     arret();
     k.fermer();
     rmSync(dir, { recursive: true, force: true });
+    memoire.fermer();
   }
 }
 
