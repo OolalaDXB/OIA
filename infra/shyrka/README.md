@@ -43,9 +43,21 @@ puis comparer `shasum -a 256` à l'empreinte affichée sur la page du fichier.
 Noter la valeur dans le rapport d'essai.
 
 Ollama : l'application est déjà prévue par la roadmap (« Ollama local, dès
-P1 »). Choisir un modèle texte et le télécharger, par exemple
-`ollama pull mistral-small3.2` (vérifier le nom exact et la licence dans la
-bibliothèque Ollama le jour de l'essai ; tout modèle déjà installé convient).
+P1 »). Modèle par défaut de Shyrka 1 : **`qwen3:8b`**. Modèle de
+comparaison, facultatif : **`mistral-small`**.
+
+```sh
+ollama pull qwen3:8b
+ollama pull mistral-small      # seulement pour comparer
+ollama list                    # noter les noms et identifiants exacts
+```
+
+Noms non vérifiés depuis la session web : `ollama.com` y était bloqué par le
+réseau. `qwen3:8b` est confirmé par des sources secondaires (environ 5,2 Go).
+Pour Mistral Small, `mistral-small` est le nom de la famille ; la version
+servie par l'étiquette par défaut est à lire dans `ollama show mistral-small`
+(licence comprise). Si un `pull` échoue, ouvrir la page du modèle sur
+ollama.com/library et prendre le nom exact.
 
 Voix Aurélie (utile seulement pour l'étape 4) : Réglages Système >
 Accessibilité > Contenu énoncé > Voix du système > Gérer les voix > Français >
@@ -55,7 +67,9 @@ Aurélie.
 
 ```sh
 export SHYRKA_WHISPER_MODEL=~/oia-shyrka-data/models/ggml-large-v3-turbo.bin
-export SHYRKA_OLLAMA_MODEL=mistral-small3.2   # le nom donné par `ollama list`
+# facultatif : SHYRKA_OLLAMA_MODEL (défaut qwen3:8b),
+# SHYRKA_OLLAMA_COMPARAISON (défaut mistral-small),
+# SHYRKA_OLLAMA_REFLEXION=oui pour laisser qwen3 raisonner (plus lent, coupé par défaut)
 # facultatif : SHYRKA_MICRO=":0" (périphérique avfoundation), SHYRKA_DUREE=8,
 # SHYRKA_VOIX="Aurélie", SHYRKA_LANGUE=fr, SHYRKA_WHISPER_BIN=whisper-cli
 ```
@@ -69,7 +83,8 @@ Pour lister les micros : `ffmpeg -f avfoundation -list_devices true -i ""`
 pnpm --filter @oia/shyrka diagnostic
 ```
 
-Attendu : sept lignes `ok`. Une ligne `MANQUE` donne la commande à lancer.
+Attendu : sept lignes `ok`, plus une ligne facultative pour le modèle de
+comparaison. Une ligne `MANQUE` donne la commande à lancer.
 La ligne « voix macOS Aurélie » peut rester en `MANQUE` tant que l'étape 4
 n'est pas visée.
 
@@ -78,7 +93,11 @@ n'est pas visée.
 ```sh
 pnpm --filter @oia/shyrka parle -- --texte   # d'abord sans micro : on tape, Shyrka répond
 pnpm --filter @oia/shyrka parle              # puis au micro : Entrée, parler 8 s
+pnpm --filter @oia/shyrka parle -- --texte --comparer   # même question posée à qwen3:8b et à mistral-small
 ```
+
+Avec `--comparer`, la réponse de `mistral-small` s'affiche sous celle de
+Shyrka, avec sa durée ; elle n'est ni parlée ni gardée dans la conversation.
 
 À la première prise, macOS demande l'accès au micro pour le terminal :
 accepter (Réglages Système > Confidentialité > Micro). Trois phrases
@@ -107,13 +126,14 @@ say -v Aurélie "Essai de la sortie audio."
 ### 5. Consigner
 
 Écrire `infra/shyrka/reports/<date>-premier-essai.md` : version de macOS,
-modèle Whisper et son empreinte, modèle Ollama, micro utilisé, durées par
+modèle Whisper et son empreinte, modèles Ollama (noms et identifiants de
+`ollama list`), comparaison qwen3:8b et mistral-small sur les trois phrases, micro utilisé, durées par
 étape sur les trois phrases, qualité de transcription (mots faux), qualité
 des réponses, et si l'étape 4 a été faite : clarté de la voix, débit.
 
 ## Tests
 
 ```sh
-pnpm --filter @oia/shyrka test        # 30 tests, adaptateurs simulés et faux exécuteurs
+pnpm --filter @oia/shyrka test        # 34 tests, adaptateurs simulés et faux exécuteurs
 pnpm --filter @oia/shyrka parle -- --simule   # boucle complète simulée, sans matériel
 ```

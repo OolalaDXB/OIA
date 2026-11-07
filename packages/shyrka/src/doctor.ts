@@ -15,6 +15,8 @@ export interface DoctorConfig {
   whisperModel: string;
   ollamaUrl: string;
   ollamaModel: string;
+  /** Modèle de comparaison, facultatif : son absence n'est pas bloquante. */
+  compareModel?: string;
   voice: string;
 }
 
@@ -64,13 +66,22 @@ export async function diagnose(
     ollamaOk = false;
   }
   checks.push({ name: "Ollama (local)", ok: ollamaOk, detail: ollamaOk ? cfg.ollamaUrl : "injoignable", fix: "Ouvrir l'application Ollama, ou `ollama serve`" });
-  const hasModelOllama = cfg.ollamaModel !== "" && models.some((m) => m === cfg.ollamaModel || m === `${cfg.ollamaModel}:latest`);
+  const installed = (name: string) => name !== "" && models.some((m) => m === name || m === `${name}:latest`);
+  const hasModelOllama = installed(cfg.ollamaModel);
   checks.push({
     name: "modèle Ollama",
     ok: hasModelOllama,
     detail: cfg.ollamaModel ? `${cfg.ollamaModel}${models.length ? ` (installés : ${models.join(", ")})` : ""}` : "SHYRKA_OLLAMA_MODEL non défini",
-    fix: "`ollama pull <modèle>` puis SHYRKA_OLLAMA_MODEL=<modèle>",
+    fix: `\`ollama pull ${cfg.ollamaModel || "<modèle>"}\``,
   });
+  if (cfg.compareModel) {
+    checks.push({
+      name: "modèle de comparaison (facultatif)",
+      ok: installed(cfg.compareModel) || models.some((m) => m.startsWith(`${cfg.compareModel}:`)),
+      detail: cfg.compareModel,
+      fix: `\`ollama pull ${cfg.compareModel}\` (seulement pour \`parle -- --comparer\`)`,
+    });
+  }
 
   const voices = await deps.run("say", ["-v", "?"], { timeoutMs: 10_000 });
   const hasVoice = voices.code === 0 && voices.stdout.split("\n").some((l) => l.toLowerCase().startsWith(cfg.voice.toLowerCase()));

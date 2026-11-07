@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { diagnose, formatChecks } from "../src/doctor.js";
 import { fakeRunner } from "./fakes.js";
 
-const cfg = { ffmpeg: "ffmpeg", whisperBin: "whisper-cli", whisperModel: "/m/ggml-large-v3-turbo.bin", ollamaUrl: "http://127.0.0.1:11434", ollamaModel: "mistral-small3.2", voice: "Aurélie" };
+const cfg = { ffmpeg: "ffmpeg", whisperBin: "whisper-cli", whisperModel: "/m/ggml-large-v3-turbo.bin", ollamaUrl: "http://127.0.0.1:11434", ollamaModel: "qwen3:8b", compareModel: "mistral-small", voice: "Aurélie" };
 
 describe("diagnostic du Mac (lecture seule)", () => {
   it("tout présent : tout est ok", async () => {
@@ -11,7 +11,7 @@ describe("diagnostic du Mac (lecture seule)", () => {
       run,
       platform: "darwin",
       exists: () => true,
-      fetchJson: async () => ({ ok: true, status: 200, json: async () => ({ models: [{ name: "mistral-small3.2:latest" }] }) }),
+      fetchJson: async () => ({ ok: true, status: 200, json: async () => ({ models: [{ name: "qwen3:8b" }, { name: "mistral-small:latest" }] }) }),
     });
     expect(checks.filter((c) => !c.ok)).toEqual([]);
   });

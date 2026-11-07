@@ -12,6 +12,7 @@ export interface TurnEvent {
 export interface TurnResult {
   heard: string;
   answer: string | null;
+  comparison?: { model: string; answer: string; ms: number };
   /** "voix" seulement si l'identité en vigueur autorise la voix en sortie. */
   output: "voix" | "texte" | "aucune";
   events: TurnEvent[];
@@ -21,6 +22,8 @@ export interface SessionDeps {
   microphone?: Microphone;
   transcriber?: Transcriber;
   model: TextModel;
+  /** Second modèle, pour comparer : sa réponse s'affiche, ne parle pas, n'entre pas dans l'historique. */
+  compareModel?: TextModel;
   speaker?: Speaker;
   identity: Identity;
   /** Affichage texte : toujours disponible, c'est la sortie de la version 0. */
@@ -78,15 +81,23 @@ export class ShyrkaSession {
     const messages: ChatMessage[] = [{ role: "system", content: SHYRKA_SYSTEM_PROMPT }, ...this.history, { role: "user", content: heard }];
     const raw = await this.step(events, "reflexion", () => this.deps.model.chat(messages), this.deps.model.name);
     const answer = applyStyle(raw);
+    let comparison: TurnResult["comparison"];
+    if (this.deps.compareModel) {
+      const cm = this.deps.compareModel;
+      const t0 = this.clock();
+      const other = applyStyle(await cm.chat(messages));
+      comparison = { model: cm.name, answer: other, ms: this.clock() - t0 };
+    }
     this.remember(heard, answer);
     this.deps.print(`Shyrka · ${answer}`);
+    if (comparison) this.deps.print(`  comparaison ${comparison.model} (${comparison.ms} ms) · ${comparison.answer}`);
     if (this.voiceOutput && this.deps.speaker) {
       const speaker = this.deps.speaker;
       await this.step(events, "voix", () => speaker.speak(answer));
-      return { heard, answer, output: "voix", events };
+      return { heard, answer, output: "voix", events, ...(comparison ? { comparison } : {}) };
     }
     events.push({ at: new Date(this.clock()).toISOString(), step: "texte", ms: 0, detail: `identité v${this.deps.identity.version}` });
-    return { heard, answer, output: "texte", events };
+    return { heard, answer, output: "texte", events, ...(comparison ? { comparison } : {}) };
   }
 
   private remember(user: string, assistant: string): void {

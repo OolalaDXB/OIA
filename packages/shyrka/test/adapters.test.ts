@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { FfmpegMicrophone, MAX_RECORD_SECONDS } from "../src/adapters/microphone-ffmpeg.js";
 import { WhisperCppTranscriber, cleanWhisperOutput } from "../src/adapters/whisper-cpp.js";
-import { OllamaTextModel, assertLoopback } from "../src/adapters/ollama.js";
+import { COMPARISON_OLLAMA_MODEL, DEFAULT_OLLAMA_MODEL, OllamaTextModel, assertLoopback, stripThinking } from "../src/adapters/ollama.js";
 import { MacSaySpeaker } from "../src/adapters/macos-say.js";
 import { fakeRunner } from "./fakes.js";
 
@@ -65,16 +65,16 @@ describe("modèle texte (Ollama local)", () => {
   it("envoie /api/chat sans streaming et lit message.content", async () => {
     const seen: { url: string; body: unknown }[] = [];
     const m = new OllamaTextModel({
-      model: "mistral-small3.2",
+      model: "qwen3:8b",
       fetch: async (url, init) => {
         seen.push({ url, body: JSON.parse(init.body) });
         return { ok: true, status: 200, json: async () => ({ message: { role: "assistant", content: "Oui." } }), text: async () => "" };
       },
     });
-    expect(m.name).toBe("ollama:mistral-small3.2");
+    expect(m.name).toBe("ollama:qwen3:8b");
     await expect(m.chat([{ role: "user", content: "Tu m'entends ?" }])).resolves.toBe("Oui.");
     expect(seen[0]?.url).toBe("http://127.0.0.1:11434/api/chat");
-    expect(seen[0]?.body).toMatchObject({ model: "mistral-small3.2", stream: false, messages: [{ role: "user", content: "Tu m'entends ?" }] });
+    expect(seen[0]?.body).toMatchObject({ model: "qwen3:8b", stream: false, think: false, messages: [{ role: "user", content: "Tu m'entends ?" }] });
   });
 
   it("signale un HTTP en erreur ou une réponse sans contenu", async () => {
@@ -115,5 +115,35 @@ describe("modèle texte : Ollama éteint", () => {
       },
     });
     await expect(m.chat([])).rejects.toThrow(/injoignable sur http:\/\/127\.0\.0\.1:11434.*ollama serve/);
+  });
+});
+
+describe("modèles Ollama par défaut", () => {
+  it("qwen3:8b par défaut, mistral-small en comparaison", () => {
+    expect(DEFAULT_OLLAMA_MODEL).toBe("qwen3:8b");
+    expect(COMPARISON_OLLAMA_MODEL).toBe("mistral-small");
+  });
+
+  it("retire un raisonnement <think> resté dans la réponse", async () => {
+    expect(stripThinking("<think>je réfléchis\nlongtemps</think>\n\nBonjour.")).toBe("Bonjour.");
+    const m = new OllamaTextModel({
+      model: "qwen3:8b",
+      fetch: async () => ({ ok: true, status: 200, json: async () => ({ message: { content: "<think>x</think>Oui." } }), text: async () => "" }),
+    });
+    await expect(m.chat([])).resolves.toBe("Oui.");
+  });
+
+  it("le raisonnement peut être demandé explicitement", async () => {
+    let body: { think?: boolean } = {};
+    const m = new OllamaTextModel({
+      model: "qwen3:8b",
+      think: true,
+      fetch: async (_u, init) => {
+        body = JSON.parse(init.body);
+        return { ok: true, status: 200, json: async () => ({ message: { content: "ok" } }), text: async () => "" };
+      },
+    });
+    await m.chat([]);
+    expect(body.think).toBe(true);
   });
 });

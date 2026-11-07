@@ -5,7 +5,7 @@ import { createInterface } from "node:readline/promises";
 import { fileURLToPath } from "node:url";
 import { FfmpegMicrophone } from "./adapters/microphone-ffmpeg.js";
 import { MacSaySpeaker } from "./adapters/macos-say.js";
-import { OllamaTextModel } from "./adapters/ollama.js";
+import { COMPARISON_OLLAMA_MODEL, DEFAULT_OLLAMA_MODEL, OllamaTextModel } from "./adapters/ollama.js";
 import { RecordingSpeaker, SimulatedMicrophone, SimulatedTextModel, SimulatedTranscriber } from "./adapters/simulated.js";
 import { WhisperCppTranscriber } from "./adapters/whisper-cpp.js";
 import { diagnose, formatChecks } from "./doctor.js";
@@ -18,6 +18,7 @@ import { ShyrkaSession, type TurnResult } from "./session.js";
  * pnpm --filter @oia/shyrka parle               dialogue réel (micro, Whisper, Ollama)
  * pnpm --filter @oia/shyrka parle -- --texte    sans micro : on tape, Shyrka répond
  * pnpm --filter @oia/shyrka parle -- --simule   tout simulé, aucun matériel requis
+ * pnpm --filter @oia/shyrka parle -- --comparer chaque réponse aussi demandée à mistral-small
  */
 const env = process.env;
 const DEFAULT_IDENTITY = fileURLToPath(new URL("../../../infra/shyrka/identite.json", import.meta.url));
@@ -29,7 +30,9 @@ const cfg = {
   whisperBin: env.SHYRKA_WHISPER_BIN ?? "whisper-cli",
   whisperModel: env.SHYRKA_WHISPER_MODEL ?? "",
   ollamaUrl: env.SHYRKA_OLLAMA_URL ?? "http://127.0.0.1:11434",
-  ollamaModel: env.SHYRKA_OLLAMA_MODEL ?? "",
+  ollamaModel: env.SHYRKA_OLLAMA_MODEL ?? DEFAULT_OLLAMA_MODEL,
+  compareModel: env.SHYRKA_OLLAMA_COMPARAISON ?? COMPARISON_OLLAMA_MODEL,
+  think: env.SHYRKA_OLLAMA_REFLEXION === "oui",
   voice: env.SHYRKA_VOIX ?? "Aurélie",
   language: env.SHYRKA_LANGUE ?? "fr",
   identityPath: env.SHYRKA_IDENTITE ?? DEFAULT_IDENTITY,
@@ -68,7 +71,8 @@ async function parle(flags: Set<string>): Promise<void> {
               microphone: new FfmpegMicrophone(execFileRunner, { device: cfg.device, dir, ffmpeg: cfg.ffmpeg }),
               transcriber: new WhisperCppTranscriber(execFileRunner, { model: cfg.whisperModel, bin: cfg.whisperBin }),
             }),
-        model: new OllamaTextModel({ model: cfg.ollamaModel, url: cfg.ollamaUrl }),
+        model: new OllamaTextModel({ model: cfg.ollamaModel, url: cfg.ollamaUrl, think: cfg.think }),
+        ...(flags.has("--comparer") ? { compareModel: new OllamaTextModel({ model: cfg.compareModel, url: cfg.ollamaUrl, think: cfg.think }) } : {}),
         speaker: new MacSaySpeaker(execFileRunner, { voice: cfg.voice, dir }),
         identity,
         print: (l) => console.log(l),
@@ -107,7 +111,7 @@ async function main(): Promise<void> {
   const flags = new Set(rest.filter((a) => a !== "--"));
   if (cmd === "diagnostic") {
     const checks = await diagnose(
-      { ffmpeg: cfg.ffmpeg, whisperBin: cfg.whisperBin, whisperModel: cfg.whisperModel, ollamaUrl: cfg.ollamaUrl, ollamaModel: cfg.ollamaModel, voice: cfg.voice },
+      { ffmpeg: cfg.ffmpeg, whisperBin: cfg.whisperBin, whisperModel: cfg.whisperModel, ollamaUrl: cfg.ollamaUrl, ollamaModel: cfg.ollamaModel, compareModel: cfg.compareModel, voice: cfg.voice },
       { run: execFileRunner },
     );
     console.log(formatChecks(checks));
@@ -115,7 +119,7 @@ async function main(): Promise<void> {
     return;
   }
   if (cmd === "parle") return parle(flags);
-  console.log("Usage : cli.ts diagnostic | parle [--texte] [--simule]");
+  console.log("Usage : cli.ts diagnostic | parle [--texte] [--simule] [--comparer]");
   process.exitCode = 2;
 }
 

@@ -86,3 +86,19 @@ describe("Shyrka 1 « Te parle », boucle simulée", () => {
     expect(SHYRKA_SYSTEM_PROMPT).toMatch(/n'envoies rien/);
   });
 });
+
+describe("comparaison de modèles", () => {
+  it("affiche la réponse du second modèle sans la parler ni la garder", async () => {
+    const printed: string[] = [];
+    const speaker = new RecordingSpeaker();
+    const main = new SimulatedTextModel("Réponse principale.");
+    const other = new SimulatedTextModel("Autre réponse.");
+    const s = new ShyrkaSession({ model: main, compareModel: other, speaker, identity: { ...IDENTITY_V0, version: 1, voixEnSortie: true }, print: (l) => printed.push(l) });
+    const r = await s.textTurn("Bonjour");
+    expect(r.comparison?.answer).toBe("Autre réponse.");
+    expect(speaker.spoken).toEqual(["Réponse principale."]);
+    expect(printed[1]).toMatch(/comparaison simule:modele-texte .*Autre réponse\./);
+    await s.textTurn("Et ensuite ?");
+    expect(main.calls[1]!.filter((m) => m.role === "assistant").map((m) => m.content)).toEqual(["Réponse principale."]);
+  });
+});
