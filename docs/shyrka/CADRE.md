@@ -70,7 +70,7 @@ préférence est exprimée.
 
 - **Ce qui appartient à Mickaël peut entrer.** Rien n'est bloqué par
   principe parmi ses projets, ses dépôts, ses finances personnelles, sa
-  santé, sa famille — dans les limites des mémoires sensibles ci-dessous.
+  santé, sa famille, dans les limites des mémoires sensibles ci-dessous.
 - **Les données de Swift et de ses clients n'entrent pas.** Aucune
   exception.
 - **Mémoires sensibles** (famille, finances, santé) : hors de portée des
@@ -136,7 +136,7 @@ préférence est exprimée.
 
 - **États d'humeur liés au travail.** Shyrka peut exprimer qu'elle juge
   une mission bien finie, mal finie, injuste, fatigante, agaçante,
-  satisfaisante — toujours à propos d'un travail concret, jamais comme
+  satisfaisante, toujours à propos d'un travail concret, jamais comme
   une humeur générale non reliée. Une humeur sans objet n'a pas de
   place.
 - Les humeurs se consignent dans la mémoire projet (`reports/`), pas
@@ -155,7 +155,7 @@ préférence est exprimée.
 
 Trois périmètres :
 
-1. **Global** : cadre, préférences, choix de style — utilisables partout.
+1. **Global** : cadre, préférences, choix de style : utilisables partout.
 2. **Projet** : spécifique à un projet (OIA Visibility, OIA Funding,
    Shyrka elle-même).
 3. **Client** : spécifique à un client ; jamais mélangé avec un autre
@@ -179,7 +179,7 @@ flowchart LR
 
 | Étape | Niveau d'action maximal | Règle propre à l'étape |
 |---|---|---|
-| Shyrka 1 · Te parle | Analyse, sans données | Dialogue local seulement (micro, Whisper, Ollama, voix macOS) ; prise de parole volontaire ; aucune donnée de projet ; rien ne quitte la machine ; identité version 0, donc texte en sortie |
+| Shyrka 1 · Te parle | Analyse, sans données | Dialogue local seulement (micro, Whisper, Ollama, voix macOS) ; prise de parole volontaire ; aucune donnée de projet ; rien ne quitte la machine ; identité version 0 : voix Aurélie en sortie, aucun visage |
 | Shyrka 2 · Te seconde | Préparation | Digest et brouillons ; rien n'est envoyé ni fusionné |
 | Shyrka 3 · Te connaît | Analyse, avec mémoire | Lit la mémoire validée et les preuves ; refuse de généraliser une leçon d'un client à un autre ; mémoires sensibles pour Mickaël seulement |
 | Shyrka 4 · Agit pour toi | Engagement | Confirmation de Mickaël à chaque action, sauf délégation écrite ; e-mail et WhatsApp par paliers ; refus journalisés |
@@ -210,7 +210,7 @@ utilise un terme neutre.
 
 La porte P0 est franchie quand :
 
-1. ce cadre est **approuvé par Mickaël** (date, version — ligne
+1. ce cadre est **approuvé par Mickaël** (date, version : ligne
    « Version 1 · 2026-11-07 · Mickaël Thomas » en tête) ;
 2. une **politique de permissions** est documentée (sources, actions,
    validations exigées) ;
@@ -219,5 +219,6 @@ La porte P0 est franchie quand :
 
 P0 validée est un prérequis de Shyrka 2 à 4 (ajout 3.6 ; auparavant de P7,
 qui n'est plus une phase), jamais de P1 à P6. Le point 3 est vérifié pour
-l'identité par `packages/shyrka/test/identity.test.ts` : la version 0
-suivie n'autorise ni voix ni visage.
+l'identité par `infra/shyrka/test/identity.test.ts` : la version 0
+suivie parle avec la voix Aurélie, n'a pas de visage, et n'active aucune
+capacité d'engagement.

@@ -1,0 +1,317 @@
+{
+ "_avertissement": "Données entièrement fictives (mandat v8, C2). Contrat Shyrka version 1.",
+ "contexte_v1": [
+  {
+   "id": "ctx-000001",
+   "type": "projet",
+   "contenu": "Projet fictif Alpha : subvention régionale fictive",
+   "source": "oia:registre",
+   "application": "oia",
+   "date": "2026-11-08T09:11:00.000Z",
+   "statut": "a_valider",
+   "portee": "projet",
+   "derive_de": []
+  },
+  {
+   "id": "ctx-000002",
+   "type": "decision",
+   "contenu": "Décision fictive : poursuivre l'appel à projets fictif",
+   "source": "oia:revue",
+   "application": "oia",
+   "date": "2026-11-08T09:14:00.000Z",
+   "statut": "valide",
+   "portee": "projet",
+   "derive_de": []
+  },
+  {
+   "id": "ctx-000003",
+   "type": "projet",
+   "contenu": "Projet fictif Bêta, abandonné",
+   "source": "oia:registre",
+   "application": "oia",
+   "date": "2026-11-08T09:16:00.000Z",
+   "statut": "retire",
+   "portee": "projet",
+   "derive_de": []
+  },
+  {
+   "id": "ctx-000004",
+   "type": "derive",
+   "contenu": "Résumé fictif : Alpha avance, décision prise le 8 novembre",
+   "source": "noyau:derive",
+   "application": "noyau",
+   "date": "2026-11-08T09:20:00.000Z",
+   "statut": "a_valider",
+   "portee": "global",
+   "derive_de": [
+    "ctx-000001",
+    "ctx-000002"
+   ]
+  }
+ ],
+ "sources_v1": [
+  {
+   "id": "oia:registre",
+   "nom": "registre",
+   "application": "oia",
+   "ajoutee_le": "2026-11-08T09:10:00.000Z",
+   "elements": 2
+  },
+  {
+   "id": "oia:revue",
+   "nom": "revue",
+   "application": "oia",
+   "ajoutee_le": "2026-11-08T09:13:00.000Z",
+   "elements": 1
+  },
+  {
+   "id": "noyau:derive",
+   "nom": "derive",
+   "application": "noyau",
+   "ajoutee_le": "2026-11-08T09:21:00.000Z",
+   "elements": 1
+  }
+ ],
+ "permissions_v1": [
+  {
+   "application": "oia",
+   "capacite": "fournir:projet",
+   "accordee_par": "Mickaël Thomas",
+   "le": "2026-11-08T09:04:00.000Z"
+  },
+  {
+   "application": "oia",
+   "capacite": "fournir:decision",
+   "accordee_par": "Mickaël Thomas",
+   "le": "2026-11-08T09:06:00.000Z"
+  },
+  {
+   "application": "oia",
+   "capacite": "action:ouvrir-fiche",
+   "accordee_par": "Mickaël Thomas",
+   "le": "2026-11-08T09:08:00.000Z"
+  }
+ ],
+ "cadre_v1": [
+  {
+   "ordre": 1,
+   "section": "Rôle",
+   "fichier": "docs/shyrka/CADRE.md",
+   "version": "à valider"
+  },
+  {
+   "ordre": 2,
+   "section": "Identité",
+   "fichier": "docs/shyrka/CADRE.md",
+   "version": "à valider"
+  },
+  {
+   "ordre": 3,
+   "section": "Permissions",
+   "fichier": "docs/shyrka/CADRE.md",
+   "version": "à valider"
+  },
+  {
+   "ordre": 4,
+   "section": "Données",
+   "fichier": "docs/shyrka/CADRE.md",
+   "version": "à valider"
+  },
+  {
+   "ordre": 5,
+   "section": "Mémoire",
+   "fichier": "docs/shyrka/CADRE.md",
+   "version": "à valider"
+  }
+ ],
+ "identite_v1": [
+  {
+   "version": 1,
+   "voix": "Aurélie",
+   "apparence": "Lovable Shyrka v0, présence en points",
+   "expression": "Phrases courtes, un fait par phrase (choix fictif de démonstration)",
+   "choisie_par": "Shyrka",
+   "le": "2026-11-08T09:27:00.000Z"
+  }
+ ],
+ "applications_v1": [
+  {
+   "id": "oia",
+   "nom": "OIA",
+   "fournit": [
+    "projet",
+    "decision"
+   ],
+   "actions": [
+    "ouvrir-fiche"
+   ],
+   "enregistree_le": "2026-11-08T09:00:00.000Z",
+   "permissions": [
+    "fournir:projet",
+    "fournir:decision",
+    "action:ouvrir-fiche"
+   ]
+  },
+  {
+   "id": "agenda-fictif",
+   "nom": "Agenda fictif",
+   "fournit": [
+    "rendez-vous"
+   ],
+   "actions": [],
+   "enregistree_le": "2026-11-08T09:02:00.000Z",
+   "permissions": []
+  }
+ ],
+ "journal_v1": [
+  {
+   "n": 1,
+   "le": "2026-11-08T09:01:00.000Z",
+   "acteur": "oia",
+   "quoi": "application.enregistree",
+   "application": "oia",
+   "cible": null,
+   "resultat": "info"
+  },
+  {
+   "n": 2,
+   "le": "2026-11-08T09:03:00.000Z",
+   "acteur": "agenda-fictif",
+   "quoi": "application.enregistree",
+   "application": "agenda-fictif",
+   "cible": null,
+   "resultat": "info"
+  },
+  {
+   "n": 3,
+   "le": "2026-11-08T09:05:00.000Z",
+   "acteur": "Mickaël Thomas",
+   "quoi": "permission.accordee",
+   "application": "oia",
+   "cible": "fournir:projet",
+   "resultat": "info"
+  },
+  {
+   "n": 4,
+   "le": "2026-11-08T09:07:00.000Z",
+   "acteur": "Mickaël Thomas",
+   "quoi": "permission.accordee",
+   "application": "oia",
+   "cible": "fournir:decision",
+   "resultat": "info"
+  },
+  {
+   "n": 5,
+   "le": "2026-11-08T09:09:00.000Z",
+   "acteur": "Mickaël Thomas",
+   "quoi": "permission.accordee",
+   "application": "oia",
+   "cible": "action:ouvrir-fiche",
+   "resultat": "info"
+  },
+  {
+   "n": 6,
+   "le": "2026-11-08T09:12:00.000Z",
+   "acteur": "oia",
+   "quoi": "contexte.fourni",
+   "application": "oia",
+   "cible": "ctx-000001",
+   "resultat": "autorise"
+  },
+  {
+   "n": 7,
+   "le": "2026-11-08T09:15:00.000Z",
+   "acteur": "oia",
+   "quoi": "contexte.fourni",
+   "application": "oia",
+   "cible": "ctx-000002",
+   "resultat": "autorise"
+  },
+  {
+   "n": 8,
+   "le": "2026-11-08T09:17:00.000Z",
+   "acteur": "oia",
+   "quoi": "contexte.fourni",
+   "application": "oia",
+   "cible": "ctx-000003",
+   "resultat": "autorise"
+  },
+  {
+   "n": 9,
+   "le": "2026-11-08T09:18:00.000Z",
+   "acteur": "Mickaël Thomas",
+   "quoi": "contexte.valide",
+   "application": null,
+   "cible": "ctx-000002",
+   "resultat": "info"
+  },
+  {
+   "n": 10,
+   "le": "2026-11-08T09:19:00.000Z",
+   "acteur": "Mickaël Thomas",
+   "quoi": "contexte.retire",
+   "application": null,
+   "cible": "ctx-000003",
+   "resultat": "info"
+  },
+  {
+   "n": 11,
+   "le": "2026-11-08T09:22:00.000Z",
+   "acteur": "Shyrka",
+   "quoi": "contexte.derive",
+   "application": null,
+   "cible": "ctx-000004",
+   "resultat": "info"
+  },
+  {
+   "n": 12,
+   "le": "2026-11-08T09:23:00.000Z",
+   "acteur": "oia",
+   "quoi": "action",
+   "application": "oia",
+   "cible": "action:ouvrir-fiche",
+   "resultat": "autorise"
+  },
+  {
+   "n": 13,
+   "le": "2026-11-08T09:24:00.000Z",
+   "acteur": "oia",
+   "quoi": "action",
+   "application": "oia",
+   "cible": "action:envoyer",
+   "resultat": "refuse"
+  },
+  {
+   "n": 14,
+   "le": "2026-11-08T09:25:00.000Z",
+   "acteur": "Mickaël Thomas",
+   "quoi": "mode_prive.debut",
+   "application": null,
+   "cible": null,
+   "resultat": "info"
+  },
+  {
+   "n": 15,
+   "le": "2026-11-08T09:26:00.000Z",
+   "acteur": "Mickaël Thomas",
+   "quoi": "mode_prive.fin",
+   "application": null,
+   "cible": null,
+   "resultat": "info"
+  },
+  {
+   "n": 16,
+   "le": "2026-11-08T09:28:00.000Z",
+   "acteur": "Shyrka",
+   "quoi": "identite.modifiee",
+   "application": null,
+   "cible": "version 1",
+   "resultat": "info"
+  }
+ ],
+ "mode_prive_v1": [
+  {
+   "actif": false
+  }
+ ]
+}
