@@ -15,25 +15,29 @@ TypeSafe. Gemini et Perplexity passent par OpenRouter, seule voie dans
 Elmo 0.7.7 (5 $ de crédit, clé plafonnée à 5 $ par mois). Grok : pas pour
 J0, candidat pour une fenêtre ultérieure avec sa propre mesure de départ.
 
-**Règle commune** : crédit prépayé + recharge automatique **coupée**
-partout, et la somme des crédits ne dépasse pas le plafond de 30 $. Sans
-cette précaution, le plafond logiciel de `cost-guard.sh` n'arrête rien
+**Règle commune** : crédit prépayé, limite de dépense et recharge
+automatique **coupée** chez chaque fournisseur. Sans cette précaution, le plafond logiciel de `cost-guard.sh` n'arrête rien
 tant que l'estimation ou le solde reporté n'a pas rattrapé la dépense
 réelle (et l'estimation d'Elmo sous-estime Claude Sonnet 5.5).
 
 | Fournisseur | Clé | Crédit prépayé | Limite supplémentaire |
 |---|---|---|---|
 | OpenAI | `oia-visibility` | 5 $ | limite mensuelle du projet |
-| Anthropic | `oia-visibility`, créée **dans l'espace de travail dédié** | 10 $ | limite de dépense de l'espace : 10 $ / mois |
+| Anthropic | `oia-visibility`, créée **dans l'espace de travail dédié** | 12 $ | limite de dépense de l'espace : 12 $ / mois |
 | Mistral | `oia-visibility` (compte existant, séparée d'OIA Funding) | 8 $ | **limite recommandée : 8 $** |
 | OpenRouter | `oia-visibility` | 5 $ | **clé plafonnée à 5 $ par mois** |
-| TypeSafe (Jev) | `oia-visibility` | minimum proposé, au plus 2 $ | — |
+| TypeSafe (Jev) | `oia-visibility` | minimum proposé, au plus 3 $ | — |
 
-Total ≤ 30 $. Mistral passe à 8 $ (modèle `mistral-large-4`, pire cas
-≈ 6,55 $ onboarding compris) ; pour rester sous les 30 $, Anthropic
-descend à 10 $ et TypeSafe à 2 $ au plus. Le pire cas Claude (≈ 11 $,
-nouvelle tentative complète sur chaque appel) dépasse alors légèrement
-les 10 $ : les derniers appels seraient refusés, sans dépense au-delà.
+Les limites par fournisseur sont des **plafonds indépendants**, pas un
+budget à répartir : leur somme (33 $) peut dépasser 30 $. Chacune borne la
+dépense d'un seul fournisseur, même si `cost-guard.sh` lit mal. Le plafond
+de **30 $ s'applique à la dépense totale réelle du mois**, que surveille
+`cost-guard.sh` (arrêt du worker au-delà). Si `cost-guard.sh` tombait en
+panne, la dépense resterait bornée par la somme des limites (33 $).
+
+Chaque limite couvre le pire cas J0 de son fournisseur : Claude ≈ 11 $
+(nouvelle tentative complète sur chaque appel) sous 12 $, Mistral ≈ 6,55 $
+(`mistral-large-4`, onboarding compris) sous 8 $.
 
 **Le prix de la recherche web de Mistral n'est pas publié** (page de
 tarifs : « facturé par appel », sans montant). La grille compte 0,03 $
@@ -45,14 +49,14 @@ Cases à cocher avant de poser la première clé :
 - [ ] OpenAI : recharge automatique coupée (Billing → Auto recharge).
 - [ ] OpenAI : limite mensuelle posée sur le projet de la clé.
 - [ ] Anthropic : espace de travail dédié `oia-visibility` créé.
-- [ ] Anthropic : limite de dépense posée sur cet espace (10 $ / mois).
+- [ ] Anthropic : limite de dépense posée sur cet espace (12 $ / mois).
 - [ ] Anthropic : clé créée dans cet espace, pas dans l'espace par défaut.
 - [ ] Anthropic : recharge automatique coupée (Billing).
 - [ ] Mistral : 8 $ de crédit, limite de dépense à 8 $, recharge automatique coupée, clé dédiée `oia-visibility`.
 - [ ] TypeSafe : recharge automatique coupée (ou facturation sans carte enregistrée).
 - [ ] OpenRouter : 5 $ de crédit, recharge automatique coupée.
 - [ ] OpenRouter : clé `oia-visibility` plafonnée à 5 $ par mois (limite de crédit de la clé).
-- [ ] Somme des crédits prépayés ≤ 30 $.
+- [ ] Plafond total de 30 $ dans `.env` (`OIA_VIS_MONTHLY_CAP_USD=30`, alerte à 24 $), vérifié à l'étape 2.
 - [ ] Clés Google (Gemini), Perplexity et xAI laissées dans Proton Pass : Elmo 0.7.7 ne les lit pas.
 
 ## 1 · Poser les clés sur le Mac

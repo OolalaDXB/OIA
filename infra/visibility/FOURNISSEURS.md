@@ -31,9 +31,11 @@ branchés en API ou en complément.
   refuse rien par avance.
 - Il échoue en sécurité (worker arrêté) si le coût du mois est illisible.
 
-**Le vrai plafond opposable** est double : crédits prépayés **et** recharge
-automatique désactivée chez chaque fournisseur (OpenAI, Anthropic, Mistral,
-OpenRouter), plus une réserve de budget avant chaque lot de mesure. Sans
+**Le vrai plafond opposable** est par fournisseur : crédit prépayé, limite
+de dépense **et** recharge automatique désactivée chez chacun (OpenAI,
+Anthropic, Mistral, OpenRouter, TypeSafe). Ces limites sont indépendantes ;
+le plafond de 30 $ porte sur la dépense totale réelle et relève de
+`cost-guard.sh` (§ 0 quater, « Protection par fournisseur »). Sans
 cette double précaution, un dépassement peut passer sous le radar du
 script le temps que l'estimation ou l'API de solde se mette à jour.
 
@@ -118,23 +120,24 @@ propre mesure de départ.
 
 ### Protection par fournisseur (plafond opposable)
 
-La somme des crédits prépayés ne dépasse pas le plafond de 30 $ : même si
-`cost-guard.sh` lit mal, aucun fournisseur ne peut dépenser plus que son
-crédit.
+Les limites par fournisseur sont des **plafonds indépendants**, pas un
+budget à répartir : leur somme (33 $) peut dépasser 30 $. Chacune borne la
+dépense d'un seul fournisseur, même si `cost-guard.sh` lit mal. Le plafond
+de **30 $ s'applique à la dépense totale réelle du mois**, que surveille
+`cost-guard.sh` (arrêt du worker au-delà). Si `cost-guard.sh` tombait en
+panne, la dépense resterait bornée par la somme des limites (33 $).
 
 | Fournisseur | Crédit prépayé | Recharge automatique | Limite supplémentaire | Besoin J0 (pire cas) |
 |---|---|---|---|---|
 | OpenAI | 5 $ | coupée | limite mensuelle du projet `oia-visibility` | 1,30 $ |
-| Anthropic | 10 $ | coupée | **espace de travail dédié `oia-visibility`, limite de dépense 10 $ / mois**, clé créée dans cet espace | 11,00 $ |
+| Anthropic | 12 $ | coupée | **espace de travail dédié `oia-visibility`, limite de dépense 12 $ / mois**, clé créée dans cet espace | 11,00 $ |
 | Mistral | 8 $ | coupée | **limite de dépense 8 $**, clé dédiée `oia-visibility` | 6,55 $ (recherche au prix provisoire) |
 | OpenRouter | 5 $ | coupée | **clé plafonnée à 5 $ par mois** | 4,05 $ |
-| TypeSafe (Jev) | minimum proposé, au plus 2 $ | coupée | — | < 0,10 $ |
-| **Total immobilisé** | **≤ 30 $** | | | |
+| TypeSafe (Jev) | minimum proposé, au plus 3 $ | coupée | — | < 0,10 $ |
+| **Somme des limites** | **33 $** (plafonds indépendants) | | | **≈ 23 $** au pire |
 
-Mistral à 8 $ (décision 2026-11-07) couvre son pire cas. Pour rester sous
-les 30 $, Anthropic descend à 10 $ : son pire cas (≈ 11 $, nouvelle
-tentative complète sur chaque appel) dépasserait légèrement la limite, et
-les derniers appels seraient refusés, sans dépense au-delà.
+Décision du 2026-11-07 : Anthropic 12 $, Mistral 8 $, TypeSafe 3 $ au plus.
+Chaque limite couvre le pire cas J0 de son fournisseur.
 
 ## 0 ter. Modèles mesurés, proches des applications grand public (A6, mis à jour 2026-11-07)
 

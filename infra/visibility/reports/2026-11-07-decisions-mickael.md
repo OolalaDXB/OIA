@@ -169,3 +169,13 @@ Tests : 230 passent, typage propre.
   à reporter alors dans `src/cost-grid.ts`.
 
 Tests : 231 passent, typage propre.
+
+## 7 · Limites par fournisseur : plafonds indépendants (décision de Mickaël)
+
+Annule l'ajustement du § 6. Limites retenues : Anthropic 12 $, Mistral
+8 $, TypeSafe 3 $ au plus, OpenAI 5 $, OpenRouter 5 $. Ce sont des
+plafonds indépendants, pas un budget à répartir : leur somme (33 $) peut
+dépasser 30 $. Le plafond de 30 $ porte sur la dépense totale réelle, que
+surveille `cost-guard.sh`. Chaque limite couvre le pire cas J0 de son
+fournisseur. `runbook-j0.md` (étape 0) et `FOURNISSEURS.md` (§ 0 et
+§ 0 quater) sont mis à jour.
