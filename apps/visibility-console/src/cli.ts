@@ -126,6 +126,8 @@ async function viewSeoCommand(): Promise<void> {
       createdAt: new Date().toISOString().slice(0, 10),
       updatedAt: new Date().toISOString().slice(0, 10),
       results: { recommendationIds: [], evidenceIds: [] },
+      // Démonstration : aucun contrôle de la checklist n'est visé.
+      checkIds: [],
     } satisfies Mission);
     q.enqueue(mission);
     const executors = { fake: createFakeExecutor({ output: { hasWriteProposal: false, costUsd: 0 } }) };
