@@ -10,6 +10,7 @@ La fenêtre J0 de Coach Gari tourne depuis le 7 novembre 2026, 15 h 27 UTC.
 
 - Le bloc A du mandat v6 ne pilote plus Elmo. Ce qui en reste utile (`preflight-j0.sh`, suivi quotidien, guide Google) sert aux campagnes suivantes et ne s'exécute qu'en lecture seule sur la fenêtre en cours.
 - Aucun script, aucun test, aucune commande ne peut arrêter, redémarrer ou reconfigurer Elmo pendant la fenêtre. Tout test qui touche Docker utilise un faux `docker` et le prouve. Le seul arrêt autorisé est celui de `vis:j0-close`, lancé par Mickaël.
+- **Exception (décision de Mickaël, 7 novembre 2026) : `cost-guard.sh` garde le droit d'arrêter le worker** quand le plafond budgétaire de 30 $ est atteint ou que la dépense du mois devient illisible. C'est le garde-fou budgétaire. Son mode `--check`, utilisé par la tâche quotidienne, n'arrête jamais rien.
 - Panel, moteurs, modèles, concurrents et réglages de marque restent inchangés jusqu'à la fin de la fenêtre.
 
 ## 2. Répartition des sessions

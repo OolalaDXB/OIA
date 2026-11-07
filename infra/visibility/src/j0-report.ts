@@ -26,6 +26,7 @@ import type { EvidenceStructured } from "./j0-evidence.js";
 import { classifyCitation, mentions, profileUrls } from "./j0-reanalysis.js";
 import { checkFact, type ReferenceFact } from "./fact-check.js";
 import { defaultSubjectsDir, listSubjectDirs, loadSubject } from "./load.js";
+import { applyRedirects, readCache, type RedirectCache } from "./redirects.js";
 import type { SubjectBundle } from "./schema.js";
 
 export interface Provenance {
@@ -79,6 +80,8 @@ export function computeFigures(
   window: { startedAt: string; days: number },
   failed: { model: string; createdAt: string }[],
   keywords: FactKeywords,
+  /** Instantané des redirections résolues à la clôture (Gemini) : liens remplacés par le site réel. */
+  redirects: RedirectCache = {},
 ): ReportFigures {
   const rows = evidence.filter((e) => e.windowId === windowId && e.subjectId === b.subject.id);
   const start = Date.parse(window.startedAt);
@@ -122,7 +125,8 @@ export function computeFigures(
   let brandProfiles = 0;
   const domains = new Map<string, number>();
   for (const r of rows) {
-    for (const { url } of r.citations) {
+    for (const { url: raw } of r.citations) {
+      const url = applyRedirects(raw, redirects);
       const c = classifyCitation(url, brandDomains, profiles, competitorDomains);
       if (c === "marque-site") brandSite++;
       else if (c === "marque-profil") brandProfiles++;
@@ -241,6 +245,13 @@ export function renderReportMarkdown(b: SubjectBundle, f: ReportFigures): string
   L.push("| Fait validé | Réponses contrôlées | Cité | Contredit | Absent |", "|---|---|---|---|---|");
   for (const x of f.factCheck) L.push(`| ${x.statement} | ${x.checkedRuns} | ${x.matches} | ${x.contradicts} | ${x.absent} |`);
   L.push("", "Seconde passe par un modèle et revue croisée : désactivées (aucune dépense nouvelle) ; options à décider par Mickaël.", "");
+  const win = b.measurement.windows.find((w) => w.id === f.windowId);
+  if (win?.note) {
+    L.push("## Contexte et perturbations de la fenêtre", "");
+    L.push(`${win.note}`, "");
+    for (const m of win.missingDays) L.push(`- ${m.date} : ${m.reason}`);
+    if (win.missingDays.length) L.push("");
+  }
   L.push("## Jours manquants", "");
   L.push(f.window.missingDays.length ? `Jours sans réponse : ${f.window.missingDays.join(", ")}.` : "Aucun jour manquant.");
   L.push(`Runs échoués pendant la fenêtre : ${f.window.failedRuns}.`, "");
@@ -318,7 +329,7 @@ export function verify(recomputed: ReportFigures, stored: ReportFigures, evidenc
 }
 
 if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href) {
-  const [mode, subjectId, windowId, evidenceFile, outDir, failedFile, keywordsFile] = process.argv.slice(2);
+  const [mode, subjectId, windowId, evidenceFile, outDir, failedFile, keywordsFile, redirectsFile] = process.argv.slice(2);
   try {
     if (!mode || !subjectId || !windowId || !evidenceFile || !outDir) {
       throw new Error("usage: tsx src/j0-report.ts report|verify <subjectId> <windowId> <evidence.jsonl> <outDir> [failed.json] [fact-keywords.yaml]");
@@ -331,7 +342,8 @@ if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).
     const failedData = failedFile && existsSync(failedFile) ? (JSON.parse(readFileSync(failedFile, "utf8")) as { startedAt: string; days: number; failed: { model: string; createdAt: string }[] }) : null;
     if (!failedData) throw new Error("fichier de fenêtre (failed.json : startedAt, days, failed) absent : lancer d'abord vis:j0-close");
     const keywords = keywordsFile && existsSync(keywordsFile) ? (parse(readFileSync(keywordsFile, "utf8")) as FactKeywords) : { facts: [] };
-    const figures = computeFigures(b, windowId, evidence, failedData, failedData.failed, keywords);
+    const redirects = redirectsFile ? readCache(redirectsFile) : {};
+    const figures = computeFigures(b, windowId, evidence, failedData, failedData.failed, keywords, redirects);
     const figFile = join(outDir, "figures.json");
     if (mode === "report") {
       mkdirSync(outDir, { recursive: true });

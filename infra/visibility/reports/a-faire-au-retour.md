@@ -25,6 +25,11 @@
 > relancer une mesure de départ après stabilisation ? Le fait
 > `f-site-service-pages-noindex` de `facts.yaml` n'est plus vrai.
 >
+> **Décisions du 7 nov. (soir) appliquées** : J0 conservé, chronologie
+> du gel rompu consignée, gel rétabli, exception de `cost-guard.sh`
+> ajoutée à l'amendement, audit Crawlie et résolution des liens Gemini
+> ajoutés à la clôture. Détail : fin de `reports/2026-11-08-mandat-v7.md`.
+>
 > **Mandat v7 (blocs A à E) : fait.** Rapport :
 > `reports/2026-11-08-mandat-v7.md`. Commandes, dans l'ordre :
 > pendant la fenêtre `pnpm vis:j0-status` et `pnpm vis:j0-view` ; après

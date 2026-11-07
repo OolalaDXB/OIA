@@ -16,7 +16,11 @@
 #   5 verify-backup empreintes SHA-256 et lecture de la sauvegarde par pg_restore
 #   6 export        exportation complète de la fenêtre (lecture seule)
 #   7 import        preuves ajoutées à la table locale, avec leur empreinte
-#   8 remove-watch  retrait de la tâche quotidienne
+#   8 redirects     liens de redirection (Gemini) résolus une fois, instantané figé pour
+#                   le rapport et sa vérification (src/redirects.ts, sans suivre la redirection)
+#   9 remove-watch  retrait de la tâche quotidienne
+#  10 crawlie       nouvel audit Crawlie de la surface publique (gratuit), comparé au
+#                   précédent ; ne bloque pas la clôture
 # Aucun nettoyage ni arrêt définitif avant que la sauvegarde soit vérifiée.
 #
 #   ./scripts/j0-close.sh <subjectId>
@@ -88,6 +92,28 @@ export_window() {
 }
 import_evidence() { "$tsx" "$VIS_ROOT/src/j0-evidence.ts" "$subject" "$window" "$state/export.json" "$evidence"; }
 remove_watch() { "$VIS_ROOT/scripts/j0-watch.sh" remove "$subject"; }
+redirects() {
+  if [ -n "${OIA_VIS_NO_RESOLVE:-}" ]; then echo "{}" > "$state/redirects.json"; return 0; fi
+  "$tsx" "$VIS_ROOT/src/redirects.ts" "$state/export.json" "$state/redirects.json"
+}
+crawlie() {
+  local subjects_dir="${OIA_VIS_SUBJECTS_DIR:-$VIS_ROOT/subjects}" audit_cmd="${OIA_VIS_CRAWLIE_AUDIT:-$VIS_ROOT/scripts/crawlie-audit.sh}"
+  local log="$state/crawlie.log" json today prev
+  if ! "$audit_cmd" "$subject" > "$log" 2>&1; then echo "audit Crawlie en échec (voir $log) : à relancer, clôture non bloquée"; return 0; fi
+  json="$(sed -n 's/^  -> //p' "$log" | head -1)"
+  [ -n "$json" ] && [ -s "$json" ] || { echo "audit Crawlie sans rapport (voir $log)"; return 0; }
+  today="$(date -u +%Y-%m-%d)"
+  prev="$(ls -d "$subjects_dir/$subject/audits"/*/ 2>/dev/null | sed 's#/$##' | while read -r d; do [ -s "$d/crawlie.json" ] && [ "$(basename "$d")" != "$today" ] && echo "$d"; done | sort | tail -1)"
+  mkdir -p "$subjects_dir/$subject/audits/$today"
+  cp "$json" "$subjects_dir/$subject/audits/$today/crawlie.json"
+  if [ -n "$prev" ]; then
+    "$tsx" "$VIS_ROOT/src/crawlie-compare.ts" "$prev/crawlie.json" "$subjects_dir/$subject/audits/$today/crawlie.json" "$(basename "$prev")" "$today" \
+      > "$subjects_dir/$subject/audits/$today/crawlie-comparaison.md"
+    echo "audit Crawlie comparé à $(basename "$prev") : $subjects_dir/$subject/audits/$today/crawlie-comparaison.md"
+  else
+    echo "audit Crawlie enregistré (aucun audit précédent à comparer)"
+  fi
+}
 
 step completeness completeness
 step freeze freeze
@@ -96,7 +122,9 @@ step backup backup
 step verify-backup verify_backup
 step export export_window
 step import import_evidence
+step redirects redirects
 step remove-watch remove_watch
+step crawlie crawlie
 echo
 echo "Fenêtre $window clôturée. Preuves : $evidence"
 echo "Ensuite : pnpm vis:j0-report, puis pnpm vis:j0-verify."

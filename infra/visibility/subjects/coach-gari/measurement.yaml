@@ -38,7 +38,7 @@ windows:
       - mistral:mistral-api:mistral-large-4:online
       - gemini:openrouter:google/gemini-3-flash-preview:online
       - perplexity:openrouter:perplexity/sonar:online
-    note: "Mesure de départ, 5 moteurs (3 directs + Gemini et Perplexity via OpenRouter). Dates fixées au démarrage du worker, après validation du panel. Démarrée le 2026-11-07 à 15:27 UTC (démarrage du worker). Perturbation jour 1 : worker arrêté par erreur de 15:28:20 à 17:20:16 UTC (test de cost-guard.sh à blanc qui arrêtait le vrai worker ; correctif bc7a230) ; 3 runs Mistral et des jugements de Jev retardés, terminés à la relance ; premier passage complet (50/50, jugés 50/50), aucun jour manquant."
+    note: "Mesure de départ, 5 moteurs (3 directs + Gemini et Perplexity via OpenRouter). Dates fixées au démarrage du worker, après validation du panel. Démarrée le 2026-11-07 à 15:27 UTC (démarrage du worker). Perturbation jour 1 : worker arrêté par erreur de 15:28:20 à 17:20:16 UTC (test de cost-guard.sh à blanc qui arrêtait le vrai worker ; correctif bc7a230) ; 3 runs Mistral et des jugements de Jev retardés, terminés à la relance ; premier passage complet (50/50, jugés 50/50), aucun jour manquant. Gel rompu, J0 conservé (décision de Mickaël, 2026-11-07) : le 7 nov. à 08:54 UTC, 710b4dd publie les quatre pages de service (noindex retiré, entrée dans le sitemap) ; à 09:24 UTC, d89380b ajoute une section à la page padel ; pendant la fenêtre, à 15:56 UTC (29 min après le démarrage), a7ac6a7 réécrit le texte « About » de la page d'accueil. J0 mesure donc un site en transition d'indexation (pages de service indexables depuis quelques heures au démarrage). Gel rétabli jusqu'à la fin de la fenêtre."
   # Remesure (mandat v7, bloc E) : identique à J0 (mêmes questions, moteurs, modèles, heure,
   # cinq jours). Début à fixer par Mickaël, au moins trois semaines après la publication des
   # correctifs de P2 (p2/decisions.md). Grok n'y entre pas : candidat pour sa propre mesure
@@ -56,7 +56,7 @@ windows:
       - mistral:mistral-api:mistral-large-4:online
       - gemini:openrouter:google/gemini-3-flash-preview:online
       - perplexity:openrouter:perplexity/sonar:online
-    note: "Remesure après les correctifs de P2. Début à fixer par Mickaël (au moins trois semaines après leur publication). Mêmes questions, moteurs, modèles et heure que J0. Grok : candidat pour sa propre mesure de départ, hors comparaison."
+    note: "Remesure après les correctifs de P2. Début à fixer par Mickaël (au moins trois semaines après leur publication). Mêmes questions, moteurs, modèles et heure que J0 ; mistral-large-4 conservé pour comparer à l'identique, bien qu'il ne renvoie pas ses sources (décision de Mickaël, 2026-11-07). J0 ayant mesuré un site en transition d'indexation (gel rompu le 7 nov.), les gains de la remesure ne pourront pas être attribués aux seuls correctifs de P2. Grok : candidat pour sa propre mesure de départ, hors comparaison."
 freezes:
   - id: freeze-j0
     scope: [site, repository]

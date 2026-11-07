@@ -113,13 +113,24 @@ describe("réanalyse des réponses complètes", () => {
     expect(md).toMatch(/Citations des profils officiels \(comptées pour la marque\) : \*\*2\*\*/);
   });
 
+  it("remplace les liens de redirection de Gemini par le site réel, et compte ceux qui restent", () => {
+    const redirect = "https://vertexaisearch.cloud.google.com/grounding-api-redirect/xyz";
+    const lost = "https://vertexaisearch.cloud.google.com/grounding-api-redirect/lost";
+    const data: ReanalysisExport = { exportedAt: "2026-11-08T10:00:00Z", runs: [run({ model: "gemini", citations: [redirect, lost] })] };
+    const r = reanalyse(bundle(), data, [], { [redirect]: "https://www.instagram.com/demo_coach/" });
+    const g = r.byEngine.find((e) => e.model === "gemini")!;
+    expect(g.profileCitations).toBe(1);
+    expect(g.unresolvedRedirects).toBe(1);
+    expect(renderMarkdown(bundle(), r, data.exportedAt)).toMatch(/Liens de redirection non résolus, laissés tels quels : 1/);
+  });
+
   it("scripts/j0-reanalysis.sh écrit le rapport hors du dépôt, sans Elmo", () => {
     const data = mkdtempSync(join(tmpdir(), "reanalyse-"));
     const exp = join(data, "export.json");
     writeFileSync(exp, JSON.stringify({ exportedAt: "2026-11-08T10:00:00Z", runs: [run({ id: "1", text: "Demo Subject", brandMentioned: true })] }));
     const r = spawnSync("bash", [join(ROOT, "scripts/j0-reanalysis.sh"), "demo-subject"], {
       encoding: "utf8",
-      env: { ...process.env, OIA_VIS_DATA: data, OIA_VIS_REANALYSIS_EXPORT: exp, OIA_VIS_SUBJECTS_DIR: join(here, "fixtures") },
+      env: { ...process.env, OIA_VIS_DATA: data, OIA_VIS_REANALYSIS_EXPORT: exp, OIA_VIS_SUBJECTS_DIR: join(here, "fixtures"), OIA_VIS_NO_RESOLVE: "1" },
     });
     expect(r.status, r.stderr).toBe(0);
     const out = r.stdout.trim();

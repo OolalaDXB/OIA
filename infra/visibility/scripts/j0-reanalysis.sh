@@ -42,6 +42,10 @@ select json_build_object(
 SQL
 fi
 
+# Liens de redirection de Gemini → vrais sites (src/redirects.ts : safeFetch, sans suivre,
+# cache hors du dépôt). OIA_VIS_NO_RESOLVE=1 : aucune requête réseau.
+cache="$data/$subject/redirects-cache.json"
+if [ -z "${OIA_VIS_NO_RESOLVE:-}" ]; then "$tsx" "$VIS_ROOT/src/redirects.ts" "$export_file" "$cache" || echo "résolution des redirections en échec : liens laissés tels quels" >&2; fi
 out="$data/$subject/reanalyse-$stamp.md"
-"$tsx" "$VIS_ROOT/src/j0-reanalysis.ts" "$subject" "$export_file" ${candidates:+"$candidates"} > "$out"
+"$tsx" "$VIS_ROOT/src/j0-reanalysis.ts" "$subject" "$export_file" "${candidates:-/dev/null}" "$cache" > "$out"
 echo "$out"

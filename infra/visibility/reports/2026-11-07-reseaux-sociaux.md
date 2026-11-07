@@ -59,9 +59,13 @@ compare au jugement de Jev. Le rapport complet est hors du dépôt :
    n'enregistre donc aucune citation Mistral. Seuls 6 liens, écrits dans
    le texte d'une seule réponse, sont récupérés par la réanalyse.
 2. **Les citations de Gemini sont des redirections Google**
-   (`vertexaisearch.cloud.google.com`, 81). Le site réel n'est pas
-   visible sans suivre la redirection, ce que la réanalyse ne fait pas
-   (aucun appel réseau).
+   (`vertexaisearch.cloud.google.com`, 81). **Résolu le 2026-11-07**
+   (décision de Mickaël), par `src/redirects.ts`. Pour chaque lien, une
+   seule requête au service de redirection, via `safeFetch`, sans suivre
+   la redirection : le site cité n'est jamais contacté. C'est gratuit, et
+   un cache hors du dépôt évite de résoudre deux fois le même lien. Les
+   81 liens sont résolus. Gemini cite le site de Coach Gari 1 fois et
+   d'autres réseaux sociaux 2 fois, mais aucun profil officiel.
 3. **Alias contre jugement de Jev.** Chaque moteur nomme la marque dans
    les 2 réponses aux questions marquées. Jev n'en compte qu'une par
    moteur (aucune pour ChatGPT). Une réponse peut nommer la marque pour
@@ -121,5 +125,6 @@ Mentions dans les réponses du jour 1 :
    C'est nécessaire pour l'accès officiel Instagram (ADR 0003).
 3. Faut-il ajouter les profils en sameAs sur coachgari28.com (N03) ?
    C'est un changement du site, donc après la fin du gel J0.
-4. Mistral sans sources : garder `mistral-large-4` pour la suite de J0
-   (comparabilité) et chercher la cause après la fenêtre ?
+4. Mistral sans sources : **décidé le 2026-11-07**. `mistral-large-4` est
+   conservé pour la remesure, afin de comparer à l'identique. Le rapport
+   J0 dit qu'il ne renvoie pas ses sources.

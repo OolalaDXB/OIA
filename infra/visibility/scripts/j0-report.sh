@@ -13,4 +13,4 @@ data="${OIA_VIS_DATA:-$HOME/oia-visibility-data}"
 subjects_dir="${OIA_VIS_SUBJECTS_DIR:-$VIS_ROOT/subjects}"
 exec "$VIS_ROOT/node_modules/.bin/tsx" "$VIS_ROOT/src/j0-report.ts" "$mode" "$subject" "$window" \
   "$data/$subject/evidence/$window.jsonl" "$subjects_dir/$subject/reports/$window" \
-  "$data/$window/close/failed.json" "$subjects_dir/$subject/fact-keywords.yaml"
+  "$data/$window/close/failed.json" "$subjects_dir/$subject/fact-keywords.yaml" "$data/$window/close/redirects.json"

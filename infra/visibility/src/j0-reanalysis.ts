@@ -11,6 +11,7 @@
 import { readFileSync } from "node:fs";
 import { parse } from "yaml";
 import { defaultSubjectsDir, listSubjectDirs, loadSubject } from "./load.js";
+import { applyRedirects, isRedirectLink, readCache, type RedirectCache } from "./redirects.js";
 import type { SubjectBundle } from "./schema.js";
 
 export interface ReanalysisExport {
@@ -99,6 +100,8 @@ export interface Reanalysis {
     profileCitations: number;
     /** Citations venues des liens écrits dans le texte, absentes des sources renvoyées à part. */
     textOnlyLinks: number;
+    /** Liens de redirection (Gemini) restés sans cible connue. */
+    unresolvedRedirects: number;
     /** Réponses qui parlent d'Instagram ou de TikTok, et réponses qui citent un pseudonyme de la marque. */
     platformMentionRuns: Record<string, number>;
     handleMentionRuns: number;
@@ -112,7 +115,11 @@ export interface Reanalysis {
   candidateMentions: { name: string; segment: Candidate["segment"]; runs: number; engines: string[] }[];
 }
 
-export function reanalyse(b: SubjectBundle, data: ReanalysisExport, candidates: Candidate[]): Reanalysis {
+/**
+ * `redirects` : cibles des liens de redirection (Gemini), résolues par src/redirects.ts.
+ * Un lien sans cible connue reste tel quel et est compté comme non résolu.
+ */
+export function reanalyse(b: SubjectBundle, data: ReanalysisExport, candidates: Candidate[], redirects: RedirectCache = {}): Reanalysis {
   const s = b.subject;
   const brandDomains = [
     new URL(s.urls.primary).hostname.replace(/^www\./, ""),
@@ -134,10 +141,12 @@ export function reanalyse(b: SubjectBundle, data: ReanalysisExport, candidates: 
     let jevMentionRuns = 0;
     let disagreements = 0;
     let textOnlyLinks = 0;
+    let unresolvedRedirects = 0;
     let handleMentionRuns = 0;
     const platformMentionRuns: Record<string, number> = Object.fromEntries(Object.keys(PLATFORM_TERMS).map((k) => [k, 0]));
     for (const r of rs) {
-      const returned = new Set(r.citations);
+      const returned = new Set(r.citations.map((u) => applyRedirects(u, redirects)));
+      unresolvedRedirects += [...returned].filter(isRedirectLink).length;
       const inText = urlsInText(r.text).filter((u) => !returned.has(u));
       textOnlyLinks += inText.length;
       for (const [k, terms] of Object.entries(PLATFORM_TERMS)) if (mentions(r.text ?? "", terms).length) platformMentionRuns[k]!++;
@@ -162,6 +171,7 @@ export function reanalyse(b: SubjectBundle, data: ReanalysisExport, candidates: 
       citations,
       profileCitations: citations["marque-profil"],
       textOnlyLinks,
+      unresolvedRedirects,
       platformMentionRuns,
       handleMentionRuns,
       aliasMentionRuns,
@@ -203,7 +213,9 @@ export function renderMarkdown(b: SubjectBundle, r: Reanalysis, exportedAt: stri
   L.push(`# Réanalyse des réponses · ${b.subject.displayName} · ${exportedAt}`, "");
   L.push(`${r.runs} réponses, ${r.judged} jugées par Jev. Aucun appel à un fournisseur d'IA.`, "");
   L.push("## Citations classées à l'adresse près", "");
-  L.push("Sources renvoyées par le moteur, plus les liens écrits dans le texte (comptés une fois par réponse).", "");
+  L.push("Sources renvoyées par le moteur, plus les liens écrits dans le texte (comptés une fois par réponse). Les liens de redirection de Gemini sont remplacés par le site réel qu'ils désignent (lu dans la redirection, sans contacter le site).", "");
+  const unresolved = r.byEngine.reduce((n, e) => n + e.unresolvedRedirects, 0);
+  if (unresolved) L.push(`Liens de redirection non résolus, laissés tels quels : ${unresolved}.`, "");
   L.push("| Moteur | Réponses | Site de la marque | Profils officiels | Concurrents candidats | Autres réseaux sociaux | Autres | dont liens du texte seul |");
   L.push("|---|---|---|---|---|---|---|---|");
   for (const e of r.byEngine) {
@@ -237,15 +249,17 @@ export function renderMarkdown(b: SubjectBundle, r: Reanalysis, exportedAt: stri
 }
 
 if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href) {
-  const [subjectId, exportFile, candidatesFile] = process.argv.slice(2);
+  const [subjectId, exportFile, candidatesFile, redirectCacheFile] = process.argv.slice(2);
   try {
     if (!subjectId || !exportFile) throw new Error("usage: tsx src/j0-reanalysis.ts <subjectId> <export.json> [candidats.yaml]");
     const dir = listSubjectDirs(defaultSubjectsDir()).find((d) => d.split(/[\\/]/).pop() === subjectId);
     if (!dir) throw new Error(`aucun sujet "${subjectId}"`);
     const b = loadSubject(dir);
     const data = JSON.parse(readFileSync(exportFile, "utf8")) as ReanalysisExport;
-    const candidates = candidatesFile ? ((parse(readFileSync(candidatesFile, "utf8")) as { candidates: Candidate[] }).candidates ?? []) : [];
-    process.stdout.write(renderMarkdown(b, reanalyse(b, data, candidates), data.exportedAt));
+    const parsed = candidatesFile ? (parse(readFileSync(candidatesFile, "utf8")) as { candidates?: Candidate[] } | null) : null;
+    const candidates = parsed?.candidates ?? [];
+    const redirects = redirectCacheFile ? readCache(redirectCacheFile) : {};
+    process.stdout.write(renderMarkdown(b, reanalyse(b, data, candidates, redirects), data.exportedAt));
   } catch (err) {
     process.stderr.write(`j0-reanalysis : ${err instanceof Error ? err.message : String(err)}\n`);
     process.exit(1);

@@ -98,6 +98,19 @@ exit 0
   writeFileSync(join(bin, "launchctl"), `#!/bin/sh\necho "$*" >> "${join(dir, "launchctl.log")}"\n`);
   chmodSync(join(bin, "launchctl"), 0o755);
   const repo = siteRepo(dir, breakFreeze);
+  // Audit Crawlie précédent, et faux audit du jour (forme réduite du rapport Crawlie).
+  const crawl = (pages: number, rules: string[]) => JSON.stringify({
+    summary: { totalPages: pages, indexablePages: pages, healthScore: 50 + pages, geoScore: 30, a11yScore: 99, warnings: rules.length, notices: 0, errors: 0 },
+    pages: Array.from({ length: pages }, (_, i) => ({ url: `https://demo.example/p${i}`, status: 200 })),
+    issues: rules.map((rule) => ({ rule, severity: "warning", url: "https://demo.example/" })),
+  });
+  mkdirSync(join(subjects, "demo-subject", "audits", "2026-10-01"), { recursive: true });
+  writeFileSync(join(subjects, "demo-subject", "audits", "2026-10-01", "crawlie.json"), crawl(2, ["noindex", "noindex"]));
+  const fresh = join(dir, "crawlie-new.json");
+  writeFileSync(fresh, crawl(4, ["title-too-short"]));
+  const fakeAudit = join(bin, "fake-crawlie-audit");
+  writeFileSync(fakeAudit, `#!/bin/sh\necho "[demo-subject] crawl https://demo.example..."\necho "  -> ${fresh}"\n`);
+  chmodSync(fakeAudit, 0o755);
   const vars = {
     ...process.env,
     PATH: `${bin}:${process.env.PATH ?? ""}`,
@@ -109,6 +122,7 @@ exit 0
     OIA_VIS_WINDOW_DAYS: "2",
     OIA_VIS_FREEZE_REPO: repo,
     BACKUP_DIR: join(dir, "backups"),
+    OIA_VIS_CRAWLIE_AUDIT: fakeAudit,
   };
   const close = (extra: Record<string, string> = {}) =>
     spawnSync("bash", [join(ROOT, "scripts/j0-close.sh"), "demo-subject"], { encoding: "utf8", env: { ...vars, ...extra } });
@@ -129,6 +143,12 @@ describe("vis:j0-close (reprenable, sans doublon, seul arrêt autorisé)", () =>
     expect(second.stdout).toMatch(/= stop-worker : déjà fait/);
     expect(second.stdout).toMatch(/sauvegarde vérifiée/);
     expect(readEvidence(s.evidence)).toHaveLength(8);
+    // Audit Crawlie de clôture, comparé au précédent.
+    const today = new Date().toISOString().slice(0, 10);
+    const cmp = readFileSync(join(s.subjects, "demo-subject", "audits", today, "crawlie-comparaison.md"), "utf8");
+    expect(cmp).toMatch(/Audit Crawlie : 2026-10-01 → /);
+    expect(cmp).toMatch(/\| Pages crawlées \| 2 \| 4 \| \+2 \|/);
+    expect(cmp).toMatch(/\| noindex \| 2 \| 0 \|/);
     // Troisième passage : rien n'est refait, aucune preuve dupliquée.
     const third = s.close();
     expect(third.status).toBe(0);
