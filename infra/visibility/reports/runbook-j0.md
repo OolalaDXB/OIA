@@ -87,9 +87,14 @@ décision de Mickaël (2026-11-07). Ils seront **régénérés au passage sur
 serveur, en P3** (nouvelle installation, nouveau `.env`, sauvegarde hors
 machine selon `SECRETS.md`).
 
-Également dans `.env`, laisser `SCRAPE_TARGETS=` **vide pour l'instant** :
-c'est le verrou qui empêche le worker de démarrer avant la vérification
-du plafond.
+Également dans `.env`, poser `SCRAPE_TARGETS` avec les cinq moteurs
+(valeur de l'étape 5) **avant de démarrer l'interface** : sans lui, Elmo
+affiche « Missing environment configuration : SCRAPE_TARGETS » sur toutes
+ses pages, y compris l'inscription (constaté le 2026-11-07). Le verrou
+contre les appels payants est alors **le worker arrêté** : il ne démarre
+qu'à l'étape 6 (ou par `j0-launch.sh`), après le chargement de la marque
+et la vérification du plafond. `j0-launch.sh` accepte un `SCRAPE_TARGETS`
+déjà posé s'il est identique à ses cibles, et refuse sinon.
 
 ## 2 · Vérifier le plafond mensuel (`cost-guard.sh`) avant tout lancement
 

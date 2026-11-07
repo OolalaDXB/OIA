@@ -10,7 +10,9 @@
 #      un seul compte et une seule organisation dans Elmo, marque absente,
 #      worker arrêté) ; au premier NO-GO, arrêt sans rien écrire ;
 #   2. clé admin temporaire (ADMIN_API_KEYS) ajoutée à elmo/.env, web relancé ;
-#   3. SCRAPE_TARGETS posé dans elmo/.env ;
+#   3. SCRAPE_TARGETS posé dans elmo/.env (s'il ne l'est pas déjà : l'interface
+#      d'Elmo l'exige pour afficher l'inscription ; une valeur déjà posée doit
+#      être identique aux cibles du lancement) ;
 #   4. marque, concurrents et questions actives créés par POST /api/v1/brands
 #      dans l'organisation du compte (aucun appel LLM côté Elmo) ;
 #   5. clé admin retirée de elmo/.env, web relancé ;
@@ -64,9 +66,18 @@ for k in OPENAI_API_KEY ANTHROPIC_API_KEY MISTRAL_API_KEY OPENROUTER_API_KEY TYP
 done
 ok "clés posées dans elmo/.env (valeurs non lues)"
 present ADMIN_API_KEYS && nogo "ADMIN_API_KEYS déjà présente dans elmo/.env : la retirer à la main avant de relancer"
-filled SCRAPE_TARGETS && nogo "SCRAPE_TARGETS déjà rempli : un lancement a peut-être déjà eu lieu (vérifier avant tout)"
 "$tsx" "$VIS_ROOT/src/elmo-load.ts" check-targets "$subject" "$targets" || nogo "cibles incompatibles avec le sujet ou la grille de prix"
 ok "cibles = moteurs du sujet, toutes dans la grille de prix, recherche web partout"
+# L'interface d'Elmo refuse de s'afficher sans SCRAPE_TARGETS (« Missing environment
+# configuration »), y compris la page d'inscription : il peut donc être déjà posé.
+# Accepté seulement s'il est identique aux cibles du lancement.
+targets_preset=""
+if filled SCRAPE_TARGETS; then
+  current="$(awk -F= '$1=="SCRAPE_TARGETS"{print substr($0,16); exit}' "$ELMO_ENV_FILE")"
+  [ "$current" = "$targets" ] || nogo "SCRAPE_TARGETS déjà posé dans elmo/.env, mais différent des cibles du lancement : le corriger avant de relancer"
+  targets_preset=1
+  ok "SCRAPE_TARGETS déjà posé, identique aux cibles du lancement"
+fi
 
 [ "$(elmo_dc ps --status running -q postgres 2>/dev/null | wc -l | tr -d ' ')" = 1 ] || nogo "Postgres d'Elmo arrêté : docker compose ... up -d postgres db-migrate web"
 [ "$(elmo_dc ps --status running -q web 2>/dev/null | wc -l | tr -d ' ')" = 1 ] || nogo "web d'Elmo arrêté : docker compose ... up -d postgres db-migrate web"
@@ -93,7 +104,7 @@ fi
 cleanup_key() {
   if present ADMIN_API_KEYS; then
     set_env_line ADMIN_API_KEYS "" remove
-    elmo_dc up -d --force-recreate web >/dev/null 2>&1 || true
+    elmo_dc up -d --no-deps --force-recreate web >/dev/null 2>&1 || true
     echo "clé admin temporaire retirée de elmo/.env" >&2
   fi
 }
@@ -101,8 +112,8 @@ trap cleanup_key EXIT
 key="$(openssl rand -hex 32)"
 set_env_line ADMIN_API_KEYS "$key"
 # ---- 3. Cibles -------------------------------------------------------------------
-set_env_line SCRAPE_TARGETS "$targets"
-elmo_dc up -d --force-recreate web >/dev/null 2>&1
+[ -n "$targets_preset" ] || set_env_line SCRAPE_TARGETS "$targets"
+elmo_dc up -d --no-deps --force-recreate web >/dev/null 2>&1
 wait_web || nogo "web d'Elmo ne repart pas après l'ajout de la clé admin"
 ok "SCRAPE_TARGETS posé, clé admin temporaire active"
 
@@ -113,7 +124,7 @@ resp="$data/$window/elmo-brand-response.json"
 code="$(printf 'Authorization: Bearer %s\n' "$key" | curl -sS -o "$resp" -w '%{http_code}' -H @- \
   -H 'Content-Type: application/json' --data @"$body" "$base/api/v1/brands")"
 unset key
-[ "$code" = 201 ] || nogo "POST /api/v1/brands a répondu $code (réponse : $resp) ; SCRAPE_TARGETS reste posé, worker non démarré"
+[ "$code" = 201 ] || nogo "POST /api/v1/brands a répondu $code (réponse : $resp) ; worker non démarré"
 ok "marque créée (réponse : $resp)"
 
 # ---- 5. Retrait de la clé admin ---------------------------------------------------

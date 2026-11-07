@@ -5,8 +5,19 @@ faire : **créer ton compte dans Elmo** (ton email, ton mot de passe). Tout
 le reste est prêt et vérifié. Ensuite, deux commandes suffisent.
 
 État laissé : Postgres et l'interface d'Elmo tournent, **worker arrêté**,
-base vide (aucun compte, aucune marque, aucune question), `SCRAPE_TARGETS`
-vide dans `elmo/.env` (le verrou). Aucun appel payant n'a été fait.
+base vide (aucun compte, aucune marque, aucune question). Aucun appel payant
+n'a été fait.
+
+**Mise à jour 2026-11-07, après ton essai :** l'inscription affichait
+« Missing environment configuration : SCRAPE_TARGETS ». L'interface d'Elmo
+refuse en effet de s'afficher, page d'inscription comprise, tant que
+`SCRAPE_TARGETS` est vide. La ligne `SCRAPE_TARGETS` de `elmo/.env` est
+donc posée avec les cinq moteurs, et seul le service web a été redémarré.
+Le formulaire d'inscription s'affiche : champs email et mot de passe,
+bouton « Create account ». **Le verrou contre les appels payants, c'est
+maintenant le worker arrêté** : tant qu'il ne tourne pas, aucun run n'a
+lieu. Ne le démarre pas à la main : `j0-launch.sh` le fait après avoir
+chargé la marque.
 
 ## 1 · Vérifier les consoles des fournisseurs (5 min, toi seul)
 
@@ -46,7 +57,8 @@ Le script refait tous les contrôles et s'arrête au premier NO-GO, sans
 rien écrire. S'il passe :
 
 1. il ajoute à `elmo/.env` une clé admin temporaire ;
-2. il pose `SCRAPE_TARGETS` (les cinq moteurs, tous avec recherche web) ;
+2. il vérifie que `SCRAPE_TARGETS`, déjà posé, est identique aux cinq
+   moteurs du lancement (sinon NO-GO) ;
 3. il crée la marque, les 4 concurrents et les 10 questions par l'API
    d'Elmo, dans ton organisation (aucun appel LLM à ce moment) ;
 4. il retire la clé admin ;
@@ -57,10 +69,9 @@ rien écrire. S'il passe :
 Aucune valeur de `.env` n'est affichée, et la clé admin ne passe jamais
 sur la ligne de commande.
 
-Si le script s'arrête après avoir posé `SCRAPE_TARGETS` (par exemple si
-`POST /api/v1/brands` échoue), le worker n'est pas démarré. Le message
-dit où lire la réponse d'Elmo. Pour relancer, vide d'abord
-`SCRAPE_TARGETS=` dans `elmo/.env`.
+Si `POST /api/v1/brands` échoue, le script s'arrête sans démarrer le
+worker. La clé admin est retirée, et le message dit où lire la réponse
+d'Elmo. On peut relancer tel quel une fois la cause corrigée.
 
 ## 4 · Contrôler le premier run (10 à 15 min après)
 
