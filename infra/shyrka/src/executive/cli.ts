@@ -6,7 +6,7 @@ import { normaliserTexte, type Demandeur } from "@oia/shyrka-noyau";
 import { ollamaPresent } from "../adapters/mistral.js";
 import { RACINE_DEPOT } from "../local.js";
 import { dossierVerifie, etatVolume } from "../memoire/volume.js";
-import { construireBrief, texteBrief, texteVocalBrief } from "./brief.js";
+import { construireBrief, texteBrief, texteVocalBrief, vuesExecutive } from "./brief.js";
 import { chargerPortefeuille, REGLAGES, revision } from "./config.js";
 import { chargerCatalogue, Corpus, renduExtraits } from "./corpus.js";
 import { commandeMemoire, ouvrirMemoire } from "./memoire-cli.js";
@@ -29,6 +29,7 @@ function aide(): number {
   console.log(`Usage : pnpm shyrka:executive <commande>
   doctor                         versions, chiffrement, mémoire, connecteurs, ordonnanceur, droits manquants
   run-once [--produit <slug>]    une collecte bornée : observations, incidents dédupliqués, propositions de missions
+  vues                           vues JSON du contrat Lovable v1 (validées par le schéma)
   brief [--voix] [--marquer]     briefing sourcé (--marquer : ce briefing devient la référence « depuis »)
   cherche <question>             corpus + mémoire, avec sources (« état du cockpit », « reste à valider », « absent ou ancien »)
   missions list | show <id> | autoriser <id> | refuser <id> <motif> | corriger <id> <demande> | approuver <id> <empreinte>
@@ -489,6 +490,14 @@ async function main(): Promise<number> {
       return 0;
     case "brief":
       return brief(rest);
+    case "vues": {
+      // Vues du contrat Lovable v1, validées par le schéma. Sortie locale : aucun transport distant en v1.
+      const o = ops();
+      const mi = new Missions(o);
+      console.log(JSON.stringify(vuesExecutive(construireBrief({ ops: o, missions: mi, produits: chargerPortefeuille(), corpus: etatsCorpus() }), { ops: o, missions: mi }), null, 2));
+      o.fermer();
+      return 0;
+    }
     case "cherche":
       return cherche(rest.join(" "));
     case "missions":

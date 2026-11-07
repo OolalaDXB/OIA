@@ -1,7 +1,9 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
-import { etatOia } from "../contexte.js";
+import { decisionsOuvertes, etatOia } from "../contexte.js";
+import { RACINE_DEPOT } from "../local.js";
+import { VuesExecutiveV1, type VuesExecutive } from "@oia/shyrka-noyau";
 import type { EtatSource } from "./corpus.js";
 import { REGLAGES, type Produit } from "./config.js";
 import type { Missions } from "./missions.js";
@@ -190,4 +192,46 @@ export function texteVocalBrief(b: Brief): string {
     `${b.decisionsOuvertes} décisions restent ouvertes dans la roadmap. Le détail est à l'écran.`,
   ];
   return parties.filter(Boolean).join(" ");
+}
+
+/**
+ * Vues du contrat Lovable v1, validées par le schéma avant d'être rendues.
+ * La mémoire du cockpit est « non implémentée » en v1 : aucun élément
+ * personnel n'est servi hors du Mac, et la base OIA ne porte pas encore les
+ * champs de l'ADR 0004.
+ */
+export function vuesExecutive(b: Brief, deps: { ops: BaseOps; missions: Missions }): VuesExecutive {
+  const env = <T>(vue: string, donnees: T, etat: "connecte" | "ancien" | "non_implemente" = "connecte", motif: string | null = null) => ({ vue, version: 1 as const, etat, produiteLe: b.le, origine: "mac-local" as const, donnees, motif });
+  const obs = deps.ops.dernieresObservations();
+  const recente = obs.length > 0 && obs.every((o) => Date.parse(b.le) - Date.parse(o.collecteLe) < REGLAGES.fraicheurHeures * 3_600_000);
+  const roadmap = (() => {
+    try {
+      return decisionsOuvertes(readFileSync(join(RACINE_DEPOT, "docs/roadmap-oia-shyrka-souffleur.md"), "utf8"));
+    } catch {
+      return [];
+    }
+  })();
+  const missions = deps.missions.lister();
+  return VuesExecutiveV1.parse({
+    format: "shyrka.executive.vues",
+    version: 1,
+    brief_v1: env("brief_v1", {
+      depuis: b.depuis, changements: b.changements, sujets: b.sujets,
+      opportunites: b.opportunites && { total: b.opportunites.total, verifiees: b.opportunites.verifiees, aRevoir: b.opportunites.aRevoir, dateDonnee: b.opportunites.dateDonnee, pistes: b.opportunites.avecEcheanceFuture, regles: b.opportunites.regles },
+      decisionsOuvertes: b.decisionsOuvertes, budget: b.budget, dependances: b.dependances,
+    }),
+    couverture_v1: env("couverture_v1", obs, recente ? "connecte" : "ancien", recente ? null : "dernière collecte trop ancienne ou absente"),
+    incidents_v1: env("incidents_v1", deps.ops.incidents().map((i) => ({ id: i.id, produit: i.produit, source: i.source, observation: i.observation, gravite: i.gravite, statut: i.statut, premiere: i.premiere, derniere: i.derniere, occurrences: i.occurrences, reapparitions: i.reapparitions, preuve: i.preuve, prochaineAction: i.prochaineAction, motif: i.motif }))),
+    missions_v1: env("missions_v1", missions.map((m) => {
+      const r = m.resultats as { empreinteDiff?: string; pr?: string };
+      return { id: m.id, objectif: m.objectif, statut: m.statut, automatisation: m.automatisation, tentatives: m.tentatives, tentativesMax: m.tentativesMax, empreinteDiff: r.empreinteDiff ?? null, pr: r.pr ?? null, causeBlocage: m.causeBlocage, coutUsd: m.coutConstate, majLe: m.majLe };
+    })),
+    decisions_v1: env("decisions_v1", [
+      ...missions.filter((m) => m.statut === "attente_validation").map((m) => ({ cle: `mission:${m.id}`, intitule: `Relire et accepter ou corriger : ${m.objectif}`, source: "registre des missions", action: `pnpm shyrka:executive missions show ${m.id.slice(0, 8)}` })),
+      ...missions.filter((m) => m.statut === "proposee").map((m) => ({ cle: `mission:${m.id}`, intitule: `Autoriser ou refuser : ${m.objectif}`, source: "registre des missions", action: `pnpm shyrka:executive missions autoriser ${m.id.slice(0, 8)}` })),
+      ...deps.ops.incidents(["confirme"]).map((i) => ({ cle: `incident:${i.id}`, intitule: `${i.produit} : ${i.observation}`, source: i.preuve, action: `pnpm shyrka:executive incidents show ${i.id.slice(0, 8)}` })),
+      ...roadmap.map((d) => ({ cle: `roadmap:${d.ligne}`, intitule: d.intitule, source: `docs/roadmap-oia-shyrka-souffleur.md:${d.ligne}`, action: "décision de Mickaël" })),
+    ]),
+    memoire_autorisee_v1: env("memoire_autorisee_v1", null, "non_implemente", "la base OIA ne porte pas encore les champs de l'ADR 0004 (migration à relire) ; aucune mémoire personnelle n'est copiée dans Supabase"),
+  });
 }
