@@ -49,3 +49,9 @@ facts:
       sourceId: repo-seo-aeo-plan, status: extracted, note: "section 1, point 3" }
   - { id: f-site-service-pages-noindex, statement: "Les quatre pages de service (padel, personal training, coaching en ligne, corporate wellness) sont des brouillons non indexables (noindex) ; seule la page d'accueil est une page commerciale indexable.", language: fr, category: other,
       sourceId: repo-pages, status: extracted, note: "plan section 1, point 1, confirmé dans le code au commit 73e1967 (meta robots noindex)" }
+  - { id: f-profile-instagram, statement: "Le profil Instagram officiel de Coach Gari est https://www.instagram.com/coach_gari28 (@coach_gari28).", language: fr, category: contact,
+      sourceId: owner-2026-11-07, status: validated, validatedBy: "Mickaël THOMAS", validatedAt: "2026-11-07" }
+  - { id: f-profile-tiktok, statement: "Le profil TikTok officiel de Coach Gari est https://www.tiktok.com/@coach_gari28 (@coach_gari28).", language: fr, category: contact,
+      sourceId: owner-2026-11-07, status: validated, validatedBy: "Mickaël THOMAS", validatedAt: "2026-11-07" }
+  - { id: f-profile-myoolala, statement: "La page myOolala officielle de Coach Gari est https://myoolala.com/u/coachgari28.", language: fr, category: contact,
+      sourceId: owner-2026-11-07, status: validated, validatedBy: "Mickaël THOMAS", validatedAt: "2026-11-07" }

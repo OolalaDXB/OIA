@@ -69,3 +69,12 @@ prompts:
       text: "Who offers physical preparation and fitness coaching for padel players in Dubai?" }
   - { id: en-23, version: 1, family: unbranded, language: en, markets: [ZW, ZA], origin: claude, note: "reprise de la proposition v1 (en-08@v1)", status: candidate, createdAt: "2026-11-05",
       text: "Affordable online coach for muscle gain with weekly check-ins, available to clients in Zimbabwe or South Africa" }
+  - { id: en-24, version: 1, family: unbranded, language: en, markets: [AE], origin: claude, status: candidate, createdAt: "2026-11-07",
+      note: "Famille « réseaux sociaux », préparée le 2026-11-07 pour la remesure, non activée ; la comparaison avec J0 reste sur les dix questions communes.",
+      text: "Which personal trainers or padel coaches in Dubai are worth following on Instagram or TikTok?" }
+  - { id: en-25, version: 1, family: unbranded, language: en, markets: [ZW], origin: claude, status: candidate, createdAt: "2026-11-07",
+      note: "Famille « réseaux sociaux », préparée le 2026-11-07 pour la remesure, non activée ; la comparaison avec J0 reste sur les dix questions communes.",
+      text: "Which online fitness and nutrition coaches active on Instagram or TikTok work with clients in Zimbabwe?" }
+  - { id: en-26, version: 1, family: branded, language: en, markets: [AE, ZW], origin: claude, status: candidate, createdAt: "2026-11-07",
+      note: "Famille « réseaux sociaux », préparée le 2026-11-07 pour la remesure, non activée ; la comparaison avec J0 reste sur les dix questions communes.",
+      text: "What does Coach Gari (@coach_gari28) share on Instagram and TikTok, and is it a good sign of the quality of his coaching?" }

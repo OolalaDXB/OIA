@@ -7,7 +7,7 @@ import { resolveCheckIds } from "../src/seo-command/executor";
 import type { Mission } from "../src/seo-command/mission";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const EXPECTED_FAMILIES = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"];
+const EXPECTED_FAMILIES = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N"];
 
 function fakeMission(partial: Partial<Mission> = {}): Mission {
   return {
@@ -28,7 +28,7 @@ function fakeMission(partial: Partial<Mission> = {}): Mission {
 }
 
 describe("modèle de vérification (données)", () => {
-  it("couvre les treize familles A à M", () => {
+  it("couvre les quatorze familles A à N (N : réseaux sociaux)", () => {
     const fams = loadFamilies();
     expect(fams.map((f) => f.family)).toEqual(EXPECTED_FAMILIES);
   });
@@ -36,7 +36,7 @@ describe("modèle de vérification (données)", () => {
   it("tous les IDs sont uniques et conformes", () => {
     const ids = flatChecks().map((c) => c.id);
     expect(new Set(ids).size).toBe(ids.length);
-    for (const id of ids) expect(id).toMatch(/^[A-M]\d{2}$/);
+    for (const id of ids) expect(id).toMatch(/^[A-N]\d{2}$/);
   });
 
   it("chaque contrôle auto ou mixte nomme un outil non manuel", () => {
@@ -54,7 +54,7 @@ describe("modèle de vérification (données)", () => {
 
   it("chaque ID du document d'origine existe dans le YAML", () => {
     const md = readFileSync(join(root, "agents/modele-verification-compte.md"), "utf8");
-    const mdIds = Array.from(new Set(md.match(/\|\s([A-M]\d{2})\s\|/g)?.map((m) => m.slice(2, 5)) ?? []));
+    const mdIds = Array.from(new Set(md.match(/\|\s([A-N]\d{2})\s\|/g)?.map((m) => m.slice(2, 5)) ?? []));
     expect(mdIds.length).toBeGreaterThan(50);
     const dataIds = new Set(flatChecks().map((c) => c.id));
     for (const id of mdIds) expect(dataIds.has(id), `${id} absent du YAML`).toBe(true);

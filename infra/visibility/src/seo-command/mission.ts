@@ -69,7 +69,7 @@ export const MissionSchema = z
      *  données (`verification/*.yaml`). Vide = tous les contrôles couverts
      *  par l'exécuteur. Non vide = limiter à ces IDs ; l'exécuteur rejette
      *  la mission si un ID n'est pas couvert par son outil. */
-    checkIds: z.array(z.string().regex(/^[A-M]\d{2}$/)).default([]),
+    checkIds: z.array(z.string().regex(/^[A-N]\d{2}$/)).default([]),
   })
   .strict();
 

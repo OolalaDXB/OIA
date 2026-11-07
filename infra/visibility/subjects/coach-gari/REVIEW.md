@@ -17,7 +17,8 @@
 |---|---|---|---|
 | Coach Gari | name | ✅ |  |
 | @coach_gari28 | handle | ✅ | Instagram / TikTok |
-| coach_gari28 | handle | ❓ | graphie sans @, utilisée dans docs/SEO_AEO_PLAN.md du dépôt |
+| coach_gari28 | handle | ✅ | pseudonyme Instagram et TikTok, confirmé par Mickaël le 2026-11-07 |
+| coachgari28 | handle | ✅ | pseudonyme de la page myOolala (myoolala.com/u/coachgari28), confirmé par Mickaël le 2026-11-07 |
 | coachgari28.com | domain | ✅ |  |
 | coachgari.com | domain | ❓ | à confirmer |
 
@@ -25,7 +26,7 @@
 
 | Nom | Domaines | Catégorie | Marchés | Statut | Pourquoi |
 |---|---|---|---|---|---|
-| Playtomic | playtomic.io | plateforme de réservation de padel (cours et coachs) | AE | ❓ | Cité comme levier dans le plan SEO du dépôt ; les assistants renvoient souvent vers les coachs de padel listés sur Playtomic. |
+| Playtomic | playtomic.io | plateforme de réservation de padel (cours et coachs) | AE | ❌ | Pas un concurrent (décision de Mickaël, 2026-11-07) : plateforme de réservation, où Coach Gari peut être listé. Reste chargé comme concurrent dans Elmo pendant J0 (aucun changement pendant la fenêtre) ; exclu des analyses OIA. |
 | Ultimate Performance | upfitness.com | coaching personnel premium avec salle à Dubaï | AE | ❓ | Chaîne de personal training présente à Dubaï, souvent citée pour « personal trainer Dubai ». Domaine à vérifier. |
 | Future | future.co | application de coaching en ligne avec coach dédié | AE, ZA, ZW | ❓ | Coaching en ligne un-à-un par abonnement : concurrent direct du format en ligne. |
 | Caliber | caliberstrong.com | coaching en ligne musculation et nutrition | AE, ZA, ZW | ❓ | Coaching en ligne entraînement + nutrition, fréquemment recommandé par les assistants. |
@@ -47,7 +48,7 @@
 | en-08@v2 | non marquée | ZW | Fitness coach in Harare, Zimbabwe | document repo-seo-aeo-plan annexe B, n° 15 — « Harare / Zimbabwe » écrit « Harare, Zimbabwe » |
 | en-09@v2 | marquée | AE, ZW | Who is Coach Gari? | document repo-seo-aeo-plan annexe B, n° 1 |
 
-### Candidates (13, pour un panel élargi ; jamais envoyées à Elmo)
+### Candidates (16, pour un panel élargi ; jamais envoyées à Elmo)
 
 | ID | Famille | Marchés | Question | Origine |
 |---|---|---|---|---|
@@ -64,6 +65,9 @@
 | en-21@v1 | marquée | AE, ZW | Coach Gari reviews | document repo-seo-aeo-plan annexe B, n° 20 — utile pour détecter des avis inventés : aucun avis public au 2026-09-30 (fait f-plan-no-reviews) |
 | en-22@v1 | non marquée | AE | Who offers physical preparation and fitness coaching for padel players in Dubai? | claude — reprise de la proposition v1 (en-07@v1) |
 | en-23@v1 | non marquée | ZW, ZA | Affordable online coach for muscle gain with weekly check-ins, available to clients in Zimbabwe or South Africa | claude — reprise de la proposition v1 (en-08@v1) |
+| en-24@v1 | non marquée | AE | Which personal trainers or padel coaches in Dubai are worth following on Instagram or TikTok? | claude — Famille « réseaux sociaux », préparée le 2026-11-07 pour la remesure, non activée ; la comparaison avec J0 reste sur les dix questions communes. |
+| en-25@v1 | non marquée | ZW | Which online fitness and nutrition coaches active on Instagram or TikTok work with clients in Zimbabwe? | claude — Famille « réseaux sociaux », préparée le 2026-11-07 pour la remesure, non activée ; la comparaison avec J0 reste sur les dix questions communes. |
+| en-26@v1 | marquée | AE, ZW | What does Coach Gari (@coach_gari28) share on Instagram and TikTok, and is it a good sign of the quality of his coaching? | claude — Famille « réseaux sociaux », préparée le 2026-11-07 pour la remesure, non activée ; la comparaison avec J0 reste sur les dix questions communes. |
 
 ### Versions retirées (9, conservées pour la traçabilité)
 
@@ -107,6 +111,9 @@
 | f-plan-no-reviews | Aucun avis client public au 2026-09-30. | ❓ extracted | repo-seo-aeo-plan |
 | f-plan-profiles | Profils publics reliés au site au 2026-09-30 : Instagram et TikTok uniquement (sameAs). | ❓ extracted | repo-seo-aeo-plan |
 | f-site-service-pages-noindex | Les quatre pages de service (padel, personal training, coaching en ligne, corporate wellness) sont des brouillons non indexables (noindex) ; seule la page d'accueil est une page commerciale indexable. | ❓ extracted | repo-pages |
+| f-profile-instagram | Le profil Instagram officiel de Coach Gari est https://www.instagram.com/coach_gari28 (@coach_gari28). | ✅ validated | owner-2026-11-07 |
+| f-profile-tiktok | Le profil TikTok officiel de Coach Gari est https://www.tiktok.com/@coach_gari28 (@coach_gari28). | ✅ validated | owner-2026-11-07 |
+| f-profile-myoolala | La page myOolala officielle de Coach Gari est https://myoolala.com/u/coachgari28. | ✅ validated | owner-2026-11-07 |
 
 ## Plan de mesure
 

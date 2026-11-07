@@ -17,7 +17,8 @@ markets:
 aliases:
   - { value: Coach Gari, kind: name, status: confirmed }
   - { value: "@coach_gari28", kind: handle, status: confirmed, note: "Instagram / TikTok" }
-  - { value: coach_gari28, kind: handle, status: proposed, note: "graphie sans @, utilisée dans docs/SEO_AEO_PLAN.md du dépôt" }
+  - { value: coach_gari28, kind: handle, status: confirmed, note: "pseudonyme Instagram et TikTok, confirmé par Mickaël le 2026-11-07" }
+  - { value: coachgari28, kind: handle, status: confirmed, note: "pseudonyme de la page myOolala (myoolala.com/u/coachgari28), confirmé par Mickaël le 2026-11-07" }
   - { value: coachgari28.com, kind: domain, status: confirmed }
   - { value: coachgari.com, kind: domain, status: proposed, note: "à confirmer" }
 competitors:
@@ -25,8 +26,8 @@ competitors:
     domains: [playtomic.io]
     category: "plateforme de réservation de padel (cours et coachs)"
     markets: [AE]
-    status: proposed
-    rationale: "Cité comme levier dans le plan SEO du dépôt ; les assistants renvoient souvent vers les coachs de padel listés sur Playtomic."
+    status: rejected
+    rationale: "Pas un concurrent (décision de Mickaël, 2026-11-07) : plateforme de réservation, où Coach Gari peut être listé. Reste chargé comme concurrent dans Elmo pendant J0 (aucun changement pendant la fenêtre) ; exclu des analyses OIA."
   - name: Ultimate Performance
     domains: [upfitness.com]
     category: "coaching personnel premium avec salle à Dubaï"
@@ -64,6 +65,11 @@ sources:
     ref: "Mandat 1, suite : décisions (Mickaël THOMAS, 2026-11-05)"
     description: "Activité, base, audience, alias et langue du panel donnés par le propriétaire"
     addedAt: "2026-11-05"
+  - id: owner-2026-11-07
+    kind: owner-statement
+    ref: "Profils officiels de Coach Gari (Mickaël THOMAS, 2026-11-07)"
+    description: "Instagram, TikTok et page myOolala officiels, pseudonymes coach_gari28 et coachgari28"
+    addedAt: "2026-11-07"
   - id: oia-registry
     kind: file
     ref: "registry/projects (fiche du projet dans le registre OIA Funding)"

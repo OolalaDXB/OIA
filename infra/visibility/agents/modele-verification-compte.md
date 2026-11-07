@@ -179,6 +179,21 @@ Ce que le reste du web dit de la marque, et donc ce que les IA en retiennent.
 | M04 | Prévisualisation disponible avant mise en ligne | manuel | manuel | amélioration |
 | M05 | Construction vérifiable dans un bac à sable, sans secret | OIA | auto | important |
 
+## N · Réseaux sociaux
+
+Les profils officiels de la marque, ce qu'ils disent et ce que les IA en
+citent. Lecture par les accès officiels autorisés par le titulaire (ADR
+`docs/visibility/adr/0003-reseaux-sociaux.md`), jamais par aspiration.
+
+| ID | À vérifier | Outil | Mode | Gravité |
+| --- | --- | --- | --- | --- |
+| N01 | Profils officiels cohérents avec le site : nom, biographie, activité, lieu et offres identiques aux faits validés | réseaux sociaux | mixte | important |
+| N02 | Lien vers le site officiel (domaine canonique) dans la biographie de chaque profil | réseaux sociaux | auto | important |
+| N03 | Profils officiels déclarés en sameAs dans les données structurées du site | Crawlie | auto | important |
+| N04 | Régularité des publications sur 90 jours, par profil | réseaux sociaux | auto | amélioration |
+| N05 | Sujets des publications alignés sur le panel : offres, lieux et questions mesurées | réseaux sociaux | mixte | amélioration |
+| N06 | Citations des profils officiels par les assistants, comptées pour la marque à l'adresse près | OIA | auto | important |
+
 ## Synthèse par compte
 
 Chaque vérification produit une fiche par compte et par date :

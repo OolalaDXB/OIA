@@ -1,0 +1,11 @@
+schemaVersion: 1
+family: N
+title: "Réseaux sociaux"
+intro: "Les profils officiels de la marque sur les réseaux sociaux, ce qu'ils disent et ce que les IA en citent. Lecture par les accès officiels autorisés par le titulaire (ADR 0003), jamais par aspiration."
+checks:
+  - { id: N01, label: "Profils officiels cohérents avec le site : nom, biographie, activité, lieu et offres identiques aux faits validés", tool: social, mode: mixte, severity: important, tags: [social, aeo] }
+  - { id: N02, label: "Lien vers le site officiel (domaine canonique) dans la biographie de chaque profil", tool: social, mode: auto, severity: important, tags: [social] }
+  - { id: N03, label: "Profils officiels déclarés en sameAs dans les données structurées du site (Organization ou Person)", tool: crawlie, mode: auto, severity: important, tags: [social, structured-data] }
+  - { id: N04, label: "Régularité des publications sur 90 jours, par profil (rythme et dernière publication)", tool: social, mode: auto, severity: amélioration, tags: [social] }
+  - { id: N05, label: "Sujets des publications alignés sur le panel : offres, lieux et questions mesurées", tool: social, mode: mixte, severity: amélioration, tags: [social, aeo] }
+  - { id: N06, label: "Citations des profils officiels par les assistants, comptées pour la marque à l'adresse près", tool: oia, mode: auto, severity: important, tags: [social, aeo], note: "Elmo 0.7.7 ne classe les citations qu'à l'hôte près : instagram.com ou tiktok.com ne peuvent pas être déclarés comme domaines de la marque. Réanalyse OIA (src/j0-reanalysis.ts)." }

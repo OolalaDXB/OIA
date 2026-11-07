@@ -1,0 +1,47 @@
+# Concurrents candidats de Coach Gari · liste corrigée À VALIDER par Mickaël
+# Préparée le 2026-11-07 (recherches publiques sourcées et domaines cités dans les
+# réponses de J0). Rien n'est chargé dans Elmo pendant J0 : les concurrents d'Elmo
+# restent ceux du lancement (Playtomic, Ultimate Performance, Future, Caliber).
+# Playtomic n'est pas un concurrent (décision de Mickaël, 2026-11-07).
+# Lu par scripts/j0-reanalysis.sh pour compter les mentions dans les réponses.
+candidates:
+  # ---- Coachs personnels et coachs de padel indépendants à Dubaï ----
+  - { name: PTD Fitness, segment: dubai-independant, aliases: ["Personal Trainers Dubai"],
+      source: "https://ptd-clone-preview.pages.dev/blog/best-personal-trainer-dubai-2026", note: "réseau de coachs qui se déplacent chez le client ; source commerciale, à vérifier" }
+  - { name: Magali de Lattre, segment: dubai-independant,
+      source: "https://gulfnews.com/special-reports/play-tennis-and-padel-at-the-world-class-indoor-aria-sportscape-academy-1.1663586197929", note: "coach de padel, ancienne joueuse professionnelle ; indépendante ou salariée d'Aria : à vérifier" }
+  - { name: Fede Brambati, segment: dubai-independant,
+      source: "https://dubaicreekresort.com/?p=642", note: "coach de padel listé par RRA Padel ; statut à vérifier" }
+  - { name: David Pozo, segment: dubai-independant,
+      source: "https://dubaicreekresort.com/?p=642", note: "coach de padel listé par RRA Padel ; statut à vérifier" }
+  # ---- Académies de padel à Dubaï (segment à classer par Mickaël) ----
+  - { name: Mouratoglou, segment: dubai-academie-padel, domains: [mouratoglou.com], aliases: ["Mouratoglou Tennis Center"],
+      source: "https://www.mouratoglou.com/?p=21259", note: "cours de padel individuels à Jumeirah" }
+  - { name: Aria Sportscape, segment: dubai-academie-padel, aliases: ["Aria Sportscape Academy"],
+      source: "https://gulfnews.com/special-reports/play-tennis-and-padel-at-the-world-class-indoor-aria-sportscape-academy-1.1663586197929" }
+  - { name: Champs Sports Club, segment: dubai-academie-padel, domains: [champs-sportsclub.com],
+      source: "https://champs-sportsclub.com/academy/padel-academy/" }
+  - { name: Viya Padel, segment: dubai-academie-padel, domains: [dubaigolf.com],
+      source: "https://dubaigolf.com/viya-padel/coaching/", note: "dubaigolf.com cité 13 fois dans les réponses du jour 1 de J0" }
+  - { name: RRA Padel, segment: dubai-academie-padel, aliases: ["Real Racquet Academy"],
+      source: "https://dubaicreekresort.com/?p=642" }
+  - { name: World Padel Academy, segment: dubai-academie-padel,
+      source: "https://qidz.com/booking/padel-coaching-sessions-at-world-padel-academy-43999" }
+  - { name: Lion Elite Padel Academy, segment: dubai-academie-padel,
+      source: "https://playtomic.com/clubs/lion-elite-padel-academy" }
+  # ---- Salles de coaching personnel à Dubaï ----
+  - { name: Ultimate Performance, segment: dubai-salle, domains: [upfitness.com], aliases: ["UP Fitness"],
+      source: "subject.yaml (concurrent de lancement)" }
+  - { name: StudioRepublik, segment: dubai-salle, domains: [studio-republik.com], aliases: ["Studio Republik"],
+      source: "https://studio-republik.com/?p=9228" }
+  - { name: Symmetry Gym, segment: dubai-salle,
+      source: "https://whatson.ae/?p=28992", note: "cité par What's On pour ses programmes de coaching personnel" }
+  - { name: SHP Dubai, segment: dubai-salle,
+      source: "https://whatson.ae/?p=28992" }
+  - { name: Fitsetgo, segment: dubai-salle,
+      source: "https://focus.hidubai.com/elevate-your-fitness-game-top-boutique-studios-to-try-in-dubai" }
+  # ---- Coaching en ligne (à part) ----
+  - { name: Future, segment: en-ligne, domains: [future.co], source: "subject.yaml (concurrent de lancement)" }
+  - { name: Caliber, segment: en-ligne, domains: [caliberstrong.com], source: "subject.yaml (concurrent de lancement)" }
+  - { name: Planet Fitness Play, segment: en-ligne, domains: [play.planetfitness.co.za],
+      source: "https://play.planetfitness.co.za/1-on-1-coaching", note: "coaching individuel en ligne, Afrique du Sud" }

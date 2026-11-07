@@ -24,6 +24,8 @@ export const Tool = z.enum([
   "repo-read",
   "oia",
   "panel",
+  /** Adaptateurs de lecture des réseaux sociaux (src/social, ADR 0003) : simulés tant que non branchés. */
+  "social",
   "manual",
 ]);
 export type Tool = z.infer<typeof Tool>;
@@ -34,7 +36,7 @@ export type Mode = z.infer<typeof Mode>;
 export const Severity = z.enum(["bloquant", "important", "amélioration"]);
 export type Severity = z.infer<typeof Severity>;
 
-const CheckId = z.string().regex(/^[A-M]\d{2}$/);
+const CheckId = z.string().regex(/^[A-N]\d{2}$/);
 
 export const CheckSchema = z
   .object({
@@ -61,7 +63,7 @@ export const CheckSchema = z
 export const FamilySchema = z
   .object({
     schemaVersion: z.literal(1),
-    family: z.string().regex(/^[A-M]$/),
+    family: z.string().regex(/^[A-N]$/),
     title: z.string().min(2),
     intro: z.string().min(5),
     checks: z.array(CheckSchema).min(1),
@@ -78,7 +80,7 @@ export function defaultVerificationDir(): string {
 export function loadFamilies(root: string = defaultVerificationDir()): Family[] {
   if (!existsSync(root)) return [];
   const files = readdirSync(root)
-    .filter((f) => /^[a-m]-[a-z0-9-]+\.yaml$/.test(f))
+    .filter((f) => /^[a-n]-[a-z0-9-]+\.yaml$/.test(f))
     .sort();
   const families: Family[] = [];
   for (const f of files) {
