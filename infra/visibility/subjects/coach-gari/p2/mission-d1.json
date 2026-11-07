@@ -1,0 +1,198 @@
+{
+  "missions": [
+    {
+      "id": "msn-p2-coach-gari-technique",
+      "agents": [
+        "technique"
+      ],
+      "state": "waiting-validation",
+      "results": {
+        "recommendationIds": [
+          "p2-technique-E03",
+          "p2-technique-E06",
+          "p2-technique-E01",
+          "p2-technique-B06",
+          "p2-technique-B06",
+          "p2-technique-B03",
+          "p2-technique-B04"
+        ],
+        "evidenceIds": [
+          "audits/2026-11-08/crawlie.json#issues[rule=schema-missing-required]",
+          "audits/2026-11-08/crawlie.json#issues[rule=schema-missing-recommended]",
+          "audits/2026-11-08/crawlie.json#issues[rule=structured-data-missing]",
+          "audits/2026-11-08/crawlie.json#issues[rule=noindex]",
+          "audits/2026-11-08/crawlie.json#issues[rule=nofollow]",
+          "audits/2026-11-08/crawlie.json#issues[rule=canonical-missing]",
+          "audits/2026-11-08/crawlie.json#issues[rule=blocked-by-robots]"
+        ],
+        "notes": "7 constat(s), lecture de fichiers seulement, aucun modèle."
+      },
+      "actualCostUsd": 0
+    },
+    {
+      "id": "msn-p2-coach-gari-seo",
+      "agents": [
+        "seo"
+      ],
+      "state": "waiting-validation",
+      "results": {
+        "recommendationIds": [
+          "p2-seo-D01",
+          "p2-seo-D02",
+          "p2-seo-D03"
+        ],
+        "evidenceIds": [
+          "audits/2026-11-08/crawlie.json#issues[rule=title-too-short]",
+          "audits/2026-11-08/crawlie.json#issues[rule=description-missing]",
+          "audits/2026-11-08/crawlie.json#issues[rule=h1-multiple]"
+        ],
+        "notes": "3 constat(s), lecture de fichiers seulement, aucun modèle ; 1 plan(s) de rédaction au lieu de texte."
+      },
+      "actualCostUsd": 0
+    },
+    {
+      "id": "msn-p2-coach-gari-contenu",
+      "agents": [
+        "contenu"
+      ],
+      "state": "waiting-validation",
+      "results": {
+        "recommendationIds": [
+          "p2-contenu-D05",
+          "p2-contenu-F05",
+          "p2-contenu-F08"
+        ],
+        "evidenceIds": [
+          "audits/2026-11-08/crawlie.json#issues[rule=image-missing-alt]",
+          "audits/2026-11-08/crawlie.json#issues[rule=geo-not-answerable]",
+          "audits/2026-11-08/crawlie.json#issues[rule=thin-content]"
+        ],
+        "notes": "3 constat(s), lecture de fichiers seulement, aucun modèle ; 3 plan(s) de rédaction au lieu de texte."
+      },
+      "actualCostUsd": 0
+    },
+    {
+      "id": "msn-p2-coach-gari-aeo",
+      "agents": [
+        "aeo"
+      ],
+      "state": "waiting-validation",
+      "results": {
+        "recommendationIds": [
+          "p2-aeo-E05",
+          "p2-aeo-E01",
+          "p2-aeo-H07",
+          "p2-aeo-F02",
+          "p2-aeo-F02",
+          "p2-aeo-E02"
+        ],
+        "evidenceIds": [
+          "audits/2026-11-08/crawlie.json#issues[rule=geo-no-author]",
+          "audits/2026-11-08/crawlie.json#issues[rule=geo-no-structured-data]",
+          "audits/2026-11-08/crawlie.json#issues[rule=geo-no-llms-txt]",
+          "facts.yaml#f-prices",
+          "facts.yaml#f-price-entry",
+          "facts.yaml (faits contact validés)"
+        ],
+        "notes": "6 constat(s), lecture de fichiers seulement, aucun modèle ; 1 plan(s) de rédaction au lieu de texte."
+      },
+      "actualCostUsd": 0
+    },
+    {
+      "id": "msn-p2-coach-gari-conversion",
+      "agents": [
+        "conversion"
+      ],
+      "state": "waiting-validation",
+      "results": {
+        "recommendationIds": [
+          "p2-conversion-I02",
+          "p2-conversion-C02"
+        ],
+        "evidenceIds": [
+          "audits/2026-11-08/crawlie.json#issues[rule=a11y-input-no-label]",
+          "recommendations/rec-cg-tech-offer-price.json"
+        ],
+        "notes": "2 constat(s), lecture de fichiers seulement, aucun modèle."
+      },
+      "actualCostUsd": 0
+    }
+  ],
+  "log": [
+    {
+      "who": "manual",
+      "what": "mission.start",
+      "clientId": "oia-internal",
+      "missionId": "msn-p2-coach-gari-technique",
+      "at": "2026-11-07T17:54:38.251Z"
+    },
+    {
+      "who": "manual",
+      "what": "mission.waiting-validation",
+      "clientId": "oia-internal",
+      "missionId": "msn-p2-coach-gari-technique",
+      "costUsd": 0,
+      "at": "2026-11-07T17:54:38.257Z"
+    },
+    {
+      "who": "manual",
+      "what": "mission.start",
+      "clientId": "oia-internal",
+      "missionId": "msn-p2-coach-gari-seo",
+      "at": "2026-11-07T17:54:38.257Z"
+    },
+    {
+      "who": "manual",
+      "what": "mission.waiting-validation",
+      "clientId": "oia-internal",
+      "missionId": "msn-p2-coach-gari-seo",
+      "costUsd": 0,
+      "at": "2026-11-07T17:54:38.262Z"
+    },
+    {
+      "who": "manual",
+      "what": "mission.start",
+      "clientId": "oia-internal",
+      "missionId": "msn-p2-coach-gari-contenu",
+      "at": "2026-11-07T17:54:38.262Z"
+    },
+    {
+      "who": "manual",
+      "what": "mission.waiting-validation",
+      "clientId": "oia-internal",
+      "missionId": "msn-p2-coach-gari-contenu",
+      "costUsd": 0,
+      "at": "2026-11-07T17:54:38.267Z"
+    },
+    {
+      "who": "manual",
+      "what": "mission.start",
+      "clientId": "oia-internal",
+      "missionId": "msn-p2-coach-gari-aeo",
+      "at": "2026-11-07T17:54:38.267Z"
+    },
+    {
+      "who": "manual",
+      "what": "mission.waiting-validation",
+      "clientId": "oia-internal",
+      "missionId": "msn-p2-coach-gari-aeo",
+      "costUsd": 0,
+      "at": "2026-11-07T17:54:38.272Z"
+    },
+    {
+      "who": "manual",
+      "what": "mission.start",
+      "clientId": "oia-internal",
+      "missionId": "msn-p2-coach-gari-conversion",
+      "at": "2026-11-07T17:54:38.272Z"
+    },
+    {
+      "who": "manual",
+      "what": "mission.waiting-validation",
+      "clientId": "oia-internal",
+      "missionId": "msn-p2-coach-gari-conversion",
+      "costUsd": 0,
+      "at": "2026-11-07T17:54:38.275Z"
+    }
+  ]
+}
