@@ -4,6 +4,8 @@ import type { AudioClip } from "../types.js";
 /** Une prise en cours : elle s'arrête sur demande (pousser pour parler) ou au plafond. */
 export interface Prise {
   arreter(): Promise<AudioClip>;
+  /** Abandonne la prise : le processus d'enregistrement est arrêté, rien n'est rendu. */
+  annuler?(): void;
 }
 
 export interface Enregistreur {
@@ -31,6 +33,9 @@ export class EnregistreurFfmpeg implements Enregistreur {
     const proc = sp(this.opts.ffmpeg ?? "ffmpeg", args);
     const fin = new Promise<number>((resolve) => proc.once("exit", (code: number | null) => resolve(code ?? 0)));
     return {
+      annuler: () => {
+        proc.kill("SIGTERM");
+      },
       arreter: async () => {
         proc.stdin?.write("q");
         proc.stdin?.end();
@@ -47,6 +52,6 @@ export class EnregistreurSimule implements Enregistreur {
   readonly prises: string[] = [];
   demarrer(chemin: string): Prise {
     this.prises.push(chemin);
-    return { arreter: async () => ({ path: chemin, durationMs: 1000 }) };
+    return { arreter: async () => ({ path: chemin, durationMs: 1000 }), annuler: () => {} };
   }
 }

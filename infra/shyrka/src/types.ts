@@ -37,5 +37,8 @@ export interface TextModel {
 }
 
 export interface Speaker {
-  speak(text: string): Promise<void>;
+  /** Dit le texte. Rend « interrompu » si la réplique a été coupée avant la fin. */
+  speak(text: string): Promise<void | "interrompu">;
+  /** Coupe la réplique en cours, sans arrêter Shyrka. */
+  interrompre?(): void;
 }

@@ -2,7 +2,13 @@ import { voiceOutputAllowed, type Identity } from "./identity.js";
 import { applyStyle, SHYRKA_SYSTEM_PROMPT } from "./persona.js";
 import type { AudioClip, ChatMessage, Microphone, Speaker, TextModel, Transcriber } from "./types.js";
 import { assertModeleLocal } from "./local.js";
-import { detecterDemande, detecterOffre, estAccord, estRefus, executer, questions, refusDocument, sansRepetition, sourcesDuDepot, type Execution, type Offre, type Operation, type Sources } from "./dialogue.js";
+import {
+  detecterDemande, detecterOffre, entiteDecision, estAccord, estArret, estRefus, executer, idsDecision, passageSuivant, questions, refusDocument, renduListe,
+  routerDecision, sansRepetition, sourcesDuDepot, texteVocal, type Decision, type Entite, type Execution, type Offre, type Operation, type Sources,
+} from "./dialogue.js";
+
+/** États explicites d'un tour. */
+export type EtatSession = "attente" | "ecoute" | "transcription" | "reflexion" | "parole" | "interrompue" | "arret";
 
 export interface TurnEvent {
   at: string;
@@ -18,6 +24,12 @@ export interface TurnResult {
   /** "voix" seulement si l'identité en vigueur autorise la voix en sortie. */
   output: "voix" | "texte" | "aucune";
   events: TurnEvent[];
+  /** Ce qui a été dit (ou aurait été dit) à voix haute, distinct de l'écran. */
+  spoken?: string;
+  /** Vrai si Mickaël a coupé la réplique avant la fin. */
+  interrompue?: boolean;
+  /** Vrai si Mickaël a demandé de terminer la session : l'appelant ferme. */
+  arret?: boolean;
 }
 
 export interface SessionDeps {
@@ -41,6 +53,8 @@ export interface SessionDeps {
   clock?: () => number;
   /** Sources lues par la liste blanche (cadre, roadmap, rapports). Par défaut : le dépôt. */
   sources?: Sources;
+  /** Appelé à chaque changement d'état (affichage, raccourcis clavier). */
+  onEtat?: (etat: EtatSession) => void;
 }
 
 /**
@@ -61,6 +75,32 @@ export class ShyrkaSession {
   private dernieresQuestions: string[] = [];
   /** Opérations déjà faites dans la session : leur offre n'est plus reproposée. */
   private readonly faites: Operation[] = [];
+
+  /** Passages d'une liste longue pas encore lus à voix haute. */
+  private suiteVocale: string[] = [];
+  /** Dernière entité dont on a parlé, avec sa source : « cette décision » la désigne. */
+  private entite: Entite | null = null;
+  private etatCourant: EtatSession = "attente";
+
+  get etat(): EtatSession {
+    return this.etatCourant;
+  }
+
+  get derniereEntite(): Entite | null {
+    return this.entite;
+  }
+
+  private passer(e: EtatSession): void {
+    this.etatCourant = e;
+    this.deps.onEtat?.(e);
+  }
+
+  /** Coupe la réplique en cours. Shyrka continue ; rend vrai si une réplique était en cours. */
+  interrompre(): boolean {
+    if (this.etatCourant !== "parole") return false;
+    this.deps.speaker?.interrompre?.();
+    return true;
+  }
 
   /** Offre en attente, pour l'affichage et les tests. */
   get offreEnAttente(): Offre | null {
@@ -106,32 +146,75 @@ export class ShyrkaSession {
     if (!heard) {
       events.push({ at: new Date(this.clock()).toISOString(), step: "silence", ms: 0 });
       this.deps.print("Shyrka · (rien entendu)");
+      this.passer("attente");
       return { heard, answer: null, output: "aucune", events };
+    }
+    // Arrêt oral : sans modèle, sans confirmation.
+    if (estArret(heard)) {
+      this.passer("arret");
+      return { heard, answer: null, output: "aucune", events, arret: true };
     }
     const system = this.deps.system ?? SHYRKA_SYSTEM_PROMPT;
     const messages: ChatMessage[] = [{ role: "system", content: system }, ...this.history, { role: "user", content: heard }];
     const decision = this.decider(heard);
     let answer: string;
+    let parle: string | null = null;
+    let suite: string[] | null = null;
     let parModele = false;
-    if ("texte" in decision) answer = decision.texte;
-    else if ("execution" in decision && "texte" in decision.execution) answer = decision.execution.texte;
+    let entite: Entite | null = null;
+    if ("suiteVocale" in decision) {
+      const p = passageSuivant(this.suiteVocale);
+      answer = `(suite de la liste, lue à voix haute)\n${this.suiteVocale.slice(0, this.suiteVocale.length - p.reste.length).join("\n")}`;
+      parle = p.parle;
+      suite = p.reste;
+    } else if ("texte" in decision) answer = decision.texte;
+    else if ("liste" in decision) {
+      answer = renduListe(decision);
+      if (decision.liste.length === 1) entite = entiteDecision(decision.liste[0]!);
+    } else if ("expliquer" in decision) {
+      const d = decision.expliquer;
+      entite = entiteDecision(d);
+      this.passer("reflexion");
+      const raw = await this.step(events, "reflexion", () => this.deps.model.chat(this.messagesDecision(system, d, decision.question)), this.deps.model.name);
+      const explication = sansRepetition(applyStyle(raw), this.dernieresQuestions, this.faites);
+      answer = `${d.id} · ${d.intitule} (roadmap, ligne ${d.ligne})\n${explication}`;
+      parle = `${d.id}. ${explication}`;
+    } else if ("execution" in decision && "texte" in decision.execution) answer = decision.execution.texte;
     else if ("execution" in decision && "synthese" in decision.execution) {
       const { fichier, texte, consigne } = decision.execution.synthese;
       const lecture: ChatMessage[] = [
         { role: "system", content: system },
         { role: "user", content: `Voici le texte intégral de ${fichier}, que tu viens de lire.\n\n${texte}\n\n${consigne} N'ajoute rien qui n'y figure pas. Ne pose aucune question.` },
       ];
+      this.passer("reflexion");
       const raw = await this.step(events, "reflexion", () => this.deps.model.chat(lecture), this.deps.model.name);
       answer = `J'ai lu ${fichier}. ${sansRepetition(applyStyle(raw), this.dernieresQuestions, [...this.faites, ...(decision.operation ? [decision.operation] : [])])}`.trim();
     } else {
       parModele = true;
+      this.passer("reflexion");
       const raw = await this.step(events, "reflexion", () => this.deps.model.chat(messages), this.deps.model.name);
       answer = sansRepetition(applyStyle(raw), this.dernieresQuestions, this.faites) || "Je n'ai rien à ajouter. Dis-moi ce que tu veux voir.";
+      const cites = idsDecision(answer);
+      if (cites.length === 1) {
+        const d = this.decisions().find((x) => x.id === cites[0]);
+        if (d) entite = entiteDecision(d);
+      }
     }
-    if ("execution" in decision && decision.operation) this.faites.push(decision.operation);
-    // Une offre ne se retient que d'une réponse du modèle ; elle attend la réplique suivante, pas plus.
-    this.offre = parModele ? detecterOffre(answer) : null;
-    this.dernieresQuestions = questions(answer);
+    // Une décision citée par Mickaël devient le sujet courant, même sans explication.
+    if (!entite) {
+      const cites = idsDecision(heard);
+      const d = cites.length === 1 ? this.decisions().find((x) => x.id === cites[0]) : undefined;
+      if (d) entite = entiteDecision(d);
+    }
+    if (entite) this.entite = entite;
+
+    // Ce qui se dit est distinct de ce qui s'affiche.
+    if (parle === null) {
+      const v = texteVocal(answer);
+      parle = v.parle;
+      suite = v.suite;
+    }
+
     let comparison: TurnResult["comparison"];
     if (parModele && this.deps.compareModel) {
       const cm = this.deps.compareModel;
@@ -139,16 +222,61 @@ export class ShyrkaSession {
       const other = applyStyle(await cm.chat(messages));
       comparison = { model: cm.name, answer: other, ms: this.clock() - t0 };
     }
-    this.remember(heard, answer);
     this.deps.print(`Shyrka · ${answer}`);
     if (comparison) this.deps.print(`  comparaison ${comparison.model} (${comparison.ms} ms) · ${comparison.answer}`);
+
+    let output: TurnResult["output"] = "texte";
+    let interrompue = false;
     if (this.voiceOutput && this.deps.speaker) {
       const speaker = this.deps.speaker;
-      await this.step(events, "voix", () => speaker.speak(answer));
-      return { heard, answer, output: "voix", events, ...(comparison ? { comparison } : {}) };
+      this.passer("parole");
+      const fin = await this.step(events, "voix", () => speaker.speak(parle!));
+      output = "voix";
+      interrompue = fin === "interrompu";
+    } else {
+      events.push({ at: new Date(this.clock()).toISOString(), step: "texte", ms: 0, detail: `identité v${this.deps.identity.version}` });
+      suite = []; // tout est à l'écran : pas de suite à lire
+      parle = answer;
     }
-    events.push({ at: new Date(this.clock()).toISOString(), step: "texte", ms: 0, detail: `identité v${this.deps.identity.version}` });
-    return { heard, answer, output: "texte", events, ...(comparison ? { comparison } : {}) };
+
+    if (interrompue) {
+      // Une réplique coupée n'est pas une opération achevée : rien n'est retenu comme fait,
+      // aucune offre ni suite n'attend, et l'historique dit qu'elle a été interrompue.
+      this.offre = null;
+      this.suiteVocale = [];
+      this.dernieresQuestions = [];
+      this.remember(heard, `${answer}\n(Réponse interrompue par Mickaël avant la fin : il ne l'a pas entendue en entier.)`);
+      this.passer("interrompue");
+    } else {
+      if ("execution" in decision && decision.operation) this.faites.push(decision.operation);
+      // Une offre ne se retient que d'une réponse du modèle ; elle attend la réplique suivante, pas plus.
+      this.offre = parModele ? detecterOffre(answer) : null;
+      this.suiteVocale = suite ?? [];
+      this.dernieresQuestions = [...questions(answer), ...questions(parle)];
+      this.remember(heard, answer);
+      this.passer("attente");
+    }
+    return { heard, answer, output, events, spoken: parle, ...(interrompue ? { interrompue } : {}), ...(comparison ? { comparison } : {}) };
+  }
+
+  /** Consigne pour expliquer une seule décision, à partir de son intitulé exact. */
+  private messagesDecision(system: string, d: Decision, question: string): ChatMessage[] {
+    return [
+      { role: "system", content: system },
+      ...this.history,
+      {
+        role: "user",
+        content: [
+          `Mickaël demande : « ${question} »`,
+          `Cette demande porte sur une seule décision : ${d.id}, dans docs/roadmap-oia-shyrka-souffleur.md, ligne ${d.ligne}. Intitulé exact : « ${d.intitule} ».`,
+          "Réponds sur cette décision seulement, en quatre phrases au plus. Ne liste pas les autres décisions. Distingue ce que la roadmap écrit de ton interprétation ; si la roadmap ne donne pas la raison, dis-le. Ne pose aucune question.",
+        ].join("\n"),
+      },
+    ];
+  }
+
+  private decisions(): Decision[] {
+    return this.sources().etat().decisionsDetail ?? [];
   }
 
   /**
@@ -156,11 +284,23 @@ export class ShyrkaSession {
    * acceptée, répondre à un refus, exécuter une demande de lecture, refuser
    * un document hors liste. Sinon, le modèle répond.
    */
-  private decider(heard: string): { texte: string } | { execution: Execution; operation: Operation | null } | { modele: true } {
+  private decider(
+    heard: string,
+  ):
+    | { texte: string }
+    | { suiteVocale: true }
+    | { liste: Decision[]; total: number; libelle: string }
+    | { expliquer: Decision; question: string }
+    | { execution: Execution; operation: Operation | null }
+    | { modele: true } {
     const offre = this.offre;
     this.offre = null;
+    if (this.suiteVocale.length && estAccord(heard)) return { suiteVocale: true };
+    this.suiteVocale = [];
     if (offre && estAccord(heard)) return { execution: executer(offre, this.sources()), operation: { type: offre.type, sujet: offre.sujet } };
     if (offre && estRefus(heard)) return { texte: "Entendu, je laisse ça de côté." };
+    const route = /\bd[ée]cision|\b[dD] ?\d{1,2}\b|celle-ci|cette derni[èe]re|ce point/i.test(heard) ? routerDecision(heard, this.decisions(), this.entite) : null;
+    if (route) return route;
     const d = detecterDemande(heard);
     if (d && !d.ok) return { texte: refusDocument(d.document) };
     if (d && "operation" in d) return { execution: executer(d.operation, this.sources()), operation: d.operation };

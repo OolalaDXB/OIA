@@ -37,7 +37,13 @@ pnpm shyrka:parler -- --simule     # tout simulé, aucun matériel
 pnpm shyrka:resume                 # résumé du jour, lu à voix haute
 pnpm shyrka:resume -- --simule     # résumé affiché seulement
 pnpm --filter @oia/shyrka diagnostic
+pnpm --filter @oia/shyrka mesure-echo   # écho de la voix d'Aurélie au micro (étude du barge-in)
 ```
+
+Pendant que Shyrka parle : **Entrée** ou **Espace** l'interrompt (une nouvelle
+prise de parole démarre aussitôt), **Ctrl+C** ferme la session. Pour finir à
+l'oral : « Termine la session », « Arrête Shyrka » ou « Au revoir » ; au
+clavier : `q`. Détail, étude du barge-in et recette : `BARGE-IN.md`.
 
 `shyrka:resume` ajoute la première ligne du dernier résumé du matin de
 l'agent courrier (`packages/shyrka-mail`), s'il existe dans

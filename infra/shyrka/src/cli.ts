@@ -1,15 +1,16 @@
 import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync, unlinkSync } from "node:fs";
 import { homedir, tmpdir } from "node:os";
 import { join } from "node:path";
-import { createInterface } from "node:readline";
 import { fileURLToPath } from "node:url";
-import { EnregistreurFfmpeg, EnregistreurSimule, type Enregistreur } from "./adapters/enregistreur.js";
+import { EnregistreurFfmpeg, EnregistreurSimule, type Enregistreur, type Prise } from "./adapters/enregistreur.js";
 import { MacSaySpeaker } from "./adapters/macos-say.js";
 import { lireCleMistral, MistralTextModel, ollamaPresent } from "./adapters/mistral.js";
 import { MAX_ENTRETIEN_SECONDS, MAX_RECORD_SECONDS } from "./adapters/microphone-ffmpeg.js";
 import { COMPARISON_OLLAMA_MODEL, DEFAULT_OLLAMA_MODEL, OllamaTextModel } from "./adapters/ollama.js";
 import { RecordingSpeaker, SimulatedTextModel, SimulatedTranscriber } from "./adapters/simulated.js";
 import { PROMPT_WHISPER, WhisperServer } from "./adapters/whisper-server.js";
+import { Clavier } from "./clavier.js";
+import { PHRASE_ECHO, tauxEcho, verdictEcho } from "./echo.js";
 import { contexteModele, etatOia, resumeDuJour } from "./contexte.js";
 import { diagnose, formatChecks } from "./doctor.js";
 import { preparerDossierSeance, ecrireFiche } from "./entretien/fiche.js";
@@ -55,26 +56,9 @@ const cfg = {
   resumeCourrierDir: env.SHYRKA_COURRIER_DIR ?? join(homedir(), "oia-shyrka-data", "courrier"),
 };
 
-/** Lit les lignes du clavier une par une ; renvoie null en fin de flux. */
+/** Clavier de la CLI : lignes, et touches immédiates pendant que Shyrka parle. */
 function clavier() {
-  const rl = createInterface({ input: process.stdin });
-  const file: string[] = [];
-  const attente: ((l: string | null) => void)[] = [];
-  let fini = false;
-  rl.on("line", (l) => (attente.length ? attente.shift()!(l) : file.push(l)));
-  rl.on("close", () => {
-    fini = true;
-    while (attente.length) attente.shift()!(null);
-  });
-  return {
-    lire(invite: string): Promise<string | null> {
-      process.stdout.write(invite);
-      if (file.length) return Promise.resolve(file.shift()!);
-      if (fini) return Promise.resolve(null);
-      return new Promise((r) => attente.push(r));
-    },
-    fermer: () => rl.close(),
-  };
+  return new Clavier(process.stdin);
 }
 
 function voix(simule: boolean, dir: string): Speaker {
@@ -149,40 +133,71 @@ async function parler(flags: Set<string>): Promise<void> {
     print: (l) => console.log(simule ? `${l}  [simulé]` : l),
   });
   const k = clavier();
-  const arret = () => whisper?.arreter();
-  process.once("SIGINT", () => {
-    arret();
-    process.exit(130);
-  });
+  let prise: Prise | null = null;
+  let ferme = false;
+  // Ferme tout ce qui a été lancé : voix en cours, micro, serveur Whisper, terminal. Rien d'orphelin.
+  const nettoyer = () => {
+    if (ferme) return;
+    ferme = true;
+    speaker.interrompre?.();
+    prise?.annuler?.();
+    prise = null;
+    whisper?.arreter();
+    k.fermer();
+    rmSync(dir, { recursive: true, force: true });
+  };
+  const quitter = (code: number) => {
+    nettoyer();
+    console.log("\nSession terminée.");
+    process.exit(code);
+  };
+  process.once("SIGINT", () => quitter(130));
+  process.once("SIGTERM", () => quitter(143));
+  process.once("exit", nettoyer);
+  const tour = (p: Promise<TurnResult>) => k.pendantParole(p, { interrompre: () => session.interrompre(), fermer: () => quitter(130) });
   try {
     if (whisper) {
       console.log("Démarrage du serveur Whisper local (port 8178)…");
       await whisper.demarrer();
     }
+    console.log("Pendant que Shyrka parle : Entrée ou Espace l'interrompt, Ctrl+C ferme. « Termine la session » ou q pour finir.");
+    let reprendre = false;
     for (let n = 1; ; n++) {
-      const l = await k.lire(texte ? "Toi (q pour quitter) : " : "Entrée pour parler, ou tape une phrase (q pour quitter) : ");
+      // Après une interruption, nouvelle prise de parole tout de suite (push-to-talk : la touche vaut activation).
+      const l = reprendre && !texte ? "" : await k.lire(texte ? "Toi (q pour quitter) : " : "Entrée pour parler, ou tape une phrase (q pour quitter) : ");
+      reprendre = false;
       if (l === null || l.trim() === "q") break;
       try {
         let r: TurnResult;
-        if (l.trim() || texte) r = await session.textTurn(l);
+        if (l.trim() || texte) r = await tour(session.textTurn(l));
         else {
-          const prise = enregistreur.demarrer(join(dir, `prise-${n}.wav`));
-          await k.lire(`J'écoute (${MAX_RECORD_SECONDS} s au plus). Entrée pour finir… `);
-          r = await session.clipTurn(await prise.arreter());
+          prise = enregistreur.demarrer(join(dir, `prise-${n}.wav`));
+          const fin = await k.lire(`J'écoute (${MAX_RECORD_SECONDS} s au plus). Entrée pour finir… `);
+          const p = prise;
+          prise = null;
+          if (fin === null) {
+            p.annuler?.();
+            break;
+          }
+          r = await tour(session.clipTurn(await p.arreter()));
           if (r.heard) console.log(`Toi · ${r.heard}`);
         }
         const t = timings(r);
         if (t) console.log(`  (${t})`);
+        if (r.arret) break;
+        if (r.interrompue) {
+          console.log("  (interrompue)");
+          reprendre = true;
+        }
       } catch (e) {
         console.log(`! ${(e as Error).message}`);
       } finally {
-        for (const f of readdirSync(dir)) unlinkSync(join(dir, f)); // aucune prise conservée
+        if (existsSync(dir)) for (const f of readdirSync(dir)) unlinkSync(join(dir, f)); // aucune prise conservée
       }
     }
   } finally {
-    arret();
-    k.fermer();
-    rmSync(dir, { recursive: true, force: true });
+    nettoyer();
+    console.log("Session terminée.");
   }
 }
 
@@ -192,7 +207,13 @@ async function resume(flags: Set<string>): Promise<void> {
   try {
     const texte = contexte();
     console.log(texte);
-    await voix(simule, dir).speak(texte);
+    const k = clavier();
+    const v = voix(simule, dir);
+    try {
+      await k.pendantParole(v.speak(texte), { interrompre: () => v.interrompre?.(), fermer: () => v.interrompre?.() });
+    } finally {
+      k.fermer();
+    }
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -255,6 +276,31 @@ async function entretien(args: string[]): Promise<void> {
   }
 }
 
+/**
+ * Mesure d'écho (P2) : Aurélie dit une phrase pendant que le micro enregistre,
+ * puis Whisper transcrit la prise. Rien n'est conservé. Ne lance aucune écoute
+ * permanente : une seule prise, bornée.
+ */
+async function mesureEcho(): Promise<void> {
+  const dir = mkdtempSync(join(tmpdir(), "shyrka-echo-"));
+  const whisper = new WhisperServer({ model: cfg.whisperModel, bin: cfg.whisperBin, prompt: PROMPT_WHISPER });
+  const enregistreur = new EnregistreurFfmpeg({ device: cfg.device, plafondSecondes: 15, ffmpeg: cfg.ffmpeg });
+  let prise: Prise | null = null;
+  try {
+    await whisper.demarrer();
+    prise = enregistreur.demarrer(join(dir, "echo.wav"));
+    await voix(false, dir).speak(PHRASE_ECHO);
+    const clip = await prise.arreter();
+    prise = null;
+    const t = await whisper.transcribe(clip, { language: "fr" });
+    console.log(`Dit : ${PHRASE_ECHO}\nEntendu : ${t.text || "(rien)"}\n${verdictEcho(tauxEcho(PHRASE_ECHO, t.text))}`);
+  } finally {
+    prise?.annuler?.();
+    whisper.arreter();
+    rmSync(dir, { recursive: true, force: true });
+  }
+}
+
 async function main(): Promise<void> {
   const [cmd, ...rest] = process.argv.slice(2);
   const args = rest.filter((a) => a !== "--");
@@ -271,7 +317,8 @@ async function main(): Promise<void> {
   if (cmd === "parler") return parler(flags);
   if (cmd === "resume") return resume(flags);
   if (cmd === "entretien") return entretien(args);
-  console.log("Usage : cli.ts parler [--texte] [--simule] [--comparer] | resume [--simule] | entretien --seance N [--simule] | diagnostic");
+  if (cmd === "echo") return mesureEcho();
+  console.log("Usage : cli.ts parler [--texte] [--simule] [--comparer] | resume [--simule] | entretien --seance N [--simule] | echo | diagnostic");
   process.exitCode = 2;
 }
 

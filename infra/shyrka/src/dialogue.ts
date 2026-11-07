@@ -54,6 +54,7 @@ export function normaliser(t: string): string {
 }
 
 const ACCORDS = [
+  "la suite", "suite", "continue", "continue stp", "je veux la suite",
   "oui", "ouais", "ouai", "ok", "okay", "d accord", "dac", "vas y", "vas-y", "va y", "go", "allez", "allez y", "bien sur", "volontiers",
   "avec plaisir", "c est parti", "parfait", "carrement", "tout a fait", "absolument", "yes", "fais le", "fais-le", "je veux bien", "oui merci",
 ];
@@ -142,7 +143,9 @@ export function detecterDemande(texte: string, depot: string = RACINE_DEPOT): De
   // Une demande de lecture est courte (« présente-moi le cadre ») ; une question
   // plus longue sur le même sujet va au modèle, avec le contexte.
   const sujet = n.split(" ").length <= 12 ? sujetDe(n) : null;
-  if (sujet) return { ok: true, operation: { type: sujet === "decisions" || sujet === "rapports" ? "lister" : type, sujet } };
+  // Les décisions passent par routerDecision : liste, sous-liste ou explication, jamais une liste par défaut.
+  if (sujet === "decisions") return null;
+  if (sujet) return { ok: true, operation: { type: sujet === "rapports" ? "lister" : type, sujet } };
   const nom = NOMS_DOCUMENT.exec(n)?.[0];
   return nom ? { ok: false, document: nom } : null;
 }
@@ -226,6 +229,162 @@ export function sansRepetition(reponse: string, precedentes: string[], faites: O
   }
   // Typographie française conservée : seules les espaces doublées se resserrent.
   return out.replace(/[ \t]{2,}/g, " ").trim();
+}
+
+
+
+// ---------------------------------------------------------------- arrêt oral
+
+const ARRETS = [
+  "arrete", "arrete toi", "arrete shyrka", "stop", "stop shyrka", "termine", "termine la session", "termine la conversation",
+  "fin de session", "fin de la session", "fin de la conversation", "au revoir", "quitte", "quitter", "ferme la session",
+  "c est tout pour aujourd hui", "on arrete la", "on s arrete la", "bonne nuit",
+];
+
+/** Vrai si la réplique demande de terminer la session (« Arrête Shyrka », « Termine la session », « Au revoir »). */
+export function estArret(texte: string): boolean {
+  const n = normaliser(texte)
+    .replace(/[.!,]/g, " ")
+    .replace(/\b(shyrka|s il te plait|stp|merci|maintenant|alors|bon|ok|oui)\b/g, " ")
+    .replace(/-/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  return n === "q" || ARRETS.includes(n);
+}
+
+// ---------------------------------------------------------------- décisions
+
+/** Ce dont on parle : la dernière entité citée, avec sa source. */
+export interface Entite {
+  genre: "decision";
+  id: string;
+  intitule: string;
+  source: string;
+}
+
+export function entiteDecision(d: Decision): Entite {
+  return { genre: "decision", id: d.id, intitule: d.intitule, source: `docs/roadmap-oia-shyrka-souffleur.md, ligne ${d.ligne}` };
+}
+
+/** Identifiants de décision cités (« D01 », « d 7 », « D12 »), normalisés en D01. */
+export function idsDecision(texte: string): string[] {
+  return [...new Set([...texte.matchAll(/\b[dD] ?0?(\d{1,2})\b/g)].map((m) => `D${m[1]!.padStart(2, "0")}`))];
+}
+
+const NOMBRES: Record<string, number> = { un: 1, une: 1, deux: 2, trois: 3, quatre: 4, cinq: 5, six: 6, sept: 7, huit: 8, neuf: 9, dix: 10 };
+
+/** « les trois premières », « les 5 dernières » : nombre et sens. */
+export function nombreDemande(texte: string): { n: number; depuis: "debut" | "fin" } | null {
+  const m = /\b(\d{1,2}|un|une|deux|trois|quatre|cinq|six|sept|huit|neuf|dix)\s+(premieres?|premiers?|dernieres?|derniers?)?\s*decisions?\b/.exec(normaliser(texte))
+    ?? /\b(\d{1,2}|un|une|deux|trois|quatre|cinq|six|sept|huit|neuf|dix)\s+(premieres?|premiers?|dernieres?|derniers?)\b/.exec(normaliser(texte));
+  if (!m) return null;
+  const n = /^\d+$/.test(m[1]!) ? Number(m[1]) : NOMBRES[m[1]!]!;
+  return n > 0 ? { n, depuis: m[2]?.startsWith("dernier") ? "fin" : "debut" } : null;
+}
+
+const ANAPHORE = /\b(cette decision|cette derniere|celle ci|celle la|ce point|la meme decision|cette decision la)\b/;
+
+export type RouteDecision =
+  | { liste: Decision[]; total: number; libelle: string }
+  | { expliquer: Decision; question: string }
+  | { texte: string };
+
+/**
+ * Routage des demandes qui portent sur les décisions. Une explication n'est
+ * jamais transformée en liste : la liste exige « liste », « énumère »,
+ * « présente » ou « montre » ; « explique D01 » ou « pourquoi cette
+ * décision » donnent l'explication d'une seule décision.
+ */
+export function routerDecision(texte: string, decisions: Decision[], derniere: Entite | null): RouteDecision | null {
+  const n = normaliser(texte);
+  const type = typeDe(n);
+  const ids = idsDecision(texte);
+  const parId = (id: string) => decisions.find((d) => d.id === id);
+  if (ids.length) {
+    const trouvees = ids.map(parId).filter((d): d is Decision => Boolean(d));
+    if (trouvees.length === 0) return { texte: `${ids.join(", ")} n'existe pas dans la roadmap : les décisions ouvertes vont de D01 à D${String(decisions.length).padStart(2, "0")}.` };
+    if (type === "lister" && trouvees.length > 1) return { liste: trouvees, total: decisions.length, libelle: "Décisions demandées" };
+    return { expliquer: trouvees[0]!, question: texte };
+  }
+  if (ANAPHORE.test(n)) {
+    if (derniere?.genre === "decision") {
+      const d = parId(derniere.id);
+      if (d) return { expliquer: d, question: texte };
+    }
+    return { texte: "Je ne sais pas de quelle décision tu parles : donne-moi son identifiant, de D01 à D" + String(decisions.length).padStart(2, "0") + "." };
+  }
+  if (!/\bdecisions?\b/.test(n) || (type !== "lister" && type !== "presenter")) return null;
+  const nb = nombreDemande(texte);
+  if (nb) {
+    const liste = nb.depuis === "fin" ? decisions.slice(-nb.n) : decisions.slice(0, nb.n);
+    const mot = nb.depuis === "fin" ? "dernières" : "premières";
+    return { liste, total: decisions.length, libelle: liste.length === 1 ? `La ${nb.depuis === "fin" ? "dernière" : "première"} décision ouverte` : `Les ${liste.length} ${mot} décisions ouvertes` };
+  }
+  return { liste: decisions, total: decisions.length, libelle: "Décisions ouvertes" };
+}
+
+/** Rendu écran d'une liste de décisions : intitulés exacts, identifiants, lignes. */
+export function renduListe(r: { liste: Decision[]; total: number; libelle: string }): string {
+  if (r.liste.length === 0) return "Aucune décision ouverte dans la roadmap.";
+  const tete = r.liste.length === r.total ? `Décisions ouvertes dans la roadmap (${r.total}) :` : `${r.libelle} de la roadmap (${r.liste.length} sur ${r.total}) :`;
+  return [tete, ...r.liste.map((x) => `${x.id} · ${x.intitule} (roadmap, ligne ${x.ligne})`)].join("\n");
+}
+
+// ---------------------------------------------------------------- voix
+
+/** Taille du premier passage lu d'une liste, puis des suivants. */
+export const LISTE_VOCALE_PREMIERS = 3;
+export const LISTE_VOCALE_SUITE = 5;
+
+/** Texte lisible à voix haute : sans balises, sans parenthèses de provenance. */
+export function pourLaVoix(t: string): string {
+  return t
+    .replace(/`/g, "")
+    .replace(/\s*\((?:roadmap, )?ligne \d+\)/g, "")
+    .replace(/\s*\([^)]*\)/g, "")
+    .replace(/ · /g, " : ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function lignesDeListe(affiche: string): { tete: string; items: string[] } | null {
+  const lignes = affiche.split("\n");
+  const items = lignes.filter((l) => /^(D\d{2} · |- )/.test(l));
+  if (items.length < 4) return null;
+  return { tete: lignes.find((l) => !/^(D\d{2} · |- )/.test(l)) ?? "", items };
+}
+
+/** Questions de suite qui changent à chaque passage : jamais la même question deux fois de suite. */
+export function questionDeSuite(reste: number): string {
+  return reste === 1 ? "Il en reste une : veux-tu l'entendre ?" : `Il en reste ${reste} : veux-tu la suite ?`;
+}
+
+/**
+ * Sépare ce qui s'affiche de ce qui se dit. Une liste longue n'est jamais
+ * lue en entier : un résumé, les premiers éléments, puis une question de
+ * suite. Une réponse longue se réduit à ses premières phrases.
+ */
+export function texteVocal(affiche: string): { parle: string; suite: string[] } {
+  const liste = lignesDeListe(affiche);
+  if (liste) {
+    const items = liste.items.map(pourLaVoix);
+    const premiers = items.slice(0, LISTE_VOCALE_PREMIERS);
+    const suite = items.slice(LISTE_VOCALE_PREMIERS);
+    const nombre = /\((\d+)(?: sur \d+)?\)/.exec(liste.tete)?.[1] ?? String(items.length);
+    const intro = `${nombre} éléments, tous affichés à l'écran. Les ${premiers.length} premiers : `;
+    return { parle: `${intro}${premiers.join(". ")}.${suite.length ? ` ${questionDeSuite(suite.length)}` : ""}`.replace(/\.\./g, "."), suite };
+  }
+  const plat = pourLaVoix(affiche);
+  if (plat.length <= 600 && affiche.split("\n").length <= 6) return { parle: plat, suite: [] };
+  const phrases = plat.match(/[^.!?]+[.!?]+/g) ?? [plat];
+  return { parle: `${phrases.slice(0, 2).map((p) => p.trim()).join(" ")} Le détail est à l'écran.`, suite: [] };
+}
+
+/** Passage suivant d'une liste lue à voix haute. */
+export function passageSuivant(suite: string[]): { parle: string; reste: string[] } {
+  const lot = suite.slice(0, LISTE_VOCALE_SUITE);
+  const reste = suite.slice(LISTE_VOCALE_SUITE);
+  return { parle: `${lot.join(". ")}.${reste.length ? ` ${questionDeSuite(reste.length)}` : " C'est la fin de la liste."}`.replace(/\.\./g, "."), reste };
 }
 
 export type { Decision };
