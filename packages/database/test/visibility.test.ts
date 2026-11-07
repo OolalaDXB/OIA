@@ -91,7 +91,7 @@ describe.skipIf(!postgresDisponible)("Visibility 0006 (Postgres jetable)", () =>
       insert into vis.subject_site (subject_id, site_id, client_id) values ('sujet-b', 'site-b', 'client-b');
       insert into vis.window (id, subject_id, client_id, kind, panel_version, status, starts_on, ends_on) values ('b-j0', 'sujet-b', 'client-b', 'baseline', 1, 'done', '2026-10-01', '2026-10-05');
       insert into vis.evidence (client_id, site_id, subject_id, window_id, prompt_id, prompt_version, prompt_language, engine, collector_name, received_at, raw_text, raw_sha256, structured, citations)
-      values ('client-b', 'site-b', 'sujet-b', 'b-j0', 'q01', 1, 'fr', 'chatgpt', 'manual', '2026-10-01T08:00:00Z', 'Réponse fictive B', '\\x00', '{"brandMentioned": true, "webSearch": true}', '[{"url": "https://b-fictif.example/x"}, {"url": "https://www.reddit.com/r/bfictif/comments/1"}]');
+      values ('client-b', 'site-b', 'sujet-b', 'b-j0', 'q01', 1, 'fr', 'chatgpt', 'manual', '2026-10-01T08:00:00Z', 'Réponse fictive B', '\\x00', '{"brandMentioned": true, "webSearch": true}', '[{"url": "https://b-fictif.example/x"}, {"url": "https://www.instagram.com/b-fictif"}]');
       insert into vis.recommendation (id, client_id, subject_id, type, title, statement, impact_level, effort_level, risk, confidence, created_by, payload)
       values ('rec-b-fictive-01', 'client-b', 'sujet-b', 'WATCH', 'Recommandation B', 'Énoncé fictif du client B.', 'low', 'XS', 'low', 'low', 'test', '{}');
       insert into vis.action_log (who, what, client_id) values ('test', 'mission.b', 'client-b');
@@ -184,9 +184,10 @@ describe.skipIf(!postgresDisponible)("Visibility 0006 (Postgres jetable)", () =>
   it("citations et réseaux sociaux : catégories et dénominateur explicite", () => {
     const cat = json(`select json_object_agg(categorie, n) from (select categorie, sum(citations) n from vis_citations_v1 where window_id = 'demo-j0' group by categorie) t`, DEMO);
     expect(Object.keys(cat).sort()).toEqual(["autre", "marque", "reseau_social"]);
-    const s = json(`select json_agg(json_build_object('p', plateforme, 'c', communaute, 'den', denominateur)) from vis_reseaux_sociaux_v1 where window_id = 'demo-j0'`, DEMO);
-    expect(s.map((x: { p: string }) => x.p).sort()).toEqual(["reddit", "youtube"]);
-    expect(s.find((x: { p: string }) => x.p === "reddit").c).toBe("r/materielfictif");
+    const s = json(`select json_agg(json_build_object('p', plateforme, 'den', denominateur)) from vis_reseaux_sociaux_v1 where window_id = 'demo-j0'`, DEMO);
+    expect(s.map((x: { p: string }) => x.p).sort()).toEqual(["linkedin", "youtube"]);
+    // Même liste que Visibility : un forum n'est pas un réseau social, un raccourci youtu.be non plus.
+    expect(b.sql("select coalesce(vis_ui.plateforme_sociale('reddit.com'), 'aucune') || ' ' || coalesce(vis_ui.plateforme_sociale('youtu.be'), 'aucune') || ' ' || vis_ui.plateforme_sociale('fr.linkedin.com') || ' ' || vis_ui.plateforme_sociale('twitter.com')")).toBe("aucune aucune linkedin x");
     const total = Number(b.sql(`select count(*) from vis_ui.base_citation where window_id = 'demo-j0'`, en(DEMO)));
     for (const x of s) expect(x.den).toBe(total);
   });

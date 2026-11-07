@@ -153,7 +153,7 @@ our network, and a checker that lies about that is worse than none.
 | Package | What it does |
 |---|---|
 | `packages/config` | Zod-validated env + scoring constants |
-| `packages/database` | Domain Zod schemas, row types, Supabase client, migration `0001_init.sql` |
+| `packages/database` | Domain Zod schemas, row types, Supabase client, migrations (`supabase/migrations/`, `0002` deployed; `0001` archived) |
 | `packages/registry` | **The project and source registries** — YAML source of truth, schema, honesty rules, generated browser snapshot |
 | `packages/audit` | Fail-closed policy hooks + append-only audit sink |
 | `packages/providers` | Provider-neutral `LLMProvider` — **Mistral by default** (native JSON mode, temperature 0, hard call budget), Anthropic and a fake |

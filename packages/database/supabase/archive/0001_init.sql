@@ -1,3 +1,8 @@
+-- ====================================================================
+-- ARCHIVÉE le 2026-11-08 (décision de Mickaël) : JAMAIS APPLIQUÉE.
+-- Schéma M0 de conception, sorti du dossier des migrations. Copie de
+-- conception identique : docs/architecture/schema/0001_init.sql.
+-- ====================================================================
 -- OIA Funding V0 — Minimal Supabase schema (PROPOSAL, NOT YET APPLIED)
 -- Target: Supabase Cloud / PostgreSQL. Reviewed before any `apply_migration`.
 --

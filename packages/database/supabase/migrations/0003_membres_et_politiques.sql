@@ -1,24 +1,26 @@
 -- 0003 · Espaces, membres et politiques fondées sur l'appartenance
 -- Mandat v8, exigences 2 et 3 ; audit docs/audits/2026-11-08-donnees-existantes.md.
 --
--- Part de l'état DÉPLOYÉ décrit par docs/architecture/schema/0002_watch_and_workspace.sql
+-- Part de l'état DÉPLOYÉ décrit par packages/database/supabase/migrations/0002_watch_and_workspace.sql
 -- (migrations Supabase watch_ledger_and_workspace, rename_dedup_key_to_watch_key,
 -- requests_drafts_and_link_checks). Ne le rejoue jamais.
 --
 -- Effets :
 --   * un espace de travail (le studio) et une table des membres ;
 --   * une colonne espace_id sur chaque table d'OIA ;
---   * les politiques « authenticated … true » sont supprimées : un compte
---     connecté qui n'est pas membre ne lit et n'écrit plus rien (la base est
---     partagée avec un autre produit) ;
+--   * les politiques « authenticated … true » de 0002, et celles de 0002a si
+--     elle a été appliquée, sont supprimées : un compte connecté qui n'est pas
+--     membre ne lit et n'écrit plus rien ;
 --   * plus aucune écriture directe par les rôles applicatifs : décisions,
 --     étiquettes, notes, tâches, contacts, vues, acquittements et demandes
 --     passent par des fonctions qui vérifient l'identité et journalisent.
 --
--- Après application, aucun compte n'est membre : personne ne lit rien tant que
--- Mickaël ne s'est pas ajouté (voir README.md de ce dossier).
+-- Après application, seuls les comptes de 0002a (s'il y en a) deviennent
+-- propriétaires du studio ; sinon personne ne lit rien tant que Mickaël ne
+-- s'est pas ajouté (voir README.md de ce dossier).
 -- AVANT application : la console écrit aujourd'hui directement dans ces tables
--- (apps/web/src/lib/remoteWorkspace.ts) ; ces écritures seront refusées.
+-- (apps/web/src/lib/remoteWorkspace.ts) ; ces écritures seront refusées. Décision
+-- de Mickaël du 2026-11-08 : 0003 attend l'application Lovable.
 
 begin;
 
@@ -100,6 +102,27 @@ end $$;
 -- Une étiquette est propre à un espace.
 alter table public.project_tags drop constraint if exists project_tags_pkey;
 alter table public.project_tags add primary key (espace_id, record_id);
+
+-- Les comptes réservés par 0002a deviennent propriétaires du studio.
+do $$
+begin
+  if to_regclass('public.oia_compte_autorise') is not null then
+    insert into public.oia_membre (user_id, espace_id, role)
+    select user_id, '00000000-0000-4000-8000-000000000001', 'proprietaire' from public.oia_compte_autorise
+    on conflict do nothing;
+  end if;
+end $$;
+
+-- Politiques de 0002a, si elle a été appliquée.
+do $$
+declare t text; p text;
+begin
+  for t, p in select tablename, policyname from pg_policies
+              where schemaname = 'public' and policyname in ('mickael read', 'mickael all', 'mickael acknowledge', 'mickael append', 'mickael ask', 'mickael draft', 'mickael edit own draft')
+  loop
+    execute format('drop policy %I on public.%I', p, t);
+  end loop;
+end $$;
 
 -- 3. Politiques : suppression des politiques trop larges --------------------------
 drop policy if exists "authenticated read"        on public.watch_opportunities;

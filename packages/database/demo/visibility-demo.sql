@@ -80,7 +80,7 @@ select md5(format('demo|%s|%s|%s|%s', g.window_id, g.d, g.q, g.engine))::uuid,
          'fictif', true),
        case when not g.web then '[]'::jsonb else jsonb_build_array() ||
          case when g.mentionnee then jsonb_build_array(jsonb_build_object('url', format('https://www.exemple-fictif.example/guide/q%s', g.q))) else '[]'::jsonb end ||
-         case when g.q % 3 = 0 then jsonb_build_array(jsonb_build_object('url', 'https://www.reddit.com/r/materielfictif/comments/demo1')) else '[]'::jsonb end ||
+         case when g.q % 3 = 0 then jsonb_build_array(jsonb_build_object('url', 'https://www.linkedin.com/company/exemple-fictif')) else '[]'::jsonb end ||
          case when g.q % 4 = 0 then jsonb_build_array(jsonb_build_object('url', 'https://www.youtube.com/watch?v=demo-fictif')) else '[]'::jsonb end ||
          jsonb_build_array(jsonb_build_object('url', format('https://annuaire-fictif.example/fiche/%s', g.q % 5)))
        end,
@@ -100,7 +100,7 @@ values
    'medium', 'M', 'low', 'medium', 'seo-command-contenu', '2026-10-06T10:05:00Z',
    '{"evidence": [{"kind": "panel-prompt", "ref": "q10@v1"}], "fictif": true}'),
   ('rec-demo-veille-01', 'demo-fictif', 'demo-site', 'demo-sujet', 'demo-j0', 'WATCH',
-   'Suivre la communauté r/materielfictif', 'Cette communauté fictive est citée par deux moteurs.',
+   'Suivre la page LinkedIn fictive', 'Cette page fictive est citée par deux moteurs.',
    'low', 'XS', 'low', 'low', 'seo-command-aeo', '2026-10-06T10:10:00Z',
    '{"evidence": [{"kind": "evidence-row", "ref": "demo-j0/q06"}], "fictif": true}');
 

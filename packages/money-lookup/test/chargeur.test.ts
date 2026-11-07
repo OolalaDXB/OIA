@@ -66,7 +66,7 @@ describe.skipIf(!postgresDisponible)("chargeur sur Postgres jetable", () => {
   beforeAll(() => {
     b = demarrer();
     b.fichier(chemin("../../database/test/pg/supabase-emulation.sql"));
-    b.fichier(chemin("../../../docs/architecture/schema/0002_watch_and_workspace.sql"));
+    b.fichier(chemin("../../database/supabase/migrations/0002_watch_and_workspace.sql"));
     for (const m of ["0003_membres_et_politiques.sql", "0004_money_lookup.sql", "0005_reprise_navigateur.sql"]) b.fichier(chemin(`../../database/supabase/migrations/${m}`));
     b.sql(`insert into oia_membre (user_id, espace_id, role) values ('${A}', '${ESPACE_STUDIO}', 'editeur');`);
   });

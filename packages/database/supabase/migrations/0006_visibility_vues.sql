@@ -42,23 +42,18 @@ language sql immutable as $$
   select hote is not null and dom is not null and (hote = dom or hote like '%.' || dom)
 $$;
 
--- Plateforme sociale d'un hôte, ou null. Liste de Visibility (SOCIAL_HOSTS),
--- plus reddit.com et quora.com (forums), à aligner avec la session Visibility.
+-- Plateforme sociale d'un hôte, ou null. Exactement la liste de Visibility
+-- (SOCIAL_HOSTS, infra/visibility/src/j0-reanalysis.ts), sous-domaines compris
+-- comme son hostIn. Décision de Mickaël du 2026-11-08 : listes alignées.
 create or replace function vis_ui.plateforme_sociale(hote text) returns text
 language sql immutable as $$
   select p.nom from (values
     ('instagram.com', 'instagram'), ('tiktok.com', 'tiktok'), ('facebook.com', 'facebook'),
-    ('youtube.com', 'youtube'), ('youtu.be', 'youtube'), ('x.com', 'x'), ('twitter.com', 'x'),
-    ('linkedin.com', 'linkedin'), ('threads.net', 'threads'), ('reddit.com', 'reddit'), ('quora.com', 'quora')
+    ('youtube.com', 'youtube'), ('x.com', 'x'), ('twitter.com', 'x'),
+    ('linkedin.com', 'linkedin'), ('threads.net', 'threads')
   ) as p(dom, nom)
   where vis_ui.dans_domaine(hote, p.dom)
   limit 1
-$$;
-
--- Communauté Reddit (« r/nom ») d'une adresse, ou null.
-create or replace function vis_ui.communaute(adresse text) returns text
-language sql immutable as $$
-  select 'r/' || lower(substring(adresse from '/r/([A-Za-z0-9_]+)'))
 $$;
 
 -- Intervalle de Wilson à 95 % (z = 1,96) pour k succès sur n essais.
@@ -330,7 +325,7 @@ with tot as (
   select window_id, count(*) as toutes from vis_ui.base_citation group by window_id
 )
 select c.client_id, c.subject_id, c.window_id, vis_ui.plateforme_sociale(c.domaine) as plateforme,
-       vis_ui.communaute(c.url) as communaute, c.url,
+       c.url,
        count(*) as citations, t.toutes as denominateur,
        round(count(*)::numeric / t.toutes, 4) as part,
        count(distinct c.prompt_id) as questions,
@@ -338,7 +333,7 @@ select c.client_id, c.subject_id, c.window_id, vis_ui.plateforme_sociale(c.domai
 from vis_ui.base_citation c
 join tot t on t.window_id = c.window_id
 where vis_ui.plateforme_sociale(c.domaine) is not null
-group by c.client_id, c.subject_id, c.window_id, vis_ui.plateforme_sociale(c.domaine), vis_ui.communaute(c.url), c.url, t.toutes;
+group by c.client_id, c.subject_id, c.window_id, vis_ui.plateforme_sociale(c.domaine), c.url, t.toutes;
 
 -- Concurrents : la marque et chaque concurrent nommé, par fenêtre et moteur.
 create or replace view public.vis_concurrents_v1 with (security_invoker = true) as

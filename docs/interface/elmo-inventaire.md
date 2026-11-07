@@ -314,7 +314,7 @@ Multi-tenant par organisation : chaque marque porte `organization_id` (`schema.t
 | Sentiment | Score accompagné des effectifs bruts ; « non mesurable » sous 5 mentions ; lien vers les passages qui contredisent un fait validé. |
 | Réponses | Filtre « affirmation fausse » relié aux faits validés ; affichage de l'échec quand une réponse manque ; badge API ou application ; version de modèle visible. |
 | Fan-out | État « moteur sans recherches exposées » séparé de « aucune requête » ; part des requêtes qui visent un réseau social. |
-| Citations | Écran « Social » dédié (forums, Reddit, YouTube, réseaux) ; part de citations avec `n` ; « non mesurable » si aucune réponse avec recherche web ; avant et après par domaine. |
+| Citations | Écran « Social » dédié, sur la liste de réseaux de Visibility (Instagram, TikTok, Facebook, YouTube, X, LinkedIn, Threads) ; part de citations avec `n` ; « non mesurable » si aucune réponse avec recherche web ; avant et après par domaine. |
 | Opportunités | Remplacé par les recommandations SEO Command : preuve, risque, confiance, état (`pending`, `accepted`, `rejected`, `obsolete`), validation humaine ; date et modèle de génération affichés. |
 | Détail d'une question | Historique jour par jour avec réussites et échecs ; texte de la question par version du panel ; faits attendus pour cette question. |
 | Rapports | Rapport de fenêtre J0 et de remesure sur le panel complet, sans sélection des questions favorables. |
@@ -407,7 +407,7 @@ But : savoir comment les réponses décrivent la marque.
 Contenu : score sur 100 et effectifs par classe (positif, neutre, mitigé, négatif) ;
 passages cités par classe ; sentiment par question, du moins positif au plus positif.
 États : non mesurable sous 5 mentions ; vide par classe « Aucun passage de cette classe ».
-Données : hors version 1 du contrat (le sentiment n'est pas encore dans la table des preuves).
+Données : version 2 du contrat, après J0 (le sentiment n'est pas encore dans la table des preuves).
 À construire avec l'état « Non mesurable : sentiment non collecté ».
 
 ÉCRAN 6 · RÉPONSES
@@ -438,10 +438,10 @@ premier_jour, dernier_jour) et vis_apercu_v1 (indicateur citation_marque).
 
 ÉCRAN 9 · SOCIAL
 But : suivre les sources sociales citées.
-Contenu : plateformes (forums, Reddit par communauté, YouTube, réseaux), part dans les
+Contenu : plateformes (Instagram, TikTok, Facebook, YouTube, X, LinkedIn, Threads), part dans les
 citations avec effectif, questions concernées, liens.
 États : vide « Aucune source sociale citée sur la fenêtre » ; non mesurable.
-Données : vis_reseaux_sociaux_v1 (plateforme, communaute, url, citations, denominateur, part,
+Données : vis_reseaux_sociaux_v1 (plateforme, url, citations, denominateur, part,
 questions, moteurs).
 
 ÉCRAN 10 · RECOMMANDATIONS
@@ -499,7 +499,7 @@ réservées aux rôles propriétaire et approbateur.
 | Questions (Visibility) | `vis_questions_v1` |
 | Détail d'une question (Prompt detail) | `vis_questions_v1`, `vis_reponses_v1`, `vis_citations_v1` filtrés par `question_id` |
 | Concurrents (Share of Voice) | `vis_concurrents_v1` |
-| Sentiment (Sentiment) | hors version 1 |
+| Sentiment (Sentiment) | version 2, après J0 |
 | Réponses (Responses) | `vis_reponses_v1` |
 | Exactitude des faits (absent de l'inventaire) | hors version 1 |
 | Recherches web (Query Fan-Out) | hors version 1 |

@@ -85,9 +85,11 @@ a dit si la marque y figure (`structured.brandMentioned` vrai ou faux).
   reçues. Les échecs de collecte n'y sont pas ; les jours manquants le sont
   (`vis.window_missing_day`, colonne `jours_manquants`). Afficher « échecs de
   collecte : non enregistrés dans cette version », jamais 0.
-- **Hors version 1** : sentiment, position et exactitude des faits. La table
-  des preuves ne les contient pas encore. Les ajouter sera un changement
-  compatible (nouvelles lignes d'indicateur).
+- **Version 2, après J0** (décision de Mickaël du 2026-11-08) : sentiment,
+  position et échecs de collecte. La table des preuves ne les contient pas
+  encore. Les ajouter sera un changement compatible (nouvelles lignes
+  d'indicateur, nouvelles colonnes).
+- **Hors version 1, sans date** : exactitude des faits.
 
 ## Vues, colonne par colonne
 
@@ -225,8 +227,7 @@ Onglet **Réseaux sociaux**. Citations vers une plateforme sociale.
 | `client_id` | text | preuves |
 | `subject_id` | text | preuves |
 | `window_id` | text | preuves |
-| `plateforme` | text | `instagram`, `tiktok`, `facebook`, `youtube`, `x`, `linkedin`, `threads`, `reddit`, `quora` |
-| `communaute` | text | `r/<nom>` pour Reddit, sinon `null` |
+| `plateforme` | text | `instagram`, `tiktok`, `facebook`, `youtube`, `x` (x.com et twitter.com), `linkedin`, `threads` : exactement la liste de Visibility, sous-domaines compris |
 | `url` | text | adresse citée |
 | `citations` | bigint | citations de cette adresse |
 | `denominateur` | bigint | toutes les citations de la fenêtre |
@@ -382,7 +383,7 @@ Onglet **SEO Command** : planificateur, affiché désactivé tant qu'il l'est.
 | **Réponses** | `vis_reponses_v1` | Filtres : moteur, question, jugement, recherche web, texte. Une réponse non jugée s'affiche « non jugée », jamais « marque absente » |
 | **Citations** | `vis_citations_v1`, `vis_apercu_v1` (`citation_marque`) | Domaines, adresses, catégories, premier et dernier jour |
 | **Concurrents** | `vis_concurrents_v1` | Classement par mentions, part de voix, taux d'apparition et intervalle |
-| **Réseaux sociaux** | `vis_reseaux_sociaux_v1` | Plateformes, communautés Reddit, part avec dénominateur |
+| **Réseaux sociaux** | `vis_reseaux_sociaux_v1` | Plateformes de la liste de Visibility, part avec dénominateur |
 | **Questions** | `vis_questions_v1` | Courbe jour par jour sans valeur inventée avant la première mesure |
 | **Recommandations** | `vis_recommandations_v1` | Tri par `priorite`, actions valider et rejeter |
 | **Rapports** | `vis_rapports_v1` | Statut « à valider » tant que Mickaël n'a pas validé |
@@ -395,11 +396,11 @@ décrit 14 écrans. Leur couverture par la version 1 :
 
 | Écran de l'inventaire | Version 1 | Remarque |
 | --- | --- | --- |
-| Vue d'ensemble | `vis_apercu_v1`, `vis_mesure_v1` | Sentiment et position remplacés par `citation_marque` et `concurrent_a_la_place`, mesurés par la table des preuves |
+| Vue d'ensemble | `vis_apercu_v1`, `vis_mesure_v1` | En version 1, `citation_marque` et `concurrent_a_la_place` à la place du sentiment et de la position, qui viendront en version 2, après J0 |
 | Questions | `vis_questions_v1` | |
 | Détail d'une question | `vis_questions_v1`, `vis_reponses_v1`, `vis_citations_v1` filtrés par `question_id` | Faits attendus : hors version 1 |
 | Concurrents | `vis_concurrents_v1` | |
-| Sentiment | hors version 1 | Non collecté par la table des preuves |
+| Sentiment | version 2, après J0 | Non collecté par la table des preuves |
 | Réponses | `vis_reponses_v1` | Comparaison aux faits validés : hors version 1 |
 | Recherches web | hors version 1 | Les requêtes des moteurs ne sont pas dans la table des preuves |
 | Citations | `vis_citations_v1` | |
@@ -446,3 +447,4 @@ régénérer : `pnpm --filter @oia/database demo:visibility`.
 | Version | Date | Changement |
 | --- | --- | --- |
 | 1 | 2026-11-08 | Création |
+| 1 | 2026-11-08 | Révision avant mise en service (aucune vue servie) : liste des réseaux sociaux alignée sur celle de Visibility (décision de Mickaël), colonne `communaute` de `vis_reseaux_sociaux_v1` retirée ; sentiment, position et échecs de collecte prévus en version 2, après J0 |

@@ -26,7 +26,7 @@ describe.skipIf(!postgresDisponible)("migrations OIA 0003 à 0005 (Postgres jeta
   beforeAll(() => {
     b = demarrer();
     b.fichier(chemin("./pg/supabase-emulation.sql"));
-    b.fichier(chemin("../../../docs/architecture/schema/0002_watch_and_workspace.sql"));
+    b.fichier(chemin("../supabase/migrations/0002_watch_and_workspace.sql"));
     // L'état déployé contient déjà une opportunité, créée avant les espaces.
     b.sql(`insert into watch_opportunities (watch_key, record_id, title, issuer, recommendation, verification_status, payload, content_fingerprint)
            values ('deja-la', 'rec-deja-la', 'Opportunité déjà en base', 'Émetteur', 'INVESTIGATE', 'UNVERIFIED', '{}', 'f0');`);
@@ -182,7 +182,7 @@ describe.skipIf(!postgresDisponible)("témoin : l'état déployé seul (0002) la
   beforeAll(() => {
     t = demarrer();
     t.fichier(chemin("./pg/supabase-emulation.sql"));
-    t.fichier(chemin("../../../docs/architecture/schema/0002_watch_and_workspace.sql"));
+    t.fichier(chemin("../supabase/migrations/0002_watch_and_workspace.sql"));
     t.sql(`insert into watch_opportunities (watch_key, record_id, title, issuer, recommendation, verification_status, payload, content_fingerprint)
            values ('k', 'r', 't', 'i', 'INVESTIGATE', 'UNVERIFIED', '{}', 'f');`);
   });

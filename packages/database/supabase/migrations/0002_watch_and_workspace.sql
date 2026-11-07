@@ -1,3 +1,10 @@
+-- ====================================================================
+-- MIGRATION DE DÉPART, DÉJÀ DÉPLOYÉE sur la base OIA (iywmvyebuikxyvnrcnoy)
+-- le 16 septembre 2026. NE JAMAIS LA REJOUER sur cette base : elle décrit
+-- l'état réel, d'où partent les migrations suivantes. Rangée ici le
+-- 2026-11-08 (décision de Mickaël), depuis docs/architecture/schema/.
+-- Elle ne sert qu'aux tests sur Postgres jetable et à une base neuve.
+-- ====================================================================
 -- The applied schema of the OIA Supabase project (ref iywmvyebuikxyvnrcnoy).
 --
 -- APPLIED on 2026-09-16 as three migrations: `watch_ledger_and_workspace`,
@@ -5,7 +12,8 @@
 -- is the consolidated result, **transcribed from the live database** (catalog
 -- dump, not from memory) so the repository carries the truth it claims to.
 --
--- Note on 0001_init.sql, which sits next to this file: it is a DESIGN document
+-- Note on 0001_init.sql (archived in packages/database/supabase/archive/, design
+-- copy in docs/architecture/schema/): it is a DESIGN document
 -- for the Milestone-1 qualifier (claims / scores / recommendations tables) and
 -- is deliberately NOT applied. Nothing writes to it, and a dead schema is the
 -- same lie as a dead feature. What is applied is what is used.

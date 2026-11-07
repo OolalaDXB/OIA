@@ -42,7 +42,9 @@ est le seul lien entre les deux.
 - **Exemples fictifs** : les valeurs ci-dessous sont inventées.
 
 Migrations : `packages/database/supabase/migrations/0003` à `0005`, à relire
-par Mickaël, non appliquées.
+par Mickaël, non appliquées. Décision du 2026-11-08 : elles attendent
+l'application Lovable ; d'ici là, `0002a` réserve les tables aux comptes de
+Mickaël et la console garde son stockage local.
 
 ## Colonnes de `ml_toutes_v1` (base des écrans de liste)
 

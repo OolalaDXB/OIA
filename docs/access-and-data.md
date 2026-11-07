@@ -56,7 +56,7 @@ Three properties are enforced by the database rather than by the UI:
   unless it ran" a property of the schema rather than a promise in the worker.
 
 The full applied schema, transcribed from the live catalog, is in
-[`architecture/schema/0002_watch_and_workspace.sql`](architecture/schema/0002_watch_and_workspace.sql).
+[`packages/database/supabase/migrations/0002_watch_and_workspace.sql`](../packages/database/supabase/migrations/0002_watch_and_workspace.sql).
 
 ### What the worker writes, and with which key
 
@@ -101,7 +101,7 @@ defines the localStorage driver behind a three-method interface; the console now
 picks the Postgres path when it is configured and falls back to that driver when
 it is not, with the same hooks either way.
 
-Schema: `docs/architecture/schema/0002_watch_and_workspace.sql` (applied).
+Schema: `packages/database/supabase/migrations/0002_watch_and_workspace.sql` (applied; starting migration).
 `0001_init.sql` remains a design document for the Milestone-1 qualifier and is
 deliberately **not** applied — nothing writes to it, and a dead schema is the
 same lie as a dead feature.

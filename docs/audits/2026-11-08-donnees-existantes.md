@@ -1,35 +1,43 @@
 # Audit A0 · données existantes d'OIA · 2026-11-08
 
-Mandat v8, exigence 1. Audit fait avant toute migration. Lecture seule : la
-base Supabase n'a été interrogée que par des `SELECT` sur le catalogue
-(`pg_policies`, `information_schema`) et sur le nombre d'utilisateurs, sans
-lire aucune ligne de donnée.
+Mandat v8, exigence 1. Audit fait avant toute migration, **mis à jour le
+2026-11-08** après la décision de Mickaël : la base est désormais réservée à
+OIA. Lecture seule : la base Supabase n'a été interrogée que par des `SELECT`
+sur le catalogue (`information_schema`, `pg_policies`,
+`supabase_migrations`, `storage.buckets`) et par des comptages, sans lire
+aucune ligne de donnée ni aucun compte.
 
-## 1. Où vivent les migrations (instruction de tête du mandat)
+## 1. Où vivent les migrations
 
 | Emplacement | Contenu | Déployé sur la base OIA ? |
 | --- | --- | --- |
-| `packages/database/supabase/migrations/0001_init.sql` | Schéma M0 : `projects`, `sources`, `opportunities`, `evidence`, `claims`, `eligibility_assessments`, `opportunity_scores`, `recommendations`, `llm_runs`, `pipeline_runs`, `audit_log` | **Non.** Aucune de ces tables n'existe en base |
-| `docs/architecture/schema/0001_init.sql` | Copie identique du précédent | Non |
-| `docs/architecture/schema/0002_watch_and_workspace.sql` | Registre de veille (`watch_*`, `alerts`), couche humaine (`reviews`, `project_tags`, `notes`, `tasks`, `contacts`, `saved_views`), file de travail (`requests`, `project_drafts`, `link_checks`) | **Oui**, par trois migrations Supabase du 16 septembre 2026 : `watch_ledger_and_workspace`, `rename_dedup_key_to_watch_key`, `requests_drafts_and_link_checks` |
-| `infra/visibility/migrations/0001` à `0004` | Schéma `vis` de Visibility : preuves, journal de décision, journal des actions client, identité et membres (S1 à S4) | Non : appliqué seulement sur le Postgres local de Visibility |
+| `packages/database/supabase/migrations/0002_watch_and_workspace.sql` | **Migration de départ** : registre de veille (`watch_*`, `alerts`), couche humaine (`reviews`, `project_tags`, `notes`, `tasks`, `contacts`, `saved_views`), file de travail (`requests`, `project_drafts`, `link_checks`). Rangée ici le 2026-11-08 depuis `docs/architecture/schema/` | **Oui**, par trois migrations Supabase du 16 septembre 2026 : `watch_ledger_and_workspace`, `rename_dedup_key_to_watch_key`, `requests_drafts_and_link_checks` |
+| `packages/database/supabase/archive/0001_init.sql` | Schéma M0 : `projects`, `sources`, `opportunities`, `evidence`, `claims`, `eligibility_assessments`, `opportunity_scores`, `recommendations`, `llm_runs`, `pipeline_runs`, `audit_log`. Archivé le 2026-11-08 | **Non**, jamais. Aucune de ces tables n'existe en base |
+| `docs/architecture/schema/0001_init.sql` | Copie de conception identique du précédent | Non |
+| `infra/visibility/migrations/0001` à `0004` | Schéma `vis` de Visibility : preuves, journal de décision, journal des actions client, identité et membres | Non : appliqué seulement sur le Postgres local de Visibility |
 
-**Emplacement canonique retenu : `packages/database/supabase/migrations/`.**
-Les nouvelles migrations y sont numérotées à partir de `0003`. Elles partent
-de l'état réel décrit par `0002_watch_and_workspace.sql`, sans jamais le
-rejouer comme création initiale (exigence 2). Aucun second historique n'est
-créé. `0002` reste où il est ; le déplacer est une question pour Mickaël.
+**Emplacement canonique : `packages/database/supabase/migrations/`.** Un seul
+historique : `0002` (déployée), puis `0002a`, `0003` à `0006` (fichiers à
+relire, non appliqués). Aucune migration ne rejoue `0002` comme création
+initiale (exigence 2).
 
 ## 2. La base Supabase « OIA » (`iywmvyebuikxyvnrcnoy`)
 
 - Postgres 17.6, région eu-central-1.
-- 151 migrations au total. Les 3 dernières sont celles d'OIA ; les
-  précédentes, de décembre 2025 à juin 2026, appartiennent à un autre produit.
-- **La base est partagée avec BEAU**, un autre produit qui contient des
-  données financières personnelles (tables `beau_*`, `assets`, `liabilities`,
-  `loan_*`, `receivables`, `documents`…). L'audit n'a lu aucune de ces
-  tables. Il ne décrit que celles d'OIA.
-- 6 comptes dans `auth.users`, communs aux deux produits.
+- **Réservée à OIA depuis le 7 novembre 2026** (décision de Mickaël). La
+  copie de BEAU, qui la partageait, en a été retirée : tables, fonctions,
+  comptes de démonstration, files d'e-mails. Vérifié ce jour :
+  - deux migrations du 7 novembre consignent ce retrait :
+    `vider_beau_garder_oia` et `retirer_files_email_beau` ;
+  - le schéma `public` ne contient plus que les 13 tables d'OIA, ses 4 types
+    énumérés (`watch_event_type`, `alert_kind`, `request_kind`,
+    `request_status`), aucune vue et aucune fonction ;
+  - `auth.users` compte **2 comptes**, ceux de Mickaël ;
+  - aucune tâche planifiée (`cron.job` vide), aucun secret dans `vault`.
+- **Reste à nettoyer** : trois compartiments de stockage, vides, qui ne
+  servent pas à OIA : `asset-images` et `documents` (privés), `email-assets`
+  (public). Aucun objet dedans. À supprimer par Mickaël s'ils viennent de BEAU.
+- **Pas de projet Supabase séparé pour OIA** (décision de Mickaël).
 
 ### Tables d'OIA en base
 
@@ -41,9 +49,11 @@ créé. `0002` reste où il est ; le déplacer est une question pour Mickaël.
 | `project_tags`, `notes`, `tasks`, `contacts`, `saved_views` | 0 | Couche humaine |
 | `requests`, `project_drafts`, `link_checks` | 0 | File de travail entre la console et le worker |
 
-Aucune vue, aucun déclencheur sur ces tables. RLS activé partout.
+RLS activé partout. Aucun déclencheur.
 
-### Politiques en place : trop larges (exigence 3)
+### Politiques en place : encore larges
+
+Les 18 politiques de `0002` sont toujours en place :
 
 | Table | Politique | Effet |
 | --- | --- | --- |
@@ -53,23 +63,23 @@ Aucune vue, aucun déclencheur sur ces tables. RLS activé partout.
 | `notes`, `tasks`, `contacts`, `project_tags`, `saved_views` | `ALL` : `true` / `true` | Tout compte connecté lit, crée, modifie et supprime |
 | `requests`, `project_drafts` | `INSERT` si statut initial | Tout compte connecté met du travail en file |
 
-**Constat bloquant.** La base est partagée avec BEAU, dont les utilisateurs
-sont aussi des comptes `authenticated`. Un utilisateur de BEAU peut donc
-lire, modifier et supprimer les tâches, notes et contacts d'OIA, et y
-déposer des décisions. Le risque est faible aujourd'hui, car ces tables sont
-vides, mais il deviendra réel dès la reprise des données du navigateur (A4).
-La migration `0003` le corrige ; **elle doit être appliquée avant toute
-reprise.**
+**Risque.** Le constat bloquant de la première version (comptes d'un autre
+produit sur la même base) est levé : seuls les deux comptes de Mickaël
+existent. Le risque qui reste : tout compte créé plus tard, par erreur ou par
+une inscription restée ouverte, lirait et écrirait le travail d'OIA.
+`0002a_comptes_de_mickael.sql` le ferme dès maintenant, sans toucher à la
+console : les politiques sont les mêmes, réservées aux comptes de Mickaël.
 
 Les droits `anon` sont ceux que Supabase accorde par défaut sur `public`.
-Ils sont neutralisés par RLS, faute de politique `anon`. `0003` les retire
-par défense en profondeur.
+Ils sont neutralisés par RLS, faute de politique `anon`. `0003` les retirera.
 
 ## 3. Tables utilisées par la console
 
 - **`apps/web/src/lib/remoteWorkspace.ts`** et `workspaceStore.ts` : lecture
   et écriture de `reviews`, `project_tags`, `notes`, `tasks`, `contacts`,
   `saved_views` quand Supabase est configuré. Sinon, stockage local.
+  **Décision de Mickaël du 2026-11-08 : la console garde son stockage
+  local ; 0003 attendra l'application Lovable.**
 - **`apps/web/src/lib/watchData.ts`** : lecture de `watch_opportunities`,
   d'`alerts` et de `link_checks`, acquittement des alertes.
 - `apps/web/src/app/projects/*` : `requests`, `project_drafts`.
@@ -78,6 +88,9 @@ par défense en profondeur.
   `watch_*` et `alerts`. `persistence.supabase.ts` et `run.ts` citent aussi
   des tables de `0001_init.sql` (`opportunities`, `sources`, `claims`…), qui
   n'existent pas en base : ce chemin n'a jamais tourné contre Supabase.
+
+Toutes ces opérations restent permises aux comptes de Mickaël après `0002a`
+(test `packages/database/test/comptes-mickael.test.ts`).
 
 ## 4. Données stockées dans le navigateur, à préserver
 
@@ -93,34 +106,35 @@ Six clés, dans le stockage local du navigateur de Mickaël
 
 Plus `oia.lang` (choix de langue), qui reste dans le navigateur. Le bouton
 « sauvegarder » produit un fichier `{ "kind": "oia.workspace.backup",
-"version": 1, "data": { <clé>: <valeur> } }`. La reprise (A4) part de ce
-fichier. **Rien n'est effacé du navigateur** : la console d'origine est
-remise à l'identique et garde ses clés.
+"version": 1, "data": { <clé>: <valeur> } }`. La reprise (A4, migration 0005)
+part de ce fichier. **Rien n'est effacé du navigateur.** Comme la console
+garde son stockage local, ces données y restent la référence jusqu'à la
+reprise.
 
 ## 5. Conséquences pour les migrations
 
-1. `0003_membres_et_politiques.sql` : espace de travail, table des membres,
-   colonne `workspace_id` sur chaque table d'OIA. Les politiques
-   `authenticated … true` sont remplacées par des politiques d'appartenance,
-   et les écritures passent par des fonctions qui vérifient l'identité et
-   journalisent.
-2. `0004_money_lookup.sql` : typologie financière, montants, vues par écran
+1. `0002a_comptes_de_mickael.sql` : à appliquer maintenant. Tables réservées
+   aux comptes de Mickaël, lus par e-mail au moment de l'application.
+2. `0003_membres_et_politiques.sql` : attend l'application Lovable. Espaces,
+   membres, fonctions d'écriture journalisées ; elle retire les politiques de
+   `0002a` et fait des comptes de Mickaël les propriétaires du studio.
+3. `0004_money_lookup.sql` : typologie financière, montants, vues par écran
    en `security_invoker`.
-3. `0005_reprise_navigateur.sql` : colonnes d'identifiant d'origine, journal
-   d'import et retour arrière.
-4. `0006_visibility_vues.sql` : vues de lecture sur le schéma `vis`. Elle
-   exige que les migrations `infra/visibility/migrations/0001` à `0004` aient
-   été appliquées d'abord.
+4. `0005_reprise_navigateur.sql` : identifiants d'origine, journal d'import et
+   retour arrière.
+5. `0006_visibility_vues.sql` : vues de lecture sur le schéma `vis`, après
+   `infra/visibility/migrations/0001` à `0004`, `0004` corrigée pour
+   Supabase.
 
 Toutes sont testées sur un Postgres 16 jetable, sans Docker, avec une
 émulation d'`auth.uid()` et des rôles Supabase.
 
-## 6. Questions pour Mickaël
+## 6. Questions tranchées par Mickaël le 2026-11-08
 
-1. Faut-il déplacer `docs/architecture/schema/0002_watch_and_workspace.sql`
-   dans `packages/database/supabase/migrations/`, pour n'avoir qu'un dossier ?
-2. `0001_init.sql` n'est pas déployé. Faut-il le marquer « jamais appliqué »,
-   ou le retirer du dossier canonique ?
-3. La base est partagée avec BEAU. Faut-il, à terme, un projet Supabase
-   propre à OIA ? En attendant, `0003` ferme l'accès des comptes qui ne sont
-   pas membres.
+1. `0002` est rangée dans `packages/database/supabase/migrations/` comme
+   migration de départ, marquée déjà déployée.
+2. `0001_init.sql` est archivée (`packages/database/supabase/archive/`).
+3. Pas de projet Supabase séparé : la base est réservée à OIA.
+
+Question restante : supprimer les trois compartiments de stockage vides
+(§ 2) ?

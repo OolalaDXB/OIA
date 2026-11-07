@@ -4,7 +4,7 @@
 
 | Champ | Valeur |
 | --- | --- |
-| Version | 3.10 |
+| Version | 3.11 |
 | Dernière modification | 2026-11-08 |
 | Statut | Proposé (à valider par Mickaël) |
 | Responsable | Mickaël Thomas |
@@ -45,6 +45,7 @@
 | 3.8 | 2026-11-08 | Réponses de Mickaël et suite des mandats v6 et v7. Interface web OIA refaite d'après le prototype Lovable (colonne des modules, accueil, Visibility, Shyrka en panneau et en plein écran, pages existantes réutilisées), allumée en Preview Vercel seulement. Shyrka : Ollama `qwen3:8b` par défaut et `mistral-small` en comparaison ; bloc B livré en code simulé (paliers de permission, agent courrier et WhatsApp, mode entretien) ; Aurélie devient une proposition de départ. Blocs C et E du mandat v6 non traités : leur texte n'est pas dans le dépôt |
 | 3.9 | 2026-11-08 | Clôture des mandats v6 et v7 (session web), avec l'amendement du 7 novembre. Décisions : J0 sur cinq moteurs avec OpenRouter, Grok reporté, branche Lovable autorisée sous les règles du dépôt, Shyrka v0 décidée par Mickaël (présence en points et voix Aurélie). Piste Shyrka v0 avancée : voix locale, entretiens, courrier en brouillons, WhatsApp professionnel cadré, paliers de permission. Règle d'intégration des moteurs reformulée en règle proposée, modifiable par Mickaël, qui autorise un fork documenté après preuve d'intérêt. Navigation de la console en proposition (`docs/interface/integration-console.md`). P1 : J0 en cours, rapport attendu. P2 : correctifs préparés, en attente de validation. Chantier « Interface web OIA » : nouvelle console sous `/oia`, en Preview, bascule en attente de Mickaël |
 | 3.10 | 2026-11-08 | Mandat v8. Principe : Lovable pour l'interface, Claude Code pour les données ; interface `/oia` retirée, console d'origine rétablie à l'identique, `packages/ui-tokens` retiré. Money Lookup remplace Funding, Tenders, Ventures et Signals comme module : audit des données (A0), migrations 0003 à 0005 à relire, vues par écran, chargeur idempotent, reprise du travail du navigateur. Visibility : contrat de données, vues 0006, démonstration fictive ; constat bloquant sur `vis` 0004 pour Supabase. Piste Shyrka autonome : ADR 0003, noyau simulé (`packages/shyrka`), contrat de la zone Contexte. Voix Aurélie en sortie dans la version 0, alignée partout. Rien n'est appliqué en production |
+| 3.11 | 2026-11-08 | Décisions de Mickaël : la base Supabase d'OIA lui est réservée (la copie de BEAU en est retirée), pas de projet séparé ; migration `0002a` qui réserve les tables aux comptes de Mickaël, à appliquer maintenant, sans changer la console ; la console garde son stockage local et `0003` attend l'application Lovable ; `0002` rangée comme migration de départ, `0001` archivée ; réseaux sociaux alignés sur la liste de Visibility ; sentiment, position et échecs de collecte en version 2 du contrat Visibility, après J0 |
 
 > Emplacement de référence : `docs/roadmap-oia-shyrka-souffleur.md` dans le repo OolalaDXB/OIA. Toute autre copie (Claude Doc, export GPT) est une copie de lecture. `docs/roadmap.md` reste la roadmap d'OIA Funding.
 
@@ -329,7 +330,7 @@ Ces chantiers restent hors du chemin principal, chacun avec sa condition.
 | OIA Funding V0 | Gelé en l'état, aucune régression | Reprise proposée à la clôture de P2 |
 | Moë-Kan | Premier client externe envisagé, données séparées dès le départ | Mesure de départ avant toute modification de son site ; mission après la porte P3 |
 | Maisons.co, restructuration SEO | En attente de la refonte (`infra/visibility/subjects/maisons-co/refonte-exigences-seo.md`) | Critères §10 du document d'exigences au vert ; mesure J0 ensuite |
-| **Money Lookup** | Remplace Funding, Tenders, Ventures et Signals comme module. Données prêtes (mandat v8, bloc A) : contrat `docs/interface/contrat-donnees-money-lookup.md`, migrations 0003 à 0005 à relire, chargeur idempotent (`packages/money-lookup`), reprise du travail du navigateur | Migrations relues et appliquées par Mickaël, dans l'ordre ; console préparée avant 0003 ; écrans par Lovable |
+| **Money Lookup** | Remplace Funding, Tenders, Ventures et Signals comme module. Données prêtes (mandat v8, bloc A) : contrat `docs/interface/contrat-donnees-money-lookup.md`, migrations 0003 à 0005 à relire, chargeur idempotent (`packages/money-lookup`), reprise du travail du navigateur | `0002a` d'abord (tables réservées aux comptes de Mickaël) ; la console garde son stockage local ; 0003 à 0005 quand l'application Lovable appellera les fonctions `oia_*` |
 | **Interface (Lovable)** | Lovable possède l'interface. Contrats de données prêts : Money Lookup, Visibility, Shyrka (`docs/interface/`) | Écrans construits par Lovable d'après les contrats |
 | **Espace personnel (Agenda, Santé, Famille)** | **Audit en lecture seule fait le 2026-11-08** (`docs/audits/2026-11-08-espace-personnel.md`) : la branche existante n'est pas publiable en l'état | **Strictement séparé des modules professionnels.** Première étape : un **audit en lecture seule** des sources existantes (agenda macOS, Family, données de santé Apple), sans écriture. Sortie : un inventaire et un périmètre. Aucune automatisation tant que Mickaël n'a pas validé le périmètre. |
 | Voix et Ollama locaux | Devenus Shyrka 1, livrée avec P1 (code prêt, essai réel à faire) | Sans données réelles avant P6 ; modèles sans donnée client externe tant que P6 n'est pas franchi |
@@ -388,9 +389,11 @@ Chaque domaine garde ses propres mesures, publiées séparément.
 - [ ] Fixer, après la séance 7 d'entretien, les catégories éventuelles du palier 2 (envoi seul), aujourd'hui désactivé.
 - [x] Mandats v6 et v7 poussés (`8219e45`) et exécutés côté web (v6 C, B, E ; v7 F).
 - [x] Navigation et bascule de `/oia` : sans objet (décision du 2026-11-08).
-- [ ] Relire puis appliquer, dans l'ordre, les migrations 0003, 0004, 0005 (`packages/database/supabase/migrations/README.md`), après avoir choisi comment préparer la console : rester en stockage local, ou adapter `remoteWorkspace.ts` aux fonctions `oia_*`.
+- [ ] Relire puis appliquer `0002a_comptes_de_mickael.sql` (`packages/database/supabase/migrations/README.md`), avec les e-mails des deux comptes.
+- [x] Console : elle garde son stockage local ; 0003 à 0005 attendent l'application Lovable (2026-11-08).
+- [ ] Supprimer les trois compartiments de stockage vides restés sur la base (`asset-images`, `documents`, `email-assets`) s'ils viennent de BEAU.
 - [ ] Faire corriger `infra/visibility/migrations/0004` pour Supabase par la session Visibility, puis relire et appliquer 0006.
-- [ ] Décider d'un projet Supabase propre à OIA : la base actuelle est partagée avec un autre produit (`docs/audits/2026-11-08-donnees-existantes.md`).
+- [x] Base Supabase réservée à OIA, pas de projet séparé (2026-11-08).
 - [ ] Shyrka autonome : choisir le stockage réel du noyau et la durée des sauvegardes (`docs/shyrka/adr/0003-shyrka-autonome.md`).
 - [ ] Espace personnel : purger l'historique de la branche `feature/transformation-90-personal` et fermer la PR #3 avant toute publication (`docs/audits/2026-11-08-espace-personnel.md`).
 - [ ] Bifrost : lever les points à vérifier avec Docker avant tout essai en P4.
