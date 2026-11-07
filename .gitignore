@@ -28,3 +28,7 @@ outputs/milestone-0/opportunities.json
 out/
 apps/web/out/
 local-models/
+
+# OIA Visibility : données de client servies au prototype, jamais commitées
+prototypes/oia-prototype/public/data/
+visibility.json

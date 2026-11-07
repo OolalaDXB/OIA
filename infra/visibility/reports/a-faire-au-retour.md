@@ -94,4 +94,13 @@ console Mistral (Usage).
 
 ## 6 · Voir J0 dans l'écran Lovable
 
-Voir le rapport `reports/2026-11-07-lancement-j0.md`, § Étape 3.
+```
+cd ~/OIA && pnpm vis:j0-view
+```
+
+La commande met les données à jour (lecture seule d'Elmo) et ouvre
+http://127.0.0.1:4317/. **Le prototype ne lit pas encore
+`public/data/visibility.json`** : il affiche ses données de
+démonstration. À demander à Lovable : « charger `/data/visibility.json`
+au démarrage, à la place de `src/data/demo.ts`, avec la même structure ».
+Détails : `reports/2026-11-07-lancement-j0.md`, § Étape 3.

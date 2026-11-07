@@ -13,7 +13,8 @@
     "test": "turbo run test",
     "lint": "turbo run lint",
     "build": "turbo run build",
-    "worker:bawaba": "pnpm --filter @oia/workers run start -- --project bawaba"
+    "worker:bawaba": "pnpm --filter @oia/workers run start -- --project bawaba",
+    "vis:j0-view": "bash infra/visibility/scripts/j0-view.sh coach-gari"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",

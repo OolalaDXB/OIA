@@ -1,0 +1,17 @@
+{
+  "exportedAt": "2026-11-10T08:00:00Z",
+  "brand": { "id": "demo-subject", "name": "Demo Subject", "website": "https://demo.example" },
+  "competitors": [{ "name": "Rival Co" }],
+  "prompts": [
+    { "id": "11111111-1111-4111-8111-111111111111", "value": "Which demo tools are best?", "enabled": true, "tags": ["oia:en-01@v1", "panel:v1", "lang:en", "family:unbranded"] },
+    { "id": "22222222-2222-4222-8222-222222222222", "value": "What does Demo Subject offer?", "enabled": true, "tags": ["oia:en-02@v1", "panel:v1", "lang:en", "family:branded"] }
+  ],
+  "runs": [
+    { "id": "a0000000-0000-4000-8000-000000000001", "promptId": "11111111-1111-4111-8111-111111111111", "model": "chatgpt", "version": "gpt-6-luna", "createdAt": "2026-11-08T09:15:00Z", "brandMentioned": false, "competitorsMentioned": ["Rival Co"], "citedDomains": ["rival.example", "reddit.com"] },
+    { "id": "a0000000-0000-4000-8000-000000000002", "promptId": "22222222-2222-4222-8222-222222222222", "model": "chatgpt", "version": "gpt-6-luna", "createdAt": "2026-11-08T09:16:00Z", "brandMentioned": true, "competitorsMentioned": [], "citedDomains": ["demo.example"] },
+    { "id": "a0000000-0000-4000-8000-000000000003", "promptId": "11111111-1111-4111-8111-111111111111", "model": "chatgpt", "version": "gpt-6-luna", "createdAt": "2026-11-09T09:15:00Z", "brandMentioned": true, "competitorsMentioned": ["Rival Co"], "citedDomains": ["demo.example", "reddit.com"] },
+    { "id": "a0000000-0000-4000-8000-000000000004", "promptId": "22222222-2222-4222-8222-222222222222", "model": "chatgpt", "version": "gpt-6-luna", "createdAt": "2026-11-09T09:16:00Z", "brandMentioned": true, "competitorsMentioned": [], "citedDomains": [] },
+    { "id": "a0000000-0000-4000-8000-000000000005", "promptId": "22222222-2222-4222-8222-222222222222", "model": "chatgpt", "version": "gpt-6-luna", "createdAt": "2026-11-09T09:17:00Z", "brandMentioned": null, "competitorsMentioned": [], "citedDomains": ["reddit.com"] }
+  ],
+  "failed": [{ "model": "chatgpt", "count": 1 }]
+}
