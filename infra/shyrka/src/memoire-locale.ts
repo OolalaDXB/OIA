@@ -32,6 +32,8 @@ export class MemoireLocale {
     if (!this.pourTests && this.racine !== VOLUME) throw new Error("Memoire : seul le volume Shyrka-corpus est autorise.");
   }
 
+  get modePriveActif(): boolean { return this.prive; }
+
   get disponible(): boolean {
     return existsSync(this.racine) && lstatSync(this.racine).isDirectory() && !lstatSync(this.racine).isSymbolicLink();
   }
