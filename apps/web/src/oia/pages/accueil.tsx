@@ -1,0 +1,15 @@
+"use client";
+
+// Porté du prototype Lovable « OIA Dashoard » (commit c6470e86), route TanStack devenue vue Next.
+import { Link } from "@/lib/router";
+import { Shell, Section, Fictif, Statut } from "@/components/oia/ui";
+import { Button } from "@/components/ui/button";
+import { aDecider, modules, depenses, utilisateur, activiteRecente } from "@/data/demo";
+
+export function Accueil() {
+  return <Shell><div className="mb-10"><Fictif /><h1 className="mt-2 text-3xl md:text-4xl">Bonjour {utilisateur.prenom}</h1><p className="mt-2 text-muted-foreground">Cinq décisions vous attendent.</p></div>
+    <Section titre="À décider" aside={<span className="num text-sm text-tertiary">5</span>}><ol>{aDecider.map((a, i) => <li key={a.titre} className="grid grid-cols-[2rem_1fr_auto] items-center gap-3 border-t border-border py-3 first:border-0"><span className="num text-sm text-tertiary">{String(i+1).padStart(2,"0")}</span><div><p className="text-xs text-tertiary">{a.module}</p><p className="text-sm">{a.titre}</p><p className="text-sm text-tertiary">{a.detail}</p></div><Button asChild variant="link" className="px-0 font-normal"><Link to="/visibility">Ouvrir</Link></Button></li>)}</ol></Section>
+    <section className="my-8"><h2 className="mb-5 text-lg">Modules</h2><div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">{modules.map((m) => <article key={m.slug} className={`card flex min-w-0 flex-col border-t-2 border-t-${m.couleur} p-5`}><h3 className="text-lg">{m.nom}</h3><p className="mt-3 min-h-12 text-sm text-muted-foreground">{m.role}</p><div className="mt-4"><Statut etat={m.statut} label={m.etat} /></div><p className="mt-4 min-h-10 text-sm text-tertiary">{m.cle}</p><Button asChild variant="link" className="mt-4 self-start px-0 font-normal"><Link to={`/${m.slug}`}>Ouvrir</Link></Button></article>)}</div></section>
+    <div className="grid gap-6 lg:grid-cols-[1fr_2fr]"><Section titre="Dépenses du mois"><div className="num text-6xl font-normal">{depenses.montant} $</div><div className="mt-3 h-1.5 rounded-full bg-track" /><p className="num mt-3 text-sm text-tertiary">Visibility : plafond de {depenses.plafond} $</p></Section><Section titre="Activité récente"><ol>{activiteRecente.map((a) => <li key={a.heure} className="flex gap-4 border-t border-border py-3 first:border-0"><span className="num text-xs text-tertiary">{a.heure}</span><div><p className="text-xs text-tertiary">{a.module}</p><p className="mt-1 text-sm">{a.texte}</p></div></li>)}</ol></Section></div>
+  </Shell>;
+}

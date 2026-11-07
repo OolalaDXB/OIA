@@ -21,7 +21,12 @@
       "react-dom"
     ],
     "allowJs": true,
-    "incremental": true
+    "incremental": true,
+    "paths": {
+      "@/*": [
+        "./src/oia/*"
+      ]
+    }
   },
   "include": [
     "src",

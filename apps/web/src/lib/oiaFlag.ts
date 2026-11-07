@@ -1,17 +1,14 @@
 /**
  * Bascule de l'interface web OIA (route /oia).
  *
- * Désactivée par défaut. Elle ne s'allume qu'avec la valeur exacte "on" au
- * moment du build (export statique) :
- *
- *   NEXT_PUBLIC_OIA_INTERFACE=on pnpm --filter @oia/web build
- *
- * Toute autre valeur, absente comprise, laisse la route en mode « désactivée »
- * et retire l'entrée du rail. La variable est lue littéralement pour que Next
- * l'inline dans le bundle client (le rail est un composant client).
+ * La valeur est calculée au build par `oia-flag.mjs` et inlinée par Next
+ * (`env.OIA_INTERFACE` dans next.config.mjs) :
+ * - production Vercel : toujours éteinte ;
+ * - Preview Vercel : allumée ;
+ * - local et CI : éteinte, sauf `NEXT_PUBLIC_OIA_INTERFACE=on`.
  */
 export const OIA_INTERFACE_FLAG = "NEXT_PUBLIC_OIA_INTERFACE";
 
-export function oiaInterfaceEnabled(value: string | undefined = process.env.NEXT_PUBLIC_OIA_INTERFACE): boolean {
+export function oiaInterfaceEnabled(value: string | undefined = process.env.OIA_INTERFACE): boolean {
   return value === "on";
 }

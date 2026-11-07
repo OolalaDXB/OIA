@@ -1,47 +1,130 @@
-# Interface web OIA sous `/oia` · bascule désactivée
+# Interface web OIA sous `/oia`
 
-2026-11-08 · session web parallèle · statut : livré, **éteint**.
+2026-11-08 · session web parallèle · mandat v7, bloc F, refait d'après les
+réponses de Mickaël. **Allumée sur les déploiements Preview de Vercel
+seulement, jamais en production.**
+
+## Source
+
+Portage du prototype Lovable « OIA Dashoard », lu sans être modifié :
+
+- projet Lovable `b746af25-5095-475b-9e8d-4c9a88b0d4bd`, commit
+  `c6470e86c6c5843d7c49197f4bff006ea2aab481` (dernière édition le
+  2026-11-07 à 15:43 UTC), lu par l'outil `read_file` seulement ;
+- branche `lovable/oia-visibility-prototype` (copie plus ancienne), d'où
+  viennent tels quels les composants shadcn (`button`, `checkbox`, `input`,
+  `sheet`, `tabs`) et `lib/utils.ts`.
+
+La branche ne contient ni la colonne des modules ni Shyrka : ces éléments
+n'existent que dans le projet Lovable, plus récent. C'est donc lui qui sert de
+référence.
 
 ## Ce qui existe
 
-- Route `/oia` dans `apps/web` (export statique, déployé par Vercel avec le
-  reste de la console).
-- Bascule : variable de build `NEXT_PUBLIC_OIA_INTERFACE`. Seule la valeur
-  exacte `on` l'allume (`apps/web/src/lib/oiaFlag.ts`). Aucune valeur n'est
-  posée dans `vercel.json`, `next.config.mjs` ni ailleurs dans le dépôt.
-- Bascule éteinte (cas par défaut, donc en production) :
-  - `/oia/` affiche seulement « Interface OIA désactivée » ;
-  - l'entrée « OIA » n'apparaît pas dans le rail ;
-  - la page est marquée `noindex, nofollow` ;
-  - elle n'importe aucune donnée et n'appelle aucun service.
-- Bascule allumée : vue de lecture (trois identités, phases P0 à P6 et P9,
-  piste Shyrka en quatre étapes), tirée de la roadmap 3.6 et de
-  `docs/shyrka/CADRE.md` (`apps/web/src/lib/oiaOverview.ts`). Aucune action,
-  aucun appel à un fournisseur.
+| Écran | URL | Origine |
+|---|---|---|
+| Colonne des modules (huit modules, Personnel, Shyrka, Réglages) | toutes les pages | `components/oia/ui.tsx` |
+| Accueil OIA | `/oia/` | `routes/index.tsx` |
+| Visibility (vue d'ensemble, sites, SEO Command, rapports) | `/oia/visibility/…` | `components/oia/visibility.tsx`, `routes/visibility.*` |
+| Vue d'un site, ajout d'un compte en cinq étapes | `/oia/sites/studio-ardoise/`, `/oia/nouveau-compte/` | `routes/sites/$slug.tsx`, `routes/nouveau-compte.tsx` |
+| Shyrka en page (présence, conversation, journal) | `/oia/shyrka/` | `routes/shyrka.tsx` |
+| Shyrka en panneau (bouton « Shyrka » en bas à droite) et en plein écran | toutes les pages | `components/oia/shyrka.tsx` |
+| Funding, Tenders, Ventures, Signals, CRM, Data, Training | `/oia/<module>/` | `routes/<module>.tsx`, `module-page.tsx` |
+| Personnel : Agenda, Santé, Famille (en préparation) | `/oia/personnel/<module>/` | `routes/personnel/$module.tsx` |
 
-## Tests
+**Pages existantes réutilisées.** Chaque module qui a déjà des pages dans la
+console les cite dans une rubrique « Dans la console ». Ce sont des liens
+simples, qui ouvrent les vraies pages avec leurs vraies données :
 
-`apps/web/test/oia.test.ts` : bascule éteinte par défaut et pour toute valeur
-autre que `on` ; jamais allumée dans un fichier suivi ; rail conditionné ;
-page éteinte sans donnée ni appel.
-`apps/web/test/oia-roadmap.test.ts` (ajouté avec la roadmap 3.6) : chaque phase affichée existe dans la
-roadmap ; P7 et P8 ne sont plus des phases ; les quatre étapes Shyrka sont
-alignées sur P1, P2, P5 et P6.
+- Funding : Opportunités `/`, Argent `/money/`, Aujourd'hui `/digest/` ;
+- Tenders : `/tenders/` ;
+- Ventures : Projets `/projects/`, Investisseurs `/investors/` ;
+- Signals : `/digest/` ;
+- CRM : Espace de travail `/workspace/`.
 
-Vérifié dans Chromium (build allumé en local) : page rendue, zéro erreur
-console. Build par défaut : la page éteinte est servie, le rail n'a pas
-l'entrée.
+La table de correspondance est dans `src/oia/data/console-existante.ts`. La
+console garde aussi son rail ; en Preview, il contient une entrée « OIA ».
 
-## Allumer (décision de Mickaël)
+La page de lecture précédente (identités, phases) est supprimée.
 
-En local :
+## Comment c'est construit
 
-```sh
-NEXT_PUBLIC_OIA_INTERFACE=on pnpm --filter @oia/web build
-cd apps/web/out && python3 -m http.server 4311   # puis http://127.0.0.1:4311/oia/
-```
+- `apps/web/src/oia/` : fichiers du prototype. L'alias `@/` pointe sur ce
+  dossier, comme dans Lovable.
+- Changements par rapport au prototype, limités au strict nécessaire :
+  - `"use client"` en tête des composants à état (exigence de Next) ;
+  - `@tanstack/react-router` remplacé par une cale (`src/oia/lib/router.tsx`),
+    qui reproduit `Link`, `useRouter().subscribe` et `useRouterState` et
+    place toutes les routes sous `/oia` ;
+  - routes TanStack transformées en vues (`src/oia/pages/`) appelées par des
+    pages Next (`src/app/(oia)/oia/**/page.tsx`) ;
+  - rubrique « Dans la console » ajoutée à Funding et aux pages de module ;
+  - données réelles facultatives lues à `/oia/data/visibility.json`, au lieu
+    de `/data/visibility.json` ; absentes, les données fictives s'affichent ;
+  - un seul changement dans la présence de Shyrka : l'import Vite de l'image
+    est remplacé par son URL, `/oia/shyrka-face-depth.jpg`.
+- **Lovable Shyrka v0 n'est pas modifiée par Claude Code** (CADRE.md). Un test
+  fige l'empreinte SHA-256 de `shyrka-particles.tsx` et de `shyrka.tsx` :
+  toute retouche le fait échouer.
+- Deux layouts racines (groupes de routes Next) :
+  - `src/app/(console)/` : la console existante, avec ses styles ;
+  - `src/app/(oia)/` : l'interface OIA, avec Tailwind 4 (`oia.css`).
 
-Sur Vercel : ajouter la variable `NEXT_PUBLIC_OIA_INTERFACE=on` au projet
-`oia` (environnement Preview d'abord), puis redéployer. La protection Vercel
-Authentication reste la seule barrière d'accès : à vérifier avant d'allumer en
-production (`docs/access-and-data.md`).
+  Next recharge la page en passant de l'un à l'autre, si bien que les styles
+  ne se mélangent pas. Les URL de la console ne changent pas.
+- Dépendances ajoutées à `apps/web`, versions exactes :
+  - styles : `tailwindcss`, `@tailwindcss/postcss` 4.2.1 et
+    `tw-animate-css` 1.3.4 ;
+  - rendu de la présence : `three` 0.187.0 et `@types/three` ;
+  - icônes : `lucide-react` 0.575.0 ;
+  - composants Radix : `react-dialog`, `react-tabs`, `react-checkbox`,
+    `react-slot` ;
+  - utilitaires : `class-variance-authority`, `clsx`, `tailwind-merge`.
+
+  Ce sont les versions du prototype.
+- Le prototype tourne avec React 19 ; la console reste en React 18. Les
+  composants portés fonctionnent avec React 18.
+
+## Bascule
+
+Règle dans `apps/web/oia-flag.mjs`, figée au build par `next.config.mjs` :
+
+| Environnement | `/oia` |
+|---|---|
+| Vercel Production (`VERCEL_ENV=production`) | éteinte, même si `NEXT_PUBLIC_OIA_INTERFACE=on` |
+| Vercel Preview (`VERCEL_ENV=preview`) | allumée |
+| Local, CI | éteinte, sauf `NEXT_PUBLIC_OIA_INTERFACE=on` |
+
+Bascule éteinte : chaque page `/oia` n'affiche que « Interface OIA
+désactivée », sans données ni Shyrka. L'entrée « OIA » du rail de la console
+disparaît. Toutes les pages `/oia` portent `noindex, nofollow`.
+
+## Reste à faire
+
+1. **Image de profondeur du visage** (`src/assets/shyrka-face-depth.jpg` dans
+   Lovable). Je n'ai pas pu la récupérer : l'outil de lecture de Lovable rend
+   le texte, pas les octets, et l'aperçu Lovable est bloqué par le réseau de
+   la session. Il faut la télécharger depuis l'éditeur Lovable et la déposer
+   dans `apps/web/public/oia/shyrka-face-depth.jpg`. Sans elle, la présence
+   reste un fond nuit vide, et le composant le signale par
+   `data-render-error="true"`. Avec une image de substitution locale, non
+   commitée, la sphère de particules cyan s'affiche bien.
+2. **Copie des fichiers.** Un agent a recopié les fichiers depuis les
+   résultats de `read_file`, sans somme de contrôle par rapport à la source.
+   À comparer une fois avec le projet Lovable, `shyrka-particles.tsx` en
+   priorité.
+
+## Vérifié
+
+- Build Preview : 36 pages, dont 21 sous `/oia`.
+- Chromium à 1440 × 900 : accueil (identique à la capture Lovable),
+  Visibility, vue d'un site, Tenders avec « Dans la console », Shyrka en page
+  (conversation simulée), panneau, plein écran. Seules erreurs console : les
+  deux fichiers absents (image et `visibility.json`).
+- Console existante (`/`, `/digest/`) inchangée.
+- Build Production : `/oia` éteinte, rail sans entrée « OIA ».
+- Tests :
+  - `apps/web/test/oia.test.ts` : bascule, séparation des layouts, liens
+    vers des pages qui existent, cale de routage, empreintes de Shyrka v0 ;
+  - `apps/web/test/oia-prototype/*.test.ts` : les quatre tests du prototype,
+    repris tels quels.
