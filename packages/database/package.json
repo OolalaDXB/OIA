@@ -10,7 +10,8 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests"
+    "test": "vitest run --passWithNoTests",
+    "demo:visibility": "OIA_ECRIRE_DEMO=1 vitest run test/visibility.test.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.47.10",

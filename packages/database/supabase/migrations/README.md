@@ -10,7 +10,7 @@ Emplacement canonique, confirmé par l'audit A0
 | `0003_membres_et_politiques.sql` | À relire par Mickaël, puis à appliquer |
 | `0004_money_lookup.sql` | À relire, puis à appliquer après 0003 |
 | `0005_reprise_navigateur.sql` | À relire, puis à appliquer après 0004 |
-| `0006_visibility_vues.sql` | À relire ; prérequis : le schéma `vis` (`infra/visibility/migrations/0001` à `0004`) |
+| `0006_visibility_vues.sql` | À relire ; prérequis : le schéma `vis` (`infra/visibility/migrations/0001` à `0004`), avec `0004` corrigée pour Supabase (voir plus bas) |
 
 Rien n'a été appliqué par Claude Code. Chaque fichier est testé sur un
 Postgres jetable : `pnpm --filter @oia/database test` (tests adverses dans
@@ -45,9 +45,21 @@ pas installé (`initdb` introuvable).
    connecté avec son compte. Le retour arrière se fait par
    `select oia_annuler_import('<import_id>')`.
 6. **0006** seulement quand le schéma `vis` de Visibility sera sur la base.
+   **Constat bloquant** : `infra/visibility/migrations/0004_auth_identity.sql`
+   compare `vis.client_member.user_id` (text) à `auth.uid()`, qui rend un uuid
+   sur Supabase ; elle échoue telle quelle (« operator does not exist: text =
+   uuid », test témoin dans `test/visibility.test.ts`). La correction
+   appartient à la session Visibility. 0006 pose aussi une politique RLS sur
+   `vis.client_member` (un compte de l'interface ne voit que ses propres
+   appartenances) : à relire avec elle. Les tables `vis` appartenant à
+   `vis_admin`, 0006 s'applique avec un rôle qui peut accorder leurs droits.
 
 ## Retour arrière
 
+- 0006 : `drop view` des vues `vis_*_v1`, `drop function vis_valider_recommandation,
+  vis_rejeter_recommandation`, `drop schema vis_ui cascade`, puis
+  `alter table vis.client_member disable row level security` et
+  `drop policy interface_ses_lignes on vis.client_member`.
 - 0005 : `oia_annuler_import` pour un import. Pour la migration elle-même :
   `drop function oia_importer_sauvegarde, oia_annuler_import`, puis
   `drop table oia_import cascade`. Les colonnes `id_origine`,
