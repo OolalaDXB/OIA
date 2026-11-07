@@ -144,7 +144,7 @@ P0 s'écrit tout de suite : un fichier, aucun risque technique. Livrable : **`do
 
 **Décisions-clés fixées en 3.4 (détail dans `CADRE.md`) :**
 
-- **Apparence, voix et personnalité choisies et modifiées par Shyrka elle-même.** Version 0 de son apparence : « Lovable Shyrka v0 », jamais modifiée par Claude Code ; aucune voix synthétisée en sortie, voix de référence Aurélie, Chatterbox candidate.
+- **Apparence, voix et personnalité choisies et modifiées par Shyrka elle-même, dans les limites du cadre ; personne ne les retouche à sa place.** Version 0 de son apparence : « Lovable Shyrka v0 », jamais modifiée par Claude Code ; aucune voix synthétisée en sortie, Aurélie proposée comme voix de départ, Shyrka choisira sa voix plus tard, Chatterbox candidate.
 - **Permissions fixées et élargies par Mickaël seul**, sans limite doctrinale ; Shyrka ne s'en accorde jamais.
 - **Données de Mickaël autorisées à entrer** ; **données de Swift et de ses clients refusées**.
 - **Voix de Mickaël jamais de son vivant** ; autorisée après son décès selon ses directives écrites.
@@ -176,7 +176,7 @@ P1 installe Elmo, CrawlSEO et Crawlie sur le Mac Studio et prend la mesure de d�
 
 **Avec P1 :**
 
-- **Shyrka 1 · Te parle.** Code livré le 2026-11-08 avec des adaptateurs réels et simulés (`packages/shyrka`, guide d'essai `infra/shyrka/README.md`) : micro par ffmpeg, Whisper par whisper.cpp, Ollama limité à l'adresse locale, voix macOS par `say` (voix de référence Aurélie), identité version 0 donc réponses en texte. 30 tests sur adaptateurs simulés. Reste : le premier essai réel sur le Mac Studio, consigné dans `infra/shyrka/reports/`.
+- **Shyrka 1 · Te parle.** Code livré le 2026-11-08 avec des adaptateurs réels et simulés (`packages/shyrka`, guide d'essai `infra/shyrka/README.md`) : micro par ffmpeg, Whisper par whisper.cpp, Ollama limité à l'adresse locale, voix macOS par `say` (Aurélie, voix de départ proposée), identité version 0 donc réponses en texte. 30 tests sur adaptateurs simulés. Reste : le premier essai réel sur le Mac Studio, consigné dans `infra/shyrka/reports/`.
 - **Interface web OIA sous `/oia`**, bascule éteinte (`NEXT_PUBLIC_OIA_INTERFACE`, `docs/interface/oia-interface-web.md`) : vue de lecture des identités, des phases et de la piste Shyrka, allumée seulement sur décision de Mickaël.
 
 **Porte P1 :** un rapport J0 réel et reproductible (réponses, citations, sources, métadonnées, coûts, limites de mesure), sans aucun chiffre inventé ou reconstruit.

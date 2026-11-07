@@ -6,7 +6,7 @@ import type { Speaker } from "../types.js";
 /**
  * Voix macOS par `say`. Le texte passe par un fichier (`-f`) : aucun texte
  * généré n'est interprété comme une option de la commande.
- * Voix de référence du cadre : Aurélie.
+ * Voix de départ proposée par le cadre : Aurélie ; Shyrka choisira sa voix.
  */
 export class MacSaySpeaker implements Speaker {
   constructor(
