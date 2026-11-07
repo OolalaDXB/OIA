@@ -75,10 +75,13 @@ describe("visibility.json à partir d'une exportation Elmo (fictive, forme exact
 });
 
 describe("même structure que src/data/demo.ts du prototype", () => {
-  // Lu sur la branche sans la modifier ; test sauté si la branche n'est pas présente localement.
+  // Lu sans le modifier, à l'état du prototype que vise l'exportation statique (commit a9e7a1f de
+  // la branche lovable/oia-visibility-prototype). Le prototype a évolué depuis (8 novembre 2026) ;
+  // le cockpit lit désormais la base par le contrat v1 (docs/interface/contrat-donnees-v1.md), et
+  // visibility.json ne sert plus qu'au prototype local. Test sauté si ce commit n'est pas présent.
   const demoSource = (() => {
     try {
-      return execFileSync("git", ["show", "origin/lovable/oia-visibility-prototype:prototypes/oia-prototype/src/data/demo.ts"], {
+      return execFileSync("git", ["show", "a9e7a1f:prototypes/oia-prototype/src/data/demo.ts"], {
         cwd: ROOT,
         encoding: "utf8",
         stdio: ["ignore", "pipe", "ignore"],
