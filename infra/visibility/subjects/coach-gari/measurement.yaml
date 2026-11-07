@@ -29,8 +29,9 @@ windows:
     kind: baseline
     days: 5
     panelVersion: 2
-    status: planned
-    note: "Mesure de départ, 5 moteurs (3 directs + Gemini et Perplexity via OpenRouter). Dates fixées au démarrage du worker, après validation du panel."
+    status: running
+    start: "2026-11-07"
+    note: "Mesure de départ, 5 moteurs (3 directs + Gemini et Perplexity via OpenRouter). Dates fixées au démarrage du worker, après validation du panel. Démarrée le 2026-11-07 à 15:27 UTC (démarrage du worker)."
 freezes:
   - id: freeze-j0
     scope: [site, repository]

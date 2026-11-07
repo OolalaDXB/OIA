@@ -80,6 +80,13 @@ describe("début de fenêtre dans measurement.yaml", () => {
     expect(w.note).toMatch(/2026-11-08 à 09:12 UTC/);
   });
 
+  it("ne reformate rien d'autre que la fenêtre (collections en ligne, lignes longues)", () => {
+    const long = `${text.trimEnd()}\n# ${"x".repeat(150)}\n`;
+    const out = markWindowRunning(long, "j0", at);
+    const changed = out.split("\n").filter((l) => !long.split("\n").includes(l));
+    expect(changed.every((l) => /status: running|start:|note:/.test(l))).toBe(true);
+  });
+
   it("refuse une fenêtre déjà démarrée ou absente", () => {
     const once = markWindowRunning(text, "j0", at);
     expect(() => markWindowRunning(once, "j0", at)).toThrow(/running/);

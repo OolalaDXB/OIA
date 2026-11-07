@@ -115,7 +115,7 @@ set_env_line ADMIN_API_KEYS "$key"
 [ -n "$targets_preset" ] || set_env_line SCRAPE_TARGETS "$targets"
 elmo_dc up -d --no-deps --force-recreate web >/dev/null 2>&1
 wait_web || nogo "web d'Elmo ne repart pas après l'ajout de la clé admin"
-ok "SCRAPE_TARGETS posé, clé admin temporaire active"
+ok "SCRAPE_TARGETS $([ -n "$targets_preset" ] && echo "inchangé (déjà posé)" || echo "posé"), clé admin temporaire active"
 
 # ---- 4. Marque, concurrents, questions -------------------------------------------
 body="$data/$window/elmo-brand-body.json"

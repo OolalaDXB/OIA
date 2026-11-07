@@ -99,23 +99,69 @@ export function checkTargetsMatch(bundle: SubjectBundle, scrapeTargets: string):
   return errors;
 }
 
-/**
- * Passe une fenêtre de `planned` à `running` dans measurement.yaml, avec la
- * date de début (champ `start`) et l'heure UTC dans la note. Les commentaires
- * du fichier sont conservés.
- */
-export function markWindowRunning(yamlText: string, windowId: string, startedAt: Date): string {
-  const doc = parseDocument(yamlText);
-  const windows = doc.get("windows") as { items: { get(k: string): unknown; set(k: string, v: unknown): void }[] } | undefined;
+type WindowNode = { get(k: string): unknown };
+
+function findWindow(yamlText: string, windowId: string): WindowNode {
+  const windows = parseDocument(yamlText).get("windows") as { items: WindowNode[] } | undefined;
   const w = windows?.items.find((item) => item.get("id") === windowId);
   if (!w) throw new Error(`fenêtre "${windowId}" absente`);
+  return w;
+}
+
+/**
+ * Passe une fenêtre de `planned` à `running` dans measurement.yaml, avec la
+ * date de début (champ `start`) et l'heure UTC dans la note.
+ *
+ * Modification textuelle limitée aux lignes de la fenêtre : réécrire le
+ * document entier par la bibliothèque YAML renormaliserait les collections en
+ * ligne et les longues lignes du reste du fichier. Le résultat est relu et
+ * vérifié ; un format non prévu est refusé plutôt que modifié au hasard.
+ */
+export function markWindowRunning(yamlText: string, windowId: string, startedAt: Date): string {
+  const w = findWindow(yamlText, windowId);
   if (w.get("status") !== "planned") throw new Error(`fenêtre "${windowId}" en statut "${String(w.get("status"))}", pas "planned"`);
   const iso = startedAt.toISOString();
-  w.set("status", "running");
-  w.set("start", iso.slice(0, 10));
-  const note = String(w.get("note") ?? "").trim();
-  w.set("note", `${note}${note ? " " : ""}Démarrée le ${iso.slice(0, 10)} à ${iso.slice(11, 16)} UTC (démarrage du worker).`);
-  return doc.toString();
+  const day = iso.slice(0, 10);
+  const stamp = `Démarrée le ${day} à ${iso.slice(11, 16)} UTC (démarrage du worker).`;
+  const lines = yamlText.split("\n");
+  const unsupported = () => new Error(`fenêtre "${windowId}" dans un format non prévu : modifier measurement.yaml à la main`);
+  const idRe = new RegExp(`^(\\s*)- (\\{\\s*)?id:\\s*["']?${windowId.replace(/[-]/g, "\\-")}["']?\\s*[,}]?`);
+  const at = lines.findIndex((l) => idRe.test(l));
+  if (at < 0) throw unsupported();
+  const first = lines[at]!;
+
+  if (first.includes("{")) {
+    // Fenêtre en ligne : { id: j0, ..., status: planned }
+    if (!/\}\s*$/.test(first) || !/status:\s*planned/.test(first) || /note:|start:/.test(first)) throw unsupported();
+    lines[at] = first
+      .replace(/status:\s*planned/, `status: running, start: "${day}"`)
+      .replace(/\s*\}\s*$/, `, note: "${stamp}" }`);
+  } else {
+    // Fenêtre en bloc : les clés suivent, plus indentées que le tiret.
+    const dash = idRe.exec(first)![1]!.length;
+    let end = at + 1;
+    while (end < lines.length && (lines[end]!.trim() === "" || lines[end]!.search(/\S/) > dash)) end++;
+    const keyIndent = " ".repeat(dash + 2);
+    const statusAt = lines.findIndex((l, i) => i > at && i < end && l === `${keyIndent}status: planned`);
+    if (statusAt < 0 || lines.slice(at, end).some((l) => l.startsWith(`${keyIndent}start:`))) throw unsupported();
+    lines.splice(statusAt, 1, `${keyIndent}status: running`, `${keyIndent}start: "${day}"`);
+    end++;
+    const noteAt = lines.findIndex((l, i) => i > at && i < end && l.startsWith(`${keyIndent}note:`));
+    if (noteAt < 0) {
+      lines.splice(statusAt + 2, 0, `${keyIndent}note: "${stamp}"`);
+    } else {
+      const m = /^(\s*note:\s*")(.*)"\s*$/.exec(lines[noteAt]!);
+      if (!m || m[2]!.includes('"')) throw unsupported();
+      lines[noteAt] = `${m[1]}${m[2]}${m[2] ? " " : ""}${stamp}"`;
+    }
+  }
+
+  const out = lines.join("\n");
+  const check = findWindow(out, windowId);
+  if (check.get("status") !== "running" || String(check.get("start")) !== day || !String(check.get("note")).includes(stamp)) {
+    throw unsupported();
+  }
+  return out;
 }
 
 function findBundle(subjectId: string): SubjectBundle {
