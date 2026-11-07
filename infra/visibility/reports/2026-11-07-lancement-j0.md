@@ -116,8 +116,13 @@ Le serveur du prototype tourne encore. Pour l'arrêter :
 
 ## Étape 4 · Suite
 
-Pas de `infra/visibility/mandats/MANDAT-2026-11-07-v6.md` dans le dépôt.
-Rien d'autre n'a été exécuté.
+Pas de `infra/visibility/mandats/MANDAT-2026-11-07-v6.md` dans le dépôt :
+je n'ai donc rien exécuté. En poussant, j'ai constaté qu'une autre session
+avait poussé sur `main` des commits qui citent ce mandat v6 (`818de4f`
+Shyrka 1, `66a6e03` évaluation de Bifrost), ainsi que le mandat v7, bloc F
+(`c6b4dab`, `apps/web`), et la roadmap 3.6 (`6722dbf`). Aucun fichier en
+commun avec ce mandat. Mon commit a été rebasé par-dessus, sans conflit,
+et les 254 tests passent après rebase. Je n'ai rien repris du v6.
 
 ## Questions consignées (sans blocage)
 
