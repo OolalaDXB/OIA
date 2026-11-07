@@ -449,8 +449,9 @@ function notifications(): number {
 /** Recette automatisée : tests, persistance réelle multi-processus, corpus réel. Aucun appel payant, aucune mutation de production. */
 function acceptance(): number {
   const etapes: [string, boolean, string][] = [];
-  const t = spawnSync("pnpm", ["--filter", "@oia/shyrka", "--filter", "@oia/shyrka-noyau", "test"], { cwd: RACINE_DEPOT, encoding: "utf8" });
-  etapes.push(["tests unitaires et de recette (vitest)", t.status === 0, (t.stdout.match(/Tests +\d+.*$/gm) ?? []).join(" ; ")]);
+  // `pnpm --silent` propage npm_config_loglevel=silent : on le rétablit pour lire le résumé des tests.
+  const t = spawnSync("pnpm", ["--filter", "@oia/shyrka", "--filter", "@oia/shyrka-noyau", "test"], { cwd: RACINE_DEPOT, encoding: "utf8", env: Object.fromEntries(Object.entries(process.env).filter(([k]) => !/^npm_config_/i.test(k))) });
+  etapes.push(["tests unitaires et de recette (vitest)", t.status === 0, ((t.stdout + t.stderr).replace(/\x1b\[[0-9;]*m/g, "").match(/Tests +\d+.*$/gm) ?? []).join(" ; ")]);
   const tc = spawnSync("pnpm", ["--filter", "@oia/shyrka", "--filter", "@oia/shyrka-noyau", "typecheck"], { cwd: RACINE_DEPOT, encoding: "utf8" });
   etapes.push(["typecheck", tc.status === 0, tc.status === 0 ? "0 erreur" : tc.stdout.slice(-400)]);
   const v = etatVolume();
