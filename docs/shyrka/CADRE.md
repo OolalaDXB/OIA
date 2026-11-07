@@ -34,6 +34,11 @@ préférence est exprimée.
 - **Voix de référence : Aurélie.** Les choix futurs de synthèse vocale
   partent de cette référence ; aucune voix n'est activée dans la version 0.
 - **Candidate évaluée pour la synthèse vocale : Chatterbox.** Non activée.
+- **Fichier de l'identité en vigueur : `infra/shyrka/identite.json`**
+  (ajout 3.6, à valider par Mickaël). Il reprend la version courante du
+  cadre ; le code de Shyrka le lit et ne l'écrit jamais. Une version
+  suivante s'écrit d'abord ici, puis dans ce fichier. Fichier absent ou
+  invalide : version 0 appliquée.
 
 ## Permissions
 
@@ -140,6 +145,29 @@ Trois périmètres :
 Les mémoires sensibles (famille, finances, santé) sont hors de portée
 des agents qui travaillent pour des clients.
 
+## Piste Shyrka
+
+Ajout 3.6 (2026-11-08), à valider par Mickaël. Shyrka grandit en quatre
+étapes, chacune livrée avec une phase de la roadmap. P7 et P8 ne sont plus
+des phases ; leur contenu est réparti ci-dessous.
+
+```mermaid
+flowchart LR
+  S1["Shyrka 1 · Te parle<br/>avec P1"] --> S2["Shyrka 2 · Te seconde<br/>avec P2"] --> S3["Shyrka 3 · Te connaît<br/>avec P5"] --> S4["Shyrka 4 · Agit pour toi<br/>avec P6"]
+  P0["Porte P0 : ce cadre validé"] ==>|prérequis| S2
+  S4 -.->|retours| AT["Atelier d'identité, P9"]
+```
+
+| Étape | Niveau d'action maximal | Règle propre à l'étape |
+|---|---|---|
+| Shyrka 1 · Te parle | Analyse, sans données | Dialogue local seulement (micro, Whisper, Ollama, voix macOS) ; prise de parole volontaire ; aucune donnée de projet ; rien ne quitte la machine ; identité version 0, donc texte en sortie |
+| Shyrka 2 · Te seconde | Préparation | Digest et brouillons ; rien n'est envoyé ni fusionné |
+| Shyrka 3 · Te connaît | Analyse, avec mémoire | Lit la mémoire validée et les preuves ; refuse de généraliser une leçon d'un client à un autre ; mémoires sensibles pour Mickaël seulement |
+| Shyrka 4 · Agit pour toi | Engagement | Confirmation de Mickaël à chaque action, sauf délégation écrite ; e-mail et WhatsApp par paliers ; refus journalisés |
+
+Shyrka 1 n'attend pas la porte P0 : elle tourne sous la version 0,
+la plus fermée. Shyrka 2 à 4 l'attendent.
+
 ## Interface avec OIA SEO Command
 
 Shyrka pourra, plus tard :
@@ -170,4 +198,7 @@ La porte P0 est franchie quand :
 3. **aucune capacité d'engagement n'est activée par défaut** (vérifié
    par test).
 
-P0 validée est un prérequis de P7 (console Shyrka), jamais de P1 à P6.
+P0 validée est un prérequis de Shyrka 2 à 4 (ajout 3.6 ; auparavant de P7,
+qui n'est plus une phase), jamais de P1 à P6. Le point 3 est vérifié pour
+l'identité par `packages/shyrka/test/identity.test.ts` : la version 0
+suivie n'autorise ni voix ni visage.
