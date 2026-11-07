@@ -109,31 +109,30 @@ export function sqlChargement(data: ConsoleData, opts: { source: string; espace?
 begin;
 insert into public.ml_lot (id, espace_id, source, empreinte) values ('${lot}', '${espace}', ${DOLLAR}${opts.source}${DOLLAR}, '${empreinte}')
 on conflict (id) do nothing;
-with x as (
+-- Table temporaire, puis deux instructions : une insertion dans un CTE n'est pas
+-- visible des autres parties de la même requête (instantané unique).
+create temp table _ml_x on commit drop as
   select * from jsonb_to_recordset(${DOLLAR}${json}${DOLLAR}::jsonb) as t(
     id uuid, watch_key text, record_id text, title text, issuer text, opportunity_kind text, official_url text,
     deadline_at timestamptz, recommendation text, verification_status text, info_confidence int,
     gate_pursue_eligible boolean, gate_failed_reasons text[], discovered_for text[], payload jsonb, content_fingerprint text,
-    valeur numeric, devise text, confiance text, source_montant text)
-), opp as (
-  insert into public.watch_opportunities (id, watch_key, record_id, title, issuer, opportunity_kind, official_url, deadline_at,
+    valeur numeric, devise text, confiance text, source_montant text);
+insert into public.watch_opportunities (id, watch_key, record_id, title, issuer, opportunity_kind, official_url, deadline_at,
     recommendation, verification_status, info_confidence, gate_pursue_eligible, gate_failed_reasons, discovered_for, payload,
     content_fingerprint, espace_id, lot_initial)
   select id, watch_key, record_id, title, issuer, opportunity_kind, official_url, deadline_at, recommendation, verification_status,
     info_confidence, gate_pursue_eligible, gate_failed_reasons, discovered_for, payload, content_fingerprint, '${espace}', '${lot}'
-  from x
+  from _ml_x
   on conflict (watch_key) do update set
     title = excluded.title, issuer = excluded.issuer, opportunity_kind = excluded.opportunity_kind, official_url = excluded.official_url,
     deadline_at = excluded.deadline_at, recommendation = excluded.recommendation, verification_status = excluded.verification_status,
     info_confidence = excluded.info_confidence, gate_pursue_eligible = excluded.gate_pursue_eligible,
     gate_failed_reasons = excluded.gate_failed_reasons, discovered_for = excluded.discovered_for, payload = excluded.payload,
     content_fingerprint = excluded.content_fingerprint, last_seen_at = now()
-  where public.watch_opportunities.content_fingerprint is distinct from excluded.content_fingerprint
-  returning 1
-)
+  where public.watch_opportunities.content_fingerprint is distinct from excluded.content_fingerprint;
 insert into public.ml_montant (opportunity_id, espace_id, valeur, devise, confiance, source, lot_id)
 select o.id, o.espace_id, x.valeur, x.devise, x.confiance, x.source_montant, '${lot}'
-from x join public.watch_opportunities o on o.watch_key = x.watch_key
+from _ml_x x join public.watch_opportunities o on o.watch_key = x.watch_key
 on conflict (opportunity_id) do update set valeur = excluded.valeur, devise = excluded.devise, confiance = excluded.confiance, source = excluded.source
 where (public.ml_montant.valeur, public.ml_montant.devise, public.ml_montant.confiance) is distinct from (excluded.valeur, excluded.devise, excluded.confiance);
 commit;

@@ -76,6 +76,8 @@ describe.skipIf(!postgresDisponible)("chargeur sur Postgres jetable", () => {
     const d = donnees([rec("r1", { montant: "50 000 EUR" }), rec("r2", { opportunityKind: "TENDER_RFP" } as Partial<ConsoleRecord>)]);
     charger(d);
     expect(n(`select count(*) from watch_opportunities`)).toBe(2);
+    // Dès le premier chargement : un montant (ou un montant inconnu) par opportunité.
+    expect(n(`select count(*) from ml_montant`)).toBe(2);
     const vu = b.sql(`select last_seen_at from watch_opportunities where record_id = 'r1'`);
     charger(d);
     expect(n(`select count(*) from watch_opportunities`)).toBe(2);

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Money Lookup (mandat v8, bloc A) : chargement idempotent des opportunités dans les tables d'OIA, à partir des sorties existantes. Fichiers et tests seulement ; aucune exécution sur Supabase par Claude Code.",
+  "description": "Money Lookup (mandat v8, bloc A) : chargement idempotent des opportunités dans les tables d'OIA, à partir des sorties existantes. Chargé en production le 8 novembre 2026 (mandat v9) ; rafraîchi chaque jour par scripts/rafraichir.sh.",
   "exports": {
     ".": "./src/index.ts"
   },
