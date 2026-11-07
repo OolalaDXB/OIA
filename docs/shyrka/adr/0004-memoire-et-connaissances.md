@@ -1,13 +1,13 @@
 # ADR 0004 · Mémoire et connaissances de Shyrka
 
-- Statut : **proposé le 2026-11-08, à valider par Mickaël avant tout code.**
+- Statut : **validée par Mickaël le 2026-11-08**, avec les précisions de la section « Décisions de Mickaël ». Proposée le même jour.
 - Références : `docs/shyrka/CADRE.md` (« Mémoire », « Données ») ;
   `docs/shyrka/corpus-inventaire.md` (brut, extrait, validé) ;
   ADR 0003 (noyau, oubli, mode privé, évolution du cockpit) ; migration
   `0007_shyrka.sql` (mémoire du cockpit) ; PR #5 (mémoire SQLite locale,
   brouillon).
 - Portée : cette décision fixe le modèle et les règles. Elle ne livre aucun
-  code.
+  code ; la réalisation relève du mandat v10.
 
 ## Contexte
 
@@ -80,7 +80,13 @@ Chaque élément porte :
 `local_seulement` vit sur le Mac, `cockpit` vit dans la base OIA. Passer de
 l'une à l'autre est une **correction de portée faite par Mickaël** : l'élément
 est écrit au nouvel emplacement et supprimé de l'ancien, dans la même
-opération. Il n'existe donc jamais deux copies d'un même élément. Shyrka sur
+opération. Il n'existe donc jamais deux copies d'un même élément.
+
+**Les dérivés ne sont pas des copies.** Les index, extraits et résumés
+dérivés d'un élément suivent son emplacement et ses restrictions : un
+élément `local_seulement` n'a de dérivés que sur le Mac. Ils disparaissent
+avec lui en cas de correction ou d'oubli, et sont recalculés à partir de la
+version en vigueur. Shyrka sur
 le Mac peut lire les éléments `cockpit` à la demande ; le cockpit ne lit
 jamais le Mac.
 
@@ -128,14 +134,15 @@ Souffleur fournit les moyens.
 Les règles de l'ADR 0003 s'appliquent aux deux stockages :
 
 - **Corriger** crée une nouvelle version et retire l'ancienne du service.
-  L'ancienne reste dans l'historique, marquée « remplacée par ». Les résumés
-  dérivés de l'ancienne version sont marqués à revoir.
+  L'ancienne reste dans l'historique, marquée « remplacée par ». Les index,
+  extraits et résumés dérivés de l'ancienne version disparaissent avec elle,
+  puis sont recalculés à partir de la nouvelle.
 - **Oublier** efface l'élément, ses copies dérivées de proche en proche, et
   leurs entrées d'index. Une empreinte empêche son retour, y compris par la
   restauration d'une sauvegarde. Le journal ne garde que l'empreinte.
-- **Sauvegardes du volume** : chiffrées, conservées 30 jours au plus
-  (proposition de l'ADR 0003, à confirmer) ; une restauration rejoue les
-  oublis avant de servir quoi que ce soit.
+- **Sauvegardes du volume** : chiffrées, conservées 30 jours (décision de
+  Mickaël). Le registre des oublis empêche toute réactivation : une
+  restauration le rejoue avant de servir quoi que ce soit.
 - **Mode privé** : rien n'est enregistré ni retrouvé.
 - **Modèles en ligne** : un élément `local_seulement` n'entre jamais dans un
   message envoyé à Mistral ou à un autre fournisseur. Seul un modèle local
@@ -151,32 +158,25 @@ simulé puis en vrai sur le Mac Studio :
 | Preuve | Ce qui est vérifié |
 | --- | --- |
 | **Retour après redémarrage, avec provenance** | « Retiens que… », arrêt, relance : `retrouver` rend le même `id`, le même contenu, la voie, la source (conversation et heure) et la date |
-| **Correction sans deux vérités** | après `corriger`, `retrouver` ne rend que la nouvelle version, sur le Mac comme dans le cockpit ; après un changement de portée, une seule copie existe, au nouvel emplacement |
+| **Correction sans deux vérités** | après `corriger`, `retrouver` ne rend que la nouvelle version, sur le Mac comme dans le cockpit, et aucun index ni résumé ne renvoie l'ancienne ; après un changement de portée, une seule copie existe, au nouvel emplacement, et ses dérivés l'ont suivie |
 | **Oubli effectif** | l'élément, ses résumés dérivés et leurs entrées d'index ont disparu ; la restauration d'une sauvegarde ne les ramène pas ; l'export ne les contient pas ; un nouvel enregistrement identique est refusé |
 | **Local inaccessible sans autorisation** | un élément `local_seulement` n'est rendu ni au cockpit, ni à un agent, ni dans un message envoyé à un modèle en ligne ; il le devient seulement après une décision explicite de Mickaël (changement de portée, ou mandat qui l'autorise) |
 
 ## Le sort de la PR #5
 
-La PR #5 apporte de bonnes briques : base dans le volume chiffré seulement,
-refus d'un dossier ordinaire ou d'un lien symbolique, fichier en 0600,
-suppression sécurisée, empreinte d'oubli, refus de Swift, souvenirs donnés
-seulement à un modèle local, « retiens que » comme instruction explicite
-(voie 1), et des tests de redémarrage.
+**Décidé : alignée, pas fusionnée.** Ses briques utiles deviennent le
+stockage local de l'interface unique dans le mandat v10 : base dans le volume
+chiffré seulement, refus d'un dossier ordinaire ou d'un lien symbolique,
+fichier en 0600, suppression sécurisée, empreinte d'oubli, refus de Swift,
+souvenirs donnés seulement à un modèle local, « retiens que » comme
+instruction explicite (voie 1), tests de redémarrage. La PR #5 est fermée
+ensuite, avec un renvoi vers le travail du mandat v10.
 
-Elle ne suit pas encore cette décision :
-
-- identifiants `M0001` propres à la base locale, au lieu d'un identifiant commun ;
-- ni compartiment, ni forme, ni portée, ni emplacement, ni voie d'apprentissage ;
-- pas de `corriger` ni d'`exporter`, pas de copies dérivées ;
-- un second mode privé dans la mémoire, à côté de celui de la session ;
-- conflit avec `main` (la session a changé depuis), et `node:sqlite`, encore
-  expérimental dans Node 22, à vérifier sur le Mac (sinon `better-sqlite3`).
-
-**Recommandation : l'aligner, pas la fusionner telle quelle.** Une fois cette
-décision validée, ses briques deviennent le stockage local de l'interface
-unique, sur une nouvelle branche à jour de `main`, avec les quatre preuves
-pour tests. La PR #5 est alors fermée, avec un renvoi vers la nouvelle. Si
-Mickaël préfère repartir de zéro, la fermer dès maintenant.
+Ce que l'alignement ajoute : identifiant commun à la place de `M0001` ;
+compartiment, forme, portée, emplacement et voie d'apprentissage ;
+`corriger` et `exporter` ; dérivés suivis ; un seul mode privé, celui de la
+session ; mise à jour sur `main`. `node:sqlite` est à vérifier sur la
+version de Node du Mac (sinon `better-sqlite3`).
 
 ## Conséquences
 
@@ -189,11 +189,16 @@ Mickaël préfère repartir de zéro, la fermer dès maintenant.
   viendra que si la recherche plein texte rate des cas réels.
 - Aucun fine-tuning.
 
-## Ce que Mickaël décide
+## Décisions de Mickaël du 8 novembre 2026
 
-1. Valider ou modifier cette décision, en particulier la règle « la portée
-   détermine l'emplacement, une seule copie ».
-2. Le sort de la PR #5 : l'aligner (recommandé) ou la fermer.
-3. La durée de conservation des sauvegardes du volume (proposé : 30 jours).
-4. Les compartiments ouverts dès la première mémoire (proposé : personnel et
-   projets ; modules d'OIA et Souffleur ensuite).
+1. **Règle « une seule copie » validée**, avec une précision : les index,
+   extraits et résumés dérivés d'un élément ne sont pas des copies ; ils
+   suivent son emplacement et ses restrictions, et disparaissent avec lui en
+   cas de correction ou d'oubli (§ 2 et § 6).
+2. **PR #5 : alignée, pas fusionnée.** Ses briques utiles deviennent le
+   stockage local dans le mandat v10 ; la PR est fermée ensuite, avec un
+   renvoi.
+3. **Sauvegardes du volume : 30 jours.** Le registre des oublis empêche toute
+   réactivation après restauration.
+4. **Compartiments ouverts en premier : personnel et projets.** Modules d'OIA
+   et Souffleur ensuite.
