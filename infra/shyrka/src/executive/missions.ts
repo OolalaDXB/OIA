@@ -150,7 +150,9 @@ export class Missions {
     return this.ops.tx(() => {
       const m = this.obtenir(ref);
       if (!TRANSITIONS[m.statut].includes(vers)) throw new RefusMission(`transition refusée : ${m.statut} → ${vers}`);
-      if (["autorisee", "terminee", "annulee"].includes(vers) && acteur !== "mickael") throw new RefusMission(`${vers} : décision de Mickaël seulement`);
+      // Autoriser : Mickaël, ou un mandat écrit de Mickaël qui délègue cette mission (consigné tel quel).
+      if (vers === "autorisee" && acteur !== "mickael" && !/^mandat:[\w.-]+$/.test(acteur)) throw new RefusMission("autorisee : décision de Mickaël ou d'un mandat écrit seulement");
+      if (["terminee", "annulee"].includes(vers) && acteur !== "mickael") throw new RefusMission(`${vers} : décision de Mickaël seulement`);
       if (vers === "terminee") {
         const empreinte = (m.resultats as { empreinteDiff?: string }).empreinteDiff;
         if (!m.validation || m.validation.empreinte !== empreinte || m.validation.action !== "accepter_patch") throw new RefusMission("aucune approbation valable pour le diff actuel");

@@ -82,6 +82,8 @@ describe("A4 · approbation d'un ancien diff", () => {
     const id = m.proposer(N).mission.id;
     expect(() => m.passer(id, "en_cours", "shyrka", "x")).toThrow(/transition refusée/);
     expect(() => m.passer(id, "autorisee", "shyrka", "x")).toThrow(/Mickaël/);
+    expect(m.passer(id, "autorisee", "mandat:v10", "délégation écrite").statut).toBe("autorisee");
+    expect(() => m.passer(id, "annulee", "mandat:v10", "x")).toThrow(/Mickaël seulement/);
     ops.fermer();
   });
 });

@@ -226,6 +226,29 @@ function missionsCmd(args: string[]): number {
       if (wt && existsSync(wt)) console.log(`\nDiff (git -C ${wt} diff ${x.shaBase.slice(0, 12)}) :\n${execFileSync("git", ["-C", wt, "diff", "--stat", x.shaBase], { encoding: "utf8" })}`);
       return 0;
     }
+    if (sous === "proposer") {
+      // missions proposer <clé> <objectif> --fichiers a,b/ --commande "pnpm --filter x test" [--commande …] --sha <base> --agent <rôle>
+      const opt = (k: string) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : undefined; };
+      const commandes = args.flatMap((a, i) => (a === "--commande" ? [args[i + 1]!.split(" ")] : []));
+      const r = m.proposer({
+        cle: ref ?? "", objectif: reste.filter((_, i, t) => !t[i]!.startsWith("--") && !(i > 0 && t[i - 1]!.startsWith("--"))).join(" "), demandeur: "shyrka", shaBase: opt("--sha") ?? revision().sha,
+        agent: opt("--agent") ?? "developpement", automatisation: (opt("--automatisation") as "assiste") ?? "assiste",
+        perimetre: { repo: "OolalaDXB/OIA", fichiers: (opt("--fichiers") ?? "").split(",").filter(Boolean), commandes }, preuvesEntree: (opt("--preuves") ?? "").split(",").filter(Boolean),
+        outils: ["git", "pnpm", "sandbox-exec"], budgetUsd: 0, tentativesMax: 2, dureeMaxMin: 120,
+      });
+      console.log(`${r.creee ? "Mission proposée" : "Mission déjà connue (même clé)"} : ${r.mission.id}`);
+      return 0;
+    }
+    if (sous === "avancer") {
+      // Transitions des rôles (registre, diagnostic, développement, vérification) : contrôlées par le code.
+      const [vers, acteur, ...note] = reste;
+      const opt = (k: string) => { const i = note.indexOf(k); return i >= 0 ? note[i + 1] : undefined; };
+      const resultats = opt("--resultats") ? (JSON.parse(readFileSync(opt("--resultats")!, "utf8")) as Record<string, unknown>) : undefined;
+      const texte = note.filter((x, i) => x !== "--resultats" && note[i - 1] !== "--resultats").join(" ");
+      const x = vers === "en_cours" && m.obtenir(ref ?? "").statut === "en_file" ? m.prendre(ref ?? "", acteur ?? "?", 2 * 3_600_000) : m.passer(ref ?? "", vers as never, acteur ?? "?", texte, resultats ? { resultats } : {});
+      console.log(`${x.id.slice(0, 8)} → ${x.statut}`);
+      return 0;
+    }
     if (sous === "autoriser") return console.log(m.passer(ref ?? "", "autorisee", "mickael", "autorisée par Mickaël (CLI)").statut), 0;
     if (sous === "refuser") return console.log(m.passer(ref ?? "", "annulee", "mickael", `refusée : ${reste.join(" ") || "sans motif"}`).statut), 0;
     if (sous === "corriger") return console.log(m.passer(ref ?? "", "en_cours", "mickael", `correction demandée : ${reste.join(" ")}`).statut), 0;
