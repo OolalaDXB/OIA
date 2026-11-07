@@ -189,6 +189,14 @@ export const WindowSchema = z
     start: isoDate.optional(),
     end: isoDate.optional(),
     missingDays: z.array(z.object({ date: isoDate, reason: z.string().min(3) }).strict()).default([]),
+    /** Cibles mesurées, telles que dans SCRAPE_TARGETS d'Elmo (moteur:fournisseur:modèle:online). */
+    targets: z.array(z.string().min(3)).optional(),
+    /** Heure UTC du run quotidien (HH:MM), celle du démarrage du worker. */
+    runTimeUtc: z.string().regex(/^\d{2}:\d{2}$/).optional(),
+    /** Fenêtre de référence d'une fenêtre de suivi : même panel, mêmes cibles, même heure. */
+    comparesWith: z.string().optional(),
+    /** Obligatoire si le panel, les cibles ou l'heure diffèrent de la référence : ce qui change, et pourquoi. */
+    comparisonNote: z.string().min(10).optional(),
     note: z.string().optional(),
   })
   .strict();

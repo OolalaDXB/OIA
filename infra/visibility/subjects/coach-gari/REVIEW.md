@@ -128,6 +128,7 @@
 | Fenêtre | Type | Jours | Panel | Statut | Début | Fin | Jours manquants |
 |---|---|---|---|---|---|---|---|
 | j0 | baseline | 5 | v2 | running | 2026-11-07 | — | — |
+| j1 | follow-up | 5 | v2 | planned | — | — | — |
 
 ### Gel `freeze-j0` (en vigueur) — jusqu'à la fin de la fenêtre j0
 

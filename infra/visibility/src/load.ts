@@ -118,6 +118,28 @@ export function checkBundle(b: SubjectBundle): string[] {
       problems.push(`window ${w.id}: ${w.status} while panel v${panel.panelVersion} is not validated`);
     if ((w.status === "done" || w.status === "aborted") && (!w.start || !w.end)) problems.push(`window ${w.id}: ${w.status} without start/end`);
   }
+  // Remesure : une fenêtre de suivi se compare à sa référence seulement si le panel, les
+  // cibles (moteurs et modèles) et l'heure sont les mêmes. Tout écart doit être signalé.
+  for (const w of measurement.windows.filter((x) => x.kind === "follow-up")) {
+    if (!w.comparesWith) {
+      problems.push(`window ${w.id}: follow-up without comparesWith (baseline window)`);
+      continue;
+    }
+    const ref = measurement.windows.find((x) => x.id === w.comparesWith);
+    if (!ref) {
+      problems.push(`window ${w.id}: comparesWith unknown window "${w.comparesWith}"`);
+      continue;
+    }
+    const diffs: string[] = [];
+    if (w.panelVersion !== ref.panelVersion) diffs.push(`panel v${w.panelVersion} ≠ v${ref.panelVersion}`);
+    if (w.days !== ref.days) diffs.push(`${w.days} jours ≠ ${ref.days}`);
+    const same = (a?: string[], z?: string[]) => !!a && !!z && a.length === z.length && [...a].sort().every((x, i) => x === [...z].sort()[i]);
+    if (!same(w.targets, ref.targets)) diffs.push(`cibles ${JSON.stringify(w.targets ?? null)} ≠ ${JSON.stringify(ref.targets ?? null)}`);
+    if (w.runTimeUtc !== ref.runTimeUtc) diffs.push(`heure ${w.runTimeUtc ?? "?"} ≠ ${ref.runTimeUtc ?? "?"}`);
+    if (diffs.length && !w.comparisonNote) {
+      problems.push(`window ${w.id}: differs from ${ref.id} without comparisonNote (${diffs.join("; ")})`);
+    }
+  }
   for (const f of measurement.freezes)
     if (!windowIds.has(f.untilEndOfWindow)) problems.push(`freeze ${f.id}: unknown window "${f.untilEndOfWindow}"`);
 

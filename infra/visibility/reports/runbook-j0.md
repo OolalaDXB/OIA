@@ -339,3 +339,35 @@ quand la fenêtre passe à `done`, voir `src/load.ts` → `activeFreezes`).
   (y compris ses clés chiffrées).
 - **Ne pas démarrer deux workers en parallèle** (double Elmo sur le
   Mac) : double coût sans double mesure.
+
+## 10 · Remesure (fenêtre `j1`, mandat v7 bloc E)
+
+La fenêtre `j1` est planifiée dans `subjects/coach-gari/measurement.yaml`
+(`kind: follow-up`, `comparesWith: j0`), à l'identique de J0 : mêmes
+questions (panel v2), mêmes moteurs et modèles (`targets`), même heure
+(`runTimeUtc: 15:27`), cinq jours. `subjects validate` refuse une `j1` qui
+diffère de J0 sans `comparisonNote` qui le signale (test
+`test/remeasure.test.ts`).
+
+1. **Quand** : au moins trois semaines après la publication des correctifs
+   de P2 validés (`subjects/coach-gari/p2/decisions.md`). Date à fixer par
+   Mickaël.
+2. **Avant** : rapport J0 validé, correctifs publiés, nouvel audit Crawlie
+   de la surface publique, gel de la fenêtre `j1` déclaré dans
+   `measurement.yaml` (`freezes`, `untilEndOfWindow: j1`), avec un
+   nouveau `freeze-surface.yaml` si la surface a changé.
+3. **Elmo** : marque, questions et concurrents inchangés depuis J0. Si
+   `SCRAPE_TARGETS` doit changer (modèle retiré par un fournisseur, par
+   exemple), poser `comparisonNote` dans `j1` avant le lancement, et le
+   signaler dans le rapport.
+4. **Lancement** : relancer le worker à l'heure de `runTimeUtc` pour garder
+   le même rythme (Elmo relance chaque question 24 h après la précédente),
+   puis `OIA_VIS_WINDOW=j1` pour toutes les commandes de fenêtre :
+   `vis:j0-watch:install`, `vis:j0-status`, `vis:j0-close`,
+   `vis:j0-report`, `vis:j0-verify`. Écrire d'abord le début dans
+   `~/oia-visibility-data/j1/started-at.txt`.
+5. **Grok** : hors comparaison. S'il est retenu, il a sa propre mesure de
+   départ (une fenêtre `baseline` distincte), jamais ajoutée à `j1`.
+6. **Comparaison** : seulement sur les dix questions communes ; un
+   changement n'est déclaré démontrable que si l'intervalle de `j1` ne
+   recoupe pas celui de J0 (règle du moteur statistique).
