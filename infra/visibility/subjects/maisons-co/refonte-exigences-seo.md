@@ -84,9 +84,46 @@ le JSON-LD est un rejet immédiat par Google.
 | ID modèle | Exigence | Mesure | Gravité |
 |---|---|---|---|
 | B05 | `sitemap.xml` à la racine, déclaré dans `robots.txt` et soumis à Search Console. Contient uniquement des URL indexables (code 200, sans `noindex`, canonical auto-référent). | `crawlie` + `crawlseo` | important |
-| B04 | `robots.txt` autorise les robots qui alimentent les réponses des IA (voir §H08), bloque `/admin`, `/owner/login`, `/admin/*`, `/owner-demo?*`, `/tenant-demo?*` et les démos. Autorise `/en/*` et `/ru/*`. | `crawlie` + manuel | bloquant |
+| B04 | `robots.txt` autorise les robots de recherche et de réponse des IA (voir §H08), bloque `/admin`, `/owner/login`, `/admin/*`, `/owner-demo?*`, `/tenant-demo?*` et les démos. Autorise `/en/*` et `/ru/*`. | `crawlie` + manuel | bloquant |
 | H07 | `llms.txt` à la racine, listant les sections utiles (offres, maisons, zones desservies) avec des descriptions courtes. | `crawlie` | amélioration |
-| H08 | Choix explicite sur les robots des IA (`GPTBot`, `ClaudeBot`, `OAI-SearchBot`, `PerplexityBot`, `Google-Extended`). Par défaut, OIA recommande **autoriser les robots qui citent** (`OAI-SearchBot`, `ClaudeBot`, `PerplexityBot`) et **refuser l'entraînement** (`GPTBot`, `Google-Extended`). À arbitrer par le propriétaire. | manuel | important |
+| H08 | Robots des IA en deux décisions distinctes (détail sous le tableau). **Exigence de la refonte** : les robots de recherche et de réponse des IA sont autorisés. **Choix séparé du client** : les robots d'entraînement, autorisés ou refusés, sans effet sur la visibilité dans les réponses. | manuel | important |
+
+### Robots des IA (H08) : deux décisions séparées
+
+**1. Recherche et réponse : autorisés (exigence de la refonte).** Ces
+robots indexent ou lisent les pages pour les citer dans une réponse ; les
+bloquer retire le site des réponses mesurées par OIA Visibility.
+
+| Éditeur | Robot de recherche | Robot de réponse (lecture à la demande d'un utilisateur) |
+|---|---|---|
+| OpenAI | `OAI-SearchBot` | `ChatGPT-User` |
+| Anthropic | `Claude-SearchBot` | `Claude-User` |
+| Perplexity | `PerplexityBot` | `Perplexity-User` |
+| Mistral | — | `MistralAI-User` |
+| Google | `Googlebot` (Recherche, AI Overviews et AI Mode) | — |
+| Microsoft | `Bingbot` (Bing, Copilot) | — |
+
+**2. Entraînement : choix du client, présenté séparément.** Refuser ces
+robots ne change pas la présence dans les réponses ci-dessus ; les
+autoriser permet l'usage des pages pour entraîner des modèles. OIA ne
+recommande ni l'un ni l'autre : la décision appartient au propriétaire
+du site et se consigne dans le dossier du sujet.
+
+| Éditeur | Robot ou jeton d'entraînement |
+|---|---|
+| OpenAI | `GPTBot` |
+| Anthropic | `ClaudeBot` |
+| Google | `Google-Extended` (jeton de contrôle, pas un robot distinct ; n'affecte pas la Recherche) |
+| Apple | `Applebot-Extended` |
+| Meta | `meta-externalagent` |
+| Common Crawl | `CCBot` |
+
+Correction par rapport à la version précédente de ce document :
+`ClaudeBot` y figurait parmi les robots qui citent ; c'est le robot
+d'entraînement d'Anthropic, ceux de recherche et de réponse sont
+`Claude-SearchBot` et `Claude-User`. Noms à revérifier dans la
+documentation de chaque éditeur au moment de la mise en ligne : les
+listes évoluent.
 
 Deux versions du domaine à aligner : l'actuel laisse passer les deux
 (`www.` et bare) ; la refonte doit redirectionner l'un vers l'autre

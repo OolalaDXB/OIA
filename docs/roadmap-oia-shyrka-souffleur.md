@@ -4,7 +4,7 @@
 
 | Champ | Valeur |
 | --- | --- |
-| Version | 3.4 |
+| Version | 3.5 |
 | Dernière modification | 2026-11-07 |
 | Statut | Proposé (à valider par Mickaël) |
 | Responsable | Mickaël Thomas |
@@ -34,6 +34,7 @@
 | 3.2 | 2026-11-07 | Sens des flèches Funding et Moë-Kan, accord de principe distingué de l'autorisation de dépense, critères de bascule du collecteur maison |
 | 3.3 | 2026-11-07 | OIA SEO Command rétabli comme centre opérationnel de Visibility, stratégie d'intégration des moteurs open source |
 | 3.4 | 2026-11-07 | Cadre de Shyrka (CADRE.md) remplace la doctrine, P8 reçoit Ollama local + présence + identité évolutive, P9 reçoit l'atelier d'identité, chantier Espace personnel ajouté après J0, P6 constate l'absence de MCP existant et part de zéro |
+| 3.5 | 2026-11-07 | P4 : Bifrost ajouté aux passerelles candidates, versions épinglées et audit de la chaîne d'approvisionnement avant toute installation |
 
 > Emplacement de référence : `docs/roadmap-oia-shyrka-souffleur.md` dans le repo OolalaDXB/OIA. Toute autre copie (Claude Doc, export GPT) est une copie de lecture. `docs/roadmap.md` reste la roadmap d'OIA Funding.
 
@@ -191,7 +192,7 @@ P3 construit ce qui appartient en propre à OIA Visibility et le rend prêt pour
 
 ## P4 · Souffleur / routage : passerelle LLM
 
-**Première fonction de Souffleur : le routage.** La passerelle LLM fournit un point d'accès commun, observable et contrôlé aux fournisseurs d'IA pour toutes les applications. Souffleur définit les politiques de choix de modèles par tâche ; la passerelle les applique et journalise les appels. LiteLLM, Portkey et leurs alternatives sont évalués d'abord (licences, fonctions, déploiement). `packages/providers` conserve les contrats métier et les extractions structurées : un proxy générique ne doit pas les remplacer sans preuve d'intérêt. **État constaté dans OIA :** l'abstraction `packages/providers` existe, mais `createProviderFromEnv` ne comporte pas encore de routeur dynamique et ne fournit pas d'adaptateur OpenAI opérationnel.
+**Première fonction de Souffleur : le routage.** La passerelle LLM fournit un point d'accès commun, observable et contrôlé aux fournisseurs d'IA pour toutes les applications. Souffleur définit les politiques de choix de modèles par tâche ; la passerelle les applique et journalise les appels. LiteLLM, Portkey, Bifrost et leurs alternatives sont évalués d'abord (licences, fonctions, déploiement). **Règle d'installation des candidats :** aucune installation, même locale ou d'essai, avant un audit de la chaîne d'approvisionnement (provenance du dépôt et des images, signatures ou empreintes, dépendances, scripts d'installation, télémétrie, droits demandés) consigné dans un rapport ; versions épinglées par tag **et** empreinte (image ou paquet), jamais `latest` ni plage de versions ; montée de version uniquement après un nouvel audit. `packages/providers` conserve les contrats métier et les extractions structurées : un proxy générique ne doit pas les remplacer sans preuve d'intérêt. **État constaté dans OIA :** l'abstraction `packages/providers` existe, mais `createProviderFromEnv` ne comporte pas encore de routeur dynamique et ne fournit pas d'adaptateur OpenAI opérationnel.
 
 - Routage par tâche, projet, fournisseur et sensibilité des données, avec replis explicites et testés.
 - Budgets, limites de débit et arrêt automatique ; secrets centralisés, ce qui règle le piège de `ANTHROPIC_API_KEY`.
@@ -300,7 +301,7 @@ Règles d'intégration :
 - OIA reste entièrement en TypeScript : Crawlie est utilisé en binaire, sans chaîne de compilation Rust dans le dépôt.
 - Les agents de SEO Command n'accèdent aux moteurs qu'en lecture ; les outils qui déclenchent une action (par exemple le lancement d'un crawl CrawlSEO) passent par une mission validée.
 - Appropriation sélective : un fork ou le remplacement d'une fonction n'est décidé qu'après une preuve d'intérêt, selon les critères de bascule de P3 ; un fork conserve les avis de licence d'origine et est documenté dans un ADR.
-- Hors du socle initial : Canonry (plan B de collecte AEO), LiteLLM et Portkey (à évaluer pour Souffleur en P4).
+- Hors du socle initial : Canonry (plan B de collecte AEO), LiteLLM, Portkey et Bifrost (à évaluer pour Souffleur en P4, après audit de la chaîne d'approvisionnement et versions épinglées).
 
 ## En parallèle et en attente
 

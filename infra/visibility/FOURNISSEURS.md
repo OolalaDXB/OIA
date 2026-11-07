@@ -34,7 +34,89 @@ OpenRouter), plus une réserve de budget avant chaque lot de mesure. Sans
 cette double précaution, un dépassement peut passer sous le radar du
 script le temps que l'estimation ou l'API de solde se mette à jour.
 
+## 0 quater. Décision du 2026-11-07 : API directes, J0 recalculé
+
+Remplace les identifiants et le budget du § 0 ter pour la fenêtre J0 du premier pilote. Le
+tableau de compatibilité (fournisseur et modèle, fichier et ligne d'Elmo
+0.7.7) est dans `reports/2026-11-07-decisions-mickael.md`.
+
+**Règle** : API directe partout où Elmo la gère ; un moteur qu'Elmo
+n'appelle que via OpenRouter attend la décision de Mickaël (OpenRouter à
+5 $ ou moteur retiré de J0) ; aucun adaptateur maison avant P3.
+
+| Moteur | Accès dans Elmo 0.7.7 | Modèle | Statut J0 |
+|---|---|---|---|
+| chatgpt | OpenAI direct | `gpt-6-luna` | retenu |
+| claude | Anthropic direct | `claude-sonnet-5-5` (vérifié sur platform.claude.com : 2 $ / 10 $ par M, recherche web acceptée) | retenu |
+| mistral | Mistral direct | `mistral-medium-latest` | retenu |
+| gemini | OpenRouter seulement | Gemini 3 Flash = `google/gemini-3-flash-preview` sur OpenRouter (0,50 $ / 3 $ par M + 0,014 $ par recherche). Le slug `google/gemini-3-flash` cité au § 0 ter n'existe pas (404). | **décision Mickaël** |
+| perplexity | OpenRouter seulement | `perplexity/sonar` | **décision Mickaël** |
+| grok | OpenRouter seulement | `x-ai/grok-4.5` (seul slug Grok testé par Elmo) | **décision Mickaël** (sixième moteur) |
+| Jev | TypeSafe direct (`TYPESAFE_API_KEY`) | `jev-1.13.0`, épinglé par Elmo | retenu |
+
+Les clés Google (Gemini), Perplexity et xAI créées par Mickaël ne sont lues
+par aucun fournisseur d'Elmo 0.7.7 : elles restent dans Proton Pass.
+
+### Budget J0 du premier pilote (10 questions × moteurs × 5 jours)
+
+`RUNS_PER_PROMPT=1`, `DEFAULT_DELAY_HOURS=24` : 50 appels par moteur sur
+la fenêtre. Hypothèses par appel : 10 k tokens d'entrée (question +
+résultats de recherche facturés comme entrée), 1,5 k de sortie en typique
+(2,5 k pour Claude, dont la réflexion adaptative de Sonnet 5.5) ;
+le **pire cas** prend la sortie au plafond d'Elmo (8 000 tokens, réflexion
+comprise) et, pour Claude, la nouvelle tentative qu'Elmo fait après une
+erreur de recherche. Plafonds de recherche fixés par Elmo : 2 appels
+d'outil par run chez OpenAI, 1 chez Anthropic.
+
+| Poste | Prix (source, 2026-11-07) | Typique / appel | Pire cas / appel | Fenêtre typique | Fenêtre pire cas |
+|---|---|---|---|---|---|
+| chatgpt `gpt-6-luna` | 0,10 / 0,50 $ par M ; recherche 10 $ / 1 000 (developers.openai.com) | 0,022 $ | 0,025 $ | 1,10 $ | 1,25 $ |
+| claude `claude-sonnet-5-5` | 2 / 10 $ par M ; recherche 10 $ / 1 000 (platform.claude.com) | 0,055 $ | 0,22 $ | 2,75 $ | 11,00 $ |
+| mistral `mistral-medium-latest` | estimation du § 0 ter (prix de l'outil web_search non publié sur la page tarifs) | 0,030 $ | 0,050 $ | 1,50 $ | 2,50 $ |
+| Jev (≈ 150 réponses à juger) | 0,15 à 0,35 $ / 1 000 (§ 0 ter) | — | — | < 0,10 $ | < 0,10 $ |
+| Onboarding Mistral (une fois) | `mistral-large-latest` | — | — | < 0,20 $ | < 0,50 $ |
+| **Total, trois moteurs directs** | | | | **≈ 5,6 $** | **≈ 15,4 $** |
+| + gemini `google/gemini-3-flash-preview` (si OpenRouter) | 0,50 / 3 $ par M + 0,014 $ / recherche (openrouter.ai) | 0,024 $ | 0,043 $ | 1,20 $ | 2,15 $ |
+| + perplexity `perplexity/sonar` (si OpenRouter) | 1 / 1 $ par M + 0,005 $ / recherche | 0,010 $ | 0,016 $ | 0,50 $ | 0,80 $ |
+| + grok `x-ai/grok-4.5` (si OpenRouter et sixième moteur) | 2 / 6 $ par M + 0,005 $ / recherche | 0,034 $ | 0,073 $ | 1,70 $ | 3,65 $ |
+| **Total, six moteurs** | | | | **≈ 9,0 $** | **≈ 22,0 $** |
+
+Recherches web comprises dans les lignes ci-dessus : au plus 100 chez
+OpenAI (1 $), 100 chez Anthropic avec les nouvelles tentatives (1 $), 50
+chez Google via OpenRouter (0,70 $), 50 chez Perplexity et 50 chez xAI
+(0,25 $ chacun). Tous les scénarios restent sous le plafond de 30 $, pire
+cas compris.
+
+**Écart avec l'estimation d'Elmo** : Elmo compte 0,02 $ par run Anthropic
+avec recherche (`packages/lib/src/usage/cost.ts:24,33`), quel que soit le
+modèle. Avec Sonnet 5.5, le coût réel typique est près de 3 fois plus élevé :
+`cost-guard.sh` sous-estimera Claude. D'où la protection par fournisseur
+ci-dessous, qui ne dépend pas de l'estimation.
+
+### Protection par fournisseur (plafond opposable)
+
+La somme des crédits prépayés ne dépasse pas le plafond de 30 $ : même si
+`cost-guard.sh` lit mal, aucun fournisseur ne peut dépenser plus que son
+crédit.
+
+| Fournisseur | Crédit prépayé | Recharge automatique | Limite supplémentaire | Besoin J0 (pire cas) |
+|---|---|---|---|---|
+| OpenAI | 5 $ | coupée | limite mensuelle du projet `oia-visibility` | 1,25 $ |
+| Anthropic | 12 $ | coupée | **espace de travail dédié `oia-visibility`, limite de dépense 12 $ / mois**, clé créée dans cet espace | 11,00 $ |
+| Mistral | 5 $ | coupée | clé dédiée `oia-visibility` | 3,00 $ |
+| TypeSafe (Jev) | minimum proposé, au plus 3 $ | coupée | — | < 0,10 $ |
+| OpenRouter (si retenu) | 5 $ | coupée | limite de crédit sur la clé | 6,60 $ avec Grok, 2,95 $ sans |
+| **Total immobilisé** | **≤ 30 $** | | | |
+
+Si OpenRouter est retenu **avec** Grok, le pire cas (6,60 $) dépasse les
+5 $ : OpenRouter refuserait les derniers appels (la fenêtre perd des
+mesures, mais rien n'est dépensé au-delà). Pour l'éviter, passer
+OpenRouter à 7 $ et Anthropic à 10 $ (pire cas Claude à 11 $ peu
+probable), toujours dans les 30 $.
+
 ## 0 ter. Modèles mesurés, proches des applications grand public (A6, mis à jour 2026-11-07)
+
+> **Remplacé pour J0 par le § 0 quater** (décision du 2026-11-07). Conservé pour l'historique des vérifications et des prix.
 
 Vérification documentaire des identifiants retenus, à partir des pages
 officielles consultées le 2026-11-07. Les cinq moteurs sont confirmés.
@@ -52,8 +134,10 @@ clés posées.
 | perplexity (via OpenRouter) | Perplexity Sonar | `perplexity/sonar` avec `:online` | Oui (Sonar) | **Vérifié** sur openrouter.ai/perplexity/sonar : 1,00 $ / 1,00 $ par M de tokens + 5,00 $ / 1 000 recherches web. |
 | mistral (Mistral direct) | Le Chat (modèle de base) | `mistral-medium-latest` avec `:online` (Conversations API, outil `web_search`) | Oui | **Vérifié** sur docs.mistral.ai/studio/agents/agent-tools/websearch : l'API Conversations accepte `tools: [{type:"web_search"}]`. Alias `-latest` qui évolue ; la version servie est stockée par Elmo (`prompt_runs.version`). |
 
-Jev (juge des mentions) : `typesafe/jev-1.13` via OpenRouter. Pas modifié
-depuis le 2026-11-05.
+Jev (juge des mentions) : `typesafe/jev-1.13` via OpenRouter. **Remplacé le
+2026-11-07 par TypeSafe en direct** (§ 0 quater). Le slug `typesafe/jev-1.13`
+n'apparaît plus dans la liste publique d'OpenRouter (seul `typesafe/jev-router`
+y figure, vérifié le 2026-11-07).
 
 ### Modèles alternatifs proches de l'application grand public (décision Mickaël)
 

@@ -8,20 +8,27 @@ schemaVersion: 1
 # questions en anglais, et les réponses seront conservées puis rapportées (reportLanguages
 # = en pour Mistral sur ce sujet). Décision de ne pas exclure, pour que la comparaison des
 # cinq moteurs soit homogène sur J0.
+#
+# Décisions du 2026-11-07 : API directe partout où Elmo 0.7.7 la gère (OpenAI, Anthropic,
+# Mistral) ; Jev en direct chez TypeSafe. Gemini et Perplexity ne passent que par OpenRouter
+# dans Elmo : lignes mises en commentaire EN ATTENTE DE DÉCISION de Mickaël (OpenRouter à 5 $
+# ou moteurs retirés de J0). Grok idem, en sixième moteur. Voir FOURNISSEURS.md § 0 quater.
 engines:
   - { model: chatgpt,    collection: api, webSearch: true, note: "OpenAI en direct (:online, outil web_search)" }
-  - { model: claude,     collection: api, webSearch: true, note: "Anthropic en direct (:online, outil web_search)" }
-  - { model: gemini,     collection: api, webSearch: true, note: "via OpenRouter (recherche Google native)" }
-  - { model: perplexity, collection: api, webSearch: true, note: "via OpenRouter (Sonar)" }
+  - { model: claude,     collection: api, webSearch: true, note: "Anthropic en direct, claude-sonnet-5-5 (:online, outil web_search)" }
+  # En attente de décision (OpenRouter seulement dans Elmo 0.7.7) :
+  # - { model: gemini,     collection: api, webSearch: true, note: "via OpenRouter, google/gemini-3-flash-preview" }
+  # - { model: perplexity, collection: api, webSearch: true, note: "via OpenRouter (Sonar)" }
+  # - { model: grok,       collection: api, webSearch: true, note: "via OpenRouter, x-ai/grok-4.5 (sixième moteur)" }
   - { model: mistral,    collection: api, webSearch: true, note: "Mistral en direct (Conversations API + outil web_search). Mesuré en anglais pour le pilote J0 (langue unique du panel)." }
-# Jev reste activé via OpenRouter (TYPESAFE_API_KEY vide, OPENROUTER_API_KEY renseignée — voir elmo/.env.example).
+# Jev en direct chez TypeSafe (TYPESAFE_API_KEY, décision 2026-11-07 — voir elmo/.env.example).
 windows:
   - id: j0
     kind: baseline
     days: 5
     panelVersion: 2
     status: planned
-    note: "Mesure de départ, 5 moteurs. Dates fixées au démarrage du worker, après validation du panel."
+    note: "Mesure de départ, 3 moteurs directs (5 ou 6 si OpenRouter est retenu). Dates fixées au démarrage du worker, après validation du panel."
 freezes:
   - id: freeze-j0
     scope: [site, repository]

@@ -1,30 +1,46 @@
 # Runbook J0 · OIA Visibility · Coach Gari
 
-Mise à jour 2026-11-07. Lancement du premier pilote (`coach-gari`) en cinq
-moteurs API plafonnés à 30 $/mois. Toutes les étapes sont faites par
+Mise à jour 2026-11-07. Lancement du premier pilote (`coach-gari`) en
+moteurs API directs plafonnés à 30 $/mois. Toutes les étapes sont faites par
 Mickaël sur le Mac Studio ; aucune n'est exécutée par un agent Claude
 Code. Durée estimée : 45 min pour poser les clés, 5 min de lancement, puis
 cinq journées pendant lesquelles un contrôle quotidien suffit.
 
 ## 0 · Avant de poser une clé
 
-Préparer les quatre comptes (ou vérifier qu'ils sont déjà prêts). **Règle
-commune** : crédit prépayé + recharge automatique **désactivée** partout.
-Sans cette double précaution, le plafond logiciel de `cost-guard.sh`
-n'arrête rien tant que l'estimation ou le solde reporté par le
-fournisseur n'a pas rattrapé la dépense réelle (voir FOURNISSEURS.md
-section « Plafond logiciel et plafond réel »).
+Mise à jour 2026-11-07 (décisions de Mickaël, `FOURNISSEURS.md` § 0
+quater) : API directes partout où Elmo les gère, Jev en direct chez
+TypeSafe. Gemini, Perplexity et Grok ne passent que par OpenRouter dans
+Elmo 0.7.7 : **en attente de décision** (OpenRouter à 5 $ ou moteurs
+retirés de J0).
 
-| Fournisseur | Compte | Clé à créer | Crédit prépayé minimum |
+**Règle commune** : crédit prépayé + recharge automatique **coupée**
+partout, et la somme des crédits ne dépasse pas le plafond de 30 $. Sans
+cette précaution, le plafond logiciel de `cost-guard.sh` n'arrête rien
+tant que l'estimation ou le solde reporté n'a pas rattrapé la dépense
+réelle (et l'estimation d'Elmo sous-estime Claude Sonnet 5.5).
+
+| Fournisseur | Clé | Crédit prépayé | Limite supplémentaire |
 |---|---|---|---|
-| OpenAI | compte perso ou OIA, carte en dépôt mais recharge auto **désactivée** | `oia-visibility` (scope restreint si possible) | 5 $ |
-| Anthropic | idem | `oia-visibility` | 5 $ |
-| Mistral | **compte Mistral existant de Mickaël** (une clé dédiée `oia-visibility` pour séparer la dépense OIA Visibility de celle d'OIA Funding) | `oia-visibility` | 5 $ |
-| OpenRouter | compte dédié OIA | `oia-visibility` | 5 $ (sert à Gemini + Perplexity + Jev) |
+| OpenAI | `oia-visibility` | 5 $ | limite mensuelle du projet |
+| Anthropic | `oia-visibility`, créée **dans l'espace de travail dédié** | 12 $ | limite de dépense de l'espace : 12 $ / mois |
+| Mistral | `oia-visibility` (compte existant, séparée d'OIA Funding) | 5 $ | — |
+| TypeSafe (Jev) | `oia-visibility` | minimum proposé, au plus 3 $ | — |
+| OpenRouter | **seulement si Mickaël le retient** | 5 $ (7 $ avec Grok, Anthropic ramené à 10 $) | limite de crédit sur la clé |
 
-Les quatre clés totalisent ≈ 20 $ immobilisés, bien en-dessous du
-plafond. Jev consomme du crédit OpenRouter (pas de compte TypeSafe
-séparé).
+Cases à cocher avant de poser la première clé :
+
+- [ ] OpenAI : recharge automatique coupée (Billing → Auto recharge).
+- [ ] OpenAI : limite mensuelle posée sur le projet de la clé.
+- [ ] Anthropic : espace de travail dédié `oia-visibility` créé.
+- [ ] Anthropic : limite de dépense posée sur cet espace (12 $ / mois).
+- [ ] Anthropic : clé créée dans cet espace, pas dans l'espace par défaut.
+- [ ] Anthropic : recharge automatique coupée (Billing).
+- [ ] Mistral : recharge automatique coupée, clé dédiée `oia-visibility`.
+- [ ] TypeSafe : recharge automatique coupée (ou facturation sans carte enregistrée).
+- [ ] OpenRouter (si retenu) : recharge automatique coupée, limite de crédit sur la clé.
+- [ ] Somme des crédits prépayés ≤ 30 $.
+- [ ] Clés Google (Gemini), Perplexity et xAI laissées dans Proton Pass : Elmo 0.7.7 ne les lit pas.
 
 ## 1 · Poser les clés sur le Mac
 
@@ -37,11 +53,11 @@ Les clés **ne sont jamais exportées dans le shell** — elles iraient dans
 cd ~/OIA/infra/visibility/elmo
 cp -n .env.example .env               # ne jamais écraser un .env déjà posé
 # Ouvrir .env dans un éditeur et compléter UNIQUEMENT :
-#   OPENAI_API_KEY=sk-...
-#   ANTHROPIC_API_KEY=sk-ant-...
+#   OPENAI_API_KEY=...
+#   ANTHROPIC_API_KEY=...         (clé de l'espace de travail dédié)
 #   MISTRAL_API_KEY=...
-#   OPENROUTER_API_KEY=sk-or-...
-#   TYPESAFE_API_KEY=            (laissé vide : Jev routé via OpenRouter)
+#   TYPESAFE_API_KEY=...          (Jev en direct chez TypeSafe)
+#   OPENROUTER_API_KEY=           (VIDE sauf décision de Mickaël)
 # Les autres variables (ELMO_POSTGRES_PASSWORD, ELMO_ENCRYPTION_KEY,
 # BETTER_AUTH_SECRET, DEPLOYMENT_ID) ont été générées une fois par
 # scripts/init-env.sh et sauvegardées hors machine (SECRETS.md).
@@ -67,9 +83,10 @@ cd ~/OIA/infra/visibility
 #         donc l'arrêt est un no-op, mais le journal trace la décision.
 ```
 
-Si le script échoue sur la lecture OpenRouter (clé absente, mauvaise
-syntaxe), il affiche `stop-worker(cost-unreadable)` : vérifier le
-contenu de `.env` et relire la ligne OPENROUTER_API_KEY.
+Sans OpenRouter, la colonne `openrouter_cum_usd` vaut `n/a` : normal avec
+`OIA_VIS_COST_SOURCE=max`. Ne pas passer en `real` sans OpenRouter (le
+script s'arrêterait sur `cost-unreadable`). Les coûts OpenAI, Anthropic,
+Mistral et TypeSafe se relèvent dans leurs consoles (`OIA_VIS_MANUAL_COST_USD`).
 
 ## 3 · Démarrer Elmo (web + Postgres + migrations), **worker arrêté**
 
@@ -100,8 +117,8 @@ pnpm --filter @oia/visibility-infra subjects elmo-brief coach-gari > /tmp/brief-
 ```
 
 Il contient : la marque (slug, nom, site, alias, domaines additionnels),
-les cinq moteurs à activer (`chatgpt, claude, gemini, perplexity,
-mistral`), les concurrents (Playtomic, Ultimate Performance, Future,
+les moteurs à activer (`chatgpt, claude, mistral` au 2026-11-07, plus
+`gemini, perplexity, grok` si OpenRouter est retenu), les concurrents (Playtomic, Ultimate Performance, Future,
 Caliber), et les dix questions actives (annexe B du plan SEO/AEO).
 
 Pour simuler l'ordre des appels d'API qu'Elmo recevrait :
@@ -118,8 +135,9 @@ Saisir ensuite dans Elmo (interface web) :
 1. **Brand → Create** : coller `brand.slug`, `brand.name`, `brand.website`.
    Dans « Additional domains » : `coachgari.com`. Dans « Aliases » : les
    trois alias du brief.
-2. **Brand → LLM settings** : activer `chatgpt`, `claude`, `gemini`,
-   `perplexity`, `mistral`. **Décocher** tout autre moteur (pas de
+2. **Brand → LLM settings** : activer `chatgpt`, `claude`, `mistral`
+   (plus `gemini`, `perplexity`, `grok` seulement si OpenRouter est
+   retenu, voir étape 5). **Décocher** tout autre moteur (pas de
    fallback par défaut d'Elmo).
 3. **Brand → Competitors** : ajouter les quatre concurrents ; cocher
    « proposed » (passera en « confirmed » quand Mickaël aura tranché).
@@ -132,30 +150,27 @@ Saisir ensuite dans Elmo (interface web) :
 Faire une **capture d'écran** de la page « Prompts » (10 questions
 cochées) à sauvegarder dans `~/oia-visibility-data/j0/elmo-prompts.png`.
 
-## 5 · Décider des modèles
+## 5 · Modèles (décidés le 2026-11-07)
 
-Les identifiants API par défaut, mis dans `SCRAPE_TARGETS`, sont
-documentés dans `FOURNISSEURS.md` § 0 ter. **À confirmer par Mickaël
-avant cette étape** :
-
-- Gemini : `google/gemini-2.5-flash` déprécié le 2026-11-02 par Google.
-  Recommandation : `google/gemini-3-flash:online` dès J0 (voir décision
-  en attente n° 1 dans FOURNISSEURS.md).
-- Claude : par défaut `claude-haiku-5-5` (coût minimal, aligné sur
-  `gpt-6-luna`). Si Mickaël choisit `claude-sonnet-4-6` ou
-  `claude-opus-4-7` pour se rapprocher de l'app, le surcoût sur J0 reste
-  dans le plafond (voir décision en attente n° 2).
-- Les trois autres : pas de changement (`gpt-6-luna`, `perplexity/sonar`,
-  `mistral-medium-latest`).
-
-Une fois tranché, poser dans `.env` :
+Trois moteurs directs retenus : `gpt-6-luna`, `claude-sonnet-5-5`
+(identifiant vérifié sur platform.claude.com), `mistral-medium-latest`.
+Poser dans `.env` :
 
 ```
-SCRAPE_TARGETS=chatgpt:openai-api:gpt-6-luna:online,claude:anthropic-api:claude-haiku-5-5:online,gemini:openrouter:google/gemini-2.5-flash:online,perplexity:openrouter:perplexity/sonar:online,mistral:mistral-api:mistral-medium-latest:online
+SCRAPE_TARGETS=chatgpt:openai-api:gpt-6-luna:online,claude:anthropic-api:claude-sonnet-5-5:online,mistral:mistral-api:mistral-medium-latest:online
 ```
 
-(remplacer `gemini-2.5-flash` par `gemini-3-flash` et/ou
-`claude-haiku-5-5` par le modèle choisi si bascule).
+Seulement si Mickaël retient OpenRouter, ajouter à la fin de la ligne :
+
+```
+,gemini:openrouter:google/gemini-3-flash-preview:online,perplexity:openrouter:perplexity/sonar:online
+```
+
+et, si Grok est retenu comme sixième moteur :
+`,grok:openrouter:x-ai/grok-4.5:online`.
+
+Dans Elmo, **Brand → LLM settings** : n'activer que les moteurs présents
+dans `SCRAPE_TARGETS` (étape 4).
 
 ## 6 · Démarrer le worker
 
@@ -163,7 +178,7 @@ SCRAPE_TARGETS=chatgpt:openai-api:gpt-6-luna:online,claude:anthropic-api:claude-
 cd ~/OIA/infra/visibility/elmo
 docker compose --env-file .env -f compose.yaml up -d worker
 docker compose logs -f worker
-# Attendu : connexion à Postgres, enregistrement des cinq moteurs,
+# Attendu : connexion à Postgres, enregistrement des moteurs de SCRAPE_TARGETS,
 # premier run lancé à l'heure UTC qui suit le démarrage.
 ```
 
@@ -236,7 +251,7 @@ quand la fenêtre passe à `done`, voir `src/load.ts` → `activeFreezes`).
 - Export du rapport (statistiques, exactitude des faits, revue croisée)
   et archivage dans `infra/visibility/subjects/coach-gari/reports/j0/`.
 - Relevé manuel des coûts réels dans chaque console (OpenAI, Anthropic,
-  Mistral), à reporter dans la colonne `manual_usd` du journal
+  Mistral, TypeSafe), à reporter dans la colonne `manual_usd` du journal
   (`OIA_VIS_MANUAL_COST_USD`), pour que le plafond logiciel soit lu sur
   des chiffres facturés et non seulement sur l'estimation d'Elmo.
 - Décision Mickaël : mesure suivante en M+1, ou fenêtre de contrôle plus
