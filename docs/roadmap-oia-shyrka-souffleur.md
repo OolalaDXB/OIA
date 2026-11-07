@@ -4,7 +4,7 @@
 
 | Champ | Valeur |
 | --- | --- |
-| Version | 3.12 |
+| Version | 3.13 |
 | Dernière modification | 2026-11-08 |
 | Statut | Proposé (à valider par Mickaël) |
 | Responsable | Mickaël Thomas |
@@ -47,6 +47,7 @@
 | 3.10 | 2026-11-08 | Mandat v8. Principe : Lovable pour l'interface, Claude Code pour les données ; interface `/oia` retirée, console d'origine rétablie à l'identique, `packages/ui-tokens` retiré. Money Lookup remplace Funding, Tenders, Ventures et Signals comme module : audit des données (A0), migrations 0003 à 0005 à relire, vues par écran, chargeur idempotent, reprise du travail du navigateur. Visibility : contrat de données, vues 0006, démonstration fictive ; constat bloquant sur `vis` 0004 pour Supabase. Piste Shyrka autonome : ADR 0003, noyau simulé (`packages/shyrka`), contrat de la zone Contexte. Voix Aurélie en sortie dans la version 0, alignée partout. Rien n'est appliqué en production |
 | 3.11 | 2026-11-08 | Décisions de Mickaël : la base Supabase d'OIA lui est réservée (la copie de BEAU en est retirée), pas de projet séparé ; migration `0002a` qui réserve les tables aux comptes de Mickaël, à appliquer maintenant, sans changer la console ; la console garde son stockage local et `0003` attend l'application Lovable ; `0002` rangée comme migration de départ, `0001` archivée ; réseaux sociaux alignés sur la liste de Visibility ; sentiment, position et échecs de collecte en version 2 du contrat Visibility, après J0 |
 | 3.12 | 2026-11-08 | Mandat v9 (nuit de production). **P1 : J0 en cours, cockpit OIA prêt à publier.** Base OIA migrée en production (0002a à 0007, vis 0001 à 0004, 0006), un seul modèle d'appartenance, transition temporaire de la console (`0003a`). **Money Lookup en production** côté données : 271 opportunités chargées, 0 écart avec la console, rafraîchissement quotidien prêt. Visibility : J0 de Coach Gari en base, synchronisé chaque jour depuis Elmo en lecture seule. Shyrka en texte dans le cockpit (`shyrka-chat`, Mistral, conversations et brouillons en base) et recherche assistée (`money-match`), budget IA commun de 5 $ par mois. Contrat de données v1 figé, brief Lovable et liste de mise en production prêts. Publication : après le branchement Lovable et la réception par Mickaël |
+| 3.13 | 2026-11-08 | Mandat v10 (Shyrka exécutive, sur `main`). **Mémoire persistante sur le Mac** (ADR 0004 : SQLite dans le volume chiffré, retenir/corriger/oublier/mode privé, testée en vrai après redémarrage). **Corpus initial** de 18 sources, recherche sourcée. **Veille réelle** des six produits en lecture seule (GitHub, HTTP, Visibility, Money Lookup ; Vercel et Supabase : accès manquant), incidents dédupliqués. **Registre des missions** et vérification isolée (`sandbox-exec`). Première mission OIA menée jusqu'à la revue : **bloquée** à la limite de deux tentatives, la revue indépendante ayant trouvé des faux positifs (PR #6, brouillon). Briefing déterministe, CLI `pnpm shyrka:executive`, contrat Lovable exécutif v1 (raccordement distant à réaliser). Rapport : `infra/shyrka/reports/2026-11-08-mandat-v10.md` |
 
 > Emplacement de référence : `docs/roadmap-oia-shyrka-souffleur.md` dans le repo OolalaDXB/OIA. Toute autre copie (Claude Doc, export GPT) est une copie de lecture. `docs/roadmap.md` reste la roadmap d'OIA Funding.
 
@@ -370,6 +371,8 @@ Chaque domaine garde ses propres mesures, publiées séparément.
 | Shyrka | Taux de réponses fondées, qualité du digest, tâches réalisées avec validation, utilité quotidienne, latence, coût par session |
 | Mémoire | Exactitude des rappels, part de leçons validées, leçons erronées corrigées, aucune fuite entre périmètres |
 
+**Shyrka exécutive (mandat v10, état au 2026-11-08).** Ce qui est livré relève de « Shyrka 2 · Te seconde » et de la mémoire locale de « Shyrka 3 », sans franchir leurs portes. Utilisable sur le Mac : mémoire persistante gouvernée (ADR 0004), corpus sourcé, veille des six produits, registre de missions, briefing (`pnpm shyrka:executive`). Non livré : raccordement au cockpit (contrat `docs/interface/contrat-donnees-shyrka-executive-v1.md` seulement), portée `cockpit` de la mémoire (migration de `shy_contexte` à relire), dispatch autonome des missions (exécution assistée seulement), essais micro. Répartition inchangée : Shyrka comprend et dialogue ; OIA orchestre et contrôle ; Souffleur route, capitalise l'expérience et audite.
+
 ## Décisions ouvertes
 
 - [ ] Relire et approuver le cadre de Shyrka (P0), `docs/shyrka/CADRE.md` (fichier renommé en 3.4 ; ex-`DOCTRINE.md`).
@@ -396,6 +399,12 @@ Chaque domaine garde ses propres mesures, publiées séparément.
 - [x] `infra/visibility/migrations/0004` corrigée pour Supabase par la session Visibility (commit `7093687`).
 - [ ] Relire et appliquer `vis` 0001 à 0004, puis 0006, quand les écrans Visibility de Lovable seront prêts.
 - [x] Base Supabase réservée à OIA, pas de projet séparé (2026-11-08).
-- [ ] Shyrka autonome : choisir le stockage réel du noyau et la durée des sauvegardes (`docs/shyrka/adr/0003-shyrka-autonome.md`).
+- [x] Shyrka autonome : stockage réel du noyau et durée des sauvegardes décidés (ADR 0004, 2026-11-08 : SQLite sur le Mac, volume chiffré, sauvegardes 30 jours) ; réalisé par le mandat v10.
 - [ ] Espace personnel : purger l'historique de la branche `feature/transformation-90-personal` et fermer la PR #3 avant toute publication (`docs/audits/2026-11-08-espace-personnel.md`).
 - [ ] Bifrost : lever les points à vérifier avec Docker avant tout essai en P4.
+- [ ] Mission Shyrka 01 (PR #6, bloquée) : autoriser une troisième tentative avec la correction de la revue, ou refuser (`pnpm shyrka:executive missions show eaffddbc`).
+- [ ] Raccorder Shyrka exécutive au cockpit : transport en lecture seule depuis le Mac et migration relue (`docs/interface/contrat-donnees-shyrka-executive-v1.md`).
+- [ ] Relire la migration de `shy_contexte` pour les champs de l'ADR 0004 (portée `cockpit` de la mémoire).
+- [ ] Veille : accorder une lecture Vercel (jeton en lecture) et Supabase (advisors, sans clé de service), ou les laisser non couvertes.
+- [ ] Portefeuille : rattacher ou non pro.outre-national.com à SILLON, les dépôts BEAU* autres que BEAU-capital-Dev, et confirmer le dépôt de référence de myOolala.
+- [ ] Fermer la PR #5 avec un renvoi au mandat v10 (ADR 0004, « alignée, pas fusionnée »).
