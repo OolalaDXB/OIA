@@ -23,6 +23,20 @@ données, `SHA256SUMS`), relue sur un Postgres jetable.
 | 7 | `0006_visibility_vues.sql` | `20261108010900` |
 | 8 | `0007_shyrka.sql` (bloc G) | voir le rapport du mandat v9 |
 
+## À appliquer (fichiers relus, non appliqués)
+
+| Ordre | Fichier | Effet | Prérequis |
+| --- | --- | --- | --- |
+| 9 | `0008_money_lookup_v2.sql` | Contrat Money Lookup **version 2** : table `oia_projet` (copie du registre) et quatorze vues de lecture pour que le cockpit remplace la console (projets, contacts, notes, tâches, vues enregistrées, demandes, brouillons de projet, liens, imports, rattachement, indicateurs, avis). Aucune vue existante ne change | 0007 appliquée |
+
+Après 0008 : charger les projets (`pnpm --filter @oia/money-lookup charger -- --projets --base …`,
+avec `OIA_CHARGEMENT_SUPABASE=oui`), puis ajouter cette commande au
+rafraîchissement quotidien (`packages/money-lookup/scripts/rafraichir.sh`).
+Retour arrière : bloc en tête de `0008_money_lookup_v2.sql`. Tests :
+`test/money-lookup-v2.test.ts` (séquence de production puis 0008, tests
+adverses) et `packages/money-lookup/test/projets.test.ts`. Parité avec la
+console : `docs/interface/parite-console-cockpit.md`.
+
 Données posées après les migrations (pas de structure) :
 `../production/a3_membres.sql` (A3).
 

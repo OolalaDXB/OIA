@@ -1,6 +1,6 @@
-# Contrat de données · Money Lookup · version 1
+# Contrat de données · Money Lookup · version 2
 
-2026-11-08 · mandat v8, blocs A1 et A4 · exigence 8.
+2026-11-08 · mandat v8, blocs A1 et A4 · exigence 8. Version 2 le même jour : les vues qui manquent pour remplacer la console (section « Version 2 »).
 **Lovable possède l'interface ; Claude Code possède les données.** Ce contrat
 est le seul lien entre les deux.
 
@@ -163,8 +163,287 @@ humain. Le chargeur refuse une base Supabase sans
 `OIA_CHARGEMENT_SUPABASE=oui` : ce chargement est réservé à Mickaël. Tests :
 `packages/money-lookup/test/chargeur.test.ts`.
 
+## Version 2 · les vues qui remplacent la console
+
+Migration `packages/database/supabase/migrations/0008_money_lookup_v2.sql`,
+**en fichier, non appliquée** : Mickaël l'applique après 0007. Inventaire des
+fonctions de la console et liste de parité : `docs/interface/parite-console-cockpit.md`.
+
+Mêmes règles que la version 1 : vues en `security_invoker`, lisibles par les
+membres de l'espace seulement (`oia_membre`) ; `anon` ne lit rien ; un compte
+connecté sans droit lit 0 ligne ; aucune écriture par une vue. Les vues de la
+version 1 sont inchangées : la version 2 n'ajoute que des vues, toutes en
+`_v1`. Colonnes et types relevés en base (test :
+`packages/database/test/money-lookup-v2.test.ts`).
+
+**États à prévoir**, en plus de ceux de la version 1 :
+- `ml_projets_v1` vide : « Registre non chargé » (la copie des projets n'a pas
+  encore tourné), et non « aucun projet » ;
+- `ml_liens_v1` sans ligne pour une adresse : « non vérifié » ;
+- `ml_indicateurs_*` : jamais de total qui additionne deux catégories, deux
+  sens ou deux devises.
+
+**Chargement des projets.** `pnpm --filter @oia/money-lookup charger -- --projets`
+produit un script idempotent (mise à jour seulement si le contenu change ; un
+projet sorti du registre est marqué, jamais supprimé). À ajouter au
+rafraîchissement quotidien après application de 0008.
+
+Exemple fictif (`ml_taches_v1`) : `{ "titre": "Relancer l'organisme fictif",
+"echeance": "2026-11-12", "statut": "OPEN", "en_retard": false,
+"projet": "projet-fictif" }`.
+
+### `ml_projets_v1`
+
+Projets du registre, pour l'étiquetage, les suggestions et la page Projets. Copiés depuis `registry/projects/*.yaml` par le chargeur ; le registre reste la référence.
+
+| Colonne | Type | Sens |
+| --- | --- | --- |
+| `espace_id` | uuid | espace de travail (studio : `00000000-0000-4000-8000-000000000001`) |
+| `slug` | text | identifiant du projet |
+| `nom` | text | nom |
+| `type` | text | `PRODUCT`, `VENTURE`, `ADVISORY`, `FOUNDATION`, `STUDIO` |
+| `statut` | text | `LIVE`, `PRIVATE_BETA`, `IN_DEVELOPMENT`, `PROTOTYPE`, `CONCEPT`, `ON_HOLD`, `DOSSIER_ON_REQUEST` |
+| `actif` | boolean | faux : gardé dans le registre mais hors de toute surface ; la console n'affiche que les actifs |
+| `une_ligne` | text | présentation en une ligne |
+| `url` | text | site public, ou `null` |
+| `secteurs` | ARRAY | secteurs (signal de rapprochement) |
+| `geographies` | ARRAY | géographies |
+| `types_financement` | ARRAY | types de financement recherchés |
+| `natures_suivies` | ARRAY | natures surveillées par la découverte |
+| `decouverte_active` | boolean | vrai si la découverte automatique tourne pour ce projet |
+| `revue_profil` | text | `DRAFT` (hypothèse de travail) ou `CONFIRMED_BY_OWNER` |
+| `mots_cles` | ARRAY | mots-clés (rapprochement) |
+| `exclusions` | ARRAY | exclusions : un mot présent écarte la suggestion |
+| `profil` | jsonb | entrée complète du registre (entités juridiques, découverte, revue du profil…) |
+| `sources` | jsonb | sources prévues pour le projet : `[{ id, nom, url, statut, natures, geographies, notes }]` |
+| `opportunites_etiquetees` | bigint | opportunités étiquetées vers ce projet (étiquettes seulement) |
+| `taches_ouvertes` | bigint | tâches ouvertes rattachées au projet |
+| `notes` | bigint | notes rattachées au projet |
+| `charge_le` | timestamp with time zone | dernière copie depuis le registre |
+| `retire_du_registre_le` | timestamp with time zone | date à laquelle le projet a quitté le registre, sinon `null` |
+
+### `ml_contacts_v1`
+
+Contacts de l'espace de travail. Données de tiers : à n'afficher qu'aux membres.
+
+| Colonne | Type | Sens |
+| --- | --- | --- |
+| `id` | uuid | identifiant stable |
+| `espace_id` | uuid | espace de travail (studio : `00000000-0000-4000-8000-000000000001`) |
+| `nom` | text | nom |
+| `organisation` | text | organisme |
+| `role` | text | fonction |
+| `email` | text | courriel |
+| `telephone` | text | téléphone |
+| `note` | text | note libre |
+| `record_id` | text | opportunité liée (`ml_toutes_v1.record_id`), ou `null` |
+| `projet` | text | slug du projet lié (`ml_projets_v1.slug`), ou `null` |
+| `cree_le` | timestamp with time zone | création |
+| `auteur` | text | compte qui a écrit (identifiant), ou `mickael` pour la console d'origine |
+| `import_id` | uuid | import d'origine (`ml_imports_v1.id`), ou `null` si écrit directement |
+
+### `ml_notes_v1`
+
+Notes de l'espace de travail ; une note sans `record_id` ni `projet` est une note libre.
+
+| Colonne | Type | Sens |
+| --- | --- | --- |
+| `id` | uuid | identifiant stable |
+| `espace_id` | uuid | espace de travail (studio : `00000000-0000-4000-8000-000000000001`) |
+| `texte` | text | texte |
+| `record_id` | text | opportunité liée (`ml_toutes_v1.record_id`), ou `null` |
+| `projet` | text | slug du projet lié (`ml_projets_v1.slug`), ou `null` |
+| `cree_le` | timestamp with time zone | création |
+| `auteur` | text | compte qui a écrit (identifiant), ou `mickael` pour la console d'origine |
+| `import_id` | uuid | import d'origine (`ml_imports_v1.id`), ou `null` si écrit directement |
+
+### `ml_taches_v1`
+
+Tâches de l'espace de travail.
+
+| Colonne | Type | Sens |
+| --- | --- | --- |
+| `id` | uuid | identifiant stable |
+| `espace_id` | uuid | espace de travail (studio : `00000000-0000-4000-8000-000000000001`) |
+| `titre` | text | titre |
+| `echeance` | date | échéance (date), ou `null` |
+| `statut` | text | `OPEN` ou `DONE` |
+| `faite_le` | timestamp with time zone | date de fin, `null` si ouverte |
+| `en_retard` | boolean | ouverte et échéance passée |
+| `record_id` | text | opportunité liée (`ml_toutes_v1.record_id`), ou `null` |
+| `projet` | text | slug du projet lié (`ml_projets_v1.slug`), ou `null` |
+| `cree_le` | timestamp with time zone | création |
+| `auteur` | text | compte qui a écrit (identifiant), ou `mickael` pour la console d'origine |
+| `import_id` | uuid | import d'origine (`ml_imports_v1.id`), ou `null` si écrit directement |
+
+### `ml_vues_enregistrees_v1`
+
+Vues enregistrées de la liste des opportunités.
+
+| Colonne | Type | Sens |
+| --- | --- | --- |
+| `id` | uuid | identifiant stable |
+| `espace_id` | uuid | espace de travail (studio : `00000000-0000-4000-8000-000000000001`) |
+| `nom` | text | nom donné |
+| `type` | text | `OPPORTUNITY` |
+| `filtres` | jsonb | filtres enregistrés (nature, recommandation, vérification, route, revue, projet, fraîcheur) |
+| `tri` | text | champ de tri |
+| `sens` | text | `asc` ou `desc` |
+| `cree_le` | timestamp with time zone | création |
+
+### `ml_demandes_v1`
+
+Demandes faites au worker : recherche pour un projet, ajout par lien, contrôle de liens.
+
+| Colonne | Type | Sens |
+| --- | --- | --- |
+| `id` | uuid | identifiant stable |
+| `espace_id` | uuid | espace de travail (studio : `00000000-0000-4000-8000-000000000001`) |
+| `type` | text | `DISCOVERY`, `INGEST_URL`, `LINK_CHECK` |
+| `charge` | jsonb | paramètres (`{ projects: [slug] }`, `{ url, projectSlug, kindHint }`) |
+| `statut` | text | `QUEUED`, `RUNNING`, `DONE`, `FAILED` |
+| `demande_le` | timestamp with time zone | date de la demande |
+| `demande_par` | text | auteur |
+| `commencee_le` | timestamp with time zone | début du traitement |
+| `terminee_le` | timestamp with time zone | fin du traitement |
+| `resultat` | jsonb | résultat rendu par le worker |
+| `erreur` | text | message d'erreur, ou `null` |
+
+### `ml_brouillons_projet_v1`
+
+Projets créés depuis l'interface, en attente d'écriture dans le registre par le worker.
+
+| Colonne | Type | Sens |
+| --- | --- | --- |
+| `slug` | text | identifiant proposé |
+| `espace_id` | uuid | espace de travail (studio : `00000000-0000-4000-8000-000000000001`) |
+| `contenu` | jsonb | entrée proposée, au format du registre |
+| `statut` | text | `PENDING`, `APPLIED`, `REJECTED` |
+| `cree_le` | timestamp with time zone | création |
+| `cree_par` | text | auteur |
+| `applique_le` | timestamp with time zone | date d'écriture dans le registre |
+| `commit_applique` | text | commit qui l'a écrit |
+| `erreur` | text | motif de refus, ou `null` |
+
+### `ml_liens_v1`
+
+Contrôle des liens. Une adresse sans ligne n'a jamais été vérifiée : afficher « non vérifié », jamais « valide ».
+
+| Colonne | Type | Sens |
+| --- | --- | --- |
+| `url` | text | adresse vérifiée |
+| `espace_id` | uuid | espace de travail (studio : `00000000-0000-4000-8000-000000000001`) |
+| `statut` | text | `OK` (fonctionne), `REDIRECTED` (déplacée), `DEAD` ou `UNREACHABLE` (cassée), autre valeur : non concluant |
+| `code_http` | integer | code HTTP, ou `null` |
+| `url_finale` | text | adresse après redirection |
+| `verifie_le` | timestamp with time zone | date du contrôle |
+| `note` | text | précision |
+| `trouve_dans` | ARRAY | opportunités où l'adresse apparaît |
+
+### `ml_imports_v1`
+
+Imports de sauvegardes du navigateur (A4) ; « Annuler cet import » : `oia_annuler_import(id)`.
+
+| Colonne | Type | Sens |
+| --- | --- | --- |
+| `id` | uuid | identifiant stable |
+| `espace_id` | uuid | espace de travail (studio : `00000000-0000-4000-8000-000000000001`) |
+| `importe_par` | uuid | compte qui a importé |
+| `exporte_le` | timestamp with time zone | date de la sauvegarde |
+| `importe_le` | timestamp with time zone | date de l'import |
+| `bilan` | jsonb | nombre ajouté par type |
+| `annule_le` | timestamp with time zone | date d'annulation, ou `null` |
+| `actif` | boolean | vrai tant que l'import n'est pas annulé |
+
+### `ml_rattachement_v1`
+
+Rattachement de chaque opportunité aux projets, selon la règle de la console : l'étiquette posée par un humain ; sinon chaque projet du registre dont la découverte l'a trouvée ; sinon aucun. Une opportunité non étiquetée peut compter pour plusieurs projets.
+
+| Colonne | Type | Sens |
+| --- | --- | --- |
+| `id` | uuid | opportunité (`ml_toutes_v1.id`) |
+| `espace_id` | uuid | espace de travail (studio : `00000000-0000-4000-8000-000000000001`) |
+| `projet` | text | slug du projet, `null` si non triée |
+| `rattachement` | text | `etiquette`, `decouverte` ou `aucun` |
+
+### `ml_indicateurs_v1`
+
+Indicateurs de la page « metrics », comptes seulement, par projet selon `ml_rattachement_v1` (`projet` null : non triées). Une opportunité découverte par deux projets compte dans les deux : ne pas additionner les lignes pour obtenir l'espace entier.
+
+| Colonne | Type | Sens |
+| --- | --- | --- |
+| `espace_id` | uuid | espace de travail (studio : `00000000-0000-4000-8000-000000000001`) |
+| `projet` | text | slug du projet lié (`ml_projets_v1.slug`), ou `null` |
+| `opportunites` | bigint | opportunités rattachées |
+| `etiquetees` | bigint | dont rattachées par étiquette |
+| `actives` | bigint | pas disparues de la source |
+| `a_trier` | bigint | actives sans décision humaine |
+| `approuvees` | bigint | dernière décision `APPROVE` |
+| `rejetees` | bigint | dernière décision `REJECT` |
+| `a_verifier` | bigint | dernière décision `NEEDS_VERIFICATION` |
+| `approuvees_bloquees` | bigint | approuvées mais gate non franchi |
+| `pretes` | bigint | entrantes, gate franchi, échéance non passée |
+| `verifiees` | bigint | vérifiées par un humain |
+| `avec_montant` | bigint | montant lisible |
+| `sans_montant` | bigint | montant inconnu |
+| `montants_peu_surs` | bigint | montant de confiance `BASSE` |
+| `sortantes` | bigint | sens `sortant` (acquisitions) |
+| `closes_sous_14_jours` | bigint | échéance dans les 14 jours |
+| `expirees` | bigint | échéance passée |
+| `sans_echeance` | bigint | aucune échéance lisible |
+| `derniere_veille` | timestamp with time zone | dernière fois qu'une de ces opportunités a été vue par la veille |
+
+### `ml_indicateurs_montants_v1`
+
+Montants par projet, jamais mélangés : une ligne par projet, catégorie, sens, devise et état de vérification. Les montants inconnus forment des lignes à part (`devise` et `somme_connue` à `null`). Aucun total global.
+
+| Colonne | Type | Sens |
+| --- | --- | --- |
+| `espace_id` | uuid | espace de travail (studio : `00000000-0000-4000-8000-000000000001`) |
+| `projet` | text | slug du projet lié (`ml_projets_v1.slug`), ou `null` |
+| `categorie` | USER-DEFINED | typologie financière obligatoire |
+| `sens` | USER-DEFINED | `entrant` ou `sortant` |
+| `devise` | text | code ISO, `null` pour les montants inconnus |
+| `verifie_par_humain` | boolean | état de vérification |
+| `opportunites` | bigint | opportunités de la ligne |
+| `pretes` | bigint | dont prêtes (gate franchi, échéance non passée) |
+| `closes_sous_14_jours` | bigint | dont échéance dans les 14 jours |
+| `somme_connue` | numeric | somme des montants de la ligne, dans sa devise |
+| `somme_pretes` | numeric | somme des montants prêts |
+| `montants_peu_surs` | bigint | montants de confiance `BASSE` |
+
+### `ml_indicateurs_repartition_v1`
+
+Répartitions par axe, pour l'espace entier (`portee` = `espace`) et par projet (`portee` = `projet`).
+
+| Colonne | Type | Sens |
+| --- | --- | --- |
+| `espace_id` | uuid | espace de travail (studio : `00000000-0000-4000-8000-000000000001`) |
+| `portee` | text | `espace` ou `projet` |
+| `projet` | text | slug du projet lié (`ml_projets_v1.slug`), ou `null` |
+| `axe` | text | `nature`, `recommandation`, `verification`, `decision`, `blocage` |
+| `valeur` | text | valeur de l'axe (pour `blocage` : la raison du gate) |
+| `opportunites` | bigint | nombre d'opportunités |
+
+### `ml_avis_v1`
+
+Historique complet des avis humains (journal d'audit) ; `ml_decision_v1` ne garde que le dernier.
+
+| Colonne | Type | Sens |
+| --- | --- | --- |
+| `id` | uuid | identifiant stable |
+| `espace_id` | uuid | espace de travail (studio : `00000000-0000-4000-8000-000000000001`) |
+| `record_id` | text | opportunité |
+| `action` | text | `APPROVE`, `REJECT`, `NEEDS_VERIFICATION`, `COMMENT` |
+| `commentaire` | text | commentaire |
+| `le` | timestamp with time zone | date |
+| `auteur` | text | auteur |
+| `gate_ok_au_moment` | boolean | état du gate au moment de l'avis |
+| `import_id` | uuid | import d'origine (`ml_imports_v1.id`), ou `null` si écrit directement |
+
 ## Historique du contrat
 
 | Version | Date | Changement |
 | --- | --- | --- |
 | 1 | 2026-11-08 | Création |
+| 2 | 2026-11-08 | Quatorze vues ajoutées pour remplacer la console (projets du registre, contacts, notes, tâches, vues enregistrées, demandes, brouillons de projet, contrôle des liens, imports, rattachement, trois vues d'indicateurs, historique des avis) ; table `oia_projet` ; migration 0008. Aucune vue de la version 1 ne change |

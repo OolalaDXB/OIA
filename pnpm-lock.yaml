@@ -336,6 +336,9 @@ importers:
       '@oia/ingestion':
         specifier: workspace:*
         version: link:../ingestion
+      '@oia/registry':
+        specifier: workspace:*
+        version: link:../registry
       '@oia/workspace':
         specifier: workspace:*
         version: link:../workspace

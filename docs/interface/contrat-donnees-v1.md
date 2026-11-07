@@ -682,4 +682,5 @@ l'utilisateur (le client ajoute l'en-tête `Authorization`).
 ## Historique
 
 - v1 · 2026-11-08 · mandat v9 : première version figée, en production.
+- Money Lookup, contrat version 2 · 2026-11-08 : quatorze vues ajoutées, sans rien changer à ce document ni aux vues ci-dessus (`contrat-donnees-money-lookup.md`, section « Version 2 » ; migration 0008, à appliquer).
 

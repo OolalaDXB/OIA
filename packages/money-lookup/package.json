@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@oia/ingestion": "workspace:*",
+    "@oia/registry": "workspace:*",
     "@oia/workspace": "workspace:*"
   },
   "devDependencies": {
