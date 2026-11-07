@@ -1,0 +1,39 @@
+# Fragment Compose pour lancer Crawlie dans un sandbox confiné (S5).
+#
+# Utilisation : `docker compose -f sandbox/compose.yaml run --rm crawlie <args>`.
+#
+# Le réseau `egress_public` est pensé pour être ISOLÉ de l'hôte : aucune
+# route par défaut vers 10/8, 172.16-31/12, 192.168/16, 169.254/16, fc00::/7
+# ni fe80::/10. Sur Mac avec Docker Desktop, la mise en place complète
+# de ces règles passe par le daemon (pf) et sort de ce fichier. La
+# couche logicielle `src/network/safe-fetch.ts` reste la première barrière.
+name: oia-sandbox
+
+services:
+  crawlie:
+    build:
+      context: ..
+      dockerfile: sandbox/Dockerfile
+    image: oia-sandbox:latest
+    networks:
+      - egress_public
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /work/output
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      CRAWLSEO_UPDATE_CHECK: "false"
+      DISABLE_TELEMETRY: "1"
+
+networks:
+  egress_public:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: oia-sandbox
+    ipam:
+      config:
+        - subnet: 10.200.0.0/24

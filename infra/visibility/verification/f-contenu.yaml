@@ -1,0 +1,14 @@
+schemaVersion: 1
+family: F
+title: "Contenu et offre"
+intro: "Ce que le propriétaire décide de dire, et comment c'est aligné aux vraies demandes."
+checks:
+  - { id: F01, label: "Chaque offre a sa page, avec à qui elle s'adresse, ce qu'elle comprend, où et comment", tool: manual, mode: manuel, severity: important, tags: [aeo] }
+  - { id: F02, label: "Prix ou fourchettes publics, ou explication claire de leur absence", tool: manual, mode: manuel, severity: important, tags: [aeo] }
+  - { id: F03, label: "Page à propos qui établit qui est derrière le site et pourquoi le croire", tool: manual, mode: manuel, severity: important, tags: [aeo] }
+  - { id: F04, label: "Preuves : réalisations, chiffres, témoignages vérifiables, certifications", tool: manual, mode: manuel, severity: important, tags: [aeo] }
+  - { id: F05, label: "FAQ fondée sur les vraies questions reçues", tool: manual, mode: manuel, severity: amélioration, tags: [aeo] }
+  - { id: F06, label: "Vocabulaire aligné sur les recherches réelles (Search Console, panel) plutôt que sur le jargon interne", tool: crawlseo, mode: mixte, severity: important, tags: [seo, aeo] }
+  - { id: F07, label: "Contenu daté et à jour ; pages obsolètes retirées ou redirigées", tool: manual, mode: manuel, severity: amélioration, tags: [seo] }
+  - { id: F08, label: "Pages trop minces fusionnées ou enrichies", tool: crawlie, mode: mixte, severity: amélioration, tags: [seo] }
+  - { id: F09, label: "Langues et marchés couverts conformes aux marchés visés", tool: manual, mode: manuel, severity: important, tags: [seo] }

@@ -1,0 +1,13 @@
+schemaVersion: 1
+family: H
+title: "Visibilité dans les réponses des IA"
+intro: "La mesure propre à OIA Visibility : panels, fenêtres, taux de mention, exactitude."
+checks:
+  - { id: H01, label: "Panel validé : questions non marquées et marquées, par langue et par marché", tool: panel, mode: manuel, severity: bloquant, tags: [aeo] }
+  - { id: H02, label: "Faits de référence validés par le propriétaire de la marque", tool: manual, mode: manuel, severity: bloquant, tags: [aeo] }
+  - { id: H03, label: "Taux de mention de la marque par moteur et par marché, avec intervalle", tool: elmo, mode: auto, severity: important, tags: [aeo] }
+  - { id: H04, label: "Exactitude des faits cités sur la marque (prix, offres, lieux, personnes)", tool: elmo, mode: mixte, severity: important, tags: [aeo] }
+  - { id: H05, label: "Sources citées par les IA : le site lui-même ou des tiers", tool: elmo, mode: auto, severity: important, tags: [aeo] }
+  - { id: H06, label: "Concurrents cités à la place de la marque, et pourquoi", tool: elmo, mode: mixte, severity: important, tags: [aeo] }
+  - { id: H07, label: "Fichier llms.txt utile et à jour, si pertinent", tool: crawlie, mode: auto, severity: amélioration, tags: [aeo] }
+  - { id: H08, label: "Robots des IA autorisés ou non dans robots.txt, selon le choix du client", tool: manual, mode: manuel, severity: important, tags: [aeo, legal] }

@@ -1,0 +1,10 @@
+schemaVersion: 1
+family: L
+title: "Mesure et fenêtres"
+intro: "Hygiène du protocole OIA : fenêtres, gels, budgets, versions."
+checks:
+  - { id: L01, label: "Commit et état publics de référence notés avant la première fenêtre", tool: repo-read, mode: auto, severity: bloquant, tags: [aeo] }
+  - { id: L02, label: "Gel respecté pendant la fenêtre : site, fiche Google, avis, annuaires", tool: repo-read, mode: mixte, severity: bloquant, tags: [aeo, legal] }
+  - { id: L03, label: "Modèles mesurés et versions consignés", tool: elmo, mode: auto, severity: important, tags: [aeo] }
+  - { id: L04, label: "Jours manquants consignés, sans reconstruction", tool: oia, mode: auto, severity: important, tags: [aeo] }
+  - { id: L05, label: "Budget de la fenêtre réservé avant le lancement", tool: oia, mode: auto, severity: bloquant, tags: [tech] }

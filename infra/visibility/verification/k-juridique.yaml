@@ -1,0 +1,9 @@
+schemaVersion: 1
+family: K
+title: "Juridique et confiance"
+intro: "Ce qui rend le site publiable et le rend « un peu plus citable » par les IA."
+checks:
+  - { id: K01, label: "Mentions légales complètes selon le pays", tool: manual, mode: manuel, severity: important, tags: [legal] }
+  - { id: K02, label: "Politique de confidentialité à jour", tool: manual, mode: manuel, severity: important, tags: [legal] }
+  - { id: K03, label: "Bandeau de consentement conforme, si des traceurs sont utilisés", tool: manual, mode: manuel, severity: important, tags: [legal] }
+  - { id: K04, label: "Conditions générales de vente, si vente en ligne", tool: manual, mode: manuel, severity: important, tags: [legal] }

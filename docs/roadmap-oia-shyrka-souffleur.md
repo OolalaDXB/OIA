@@ -4,7 +4,7 @@
 
 | Champ | Valeur |
 | --- | --- |
-| Version | 3.3 |
+| Version | 3.4 |
 | Dernière modification | 2026-11-07 |
 | Statut | Proposé (à valider par Mickaël) |
 | Responsable | Mickaël Thomas |
@@ -33,6 +33,7 @@
 | 3.1 | 2026-11-07 | Gouvernance du document, P0 prérequis explicite de P7 |
 | 3.2 | 2026-11-07 | Sens des flèches Funding et Moë-Kan, accord de principe distingué de l'autorisation de dépense, critères de bascule du collecteur maison |
 | 3.3 | 2026-11-07 | OIA SEO Command rétabli comme centre opérationnel de Visibility, stratégie d'intégration des moteurs open source |
+| 3.4 | 2026-11-07 | Cadre de Shyrka (CADRE.md) remplace la doctrine, P8 reçoit Ollama local + présence + identité évolutive, P9 reçoit l'atelier d'identité, chantier Espace personnel ajouté après J0, P6 constate l'absence de MCP existant et part de zéro |
 
 > Emplacement de référence : `docs/roadmap-oia-shyrka-souffleur.md` dans le repo OolalaDXB/OIA. Toute autre copie (Claude Doc, export GPT) est une copie de lecture. `docs/roadmap.md` reste la roadmap d'OIA Funding.
 
@@ -70,11 +71,13 @@ Shyrka est la couche du dessus, posée sur l'ensemble des modules. Souffleur est
 
 ```mermaid
 flowchart LR
-  P1["P1 Visibility J0"] --> P2["P2 Agents et boucle"] --> P3["P3 Couche Visibility"] --> P4["P4 Souffleur : routage"] --> P5["P5 Souffleur : mémoire"] --> P6["P6 MCP + audit"] --> P7["P7 Shyrka console"] --> P8["P8 Shyrka voix"] --> P9["P9 Écosystème"]
-  P0["P0 Doctrine, dès maintenant"] ==>|prérequis obligatoire| P7
+  P1["P1 Visibility J0"] --> P2["P2 Agents et boucle"] --> P3["P3 Couche Visibility"] --> P4["P4 Souffleur : routage"] --> P5["P5 Souffleur : mémoire"] --> P6["P6 MCP + audit"] --> P7["P7 Shyrka console"] --> P8["P8 Voix, présence, Ollama"] --> P9["P9 Écosystème + atelier identité"]
+  P0["P0 Cadre de Shyrka, dès maintenant"] ==>|prérequis obligatoire| P7
   VL["Prototype vocal local"] -.-> P8
+  OL["Ollama local"] -.-> P8
   P2 -.->|reprise possible| FV["Funding V0, gelé"]
   P3 -.->|mission autorisée| MK["Moë-Kan"]
+  P1 -.->|après J0| EP["Chantier Espace personnel<br/>audit lecture seule"]
 ```
 
 **Parallèle :** prototype vocal local, maintien de Funding V0, étude Moë-Kan et audit technique Maisons.co, selon les conditions définies ci-dessous.
@@ -108,26 +111,28 @@ Quatre niveaux, du plus libre au plus encadré ; aucune capacité d'engagement n
 
 Interdits quel que soit le niveau : faire entrer des données internes de l'employeur, parler à des tiers au nom de Mickaël ou avec sa voix, mélanger les données de deux clients.
 
-## P0 · Doctrine de Shyrka
+## P0 · Cadre de Shyrka
 
-P0 s'écrit tout de suite : un fichier, aucun risque technique. Livrable : `docs/shyrka/DOCTRINE.md`, utilisable comme skill ou fichier d'instructions de Claude Code.
+P0 s'écrit tout de suite : un fichier, aucun risque technique. Livrable : **`docs/shyrka/CADRE.md`** (ancien `DOCTRINE.md`, renommé en 3.4 pour marquer qu'il s'agit d'une liste courte et modifiable, pas d'un texte doctrinal figé). Utilisable comme skill ou fichier d'instructions de Claude Code. Les décisions prises par Mickaël y sont consignées : rôle, identité évolutive, permissions, données, benchmarks, voix et visages, communications au nom de Mickaël, humeur. **Les décisions approuvées renvoient à `docs/shyrka/CADRE.md`**, ce fichier reste la référence unique sur ces points.
 
 **Rôle.** Shyrka orchestre les demandes de l'utilisateur et rend les conclusions intelligibles ; Souffleur fournit le routage, la mémoire et les audits ; OIA impose les permissions et les preuves. Shyrka doit surveiller les projets, les opportunités, les dépôts et les coûts ; synthétiser (digest du matin, état d'un chantier, décisions en attente) ; conseiller franchement, y compris pour contredire ; préparer brouillons, plans et mandats. Shyrka change d'avis sur un fait ou un argument, jamais parce qu'une préférence est exprimée.
 
-**Doctrine de travail.**
+**Décisions-clés fixées en 3.4 (détail dans `CADRE.md`) :**
 
-- Un fil, un projet.
-- Toute dépense signalée avec son coût et validée avant engagement ; open source et gratuit d'abord.
-- Sources primaires ; fait, extrait, inférence et incertitude toujours distingués.
-- Phases P0 à P9 ; commits directs sur main sur les dépôts de Mickaël, demandes de fusion sur ceux des clients.
-- Style : français quand Mickaël écrit en français, pas de tiret cadratin, pas de définition par la négation, « Swift » en graphie officielle.
-- Règles de confidentialité propres à Mickaël : dans une liste séparée, appliquées sans exception.
+- **Identité évolutive, décidée par Mickaël.** Version 0 : présence en points, aucune voix synthétisée en sortie, voix de référence Aurélie, Chatterbox candidate.
+- **Permissions fixées et élargies par Mickaël seul**, sans limite doctrinale ; Shyrka ne s'en accorde jamais.
+- **Données de Mickaël autorisées à entrer** ; **données de Swift et de ses clients refusées**.
+- **Voix de Mickaël jamais de son vivant** ; autorisée après son décès selon ses directives écrites.
+- **Visages : mélanges libres, sans ressemblance reconnaissable** avec une personne réelle.
+- **E-mail et WhatsApp au nom de Mickaël par paliers** ; téléphone plus tard, en se présentant comme son assistante.
+- **États d'humeur reliés à un travail**, jamais d'humeur sans objet.
+- **Benchmarks agrégés et anonymisés** avec accord écrit : trois clients au moins par repère, fourchettes plutôt que valeurs exactes, modèles réécrits et non copiés, usages nommés dans les CGV.
 
 **Mémoire.** Trois périmètres (global, projet, client) ; mémoires sensibles (famille, finances, santé) hors de portée des agents qui travaillent pour des clients ; sauvegardée, versionnée, restaurable.
 
 **Nom.** Shyrka reste un nom interne tant que les droits de marque et ceux liés à Ulysse 31 ne sont pas vérifiés.
 
-**Porte P0 :** doctrine approuvée par Mickaël, politique de permissions documentée, aucune capacité d'engagement activée par défaut.
+**Porte P0 :** cadre approuvé par Mickaël (ligne « Version 1 · 2026-11-07 · Mickaël Thomas » en tête de `CADRE.md`), politique de permissions documentée, aucune capacité d'engagement activée par défaut.
 
 ## P1 · OIA Visibility opérationnel
 
@@ -208,7 +213,7 @@ P3 construit ce qui appartient en propre à OIA Visibility et le rend prêt pour
 
 ## P6 · MCP Gateway et exposition contrôlée de Souffleur Audit
 
-Le serveur MCP expose de façon contrôlée les capacités d'OIA à Claude Code, aux agents et aux applications autorisées. D'abord un audit du dépôt `mcp-studio-mt` : outils annoncés, authentification, compatibilité avec le protocole actuel. **Troisième fonction de Souffleur : l'assurance des dépôts.** Le script `souffleur.py` est mentionné dans le cadrage comme moteur d'audit et de verdict GO bloquant tant qu'un contrôle P0 n'est pas évalué. **Son code, ses tests et son emplacement n'ont pas été retrouvés dans les dépôts GitHub accessibles durant cette revue : la capacité est à vérifier avant intégration.**
+Le serveur MCP expose de façon contrôlée les capacités d'OIA à Claude Code, aux agents et aux applications autorisées. **Inventaire I1 clos le 2026-11-07 (`docs/audits/2026-11-08-souffleur-mcp.md`) : aucun serveur MCP n'a été trouvé dans les dépôts d'OolalaDXB (`studiomt-platform`, `TheStudioMT`, les trois dépôts `myOolala*`, `mcp-studio-mt` inclus).** P6 part donc de zéro : pas de code MCP à reprendre, pas d'outil à migrer. **Troisième fonction de Souffleur : l'assurance des dépôts.** Le script `souffleur.py` est repéré localement à `/Users/mickael/souffleur/souffleur.py` (hors dépôts GitHub) et peut servir de moteur d'audit après lecture par Mickaël et portage dans le dépôt OIA.
 
 - Premiers outils : `catalogue.search`, `projects.list`, `evidence.get`, `visibility.summary`, `tasks.create_draft`, `memory.search`, `decisions.propose` et, **après audit du code**, `souffleur.audit_repository` (lecture / rapport) et `souffleur.quality_gate_status` (lecture du verdict).
 - Chaque outil : schéma, identité de l'appelant, portée, limite d'usage, journal d'audit ; écritures séparées des lectures ; aucun accès général aux secrets ni à la production.
@@ -229,25 +234,32 @@ Un assistant central utile chaque jour, qui s'appuie sur les services existants 
 
 **Porte P7 :** un digest démontrable, traçable et utile, sans aucune décision exécutée sans autorisation.
 
-## P8 · Voix de Shyrka
+## P8 · Voix, présence et personnalité de Shyrka
 
-Deux chemins complémentaires, le local d'abord.
+Trois chemins complémentaires. Le local d'abord, puis **Ollama** comme socle de modèles en local (texte et appels par outils), et l'expérience avancée distante seulement si besoin.
 
 | Chemin | Contenu | Coût |
 | --- | --- | --- |
-| Prototype local | Transcription Whisper et synthèse vocale locale (Piper, Kokoro ou autre, licences vérifiées) sur le Mac Studio ; premier usage : le digest du matin lu à voix haute | Gratuit |
+| Prototype local (son) | Transcription Whisper et synthèse vocale locale (Piper, Kokoro, Chatterbox — licences vérifiées) sur le Mac Studio ; premier usage : le digest du matin lu à voix haute | Gratuit |
+| Ollama local (texte) | Modèles texte servis par Ollama sur le Mac Studio pour les tâches sans donnée sensible envoyée dehors (digest, résumés rapides, préparations d'e-mails internes). Les tâches sensibles passent par Souffleur / routage | Gratuit |
 | Expérience avancée | Assistant vocal temps réel d'un fournisseur, voix originale générée sur description, demandes complexes déléguées au backend OIA (piste GPT-Live, à vérifier) | Payant à la minute, à valider |
 
+- **Présence et personnalité** (CADRE.md) : version 0 = présence en points, pas d'avatar, pas de voix synthétisée en sortie. Les versions suivantes de l'identité s'y ajoutent une par une, décidées par Mickaël, et sont consignées dans le cadre.
+- **Identité évolutive** : chaque version a sa date et son périmètre (voix activée oui/non, visage activé oui/non, références utilisées). Les transitions se font par ateliers d'identité (P9) et validations écrites.
 - Voix française naturelle, posée, précise, chaleureuse et légèrement futuriste, distincte de celle des comédiennes d'Ulysse 31 et de celle de Mickaël.
 - Prise de parole volontaire, sans écoute permanente par défaut ; interruptions et conversations à plusieurs tours.
-- Confirmation explicite avant toute action engageante ; Shyrka parle à Mickaël, jamais aux tiers en son nom.
+- Confirmation explicite avant toute action engageante ; Shyrka parle à Mickaël, jamais aux tiers en son nom tant qu'un palier ne le permet.
 - Tests : clarté, latence, accents, interruptions, coût réel.
 
-Le prototype local peut être essayé en parallèle dès P1 ; sa connexion aux données réelles attend les permissions et le serveur MCP.
+Le prototype local peut être essayé en parallèle dès P1 ; Ollama peut être installé dès P1 pour les premiers usages locaux ; la connexion aux données réelles attend les permissions et le serveur MCP (P6).
 
-**Porte P8 :** un dialogue vocal complet sur un cas métier, avec sources restituées et permissions respectées.
+**Porte P8 :** un dialogue vocal complet sur un cas métier, avec sources restituées et permissions respectées. Les décisions approuvées renvoient à [`docs/shyrka/CADRE.md`](shyrka/CADRE.md).
 
-## P9 · Écosystème et ouverture
+## P9 · Écosystème, ouverture et atelier d'identité de Shyrka
+
+**Atelier d'identité de Shyrka.** À l'ouverture de P9, un atelier d'identité produit la version suivante (voix activée, visage activé, références, personnalité, humeur par défaut), décidée par Mickaël et consignée dans [`docs/shyrka/CADRE.md`](shyrka/CADRE.md). Entrées de l'atelier : éléments du prototype vocal, retours de P8, décisions sur les visages (mélanges libres, sans ressemblance reconnaissable), décisions sur les voix (jamais la voix de Mickaël de son vivant). Sortie : une version de l'identité (par exemple « version 1 : voix activée, visage de nuit étoilée, humeur par défaut posée »). Pas d'exécution tant que l'atelier n'a pas abouti.
+
+
 
 Shyrka s'étend progressivement aux activités autorisées (Maisons.co, Coach Gari, SILLON, BEAU et les autres projets), puis, sous conditions, à des tiers.
 
@@ -298,8 +310,10 @@ Ces chantiers restent hors du chemin principal, chacun avec sa condition.
 | --- | --- | --- |
 | OIA Funding V0 | Gelé en l'état, aucune régression | Reprise proposée à la clôture de P2 |
 | Moë-Kan | Premier client externe envisagé, données séparées dès le départ | Mesure de départ avant toute modification de son site ; mission après la porte P3 |
-| Maisons.co, restructuration SEO | En attente | Décision sur la séparation Collection / Géorgie ; audit technique et URL hors sujet permis dès maintenant |
+| Maisons.co, restructuration SEO | En attente de la refonte (`infra/visibility/subjects/maisons-co/refonte-exigences-seo.md`) | Critères §10 du document d'exigences au vert ; mesure J0 ensuite |
+| **Espace personnel (Agenda, Santé, Famille)** | **À démarrer après le lancement de J0** | **Strictement séparé des modules professionnels.** Première étape : un **audit en lecture seule** des sources existantes (agenda macOS, Family, données de santé Apple), sans écriture. Sortie : un inventaire et un périmètre. Aucune automatisation tant que Mickaël n'a pas validé le périmètre. |
 | Prototype vocal local | Possible à tout moment | Sans données réelles avant P6 |
+| Ollama local | À installer dès P1 | Modèles sans donnée client externe tant que P6 n'est pas franchi |
 | Tenders, Ventures, Signals, CRM | Briques dans le repo | Après Funding |
 | Data, Training | À cadrer | Après Funding |
 
@@ -336,7 +350,7 @@ Chaque domaine garde ses propres mesures, publiées séparément.
 
 ## Décisions ouvertes
 
-- [ ] Relire et approuver la doctrine de Shyrka (P0), puis la placer dans `docs/shyrka/DOCTRINE.md`.
+- [ ] Relire et approuver le cadre de Shyrka (P0), `docs/shyrka/CADRE.md` (fichier renommé en 3.4 ; ex-`DOCTRINE.md`).
 - [ ] Donner le feu vert de l'étape B de P1.
 - [ ] Valider les modèles mesurés proposés par Claude Code, avec leur coût par fenêtre.
 - [ ] Valider le panel final de Maisons.co (10 questions en français, 10 en anglais).

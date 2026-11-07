@@ -1,0 +1,10 @@
+schemaVersion: 1
+family: M
+title: "Dépôt et déploiement"
+intro: "Comment le code produit les pages, et quels garde-fous sont posés."
+checks:
+  - { id: M01, label: "Cadre technique identifié (Next.js, Vite et React, HTML statique, CMS)", tool: repo-read, mode: auto, severity: important, tags: [tech] }
+  - { id: M02, label: "Surfaces SEO localisées : balises de tête, robots, sitemap, données structurées", tool: repo-read, mode: auto, severity: important, tags: [tech, seo] }
+  - { id: M03, label: "Garde-fou SEO installé dans l'intégration continue du dépôt", tool: repo-read, mode: auto, severity: important, tags: [tech, seo] }
+  - { id: M04, label: "Prévisualisation disponible avant mise en ligne", tool: manual, mode: manuel, severity: amélioration, tags: [tech] }
+  - { id: M05, label: "Construction vérifiable dans un bac à sable, sans secret", tool: oia, mode: auto, severity: important, tags: [tech] }

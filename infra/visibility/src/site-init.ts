@@ -1,4 +1,5 @@
 import { isIP } from "node:net";
+import { applicableChecks, type Check } from "./verification";
 
 /**
  * Initialisation d'un nouveau site pour OIA Visibility (C2).
@@ -77,6 +78,11 @@ export interface SiteInitDryRun {
   languagesDetected: string[];
   factsCandidates: Array<{ category: string; statement: string }>;
   repo?: { ownerName: string };
+  /** Contrôles de vérification applicables, selon le modèle en données
+   *  (`verification/*.yaml`). Sert à présenter d'emblée la liste à faire,
+   *  et à éviter que le tooling oublie une famille (ex. hreflang pour un
+   *  site multilingue). Réduit par `applicableChecks`. */
+  checks: Array<{ id: string; label: string; tool: string; mode: string; severity: string }>;
 }
 
 export interface SiteInitOptions {
@@ -84,6 +90,11 @@ export interface SiteInitOptions {
   url: string;
   repo?: string; // owner/name
   allowedLocal?: string[];
+  /** Relation avec le client : « external » active A09 (accord écrit). */
+  ownership?: "internal" | "external";
+  /** Langues connues à l'initialisation ; une seule langue désactive B10 (hreflang). */
+  languages?: string[];
+  hasLocalPresence?: boolean;
 }
 
 /** Dry-run d'initialisation : valide les entrées et prépare la fiche. */
@@ -94,13 +105,25 @@ export function dryRunSiteInit(opts: SiteInitOptions): SiteInitDryRun {
     .replace(/\./g, "-")
     .replace(/[^a-z0-9-]/g, "-")
     .replace(/-+$/, "");
+  const checks: Check[] = applicableChecks({
+    ownership: opts.ownership ?? "internal",
+    languages: opts.languages ?? [],
+    hasLocalPresence: opts.hasLocalPresence,
+  });
   return {
     clientId: opts.clientId,
     subjectId,
     primaryUrl: url.toString(),
-    languagesDetected: [], // on ne crawle rien ici ; le vrai init appelle Crawlie après.
+    languagesDetected: opts.languages ?? [], // le vrai init appellera Crawlie pour confirmer.
     factsCandidates: [],
     repo: opts.repo ? { ownerName: opts.repo } : undefined,
+    checks: checks.map((c) => ({
+      id: c.id,
+      label: c.label,
+      tool: c.tool,
+      mode: c.mode,
+      severity: c.severity,
+    })),
   };
 }
 

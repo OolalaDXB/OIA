@@ -1,5 +1,29 @@
 import type { VisibilityLLM } from "../llm";
+import { checksForTool, flatChecks, type Tool } from "../verification";
 import type { Mission } from "./mission";
+
+/**
+ * Renvoie les IDs de contrôle qu'un exécuteur (ciblant un outil donné)
+ * couvre pour la mission. Si `mission.checkIds` est vide, on retourne la
+ * liste complète de l'outil. Sinon, on garde l'intersection, et on lève
+ * si un ID demandé sort de la couverture — garde-fou qui remonte au plus
+ * tôt une mission malformée.
+ */
+export function resolveCheckIds(mission: Mission, tool: Tool): string[] {
+  const covered = new Set(checksForTool(tool).map((c) => c.id));
+  if (mission.checkIds.length === 0) return [...covered];
+  const outOfScope = mission.checkIds.filter((id) => !covered.has(id));
+  if (outOfScope.length > 0)
+    throw new Error(
+      `mission ${mission.id}: outil "${tool}" ne couvre pas ${outOfScope.join(", ")} (voir verification/*.yaml)`,
+    );
+  return mission.checkIds.filter((id) => covered.has(id));
+}
+
+/** Contrôles qu'un outil peut exécuter, forme déjà filtrée (tests). */
+export function allChecksForTool(tool: Tool) {
+  return checksForTool(tool, flatChecks());
+}
 
 /**
  * Interface d'exécution d'un agent SEO Command. Quatre adaptateurs :

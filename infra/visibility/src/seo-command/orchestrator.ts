@@ -6,6 +6,17 @@ import type { Mission } from "./mission";
 import type { Queue } from "./queue";
 
 /**
+ * S2 : adapter vers la base pour la validation humaine. Une implémentation
+ * concrète appelle `select vis.validate_recommendation(?, ?)` ; les tests
+ * injectent une version qui simule les refus (identité de service, rôle
+ * insuffisant, recommandation inconnue).
+ */
+export interface ValidationGateway {
+  /** Lève avec le message exact remonté par la base si la validation est refusée. */
+  validateRecommendation(recommendationId: string, reason?: string): Promise<{ decisionId: number; clientId: string; decidedBy: string }>;
+}
+
+/**
  * Noyau de SEO Command : prend une mission `planned`, réserve un budget,
  * appelle un exécuteur, pose en `waiting-validation` si une écriture est
  * proposée, ou en `done` sinon. Jamais d'exécution sans validation humaine
@@ -20,12 +31,19 @@ export interface OrchestratorCtx {
   llm?: VisibilityLLM;
   /** Le planificateur du contexte, pour tracer son état dans les logs. */
   env?: Record<string, string | undefined>;
+  /** S2 : passerelle vers les fonctions de validation en base. Si absente,
+   *  `ackValidation` refuse toute approbation : on ne valide pas sans
+   *  passer par la base. */
+  validation?: ValidationGateway;
 }
 
+/** S2 : l'orchestrateur ne reçoit plus d'humanId / isAgent de l'appelant.
+ *  L'identité qui valide est lue par la base via auth.uid(). L'ackValidation
+ *  ne porte plus qu'un pointeur vers la recommandation à valider. */
 export interface AckValidation {
   missionId: string;
-  humanId: string;
   decidedAt: string;
+  reason?: string;
 }
 
 /** Fait tourner une étape : prend la prochaine mission planifiée et la termine. */
@@ -81,20 +99,37 @@ export async function tick(ctx: OrchestratorCtx, workerId: string): Promise<Miss
   }
 }
 
-/** Acquitte une validation humaine (règle 16) : passe une mission à `done`. */
-export function ackValidation(ctx: OrchestratorCtx, ack: AckValidation, isAgent: boolean): Mission {
-  if (isAgent) {
-    throw new Error("ackValidation refused: current executor is an agent (règle 16).");
+/**
+ * Acquitte une validation humaine (règle 16 + S2) : délègue à la base la
+ * vérification de l'identité (auth.uid()), le rôle (owner/approver) et le
+ * refus des identités de service. Aucun booléen « isAgent » ni humanId
+ * fourni par l'appelant n'intervient dans la décision.
+ */
+export async function ackValidation(ctx: OrchestratorCtx, ack: AckValidation): Promise<Mission> {
+  if (!ctx.validation) {
+    throw new Error("ackValidation refused: no validation gateway configured (S2 requires a DB-backed validator).");
   }
   const m = ctx.queue.get(ack.missionId);
   if (!m) throw new Error(`ackValidation: unknown mission "${ack.missionId}"`);
   if (m.state !== "waiting-validation") {
     throw new Error(`ackValidation refused: mission state is "${m.state}" (expected waiting-validation).`);
   }
+  // Les missions produisent des recommandations ; on valide la première
+  // (une mission avec plusieurs recommandations appelle la fonction
+  // plusieurs fois, côté appelant).
+  const recId = m.results.recommendationIds[0];
+  if (!recId) throw new Error(`ackValidation refused: mission ${m.id} has no recommendation to validate.`);
+  const outcome = await ctx.validation.validateRecommendation(recId, ack.reason);
   const updated = ctx.queue.transition(ack.missionId, "done", {
-    validatedBy: ack.humanId,
+    validatedBy: outcome.decidedBy,
     validatedAt: ack.decidedAt,
   });
-  ctx.log.append({ who: `humain:${ack.humanId}`, what: "mission.validated", clientId: m.clientId, missionId: m.id });
+  ctx.log.append({
+    who: `humain:${outcome.decidedBy}`,
+    what: "mission.validated",
+    clientId: m.clientId,
+    missionId: m.id,
+    details: { decisionId: outcome.decisionId },
+  });
   return updated;
 }

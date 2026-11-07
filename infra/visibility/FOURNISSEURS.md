@@ -34,61 +34,99 @@ OpenRouter), plus une réserve de budget avant chaque lot de mesure. Sans
 cette double précaution, un dépassement peut passer sous le radar du
 script le temps que l'estimation ou l'API de solde se mette à jour.
 
-## 0 ter. Modèles mesurés, proches des applications grand public (A6, 2026-11-08)
+## 0 ter. Modèles mesurés, proches des applications grand public (A6, mis à jour 2026-11-07)
 
-Proposition de cinq modèles API, chacun aussi proche que possible du
-comportement de l'application grand public du fournisseur (ChatGPT,
-Claude, Le Chat, Gemini, Perplexity). Les identifiants proviennent de la
-documentation officielle aux adresses citées, consultées le 2026-11-08.
-**Aucun appel réel** n'a été fait pour les confirmer : ce qui est marqué
-« non vérifié » demande un appel réel plus tard.
+Vérification documentaire des identifiants retenus, à partir des pages
+officielles consultées le 2026-11-07. Les cinq moteurs sont confirmés.
+**Aucun appel réel** n'a été fait depuis OIA : seul un appel « ping »
+depuis le compte Mickaël permettra de clore la vérification une fois les
+clés posées.
 
-| Modèle (nom Elmo) | Plus proche de | Identifiant API | Source de l'identifiant | Recherche web | Statut de vérification |
-|---|---|---|---|---|---|
-| chatgpt (OpenAI) | ChatGPT | `gpt-6-luna` (Responses API, outil `web_search`) | HANDOFF §2.1 (code Elmo 0.7.7, `openai-api.ts`) | Oui | Nom d'identifiant **non vérifié** côté OpenAI docs — à rejouer quand les docs seront accessibles. |
-| claude (Anthropic) | Claude.ai | `claude-haiku-5-5` (Messages, outil `web_search`) | HANDOFF §2.1 | Oui | Idem : **non vérifié** côté Anthropic docs. |
-| gemini (via OpenRouter) | Gemini app | `google/gemini-2.5-flash` avec `:online` | HANDOFF §2.1 ; AI Studio annonce `gemini-2.5-flash` comme offre gratuite courante | Oui (Google natif) | Identifiant côté OpenRouter : **vérifié dans le code Elmo**, pas sur docs OpenRouter (accès bloqué dans la session précédente). |
-| perplexity (via OpenRouter) | Perplexity | `perplexity/sonar` avec `:online` | HANDOFF §2.1 ; Perplexity annonce Sonar comme son modèle « base » | Oui (Sonar) | **Vérifié dans le code Elmo** ; Perplexity peut l'étiqueter autrement côté console. |
-| mistral (Mistral direct, FR) | Le Chat FR | `mistral-medium-latest` avec `:online` (Conversations API, outil `web_search`) | HANDOFF §2.1, Mistral annonce Conversations en bêta | Oui | Alias `-latest` qui évolue ; la version exacte est stockée par Elmo (`prompt_runs.version`). |
+### Identifiants retenus pour J0 (pilote anglophone)
+
+| Moteur (nom Elmo) | Plus proche de | Identifiant API | Recherche web | Statut documentaire |
+|---|---|---|---|---|
+| chatgpt (OpenAI) | ChatGPT Free (Luna) | `gpt-6-luna` (Responses API, outil `web_search`) | Oui | **Vérifié** sur openai.com/index/introducing-gpt-6-sol-and-luna (sortie 2026-09-22) et developers.openai.com/api/docs/pricing : 0,10 $ / 0,50 $ par M de tokens (entrée / sortie). |
+| claude (Anthropic) | — (modèle de la couche API, pas celui de l'app) | `claude-haiku-5-5` (Messages, outil `web_search`) | Oui | **Vérifié** sur platform.claude.com/docs/en/models/haiku-5-5/overview (sortie 2026-10-07) : 0,10 $ / 0,50 $ par M de tokens jusqu'à 100 k. |
+| gemini (via OpenRouter) | — (identifiant en voie de dépréciation) | `google/gemini-2.5-flash` avec `:online` | Oui | **Déprécié par Google le 2026-11-02**, cinq jours avant J0. Décision à prendre (voir « Décision en attente » plus bas). |
+| perplexity (via OpenRouter) | Perplexity Sonar | `perplexity/sonar` avec `:online` | Oui (Sonar) | **Vérifié** sur openrouter.ai/perplexity/sonar : 1,00 $ / 1,00 $ par M de tokens + 5,00 $ / 1 000 recherches web. |
+| mistral (Mistral direct) | Le Chat (modèle de base) | `mistral-medium-latest` avec `:online` (Conversations API, outil `web_search`) | Oui | **Vérifié** sur docs.mistral.ai/studio/agents/agent-tools/websearch : l'API Conversations accepte `tools: [{type:"web_search"}]`. Alias `-latest` qui évolue ; la version servie est stockée par Elmo (`prompt_runs.version`). |
 
 Jev (juge des mentions) : `typesafe/jev-1.13` via OpenRouter. Pas modifié
 depuis le 2026-11-05.
 
+### Modèles alternatifs proches de l'application grand public (décision Mickaël)
+
+L'application Claude.ai sert Sonnet 4.6 aux utilisateurs Pro et Opus 4.7
+aux utilisateurs Max ; Haiku 5.5 n'y est jamais exposé seul. L'application
+Gemini sert maintenant Gemini 3 Flash (Gemini 2.5 Flash déprécié le
+2026-11-02). Les deux alternatives « plus proches de l'app » coûtent
+nettement plus cher :
+
+| Moteur | Alternative plus proche de l'app grand public | Coût entrée / sortie (M tokens) | Facteur vs. retenu | Source |
+|---|---|---|---|---|
+| claude | `claude-sonnet-4-6` (par défaut Free + Pro de Claude.ai depuis 2026-02) | 3,00 $ / 15,00 $ | **×30** en entrée, **×30** en sortie | Pages anthropic.com/news/claude-sonnet-4-6 et platform.claude.com. |
+| claude | `claude-opus-4-7` (plan Max de Claude.ai, modèle « phare » depuis 2026-04) | 5,00 $ / 25,00 $ | **×50** en entrée, **×50** en sortie | Page platform.claude.com, confirmé par deux agrégateurs. |
+| gemini | `google/gemini-3-flash` sur OpenRouter (défaut app Gemini depuis déc. 2025) | 0,50 $ / 3,00 $ | **×50** en entrée, environ **×90** en sortie par rapport à 2.5 Flash | Pages openrouter.ai/google/gemini-3-flash et blog Google. |
+
+Ces trois alternatives multiplient le coût par appel entre 30 et 90. Avec
+le plafond mensuel de 30 $ et une fenêtre J0 = 250 appels, elles restent
+toutes finançables ; au-delà, elles sortent du plafond. **Décision à
+prendre par Mickaël** (voir section « Décisions en attente »).
+
 ### Coûts estimés face au plafond mensuel de 30 $
 
-Sources des prix : tableau du HANDOFF §2.3 (non vérifié, documenté à partir
-des tarifs de la doc Elmo) + estimations OIA. Les nombres sont donnés en
-USD, arrondis. Par appel, recherche web comprise.
+Sources des prix : pages officielles citées ci-dessus. Les nombres sont
+donnés en USD, arrondis. « Par appel » = prompt + réponse, recherche web
+comprise quand facturée séparément.
 
-| Moteur | Coût unitaire estimé |
-|---|---|
-| ChatGPT (OpenAI) | 0,015 à 0,02 $ |
-| Claude (Anthropic) | ≈ 0,03 $ (≈ 40 % de la facture) |
-| Gemini (via OpenRouter) | 0,01 à 0,035 $ |
-| Perplexity (Sonar) | ≈ 0,007 $ |
-| Mistral (avec recherche web) | ≈ 0,03 $ |
-| Jev (par 1 000 réponses) | 0,15 à 0,35 $ |
+| Moteur | Coût unitaire estimé | Source |
+|---|---|---|
+| chatgpt (`gpt-6-luna`) | 0,003 à 0,006 $ | 0,10 + 0,50 $/M × ≈ 1,5 k entrée + 1 k sortie + recherche |
+| claude (`claude-haiku-5-5`) | 0,003 à 0,006 $ | mêmes tarifs qu'OpenAI Luna, outil `web_search` inclus |
+| gemini (via OpenRouter, 2.5 Flash) | 0,005 à 0,015 $ | 0,15 / 0,60 $/M + recherche Google native |
+| perplexity (`sonar` + online) | ≈ 0,010 $ | 1,00 $/M × 2 k tokens + 0,005 $ recherche |
+| mistral (`mistral-medium-latest` + web_search) | 0,015 à 0,030 $ | tarifs Mistral medium + outil web_search |
+| Jev (par 1 000 réponses analysées) | 0,15 à 0,35 $ | inchangé |
 
-**Volumétrie des deux pilotes (fenêtre J0 = 5 jours à 1 run par jour par cible)** :
+**Volumétrie du pilote anglophone (J0 = 10 questions × 5 moteurs × 5 jours)** :
 
-| Pilote | Questions × moteurs × jours | Appels fournisseurs | Plafond 30 $ compatible ? |
-|---|---|---|---|
-| Pilote 1 (anglophone, 10 questions × 4 moteurs × 5 jours) | 200 | ≈ 0,5 à 0,9 $/jour → **2,5 à 4,5 $/fenêtre** | oui, confortablement |
-| Pilote 2 (bilingue FR+EN, 20 questions × 5 moteurs × 5 jours) | 500 | ≈ 1,1 à 2,2 $/jour → **5,5 à 11 $/fenêtre** | oui |
-| Les deux ensemble, 1 fenêtre/mois | — | **8 à 16 $/mois** | oui, marge 14 à 22 $ |
-| Les deux ensemble, mesure quotidienne (hors scénario) | — | 48 à 95 $/mois | **non** — le plafond 30 $ arrêterait le worker vers J12-J15. |
+| Scénario | Questions × moteurs × jours | Appels fournisseurs | Coût estimé fenêtre J0 | Plafond 30 $ compatible ? |
+|---|---|---|---|---|
+| **Pilote anglophone J0** (retenu, modèles ci-dessus) | 10 × 5 × 5 = **250** | 250 appels moteurs + ≈ 250 passages Jev | **1,0 à 2,0 $ / fenêtre** (10 moteurs × 5 j × 0,04 $ médian) | oui, marge ≈ 28 $ |
+| Variante A : Claude basculé sur Sonnet 4.6 | 250 | — | **5 à 7 $ / fenêtre** | oui |
+| Variante B : Claude Opus 4.7 **et** Gemini 3 Flash | 250 | — | **10 à 15 $ / fenêtre** | oui, marge ≈ 15 $ |
+| Deux pilotes J0 enchaînés le même mois (anglophone 10×5×5 + bilingue 20×5×5) | 250 + 500 = 750 | — | **4 à 8 $ / mois** avec les modèles retenus | oui, large marge |
+| Mesure quotidienne permanente (hors scénario) | — | — | 30 à 60 $ / mois | **non** — le plafond 30 $ arrêterait le worker après ≈ 15 à 20 jours |
 
-Conclusion : **une fenêtre de 5 jours par mois tient dans le plafond 30 $
-avec marge**. Une mesure quotidienne permanente ne tient pas ; elle n'est
-pas au programme (roadmap 3.3 : fenêtres ponctuelles). Les crédits
-prépayés à placer chez chaque fournisseur avant la première fenêtre : 5 $
-minimum chez OpenAI, Anthropic, Mistral, OpenRouter, soit environ 20 à
-25 $ immobilisés en avance.
+Conclusion : **une fenêtre de 5 jours tient très largement dans le plafond
+30 $**, même en basculant Claude et Gemini sur leurs modèles grand public.
+Les crédits prépayés à placer chez chaque fournisseur avant la première
+fenêtre : 5 $ minimum chez OpenAI, Anthropic, Mistral, OpenRouter, soit
+≈ 20 $ immobilisés en avance (Jev consomme du crédit OpenRouter, pas de
+compte supplémentaire).
 
-Reste à vérifier par Mickaël avant J0 réel :
-- identifiants exacts (deux `non vérifié` ci-dessus) ;
-- disponibilité de la recherche web en formule prépayée sur chaque compte ;
-- recharge automatique **désactivée** partout.
+### Décisions en attente avant J0 réel
+
+1. **Gemini : `gemini-2.5-flash` déprécié le 2026-11-02**. Deux options :
+   - garder `google/gemini-2.5-flash:online` tant qu'OpenRouter sert encore
+     ce routage (réponses encore comparables aux mesures précédentes, mais
+     indisponibilité imminente) ;
+   - basculer sur `google/gemini-3-flash:online` dès J0 (plus proche de ce
+     que voit un utilisateur de l'app Gemini, surcoût estimé 1 à 3 $ sur la
+     fenêtre).
+   Option recommandée : **`gemini-3-flash` dès J0**, alignée avec la
+   doctrine « au plus proche de l'app grand public » ; à acter par Mickaël.
+2. **Claude : rester sur Haiku 5.5 ou basculer sur Sonnet 4.6 / Opus 4.7 ?**
+   Rester sur Haiku = coût minimal mais aucun utilisateur Claude.ai ne reçoit
+   Haiku. Sonnet 4.6 = ce que voit un utilisateur Pro. Surcoût sur J0 :
+   ≈ 5 $ pour Sonnet, ≈ 9 $ pour Opus (toujours dans le plafond).
+3. **Clé Mistral** : à ouvrir par Mickaël dans son compte Mistral existant,
+   idéalement une clé dédiée nommée `oia-visibility` pour que la dépense
+   d'OIA Visibility ne se confonde pas avec celle d'OIA Funding. La clé est
+   collée dans `infra/visibility/elmo/.env` (hors Git).
+4. **Recharge automatique désactivée** partout (OpenAI, Anthropic, Mistral,
+   OpenRouter) : à confirmer avant de poser la première clé.
 
 ## 0 bis. Historique : la configuration à zéro coût (2026-11-06, annulée le 2026-11-08)
 

@@ -1,0 +1,12 @@
+schemaVersion: 1
+family: C
+title: "Rendu et performance"
+intro: "Ce qui n'est visible qu'après JavaScript est souvent invisible pour les robots des IA."
+checks:
+  - { id: C01, label: "Contenu principal présent dans le HTML initial, sans JavaScript", tool: crawlie, mode: mixte, severity: bloquant, tags: [aeo, tech] }
+  - { id: C02, label: "Prix et offres lisibles sans JavaScript", tool: crawlie, mode: mixte, severity: important, tags: [aeo] }
+  - { id: C03, label: "Core Web Vitals (LCP, INP, CLS) dans le vert sur mobile", tool: crawlseo, mode: auto, severity: important, tags: [tech, seo] }
+  - { id: C04, label: "Affichage mobile correct, sans défilement horizontal", tool: manual, mode: manuel, severity: important, tags: [tech] }
+  - { id: C05, label: "Poids des images maîtrisé, formats modernes", tool: crawlie, mode: auto, severity: amélioration, tags: [tech] }
+  - { id: C06, label: "Polices et scripts tiers qui ralentissent l'affichage", tool: crawlie, mode: auto, severity: amélioration, tags: [tech] }
+  - { id: C07, label: "Temps de réponse du serveur", tool: crawlie, mode: auto, severity: amélioration, tags: [tech] }

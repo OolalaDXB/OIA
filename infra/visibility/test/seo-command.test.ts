@@ -8,7 +8,7 @@ import {
   createManualExecutor,
 } from "../src/seo-command/executor";
 import { MissionSchema, canTransition, type Mission } from "../src/seo-command/mission";
-import { ackValidation, tick } from "../src/seo-command/orchestrator";
+import { ackValidation, tick, type OrchestratorCtx, type ValidationGateway } from "../src/seo-command/orchestrator";
 import { createQueue } from "../src/seo-command/queue";
 import { createScheduler } from "../src/seo-command/scheduler";
 import { missionsForEvent } from "../src/seo-command/trigger";
@@ -81,12 +81,10 @@ describe("Scheduler is OFF by default (règle 16)", () => {
       reservedBudgetUsd: 1,
       agents: ["fake"],
       enabled: true,
-      enabledBy: "mt",
-      enabledAt: "2026-11-08",
     });
     expect(s.tick(new Date("2026-11-08"))).toEqual([]);
   });
-  it("tick returns the planned missions when globalEnabled is true", () => {
+  it("S2 : enabled fourni par l'appelant est toujours ignoré (toggle en base)", () => {
     const s = createScheduler({ globalEnabled: true });
     s.register({
       id: "rec-weekly",
@@ -97,17 +95,17 @@ describe("Scheduler is OFF by default (règle 16)", () => {
       reservedBudgetUsd: 1,
       agents: ["fake"],
       enabled: true,
-      enabledBy: "mt",
-      enabledAt: "2026-11-08",
     });
-    const out = s.tick(new Date("2026-11-08"));
-    expect(out).toHaveLength(1);
-    expect(out[0]?.trigger).toBe("scheduler");
+    // L'appelant a demandé enabled=true, mais l'orchestrateur force à false ;
+    // l'activation passe désormais par `vis.toggle_scheduler` (base, security
+    // definer avec contrôle auth.uid() + rôle).
+    expect(s.list()[0]?.enabled).toBe(false);
+    expect(s.tick(new Date("2026-11-08"))).toEqual([]);
   });
-  it("a recurrence registered with enabled=true but no enabledBy is forcibly disabled", () => {
+  it("register ignores enabled even if present (S2)", () => {
     const s = createScheduler({ globalEnabled: true });
     s.register({
-      id: "rec-weekly",
+      id: "rec-weekly-2",
       clientId: "fictive-client",
       subjectId: "fictive-subject",
       type: "audit-technique",
@@ -165,7 +163,16 @@ describe("Disabled executors refuse to run", () => {
 });
 
 describe("Orchestrator end-to-end (données fictives)", () => {
-  async function setup(opts: { withWriteProposal: boolean; capUsd?: number }) {
+  function gateway(overrides: Partial<{ fails: string; decidedBy: string }> = {}): ValidationGateway {
+    return {
+      async validateRecommendation(recId, _reason) {
+        if (overrides.fails) throw new Error(overrides.fails);
+        return { decisionId: 1, clientId: "fictive-client", decidedBy: overrides.decidedBy ?? "mt" };
+      },
+    };
+  }
+
+  async function setup(opts: { withWriteProposal: boolean; capUsd?: number; validation?: ValidationGateway }): Promise<OrchestratorCtx> {
     const queue = createQueue();
     const budget = createBudgetGuard({ capUsd: opts.capUsd ?? 10 });
     const log = createActionLog();
@@ -183,7 +190,7 @@ describe("Orchestrator end-to-end (données fictives)", () => {
       manual: createManualExecutor({ assignTo: "mt" }),
     };
     queue.enqueue(mission({ agents: ["fake"] }));
-    return { queue, budget, log, executors };
+    return { queue, budget, log, executors, validation: opts.validation };
   }
 
   it("a read-only mission goes planned → running → done, no validation", async () => {
@@ -201,20 +208,33 @@ describe("Orchestrator end-to-end (données fictives)", () => {
     expect(ctx.log.all().some((e) => e.what === "mission.waiting-validation")).toBe(true);
   });
 
-  it("ackValidation refuses when caller is an agent (règle 16)", async () => {
-    const ctx = await setup({ withWriteProposal: true });
+  it("S2 : ackValidation refusée quand la base rejette (identité de service)", async () => {
+    const ctx = await setup({
+      withWriteProposal: true,
+      validation: gateway({ fails: "validate_recommendation refusée : identité de service (seo-worker-7)" }),
+    });
     await tick(ctx, "worker-1");
-    expect(() =>
-      ackValidation(ctx, { missionId: "msn-fictive-1", humanId: "mt", decidedAt: "2026-11-08" }, true),
-    ).toThrow(/agent/);
+    await expect(
+      ackValidation(ctx, { missionId: "msn-fictive-1", decidedAt: "2026-11-08" }),
+    ).rejects.toThrow(/identité de service/);
   });
 
-  it("ackValidation accepts when caller is human, mission goes to done", async () => {
-    const ctx = await setup({ withWriteProposal: true });
+  it("S2 : ackValidation refusée si aucune passerelle configurée", async () => {
+    const ctx = await setup({ withWriteProposal: true /* pas de validation */ });
     await tick(ctx, "worker-1");
-    const done = ackValidation(ctx, { missionId: "msn-fictive-1", humanId: "mt", decidedAt: "2026-11-08" }, false);
+    await expect(
+      ackValidation(ctx, { missionId: "msn-fictive-1", decidedAt: "2026-11-08" }),
+    ).rejects.toThrow(/no validation gateway/);
+  });
+
+  it("S2 : ackValidation acceptée quand la base valide ; validatedBy vient d'auth.uid()", async () => {
+    const ctx = await setup({ withWriteProposal: true, validation: gateway({ decidedBy: "u-mickael" }) });
+    await tick(ctx, "worker-1");
+    const done = await ackValidation(ctx, { missionId: "msn-fictive-1", decidedAt: "2026-11-08" });
     expect(done.state).toBe("done");
-    expect(done.validatedBy).toBe("mt");
+    // L'identité qui valide vient de la base (auth.uid()), pas d'un humanId
+    // fourni par l'appelant.
+    expect(done.validatedBy).toBe("u-mickael");
     expect(ctx.log.all().some((e) => e.what === "mission.validated")).toBe(true);
   });
 
@@ -226,12 +246,12 @@ describe("Orchestrator end-to-end (données fictives)", () => {
   });
 
   it("E5 bout en bout : planifiée → agent fictif → recommandation → attente → validation simulée → done", async () => {
-    const ctx = await setup({ withWriteProposal: true });
+    const ctx = await setup({ withWriteProposal: true, validation: gateway() });
     const m1 = await tick(ctx, "w");
     expect(m1?.state).toBe("waiting-validation");
     expect(m1?.results.recommendationIds).toContain("rec-fictive-tech");
-    // Validation simulée, identité distincte de l'agent
-    const done = ackValidation(ctx, { missionId: "msn-fictive-1", humanId: "mt", decidedAt: "2026-11-08" }, false);
+    // Validation simulée par la base (S2)
+    const done = await ackValidation(ctx, { missionId: "msn-fictive-1", decidedAt: "2026-11-08" });
     expect(done.state).toBe("done");
     // Événement fictif de PR fusionnée déclenche une post-deploy-analysis
     const postDeploy = missionsForEvent(

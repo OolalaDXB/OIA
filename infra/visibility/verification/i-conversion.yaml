@@ -1,0 +1,10 @@
+schemaVersion: 1
+family: I
+title: "Conversion"
+intro: "La visite devient-elle contact, réservation ou achat ?"
+checks:
+  - { id: I01, label: "Appel à l'action clair sur chaque page d'offre", tool: manual, mode: manuel, severity: important, tags: [seo] }
+  - { id: I02, label: "Formulaires courts, avec étiquettes et messages d'erreur", tool: crawlie, mode: mixte, severity: important, tags: [access] }
+  - { id: I03, label: "Moyens de contact directs (téléphone, messagerie) cohérents avec le marché", tool: manual, mode: manuel, severity: important, tags: [seo] }
+  - { id: I04, label: "Réservation ou paiement en ligne fonctionnels de bout en bout", tool: manual, mode: manuel, severity: important, tags: [seo] }
+  - { id: I05, label: "Conversions suivies dans l'outil d'audience", tool: manual, mode: manuel, severity: amélioration, tags: [seo] }

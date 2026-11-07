@@ -116,6 +116,7 @@
 | claude | API (Elmo) | oui | en | Anthropic en direct (:online, outil web_search) |
 | gemini | API (Elmo) | oui | en | via OpenRouter (recherche Google native) |
 | perplexity | API (Elmo) | oui | en | via OpenRouter (Sonar) |
+| mistral | API (Elmo) | oui | en | Mistral en direct (Conversations API + outil web_search). Mesuré en anglais pour le pilote J0 (langue unique du panel). |
 
 | Fenêtre | Type | Jours | Panel | Statut | Début | Fin | Jours manquants |
 |---|---|---|---|---|---|---|---|

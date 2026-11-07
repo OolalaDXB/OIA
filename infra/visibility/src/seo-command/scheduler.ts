@@ -2,9 +2,14 @@ import type { Mission, MissionType } from "./mission";
 
 /**
  * Planificateur de missions récurrentes. **Désactivé par défaut** (règle 16
- * + mandat E5.3). Un test vérifie qu'aucune mission ne part quand
+ * + mandat E5.3 + S2). Un test vérifie qu'aucune mission ne part quand
  * `OIA_SEO_COMMAND_SCHEDULER_ENABLED=false`, et qu'un redémarrage ne force
  * jamais l'interrupteur à `true`.
+ *
+ * S2 : `enabled` n'est jamais mis à `true` par le code applicatif. Il est
+ * lu dans `vis.scheduler_switch` via la fonction `vis.toggle_scheduler`
+ * (voir migrations/0004_auth_identity.sql). Le `Recurrence` ne porte plus
+ * de `enabledBy` : la trace est en base, dans `scheduler_switch.toggled_by`.
  */
 
 export interface Recurrence {
@@ -17,10 +22,8 @@ export interface Recurrence {
   everyDays?: number;
   reservedBudgetUsd: number;
   agents: string[];
-  /** Désactivée par défaut à la création (règle 16) ; seul un humain owner peut passer à `enabled: true`. */
+  /** Lu depuis `vis.scheduler_switch.enabled` ; jamais positionné à `true` par l'appelant. */
   enabled: boolean;
-  enabledBy?: string;
-  enabledAt?: string;
 }
 
 export interface SchedulerOptions {
@@ -52,10 +55,11 @@ export function createScheduler(opts: SchedulerOptions = {}): Scheduler {
     list: () => [...recurrences.values()],
     register(r) {
       if (recurrences.has(r.id)) return "already-exists";
-      // Règle 16 renforcée : même à la création, `enabled=true` sans
-      // enabledBy/enabledAt n'est pas acceptable.
-      const enabled = Boolean(r.enabled && r.enabledBy && r.enabledAt);
-      recurrences.set(r.id, { ...r, enabled });
+      // S2 : `enabled` à la création est TOUJOURS ignoré (forcé à false).
+      // L'activation passe exclusivement par `vis.toggle_scheduler` (base,
+      // security definer avec contrôle auth.uid() + rôle). Ce que l'appelant
+      // fournit n'est pas pris en compte pour la décision d'activation.
+      recurrences.set(r.id, { ...r, enabled: false });
       return "registered";
     },
     tick(_now) {

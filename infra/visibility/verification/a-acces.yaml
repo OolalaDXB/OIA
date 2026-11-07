@@ -1,0 +1,14 @@
+schemaVersion: 1
+family: A
+title: "Accès et comptes"
+intro: "Sans ces accès, la mesure est incomplète. À réunir avant la première fenêtre."
+checks:
+  - { id: A01, label: "Propriété Google Search Console vérifiée, de type domaine", tool: crawlseo, mode: manuel, severity: bloquant, tags: [access, seo] }
+  - { id: A02, label: "Propriété Bing Webmaster Tools vérifiée", tool: manual, mode: manuel, severity: important, tags: [access, seo] }
+  - { id: A03, label: "Outil d'audience en place (Plausible ou équivalent), sans données personnelles inutiles", tool: manual, mode: manuel, severity: important, tags: [access, access] }
+  - { id: A04, label: "Fiche d'établissement Google (si activité locale) : existence, propriétaire, accès", tool: manual, mode: manuel, severity: important, tags: [aeo, access] }
+  - { id: A05, label: "Accès au dépôt du site et mode d'action déclaré (lecture, proposition, direct)", tool: repo-read, mode: manuel, severity: important, tags: [tech, access] }
+  - { id: A06, label: "Accès à l'hébergeur et au déploiement (prévisualisations, journaux)", tool: manual, mode: manuel, severity: amélioration, tags: [tech, access] }
+  - { id: A07, label: "Accès au registrar et à la zone DNS", tool: manual, mode: manuel, severity: important, tags: [tech, access] }
+  - { id: A08, label: "CMS ou outil d'édition utilisé, et qui publie", tool: manual, mode: manuel, severity: amélioration, tags: [tech, access] }
+  - { id: A09, label: "Accord écrit du client sur l'usage des données (benchmarks agrégés et anonymisés)", tool: manual, mode: manuel, severity: bloquant, tags: [legal] }

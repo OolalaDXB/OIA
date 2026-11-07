@@ -1,0 +1,17 @@
+schemaVersion: 1
+family: B
+title: "Domaine et indexation"
+intro: "Le premier filtre : une page mal déclarée n'existe pas pour Google ni pour les IA."
+checks:
+  - { id: B01, label: "Une seule version du domaine fait foi : l'autre (avec ou sans www) redirige en 301", tool: oia, mode: auto, severity: bloquant, tags: [seo, tech], note: "Scripté côté OIA : `curl -sIL` sur la racine avec et sans `www`." }
+  - { id: B02, label: "HTTPS partout, certificat valide, aucune page en HTTP", tool: crawlie, mode: auto, severity: bloquant, tags: [seo, tech] }
+  - { id: B03, label: "Balise canonique : chaque page indexable pointe vers elle-même, sur le bon domaine", tool: crawlie, mode: mixte, severity: bloquant, tags: [seo] }
+  - { id: B04, label: "robots.txt : ne bloque aucune page publique utile ; bloque le back-office", tool: crawlie, mode: mixte, severity: bloquant, tags: [seo, aeo] }
+  - { id: B05, label: "Sitemap XML présent, déclaré dans robots.txt et dans Search Console, sans URL en erreur", tool: crawlseo, mode: auto, severity: important, tags: [seo] }
+  - { id: B06, label: "Aucun noindex oublié (balise ou en-tête X-Robots-Tag) sur une page publique", tool: crawlie, mode: auto, severity: bloquant, tags: [seo] }
+  - { id: B07, label: "Codes HTTP : pas de 404 ou de 5xx sur les liens internes ; redirections sans chaîne", tool: crawlie, mode: auto, severity: important, tags: [tech] }
+  - { id: B08, label: "Pages indexées dans Search Console proches du nombre de pages publiques", tool: crawlseo, mode: mixte, severity: important, tags: [seo] }
+  - { id: B09, label: "Contenus dupliqués et titres dupliqués : chaque page a un rôle distinct", tool: crawlie, mode: mixte, severity: important, tags: [seo, aeo] }
+  - { id: B10, label: "Versions linguistiques déclarées entre elles (hreflang) si le site est multilingue", tool: crawlie, mode: auto, severity: important, tags: [seo] }
+  - { id: B11, label: "Profondeur : toute page utile accessible en trois clics au plus", tool: crawlie, mode: auto, severity: amélioration, tags: [seo] }
+  - { id: B12, label: "Pages orphelines (sans lien interne)", tool: crawlie, mode: auto, severity: amélioration, tags: [seo] }

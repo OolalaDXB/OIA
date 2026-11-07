@@ -1,0 +1,13 @@
+schemaVersion: 1
+family: G
+title: "Entité et réputation"
+intro: "Ce que le reste du web dit de la marque, et donc ce que les IA en retiennent."
+checks:
+  - { id: G01, label: "Nom, adresse et téléphone identiques partout (site, fiche Google, annuaires, réseaux)", tool: manual, mode: manuel, severity: important, tags: [aeo] }
+  - { id: G02, label: "Fiche d'établissement Google complète : catégories, horaires, photos, services", tool: manual, mode: manuel, severity: important, tags: [aeo] }
+  - { id: G03, label: "Avis clients : nombre, note, fraîcheur, réponses du propriétaire", tool: manual, mode: manuel, severity: important, tags: [aeo] }
+  - { id: G04, label: "Présence dans les annuaires et plateformes de référence du secteur", tool: manual, mode: manuel, severity: important, tags: [aeo] }
+  - { id: G05, label: "Mentions par des tiers crédibles (presse, partenaires, associations)", tool: manual, mode: manuel, severity: important, tags: [aeo] }
+  - { id: G06, label: "Profils sociaux actifs, cohérents, reliés au site", tool: manual, mode: manuel, severity: amélioration, tags: [aeo] }
+  - { id: G07, label: "Fiches encyclopédiques ou bases de connaissances, si l'entité y a sa place", tool: manual, mode: manuel, severity: amélioration, tags: [aeo] }
+  - { id: G08, label: "Homonymes et confusions possibles avec une autre entité", tool: elmo, mode: mixte, severity: important, tags: [aeo] }

@@ -1,0 +1,12 @@
+schemaVersion: 1
+family: E
+title: "Données structurées"
+intro: "Ce que les moteurs et les IA lisent comme des faits."
+checks:
+  - { id: E01, label: "Organization ou LocalBusiness sur l'accueil, avec nom, logo, coordonnées", tool: crawlie, mode: auto, severity: important, tags: [aeo, seo] }
+  - { id: E02, label: "sameAs vers les profils officiels (réseaux, annuaires, fiche Google)", tool: crawlie, mode: auto, severity: important, tags: [aeo] }
+  - { id: E03, label: "Product, Service ou Offer avec prix et devise quand un prix est public", tool: crawlie, mode: auto, severity: important, tags: [aeo, seo] }
+  - { id: E04, label: "FAQPage sur les vraies questions de clients", tool: crawlie, mode: auto, severity: amélioration, tags: [aeo] }
+  - { id: E05, label: "Person pour l'auteur ou le praticien quand l'expertise repose sur une personne", tool: crawlie, mode: auto, severity: amélioration, tags: [aeo] }
+  - { id: E06, label: "Données structurées valides, sans erreur ni contradiction avec la page", tool: crawlie, mode: mixte, severity: important, tags: [aeo] }
+  - { id: E07, label: "Aucune donnée inventée : prix, avis et caractéristiques viennent des faits validés", tool: manual, mode: manuel, severity: bloquant, tags: [aeo, legal] }

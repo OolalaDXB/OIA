@@ -2,20 +2,26 @@ schemaVersion: 1
 # Configuration payante plafonnée (annulation de la bascule zéro coût du 2026-11-06,
 # décision 2026-11-08). Les comptes et les clés sont à ouvrir par Mickaël ; cost-guard.sh
 # arrête le worker au plafond mensuel de 30 $ (pour le mois UTC), avec une alerte à 24 $.
+#
+# Mandat du 2026-11-07 : passer à CINQ moteurs pour J0, Mistral inclus. Elmo 0.7.7 choisit
+# les moteurs PAR MARQUE : avec un panel entièrement anglophone, Mistral répondra aussi aux
+# questions en anglais, et les réponses seront conservées puis rapportées (reportLanguages
+# = en pour Mistral sur ce sujet). Décision de ne pas exclure, pour que la comparaison des
+# cinq moteurs soit homogène sur J0.
 engines:
   - { model: chatgpt,    collection: api, webSearch: true, note: "OpenAI en direct (:online, outil web_search)" }
   - { model: claude,     collection: api, webSearch: true, note: "Anthropic en direct (:online, outil web_search)" }
   - { model: gemini,     collection: api, webSearch: true, note: "via OpenRouter (recherche Google native)" }
   - { model: perplexity, collection: api, webSearch: true, note: "via OpenRouter (Sonar)" }
-# Mistral non mesuré : panel entièrement anglophone. Jev reste activé via OpenRouter
-# (TYPESAFE_API_KEY vide, OPENROUTER_API_KEY renseignée — voir elmo/.env.example).
+  - { model: mistral,    collection: api, webSearch: true, note: "Mistral en direct (Conversations API + outil web_search). Mesuré en anglais pour le pilote J0 (langue unique du panel)." }
+# Jev reste activé via OpenRouter (TYPESAFE_API_KEY vide, OPENROUTER_API_KEY renseignée — voir elmo/.env.example).
 windows:
   - id: j0
     kind: baseline
     days: 5
     panelVersion: 2
     status: planned
-    note: "Mesure de départ. Dates fixées au démarrage du worker, après validation du panel."
+    note: "Mesure de départ, 5 moteurs. Dates fixées au démarrage du worker, après validation du panel."
 freezes:
   - id: freeze-j0
     scope: [site, repository]

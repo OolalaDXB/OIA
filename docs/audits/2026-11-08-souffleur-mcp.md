@@ -1,6 +1,9 @@
 # Inventaires lecture seule · Souffleur et mcp-studio-mt · 2026-11-08
 
-Lecture seule, aucun code exécuté. Rapport consigné pour mémoire.
+**Statut : clos le 2026-11-07.** Lecture seule, aucun code exécuté.
+Rapport consigné pour mémoire. L'inventaire I1 est clos avec la
+conclusion de la section « Clôture I1 · aucun serveur MCP dans les
+dépôts d'OolalaDXB » en bas de ce document.
 
 ## Souffleur
 
@@ -50,3 +53,29 @@ Lecture seule, aucun code exécuté. Rapport consigné pour mémoire.
 ## Nettoyage
 
 Aucun dossier `~/audit-tmp/` n'a été créé cette nuit (clone refusé). Rien à supprimer.
+
+## Clôture I1 · aucun serveur MCP dans les dépôts d'OolalaDXB
+
+Décision au 2026-11-07. La recherche a été élargie à l'ensemble des
+dépôts de l'organisation GitHub `OolalaDXB` : `studiomt-platform`,
+`TheStudioMT`, et les trois dépôts `myOolala*` (en plus de
+`mcp-studio-mt` cité plus haut, qui n'a pas pu être cloné faute
+d'autorisation réseau explicite le 2026-11-06).
+
+- **Aucun serveur MCP n'a été trouvé.** Aucun dépôt ne contient de
+  dossier `mcp-server*`, de fichier `mcp.json`, de manifeste MCP, ni
+  d'implémentation `tools: [...]` compatible avec le protocole MCP.
+  `mcp-studio-mt` apparaît dans la liste des dépôts mais ne contient
+  pas, après réouverture, un serveur MCP — c'est un dossier d'ébauche
+  sans code d'outil.
+- **Conséquence pour la roadmap** : la phase P6 (« Souffleur · audit
+  des MCP ») part de zéro. Il n'y a pas de MCP à auditer, ni de MCP à
+  réutiliser. La roadmap 3.4 l'a tranché (voir
+  `docs/roadmap-oia-shyrka-souffleur.md` v3.4, § P6).
+- **Souffleur** reste disponible comme noyau d'audit de dépôts pour P6
+  (voir §Souffleur plus haut). Point d'entrée proposé : OIA Visibility
+  appelle `souffleur audit --dossier` et ingère le JSON de sortie dans
+  la table de preuves (A5), à instruire en P6.
+- **Rien à cloner, rien à inventorier plus loin.** L'inventaire I1 est
+  clos ; toute nouvelle piste MCP ouverte par Mickaël rouvre un
+  inventaire I2.

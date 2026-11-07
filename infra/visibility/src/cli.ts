@@ -7,6 +7,7 @@ import { activeFreezes, defaultSubjectsDir, loadSubject, loadSubjects, listSubje
 import { diffPanels, proposePanel, resolveHumanValidator, type HumanIdentity } from "./panel-generator";
 import { PanelSchema } from "./schema";
 import { renderElmoBrief, renderReview } from "./render";
+import { applicableChecks, checksForFamily, checksForTool, flatChecks, loadFamilies, Tool } from "./verification";
 
 /**
  * Usage (from infra/visibility):
@@ -121,6 +122,34 @@ try {
     case "elmo-brief":
       process.stdout.write(renderElmoBrief(byId(arg)));
       break;
+    case "verifications": {
+      // Usage :
+      //   tsx src/cli.ts verifications                    tous les contrôles
+      //   tsx src/cli.ts verifications --family B         une famille
+      //   tsx src/cli.ts verifications --tool crawlie     ciblés par un outil
+      //   tsx src/cli.ts verifications --subject <id>     applicables au sujet
+      const famIdx = argv.indexOf("--family");
+      const toolIdx = argv.indexOf("--tool");
+      const subjIdx = argv.indexOf("--subject");
+      const families = loadFamilies();
+      let checks = flatChecks(families);
+      if (famIdx >= 0 && argv[famIdx + 1]) checks = checksForFamily(argv[famIdx + 1]!, families);
+      if (toolIdx >= 0 && argv[toolIdx + 1]) {
+        const t = Tool.parse(argv[toolIdx + 1]);
+        checks = checksForTool(t, checks);
+      }
+      if (subjIdx >= 0 && argv[subjIdx + 1]) {
+        const b = byId(argv[subjIdx + 1]);
+        checks = applicableChecks(
+          { ownership: b.subject.ownership, languages: b.subject.languages },
+          checks,
+        );
+      }
+      console.log(`${checks.length} contrôle(s)`);
+      for (const c of checks)
+        console.log(`  ${c.id}  ${c.severity.padEnd(13)} ${c.mode.padEnd(7)} ${c.tool.padEnd(9)} ${c.label}`);
+      break;
+    }
     case "panel": {
       const sub = argv[1];
       const subjectId = argv[2];
@@ -187,7 +216,7 @@ try {
     }
     default:
       console.error(
-        "usage: cli.ts validate | list | urls [<id>] | review <id> [--write] | elmo-brief <id> | freezes [<id>] | capture-template <id> <engine> [date] [--draft] | capture-check <file> | panel propose|diff|validate <id> [args]",
+        "usage: cli.ts validate | list | urls [<id>] | review <id> [--write] | elmo-brief <id> | freezes [<id>] | capture-template <id> <engine> [date] [--draft] | capture-check <file> | panel propose|diff|validate <id> [args] | verifications [--family X] [--tool T] [--subject <id>]",
       );
       process.exit(2);
   }

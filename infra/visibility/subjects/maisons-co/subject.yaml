@@ -1,7 +1,9 @@
 schemaVersion: 1
 id: maisons-co
 displayName: Maisons.co
-status: draft
+# Statut « paused » le 2026-11-07 : la mesure J0 attend la refonte du site.
+# Exigences à respecter avant reprise : refonte-exigences-seo.md (ce dossier).
+status: paused
 ownership: internal
 urls:
   primary: https://maisons.co
@@ -38,6 +40,7 @@ sources:
     description: "Exemple de question marquée « Que propose Maisons.co à Gudauri ? » ; URL hors sujet déjà repérée dans l'index ; séparation Collection / Géorgie non tranchée"
     addedAt: "2026-11-05"
 openQuestions:
+  - "Panel Maisons.co en attente de la refonte (voir refonte-exigences-seo.md) ; critères d'acceptation en §10"
   - "Noms des maisons (Quistinic, Morbihan, Gudauri) à suivre comme alias : à fournir"
   - "Noms commerciaux des offres (location, conciergerie, Collection ?) : à fournir"
   - "Autres domaines ou fiches (Airbnb, Booking, site d'une maison) : à fournir"

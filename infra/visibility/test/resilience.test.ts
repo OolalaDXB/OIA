@@ -104,8 +104,6 @@ describe("Z2.2 résilience", () => {
       reservedBudgetUsd: 1,
       agents: ["fake"],
       enabled: true,
-      enabledBy: "mt",
-      enabledAt: "2026-11-08",
     });
     expect(second.tick(new Date("2026-11-08"))).toEqual([]);
   });

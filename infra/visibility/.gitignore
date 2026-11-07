@@ -18,3 +18,4 @@ crawlie-out/
 !migrations/0001_evidence.sql
 !migrations/0002_decision_journal.sql
 !migrations/0003_client_action_log.sql
+!migrations/0004_auth_identity.sql

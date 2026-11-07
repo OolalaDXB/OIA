@@ -87,6 +87,7 @@
 
 ## Questions ouvertes
 
+- Panel Maisons.co en attente de la refonte (voir refonte-exigences-seo.md) ; critères d'acceptation en §10
 - Noms des maisons (Quistinic, Morbihan, Gudauri) à suivre comme alias : à fournir
 - Noms commerciaux des offres (location, conciergerie, Collection ?) : à fournir
 - Autres domaines ou fiches (Airbnb, Booking, site d'une maison) : à fournir

@@ -1,0 +1,13 @@
+schemaVersion: 1
+family: D
+title: "Structure des pages"
+intro: "Chaque page a un rôle unique, un titre qui le dit, une hiérarchie lisible."
+checks:
+  - { id: D01, label: "Titre unique par page, entre 30 et 60 caractères, qui dit ce que fait la page", tool: crawlie, mode: auto, severity: important, tags: [seo] }
+  - { id: D02, label: "Meta description unique, utile, entre 70 et 155 caractères", tool: crawlie, mode: auto, severity: amélioration, tags: [seo] }
+  - { id: D03, label: "Un seul H1 par page, cohérent avec le titre", tool: crawlie, mode: auto, severity: important, tags: [seo, aeo] }
+  - { id: D04, label: "Hiérarchie des intertitres sans saut de niveau", tool: crawlie, mode: auto, severity: amélioration, tags: [seo, access] }
+  - { id: D05, label: "Texte alternatif sur les images porteuses de sens", tool: crawlie, mode: auto, severity: amélioration, tags: [access, seo] }
+  - { id: D06, label: "URL lisibles et stables, dans la langue de la page", tool: crawlie, mode: mixte, severity: amélioration, tags: [seo] }
+  - { id: D07, label: "Maillage interne entre les pages d'offre, de preuve et de contact", tool: crawlie, mode: mixte, severity: important, tags: [seo] }
+  - { id: D08, label: "Fil d'Ariane sur les sites profonds", tool: crawlie, mode: auto, severity: amélioration, tags: [seo] }

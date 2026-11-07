@@ -1,0 +1,9 @@
+schemaVersion: 1
+family: J
+title: "Accessibilité"
+intro: "Un site utilisable est aussi mieux cité par les IA (contenu bien structuré, pas d'invisible)."
+checks:
+  - { id: J01, label: "Champs de formulaire avec étiquette", tool: crawlie, mode: auto, severity: important, tags: [access] }
+  - { id: J02, label: "Contrastes suffisants", tool: crawlie, mode: auto, severity: amélioration, tags: [access] }
+  - { id: J03, label: "Navigation au clavier possible", tool: manual, mode: manuel, severity: amélioration, tags: [access] }
+  - { id: J04, label: "Langue de la page déclarée", tool: crawlie, mode: auto, severity: amélioration, tags: [access, seo] }

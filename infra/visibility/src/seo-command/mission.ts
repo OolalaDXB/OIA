@@ -65,6 +65,11 @@ export const MissionSchema = z
     validatedAt: isoDate.optional(),
     /** Pour la post-deploy-analysis : la PR fusionnée qui a déclenché. */
     sourcePrRef: z.string().optional(),
+    /** Contrôles visés par la mission, repris du modèle de vérification en
+     *  données (`verification/*.yaml`). Vide = tous les contrôles couverts
+     *  par l'exécuteur. Non vide = limiter à ces IDs ; l'exécuteur rejette
+     *  la mission si un ID n'est pas couvert par son outil. */
+    checkIds: z.array(z.string().regex(/^[A-M]\d{2}$/)).default([]),
   })
   .strict();
 
