@@ -1,0 +1,25 @@
+{
+  "name": "@oia/money-lookup",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Money Lookup (mandat v8, bloc A) : chargement idempotent des opportunités dans les tables d'OIA, à partir des sorties existantes. Fichiers et tests seulement ; aucune exécution sur Supabase par Claude Code.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "charger": "tsx src/cli.ts"
+  },
+  "dependencies": {
+    "@oia/ingestion": "workspace:*",
+    "@oia/workspace": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}
