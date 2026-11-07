@@ -141,6 +141,9 @@ importers:
 
   infra/shyrka:
     dependencies:
+      '@oia/shyrka-noyau':
+        specifier: workspace:*
+        version: link:../../packages/shyrka
       zod:
         specifier: ^3.24.1
         version: 3.25.76

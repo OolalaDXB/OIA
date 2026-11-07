@@ -2,6 +2,10 @@ import { voiceOutputAllowed, type Identity } from "./identity.js";
 import { applyStyle, SHYRKA_SYSTEM_PROMPT } from "./persona.js";
 import type { AudioClip, ChatMessage, Microphone, Speaker, TextModel, Transcriber } from "./types.js";
 import { assertModeleLocal } from "./local.js";
+import type { ServiceMemoire } from "./memoire/commandes.js";
+import { normaliserTexte } from "@oia/shyrka-noyau";
+
+const COURANTS = new Set(["fictif", "fictive", "prefere", "preferee", "toujours", "jamais", "cette", "votre", "notre", "parce", "comme", "avoir", "faire", "projet"]);
 import {
   detecterDemande, detecterOffre, entiteDecision, estAccord, estArret, estRefus, executer, idsDecision, passageSuivant, questions, refusDocument, renduListe,
   routerDecision, sansRepetition, sourcesDuDepot, texteVocal, type Decision, type Entite, type Execution, type Offre, type Operation, type Sources,
@@ -55,7 +59,16 @@ export interface SessionDeps {
   sources?: Sources;
   /** Appelé à chaque changement d'état (affichage, raccourcis clavier). */
   onEtat?: (etat: EtatSession) => void;
+  /**
+   * Mémoire persistante (mandat v10, bloc A). Ses commandes sont traitées par le
+   * code ; leur contenu n'entre jamais dans l'historique d'un modèle, et les
+   * souvenirs ne sont donnés qu'à un modèle local.
+   */
+  memoire?: ServiceMemoire;
 }
+
+/** Ce qui remplace, dans l'historique d'un modèle, un échange de mémoire. */
+export const ECHANGE_MEMOIRE = "(échange de mémoire traité localement ; contenu non transmis au modèle)";
 
 /**
  * Une conversation de Shyrka 1 « Te parle ».
@@ -154,7 +167,9 @@ export class ShyrkaSession {
       this.passer("arret");
       return { heard, answer: null, output: "aucune", events, arret: true };
     }
-    const system = this.deps.system ?? SHYRKA_SYSTEM_PROMPT;
+    const mem = this.deps.memoire?.traiter(heard);
+    if (mem) return this.reponseMemoire(heard, mem, events);
+    const system = this.systeme(heard);
     const messages: ChatMessage[] = [{ role: "system", content: system }, ...this.history, { role: "user", content: heard }];
     const decision = this.decider(heard);
     let answer: string;
@@ -257,6 +272,50 @@ export class ShyrkaSession {
       this.passer("attente");
     }
     return { heard, answer, output, events, spoken: parle, ...(interrompue ? { interrompue } : {}), ...(comparison ? { comparison } : {}) };
+  }
+
+  /** Où partira ce qu'on donne au modèle : local (Ollama, simulé) ou en ligne. */
+  private get modeleLocal(): boolean {
+    return /^(ollama|simule):/.test(this.deps.model.name);
+  }
+
+  /** Consignes du tour : le cadre, plus les souvenirs pertinents si le modèle est local. */
+  private systeme(heard: string): string {
+    const base = this.deps.system ?? SHYRKA_SYSTEM_PROMPT;
+    const m = this.deps.memoire;
+    if (!m) return base;
+    const souvenirs = m.contexteModele(heard, { type: "conversation", modele: this.modeleLocal ? "local" : "en_ligne" });
+    return souvenirs ? `${base}\n\n${souvenirs}` : base;
+  }
+
+  /** Réponse d'une commande de mémoire : écran complet, voix courte, historique sans contenu. */
+  private async reponseMemoire(heard: string, mem: { texte: string; sensible: boolean; oublies?: string[] }, events: TurnEvent[]): Promise<TurnResult> {
+    this.offre = null;
+    this.suiteVocale = [];
+    this.deps.print(`Shyrka · ${mem.texte}`);
+    if (mem.oublies?.length) {
+      // Un oubli retire aussi le souvenir de l'historique qui pourrait le réinjecter.
+      // Large exprès : un tour qui reprend un mot distinctif du souvenir (5 lettres ou plus) est retiré.
+      const mots = new Set(mem.oublies.flatMap((c) => normaliserTexte(c).split(" ").filter((m) => m.length >= 5 && !COURANTS.has(m))));
+      const garde: ChatMessage[] = [];
+      for (let i = 0; i < this.history.length; i += 2) {
+        const paire = this.history.slice(i, i + 2);
+        if (!paire.some((x) => normaliserTexte(x.content).split(" ").some((m) => mots.has(m)))) garde.push(...paire);
+      }
+      this.history = garde;
+    }
+    const parle = mem.texte.split("\n")[0]!.replace(/\[[0-9a-f]{8}\]\s*/g, "");
+    let output: TurnResult["output"] = "texte";
+    let interrompue = false;
+    if (this.voiceOutput && this.deps.speaker) {
+      const speaker = this.deps.speaker;
+      this.passer("parole");
+      interrompue = (await this.step(events, "voix", () => speaker.speak(parle))) === "interrompu";
+      output = "voix";
+    } else events.push({ at: new Date(this.clock()).toISOString(), step: "texte", ms: 0, detail: "mémoire" });
+    this.remember(ECHANGE_MEMOIRE, mem.sensible ? ECHANGE_MEMOIRE : mem.texte);
+    this.passer(interrompue ? "interrompue" : "attente");
+    return { heard, answer: mem.texte, output, events, spoken: parle, ...(interrompue ? { interrompue } : {}) };
   }
 
   /** Consigne pour expliquer une seule décision, à partir de son intitulé exact. */

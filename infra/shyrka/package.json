@@ -14,9 +14,11 @@
     "resume": "tsx src/cli.ts resume",
     "entretien": "tsx src/cli.ts entretien",
     "diagnostic": "tsx src/cli.ts diagnostic",
-    "mesure-echo": "tsx src/cli.ts echo"
+    "mesure-echo": "tsx src/cli.ts echo",
+    "executive": "tsx src/executive/cli.ts"
   },
   "dependencies": {
+    "@oia/shyrka-noyau": "workspace:*",
     "zod": "^3.24.1"
   },
   "devDependencies": {

@@ -1,0 +1,81 @@
+{
+  "format": "shyrka.portefeuille",
+  "version": 1,
+  "verifie_le": "2026-11-08",
+  "methode": "Correspondances vérifiées en lecture seule le 2026-11-08 : gh repo list OolalaDXB, MCP Vercel (list_projects par repoUrl, list_project_domains), un GET par domaine. Une correspondance non confirmée est marquée et n'est pas surveillée comme celle du produit.",
+  "produits": [
+    {
+      "slug": "oia",
+      "nom": "OIA",
+      "noms": ["OIA", "cockpit", "Money Lookup", "Visibility", "Shyrka"],
+      "priorite": "approfondie",
+      "depots": [{ "repo": "OolalaDXB/OIA", "branche": "main", "confirme": true }],
+      "http": [{ "url": "https://oia-khaki.vercel.app/", "confirme": true, "preuve": "Vercel projet oia (prj_5sm6hGkQD9sqQnIRz8qtn5AIp12O) ; docs/access-and-data.md:12" }],
+      "vercel": [{ "projet": "oia", "id": "prj_5sm6hGkQD9sqQnIRz8qtn5AIp12O", "confirme": true }],
+      "supabase": { "ref": "iywmvyebuikxyvnrcnoy", "confirme": true, "preuve": "docs/interface/mise-en-production-v1.md:28" },
+      "local": ["visibility", "money-lookup"],
+      "ambiguites": ["Dépôt Lovable du cockpit non identifié (mise-en-production-v1.md:20-22)."]
+    },
+    {
+      "slug": "coach-gari",
+      "nom": "Coach Gari",
+      "noms": ["Coach Gari", "CoachGari", "Gari"],
+      "priorite": "approfondie",
+      "depots": [{ "repo": "OolalaDXB/CoachGari", "branche": "main", "confirme": true }],
+      "http": [
+        { "url": "https://coachgari28.com/", "confirme": true, "preuve": "Vercel coachgari_v0 ; registry/projects/coach-gari.yaml:12" },
+        { "url": "https://coachgari.com/", "confirme": true, "attendu": [308], "preuve": "Vercel coachgari_v0, redirection vers coachgari28.com" }
+      ],
+      "vercel": [{ "projet": "coachgari_v0", "id": "prj_YCx9wcCieYVzzc1NBp2oRWoW8Zwp", "confirme": true }],
+      "supabase": { "ref": "acrjrlgeeyseyolmofuq", "confirme": true, "preuve": "CoachGari README.md:78" },
+      "ambiguites": ["Site gelé : observation seulement.", "Instances BEAU Solo (beau-solo-*) servies depuis le dépôt CoachGari : rattachement produit non confirmé, non surveillées."]
+    },
+    {
+      "slug": "maisons-co",
+      "nom": "Maisons.co",
+      "noms": ["Maisons.co", "Maisons", "maison-collection"],
+      "priorite": "approfondie",
+      "depots": [{ "repo": "OolalaDXB/maison-collection", "branche": "main", "confirme": true }],
+      "http": [{ "url": "https://www.maisons.co/", "confirme": true, "preuve": "Vercel maisonsmain, domaine principal" }],
+      "vercel": [
+        { "projet": "maisonsmain", "id": "prj_8pH4YYZTnshY9BjmMVzCSNJMS0DF", "confirme": true },
+        { "projet": "maisons", "id": "prj_03Phw8qBo2yWI5rZYTQDxZ8l3n9l", "confirme": false }
+      ],
+      "supabase": { "ref": "gugduludshezdsplkkxu", "confirme": true, "preuve": "maison-collection/supabase/config.toml:1" },
+      "ambiguites": ["Projet Vercel « maisons » : dépôt et rôle non confirmés."]
+    },
+    {
+      "slug": "beau",
+      "nom": "BEAU",
+      "noms": ["BEAU", "beau.capital"],
+      "priorite": "standard",
+      "depots": [{ "repo": "OolalaDXB/BEAU-capital-Dev", "branche": "main", "confirme": true }],
+      "http": [{ "url": "https://beau.capital/", "confirme": true, "preuve": "Vercel beau-capital-dev ; registry/projects/beau.yaml:12" }],
+      "vercel": [{ "projet": "beau-capital-dev", "id": "prj_GSB9m6l01NKNWYNiMAV6wyVNsSSe", "confirme": true }],
+      "supabase": { "ref": "ilptklvdbuhvtasjxcdc", "confirme": true, "preuve": "BEAU-capital-Dev/supabase/config.toml:1" },
+      "ambiguites": ["Autres dépôts BEAU* (BEAUX, beaucollection, LUDOBEAU, BEAUTREASURY, beau-treasury, beau-money-dashboard, beau-access-gateway) : rattachement non confirmé, non surveillés."]
+    },
+    {
+      "slug": "sillon",
+      "nom": "SILLON",
+      "noms": ["SILLON", "Sillon"],
+      "priorite": "standard",
+      "depots": [{ "repo": "OolalaDXB/SILLON", "branche": "main", "confirme": true }],
+      "http": [{ "url": "https://www.sillon.me/", "confirme": true, "preuve": "Vercel sillon-music, domaine principal ; registry/projects/sillon.yaml:12" }],
+      "vercel": [{ "projet": "sillon-music", "id": "prj_XoQiaUeGZMwOZTOJ0DUlABbwISkZ", "confirme": true }],
+      "supabase": { "ref": "modgiywtysnpnyrgwuhn", "confirme": true, "preuve": "SILLON/supabase/config.toml:1" },
+      "ambiguites": ["pro.outre-national.com servi par le même projet Vercel : non surveillé tant que Mickaël n'a pas dit s'il relève de SILLON.", "SillonB2C et projet Vercel sillon-b2-c : non confirmés."]
+    },
+    {
+      "slug": "myoolala",
+      "nom": "myOolala",
+      "noms": ["myOolala", "myoolala"],
+      "priorite": "standard",
+      "depots": [{ "repo": "OolalaDXB/myOolalaP1", "branche": "main", "confirme": false }],
+      "http": [{ "url": "https://myoolala.com/", "confirme": true, "preuve": "Vercel projet myoolala ; registry/projects/myoolala.yaml:12" }],
+      "vercel": [{ "projet": "myoolala", "id": "prj_zyvdJfKtBoubo6NSx9JWT4B2S4Qv", "confirme": true }],
+      "supabase": { "ref": "txbteobudstggbhlcsyz", "confirme": false, "preuve": "myOolalaP1/supabase/config.toml:1" },
+      "ambiguites": ["Domaine servi par le projet Vercel « myoolala », lié au dépôt myOolalaP1 et non au dépôt myOolala : dépôt de référence non confirmé, surveillé à titre indicatif."]
+    }
+  ]
+}

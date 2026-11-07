@@ -23,6 +23,7 @@
     "vis:j0-verify": "bash infra/visibility/scripts/j0-report.sh verify coach-gari",
     "shyrka:parler": "pnpm --filter @oia/shyrka parler",
     "shyrka:resume": "pnpm --filter @oia/shyrka resume",
+    "shyrka:executive": "pnpm --silent --filter @oia/shyrka executive",
     "ml:rafraichir": "bash packages/money-lookup/scripts/rafraichir.sh",
     "ml:quotidien:install": "bash packages/money-lookup/scripts/quotidien.sh install",
     "ml:quotidien:remove": "bash packages/money-lookup/scripts/quotidien.sh remove"

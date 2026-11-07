@@ -21,6 +21,10 @@ import { RACINE_DEPOT } from "./local.js";
 import { promptSysteme } from "./persona.js";
 import { execFileRunner } from "./runner.js";
 import { ShyrkaSession, type TurnResult } from "./session.js";
+import { ServiceMemoire } from "./memoire/commandes.js";
+import { MemoireLocale } from "./memoire/sqlite.js";
+import { dossierVerifie } from "./memoire/volume.js";
+import { projetsConnus } from "./executive/config.js";
 import type { Speaker, Transcriber } from "./types.js";
 
 /**
@@ -101,9 +105,13 @@ function timings(r: TurnResult): string {
  * Ollama d'abord (local). S'il est absent, ou si SHYRKA_MODELE=mistral, Mistral
  * par son API (mandat v9, G5), avec la clé de ~/.oia/mistral.env.
  */
-async function modeleTexte() {
+async function modeleTexte(memoireActive = false) {
   const forcer = env.SHYRKA_MODELE === "mistral";
   if (!forcer && (await ollamaPresent(cfg.ollamaUrl))) return new OllamaTextModel({ model: cfg.ollamaModel, url: cfg.ollamaUrl, think: cfg.think });
+  // Mandat v10, A4 : aucun basculement en ligne implicite pour une session qui porte la mémoire personnelle.
+  if (!forcer && memoireActive) {
+    throw new Error("Ollama indisponible. Je ne bascule pas en ligne avec la mémoire personnelle ouverte : relancer Ollama, ou SHYRKA_MODELE=mistral (les souvenirs locaux ne seront pas transmis).");
+  }
   const cle = lireCleMistral();
   if (!cle) {
     throw new Error(
@@ -114,8 +122,24 @@ async function modeleTexte() {
   return new MistralTextModel({ cle });
 }
 
+/** Mémoire persistante : volume chiffré vérifié, sinon déclarée non activée (jamais de repli en clair). */
+function serviceMemoire(simule: boolean): ServiceMemoire {
+  const projets = projetsConnus();
+  if (simule) return new ServiceMemoire(null, { projets, indisponible: "mode simulé, aucune mémoire" });
+  try {
+    const m = new MemoireLocale(dossierVerifie("memoire"));
+    process.once("exit", () => m.fermer());
+    console.log(`Mémoire personnelle : active (${m.chemin}).`);
+    return new ServiceMemoire(m, { projets });
+  } catch (e) {
+    console.log(`! ${(e as Error).message}`);
+    return new ServiceMemoire(null, { projets, indisponible: (e as Error).message });
+  }
+}
+
 async function parler(flags: Set<string>): Promise<void> {
   const simule = flags.has("--simule");
+  const memoire = serviceMemoire(simule);
   const texte = flags.has("--texte");
   const dir = mkdtempSync(join(tmpdir(), "shyrka-"));
   const speaker = voix(simule, dir);
@@ -123,8 +147,9 @@ async function parler(flags: Set<string>): Promise<void> {
   const transcriber: Transcriber | undefined = simule ? new SimulatedTranscriber(["Bonjour Shyrka, tu m'entends ?", "Où en est J0 ?"]) : whisper ?? undefined;
   const enregistreur: Enregistreur = simule ? new EnregistreurSimule() : new EnregistreurFfmpeg({ device: cfg.device, plafondSecondes: MAX_RECORD_SECONDS, ffmpeg: cfg.ffmpeg });
   const session = new ShyrkaSession({
-    model: simule ? new SimulatedTextModel((m) => `Réponse simulée à : « ${m[m.length - 1]?.content ?? ""} »`) : await modeleTexte(),
+    model: simule ? new SimulatedTextModel((m) => `Réponse simulée à : « ${m[m.length - 1]?.content ?? ""} »`) : await modeleTexte(memoire.active),
     mistralAutorise: true,
+    memoire,
     ...(flags.has("--comparer") && !simule ? { compareModel: new OllamaTextModel({ model: cfg.compareModel, url: cfg.ollamaUrl, think: cfg.think }) } : {}),
     ...(transcriber ? { transcriber } : {}),
     speaker,
