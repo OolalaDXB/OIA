@@ -1,10 +1,9 @@
 import { createHash, randomUUID } from "node:crypto";
 import { chmodSync, lstatSync, mkdirSync } from "node:fs";
-import { createRequire } from "node:module";
 import { join } from "node:path";
 import type { DatabaseSync as TypeBase } from "node:sqlite";
 
-const { DatabaseSync } = createRequire(import.meta.url)("node:sqlite") as typeof import("node:sqlite");
+import { DatabaseSync } from "../node-sqlite.js";
 
 /**
  * Base de fonctionnement de Shyrka exécutive (mandat v10, C4, D1, E2, E3) :

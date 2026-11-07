@@ -84,6 +84,23 @@ export function opportunites(donnees = process.env.OIA_ML_DATA ?? join(homedir()
 
 const PRIORITE: Record<Incident["gravite"], number> = { critique: 0, majeure: 1, mineure: 2, info: 3 };
 
+/**
+ * Contrôles non couverts d'un produit, une ligne par contrôle et par état :
+ * deux projets Vercel sans accès donnent « vercel.deploiement ×2 [a, b] »,
+ * et non deux lignes identiques (défaut v10, Maisons.co).
+ */
+export function resumerManquants(obs: { controle: string; etat: string; cible: string }[]): string[] {
+  const groupes = new Map<string, string[]>();
+  for (const x of obs) {
+    const k = `${x.controle}\u0000${x.etat}`;
+    groupes.set(k, [...(groupes.get(k) ?? []), x.cible]);
+  }
+  return [...groupes].map(([k, cibles]) => {
+    const [controle, etat] = k.split("\u0000");
+    return cibles.length > 1 ? `${controle} ×${cibles.length} [${cibles.join(", ")}] (${etat})` : `${controle} (${etat})`;
+  });
+}
+
 export function construireBrief(deps: { ops: BaseOps; missions: Missions; produits: Produit[]; corpus?: EtatSource[] | null; maintenant?: Date }): Brief {
   const { ops, missions, produits } = deps;
   const maintenant = deps.maintenant ?? new Date();
@@ -116,7 +133,7 @@ export function construireBrief(deps: { ops: BaseOps; missions: Missions; produi
   const obs = ops.dernieresObservations();
   const couverture = produits.map((p) => {
     const o = obs.filter((x) => x.produit === p.slug);
-    return { produit: p.nom, actifs: o.filter((x) => x.etat === "actif").length, total: o.length, manquants: o.filter((x) => x.etat !== "actif").map((x) => `${x.controle} (${x.etat})`) };
+    return { produit: p.nom, actifs: o.filter((x) => x.etat === "actif").length, total: o.length, manquants: resumerManquants(o.filter((x) => x.etat !== "actif")) };
   });
   const ageH = (d: string) => (maintenant.getTime() - Date.parse(d)) / 3_600_000;
   const sourcesAnciennes = [

@@ -67,13 +67,33 @@ export function hotesAutorises(produits: Produit[]): Set<string> {
   return new Set(produits.flatMap((p) => p.http.filter((h) => h.confirme).map((h) => new URL(h.url).host)));
 }
 
-/** Révision du code qui tourne : SHA de HEAD, et vrai si les chemins de Shyrka ont des modifications locales. */
+/**
+ * Chemins du code de Shyrka : ce qui, modifié, change le comportement du
+ * service. Les mandats, rapports et notes Markdown n'en font pas partie
+ * (défaut v10 : un mandat non suivi dans infra/shyrka/mandats faisait
+ * refuser le service et demander une réinstallation inutile).
+ */
+export const CHEMINS_CODE = ["infra/shyrka", "packages/shyrka", ":(exclude)infra/shyrka/mandats", ":(exclude)infra/shyrka/reports", ":(exclude,glob)infra/shyrka/*.md", ":(exclude,glob)packages/shyrka/*.md"];
+
+/** Révision du code qui tourne : SHA de HEAD, et vrai si le code de Shyrka a des modifications locales. */
 export function revision(depot = RACINE_DEPOT): { sha: string; modifie: boolean } {
   try {
     const sha = execFileSync("git", ["-C", depot, "rev-parse", "HEAD"], { encoding: "utf8" }).trim();
-    const etat = execFileSync("git", ["-C", depot, "status", "--porcelain", "--", "infra/shyrka", "packages/shyrka"], { encoding: "utf8" }).trim();
+    const etat = execFileSync("git", ["-C", depot, "status", "--porcelain", "--", ...CHEMINS_CODE], { encoding: "utf8" }).trim();
     return { sha, modifie: etat.length > 0 };
   } catch {
     return { sha: "inconnu", modifie: true };
   }
+}
+
+/**
+ * Pourquoi le service refuse un passage. Réinstaller n'est demandé que si le
+ * code a changé depuis la révision installée ; des modifications locales
+ * non commitées sur la même révision demandent de committer ou d'annuler,
+ * pas de réinstaller (défaut v10).
+ */
+export function motifRefusService(codeChange: boolean, modifie: boolean): { cle: string; titre: string; journal: string } | null {
+  if (codeChange) return { cle: "revision", titre: "Shyrka : le code a changé depuis la révision installée, réinstaller le service", journal: "code de Shyrka changé depuis la révision installée" };
+  if (modifie) return { cle: "local", titre: "Shyrka : modifications locales non commitées du code ; la révision installée est la bonne, ne pas réinstaller", journal: "modifications locales non commitées du code de Shyrka" };
+  return null;
 }

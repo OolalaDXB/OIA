@@ -1,6 +1,5 @@
 import { execFileSync } from "node:child_process";
 import { chmodSync, existsSync, mkdirSync, readFileSync } from "node:fs";
-import { createRequire } from "node:module";
 import { join } from "node:path";
 import type { DatabaseSync as TypeBase } from "node:sqlite";
 import { z } from "zod";
@@ -9,7 +8,7 @@ import { RACINE_DEPOT } from "../local.js";
 import type { DossierVerifie } from "../memoire/volume.js";
 import { DOSSIER_CONFIG } from "./config.js";
 
-const { DatabaseSync } = createRequire(import.meta.url)("node:sqlite") as typeof import("node:sqlite");
+import { DatabaseSync } from "../node-sqlite.js";
 
 /**
  * Corpus initial et accès transversal (mandat v10, bloc B).

@@ -7,7 +7,7 @@ import { ollamaPresent } from "../adapters/mistral.js";
 import { RACINE_DEPOT } from "../local.js";
 import { dossierVerifie, etatVolume } from "../memoire/volume.js";
 import { construireBrief, texteBrief, texteVocalBrief, vuesExecutive } from "./brief.js";
-import { chargerPortefeuille, REGLAGES, revision } from "./config.js";
+import { chargerPortefeuille, CHEMINS_CODE, motifRefusService, REGLAGES, revision } from "./config.js";
 import { chargerCatalogue, Corpus, renduExtraits } from "./corpus.js";
 import { commandeMemoire, ouvrirMemoire } from "./memoire-cli.js";
 import { Missions, RefusMission } from "./missions.js";
@@ -361,10 +361,11 @@ async function tick(): Promise<number> {
   const pidf = join(REGLAGES.dossierOps, "tick.pid");
   try {
     // La révision installée fait foi pour le code de Shyrka : un commit ailleurs dans le dépôt (rapport, roadmap) ne l'arrête pas.
-    const codeChange = attendu ? spawnSync("git", ["-C", RACINE_DEPOT, "diff", "--quiet", attendu, "HEAD", "--", "infra/shyrka", "packages/shyrka"]).status !== 0 : false;
-    if (attendu && (codeChange || rev.modifie)) {
-      o0.notifier(`service:revision:${rev.sha}`, "a_connaitre", "Shyrka : révision changée, réinstaller le service", "service");
-      console.log(`${new Date().toISOString()} refus : révision ${rev.sha.slice(0, 12)}${rev.modifie ? " modifiée" : ""} ≠ installée ${attendu.slice(0, 12)}`);
+    const codeChange = attendu ? spawnSync("git", ["-C", RACINE_DEPOT, "diff", "--quiet", attendu, "HEAD", "--", ...CHEMINS_CODE]).status !== 0 : false;
+    const refus = attendu ? motifRefusService(codeChange, rev.modifie) : null;
+    if (attendu && refus) {
+      o0.notifier(`service:${refus.cle}:${rev.sha}`, "a_connaitre", refus.titre, "service");
+      console.log(`${new Date().toISOString()} refus : ${refus.journal} (HEAD ${rev.sha.slice(0, 12)}, installée ${attendu.slice(0, 12)})`);
       return 1;
     }
     if (o0.lireControle("arret") === "1") return 0;

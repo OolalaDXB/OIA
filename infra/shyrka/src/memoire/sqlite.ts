@@ -1,7 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { chmodSync, existsSync, lstatSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { createRequire } from "node:module";
 import type { DatabaseSync as TypeBase } from "node:sqlite";
 import {
   ChangementSchema, empreinteContenu, empreinteId, motifExclusion, NouvelElementSchema, peutLire, provenance, RefusMemoire,
@@ -25,8 +24,7 @@ import type { DossierVerifie } from "./volume.js";
  *   base absente, on refuse.
  */
 
-// Chargé par require : Vite 5 (vitest) ne reconnaît pas encore `node:sqlite` comme module intégré.
-const { DatabaseSync } = createRequire(import.meta.url)("node:sqlite") as typeof import("node:sqlite");
+import { DatabaseSync } from "../node-sqlite.js";
 type DatabaseSync = TypeBase;
 
 const SCHEMA = 1;
