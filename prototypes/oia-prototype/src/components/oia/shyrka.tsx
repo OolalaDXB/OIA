@@ -8,7 +8,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Sheet, SheetTrigger, SheetContent, SheetTitle, SheetDescription } from "@/components/ui/sheet";
-import { commandesShyrka, simulerShyrka, presenceInitiale, etatPresence } from "@/data/demo";
+import { simulerShyrka, etatPresence } from "@/lib/donnees/shyrka";
+import { useShyrkaDonnees } from "@/lib/donnees/provider";
+import { EtatEcran } from "@/components/oia/etat-donnees";
 
 import { lireShyrka, sauverShyrka } from "@/lib/shyrka-storage";
 
@@ -86,6 +88,7 @@ export function PresenceShyrka({ compacte = false, seule = false, modeForce, pau
 }
 
 export function ConversationShyrka({ compacte = false }: { compacte?: boolean }) {
+  const { commandesShyrka } = useShyrkaDonnees();
   const { messages, envoyer, ecouter, pret } = useShyrka();
   const [texte, setTexte] = useState("");
   const transcription = useRef<HTMLDivElement>(null);
@@ -105,8 +108,8 @@ export function ConversationShyrka({ compacte = false }: { compacte?: boolean })
   </div>;
 }
 
-const actionsPreparees = ["Quatre corrections Studio Ardoise, en attente de relecture", "Annexe technique Bpifrance, brouillon"];
 export function JournalShyrka() {
+  const { actionsPreparees } = useShyrkaDonnees();
   const { actions, decisions, cocher } = useShyrka();
   return <aside aria-label="Journal de Shyrka" className="min-w-0 break-words xl:border-l xl:border-border xl:pl-6">
     <h2 className="mb-6 text-lg">Journal</h2>
@@ -134,14 +137,15 @@ export function ShyrkaGlobale() {
     <SheetContent className="shyrka-sheet flex w-full min-h-0 flex-col gap-3 overflow-hidden p-4 sm:max-w-md sm:p-6">
       <SheetTitle className="shrink-0 pr-10 font-medium">Shyrka</SheetTitle>
       <SheetDescription className="text-xs">Assistante · démonstration simulée</SheetDescription>
-      <PresenceShyrka compacte />
-      <ConversationShyrka compacte />
+      <EtatEcran module="shyrka"><PresenceShyrka compacte />
+      <ConversationShyrka compacte /></EtatEcran>
       <div className="shrink-0"><SauvegardeShyrka compacte /><Button asChild variant="link" className="min-h-11 justify-start px-0 text-xs font-normal"><Link to="/shyrka" onClick={() => ouvrir(false)}>Ouvrir la conversation complète</Link></Button></div>
     </SheetContent></Sheet>
     <PresencePleinEcran />
   </>;
 }
 function PresencePleinEcran() {
+  const { presenceInitiale } = useShyrkaDonnees();
   const { pleinEcran, setPleinEcran, mode } = useShyrka();
   const [microActif, setMicroActif] = useState(presenceInitiale.microActif);
   const [pause, setPause] = useState(presenceInitiale.pause);

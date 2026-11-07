@@ -1,11 +1,13 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import { assistants, familles, fenetres, NOTE_MESURE, type Fenetre, type Valeur } from "@/data/visibility";
+import type { Fenetre, Valeur } from "@/lib/donnees/visibility";
+import { useVisibilityDonnees } from "@/lib/donnees/provider";
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 import { couleursGraphique } from "@/components/oia/graphiques";
 
 type Filtres = { assistant: string; famille: string; fenetre: string; set: (k: "assistant" | "famille" | "fenetre", v: string) => void; fenetreActive: Fenetre };
 const Ctx = createContext<Filtres | null>(null);
 export function FiltresProvider({ children }: { children: ReactNode }) {
+  const { fenetres } = useVisibilityDonnees();
   const [f, setF] = useState({ assistant: "Tous", famille: "Toutes", fenetre: "f2" });
   const fenetreActive = fenetres.find((x) => x.id === f.fenetre) ?? fenetres[1];
   return <Ctx.Provider value={{ ...f, fenetreActive, set: (k, v) => setF((p) => ({ ...p, [k]: v })) }}>{children}</Ctx.Provider>;
@@ -18,6 +20,7 @@ export function useFiltres() {
 
 const select = "min-h-11 rounded-md border border-border bg-background px-2 text-sm text-muted-foreground";
 export function FiltresVisibility() {
+  const { assistants, familles, fenetres } = useVisibilityDonnees();
   const f = useFiltres();
   return <div role="group" aria-label="Filtres" className="mb-6 flex flex-wrap gap-3 text-sm">
     <label className="flex items-center gap-2 text-tertiary">Assistant<select className={select} value={f.assistant} onChange={(e) => f.set("assistant", e.target.value)}><option>Tous</option>{assistants.map((a) => <option key={a.nom}>{a.nom}</option>)}</select></label>
@@ -43,7 +46,7 @@ export function Chiffre({ val, fen, unite = " %", alerte = false, grand = false 
 export function Indicateur({ titre, val, fen, unite, alerte, extra }: { titre: string; val: Valeur; fen: Fenetre; unite?: string | undefined; alerte?: boolean | undefined; extra?: ReactNode }) {
   return <div className="card min-w-0 p-5"><h3 className="mb-3 text-sm text-muted-foreground">{titre}</h3><Chiffre val={val} fen={fen} unite={unite} alerte={alerte} grand />{extra}</div>;
 }
-export function NoteMesure() { return <p className="mt-10 border-t border-border pt-4 text-xs text-tertiary">{NOTE_MESURE}</p>; }
+export function NoteMesure() { const { NOTE_MESURE } = useVisibilityDonnees(); return <p className="mt-10 border-t border-border pt-4 text-xs text-tertiary">{NOTE_MESURE}</p>; }
 
 export function Surligne({ texte, marque, concurrents }: { texte: string; marque: string; concurrents: string[] }) {
   const noms = [marque, ...concurrents].sort((a, b) => b.length - a.length);

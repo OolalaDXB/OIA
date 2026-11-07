@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { opportunites } from "@/data/money";
+import { lireDemoMoney } from "@/lib/donnees/money";
 
 export const besoinSchema = z.object({ texte: z.string().trim().min(3).max(3000) });
 export const analyseSchema = z.object({
@@ -10,6 +10,7 @@ export const analyseSchema = z.object({
 export type AnalyseMoney = z.infer<typeof analyseSchema>;
 export function validerAnalyse(value: unknown): AnalyseMoney {
   const result = analyseSchema.parse(value);
+  const { opportunites } = lireDemoMoney();
   const ids = new Set<string>();
   for (const c of result.correspondances) {
     if (!opportunites.some((o) => o.id === c.id) || ids.has(c.id)) throw new Error("Correspondance hors catalogue ou dupliquée.");

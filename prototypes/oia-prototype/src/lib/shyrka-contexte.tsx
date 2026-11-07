@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { z } from "zod";
-import { cadreInitial, contexteInitial, permissionsInitiales, paliers, sourcesShyrka, type CategorieContexte, type ElementContexte, type Palier } from "@/data/shyrka-contexte";
+import { lireDemoShyrka, permissionsInitiales, paliers, type CategorieContexte, type ElementContexte, type Palier } from "@/lib/donnees/shyrka";
 
 export const CLE_CONTEXTE = "oia.shyrka.contexte.v1";
 const schema = z.object({
@@ -11,7 +11,7 @@ const schema = z.object({
   cadre: z.string(),
 });
 export type EtatContexte = z.infer<typeof schema>;
-export const etatInitial = (): EtatContexte => ({ version: 1, elements: contexteInitial, sources: Object.fromEntries(sourcesShyrka.map((s) => [s.id, s.id === "oia"])), permissions: permissionsInitiales(), cadre: cadreInitial });
+export const etatInitial = (): EtatContexte => { const d = lireDemoShyrka(); return { version: 1, elements: d.contexteInitial, sources: Object.fromEntries(d.sourcesShyrka.map((s) => [s.id, s.id === "oia"])), permissions: permissionsInitiales(), cadre: d.cadreInitial }; };
 export function lireContexte(raw: string | null): EtatContexte | null { try { const r = schema.safeParse(JSON.parse(raw ?? "")); return r.success ? r.data : null; } catch { return null; } }
 
 /** Mode privé : Shyrka n'apprend rien pendant la session. */

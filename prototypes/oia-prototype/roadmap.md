@@ -1,6 +1,8 @@
 # Roadmap
 
 ## Open
+- [x] Préparer une couche de données par module, sources réelles non branchées et états chargement, vide, erreur.
+- [x] Vérifier l’affichage et les parcours, puis envoyer uniquement sur la branche prototype OIA.
 - [x] Envoyer le prototype à jour sur `lovable/oia-visibility-prototype`, sans toucher `main` ni les dossiers protégés.
 - [x] Money Lookup : préciser la démonstration via Lovable et conserver le suivi uniquement dans le navigateur.
 - [x] Visibility : marquer explicitement les versions fictives des assistants.

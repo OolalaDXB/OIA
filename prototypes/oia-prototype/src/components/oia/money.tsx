@@ -8,7 +8,8 @@ import { useServerFn } from "@tanstack/react-start";
 import { rechercherMoney } from "@/lib/money-recherche.functions";
 import type { AnalyseMoney } from "@/lib/money-recherche";
 import { enregistrerEvenementMoney } from "@/lib/money-analytics";
-import { formatMontant, opportunites, projets, signals, sousTotaux, typesMontant, versCsv, versMarkdown, type Opportunite } from "@/data/money";
+import { formatMontant, sousTotaux, versCsv, versMarkdown, type Opportunite } from "@/lib/donnees/money";
+import { useMoneyDonnees } from "@/lib/donnees/provider";
 
 export const ongletsMoney = [
   { id: "aujourdhui", label: "Aujourd'hui" }, { id: "toutes", label: "Toutes" }, { id: "financements", label: "Financements" },
@@ -20,6 +21,7 @@ const Ctx = createContext<{ etiquettes: Record<string, string>; etiqueter: (id: 
 const useMoney = () => { const c = useContext(Ctx); if (!c) throw new Error("Money Lookup indisponible."); return c; };
 
 export function MoneyProvider({ children }: { children: ReactNode }) {
+  const { opportunites } = useMoneyDonnees();
   const [etiquettes, setEt] = useState<Record<string, string>>({});
   const [journal, setJournal] = useState<Journal[]>([]);
   const [fiche, setFiche] = useState<Opportunite | null>(null);
@@ -44,6 +46,7 @@ export function MoneyShell({ actif, children }: { actif: string; children: React
 }
 
 function RechercheMoney() {
+  const { opportunites } = useMoneyDonnees();
   const [texte, setTexte] = useState("");
   const [analyse, setAnalyse] = useState<AnalyseMoney | null>(null);
   const [erreur, setErreur] = useState<string | null>(null);
@@ -91,6 +94,7 @@ function Ligne({ o }: { o: Opportunite }) {
 }
 
 export function Aujourdhui() {
+  const { opportunites } = useMoneyDonnees();
   const bientot = opportunites.filter((o) => o.joursRestants !== null && o.joursRestants >= 0 && o.joursRestants <= 14);
   const retard = opportunites.filter((o) => o.statut === "En retard");
   const tri = opportunites.filter((o) => o.statut === "À trier");
@@ -103,11 +107,12 @@ export function Aujourdhui() {
 }
 
 export function Signals({ compact = false }: { compact?: boolean }) {
+  const { signals } = useMoneyDonnees();
   const l = <ol>{signals.slice(0, compact ? 3 : undefined).map((s) => <li key={s.date} className="grid gap-1 border-b border-border py-3 text-sm last:border-0 sm:grid-cols-[10rem_1fr]"><span className="num text-xs text-tertiary">{s.date}</span><span>{s.texte}<span className="block text-xs text-tertiary">{s.source} · non vérifié</span></span></li>)}</ol>;
   return compact ? l : <Section titre="Veille permanente">{l}</Section>;
 }
 
-const champsFiltre = { type: ["Financement", "Appel d'offres", "Investisseur"], eligibilite: ["Éligible", "À confirmer", "Non éligible"], recommandation: ["Prioritaire", "À étudier", "Écarter"], verification: ["Vérifié", "Non vérifié"], entite: ["OIA SAS", "OIA FZ", "Studio Ardoise"], projet: [...projets], fraicheur: ["Moins de 7 jours", "Moins de 30 jours", "Plus ancien"] } as const;
+const champsFiltre = { type: ["Financement", "Appel d'offres", "Investisseur"], eligibilite: ["Éligible", "À confirmer", "Non éligible"], recommandation: ["Prioritaire", "À étudier", "Écarter"], verification: ["Vérifié", "Non vérifié"], entite: ["OIA SAS", "OIA FZ", "Studio Ardoise"], projet: [] as string[], fraicheur: ["Moins de 7 jours", "Moins de 30 jours", "Plus ancien"] } as const;
 const libChamp: Record<keyof typeof champsFiltre, string> = { type: "Type", eligibilite: "Éligibilité", recommandation: "Recommandation", verification: "Vérification", entite: "Entité", projet: "Projet", fraicheur: "Fraîcheur" };
 type Filtres = Partial<Record<keyof typeof champsFiltre, string>>;
 type Vue = { nom: string; filtres: Filtres; tri: string };
@@ -120,17 +125,19 @@ function telecharger(contenu: string, nom: string, type: string) {
 }
 
 export function Liste({ type }: { type?: Opportunite["type"] }) {
+  const { opportunites, projets } = useMoneyDonnees();
+  const champs = { ...champsFiltre, projet: [...projets] };
   const { etiquettes } = useMoney();
   const [filtres, setFiltres] = useState<Filtres>({});
   const [tri, setTri] = useState("cloture");
   const [vues, setVues] = useState<Vue[]>([]);
   useEffect(() => { try { setVues(JSON.parse(localStorage.getItem(CLE_VUES) ?? "[]")); } catch { setVues([]); } }, []);
   const liste = useMemo(() => opportunites.filter((o) => (!type || o.type === type) && Object.entries(filtres).every(([k, v]) => !v || (k === "projet" ? etiquettes[o.id] === v || o.suggestions[0]?.projet === v : (o as Record<string, unknown>)[k] === v)))
-    .sort((a, b) => tri === "cloture" ? (a.joursRestants ?? 9999) - (b.joursRestants ?? 9999) : tri === "score" ? (b.suggestions[0]?.score ?? 0) - (a.suggestions[0]?.score ?? 0) : a.titre.localeCompare(b.titre, "fr")), [filtres, tri, type, etiquettes]);
+    .sort((a, b) => tri === "cloture" ? (a.joursRestants ?? 9999) - (b.joursRestants ?? 9999) : tri === "score" ? (b.suggestions[0]?.score ?? 0) - (a.suggestions[0]?.score ?? 0) : a.titre.localeCompare(b.titre, "fr")), [filtres, tri, type, etiquettes, opportunites]);
   const enregistrer = () => { const nom = `Vue ${vues.length + 1}`; const n = [...vues, { nom, filtres, tri }]; setVues(n); try { localStorage.setItem(CLE_VUES, JSON.stringify(n)); } catch { /* stockage indisponible */ } };
   const sel = "min-h-11 rounded-md border border-border bg-background px-2 text-sm text-muted-foreground";
   return <>
-    <div role="group" aria-label="Filtres" className="mb-4 flex flex-wrap gap-3 text-sm">{(Object.keys(champsFiltre) as (keyof typeof champsFiltre)[]).filter((k) => !(type && k === "type")).map((k) => <label key={k} className="flex items-center gap-2 text-tertiary">{libChamp[k]}<select className={sel} value={filtres[k] ?? ""} onChange={(e) => { setFiltres((f) => ({ ...f, [k]: e.target.value })); enregistrerEvenementMoney("project.money_filter_changed", { view: type ?? "Toutes", filter: k, active: e.target.value !== "" }); }}><option value="">Tous</option>{champsFiltre[k].map((v) => <option key={v}>{v}</option>)}</select></label>)}
+    <div role="group" aria-label="Filtres" className="mb-4 flex flex-wrap gap-3 text-sm">{(Object.keys(champsFiltre) as (keyof typeof champsFiltre)[]).filter((k) => !(type && k === "type")).map((k) => <label key={k} className="flex items-center gap-2 text-tertiary">{libChamp[k]}<select className={sel} value={filtres[k] ?? ""} onChange={(e) => { setFiltres((f) => ({ ...f, [k]: e.target.value })); enregistrerEvenementMoney("project.money_filter_changed", { view: type ?? "Toutes", filter: k, active: e.target.value !== "" }); }}><option value="">Tous</option>{champs[k].map((v) => <option key={v}>{v}</option>)}</select></label>)}
       <label className="flex items-center gap-2 text-tertiary">Tri<select className={sel} value={tri} onChange={(e) => { setTri(e.target.value); enregistrerEvenementMoney("project.money_filter_changed", { view: type ?? "Toutes", filter: "tri", active: true }); }}><option value="cloture">Clôture la plus proche</option><option value="score">Meilleur score</option><option value="titre">Titre</option></select></label></div>
     <div className="mb-6 flex flex-wrap items-center gap-2"><Button variant="outline" className="min-h-11 font-normal" onClick={enregistrer}>Enregistrer la vue</Button>{vues.map((v) => <Button key={v.nom} variant="ghost" className="min-h-11 font-normal" onClick={() => { setFiltres(v.filtres); setTri(v.tri); enregistrerEvenementMoney("project.money_filter_changed", { view: type ?? "Toutes", filter: "vue_enregistree", active: Object.values(v.filtres).some(Boolean) }); }}>{v.nom}</Button>)}
       <span className="ml-auto flex flex-wrap gap-2"><Button variant="outline" className="min-h-11 font-normal" onClick={() => { telecharger(versCsv(liste), "money-lookup.csv", "text/csv;charset=utf-8"); enregistrerEvenementMoney("project.money_export_requested", { format: "csv", count: liste.length, view: type ?? "Toutes" }); }}>Export CSV</Button><Button variant="outline" className="min-h-11 font-normal" onClick={() => { telecharger(versMarkdown(liste), "money-lookup.md", "text/markdown;charset=utf-8"); enregistrerEvenementMoney("project.money_export_requested", { format: "markdown", count: liste.length, view: type ?? "Toutes" }); }}>Export Markdown</Button></span></div>
@@ -139,6 +146,7 @@ export function Liste({ type }: { type?: Opportunite["type"] }) {
 }
 
 function Fiche({ o, fermer }: { o: Opportunite | null; fermer: () => void }) {
+  const { projets } = useMoneyDonnees();
   const { etiquettes, etiqueter, journal } = useMoney();
   const ligne = "flex flex-wrap justify-between gap-2 border-b border-border py-2 text-sm";
   return <Sheet open={!!o} onOpenChange={(v) => !v && fermer()}><SheetContent className="w-full overflow-y-auto sm:max-w-lg">{o && <>
@@ -157,6 +165,7 @@ function Fiche({ o, fermer }: { o: Opportunite | null; fermer: () => void }) {
 }
 
 export function Montants() {
+  const { opportunites, typesMontant } = useMoneyDonnees();
   const { etiquettes } = useMoney();
   const [type, setType] = useState(""); const [devise, setDevise] = useState(""); const [verif, setVerif] = useState("");
   const liste = opportunites.filter((o) => (!type || o.typeMontant === type) && (!devise || o.devise === devise) && (!verif || o.verification === verif));
@@ -166,6 +175,7 @@ export function Montants() {
   return <>
     <div role="group" aria-label="Filtres" className="mb-6 flex flex-wrap gap-3 text-sm"><label className="flex items-center gap-2 text-tertiary">Type<select className={sel} value={type} onChange={(e) => { setType(e.target.value); enregistrerEvenementMoney("project.money_filter_changed", { view: "Montants", filter: "type_montant", active: e.target.value !== "" }); }}><option value="">Tous</option>{typesMontant.map((t) => <option key={t}>{t}</option>)}</select></label><label className="flex items-center gap-2 text-tertiary">Devise<select className={sel} value={devise} onChange={(e) => { setDevise(e.target.value); enregistrerEvenementMoney("project.money_filter_changed", { view: "Montants", filter: "devise", active: e.target.value !== "" }); }}><option value="">Toutes</option><option>EUR</option><option>USD</option><option>AED</option></select></label><label className="flex items-center gap-2 text-tertiary">Vérification<select className={sel} value={verif} onChange={(e) => { setVerif(e.target.value); enregistrerEvenementMoney("project.money_filter_changed", { view: "Montants", filter: "verification", active: e.target.value !== "" }); }}><option value="">Toutes</option><option>Vérifié</option><option>Non vérifié</option></select></label></div>
     <p className="mb-6 text-xs text-tertiary">Aucun total global : une subvention, un chiffre d'affaires potentiel, un investissement et un prêt ne s'additionnent pas.</p>
+    {groupes.length === 0 && <p role="status" className="text-sm text-muted-foreground">Aucun montant pour ces filtres.</p>}
     <div className="grid gap-6">{groupes.map((p) => { const items = liste.filter((o) => projetDe(o) === p); return <Section key={p} titre={p}>
       {typesMontant.filter((t) => items.some((o) => o.typeMontant === t)).map((t) => <div key={t} className="mb-4 last:mb-0"><h3 className="mb-1 text-xs text-tertiary">{t}</h3>{items.filter((o) => o.typeMontant === t).map((o) => <div key={o.id} className="flex flex-wrap items-center justify-between gap-2 border-b border-border py-2 text-sm"><span>{o.titre}</span><span className="flex items-center gap-3"><span className="num">{formatMontant(o.montant, o.devise)}</span><Verif v={o.verification} /></span></div>)}
         {sousTotaux(items.filter((o) => o.typeMontant === t)).map((s) => <p key={s.devise} className="num mt-1 text-right text-xs text-tertiary">Sous-total {t.toLocaleLowerCase("fr")}, {s.devise} : {s.inconnus && s.total === 0 ? "inconnu" : formatMontant(s.total, s.devise)}{s.inconnus && s.total > 0 ? ` + ${s.inconnus} montant${s.inconnus > 1 ? "s" : ""} inconnu${s.inconnus > 1 ? "s" : ""}` : ""}</p>)}</div>)}

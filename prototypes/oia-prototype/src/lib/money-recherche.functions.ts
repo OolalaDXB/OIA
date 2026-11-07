@@ -1,12 +1,13 @@
 import { createServerFn } from "@tanstack/react-start";
 import { generateMessage, GatewayError } from "@lovable.dev/ai-gateway";
-import { opportunites } from "@/data/money";
+import { lireDemoMoney } from "@/lib/donnees/money";
 import { besoinSchema, validerAnalyse } from "@/lib/money-recherche";
 
 export const rechercherMoney = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => besoinSchema.parse(input))
   .handler(async ({ data }) => {
     try {
+      const { opportunites } = lireDemoMoney();
       const message = await generateMessage({
         model: "anthropic/claude-sonnet-5",
         max_tokens: 3500,

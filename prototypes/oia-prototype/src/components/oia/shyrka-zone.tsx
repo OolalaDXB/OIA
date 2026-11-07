@@ -5,7 +5,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Section } from "@/components/oia/ui";
 import { useContexte } from "@/lib/shyrka-contexte";
 import { useShyrka } from "@/components/oia/shyrka";
-import { applications, canaux, categoriesContexte, categoriesPermission, identite, paliers, sourcesShyrka, type Palier } from "@/data/shyrka-contexte";
+import type { Palier } from "@/lib/donnees/shyrka";
+import { useShyrkaDonnees } from "@/lib/donnees/provider";
 
 export function BarreContexte() {
   const c = useContexte(); const s = useShyrka();
@@ -22,6 +23,7 @@ export function BarreContexte() {
 
 const statutDot = { "À valider": "bg-warn", "Validé": "bg-ok", "Retiré": "bg-track" } as const;
 export function ContexteVue() {
+  const { categoriesContexte } = useShyrkaDonnees();
   const c = useContexte(); const [edition, setEdition] = useState<{ id: string; texte: string } | null>(null);
   return <div className="grid gap-6">{categoriesContexte.map((cat) => { const items = c.elements.filter((e) => e.categorie === cat); return <Section key={cat} titre={cat} aside={<span className="num text-sm text-tertiary">{items.length}</span>}>
     {items.length === 0 ? <p className="text-sm text-muted-foreground">Rien pour l'instant.</p> : <ul>{items.map((e) => <li key={e.id} className="border-b border-border py-3 last:border-0">
@@ -33,11 +35,13 @@ export function ContexteVue() {
 }
 
 export function SourcesVue() {
+  const { sourcesShyrka } = useShyrkaDonnees();
   const c = useContexte();
   return <Section titre="Ce que Shyrka peut lire">{sourcesShyrka.map((s) => <label key={s.id} className="flex min-h-12 items-center justify-between gap-4 border-b border-border py-3 text-sm last:border-0"><span><span className="block">{s.nom}</span><span className="block text-xs text-tertiary">Périmètre : {s.perimetre}</span></span><Switch checked={!!c.sources[s.id]} onCheckedChange={() => c.basculerSource(s.id)} /></label>)}</Section>;
 }
 
 export function PermissionsVue() {
+  const { canaux, categoriesPermission, paliers } = useShyrkaDonnees();
   const c = useContexte();
   return <Section titre="Paliers par canal et par catégorie" aside={<span className="text-xs text-tertiary">Tout est fermé par défaut</span>}><p className="mb-4 text-xs text-tertiary">Seul Mickaël peut changer ces paliers. Paliers : {paliers.join(", ")}.</p><div className="overflow-x-auto"><table className="w-full min-w-[640px] text-sm"><thead className="text-left text-tertiary"><tr className="border-b border-border"><th className="py-2 pr-3 font-normal">Canal</th>{categoriesPermission.map((k) => <th key={k} className="pr-3 font-normal">{k}</th>)}</tr></thead><tbody>{canaux.map((canal) => <tr key={canal} className="border-b border-border last:border-0"><td className="py-2 pr-3">{canal}</td>{categoriesPermission.map((k) => { const cle = `${canal}|${k}`; return <td key={k} className="pr-3"><select aria-label={`${canal}, ${k}`} className="min-h-11 rounded-md border border-border bg-background px-2 text-sm text-muted-foreground" value={c.permissions[cle] ?? "Aucun"} onChange={(e) => c.setPermission(cle, e.target.value as Palier)}>{paliers.map((p) => <option key={p}>{p}</option>)}</select></td>; })}</tr>)}</tbody></table></div></Section>;
 }
@@ -48,10 +52,12 @@ export function CadreVue() {
 }
 
 export function IdentiteVue() {
+  const { identite } = useShyrkaDonnees();
   return <div className="grid gap-6"><Section titre="Identité actuelle" aside={<span className="text-xs text-tertiary">Lecture seule</span>}><dl className="grid gap-4 text-sm">{([["Apparence", identite.apparence], ["Voix", identite.voix], ["Personnalité", identite.personnalite]] as const).map(([k, v]) => <div key={k}><dt className="text-xs text-tertiary">{k}</dt><dd className="mt-1">{v}</dd></div>)}</dl><p className="mt-4 text-xs text-tertiary">C'est Shyrka qui fait évoluer son identité.</p></Section>
     <Section titre="Historique des versions"><ol>{identite.versions.map((v) => <li key={v.version} className="grid grid-cols-[4rem_7rem_1fr] gap-3 border-b border-border py-2.5 text-sm last:border-0"><span className="num">{v.version}</span><span className="num text-tertiary">{v.date}</span><span className="text-muted-foreground">{v.note}</span></li>)}</ol></Section></div>;
 }
 
 export function ApplicationsVue() {
+  const { applications } = useShyrkaDonnees();
   return <Section titre="Où Shyrka est présente">{applications.map((a) => <div key={a.nom} className="grid gap-1 border-b border-border py-3 text-sm last:border-0 sm:grid-cols-[10rem_1fr_1fr] sm:gap-4"><span>{a.nom}<span className="block text-xs text-tertiary">{a.etat}</span></span><span className="text-muted-foreground"><span className="block text-xs text-tertiary">Peut lire</span>{a.lire}</span><span className="text-muted-foreground"><span className="block text-xs text-tertiary">Peut faire</span>{a.faire}</span></div>)}</Section>;
 }

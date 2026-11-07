@@ -1,12 +1,16 @@
-import { Link, useRouter } from "@tanstack/react-router";
+import { Link, useRouter, useRouterState } from "@tanstack/react-router";
 import { useId, useRef, useState, type ReactNode } from "react";
-import type { Etat } from "@/data/demo";
-import { modulesPersonnels, modules, depenses } from "@/data/demo";
+import type { Etat } from "@/lib/donnees/accueil";
+import { useAccueilDonnees } from "@/lib/donnees/provider";
+import { EtatEcran } from "@/components/oia/etat-donnees";
 import { Button } from "@/components/ui/button";
 import { LockKeyhole, Menu, X } from "lucide-react";
 import { BarreColoree } from "@/components/oia/graphiques";
 
 export function Shell({ children, large = false, fictif = true }: { children: ReactNode; large?: boolean; fictif?: boolean }) {
+  const { modulesPersonnels, modules, depenses } = useAccueilDonnees();
+  const chemin = useRouterState({ select: (s) => s.location.pathname });
+  const module = chemin.startsWith("/money-lookup") ? "money" : chemin.startsWith("/visibility") || chemin.startsWith("/sites/") || chemin === "/nouveau-compte" ? "visibility" : chemin === "/shyrka" ? "shyrka" : "accueil";
   const [menuOuvert, setMenuOuvert] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
   const contenuId = useId();
@@ -29,7 +33,7 @@ export function Shell({ children, large = false, fictif = true }: { children: Re
         <nav aria-label="Assistante et réglages" className="mt-5 border-t border-border pt-3 md:mt-auto"><Link to="/shyrka" className="flex min-h-11 items-center px-2 text-sm text-muted-foreground" activeProps={{ className: "text-foreground underline underline-offset-4" }}>Shyrka</Link><Link to="/reglages" className="flex min-h-11 items-center px-2 text-sm text-muted-foreground" activeProps={{ className: "text-foreground underline underline-offset-4" }}>Réglages</Link></nav><p className="num mt-3 px-2 text-xs text-tertiary">Dépense du mois : {depenses.montant} $ <span className="block">plafond Visibility : {depenses.plafond} $</span></p>
       </div>
     </header>
-    <div className="min-w-0"><main id={contenuId} tabIndex={-1} className={`mx-auto px-5 py-10 md:px-10 md:py-14 ${large ? "max-w-[1600px]" : "max-w-6xl"}`}>{children}</main>{fictif && <footer className="mx-auto max-w-6xl px-5 pb-20 text-xs text-tertiary md:px-10">Exemple fictif, données de démonstration.</footer>}</div>
+    <div className="min-w-0"><main id={contenuId} tabIndex={-1} className={`mx-auto px-5 py-10 md:px-10 md:py-14 ${large ? "max-w-[1600px]" : "max-w-6xl"}`}><EtatEcran module={module}>{children}</EtatEcran></main>{fictif && <footer className="mx-auto max-w-6xl px-5 pb-20 text-xs text-tertiary md:px-10">Exemple fictif, données de démonstration.</footer>}</div>
   </div>;
 }
 
