@@ -4,7 +4,7 @@
 
 | Champ | Valeur |
 | --- | --- |
-| Version | 3.8 |
+| Version | 3.9 |
 | Dernière modification | 2026-11-08 |
 | Statut | Proposé (à valider par Mickaël) |
 | Responsable | Mickaël Thomas |
@@ -15,6 +15,9 @@
 - Elmo collecteur de transition, en mode API payant : **accord de principe et plafond de 30 $ par mois validés**. La mise en œuvre technique se fait à l'étape B de P1 ; les dépenses réelles commencent seulement à l'étape D, avec la création des comptes par Mickaël. Toute autre dépense est validée au cas par cas.
 - Collecteur maison en cible, remplacement progressif moteur par moteur.
 - Pilotes de départ : Coach Gari et Maisons.co ; Moë-Kan comme premier client externe envisagé.
+- J0 sur cinq moteurs : ChatGPT, Claude et Mistral en direct ; Gemini et Perplexity via OpenRouter. Grok reporté à une fenêtre ultérieure, avec sa propre mesure de départ.
+- La branche Lovable (`lovable/oia-visibility-prototype`) est autorisée, sous les règles du dépôt : elle appartient à Lovable et se lit sans être modifiée.
+- Shyrka v0, décidée par Mickaël le 7 novembre 2026 : présence en points et voix Aurélie, voix en sortie comprise (`docs/shyrka/CADRE.md`).
 - Outil générique : aucun sujet, projet ou client codé en dur.
 - OIA Visibility comme nom de travail ; Shyrka comme nom interne.
 - Mistral retenu dans OIA pour son coût ; agents de développement dans Claude Code.
@@ -38,6 +41,7 @@
 | 3.6 | 2026-11-08 | Piste Shyrka en quatre étapes, chacune livrée avec une phase : Shyrka 1 « Te parle » avec P1, Shyrka 2 « Te seconde » avec P2, Shyrka 3 « Te connaît » avec P5, Shyrka 4 « Agit pour toi » avec P6. **P7 et P8 cessent d'être des phases** : Shyrka n'attend plus la fin de la chaîne pour exister, elle grandit avec les capacités qu'elle utilise. Le contenu de P7 (digest, dialogue, préparation) passe dans Shyrka 2 et Shyrka 3 ; celui de P8 (son local, Ollama) dans Shyrka 1, la présence et l'identité dans l'atelier de P9, la voix distante payante en attente. **P1 à P6 et P9 gardent leur numéro et leur contenu** ; les numéros 7 et 8 ne sont pas réattribués, pour que les références existantes (rapports, mandats, commits) restent justes. P0 validée devient le prérequis de Shyrka 2 à 4. Points des mandats v6 et v7 : Shyrka 1 livrée en code à adaptateurs (`packages/shyrka`), interface web sous `/oia` bascule éteinte, évaluation documentaire de Bifrost (`docs/audits/2026-11-08-bifrost-evaluation.md`) |
 | 3.7 | 2026-11-08 | Décision de Mickaël (CADRE.md) : l'apparence, la voix et la personnalité de Shyrka sont choisies et modifiées par Shyrka elle-même. La piste Shyrka, P0 et l'atelier de P9 sont alignés |
 | 3.8 | 2026-11-08 | Réponses de Mickaël et suite des mandats v6 et v7. Interface web OIA refaite d'après le prototype Lovable (colonne des modules, accueil, Visibility, Shyrka en panneau et en plein écran, pages existantes réutilisées), allumée en Preview Vercel seulement. Shyrka : Ollama `qwen3:8b` par défaut et `mistral-small` en comparaison ; bloc B livré en code simulé (paliers de permission, agent courrier et WhatsApp, mode entretien) ; Aurélie devient une proposition de départ. Blocs C et E du mandat v6 non traités : leur texte n'est pas dans le dépôt |
+| 3.9 | 2026-11-08 | Clôture des mandats v6 et v7 (session web), avec l'amendement du 7 novembre. Décisions : J0 sur cinq moteurs avec OpenRouter, Grok reporté, branche Lovable autorisée sous les règles du dépôt, Shyrka v0 décidée par Mickaël (présence en points et voix Aurélie). Piste Shyrka v0 avancée : voix locale, entretiens, courrier en brouillons, WhatsApp professionnel cadré, paliers de permission. Règle d'intégration des moteurs reformulée en règle proposée, modifiable par Mickaël, qui autorise un fork documenté après preuve d'intérêt. Navigation de la console en proposition (`docs/interface/integration-console.md`). P1 : J0 en cours, rapport attendu. P2 : correctifs préparés, en attente de validation. Chantier « Interface web OIA » : nouvelle console sous `/oia`, en Preview, bascule en attente de Mickaël |
 
 > Emplacement de référence : `docs/roadmap-oia-shyrka-souffleur.md` dans le repo OolalaDXB/OIA. Toute autre copie (Claude Doc, export GPT) est une copie de lecture. `docs/roadmap.md` reste la roadmap d'OIA Funding.
 
@@ -164,12 +168,14 @@ P0 s'écrit tout de suite : un fichier, aucun risque technique. Livrable : **`do
 
 P1 installe Elmo, CrawlSEO et Crawlie sur le Mac Studio et prend la mesure de départ (J0) sur Coach Gari et Maisons.co. La roadmap retient **comme décision à approuver à l'étape B** le retour à un Elmo transitoire en mode API payant, plafonné à 30 $ par mois. Le dépôt OIA consulté porte encore une configuration « zéro coût » ; la modification ne doit pas être présentée comme déjà appliquée.
 
+**État au 2026-11-08 : J0 en cours, rapport attendu.** La fenêtre J0 de Coach Gari tourne depuis le 7 novembre 2026 à 15 h 27 UTC, sur cinq jours. Clôture, rapport et vérification : `pnpm vis:j0-close`, `pnpm vis:j0-report`, `pnpm vis:j0-verify`, lancés par Mickaël (rapport du mandat v7 de la session Mac).
+
 | Étape | Contenu | État |
 | --- | --- | --- |
 | A | Reprise locale, passation lue, repo CoachGari cloné, branche de session supprimée, preflight macOS arm64 | Fait |
 | B | Annulation ciblée de la bascule zéro coût, plafond mensuel, modèles mesurés proposés, ADR de collecte, interface de collecteur, table des preuves en ajout seul | Feu vert à donner |
 | C | Installation complète, Search Console branchée, premier crawl réel, sauvegarde et restauration testées avec de vrais jetons Google, worker arrêté | À venir |
-| D | Comptes prestataires créés, panels et faits validés, fenêtre J0 de 5 jours, jours manquants consignés | À venir |
+| D | Comptes prestataires créés, panels et faits validés, fenêtre J0 de 5 jours, jours manquants consignés | En cours : fenêtre J0 lancée le 2026-11-07 |
 
 - [ ] Avant B : comparer les commits CoachGari entre `73e1967` et `8ef1fd7` et leurs déploiements, pour préserver l'intégrité de J0.
 - [ ] Avant C : lancer Docker Desktop.
@@ -177,8 +183,8 @@ P1 installe Elmo, CrawlSEO et Crawlie sur le Mac Studio et prend la mesure de d�
 
 **Avec P1 :**
 
-- **Shyrka 1 · Te parle.** Code livré le 2026-11-08 avec des adaptateurs réels et simulés (`packages/shyrka`, guide d'essai `infra/shyrka/README.md`) : micro par ffmpeg, Whisper par whisper.cpp, Ollama limité à l'adresse locale, voix macOS par `say` (Aurélie, voix de départ proposée), identité version 0 donc réponses en texte. Modèle Ollama par défaut `qwen3:8b`, `mistral-small` en option de comparaison (`--comparer`). Mode entretien (`docs/shyrka/entretiens.md`, séances menées en local, fiches « à valider » écrites hors du dépôt), qui prépare le corpus de Shyrka 3. 56 tests sur adaptateurs simulés. Reste : le premier essai réel sur le Mac Studio, consigné dans `infra/shyrka/reports/`.
-- **Interface web OIA sous `/oia`** (`docs/interface/oia-interface-web.md`) : portage du prototype Lovable « OIA Dashoard », avec la colonne des modules, l'accueil OIA, Visibility, Shyrka en page, en panneau et en plein écran (présence « Lovable Shyrka v0 », jamais modifiée par Claude Code), et des modules qui renvoient aux pages existantes de la console. Données de démonstration. Allumée sur les déploiements Preview de Vercel, jamais en production pour l'instant (décision de Mickaël du 2026-11-08).
+- **Shyrka 1 · Te parle (Shyrka v0, mandat v6 bloc B).** Code livré le 2026-11-08, tout en local, testé avec des adaptateurs simulés : voix (`infra/shyrka`, `pnpm --filter @oia/shyrka parler` et `resume`) avec le serveur Whisper local, Ollama `qwen3:8b` et la voix Aurélie ; contexte en lecture seule (rapports, J0, décisions, budget) ; mode entretien (`infra/shyrka/ENTRETIEN.md`), réponses enregistrées sur le volume chiffré ; agent courrier en brouillons uniquement (`packages/shyrka-mail`, exclusions Swift avant tout modèle) ; WhatsApp professionnel cadré (`docs/shyrka/adr/0002-whatsapp.md`) ; paliers de permission 0, 1, 2 (`infra/shyrka/permissions.json`). Reste : le premier essai réel sur le Mac Studio, la connexion Gmail et `docs/shyrka/style.md`, par Mickaël.
+- **Interface web OIA sous `/oia`** (mandat v7, bloc F ; `docs/interface/oia-interface-web.md`) : interface tirée du prototype Lovable, avec la navigation proposée (`docs/interface/integration-console.md`, fichier `apps/web/src/oia/config/navigation.ts`) : Accueil, Visibility, Opportunités, CRM, Portefeuille, Data, Training, Personnel, Shyrka, Réglages. Les pages actuelles sont reprises telles quelles. Visibility est en données de démonstration : aucune donnée de client dans les fichiers publics. Allumée en Preview seulement ; la bascule en production reste une décision de Mickaël.
 
 **Porte P1 :** un rapport J0 réel et reproductible (réponses, citations, sources, métadonnées, coûts, limites de mesure), sans aucun chiffre inventé ou reconstruit.
 
@@ -190,7 +196,7 @@ P2 fait tourner une première boucle complète sur un sujet : mesure, recommanda
 - **Règles des agents :** niveau d'incertitude signalé, seuls les faits validés servent de référence, recommandations datées, sourcées et priorisées, gels respectés.
 - **Checklist générique :** chaque contrôle « à la main » produit une tâche de vérification, avec quoi regarder et où.
 - **Garde-fou SEO en intégration continue :** une GitHub Action bloque les régressions. Ce contrôle devient un premier profil d'audit compatible avec la doctrine Souffleur, sans attendre le serveur MCP de P6.
-- **Exécution après J0 :** pages de service de Coach Gari, prix visibles, page à propos, fiche Google, avis.
+- **Exécution après J0 :** pages de service de Coach Gari, prix visibles, page à propos, fiche Google, avis. **État au 2026-11-08 : correctifs préparés en local, en attente de validation** (fiche de décision de P2, session Mac, mandat v7 bloc D). Rien n'est publié avant la validation du rapport J0.
 - **Remesure :** une deuxième fenêtre de 5 jours.
 - **SEO Command en mode manuel :** missions lancées à la main, file, journal et validations opérationnels.
 
@@ -305,7 +311,7 @@ Règles d'intégration :
 - Chaque moteur passe par un adaptateur normalisé ; la couche OIA ne dépend jamais de leurs schémas internes.
 - OIA reste entièrement en TypeScript : Crawlie est utilisé en binaire, sans chaîne de compilation Rust dans le dépôt.
 - Les agents de SEO Command n'accèdent aux moteurs qu'en lecture ; les outils qui déclenchent une action (par exemple le lancement d'un crawl CrawlSEO) passent par une mission validée.
-- Appropriation sélective : un fork ou le remplacement d'une fonction n'est décidé qu'après une preuve d'intérêt, selon les critères de bascule de P3 ; un fork conserve les avis de licence d'origine et est documenté dans un ADR.
+- **Règle proposée, modifiable par Mickaël** : un moteur peut être forké, ou une de ses fonctions remplacée, après une preuve d'intérêt (critères de bascule de P3). Le fork est alors documenté dans un ADR et conserve les avis de licence d'origine. Sans preuve d'intérêt, le moteur reste dans son dépôt, derrière son adaptateur.
 - Hors du socle initial : Canonry (plan B de collecte AEO), LiteLLM, Portkey et Bifrost (à évaluer pour Souffleur en P4, après audit de la chaîne d'approvisionnement et versions épinglées).
 
 ## En parallèle et en attente
@@ -317,7 +323,8 @@ Ces chantiers restent hors du chemin principal, chacun avec sa condition.
 | OIA Funding V0 | Gelé en l'état, aucune régression | Reprise proposée à la clôture de P2 |
 | Moë-Kan | Premier client externe envisagé, données séparées dès le départ | Mesure de départ avant toute modification de son site ; mission après la porte P3 |
 | Maisons.co, restructuration SEO | En attente de la refonte (`infra/visibility/subjects/maisons-co/refonte-exigences-seo.md`) | Critères §10 du document d'exigences au vert ; mesure J0 ensuite |
-| **Espace personnel (Agenda, Santé, Famille)** | **À démarrer après le lancement de J0** | **Strictement séparé des modules professionnels.** Première étape : un **audit en lecture seule** des sources existantes (agenda macOS, Family, données de santé Apple), sans écriture. Sortie : un inventaire et un périmètre. Aucune automatisation tant que Mickaël n'a pas validé le périmètre. |
+| **Interface web OIA** | Nouvelle console sous `/oia`, en Preview seulement (mandat v7, bloc F) | Bascule en attente de Mickaël : allumer en production (`apps/web/oia-flag.mjs`), puis faire de `/oia` l'accueil (`BASCULE_ACCUEIL`) |
+| **Espace personnel (Agenda, Santé, Famille)** | **Audit en lecture seule fait le 2026-11-08** (`docs/audits/2026-11-08-espace-personnel.md`) : la branche existante n'est pas publiable en l'état | **Strictement séparé des modules professionnels.** Première étape : un **audit en lecture seule** des sources existantes (agenda macOS, Family, données de santé Apple), sans écriture. Sortie : un inventaire et un périmètre. Aucune automatisation tant que Mickaël n'a pas validé le périmètre. |
 | Voix et Ollama locaux | Devenus Shyrka 1, livrée avec P1 (code prêt, essai réel à faire) | Sans données réelles avant P6 ; modèles sans donnée client externe tant que P6 n'est pas franchi |
 | Expérience vocale avancée distante | En attente (ancien P8, troisième chemin) | Assistant vocal temps réel d'un fournisseur, payant à la minute : dépense à valider, et seulement si Shyrka 1 ne suffit pas |
 | Tenders, Ventures, Signals, CRM | Briques dans le repo | Après Funding |
@@ -370,7 +377,10 @@ Chaque domaine garde ses propres mesures, publiées séparément.
 - [ ] Faire le premier essai réel de Shyrka 1 sur le Mac Studio (`infra/shyrka/README.md`), puis préciser comment Shyrka consigne une version de son identité qu'elle a choisie (voix en sortie comprise).
 - [x] Interface web sous `/oia` : allumée en Preview Vercel seulement (2026-11-08).
 - [ ] Déposer l'image de profondeur du visage de Shyrka (`apps/web/public/oia/shyrka-face-depth.jpg`, à exporter depuis Lovable).
-- [ ] Choisir l'accès réel à l'e-mail (IMAP via Proton Mail Bridge, API Gmail ou Mail.app) et la voie WhatsApp (API Business avec un numéro dédié, ou rien), avant tout adaptateur réel.
-- [ ] Ouvrir les premiers paliers (lecture) et fixer les catégories déléguées, après la séance 7 d'entretien.
-- [ ] Pousser les mandats v6 et v7 dans `infra/visibility/mandats/`, pour traiter les blocs C et E.
+- [ ] Connecter Gmail (OAuth, `docs/shyrka/adr/0001-agent-courrier.md`), accepter ou non le périmètre `gmail.compose`, et remplir `docs/shyrka/style.md`.
+- [ ] WhatsApp Business pour les numéros professionnels : valider l'inscription et les coûts (`docs/shyrka/adr/0002-whatsapp.md`).
+- [ ] Fixer, après la séance 7 d'entretien, les catégories éventuelles du palier 2 (envoi seul), aujourd'hui désactivé.
+- [x] Mandats v6 et v7 poussés (`8219e45`) et exécutés côté web (v6 C, B, E ; v7 F).
+- [ ] Valider la navigation proposée (`docs/interface/integration-console.md`) et décider la bascule de `/oia` en production.
+- [ ] Espace personnel : purger l'historique de la branche `feature/transformation-90-personal` et fermer la PR #3 avant toute publication (`docs/audits/2026-11-08-espace-personnel.md`).
 - [ ] Bifrost : lever les points à vérifier avec Docker avant tout essai en P4.
