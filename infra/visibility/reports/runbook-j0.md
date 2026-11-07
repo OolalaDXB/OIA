@@ -81,6 +81,12 @@ cp -n .env.example .env               # ne jamais écraser un .env déjà posé
 chmod 600 .env
 ```
 
+**Secrets générés d'Elmo** (`ELMO_POSTGRES_PASSWORD`, `ELMO_ENCRYPTION_KEY`,
+`BETTER_AUTH_SECRET`, `DEPLOYMENT_ID`) : conservés tels quels pour J0, par
+décision de Mickaël (2026-11-07). Ils seront **régénérés au passage sur
+serveur, en P3** (nouvelle installation, nouveau `.env`, sauvegarde hors
+machine selon `SECRETS.md`).
+
 Également dans `.env`, laisser `SCRAPE_TARGETS=` **vide pour l'instant** :
 c'est le verrou qui empêche le worker de démarrer avant la vérification
 du plafond.
@@ -149,7 +155,29 @@ Mémoire Docker recommandée : 6 Go minimum alloués à Docker Desktop
 (Elmo web + Postgres + migration + worker ≈ 3 Go en charge ; Crawlie
 ajoute 1 Go). Docker Desktop → Settings → Resources → Memory.
 
-## 4 · Charger la marque et le panel dans Elmo (manuellement, depuis le brief OIA)
+## 4 · Charger la marque et le panel dans Elmo
+
+**Lancement outillé (2026-11-07), qui remplace les étapes 4 à 6 ci-dessous.**
+Après la création du compte (étape 3), et **sans rien saisir dans l'écran
+« Brand Onboarding »** (il lancerait l'assistant d'Elmo et une analyse
+Mistral non mesurée) :
+
+```
+cd ~/OIA/infra/visibility
+./scripts/j0-launch.sh coach-gari --dry-run   # contrôles, « GO » attendu
+./scripts/j0-launch.sh coach-gari             # charge la marque par l'API et démarre
+./scripts/j0-first-run.sh coach-gari          # 10 à 15 min après : premier run par moteur
+```
+
+`j0-launch.sh` crée la marque, les concurrents et les questions actives
+par `POST /api/v1/brands` (clé admin temporaire, retirée aussitôt), pose
+`SCRAPE_TARGETS`, démarre le worker, `caffeinate` et `cost-guard.sh --watch
+60`, et note le début de fenêtre dans `measurement.yaml`. La marque n'a
+pas de `enabledModels` : Elmo interroge alors tous les moteurs de
+`SCRAPE_TARGETS`, que le script vérifie identiques à ceux du sujet.
+Détail pas à pas : `reports/a-faire-au-retour.md`.
+
+La procédure manuelle ci-dessous reste valable en secours.
 
 Le brief est généré depuis les fichiers du sujet :
 
