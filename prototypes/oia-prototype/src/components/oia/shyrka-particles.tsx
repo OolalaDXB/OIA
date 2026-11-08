@@ -113,7 +113,9 @@ export function ShyrkaParticles({ mode, paused }: Props) {
         const target = current.mode === "parle" ? 1 : current.mode === "reflexion" ? .52 : 0;
         if (!current.paused) {
           if (!reduced.matches) uniforms.uTime.value += dt;
-          uniforms.uMorph.value += (target - uniforms.uMorph.value) * (reduced.matches ? 1 : dt * 4);
+          // Le visage se forme au même rythme, mais se défait plus lentement : retour à la sphère doux, sans à-coup.
+          const vitesseMorph = target > uniforms.uMorph.value ? 3.5 : 1.3;
+          uniforms.uMorph.value += (target - uniforms.uMorph.value) * (reduced.matches ? 1 : Math.min(1, dt * vitesseMorph));
           uniforms.uListen.value += ((current.mode === "ecoute" ? 1 : current.mode === "reflexion" ? .16 : 0) - uniforms.uListen.value) * (reduced.matches ? 1 : dt * 3);
           uniforms.uThink.value += ((current.mode === "reflexion" ? 1 : 0) - uniforms.uThink.value) * (reduced.matches ? 1 : dt * 4);
         }

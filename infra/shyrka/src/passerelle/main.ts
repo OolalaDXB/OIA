@@ -137,6 +137,7 @@ async function main(): Promise<void> {
         }
       : null,
     definirLangue: (code) => speaker?.langue(code),
+    ...(speaker ? { dire: (texte: string) => speaker.speak(texte) } : {}),
     invite,
     modele: { nom: `ollama:${modeleNom}`, disponible: () => ollamaPresent(ollamaUrl) },
     voix: speaker ? voixMac.voix : null,

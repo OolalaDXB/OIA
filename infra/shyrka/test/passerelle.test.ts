@@ -5,7 +5,7 @@ import type { Server } from "node:http";
 import { afterEach, describe, expect, it } from "vitest";
 import { analyserParole, inviteWhisper, verdictApres, verdictAvant } from "../src/passerelle/audio.js";
 import { motInterruption } from "../src/passerelle/interruption.js";
-import { estSalutation, Passerelle, type Connaissances, type DepsPasserelle, type SessionLike } from "../src/passerelle/serveur.js";
+import { consignesDuTour, estSalutation, salutationDeLHeure, Passerelle, type Connaissances, type DepsPasserelle, type SessionLike } from "../src/passerelle/serveur.js";
 import type { ServiceMemoire } from "../src/memoire/commandes.js";
 import type { EtatSession, TurnResult } from "../src/session.js";
 
@@ -94,7 +94,7 @@ async function demarrer(over: Partial<DepsPasserelle> & { repondre?: (t: string)
           const ctx = contexte!(t);
           appels.contextes.push(ctx);
           etat!("reflexion");
-          const answer = ctx ? `D'après docs/roadmap.md:42, réponse sur ${t}` : `Réponse à ${t}`;
+          const answer = ctx.includes("docs/roadmap.md:42") ? `D'après docs/roadmap.md:42, réponse sur ${t}` : `Réponse à ${t}`;
           print!(`Shyrka · ${answer}`);
           etat!("parole");
           etat!("attente");
@@ -274,13 +274,13 @@ describe("langue du tour (Shyrka ne parlait que français)", () => {
     const r = (await (await post(b, "/v1/tour/texte", { texte: "Где сейчас проект?", langue: "ru" })).json()) as Record<string, unknown>;
     expect(r.langue).toBe("ru");
     expect(b.appels.langues.at(-1)).toBe("ru");
-    expect(b.appels.contextes.at(-1)).toMatch(/^Langue de ce tour : Mickaël te parle en russe\. Pour ce tour, réponds en russe/);
+    expect(b.appels.contextes.at(-1)).toMatch(/Langue de ce tour : Mickaël te parle en russe\. Pour ce tour, réponds en russe/);
   });
   it("l'alphabet d'un texte tapé décide ; un texte latin sans langue indiquée reste en français, sans consigne", async () => {
     const b = await demarrer();
     expect(((await (await post(b, "/v1/tour/texte", { texte: "Привет, Ширка" })).json()) as Record<string, unknown>).langue).toBe("ru");
     expect(((await (await post(b, "/v1/tour/texte", { texte: "Où en est le projet ?" })).json()) as Record<string, unknown>).langue).toBe("fr");
-    expect(b.appels.contextes.at(-1)).toBe("");
+    expect(b.appels.contextes.at(-1)).not.toMatch(/Langue de ce tour/);
     expect((await post(b, "/v1/tour/texte", { texte: "x", langue: "russe; drop" })).status).toBe(400);
   });
 });
@@ -292,7 +292,7 @@ describe("salutation", () => {
     const b = await demarrer();
     const r = (await (await post(b, "/v1/tour/texte", { texte: "Bonsoir, Shyrka." })).json()) as Record<string, unknown>;
     expect(r.sources).toEqual([]);
-    expect(b.appels.contextes.at(-1)).toMatch(/salutation courte, une phrase/);
+    expect(b.appels.contextes.at(-1)).toMatch(/Mickaël te salue seulement : réponds par « (Bonjour|Bonsoir) »/);
   });
 });
 
@@ -310,5 +310,32 @@ describe("interruption par mot d'arrêt seulement", () => {
     const avec = await demarrer({ transcription: "Stop." });
     expect(await (await audio(avec, wav(1500, 900, 0.2))).json()).toEqual({ interrompue: true, mot: "stop" });
     expect(avec.appels.textes).toEqual([]); // jamais un tour
+  });
+});
+
+describe("consignes de chaque tour", () => {
+  it("rappelle qui elle est (pas Mickaël, pas de famille), l'heure, et la salutation de l'heure", () => {
+    const soir = consignesDuTour(new Date(2026, 10, 8, 22, 5));
+    expect(soir).toMatch(/Tu n'es pas Mickaël/);
+    expect(soir).toMatch(/tu n'as ni famille, ni enfants/);
+    expect(soir).toMatch(/22 h 05/);
+    expect(soir).toMatch(/« Bonsoir »/);
+    expect(soir).toMatch(/bonne nuit/);
+    expect(soir).toMatch(/pose une seule question courte avant de conclure/);
+    expect(consignesDuTour(new Date(2026, 10, 8, 10, 0))).toMatch(/« Bonjour »/);
+    expect([salutationDeLHeure(new Date(2026, 10, 8, 17, 59)), salutationDeLHeure(new Date(2026, 10, 8, 18, 0))]).toEqual(["Bonjour", "Bonsoir"]);
+  });
+});
+
+describe("prise de congé", () => {
+  it("« Bonne nuit » reçoit une réponse dite à voix haute, et la conversation reste ouverte", async () => {
+    const dits: string[] = [];
+    const b = await demarrer({ dire: async (x: string) => void dits.push(x), maintenant: () => new Date(2026, 10, 8, 22, 30).getTime() });
+    const r = (await (await post(b, "/v1/tour/texte", { texte: "Bonne nuit Shyrka" })).json()) as Record<string, unknown>;
+    expect(r.reponse).toBe("Bonne nuit, Mickaël.");
+    expect(dits).toEqual(["Bonne nuit, Mickaël."]);
+    expect(b.appels.textes).toEqual([]); // pas un tour du modèle
+    await new Promise((x) => setTimeout(x, 10));
+    expect((await post(b, "/v1/tour/texte", { texte: "Une dernière chose" })).status).toBe(200);
   });
 });

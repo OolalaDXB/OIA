@@ -29,6 +29,11 @@ describe("langue et voix", () => {
     expect(consigneLangue("fr")).toBe("");
     expect(consigneLangue("en")).toMatch(/réponds en anglais, pas en français/);
   });
+  it("n'utilise jamais une voix gadget ; prend la voix préférée de la langue (Samantha plutôt qu'Albert)", () => {
+    const v = voixParLocale(["Albert              en_US    # Hello! My name is Albert.", "Bad News            en_US    # x", "Samantha            en_US    # Hello", "Daniel              en_GB    # Hello"].join("\n"));
+    expect(voixPourLangue("en", v)).toBe("Samantha");
+    expect(voixPourLangue("en", voixParLocale("Albert              en_US    # x\nBubbles             en_US    # x"))).toBeNull();
+  });
   it("choisit Premium, puis Enhanced, puis la première voix de la langue ; null sans voix", () => {
     const v = voixParLocale(SORTIE);
     expect(voixPourLangue("en", v)).toBe("Ava (Premium)");

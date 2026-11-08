@@ -52,11 +52,29 @@ export function voixParLocale(sortie: string): VoixInstallee[] {
   });
 }
 
-/** Voix d'une langue : Premium, puis Enhanced, puis la première installée. Null si aucune. */
+/** Voix gadgets de macOS (effets, caricatures) : jamais pour Shyrka (« Albert » rendait l'anglais effrayant). */
+const GADGETS = /^(Albert|Bad News|Bahh|Bells|Boing|Bubbles|Cellos|Wobble|Good News|Jester|Junior|Organ|Superstar|Ralph|Trinoids|Whisper|Zarvox|Fred|Grandma|Grandpa|Rocko|Eddy|Reed)\b/;
+
+/** Voix voulues par langue, dans l'ordre : des voix féminines posées, proches d'Aurélie. */
+const PREFEREES: Record<string, string[]> = {
+  en: ["Ava", "Samantha", "Allison", "Karen", "Moira", "Serena", "Kate", "Susan", "Tessa", "Kathy", "Flo", "Shelley", "Sandy"],
+  ru: ["Milena", "Katya"],
+  es: ["Mónica", "Paulina", "Marisol"],
+  de: ["Anna", "Petra", "Helena"],
+  it: ["Alice", "Federica"],
+  pt: ["Joana", "Luciana"],
+};
+
+/** Voix d'une langue : la préférée installée (Premium, puis Enhanced, puis de base), sans voix gadget. Null si aucune. */
 export function voixPourLangue(code: string, installees: VoixInstallee[]): string | null {
-  const candidates = installees.filter((v) => v.locale.split("_")[0] === code);
+  const candidates = installees.filter((v) => v.locale.split("_")[0] === code && !GADGETS.test(v.nom));
   if (!candidates.length) return null;
-  return (candidates.find((v) => /\(Premium\)$/.test(v.nom)) ?? candidates.find((v) => /\(Enhanced\)$/.test(v.nom)) ?? candidates[0]!).nom;
+  const qualite = (vs: VoixInstallee[]) => vs.find((v) => /\(Premium\)$/.test(v.nom)) ?? vs.find((v) => /\(Enhanced\)$/.test(v.nom)) ?? vs[0];
+  for (const nom of PREFEREES[code] ?? []) {
+    const memes = candidates.filter((v) => v.nom === nom || v.nom.startsWith(`${nom} (`));
+    if (memes.length) return qualite(memes)!.nom;
+  }
+  return qualite(candidates)!.nom;
 }
 
 /**
