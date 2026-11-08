@@ -24,6 +24,15 @@ données, `SHA256SUMS`), relue sur un Postgres jetable.
 | 8 | `0007_shyrka.sql` (bloc G) | voir le rapport du mandat v9 |
 | 9 | `0008_money_lookup_v2.sql` | `20261108011100` (8 novembre 2026, sauvegarde `~/oia-sauvegardes/avant-0008/`) |
 
+## À appliquer (fichiers relus, non appliqués)
+
+| Ordre | Fichier | Effet | Prérequis |
+| --- | --- | --- | --- |
+| 10 | `0009_ia_couts.sql` | Dépenses d'IA d'OIA, vue unique `oia_ia_couts_v1` du contrat de Lovable (`prototypes/oia-prototype/CONTRAT_VIS_COUTS_V1.md`, `91cecd5`) : coûts estimé, retenu et facturé distincts ; table `oia_ia_cout` alimentée chaque jour depuis le Mac (`infra/visibility/scripts/couts-sync.sh`, tâche de J0) ; money-match et shyrka lus en direct dans le compteur de budget (0007) ; factures relevées par un propriétaire (`oia_ia_relever_facture`, `oia_ia_retirer_facture`), NULL tant qu'elles ne le sont pas, jamais réparties ; `oia_ia_factures_v1`. Membres de l'espace seulement | 0008 appliquée |
+
+Tests : `test/ia-couts.test.ts` (séquence de production puis 0009, tests adverses) et
+`infra/visibility/test/couts-sync.test.ts`. Retour arrière : bloc en fin de fichier.
+
 ## Contrat Money Lookup version 2 (0008, appliquée)
 
 Contenu de `0008_money_lookup_v2.sql` : contrat Money Lookup **version 2**, d'après les écarts relevés par Lovable (`1e3040c`) et les décisions de Mickaël du 8 novembre : import A4 corrigé (valeurs `null`, conflits au bilan, aperçu et confirmation d'annulation) ; vues `_v2` sur lesquelles se branche le cockpit (COMMENT ignoré, REGULATORY hors de Toutes et des montants, tri sans échéances dépassées, échéance de candidature et la plus tardive, fraîcheur recalculée, Aujourd'hui à 7, 14 et 30 jours) ; seize lectures nouvelles, dont suggestions de projets et « clos depuis la dernière visite », et tables `oia_projet`, `oia_import_element`, `oia_visite` ; `oia_supprimer`, `oia_proposer_projet`, `oia_marquer_visite` ; `oia_basculer_tache` ouverte aux propriétaires. Les vues `_v1` restent servies sans changement.

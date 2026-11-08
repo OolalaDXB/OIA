@@ -5,7 +5,8 @@
 #  1. fiche du jour : subjects/<sujet>/reports/<fenêtre>/jour-N.md ;
 #  2. visibility.json mis à jour (vis-export.sh) ;
 #  3. preuves du jour synchronisées vers la base OIA (vis-sync.sh, mandat v9) ;
-#  4. dépense vérifiée (cost-guard.sh --check, sans arrêt du worker) ;
+#  4. dépense vérifiée (cost-guard.sh --check, sans arrêt du worker), puis
+#     dépenses d'IA synchronisées vers la base OIA (couts-sync.sh, 0009) ;
 #  5. notification macOS SEULEMENT en cas de problème ;
 #  6. après la fin de la fenêtre : la tâche se retire d'elle-même.
 set -uo pipefail
@@ -42,6 +43,10 @@ fi
 if [ -z "${OIA_VIS_SKIP_COST:-}" ]; then
   "$VIS_ROOT/scripts/cost-guard.sh" --check >/dev/null 2>&1; crc=$?
   case $crc in 2|3) notify "Dépense : seuil d'alerte ou plafond atteint (voir cost-journal.csv).";; 4) notify "Dépense du mois illisible.";; esac
+fi
+# Dépenses d'IA vers la base OIA (0009), après le relevé du garde-fou.
+if [ -z "${OIA_VIS_SKIP_COST:-}" ] && [ -z "${OIA_VIS_SKIP_SYNC:-}" ]; then
+  "$VIS_ROOT/scripts/couts-sync.sh" >/dev/null || notify "Dépenses d'IA non synchronisées vers la base OIA (couts-sync)."
 fi
 
 if [ "$rc" = 3 ]; then
