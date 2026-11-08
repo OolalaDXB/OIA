@@ -3,6 +3,8 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Statut, Check, btnPrimary, btnSecondary, field } from "@/components/oia/ui";
 import { VisibilityShell } from "@/components/oia/visibility";
 import { useDonnees } from "@/lib/donnees-visibility";
+import { FaviconSource } from "@/components/oia/identites";
+import { LogoAssistant, LogoMarque } from "@/components/oia/visibility-identites";
 
 export const Route = createFileRoute("/nouveau-compte")({
   head: () => ({
@@ -103,7 +105,7 @@ function NouveauCompte() {
             {o.offres.map((x) => <Check key={x} label={x} checked={offres.sel.has(x)} onChange={() => offres.flip(x)} />)}
           </fieldset>
           <fieldset><legend className="mb-2 text-sm text-tertiary">Concurrents</legend>
-            {o.concurrents.map((x) => <Check key={x} label={x} checked={conc.sel.has(x)} onChange={() => conc.flip(x)} />)}
+            {o.concurrents.map((x) => <Check key={x} label={<span className="flex items-center gap-2.5"><LogoMarque nom={x} />{x}</span>} checked={conc.sel.has(x)} onChange={() => conc.flip(x)} />)}
           </fieldset>
         </div>
         {step === 2 && suite(3)}
@@ -114,7 +116,7 @@ function NouveauCompte() {
         <ul className="max-w-3xl">
           {o.connexions.map((c) => (
             <li key={c.nom} className="flex flex-wrap items-center justify-between gap-3 border-b border-border py-3">
-              <div><div className="text-sm">{c.nom}</div><div className="text-sm text-tertiary">{c.detail}</div></div>
+              <div className="flex items-center gap-3"><FaviconSource source={c.nom.includes("Google") ? "google.com" : "github.com"} /><div><div className="text-sm">{c.nom}</div><div className="text-sm text-tertiary">{c.detail}</div></div></div>
               {cx[c.nom] ? <Statut etat="conforme" label="Connecté" /> :
                 <button className={btnSecondary} onClick={() => setCx({ ...cx, [c.nom]: true })}>Connecter</button>}
             </li>
@@ -151,7 +153,7 @@ function NouveauCompte() {
           <div><dt className="text-sm text-tertiary">Questions</dt><dd className="mt-1 text-4xl font-normal">{qs.sel.size}</dd></div>
           <div><dt className="text-sm text-tertiary">Coût estimé</dt><dd className="mt-1 text-4xl font-normal">≈ 2 $</dd></div>
         </dl>
-        <p className="mt-4 text-sm text-muted-foreground">Assistants interrogés : {o.assistants.join(", ")}.</p>
+        <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-muted-foreground"><span>Assistants interrogés :</span>{o.assistants.map((a) => <span key={a} className="inline-flex items-center gap-1.5"><LogoAssistant nom={a} petite />{a}</span>)}</div>
 
         <div className="card mt-8 max-w-3xl p-5">
           <h3 className="text-base">Déjà repéré</h3>

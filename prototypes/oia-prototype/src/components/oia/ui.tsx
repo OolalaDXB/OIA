@@ -54,7 +54,7 @@ export function Statut({ etat, label }: { etat: Etat; label?: string }) {
   );
 }
 
-export function Section({ titre, aside, children }: { titre: string; aside?: ReactNode; children: ReactNode }) {
+export function Section({ titre, aside, children }: { titre: ReactNode; aside?: ReactNode; children: ReactNode }) {
   return (
     <section className="card min-w-0 p-5 md:p-6">
       <div className="mb-5 flex items-baseline justify-between gap-4">
@@ -66,10 +66,10 @@ export function Section({ titre, aside, children }: { titre: string; aside?: Rea
   );
 }
 
-export function Barre({ label, v, max = 100 }: { label: string; v: number; max?: number }) {
+export function Barre({ label, v, max = 100, identite }: { label: string; v: number; max?: number; identite?: ReactNode }) {
   return (
     <div className="grid grid-cols-[minmax(6rem,11rem)_1fr_3rem] items-center gap-4 py-2 text-sm">
-      <span className="truncate text-muted-foreground">{label}</span>
+      <span className="flex min-w-0 items-center gap-2 text-muted-foreground">{identite}<span className="truncate">{label}</span></span>
       <BarreColoree label={label} largeur={(v / max) * 100} detail={`${v} %`} />
       <span className="num text-right">{v} %</span>
     </div>
@@ -80,7 +80,7 @@ export const btnPrimary = "inline-flex min-h-11 items-center justify-center roun
 export const btnSecondary = "inline-flex min-h-11 items-center justify-center rounded-md border border-input bg-background px-5 text-sm text-foreground hover:bg-muted";
 export const field = "min-h-11 w-full rounded-md border border-input bg-background px-3 text-sm outline-none focus:border-ring";
 
-export function Check({ label, checked, onChange, extra }: { label: string; checked: boolean; onChange: () => void; extra?: ReactNode }) {
+export function Check({ label, checked, onChange, extra }: { label: ReactNode; checked: boolean; onChange: () => void; extra?: ReactNode }) {
   return (
     <label className="flex min-h-11 cursor-pointer items-center gap-3 border-b border-border py-2 text-sm last:border-0">
       <input type="checkbox" checked={checked} onChange={onChange} className="size-4 accent-[var(--primary)]" />

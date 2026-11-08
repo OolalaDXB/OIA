@@ -6,6 +6,8 @@ import { useState } from "react";
 import { useDonnees } from "@/lib/donnees-visibility";
 import { Indicateurs, Paysage } from "@/components/oia/visibility-vues";
 import { FiltresVisibility, NoteMesure } from "@/components/oia/mesure";
+import { LogoAssistant, LogoMarque } from "@/components/oia/visibility-identites";
+import { FaviconSource } from "@/components/oia/identites";
 
 export const Route = createFileRoute("/sites/$slug")({
   head: () => ({
@@ -32,7 +34,7 @@ function VueSite() {
       <div className="mt-2 mb-10 flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-3xl md:text-4xl">{d.nom}</h1>
-          <p className="mt-1 text-tertiary">{d.url}</p>
+          <p className="mt-1 flex items-center gap-2 text-tertiary"><FaviconSource source={d.url} petite />{d.url}</p>
         </div>
         <div><Button className="min-h-11" onClick={() => setPrepare(true)}>Préparer les corrections</Button><p className="mt-2 text-xs text-tertiary">Rien n'est publié sans votre validation.</p>{prepare && <p role="status" className="mt-2 text-xs text-muted-foreground">Corrections préparées, simulation en attente de validation.</p>}</div>
       </div>
@@ -49,7 +51,7 @@ function VueSite() {
           <div className="num mt-2 flex justify-between text-xs text-tertiary"><span>0 %</span><span>50 %</span></div>
         </Section>
         <Section titre="Par assistant">
-          {d.parAssistant.map((a) => <Barre key={a.nom} label={a.nom} v={a.v} max={50} />)}
+          {d.parAssistant.map((a) => <Barre key={a.nom} label={a.nom} v={a.v} max={50} identite={<LogoAssistant nom={a.nom} petite />} />)}
         </Section>
       </div>
 
@@ -58,7 +60,7 @@ function VueSite() {
           <table className="num w-full text-sm"><tbody>
             {d.sources.map((s) => (
               <tr key={s.nom} className="border-b border-border last:border-0">
-                <td className="py-2.5">{s.nom}{s.nom === d.url && <span className="ml-2 text-tertiary">votre site</span>}</td>
+                <td className="py-2.5"><span className="flex items-center gap-2.5"><FaviconSource source={s.nom} petite /><span>{s.nom}{s.nom === d.url && <span className="ml-2 text-tertiary">votre site</span>}</span></span></td>
                 <td className="w-1/3"><span className="block h-1.5 rounded-full bg-track"><span className={`block h-full rounded-full ${s.nom === d.url ? "bg-module-visibility" : "bg-bar"}`} style={{ width: `${(s.n / maxSrc) * 100}%` }} /></span></td>
                 <td className="w-12 text-right">{s.n}</td>
               </tr>
@@ -66,7 +68,7 @@ function VueSite() {
           </tbody></table>
         </Section>
         <Section titre="Concurrents cités à la place du site">
-          {d.concurrents.map((c) => <Barre key={c.nom} label={c.nom} v={c.v} max={50} />)}
+          {d.concurrents.map((c) => <Barre key={c.nom} label={c.nom} v={c.v} max={50} identite={<LogoMarque nom={c.nom} />} />)}
         </Section>
       </div>
 

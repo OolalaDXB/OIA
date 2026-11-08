@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, type CSSProperties, type ReactNode } from "react";
 import type { Fenetre, Valeur } from "@/lib/donnees/visibility";
 import { useVisibilityDonnees } from "@/lib/donnees/provider";
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
@@ -43,8 +43,11 @@ export function Chiffre({ val, fen, unite = " %", alerte = false, grand = false 
     {t.intervalle && <div className="num mt-1 text-xs text-tertiary">Intervalle {t.intervalle}</div>}
   </div>;
 }
-export function Indicateur({ titre, val, fen, unite, alerte, extra }: { titre: string; val: Valeur; fen: Fenetre; unite?: string | undefined; alerte?: boolean | undefined; extra?: ReactNode }) {
-  return <div className="card min-w-0 p-5"><h3 className="mb-3 text-sm text-muted-foreground">{titre}</h3><Chiffre val={val} fen={fen} unite={unite} alerte={alerte} grand />{extra}</div>;
+export type TonIndicateur = "presence" | "part-voix" | "exactitude" | "position";
+export function Indicateur({ titre, val, fen, unite, alerte, extra, ton = "presence" }: { titre: string; val: Valeur; fen: Fenetre; unite?: string | undefined; alerte?: boolean | undefined; extra?: ReactNode; ton?: TonIndicateur }) {
+  return <div className="card indicateur-ton min-w-0 p-5" style={{ "--indicateur-couleur": `var(--mesure-${ton})` } as CSSProperties}>
+    <h3 className="mb-3 text-sm">{titre}</h3><div className="indicateur-valeur"><Chiffre val={val} fen={fen} unite={unite} alerte={alerte} grand /></div>{extra}
+  </div>;
 }
 export function NoteMesure() { const { NOTE_MESURE } = useVisibilityDonnees(); return <p className="mt-10 border-t border-border pt-4 text-xs text-tertiary">{NOTE_MESURE}</p>; }
 

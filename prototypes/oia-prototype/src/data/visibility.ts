@@ -22,9 +22,25 @@ export const assistants = [
 ] as const;
 export type NomAssistant = (typeof assistants)[number]["nom"];
 
+/** Coûts entièrement fictifs, sans appel fournisseur ni facturation. */
+export const moteurs = [
+  { assistant: "ChatGPT", fournisseur: "openai", modele: "GPT", version: assistants[0].version, acces: "API directe", estime: 0.018, observe: 0.021, suivi: true },
+  { assistant: "Claude", fournisseur: "anthropic", modele: "Claude", version: assistants[1].version, acces: "API directe", estime: 0.024, observe: 0.027, suivi: true },
+  { assistant: "Mistral", fournisseur: "mistral", modele: "Mistral", version: assistants[3].version, acces: "OpenRouter", estime: 0.006, observe: null, suivi: false },
+  { assistant: "Gemini", fournisseur: "google", modele: "Gemini", version: assistants[2].version, acces: "API directe", estime: 0.009, observe: 0.011, suivi: true },
+  { assistant: "Perplexity", fournisseur: "perplexity", modele: "Sonar", version: assistants[4].version, acces: "API directe", estime: 0.012, observe: 0.015, suivi: true },
+] as const;
+export const depensesMoteurs = { questions: 9, joursMesures: 20, frequence: "4 fenêtres de 5 jours, une réponse par question et par jour", mois: "Novembre 2026", observe: 24.9, plafond: 30 };
+export const plateformesMoteurs = [
+  { nom: "Google AI Mode", acces: "Extracteur" }, { nom: "Google AI Overview", acces: "Extracteur" },
+  { nom: "Copilot", acces: "Extracteur" }, { nom: "DeepSeek", acces: "OpenRouter" },
+  { nom: "Qwen", acces: "OpenRouter" }, { nom: "Kimi", acces: "OpenRouter" }, { nom: "Grok", acces: "OpenRouter" },
+] as const;
+
 export const familles = ["Découverte locale", "Prix et offres", "Cadeaux et famille", "Votre marque"] as const;
 
-export const questions = [
+export type QuestionVisibility = { id: string; q: string; famille: string; langue: string; marque: boolean };
+export const questions: QuestionVisibility[] = [
   { id: "q1", q: "Où prendre un cours de poterie à Vannes ?", famille: "Découverte locale", langue: "fr", marque: false },
   { id: "q2", q: "Quel atelier de céramique pour débutant dans le Morbihan ?", famille: "Découverte locale", langue: "fr", marque: false },
   { id: "q3", q: "Stage de tournage le week-end en Bretagne sud", famille: "Prix et offres", langue: "fr", marque: false },
@@ -34,7 +50,7 @@ export const questions = [
   { id: "q7", q: "Pottery class in Brittany in English", famille: "Découverte locale", langue: "en", marque: false },
   { id: "q8", q: "Studio Ardoise est-il un bon atelier ?", famille: "Votre marque", langue: "fr", marque: true },
   { id: "q9", q: "Avis sur les stages du Studio Ardoise", famille: "Votre marque", langue: "fr", marque: true },
-] as const;
+];
 
 export const marque = {
   nom: "Studio Ardoise", sites: ["studio-ardoise.fr"], alias: ["Atelier Ardoise", "Studio Ardoise Vannes"],

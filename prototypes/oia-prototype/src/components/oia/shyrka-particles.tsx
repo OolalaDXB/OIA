@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import faceDepth from "@/assets/shyrka-face-depth.jpg";
+import faceDepth from "@/assets/shyrka-face-depth-yeux-ouverts.jpg";
 
-type Props = { mode: "repos" | "ecoute" | "parle"; paused: boolean };
+type Props = { mode: "repos" | "ecoute" | "reflexion" | "parle"; paused: boolean };
 export function ShyrkaParticles({ mode, paused }: Props) {
   const host = useRef<HTMLDivElement>(null);
   const state = useRef({ mode, paused });
@@ -58,10 +58,10 @@ export function ShyrkaParticles({ mode, paused }: Props) {
         const rgba = ctx.getImageData(0, 0, 1, 1).data;
         return new THREE.Color((rgba[0] ?? 0) / 255, (rgba[1] ?? 0) / 255, (rgba[2] ?? 0) / 255);
       };
-      const uniforms = { uTime: { value: 0 }, uMorph: { value: 0 }, uListen: { value: 0 }, uDim: { value: 1 }, uPixel: { value: 1 }, uBlue: { value: readColor("--shyrka-particle") }, uIce: { value: readColor("--shyrka-light") } };
+      const uniforms = { uTime: { value: 0 }, uMorph: { value: 0 }, uListen: { value: 0 }, uThink: { value: 0 }, uDim: { value: 1 }, uPixel: { value: 1 }, uBlue: { value: readColor("--shyrka-particle") }, uIce: { value: readColor("--shyrka-light") } };
       const material = new THREE.ShaderMaterial({
         uniforms, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-        vertexShader: `attribute vec3 face; attribute float seed; uniform float uTime,uMorph,uListen,uPixel; varying float vLight; varying float vSeed;
+        vertexShader: `attribute vec3 face; attribute float seed; uniform float uTime,uMorph,uListen,uThink,uPixel; varying float vLight; varying float vSeed;
           void main(){
             vec3 p=position;
             float angle=uTime*.035;
@@ -69,8 +69,8 @@ export function ShyrkaParticles({ mode, paused }: Props) {
             p*=1.+.009*sin(uTime*.8);
             p=mix(p,face,uMorph);
             p*=1.-uListen*.14;
-            p.x+=uMorph*.018*sin(uTime*1.8+p.y*5.+seed*2.);
-            p.z+=uMorph*.025*sin(uTime*2.4+p.y*8.);
+            p.x+=uMorph*.018*sin(uTime*1.8+p.y*5.+seed*2.)+uThink*.045*sin(uTime*2.+p.y*4.+seed*6.);
+            p.z+=uMorph*.025*sin(uTime*2.4+p.y*8.)+uThink*.04*cos(uTime*1.7+p.x*5.+seed*4.);
             float rim=pow(1.-abs(position.z)/1.24,3.);
             float relief=clamp((face.z+.38)/.95,0.,1.);
             vLight=mix(.10+rim*1.5,.12+pow(relief,2.)*1.2+seed*.15,uMorph);
@@ -110,11 +110,12 @@ export function ShyrkaParticles({ mode, paused }: Props) {
         if (disposed) return;
         const dt = Math.min((now - last) / 1000, .04); last = now;
         const current = state.current;
-        const target = current.mode === "parle" ? 1 : 0;
+        const target = current.mode === "parle" ? 1 : current.mode === "reflexion" ? .52 : 0;
         if (!current.paused) {
           if (!reduced.matches) uniforms.uTime.value += dt;
           uniforms.uMorph.value += (target - uniforms.uMorph.value) * (reduced.matches ? 1 : dt * 4);
-          uniforms.uListen.value += ((current.mode === "ecoute" ? 1 : 0) - uniforms.uListen.value) * (reduced.matches ? 1 : dt * 3);
+          uniforms.uListen.value += ((current.mode === "ecoute" ? 1 : current.mode === "reflexion" ? .16 : 0) - uniforms.uListen.value) * (reduced.matches ? 1 : dt * 3);
+          uniforms.uThink.value += ((current.mode === "reflexion" ? 1 : 0) - uniforms.uThink.value) * (reduced.matches ? 1 : dt * 4);
         }
         uniforms.uDim.value = current.paused ? .15 : 1;
         renderer.render(scene, camera);
