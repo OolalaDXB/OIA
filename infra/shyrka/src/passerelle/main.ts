@@ -8,7 +8,6 @@ import { choisirVoix, MacSaySpeaker, voixInstallees } from "../adapters/macos-sa
 import { ollamaPresent } from "../adapters/mistral.js";
 import { DEFAULT_OLLAMA_MODEL, OllamaTextModel } from "../adapters/ollama.js";
 import { WhisperServer } from "../adapters/whisper-server.js";
-import { contexteModele, etatOia } from "../contexte.js";
 import { Corpus } from "../executive/corpus.js";
 import { projetsConnus } from "../executive/config.js";
 import { loadIdentity, voiceOutputAllowed } from "../identity.js";
@@ -118,7 +117,9 @@ async function main(): Promise<void> {
         contexteTour: h.contexteTour,
         ...(speaker ? { speaker } : {}),
         identity,
-        system: promptSysteme(contexteModele(etatOia())),
+        // Pas de point du jour à chaque tour : le modèle le prenait pour un programme (« 26 décisions… »).
+        // Les décisions restent servies par le code (routage) et les documents par le corpus.
+        system: promptSysteme(),
         print: h.print,
         onEtat: h.onEtat,
       }),

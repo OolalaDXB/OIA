@@ -5,7 +5,7 @@ import type { Server } from "node:http";
 import { afterEach, describe, expect, it } from "vitest";
 import { analyserParole, inviteWhisper, verdictApres, verdictAvant } from "../src/passerelle/audio.js";
 import { motInterruption } from "../src/passerelle/interruption.js";
-import { consignesDuTour, estSalutation, salutationDeLHeure, Passerelle, type Connaissances, type DepsPasserelle, type SessionLike } from "../src/passerelle/serveur.js";
+import { appelleLeCorpus, consignesDuTour, estSalutation, salutationDeLHeure, Passerelle, type Connaissances, type DepsPasserelle, type SessionLike } from "../src/passerelle/serveur.js";
 import type { ServiceMemoire } from "../src/memoire/commandes.js";
 import type { EtatSession, TurnResult } from "../src/session.js";
 
@@ -338,5 +338,19 @@ describe("prise de congé", () => {
     expect(b.appels.textes).toEqual([]); // pas un tour du modèle
     await new Promise((x) => setTimeout(x, 10));
     expect((await post(b, "/v1/tour/texte", { texte: "Une dernière chose" })).status).toBe(200);
+  });
+});
+
+describe("conversation (essai réel du soir)", () => {
+  it("une phrase de conversation n'appelle pas le corpus ; une question de travail, si", () => {
+    expect(["Ben non, je m'appelle Mickaël et tu le sais.", "Tu dois m'appeler par mon", "Et parle-tu russe ?", "Il faudrait que je dorme"].map(appelleLeCorpus)).toEqual([false, false, false, false]);
+    expect(["Qu'avais-je décidé pour SILLON ?", "Où en est la roadmap ?", "Quelles sont les permissions de Shyrka dans son cadre ?"].map(appelleLeCorpus)).toEqual([true, true, true]);
+  });
+  it("les consignes demandent la suite d'une phrase coupée, interdisent de se répéter, de ressortir les décisions sans raison, de changer de langue", () => {
+    const c = consignesDuTour(new Date(2026, 10, 8, 20, 0));
+    expect(c).toMatch(/Ne parle des décisions ouvertes, du budget, de J0 ou d'un projet que s'il en parle/);
+    expect(c).toMatch(/Si sa phrase semble coupée ou incomplète, ne la répète pas/);
+    expect(c).toMatch(/Ne redis jamais mot pour mot ta réponse précédente/);
+    expect(c).toMatch(/une seule langue, celle de Mickaël, du premier au dernier mot/);
   });
 });
