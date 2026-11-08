@@ -1,26 +1,36 @@
-# Concurrents de Coach Gari · liste VALIDÉE par Mickaël le 2026-11-08
-# Préparée le 2026-11-07 (recherches publiques sourcées et domaines cités dans les
-# réponses de J0). Chargée dans Elmo le 2026-11-08, à la place des concurrents du
-# lancement (Playtomic supprimé ; voir measurement.yaml, fenêtre j0).
-# Playtomic n'est pas un concurrent (décision de Mickaël, 2026-11-07).
-# Académies de padel : seule Aria Sportscape est un concurrent ; les autres sont des
-# lieux où Gari exerce, retirées de la liste (section `retires`, décision du 2026-11-08).
-# Lu par scripts/j0-reanalysis.sh pour compter les mentions dans les réponses
-# (seule la liste `candidates` est lue).
+# Concurrents de Coach Gari · liste VALIDÉE par Mickaël le 2026-11-08, en cinq segments
+# Sources et domaines : recherche publique en lecture seule (2026-11-07 et 2026-11-08) et
+# domaines cités dans les réponses de J0. Chargée dans Elmo le 2026-11-08, à la place des
+# concurrents du lancement (voir measurement.yaml, fenêtre j0).
+# Playtomic n'est pas un concurrent (décision de Mickaël, 2026-11-07) : retiré.
+# Les académies de padel sont des lieux où Gari travaille, pas des concurrents (décision du
+# 2026-11-08) : section `lieux`, non chargée dans Elmo, comptée à part par la réanalyse.
+# Lu par scripts/j0-reanalysis.sh pour compter les mentions dans les réponses : `candidates`
+# (concurrents) et `lieux` (lieux de travail, à part) ; `retires` n'est pas lu. Un domaine n'est retenu que s'il appartient au concurrent :
+# jamais celui d'une place de marché (fiverr.com, fresha.com, trustpilot.com).
 candidates:
-  # ---- Coachs personnels et coachs de padel indépendants à Dubaï ----
-  - { name: PTD Fitness, segment: dubai-independant, aliases: ["Personal Trainers Dubai"],
-      source: "https://ptd-clone-preview.pages.dev/blog/best-personal-trainer-dubai-2026", note: "réseau de coachs qui se déplacent chez le client ; source commerciale, à vérifier" }
-  - { name: Magali de Lattre, segment: dubai-independant,
-      source: "https://gulfnews.com/special-reports/play-tennis-and-padel-at-the-world-class-indoor-aria-sportscape-academy-1.1663586197929", note: "coach de padel, ancienne joueuse professionnelle ; indépendante ou salariée d'Aria : à vérifier" }
-  - { name: Fede Brambati, segment: dubai-independant,
-      source: "https://dubaicreekresort.com/?p=642", note: "coach de padel listé par RRA Padel ; statut à vérifier" }
-  - { name: David Pozo, segment: dubai-independant,
-      source: "https://dubaicreekresort.com/?p=642", note: "coach de padel listé par RRA Padel ; statut à vérifier" }
-  # ---- Académies de padel à Dubaï (classées par Mickaël le 2026-11-08) ----
-  - { name: Aria Sportscape, segment: dubai-academie-padel, aliases: ["Aria Sportscape Academy"],
-      source: "https://gulfnews.com/special-reports/play-tennis-and-padel-at-the-world-class-indoor-aria-sportscape-academy-1.1663586197929" }
-  # ---- Salles de coaching personnel à Dubaï ----
+  # ---- Coachs à domicile et studios à Dubaï ----
+  - { name: PTD Fitness, segment: dubai-domicile-studio, aliases: ["Personal Trainers Dubai", "PTD Fitness Group"],
+      domains: [personaltrainersdubai.com, bestpersonaltrainerdubai.pages.dev, nearmepersonaltrainer.pages.dev, ptd-clone-preview.pages.dev],
+      source: "https://bestpersonaltrainerdubai.pages.dev/about",
+      reference: "PTD Fitness publie plusieurs sites « meilleur coach à Dubaï » (bestpersonaltrainerdubai.pages.dev, « operated by PTD Fitness Group » ; nearmepersonaltrainer.pages.dev, « run by PTD Fitness » ; ptd-clone-preview.pages.dev, « Copyright Personal Trainers Dubai »), tous renvoyant à personaltrainersdubai.com : c'est le concurrent de référence pour la visibilité dans les IA.",
+      note: "coachs qui se déplacent chez le client, Dubaï et Abou Dabi ; chiffres publiés par PTD (clients, avis) non vérifiés" }
+  - { name: Fit Squad DXB, segment: dubai-domicile-studio, aliases: ["FitSquad DXB"], domains: [fitsquaddxb.com],
+      source: "https://www.trustpilot.com/review/fitsquaddxb.com", note: "coaching personnel mobile (domicile, salle de l'immeuble, plage), Dubaï et Abou Dabi" }
+  - { name: Professional Fitness Trainers Dubai, segment: dubai-domicile-studio,
+      source: "https://www.fresha.com/lp/en/tt/personal-trainers/in/ae-dubai/trade-centre", note: "fiche Fresha (Bay View Tower, Business Bay) ; aucun site propre trouvé, donc aucun domaine" }
+  - { name: Fortius Dubai, segment: dubai-domicile-studio, domains: [fortiusdubai.squarespace.com],
+      source: "https://fortiusdubai.squarespace.com/faq", note: "coaching personnel à domicile et en salle depuis 2015, en ligne depuis 2018 ; seul fortiusdubai.squarespace.com est observé, fortiusdubai.com à vérifier" }
+  - { name: Embody Fitness, segment: dubai-domicile-studio, domains: [embodyfitness.ae], status: a-verifier,
+      source: "https://www.factmagazines.com/uae/dubai/fact-review-embody-fitness-in-dubai-is-a-gamechanger-gym/", note: "À VÉRIFIER (Mickaël) : studio privé de coaching personnel (DIFC, Umm Suqeim) ; sources surtout publicitaires, adresses de plusieurs années" }
+  # ---- Coachs de padel à Dubaï ----
+  - { name: Magali de Lattre, segment: dubai-coach-padel,
+      source: "https://gulfnews.com/special-reports/play-tennis-and-padel-at-the-world-class-indoor-aria-sportscape-academy-1.1663586197929", note: "coach de padel, ancienne joueuse professionnelle" }
+  - { name: Fede Brambati, segment: dubai-coach-padel,
+      source: "https://dubaicreekresort.com/?p=642", note: "coach de padel listé par RRA Padel" }
+  - { name: David Pozo, segment: dubai-coach-padel,
+      source: "https://dubaicreekresort.com/?p=642", note: "coach de padel listé par RRA Padel" }
+  # ---- Salles de coaching à Dubaï ----
   - { name: Ultimate Performance, segment: dubai-salle, domains: [upfitness.com], aliases: ["UP Fitness"],
       source: "subject.yaml (concurrent de lancement)" }
   - { name: StudioRepublik, segment: dubai-salle, domains: [studio-republik.com], aliases: ["Studio Republik"],
@@ -31,23 +41,37 @@ candidates:
       source: "https://whatson.ae/?p=28992" }
   - { name: Fitsetgo, segment: dubai-salle,
       source: "https://focus.hidubai.com/elevate-your-fitness-game-top-boutique-studios-to-try-in-dubai" }
-  # ---- Coaching en ligne (à part) ----
-  - { name: Future, segment: en-ligne, domains: [future.co], source: "subject.yaml (concurrent de lancement)" }
-  - { name: Caliber, segment: en-ligne, domains: [caliberstrong.com], source: "subject.yaml (concurrent de lancement)" }
-  - { name: Planet Fitness Play, segment: en-ligne, domains: [play.planetfitness.co.za],
+  # ---- Coachs en ligne, Afrique australe ----
+  - { name: Michelina Chindiya, segment: en-ligne-afrique-australe, aliases: ["Miss Chindiya", "misschindiya"],
+      source: "https://en.wikipedia.org/wiki/Miss_Chindiya", note: "coach et influenceuse fitness à Harare (Instagram @misschindiya)" }
+  - { name: Brendon Kawondera, segment: en-ligne-afrique-australe,
+      source: "https://www.brainzmagazine.com/post/from-zimbabwean-childhood-to-personal-training-success-exclusive-interview-with-brendon-kawondera", note: "coach né au Zimbabwe, basé à Londres (profil Fitness First) ; son offre en ligne n'est pas observée" }
+  - { name: Mark Palet, segment: en-ligne-afrique-australe, aliases: ["mkp_fitness", "mkp fitness"],
+      source: "https://www.fiverr.com/mkp_fitness", note: "programmes d'entraînement en ligne vendus sur Fiverr, basé au Zimbabwe ; pas de site propre" }
+  - { name: VirtualBodies, segment: en-ligne-afrique-australe, aliases: ["Virtual Bodies"],
+      source: "https://www.fiverr.com/leighannschoult", note: "coaching en ligne sur Fiverr, Afrique du Sud ; pas de site propre" }
+  # ---- Applications de coaching en ligne ----
+  - { name: Future, segment: application-en-ligne, domains: [future.co], source: "subject.yaml (concurrent de lancement)" }
+  - { name: Caliber, segment: application-en-ligne, domains: [caliberstrong.com], source: "subject.yaml (concurrent de lancement)" }
+  - { name: Planet Fitness Play, segment: application-en-ligne, domains: [play.planetfitness.co.za],
       source: "https://play.planetfitness.co.za/1-on-1-coaching", note: "coaching individuel en ligne, Afrique du Sud" }
-# Retirées : lieux où Gari exerce, pas des concurrents (décision de Mickaël, 2026-11-08).
-# Non chargées dans Elmo, non comptées par la réanalyse.
+# Lieux où Gari travaille (académies de padel, décision de Mickaël du 2026-11-08) : pas des
+# concurrents. Non chargés dans Elmo ; leurs mentions sont comptées à part.
+lieux:
+  - { name: Mouratoglou, domains: [mouratoglou.com], aliases: ["Mouratoglou Tennis Center"],
+      source: "https://www.mouratoglou.com/?p=21259", note: "académie de padel" }
+  - { name: Aria Sportscape, aliases: ["Aria Sportscape Academy"],
+      source: "https://gulfnews.com/special-reports/play-tennis-and-padel-at-the-world-class-indoor-aria-sportscape-academy-1.1663586197929", note: "académie de padel" }
+  - { name: Champs Sports Club, domains: [champs-sportsclub.com],
+      source: "https://champs-sportsclub.com/academy/padel-academy/", note: "académie de padel" }
+  - { name: Viya Padel, domains: [dubaigolf.com],
+      source: "https://dubaigolf.com/viya-padel/coaching/", note: "académie de padel ; dubaigolf.com cité 13 fois au jour 1 de J0" }
+  - { name: RRA Padel, aliases: ["Real Racquet Academy"],
+      source: "https://dubaicreekresort.com/?p=642", note: "académie de padel" }
+  - { name: World Padel Academy,
+      source: "https://qidz.com/booking/padel-coaching-sessions-at-world-padel-academy-43999", note: "académie de padel" }
+  - { name: Lion Elite Padel Academy,
+      source: "https://playtomic.com/clubs/lion-elite-padel-academy", note: "académie de padel" }
+# Retirés : pas des concurrents (décision de Mickaël). Ni chargés dans Elmo, ni comptés.
 retires:
-  - { name: Mouratoglou, segment: dubai-academie-padel, domains: [mouratoglou.com], aliases: ["Mouratoglou Tennis Center"],
-      source: "https://www.mouratoglou.com/?p=21259", note: "cours de padel individuels à Jumeirah" }
-  - { name: Champs Sports Club, segment: dubai-academie-padel, domains: [champs-sportsclub.com],
-      source: "https://champs-sportsclub.com/academy/padel-academy/" }
-  - { name: Viya Padel, segment: dubai-academie-padel, domains: [dubaigolf.com],
-      source: "https://dubaigolf.com/viya-padel/coaching/", note: "dubaigolf.com cité 13 fois dans les réponses du jour 1 de J0" }
-  - { name: RRA Padel, segment: dubai-academie-padel, aliases: ["Real Racquet Academy"],
-      source: "https://dubaicreekresort.com/?p=642" }
-  - { name: World Padel Academy, segment: dubai-academie-padel,
-      source: "https://qidz.com/booking/padel-coaching-sessions-at-world-padel-academy-43999" }
-  - { name: Lion Elite Padel Academy, segment: dubai-academie-padel,
-      source: "https://playtomic.com/clubs/lion-elite-padel-academy" }
+  - { name: Playtomic, domains: [playtomic.io], raison: "plateforme de réservation où Coach Gari peut être listé (décision du 2026-11-07)" }

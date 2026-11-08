@@ -3,10 +3,10 @@
  * d'IA : citations classées à l'adresse près (les profils officiels de la
  * marque comptent pour elle, ce qu'Elmo 0.7.7 ne sait pas faire : il classe à
  * l'hôte près, voir verification/n-reseaux-sociaux.yaml N06), mentions par
- * alias dans le texte, et concurrents candidats à valider.
+ * alias dans le texte, concurrents (par segment) et lieux de travail, comptés à part.
  *
  * Entrée : exportation en lecture seule (scripts/j0-reanalysis.sh).
- * CLI : tsx src/j0-reanalysis.ts <subjectId> <export.json> [candidats.yaml] > rapport.md
+ * CLI : tsx src/j0-reanalysis.ts <subjectId> <export.json> [concurrents.yaml] > rapport.md
  */
 import { readFileSync } from "node:fs";
 import { parse } from "yaml";
@@ -32,10 +32,20 @@ export interface ReanalysisExport {
 
 export interface Candidate {
   name: string;
-  segment: "dubai-independant" | "dubai-academie-padel" | "dubai-salle" | "en-ligne";
+  segment: "dubai-domicile-studio" | "dubai-coach-padel" | "dubai-salle" | "en-ligne-afrique-australe" | "application-en-ligne";
   domains?: string[];
   aliases?: string[];
   source?: string;
+  note?: string;
+  /** Concurrent de référence : pourquoi (signalé en tête de la section des concurrents). */
+  reference?: string;
+}
+
+/** Lieu où la marque travaille (une académie qui l'accueille) : pas un concurrent, compté à part. */
+export interface Workplace {
+  name: string;
+  domains?: string[];
+  aliases?: string[];
 }
 
 export type CitationClass = "marque-site" | "marque-profil" | "concurrent" | "reseau-social" | "autre";
@@ -112,14 +122,15 @@ export interface Reanalysis {
   }[];
   profileCitations: { url: string; model: string; prompt: string }[];
   topOtherDomains: { domain: string; n: number }[];
-  candidateMentions: { name: string; segment: Candidate["segment"]; runs: number; engines: string[] }[];
+  candidateMentions: { name: string; segment: Candidate["segment"]; runs: number; engines: string[]; reference?: string }[];
+  workplaceMentions: { name: string; runs: number; engines: string[] }[];
 }
 
 /**
  * `redirects` : cibles des liens de redirection (Gemini), résolues par src/redirects.ts.
  * Un lien sans cible connue reste tel quel et est compté comme non résolu.
  */
-export function reanalyse(b: SubjectBundle, data: ReanalysisExport, candidates: Candidate[], redirects: RedirectCache = {}): Reanalysis {
+export function reanalyse(b: SubjectBundle, data: ReanalysisExport, candidates: Candidate[], redirects: RedirectCache = {}, workplaces: Workplace[] = []): Reanalysis {
   const s = b.subject;
   const brandDomains = [
     new URL(s.urls.primary).hostname.replace(/^www\./, ""),
@@ -180,13 +191,16 @@ export function reanalyse(b: SubjectBundle, data: ReanalysisExport, candidates: 
     };
   });
 
+  // Noms propres : casse respectée (« Future » ≠ « future »).
+  const hitsOf = (c: { name: string; aliases?: string[] }) => {
+    const hits = data.runs.filter((r) => mentions(r.text ?? "", [c.name, ...(c.aliases ?? [])], { caseSensitive: true }).length > 0);
+    return { runs: hits.length, engines: [...new Set(hits.map((h) => h.model))].sort() };
+  };
+  const byRuns = <T extends { name: string; runs: number }>(a: T, z: T) => z.runs - a.runs || a.name.localeCompare(z.name);
   const candidateMentions = candidates
-    .map((c) => {
-      // Noms propres : casse respectée (« Future » ≠ « future »).
-      const hits = data.runs.filter((r) => mentions(r.text ?? "", [c.name, ...(c.aliases ?? [])], { caseSensitive: true }).length > 0);
-      return { name: c.name, segment: c.segment, runs: hits.length, engines: [...new Set(hits.map((h) => h.model))].sort() };
-    })
-    .sort((a, z) => z.runs - a.runs || a.name.localeCompare(z.name));
+    .map((c) => ({ name: c.name, segment: c.segment, ...hitsOf(c), ...(c.reference ? { reference: c.reference } : {}) }))
+    .sort(byRuns);
+  const workplaceMentions = workplaces.map((w) => ({ name: w.name, ...hitsOf(w) })).sort(byRuns);
 
   return {
     runs: data.runs.length,
@@ -198,14 +212,16 @@ export function reanalyse(b: SubjectBundle, data: ReanalysisExport, candidates: 
       .slice(0, 15)
       .map(([domain, n]) => ({ domain, n })),
     candidateMentions,
+    workplaceMentions,
   };
 }
 
 const SEGMENT_LABEL: Record<Candidate["segment"], string> = {
-  "dubai-independant": "Coachs personnels et de padel indépendants à Dubaï",
-  "dubai-academie-padel": "Académies de padel à Dubaï (segment à classer)",
-  "dubai-salle": "Salles de coaching personnel à Dubaï",
-  "en-ligne": "Coaching en ligne (à part)",
+  "dubai-domicile-studio": "Coachs à domicile et studios à Dubaï",
+  "dubai-coach-padel": "Coachs de padel à Dubaï",
+  "dubai-salle": "Salles de coaching à Dubaï",
+  "en-ligne-afrique-australe": "Coachs en ligne, Afrique australe",
+  "application-en-ligne": "Applications de coaching en ligne",
 };
 
 export function renderMarkdown(b: SubjectBundle, r: Reanalysis, exportedAt: string): string {
@@ -216,7 +232,7 @@ export function renderMarkdown(b: SubjectBundle, r: Reanalysis, exportedAt: stri
   L.push("Sources renvoyées par le moteur, plus les liens écrits dans le texte (comptés une fois par réponse). Les liens de redirection de Gemini sont remplacés par le site réel qu'ils désignent (lu dans la redirection, sans contacter le site).", "");
   const unresolved = r.byEngine.reduce((n, e) => n + e.unresolvedRedirects, 0);
   if (unresolved) L.push(`Liens de redirection non résolus, laissés tels quels : ${unresolved}.`, "");
-  L.push("| Moteur | Réponses | Site de la marque | Profils officiels | Concurrents candidats | Autres réseaux sociaux | Autres | dont liens du texte seul |");
+  L.push("| Moteur | Réponses | Site de la marque | Profils officiels | Concurrents | Autres réseaux sociaux | Autres | dont liens du texte seul |");
   L.push("|---|---|---|---|---|---|---|---|");
   for (const e of r.byEngine) {
     const c = e.citations;
@@ -235,31 +251,36 @@ export function renderMarkdown(b: SubjectBundle, r: Reanalysis, exportedAt: stri
   L.push("Un alias dans le texte ne vaut pas mention : une réponse peut nommer la marque pour dire qu'elle ne la connaît pas. Les désaccords sont à relire, pas à corriger.", "");
   L.push("| Moteur | Réponses citant un alias | Réponses comptées par Jev | Désaccords |", "|---|---|---|---|");
   for (const e of r.byEngine) L.push(`| ${e.model} | ${e.aliasMentionRuns} | ${e.jevMentionRuns} | ${e.disagreements} |`);
-  L.push("", "## Domaines les plus cités hors marque et hors candidats", "");
+  L.push("", "## Domaines les plus cités hors marque et hors concurrents", "");
   for (const d of r.topOtherDomains) L.push(`- ${d.domain} : ${d.n}`);
-  L.push("", "## Concurrents candidats (à valider par Mickaël), mentions dans les réponses", "");
+  L.push("", "## Concurrents, mentions dans les réponses", "");
+  for (const c of r.candidateMentions.filter((x) => x.reference)) L.push(`**Concurrent de référence : ${c.name}** (${c.runs} réponse(s)). ${c.reference}`, "");
   for (const seg of Object.keys(SEGMENT_LABEL) as Candidate["segment"][]) {
     L.push(`### ${SEGMENT_LABEL[seg]}`, "");
     const xs = r.candidateMentions.filter((c) => c.segment === seg);
     for (const c of xs) L.push(`- ${c.name} : ${c.runs} réponse(s)${c.engines.length ? ` (${c.engines.join(", ")})` : ""}`);
-    if (!xs.length) L.push("- aucun candidat");
+    if (!xs.length) L.push("- aucun concurrent");
     L.push("");
   }
+  L.push("## Lieux de travail (pas des concurrents), mentions comptées à part", "");
+  for (const w of r.workplaceMentions) L.push(`- ${w.name} : ${w.runs} réponse(s)${w.engines.length ? ` (${w.engines.join(", ")})` : ""}`);
+  if (!r.workplaceMentions.length) L.push("- aucun lieu déclaré");
+  L.push("");
   return `${L.join("\n")}\n`;
 }
 
 if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href) {
   const [subjectId, exportFile, candidatesFile, redirectCacheFile] = process.argv.slice(2);
   try {
-    if (!subjectId || !exportFile) throw new Error("usage: tsx src/j0-reanalysis.ts <subjectId> <export.json> [candidats.yaml]");
+    if (!subjectId || !exportFile) throw new Error("usage: tsx src/j0-reanalysis.ts <subjectId> <export.json> [concurrents.yaml]");
     const dir = listSubjectDirs(defaultSubjectsDir()).find((d) => d.split(/[\\/]/).pop() === subjectId);
     if (!dir) throw new Error(`aucun sujet "${subjectId}"`);
     const b = loadSubject(dir);
     const data = JSON.parse(readFileSync(exportFile, "utf8")) as ReanalysisExport;
-    const parsed = candidatesFile ? (parse(readFileSync(candidatesFile, "utf8")) as { candidates?: Candidate[] } | null) : null;
+    const parsed = candidatesFile ? (parse(readFileSync(candidatesFile, "utf8")) as { candidates?: Candidate[]; lieux?: Workplace[] } | null) : null;
     const candidates = parsed?.candidates ?? [];
     const redirects = redirectCacheFile ? readCache(redirectCacheFile) : {};
-    process.stdout.write(renderMarkdown(b, reanalyse(b, data, candidates, redirects), data.exportedAt));
+    process.stdout.write(renderMarkdown(b, reanalyse(b, data, candidates, redirects, parsed?.lieux ?? []), data.exportedAt));
   } catch (err) {
     process.stderr.write(`j0-reanalysis : ${err instanceof Error ? err.message : String(err)}\n`);
     process.exit(1);

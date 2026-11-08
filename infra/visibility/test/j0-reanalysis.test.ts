@@ -45,7 +45,7 @@ const run = (over: Partial<ReanalysisExport["runs"][number]>): ReanalysisExport[
 });
 
 const candidates: Candidate[] = [
-  { name: "Future", segment: "en-ligne", domains: ["future.co"] },
+  { name: "Future", segment: "application-en-ligne", domains: ["future.co"] },
   { name: "Rival Co", segment: "dubai-salle", domains: ["rival.example"], aliases: ["Rival"] },
 ];
 
@@ -105,12 +105,30 @@ describe("réanalyse des réponses complètes", () => {
     expect(m.profileCitations).toBe(1);
     expect(r.judged).toBe(2);
     expect(r.candidateMentions).toEqual([
-      { name: "Future", segment: "en-ligne", runs: 1, engines: ["perplexity"] },
+      { name: "Future", segment: "application-en-ligne", runs: 1, engines: ["perplexity"] },
       { name: "Rival Co", segment: "dubai-salle", runs: 1, engines: ["perplexity"] },
     ]);
     const md = renderMarkdown(bundle(), r, data.exportedAt);
     expect(md).toMatch(/## Réseaux sociaux/);
     expect(md).toMatch(/Citations des profils officiels \(comptées pour la marque\) : \*\*2\*\*/);
+  });
+
+  it("signale le concurrent de référence et compte les lieux de travail à part, hors concurrents", () => {
+    const data: ReanalysisExport = {
+      exportedAt: "2026-11-08T10:00:00Z",
+      runs: [
+        run({ id: "a", model: "claude", text: "Essayez Rival Co ou l'académie Club Hôte." }),
+        run({ id: "b", model: "gemini", text: "Club Hôte propose des cours." }),
+      ],
+    };
+    const avecReference: Candidate[] = [{ ...candidates[1]!, reference: "publie plusieurs sites de classement" }];
+    const r = reanalyse(bundle(), data, avecReference, {}, [{ name: "Club Hôte" }]);
+    expect(r.candidateMentions).toEqual([{ name: "Rival Co", segment: "dubai-salle", runs: 1, engines: ["claude"], reference: "publie plusieurs sites de classement" }]);
+    expect(r.workplaceMentions).toEqual([{ name: "Club Hôte", runs: 2, engines: ["claude", "gemini"] }]);
+    const md = renderMarkdown(bundle(), r, data.exportedAt);
+    expect(md).toMatch(/\*\*Concurrent de référence : Rival Co\*\* \(1 réponse\(s\)\)\. publie plusieurs sites de classement/);
+    expect(md).toMatch(/## Lieux de travail \(pas des concurrents\), mentions comptées à part\n\n- Club Hôte : 2 réponse\(s\) \(claude, gemini\)/);
+    expect(md).not.toMatch(/segment à classer/);
   });
 
   it("remplace les liens de redirection de Gemini par le site réel, et compte ceux qui restent", () => {

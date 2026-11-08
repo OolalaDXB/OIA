@@ -3,7 +3,7 @@
 # LECTURE SEULE : session Postgres default_transaction_read_only=on, aucun
 # changement dans Elmo, aucun appel à un fournisseur d'IA.
 #
-#   ./scripts/j0-reanalysis.sh <subjectId> [candidats.yaml]
+#   ./scripts/j0-reanalysis.sh <subjectId> [concurrents.yaml]
 #
 # Sortie hors du dépôt (données de client) : ~/oia-visibility-data/<sujet>/
 # reanalyse-<date>.md, plus l'exportation brute à côté.
@@ -11,7 +11,7 @@
 set -euo pipefail
 source "$(dirname "$0")/lib.sh"
 subject="${1:-}"
-[ -n "$subject" ] || { echo "usage: j0-reanalysis.sh <subjectId> [candidats.yaml]" >&2; exit 2; }
+[ -n "$subject" ] || { echo "usage: j0-reanalysis.sh <subjectId> [concurrents.yaml]" >&2; exit 2; }
 candidates="${2:-}"
 data="${OIA_VIS_DATA:-$HOME/oia-visibility-data}"
 mkdir -p "$data/$subject"

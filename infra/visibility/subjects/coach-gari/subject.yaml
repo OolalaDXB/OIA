@@ -22,30 +22,128 @@ aliases:
   - { value: coachgari28.com, kind: domain, status: confirmed }
   - { value: coachgari.com, kind: domain, status: proposed, note: "à confirmer" }
 competitors:
-  - name: Playtomic
+  - name: "PTD Fitness"
+    domains: [personaltrainersdubai.com, bestpersonaltrainerdubai.pages.dev, nearmepersonaltrainer.pages.dev, ptd-clone-preview.pages.dev]
+    aliases: ["Personal Trainers Dubai", "PTD Fitness Group"]
+    category: "coach à domicile ou studio de coaching personnel à Dubaï"
+    markets: [AE]
+    status: confirmed
+    rationale: "Validé par Mickaël le 2026-11-08. PTD Fitness publie plusieurs sites « meilleur coach à Dubaï » (bestpersonaltrainerdubai.pages.dev, « operated by PTD Fitness Group » ; nearmepersonaltrainer.pages.dev, « run by PTD Fitness » ; ptd-clone-preview.pages.dev, « Copyright Personal Trainers Dubai »), tous renvoyant à personaltrainersdubai.com : c'est le concurrent de référence pour la visibilité dans les IA. coachs qui se déplacent chez le client, Dubaï et Abou Dabi ; chiffres publiés par PTD (clients, avis) non vérifiés. Source : https://bestpersonaltrainerdubai.pages.dev/about"
+  - name: "Fit Squad DXB"
+    domains: [fitsquaddxb.com]
+    aliases: ["FitSquad DXB"]
+    category: "coach à domicile ou studio de coaching personnel à Dubaï"
+    markets: [AE]
+    status: confirmed
+    rationale: "Validé par Mickaël le 2026-11-08. coaching personnel mobile (domicile, salle de l'immeuble, plage), Dubaï et Abou Dabi. Source : https://www.trustpilot.com/review/fitsquaddxb.com"
+  - name: "Professional Fitness Trainers Dubai"
+    category: "coach à domicile ou studio de coaching personnel à Dubaï"
+    markets: [AE]
+    status: confirmed
+    rationale: "Validé par Mickaël le 2026-11-08. fiche Fresha (Bay View Tower, Business Bay) ; aucun site propre trouvé, donc aucun domaine. Source : https://www.fresha.com/lp/en/tt/personal-trainers/in/ae-dubai/trade-centre"
+  - name: "Fortius Dubai"
+    domains: [fortiusdubai.squarespace.com]
+    category: "coach à domicile ou studio de coaching personnel à Dubaï"
+    markets: [AE]
+    status: confirmed
+    rationale: "Validé par Mickaël le 2026-11-08. coaching personnel à domicile et en salle depuis 2015, en ligne depuis 2018 ; seul fortiusdubai.squarespace.com est observé, fortiusdubai.com à vérifier. Source : https://fortiusdubai.squarespace.com/faq"
+  - name: "Embody Fitness"
+    domains: [embodyfitness.ae]
+    category: "coach à domicile ou studio de coaching personnel à Dubaï"
+    markets: [AE]
+    status: proposed
+    rationale: "Validé par Mickaël le 2026-11-08, à vérifier. À VÉRIFIER (Mickaël) : studio privé de coaching personnel (DIFC, Umm Suqeim) ; sources surtout publicitaires, adresses de plusieurs années. Source : https://www.factmagazines.com/uae/dubai/fact-review-embody-fitness-in-dubai-is-a-gamechanger-gym/"
+  - name: "Magali de Lattre"
+    category: "coach de padel à Dubaï"
+    markets: [AE]
+    status: confirmed
+    rationale: "Validé par Mickaël le 2026-11-08. coach de padel, ancienne joueuse professionnelle. Source : https://gulfnews.com/special-reports/play-tennis-and-padel-at-the-world-class-indoor-aria-sportscape-academy-1.1663586197929"
+  - name: "Fede Brambati"
+    category: "coach de padel à Dubaï"
+    markets: [AE]
+    status: confirmed
+    rationale: "Validé par Mickaël le 2026-11-08. coach de padel listé par RRA Padel. Source : https://dubaicreekresort.com/?p=642"
+  - name: "David Pozo"
+    category: "coach de padel à Dubaï"
+    markets: [AE]
+    status: confirmed
+    rationale: "Validé par Mickaël le 2026-11-08. coach de padel listé par RRA Padel. Source : https://dubaicreekresort.com/?p=642"
+  - name: "Ultimate Performance"
+    domains: [upfitness.com]
+    aliases: ["UP Fitness"]
+    category: "salle de coaching personnel à Dubaï"
+    markets: [AE]
+    status: confirmed
+    rationale: "Validé par Mickaël le 2026-11-08. Source : subject.yaml (concurrent de lancement)"
+  - name: "StudioRepublik"
+    domains: [studio-republik.com]
+    aliases: ["Studio Republik"]
+    category: "salle de coaching personnel à Dubaï"
+    markets: [AE]
+    status: confirmed
+    rationale: "Validé par Mickaël le 2026-11-08. Source : https://studio-republik.com/?p=9228"
+  - name: "Symmetry Gym"
+    category: "salle de coaching personnel à Dubaï"
+    markets: [AE]
+    status: confirmed
+    rationale: "Validé par Mickaël le 2026-11-08. cité par What's On pour ses programmes de coaching personnel. Source : https://whatson.ae/?p=28992"
+  - name: "SHP Dubai"
+    category: "salle de coaching personnel à Dubaï"
+    markets: [AE]
+    status: confirmed
+    rationale: "Validé par Mickaël le 2026-11-08. Source : https://whatson.ae/?p=28992"
+  - name: "Fitsetgo"
+    category: "salle de coaching personnel à Dubaï"
+    markets: [AE]
+    status: confirmed
+    rationale: "Validé par Mickaël le 2026-11-08. Source : https://focus.hidubai.com/elevate-your-fitness-game-top-boutique-studios-to-try-in-dubai"
+  - name: "Michelina Chindiya"
+    aliases: ["Miss Chindiya", "misschindiya"]
+    category: "coach en ligne, Afrique australe"
+    markets: [ZW]
+    status: confirmed
+    rationale: "Validé par Mickaël le 2026-11-08. coach et influenceuse fitness à Harare (Instagram @misschindiya). Source : https://en.wikipedia.org/wiki/Miss_Chindiya"
+  - name: "Brendon Kawondera"
+    category: "coach en ligne, Afrique australe"
+    markets: [ZW]
+    status: confirmed
+    rationale: "Validé par Mickaël le 2026-11-08. coach né au Zimbabwe, basé à Londres (profil Fitness First) ; son offre en ligne n'est pas observée. Source : https://www.brainzmagazine.com/post/from-zimbabwean-childhood-to-personal-training-success-exclusive-interview-with-brendon-kawondera"
+  - name: "Mark Palet"
+    aliases: ["mkp_fitness", "mkp fitness"]
+    category: "coach en ligne, Afrique australe"
+    markets: [ZW]
+    status: confirmed
+    rationale: "Validé par Mickaël le 2026-11-08. programmes d'entraînement en ligne vendus sur Fiverr, basé au Zimbabwe ; pas de site propre. Source : https://www.fiverr.com/mkp_fitness"
+  - name: "VirtualBodies"
+    aliases: ["Virtual Bodies"]
+    category: "coach en ligne, Afrique australe"
+    markets: [ZA]
+    status: confirmed
+    rationale: "Validé par Mickaël le 2026-11-08. coaching en ligne sur Fiverr, Afrique du Sud ; pas de site propre. Source : https://www.fiverr.com/leighannschoult"
+  - name: "Future"
+    domains: [future.co]
+    category: "application de coaching en ligne"
+    markets: [AE, ZA, ZW]
+    status: confirmed
+    rationale: "Validé par Mickaël le 2026-11-08. Source : subject.yaml (concurrent de lancement)"
+  - name: "Caliber"
+    domains: [caliberstrong.com]
+    category: "application de coaching en ligne"
+    markets: [AE, ZA, ZW]
+    status: confirmed
+    rationale: "Validé par Mickaël le 2026-11-08. Source : subject.yaml (concurrent de lancement)"
+  - name: "Planet Fitness Play"
+    domains: [play.planetfitness.co.za]
+    category: "application de coaching en ligne"
+    markets: [ZA]
+    status: confirmed
+    rationale: "Validé par Mickaël le 2026-11-08. coaching individuel en ligne, Afrique du Sud. Source : https://play.planetfitness.co.za/1-on-1-coaching"
+  - name: "Playtomic"
     domains: [playtomic.io]
     category: "plateforme de réservation de padel (cours et coachs)"
     markets: [AE]
     status: rejected
-    rationale: "Pas un concurrent (décision de Mickaël, 2026-11-07) : plateforme de réservation, où Coach Gari peut être listé. Reste chargé comme concurrent dans Elmo pendant J0 (aucun changement pendant la fenêtre) ; exclu des analyses OIA."
-  - name: Ultimate Performance
-    domains: [upfitness.com]
-    category: "coaching personnel premium avec salle à Dubaï"
-    markets: [AE]
-    status: proposed
-    rationale: "Chaîne de personal training présente à Dubaï, souvent citée pour « personal trainer Dubai ». Domaine à vérifier."
-  - name: Future
-    domains: [future.co]
-    category: "application de coaching en ligne avec coach dédié"
-    markets: [AE, ZA, ZW]
-    status: proposed
-    rationale: "Coaching en ligne un-à-un par abonnement : concurrent direct du format en ligne."
-  - name: Caliber
-    domains: [caliberstrong.com]
-    category: "coaching en ligne musculation et nutrition"
-    markets: [AE, ZA, ZW]
-    status: proposed
-    rationale: "Coaching en ligne entraînement + nutrition, fréquemment recommandé par les assistants."
+    rationale: "Pas un concurrent (décision de Mickaël, 2026-11-07) : plateforme de réservation, où Coach Gari peut être listé. Retiré des concurrents d'Elmo le 2026-11-08 ; exclu des analyses OIA. Les académies de padel sont des lieux où Gari travaille, pas des concurrents (concurrents-candidats.yaml, section lieux)."
 repository:
   url: https://github.com/OolalaDXB/CoachGari
   branch: main
