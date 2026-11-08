@@ -1,184 +1,76 @@
 import { Link } from "@tanstack/react-router";
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
-import { Shell, Fictif, Section } from "@/components/oia/ui";
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
+import { Shell, Section } from "@/components/oia/ui";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/ui/sheet";
-import { Textarea } from "@/components/ui/textarea";
-import { useServerFn } from "@tanstack/react-start";
-import { rechercherMoney } from "@/lib/money-recherche.functions";
-import type { AnalyseMoney } from "@/lib/money-recherche";
+import { Input } from "@/components/ui/input";
+import { useVueMoney, useActionMoney, useAccesMoney } from "@/lib/donnees/money";
+import { useOiaAuth } from "@/lib/oia-auth";
+import { ESPACE_OIA, categoriesMoney, naturesMoney, decisionsMoney, montantMoney, dateMoney, csvMoney, markdownMoney, type OpportuniteReelle } from "@/lib/money-contrat";
 import { enregistrerEvenementMoney } from "@/lib/money-analytics";
-import { formatMontant, sousTotaux, versCsv, versMarkdown, type Opportunite } from "@/lib/donnees/money";
-import { useMoneyDonnees } from "@/lib/donnees/provider";
-
+import { AccesMoney, EtatMoney, VerifMoney, selectMoney, telechargerMoney } from "./money-commun";
+import { FicheMoney } from "./money-fiche";
+export { RepriseMoney } from "./money-import";
+export { ContactsMoney, NotesTachesMoney, ProjetsMoney, DemandesMoney, JournalMoney } from "./money-travail";
 export const ongletsMoney = [
   { id: "aujourdhui", label: "Aujourd'hui" }, { id: "toutes", label: "Toutes" }, { id: "financements", label: "Financements" },
   { id: "appels-offres", label: "Appels d'offres" }, { id: "investisseurs", label: "Investisseurs" }, { id: "signals", label: "Signals" }, { id: "montants", label: "Montants" },
+  { id: "projets", label: "Projets" }, { id: "crm", label: "CRM" }, { id: "notes-taches", label: "Notes et tâches" }, { id: "demandes", label: "Demandes et liens" }, { id: "journal", label: "Journal" }, { id: "reprise", label: "Reprendre le travail" },
 ] as const;
-
-type Journal = { date: string; texte: string };
-const Ctx = createContext<{ etiquettes: Record<string, string>; etiqueter: (id: string, projet: string) => void; journal: Journal[]; ouvrir: (o: Opportunite) => void } | null>(null);
-const useMoney = () => { const c = useContext(Ctx); if (!c) throw new Error("Money Lookup indisponible."); return c; };
-
+const Ctx = createContext<{ ouvrir: (id: string) => void } | null>(null);
+export function useMoney() { const c = useContext(Ctx); if (!c) throw new Error("Money Lookup indisponible."); return c; }
 export function MoneyProvider({ children }: { children: ReactNode }) {
-  const { opportunites } = useMoneyDonnees();
-  const [etiquettes, setEt] = useState<Record<string, string>>({});
-  const [journal, setJournal] = useState<Journal[]>([]);
-  const [fiche, setFiche] = useState<Opportunite | null>(null);
-  const etiqueter = (id: string, projet: string) => {
-    setEt((e) => ({ ...e, [id]: projet }));
-    const o = opportunites.find((x) => x.id === id);
-    setJournal((j) => [{ date: new Date().toLocaleString("fr-FR", { dateStyle: "medium", timeStyle: "short" }), texte: `Mickaël a étiqueté « ${o?.titre} » : ${projet || "aucun projet"}.` }, ...j]);
-  };
-  const ouvrir = (o: Opportunite) => { setFiche(o); enregistrerEvenementMoney("project.money_opportunity_opened", { opportunity_id: o.id, type: o.type, verified: o.verification === "Vérifié" }); };
-  return <Ctx.Provider value={{ etiquettes, etiqueter, journal, ouvrir }}>{children}<Fiche o={fiche} fermer={() => setFiche(null)} /></Ctx.Provider>;
+  const [id, setId] = useState<string | null>(null); const auth = useOiaAuth();
+  const access = useAccesMoney(); const visit = useActionMoney("oia_marquer_visite"); const visited = useRef<string | null>(null);
+  useEffect(() => { setId(null); }, [auth.user?.id]);
+  useEffect(() => { if (!auth.user || !access.data || visited.current === auth.user.id) return; visited.current = auth.user.id; visit.mutate({ p_espace: ESPACE_OIA }); }, [auth.user?.id, access.data]);
+  return <Ctx.Provider value={{ ouvrir: (value) => { setId(value); enregistrerEvenementMoney("project.money_opportunity_opened", { opportunity_id: value }); } }}>{visit.error && <p role="alert" className="p-4 text-sm text-block">{visit.error.message}</p>}{children}{id && auth.user && <FicheMoney id={id} close={() => setId(null)} />}</Ctx.Provider>;
 }
-
-export function Verif({ v }: { v: Opportunite["verification"] }) {
-  return v === "Vérifié" ? <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground"><span aria-hidden className="size-1.5 rounded-full bg-ok" />Vérifié</span>
-    : <span className="inline-flex items-center gap-1.5 rounded-sm border border-warn px-1.5 py-0.5 text-xs text-foreground"><span aria-hidden className="size-1.5 rounded-full bg-warn" />Non vérifié</span>;
-}
-
 export function MoneyShell({ actif, children }: { actif: string; children: ReactNode }) {
-  return <Shell><Fictif /><h1 className="mt-2 text-3xl">Money Lookup</h1><p className="mt-2 text-sm text-muted-foreground">Tout l'argent à aller chercher. Rien n'est certain sans vérification humaine.</p>
-    <nav aria-label="Pages Money Lookup" className="mb-8 mt-6 flex gap-x-2 overflow-x-auto border-b border-border">{ongletsMoney.map((t) => <Link key={t.id} {...(t.id === "aujourdhui" ? { to: "/money-lookup" as const } : { to: "/money-lookup/$onglet" as const, params: { onglet: t.id } })} onClick={() => { if (t.id !== actif) enregistrerEvenementMoney("project.money_tab_selected", { tab: t.id }); }} aria-current={actif === t.id ? "page" : undefined} className={`inline-flex min-h-12 shrink-0 items-center whitespace-nowrap border-b-2 px-2 py-3 text-sm text-muted-foreground ${actif === t.id ? "border-module-funding text-foreground" : "border-transparent"}`}>{t.label}</Link>)}</nav>
-    <RechercheMoney />{children}</Shell>;
+  return <Shell fictif={false}><h1 className="mt-2 text-3xl">Money Lookup</h1><p className="mt-2 text-sm text-muted-foreground">Tout l'argent à aller chercher. Rien n'est certain sans vérification humaine.</p>
+    <nav aria-label="Pages Money Lookup" className="mb-8 mt-6 flex gap-x-2 overflow-x-auto border-b border-border">{ongletsMoney.map((t) => <Link key={t.id} {...(t.id === "aujourdhui" ? { to: "/money-lookup" as const } : { to: "/money-lookup/$onglet" as const, params: { onglet: t.id } })} onClick={() => { if (t.id !== actif) enregistrerEvenementMoney("project.money_tab_selected", { tab: t.id }); }} aria-current={actif === t.id ? "page" : undefined} className={`inline-flex min-h-12 shrink-0 items-center whitespace-nowrap border-b-2 px-2 py-3 text-sm ${actif === t.id ? "border-module-funding text-foreground" : "border-transparent text-muted-foreground"}`}>{t.label}</Link>)}</nav>
+    <AccesMoney><section className="mb-8 border-b border-border pb-4"><h2 className="text-base">Trouver des correspondances</h2><p className="mt-2 text-sm text-muted-foreground">Bientôt disponible</p></section>{children}</AccesMoney></Shell>;
 }
-
-function RechercheMoney() {
-  const { opportunites } = useMoneyDonnees();
-  const [texte, setTexte] = useState("");
-  const [analyse, setAnalyse] = useState<AnalyseMoney | null>(null);
-  const [erreur, setErreur] = useState<string | null>(null);
-  const [charge, setCharge] = useState(false);
-  const rechercher = useServerFn(rechercherMoney);
+function Ligne({ o }: { o: OpportuniteReelle }) {
   const { ouvrir } = useMoney();
-  const soumettre = async (event: React.FormEvent) => {
-    event.preventDefault(); if (charge || texte.trim().length < 3) return;
-    setCharge(true); setErreur(null); setAnalyse(null);
-    try { const result = await rechercher({ data: { texte } }); setAnalyse(result.analyse); setErreur(result.erreur); }
-    catch { setErreur("L'analyse est indisponible. Votre texte est conservé."); }
-    finally { setCharge(false); }
-  };
-  return <section className="mb-8 border-b border-border pb-6" aria-labelledby="money-besoin-titre">
-    <h2 id="money-besoin-titre" className="mb-3 text-base">Trouver des correspondances</h2>
-    <form onSubmit={soumettre} className="space-y-3"><label htmlFor="money-besoin" className="block text-sm text-muted-foreground">Votre besoin ou opportunité</label>
-      <Textarea id="money-besoin" value={texte} maxLength={3000} disabled={charge} onChange={(e) => setTexte(e.target.value)} placeholder="Je cherche une subvention pour développer le prototype logiciel OIA en Bretagne…" className="min-h-24" />
-      <div className="flex flex-wrap items-center gap-3"><Button type="submit" className="min-h-11" disabled={charge || texte.trim().length < 3}>{charge ? "Analyse en cours…" : "Rechercher les opportunités"}</Button><span className="text-xs text-tertiary">démonstration, modèle via Lovable · Claude Sonnet 5 · catalogue fictif uniquement</span></div>
-      <p className="text-xs text-tertiary">Le texte est envoyé à AI Gateway pour cette analyse. N'incluez pas de données confidentielles. Aucune recherche web ni vérification humaine.</p>
-    </form>
-    {charge && <p role="status" className="mt-4 text-sm text-muted-foreground">Comparaison des opportunités de démonstration…</p>}
-    {erreur && <p role="alert" className="mt-4 text-sm text-block">{erreur}</p>}
-    {analyse && <div className="mt-5 space-y-4" aria-live="polite"><p className="text-sm">{analyse.resume}</p>
-      {analyse.correspondances.length === 0 && <p className="text-sm text-muted-foreground">Aucune correspondance dans le catalogue de démonstration.</p>}
-      <ol>{analyse.correspondances.map((c) => { const o = opportunites.find((item) => item.id === c.id); if (!o) return null; return <li key={c.id} className="border-t border-border py-4 text-sm">
-        <div className="flex flex-wrap items-center justify-between gap-3"><h3>{o.titre}</h3><span className="text-xs text-muted-foreground">Correspondance {c.pertinence.toLowerCase()}</span></div>
-        <p className="num mt-1 text-xs text-tertiary">{formatMontant(o.montant, o.devise)} · {o.typeMontant} · exemple fictif</p><div className="mt-2"><Verif v={o.verification} /></div>
-        <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">{c.raisons.map((r, i) => <li key={i}>{r}</li>)}</ul>
-        {c.manquants.length > 0 && <div className="mt-3"><h4 className="text-xs font-medium">À préciser ou vérifier</h4><ul className="mt-1 list-inside list-disc text-xs text-muted-foreground">{c.manquants.map((m, i) => <li key={i}>{m}</li>)}</ul></div>}
-        <Button variant="link" className="mt-2 min-h-11 px-0" onClick={() => ouvrir(o)}>Ouvrir la fiche</Button>
-      </li>; })}</ol>
-      {analyse.manquants.length > 0 && <div className="border-t border-border pt-4"><h3 className="text-sm">Informations manquantes dans votre besoin</h3><ul className="mt-2 list-inside list-disc space-y-1 text-sm text-muted-foreground">{analyse.manquants.map((m, i) => <li key={i}>{m}</li>)}</ul></div>}
-      <p className="text-xs text-tertiary">Analyse IA sur données fictives, à valider par Mickaël. Aucune éligibilité ni disponibilité garantie.</p>
-    </div>}
-  </section>;
+  return <li className="border-b border-border last:border-0"><Button variant="ghost" disabled={!o.id} onClick={() => { if (o.id) ouvrir(o.id); }} className="grid h-auto min-h-12 w-full gap-2 whitespace-normal rounded-none px-0 py-4 text-left text-sm font-normal sm:grid-cols-[minmax(0,1fr)_8rem_9rem]">
+    <span className="min-w-0"><span className="block">{o.titre}</span><span className="mt-1 block text-xs text-tertiary">{naturesMoney[o.nature ?? ""] ?? o.nature} · {o.emetteur}{o.projet_etiquete ? ` · étiquette : ${o.projet_etiquete}` : ""}</span><span className="mt-1 block text-xs text-tertiary">Moteur : {o.recommandation} · avis humain : {decisionsMoney[o.decision_humaine ?? "PENDING"] ?? o.decision_humaine} · {o.gate_ok ? "Gate franchi" : "Gate non franchi"}</span></span>
+    <span className="num text-xs text-muted-foreground">Clôture {dateMoney(o.echeance)}<span className="block">{o.fraicheur}</span></span><span className="num text-xs">{montantMoney(o.montant, o.devise)}{o.confiance_montant === "BASSE" && <span className="block text-warn">peu sûr</span>}<span className="my-1 block text-tertiary">{categoriesMoney[o.categorie ?? ""]} · {o.sens}</span><VerifMoney value={o.verifie_par_humain} /></span></Button></li>;
 }
-
-function Ligne({ o }: { o: Opportunite }) {
-  const { ouvrir, etiquettes } = useMoney();
-  return <li className="border-b border-border last:border-0"><Button variant="ghost" type="button" onClick={() => ouvrir(o)} className="grid h-auto min-h-12 w-full gap-1 whitespace-normal rounded-none px-0 py-3 text-left text-sm font-normal sm:grid-cols-[1fr_8rem_9rem_7rem] sm:items-center sm:gap-4">
-    <span><span className="block">{o.titre}</span><span className="block text-xs text-tertiary">{o.type} · {o.organisme}{etiquettes[o.id] ? ` · projet : ${etiquettes[o.id]}` : ""}</span></span>
-    <span className="num text-xs text-muted-foreground">{o.cloture ? `Clôture ${o.cloture}` : "Clôture inconnue"}</span>
-    <span className="num text-xs">{formatMontant(o.montant, o.devise)}<span className="block text-tertiary">{o.typeMontant}</span></span>
-    <Verif v={o.verification} /></Button></li>;
-}
-
 export function Aujourdhui() {
-  const { opportunites } = useMoneyDonnees();
-  const bientot = opportunites.filter((o) => o.joursRestants !== null && o.joursRestants >= 0 && o.joursRestants <= 14);
-  const retard = opportunites.filter((o) => o.statut === "En retard");
-  const tri = opportunites.filter((o) => o.statut === "À trier");
-  return <div className="grid gap-6 lg:grid-cols-2">
-    <Section titre="Ferme bientôt" aside={<span className="text-xs text-tertiary">14 jours</span>}><ul>{bientot.map((o) => <Ligne key={o.id} o={o} />)}</ul></Section>
-    <Section titre="En retard"><ul>{retard.map((o) => <Ligne key={o.id} o={o} />)}</ul></Section>
-    <Section titre="Attend un tri" aside={<span className="num text-sm text-tertiary">{tri.length}</span>}><ul>{tri.map((o) => <Ligne key={o.id} o={o} />)}</ul></Section>
-    <Section titre="Alertes de veille"><Signals compact /></Section>
-  </div>;
+  const [horizon, setHorizon] = useState(14); const q = useVueMoney("ml_aujourdhui_v2", { horizon }); const closed = useVueMoney("ml_clos_depuis_visite_v1"); const opportunities = useVueMoney("ml_toutes_v2"); const { ouvrir } = useMoney();
+  const groups: Record<string, string> = { TACHE_EN_RETARD: "Tâches en retard", TACHE_A_FAIRE: "Tâches à faire", ALERTE: "Alertes de veille", BIENTOT_CLOS: "Ferme bientôt", JUSTE_EXPIREE: "Vient d'expirer", APPROUVE_MAIS_BLOQUE: "Approuvé mais bloqué", EN_ATTENTE_DE_TRI: "Attend un tri" };
+  return <><label className="mb-6 flex items-center gap-3 text-sm">Horizon<select className={selectMoney} value={horizon} onChange={(e) => setHorizon(Number(e.target.value))}>{[7, 14, 30].map((v) => <option key={v} value={v}>{v} jours</option>)}</select></label><EtatMoney loading={q.isPending || q.isFetching} error={q.error} empty={!q.data?.length} message="Rien d'urgent aujourd'hui." retry={q.refetch}><div className="grid gap-6 lg:grid-cols-2">{Object.entries(groups).filter(([key]) => q.data?.some((r) => r.raison === key)).map(([key, title]) => <Section key={key} titre={title}><ul>{q.data?.filter((r) => r.raison === key).map((r, index) => { const o = opportunities.data?.find((v) => v.record_id === r.record_id); return <li key={r.reference ?? index} className="border-t border-border py-3 text-sm"><p>{r.titre}</p><p className="text-xs text-tertiary">{r.projet} · échéance : {dateMoney(r.echeance)}{r.jours_restants !== null ? ` · ${r.jours_restants} jours` : ""}</p>{o?.id && <Button variant="link" className="px-0" onClick={() => { if (o.id) ouvrir(o.id); }}>Ouvrir la fiche</Button>}</li>; })}</ul></Section>)}</div></EtatMoney><Section titre="Clos depuis la dernière visite"><EtatMoney loading={closed.isPending || closed.isFetching} error={closed.error} empty={!closed.data?.length} message="Aucune clôture depuis la dernière visite, ou première visite." retry={closed.refetch}><ul>{closed.data?.map((r) => <li key={r.id} className="border-t border-border py-3 text-sm"><p>{r.titre} · {dateMoney(r.echeance)}</p><Button variant="link" disabled={!r.id} onClick={() => { if (r.id) ouvrir(r.id); }}>Ouvrir la fiche</Button></li>)}</ul></EtatMoney></Section></>;
 }
-
-export function Signals({ compact = false }: { compact?: boolean }) {
-  const { signals } = useMoneyDonnees();
-  const l = <ol>{signals.slice(0, compact ? 3 : undefined).map((s) => <li key={s.date} className="grid gap-1 border-b border-border py-3 text-sm last:border-0 sm:grid-cols-[10rem_1fr]"><span className="num text-xs text-tertiary">{s.date}</span><span>{s.texte}<span className="block text-xs text-tertiary">{s.source} · non vérifié</span></span></li>)}</ol>;
-  return compact ? l : <Section titre="Veille permanente">{l}</Section>;
+const filterLabels: Record<string, string> = { nature: "Nature", categorie: "Catégorie", sens: "Sens", gate_ok: "Éligibilité", recommandation: "Moteur", decision_humaine: "Avis humain", verifie_par_humain: "Vérification humaine", projet_etiquete: "Projet étiqueté", fraicheur: "Fraîcheur", devise: "Devise", confiance_montant: "Confiance du montant", verdict_analyste: "Verdict de l'analyste", type_avis: "Type d'avis", route_strategique: "Route stratégique" };
+export function Liste({ type }: { type?: "Financement" | "Appel d'offres" | "Investisseur" }) {
+  const vue = type === "Financement" ? "ml_financements_v2" : type === "Appel d'offres" ? "ml_appels_offres_v2" : type === "Investisseur" ? "ml_investisseurs_v2" : "ml_toutes_v2";
+  const q = useVueMoney(vue); const saved = useVueMoney("ml_vues_enregistrees_v1"); const save = useActionMoney("oia_enregistrer_vue"); const remove = useActionMoney("oia_supprimer");
+  const [filters, setFilters] = useState<Record<string, string>>({}); const [sort, setSort] = useState("echeance"); const [direction, setDirection] = useState("asc"); const [name, setName] = useState("");
+  const editable = ["owner", "editor", "proprietaire", "editeur"].includes(q.acces.data ?? "");
+  const list = (q.data ?? []).filter((o) => Object.entries(filters).every(([key, value]) => !value || (key === "texte" ? `${o.titre} ${o.emetteur}`.toLocaleLowerCase("fr").includes(value.toLocaleLowerCase("fr")) : key === "echeance_avant" ? o.echeance !== null && o.echeance.slice(0, 10) <= value : key === "publie_apres" ? o.publie_le !== null && o.publie_le >= value : String(o[key as keyof OpportuniteReelle] ?? "") === value))).sort((a, b) => {
+    const av = a[sort as keyof OpportuniteReelle]; const bv = b[sort as keyof OpportuniteReelle]; if (av === null || av === undefined) return 1; if (bv === null || bv === undefined) return -1;
+    const value = typeof av === "number" && typeof bv === "number" ? av - bv : String(av).localeCompare(String(bv), "fr"); return direction === "desc" ? -value : value;
+  });
+  const change = (key: string, value: string) => { setFilters((prev) => ({ ...prev, [key]: value })); enregistrerEvenementMoney("project.money_filter_changed", { view: vue, filter: key, active: Boolean(value) }); };
+  return <><div className="mb-5 flex flex-wrap gap-3"><label className="text-xs text-tertiary">Recherche<Input aria-label="Recherche dans les opportunités" value={filters["texte"] ?? ""} onChange={(e) => change("texte", e.target.value)} /></label>{Object.entries(filterLabels).map(([key, label]) => {
+    const values = [...new Set((q.data ?? []).map((o) => o[key as keyof OpportuniteReelle]).filter((v) => v !== null && v !== undefined).map(String))].sort();
+    return <label key={key} className="flex items-center gap-2 text-xs text-tertiary">{label}<select className={selectMoney} value={filters[key] ?? ""} onChange={(e) => change(key, e.target.value)}><option value="">Tous</option>{values.map((v) => <option key={v} value={v}>{key === "nature" ? naturesMoney[v] ?? v : key === "categorie" ? categoriesMoney[v] ?? v : key === "decision_humaine" ? decisionsMoney[v] ?? v : key === "verifie_par_humain" ? v === "true" ? "Vérifié" : "Non vérifié" : key === "gate_ok" ? v === "true" ? "Gate franchi" : "Gate non franchi" : v}</option>)}</select></label>;
+  })}<label className="text-xs text-tertiary">Échéance avant<Input type="date" value={filters["echeance_avant"] ?? ""} onChange={(e) => change("echeance_avant", e.target.value)} /></label><label className="text-xs text-tertiary">Publication après<Input type="date" value={filters["publie_apres"] ?? ""} onChange={(e) => change("publie_apres", e.target.value)} /></label><label className="flex items-center gap-2 text-xs text-tertiary">Tri<select className={selectMoney} value={sort} onChange={(e) => setSort(e.target.value)}>{[["echeance", "Clôture"], ["titre", "Titre"], ["montant", "Montant"], ["confiance_information", "Confiance de l'information"], ["publie_le", "Publication"], ["vu_la_derniere_fois", "Dernière observation"]].map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label><select aria-label="Sens du tri" className={selectMoney} value={direction} onChange={(e) => setDirection(e.target.value)}><option value="asc">Croissant</option><option value="desc">Décroissant</option></select><Button variant="ghost" onClick={() => setFilters({})}>Réinitialiser</Button></div>
+    <div className="mb-5 flex flex-wrap gap-3"><Input aria-label="Nom de la vue enregistrée" placeholder="Nom de la vue" className="max-w-56" value={name} onChange={(e) => setName(e.target.value)} /><Button variant="outline" disabled={!editable || save.isPending || !name.trim()} onClick={() => save.mutate({ p_espace: ESPACE_OIA, p_nom: name, p_filtres: filters, p_tri: sort, p_sens: direction }, { onSuccess: () => setName("") })}>Enregistrer la vue</Button>{["csv", "markdown"].map((format) => <Button key={format} variant="outline" disabled={q.isPending || q.isFetching || Boolean(q.error)} onClick={() => { telechargerMoney(format === "csv" ? csvMoney(list) : markdownMoney(list), `money-lookup.${format === "csv" ? "csv" : "md"}`, "text/plain;charset=utf-8"); enregistrerEvenementMoney("project.money_export_requested", { format, count: list.length, view: vue }); }}>Export {format === "csv" ? "CSV" : "Markdown"}</Button>)}</div>
+    <EtatMoney loading={saved.isPending || saved.isFetching} error={saved.error} retry={saved.refetch}><div className="mb-5 flex flex-wrap gap-2">{saved.data?.map((v) => <span key={v.id} className="inline-flex items-center"><Button variant="ghost" onClick={() => { const f = v.filtres; if (f && typeof f === "object" && !Array.isArray(f)) setFilters(Object.fromEntries(Object.entries(f).filter(([, value]) => typeof value === "string").map(([key, value]) => [key, String(value)]))); setSort(v.tri ?? "echeance"); setDirection(v.sens ?? "asc"); }}>{v.nom}</Button><Button variant="ghost" size="icon" aria-label={`Supprimer la vue ${v.nom}`} disabled={!editable || remove.isPending} onClick={() => { if (v.id && window.confirm("Supprimer cette vue ?")) remove.mutate({ p_type: "vue", p_id: v.id }); }}>×</Button></span>)}</div></EtatMoney>{(save.error || remove.error) && <p role="alert" className="my-3 text-sm text-block">{save.error?.message || remove.error?.message}</p>}
+    <Section titre="Opportunités" aside={!q.isPending && !q.isFetching && !q.error ? <span className="num text-sm text-tertiary">{list.length}</span> : null}><EtatMoney loading={q.isPending || q.isFetching} error={q.error} empty={!list.length} message={q.data?.length ? "Aucune opportunité pour ces filtres." : "Aucune opportunité dans cet espace."} retry={q.refetch}><ul>{list.map((o) => <Ligne key={o.id} o={o} />)}</ul></EtatMoney></Section></>;
 }
-
-const champsFiltre = { type: ["Financement", "Appel d'offres", "Investisseur"], eligibilite: ["Éligible", "À confirmer", "Non éligible"], recommandation: ["Prioritaire", "À étudier", "Écarter"], verification: ["Vérifié", "Non vérifié"], entite: ["OIA SAS", "OIA FZ", "Studio Ardoise"], projet: [] as string[], fraicheur: ["Moins de 7 jours", "Moins de 30 jours", "Plus ancien"] } as const;
-const libChamp: Record<keyof typeof champsFiltre, string> = { type: "Type", eligibilite: "Éligibilité", recommandation: "Recommandation", verification: "Vérification", entite: "Entité", projet: "Projet", fraicheur: "Fraîcheur" };
-type Filtres = Partial<Record<keyof typeof champsFiltre, string>>;
-type Vue = { nom: string; filtres: Filtres; tri: string };
-const CLE_VUES = "oia.money.vues.v1";
-
-function telecharger(contenu: string, nom: string, type: string) {
-  const url = URL.createObjectURL(new Blob([contenu], { type }));
-  const a = document.createElement("a"); a.href = url; a.download = nom; document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 30000);
+export function Signals() {
+  const q = useVueMoney("ml_signals_v1"); const action = useActionMoney("oia_acquitter_alerte"); const editable = ["owner", "editor", "proprietaire", "editeur"].includes(q.acces.data ?? "");
+  return <Section titre="Veille permanente"><EtatMoney loading={q.isPending || q.isFetching} error={q.error} empty={!q.data?.length} message="Aucun signal dans cet espace." retry={q.refetch}><ol>{q.data?.map((r) => <li key={r.id} className="border-t border-border py-4 text-sm"><p className="text-xs text-tertiary">{dateMoney(r.le)} · {r.type} · {r.nature_signal} · gravité {r.gravite}</p><h3 className="mt-1">{r.titre}</h3><p className="mt-2">{r.detail}</p><p className="mt-2 text-muted-foreground">{r.action_suivante}</p><p className="text-xs text-tertiary">{r.projet} · {r.record_id} · {r.acquitte_le ? `acquitté le ${dateMoney(r.acquitte_le)}` : "non acquitté"}</p>{r.type === "alerte" && !r.acquitte_le && <Button variant="outline" className="mt-3" disabled={!editable || action.isPending || !r.id} onClick={() => { if (r.id) action.mutate({ p_alerte: r.id }); }}>Acquitter</Button>}</li>)}</ol></EtatMoney>{action.error && <p role="alert" className="text-sm text-block">{action.error.message}</p>}</Section>;
 }
-
-export function Liste({ type }: { type?: Opportunite["type"] }) {
-  const { opportunites, projets } = useMoneyDonnees();
-  const champs = { ...champsFiltre, projet: [...projets] };
-  const { etiquettes } = useMoney();
-  const [filtres, setFiltres] = useState<Filtres>({});
-  const [tri, setTri] = useState("cloture");
-  const [vues, setVues] = useState<Vue[]>([]);
-  useEffect(() => { try { setVues(JSON.parse(localStorage.getItem(CLE_VUES) ?? "[]")); } catch { setVues([]); } }, []);
-  const liste = useMemo(() => opportunites.filter((o) => (!type || o.type === type) && Object.entries(filtres).every(([k, v]) => !v || (k === "projet" ? etiquettes[o.id] === v || o.suggestions[0]?.projet === v : (o as Record<string, unknown>)[k] === v)))
-    .sort((a, b) => tri === "cloture" ? (a.joursRestants ?? 9999) - (b.joursRestants ?? 9999) : tri === "score" ? (b.suggestions[0]?.score ?? 0) - (a.suggestions[0]?.score ?? 0) : a.titre.localeCompare(b.titre, "fr")), [filtres, tri, type, etiquettes, opportunites]);
-  const enregistrer = () => { const nom = `Vue ${vues.length + 1}`; const n = [...vues, { nom, filtres, tri }]; setVues(n); try { localStorage.setItem(CLE_VUES, JSON.stringify(n)); } catch { /* stockage indisponible */ } };
-  const sel = "min-h-11 rounded-md border border-border bg-background px-2 text-sm text-muted-foreground";
-  return <>
-    <div role="group" aria-label="Filtres" className="mb-4 flex flex-wrap gap-3 text-sm">{(Object.keys(champsFiltre) as (keyof typeof champsFiltre)[]).filter((k) => !(type && k === "type")).map((k) => <label key={k} className="flex items-center gap-2 text-tertiary">{libChamp[k]}<select className={sel} value={filtres[k] ?? ""} onChange={(e) => { setFiltres((f) => ({ ...f, [k]: e.target.value })); enregistrerEvenementMoney("project.money_filter_changed", { view: type ?? "Toutes", filter: k, active: e.target.value !== "" }); }}><option value="">Tous</option>{champs[k].map((v) => <option key={v}>{v}</option>)}</select></label>)}
-      <label className="flex items-center gap-2 text-tertiary">Tri<select className={sel} value={tri} onChange={(e) => { setTri(e.target.value); enregistrerEvenementMoney("project.money_filter_changed", { view: type ?? "Toutes", filter: "tri", active: true }); }}><option value="cloture">Clôture la plus proche</option><option value="score">Meilleur score</option><option value="titre">Titre</option></select></label></div>
-    <div className="mb-6 flex flex-wrap items-center gap-2"><Button variant="outline" className="min-h-11 font-normal" onClick={enregistrer}>Enregistrer la vue</Button>{vues.map((v) => <Button key={v.nom} variant="ghost" className="min-h-11 font-normal" onClick={() => { setFiltres(v.filtres); setTri(v.tri); enregistrerEvenementMoney("project.money_filter_changed", { view: type ?? "Toutes", filter: "vue_enregistree", active: Object.values(v.filtres).some(Boolean) }); }}>{v.nom}</Button>)}
-      <span className="ml-auto flex flex-wrap gap-2"><Button variant="outline" className="min-h-11 font-normal" onClick={() => { telecharger(versCsv(liste), "money-lookup.csv", "text/csv;charset=utf-8"); enregistrerEvenementMoney("project.money_export_requested", { format: "csv", count: liste.length, view: type ?? "Toutes" }); }}>Export CSV</Button><Button variant="outline" className="min-h-11 font-normal" onClick={() => { telecharger(versMarkdown(liste), "money-lookup.md", "text/markdown;charset=utf-8"); enregistrerEvenementMoney("project.money_export_requested", { format: "markdown", count: liste.length, view: type ?? "Toutes" }); }}>Export Markdown</Button></span></div>
-    <Section titre="Opportunités" aside={<span className="num text-sm text-tertiary">{liste.length}</span>}>{liste.length ? <ul>{liste.map((o) => <Ligne key={o.id} o={o} />)}</ul> : <p className="text-sm text-muted-foreground">Aucune opportunité pour ces filtres.</p>}</Section>
-  </>;
-}
-
-function Fiche({ o, fermer }: { o: Opportunite | null; fermer: () => void }) {
-  const { projets } = useMoneyDonnees();
-  const { etiquettes, etiqueter, journal } = useMoney();
-  const ligne = "flex flex-wrap justify-between gap-2 border-b border-border py-2 text-sm";
-  return <Sheet open={!!o} onOpenChange={(v) => !v && fermer()}><SheetContent className="w-full overflow-y-auto sm:max-w-lg">{o && <>
-    <SheetTitle className="pr-10 font-medium">{o.titre}</SheetTitle><SheetDescription className="text-xs">{o.type} · fiche fictive</SheetDescription>
-    <div className="mt-4"><Verif v={o.verification} />{o.verification === "Non vérifié" && <p className="mt-2 text-xs text-muted-foreground">Ces informations n'ont pas encore été vérifiées par un humain.</p>}</div>
-    <dl className="mt-4"><div className={ligne}><dt className="text-tertiary">Organisme</dt><dd>{o.organisme}</dd></div><div className={ligne}><dt className="text-tertiary">Publication</dt><dd className="num">{o.publication}</dd></div><div className={ligne}><dt className="text-tertiary">Clôture</dt><dd className="num">{o.cloture ?? "inconnue"}</dd></div><div className={ligne}><dt className="text-tertiary">Éligibilité</dt><dd>{o.eligibilite}</dd></div><div className={ligne}><dt className="text-tertiary">Montant</dt><dd className="num">{formatMontant(o.montant, o.devise)} · {o.typeMontant}</dd></div></dl>
-    <h3 className="mb-2 mt-6 text-xs text-tertiary">Faits officiels</h3><ul>{o.faits.map((f) => <li key={f.fait} className="border-b border-border py-2 text-sm">{f.fait}<span className="block text-xs text-tertiary">Source : {f.source}</span></li>)}</ul>
-    <h3 className="mb-2 mt-6 text-xs text-tertiary">Projets suggérés</h3><ul>{o.suggestions.map((s) => <li key={s.projet} className="border-b border-border py-2 text-sm"><span className="flex justify-between"><span>{s.projet}</span><span className="num">{s.score} / 100</span></span><span className="block text-xs text-tertiary">{s.raison}</span></li>)}</ul>
-    <label className="mt-6 block text-xs text-tertiary">Projet étiqueté par Mickaël<select className="mt-1 min-h-11 w-full rounded-md border border-border bg-background px-2 text-sm text-foreground" value={etiquettes[o.id] ?? ""} onChange={(e) => etiqueter(o.id, e.target.value)}><option value="">Aucun</option>{projets.map((p) => <option key={p}>{p}</option>)}</select></label>
-    <p className="mt-1 text-xs text-tertiary">Décision humaine, journalisée.</p>
-    {journal.length > 0 && <ul className="mt-2">{journal.slice(0, 3).map((j) => <li key={j.date + j.texte} className="border-l border-border pl-2 text-xs text-muted-foreground">{j.date} · {j.texte}</li>)}</ul>}
-    <h3 className="mb-2 mt-6 text-xs text-tertiary">Sources officielles</h3><ul className="text-sm">{o.sources.map((s) => <li key={s}>{s}</li>)}</ul>
-    <h3 className="mb-2 mt-6 text-xs text-tertiary">Notes</h3>{o.notes.length ? <ul className="text-sm">{o.notes.map((n) => <li key={n}>{n}</li>)}</ul> : <p className="text-sm text-muted-foreground">Aucune note.</p>}
-    <h3 className="mb-2 mt-6 text-xs text-tertiary">Tâches liées</h3>{o.taches.length ? <ul className="text-sm">{o.taches.map((n) => <li key={n}>{n}</li>)}</ul> : <p className="text-sm text-muted-foreground">Aucune tâche.</p>}
-  </>}</SheetContent></Sheet>;
-}
-
 export function Montants() {
-  const { opportunites, typesMontant } = useMoneyDonnees();
-  const { etiquettes } = useMoney();
-  const [type, setType] = useState(""); const [devise, setDevise] = useState(""); const [verif, setVerif] = useState("");
-  const liste = opportunites.filter((o) => (!type || o.typeMontant === type) && (!devise || o.devise === devise) && (!verif || o.verification === verif));
-  const projetDe = (o: Opportunite) => etiquettes[o.id] || o.suggestions[0]?.projet || "Sans projet";
-  const groupes = [...new Set(liste.map(projetDe))];
-  const sel = "min-h-11 rounded-md border border-border bg-background px-2 text-sm text-muted-foreground";
-  return <>
-    <div role="group" aria-label="Filtres" className="mb-6 flex flex-wrap gap-3 text-sm"><label className="flex items-center gap-2 text-tertiary">Type<select className={sel} value={type} onChange={(e) => { setType(e.target.value); enregistrerEvenementMoney("project.money_filter_changed", { view: "Montants", filter: "type_montant", active: e.target.value !== "" }); }}><option value="">Tous</option>{typesMontant.map((t) => <option key={t}>{t}</option>)}</select></label><label className="flex items-center gap-2 text-tertiary">Devise<select className={sel} value={devise} onChange={(e) => { setDevise(e.target.value); enregistrerEvenementMoney("project.money_filter_changed", { view: "Montants", filter: "devise", active: e.target.value !== "" }); }}><option value="">Toutes</option><option>EUR</option><option>USD</option><option>AED</option></select></label><label className="flex items-center gap-2 text-tertiary">Vérification<select className={sel} value={verif} onChange={(e) => { setVerif(e.target.value); enregistrerEvenementMoney("project.money_filter_changed", { view: "Montants", filter: "verification", active: e.target.value !== "" }); }}><option value="">Toutes</option><option>Vérifié</option><option>Non vérifié</option></select></label></div>
-    <p className="mb-6 text-xs text-tertiary">Aucun total global : une subvention, un chiffre d'affaires potentiel, un investissement et un prêt ne s'additionnent pas.</p>
-    {groupes.length === 0 && <p role="status" className="text-sm text-muted-foreground">Aucun montant pour ces filtres.</p>}
-    <div className="grid gap-6">{groupes.map((p) => { const items = liste.filter((o) => projetDe(o) === p); return <Section key={p} titre={p}>
-      {typesMontant.filter((t) => items.some((o) => o.typeMontant === t)).map((t) => <div key={t} className="mb-4 last:mb-0"><h3 className="mb-1 text-xs text-tertiary">{t}</h3>{items.filter((o) => o.typeMontant === t).map((o) => <div key={o.id} className="flex flex-wrap items-center justify-between gap-2 border-b border-border py-2 text-sm"><span>{o.titre}</span><span className="flex items-center gap-3"><span className="num">{formatMontant(o.montant, o.devise)}</span><Verif v={o.verification} /></span></div>)}
-        {sousTotaux(items.filter((o) => o.typeMontant === t)).map((s) => <p key={s.devise} className="num mt-1 text-right text-xs text-tertiary">Sous-total {t.toLocaleLowerCase("fr")}, {s.devise} : {s.inconnus && s.total === 0 ? "inconnu" : formatMontant(s.total, s.devise)}{s.inconnus && s.total > 0 ? ` + ${s.inconnus} montant${s.inconnus > 1 ? "s" : ""} inconnu${s.inconnus > 1 ? "s" : ""}` : ""}</p>)}</div>)}
-    </Section>; })}</div>
-  </>;
+  const q = useVueMoney("ml_montants_v2"); const metrics = useVueMoney("ml_indicateurs_v1"); const amounts = useVueMoney("ml_indicateurs_montants_v1"); const distribution = useVueMoney("ml_indicateurs_repartition_v1");
+  const [category, setCategory] = useState(""); const [currency, setCurrency] = useState(""); const [verified, setVerified] = useState(""); const [scope, setScope] = useState("espace"); const [project, setProject] = useState("");
+  const match = (r: { categorie: string | null; devise: string | null; verifie_par_humain: boolean | null }) => (!category || r.categorie === category) && (!currency || r.devise === currency) && (!verified || String(r.verifie_par_humain) === verified);
+  const m = metrics.data?.find((r) => r.portee === scope && (scope !== "projet" || r.projet === project));
+  return <div className="space-y-6"><div className="flex flex-wrap gap-3"><select aria-label="Catégorie" className={selectMoney} value={category} onChange={(e) => setCategory(e.target.value)}><option value="">Toutes catégories</option>{Object.entries(categoriesMoney).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select><select aria-label="Devise" className={selectMoney} value={currency} onChange={(e) => setCurrency(e.target.value)}><option value="">Toutes devises</option>{[...new Set(q.data?.map((r) => r.devise).filter(Boolean))].map((v) => <option key={v} value={v ?? ""}>{v}</option>)}</select><select aria-label="Vérification" className={selectMoney} value={verified} onChange={(e) => setVerified(e.target.value)}><option value="">Toute vérification</option><option value="true">Vérifié</option><option value="false">Non vérifié</option></select><select aria-label="Périmètre" className={selectMoney} value={scope} onChange={(e) => setScope(e.target.value)}><option value="espace">Espace</option><option value="projet">Projet</option><option value="non_triee">Non triée</option></select>{scope === "projet" && <select aria-label="Projet" className={selectMoney} value={project} onChange={(e) => setProject(e.target.value)}><option value="">Choisir un projet</option>{metrics.data?.filter((r) => r.portee === "projet").map((r) => <option key={r.projet} value={r.projet ?? ""}>{r.projet}</option>)}</select>}</div>
+    <p className="text-xs text-tertiary">Aucun total global : catégories, sens entrant ou sortant et devises restent séparés.</p><Section titre="Couverture et état du périmètre"><EtatMoney loading={metrics.isPending || metrics.isFetching} error={metrics.error} empty={!m} message="Aucun indicateur pour ce périmètre." retry={metrics.refetch}>{m && <dl className="grid gap-3 sm:grid-cols-3">{Object.entries(m).filter(([k]) => !["espace_id", "portee", "projet"].includes(k)).map(([k, v]) => <div key={k}><dt className="text-xs text-tertiary">{k.replace(/_/g, " ")}</dt><dd className="num text-lg">{v ?? "inconnu"}</dd></div>)}<div><dt className="text-xs text-tertiary">Couverture des montants</dt><dd className="num">{m.opportunites ? `${Math.round((m.avec_montant ?? 0) / m.opportunites * 100)} %` : "non mesurable"}</dd></div></dl>}</EtatMoney></Section>
+    <Section titre="Montants de l'espace"><EtatMoney loading={q.isPending || q.isFetching} error={q.error} empty={!q.data?.filter(match).length} message="Aucun montant pour ces filtres." retry={q.refetch}><ul>{q.data?.filter(match).map((r, i) => <li key={i} className="flex flex-wrap justify-between gap-3 border-t border-border py-4 text-sm"><span>{categoriesMoney[r.categorie ?? ""]} · {r.sens} · {r.devise ?? "devise inconnue"}<span className="block"><VerifMoney value={r.verifie_par_humain} /></span></span><span className="num">{r.somme_connue === null ? `${r.opportunites} opportunités sans montant lisible` : montantMoney(r.somme_connue, r.devise)}<span className="block text-xs text-tertiary">{r.avec_montant} avec montant · {r.montants_peu_surs} peu sûrs</span></span></li>)}</ul></EtatMoney></Section>
+    <Section titre="Montants prêts et bloqués"><EtatMoney loading={amounts.isPending || amounts.isFetching} error={amounts.error} retry={amounts.refetch}><ul>{amounts.data?.filter((r) => r.portee === scope && (scope !== "projet" || r.projet === project) && match(r)).map((r, i) => <li key={i} className="border-t border-border py-3 text-sm"><p>{categoriesMoney[r.categorie ?? ""]} · {r.sens} · {r.devise ?? "inconnue"} · {r.verifie_par_humain ? "Vérifié" : "Non vérifié"}</p><p className="num">Connue : {montantMoney(r.somme_connue, r.devise)} · prêtes : {montantMoney(r.somme_pretes, r.devise)} · bloquées : {montantMoney(r.somme_bloquees, r.devise)}</p><p className="text-xs text-tertiary">{r.opportunites} opportunités · {r.pretes} prêtes · {r.bloquees} bloquées · {r.closes_sous_14_jours} closes sous 14 jours · {r.montants_peu_surs} peu sûrs</p></li>)}</ul></EtatMoney></Section><Section titre="Répartition et raisons de blocage"><EtatMoney loading={distribution.isPending || distribution.isFetching} error={distribution.error} retry={distribution.refetch}><ul>{distribution.data?.filter((r) => r.portee === scope && (scope !== "projet" || r.projet === project)).map((r, i) => <li key={i} className="flex justify-between gap-3 border-t border-border py-2 text-sm"><span>{r.axe} : {r.valeur}</span><span className="num">{r.opportunites}</span></li>)}</ul></EtatMoney></Section></div>;
 }

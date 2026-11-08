@@ -1,4 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ModulePage } from "@/components/oia/module-page";
+import { MoneyShell, MoneyProvider, ContactsMoney } from "@/components/oia/money";
 import { moduleHead } from "@/components/oia/visibility";
-export const Route = createFileRoute("/crm")({ head: () => moduleHead("CRM", "CRM, module de démonstration OIA."), component: () => <ModulePage slug="crm" /> });
+export const Route = createFileRoute("/crm")({ head: () => moduleHead("CRM OIA", "Contacts de l'espace OIA et liens aux projets et opportunités."), component: () => <MoneyProvider><MoneyShell actif="crm"><ContactsMoney /></MoneyShell></MoneyProvider> });

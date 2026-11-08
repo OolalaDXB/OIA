@@ -1,0 +1,11 @@
+import { describe, it, expect } from "vitest";
+import { apercuSauvegarde, montantMoney, csvMoney, naturesMoney, categoriesMoney } from "@/lib/money-contrat";
+describe("contrat Money Lookup v2", () => {
+  it("un montant inconnu ne devient jamais zéro", () => { expect(montantMoney(null, null)).toBe("inconnu"); expect(montantMoney(0, "EUR")).toBe("0 EUR"); });
+  it("prévoit exactement les dix natures monétaires, hors REGULATORY", () => { expect(Object.keys(naturesMoney)).toHaveLength(10); expect(naturesMoney["REGULATORY"]).toBeUndefined(); expect(naturesMoney["ACQUISITION"]).toBe("Acquisition"); });
+  it("conserve les six catégories distinctes", () => { expect(Object.keys(categoriesMoney)).toEqual(["subvention", "chiffre_affaires_contractuel_potentiel", "investissement_capital", "pret", "aide_fiscale", "montant_inconnu"]); });
+  it("compte les six collections de sauvegarde sans modifier le fichier", () => { const input = { kind: "oia.workspace.backup", version: 1, data: { "oia.audit.v1": [{ id: "a" }], "oia.tags.v1": { a: "p" }, "oia.notes.v1": null, "oia.tasks.v1": [{ id: "t" }, { id: "t2" }], "oia.contacts.v1": [], "oia.views.v1": [{}] } }; const before = JSON.stringify(input); expect(apercuSauvegarde(input)).toEqual({ decisions: 1, etiquettes: 1, notes: 0, taches: 2, contacts: 0, vues: 1 }); expect(JSON.stringify(input)).toBe(before); });
+  it("refuse une collection de mauvais type avant tout import", () => { expect(() => apercuSauvegarde({ kind: "oia.workspace.backup", version: 1, data: { "oia.notes.v1": "invalide" } })).toThrow("22023"); });
+  it("refuse les fichiers non OIA", () => { expect(() => apercuSauvegarde({ kind: "autre", version: 1, data: {} })).toThrow("22023"); });
+  it("l'export conserve le montant inconnu et les deux décisions séparées", () => { const result = csvMoney([{ montant: null, recommandation: "REJECT", decision_humaine: "APPROVE", sens: "sortant", devise: "AED" }]); expect(result).toContain('"inconnu";"REJECT";"APPROVE";"sortant";"AED"'); });
+});

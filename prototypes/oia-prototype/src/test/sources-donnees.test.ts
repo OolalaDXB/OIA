@@ -10,7 +10,7 @@ describe("couche unique de données", () => {
   it("Money Lookup conserve les sept opportunités fictives", () => { expect(sourceMoney()).toEqual(lireDemoMoney()); expect(lireDemoMoney().opportunites).toHaveLength(7); });
   it("Shyrka conserve ses données simulées", () => { expect(sourceShyrka()).toEqual(lireDemoShyrka()); });
   it("Visibility conserve la démonstration actuelle", () => { expect(sourceVisibility()).toEqual(lireDemoVisibility()); expect(lireDemoVisibility().reel).toBe(false); });
-  it("les quatre emplacements réels restent non branchés", () => { expect([sourceReelleAccueil, sourceReelleMoney, sourceReelleShyrka, sourceReelleVisibility]).toEqual([null, null, null, null]); });
+  it("seul Money Lookup possède une source réelle", () => { expect([sourceReelleAccueil, sourceReelleShyrka, sourceReelleVisibility]).toEqual([null, null, null]); expect(typeof sourceReelleMoney).toBe("function"); });
   it("une collection sans résultats donne un état vide", async () => { expect(await chargerDonnees(() => [], (d) => d.length === 0)).toEqual({ statut: "vide" }); });
   it("une source en échec donne un état erreur", async () => { expect((await chargerDonnees(() => { throw Error("échec"); }, () => false)).statut).toBe("erreur"); });
   it("une source résolue fournit ses données", async () => { expect(await chargerDonnees(async () => ["m1"], (d) => d.length === 0)).toEqual({ statut: "pret", donnees: ["m1"] }); });

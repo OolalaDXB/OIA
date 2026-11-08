@@ -17,6 +17,7 @@ import { ShyrkaProvider, ShyrkaGlobale } from "@/components/oia/shyrka";
 import { FiltresProvider } from "@/components/oia/mesure";
 import { ContexteProvider } from "@/lib/shyrka-contexte";
 import { SourcesProvider } from "@/lib/donnees/provider";
+import { OiaAuthProvider } from "@/lib/oia-auth";
 
 function NotFoundComponent() {
   return (
@@ -124,7 +125,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <SourcesProvider><DonneesProvider><FiltresProvider><ContexteProvider><ShyrkaProvider><Outlet /><ShyrkaGlobale /></ShyrkaProvider></ContexteProvider></FiltresProvider></DonneesProvider></SourcesProvider>
+      <OiaAuthProvider><SourcesProvider><DonneesProvider><FiltresProvider><ContexteProvider><ShyrkaProvider><Outlet /><ShyrkaGlobale /></ShyrkaProvider></ContexteProvider></FiltresProvider></DonneesProvider></SourcesProvider></OiaAuthProvider>
     </QueryClientProvider>
   );
 }
