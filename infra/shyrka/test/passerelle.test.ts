@@ -190,9 +190,9 @@ describe("passerelle locale : défenses", () => {
     expect((await premier).status).toBe(200);
     const b2 = await demarrer();
     const codes: number[] = [];
-    for (let i = 0; i < 31; i++) codes.push((await post(b2, "/v1/tour/texte", { texte: `t${i}` })).status);
-    expect(codes.slice(0, 30).every((c) => c === 200)).toBe(true);
-    expect(codes[30]).toBe(429);
+    for (let i = 0; i < 61; i++) codes.push((await post(b2, "/v1/tour/texte", { texte: `t${i}` })).status);
+    expect(codes.slice(0, 60).every((c) => c === 200)).toBe(true);
+    expect(codes[60]).toBe(429);
   });
 });
 

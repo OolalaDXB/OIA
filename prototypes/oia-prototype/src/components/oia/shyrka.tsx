@@ -14,6 +14,7 @@ import { useShyrkaDonnees } from "@/lib/donnees/provider";
 import { EtatEcran } from "@/components/oia/etat-donnees";
 
 import { lireShyrka, sauverShyrka } from "@/lib/shyrka-storage";
+import { EcouteContinue } from "@/lib/shyrka-mains-libres";
 import { definirPrive, interrompre, PriseMicro, santeLocale, suivreEtats, tourAudio, tourTexte, ErreurLocale, type EtatLocal, type SanteLocale, type SourceLocale } from "@/lib/shyrka-locale";
 
 /** État réel de Shyrka sur le Mac (passerelle locale), ou de la démonstration. */
@@ -31,7 +32,7 @@ type Session = {
   cocher: (id: number) => void; ouvert: boolean; ouvrir: (open: boolean) => void;
   /** Passerelle du Mac joignable : conversation réelle. Sinon null : démonstration. */
   locale: SanteLocale | null; occupe: boolean;
-  /** Pousser pour parler : première action démarre la prise, la seconde l'arrête et la transcrit. */
+  /** Mains libres : active ou coupe le micro ouvert (fin d'énoncé après 2 s de silence, reprise qui interrompt Shyrka). */
   parler: () => void; priseActive: boolean;
   /** Transcription à relire avant envoi (jamais envoyée d'elle-même). */
   brouillon: { texte: string; note: string | null; n: number; langue?: string } | null;
@@ -74,6 +75,7 @@ export function ShyrkaProvider({ children }: { children: ReactNode }) {
   const [brouillon, setBrouillon] = useState<Session["brouillon"]>(null);
   const [alerte, setAlerte] = useState<string | null>(null);
   const prise = useRef<PriseMicro | null>(null);
+  const ecoute = useRef<EcouteContinue | null>(null);
   useEffect(() => {
     let fermer: (() => void) | undefined;
     let vivant = true;
@@ -86,13 +88,21 @@ export function ShyrkaProvider({ children }: { children: ReactNode }) {
         perdu: () => setAlerte("Passerelle du Mac injoignable : relancer pnpm shyrka:passerelle."),
       });
     });
-    return () => { vivant = false; fermer?.(); prise.current?.liberer(); };
+    return () => { vivant = false; fermer?.(); prise.current?.liberer(); ecoute.current?.arreter(); };
   }, []);
+  // L'écoute continue suit l'état réel : seuil relevé pendant la voix de Shyrka, rien pris pendant qu'elle réfléchit.
+  useEffect(() => {
+    const e = ecoute.current;
+    if (!e) return;
+    e.voixShyrka = mode === "parle";
+    // Après une reprise (Shyrka interrompue), Mickaël parle déjà : on écoute.
+    e.enAttente = mode === "transcription" || mode === "reflexion";
+  }, [mode]);
   useEffect(() => { if (locale) void definirPrive(ctx.prive).catch(() => undefined); }, [locale, ctx.prive]);
   const ajouter = (m: Omit<Message, "id">) => setMessages((prev) => [...prev, { ...m, id: ++sequence.current }]);
-  const envoyerLocal = async (demande: string) => {
+  const envoyerLocal = async (demande: string, langueDetectee?: string) => {
     // La langue détectée sur la prise accompagne le tour ; un texte tapé est jugé par la passerelle.
-    const langue = brouillon?.langue;
+    const langue = langueDetectee ?? brouillon?.langue;
     setOccupe(true); setAlerte(null); setBrouillon(null);
     ajouter({ auteur: "Vous", texte: demande });
     setMode("reflexion");
@@ -107,29 +117,39 @@ export function ShyrkaProvider({ children }: { children: ReactNode }) {
       ajouter({ auteur: "Shyrka", texte: e instanceof ErreurLocale ? e.message : "La passerelle du Mac n'a pas répondu.", meta: "Mac Studio · erreur, aucune réponse inventée" });
     }
   };
+  // Énoncé terminé (2 s de silence) : transcrit puis envoyé aussitôt ; une transcription douteuse attend.
+  const traiterEnonce = (b: Blob) => {
+    setMode("transcription");
+    void tourAudio(b).then((r) => {
+      if (r.verdict === "silence") { setMode("repos"); return; }
+      if (r.verdict === "douteux") {
+        setMode("repos");
+        setBrouillon((x) => ({ texte: r.transcription, note: `Transcription douteuse : ${r.raison}. Corrige-la ou efface-la.`, n: (x?.n ?? 0) + 1, ...(r.langue ? { langue: r.langue } : {}) }));
+        return;
+      }
+      void envoyerLocal(r.transcription, r.langue);
+    }).catch((e) => { setMode("erreur"); setAlerte(e instanceof ErreurLocale ? e.message : "Transcription impossible."); });
+  };
   const parler = () => {
     if (!locale) return;
-    const p = prise.current;
-    if (p?.active) {
-      setPriseActive(false); setMode("transcription");
-      void p.arreter().then(tourAudio).then((r) => {
-        setMode("repos");
-        if (r.verdict === "silence") setAlerte(`Rien entendu (${r.raison ?? "silence"}) : aucun tour envoyé.`);
-        else setBrouillon((b) => ({ texte: r.transcription, note: r.verdict === "douteux" ? `Transcription douteuse : ${r.raison}. Corrige-la ou efface-la.` : null, n: (b?.n ?? 0) + 1, ...(r.langue ? { langue: r.langue } : {}) }));
-      }).catch((e) => { setMode("erreur"); setAlerte(e instanceof ErreurLocale ? e.message : "Transcription impossible."); });
-      prise.current = null;
+    if (ecoute.current?.active) {
+      ecoute.current.arreter();
+      ecoute.current = null;
+      setPriseActive(false);
+      setMode((m) => (m === "ecoute" ? "repos" : m));
       return;
     }
-    if (occupe && mode !== "parle") return;
-    // Shyrka se tait avant d'écouter : sa voix ne doit pas entrer dans le micro.
-    if (mode === "parle") void interrompre().catch(() => undefined);
-    const nouvelle = new PriseMicro();
-    prise.current = nouvelle;
-    setAlerte(null);
-    void nouvelle.demarrer(() => parler()).then(() => { setPriseActive(true); setMode("ecoute"); }).catch((e) => {
-      prise.current = null; setPriseActive(false); setMode("repos");
-      setAlerte(e instanceof ErreurLocale ? e.message : "Micro indisponible : le clavier reste disponible.");
+    const e = new EcouteContinue({
+      enonce: traiterEnonce,
+      debutParole: (pendantVoix) => {
+        if (pendantVoix) void interrompre().catch(() => undefined);
+        setMode("ecoute");
+      },
+      erreur: (message) => { ecoute.current?.arreter(); ecoute.current = null; setPriseActive(false); setMode("repos"); setAlerte(message); },
     });
+    ecoute.current = e;
+    setAlerte(null);
+    void e.demarrer().then(() => { if (e.active) setPriseActive(true); });
   };
   const couper = () => { void interrompre().catch(() => undefined); };
   const envoyer = (texte: string) => {
@@ -186,8 +206,8 @@ export function ConversationShyrka({ compacte = false }: { compacte?: boolean })
       <form onSubmit={(e) => { e.preventDefault(); envoyer(texte); setTexte(""); }} className={`grid ${locale ? "grid-cols-[auto_minmax(0,1fr)_auto]" : "grid-cols-[minmax(0,1fr)_auto]"} items-center gap-2`}>
         {locale && (mode === "parle"
           ? <Button type="button" variant="outline" size="icon" className="size-11 shrink-0" onClick={couper} aria-label="Couper la parole de Shyrka" title="Couper la parole de Shyrka"><Square /></Button>
-          : <Button type="button" variant={priseActive ? "destructive" : "outline"} size="icon" className="size-11 shrink-0" disabled={locale.transcription !== "whisper-local" || (occupe && !priseActive) || mode === "transcription"} onClick={parler} aria-pressed={priseActive} aria-label={priseActive ? "Arrêter la prise et transcrire" : "Parler à Shyrka (pousser pour parler)"} title={priseActive ? "Arrêter et transcrire" : "Parler"}>{priseActive ? <MicOff /> : <Mic />}</Button>)}
-        <Input aria-label="Demander à Shyrka" placeholder={priseActive ? "● J’écoute… clique pour arrêter" : "Demander à Shyrka"} value={texte} onChange={(e) => setTexte(e.target.value)} className="min-h-11 min-w-0 text-base sm:text-sm" />
+          : <Button type="button" variant={priseActive ? "destructive" : "outline"} size="icon" className="size-11 shrink-0" disabled={locale.transcription !== "whisper-local"} onClick={parler} aria-pressed={priseActive} aria-label={priseActive ? "Couper le micro (mains libres)" : "Ouvrir le micro : parler à Shyrka en mains libres"} title={priseActive ? "Couper le micro" : "Parler en mains libres"}>{priseActive ? <MicOff /> : <Mic />}</Button>)}
+        <Input aria-label="Demander à Shyrka" placeholder={priseActive ? "● Micro ouvert : parle, je réponds après 2 s de silence" : "Demander à Shyrka"} value={texte} onChange={(e) => setTexte(e.target.value)} className="min-h-11 min-w-0 text-base sm:text-sm" />
         <Button type="submit" variant="outline" size="icon" disabled={!pret || !texte.trim() || occupe} className="size-11 shrink-0" aria-label="Envoyer à Shyrka" title="Envoyer à Shyrka"><ArrowUp /></Button>
       </form>
       <p className="mt-3 text-xs text-tertiary">{locale ? `Mac Studio · ${locale.modele.nom.replace(/^ollama:/, "")} local · Whisper local · voix ${locale.voix.sortie === "mac" ? `${locale.voix.nom} sur le Mac` : "désactivée"} · mémoire ${locale.memoire} · corpus ${locale.corpus}. Rien ne part en ligne.` : "Réponses simulées · aucune action réelle."}</p>
@@ -290,13 +310,13 @@ function PresencePleinEcran() {
     disparition.current = setTimeout(() => setVisible(false), 2400);
   };
   const demarrerEcoute = () => {
+    if (locale) { parler(); return; } // mains libres : bascule du micro ouvert, même pendant la voix de Shyrka
     if (pause || modeRef.current === "parle" || editionRef.current || phaseRef.current === "reflexion" || comprisRef.current) return;
     nettoyerMinuteurs();
     setCompris(null);
     setPhase("ecoute");
     phaseRef.current = "ecoute";
     setMicroActif(true);
-    if (locale) parler(); // vraie prise au micro du Mac
   };
   const envoyerTexte = (texte: string) => {
     const demande = texte.trim();
@@ -318,8 +338,7 @@ function PresencePleinEcran() {
     setPhase("reflexion");
     phaseRef.current = "reflexion";
     setMicroActif(false);
-    // Mode Mac : la prise s'arrête et part en transcription ; le résultat revient par la session.
-    if (locale) { parler(); return; }
+    if (locale) return; // mains libres : la fin d'énoncé vient du silence
     reflexionTimer.current = setTimeout(() => {
       setCompris(TRANSCRIPTION_SIMULEE);
       comprisRef.current = TRANSCRIPTION_SIMULEE;
@@ -360,6 +379,7 @@ function PresencePleinEcran() {
   // Le quitter par Échap de Chrome ferme la vue.
   useEffect(() => {
     if (!pleinEcran && document.fullscreenElement) void document.exitFullscreen?.().catch(() => undefined);
+    if (!pleinEcran && locale && priseActive) parler(); // quitter le plein écran ferme le micro ouvert
   }, [pleinEcran]);
   useEffect(() => {
     const sortie = () => { if (!document.fullscreenElement) setPleinEcran(false); };
@@ -450,7 +470,7 @@ function PresencePleinEcran() {
     <DialogPrimitive.Content ref={contenuRef} aria-describedby="shyrka-immersion-aide" className="shyrka-fullscreen" data-paused={pause} onOpenAutoFocus={(event) => { event.preventDefault(); retourFocus.current = document.activeElement instanceof HTMLElement ? document.activeElement : null; contenuRef.current?.focus(); }} onCloseAutoFocus={(e) => { if (retourFocus.current?.isConnected) { e.preventDefault(); retourFocus.current.focus(); } }} onPointerMove={reveiller} onPointerDown={reveiller} onKeyDown={reveiller} onKeyDownCapture={(event) => { if (event.key === "Escape" && edition) { event.preventDefault(); event.stopPropagation(); setEdition(false); setBrouillon(""); } }}>
       <DialogPrimitive.Title className="sr-only">{locale ? "Présence de Shyrka sur le Mac" : "Présence de Shyrka, simulation"}</DialogPrimitive.Title>
       <p id="shyrka-immersion-aide" className="sr-only">Maintenez la barre d’espace pour parler. Entrée envoie la transcription. Une autre touche permet de corriger. F ferme le plein écran.</p>
-      <button type="button" className="shyrka-presence-button" aria-label={locale ? (priseActive ? "Arrêter la prise et transcrire" : "Parler à Shyrka") : phase === "ecoute" ? "Arrêter l’écoute simulée" : "Démarrer l’écoute simulée"} aria-describedby="shyrka-immersion-aide" onClick={() => { if (phaseRef.current === "ecoute") terminerEcoute(); else demarrerEcoute(); }}>
+      <button type="button" className="shyrka-presence-button" aria-label={locale ? (priseActive ? "Couper le micro (mains libres)" : "Ouvrir le micro : mains libres") : phase === "ecoute" ? "Arrêter l’écoute simulée" : "Démarrer l’écoute simulée"} aria-describedby="shyrka-immersion-aide" onClick={() => { if (phaseRef.current === "ecoute") terminerEcoute(); else demarrerEcoute(); }}>
         <PresenceShyrka seule paused={pause} modeForce={presenceMode} />
       </button>
       <Button variant="ghost" size="icon" className="shyrka-close" data-visible={visible} aria-label="Fermer le plein écran" title="Fermer, touche F" onFocus={reveiller} onClick={() => setPleinEcran(false)}><X /></Button>
@@ -463,7 +483,7 @@ function PresencePleinEcran() {
         <div className="flex justify-center gap-3">
           {locale && mode === "parle"
             ? <Button variant="ghost" size="icon" className="shyrka-control" aria-label="Couper la parole de Shyrka" title="Couper" onClick={couper}><Square /></Button>
-            : <Button variant="ghost" size="icon" className="shyrka-control" aria-label={locale ? (priseActive ? "Arrêter la prise et transcrire" : "Parler à Shyrka") : microActif ? "Arrêter l’écoute simulée" : "Démarrer l’écoute simulée"} aria-pressed={locale ? priseActive : microActif} title="Parler, ou maintenir la barre d’espace" onClick={() => { if (phaseRef.current === "ecoute") terminerEcoute(); else demarrerEcoute(); }}>{(locale ? priseActive : microActif) ? <Mic /> : <MicOff />}</Button>}
+            : <Button variant="ghost" size="icon" className="shyrka-control" aria-label={locale ? (priseActive ? "Couper le micro (mains libres)" : "Ouvrir le micro : mains libres") : microActif ? "Arrêter l’écoute simulée" : "Démarrer l’écoute simulée"} aria-pressed={locale ? priseActive : microActif} title={locale ? "Micro ouvert ou coupé, barre d’espace" : "Parler, ou maintenir la barre d’espace"} onClick={() => { if (phaseRef.current === "ecoute") terminerEcoute(); else demarrerEcoute(); }}>{(locale ? priseActive : microActif) ? <Mic /> : <MicOff />}</Button>}
           <Button variant="ghost" size="icon" className="shyrka-control" aria-label="Écrire à Shyrka" title="Écrire" onClick={() => ouvrirSaisie()}><Keyboard /></Button>
           <Button variant="ghost" size="icon" className="shyrka-control" aria-label={pause ? "Relancer la présence" : "Mettre la présence en pause"} aria-pressed={pause} title={pause ? "Relancer" : "Pause"} onClick={() => setPause((valeur) => !valeur)}>{pause ? <Play /> : <Pause />}</Button>
         </div>

@@ -38,7 +38,7 @@ export const VERSION_API = 1;
 const JSON_MAX = 16 * 1024;
 const AUDIO_MAX = 8 * 1024 * 1024;
 const TEXTE_MAX = 2000;
-const TOURS_PAR_FENETRE = 30;
+const TOURS_PAR_FENETRE = 60; // mains libres : deux appels par échange (transcription, réponse)
 const FENETRE_MS = 5 * 60_000;
 const TYPES_AUDIO = /^audio\/(webm|ogg|mp4|wav|x-wav|wave)(;.*)?$/i;
 
