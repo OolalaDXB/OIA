@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Shyrka : copie de nuit des dépôts GitHub (lecture seule) sur le volume chiffré, puis réindexation des
+     dépôts validés par la passerelle si elle tourne. Sans volume monté et chiffré, le script ne fait rien.
+     Installé dans ~/Library/LaunchAgents ; retrait : launchctl bootout gui/$(id -u)/com.oia.shyrka.depots -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.oia.shyrka.depots</string>
+  <key>ProgramArguments</key><array><string>/bin/bash</string><string>/Users/mickael/OIA/infra/shyrka/scripts/depots-miroir.sh</string></array>
+  <key>StartCalendarInterval</key><dict><key>Hour</key><integer>3</integer><key>Minute</key><integer>15</integer></dict>
+  <key>EnvironmentVariables</key><dict><key>PATH</key><string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string></dict>
+  <key>ProcessType</key><string>Background</string>
+  <key>LowPriorityIO</key><true/>
+  <key>Nice</key><integer>10</integer>
+  <key>StandardOutPath</key><string>/Users/mickael/oia-shyrka-data/logs/depots.log</string>
+  <key>StandardErrorPath</key><string>/Users/mickael/oia-shyrka-data/logs/depots.log</string>
+</dict>
+</plist>

@@ -8,7 +8,7 @@ import { useShyrka } from "@/components/oia/shyrka";
 import {
   annulerPreparation, confirmerDocument, deciderProposition, effacerFichierDossier, ErreurLocale, etatCorpus, etatSurveillance, examinerFichier, extraitsSource, piloterSurveillance,
   preparerDocument, preparerNote, propositionsCorpus, rechercherCorpus, reindexerSource, retirerSource, sourcesCorpus, TAILLE_MAX_CORPUS,
-  NIVEAUX, souvenirsSource, fixerNiveauSource, connaissancesValidees, fixerNiveauConnaissance,
+  NIVEAUX, souvenirsSource, collections, collection, analyserCollections, validerCollection, niveauCollection, exclureCollection, inclureGroupe, niveauElement, exclureElement, type ResumeCollection, fixerNiveauSource, connaissancesValidees, fixerNiveauConnaissance,
   type ApercuCorpus, type ConnaissanceValidee, type EtatCorpus, type Niveau, type ExtraitCorpus, type FichierDetecte, type PropositionCorpus, type SourcePrivee, type EtatSurveillance,
 } from "@/lib/shyrka-locale";
 
@@ -20,7 +20,7 @@ import {
  * interprétés comme du HTML.
  */
 
-type Vue = "deposer" | "rechercher" | "confirmer";
+type Vue = "deposer" | "rechercher" | "confirmer" | "sources";
 const message = (e: unknown) => (e instanceof ErreurLocale ? e.message : "La passerelle du Mac n'a pas répondu.");
 const taille = (n: number) => (n < 1024 * 1024 ? `${Math.max(1, Math.round(n / 1024))} Ko` : `${(n / 1024 / 1024).toFixed(1)} Mo`);
 const jour = (iso: string) => (iso ? new Date(iso).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" }) : "—");
@@ -73,13 +73,70 @@ function CorpusLocal({ presence }: { presence: string | null }) {
       {etat.prive && <p className="mt-2 text-xs text-warn">Mode privé : la recherche reste possible ; rien ne peut être ajouté, indexé ni proposé tant qu'il est actif.</p>}
     </div>
     <div role="tablist" aria-label="Actions du Corpus" className="flex flex-wrap gap-2">
-      {([["deposer", "Déposer"], ["rechercher", "Rechercher"], ["confirmer", `À confirmer${aConfirmer ? ` (${aConfirmer})` : ""}`]] as const).map(([id, l]) =>
+      {([["deposer", "Déposer"], ["rechercher", "Rechercher"], ["confirmer", `À confirmer${aConfirmer ? ` (${aConfirmer})` : ""}`], ["sources", "Sources groupées"]] as const).map(([id, l]) =>
         <Button key={id} role="tab" aria-selected={vue === id} variant={vue === id ? "default" : "outline"} className="min-h-11 font-normal" onClick={() => setVue(id)}>{l}</Button>)}
     </div>
     {vue === "deposer" && <Deposer etat={etat} apres={rafraichir} />}
     {vue === "rechercher" && <Rechercher filtreSource={filtreSource} setFiltreSource={setFiltreSource} apres={rafraichir} />}
     {vue === "confirmer" && <AConfirmer prive={etat.prive} apres={rafraichir} />}
+    {vue === "sources" && <SourcesGroupees seul={etat.presence === "seul"} apres={rafraichir} />}
   </div>;
+}
+
+// ── Sources groupées : un écran par source, validé d'un geste (pas fichier par fichier) ──
+
+const TYPES_COLLECTION = { depot: "Dépôt GitHub (documentation)", semence: "Corpus du 8 novembre", conversations: "Conversations d'IA" } as const;
+const ETATS_COLLECTION = { a_valider: ["warn", "À valider"], validee: ["ok", "Validée"], exclue: ["neutre", "Exclue"] } as const;
+
+function SourcesGroupees({ seul, apres }: { seul: boolean; apres: () => void }) {
+  const [liste, setListe] = useState<ResumeCollection[] | null>(null);
+  const [info, setInfo] = useState<string | null>(null);
+  const [ouverte, setOuverte] = useState<string | null>(null);
+  const [analyse, setAnalyse] = useState(false);
+  const lire = useCallback(() => void collections().then((r) => setListe(r.collections), (e) => setInfo(message(e))), []);
+  useEffect(() => { if (!seul) return; lire(); const t = setInterval(lire, 5000); return () => clearInterval(t); }, [lire, seul]);
+  if (!seul) return <Section titre="Sources groupées"><p className="text-sm text-muted-foreground">Les sources groupées (dépôts, corpus du 8 novembre, conversations d'IA) se valident quand tu es seul : leurs noms ne sont pas encore classés.</p></Section>;
+  const agir = (p: Promise<unknown>, ok: string) => void p.then(() => { setInfo(ok); lire(); apres(); }, (e) => setInfo(message(e)));
+  const aValider = (liste ?? []).filter((c) => c.etat === "a_valider").length;
+  return <div className="grid gap-4">
+    <Section titre="Sources groupées" aside={<span className="text-xs text-tertiary">{liste ? `${liste.length} source${liste.length > 1 ? "s" : ""} · ${aValider} à valider` : ""}</span>}>
+      <p className="text-sm text-muted-foreground">Dépôts GitHub copiés sur le volume chiffré (chaque nuit), corpus du 8 novembre, exports de conversations déposés dans <span className="num">brut/ia/…</span>. Rien n'est indexé avant « Valider ». Exclus d'office : historique Git, fichiers de secrets, données de clients ; tout secret repéré est signalé, jamais indexé ; règle Swift appliquée.</p>
+      <div className="mt-3 flex flex-wrap items-center gap-2"><Button className="min-h-11" disabled={analyse} onClick={() => { setAnalyse(true); void analyserCollections().then((r) => { setInfo(`${r.sources} source(s) analysée(s)${r.exportsEnCours ? `, ${r.exportsEnCours} export(s) de conversations en cours d'analyse` : ""}.`); lire(); }, (e) => setInfo(message(e))).finally(() => setAnalyse(false)); }}>{analyse ? "Analyse…" : "Analyser les sources"}</Button>
+        {info && <span role="status" className="text-sm">{info}</span>}</div>
+    </Section>
+    {liste?.map((c) => <CarteCollection key={c.id} c={c} ouverte={ouverte === c.id} basculer={() => setOuverte(ouverte === c.id ? null : c.id)} agir={agir} />)}
+  </div>;
+}
+
+function CarteCollection({ c, ouverte, basculer, agir }: { c: ResumeCollection; ouverte: boolean; basculer: () => void; agir: (p: Promise<unknown>, ok: string) => void }) {
+  const [detail, setDetail] = useState<ResumeCollection | null>(null);
+  useEffect(() => { if (ouverte) void collection(c.id).then(setDetail, () => undefined); }, [ouverte, c]);
+  const [ton, libelle] = ETATS_COLLECTION[c.etat];
+  const niveaux = NIVEAUX.filter(([n]) => c.parNiveau[n]).map(([n, l]) => `${l} ${c.parNiveau[n]}`).join(" · ");
+  return <Section titre={<span className="break-all">{c.nom}</span>} aside={<Pastille ton={ton}>{libelle}{c.tache && c.tache.etape !== "fini" ? ` · ${c.tache.etape} ${c.tache.fait}/${c.tache.total}` : ""}</Pastille>}>
+    <p className="text-xs text-tertiary">{TYPES_COLLECTION[c.type]} · {c.raisonNiveau}</p>
+    <p className="mt-2 text-sm">{c.etat === "validee" ? `${c.indexes} indexé${c.indexes > 1 ? "s" : ""}${c.aIndexer ? `, ${c.aIndexer} en attente` : ""}` : `${c.aIndexer} à indexer`} · {c.exclus} exclu{c.exclus > 1 ? "s" : ""}{c.passagesSwiftExclus ? ` · ${c.passagesSwiftExclus} passage${c.passagesSwiftExclus > 1 ? "s" : ""} écarté${c.passagesSwiftExclus > 1 ? "s" : ""} (Swift)` : ""}</p>
+    {niveaux && <p className="mt-1 text-xs text-muted-foreground">Niveaux : {niveaux}</p>}
+    {Object.keys(c.exclusions).length > 0 && <p className="mt-1 text-xs text-muted-foreground">Exclus : {Object.entries(c.exclusions).map(([m, n]) => `${m} (${n})`).join(" ; ")}</p>}
+    {c.signales.length > 0 && <p className="mt-1 text-xs text-warn">{c.signales.length} fichier{c.signales.length > 1 ? "s" : ""} signalé{c.signales.length > 1 ? "s" : ""} pour un secret, jamais indexé{c.signales.length > 1 ? "s" : ""}.</p>}
+    <div className="mt-3 flex flex-wrap items-end gap-2">
+      <div className="w-48"><ChoixNiveau id={`cn-${c.id}`} valeur={c.niveauDefaut} libelle="Niveau de la source" onChange={(n) => agir(niveauCollection(c.id, n), `${c.nom} : ${libelleNiveau(n)} (sauf groupes fixés à part).`)} /></div>
+      {c.etat !== "exclue" && (c.etat === "a_valider" || c.aIndexer > 0) && <Button className="min-h-11" onClick={() => agir(validerCollection(c.id), `${c.nom} : indexation lancée.`)}>Valider</Button>}
+      {c.etat !== "exclue" && <Button variant="ghost" className="min-h-11 font-normal" onClick={() => agir(exclureCollection(c.id), `${c.nom} : exclu (retiré de l'index).`)}>Exclure</Button>}
+      <Button variant="ghost" className="min-h-11 font-normal" onClick={basculer}>{ouverte ? "Masquer le détail" : "Détail par dossier"}</Button>
+    </div>
+    {ouverte && detail && <div className="mt-4 grid gap-4">
+      <div className="overflow-x-auto"><table className="w-full min-w-[560px] text-sm"><thead className="text-left text-xs text-tertiary"><tr className="border-b border-border"><th className="py-2 pr-3 font-normal">{c.type === "conversations" ? "Groupe (niveau proposé)" : c.type === "semence" ? "Fichier" : "Dossier"}</th><th className="pr-3 font-normal">À indexer</th><th className="pr-3 font-normal">Exclus</th><th className="pr-3 font-normal">Niveau</th><th /></tr></thead>
+        <tbody>{detail.groupes.map((g) => <tr key={g.groupe} className={`border-b border-border last:border-0 ${g.exclu ? "text-tertiary line-through" : ""}`}><td className="py-2 pr-3 break-all">{g.groupe}</td><td className="pr-3 num">{g.aIndexer + g.indexes}</td><td className="pr-3 num">{g.exclus}</td>
+          <td className="pr-3"><select aria-label={`Niveau de ${g.groupe}`} className="min-h-11 rounded-md border border-border bg-background px-2 text-sm" value={g.niveau} onChange={(e) => agir(niveauCollection(c.id, e.target.value as Niveau, g.groupe), `${g.groupe} : ${libelleNiveau(e.target.value)}.`)}>{NIVEAUX.map(([v, l]) => <option key={v} value={v}>{l}</option>)}</select></td>
+          <td>{g.exclu ? <Button size="sm" variant="ghost" className="min-h-11 font-normal" onClick={() => agir(inclureGroupe(c.id, g.groupe), `${g.groupe} : réintégré.`)}>Réintégrer</Button> : <Button size="sm" variant="ghost" className="min-h-11 font-normal" onClick={() => agir(exclureCollection(c.id, g.groupe), `${g.groupe} : exclu.`)}>Exclure</Button>}</td></tr>)}</tbody></table></div>
+      {detail.signales.length > 0 && <div><p className="text-xs text-tertiary">Signalés (secret repéré : jamais indexés, contenu non montré)</p><ul className="mt-1 text-xs">{detail.signales.map((x) => <li key={x.chemin} className="break-all">{x.chemin} · {x.motif}</li>)}</ul></div>}
+      {c.type === "conversations" && detail.elements && <div><p className="text-xs text-tertiary">Conversations (niveau proposé par le modèle local ; à changer au besoin)</p>
+        <ul className="mt-1 max-h-96 overflow-auto">{detail.elements.filter((e) => e.statut !== "exclu").map((e) => <li key={e.id} className="flex flex-wrap items-center gap-2 border-b border-border py-1 text-sm last:border-0"><span className="min-w-0 flex-1 break-words">{e.titre} <span className="text-xs text-tertiary">· {jour(e.date)} · {e.raison}</span></span>
+          <select aria-label={`Niveau de ${e.titre}`} className="min-h-11 rounded-md border border-border bg-background px-2 text-sm" value={e.niveau} onChange={(ev) => agir(niveauElement(c.id, e.id, ev.target.value as Niveau), "Niveau changé.")}>{NIVEAUX.map(([v, l]) => <option key={v} value={v}>{l}</option>)}</select>
+          <Button size="sm" variant="ghost" className="min-h-11 font-normal" onClick={() => agir(exclureElement(c.id, e.id), "Conversation exclue.")}>Exclure</Button></li>)}</ul></div>}
+    </div>}
+  </Section>;
 }
 
 function ChoixNiveau({ valeur, onChange, id, libelle = "Confidentialité" }: { valeur: Niveau; onChange: (n: Niveau) => void; id: string; libelle?: string }) {

@@ -1,6 +1,6 @@
 import { execFile, execFileSync } from "node:child_process";
 import { randomBytes } from "node:crypto";
-import { chmodSync, existsSync, mkdirSync, mkdtempSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { chmodSync, existsSync, lstatSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { homedir, tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -10,6 +10,7 @@ import { DEFAULT_OLLAMA_MODEL, OllamaTextModel } from "../adapters/ollama.js";
 import { WhisperServer } from "../adapters/whisper-server.js";
 import { chargerCatalogue, composer, Corpus } from "../executive/corpus.js";
 import { CataloguePrive } from "../corpus/catalogue-prive.js";
+import { Collections } from "../corpus/collections.js";
 import { DepotCorpus } from "../corpus/depot.js";
 import { generateurOllama } from "../corpus/propositions.js";
 import { vectoriseurOllama, type Vectoriseur } from "../corpus/sens.js";
@@ -64,6 +65,7 @@ function connaissances(modeleConversation: string, h: { prive: () => boolean; ni
   let corpus: Corpus | null = null;
   let cataloguePrive: CataloguePrive | null = null;
   let depot: DepotCorpus | null = null;
+  let collections: Collections | null = null;
   const raisons: string[] = [];
   const vectoriser: Vectoriseur = vectoriseurOllama();
   const surveillance = new Surveillance(() => (etatVolume().chiffre ? (env.SHYRKA_RECETTE ? `${VOLUME_SHYRKA}/${env.SHYRKA_RECETTE}` : VOLUME_SHYRKA) : null));
@@ -78,7 +80,8 @@ function connaissances(modeleConversation: string, h: { prive: () => boolean; ni
   try {
     const cp = new CataloguePrive(dossierVerifie(sous("connaissances")));
     cataloguePrive = cp;
-    corpus = new Corpus(dossierVerifie(sous("connaissances")), () => composer(chargerCatalogue(), cp.sourcesCorpus()));
+    corpus = new Corpus(dossierVerifie(sous("connaissances")), () => composer(chargerCatalogue(), cp.sourcesCorpus(), collections?.sourcesCorpus() ?? []));
+    collections = new Collections({ dossier: dossierVerifie(sous("connaissances")), corpus, vectoriser, generer: generateurOllama(modeleConversation) });
     if (corpus.reconstruit) console.log("Index du corpus reconstruit (schéma 2 : références, sens, identifiants) ; les sources se réindexent.");
     corpus.indexer();
     const brut = dossierVerifie(sous("brut/depots"));
@@ -88,6 +91,8 @@ function connaissances(modeleConversation: string, h: { prive: () => boolean; ni
     // En fond : sens des extraits qui n'en ont pas encore, sources privées à réindexer après une reconstruction.
     const c0 = corpus;
     const d0 = depot;
+    const n = collections.rattraper();
+    if (n) console.log(`Sources groupées : ${n} élément(s) à réindexer (index reconstruit).`);
     void d0
       .rattraper()
       .then(() => c0.calculerSens(vectoriser))
@@ -96,6 +101,8 @@ function connaissances(modeleConversation: string, h: { prive: () => boolean; ni
   } catch (e) {
     corpus?.fermer();
     cataloguePrive?.fermer();
+    collections?.fermer();
+    collections = null;
     corpus = null;
     depot = null;
     raisons.push(`corpus : ${(e as Error).message}`);
@@ -124,6 +131,7 @@ function connaissances(modeleConversation: string, h: { prive: () => boolean; ni
             depot: d,
             surveillance,
             vecteur,
+            ...(collections ? { collections: apiCollections(collections) } : {}),
             etat: () => {
               // Les 18 documents du dépôt sont « interne » : visibles en « seul » et « entre proches », pas « avec un externe ».
               const git = h.niveaux().includes("interne") ? chargerCatalogue().filter((s) => s.statut !== "revoque").length : 0;
@@ -143,7 +151,61 @@ function connaissances(modeleConversation: string, h: { prive: () => boolean; ni
       memoire?.fermer();
       c?.fermer();
       cataloguePrive?.fermer();
+      collections?.fermer();
     },
+  };
+}
+
+/** Emplacements des sources groupées, sur le volume chiffré (données brutes, jamais dans Git). */
+const DEPOTS = `${VOLUME_SHYRKA}/brut/depots-git`;
+const SEMENCE = `${VOLUME_SHYRKA}/brut/ia/Chatgpt/2026-11-08-synthese/shyrka_seed_2026-11-08`;
+const EXPORTS_IA = `${VOLUME_SHYRKA}/brut/ia`;
+
+/** Visibilité des dépôts sur GitHub, écrite par le script de copie (`.visibilites.json`). */
+function visibilites(): Record<string, boolean> {
+  try {
+    return JSON.parse(readFileSync(join(DEPOTS, ".visibilites.json"), "utf8")) as Record<string, boolean>;
+  } catch {
+    return {};
+  }
+}
+
+/** Exports ZIP de conversations déposés sous `brut/ia/<fournisseur>/` (un niveau de dossier ; les archives de synthèse sont ignorées). */
+function exportsIa(): string[] {
+  const out: string[] = [];
+  if (!existsSync(EXPORTS_IA)) return out;
+  for (const f of readdirSync(EXPORTS_IA)) {
+    const d = join(EXPORTS_IA, f);
+    if (!lstatSync(d).isDirectory()) continue;
+    for (const z of readdirSync(d)) if (z.toLowerCase().endsWith(".zip") && lstatSync(join(d, z)).isFile()) out.push(join(d, z));
+  }
+  return out;
+}
+
+function apiCollections(g: Collections) {
+  return {
+    gestion: g,
+    analyser: async () => {
+      const vis = visibilites();
+      let sources = 0;
+      if (existsSync(DEPOTS))
+        for (const nom of readdirSync(DEPOTS).sort()) {
+          const r = join(DEPOTS, nom);
+          if (lstatSync(r).isDirectory() && existsSync(join(r, ".git"))) {
+            g.analyserDepot(r, vis[nom] ?? false);
+            sources++;
+          }
+        }
+      if (existsSync(join(SEMENCE, "manifest.json"))) {
+        g.analyserSemence(SEMENCE);
+        sources++;
+      }
+      // Exports : analyse en fond (le modèle local propose un niveau par conversation) ; une archive qui n'est pas un export est ignorée.
+      const zips = exportsIa();
+      for (const z of zips) void g.analyserExport(z).catch((e: Error) => console.log(`Export ignoré (${z.split("/").pop()}) : ${e.message}`));
+      return { sources, exportsEnCours: zips.length };
+    },
+    rafraichir: () => g.rafraichir(DEPOTS, visibilites()),
   };
 }
 

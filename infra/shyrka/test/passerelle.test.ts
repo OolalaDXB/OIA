@@ -72,7 +72,7 @@ async function demarrer(over: Partial<DepsPasserelle> & { repondre?: (t: string)
     connaissances: (): Connaissances => {
       appels.ouvertures++;
       return volume.monte
-        ? { memoire: memoireFictive(appels.prive), chercher: (t) => (/sillon/i.test(t) ? [{ source: "roadmap", chemin: "docs/roadmap.md", section: "SILLON", ligne: 42, ref: "ligne 42", citation: "docs/roadmap.md:42", titre: "Roadmap", version: "abc123def456", dateSource: "2026-11-01T00:00:00Z", indexeLe: "2026-11-08T00:00:00Z", statut: "valide", compartiment: "projet:sillon", connecteur: "depot-git", niveau: "interne", extrait: "SILLON : décision fictive", mode: "mots", score: 0, identifiant: false, nonFiable: true }] : []), etat: { memoire: "active", corpus: "actif", detail: "monté" }, fermer: () => undefined }
+        ? { memoire: memoireFictive(appels.prive), chercher: (t) => (/sillon/i.test(t) ? [{ source: "roadmap", chemin: "docs/roadmap.md", section: "SILLON", ligne: 42, ref: "ligne 42", citation: "docs/roadmap.md:42", titre: "Roadmap", version: "abc123def456", dateSource: "2026-11-01T00:00:00Z", indexeLe: "2026-11-08T00:00:00Z", statut: "valide", compartiment: "projet:sillon", connecteur: "depot-git", niveau: "interne", nature: "document", extrait: "SILLON : décision fictive", mode: "mots", score: 0, identifiant: false, nonFiable: true }] : []), etat: { memoire: "active", corpus: "actif", detail: "monté" }, fermer: () => undefined }
         : { memoire: memoireFictive(appels.prive), chercher: null, etat: { memoire: "indisponible", corpus: "indisponible", detail: "volume démonté" }, fermer: () => undefined };
     },
     creerSession: (h): SessionLike => {
@@ -472,7 +472,7 @@ describe("passerelle locale : mode de présence", () => {
   });
 
   it("mode protégé : une question qui ne trouve rien de visible reçoit toujours la même réponse, sans modèle", async () => {
-    const extrait = { source: "s", chemin: "prive/s", section: "S", ligne: 1, ref: "ligne 1", citation: "dossier · ligne 1", titre: "dossier", version: "v", dateSource: "2026-11-08T00:00:00Z", indexeLe: "2026-11-08T00:00:00Z", statut: "valide" as const, compartiment: "personnel", connecteur: "fichier-local" as const, niveau: "confidentiel" as const, extrait: "budget fictif du dossier Orion", mode: "sens" as const, score: 0.7, identifiant: false, nonFiable: true as const };
+    const extrait = { source: "s", chemin: "prive/s", section: "S", ligne: 1, ref: "ligne 1", citation: "dossier · ligne 1", titre: "dossier", version: "v", dateSource: "2026-11-08T00:00:00Z", indexeLe: "2026-11-08T00:00:00Z", statut: "valide" as const, compartiment: "personnel", connecteur: "fichier-local" as const, niveau: "confidentiel" as const, nature: "document" as const, extrait: "budget fictif du dossier Orion", mode: "sens" as const, score: 0.7, identifiant: false, nonFiable: true as const };
     const b = await demarrer({
       presenceAuDemarrage: true,
       connaissances: (h) => ({

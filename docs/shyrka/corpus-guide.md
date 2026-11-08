@@ -31,6 +31,13 @@ En conversation, une proposition n'est jamais dite comme une décision (« 1 pro
 
 Le dossier **« Déposer dans Shyrka »** est à la racine du volume chiffré. Il est **arrêté par défaut** : **Corpus › Déposer › Dossier « Déposer dans Shyrka » › Activer**. Un fichier copié dedans apparaît comme « à examiner » ; **Examiner** le prépare comme un dépôt, **Refuser** l'efface du dossier. **Mettre en pause** ou **Arrêter** : effet immédiat. Il s'arrête seul si le volume est démonté, et ne redémarre jamais au lancement de la passerelle. Aucun son.
 
+## Sources groupées : dépôts, corpus du 8 novembre, conversations d'IA
+
+Quand tu es seul : **Corpus › Sources groupées › Analyser les sources**. Pour chaque source, Shyrka montre ce qu'elle indexera, à quel niveau, et ce qu'elle exclut (secrets, données de clients, historique Git, règle Swift). Tu **valides par source**, tu changes le niveau de la source ou d'un dossier, tu exclus une source ou un dossier. Rien n'est indexé avant « Valider ».
+
+- **Dépôts GitHub** : copiés chaque nuit à 3 h 15 sur le volume chiffré (lecture seule) ; une source validée suit ses fichiers. La documentation seulement ; le code plus tard, sur ta décision.
+- **Conversations ChatGPT ou Claude** : demande l'export officiel, dépose le ZIP dans `brut/ia/Chatgpt/` ou `brut/ia/Claude/` sur le volume, puis « Analyser les sources ». Une conversation = un document ; niveau proposé par le modèle local ; citées comme « analyse d'IA, à vérifier ».
+
 ## Confidentialité et présence
 
 - **Niveaux** : public, interne, confidentiel, personnel. Shyrka en propose un au dépôt (avec sa raison), tu le confirmes ; tu peux le changer ensuite (Sources privées, À confirmer, Connaissances validées).

@@ -197,3 +197,21 @@ export const etatSurveillance = () => appel<{ etat: EtatSurveillance; aExaminer:
 export const piloterSurveillance = (action: "activer" | "pause" | "arreter") => appel<{ etat: EtatSurveillance }>("/corpus/surveillance", json({ action }));
 export const examinerFichier = (id: string) => appel<ApercuCorpus>(`/corpus/surveillance/${encodeURIComponent(id)}/examiner`, json({}));
 export const effacerFichierDossier = (id: string) => appel<{ efface: true }>(`/corpus/surveillance/${encodeURIComponent(id)}/effacer`, json({ confirmer: true }));
+
+// ── Sources groupées (dépôts, corpus du 8 novembre, exports de conversations) : validation par source. ──
+export interface GroupeCollection { groupe: string; niveau: Niveau; aIndexer: number; indexes: number; exclus: number; exclu: boolean }
+export interface ResumeCollection {
+  id: string; type: "depot" | "semence" | "conversations"; nom: string; etat: "a_valider" | "validee" | "exclue"; niveauDefaut: Niveau; raisonNiveau: string; analyseLe: string; valideLe: string | null;
+  tache: { etape: string; fait: number; total: number; message?: string } | null; total: number; aIndexer: number; indexes: number; exclus: number; passagesSwiftExclus: number;
+  parNiveau: Partial<Record<Niveau, number>>; exclusions: Record<string, number>; groupes: GroupeCollection[]; signales: { chemin: string; motif: string }[];
+  elements?: { id: string; groupe: string; titre: string; chemin: string; statut: string; motif: string | null; niveau: Niveau; raison: string; date: string }[];
+}
+export const collections = () => appel<{ collections: ResumeCollection[] }>("/corpus/collections");
+export const collection = (id: string) => appel<ResumeCollection>(`/corpus/collections/${encodeURIComponent(id)}`);
+export const analyserCollections = () => appel<{ sources: number; exportsEnCours: number }>("/corpus/collections/analyser", json({}));
+export const validerCollection = (id: string) => appel<{ id: string; aIndexer: number }>(`/corpus/collections/${encodeURIComponent(id)}/valider`, json({}));
+export const niveauCollection = (id: string, niveau: Niveau, groupe?: string) => appel<ResumeCollection>(`/corpus/collections/${encodeURIComponent(id)}/niveau`, json(groupe ? { niveau, groupe } : { niveau }));
+export const exclureCollection = (id: string, groupe?: string) => appel<ResumeCollection>(`/corpus/collections/${encodeURIComponent(id)}/exclure`, json(groupe ? { groupe } : {}));
+export const inclureGroupe = (id: string, groupe: string) => appel<ResumeCollection>(`/corpus/collections/${encodeURIComponent(id)}/inclure`, json({ groupe }));
+export const niveauElement = (id: string, eid: string, niveau: Niveau) => appel<unknown>(`/corpus/collections/${encodeURIComponent(id)}/elements/${encodeURIComponent(eid)}/niveau`, json({ niveau }));
+export const exclureElement = (id: string, eid: string) => appel<unknown>(`/corpus/collections/${encodeURIComponent(id)}/elements/${encodeURIComponent(eid)}/exclure`, json({}));

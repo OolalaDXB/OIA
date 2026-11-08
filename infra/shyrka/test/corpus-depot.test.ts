@@ -292,6 +292,10 @@ describe("Corpus · retrait, exclusions, mode privé", () => {
     expect(controler("schema = z.object({ password: z.string().min(8) })")).toMatchObject({ decision: "quarantaine" });
     expect(controler("password: Hk82!vQz")).toMatchObject({ decision: "refus", code: "secret" });
     expect(controler("| 1 234 567 | 2 345 678 | 3 456 789 | 4 567 890 | 5 678 901 |").decision).toBe("admis");
+    expect(controler("Migration 20260812123456_ajout.sql appliquée ; identifiant 4709123456789012.").decision).toBe("admis"); // horodatages, identifiants
+    expect(controler("Carte fictive 4539 0174 9410 9883.")).toMatchObject({ decision: "refus", code: "carte_bancaire" });
+    expect(controler("Le mot de passe = l'email de connexion, voir la doc.")).toMatchObject({ decision: "quarantaine" });
+    expect(controler("Variable : secret = `MISTRAL_API_KEY`.")).toMatchObject({ decision: "quarantaine" });
     expect(controler("Appeler le 06 12 34 56 78, le +33 6 98 76 54 32 ou le 01 23 45 67 89.")).toMatchObject({ decision: "quarantaine" });
   });
 

@@ -15,7 +15,8 @@ export type Verdict =
 
 const REFUS: [RegExp, string, string][] = [
   [/\b[A-Z]{2}\d{2}(?: ?[A-Z0-9]{4}){3,7}(?: ?[A-Z0-9]{1,3})?\b/, "compte_bancaire", "numéro de compte bancaire (IBAN)"],
-  [/\b(?:passeport|passport|carte nationale d'identit[ée]|n° de s[ée]curit[ée] sociale|social security number|numéro fiscal)\b/i, "piece_identite", "pièce d'identité ou numéro administratif"],
+  // Un numéro de pièce, pas le mot seul (« Passport.js », « portefeuille de passeports » sont légitimes).
+  [/\b(?:passeport|passport|carte nationale d'identit[ée]|carte d'identit[ée]|s[ée]curit[ée] sociale|social security|num[ée]ro fiscal)\s*(?:n[°o]\.?|num[ée]ro|number|#)?\s*:?\s*[A-Z0-9]{2}[A-Z0-9 ]{5,13}\d\b/i, "piece_identite", "pièce d'identité ou numéro administratif"],
   [/\b[12] ?\d{2} ?(?:0[1-9]|1[0-2]) ?\d{2} ?\d{3} ?\d{3}(?: ?\d{2})?\b/, "piece_identite", "numéro de sécurité sociale"],
   [/\bAKIA[0-9A-Z]{16}\b|\bxox[abpr]-[A-Za-z0-9-]{10,}|\bAIza[0-9A-Za-z_-]{30,}/, "secret", "clé d'accès à un service"],
   [/\b(?:employeur|employer)\b.{0,40}\bswift\b|\bswift\b.{0,40}\b(?:client|confidentiel|interne)\b/i, "swift", "Swift et ses clients sont exclus"],
@@ -38,11 +39,15 @@ function luhn(chiffres: string): boolean {
   }
   return somme % 10 === 0;
 }
-const carteReelle = (t: string) => [...t.matchAll(/\b(?:\d[ -]?){13,19}\b/g)].some((m) => luhn(m[0].replace(/\D/g, "")) && !/^(\d)\1+$/.test(m[0].replace(/\D/g, "")));
+/** Préfixe et longueur d'un réseau de cartes (Visa, Mastercard, Amex, Discover, Diners, JCB) : un horodatage ou un identifiant n'en a pas. */
+const reseau = (d: string) =>
+  (/^4/.test(d) && [13, 16, 19].includes(d.length)) || (/^(5[1-5]|2(2[2-9]|[3-6]\d|7[01]|720))/.test(d) && d.length === 16) || (/^3[47]/.test(d) && d.length === 15) ||
+  (/^(6011|65|64[4-9])/.test(d) && d.length >= 16) || (/^(30[0-5]|36|38|39)/.test(d) && d.length >= 14) || (/^35(2[89]|[3-8]\d)/.test(d) && d.length >= 16);
+const carteReelle = (t: string) => [...t.matchAll(/\b(?:\d[ -]?){13,19}\b/g)].some((m) => { const d = m[0].replace(/\D/g, ""); return reseau(d) && luhn(d) && !/^(\d)\1+$/.test(d); });
 
 /** Valeur d'exemple dans du code ou une documentation : `API_KEY`, `'YOUR_API_KEY'`, `Type.String(`, `process.env.X`, `<clé>`. */
 const SECRET = /\b(?:mot de passe|password|passwd|api[_ -]?key|secret)\s*[:=]\s*(\S{4,})/gi;
-const exemple = (v: string) => /^['"`]?(?:[A-Z][A-Z0-9_]*|your[_-]?\w*|x{3,}\w*|<[^>]*>?|\*{3,})['"`,]*$/i.test(v) || /[({]|process\.env|^['"`]?(?:z|v|vine|yup|Type|Schema|string|number)\b/.test(v);
+const exemple = (v: string) => /^['"`]?(?:[A-Z][A-Z0-9_]*|your[_-]?\w*|x{3,}\w*|<[^>]*>?|\*{3,})['"`,.;:)]*$/i.test(v) || /^(?:\*\*|[ldsjmnc]'|qu')/i.test(v) || /[({]|process\.env|^['"`]?(?:z|v|vine|yup|Type|Schema|string|number)\b/.test(v);
 
 export function controler(texte: string, nom = ""): Verdict {
   const tout = `${nom}\n${texte}`;
