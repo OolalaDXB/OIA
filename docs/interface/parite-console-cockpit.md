@@ -55,11 +55,11 @@ Sources lues : `apps/web/src/app/*`, `lib/workspaceStore.ts`,
 | Enregistrer une vue | `oia_enregistrer_vue` ; lecture `ml_vues_enregistrees_v1` | servie (v2) |
 | Appliquer une vue enregistrée | `ml_vues_enregistrees_v1` | servie (v2) |
 | Fiche : faits, échéances, preuves, gate, questions ouvertes, liens | `ml_fiche_v1` (`source` = contenu complet) | servie |
-| Suggestions de projets (top 5) | `ml_projets_v1` (mots-clés, secteurs, géographies, exclusions) et `ml_fiche_v1.source` ; la règle de score est à reprendre | cockpit, ou **manque** (calcul côté base) |
+| Suggestions de projets (top 5) | `ml_suggestions_v1` (`rang_opportunite <= 5`), règle de la console calculée dans la base | servie (v2) |
 | Étiqueter vers un projet, retirer l'étiquette | `oia_etiqueter` ; liste des projets `ml_projets_v1` | servie (v2) |
 | Ajouter une note à l'opportunité | `oia_noter` ; lecture `ml_notes_v1` ou `ml_fiche_v1.notes` | servie |
 | Créer une tâche sur l'opportunité | `oia_creer_tache` | servie |
-| Basculer une tâche faite ou rouverte | `oia_basculer_tache(id)` ; l'identifiant est dans `ml_fiche_v2.taches` ; **réservée à l'auteur de la tâche** | servie (v2), réserve au § 2 |
+| Basculer une tâche faite ou rouverte | `oia_basculer_tache(id)` ; l'identifiant est dans `ml_fiche_v2.taches` ; auteur ou tout propriétaire de l'espace | servie (v2) |
 | Avis humain (approuver, rejeter, à vérifier, commentaire) | `oia_decider` ; « Ton avis » : `ml_decision_v2`, un COMMENT ne le change pas (décision par défaut) | servie (v2) |
 | Journal d'audit de la fiche | `ml_fiche_v2.decisions` (gate et auteur d'origine compris), `ml_avis_v1` | servie (v2) |
 
@@ -67,10 +67,10 @@ Sources lues : `apps/web/src/app/*`, `lib/workspaceStore.ts`,
 
 | Fonction | Servie par | État |
 | --- | --- | --- |
-| Raisons : bientôt clos, approuvé mais bloqué, à trier, tâche en retard, tâche à faire | `ml_aujourdhui_v2` (« à trier » sans échéances dépassées, décision par défaut) | servie (v2), avec des écarts (ci-dessous) |
-| Horizon 7, 14 ou 30 jours | `ml_aujourdhui_v1` fixe 7 jours (tâches) et 14 jours (échéances) ; le cockpit peut filtrer `ml_taches_v1` et `ml_toutes_v1` | cockpit |
-| Raison « juste expirée » (échue, déjà décidée) | absente de `ml_aujourdhui_v1` ; calculable depuis `ml_toutes_v1` | cockpit |
-| « À trier » limité aux 5 plus récentes | `ml_aujourdhui_v1` les rend toutes | cockpit |
+| Raisons : bientôt clos, approuvé mais bloqué, à trier, tâche en retard, tâche à faire | `ml_aujourdhui_v2`, digest de la console calculé dans la base | servie (v2) |
+| Horizon 7, 14 ou 30 jours | `ml_aujourdhui_v2.horizon` | servie (v2) |
+| Raison « juste expirée » (échue, déjà décidée) | `ml_aujourdhui_v2` (`JUSTE_EXPIREE`) ; « clos depuis la dernière visite » : `oia_marquer_visite`, `ml_clos_depuis_visite_v1` | servie (v2) |
+| « À trier » limité aux 5 plus récentes | `ml_aujourdhui_v2` (cinq au plus, par date de publication) | servie (v2) |
 | Export Markdown du digest | à produire par le cockpit | cockpit |
 | Liste des alertes ouvertes, acquitter | `ml_signals_v1`, `oia_acquitter_alerte` | servie |
 
@@ -97,7 +97,7 @@ donc une ligne par catégorie.
 | --- | --- | --- |
 | Tâches : liste, filtres ouvertes, faites, toutes, en retard | `ml_taches_v1` (`en_retard`) | servie (v2) |
 | Créer une tâche | `oia_creer_tache` | servie |
-| Basculer une tâche | `oia_basculer_tache(id)`, identifiant dans `ml_taches_v1` (auteur seulement) | servie (v2), réserve au § 2 |
+| Basculer une tâche | `oia_basculer_tache(id)`, identifiant dans `ml_taches_v1` (auteur ou tout propriétaire de l'espace) | servie (v2) |
 | Supprimer une tâche | `oia_supprimer('tache', id)` | servie (v2) |
 | Notes : liste, filtre libre ou par projet | `ml_notes_v1` | servie (v2) |
 | Écrire une note | `oia_noter` | servie |
@@ -117,7 +117,7 @@ donc une ligne par catégorie.
 | Sources du projet | `ml_projets_v1.sources` | servie (v2) |
 | Statut des liens (site, sources, opportunités) | `ml_liens_v1` ; « non vérifié » sans ligne | servie (v2) |
 | Opportunités étiquetées, tâches et notes du projet | `ml_toutes_v1`, `ml_taches_v1`, `ml_notes_v1` | servie (v2) |
-| Suggestions (10 non étiquetées) | comme les suggestions de la fiche | cockpit, ou **manque** |
+| Suggestions (10 non étiquetées) | `ml_suggestions_v1` (`not etiquetee`, `rang_projet <= 10`) | servie (v2) |
 | Lancer une recherche pour le projet | `oia_demander('DISCOVERY', { projects: [slug] })` ; suivi `ml_demandes_v1` | servie (v2 pour le suivi) |
 | Ajouter une opportunité par lien | `oia_demander('INGEST_URL', { url, projectSlug, kindHint })` ; suivi `ml_demandes_v1` | servie (v2 pour le suivi) |
 | Créer un projet | `oia_proposer_projet` (brouillon puis recherche) ; lecture `ml_brouillons_projet_v1` | servie (v2) |
@@ -132,34 +132,36 @@ Chaque ligne doit être cochée avant de retirer la console.
   `supabase_migrations.schema_migrations`.
 - [ ] Projets chargés : `pnpm --filter @oia/money-lookup charger -- --projets`,
   puis ajouté au rafraîchissement quotidien (`scripts/rafraichir.sh`).
-- [ ] Le cockpit lit les vues `_v2` et les quatorze vues nouvelles, avec les
-  états chargement, vide, erreur et accès non accordé.
+- [ ] Le cockpit lit les vues `_v2` et les seize vues nouvelles, avec les
+  états chargement, vide, erreur et accès non accordé, et appelle
+  `oia_marquer_visite` à l'ouverture de Money Lookup.
 
 ### Écritures (0008)
 
 - [x] `oia_supprimer(type, id)` : note, tâche, contact, vue enregistrée.
 - [x] `oia_proposer_projet(espace, slug, contenu)` : brouillon `PENDING`, puis
   demande `DISCOVERY`.
-- [ ] **À décider** : basculer ou modifier une tâche créée depuis un autre
-  compte de Mickaël. `oia_basculer_tache` reste réservée à l'auteur ; une
-  tâche importée appartient au compte qui a fait l'import.
+- [x] `oia_basculer_tache` : l'auteur ou tout propriétaire de l'espace, y
+  compris pour une tâche importée (décision de Mickaël).
+- [x] `oia_marquer_visite(espace)` : visite de Money Lookup par compte.
 
 ### Colonnes de liste (0008)
 
 - [x] Publication, confiance, verdict de l'analyste, route stratégique, type
   d'avis : `ml_toutes_v2`.
-- [ ] Fraîcheur : la console recalcule à la lecture qu'une opportunité échue
-  est « expirée », non éligible et rejetée. La base garde l'état de la source.
-  Le cockpit montre « expirée » d'après `echeance` ; les indicateurs ne
-  comptent jamais une opportunité échue comme prête. **Écart à noter** : la
-  console prend l'échéance de candidature, la base la date la plus tardive
-  citée par la source.
+- [x] Deux échéances : `echeance` est celle de candidature (règle de la
+  console), `echeance_plus_tardive` la plus tardive de la source.
+- [x] Fraîcheur recalculée à la lecture comme la console : une opportunité
+  échue n'est jamais éligible et sa recommandation devient `REJECT`
+  (`fraicheur`, `jours_restants` ; la source reste dans
+  `recommandation_source` et `gate_ok_source`).
 
-### Décisions par défaut à valider par Mickaël (0008)
+### Décisions de Mickaël du 8 novembre (0008)
 
-- [ ] Un COMMENT ne change pas la dernière décision (`ml_decision_v2`).
-- [ ] REGULATORY exclu de « Toutes » et des montants (`ml_toutes_v2`, `ml_montants_v2`).
-- [ ] EN_ATTENTE_DE_TRI exclut les échéances dépassées (`ml_aujourdhui_v2`).
+- [x] Un COMMENT ne change pas la dernière décision (`ml_decision_v2`).
+- [x] REGULATORY exclu de « Toutes » et des montants (`ml_toutes_v2`, `ml_montants_v2`).
+- [x] EN_ATTENTE_DE_TRI exclut les échéances dépassées (`ml_aujourdhui_v2`).
+- [x] Le cockpit se branche sur les vues `_v2`.
 
 ### Reprise du navigateur (0008)
 
@@ -169,14 +171,15 @@ Chaque ligne doit être cochée avant de retirer la console.
 - [x] Annulation : aperçu, refus sans confirmation si des éléments importés
   ont été modifiés depuis (`55000`).
 
-### Calculs à porter par le cockpit (ou par la base, à décider)
+### Calculs de la console
 
-- [ ] Suggestions de projets (score mots-clés, secteurs, géographies,
-  exclusions), sur `ml_projets_v1` et la source de la fiche.
-- [ ] Digest : horizon 7, 14 ou 30 jours, limite de 5 « à trier » ;
-  « clos depuis la dernière visite » non repris (la base ne connaît pas la
-  dernière visite), à décider.
-- [ ] Exports CSV, Markdown, digest et journal d'audit, depuis les vues.
+- [x] Suggestions de projets, calculées dans la base (`ml_suggestions_v1`).
+- [x] Digest : horizons 7, 14 et 30 jours, « juste expirée », cinq « à trier »
+  au plus (`ml_aujourdhui_v2`) ; « clos depuis la dernière visite »
+  (`ml_clos_depuis_visite_v1`, le cockpit appelle `oia_marquer_visite` à
+  l'ouverture).
+- [ ] Exports CSV, Markdown, digest et journal d'audit : à produire par le
+  cockpit depuis les vues.
 - [ ] Écarts du dernier passage du pipeline : à servir (rapport) ou à
   abandonner.
 

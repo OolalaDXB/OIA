@@ -27,6 +27,7 @@ const VUES_NOUVELLES = [
   "ml_projets_v1", "ml_contacts_v1", "ml_notes_v1", "ml_taches_v1", "ml_vues_enregistrees_v1",
   "ml_demandes_v1", "ml_brouillons_projet_v1", "ml_liens_v1", "ml_imports_v1", "ml_rattachement_v1",
   "ml_indicateurs_v1", "ml_indicateurs_montants_v1", "ml_indicateurs_repartition_v1", "ml_avis_v1",
+  "ml_clos_depuis_visite_v1", "ml_suggestions_v1",
 ];
 const TOUTES = [...VUES_V2, ...VUES_NOUVELLES];
 const VUES_V1 = ["ml_toutes_v1", "ml_financements_v1", "ml_appels_offres_v1", "ml_investisseurs_v1", "ml_signals_v1", "ml_aujourdhui_v1", "ml_montants_v1", "ml_fiche_v1", "ml_decision_v1"];
@@ -103,6 +104,35 @@ describe.skipIf(!postgresDisponible)("0008 · Money Lookup, contrat version 2 (P
       insert into link_checks (espace_id, url, status, http_code, checked_at, where_found) values ('${STUDIO}', 'https://exemple.test/appel', 'OK', 200, now(), '{rec-1}'), ('${AUTRE}', 'https://exemple.test/b', 'DEAD', 404, now(), '{}');
       insert into oia_import (espace_id, user_id, bilan) values ('${STUDIO}', '${M1}', '{"notes": 0}'), ('${AUTRE}', '${B}', '{}');
     `);
+    // Échéances de candidature dans la source (règle de la console) ; rec-1 a aussi une échéance plus tardive.
+    const ech = (rec: string, jours: number, type = "APPLICATION") =>
+      `update watch_opportunities set payload = jsonb_set(payload, '{deadlines}', coalesce(payload -> 'deadlines', '[]'::jsonb) || jsonb_build_array(jsonb_build_object('deadlineType', '${type}', 'normalized', to_char(current_date + ${jours}, 'YYYY-MM-DD')))) where record_id = '${rec}';`;
+    b.sql([ech("rec-1", 5), ech("rec-1", 40, "UNKNOWN"), ech("rec-2", -3), ech("rec-4", -1)].join("\n"));
+    b.sql(`update watch_opportunities set deadline_at = now() + interval '40 days' where record_id = 'rec-1';`);
+    // Autre espace : scénarios d'« Aujourd'hui » et de suggestions.
+    const pub = (n: number) => `'{"facts": [{"field": "publication-date", "normalizedValue": "2026-10-${String(10 + n).padStart(2, "0")}"}]}'`;
+    b.sql(`
+      insert into watch_opportunities (id, watch_key, record_id, title, issuer, opportunity_kind, recommendation, verification_status, payload, content_fingerprint, espace_id)
+      select ('33333333-aaaa-4000-8000-0000000000' || lpad(n::text, 2, '0'))::uuid, 'kb' || n, 'rec-b-' || n, 'Appel à trier ' || n, 'Émetteur B', 'GRANT', 'INVESTIGATE', 'UNVERIFIED',
+             ('{"facts": [{"field": "publication-date", "normalizedValue": "2026-10-' || lpad((10 + n)::text, 2, '0') || '"}]}')::jsonb, 'fb' || n, '${AUTRE}'
+      from generate_series(1, 7) n;
+      insert into watch_opportunities (id, watch_key, record_id, title, issuer, opportunity_kind, recommendation, verification_status, payload, content_fingerprint, espace_id)
+      values ('33333333-aaaa-4000-8000-000000000020', 'kb20', 'rec-b-exp', 'Subvention échue fictive', 'Émetteur B', 'GRANT', 'INVESTIGATE', 'UNVERIFIED',
+              jsonb_build_object('deadlines', jsonb_build_array(jsonb_build_object('deadlineType', 'APPLICATION', 'normalized', to_char(current_date - 2, 'YYYY-MM-DD')))), 'fb20', '${AUTRE}'),
+             ('33333333-aaaa-4000-8000-000000000021', 'kb21', 'rec-b-sol', 'Solar energy grant, FR', 'Agence fictive', 'GRANT', 'INVESTIGATE', 'UNVERIFIED', '{}', 'fb21', '${AUTRE}'),
+             ('33333333-aaaa-4000-8000-000000000022', 'kb22', 'rec-b-nuc', 'Solar and nuclear call', 'Agence fictive', 'GRANT', 'INVESTIGATE', 'UNVERIFIED', '{}', 'fb22', '${AUTRE}'),
+             ('33333333-aaaa-4000-8000-000000000023', 'kb23', 'rec-b-geo', 'Maintenance contract FR', 'Agence fictive', 'GRANT', 'INVESTIGATE', 'UNVERIFIED', '{}', 'fb23', '${AUTRE}');
+      insert into reviews (espace_id, record_id, action, actor, gate_pursue_eligible_at_decision) values
+        ('${AUTRE}', 'rec-b-exp', 'NEEDS_VERIFICATION', 'b', false), ('${AUTRE}', 'rec-b-sol', 'REJECT', 'b', false),
+        ('${AUTRE}', 'rec-b-nuc', 'REJECT', 'b', false), ('${AUTRE}', 'rec-b-geo', 'REJECT', 'b', false);
+      insert into tasks (espace_id, title, due, actor) values ('${AUTRE}', 'Tâche B à 10 jours', current_date + 10, 'b'), ('${AUTRE}', 'Tâche B à 20 jours', current_date + 20, 'b');
+      update oia_projet set mots_cles = '{subvention}' where slug = 'projet-a';
+      update oia_projet set mots_cles = '{solar,ai}', secteurs = '{energy}', geographies = '{FR}', exclusions = '{nuclear}' where slug = 'projet-b';
+      insert into oia_visite (user_id, espace_id, derniere, precedente) values
+        ('${M1}', '${STUDIO}', now() - interval '2 hours', now() - interval '10 days'),
+        ('${L}', '${STUDIO}', now() - interval '2 hours', now() - interval '10 days'),
+        ('${B}', '${AUTRE}', now() - interval '2 hours', now() - interval '10 days');
+    `);
   });
   afterAll(() => b?.arreter());
 
@@ -164,7 +194,7 @@ describe.skipIf(!postgresDisponible)("0008 · Money Lookup, contrat version 2 (P
   it("décisions par défaut : EN_ATTENTE_DE_TRI exclut les échéances dépassées", () => {
     const tri = (v: string) => j(`select coalesce(json_agg(record_id order by record_id), '[]') from ${v} where raison = 'EN_ATTENTE_DE_TRI'`);
     expect(tri("ml_aujourdhui_v1")).toEqual(["rec-3", "rec-4", "rec-5"]);
-    expect(tri("ml_aujourdhui_v2")).toEqual(["rec-3"]);
+    expect(j(`select coalesce(json_agg(record_id order by record_id), '[]') from ml_aujourdhui_v2 where raison = 'EN_ATTENTE_DE_TRI' and horizon = 14`)).toEqual(["rec-3"]);
   });
 
   it("colonnes de liste lues dans la source, sans erreur sur une source incomplète", () => {
@@ -197,7 +227,7 @@ describe.skipIf(!postgresDisponible)("0008 · Money Lookup, contrat version 2 (P
     expect(compte(`select count(*) from (select 1 from ml_indicateurs_montants_v1 group by espace_id, portee, projet, categorie, sens, devise, verifie_par_humain having count(*) > 1) d`, M1)).toBe(0);
     expect(j(`select to_json(m) from (select somme_connue, somme_bloquees, bloquees from ml_indicateurs_montants_v1 where portee = 'projet' and projet = 'projet-a' and devise = 'EUR') m`))
       .toEqual({ somme_connue: 50000, somme_bloquees: 50000, bloquees: 1 });
-    expect(j(`select json_object_agg(valeur, opportunites) from ml_indicateurs_repartition_v1 where portee = 'espace' and axe = 'blocage'`)).toEqual({ "deadline not verified": 2 });
+    expect(j(`select json_object_agg(valeur, opportunites) from ml_indicateurs_repartition_v1 where portee = 'espace' and axe = 'blocage'`)).toEqual({ "deadline not verified": 2, "opportunity is expired": 2 });
   });
 
   it("lectures globales : tâches (retard, fin), projets, liens, avis avec auteur d'origine et gate", () => {
@@ -207,6 +237,62 @@ describe.skipIf(!postgresDisponible)("0008 · Money Lookup, contrat version 2 (P
     expect(j(`select to_json(l) from (select statut, code_http, trouve_dans from ml_liens_v1) l`)).toEqual({ statut: "OK", code_http: 200, trouve_dans: ["rec-1"] });
     expect(compte(`select count(*) from ml_avis_v1`, M1)).toBe(3);
     expect(compte(`select count(*) from ml_avis_v1 where auteur_origine = 'mickael' and gate_ok_au_moment = false`, M1)).toBe(1);
+  });
+
+  it("deux échéances : candidature par défaut, la plus tardive de la source à côté ; fraîcheur recalculée comme la console", () => {
+    const o = j(`select json_object_agg(record_id, json_build_object('ech', echeance::date - current_date, 'tard', echeance_plus_tardive::date - current_date, 'j', jours_restants, 'f', fraicheur)) from ml_toutes_v2`);
+    expect(o["rec-1"]).toEqual({ ech: 5, tard: 40, j: 5, f: "BIENTOT_CLOSE" });
+    expect(o["rec-2"]).toMatchObject({ ech: -3, j: -3, f: "EXPIREE" });
+    expect(o["rec-3"]).toMatchObject({ ech: null, j: null, f: "SANS_ECHEANCE" });
+    // Échue : jamais éligible, recommandation REJECT, raison ajoutée ; la source reste lisible.
+    b.sql(`update watch_opportunities set gate_pursue_eligible = true where record_id = 'rec-4'`);
+    expect(j(`select to_json(t) from (select gate_ok, gate_ok_source, recommandation, recommandation_source, raisons_gate from ml_toutes_v2 where record_id = 'rec-4') t`))
+      .toEqual({ gate_ok: false, gate_ok_source: true, recommandation: "REJECT", recommandation_source: "INVESTIGATE", raisons_gate: ["opportunity is expired"] });
+    b.sql(`update watch_opportunities set gate_pursue_eligible = false where record_id = 'rec-4'`);
+  });
+
+  it("Aujourd'hui : horizons 7, 14 et 30 jours, « juste expirée », cinq « à trier » au plus", () => {
+    const g = (h: number) => j(`select json_object_agg(raison, n) from (select raison, count(*) n from ml_aujourdhui_v2 where horizon = ${h} group by raison) x`, B);
+    expect(g(7)).toEqual({ TACHE_EN_RETARD: 1, JUSTE_EXPIREE: 1, EN_ATTENTE_DE_TRI: 5 });
+    expect(g(14)).toEqual({ TACHE_EN_RETARD: 1, TACHE_A_FAIRE: 1, JUSTE_EXPIREE: 1, EN_ATTENTE_DE_TRI: 5 });
+    expect(g(30)).toEqual({ TACHE_EN_RETARD: 1, TACHE_A_FAIRE: 2, JUSTE_EXPIREE: 1, EN_ATTENTE_DE_TRI: 5 });
+    // Les cinq plus récemment publiées ; rec-9, sans date de publication, vient après.
+    expect(j(`select json_agg(record_id order by record_id) from ml_aujourdhui_v2 where horizon = 7 and raison = 'EN_ATTENTE_DE_TRI'`, B)).toEqual(["rec-b-3", "rec-b-4", "rec-b-5", "rec-b-6", "rec-b-7"]);
+    expect(j(`select to_json(x) from (select ordre, jours_restants from ml_aujourdhui_v2 where horizon = 7 and raison = 'JUSTE_EXPIREE') x`, B)).toEqual({ ordre: 5, jours_restants: -2 });
+    // Studio : rec-1 bientôt close (approuvée), une seule ligne même si elle est aussi bloquée.
+    expect(j(`select json_agg(raison) from ml_aujourdhui_v2 where horizon = 14 and record_id = 'rec-1' and raison not like 'TACHE%'`)).toEqual(["BIENTOT_CLOS"]);
+  });
+
+  it("suggestions de projets : mots entiers, exclusion, il faut un mot-clé ou un secteur, confiance plafonnée", () => {
+    const s = j(`select json_object_agg(record_id, json_build_object('p', projet, 'c', confiance, 'k', mots_cles, 's', secteurs, 'g', geographies)) from ml_suggestions_v1`, B);
+    expect(s["rec-b-sol"]).toEqual({ p: "projet-b", c: 26, k: ["solar"], s: ["energy"], g: ["FR"] });
+    expect(s["rec-b-nuc"]).toBeUndefined(); // exclusion « nuclear »
+    expect(s["rec-b-geo"]).toBeUndefined(); // « ai » n'est pas un mot de « maintenance », et une géographie seule ne suffit pas
+    expect(j(`select json_agg(record_id) from ml_suggestions_v1`)).toEqual(["rec-1"]);
+    expect(b.sql(`select ml_mot_entier('Score (AI) fictif', 'ai')::text || ml_mot_entier('maintenance', 'ai')::text || ml_mot_entier('c++ et rust', 'c++')::text`)).toBe("truefalsetrue");
+  });
+
+  it("clos depuis la dernière visite : par compte ; oia_marquer_visite ne fait pas avancer la visite sur un simple rechargement", () => {
+    expect(j(`select json_agg(record_id order by record_id) from ml_clos_depuis_visite_v1`)).toEqual(["rec-4"]);
+    expect(j(`select json_agg(record_id order by record_id) from ml_clos_depuis_visite_v1`, B)).toEqual(["rec-b-exp"]);
+    const v1 = j(`select oia_marquer_visite('${STUDIO}')`);
+    const v2 = j(`select oia_marquer_visite('${STUDIO}')`);
+    expect(v2).toEqual(v1);
+    expect(Date.parse(v1.derniere)).toBeGreaterThan(Date.now() - 60_000);
+    expect(compte(`select count(*) from ml_clos_depuis_visite_v1`, M1)).toBe(0);
+    expect(compte(`select count(*) from ml_clos_depuis_visite_v1`, L)).toBe(1);
+    expect(erreur(b, `select oia_marquer_visite('${STUDIO}')`, en(X))).toMatch(/accès refusé/);
+    expect(erreur(b, `select count(*) from oia_visite`, { role: "anon" })).toMatch(/permission denied/);
+    expect(compte(`select count(*) from oia_visite`, M1)).toBe(1);
+  });
+
+  it("basculer une tâche : son auteur ou tout propriétaire de l'espace ; pas un autre éditeur ni un lecteur", () => {
+    const t = b.sql(`select id from ml_taches_v1 where titre = 'Tâche à venir'`, en(M1)); // auteur « m1 » (texte) : M1 n'en est pas l'auteur
+    expect(b.sql(`select oia_basculer_tache('${t}')`, en(M1))).toBe("DONE");
+    expect(b.sql(`select oia_basculer_tache('${t}')`, en(M1))).toBe("OPEN");
+    expect(erreur(b, `select oia_basculer_tache('${t}')`, en(L))).toMatch(/droit d'écriture refusé/);
+    const tb = b.sql(`select id from ml_taches_v1 where titre = 'Tâche B'`, en(B)); // éditeur, pas auteur, pas propriétaire
+    expect(erreur(b, `select oia_basculer_tache('${tb}')`, en(B))).toMatch(/seuls l'auteur de la tâche et les propriétaires/);
   });
 
   it("oia_supprimer : éditeur de l'espace seulement, journalisé", () => {

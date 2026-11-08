@@ -27,7 +27,7 @@ données, `SHA256SUMS`), relue sur un Postgres jetable.
 
 | Ordre | Fichier | Effet | Prérequis |
 | --- | --- | --- | --- |
-| 9 | `0008_money_lookup_v2.sql` | Contrat Money Lookup **version 2**, d'après les écarts relevés par Lovable (`1e3040c`) : import A4 corrigé (valeurs `null` d'une sauvegarde valide, conflits au bilan, aperçu et confirmation d'annulation) ; vues `_v2` pour trois décisions par défaut **à valider par Mickaël** (COMMENT ignoré, REGULATORY hors de Toutes et des montants, tri sans échéances dépassées) ; quatorze lectures nouvelles et table `oia_projet` ; `oia_supprimer`, `oia_proposer_projet`. Les vues `_v1` restent servies sans changement | 0007 appliquée |
+| 9 | `0008_money_lookup_v2.sql` | Contrat Money Lookup **version 2**, d'après les écarts relevés par Lovable (`1e3040c`) et les décisions de Mickaël du 8 novembre : import A4 corrigé (valeurs `null`, conflits au bilan, aperçu et confirmation d'annulation) ; vues `_v2` sur lesquelles se branche le cockpit (COMMENT ignoré, REGULATORY hors de Toutes et des montants, tri sans échéances dépassées, échéance de candidature et la plus tardive, fraîcheur recalculée, Aujourd'hui à 7, 14 et 30 jours) ; seize lectures nouvelles, dont suggestions de projets et « clos depuis la dernière visite », et tables `oia_projet`, `oia_import_element`, `oia_visite` ; `oia_supprimer`, `oia_proposer_projet`, `oia_marquer_visite` ; `oia_basculer_tache` ouverte aux propriétaires. Les vues `_v1` restent servies sans changement | 0007 appliquée |
 
 Après 0008 : charger les projets (`pnpm --filter @oia/money-lookup charger -- --projets --base …`,
 avec `OIA_CHARGEMENT_SUPABASE=oui`), puis ajouter cette commande au

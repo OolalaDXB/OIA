@@ -15,13 +15,19 @@
 --      `oia_annuler_import` refuse (code 55000) tant que ces modifications ne
 --      sont pas confirmées ;
 --    * l'auteur d'origine d'une vue enregistrée est conservé quand il existe.
--- 2. Décisions par défaut, à valider par Mickaël, servies par des vues `_v2`
---    (les vues `_v1` restent servies sans changement, règle du contrat) :
+-- 2. Décisions validées par Mickaël le 8 novembre 2026, servies par des vues
+--    `_v2` (les vues `_v1` restent servies sans changement, règle du contrat) :
 --    * un COMMENT ne change pas la dernière décision (`ml_decision_v2`) ;
 --    * REGULATORY est exclu de « Toutes » et des montants (il reste dans Signals) ;
 --    * EN_ATTENTE_DE_TRI exclut les échéances dépassées (`ml_aujourdhui_v2`).
 --    `ml_toutes_v2` ajoute les colonnes de liste (publication, confiance,
---    verdict de l'analyste, route stratégique, type d'avis) ; `ml_fiche_v2`
+--    verdict de l'analyste, route stratégique, type d'avis) et les deux
+--    échéances : `echeance` est celle de candidature (règle de la console),
+--    `echeance_plus_tardive` la plus tardive de la source. La fraîcheur est
+--    recalculée à la lecture comme dans la console : une opportunité échue
+--    n'est jamais éligible et sa recommandation devient REJECT.
+--    `ml_aujourdhui_v2` reprend le digest de la console : horizons 7, 14 et
+--    30 jours, « juste expirée », cinq « à trier » au plus. `ml_fiche_v2`
 --    donne les identifiants, la date de fin des tâches, le gate de chaque
 --    décision et l'auteur d'origine.
 -- 3. Lectures nouvelles (`_v1`), membres de l'espace seulement : projets du
@@ -29,8 +35,12 @@
 --    tâches, vues enregistrées, demandes, brouillons de projet, contrôle des
 --    liens, imports, rattachement aux projets, indicateurs (comptes, montants
 --    sans mélange, répartitions), journal global des avis.
--- 4. Écritures nouvelles : `oia_supprimer` (note, tâche, contact, vue) et
---    `oia_proposer_projet` (brouillon puis recherche).
+--    Plus : suggestions de projets calculées dans la base (règle de la
+--    console), et « clos depuis la dernière visite » (`oia_marquer_visite`).
+-- 4. Écritures nouvelles : `oia_supprimer` (note, tâche, contact, vue),
+--    `oia_proposer_projet` (brouillon puis recherche), `oia_marquer_visite` ;
+--    `oia_basculer_tache` est ouverte à tout propriétaire de l'espace, en plus
+--    de l'auteur de la tâche (décision de Mickaël).
 --
 -- Rejouable. Retour arrière : voir la fin du fichier.
 
@@ -292,25 +302,58 @@ from public.reviews r
 where r.action <> 'COMMENT'
 order by r.espace_id, r.record_id, r.at desc, r.id;
 
+-- Échéance de candidature, règle de la console (packages/ingestion/src/freshness.ts) :
+-- la première échéance de type APPLICATION, sinon la première échéance normalisée.
+create or replace function public.ml_echeance_candidature(p jsonb) returns timestamptz
+language plpgsql immutable set search_path = public, pg_temp as $$
+declare
+  v text;
+begin
+  if p is null or jsonb_typeof(p -> 'deadlines') is distinct from 'array' then return null; end if;
+  select coalesce(
+    (select d ->> 'normalized' from jsonb_array_elements(p -> 'deadlines') with ordinality as x(d, n)
+      where d ->> 'deadlineType' = 'APPLICATION' and coalesce(d ->> 'normalized', '') <> '' order by n limit 1),
+    (select d ->> 'normalized' from jsonb_array_elements(p -> 'deadlines') with ordinality as x(d, n)
+      where coalesce(d ->> 'normalized', '') <> '' order by n limit 1))
+  into v;
+  if v is null then return null; end if;
+  if v ~ '^\d{4}-\d{2}-\d{2}$' then return v::date::timestamp at time zone 'UTC'; end if;
+  return v::timestamptz;
+exception when others then
+  return null;
+end $$;
+
 -- « Toutes », strictement monétaire : REGULATORY reste dans Signals seulement.
+-- Fraîcheur recalculée à la lecture, comme la console : jours jusqu'à l'échéance de
+-- candidature depuis aujourd'hui 0 h UTC ; échue (< 0) : non éligible, recommandation
+-- REJECT, raison « opportunity is expired » ajoutée au gate.
 create or replace view public.ml_toutes_v2 with (security_invoker = true) as
+with base as (
+  select o.*, public.ml_nature(o.opportunity_kind) as nat, public.ml_echeance_candidature(o.payload) as ech,
+         date_trunc('day', now() at time zone 'UTC') at time zone 'UTC' as jour
+  from public.watch_opportunities o
+  where public.ml_nature(o.opportunity_kind) <> 'REGULATORY'
+), f as (
+  select b.*, floor(extract(epoch from (b.ech - b.jour)) / 86400)::int as jr from base b
+)
 select
   o.id, o.espace_id, o.record_id,
   o.title                                   as titre,
   o.issuer                                  as emetteur,
-  public.ml_nature(o.opportunity_kind)      as nature,
-  public.ml_categorie_de(public.ml_nature(o.opportunity_kind)) as categorie,
-  public.ml_sens_de(public.ml_nature(o.opportunity_kind))      as sens,
+  o.nat                                     as nature,
+  public.ml_categorie_de(o.nat)             as categorie,
+  public.ml_sens_de(o.nat)                  as sens,
   m.valeur                                  as montant,
   m.devise,
   m.confiance                               as confiance_montant,
   (m.valeur is not null)                    as montant_connu,
-  o.deadline_at                             as echeance,
-  o.recommendation                          as recommandation,
+  o.ech                                     as echeance,
+  case when o.jr < 0 then 'REJECT' else o.recommendation end as recommandation,
   o.verification_status                     as statut_verification,
   coalesce(o.verification_status = 'VERIFIED' and d.decision = 'APPROVE', false) as verifie_par_humain,
-  o.gate_pursue_eligible                    as gate_ok,
-  o.gate_failed_reasons                     as raisons_gate,
+  (o.gate_pursue_eligible and coalesce(o.jr >= 0, true)) as gate_ok,
+  case when o.jr < 0 then array(select distinct x from unnest(coalesce(o.gate_failed_reasons, '{}') || array['opportunity is expired']) as x order by x)
+       else o.gate_failed_reasons end    as raisons_gate,
   coalesce(d.decision, 'PENDING')           as decision_humaine,
   d.decide_le,
   t.project_slug                            as projet_etiquete,
@@ -320,22 +363,26 @@ select
   o.last_seen_at                            as vu_la_derniere_fois,
   o.disappeared_at                          as disparu_le,
   -- Colonnes de liste, lues dans la source (filtres et tris de l'ancienne console).
-  (select case when f ->> 'normalizedValue' ~ '^\d{4}-\d{2}-\d{2}' then left(f ->> 'normalizedValue', 10)::date end
-     from jsonb_array_elements(case when jsonb_typeof(o.payload -> 'facts') = 'array' then o.payload -> 'facts' else '[]'::jsonb end) f
-    where f ->> 'field' = 'publication-date' limit 1) as publie_le,
+  (select case when x ->> 'normalizedValue' ~ '^\d{4}-\d{2}-\d{2}' then left(x ->> 'normalizedValue', 10)::date end
+     from jsonb_array_elements(case when jsonb_typeof(o.payload -> 'facts') = 'array' then o.payload -> 'facts' else '[]'::jsonb end) x
+    where x ->> 'field' = 'publication-date' limit 1) as publie_le,
   case when jsonb_typeof(o.payload #> '{scores,infoConfidence}') = 'number' then (o.payload #>> '{scores,infoConfidence}')::numeric end as confiance_information,
   o.payload #>> '{assessment,verdict}'      as verdict_analyste,
   o.payload ->> 'strategicRoute'            as route_strategique,
-  (select f ->> 'normalizedValue'
-     from jsonb_array_elements(case when jsonb_typeof(o.payload -> 'facts') = 'array' then o.payload -> 'facts' else '[]'::jsonb end) f
-    where f ->> 'field' = 'notice-type' limit 1) as type_avis,
+  (select x ->> 'normalizedValue'
+     from jsonb_array_elements(case when jsonb_typeof(o.payload -> 'facts') = 'array' then o.payload -> 'facts' else '[]'::jsonb end) x
+    where x ->> 'field' = 'notice-type' limit 1) as type_avis,
   d.decide_par,
-  d.auteur_origine                          as decide_par_origine
-from public.watch_opportunities o
+  d.auteur_origine                          as decide_par_origine,
+  o.deadline_at                             as echeance_plus_tardive,
+  o.jr                                      as jours_restants,
+  case when o.ech is null then 'SANS_ECHEANCE' when o.jr < 0 then 'EXPIREE' when o.jr <= 14 then 'BIENTOT_CLOSE' else 'OUVERTE' end as fraicheur,
+  o.recommendation                          as recommandation_source,
+  o.gate_pursue_eligible                    as gate_ok_source
+from f o
 left join public.ml_montant m on m.opportunity_id = o.id
 left join public.ml_decision_v2 d on d.espace_id = o.espace_id and d.record_id = o.record_id
-left join public.project_tags t on t.espace_id = o.espace_id and t.record_id = o.record_id
-where public.ml_nature(o.opportunity_kind) <> 'REGULATORY';
+left join public.project_tags t on t.espace_id = o.espace_id and t.record_id = o.record_id;
 
 create or replace view public.ml_financements_v2 with (security_invoker = true) as
   select * from public.ml_toutes_v2 where nature in ('GRANT', 'PRIZE', 'TAX_INCENTIVE', 'DEBT_GUARANTEE');
@@ -356,23 +403,77 @@ select espace_id, categorie, sens, null, verifie_par_humain, count(*), 0, null, 
 from public.ml_toutes_v2 where montant is null
 group by espace_id, categorie, sens, verifie_par_humain;
 
--- « Aujourd'hui » : EN_ATTENTE_DE_TRI exclut les échéances dépassées, comme l'ancienne console.
+-- « Aujourd'hui », digest de la console (packages/workspace/src/digest.ts), pour chaque
+-- horizon (7, 14, 30 jours) : le cockpit filtre `horizon`. Une opportunité n'a qu'une
+-- ligne : bientôt close (14 jours, hors rejet), sinon juste expirée (échue après une
+-- approbation ou une demande de vérification), sinon approuvée mais bloquée. « À trier » :
+-- sans décision, pas échue, pas déjà listée, cinq au plus, les plus récemment publiées.
+-- L'horizon ne change que les tâches à faire.
 create or replace view public.ml_aujourdhui_v2 with (security_invoker = true) as
-select t.espace_id, case when t.due < current_date then 'TACHE_EN_RETARD' else 'TACHE_A_FAIRE' end as raison,
-       t.title as titre, t.record_id, t.project_slug as projet, t.due::timestamptz as echeance, t.id::text as reference
-from public.tasks t where t.status = 'OPEN' and t.due is not null and t.due <= current_date + 7
-union all
-select a.espace_id, 'ALERTE', a.headline, null, a.project_slug, null, a.id::text
-from public.alerts a where a.acknowledged_at is null
-union all
-select v.espace_id, 'BIENTOT_CLOS', v.titre, v.record_id, v.projet_etiquete, v.echeance, v.id::text
-from public.ml_toutes_v2 v where v.echeance between now() and now() + interval '14 days' and v.decision_humaine <> 'REJECT'
-union all
-select v.espace_id, 'APPROUVE_MAIS_BLOQUE', v.titre, v.record_id, v.projet_etiquete, v.echeance, v.id::text
-from public.ml_toutes_v2 v where v.decision_humaine = 'APPROVE' and not v.gate_ok
-union all
-select v.espace_id, 'EN_ATTENTE_DE_TRI', v.titre, v.record_id, v.projet_etiquete, v.echeance, v.id::text
-from public.ml_toutes_v2 v where v.decision_humaine = 'PENDING' and v.disparu_le is null and (v.echeance is null or v.echeance >= now());
+with h(horizon) as (values (7), (14), (30)),
+j as (select (now() at time zone 'UTC')::date as jour),
+opp as (
+  select v.*,
+         case
+           when v.fraicheur = 'BIENTOT_CLOSE' and v.decision_humaine <> 'REJECT' then 'BIENTOT_CLOS'
+           when v.fraicheur = 'EXPIREE' and v.decision_humaine in ('APPROVE', 'NEEDS_VERIFICATION') then 'JUSTE_EXPIREE'
+           when v.decision_humaine = 'APPROVE' and not v.gate_ok then 'APPROUVE_MAIS_BLOQUE'
+         end as raison_opp
+  from public.ml_toutes_v2 v
+),
+a_trier as (
+  select o.*, row_number() over (partition by o.espace_id order by o.publie_le desc nulls last, o.titre, o.id) as rang
+  from opp o
+  where o.raison_opp is null and o.decision_humaine = 'PENDING' and o.fraicheur <> 'EXPIREE' and o.disparu_le is null
+),
+lignes as (
+  select t.espace_id, null::int as horizon_min, 'TACHE_EN_RETARD'::text as raison, t.title as titre, t.record_id, t.project_slug as projet,
+         t.due::timestamp at time zone 'UTC' as echeance, (t.due - j.jour) as jours_restants, t.id::text as reference, t.due as jour_tache
+  from public.tasks t, j where t.status = 'OPEN' and t.due is not null and t.due < j.jour
+  union all
+  select t.espace_id, (t.due - j.jour), 'TACHE_A_FAIRE', t.title, t.record_id, t.project_slug,
+         t.due::timestamp at time zone 'UTC', (t.due - j.jour), t.id::text, t.due
+  from public.tasks t, j where t.status = 'OPEN' and t.due is not null and t.due >= j.jour and t.due <= j.jour + 30
+  union all
+  select a.espace_id, null, 'ALERTE', a.headline, null, a.project_slug, null, null, a.id::text, null
+  from public.alerts a where a.acknowledged_at is null
+  union all
+  select o.espace_id, null, o.raison_opp, o.titre, o.record_id, o.projet_etiquete, o.echeance, o.jours_restants, o.id::text, null
+  from opp o where o.raison_opp is not null
+  union all
+  select a.espace_id, null, 'EN_ATTENTE_DE_TRI', a.titre, a.record_id, a.projet_etiquete, a.echeance, a.jours_restants, a.id::text, null
+  from a_trier a where a.rang <= 5
+)
+select l.espace_id, h.horizon,
+       case l.raison when 'TACHE_EN_RETARD' then 1 when 'TACHE_A_FAIRE' then 2 when 'ALERTE' then 3 when 'BIENTOT_CLOS' then 4
+                     when 'JUSTE_EXPIREE' then 5 when 'APPROUVE_MAIS_BLOQUE' then 6 else 7 end as ordre,
+       l.raison, l.titre, l.record_id, l.projet, l.echeance, l.jours_restants, l.reference
+from lignes l cross join h
+where l.horizon_min is null or l.horizon_min <= h.horizon;
+
+-- « Clos depuis la dernière visite » : date de visite de Money Lookup, par compte.
+create table if not exists public.oia_visite (
+  user_id    uuid not null,
+  espace_id  uuid not null references public.oia_espace (id),
+  module     text not null default 'money_lookup' check (module in ('money_lookup')),
+  derniere   timestamptz not null,
+  precedente timestamptz,
+  primary key (user_id, espace_id, module)
+);
+alter table public.oia_visite enable row level security;
+drop policy if exists soi_meme on public.oia_visite;
+create policy soi_meme on public.oia_visite for select to authenticated using (user_id = auth.uid() and public.oia_est_membre(espace_id));
+revoke all on public.oia_visite from public, anon, authenticated;
+grant select on public.oia_visite to authenticated;
+
+-- Ce qui a été clos depuis la visite précédente de l'appelant : échéance de
+-- candidature passée entre cette visite et maintenant, hors rejet. Pas de visite
+-- précédente : aucune ligne (première visite).
+create or replace view public.ml_clos_depuis_visite_v1 with (security_invoker = true) as
+select v.espace_id, v.id, v.record_id, v.titre, v.echeance, v.decision_humaine, v.projet_etiquete, s.precedente as depuis
+from public.ml_toutes_v2 v
+join public.oia_visite s on s.espace_id = v.espace_id and s.user_id = auth.uid() and s.module = 'money_lookup'
+where s.precedente is not null and v.echeance >= s.precedente and v.echeance < now() and v.decision_humaine <> 'REJECT';
 
 -- Fiche : identifiants, date de fin des tâches, gate de chaque décision, auteur d'origine.
 create or replace view public.ml_fiche_v2 with (security_invoker = true) as
@@ -583,6 +684,43 @@ select r.id, r.espace_id, r.record_id, r.action, r.comment as commentaire, r.at 
        r.auteur_origine, r.gate_pursue_eligible_at_decision as gate_ok_au_moment, r.id_origine, r.import_id
 from public.reviews r;
 
+-- Suggestions de projets, règle de la console (packages/workspace/src/suggest.ts) :
+-- mots-clés, secteurs et géographies du registre cherchés en mots entiers dans le
+-- titre, l'émetteur et les faits ; une exclusion écarte ; il faut un mot-clé ou un
+-- secteur ; score = 12 par mot-clé, 10 par secteur, 4 par géographie ; confiance
+-- plafonnée à 70. Heuristique, jamais un verdict.
+create or replace function public.ml_mot_entier(p_texte text, p_terme text) returns boolean
+language sql immutable set search_path = public, pg_temp as $$
+  select btrim(coalesce(p_terme, '')) <> ''
+     and lower(p_texte) ~ ('(^|[^a-z0-9])' || regexp_replace(lower(btrim(p_terme)), '([.*+?^${}()|\[\]\\])', '\\\1', 'g') || '([^a-z0-9]|$)')
+$$;
+
+create or replace view public.ml_suggestions_v1 with (security_invoker = true) as
+with corpus as (
+  select v.id, v.espace_id, v.record_id, (v.projet_etiquete is not null) as etiquetee,
+         lower(concat_ws(' 
+ ', o.title, o.issuer,
+           (select string_agg(concat_ws(' ', x ->> 'field', x ->> 'normalizedValue'), ' 
+ ')
+              from jsonb_array_elements(case when jsonb_typeof(o.payload -> 'facts') = 'array' then o.payload -> 'facts' else '[]'::jsonb end) x))) as texte
+  from public.ml_toutes_v2 v join public.watch_opportunities o on o.id = v.id
+), signaux as (
+  select c.id, c.espace_id, c.record_id, c.etiquetee, p.slug as projet,
+         array(select k from unnest(p.mots_cles) k where public.ml_mot_entier(c.texte, k)) as mots_cles,
+         array(select k from unnest(p.secteurs) k where public.ml_mot_entier(c.texte, k)) as secteurs,
+         array(select k from unnest(p.geographies) k where public.ml_mot_entier(c.texte, k)) as geographies
+  from corpus c
+  join public.oia_projet p on p.espace_id = c.espace_id and p.actif and p.retire_du_registre_le is null
+  where not exists (select 1 from unnest(p.exclusions) x where public.ml_mot_entier(c.texte, x))
+), scores as (
+  select s.*, cardinality(s.mots_cles) * 12 + cardinality(s.secteurs) * 10 + cardinality(s.geographies) * 4 as score
+  from signaux s where cardinality(s.mots_cles) + cardinality(s.secteurs) > 0
+)
+select s.espace_id, s.id, s.record_id, s.projet, least(s.score, 70) as confiance, s.score, s.mots_cles, s.secteurs, s.geographies, s.etiquetee,
+       row_number() over (partition by s.espace_id, s.id order by least(s.score, 70) desc, s.projet) as rang_opportunite,
+       row_number() over (partition by s.espace_id, s.projet, s.etiquetee order by least(s.score, 70) desc, s.record_id) as rang_projet
+from scores s;
+
 -- ══ 4. Écritures nouvelles ═════════════════════════════════════════════════
 
 -- Supprimer une note, une tâche, un contact ou une vue enregistrée. Éditeur ou propriétaire ; journalisé.
@@ -636,6 +774,50 @@ begin
   return jsonb_build_object('slug', p_slug, 'statut', 'PENDING', 'demande_id', v_demande);
 end $$;
 
+-- Marquer une visite de Money Lookup (le cockpit l'appelle à l'ouverture). La visite
+-- précédente n'avance que si la dernière date de plus de 30 minutes : recharger la
+-- page ne vide pas « clos depuis la dernière visite ».
+create or replace function public.oia_marquer_visite(p_espace uuid)
+returns jsonb language plpgsql security definer set search_path = public, pg_temp as $$
+declare
+  v_uid uuid := auth.uid();
+  v_ligne public.oia_visite;
+begin
+  if v_uid is null then raise exception 'oia: identité requise' using errcode = '42501'; end if;
+  if not public.oia_est_membre(p_espace) then raise exception 'oia: accès refusé à cet espace' using errcode = '42501'; end if;
+  insert into public.oia_visite (user_id, espace_id, module, derniere, precedente)
+  values (v_uid, p_espace, 'money_lookup', now(), null)
+  on conflict (user_id, espace_id, module) do update
+    set precedente = case when public.oia_visite.derniere < now() - interval '30 minutes' then public.oia_visite.derniere else public.oia_visite.precedente end,
+        derniere   = case when public.oia_visite.derniere < now() - interval '30 minutes' then now() else public.oia_visite.derniere end
+  returning * into v_ligne;
+  return jsonb_build_object('derniere', v_ligne.derniere, 'precedente', v_ligne.precedente);
+end $$;
+
+-- Basculer une tâche : son auteur, ou tout propriétaire de l'espace (décision de Mickaël),
+-- y compris pour une tâche importée.
+create or replace function public.oia_basculer_tache(p_tache uuid)
+returns text language plpgsql security definer set search_path = public, pg_temp as $$
+declare
+  v_espace uuid;
+  v_actor text;
+  v_statut text;
+  v_uid uuid;
+begin
+  select espace_id, actor into v_espace, v_actor from public.tasks where id = p_tache;
+  if v_espace is null then raise exception 'oia: tâche introuvable' using errcode = 'P0002'; end if;
+  v_uid := public.oia_exiger_editeur(v_espace);
+  if v_actor is distinct from v_uid::text and public.oia_role(v_espace) <> 'proprietaire' then
+    raise exception 'oia: seuls l''auteur de la tâche et les propriétaires de l''espace la basculent' using errcode = '42501';
+  end if;
+  update public.tasks
+     set status = case when status = 'OPEN' then 'DONE' else 'OPEN' end,
+         completed_at = case when status = 'OPEN' then now() else null end
+   where id = p_tache returning status into v_statut;
+  perform public.oia_journaliser(v_espace, 'basculer', 'tasks', p_tache::text, jsonb_build_object('statut', v_statut));
+  return v_statut;
+end $$;
+
 -- ══ 5. Droits ══════════════════════════════════════════════════════════════
 
 do $$
@@ -647,7 +829,7 @@ begin
   -- y compris à authenticated, puis on ne rend que la lecture. Aucune écriture par une vue.
   foreach v in array array[
     'ml_decision_v2', 'ml_toutes_v2', 'ml_financements_v2', 'ml_appels_offres_v2', 'ml_investisseurs_v2', 'ml_montants_v2',
-    'ml_aujourdhui_v2', 'ml_fiche_v2',
+    'ml_aujourdhui_v2', 'ml_fiche_v2', 'ml_clos_depuis_visite_v1', 'ml_suggestions_v1',
     'ml_projets_v1', 'ml_contacts_v1', 'ml_notes_v1', 'ml_taches_v1', 'ml_vues_enregistrees_v1', 'ml_demandes_v1',
     'ml_brouillons_projet_v1', 'ml_liens_v1', 'ml_imports_v1', 'ml_rattachement_v1', 'ml_indicateurs_v1',
     'ml_indicateurs_montants_v1', 'ml_indicateurs_repartition_v1', 'ml_avis_v1'] loop
@@ -657,11 +839,11 @@ begin
   end loop;
   foreach f in array array[
     'oia_importer_sauvegarde(uuid, jsonb)', 'oia_apercu_annulation(uuid)', 'oia_annuler_import(uuid, boolean)',
-    'oia_supprimer(text, uuid)', 'oia_proposer_projet(uuid, text, jsonb, boolean)'] loop
+    'oia_supprimer(text, uuid)', 'oia_proposer_projet(uuid, text, jsonb, boolean)', 'oia_marquer_visite(uuid)', 'oia_basculer_tache(uuid)'] loop
     execute format('revoke all on function public.%s from public, anon', f);
     execute format('grant execute on function public.%s to authenticated', f);
   end loop;
-  foreach f in array array['oia_json_tableau(jsonb)', 'oia_json_objet(jsonb)', 'oia_empreinte(text[])'] loop
+  foreach f in array array['oia_json_tableau(jsonb)', 'oia_json_objet(jsonb)', 'oia_empreinte(text[])', 'ml_echeance_candidature(jsonb)', 'ml_mot_entier(text, text)'] loop
     execute format('revoke all on function public.%s from public, anon', f);
     execute format('grant execute on function public.%s to authenticated', f);
   end loop;
@@ -671,15 +853,17 @@ commit;
 
 -- ══ Retour arrière ════════════════════════════════════════════════════════
 -- begin;
---   drop view if exists public.ml_avis_v1, public.ml_indicateurs_repartition_v1, public.ml_indicateurs_montants_v1,
+--   drop view if exists public.ml_suggestions_v1, public.ml_clos_depuis_visite_v1, public.ml_avis_v1, public.ml_indicateurs_repartition_v1, public.ml_indicateurs_montants_v1,
 --     public.ml_indicateurs_v1, public.ml_rattachement_v1, public.ml_imports_v1, public.ml_liens_v1,
 --     public.ml_brouillons_projet_v1, public.ml_demandes_v1, public.ml_vues_enregistrees_v1, public.ml_taches_v1,
 --     public.ml_notes_v1, public.ml_contacts_v1, public.ml_projets_v1, public.ml_fiche_v2, public.ml_aujourdhui_v2,
 --     public.ml_montants_v2, public.ml_investisseurs_v2, public.ml_appels_offres_v2, public.ml_financements_v2,
 --     public.ml_toutes_v2, public.ml_decision_v2;
 --   drop function if exists public.oia_proposer_projet(uuid, text, jsonb, boolean), public.oia_supprimer(text, uuid),
---     public.oia_apercu_annulation(uuid), public.oia_annuler_import(uuid, boolean);
---   drop table if exists public.oia_projet, public.oia_import_element;
+--     public.oia_apercu_annulation(uuid), public.oia_annuler_import(uuid, boolean), public.oia_marquer_visite(uuid),
+--     public.ml_mot_entier(text, text), public.ml_echeance_candidature(jsonb);
+--   drop table if exists public.oia_projet, public.oia_import_element, public.oia_visite;
+--   -- puis rejouer oia_basculer_tache de 0003 (réservée à l'auteur).
 --   -- puis rejouer les définitions de oia_importer_sauvegarde et oia_annuler_import(uuid) de 0005.
 --   delete from supabase_migrations.schema_migrations where version = '<version inscrite>';
 -- commit;

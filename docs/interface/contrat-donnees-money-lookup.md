@@ -171,20 +171,38 @@ Migration `packages/database/supabase/migrations/0008_money_lookup_v2.sql`,
 **en fichier, non appliquée** : Mickaël l'applique après 0007. Inventaire de
 la console et parité : `docs/interface/parite-console-cockpit.md`.
 
-**Règles.** Mêmes règles que la version 1. Les vues `_v1` restent servies
-sans changement au moins 30 jours ; le cockpit se branche sur les vues `_v2`
-et les vues nouvelles. Toutes sont en `security_invoker`, lisibles par les
+**Règles.** Mêmes règles que la version 1. Le cockpit se branche sur les
+vues `_v2` et les vues nouvelles (décision de Mickaël) ; les vues `_v1`
+restent servies sans changement au moins 30 jours. Toutes sont en `security_invoker`, lisibles par les
 membres de l'espace seulement ; `anon` ne lit rien ; aucune écriture par une
 vue. Colonnes et types relevés en base (test :
 `packages/database/test/money-lookup-v2.test.ts`).
 
-### Décisions par défaut, à valider par Mickaël
+### Décisions de Mickaël du 8 novembre 2026 (validées)
 
-| Décision | Vue | Effet | Si Mickaël la refuse |
-| --- | --- | --- | --- |
-| 1. Un COMMENT ne change pas la dernière décision | `ml_decision_v2`, et tout ce qui en dépend | « Ton avis », `verifie_par_humain` et le tri ignorent les commentaires, comme l'ancienne console | le cockpit lit `ml_decision_v1` |
-| 2. REGULATORY exclu de « Toutes » et des montants | `ml_toutes_v2`, `ml_montants_v2`, familles `_v2`, indicateurs | « Toutes » reste strictement monétaire ; REGULATORY reste dans `ml_signals_v1` | retirer le filtre dans une 0009 |
-| 3. EN_ATTENTE_DE_TRI exclut les échéances dépassées | `ml_aujourdhui_v2`, `ml_indicateurs_v1.a_trier` | même périmètre que l'ancienne console | le cockpit lit `ml_aujourdhui_v1` |
+| Décision | Vue ou fonction | Effet |
+| --- | --- | --- |
+| 1. Un COMMENT ne change pas la dernière décision | `ml_decision_v2`, et tout ce qui en dépend | « Ton avis », `verifie_par_humain` et le tri ignorent les commentaires, comme l'ancienne console |
+| 2. REGULATORY exclu de « Toutes » et des montants | `ml_toutes_v2`, `ml_montants_v2`, familles `_v2`, indicateurs, suggestions | « Toutes » reste strictement monétaire ; REGULATORY reste dans `ml_signals_v1` |
+| 3. EN_ATTENTE_DE_TRI exclut les échéances dépassées | `ml_aujourdhui_v2`, `ml_indicateurs_v1.a_trier` | même périmètre que l'ancienne console |
+| 4. Le cockpit se branche sur les vues `_v2` | toutes les vues `_v2` | les `_v1` restent servies au moins 30 jours, sans changement |
+| 5. Une tâche se bascule depuis tout compte propriétaire de l'espace | `oia_basculer_tache` | en plus de son auteur, y compris pour une tâche importée ; un autre éditeur ne la bascule pas |
+| 6. « Clos depuis la dernière visite » | `oia_marquer_visite`, `ml_clos_depuis_visite_v1` | date de visite de Money Lookup par compte ; le cockpit l'appelle à l'ouverture |
+
+### Calculs de la console repris dans la base
+
+- **Deux échéances.** `echeance` est l'échéance de candidature, comme dans la
+  console (première échéance `APPLICATION`, sinon première échéance
+  normalisée) ; `echeance_plus_tardive` est la date la plus tardive citée par
+  la source. Fraîcheur, « bientôt clos », « échue », indicateurs et visites
+  se calculent sur l'échéance de candidature.
+- **Fraîcheur à la lecture.** Une opportunité échue n'est jamais éligible et
+  sa recommandation devient `REJECT`, comme dans la console ; la source reste
+  lisible (`recommandation_source`, `gate_ok_source`).
+- **Aujourd'hui.** Horizons 7, 14 et 30 jours, « juste expirée », cinq « à
+  trier » au plus : `ml_aujourdhui_v2`.
+- **Suggestions de projets** : `ml_suggestions_v1` (fiche : 5 premières ;
+  page Projets : 10 premières non étiquetées).
 
 ### Reprise du navigateur (A4), corrigée
 
@@ -214,6 +232,8 @@ vue. Colonnes et types relevés en base (test :
 | `oia_proposer_projet(espace, slug, contenu, lancer_recherche = true)` | éditeur | Brouillon `PENDING` au format du registre (`contenu.name` obligatoire), puis une demande `DISCOVERY` ; refuse un projet déjà au registre ou un brouillon déjà traité |
 | `oia_apercu_annulation(import)` | membre | Aperçu d'une annulation (ci-dessus) |
 | `oia_annuler_import(import, confirmer = false)` | auteur de l'import ou propriétaire | Remplace la fonction de la v1 (même appel à un argument) |
+| `oia_marquer_visite(espace)` | membre | Enregistre la visite de Money Lookup du compte ; la visite précédente n'avance que si la dernière date de plus de 30 minutes (un rechargement ne vide pas la liste). Rend `{ derniere, precedente }` |
+| `oia_basculer_tache(tache)` | auteur de la tâche ou propriétaire de l'espace | Remplace la fonction de la v1 : ouverte aussi aux propriétaires |
 
 Erreurs : `42501` droit refusé, `22023` valeur refusée, `P0002` introuvable,
 **`55000` confirmation requise** (annulation d'un import modifié). Le message
@@ -226,7 +246,7 @@ s'affiche tel quel.
 | 1 | Projets du registre | `ml_projets_v1` (profil complet, sources, chemin du fichier) ; chargeur `--projets` |
 | 2 | CRM | `ml_contacts_v1` |
 | 3 | Notes globales, modification | `ml_notes_v1` (id, liens, auteur, auteur d'origine) ; `oia_modifier_note` |
-| 4 | Tâches globales, bascule | `ml_taches_v1` (id, statut, échéance, fin, retard) ; `oia_basculer_tache` |
+| 4 | Tâches globales, bascule | `ml_taches_v1` (id, statut, échéance, fin, retard) ; `oia_basculer_tache`, ouverte aux propriétaires |
 | 5 | Fiche : id, fin, gate, auteur d'origine | `ml_fiche_v2` |
 | 6 | Vues enregistrées, suppression | `ml_vues_enregistrees_v1` ; `oia_supprimer('vue', id)` |
 | 7 | Demandes | `ml_demandes_v1` |
@@ -237,11 +257,11 @@ s'affiche tel quel.
 | 12 | Filtres de liste | `ml_toutes_v2` : `publie_le`, `confiance_information`, `verdict_analyste`, `route_strategique`, `type_avis` |
 | 13 | Agrégats Montants | `ml_indicateurs_v1` (même périmètre : couverture, prêtes, bloquées, bientôt closes), `ml_indicateurs_montants_v1`, `ml_indicateurs_repartition_v1` (raisons de blocage) |
 | 14 | Suppressions | `oia_supprimer` (note, tâche, contact, vue) |
-| 15 | « Clos depuis la dernière visite » | **non repris** : la base ne connaît pas la dernière visite. Le cockpit peut l'approcher avec `echeance` et `decision_humaine` ; à décider par Mickaël |
-| 16 | Dernière décision hors COMMENT | `ml_decision_v2` (décision par défaut 1) |
-| 17 | REGULATORY hors de Toutes | `ml_toutes_v2` (décision par défaut 2) |
+| 15 | « Clos depuis la dernière visite » | `oia_marquer_visite` et `ml_clos_depuis_visite_v1` (décision 6) ; « juste expirée » dans `ml_aujourdhui_v2` |
+| 16 | Dernière décision hors COMMENT | `ml_decision_v2` (décision 1) |
+| 17 | REGULATORY hors de Toutes | `ml_toutes_v2` (décision 2) |
 | 18 | A4 : valeurs null, conflits, annulation | ci-dessus |
-| 19 | Tri sans échéances dépassées | `ml_aujourdhui_v2` (décision par défaut 3) |
+| 19 | Tri sans échéances dépassées | `ml_aujourdhui_v2` (décision 3) |
 
 **Chargement des projets.** `pnpm --filter @oia/money-lookup charger -- --projets`
 produit un script idempotent (mise à jour si le contenu change ; projet sorti
@@ -254,7 +274,7 @@ fictif", "echeance": "2026-11-12", "statut": "OPEN", "faite_le": null,
 
 ### `ml_decision_v2`
 
-Dernière décision humaine par opportunité, **hors COMMENT** (décision par défaut 1).
+Dernière décision humaine par opportunité, **hors COMMENT** (décision 1).
 
 | Colonne | Type | Sens |
 | --- | --- | --- |
@@ -268,7 +288,7 @@ Dernière décision humaine par opportunité, **hors COMMENT** (décision par d�
 
 ### `ml_toutes_v2`
 
-« Toutes », **sans REGULATORY** (décision par défaut 2) et avec la dernière décision hors COMMENT. Colonnes de la v1, puis les colonnes de liste (publication, confiance, verdict, route, type d'avis) et l'auteur de la décision.
+« Toutes », **sans REGULATORY** (décision 2), avec la dernière décision hors COMMENT, les deux échéances et la fraîcheur recalculée à la lecture comme la console : une opportunité échue n'est jamais éligible et sa recommandation devient `REJECT` (les valeurs de la source restent dans `recommandation_source` et `gate_ok_source`).
 
 | Colonne | Type | Sens |
 | --- | --- | --- |
@@ -284,12 +304,12 @@ Dernière décision humaine par opportunité, **hors COMMENT** (décision par d�
 | `devise` | text | code ISO de la devise, `null` si montant inconnu |
 | `confiance_montant` | text | `HAUTE` ou `BASSE` |
 | `montant_connu` | boolean | vrai si `montant` n'est pas `null` |
-| `echeance` | timestamp with time zone | date la plus tardive citée par la source |
-| `recommandation` | text | proposition du moteur de décision |
+| `echeance` | timestamp with time zone | **échéance de candidature** (règle de la console : première échéance `APPLICATION`, sinon première échéance normalisée), ou `null` |
+| `recommandation` | text | proposition du moteur, **recalculée** : `REJECT` si l'échéance est passée |
 | `statut_verification` | text | vérification de la source |
 | `verifie_par_humain` | boolean | `VERIFIED` et dernière décision (hors COMMENT) `APPROVE` |
-| `gate_ok` | boolean | gate déterministe franchi |
-| `raisons_gate` | ARRAY | raisons du blocage |
+| `gate_ok` | boolean | gate franchi, **recalculé** : jamais vrai si l'échéance est passée |
+| `raisons_gate` | ARRAY | raisons du blocage (plus « opportunity is expired » si échue) |
 | `decision_humaine` | text | dernière décision hors COMMENT, `PENDING` par défaut |
 | `decide_le` | timestamp with time zone | date de cette décision |
 | `projet_etiquete` | text | étiquette posée par un humain |
@@ -305,6 +325,11 @@ Dernière décision humaine par opportunité, **hors COMMENT** (décision par d�
 | `type_avis` | text | type d'avis (fait `notice-type`), ou `null` |
 | `decide_par` | text | compte de la dernière décision |
 | `decide_par_origine` | text | auteur d'origine de la dernière décision, pour une décision importée |
+| `echeance_plus_tardive` | timestamp with time zone | date la plus tardive citée par la source (seconde échéance) |
+| `jours_restants` | integer | jours jusqu'à l'échéance de candidature depuis aujourd'hui 0 h UTC ; négatif si passée |
+| `fraicheur` | text | `OUVERTE`, `BIENTOT_CLOSE` (14 jours ou moins), `EXPIREE`, `SANS_ECHEANCE` |
+| `recommandation_source` | text | recommandation telle que la source la donne |
+| `gate_ok_source` | boolean | gate tel que la source le donne |
 
 ### `ml_financements_v2`
 
@@ -324,12 +349,12 @@ Natures `GRANT`, `PRIZE`, `TAX_INCENTIVE`, `DEBT_GUARANTEE`, sur `ml_toutes_v2`.
 | `devise` | text | code ISO de la devise, `null` si montant inconnu |
 | `confiance_montant` | text | `HAUTE` ou `BASSE` |
 | `montant_connu` | boolean | vrai si `montant` n'est pas `null` |
-| `echeance` | timestamp with time zone | date la plus tardive citée par la source |
-| `recommandation` | text | proposition du moteur de décision |
+| `echeance` | timestamp with time zone | **échéance de candidature** (règle de la console : première échéance `APPLICATION`, sinon première échéance normalisée), ou `null` |
+| `recommandation` | text | proposition du moteur, **recalculée** : `REJECT` si l'échéance est passée |
 | `statut_verification` | text | vérification de la source |
 | `verifie_par_humain` | boolean | `VERIFIED` et dernière décision (hors COMMENT) `APPROVE` |
-| `gate_ok` | boolean | gate déterministe franchi |
-| `raisons_gate` | ARRAY | raisons du blocage |
+| `gate_ok` | boolean | gate franchi, **recalculé** : jamais vrai si l'échéance est passée |
+| `raisons_gate` | ARRAY | raisons du blocage (plus « opportunity is expired » si échue) |
 | `decision_humaine` | text | dernière décision hors COMMENT, `PENDING` par défaut |
 | `decide_le` | timestamp with time zone | date de cette décision |
 | `projet_etiquete` | text | étiquette posée par un humain |
@@ -345,6 +370,11 @@ Natures `GRANT`, `PRIZE`, `TAX_INCENTIVE`, `DEBT_GUARANTEE`, sur `ml_toutes_v2`.
 | `type_avis` | text | type d'avis (fait `notice-type`), ou `null` |
 | `decide_par` | text | compte de la dernière décision |
 | `decide_par_origine` | text | auteur d'origine de la dernière décision, pour une décision importée |
+| `echeance_plus_tardive` | timestamp with time zone | date la plus tardive citée par la source (seconde échéance) |
+| `jours_restants` | integer | jours jusqu'à l'échéance de candidature depuis aujourd'hui 0 h UTC ; négatif si passée |
+| `fraicheur` | text | `OUVERTE`, `BIENTOT_CLOSE` (14 jours ou moins), `EXPIREE`, `SANS_ECHEANCE` |
+| `recommandation_source` | text | recommandation telle que la source la donne |
+| `gate_ok_source` | boolean | gate tel que la source le donne |
 
 ### `ml_appels_offres_v2`
 
@@ -364,12 +394,12 @@ Natures `TENDER`, `PRE_SOLICITATION`, `MARKETPLACE_PROJECT`, `CONSORTIUM_CALL`, 
 | `devise` | text | code ISO de la devise, `null` si montant inconnu |
 | `confiance_montant` | text | `HAUTE` ou `BASSE` |
 | `montant_connu` | boolean | vrai si `montant` n'est pas `null` |
-| `echeance` | timestamp with time zone | date la plus tardive citée par la source |
-| `recommandation` | text | proposition du moteur de décision |
+| `echeance` | timestamp with time zone | **échéance de candidature** (règle de la console : première échéance `APPLICATION`, sinon première échéance normalisée), ou `null` |
+| `recommandation` | text | proposition du moteur, **recalculée** : `REJECT` si l'échéance est passée |
 | `statut_verification` | text | vérification de la source |
 | `verifie_par_humain` | boolean | `VERIFIED` et dernière décision (hors COMMENT) `APPROVE` |
-| `gate_ok` | boolean | gate déterministe franchi |
-| `raisons_gate` | ARRAY | raisons du blocage |
+| `gate_ok` | boolean | gate franchi, **recalculé** : jamais vrai si l'échéance est passée |
+| `raisons_gate` | ARRAY | raisons du blocage (plus « opportunity is expired » si échue) |
 | `decision_humaine` | text | dernière décision hors COMMENT, `PENDING` par défaut |
 | `decide_le` | timestamp with time zone | date de cette décision |
 | `projet_etiquete` | text | étiquette posée par un humain |
@@ -385,6 +415,11 @@ Natures `TENDER`, `PRE_SOLICITATION`, `MARKETPLACE_PROJECT`, `CONSORTIUM_CALL`, 
 | `type_avis` | text | type d'avis (fait `notice-type`), ou `null` |
 | `decide_par` | text | compte de la dernière décision |
 | `decide_par_origine` | text | auteur d'origine de la dernière décision, pour une décision importée |
+| `echeance_plus_tardive` | timestamp with time zone | date la plus tardive citée par la source (seconde échéance) |
+| `jours_restants` | integer | jours jusqu'à l'échéance de candidature depuis aujourd'hui 0 h UTC ; négatif si passée |
+| `fraicheur` | text | `OUVERTE`, `BIENTOT_CLOSE` (14 jours ou moins), `EXPIREE`, `SANS_ECHEANCE` |
+| `recommandation_source` | text | recommandation telle que la source la donne |
+| `gate_ok_source` | boolean | gate tel que la source le donne |
 
 ### `ml_investisseurs_v2`
 
@@ -404,12 +439,12 @@ Natures `EQUITY`, `ACQUISITION` (sens `sortant`), sur `ml_toutes_v2`.
 | `devise` | text | code ISO de la devise, `null` si montant inconnu |
 | `confiance_montant` | text | `HAUTE` ou `BASSE` |
 | `montant_connu` | boolean | vrai si `montant` n'est pas `null` |
-| `echeance` | timestamp with time zone | date la plus tardive citée par la source |
-| `recommandation` | text | proposition du moteur de décision |
+| `echeance` | timestamp with time zone | **échéance de candidature** (règle de la console : première échéance `APPLICATION`, sinon première échéance normalisée), ou `null` |
+| `recommandation` | text | proposition du moteur, **recalculée** : `REJECT` si l'échéance est passée |
 | `statut_verification` | text | vérification de la source |
 | `verifie_par_humain` | boolean | `VERIFIED` et dernière décision (hors COMMENT) `APPROVE` |
-| `gate_ok` | boolean | gate déterministe franchi |
-| `raisons_gate` | ARRAY | raisons du blocage |
+| `gate_ok` | boolean | gate franchi, **recalculé** : jamais vrai si l'échéance est passée |
+| `raisons_gate` | ARRAY | raisons du blocage (plus « opportunity is expired » si échue) |
 | `decision_humaine` | text | dernière décision hors COMMENT, `PENDING` par défaut |
 | `decide_le` | timestamp with time zone | date de cette décision |
 | `projet_etiquete` | text | étiquette posée par un humain |
@@ -425,6 +460,11 @@ Natures `EQUITY`, `ACQUISITION` (sens `sortant`), sur `ml_toutes_v2`.
 | `type_avis` | text | type d'avis (fait `notice-type`), ou `null` |
 | `decide_par` | text | compte de la dernière décision |
 | `decide_par_origine` | text | auteur d'origine de la dernière décision, pour une décision importée |
+| `echeance_plus_tardive` | timestamp with time zone | date la plus tardive citée par la source (seconde échéance) |
+| `jours_restants` | integer | jours jusqu'à l'échéance de candidature depuis aujourd'hui 0 h UTC ; négatif si passée |
+| `fraicheur` | text | `OUVERTE`, `BIENTOT_CLOSE` (14 jours ou moins), `EXPIREE`, `SANS_ECHEANCE` |
+| `recommandation_source` | text | recommandation telle que la source la donne |
+| `gate_ok_source` | boolean | gate tel que la source le donne |
 
 ### `ml_montants_v2`
 
@@ -444,16 +484,19 @@ Montants de l'espace, sans REGULATORY. Une ligne par catégorie, sens, devise et
 
 ### `ml_aujourdhui_v2`
 
-« Aujourd'hui » : `EN_ATTENTE_DE_TRI` **exclut les échéances dépassées** (décision par défaut 3).
+« Aujourd'hui », digest de la console calculé dans la base, pour chaque horizon (7, 14, 30 jours). Une opportunité n'a qu'une ligne : bientôt close (14 jours, hors rejet), sinon juste expirée (échue après une approbation ou une demande de vérification), sinon approuvée mais bloquée. « À trier » : sans décision, non échue (décision 3), pas déjà listée, **cinq au plus**, les plus récemment publiées.
 
 | Colonne | Type | Sens |
 | --- | --- | --- |
 | `espace_id` | uuid | espace de travail (studio : `00000000-0000-4000-8000-000000000001`) |
-| `raison` | text | `TACHE_EN_RETARD`, `TACHE_A_FAIRE`, `ALERTE`, `BIENTOT_CLOS`, `APPROUVE_MAIS_BLOQUE`, `EN_ATTENTE_DE_TRI` (dans cet ordre) |
+| `horizon` | integer | 7, 14 ou 30 : le cockpit filtre l'horizon choisi (il ne change que les tâches à faire) |
+| `ordre` | integer | 1 à 7, ordre des groupes |
+| `raison` | text | `TACHE_EN_RETARD`, `TACHE_A_FAIRE`, `ALERTE`, `BIENTOT_CLOS`, `JUSTE_EXPIREE`, `APPROUVE_MAIS_BLOQUE`, `EN_ATTENTE_DE_TRI` |
 | `titre` | text | titre (source, extrait) |
 | `record_id` | text | opportunité (`ml_toutes_v2.record_id`), ou `null` |
-| `projet` | text | slug du projet (`ml_projets_v1.slug`), ou `null` |
-| `echeance` | timestamp with time zone | date la plus tardive citée par la source |
+| `projet` | text | projet de la tâche ou étiquette de l'opportunité |
+| `echeance` | timestamp with time zone | échéance de la tâche ou de candidature |
+| `jours_restants` | integer | jours restants (négatif : en retard ou échue) |
 | `reference` | text | identifiant de la tâche, de l'alerte ou de l'opportunité |
 
 ### `ml_fiche_v2`
@@ -474,12 +517,12 @@ Fiche d'une opportunité (filtre `id = …`) : colonnes de `ml_toutes_v2`, puis 
 | `devise` | text | code ISO de la devise, `null` si montant inconnu |
 | `confiance_montant` | text | `HAUTE` ou `BASSE` |
 | `montant_connu` | boolean | vrai si `montant` n'est pas `null` |
-| `echeance` | timestamp with time zone | date la plus tardive citée par la source |
-| `recommandation` | text | proposition du moteur de décision |
+| `echeance` | timestamp with time zone | **échéance de candidature** (règle de la console : première échéance `APPLICATION`, sinon première échéance normalisée), ou `null` |
+| `recommandation` | text | proposition du moteur, **recalculée** : `REJECT` si l'échéance est passée |
 | `statut_verification` | text | vérification de la source |
 | `verifie_par_humain` | boolean | `VERIFIED` et dernière décision (hors COMMENT) `APPROVE` |
-| `gate_ok` | boolean | gate déterministe franchi |
-| `raisons_gate` | ARRAY | raisons du blocage |
+| `gate_ok` | boolean | gate franchi, **recalculé** : jamais vrai si l'échéance est passée |
+| `raisons_gate` | ARRAY | raisons du blocage (plus « opportunity is expired » si échue) |
 | `decision_humaine` | text | dernière décision hors COMMENT, `PENDING` par défaut |
 | `decide_le` | timestamp with time zone | date de cette décision |
 | `projet_etiquete` | text | étiquette posée par un humain |
@@ -495,10 +538,49 @@ Fiche d'une opportunité (filtre `id = …`) : colonnes de `ml_toutes_v2`, puis 
 | `type_avis` | text | type d'avis (fait `notice-type`), ou `null` |
 | `decide_par` | text | compte de la dernière décision |
 | `decide_par_origine` | text | auteur d'origine de la dernière décision, pour une décision importée |
-| `source` | jsonb | contenu complet de la source (faits, preuves, gate, évaluation…) |
+| `echeance_plus_tardive` | timestamp with time zone | date la plus tardive citée par la source (seconde échéance) |
+| `jours_restants` | integer | jours jusqu'à l'échéance de candidature depuis aujourd'hui 0 h UTC ; négatif si passée |
+| `fraicheur` | text | `OUVERTE`, `BIENTOT_CLOSE` (14 jours ou moins), `EXPIREE`, `SANS_ECHEANCE` |
+| `recommandation_source` | text | recommandation telle que la source la donne |
+| `gate_ok_source` | boolean | gate tel que la source le donne |
+| `source` | jsonb | contenu complet de la source (faits, échéances, preuves, gate, évaluation…) |
 | `decisions` | jsonb | tous les avis : `{ id, action, commentaire, le, par, auteur_origine, gate_ok_au_moment }`, du plus récent au plus ancien |
 | `notes` | jsonb | `{ id, texte, le, par, auteur_origine }` |
 | `taches` | jsonb | `{ id, titre, echeance, statut, faite_le, le, par, auteur_origine }` |
+
+### `ml_clos_depuis_visite_v1`
+
+« Clos depuis la dernière visite », par compte : échéance de candidature passée depuis la visite précédente de l'appelant, hors rejet. Le cockpit appelle `oia_marquer_visite(espace)` à l'ouverture. Sans visite précédente : aucune ligne (« première visite »).
+
+| Colonne | Type | Sens |
+| --- | --- | --- |
+| `espace_id` | uuid | espace de travail (studio : `00000000-0000-4000-8000-000000000001`) |
+| `id` | uuid | opportunité |
+| `record_id` | text | opportunité (`ml_toutes_v2.record_id`), ou `null` |
+| `titre` | text | titre (source, extrait) |
+| `echeance` | timestamp with time zone | échéance de candidature, passée depuis la visite précédente |
+| `decision_humaine` | text | dernière décision (hors rejet) |
+| `projet_etiquete` | text | étiquette posée par un humain |
+| `depuis` | timestamp with time zone | visite précédente de l'appelant |
+
+### `ml_suggestions_v1`
+
+Suggestions de projets, règle de la console : mots-clés, secteurs et géographies du registre cherchés en mots entiers dans le titre, l'émetteur et les faits ; une exclusion écarte ; il faut au moins un mot-clé ou un secteur. Heuristique : à présenter comme une piste, jamais comme un verdict.
+
+| Colonne | Type | Sens |
+| --- | --- | --- |
+| `espace_id` | uuid | espace de travail (studio : `00000000-0000-4000-8000-000000000001`) |
+| `id` | uuid | opportunité |
+| `record_id` | text | opportunité (`ml_toutes_v2.record_id`), ou `null` |
+| `projet` | text | projet suggéré |
+| `confiance` | integer | score plafonné à 70 : heuristique, jamais un verdict |
+| `score` | integer | 12 par mot-clé, 10 par secteur, 4 par géographie |
+| `mots_cles` | ARRAY | mots-clés trouvés |
+| `secteurs` | ARRAY | secteurs trouvés |
+| `geographies` | ARRAY | géographies trouvées |
+| `etiquetee` | boolean | l'opportunité porte déjà une étiquette |
+| `rang_opportunite` | bigint | rang du projet pour cette opportunité (fiche : les 5 premiers) |
+| `rang_projet` | bigint | rang de l'opportunité pour ce projet, parmi les étiquetées ou non (page Projets : les 10 premières non étiquetées) |
 
 ### `ml_projets_v1`
 
@@ -570,7 +652,7 @@ Notes de l'espace. Modification : `oia_modifier_note(id, texte)` (auteur seuleme
 
 ### `ml_taches_v1`
 
-Tâches de l'espace. Bascule : `oia_basculer_tache(id)` (auteur seulement) ; suppression : `oia_supprimer('tache', id)`.
+Tâches de l'espace. Bascule : `oia_basculer_tache(id)` (auteur ou tout propriétaire de l'espace) ; suppression : `oia_supprimer('tache', id)`.
 
 | Colonne | Type | Sens |
 | --- | --- | --- |
@@ -767,4 +849,4 @@ Journal global des avis humains, pour l'export de l'audit.
 | Version | Date | Changement |
 | --- | --- | --- |
 | 1 | 2026-11-08 | Création |
-| 2 | 2026-11-08 | D'après les écarts relevés par Lovable (commit `1e3040c`) : import A4 corrigé (valeurs `null`, conflits, aperçu et confirmation d'annulation) ; vues `_v2` pour trois décisions par défaut à valider (COMMENT, REGULATORY, tri) ; quatorze lectures nouvelles ; `oia_supprimer`, `oia_proposer_projet`. Les vues `_v1` restent servies sans changement. Migration 0008 |
+| 2 | 2026-11-08 | D'après les écarts relevés par Lovable (commit `1e3040c`) et les décisions de Mickaël du 8 novembre : import A4 corrigé (valeurs `null`, conflits, aperçu et confirmation d'annulation) ; vues `_v2` (COMMENT ignoré, REGULATORY hors de Toutes, tri sans échéances dépassées, deux échéances, fraîcheur recalculée, Aujourd'hui à trois horizons) ; seize lectures nouvelles, dont suggestions et « clos depuis la dernière visite » ; `oia_supprimer`, `oia_proposer_projet`, `oia_marquer_visite` ; bascule des tâches ouverte aux propriétaires. Les vues `_v1` restent servies sans changement. Migration 0008 |
