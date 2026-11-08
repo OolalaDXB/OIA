@@ -35,7 +35,7 @@ export function Shell({ children, large = false, fictif = true }: { children: Re
         <nav aria-label="Assistante et réglages" className="mt-5 border-t border-border pt-3 md:mt-auto"><Link to="/shyrka" className="flex min-h-11 items-center px-2 text-sm text-muted-foreground" activeProps={{ className: "text-foreground underline underline-offset-4" }}>Shyrka</Link><Link to="/reglages" className="flex min-h-11 items-center px-2 text-sm text-muted-foreground" activeProps={{ className: "text-foreground underline underline-offset-4" }}>Réglages</Link><Link to={auth.user ? "/reglages" : "/auth"} className="flex min-h-11 items-center px-2 text-sm text-muted-foreground">{auth.loading ? "Connexion…" : auth.user ? "Compte connecté" : "Se connecter"}</Link></nav><p className="num mt-3 px-2 text-xs text-tertiary">Dépense du mois : {depenses.montant} $ <span className="block">plafond Visibility : {depenses.plafond} $ · exemple fictif</span></p>
       </div>
     </header>
-    <div className="min-w-0"><main id={contenuId} tabIndex={-1} className={`mx-auto px-5 py-10 md:px-10 md:py-14 ${large ? "max-w-[1600px]" : "max-w-6xl"}`}><EtatEcran module={module}>{children}</EtatEcran></main>{fictif && <footer className="mx-auto max-w-6xl px-5 pb-20 text-xs text-tertiary md:px-10">Exemple fictif, données de démonstration.</footer>}</div>
+    <div className="min-w-0"><main id={contenuId} tabIndex={-1} className={`w-full px-5 py-8 md:px-8 md:py-10 ${large ? "mx-auto max-w-[1600px]" : "max-w-none"}`}><EtatEcran module={module}>{children}</EtatEcran></main>{fictif && <footer className="w-full px-5 pb-20 text-xs text-tertiary md:px-8">Exemple fictif, données de démonstration.</footer>}</div>
   </div>;
 }
 
