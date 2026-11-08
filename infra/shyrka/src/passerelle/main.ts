@@ -1,10 +1,10 @@
-import { execFile } from "node:child_process";
+import { execFile, execFileSync } from "node:child_process";
 import { randomBytes } from "node:crypto";
 import { chmodSync, existsSync, mkdirSync, mkdtempSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { homedir, tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { MacSaySpeaker } from "../adapters/macos-say.js";
+import { choisirVoix, MacSaySpeaker, voixInstallees } from "../adapters/macos-say.js";
 import { ollamaPresent } from "../adapters/mistral.js";
 import { DEFAULT_OLLAMA_MODEL, OllamaTextModel } from "../adapters/ollama.js";
 import { WhisperServer } from "../adapters/whisper-server.js";
@@ -81,7 +81,9 @@ async function main(): Promise<void> {
   const { identity, warning } = loadIdentity(env.SHYRKA_IDENTITE ?? ICI("../../identite.json"));
   if (warning) console.log(`! ${warning}`);
   const dir = mkdtempSync(join(tmpdir(), "shyrka-voix-"));
-  const speaker = voiceOutputAllowed(identity) ? new MacSaySpeaker(execFileRunner, { voice: identity.voix, dir }) : undefined;
+  const voixMac = choisirVoix(identity.voix, voixInstallees(execFileSync("say", ["-v", "?"], { encoding: "utf8" })));
+  if (voixMac.avertissement) console.log(`! ${voixMac.avertissement}`);
+  const speaker = voiceOutputAllowed(identity) ? new MacSaySpeaker(execFileRunner, { voice: voixMac.voix, dir }) : undefined;
   const invite = inviteWhisper(projetsConnus());
   const modele = modeleWhisper();
   const whisper = modele ? new WhisperServer({ model: modele, bin: env.SHYRKA_WHISPER_BIN ?? "whisper-server", prompt: invite }) : null;
@@ -123,7 +125,7 @@ async function main(): Promise<void> {
     transcrire: whisper ? async (wav) => (await whisper.transcribe({ path: wav, durationMs: 0 }, { language: "fr" })).text : null,
     invite,
     modele: { nom: `ollama:${modeleNom}`, disponible: () => ollamaPresent(ollamaUrl) },
-    voix: speaker ? identity.voix : null,
+    voix: speaker ? voixMac.voix : null,
     journal: (l) => console.log(l),
   });
   const serveur = passerelle.serveur();
@@ -145,7 +147,7 @@ async function main(): Promise<void> {
   serveur.listen(port, "127.0.0.1", async () => {
     const s = await passerelle.sante(true);
     console.log(`Passerelle de Shyrka : http://127.0.0.1:${port}/v1 (127.0.0.1 seulement)`);
-    console.log(`  modèle ${modeleNom} ${(s.modele as { disponible: boolean }).disponible ? "disponible" : "INDISPONIBLE (lancer Ollama)"} · transcription ${s.transcription} · voix ${speaker ? `${identity.voix}, sur le Mac` : "aucune"}`);
+    console.log(`  modèle ${modeleNom} ${(s.modele as { disponible: boolean }).disponible ? "disponible" : "INDISPONIBLE (lancer Ollama)"} · transcription ${s.transcription} · voix ${speaker ? `${voixMac.voix}, sur le Mac` : "aucune"}`);
     console.log(`  mémoire ${s.memoire} · corpus ${s.corpus}${s.memoire === "active" ? "" : ` (${s.detail})`}`);
     console.log("  Ctrl+C pour arrêter.");
   });

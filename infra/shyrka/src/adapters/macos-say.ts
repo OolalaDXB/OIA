@@ -22,6 +22,23 @@ export function erreurVoix(res: RunResult, delaiMs: number): ErreurVoix {
   return new ErreurVoix(`Voix macOS : échec (code ${res.code}${res.errno ? `, ${res.errno}` : ""}). ${res.stderr.trim()}`.trim(), "code", base);
 }
 
+/** Voix installées sur le Mac (`say -v ?`), par nom exact. */
+export function voixInstallees(sortie: string): string[] {
+  return sortie.split("\n").map((l) => /^(.+?)\s{2,}[a-z]{2}_[A-Z]{2}\b/.exec(l)?.[1]?.trim()).filter((v): v is string => !!v);
+}
+
+/**
+ * Voix exacte à donner à `say` pour la voix de l'identité : sa variante
+ * « (Enhanced) » quand elle est installée (décision de Mickaël, 8 novembre
+ * 2026), sinon la voix de base, avec un avertissement à afficher.
+ */
+export function choisirVoix(voix: string, installees: string[]): { voix: string; avertissement?: string } {
+  const amelioree = /\(Enhanced\)$/.test(voix) ? voix : `${voix} (Enhanced)`;
+  if (installees.includes(amelioree)) return { voix: amelioree };
+  const base = amelioree.replace(/\s*\(Enhanced\)$/, "");
+  return { voix: base, avertissement: `Voix « ${amelioree} » absente de ce Mac : « ${base} » utilisée à la place (Réglages Système, Accessibilité, Contenu énoncé, pour l'installer).` };
+}
+
 /**
  * Voix macOS par `say`. Le texte passe par un fichier (`-f`) : aucun texte
  * généré n'est interprété comme une option de la commande.

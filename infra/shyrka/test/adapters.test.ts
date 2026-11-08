@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { FfmpegMicrophone, MAX_RECORD_SECONDS } from "../src/adapters/microphone-ffmpeg.js";
 import { WhisperCppTranscriber, cleanWhisperOutput } from "../src/adapters/whisper-cpp.js";
 import { COMPARISON_OLLAMA_MODEL, DEFAULT_OLLAMA_MODEL, OllamaTextModel, assertLoopback, stripThinking } from "../src/adapters/ollama.js";
-import { MacSaySpeaker } from "../src/adapters/macos-say.js";
+import { MacSaySpeaker, choisirVoix, voixInstallees } from "../src/adapters/macos-say.js";
 import { fakeRunner } from "./fakes.js";
 
 describe("micro (ffmpeg avfoundation)", () => {
@@ -145,5 +145,18 @@ describe("modèles Ollama par défaut", () => {
     });
     await m.chat([]);
     expect(body.think).toBe(true);
+  });
+});
+
+describe("choix de la voix macOS (Aurélie Enhanced)", () => {
+  const sortie = "Aurélie             fr_FR    # Bonjour, je m’appelle Aurélie.\nAurélie (Enhanced)  fr_FR    # Bonjour, je m’appelle Aurélie.\nLaura               sk_SK    # Ahoj.";
+  it("lit les noms exacts de `say -v ?`", () => {
+    expect(voixInstallees(sortie)).toEqual(["Aurélie", "Aurélie (Enhanced)", "Laura"]);
+  });
+  it("prend la variante Enhanced quand elle est installée, sinon la voix de base, avec un avertissement", () => {
+    expect(choisirVoix("Aurélie", voixInstallees(sortie))).toEqual({ voix: "Aurélie (Enhanced)" });
+    const repli = choisirVoix("Aurélie", ["Aurélie", "Laura"]);
+    expect(repli.voix).toBe("Aurélie");
+    expect(repli.avertissement).toMatch(/« Aurélie \(Enhanced\) » absente de ce Mac : « Aurélie » utilisée/);
   });
 });

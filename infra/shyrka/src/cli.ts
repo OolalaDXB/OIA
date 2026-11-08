@@ -1,9 +1,10 @@
+import { execFileSync } from "node:child_process";
 import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync, unlinkSync } from "node:fs";
 import { homedir, tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { EnregistreurFfmpeg, EnregistreurSimule, type Enregistreur, type Prise } from "./adapters/enregistreur.js";
-import { MacSaySpeaker } from "./adapters/macos-say.js";
+import { choisirVoix, MacSaySpeaker, voixInstallees } from "./adapters/macos-say.js";
 import { lireCleMistral, MistralTextModel, ollamaPresent } from "./adapters/mistral.js";
 import { MAX_ENTRETIEN_SECONDS, MAX_RECORD_SECONDS } from "./adapters/microphone-ffmpeg.js";
 import { COMPARISON_OLLAMA_MODEL, DEFAULT_OLLAMA_MODEL, OllamaTextModel } from "./adapters/ollama.js";
@@ -69,7 +70,9 @@ function voix(simule: boolean, dir: string): Speaker {
   const { identity, warning } = loadIdentity(cfg.identityPath);
   if (warning) console.log(`! ${warning}`);
   if (simule || !voiceOutputAllowed(identity)) return new RecordingSpeaker();
-  return new MacSaySpeaker(execFileRunner, { voice: identity.voix, dir });
+  const v = choisirVoix(identity.voix, voixInstallees(execFileSync("say", ["-v", "?"], { encoding: "utf8" })));
+  if (v.avertissement) console.log(`! ${v.avertissement}`);
+  return new MacSaySpeaker(execFileRunner, { voice: v.voix, dir });
 }
 
 function etatDuJour() {
