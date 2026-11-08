@@ -152,6 +152,20 @@ export function ShyrkaProvider({ children }: { children: ReactNode }) {
     void e.demarrer().then(() => { if (e.active) setPriseActive(true); });
   };
   const couper = () => { void interrompre().catch(() => undefined); };
+  useEffect(() => {
+    if (!locale || mode !== "parle") return;
+    const touche = (event: KeyboardEvent) => {
+      const cible = event.target as HTMLElement | null;
+      if (cible?.matches("input, textarea, [contenteditable=true]")) return;
+      if (event.key !== "Escape" && event.key !== " ") return;
+      // Capture : passe avant le plein écran (qui fermerait la vue ou couperait le micro).
+      event.preventDefault();
+      event.stopPropagation();
+      void interrompre().catch(() => undefined);
+    };
+    window.addEventListener("keydown", touche, true);
+    return () => window.removeEventListener("keydown", touche, true);
+  }, [locale, mode]);
   const envoyer = (texte: string) => {
     const demande = texte.trim();
     if (!demande) return;
@@ -310,7 +324,7 @@ function PresencePleinEcran() {
     disparition.current = setTimeout(() => setVisible(false), 2400);
   };
   const demarrerEcoute = () => {
-    if (locale) { parler(); return; } // mains libres : bascule du micro ouvert, même pendant la voix de Shyrka
+    if (locale) { if (modeRef.current === "parle") couper(); else parler(); return; } // pendant la voix : la couper ; sinon micro ouvert ou coupé
     if (pause || modeRef.current === "parle" || editionRef.current || phaseRef.current === "reflexion" || comprisRef.current) return;
     nettoyerMinuteurs();
     setCompris(null);
@@ -479,7 +493,7 @@ function PresencePleinEcran() {
         <Input ref={saisieRef} aria-label="Écrire à Shyrka" placeholder="Écrire à Shyrka" autoComplete="off" value={brouillon} onChange={(event) => setBrouillon(event.target.value)} />
         <Button type="submit" variant="ghost" size="icon" className="shyrka-control" aria-label="Envoyer le message" disabled={!brouillon.trim()}><ArrowUp /></Button>
       </form>}
-      <div className="shyrka-controls" data-visible={visible && !edition} onFocus={reveiller}>
+      <div className="shyrka-controls" data-visible={(visible || (locale !== null && mode === "parle")) && !edition} onFocus={reveiller}>
         <div className="flex justify-center gap-3">
           {locale && mode === "parle"
             ? <Button variant="ghost" size="icon" className="shyrka-control" aria-label="Couper la parole de Shyrka" title="Couper" onClick={couper}><Square /></Button>

@@ -18,8 +18,8 @@ const TRAME_MS = 50;
 const MARGE_DB = 12;
 const SEUIL_MIN_DB = -48;
 /** Reprise pendant la voix de Shyrka : ce nombre de dB au-dessus de son écho, pendant au moins REPRISE_MS. */
-const MARGE_ECHO_DB = 9;
-const REPRISE_MS = 300;
+const MARGE_ECHO_DB = 6;
+const REPRISE_MS = 250;
 const DEBUT_PAROLE_MS = 150;
 /** Sans parole, la prise en cours est jetée et relancée (pas d'accumulation de silence). */
 const RELANCE_MS = 30_000;

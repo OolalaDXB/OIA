@@ -4,7 +4,7 @@ import type { AddressInfo } from "node:net";
 import type { Server } from "node:http";
 import { afterEach, describe, expect, it } from "vitest";
 import { analyserParole, inviteWhisper, verdictApres, verdictAvant } from "../src/passerelle/audio.js";
-import { Passerelle, type Connaissances, type DepsPasserelle, type SessionLike } from "../src/passerelle/serveur.js";
+import { estSalutation, Passerelle, type Connaissances, type DepsPasserelle, type SessionLike } from "../src/passerelle/serveur.js";
 import type { ServiceMemoire } from "../src/memoire/commandes.js";
 import type { EtatSession, TurnResult } from "../src/session.js";
 
@@ -278,8 +278,19 @@ describe("langue du tour (Shyrka ne parlait que français)", () => {
   it("l'alphabet d'un texte tapé décide ; un texte latin sans langue indiquée reste en français, sans consigne", async () => {
     const b = await demarrer();
     expect(((await (await post(b, "/v1/tour/texte", { texte: "Привет, Ширка" })).json()) as Record<string, unknown>).langue).toBe("ru");
-    expect(((await (await post(b, "/v1/tour/texte", { texte: "Bonjour Shyrka" })).json()) as Record<string, unknown>).langue).toBe("fr");
+    expect(((await (await post(b, "/v1/tour/texte", { texte: "Où en est le projet ?" })).json()) as Record<string, unknown>).langue).toBe("fr");
     expect(b.appels.contextes.at(-1)).toBe("");
     expect((await post(b, "/v1/tour/texte", { texte: "x", langue: "russe; drop" })).status).toBe(400);
+  });
+});
+
+describe("salutation", () => {
+  it("une salutation seule n'appelle ni corpus ni briefing ; une vraie demande, si", async () => {
+    expect(["Bonsoir, Shyrka.", "Salut", "Bonjour Shyrka, ça va ?"].map(estSalutation)).toEqual([true, true, true]);
+    expect(["Bonjour, où en est SILLON ?", "Bonsoir, dis-moi le budget", "Où en est J0 ?"].map(estSalutation)).toEqual([false, false, false]);
+    const b = await demarrer();
+    const r = (await (await post(b, "/v1/tour/texte", { texte: "Bonsoir, Shyrka." })).json()) as Record<string, unknown>;
+    expect(r.sources).toEqual([]);
+    expect(b.appels.contextes.at(-1)).toMatch(/salutation courte, une phrase/);
   });
 });

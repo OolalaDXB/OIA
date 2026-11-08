@@ -105,6 +105,13 @@ export function memoireDeleguee(courante: () => ServiceMemoire, corpus: (questio
   });
 }
 
+/** « Bonsoir, Shyrka. », « Salut », « Bonjour Shyrka, ça va ? » : une salutation seule, sans demande. */
+export function estSalutation(texte: string): boolean {
+  const n = texte.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z' ]/g, " ").trim();
+  const mots = n.split(/\s+/).filter((m) => m && m !== "shyrka" && m !== "chirka");
+  return mots.length > 0 && mots.length <= 5 && /^(bonjour|bonsoir|salut|coucou|hello|hey|rebonjour)\b/.test(mots.join(" ")) && !/\b(ou|quoi|comment|quel|quelle|peux|dis|montre|explique)\b/.test(mots.slice(1).join(" "));
+}
+
 export class Passerelle {
   private connaissances: Connaissances;
   private cleVolume: string;
@@ -141,6 +148,11 @@ export class Passerelle {
       }),
       contexteTour: (heard) => {
         const langue = consigneLangue(this.langueTour);
+        // Une salutation n'appelle ni corpus ni briefing (essai réel : « Bonsoir » donnait le point complet).
+        if (estSalutation(heard)) {
+          this.sourcesDuTour = [];
+          return [langue, "Mickaël te salue seulement : réponds par une salutation courte, une phrase, sans résumé, sans liste ni chiffres."].filter(Boolean).join("\n");
+        }
         const vus = new Set<string>();
         const x = (this.prive || !this.connaissances.chercher ? [] : this.connaissances.chercher(heard)).filter((e) => {
           const k = `${e.chemin}:${e.ligne}`;
