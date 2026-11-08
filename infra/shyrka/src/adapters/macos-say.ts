@@ -28,15 +28,15 @@ export function voixInstallees(sortie: string): string[] {
 }
 
 /**
- * Voix exacte à donner à `say` pour la voix de l'identité : sa variante
- * « (Enhanced) » quand elle est installée (décision de Mickaël, 8 novembre
- * 2026), sinon la voix de base, avec un avertissement à afficher.
+ * Voix exacte à donner à `say` : la variante « (Enhanced) » de la voix de
+ * l'identité, et elle seule (décision de Mickaël, 8 novembre 2026 : « je ne
+ * veux qu'Aurélie Enhanced, pas l'autre »). Absente : aucune voix (null),
+ * avec un avertissement ; jamais de repli sur la voix de base.
  */
-export function choisirVoix(voix: string, installees: string[]): { voix: string; avertissement?: string } {
+export function choisirVoix(voix: string, installees: string[]): { voix: string | null; avertissement?: string } {
   const amelioree = /\(Enhanced\)$/.test(voix) ? voix : `${voix} (Enhanced)`;
   if (installees.includes(amelioree)) return { voix: amelioree };
-  const base = amelioree.replace(/\s*\(Enhanced\)$/, "");
-  return { voix: base, avertissement: `Voix « ${amelioree} » absente de ce Mac : « ${base} » utilisée à la place (Réglages Système, Accessibilité, Contenu énoncé, pour l'installer).` };
+  return { voix: null, avertissement: `Voix « ${amelioree} » absente de ce Mac : Shyrka ne parle pas (réponses à l'écran seulement). L'installer : Réglages Système, Accessibilité, Contenu énoncé.` };
 }
 
 /**

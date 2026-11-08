@@ -87,7 +87,7 @@ async function main(): Promise<void> {
   if (voixMac.avertissement) console.log(`! ${voixMac.avertissement}`);
   // Français : la voix de l'identité ; autres langues : la meilleure voix installée pour la langue.
   const installees = voixParLocale(listeVoix);
-  const speaker = voiceOutputAllowed(identity)
+  const speaker = voiceOutputAllowed(identity) && voixMac.voix
     ? new VoixMultilingue((code) => (code === "fr" ? voixMac.voix : voixPourLangue(code, installees)), (voix) => new MacSaySpeaker(execFileRunner, { voice: voix, dir }), (m) => console.log(`! ${m}`))
     : undefined;
   const invite = inviteWhisper(projetsConnus());
@@ -161,7 +161,7 @@ async function main(): Promise<void> {
   serveur.listen(port, "127.0.0.1", async () => {
     const s = await passerelle.sante(true);
     console.log(`Passerelle de Shyrka : http://127.0.0.1:${port}/v1 (127.0.0.1 seulement)`);
-    console.log(`  modèle ${modeleNom} ${(s.modele as { disponible: boolean }).disponible ? "disponible" : "INDISPONIBLE (lancer Ollama)"} · transcription ${s.transcription} · voix ${speaker ? `${voixMac.voix}, sur le Mac` : "aucune"}`);
+    console.log(`  modèle ${modeleNom} ${(s.modele as { disponible: boolean }).disponible ? "disponible" : "INDISPONIBLE (lancer Ollama)"} · transcription ${s.transcription} · voix ${speaker ? `${voixMac.voix} (français), sur le Mac` : "aucune"}`);
     console.log(`  mémoire ${s.memoire} · corpus ${s.corpus}${s.memoire === "active" ? "" : ` (${s.detail})`}`);
     console.log("  Ctrl+C pour arrêter.");
   });

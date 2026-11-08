@@ -153,10 +153,10 @@ describe("choix de la voix macOS (Aurélie Enhanced)", () => {
   it("lit les noms exacts de `say -v ?`", () => {
     expect(voixInstallees(sortie)).toEqual(["Aurélie", "Aurélie (Enhanced)", "Laura"]);
   });
-  it("prend la variante Enhanced quand elle est installée, sinon la voix de base, avec un avertissement", () => {
+  it("prend Aurélie (Enhanced) et elle seule : absente, aucune voix et un avertissement, jamais la voix de base", () => {
     expect(choisirVoix("Aurélie", voixInstallees(sortie))).toEqual({ voix: "Aurélie (Enhanced)" });
-    const repli = choisirVoix("Aurélie", ["Aurélie", "Laura"]);
-    expect(repli.voix).toBe("Aurélie");
-    expect(repli.avertissement).toMatch(/« Aurélie \(Enhanced\) » absente de ce Mac : « Aurélie » utilisée/);
+    const sans = choisirVoix("Aurélie", ["Aurélie", "Laura"]);
+    expect(sans.voix).toBeNull();
+    expect(sans.avertissement).toMatch(/« Aurélie \(Enhanced\) » absente de ce Mac : Shyrka ne parle pas/);
   });
 });
