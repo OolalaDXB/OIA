@@ -70,6 +70,8 @@ export class MacSaySpeaker implements Speaker {
        * lue (`afplay`) ; la suivante se prépare pendant la lecture.
        */
       prerendu?: boolean;
+      /** Réglages lus à chaque réplique (commandes « plus fort », « plus lentement ») : débit de say, volume de lecture. */
+      reglages?: { debit?: number; volume?: number };
     },
   ) {}
 
@@ -117,7 +119,8 @@ export class MacSaySpeaker implements Speaker {
       fichiers.push(txt, aiff);
       (this.opts.writeFile ?? ((p, s) => writeFileSync(p, s, "utf8")))(txt, morceaux[i]!);
       const args = ["-v", this.opts.voice, "-f", txt, "-o", aiff];
-      if (this.opts.rate) args.push("-r", String(this.opts.rate));
+      const debit = this.opts.reglages?.debit ?? this.opts.rate;
+      if (debit) args.push("-r", String(debit));
       const res = await this.run("say", args, { timeoutMs: delaiMs, signal: ctrl.signal });
       if (!res.aborted && !ctrl.signal.aborted && res.code !== 0) throw erreurVoix(res, delaiMs);
       return aiff;
@@ -128,7 +131,8 @@ export class MacSaySpeaker implements Speaker {
         const aiff = await suivant;
         if (ctrl.signal.aborted) return "interrompu";
         suivant = i + 1 < morceaux.length ? preparer(i + 1) : null;
-        const res = await this.run("afplay", [aiff], { timeoutMs: delaiMs, signal: ctrl.signal });
+        const volume = this.opts.reglages?.volume;
+        const res = await this.run("afplay", volume && volume !== 1 ? ["-v", String(volume), aiff] : [aiff], { timeoutMs: delaiMs, signal: ctrl.signal });
         if (res.aborted || ctrl.signal.aborted) return "interrompu";
         if (res.code !== 0) throw erreurVoix(res, delaiMs);
       }

@@ -20,6 +20,7 @@ import { execFileRunner } from "../runner.js";
 import { ShyrkaSession } from "../session.js";
 import { inviteWhisper } from "./audio.js";
 import { VoixMultilingue, voixParLocale, voixPourLangue } from "./langues.js";
+import type { ReglagesVoix } from "./voix.js";
 import { Passerelle, PORT_PASSERELLE, type Connaissances } from "./serveur.js";
 
 /**
@@ -103,8 +104,9 @@ async function main(): Promise<void> {
   if (voixMac.avertissement) console.log(`! ${voixMac.avertissement}`);
   // Français : la voix de l'identité ; autres langues : la meilleure voix installée pour la langue.
   const installees = voixParLocale(listeVoix);
+  const reglagesVoix: ReglagesVoix = {};
   const speaker = voiceOutputAllowed(identity) && voixMac.voix
-    ? new VoixMultilingue((code) => (code === "fr" ? voixMac.voix : voixPourLangue(code, installees)), (voix) => new MacSaySpeaker(execFileRunner, { voice: voix, dir, prerendu: true }), (m) => console.log(`! ${m}`))
+    ? new VoixMultilingue((code) => (code === "fr" ? voixMac.voix : voixPourLangue(code, installees)), (voix) => new MacSaySpeaker(execFileRunner, { voice: voix, dir, prerendu: true, reglages: reglagesVoix }), (m) => console.log(`! ${m}`))
     : undefined;
   const invite = inviteWhisper(projetsConnus());
   const modele = modeleWhisper();
@@ -155,6 +157,7 @@ async function main(): Promise<void> {
         }
       : null,
     definirLangue: (code) => speaker?.langue(code),
+    reglagesVoix,
     ...(speaker ? { dire: (texte: string) => speaker.speak(texte) } : {}),
     invite,
     modele: { nom: `ollama:${modeleNom}`, disponible: () => ollamaPresent(ollamaUrl) },

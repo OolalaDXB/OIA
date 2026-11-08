@@ -9,6 +9,7 @@ import type { EtatSession, TurnResult } from "../session.js";
 import { consigneLangue, langueDuTexte } from "./langues.js";
 import { motInterruption } from "./interruption.js";
 import { estArret } from "../dialogue.js";
+import { appliquerCommandeVoix, commandeVoix, type ReglagesVoix } from "./voix.js";
 import { composerDecision, QUESTION_DECISION, type EtatCorpus } from "./decision.js";
 import { analyserParole, lireWav, verdictApres, verdictAvant, type AnalyseParole, type Verdict } from "./audio.js";
 
@@ -76,6 +77,8 @@ export interface DepsPasserelle {
   definirLangue?: (code: string) => void;
   /** Dit un texte à voix haute (prise de congé), hors d'un tour du modèle. */
   dire?: (texte: string) => Promise<unknown>;
+  /** Réglages de la voix (volume, débit), modifiés par les commandes « plus fort », « plus lentement ». */
+  reglagesVoix?: ReglagesVoix;
   invite: string;
   modele: { nom: string; disponible: () => Promise<boolean> };
   voix: string | null;
@@ -143,6 +146,7 @@ export function consignesDuTour(d: Date): string {
     "Tu n'as accès ni à son agenda, ni à son planning, ni à ses habitudes, ni à ce qu'il a fait ou prévu : n'invente jamais un programme, un rendez-vous, une règle ou une habitude. Si tu ne sais pas, dis-le ; tu peux lui demander ce qu'il veut faire. Tu n'agis pas : n'annonce jamais que tu préviens, bloques ou programmes quelque chose.",
     "C'est une conversation : réponds à ce que Mickaël vient de dire, rien de plus. Ne parle des décisions ouvertes, du budget, de J0 ou d'un projet que s'il en parle.",
     "Si sa phrase semble coupée ou incomplète, ne la répète pas et ne la complète pas : demande-lui de la terminer. Si tu n'as pas compris, dis-le et demande-lui de reformuler. Ne redis jamais mot pour mot ta réponse précédente.",
+    "Tu as une voix : tes réponses sont dites à voix haute sur le Mac. Ne dis jamais que tu ne peux pas parler ni qu'il faut configurer quelque chose pour ta voix ; s'il te demande de parler plus fort, moins fort, plus lentement ou plus vite, dis-lui de te le dire simplement ainsi.",
     "Appelle-le Mickaël. S'il te dit son nom, réponds « Tu t'appelles Mickaël » (tu peux ajouter « je t'appellerai désormais ainsi »), jamais « je t'appelle Mickaël ». Toute ta réponse est dans une seule langue, celle de Mickaël, du premier au dernier mot.",
   ].join("\n");
 }
@@ -278,6 +282,8 @@ export class Passerelle {
     if (this.occupe) throw new ErreurHttp(409, "occupe", "Un tour est déjà en cours.");
     // Prise de congé (« Bonne nuit », « Au revoir ») : dans le terminal elle ferme la session ; ici, Shyrka répond et reste là.
     if (estArret(t)) return this.priseDeConge(t);
+    const commande = commandeVoix(t);
+    if (commande && this.deps.reglagesVoix) return this.direHorsModele(t, appliquerCommandeVoix(commande, this.deps.reglagesVoix));
     // Le verrou tient jusqu'à la fin du tour, voix comprise ; la réponse part dès qu'elle est prête.
     this.occupe = true;
     // L'alphabet du texte prime ; sinon la langue détectée sur la prise ; sinon le français.
@@ -328,7 +334,11 @@ export class Passerelle {
 
   private async priseDeConge(t: string): Promise<Record<string, unknown>> {
     const d = new Date(this.horloge());
-    const reponse = d.getHours() >= 21 || d.getHours() < 5 ? "Bonne nuit, Mickaël." : "À bientôt, Mickaël.";
+    return this.direHorsModele(t, d.getHours() >= 21 || d.getHours() < 5 ? "Bonne nuit, Mickaël." : "À bientôt, Mickaël.");
+  }
+
+  /** Réponse du code (prise de congé, commande de voix) : affichée, dite, sans tour du modèle. */
+  private async direHorsModele(t: string, reponse: string): Promise<Record<string, unknown>> {
     const corps = { entendu: t, reponse, sources: [], memoire: this.connaissances.etat.memoire, corpus: this.connaissances.etat.corpus, prive: this.prive, langue: "fr", ms: 0 };
     this.diffuser("reponse", corps);
     if (this.deps.dire) {

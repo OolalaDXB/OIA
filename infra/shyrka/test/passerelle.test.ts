@@ -357,3 +357,16 @@ describe("conversation (essai réel du soir)", () => {
     expect(c).toMatch(/réponds « Tu t'appelles Mickaël » \(tu peux ajouter « je t'appellerai désormais ainsi »\), jamais « je t'appelle Mickaël »/);
   });
 });
+
+describe("commande de voix dans la passerelle", () => {
+  it("« parle plus fort » est traité par le code, dit à voix haute, sans tour du modèle", async () => {
+    const dits: string[] = [];
+    const reglagesVoix = {};
+    const b = await demarrer({ dire: async (x: string) => void dits.push(x), reglagesVoix });
+    const r = (await (await post(b, "/v1/tour/texte", { texte: "Peux-tu parler plus fort, s'il te plaît ?" })).json()) as Record<string, unknown>;
+    expect(r.reponse).toBe("D'accord, je parle plus fort.");
+    expect(dits).toEqual(["D'accord, je parle plus fort."]);
+    expect(reglagesVoix).toEqual({ volume: 1.5 });
+    expect(b.appels.textes).toEqual([]);
+  });
+});
