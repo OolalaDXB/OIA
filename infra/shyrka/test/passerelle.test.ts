@@ -45,7 +45,7 @@ interface Banc {
   url: string;
   serveur: Server;
   passerelle: Passerelle;
-  appels: { transcrire: number; textes: string[]; prive: string[]; ouvertures: number };
+  appels: { transcrire: number; textes: string[]; prive: string[]; ouvertures: number; langues: string[]; contextes: string[] };
   volume: { monte: boolean };
 }
 let banc: Banc | null = null;
@@ -57,8 +57,8 @@ afterEach(async () => {
   banc = null;
 });
 
-async function demarrer(over: Partial<DepsPasserelle> & { repondre?: (t: string) => Promise<TurnResult>; transcription?: string } = {}): Promise<Banc> {
-  const appels = { transcrire: 0, textes: [] as string[], prive: [] as string[], ouvertures: 0 };
+async function demarrer(over: Partial<DepsPasserelle> & { repondre?: (t: string) => Promise<TurnResult>; transcription?: string; langue?: string } = {}): Promise<Banc> {
+  const appels = { transcrire: 0, textes: [] as string[], prive: [] as string[], ouvertures: 0, langues: [] as string[], contextes: [] as string[] };
   const volume = { monte: true };
   let etat: ((e: EtatSession) => void) | null = null;
   let print: ((l: string) => void) | null = null;
@@ -91,6 +91,7 @@ async function demarrer(over: Partial<DepsPasserelle> & { repondre?: (t: string)
             return { heard: t, answer: mem.texte, output: "texte", events: [] };
           }
           const ctx = contexte!(t);
+          appels.contextes.push(ctx);
           etat!("reflexion");
           const answer = ctx ? `D'après docs/roadmap.md:42, réponse sur ${t}` : `Réponse à ${t}`;
           print!(`Shyrka · ${answer}`);
@@ -102,7 +103,8 @@ async function demarrer(over: Partial<DepsPasserelle> & { repondre?: (t: string)
       };
     },
     convertir: async (e, s) => copyFileSync(e, s),
-    transcrire: async () => (appels.transcrire++, over.transcription ?? "Qu'avais-je décidé pour Sillon ?"),
+    transcrire: async () => (appels.transcrire++, { texte: over.transcription ?? "Qu'avais-je décidé pour Sillon ?", langue: over.langue ?? "fr" }),
+    definirLangue: (code) => appels.langues.push(code),
     invite: INVITE,
     modele: { nom: "ollama:fictif", disponible: async () => true },
     voix: "Aurélie",
@@ -260,5 +262,24 @@ describe("passerelle locale : tours", () => {
     expect((await post(b, "/v1/tour/audio", new Uint8Array(wav(1000, 500)), { "x-shyrka-jeton": JETON, "content-type": "audio/wav" })).status).toBe(503);
     expect((await post(b, "/v1/tour/texte", { texte: "bonjour" })).status).toBe(200);
     expect(existsSync(tmpdir())).toBe(true);
+  });
+});
+
+describe("langue du tour (Shyrka ne parlait que français)", () => {
+  it("une prise en russe rend sa langue ; le tour suivant donne au modèle la consigne de répondre en russe et choisit la voix russe", async () => {
+    const b = await demarrer({ transcription: "Что я решил по проекту Силлон?", langue: "ru" });
+    const prise = (await (await post(b, "/v1/tour/audio", new Uint8Array(wav(3000, 1500, 0.2)), { "x-shyrka-jeton": JETON, "content-type": "audio/wav" })).json()) as Record<string, unknown>;
+    expect(prise).toMatchObject({ verdict: "parole", langue: "ru" });
+    const r = (await (await post(b, "/v1/tour/texte", { texte: "Где сейчас проект?", langue: "ru" })).json()) as Record<string, unknown>;
+    expect(r.langue).toBe("ru");
+    expect(b.appels.langues.at(-1)).toBe("ru");
+    expect(b.appels.contextes.at(-1)).toMatch(/^Langue de ce tour : Mickaël te parle en russe\. Pour ce tour, réponds en russe/);
+  });
+  it("l'alphabet d'un texte tapé décide ; un texte latin sans langue indiquée reste en français, sans consigne", async () => {
+    const b = await demarrer();
+    expect(((await (await post(b, "/v1/tour/texte", { texte: "Привет, Ширка" })).json()) as Record<string, unknown>).langue).toBe("ru");
+    expect(((await (await post(b, "/v1/tour/texte", { texte: "Bonjour Shyrka" })).json()) as Record<string, unknown>).langue).toBe("fr");
+    expect(b.appels.contextes.at(-1)).toBe("");
+    expect((await post(b, "/v1/tour/texte", { texte: "x", langue: "russe; drop" })).status).toBe(400);
   });
 });

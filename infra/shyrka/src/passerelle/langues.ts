@@ -1,0 +1,108 @@
+import type { Speaker } from "../types.js";
+
+/**
+ * Langue de chaque tour (demande de Mickaël, 8 novembre 2026 : Shyrka ne
+ * parlait que français). La langue d'une prise vient de Whisper (détection
+ * locale) ; celle d'un texte tapé, de son alphabet quand il n'est pas latin.
+ * Le modèle local répond dans cette langue, et la voix du Mac est choisie
+ * d'après la langue de ce qu'elle doit dire : jamais un texte russe lu par
+ * une voix française. Sans voix installée pour une langue, Shyrka n'en lit
+ * aucune et le dit.
+ */
+
+export const NOMS: Record<string, string> = {
+  fr: "français", en: "anglais", ru: "russe", uk: "ukrainien", es: "espagnol", de: "allemand", it: "italien", pt: "portugais", nl: "néerlandais",
+  pl: "polonais", tr: "turc", ar: "arabe", he: "hébreu", zh: "chinois", ja: "japonais", ko: "coréen", hi: "hindi", fa: "persan", el: "grec",
+};
+export const nomLangue = (code: string) => NOMS[code] ?? code;
+
+/** Langue d'après l'alphabet, si elle s'en déduit sans ambiguïté ; null pour l'alphabet latin. */
+export function langueDuTexte(texte: string): string | null {
+  const lettres = [...texte].filter((c) => /\p{L}/u.test(c));
+  if (!lettres.length) return null;
+  const part = (re: RegExp) => lettres.filter((c) => re.test(c)).length / lettres.length;
+  if (part(/\p{Script=Cyrillic}/u) > 0.5) return /[іїєґІЇЄҐ]/.test(texte) ? "uk" : "ru";
+  if (part(/\p{Script=Arabic}/u) > 0.5) return "ar";
+  if (part(/\p{Script=Hebrew}/u) > 0.5) return "he";
+  if (part(/\p{Script=Greek}/u) > 0.5) return "el";
+  if (part(/\p{Script=Hangul}/u) > 0.5) return "ko";
+  if (part(/[\p{Script=Hiragana}\p{Script=Katakana}]/u) > 0.2) return "ja";
+  if (part(/\p{Script=Han}/u) > 0.5) return "zh";
+  if (part(/\p{Script=Devanagari}/u) > 0.5) return "hi";
+  return null;
+}
+
+/** Consigne du tour pour le modèle : vide en français (règle du cadre). */
+export function consigneLangue(code: string): string {
+  if (code === "fr") return "";
+  const n = nomLangue(code);
+  return `Langue de ce tour : Mickaël te parle en ${n}. Pour ce tour, réponds en ${n}, pas en français, avec les mêmes règles (court, la conclusion d'abord, faits tirés des sources).`;
+}
+
+export interface VoixInstallee {
+  nom: string;
+  locale: string;
+}
+
+/** `say -v ?` : nom exact et locale de chaque voix. */
+export function voixParLocale(sortie: string): VoixInstallee[] {
+  return sortie.split("\n").flatMap((l) => {
+    const m = /^(.+?)\s{2,}([a-z]{2,3}_[A-Z0-9]{2,3})\b/.exec(l);
+    return m ? [{ nom: m[1]!.trim(), locale: m[2]! }] : [];
+  });
+}
+
+/** Voix d'une langue : Premium, puis Enhanced, puis la première installée. Null si aucune. */
+export function voixPourLangue(code: string, installees: VoixInstallee[]): string | null {
+  const candidates = installees.filter((v) => v.locale.split("_")[0] === code);
+  if (!candidates.length) return null;
+  return (candidates.find((v) => /\(Premium\)$/.test(v.nom)) ?? candidates.find((v) => /\(Enhanced\)$/.test(v.nom)) ?? candidates[0]!).nom;
+}
+
+/**
+ * Voix multilingue : la langue de la réplique (alphabet, sinon langue du
+ * tour) choisit la voix. Chaque voix est un `Speaker` créé à la demande.
+ */
+export class VoixMultilingue implements Speaker {
+  private courante = "fr";
+  private active: Speaker | null = null;
+  private readonly cache = new Map<string, Speaker | null>();
+
+  constructor(
+    private readonly voixDe: (code: string) => string | null,
+    private readonly creer: (voix: string) => Speaker,
+    private readonly signaler: (message: string) => void = () => undefined,
+  ) {}
+
+  /** Langue du tour à venir. */
+  langue(code: string): void {
+    this.courante = code;
+  }
+
+  private pour(code: string): Speaker | null {
+    if (!this.cache.has(code)) {
+      const v = this.voixDe(code);
+      this.cache.set(code, v ? this.creer(v) : null);
+    }
+    return this.cache.get(code)!;
+  }
+
+  async speak(text: string): Promise<void | "interrompu"> {
+    const code = langueDuTexte(text) ?? this.courante;
+    const s = this.pour(code);
+    if (!s) {
+      this.signaler(`aucune voix ${nomLangue(code)} installée sur ce Mac : réponse affichée, non lue`);
+      return;
+    }
+    this.active = s;
+    try {
+      return await s.speak(text);
+    } finally {
+      this.active = null;
+    }
+  }
+
+  interrompre(): void {
+    this.active?.interrompre?.();
+  }
+}

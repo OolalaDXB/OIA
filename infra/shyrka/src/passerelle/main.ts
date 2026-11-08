@@ -20,6 +20,7 @@ import { promptSysteme } from "../persona.js";
 import { execFileRunner } from "../runner.js";
 import { ShyrkaSession } from "../session.js";
 import { inviteWhisper } from "./audio.js";
+import { VoixMultilingue, voixParLocale, voixPourLangue } from "./langues.js";
 import { Passerelle, PORT_PASSERELLE, type Connaissances } from "./serveur.js";
 
 /**
@@ -81,9 +82,14 @@ async function main(): Promise<void> {
   const { identity, warning } = loadIdentity(env.SHYRKA_IDENTITE ?? ICI("../../identite.json"));
   if (warning) console.log(`! ${warning}`);
   const dir = mkdtempSync(join(tmpdir(), "shyrka-voix-"));
-  const voixMac = choisirVoix(identity.voix, voixInstallees(execFileSync("say", ["-v", "?"], { encoding: "utf8" })));
+  const listeVoix = execFileSync("say", ["-v", "?"], { encoding: "utf8" });
+  const voixMac = choisirVoix(identity.voix, voixInstallees(listeVoix));
   if (voixMac.avertissement) console.log(`! ${voixMac.avertissement}`);
-  const speaker = voiceOutputAllowed(identity) ? new MacSaySpeaker(execFileRunner, { voice: voixMac.voix, dir }) : undefined;
+  // Français : la voix de l'identité ; autres langues : la meilleure voix installée pour la langue.
+  const installees = voixParLocale(listeVoix);
+  const speaker = voiceOutputAllowed(identity)
+    ? new VoixMultilingue((code) => (code === "fr" ? voixMac.voix : voixPourLangue(code, installees)), (voix) => new MacSaySpeaker(execFileRunner, { voice: voix, dir }), (m) => console.log(`! ${m}`))
+    : undefined;
   const invite = inviteWhisper(projetsConnus());
   const modele = modeleWhisper();
   const whisper = modele ? new WhisperServer({ model: modele, bin: env.SHYRKA_WHISPER_BIN ?? "whisper-server", prompt: invite }) : null;
@@ -122,7 +128,15 @@ async function main(): Promise<void> {
           e ? ko(new Error(`conversion audio impossible (${e.message.split("\n")[0]})`)) : ok(),
         ),
       ),
-    transcrire: whisper ? async (wav) => (await whisper.transcribe({ path: wav, durationMs: 0 }, { language: "fr" })).text : null,
+    // Détection de la langue, puis, en français, seconde passe avec l'invite de vocabulaire (« Sillon », pas « Sion »).
+    transcrire: whisper
+      ? async (wav) => {
+          const auto = await whisper.transcribe({ path: wav, durationMs: 0 }, { language: "auto" });
+          if (auto.language !== "fr") return { texte: auto.text, langue: auto.language };
+          return { texte: (await whisper.transcribe({ path: wav, durationMs: 0 }, { language: "fr" })).text, langue: "fr" };
+        }
+      : null,
+    definirLangue: (code) => speaker?.langue(code),
     invite,
     modele: { nom: `ollama:${modeleNom}`, disponible: () => ollamaPresent(ollamaUrl) },
     voix: speaker ? voixMac.voix : null,

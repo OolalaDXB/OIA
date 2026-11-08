@@ -85,13 +85,27 @@ export class WhisperServer implements Transcriber {
     form.append("file", new Blob([bytes], { type: "audio/wav" }), basename(clip.path));
     form.append("language", language);
     form.append("temperature", "0");
-    form.append("response_format", "text");
-    if (this.opts.prompt) form.append("prompt", this.opts.prompt);
+    // « auto » : Whisper détecte la langue, rendue par verbose_json (nom anglais, ramené au code ISO).
+    form.append("response_format", language === "auto" ? "verbose_json" : "text");
+    // L'invite de vocabulaire est en français : elle biaiserait la détection d'une autre langue.
+    if (this.opts.prompt && language !== "auto") form.append("prompt", this.opts.prompt);
     const r = await f(`${this.base}/inference`, { method: "POST", body: form });
     if (!r.ok) throw new Error(`Whisper : HTTP ${r.status}.`);
-    return { text: cleanWhisperOutput(await r.text()), language };
+    if (language !== "auto") return { text: cleanWhisperOutput(await r.text()), language };
+    const d = JSON.parse(await r.text()) as { text?: string; language?: string };
+    return { text: cleanWhisperOutput(d.text ?? ""), language: codeLangue(d.language ?? "") };
   }
 }
 
 /** Indication de vocabulaire, reprise de docs/shyrka/entretiens.md. */
 export const PROMPT_WHISPER = "Entretien entre Mickaël Thomas et Shyrka. Noms : Mickaël, Shyrka, OIA, Souffleur, SEO Command.";
+
+/** Noms de langue de Whisper (verbose_json) → code ISO 639-1. Inconnu : rendu tel quel. */
+const CODES: Record<string, string> = {
+  french: "fr", english: "en", russian: "ru", ukrainian: "uk", spanish: "es", german: "de", italian: "it", portuguese: "pt", dutch: "nl",
+  polish: "pl", turkish: "tr", arabic: "ar", hebrew: "he", chinese: "zh", japanese: "ja", korean: "ko", hindi: "hi", persian: "fa", greek: "el",
+};
+export function codeLangue(nom: string): string {
+  const n = nom.trim().toLowerCase();
+  return CODES[n] ?? (/^[a-z]{2}$/.test(n) ? n : n || "fr");
+}
