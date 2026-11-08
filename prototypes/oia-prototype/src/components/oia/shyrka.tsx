@@ -162,7 +162,7 @@ export function PresenceShyrka({ compacte = false, seule = false, modeForce, pau
   const libelle = locale ? LIBELLE[mode] : mode === "repos" ? "Au repos" : mode === "ecoute" ? "À l’écoute" : mode === "reflexion" ? "Réflexion" : "Réponse simulée";
   return <div className={`shyrka-presence ${compacte ? "shyrka-presence-small" : ""}`} data-mode={mode}>
     <div role="img" aria-label={`Présence de Shyrka, ${libelle.toLowerCase()}`}><ShyrkaParticles mode={particules(mode)} paused={paused} /></div>
-    {!seule && <Button variant="ghost" size="icon" className="absolute right-2 top-2 size-12 text-shyrka-light hover:bg-shyrka-night hover:text-shyrka-light" onClick={() => setPleinEcran(true)} aria-label="Afficher la présence de Shyrka en plein écran" title="Afficher en plein écran, touche F"><Maximize /></Button>}
+    {!seule && <Button variant="ghost" size="icon" className="absolute right-2 top-2 size-12 text-shyrka-light hover:bg-shyrka-night hover:text-shyrka-light" onClick={() => { pleinEcranNavigateur(true); setPleinEcran(true); }} aria-label="Afficher la présence de Shyrka en plein écran" title="Afficher en plein écran, touche F"><Maximize /></Button>}
     {!seule && <span className="absolute bottom-4 left-4 text-xs text-shyrka-light" role="status">{libelle}</span>}
   </div>;
 }
@@ -215,6 +215,15 @@ export function JournalShyrka() {
   </aside>;
 }
 
+/** Délai avant l'envoi d'une transcription réelle en plein écran : de quoi taper une touche pour la corriger. */
+const DELAI_ENVOI_MAC_MS = 1500;
+
+/** Plein écran du navigateur : Chrome ne l'accorde que pendant un geste (touche, clic), d'où l'appel synchrone. */
+function pleinEcranNavigateur(ouvrir: boolean): void {
+  if (ouvrir && !document.fullscreenElement) void document.documentElement.requestFullscreen?.().catch(() => undefined);
+  if (!ouvrir && document.fullscreenElement) void document.exitFullscreen?.().catch(() => undefined);
+}
+
 export function ShyrkaGlobale() {
   const { ouvert, ouvrir, pleinEcran, setPleinEcran } = useShyrka();
   const surPageShyrka = useRouterState({ select: (s) => s.location.pathname === "/shyrka" });
@@ -224,6 +233,7 @@ export function ShyrkaGlobale() {
       if (cible?.matches("input, textarea, [contenteditable=true]") || event.ctrlKey || event.metaKey || event.altKey) return;
       if (event.key.toLowerCase() !== "f" || (!pleinEcran && !surPageShyrka && !ouvert)) return;
       event.preventDefault();
+      pleinEcranNavigateur(!pleinEcran);
       setPleinEcran(!pleinEcran);
     };
     window.addEventListener("keydown", gererF);
@@ -346,6 +356,16 @@ function PresencePleinEcran() {
   useEffect(() => {
     if (edition) saisieRef.current?.focus();
   }, [edition]);
+  // Vrai plein écran : demandé au geste (touche F, bouton, voir basculerPleinEcran) ; quitté avec la vue.
+  // Le quitter par Échap de Chrome ferme la vue.
+  useEffect(() => {
+    if (!pleinEcran && document.fullscreenElement) void document.exitFullscreen?.().catch(() => undefined);
+  }, [pleinEcran]);
+  useEffect(() => {
+    const sortie = () => { if (!document.fullscreenElement) setPleinEcran(false); };
+    document.addEventListener("fullscreenchange", sortie);
+    return () => document.removeEventListener("fullscreenchange", sortie);
+  }, [setPleinEcran]);
   useEffect(() => {
     if (mode !== "parle") return;
     nettoyerMinuteurs();
@@ -411,13 +431,18 @@ function PresencePleinEcran() {
 
   const derniereReponse = [...messages].reverse().find((message) => message.auteur === "Shyrka")?.texte ?? "";
   const sousTitre = mode === "parle" ? derniereReponse : compris ?? (locale ? alerte ?? brouillonSession?.note ?? "" : "");
-  // Mode Mac : la transcription réelle arrive de la passerelle ; elle attend Entrée (jamais d'envoi automatique).
+  // Mode Mac : la transcription réelle arrive de la passerelle et part comme dans le design de Lovable,
+  // mais après DELAI_ENVOI_MAC_MS (les 4 s de la démonstration s'ajoutaient au temps de réponse) ; d'ici là, une touche la corrige, Échap l'annule. Une transcription douteuse
+  // (silence, sous-titres appris de Whisper) attend Entrée.
   useEffect(() => {
     if (!locale || !pleinEcran || !brouillonSession?.texte) return;
-    setCompris(brouillonSession.texte);
-    comprisRef.current = brouillonSession.texte;
+    const texte = brouillonSession.texte;
+    nettoyerMinuteurs();
+    setCompris(texte);
+    comprisRef.current = texte;
     setPhase("repos");
     phaseRef.current = "repos";
+    if (!brouillonSession.note) envoiTimer.current = setTimeout(() => envoyerTexteRef.current(texte), DELAI_ENVOI_MAC_MS);
   }, [brouillonSession, locale, pleinEcran]);
   const etat = locale ? (mode === "repos" ? "" : LIBELLE[mode]) : libelleImmersif(phase, mode === "parle", pause);
   const presenceMode: Mode = locale ? mode : mode === "parle" ? "parle" : phase;
