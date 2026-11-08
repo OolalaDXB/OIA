@@ -88,7 +88,7 @@ async function main(): Promise<void> {
   // Français : la voix de l'identité ; autres langues : la meilleure voix installée pour la langue.
   const installees = voixParLocale(listeVoix);
   const speaker = voiceOutputAllowed(identity) && voixMac.voix
-    ? new VoixMultilingue((code) => (code === "fr" ? voixMac.voix : voixPourLangue(code, installees)), (voix) => new MacSaySpeaker(execFileRunner, { voice: voix, dir }), (m) => console.log(`! ${m}`))
+    ? new VoixMultilingue((code) => (code === "fr" ? voixMac.voix : voixPourLangue(code, installees)), (voix) => new MacSaySpeaker(execFileRunner, { voice: voix, dir, prerendu: true }), (m) => console.log(`! ${m}`))
     : undefined;
   const invite = inviteWhisper(projetsConnus());
   const modele = modeleWhisper();

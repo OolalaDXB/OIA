@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { FfmpegMicrophone, MAX_RECORD_SECONDS } from "../src/adapters/microphone-ffmpeg.js";
 import { WhisperCppTranscriber, cleanWhisperOutput } from "../src/adapters/whisper-cpp.js";
 import { COMPARISON_OLLAMA_MODEL, DEFAULT_OLLAMA_MODEL, OllamaTextModel, assertLoopback, stripThinking } from "../src/adapters/ollama.js";
-import { MacSaySpeaker, choisirVoix, voixInstallees } from "../src/adapters/macos-say.js";
+import { MacSaySpeaker, choisirVoix, morceauxDeVoix, voixInstallees } from "../src/adapters/macos-say.js";
 import { fakeRunner } from "./fakes.js";
 
 describe("micro (ffmpeg avfoundation)", () => {
@@ -158,5 +158,25 @@ describe("choix de la voix macOS (Aurélie Enhanced)", () => {
     const sans = choisirVoix("Aurélie", ["Aurélie", "Laura"]);
     expect(sans.voix).toBeNull();
     expect(sans.avertissement).toMatch(/« Aurélie \(Enhanced\) » absente de ce Mac : Shyrka ne parle pas/);
+  });
+});
+
+describe("voix préparée avant lecture (plus de saccades)", () => {
+  it("découpe en phrases, la première seule pour commencer vite, puis des groupes", () => {
+    expect(morceauxDeVoix("Bonsoir. Le corpus en parle : 4 passages. La source principale est la roadmap. Voilà !")).toEqual(["Bonsoir.", "Le corpus en parle : 4 passages. La source principale est la roadmap. Voilà !"]);
+    expect(morceauxDeVoix("Привет! Как дела?")).toEqual(["Привет!", "Как дела?"]);
+  });
+  it("prépare chaque morceau (say -o), le lit (afplay), prépare le suivant pendant la lecture ; Couper arrête la lecture", async () => {
+    const appels: string[] = [];
+    let ctrlLecture: AbortSignal | undefined;
+    const run = async (cmd: string, args: string[], o?: { signal?: AbortSignal }) => {
+      appels.push(`${cmd} ${cmd === "say" ? args[args.indexOf("-o") + 1]!.split("-").pop() : args[0]!.split("-").pop()}`);
+      if (cmd === "afplay") ctrlLecture = o?.signal;
+      return { code: 0, stdout: "", stderr: "", aborted: Boolean(o?.signal?.aborted) };
+    };
+    const v = new MacSaySpeaker(run as never, { voice: "Aurélie (Enhanced)", dir: "/tmp", prerendu: true, writeFile: () => undefined, removeFile: () => undefined, now: () => 1 });
+    expect(await v.speak("Bonsoir. Deuxième phrase.")).toBeUndefined();
+    expect(appels).toEqual(["say 0.aiff", "say 1.aiff", "afplay 0.aiff", "afplay 1.aiff"]);
+    expect(ctrlLecture).toBeDefined();
   });
 });

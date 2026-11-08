@@ -73,7 +73,7 @@ function voix(simule: boolean, dir: string): Speaker {
   const v = choisirVoix(identity.voix, voixInstallees(execFileSync("say", ["-v", "?"], { encoding: "utf8" })));
   if (v.avertissement) console.log(`! ${v.avertissement}`);
   if (!v.voix) return new RecordingSpeaker(); // pas d'Aurélie Enhanced : aucune voix, jamais la voix de base
-  return new MacSaySpeaker(execFileRunner, { voice: v.voix, dir });
+  return new MacSaySpeaker(execFileRunner, { voice: v.voix, dir, prerendu: true });
 }
 
 function etatDuJour() {

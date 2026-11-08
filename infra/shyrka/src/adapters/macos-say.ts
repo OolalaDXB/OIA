@@ -22,6 +22,18 @@ export function erreurVoix(res: RunResult, delaiMs: number): ErreurVoix {
   return new ErreurVoix(`Voix macOS : échec (code ${res.code}${res.errno ? `, ${res.errno}` : ""}). ${res.stderr.trim()}`.trim(), "code", base);
 }
 
+/** Morceaux de voix : phrases regroupées jusqu'à ~220 caractères (la première courte, pour commencer vite). */
+export function morceauxDeVoix(texte: string): string[] {
+  const phrases = (texte.replace(/\s+/g, " ").trim().match(/[^.!?…]+[.!?…]+["»”)]*\s*|[^.!?…]+$/g) ?? []).map((p) => p.trim()).filter(Boolean);
+  const out: string[] = [];
+  for (const p of phrases) {
+    const dernier = out.at(-1);
+    if (dernier && out.length > 1 && dernier.length + p.length < 220) out[out.length - 1] = `${dernier} ${p}`;
+    else out.push(p);
+  }
+  return out;
+}
+
 /** Voix installées sur le Mac (`say -v ?`), par nom exact. */
 export function voixInstallees(sortie: string): string[] {
   return sortie.split("\n").map((l) => /^(.+?)\s{2,}[a-z]{2}_[A-Z]{2}\b/.exec(l)?.[1]?.trim()).filter((v): v is string => !!v);
@@ -50,7 +62,15 @@ export class MacSaySpeaker implements Speaker {
 
   constructor(
     private readonly run: CommandRunner,
-    private readonly opts: { voice: string; dir: string; rate?: number; timeoutMs?: number; writeFile?: (p: string, s: string) => void; removeFile?: (p: string) => void; now?: () => number },
+    private readonly opts: {
+      voice: string; dir: string; rate?: number; timeoutMs?: number; writeFile?: (p: string, s: string) => void; removeFile?: (p: string) => void; now?: () => number;
+      /**
+       * Voix préparée avant d'être jouée (essai réel du 8 novembre 2026 : voix saccadée quand le Mac
+       * transcrivait en même temps) : chaque phrase est synthétisée dans un fichier (`say -o`), puis
+       * lue (`afplay`) ; la suivante se prépare pendant la lecture.
+       */
+      prerendu?: boolean;
+    },
   ) {}
 
   get parle(): boolean {
@@ -62,6 +82,7 @@ export class MacSaySpeaker implements Speaker {
   }
 
   async speak(text: string): Promise<void | "interrompu"> {
+    if (this.opts.prerendu) return this.speakPrerendu(text);
     const path = join(this.opts.dir, `replique-${(this.opts.now ?? Date.now)()}.txt`);
     (this.opts.writeFile ?? ((p, s) => writeFileSync(p, s, "utf8")))(path, text);
     const ctrl = new AbortController();
@@ -79,6 +100,46 @@ export class MacSaySpeaker implements Speaker {
         (this.opts.removeFile ?? unlinkSync)(path);
       } catch {
         /* fichier déjà absent */
+      }
+    }
+  }
+
+  private async speakPrerendu(text: string): Promise<void | "interrompu"> {
+    const ctrl = new AbortController();
+    this.enCours = ctrl;
+    const delaiMs = this.opts.timeoutMs ?? 120_000;
+    const base = join(this.opts.dir, `replique-${(this.opts.now ?? Date.now)()}`);
+    const morceaux = morceauxDeVoix(text);
+    const fichiers: string[] = [];
+    const preparer = async (i: number): Promise<string> => {
+      const txt = `${base}-${i}.txt`;
+      const aiff = `${base}-${i}.aiff`;
+      fichiers.push(txt, aiff);
+      (this.opts.writeFile ?? ((p, s) => writeFileSync(p, s, "utf8")))(txt, morceaux[i]!);
+      const args = ["-v", this.opts.voice, "-f", txt, "-o", aiff];
+      if (this.opts.rate) args.push("-r", String(this.opts.rate));
+      const res = await this.run("say", args, { timeoutMs: delaiMs, signal: ctrl.signal });
+      if (!res.aborted && !ctrl.signal.aborted && res.code !== 0) throw erreurVoix(res, delaiMs);
+      return aiff;
+    };
+    try {
+      let suivant = morceaux.length ? preparer(0) : null;
+      for (let i = 0; i < morceaux.length && suivant; i++) {
+        const aiff = await suivant;
+        if (ctrl.signal.aborted) return "interrompu";
+        suivant = i + 1 < morceaux.length ? preparer(i + 1) : null;
+        const res = await this.run("afplay", [aiff], { timeoutMs: delaiMs, signal: ctrl.signal });
+        if (res.aborted || ctrl.signal.aborted) return "interrompu";
+        if (res.code !== 0) throw erreurVoix(res, delaiMs);
+      }
+    } finally {
+      if (this.enCours === ctrl) this.enCours = null;
+      for (const f of fichiers) {
+        try {
+          (this.opts.removeFile ?? unlinkSync)(f);
+        } catch {
+          /* fichier déjà absent */
+        }
       }
     }
   }
