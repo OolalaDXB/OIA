@@ -53,3 +53,4 @@ use the editor.
 - Reuse the integration's single Supabase instance through `src/lib/supabase.ts` and keep one root auth listener; sign-out cancels and clears private queries before navigating to the public auth route.
 - Keep password recovery on public routes using the existing Supabase client and root recovery event; recovery updates send only the new password and never change hosted authentication settings.
 - Pass the original backup JSON unchanged to the import RPC; local preview only counts the six verified workspace keys and cancellation always requires a fresh preview before explicit confirmation.
+- Parse cancellation risks from the existing modified-elements array and unverifiable count; reset confirmation when the target changes or the RPC requests a fresh preview.
