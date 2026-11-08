@@ -55,6 +55,8 @@ export async function santeLocale(delaiMs = 1500): Promise<SanteLocale | null> {
 
 export const tourTexte = (texte: string, langue?: string) => appel<ReponseLocale>("/tour/texte", json(langue ? { texte, langue } : { texte }));
 export const tourAudio = (prise: Blob) => appel<Transcription>("/tour/audio", { method: "POST", headers: { "content-type": prise.type || "audio/webm" }, body: prise });
+/** Passage pris pendant la voix de Shyrka : la passerelle la coupe seulement s'il contient un mot d'arrêt. */
+export const verifierInterruption = (prise: Blob) => appel<{ interrompue: boolean; mot?: string; raison?: string }>("/interruption", { method: "POST", headers: { "content-type": prise.type || "audio/webm" }, body: prise });
 export const interrompre = () => appel<{ interrompue: boolean }>("/interrompre", json({}));
 export const definirPrive = (actif: boolean) => appel<{ prive: boolean }>("/prive", json({ actif }));
 

@@ -4,6 +4,7 @@ import type { AddressInfo } from "node:net";
 import type { Server } from "node:http";
 import { afterEach, describe, expect, it } from "vitest";
 import { analyserParole, inviteWhisper, verdictApres, verdictAvant } from "../src/passerelle/audio.js";
+import { motInterruption } from "../src/passerelle/interruption.js";
 import { estSalutation, Passerelle, type Connaissances, type DepsPasserelle, type SessionLike } from "../src/passerelle/serveur.js";
 import type { ServiceMemoire } from "../src/memoire/commandes.js";
 import type { EtatSession, TurnResult } from "../src/session.js";
@@ -292,5 +293,22 @@ describe("salutation", () => {
     const r = (await (await post(b, "/v1/tour/texte", { texte: "Bonsoir, Shyrka." })).json()) as Record<string, unknown>;
     expect(r.sources).toEqual([]);
     expect(b.appels.contextes.at(-1)).toMatch(/salutation courte, une phrase/);
+  });
+});
+
+describe("interruption par mot d'arrêt seulement", () => {
+  it("reconnaît Stop, Attends, Excuse-moi et leurs équivalents ; pas une phrase qui contient le mot, pas un mot courant", () => {
+    expect(["Stop !", "Attends.", "Excuse-moi", "Wait", "hold on", "Подожди!", "Espera", "待って", "Entschuldigung"].map((x) => motInterruption(x) !== null)).toEqual([true, true, true, true, true, true, true, true, true]);
+    expect(["Pardon", "Un moment", "C'est dur", "Il attend sa réponse", "Le projet avance bien, mais attends la fin de la fenêtre pour conclure."].map(motInterruption)).toEqual([null, null, null, null, null]);
+  });
+  it("une prise sans mot d'arrêt ne coupe pas Shyrka ; avec, elle la coupe ; un silence n'est pas transcrit", async () => {
+    const audio = (b: Banc, buf: Buffer) => post(b, "/v1/interruption", new Uint8Array(buf), { "x-shyrka-jeton": JETON, "content-type": "audio/wav" });
+    const sans = await demarrer({ transcription: "Et donc pour le budget de novembre" });
+    expect(await (await audio(sans, wav(1500, 900, 0.2))).json()).toEqual({ interrompue: false });
+    expect(await (await audio(sans, wav(1500, 0))).json()).toEqual({ interrompue: false, raison: "silence" });
+    expect(sans.appels.transcrire).toBe(1);
+    const avec = await demarrer({ transcription: "Stop." });
+    expect(await (await audio(avec, wav(1500, 900, 0.2))).json()).toEqual({ interrompue: true, mot: "stop" });
+    expect(avec.appels.textes).toEqual([]); // jamais un tour
   });
 });

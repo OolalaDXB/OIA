@@ -1,37 +1,46 @@
 /**
- * Conversation mains libres avec Shyrka sur le Mac (décision de Mickaël,
- * 8 novembre 2026) : une fois activé, le micro reste ouvert ; un énoncé se
- * termine après SILENCE_FIN_MS sans parole et part aussitôt ; si Mickaël
- * reprend la parole pendant que Shyrka parle, elle s'interrompt.
+ * Conversation mains libres avec Shyrka sur le Mac (décisions de Mickaël,
+ * 8 novembre 2026).
  *
- * Le micro n'est ouvert que pendant le mode, signalé à l'écran, et fermé à
- * l'arrêt (pistes libérées). Seuls les énoncés partent vers la passerelle
- * locale, qui écarte encore le silence. La voix de Shyrka sort des
- * haut-parleurs du Mac, hors du navigateur : l'annulation d'écho ne la voit
- * pas. Pendant qu'elle parle, le seuil de reprise se règle donc sur le niveau
- * de sa propre voix capté par le micro (un casque rend la reprise plus sûre).
+ * - Le micro reste ouvert pendant le mode, signalé à l'écran, fermé à l'arrêt.
+ * - Un énoncé se termine après SILENCE_FIN_MS sans parole et part aussitôt.
+ * - Pendant que Shyrka parle, un son ne la coupe pas : elle finit sa phrase.
+ *   Un passage qui ressemble à la voix de Mickaël (nettement au-dessus de
+ *   l'écho de la sienne) part en vérification (`candidat`) : la passerelle ne
+ *   la coupe que s'il contient un mot d'arrêt (« Stop », « Attends »,
+ *   « Excuse-moi », toutes langues).
+ * - Après sa réponse, APRES_VOIX_MS sans écoute : la fin de sa voix (et son
+ *   écho) n'est pas prise pour une parole de Mickaël.
+ *
+ * La voix de Shyrka sort des haut-parleurs du Mac, hors du navigateur :
+ * l'annulation d'écho ne la voit pas, d'où le seuil réglé sur son écho.
  */
 
 export const SILENCE_FIN_MS = 2000;
+export const APRES_VOIX_MS = 500;
 const TRAME_MS = 50;
-/** Parole : ce nombre de dB au-dessus du bruit de fond, et au moins ce niveau absolu. */
 const MARGE_DB = 12;
 const SEUIL_MIN_DB = -48;
-/** Reprise pendant la voix de Shyrka : ce nombre de dB au-dessus de son écho, pendant au moins REPRISE_MS. */
-const MARGE_ECHO_DB = 6;
-const REPRISE_MS = 250;
+/** Pendant la voix de Shyrka : un passage à vérifier doit dépasser son écho de MARGE_ECHO_DB pendant DEBUT_CANDIDAT_MS. */
+const MARGE_ECHO_DB = 8;
+const DEBUT_CANDIDAT_MS = 200;
+const FIN_CANDIDAT_MS = 500;
+const CANDIDAT_MAX_MS = 2500;
 const DEBUT_PAROLE_MS = 150;
-/** Sans parole, la prise en cours est jetée et relancée (pas d'accumulation de silence). */
 const RELANCE_MS = 30_000;
 const ENONCE_MAX_MS = 60_000;
 
 export interface Rappels {
-  /** Énoncé terminé (2 s de silence) : la prise à transcrire. */
+  /** Énoncé terminé (2 s de silence) : la prise à transcrire et à envoyer. */
   enonce: (prise: Blob) => void;
-  /** Mickaël commence à parler (pour l'animation) ; `pendantVoix` : il coupe Shyrka. */
-  debutParole: (pendantVoix: boolean) => void;
+  /** Passage court pris pendant la voix de Shyrka : à vérifier (mot d'arrêt ou non). */
+  candidat: (prise: Blob) => void;
+  /** Mickaël commence à parler (animation). */
+  debutParole: () => void;
   erreur: (message: string, code: "micro_refuse" | "micro_indisponible") => void;
 }
+
+type Destination = "enonce" | "candidat" | null;
 
 export class EcouteContinue {
   private flux: MediaStream | null = null;
@@ -43,12 +52,13 @@ export class EcouteContinue {
   private plancher = -60;
   private echo = -60;
   private parole = false;
-  private debutParoleMs = 0;
+  private candidat = false;
+  private debutMs = 0;
   private dernierSonMs = 0;
   private debutPriseMs = 0;
   private auDessus = 0;
-  /** Shyrka parle (voix sur le Mac) : reprise possible, seuil relevé. */
-  voixShyrka = false;
+  private muetJusqua = 0;
+  private voix = false;
   /** Shyrka transcrit ou réfléchit : rien n'est pris. */
   enAttente = false;
 
@@ -56,6 +66,17 @@ export class EcouteContinue {
 
   get active(): boolean {
     return this.flux !== null;
+  }
+
+  /** Shyrka parle ou se tait ; à la fin de sa voix, un court temps sans écoute. */
+  set voixShyrka(actif: boolean) {
+    if (this.voix && !actif) {
+      this.muetJusqua = performance.now() + APRES_VOIX_MS;
+      this.candidat = false;
+      this.parole = false;
+      this.auDessus = 0;
+    }
+    this.voix = actif;
   }
 
   async demarrer(): Promise<void> {
@@ -88,7 +109,7 @@ export class EcouteContinue {
     void this.contexte?.close().catch(() => undefined);
     this.contexte = null;
     this.analyseur = null;
-    this.parole = false;
+    this.parole = this.candidat = false;
   }
 
   private nouvellePrise(): void {
@@ -101,13 +122,13 @@ export class EcouteContinue {
     this.debutPriseMs = performance.now();
   }
 
-  /** Termine la prise en cours et la rend ; une nouvelle prise commence aussitôt. */
-  private couperPrise(rendre: boolean): void {
+  /** Termine la prise en cours (rendue à `destination`, ou jetée) ; une nouvelle prise commence aussitôt. */
+  private couperPrise(destination: Destination): void {
     const rec = this.enregistreur;
     if (!rec) return;
     rec.onstop = () => {
       const b = new Blob(this.morceaux, { type: rec.mimeType || "audio/webm" });
-      if (rendre && b.size) this.rappels.enonce(b);
+      if (destination && b.size) this.rappels[destination](b);
       this.nouvellePrise();
     };
     rec.stop();
@@ -128,37 +149,52 @@ export class EcouteContinue {
     if (!this.analyseur || !this.enregistreur) return;
     const maintenant = performance.now();
     const n = this.niveau();
-    if (this.enAttente) {
-      // Transcription ou réflexion : on n'écoute pas ; la prise repart à vide ensuite.
-      if (maintenant - this.debutPriseMs > 1000) this.couperPrise(false);
-      this.parole = false;
+    // Transcription, réflexion, ou fin de la voix de Shyrka : on n'écoute pas, la prise repart à vide.
+    if (this.enAttente || maintenant < this.muetJusqua) {
+      if (maintenant - this.debutPriseMs > 300) this.couperPrise(null);
+      this.parole = this.candidat = false;
+      this.auDessus = 0;
       return;
     }
-    // Écho de la voix de Shyrka : moyenne glissante de ce que capte le micro pendant qu'elle parle.
-    if (this.voixShyrka) this.echo = this.echo * 0.9 + n * 0.1;
+    if (this.voix) this.echo = this.echo * 0.9 + n * 0.1;
     else this.echo = Math.max(-60, this.echo - 1);
-    const seuil = Math.max(SEUIL_MIN_DB, this.plancher + MARGE_DB, this.voixShyrka ? this.echo + MARGE_ECHO_DB : -Infinity);
-    if (!this.parole && !this.voixShyrka && n < this.plancher + 6) this.plancher = this.plancher * 0.97 + n * 0.03;
+    if (!this.parole && !this.voix && n < this.plancher + 6) this.plancher = this.plancher * 0.97 + n * 0.03;
 
+    if (this.voix) {
+      // Pendant la voix : seul un passage nettement au-dessus de son écho est vérifié ; il ne la coupe pas.
+      const seuil = Math.max(SEUIL_MIN_DB, this.plancher + MARGE_DB, this.echo + MARGE_ECHO_DB);
+      if (n >= seuil) {
+        this.auDessus += TRAME_MS;
+        this.dernierSonMs = maintenant;
+        if (!this.candidat && this.auDessus >= DEBUT_CANDIDAT_MS) {
+          this.candidat = true;
+          this.debutMs = maintenant;
+          this.couperPrise(null); // la vérification part du début de ce passage
+        }
+      } else this.auDessus = 0;
+      if (this.candidat && (maintenant - this.dernierSonMs >= FIN_CANDIDAT_MS || maintenant - this.debutMs >= CANDIDAT_MAX_MS)) {
+        this.candidat = false;
+        this.couperPrise("candidat");
+      } else if (!this.candidat && maintenant - this.debutPriseMs >= 3000) this.couperPrise(null);
+      return;
+    }
+
+    const seuil = Math.max(SEUIL_MIN_DB, this.plancher + MARGE_DB);
     if (n >= seuil) {
       this.auDessus += TRAME_MS;
       this.dernierSonMs = maintenant;
-      if (!this.parole && this.auDessus >= (this.voixShyrka ? REPRISE_MS : DEBUT_PAROLE_MS)) {
+      if (!this.parole && this.auDessus >= DEBUT_PAROLE_MS) {
         this.parole = true;
-        this.debutParoleMs = maintenant;
-        // Reprise pendant la voix de Shyrka : la prise repart, sans l'écho de sa voix.
-        if (this.voixShyrka) this.couperPrise(false);
-        this.rappels.debutParole(this.voixShyrka);
+        this.debutMs = maintenant;
+        this.rappels.debutParole();
       }
     } else this.auDessus = 0;
-
     if (this.parole) {
-      // Fin d'énoncé : SILENCE_FIN_MS sans parole, ou durée maximale atteinte.
-      if (maintenant - this.dernierSonMs >= SILENCE_FIN_MS || maintenant - this.debutParoleMs >= ENONCE_MAX_MS) {
+      if (maintenant - this.dernierSonMs >= SILENCE_FIN_MS || maintenant - this.debutMs >= ENONCE_MAX_MS) {
         this.parole = false;
         this.auDessus = 0;
-        this.couperPrise(true);
+        this.couperPrise("enonce");
       }
-    } else if (maintenant - this.debutPriseMs >= RELANCE_MS) this.couperPrise(false);
+    } else if (maintenant - this.debutPriseMs >= RELANCE_MS) this.couperPrise(null);
   }
 }

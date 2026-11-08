@@ -15,7 +15,7 @@ import { EtatEcran } from "@/components/oia/etat-donnees";
 
 import { lireShyrka, sauverShyrka } from "@/lib/shyrka-storage";
 import { EcouteContinue } from "@/lib/shyrka-mains-libres";
-import { definirPrive, interrompre, PriseMicro, santeLocale, suivreEtats, tourAudio, tourTexte, ErreurLocale, type EtatLocal, type SanteLocale, type SourceLocale } from "@/lib/shyrka-locale";
+import { definirPrive, interrompre, verifierInterruption, PriseMicro, santeLocale, suivreEtats, tourAudio, tourTexte, ErreurLocale, type EtatLocal, type SanteLocale, type SourceLocale } from "@/lib/shyrka-locale";
 
 /** État réel de Shyrka sur le Mac (passerelle locale), ou de la démonstration. */
 type Mode = EtatLocal;
@@ -141,10 +141,9 @@ export function ShyrkaProvider({ children }: { children: ReactNode }) {
     }
     const e = new EcouteContinue({
       enonce: traiterEnonce,
-      debutParole: (pendantVoix) => {
-        if (pendantVoix) void interrompre().catch(() => undefined);
-        setMode("ecoute");
-      },
+      // Pendant sa voix : Shyrka n'est coupée que si la passerelle entend « Stop », « Attends » ou « Excuse-moi ».
+      candidat: (b) => { void verifierInterruption(b).catch(() => undefined); },
+      debutParole: () => setMode("ecoute"),
       erreur: (message) => { ecoute.current?.arreter(); ecoute.current = null; setPriseActive(false); setMode("repos"); setAlerte(message); },
     });
     ecoute.current = e;

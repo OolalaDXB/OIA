@@ -7,6 +7,7 @@ import type { ExtraitCorpus } from "../executive/corpus.js";
 import type { ServiceMemoire } from "../memoire/commandes.js";
 import type { EtatSession, TurnResult } from "../session.js";
 import { consigneLangue, langueDuTexte } from "./langues.js";
+import { motInterruption } from "./interruption.js";
 import { composerDecision, QUESTION_DECISION, type EtatCorpus } from "./decision.js";
 import { analyserParole, lireWav, verdictApres, verdictAvant, type AnalyseParole, type Verdict } from "./audio.js";
 
@@ -20,6 +21,7 @@ import { analyserParole, lireWav, verdictApres, verdictAvant, type AnalyseParole
  *   POST /v1/tour/texte       { texte, langue? } → réponse dans la langue du tour, sources, état de la mémoire
  *   POST /v1/tour/audio       corps audio (webm, ogg, mp4, wav) → transcription À RELIRE, jamais envoyée
  *   POST /v1/interrompre      coupe la voix en cours
+ *   POST /v1/interruption     prise courte faite pendant la voix : coupe Shyrka seulement si elle contient un mot d'arrêt
  *   POST /v1/prive            { actif } : mode privé (ni lecture ni écriture de mémoire)
  *   GET  /v1/evenements       flux SSE : état réel (repos, transcription, reflexion, parle, erreur, interrompu) et réponse
  *
@@ -317,6 +319,38 @@ export class Passerelle {
     });
   }
 
+  private verificationEnCours = false;
+
+  /**
+   * Prise faite pendant que Shyrka parle : transcrite (langue détectée) ; elle
+   * la coupe seulement si elle contient un mot d'arrêt (interruption.ts).
+   * Hors du verrou du tour (le tour en cours est justement sa réponse) ; une
+   * vérification à la fois ; la prise n'est jamais un tour.
+   */
+  async interruptionAudio(corps: Uint8Array, type: string): Promise<Record<string, unknown>> {
+    if (!TYPES_AUDIO.test(type)) throw new ErreurHttp(415, "type_audio", "Audio attendu : webm, ogg, mp4 ou wav.");
+    const transcrire = this.deps.transcrire;
+    if (!transcrire) throw new ErreurHttp(503, "transcription_indisponible", "Whisper local non lancé.");
+    if (this.verificationEnCours) return { interrompue: false, raison: "verification_en_cours" };
+    this.verificationEnCours = true;
+    const dir = mkdtempSync(join(tmpdir(), "shyrka-passerelle-"));
+    try {
+      const entree = join(dir, "prise.bin");
+      const wav = join(dir, "prise.wav");
+      writeFileSync(entree, corps, { mode: 0o600 });
+      await this.deps.convertir(entree, wav);
+      const { echantillons, frequence } = lireWav(readFileSync(wav));
+      if (verdictAvant(analyserParole(echantillons, frequence)).verdict !== "parole") return { interrompue: false, raison: "silence" };
+      const mot = motInterruption((await transcrire(wav)).texte);
+      const interrompue = mot !== null && this.session.interrompre();
+      this.log(`interruption : ${interrompue ? "mot d'arrêt entendu, Shyrka coupée" : "aucun mot d'arrêt, elle continue"}`);
+      return { interrompue, ...(mot ? { mot } : {}) };
+    } finally {
+      this.verificationEnCours = false;
+      rmSync(dir, { recursive: true, force: true });
+    }
+  }
+
   interrompre(): { interrompue: boolean } {
     return { interrompue: this.session.interrompre() };
   }
@@ -377,6 +411,7 @@ export class Passerelle {
         if (route === "GET /v1/evenements") return this.abonner(res);
         if (req.method !== "POST") throw new ErreurHttp(404, "inconnu", "Route inconnue.");
         if (url.pathname === "/v1/tour/audio") return envoyer(200, await this.tourAudio(await lire(req, AUDIO_MAX), String(req.headers["content-type"] ?? "")));
+        if (url.pathname === "/v1/interruption") return envoyer(200, await this.interruptionAudio(await lire(req, AUDIO_MAX), String(req.headers["content-type"] ?? "")));
         if (!/^application\/json(;|$)/i.test(String(req.headers["content-type"] ?? ""))) throw new ErreurHttp(415, "json_requis", "Corps JSON attendu (application/json).");
         const corps = JSON.parse(Buffer.from(await lire(req, JSON_MAX)).toString("utf8") || "{}") as Record<string, unknown>;
         switch (url.pathname) {
