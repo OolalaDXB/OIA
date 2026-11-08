@@ -23,8 +23,9 @@ données, `SHA256SUMS`), relue sur un Postgres jetable.
 | 7 | `0006_visibility_vues.sql` | `20261108010900` |
 | 8 | `0007_shyrka.sql` (bloc G) | voir le rapport du mandat v9 |
 | 9 | `0008_money_lookup_v2.sql` | `20261108011100` (8 novembre 2026, sauvegarde `~/oia-sauvegardes/avant-0008/`) |
+| 10 | `0009_ia_couts.sql` | `20261108011200` (8 novembre 2026, sauvegarde `~/oia-sauvegardes/avant-0009/`) ; alimentée chaque jour par `infra/visibility/scripts/couts-sync.sh` |
 
-## À appliquer (fichiers relus, non appliqués)
+## Dépenses d'IA (0009, appliquée)
 
 | Ordre | Fichier | Effet | Prérequis |
 | --- | --- | --- | --- |
