@@ -22,16 +22,15 @@ données, `SHA256SUMS`), relue sur un Postgres jetable.
 | 6 | `infra/visibility/migrations/0001` à `0004` | `20261108010500` à `20261108010800` |
 | 7 | `0006_visibility_vues.sql` | `20261108010900` |
 | 8 | `0007_shyrka.sql` (bloc G) | voir le rapport du mandat v9 |
+| 9 | `0008_money_lookup_v2.sql` | `20261108011100` (8 novembre 2026, sauvegarde `~/oia-sauvegardes/avant-0008/`) |
 
-## À appliquer (fichiers relus, non appliqués)
+## Contrat Money Lookup version 2 (0008, appliquée)
 
-| Ordre | Fichier | Effet | Prérequis |
-| --- | --- | --- | --- |
-| 9 | `0008_money_lookup_v2.sql` | Contrat Money Lookup **version 2**, d'après les écarts relevés par Lovable (`1e3040c`) et les décisions de Mickaël du 8 novembre : import A4 corrigé (valeurs `null`, conflits au bilan, aperçu et confirmation d'annulation) ; vues `_v2` sur lesquelles se branche le cockpit (COMMENT ignoré, REGULATORY hors de Toutes et des montants, tri sans échéances dépassées, échéance de candidature et la plus tardive, fraîcheur recalculée, Aujourd'hui à 7, 14 et 30 jours) ; seize lectures nouvelles, dont suggestions de projets et « clos depuis la dernière visite », et tables `oia_projet`, `oia_import_element`, `oia_visite` ; `oia_supprimer`, `oia_proposer_projet`, `oia_marquer_visite` ; `oia_basculer_tache` ouverte aux propriétaires. Les vues `_v1` restent servies sans changement | 0007 appliquée |
+Contenu de `0008_money_lookup_v2.sql` : contrat Money Lookup **version 2**, d'après les écarts relevés par Lovable (`1e3040c`) et les décisions de Mickaël du 8 novembre : import A4 corrigé (valeurs `null`, conflits au bilan, aperçu et confirmation d'annulation) ; vues `_v2` sur lesquelles se branche le cockpit (COMMENT ignoré, REGULATORY hors de Toutes et des montants, tri sans échéances dépassées, échéance de candidature et la plus tardive, fraîcheur recalculée, Aujourd'hui à 7, 14 et 30 jours) ; seize lectures nouvelles, dont suggestions de projets et « clos depuis la dernière visite », et tables `oia_projet`, `oia_import_element`, `oia_visite` ; `oia_supprimer`, `oia_proposer_projet`, `oia_marquer_visite` ; `oia_basculer_tache` ouverte aux propriétaires. Les vues `_v1` restent servies sans changement.
 
-Après 0008 : charger les projets (`pnpm --filter @oia/money-lookup charger -- --projets --base …`,
-avec `OIA_CHARGEMENT_SUPABASE=oui`), puis ajouter cette commande au
-rafraîchissement quotidien (`packages/money-lookup/scripts/rafraichir.sh`).
+Projets du registre chargés le 8 novembre 2026 (16, idempotent) ; le
+rafraîchissement quotidien (`packages/money-lookup/scripts/rafraichir.sh`)
+les recharge après les opportunités (`charger -- --projets`).
 Retour arrière : bloc en fin de `0008_money_lookup_v2.sql`. Tests :
 `test/money-lookup-v2.test.ts` (séquence de production puis 0008, tests
 adverses), `packages/money-lookup/test/reprise.test.ts` (sauvegarde réelle

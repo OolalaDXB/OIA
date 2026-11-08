@@ -41,5 +41,10 @@ appliquer() {
 }
 { echo 'set client_min_messages = warning;'; cat "$script"; } | appliquer >> "$journal" 2>&1 || echec "application sur la base OIA refusée"
 echo "$(date -u +%FT%TZ) ok : $(head -1 "$script" | sed 's/^-- //')" >> "$journal"
+# Projets du registre vers oia_projet (migration 0008), idempotent.
+projets="$donnees/projets-$jour.sql"
+pnpm -s --filter @oia/money-lookup charger -- --projets --sortie "$projets" 2>> "$journal" || echec "chargeur des projets en échec"
+{ echo 'set client_min_messages = warning;'; cat "$projets"; } | appliquer >> "$journal" 2>&1 || echec "projets refusés par la base OIA"
+echo "$(date -u +%FT%TZ) ok : projets du registre" >> "$journal"
 # On garde les sept derniers jours.
-find "$donnees" -name 'console-*.json' -mtime +7 -delete; find "$donnees" -name 'chargement-*.sql' -mtime +7 -delete
+find "$donnees" -name 'console-*.json' -mtime +7 -delete; find "$donnees" -name 'chargement-*.sql' -mtime +7 -delete; find "$donnees" -name 'projets-*.sql' -mtime +7 -delete

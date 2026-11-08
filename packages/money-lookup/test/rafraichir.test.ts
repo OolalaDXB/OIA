@@ -23,6 +23,9 @@ describe.skipIf(!origine)("rafraîchissement quotidien de Money Lookup", () => {
     expect(r.code).toBe(0);
     expect(r.journal).toMatch(/^1$/m);
     expect(r.journal).toMatch(/ok : Chargement Money Lookup/);
+    // Puis les projets du registre (migration 0008), passés à la base de la même façon.
+    expect(r.journal).toMatch(/ok : projets du registre/);
+    expect(r.journal.match(/^1$/gm)).toHaveLength(2);
   });
 
   it("un refus de la base est un échec consigné, code de sortie 1", () => {
