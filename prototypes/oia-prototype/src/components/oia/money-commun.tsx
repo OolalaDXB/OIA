@@ -14,7 +14,7 @@ export function AccesMoney({ children }: { children: ReactNode }) {
   const auth = useOiaAuth(); const access = useAccesMoney();
   if (auth.loading) return <EtatMoney loading retry={() => {}}>{null}</EtatMoney>;
   if (!auth.user) return <ConnexionOia />;
-  if (access.isPending || access.isFetching || access.error) return <EtatMoney loading={access.isPending || access.isFetching} error={access.error} retry={access.refetch}>{null}</EtatMoney>;
+  if (access.isPending || access.error) return <EtatMoney loading={access.isPending} error={access.error} retry={access.refetch}>{null}</EtatMoney>;
   if (!access.data) return <p role="alert" className="text-sm">Accès non accordé à cet espace.</p>;
   return children;
 }

@@ -18,11 +18,11 @@ export async function lireVueMoney<V extends VueMoney>(vue: V, filters: Record<s
 }
 export const sourceReelleMoney = lireVueMoney;
 export function optionsVueMoney<V extends VueMoney>(userId: string, vue: V, filters: Record<string, string | number | boolean> = {}) {
-  return queryOptions({ queryKey: ["money-reel", userId, vue, filters], queryFn: () => lireVueMoney(vue, filters), retry: false });
+  return queryOptions({ queryKey: ["money-reel", userId, vue, filters], queryFn: () => lireVueMoney(vue, filters), retry: false, refetchOnWindowFocus: false, refetchOnReconnect: false });
 }
 export function useAccesMoney() {
   const auth = useOiaAuth();
-  return useQuery({ queryKey: ["money-acces", auth.user?.id], enabled: Boolean(auth.user) && !auth.loading, retry: false, queryFn: async () => {
+  return useQuery({ queryKey: ["money-acces", auth.user?.id], enabled: Boolean(auth.user) && !auth.loading, retry: false, staleTime: Infinity, gcTime: Infinity, refetchOnMount: false, refetchOnWindowFocus: false, refetchOnReconnect: false, queryFn: async () => {
     const { data, error } = await supabase.rpc("oia_role", { p_espace: ESPACE_OIA });
     if (error) throw new ErreurMoney(error.message, error.code);
     return data || null;
@@ -39,7 +39,8 @@ export function useActionMoney<N extends keyof Fonctions>(nom: N) {
     const { data, error } = await supabase.rpc(nom, args);
     if (error) throw new ErreurMoney(error.message, error.code);
     return data;
-  }, onMutate: async () => { await client.cancelQueries({ queryKey: ["money-reel"] }); }, onSuccess: async () => {
+  }, onMutate: async () => { if (nom !== "oia_marquer_visite") await client.cancelQueries({ queryKey: ["money-reel"] }); }, onSuccess: async () => {
+    if (nom === "oia_marquer_visite") return;
     client.removeQueries({ queryKey: ["money-reel"], type: "inactive" });
     await client.invalidateQueries({ queryKey: ["money-reel"], refetchType: "active" });
   } });
