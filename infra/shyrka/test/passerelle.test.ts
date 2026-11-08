@@ -72,7 +72,7 @@ async function demarrer(over: Partial<DepsPasserelle> & { repondre?: (t: string)
     connaissances: (): Connaissances => {
       appels.ouvertures++;
       return volume.monte
-        ? { memoire: memoireFictive(appels.prive), chercher: (t) => (/sillon/i.test(t) ? [{ source: "roadmap", chemin: "docs/roadmap.md", section: "SILLON", ligne: 42, ref: "ligne 42", citation: "docs/roadmap.md:42", titre: "Roadmap", version: "abc123def456", dateSource: "2026-11-01T00:00:00Z", indexeLe: "2026-11-08T00:00:00Z", statut: "valide", compartiment: "projet:sillon", connecteur: "depot-git", extrait: "SILLON : décision fictive", mode: "mots", score: 0, identifiant: false, nonFiable: true }] : []), etat: { memoire: "active", corpus: "actif", detail: "monté" }, fermer: () => undefined }
+        ? { memoire: memoireFictive(appels.prive), chercher: (t) => (/sillon/i.test(t) ? [{ source: "roadmap", chemin: "docs/roadmap.md", section: "SILLON", ligne: 42, ref: "ligne 42", citation: "docs/roadmap.md:42", titre: "Roadmap", version: "abc123def456", dateSource: "2026-11-01T00:00:00Z", indexeLe: "2026-11-08T00:00:00Z", statut: "valide", compartiment: "projet:sillon", connecteur: "depot-git", niveau: "interne", extrait: "SILLON : décision fictive", mode: "mots", score: 0, identifiant: false, nonFiable: true }] : []), etat: { memoire: "active", corpus: "actif", detail: "monté" }, fermer: () => undefined }
         : { memoire: memoireFictive(appels.prive), chercher: null, etat: { memoire: "indisponible", corpus: "indisponible", detail: "volume démonté" }, fermer: () => undefined };
     },
     creerSession: (h): SessionLike => {
@@ -430,5 +430,51 @@ describe("passerelle locale : routes du Corpus (défenses)", () => {
     const r = await fetch(`${b.url}/v1/corpus/etat`, { headers: H });
     expect(r.status).toBe(503);
     expect(((await r.json()) as { message: string }).message).toMatch(/volume démonté/);
+  });
+});
+
+describe("passerelle locale : mode de présence", () => {
+  it("phrases reconnues (et pas une phrase qui contient le mot)", async () => {
+    const { commandePresence } = await import("../src/passerelle/presence.js");
+    expect(commandePresence("Je suis seul.")).toBe("seul");
+    expect(commandePresence("Shyrka, je suis seule")).toBe("seul");
+    expect(commandePresence("On est entre nous")).toBe("entre_proches");
+    expect(commandePresence("Je suis avec quelqu'un")).toBe("externe");
+    expect(commandePresence("Je suis seul responsable du projet")).toBeNull();
+  });
+
+  it("« entre proches » au démarrage ; à la voix ou d'un clic ; retour après 30 minutes sans action ; les sondages ne comptent pas", async () => {
+    let t = 1_000_000;
+    const b = await demarrer({ maintenant: () => t, inactiviteMs: 30 * 60_000 });
+    const mode = async () => ((await (await fetch(`${b.url}/v1/presence`, { headers: H })).json()) as { mode: string }).mode;
+    expect(await mode()).toBe("entre_proches");
+    const r = (await (await post(b, "/v1/tour/texte", { texte: "Je suis seul" })).json()) as { reponse: string };
+    expect(r.reponse).toMatch(/tu es seul/);
+    expect(b.appels.textes).toEqual([]); // aucun tour du modèle
+    expect(await mode()).toBe("seul");
+    t += 29 * 60_000;
+    expect(await mode()).toBe("seul"); // sonder n'est pas une action
+    t += 2 * 60_000;
+    expect(await mode()).toBe("entre_proches");
+    expect((await post(b, "/v1/presence", { mode: "externe" })).status).toBe(200);
+    expect(await mode()).toBe("externe");
+    expect((await post(b, "/v1/presence", { mode: "tous" })).status).toBe(400);
+  });
+
+  it("mode protégé : une question qui ne trouve que du masqué reçoit la réponse protégée, sans modèle", async () => {
+    const extrait = { source: "s", chemin: "prive/s", section: "S", ligne: 1, ref: "ligne 1", citation: "dossier · ligne 1", titre: "dossier", version: "v", dateSource: "2026-11-08T00:00:00Z", indexeLe: "2026-11-08T00:00:00Z", statut: "valide" as const, compartiment: "personnel", connecteur: "fichier-local" as const, niveau: "confidentiel" as const, extrait: "budget fictif du dossier Orion", mode: "sens" as const, score: 0.7, identifiant: false, nonFiable: true as const };
+    const b = await demarrer({
+      connaissances: (h) => ({
+        memoire: memoireFictive([]), etat: { memoire: "active", corpus: "actif", detail: "t" }, fermer: () => undefined,
+        chercher: (t) => (/orion/i.test(t) && h.niveaux().includes("confidentiel") ? [extrait] : []),
+        chercherTout: (t) => (/orion/i.test(t) ? [extrait] : []),
+      }),
+    });
+    const r = (await (await post(b, "/v1/tour/texte", { texte: "Quel est le budget du dossier Orion pour le projet ?" })).json()) as { reponse: string; sources: unknown[] };
+    expect(r).toMatchObject({ reponse: "Je t'en parlerai quand tu seras seul.", sources: [] });
+    expect(b.appels.textes).toEqual([]);
+    await post(b, "/v1/presence", { mode: "seul" });
+    const r2 = (await (await post(b, "/v1/tour/texte", { texte: "Quel est le budget du dossier Orion pour le projet ?" })).json()) as { sources: unknown[] };
+    expect(r2.sources).toHaveLength(1);
   });
 });

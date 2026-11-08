@@ -15,7 +15,7 @@ import { EtatEcran } from "@/components/oia/etat-donnees";
 
 import { lireShyrka, sauverShyrka } from "@/lib/shyrka-storage";
 import { EcouteContinue } from "@/lib/shyrka-mains-libres";
-import { definirPrive, interrompre, verifierInterruption, PriseMicro, santeLocale, suivreEtats, tourAudio, tourTexte, ErreurLocale, type EtatLocal, type SanteLocale, type SourceLocale } from "@/lib/shyrka-locale";
+import { changerPresence, definirPrive, interrompre, lirePresence, type ModePresence, verifierInterruption, PriseMicro, santeLocale, suivreEtats, tourAudio, tourTexte, ErreurLocale, type EtatLocal, type SanteLocale, type SourceLocale } from "@/lib/shyrka-locale";
 
 /** État réel de Shyrka sur le Mac (passerelle locale), ou de la démonstration. */
 type Mode = EtatLocal;
@@ -32,6 +32,8 @@ type Session = {
   cocher: (id: number) => void; ouvert: boolean; ouvrir: (open: boolean) => void;
   /** Passerelle du Mac joignable : conversation réelle. Sinon null : démonstration. */
   locale: SanteLocale | null; occupe: boolean;
+  /** Mode de présence réel du Mac (null hors du Mac). */
+  presence: ModePresence | null; changerPresence: (m: ModePresence) => void;
   /** Mains libres : active ou coupe le micro ouvert (fin d'énoncé après 2 s de silence, reprise qui interrompt Shyrka). */
   parler: () => void; priseActive: boolean;
   /** Transcription à relire avant envoi (jamais envoyée d'elle-même). */
@@ -74,6 +76,7 @@ export function ShyrkaProvider({ children }: { children: ReactNode }) {
   const [priseActive, setPriseActive] = useState(false);
   const [brouillon, setBrouillon] = useState<Session["brouillon"]>(null);
   const [alerte, setAlerte] = useState<string | null>(null);
+  const [presence, setPresence] = useState<ModePresence | null>(null);
   const prise = useRef<PriseMicro | null>(null);
   const ecoute = useRef<EcouteContinue | null>(null);
   useEffect(() => {
@@ -86,7 +89,9 @@ export function ShyrkaProvider({ children }: { children: ReactNode }) {
         etat: (e) => setMode((m) => (m === "ecoute" && e === "repos" ? m : e)),
         fin: () => setOccupe(false),
         perdu: () => setAlerte("Passerelle du Mac injoignable : relancer pnpm shyrka:passerelle."),
+        presence: (m) => setPresence(m),
       });
+      void lirePresence().then((p) => vivant && setPresence(p.mode), () => undefined);
     });
     return () => { vivant = false; fermer?.(); prise.current?.liberer(); ecoute.current?.arreter(); };
   }, []);
@@ -99,6 +104,14 @@ export function ShyrkaProvider({ children }: { children: ReactNode }) {
     e.enAttente = mode === "transcription" || mode === "reflexion";
   }, [mode]);
   useEffect(() => { if (locale) void definirPrive(ctx.prive).catch(() => undefined); }, [locale, ctx.prive]);
+  // Mode plus restreint (quelqu'un arrive, inactivité) : la conversation affichée disparaît de l'écran et du navigateur.
+  const rangPresence = { seul: 2, entre_proches: 1, externe: 0 } as const;
+  const presencePrecedente = useRef<ModePresence | null>(null);
+  useEffect(() => {
+    const avant = presencePrecedente.current;
+    presencePrecedente.current = presence;
+    if (avant && presence && rangPresence[presence] < rangPresence[avant]) { setMessages([]); sequence.current = 0; }
+  }, [presence]);
   const ajouter = (m: Omit<Message, "id">) => setMessages((prev) => [...prev, { ...m, id: ++sequence.current }]);
   const envoyerLocal = async (demande: string, langueDetectee?: string) => {
     // La langue détectée sur la prise accompagne le tour ; un texte tapé est jugé par la passerelle.
@@ -180,7 +193,7 @@ export function ShyrkaProvider({ children }: { children: ReactNode }) {
     setMode("parle");
     timer.current = setTimeout(() => setMode("repos"), 2600);
   };
-  return <ShyrkaContext.Provider value={{ locale, occupe, parler, priseActive, brouillon, couper, alerte, pret, sauvegarde, effacer: () => { clearTimeout(timer.current); setMessages([]); setActions([]); setDecisions([]); setMode("repos"); sequence.current = 0; }, pleinEcran, setPleinEcran, messages, actions, decisions, mode, envoyer, ecouter: (active) => { if (!locale && mode !== "parle") setMode(active ? "ecoute" : "repos"); }, cocher: (id) => setActions((prev) => prev.map((a) => a.id === id ? { ...a, faite: !a.faite } : a)), ouvert, ouvrir }}>{children}</ShyrkaContext.Provider>;
+  return <ShyrkaContext.Provider value={{ presence, changerPresence: (m: ModePresence) => { void changerPresence(m).then((r) => setPresence(r.mode), () => undefined); }, locale, occupe, parler, priseActive, brouillon, couper, alerte, pret, sauvegarde, effacer: () => { clearTimeout(timer.current); setMessages([]); setActions([]); setDecisions([]); setMode("repos"); sequence.current = 0; }, pleinEcran, setPleinEcran, messages, actions, decisions, mode, envoyer, ecouter: (active) => { if (!locale && mode !== "parle") setMode(active ? "ecoute" : "repos"); }, cocher: (id) => setActions((prev) => prev.map((a) => a.id === id ? { ...a, faite: !a.faite } : a)), ouvert, ouvrir }}>{children}</ShyrkaContext.Provider>;
 }
 
 export function useShyrka() {

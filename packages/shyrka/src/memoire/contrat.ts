@@ -231,8 +231,48 @@ export function peutLire(e: Pick<ElementMemoire, "statut" | "portee" | "comparti
 export function provenance(e: ElementMemoire): string {
   const voie = { instruction: "dit par Mickaël", proposition: "proposition à confirmer", observation: "observé par un outil" }[e.source.voie];
   const ia = e.source.affirmeParIA ? ", affirmé par une IA, non vérifié" : "";
-  return `${voie}${ia} · ${e.source.ref} · le ${e.date.slice(0, 10)} · v${e.version}`;
+  const retiree = e.details["source_retiree_le"] ? ` · source retirée le ${e.details["source_retiree_le"].slice(0, 10)}` : "";
+  return `${voie}${ia} · ${e.source.ref} · le ${e.date.slice(0, 10)} · v${e.version}${retiree}`;
 }
+
+/**
+ * Niveaux de confidentialité (décision de Mickaël, 9 novembre 2026), pour les
+ * documents du Corpus et les connaissances validées. Proposés par Shyrka,
+ * confirmés par Mickaël, modifiables ensuite. Portés par une restriction
+ * `niveau:<n>` ; « personnel » garde aussi `mickael_seulement` (jamais un
+ * modèle en ligne, un agent ni le cockpit).
+ */
+export const NIVEAUX = ["public", "interne", "confidentiel", "personnel"] as const;
+export type Niveau = (typeof NIVEAUX)[number];
+
+/** Niveau d'un élément : sa restriction `niveau:` ; à défaut, « personnel » pour un fait très privé, sinon « confidentiel » (prudence). */
+export function niveauDe(restrictions: readonly string[]): Niveau {
+  const n = restrictions.find((r) => r.startsWith("niveau:"))?.slice("niveau:".length);
+  if (NIVEAUX.includes(n as Niveau)) return n as Niveau;
+  return restrictions.includes("mickael_seulement") ? "personnel" : "confidentiel";
+}
+
+/** Restrictions d'un élément après changement de niveau (les autres restrictions sont gardées). */
+export function restrictionsPour(restrictions: readonly string[], niveau: Niveau): string[] {
+  const autres = restrictions.filter((r) => !r.startsWith("niveau:") && r !== "mickael_seulement");
+  return [...autres, `niveau:${niveau}`, ...(niveau === "personnel" ? ["mickael_seulement"] : [])];
+}
+
+/**
+ * Mode de présence : qui est là, donc ce que Shyrka peut dire ou montrer.
+ * « seul » : tout ; « entre proches » : public et interne ; « avec un externe » : public.
+ * Le filtre s'applique avant tout modèle, à la voix comme à l'écran.
+ */
+export const MODES_PRESENCE = ["seul", "entre_proches", "externe"] as const;
+export type ModePresence = (typeof MODES_PRESENCE)[number];
+export const MODE_PROTEGE_PAR_DEFAUT: ModePresence = "entre_proches";
+
+export function niveauxPermis(mode: ModePresence): Niveau[] {
+  return mode === "seul" ? [...NIVEAUX] : mode === "entre_proches" ? ["public", "interne"] : ["public"];
+}
+
+/** Réponse quand l'information demandée n'est pas visible dans ce mode : elle ne dit pas si quelque chose existe. */
+export const REPONSE_PROTEGEE = "Je t'en parlerai quand tu seras seul.";
 
 /** Libellé court d'affichage : 8 premiers caractères de l'UUID. Jamais une clé persistante. */
 export const refCourte = (id: string) => id.slice(0, 8);

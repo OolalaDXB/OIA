@@ -7,6 +7,7 @@ import { useContexte } from "@/lib/shyrka-contexte";
 import { useShyrka } from "@/components/oia/shyrka";
 import type { Palier } from "@/lib/donnees/shyrka";
 import { useShyrkaDonnees } from "@/lib/donnees/provider";
+import { MODES_PRESENCE } from "@/lib/shyrka-locale";
 
 export function BarreContexte() {
   const c = useContexte(); const s = useShyrka();
@@ -18,7 +19,20 @@ export function BarreContexte() {
   };
   return <div className="mb-4 flex flex-wrap items-center gap-3"><Button variant="outline" className="min-h-11 font-normal" onClick={exporter}>Exporter mon contexte</Button>
     <label className="flex min-h-11 items-center gap-2 text-sm"><Switch checked={c.prive} onCheckedChange={c.setPrive} aria-describedby="prive-aide" />Mode privé</label>
-    <span id="prive-aide" className="text-xs text-tertiary">{c.prive ? "Shyrka n'apprend rien pendant cette session." : "Shyrka propose ce qu'elle apprend, à valider."}</span></div>;
+    <span id="prive-aide" className="text-xs text-tertiary">{c.prive ? "Shyrka n'apprend rien pendant cette session." : "Shyrka propose ce qu'elle apprend, à valider."}</span>
+    <PresenceControle /></div>;
+}
+
+/** Mode de présence du Mac, toujours visible : seul (tout), entre proches (public, interne), avec un externe (public). Aussi à la voix. */
+export function PresenceControle() {
+  const { presence, changerPresence } = useShyrka();
+  if (!presence) return null;
+  const aide = { seul: "Tout est visible.", entre_proches: "Public et interne seulement.", externe: "Public seulement." }[presence];
+  return <div role="group" aria-label="Mode de présence" className="flex flex-wrap items-center gap-1 sm:ml-auto">
+    <span className="mr-1 text-xs text-tertiary">Présence</span>
+    {MODES_PRESENCE.map(([m, l]) => <Button key={m} size="sm" variant={presence === m ? "default" : "outline"} aria-pressed={presence === m} className="min-h-11 font-normal" onClick={() => changerPresence(m)}>{l}</Button>)}
+    <span className="ml-1 text-xs text-tertiary" aria-live="polite">{aide}</span>
+  </div>;
 }
 
 const statutDot = { "À valider": "bg-warn", "Validé": "bg-ok", "Retiré": "bg-track" } as const;

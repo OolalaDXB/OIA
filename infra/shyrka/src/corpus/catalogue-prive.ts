@@ -2,7 +2,7 @@ import { randomBytes } from "node:crypto";
 import { chmodSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import type { DatabaseSync as TypeBase } from "node:sqlite";
-import { RefusMemoire } from "@oia/shyrka-noyau";
+import { RefusMemoire, type Niveau } from "@oia/shyrka-noyau";
 import type { SourceCorpus } from "../executive/corpus.js";
 import type { DossierVerifie } from "../memoire/volume.js";
 import { DatabaseSync } from "../node-sqlite.js";
@@ -38,17 +38,19 @@ export interface SourcePrivee {
   /** Motifs de quarantaine levés par Mickaël, s'il y en avait. */
   attestation: string | null;
   revoqueLe: string | null;
+  /** Niveau de confidentialité confirmé par Mickaël (modifiable). */
+  niveau: Niveau;
 }
 
 type Ligne = {
   id: string; nom: string; origine: string; type: string; compartiment: string; lecteurs: string; empreinte: string; taille: number; fichier: string;
-  date_source: string; date_import: string; version: number; statut: string; attestation: string | null; revoque_le: string | null;
+  date_source: string; date_import: string; version: number; statut: string; attestation: string | null; revoque_le: string | null; niveau: string;
 };
 
 const versSource = (l: Ligne): SourcePrivee => ({
   id: l.id, nom: l.nom, origine: l.origine as Origine, type: l.type, compartiment: l.compartiment, lecteurs: JSON.parse(l.lecteurs) as SourcePrivee["lecteurs"],
   empreinte: l.empreinte, taille: l.taille, fichier: l.fichier, dateSource: l.date_source, dateImport: l.date_import, version: l.version,
-  statut: l.statut as StatutPrive, attestation: l.attestation, revoqueLe: l.revoque_le,
+  statut: l.statut as StatutPrive, attestation: l.attestation, revoqueLe: l.revoque_le, niveau: l.niveau as Niveau,
 });
 
 /** Identifiant stable et opaque : jamais dérivé d'un nom de fichier privé. */
@@ -68,7 +70,10 @@ export class CataloguePrive {
           version INTEGER NOT NULL, statut TEXT NOT NULL, attestation TEXT, revoque_le TEXT);
         CREATE TABLE IF NOT EXISTS versions (source TEXT NOT NULL, version INTEGER NOT NULL, empreinte TEXT NOT NULL, date_import TEXT NOT NULL, PRIMARY KEY (source, version));
         CREATE TABLE IF NOT EXISTS reports (memoire_id TEXT PRIMARY KEY, jusqu_au TEXT NOT NULL);
-        PRAGMA user_version = 1;`);
+        CREATE TABLE IF NOT EXISTS citations_oubliees (empreinte TEXT PRIMARY KEY, le TEXT NOT NULL);`);
+      // Schéma 2 : niveau de confidentialité (« confidentiel » par défaut pour les sources déjà déposées).
+      if (!(this.db.prepare("PRAGMA table_info(sources)").all() as { name: string }[]).some((c) => c.name === "niveau")) this.db.exec("ALTER TABLE sources ADD COLUMN niveau TEXT NOT NULL DEFAULT 'confidentiel'");
+      this.db.exec("PRAGMA user_version = 2");
     } catch (e) {
       throw new RefusMemoire(`Catalogue privé illisible (${(e as Error).message}).`, "stockage_corrompu");
     }
@@ -108,9 +113,9 @@ export class CataloguePrive {
   enregistrer(s: SourcePrivee): void {
     this.db.exec("BEGIN IMMEDIATE");
     try {
-      this.db.prepare("INSERT OR REPLACE INTO sources VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)").run(
-        s.id, s.nom, s.origine, s.type, s.compartiment, JSON.stringify(s.lecteurs), s.empreinte, s.taille, s.fichier, s.dateSource, s.dateImport, s.version, s.statut, s.attestation, s.revoqueLe,
-      );
+      this.db
+        .prepare("INSERT OR REPLACE INTO sources (id, nom, origine, type, compartiment, lecteurs, empreinte, taille, fichier, date_source, date_import, version, statut, attestation, revoque_le, niveau) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
+        .run(s.id, s.nom, s.origine, s.type, s.compartiment, JSON.stringify(s.lecteurs), s.empreinte, s.taille, s.fichier, s.dateSource, s.dateImport, s.version, s.statut, s.attestation, s.revoqueLe, s.niveau);
       this.db.prepare("INSERT OR IGNORE INTO versions VALUES (?, ?, ?, ?)").run(s.id, s.version, s.empreinte, s.dateImport);
       this.db.exec("COMMIT");
     } catch (e) {
@@ -121,6 +126,22 @@ export class CataloguePrive {
 
   statut(id: string, statut: StatutPrive, quand: string | null = null): void {
     this.db.prepare("UPDATE sources SET statut = ?, revoque_le = ? WHERE id = ?").run(statut, statut === "revoque" ? quand : null, id);
+  }
+
+  fixerNiveau(id: string, niveau: Niveau): void {
+    this.db.prepare("UPDATE sources SET niveau = ? WHERE id = ?").run(niveau, id);
+  }
+
+  /**
+   * Empreinte (SHA-256, jamais le texte) de la citation d'une connaissance oubliée ou refusée : une proposition
+   * future appuyée sur la même phrase est écartée, même reformulée (l'oubli efface le contenu, pas cette garde).
+   */
+  oublierCitation(empreinte: string, le: string): void {
+    this.db.prepare("INSERT OR IGNORE INTO citations_oubliees VALUES (?, ?)").run(empreinte, le);
+  }
+
+  citationOubliee(empreinte: string): boolean {
+    return Boolean(this.db.prepare("SELECT 1 FROM citations_oubliees WHERE empreinte = ?").get(empreinte));
   }
 
   reporter(memoireId: string, jusquAu: string): void {
@@ -135,7 +156,7 @@ export class CataloguePrive {
   sourcesCorpus(): SourceCorpus[] {
     return this.lister().map((s) => ({
       id: s.id, application: "prive", compartiment: s.compartiment, proprietaire: "Mickaël Thomas", connecteur: s.origine === "note" ? "note" : "fichier-local",
-      chemin: `prive/${s.id}`, confidentialite: "mickael_seulement", lecteurs: s.lecteurs, statut: s.statut === "revoque" ? "revoque" : "valide", objet: s.nom,
+      chemin: `prive/${s.id}`, confidentialite: "mickael_seulement", lecteurs: s.lecteurs, statut: s.statut === "revoque" ? "revoque" : "valide", objet: s.nom, niveau: s.niveau,
     }));
   }
 }

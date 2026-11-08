@@ -82,7 +82,7 @@ const octets = (t: string) => new TextEncoder().encode(t);
 const HELIOS = "# Projet fictif Hélios\n\nLa stratégie du projet fictif Hélios est de viser les écoles de musique en 2027.\n\nLa vue hel_eleves_v2 sert les écrans de liste.\n";
 async function deposer(nom: string, texte: string, choix: Partial<Parameters<DepotCorpus["confirmer"]>[1]> = {}) {
   const a = await depot.preparer(nom, octets(texte));
-  const r = await depot.confirmer(a.jeton, { compartiment: "projet:oia", conversation: true, ...choix });
+  const r = await depot.confirmer(a.jeton, { niveau: "interne", compartiment: "projet:oia", conversation: true, ...choix });
   await depot.attendre();
   return { a, r };
 }
@@ -94,7 +94,7 @@ describe("Corpus · dépôt et recherche sourcée", () => {
     expect(a).toMatchObject({ nom: "helios.md", type: "md", etat: "pret", dejaPresent: null });
     expect(readdirSync(join(dir, "brut/depots"))).toEqual([]); // rien d'écrit avant confirmation
     expect(catalogue.lister()).toEqual([]);
-    const r = await depot.confirmer(a.jeton, { compartiment: "projet:oia", conversation: true });
+    const r = await depot.confirmer(a.jeton, { niveau: "interne", compartiment: "projet:oia", conversation: true });
     await depot.attendre();
     const [x] = await chercher("Quelle est la stratégie du projet Hélios ?");
     expect(x).toMatchObject({ source: r.source, titre: "helios", ref: "ligne 3", citation: "helios · ligne 3", mode: "sens", connecteur: "fichier-local" });
@@ -114,7 +114,7 @@ describe("Corpus · dépôt et recherche sourcée", () => {
 
   it("sens pas encore calculé : l'extrait est trouvé par son identifiant exact et par les mots, en attendant", async () => {
     await deposer("helios.md", HELIOS);
-    catalogue.enregistrer({ id: "prive-0123456789ab", nom: "attente.md", origine: "depot", type: "md", compartiment: "projet:oia", lecteurs: ["mickael"], empreinte: "e1", taille: 1, fichier: "x", dateSource: "2026-11-08T00:00:00Z", dateImport: "2026-11-08T00:00:00Z", version: 1, statut: "indexe", attestation: null, revoqueLe: null });
+    catalogue.enregistrer({ id: "prive-0123456789ab", nom: "attente.md", origine: "depot", type: "md", compartiment: "projet:oia", lecteurs: ["mickael"], empreinte: "e1", taille: 1, fichier: "x", dateSource: "2026-11-08T00:00:00Z", dateImport: "2026-11-08T00:00:00Z", version: 1, statut: "indexe", attestation: null, revoqueLe: null, niveau: "interne" });
     corpus.indexerPassages("prive-0123456789ab", "prive/prive-0123456789ab", "attente", "e1", "2026-11-08T00:00:00Z", [{ section: "S", ref: "ligne 1", ligne: 1, texte: "La vue att_liste_v3 sert aux essais du calcul en attente." }]);
     expect((await chercher("att_liste_v3"))[0]).toMatchObject({ source: "prive-0123456789ab", identifiant: true });
     expect((await chercher("calcul en attente des essais")).some((x) => x.source === "prive-0123456789ab" && x.mode === "mots")).toBe(true);
@@ -130,7 +130,7 @@ describe("Corpus · dépôt et recherche sourcée", () => {
     const un = await deposer("helios.md", HELIOS);
     const deux = await depot.preparer("copie de helios.md", octets(HELIOS));
     expect(deux.dejaPresent).toEqual({ id: un.r.source, nom: "helios.md" });
-    expect(await depot.confirmer(deux.jeton, { compartiment: "projet:oia", conversation: true })).toMatchObject({ source: un.r.source, deja: true });
+    expect(await depot.confirmer(deux.jeton, { niveau: "interne", compartiment: "projet:oia", conversation: true })).toMatchObject({ source: un.r.source, deja: true });
     await depot.attendre();
     expect(catalogue.lister()).toHaveLength(1);
     expect(depot.propositions().total).toBe(1);
@@ -142,7 +142,7 @@ describe("Corpus · dépôt et recherche sourcée", () => {
     const a = await depot.preparer("helios.md", octets(HELIOS.replace("écoles de musique", "conservatoires")));
     expect(a.memeNom).toMatchObject({ id: v1.r.source, version: 1 });
     reponseModele = propositionsDe();
-    expect(await depot.confirmer(a.jeton, { compartiment: "projet:oia", conversation: true, nouvelleVersionDe: v1.r.source })).toMatchObject({ source: v1.r.source, version: 2 });
+    expect(await depot.confirmer(a.jeton, { niveau: "interne", compartiment: "projet:oia", conversation: true, nouvelleVersionDe: v1.r.source })).toMatchObject({ source: v1.r.source, version: 2 });
     await depot.attendre();
     const r = await chercher("stratégie du projet Hélios");
     expect(r.every((x) => !/écoles de musique/.test(x.extrait))).toBe(true);
@@ -193,7 +193,7 @@ describe("Corpus · validation des connaissances", () => {
     reponseModele = propositionsDe({ enonce: "Hélios vise les écoles de musique.", citation: "viser les écoles de musique en 2027" });
     const { r } = await deposer("helios.md", HELIOS);
     const a = await depot.preparer("helios.md", octets(`${HELIOS}\nAjout fictif sans rapport.\n`));
-    await depot.confirmer(a.jeton, { compartiment: "projet:oia", conversation: true, nouvelleVersionDe: r.source });
+    await depot.confirmer(a.jeton, { niveau: "interne", compartiment: "projet:oia", conversation: true, nouvelleVersionDe: r.source });
     await depot.attendre();
     expect(depot.propositions().lot.map((x) => (x as { enonce: string }).enonce)).toEqual(["Hélios vise les écoles de musique."]);
   });
@@ -206,7 +206,7 @@ describe("Corpus · validation des connaissances", () => {
     depot.decider(p.id, "corriger", "Hélios vise d'abord les conservatoires, en 2027.");
     // Nouvelle version (même proposition par le modèle) : la formulation corrigée n'est pas réintroduite.
     const a = await depot.preparer("helios.md", octets(`${HELIOS}\nAjout fictif.\n`));
-    await depot.confirmer(a.jeton, { compartiment: "projet:oia", conversation: true, nouvelleVersionDe: r.source });
+    await depot.confirmer(a.jeton, { niveau: "interne", compartiment: "projet:oia", conversation: true, nouvelleVersionDe: r.source });
     await depot.attendre();
     expect(depot.propositions().total).toBe(0);
     const actuels = memoire.retrouver({ texte: "Hélios", statuts: ["valide", "a_confirmer"] }, { type: "mickael" }).map((x) => x.element.contenu);
@@ -232,7 +232,7 @@ describe("Corpus · validation des connaissances", () => {
     expect(depot.propositions()).toMatchObject({ total: 0, reportees: 1 });
     const v2 = await depot.preparer("helios.md", octets(`${HELIOS}\nv2\n`));
     reponseModele = propositionsDe({ enonce: "Hélios vise les écoles de musique.", citation: "viser les écoles de musique en 2027" });
-    await depot.confirmer(v2.jeton, { compartiment: "projet:oia", conversation: true, nouvelleVersionDe: r.source });
+    await depot.confirmer(v2.jeton, { niveau: "interne", compartiment: "projet:oia", conversation: true, nouvelleVersionDe: r.source });
     await depot.attendre();
     expect(depot.propositions().total).toBe(0);
   });
@@ -259,7 +259,7 @@ describe("Corpus · retrait, exclusions, mode privé", () => {
     const { r } = await deposer("helios.md", HELIOS);
     const q = "La stratégie du projet fictif Hélios";
     expect(await chercher(q)).not.toEqual([]);
-    expect(depot.retirer(r.source)).toEqual({ retire: true, propositionsRetirees: 1, souvenirsValidesConserves: 0 });
+    expect(depot.retirer(r.source)).toEqual({ retire: true, propositionsRetirees: 1, souvenirsGardes: 0, souvenirsOublies: 0 });
     expect(await chercher(q)).toEqual([]);
     expect(existsSync(join(dir, "brut/depots", r.source))).toBe(false);
     expect(depot.propositions().total).toBe(0);
@@ -282,8 +282,8 @@ describe("Corpus · retrait, exclusions, mode privé", () => {
     const t = "Contacts fictifs : a@exemple.test, b@exemple.test, c@exemple.test.";
     const a = await depot.preparer("contacts.txt", octets(t));
     expect(a).toMatchObject({ etat: "a_verifier" });
-    await expect(depot.confirmer(a.jeton, { compartiment: "personnel", conversation: false })).rejects.toMatchObject({ code: "attestation_requise" });
-    expect(await depot.confirmer(a.jeton, { compartiment: "personnel", conversation: false, attestation: true })).toMatchObject({ version: 1 });
+    await expect(depot.confirmer(a.jeton, { niveau: "interne", compartiment: "personnel", conversation: false })).rejects.toMatchObject({ code: "attestation_requise" });
+    expect(await depot.confirmer(a.jeton, { niveau: "interne", compartiment: "personnel", conversation: false, attestation: true })).toMatchObject({ version: 1 });
     expect(controler("Un texte ordinaire.").decision).toBe("admis");
     // Faux positifs mesurés sur des README publics : dates, identifiants, exemples de code.
     expect(controler("Version du 2018-11-25 9 37 53, build 466787075518365708.").decision).toBe("admis");
@@ -321,7 +321,7 @@ describe("Corpus · retrait, exclusions, mode privé", () => {
     prive = true;
     await expect(depot.preparer("x.md", octets("# x\n\ny"))).rejects.toMatchObject({ code: "mode_prive" });
     await expect(depot.note("t", "texte")).rejects.toMatchObject({ code: "mode_prive" });
-    await expect(depot.confirmer(a.jeton, { compartiment: "personnel", conversation: false })).rejects.toBeInstanceOf(ErreurCorpus);
+    await expect(depot.confirmer(a.jeton, { niveau: "interne", compartiment: "personnel", conversation: false })).rejects.toBeInstanceOf(ErreurCorpus);
     expect(() => depot.propositions()).toThrow(/Mode privé/);
     expect(catalogue.lister()).toEqual([]);
     expect(depot.chercher("Hélios", null).resultats).toEqual([]);
@@ -406,5 +406,120 @@ describe("Corpus · lecture des formats", () => {
     const d = await lireDocument("h.docx", readFileSync(docx));
     expect(d.passages[0]).toMatchObject({ ref: "§ 1–2", ligne: 0 });
     await expect(lireDocument("h.docx", octets("PK\u0003\u0004 abîmé [Content_Types].xml word/document.xml"))).rejects.toBeInstanceOf(RefusDocument);
+  });
+});
+
+describe("Stabilisation · retrait avec les souvenirs validés, états des documents", () => {
+  const avecDeux = async () => {
+    reponseModele = propositionsDe({ enonce: "Hélios vise les écoles de musique.", citation: "viser les écoles de musique en 2027" }, { enonce: "La vue hel_eleves_v2 sert les listes.", forme: "travail", citation: "La vue hel_eleves_v2 sert les écrans de liste." });
+    const { r } = await deposer("helios.md", HELIOS);
+    for (const p of depot.propositions().lot as { id: string }[]) depot.decider(p.id, "valider");
+    return r.source;
+  };
+
+  it("garder : nombre montré avant, souvenirs marqués « source retirée le … », pas de doublon au redépôt", async () => {
+    const id = await avecDeux();
+    expect(depot.souvenirsDe(id)).toEqual({ valides: 2, enAttente: 0 });
+    expect(depot.retirer(id, "garder")).toMatchObject({ souvenirsGardes: 2, souvenirsOublies: 0 });
+    const v = memoire.retrouver({ statuts: ["valide"] }, { type: "mickael" });
+    expect(v).toHaveLength(2);
+    for (const x of v) expect(x.provenance).toMatch(/source retirée le \d{4}-\d{2}-\d{2}/);
+    await deposer("helios.md", HELIOS); // même document redéposé : les mêmes propositions ne reviennent pas en double
+    expect(depot.propositions().total).toBe(0);
+  });
+
+  it("oublier : effacés de la mémoire et de ses index, et ne réapparaissent pas au redépôt ni à la réindexation", async () => {
+    const id = await avecDeux();
+    expect(depot.retirer(id, "oublier")).toMatchObject({ souvenirsGardes: 0, souvenirsOublies: 2 });
+    expect(memoire.retrouver({ texte: "Hélios écoles", statuts: ["valide", "a_confirmer", "retire"] }, { type: "mickael" })).toEqual([]);
+    const { r } = await deposer("helios.md", HELIOS);
+    await depot.reindexer(r.source);
+    await depot.attendre();
+    const revenus = memoire.retrouver({ limite: 100, statuts: ["valide", "a_confirmer"] }, { type: "mickael" }).map((x) => x.element.contenu);
+    expect(revenus).not.toContain("Hélios vise les écoles de musique.");
+    expect(revenus).not.toContain("La vue hel_eleves_v2 sert les listes.");
+  });
+
+  it("oublier : une reformulation appuyée sur la même citation ne revient pas au redépôt", async () => {
+    const id = await avecDeux();
+    depot.retirer(id, "oublier");
+    reponseModele = propositionsDe({ enonce: "Les écoles de musique sont la cible d'Hélios pour 2027.", citation: "viser les écoles de musique en 2027" });
+    await deposer("helios.md", HELIOS);
+    expect(depot.propositions().total).toBe(0);
+  });
+
+  it("états : propositions prêtes, puis disponible une fois traitées ; analyse en cours pendant le calcul", async () => {
+    reponseModele = propositionsDe({ enonce: "Hélios vise les écoles.", citation: "viser les écoles de musique en 2027" });
+    const a = await depot.preparer("helios.md", octets(HELIOS));
+    const r = await depot.confirmer(a.jeton, { niveau: "interne", compartiment: "projet:oia", conversation: true });
+    expect(depot.sources()[0]).toMatchObject({ id: r.source, etat: "analyse_en_cours" });
+    await depot.attendre();
+    expect(depot.sources()[0]).toMatchObject({ etat: "propositions_pretes", propositionsEnAttente: 1 });
+    depot.decider((depot.propositions().lot[0] as { id: string }).id, "valider");
+    expect(depot.sources()[0]).toMatchObject({ etat: "disponible", propositionsEnAttente: 0 });
+  });
+});
+
+describe("Niveaux de confidentialité et modes de présence", () => {
+  it("niveau proposé au dépôt, confirmé, hérité par les propositions, modifiable ensuite", async () => {
+    const { proposerNiveau } = await import("../src/corpus/admission.js");
+    expect(proposerNiveau("Ordonnance du médecin, dossier médical.", { decision: "admis", avertissements: [] }, "projet:oia").niveau).toBe("personnel");
+    expect(proposerNiveau("Document confidentiel, ne pas diffuser.", { decision: "admis", avertissements: [] }, "projet:oia").niveau).toBe("confidentiel");
+    expect(proposerNiveau("Plan du projet.", { decision: "admis", avertissements: [] }, "projet:oia").niveau).toBe("interne");
+    const a = await depot.preparer("helios.md", octets(HELIOS));
+    expect(a.niveauProposeProjet.niveau).toBe("interne");
+    reponseModele = propositionsDe({ enonce: "Hélios vise les écoles.", citation: "viser les écoles de musique en 2027" });
+    const r = await depot.confirmer(a.jeton, { niveau: "confidentiel", compartiment: "projet:oia", conversation: true });
+    await depot.attendre();
+    expect(catalogue.lire(r.source)!.niveau).toBe("confidentiel");
+    const p = depot.propositions().lot[0] as { id: string; niveau: string };
+    expect(p.niveau).toBe("confidentiel");
+    expect(depot.decider(p.id, "valider", undefined, "personnel")).toMatchObject({ niveau: "personnel" });
+    expect(depot.connaissances()[0]).toMatchObject({ niveau: "personnel" });
+    expect(depot.fixerNiveauConnaissance(p.id, "interne")).toEqual({ id: p.id, niveau: "interne" });
+    expect(depot.fixerNiveau(r.source, "public")).toEqual({ id: r.source, niveau: "public" });
+  });
+
+  it("les faits très privés existants passent en « personnel » (une seule fois)", async () => {
+    const { niveauDe } = await import("@oia/shyrka-noyau");
+    const e = memoire.enregistrer({ compartiment: "personnel", forme: "preference", contenu: "Fait fictif très privé.", restrictions: ["mickael_seulement"], source: { voie: "instruction", ref: "t" } }, { type: "mickael", via: "t" });
+    expect(memoire.migrerNiveaux({ type: "mickael", via: "t" })).toBe(1);
+    expect(memoire.migrerNiveaux({ type: "mickael", via: "t" })).toBe(0);
+    expect(niveauDe(memoire.historique(e.id).at(-1)!.restrictions)).toBe("personnel");
+  });
+
+  it("mode protégé : recherche, sources, propositions et comptes ne montrent que les niveaux permis", async () => {
+    let niveaux: ("public" | "interne" | "confidentiel" | "personnel")[] = ["public", "interne", "confidentiel", "personnel"];
+    fermer();
+    ouvrir();
+    depot = new DepotCorpus({ corpus, catalogue, memoire, brut: join(dir, "brut/depots"), journal: join(dir, "journal"), vectoriser, generer, surveillance, prive: () => prive, niveaux: () => niveaux });
+    reponseModele = propositionsDe({ enonce: "Hélios vise les écoles.", citation: "viser les écoles de musique en 2027" });
+    await deposer("helios.md", HELIOS, { niveau: "confidentiel" });
+    reponseModele = propositionsDe();
+    await deposer("public.md", "# Annonce fictive\n\nLe salon fictif de la voile ouvre en mars.\n", { niveau: "public" });
+    niveaux = ["public", "interne"];
+    expect((await chercher("La stratégie du projet fictif Hélios")).map((x) => x.titre)).not.toContain("helios");
+    expect(depot.sources().map((x) => x.nom)).toEqual(["public.md"]);
+    expect(depot.propositions().total).toBe(0);
+    expect(depot.comptes()).toEqual({ sourcesPrivees: 1, propositions: 0 });
+    expect(depot.extraits(catalogue.lister().find((x) => x.nom === "helios.md")!.id)).toEqual([]);
+    niveaux = ["public", "interne", "confidentiel", "personnel"];
+    expect(depot.propositions().total).toBe(1);
+  });
+
+  it("mémoire en mode protégé : « je t'en parlerai quand tu seras seul », sans dire ce qui existe", async () => {
+    const { ServiceMemoire } = await import("../src/memoire/commandes.js");
+    const { REPONSE_PROTEGEE } = await import("@oia/shyrka-noyau");
+    let niveaux: ("public" | "interne" | "confidentiel" | "personnel")[] = ["public", "interne", "confidentiel", "personnel"];
+    const s = new ServiceMemoire(memoire, { projets: [], niveaux: () => niveaux });
+    s.traiter("Retiens que le code fictif du portail est 4417");
+    niveaux = ["public", "interne"];
+    expect(s.traiter("Que sais-tu du code du portail ?")!.texte).toBe(REPONSE_PROTEGEE);
+    expect(s.traiter("De quoi te souviens-tu ?")!.texte).toBe(REPONSE_PROTEGEE);
+    expect(s.traiter("Que sais-tu de la recette fictive du gâteau ?")!.texte).toBe(REPONSE_PROTEGEE); // rien n'existe : même réponse
+    expect(s.masque("code du portail")).toBe(true);
+    expect(s.contexteModele("code du portail", { type: "conversation", modele: "local" })).toBe("");
+    niveaux = ["public", "interne", "confidentiel", "personnel"];
+    expect(s.traiter("Que sais-tu du code du portail ?")!.texte).toMatch(/4417/);
   });
 });

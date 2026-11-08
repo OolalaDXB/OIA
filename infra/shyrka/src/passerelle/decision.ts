@@ -1,4 +1,4 @@
-import { normaliserTexte } from "@oia/shyrka-noyau";
+import { normaliserTexte, REPONSE_PROTEGEE } from "@oia/shyrka-noyau";
 import type { ExtraitCorpus } from "../executive/corpus.js";
 import { PROPOSITIONS_A_CONFIRMER } from "../memoire/commandes.js";
 import type { Reponse } from "../memoire/commandes.js";
@@ -32,6 +32,8 @@ const fichier = (chemin: string) => chemin.split("/").pop()!.replace(/\.md$/, ""
  * passage du corpus n'est jamais présenté comme un souvenir.
  */
 export function composerDecision(r: Reponse, corpus: EtatCorpus, phrase: string): Reponse {
+  // Mode protégé et rien de visible : la réponse ne dit pas si quelque chose existe.
+  if (r.texte === REPONSE_PROTEGEE && (!Array.isArray(corpus) || corpus.length === 0)) return r;
   const s = sujet(phrase);
   const [premiere = "", ...reste] = r.texte.split("\n");
   // « Je n'ai aucune décision enregistrée pour « sillon » … » : on dit explicitement que c'est la mémoire.

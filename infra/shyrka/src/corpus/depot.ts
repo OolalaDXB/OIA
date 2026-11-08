@@ -1,12 +1,12 @@
 import { randomBytes } from "node:crypto";
 import { appendFileSync, chmodSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { CompartimentSchema, RefusMemoire, type Acteur, type ElementMemoire, type Resultat } from "@oia/shyrka-noyau";
+import { CompartimentSchema, NIVEAUX, niveauDe, RefusMemoire, restrictionsPour, type Acteur, type ElementMemoire, type Niveau, type Resultat } from "@oia/shyrka-noyau";
 import type { Corpus, ExtraitCorpus } from "../executive/corpus.js";
 import type { MemoireLocale } from "../memoire/sqlite.js";
-import { controler, type Verdict } from "./admission.js";
+import { controler, proposerNiveau, type Verdict } from "./admission.js";
 import { CataloguePrive, nouvelId, type Origine, type SourcePrivee } from "./catalogue-prive.js";
-import { LOT_MAX, lireDocument, nomAffichage, RefusDocument, type DocumentLu, type Parseurs, parseursMac } from "./extraction.js";
+import { empreinte, LOT_MAX, lireDocument, nomAffichage, RefusDocument, type DocumentLu, type Parseurs, parseursMac } from "./extraction.js";
 import { normaliserCitation, proposer, type Generateur } from "./propositions.js";
 import { produit, type Vectoriseur } from "./sens.js";
 import type { Surveillance } from "./surveillance.js";
@@ -85,7 +85,13 @@ export interface Apercu {
   dejaPresent: { id: string; nom: string } | null;
   memeNom: { id: string; nom: string; version: number } | null;
   retireLe: string | null;
+  /** Niveau proposé par Shyrka (compartiment personnel, puis pour un projet) ; Mickaël confirme ou change. */
+  niveauPropose: { niveau: Niveau; raison: string };
+  niveauProposeProjet: { niveau: Niveau; raison: string };
 }
+
+/** État d'un document pour l'écran. */
+export type EtatDocument = "disponible" | "analyse_en_cours" | "propositions_pretes" | "echec";
 
 export interface Tache {
   etape: "indexation" | "sens" | "propositions" | "fini" | "erreur";
@@ -104,6 +110,8 @@ export interface ChoixConfirmation {
   nouvelleVersionDe?: string;
   /** Mickaël atteste avoir le droit de garder ce document malgré les motifs de quarantaine. */
   attestation?: boolean;
+  /** Niveau de confidentialité confirmé par Mickaël. */
+  niveau: Niveau;
 }
 
 export interface DepsDepot {
@@ -119,6 +127,8 @@ export interface DepsDepot {
   surveillance?: Surveillance;
   parseurs?: Parseurs;
   prive: () => boolean;
+  /** Niveaux visibles dans le mode de présence courant (tous si absent) : appliqué à tout ce qui est rendu. */
+  niveaux?: () => Niveau[];
   horloge?: () => Date;
   /** Fin de chaque tâche de fond (tests). */
   surFin?: (source: string, t: Tache) => void;
@@ -133,6 +143,19 @@ export class DepotCorpus {
 
   private maintenant(): Date {
     return this.d.horloge?.() ?? new Date();
+  }
+
+  private permis(): Niveau[] {
+    return this.d.niveaux?.() ?? [...NIVEAUX];
+  }
+
+  private visible(restrictions: readonly string[]): boolean {
+    return this.permis().includes(niveauDe(restrictions));
+  }
+
+  /** Éléments de mémoire issus d'une source (propositions comprises). */
+  private issusDe(id: string, statuts: ElementMemoire["statut"][]): Resultat[] {
+    return this.d.memoire ? tousLes(this.d.memoire, statuts).filter((x) => x.element.source.ref.startsWith(`corpus:${id} `)) : [];
   }
 
   private exigerPublic(action: string): void {
@@ -181,6 +204,7 @@ export class DepotCorpus {
       motifs: verdict.decision === "quarantaine" ? verdict.motifs : [], avertissements: verdict.decision === "admis" ? verdict.avertissements : [],
       dejaPresent: deja ? { id: deja.id, nom: deja.nom } : null, memeNom: meme ? { id: meme.id, nom: meme.nom, version: meme.version } : null,
       retireLe: this.d.catalogue.revoqueeAvec(doc.empreinte)?.revoqueLe ?? null,
+      niveauPropose: proposerNiveau(doc.texte, verdict, "personnel", nom), niveauProposeProjet: proposerNiveau(doc.texte, verdict, "projet:oia", nom),
     };
   }
 
@@ -204,6 +228,7 @@ export class DepotCorpus {
     if (!p) throw new ErreurCorpus(404, "preparation_inconnue", "Préparation expirée ou inconnue : dépose le document de nouveau.");
     const comp = CompartimentSchema.safeParse(choix.compartiment);
     if (!comp.success) throw new ErreurCorpus(400, "compartiment_invalide", "Compartiment : personnel, projet:<nom> ou module:<nom>.");
+    if (!NIVEAUX.includes(choix.niveau)) throw new ErreurCorpus(400, "niveau_requis", "Niveau de confidentialité à confirmer : public, interne, confidentiel ou personnel.");
     if (p.verdict.decision === "quarantaine" && choix.attestation !== true) throw new ErreurCorpus(409, "attestation_requise", "Ce document contient peut-être des données de tiers : confirme explicitement que tu as le droit de le garder, ou dépose une version nettoyée.");
     const deja = this.d.catalogue.parEmpreinte(p.doc.empreinte);
     if (deja) {
@@ -228,7 +253,7 @@ export class DepotCorpus {
     const source: SourcePrivee = {
       id, nom: p.nom, origine: p.origine, type: ext, compartiment: comp.data, lecteurs: choix.conversation ? ["mickael", "conversation"] : ["mickael"],
       empreinte: p.doc.empreinte, taille: p.doc.taille, fichier, dateSource: p.dateSource, dateImport: this.maintenant().toISOString(), version, statut: "indexe",
-      attestation: p.verdict.decision === "quarantaine" ? p.verdict.motifs.join(" ; ") : null, revoqueLe: null,
+      attestation: p.verdict.decision === "quarantaine" ? p.verdict.motifs.join(" ; ") : null, revoqueLe: null, niveau: choix.niveau,
     };
     this.d.catalogue.enregistrer(source);
     const extraits = this.d.corpus.indexerPassages(id, `prive/${id}`, titre, p.doc.empreinte, p.dateSource, p.doc.passages);
@@ -294,7 +319,7 @@ export class DepotCorpus {
     let creees = 0;
     let ecartees = r.ecartees;
     for (const [i, p] of r.retenues.entries()) {
-      if (connus.has(normaliserCitation(p.enonce)) || proche(i, gardees)) {
+      if (connus.has(normaliserCitation(p.enonce)) || proche(i, gardees) || this.d.catalogue.citationOubliee(empreinte(normaliserCitation(p.citation)))) {
         ecartees++;
         continue;
       }
@@ -305,7 +330,7 @@ export class DepotCorpus {
             compartiment: src.compartiment as never, forme: p.forme, contenu: p.enonce,
             details: { citation: p.citation, source_id: id, document: titre, ref: p.ref, raison: p.raison, incertitude: p.incertitude, version: doc.empreinte.slice(0, 12) },
             source: { voie: "proposition", ref: `corpus:${id} ${p.ref} v${src.version}`, affirmeParIA: true },
-            portee: "local_seulement", restrictions: ["mickael_seulement"],
+            portee: "local_seulement", restrictions: restrictionsPour([], src.niveau),
           },
           OUTIL,
         );
@@ -338,20 +363,53 @@ export class DepotCorpus {
     return n;
   }
 
-  /** Retire une source : invisible tout de suite, fichier admis effacé, propositions en attente retirées. */
-  retirer(id: string): { retire: true; propositionsRetirees: number; souvenirsValidesConserves: number } {
+  /** Oublie un élément de mémoire et garde l'empreinte de sa citation (anti-retour, même reformulé). */
+  private oublier(id: string, citation: string | undefined): number {
+    if (citation) this.d.catalogue.oublierCitation(empreinte(normaliserCitation(citation)), this.maintenant().toISOString());
+    return this.d.memoire!.oublier(id, MICKAEL).oublies;
+  }
+
+  /** Souvenirs validés issus d'une source : nombre à montrer avant de retirer (« garder ou oublier aussi »). */
+  souvenirsDe(id: string): { valides: number; enAttente: number } {
+    return { valides: this.issusDe(id, ["valide"]).length, enAttente: this.issusDe(id, ["a_confirmer"]).length };
+  }
+
+  /**
+   * Retire une source : invisible tout de suite, fichier admis effacé, propositions en attente retirées.
+   * Souvenirs validés qui en viennent : « garder » (ils portent « source retirée le … ») ou « oublier »
+   * (effacés de la mémoire, de ses index et dérivés, empreintes anti-retour comprises).
+   */
+  retirer(id: string, souvenirs: "garder" | "oublier" = "garder"): { retire: true; propositionsRetirees: number; souvenirsGardes: number; souvenirsOublies: number } {
     const s = this.d.catalogue.lire(id);
     if (!s || s.statut === "revoque") throw new ErreurCorpus(404, "source_inconnue", "Source inconnue ou déjà retirée.");
-    this.d.catalogue.statut(id, "revoque", this.maintenant().toISOString());
+    const quand = this.maintenant().toISOString();
+    this.d.catalogue.statut(id, "revoque", quand);
     this.d.corpus.retirerSource(id);
     rmSync(join(this.d.brut, id), { recursive: true, force: true });
     const propositionsRetirees = this.retirerPropositionsEnAttente(id, "source retirée du Corpus");
-    const souvenirsValidesConserves = this.d.memoire
-      ? tousLes(this.d.memoire, ["valide"]).filter((x) => x.element.source.ref.startsWith(`corpus:${id} `)).length
-      : 0;
+    let souvenirsGardes = 0;
+    let souvenirsOublies = 0;
+    for (const x of this.issusDe(id, ["valide"])) {
+      if (souvenirs === "oublier") souvenirsOublies += this.oublier(x.element.id, x.element.details["citation"]);
+      else {
+        this.d.memoire!.annoter(x.element.id, { source_retiree_le: quand }, MICKAEL);
+        souvenirsGardes++;
+      }
+    }
     this.taches.delete(id);
-    this.journal("retraits.md", `${id} · retiré · ${propositionsRetirees} proposition(s) retirée(s), ${souvenirsValidesConserves} souvenir(s) validé(s) conservé(s)`);
-    return { retire: true, propositionsRetirees, souvenirsValidesConserves };
+    this.journal("retraits.md", `${id} · retiré · ${propositionsRetirees} proposition(s) retirée(s), ${souvenirsGardes} souvenir(s) gardé(s), ${souvenirsOublies} oublié(s)`);
+    return { retire: true, propositionsRetirees, souvenirsGardes, souvenirsOublies };
+  }
+
+  /** Change le niveau d'un document (et de ses propositions en attente, qui en héritent). */
+  fixerNiveau(id: string, niveau: Niveau): { id: string; niveau: Niveau } {
+    const s = this.d.catalogue.lire(id);
+    if (!s || s.statut === "revoque") throw new ErreurCorpus(404, "source_inconnue", "Source inconnue ou retirée.");
+    if (!NIVEAUX.includes(niveau)) throw new ErreurCorpus(400, "niveau_inconnu", "Niveau : public, interne, confidentiel ou personnel.");
+    this.d.catalogue.fixerNiveau(id, niveau);
+    for (const x of this.issusDe(id, ["a_confirmer"])) this.d.memoire!.fixerNiveau(x.element.id, niveau, MICKAEL);
+    this.journal("imports.md", `${id} · niveau ${niveau}`);
+    return { id, niveau };
   }
 
   /** Relit le fichier admis et réindexe (sans nouvelles propositions). */
@@ -387,8 +445,57 @@ export class DepotCorpus {
     return n;
   }
 
-  sources(): (SourcePrivee & { tache: Tache | null; fichier: never })[] {
-    return this.d.catalogue.lister().map(({ fichier: _f, ...s }) => ({ ...s, tache: this.taches.get(s.id) ?? null })) as never;
+  /** Sources privées visibles dans le mode courant, avec leur état : disponible, analyse en cours, propositions prêtes. */
+  sources(): (Omit<SourcePrivee, "fichier"> & { tache: Tache | null; etat: EtatDocument; propositionsEnAttente: number })[] {
+    const p = this.permis();
+    const attente = new Map<string, number>();
+    if (this.d.memoire && !this.d.prive())
+      for (const x of tousLes(this.d.memoire, ["a_confirmer"])) {
+        const m = /^corpus:(prive-[0-9a-f]{12}) /.exec(x.element.source.ref);
+        if (m && this.visible(x.element.restrictions)) attente.set(m[1]!, (attente.get(m[1]!) ?? 0) + 1);
+      }
+    return this.d.catalogue
+      .lister()
+      .filter((s) => p.includes(s.niveau))
+      .map(({ fichier: _f, ...s }) => {
+        const tache = this.taches.get(s.id) ?? null;
+        const n = attente.get(s.id) ?? 0;
+        const etat: EtatDocument = s.statut === "echec" ? "echec" : tache && (tache.etape === "sens" || tache.etape === "propositions" || tache.etape === "indexation") ? "analyse_en_cours" : n > 0 ? "propositions_pretes" : "disponible";
+        return { ...s, tache, etat, propositionsEnAttente: n };
+      });
+  }
+
+  /** Comptes visibles dans le mode courant (ligne d'état) : rien n'y trahit un niveau masqué. */
+  comptes(): { sourcesPrivees: number; propositions: number | null } {
+    const p = this.permis();
+    const sources = this.d.catalogue.lister().filter((s) => s.statut !== "revoque" && p.includes(s.niveau)).length;
+    let propositions: number | null = null;
+    if (this.d.memoire && !this.d.prive()) propositions = this.propositions().total;
+    return { sourcesPrivees: sources, propositions };
+  }
+
+  /** Connaissances validées visibles (les plus récentes), pour en voir et changer le niveau. */
+  connaissances(limite = 30): { id: string; contenu: string; forme: string; compartiment: string; niveau: Niveau; valideLe: string | null; provenance: string }[] {
+    this.exigerPublic("consulter la mémoire");
+    const m = this.d.memoire;
+    if (!m) throw new ErreurCorpus(503, "memoire_indisponible", "Mémoire indisponible : volume chiffré absent.");
+    return tousLes(m, ["valide"])
+      .filter((x) => this.visible(x.element.restrictions))
+      .sort((a, b) => (b.element.valideLe ?? "").localeCompare(a.element.valideLe ?? ""))
+      .slice(0, limite)
+      .map((x) => ({ id: x.element.id, contenu: x.element.contenu, forme: x.element.forme, compartiment: x.element.compartiment, niveau: niveauDe(x.element.restrictions), valideLe: x.element.valideLe, provenance: x.provenance }));
+  }
+
+  /** Change le niveau d'une connaissance validée (Mickaël). Masquée dans ce mode : introuvable, sans le dire. */
+  fixerNiveauConnaissance(id: string, niveau: Niveau): { id: string; niveau: Niveau } {
+    this.exigerPublic("modifier la mémoire");
+    const m = this.d.memoire;
+    if (!m) throw new ErreurCorpus(503, "memoire_indisponible", "Mémoire indisponible : volume chiffré absent.");
+    const e = m.historique(id).at(-1);
+    if (!e || !this.visible(e.restrictions)) throw new ErreurCorpus(404, "connaissance_inconnue", "Connaissance introuvable.");
+    if (!NIVEAUX.includes(niveau)) throw new ErreurCorpus(400, "niveau_inconnu", "Niveau : public, interne, confidentiel ou personnel.");
+    m.fixerNiveau(id, niveau, MICKAEL);
+    return { id, niveau };
   }
 
   /** Lot de propositions à confirmer (8 au plus), avec les souvenirs validés proches (doublons, contradictions). */
@@ -397,41 +504,45 @@ export class DepotCorpus {
     const m = this.d.memoire;
     if (!m) throw new ErreurCorpus(503, "memoire_indisponible", "Mémoire indisponible : volume chiffré absent.");
     const reportes = this.d.catalogue.reportes(this.maintenant().toISOString());
-    const tous = tousLes(m, ["a_confirmer"]);
+    const tous = tousLes(m, ["a_confirmer"]).filter((x) => this.visible(x.element.restrictions));
     const actifs = tous.filter((x) => !reportes.has(x.element.id));
     const lot = actifs.slice(0, LOT_PROPOSITIONS).map((x) => {
       const e = x.element;
       const proches = m
         .retrouver({ texte: e.contenu, compartiment: e.compartiment as never, statuts: ["valide"], limite: 3 }, { type: "mickael" })
-        .filter((y) => y.element.id !== e.id)
+        .filter((y) => y.element.id !== e.id && this.visible(y.element.restrictions))
         .map((y) => ({ id: y.element.id, contenu: y.element.contenu, forme: y.element.forme, valideLe: y.element.valideLe }));
-      return { id: e.id, enonce: e.contenu, forme: e.forme, compartiment: e.compartiment, date: e.date, portee: e.portee, provenance: x.provenance, details: e.details, proches };
+      return { id: e.id, enonce: e.contenu, forme: e.forme, compartiment: e.compartiment, niveau: niveauDe(e.restrictions), date: e.date, portee: e.portee, provenance: x.provenance, details: e.details, proches };
     });
     return { total: actifs.length, reportees: tous.length - actifs.length, lot };
   }
 
   /** Décision explicite de Mickaël sur une proposition. Aucune validation automatique. */
-  decider(id: string, action: "valider" | "corriger" | "refuser" | "reporter", contenu?: string): Record<string, unknown> {
+  decider(id: string, action: "valider" | "corriger" | "refuser" | "reporter", contenu?: string, niveau?: Niveau): Record<string, unknown> {
     this.exigerPublic("valider une proposition");
     const m = this.d.memoire;
     if (!m) throw new ErreurCorpus(503, "memoire_indisponible", "Mémoire indisponible : volume chiffré absent.");
     const e = m.historique(id).at(-1);
-    if (!e) throw new ErreurCorpus(404, "proposition_inconnue", "Proposition introuvable.");
+    if (!e || !this.visible(e.restrictions)) throw new ErreurCorpus(404, "proposition_inconnue", "Proposition introuvable.");
+    if (niveau !== undefined && !NIVEAUX.includes(niveau)) throw new ErreurCorpus(400, "niveau_inconnu", "Niveau : public, interne, confidentiel ou personnel.");
     if (e.statut !== "a_confirmer") throw new ErreurCorpus(409, "deja_decidee", `Cette proposition est déjà « ${e.statut} ».`);
     try {
       switch (action) {
         case "valider": {
           const v = m.corriger(id, { valider: true }, MICKAEL);
-          return { id, statut: v.statut, version: v.version, valideLe: v.valideLe };
+          // Niveau confirmé par Mickaël à la validation (proposé : celui du document).
+          const n = niveau ? m.fixerNiveau(id, niveau, MICKAEL) : v;
+          return { id, statut: v.statut, version: v.version, valideLe: v.valideLe, niveau: niveauDe(n.restrictions) };
         }
         case "corriger": {
           if (!contenu?.trim()) throw new ErreurCorpus(400, "contenu_requis", "Nouvel énoncé requis.");
           const v = m.corriger(id, { contenu: contenu.trim(), valider: true }, MICKAEL);
-          return { id, statut: v.statut, version: v.version, contenu: v.contenu };
+          const n = niveau ? m.fixerNiveau(id, niveau, MICKAEL) : v;
+          return { id, statut: v.statut, version: v.version, contenu: v.contenu, niveau: niveauDe(n.restrictions) };
         }
         case "refuser":
-          // Oubli : la proposition et son empreinte disparaissent ; une réindexation ne la ramène pas.
-          return { id, ...m.oublier(id, MICKAEL), statut: "refusee" };
+          // Oubli : la proposition et son empreinte disparaissent ; ni une réindexation ni un redépôt ne la ramènent.
+          return { id, oublies: this.oublier(id, e.details["citation"]), statut: "refusee" };
         case "reporter": {
           const jusquAu = new Date(this.maintenant().getTime() + 7 * 86_400_000).toISOString();
           this.d.catalogue.reporter(id, jusquAu);
@@ -446,13 +557,13 @@ export class DepotCorpus {
 
   /** « Voir l'origine » : tous les extraits d'une source privée, dans l'ordre, avec leurs références. */
   extraits(id: string): ExtraitCorpus[] {
-    return this.d.corpus.extraitsDe(id, { type: "mickael" });
+    return this.d.corpus.extraitsDe(id, { type: "mickael" }, this.permis());
   }
 
   /** Recherche pour l'écran (Mickaël) ; le vecteur de la question est calculé par l'appelant. */
   chercher(q: string, vecteur: Float32Array | null, opts: { sources?: string[]; compartiment?: string; limite?: number } = {}): { mode: "sens" | "mots"; resultats: ExtraitCorpus[] } {
     const r = this.d.corpus
-      .chercher(q, { type: "mickael" }, opts.limite ?? 20, { vecteur, plancher: PLANCHER_ECRAN, parDocument: opts.sources?.length === 1 ? 20 : 3, ...(opts.sources ? { sources: opts.sources } : {}) })
+      .chercher(q, { type: "mickael" }, opts.limite ?? 20, { vecteur, plancher: PLANCHER_ECRAN, niveaux: this.permis(), parDocument: opts.sources?.length === 1 ? 20 : 3, ...(opts.sources ? { sources: opts.sources } : {}) })
       .filter((x) => !opts.compartiment || x.compartiment === opts.compartiment);
     return { mode: vecteur && this.d.corpus.comptes().avecSens > 0 ? "sens" : "mots", resultats: r };
   }

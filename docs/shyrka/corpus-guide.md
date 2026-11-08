@@ -31,6 +31,14 @@ En conversation, une proposition n'est jamais dite comme une décision (« 1 pro
 
 Le dossier **« Déposer dans Shyrka »** est à la racine du volume chiffré. Il est **arrêté par défaut** : **Corpus › Déposer › Dossier « Déposer dans Shyrka » › Activer**. Un fichier copié dedans apparaît comme « à examiner » ; **Examiner** le prépare comme un dépôt, **Refuser** l'efface du dossier. **Mettre en pause** ou **Arrêter** : effet immédiat. Il s'arrête seul si le volume est démonté, et ne redémarre jamais au lancement de la passerelle. Aucun son.
 
+## Confidentialité et présence
+
+- **Niveaux** : public, interne, confidentiel, personnel. Shyrka en propose un au dépôt (avec sa raison), tu le confirmes ; tu peux le changer ensuite (Sources privées, À confirmer, Connaissances validées).
+- **Présence** (en tête de la page, toujours visible) : **Seul** (tout), **Entre proches** (public et interne), **Avec un externe** (public). À la voix : « je suis seul », « on est entre nous », « je suis avec quelqu'un ».
+- En mode protégé, Shyrka ne montre ni ne dit rien d'un niveau masqué, à l'écran comme à la voix : « Je t'en parlerai quand tu seras seul ». La conversation affichée s'efface quand le mode se restreint.
+- Au démarrage et après 30 minutes sans action : retour à **Entre proches**, jusqu'à ce que tu dises que tu es seul.
+- **Retirer un document** : Shyrka dit combien de souvenirs validés en viennent ; tu les gardes (marqués « source retirée le … ») ou tu les oublies aussi.
+
 ## Mode privé, diagnostic, arrêt
 
 - **Mode privé** (interrupteur de la page) : on peut chercher, rien ne peut être ajouté, indexé ni proposé ; les propositions sont masquées.

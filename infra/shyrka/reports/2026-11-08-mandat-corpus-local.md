@@ -91,3 +91,55 @@ Dépendances ajoutées : aucune. Outils macOS utilisés : `textutil`, `swiftc` +
 ## Environnement
 
 Volumes d'essai de l'étude Knowledge Engine supprimés (7,2 Go). Données de recette (`recette/corpus-2026-11-08`) effacées après les essais. Passerelle de Shyrka relancée en mode normal sur ta vraie mémoire.
+
+---
+
+# Passe de stabilisation et de confidentialité (9 novembre 2026)
+
+Commit local, pas de push. Recette réelle sur le Mac, à l'écran : passerelle de recette **sans voix** (identité `voixEnSortie: false`, espace `recette/presence-2026-11-09`), modèle local et bge-m3 réels.
+
+## Livré
+
+| Point | Fonction | Testé en réel |
+| --- | --- | --- |
+| A1 | Retrait : nombre de souvenirs validés affiché, puis « Retirer et garder les souvenirs » (marqués « source retirée le … ») ou « Retirer et oublier aussi » (mémoire, propositions, index dérivés). Garde anti-retour : empreinte de la citation des connaissances oubliées ou refusées (jamais le texte) | oui : après « oublier », deux redépôts et une réindexation ne ramènent rien (5 écartées sur 5) ; avant ce correctif, 3 reformulations revenaient |
+| A2 | État de chaque document : Disponible, Analyse en cours, Propositions prêtes (n), Échec de lecture | oui (API et écran) |
+| A3 | Processus ouverts en fin de session : voir ci-dessous | — |
+| A4 | Hors du Mac, l'onglet Corpus affiche « Disponible seulement sur le Mac », sans appel ni erreur ; le sélecteur de présence est masqué | oui : construction de production servie sans passerelle (le chemin rend du HTML 404, comme en ligne), aucune erreur dans la console |
+| B5 | Niveaux public, interne, confidentiel, personnel : proposés par Shyrka au dépôt (avec la raison), confirmés par Mickaël, modifiables ensuite (documents, propositions, connaissances validées). Propositions : niveau du document. Faits très privés existants : « personnel » (migration au démarrage, une seule fois). Documents du dépôt OIA : « interne ». Souvenirs sans niveau : « confidentiel » (prudence) | oui |
+| C6 | Modes « seul », « entre proches », « avec un externe » : boutons toujours visibles en tête de la page Shyrka ; à la voix « je suis seul », « on est entre nous », « je suis avec quelqu'un » (traité par le code, sans modèle) | oui à l'écran (clic, et phrase tapée) ; **voix à tester avec toi** |
+| C7 | Filtre avant tout modèle : corpus et mémoire pour la conversation, recherche, sources, extraits, propositions, connaissances, comptes de l'écran. Rien de visible et quelque chose de masqué : « Je t'en parlerai quand tu seras seul. », dit par le code. Passage à un mode plus restreint : nouvelle session du modèle (historique vidé) et conversation effacée de l'écran | oui |
+| C8 | « Entre proches » au démarrage et après 30 minutes sans action (les sondages de l'écran ne comptent pas) ; jamais d'élargissement automatique | oui : redémarrage, puis inactivité avec un délai de recette d'une minute |
+| E | Roadmap : codes par niveau, reconnaissance caméra et voix, inscrits à la piste Shyrka, **non implémentés** | — |
+
+## Recette D9 (écran, modèle local réel)
+
+| Question | Seul | Entre proches | Avec un externe |
+| --- | --- | --- | --- |
+| Document confidentiel : « Quel est le budget du dossier Orion ? » | 48 000 €, source citée | « Je t'en parlerai quand tu seras seul. » | idem |
+| Fait personnel : « Que sais-tu de mon allergie ? » | le fait, niveau personnel | réponse protégée | réponse protégée |
+| Fait personnel, question libre : « Est-ce que j'ai une allergie alimentaire ? » | répond | réponse protégée | réponse protégée |
+| Document interne (Atlas) | répond | répond | réponse protégée |
+| Document public (salon) | répond | répond | répond |
+| Écran : sources privées, propositions, connaissances | 3, 6, 1 | 2, 2, 0 | 1, 1, 0 (et 0 document OIA) |
+
+## Processus ouverts en fin de session (A3)
+
+1. `vite dev` sur 127.0.0.1:8082 : cockpit local, lancé par Claude Code ; **voulu** (la page `/shyrka` et son proxy vers la passerelle).
+2. Passerelle de Shyrka sur 127.0.0.1:8179 et Whisper sur 8178 : **voulus**.
+3. `pnpm shyrka:parler` (mode vocal en terminal), lancé depuis ton Terminal le 8 novembre à 0 h 58, encore ouvert : **vraisemblablement un essai oublié**, non arrêté par Claude Code. Ctrl+C dans ce Terminal.
+
+## Tests
+
+264 tests automatiques de Shyrka et 27 du noyau, verts ; typage vert (Shyrka, cockpit) ; construction de production du cockpit réussie.
+
+## Limites restantes
+
+- **Aucune preuve de présence** : n'importe qui devant le Mac peut dire « je suis seul » ou cliquer. Les codes et la reconnaissance sont à la roadmap.
+- Réponse protégée : toujours donnée pour une question de mémoire en mode protégé ; pour une question libre, seulement si quelque chose de masqué y répond. En comparant beaucoup de questions, un témoin pourrait en déduire qu'une information existe.
+- La détection d'un document « public » est faible (proposé « interne ») : c'est toi qui confirmes.
+- Au changement de mode pendant un tour en cours, la session du modèle n'est renouvelée qu'au tour suivant.
+- La conversation reste enregistrée dans le navigateur du Mac (comportement antérieur) tant que tu es seul ; elle est effacée au passage à un mode plus restreint.
+- Les noms des fichiers du dossier « Déposer dans Shyrka » restent visibles dans tous les modes (ils ne sont pas encore classés).
+- Une phrase de mode mal transcrite par Whisper n'est pas reconnue (correspondance exacte).
+- Le modèle qualifie parfois mal la source (« document interne » pour un document public) ; plusieurs propositions quasi identiques possibles.

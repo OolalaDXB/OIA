@@ -32,6 +32,8 @@ export class ErreurLocale extends Error {
 
 async function appel<T>(chemin: string, init?: RequestInit): Promise<T> {
   const r = await fetch(`${BASE}${chemin}`, init);
+  // Hors du Mac (site en ligne), le chemin rend la page HTML du site : ce n'est pas la passerelle.
+  if (!/application\/json/i.test(r.headers.get("content-type") ?? "")) throw new ErreurLocale("hors_mac", "Disponible seulement sur le Mac.");
   const corps = (await r.json().catch(() => ({}))) as { erreur?: string; message?: string };
   if (!r.ok) throw new ErreurLocale(corps.erreur ?? `http_${r.status}`, corps.message ?? `Passerelle : HTTP ${r.status}`);
   return corps as T;
@@ -61,9 +63,18 @@ export const verifierInterruption = (prise: Blob) => appel<{ interrompue: boolea
 export const interrompre = () => appel<{ interrompue: boolean }>("/interrompre", json({}));
 export const definirPrive = (actif: boolean) => appel<{ prive: boolean }>("/prive", json({ actif }));
 
+/** Mode de présence : « seul » (tout), « entre proches » (public, interne), « avec un externe » (public). */
+export type ModePresence = "seul" | "entre_proches" | "externe";
+export type Niveau = "public" | "interne" | "confidentiel" | "personnel";
+export const NIVEAUX: [Niveau, string][] = [["public", "Public"], ["interne", "Interne"], ["confidentiel", "Confidentiel"], ["personnel", "Personnel"]];
+export const MODES_PRESENCE: [ModePresence, string][] = [["seul", "Seul"], ["entre_proches", "Entre proches"], ["externe", "Avec un externe"]];
+export const lirePresence = () => appel<{ mode: ModePresence; niveaux: Niveau[] }>("/presence");
+export const changerPresence = (mode: ModePresence) => appel<{ mode: ModePresence }>("/presence", json({ mode }));
+
 /** Flux des états réels du Mac. Rend une fonction de fermeture. */
-export function suivreEtats(h: { etat: (e: EtatLocal) => void; fin: (f: { interrompue: boolean }) => void; perdu: () => void }): () => void {
+export function suivreEtats(h: { etat: (e: EtatLocal) => void; fin: (f: { interrompue: boolean }) => void; perdu: () => void; presence?: (m: ModePresence) => void }): () => void {
   const es = new EventSource(`${BASE}/evenements`);
+  es.addEventListener("presence", (e) => h.presence?.((JSON.parse((e as MessageEvent).data) as { mode: ModePresence }).mode));
   es.addEventListener("etat", (e) => h.etat((JSON.parse((e as MessageEvent).data) as { etat: EtatLocal }).etat));
   es.addEventListener("fin", (e) => h.fin(JSON.parse((e as MessageEvent).data) as { interrompue: boolean }));
   es.onerror = () => h.perdu();
@@ -129,25 +140,27 @@ export class PriseMicro {
 // ── Corpus (mandat Corpus local) : déposer, consulter, valider. Tout passe par la passerelle du Mac. ──
 
 export interface EtatCorpus {
-  volume: "chiffre"; sourcesOia: number; sourcesPrivees: number; propositions: number | null; sources: number; extraits: number; avecSens: number; modeleSens: string;
-  surveillance: { etat: EtatSurveillance; aExaminer: number }; taches: Record<string, TacheCorpus>; prive: boolean;
+  volume: "chiffre"; sourcesOia: number; sourcesPrivees: number; propositions: number | null; sources?: number; extraits?: number; avecSens?: number; modeleSens: string;
+  surveillance: { etat: EtatSurveillance; aExaminer: number }; taches: Record<string, TacheCorpus>; prive: boolean; presence: ModePresence;
 }
 export type EtatSurveillance = "arretee" | "active" | "pause" | "volume_absent";
 export interface TacheCorpus { etape: "indexation" | "sens" | "propositions" | "fini" | "erreur"; fait: number; total: number; propositions?: number; ecartees?: number; message?: string }
 export interface ApercuCorpus {
   jeton: string; nom: string; type: string; taille: number; pages?: number; passages: number; apercu: string; etat: "pret" | "a_verifier"; motifs: string[]; avertissements: string[];
   dejaPresent: { id: string; nom: string } | null; memeNom: { id: string; nom: string; version: number } | null; retireLe: string | null;
+  niveauPropose: { niveau: Niveau; raison: string }; niveauProposeProjet: { niveau: Niveau; raison: string };
 }
 export interface SourcePrivee {
   id: string; nom: string; origine: "depot" | "note" | "dossier"; type: string; compartiment: string; lecteurs: string[]; empreinte: string; taille: number;
   dateSource: string; dateImport: string; version: number; statut: "indexe" | "echec" | "revoque"; attestation: string | null; revoqueLe: string | null; tache: TacheCorpus | null;
+  niveau: Niveau; etat: "disponible" | "analyse_en_cours" | "propositions_pretes" | "echec"; propositionsEnAttente: number;
 }
 export interface ExtraitCorpus {
   source: string; section: string; ligne: number; ref: string; citation: string; titre: string; version: string; dateSource: string; indexeLe: string;
-  statut: string; compartiment: string; connecteur: "depot-git" | "fichier-local" | "note"; extrait: string; mode: "sens" | "mots"; score: number; identifiant: boolean; sousLeSeuil?: boolean;
+  statut: string; compartiment: string; connecteur: "depot-git" | "fichier-local" | "note"; niveau: Niveau; extrait: string; mode: "sens" | "mots"; score: number; identifiant: boolean; sousLeSeuil?: boolean;
 }
 export interface PropositionCorpus {
-  id: string; enonce: string; forme: "preference" | "decision" | "travail" | "experience"; compartiment: string; date: string; portee: string; provenance: string;
+  id: string; enonce: string; forme: "preference" | "decision" | "travail" | "experience"; compartiment: string; niveau: Niveau; date: string; portee: string; provenance: string;
   details: { citation?: string; document?: string; ref?: string; version?: string; raison?: string; incertitude?: string; source_id?: string }; proches: { id: string; contenu: string; forme: string; valideLe: string | null }[];
 }
 export interface FichierDetecte { id: string; nom: string; taille: number; detecteLe: string }
@@ -168,13 +181,18 @@ export const preparerDocument = (f: File) =>
   appel<ApercuCorpus>("/corpus/preparer", { method: "POST", headers: { "content-type": "application/octet-stream", "x-corpus-nom": encodeURIComponent(f.name), "x-corpus-date": new Date(f.lastModified || Date.now()).toISOString() }, body: f });
 export const preparerNote = (titre: string, texte: string) => appel<ApercuCorpus>("/corpus/note", json({ titre, texte }));
 export const annulerPreparation = (jeton: string) => appel<{ annule: boolean }>("/corpus/annuler", json({ jeton }));
-export const confirmerDocument = (c: { jeton: string; compartiment: string; conversation: boolean; nouvelleVersionDe?: string; attestation?: boolean }) =>
+export const confirmerDocument = (c: { jeton: string; compartiment: string; conversation: boolean; niveau: Niveau; nouvelleVersionDe?: string; attestation?: boolean }) =>
   appel<{ source: string; version: number; extraits: number; deja?: boolean }>("/corpus/confirmer", json(c));
 export const reindexerSource = (id: string) => appel<{ extraits: number }>(`/corpus/sources/${encodeURIComponent(id)}/reindexer`, json({}));
-export const retirerSource = (id: string) => appel<{ retire: true; propositionsRetirees: number; souvenirsValidesConserves: number }>(`/corpus/sources/${encodeURIComponent(id)}/retirer`, json({ confirmer: true }));
+export const retirerSource = (id: string, souvenirs: "garder" | "oublier") => appel<{ retire: true; propositionsRetirees: number; souvenirsGardes: number; souvenirsOublies: number }>(`/corpus/sources/${encodeURIComponent(id)}/retirer`, json({ confirmer: true, souvenirs }));
+export const souvenirsSource = (id: string) => appel<{ valides: number; enAttente: number }>(`/corpus/sources/${encodeURIComponent(id)}/souvenirs`);
+export const fixerNiveauSource = (id: string, niveau: Niveau) => appel<{ id: string; niveau: Niveau }>(`/corpus/sources/${encodeURIComponent(id)}/niveau`, json({ niveau }));
+export interface ConnaissanceValidee { id: string; contenu: string; forme: string; compartiment: string; niveau: Niveau; valideLe: string | null; provenance: string }
+export const connaissancesValidees = () => appel<{ connaissances: ConnaissanceValidee[] }>("/corpus/connaissances");
+export const fixerNiveauConnaissance = (id: string, niveau: Niveau) => appel<{ id: string; niveau: Niveau }>(`/corpus/connaissances/${encodeURIComponent(id)}/niveau`, json({ niveau }));
 export const propositionsCorpus = () => appel<{ total: number; reportees: number; lot: PropositionCorpus[] }>("/corpus/propositions");
-export const deciderProposition = (id: string, action: "valider" | "corriger" | "refuser" | "reporter", contenu?: string) =>
-  appel<Record<string, unknown>>(`/corpus/propositions/${encodeURIComponent(id)}`, json(contenu ? { action, contenu } : { action }));
+export const deciderProposition = (id: string, action: "valider" | "corriger" | "refuser" | "reporter", contenu?: string, niveau?: Niveau) =>
+  appel<Record<string, unknown>>(`/corpus/propositions/${encodeURIComponent(id)}`, json({ action, ...(contenu ? { contenu } : {}), ...(niveau ? { niveau } : {}) }));
 export const etatSurveillance = () => appel<{ etat: EtatSurveillance; aExaminer: FichierDetecte[] }>("/corpus/surveillance");
 export const piloterSurveillance = (action: "activer" | "pause" | "arreter") => appel<{ etat: EtatSurveillance }>("/corpus/surveillance", json({ action }));
 export const examinerFichier = (id: string) => appel<ApercuCorpus>(`/corpus/surveillance/${encodeURIComponent(id)}/examiner`, json({}));

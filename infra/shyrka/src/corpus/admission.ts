@@ -1,4 +1,4 @@
-import { motifExclusion } from "@oia/shyrka-noyau";
+import { motifExclusion, type Niveau } from "@oia/shyrka-noyau";
 
 /**
  * Contrôle d'admission d'un document avant tout stockage (mandat Corpus
@@ -70,4 +70,19 @@ export function controler(texte: string, nom = ""): Verdict {
   const avertissements: string[] = [];
   if (/<script\b|javascript:/i.test(texte)) avertissements.push("le texte contient du code de page web : il sera affiché comme texte, jamais exécuté");
   return { decision: "admis", avertissements };
+}
+
+/**
+ * Niveau de confidentialité PROPOSÉ au dépôt (Mickaël le confirme ou le change) : santé, famille,
+ * finances personnelles → personnel ; mention de confidentialité ou données de tiers → confidentiel ;
+ * documentation publique → public ; document de projet → interne ; sinon, selon le compartiment.
+ */
+export function proposerNiveau(texte: string, verdict: Verdict, compartiment: string, nom = ""): { niveau: Niveau; raison: string } {
+  const t = `${nom}\n${texte}`;
+  const motifs = verdict.decision === "quarantaine" ? verdict.motifs.join(" ") : "";
+  if (/santé|salariales/.test(motifs) || /\b(?:m[ée]dical|sant[ée]|ordonnance|famille|enfants?|divorce|imp[ôo]ts?|patrimoine|testament|salaire)\b/i.test(t)) return { niveau: "personnel", raison: "santé, famille ou finances personnelles" };
+  if (/tiers/.test(motifs) || /\b(?:confidentiel|ne pas diffuser|strictement priv[ée]|secret des affaires|NDA|sous embargo)\b/i.test(t)) return { niveau: "confidentiel", raison: motifs ? "données de tiers possibles" : "le document se dit confidentiel" };
+  if (/\b(?:licen[cs]e (?:MIT|Apache|BSD)|communiqu[ée] de presse|README|documentation publique|open source)\b/i.test(t)) return { niveau: "public", raison: "documentation publique" };
+  if (compartiment === "personnel") return { niveau: "personnel", raison: "compartiment personnel" };
+  return { niveau: "interne", raison: "document de projet" };
 }

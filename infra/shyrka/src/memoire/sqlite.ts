@@ -3,7 +3,7 @@ import { chmodSync, existsSync, lstatSync, mkdirSync, readFileSync, writeFileSyn
 import { join } from "node:path";
 import type { DatabaseSync as TypeBase } from "node:sqlite";
 import {
-  ChangementSchema, empreinteContenu, empreinteId, motifExclusion, NouvelElementSchema, peutLire, provenance, RefusMemoire,
+  ChangementSchema, empreinteContenu, empreinteId, motifExclusion, NIVEAUX, NouvelElementSchema, peutLire, provenance, RefusMemoire, restrictionsPour, type Niveau,
   type Acteur, type Changement, type Demandeur, type ElementMemoire, type ExportMemoire, type Memoire, type NouvelElement, type Requete, type Resultat,
 } from "@oia/shyrka-noyau";
 import type { DossierVerifie } from "./volume.js";
@@ -319,6 +319,44 @@ export class MemoireLocale implements Memoire {
       this.noter(par, `corriger v${nouvelle.version}${derives.size ? `, ${derives.size} dérivé(s) effacé(s)` : ""}`, id);
       return versElement(nouvelle);
     });
+  }
+
+  /**
+   * Niveau de confidentialité d'un élément (Mickaël seulement) : métadonnée de la version actuelle,
+   * changée sur place et notée au journal ; le contenu ne change pas.
+   */
+  fixerNiveau(id: string, niveau: Niveau, par: Acteur): ElementMemoire {
+    if (par.type !== "mickael") throw new RefusMemoire("seul Mickaël fixe le niveau d'un souvenir", "non_autorise");
+    if (!NIVEAUX.includes(niveau)) throw new RefusMemoire("niveau inconnu", "valeur_refusee");
+    return this.tx(() => {
+      const l = this.exiger(id);
+      const restrictions = JSON.stringify(restrictionsPour(JSON.parse(l.restrictions) as string[], niveau));
+      this.db.prepare("UPDATE versions SET restrictions = ? WHERE id = ? AND actuelle = 1").run(restrictions, id);
+      this.noter(par, `niveau ${niveau}`, id);
+      return versElement({ ...l, restrictions });
+    });
+  }
+
+  /** Ajoute des détails à la version actuelle (ex. « source retirée le … »), sans changer le contenu ni le statut. */
+  annoter(id: string, details: Record<string, string>, par: Acteur): ElementMemoire {
+    if (par.type !== "mickael") throw new RefusMemoire("seul Mickaël annote un souvenir", "non_autorise");
+    return this.tx(() => {
+      const l = this.exiger(id);
+      const d = JSON.stringify({ ...(JSON.parse(l.details) as Record<string, string>), ...details });
+      this.db.prepare("UPDATE versions SET details = ? WHERE id = ? AND actuelle = 1").run(d, id);
+      this.noter(par, `annoter ${Object.keys(details).join(", ")}`, id);
+      return versElement({ ...l, details: d });
+    });
+  }
+
+  /** Les faits très privés sans niveau passent en « personnel » (décision du 9 novembre 2026). Idempotent ; rend le nombre de faits étiquetés. */
+  migrerNiveaux(par: Acteur): number {
+    const a = (this.db.prepare("SELECT id, restrictions FROM versions WHERE actuelle = 1").all() as { id: string; restrictions: string }[]).filter((l) => {
+      const r = JSON.parse(l.restrictions) as string[];
+      return r.includes("mickael_seulement") && !r.some((x) => x.startsWith("niveau:"));
+    });
+    for (const l of a) this.fixerNiveau(l.id, "personnel", par);
+    return a.length;
   }
 
   retirer(id: string, motif: string, par: Acteur): void {

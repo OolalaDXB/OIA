@@ -4,10 +4,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Section } from "@/components/oia/ui";
+import { useShyrka } from "@/components/oia/shyrka";
 import {
   annulerPreparation, confirmerDocument, deciderProposition, effacerFichierDossier, ErreurLocale, etatCorpus, etatSurveillance, examinerFichier, extraitsSource, piloterSurveillance,
   preparerDocument, preparerNote, propositionsCorpus, rechercherCorpus, reindexerSource, retirerSource, sourcesCorpus, TAILLE_MAX_CORPUS,
-  type ApercuCorpus, type EtatCorpus, type ExtraitCorpus, type FichierDetecte, type PropositionCorpus, type SourcePrivee, type EtatSurveillance,
+  NIVEAUX, souvenirsSource, fixerNiveauSource, connaissancesValidees, fixerNiveauConnaissance,
+  type ApercuCorpus, type ConnaissanceValidee, type EtatCorpus, type Niveau, type ExtraitCorpus, type FichierDetecte, type PropositionCorpus, type SourcePrivee, type EtatSurveillance,
 } from "@/lib/shyrka-locale";
 
 /**
@@ -35,6 +37,13 @@ function Alerte({ children }: { children: ReactNode }) {
 }
 
 export function CorpusVue() {
+  const { locale, presence } = useShyrka();
+  // Hors du Mac (site en ligne) : aucune passerelle, aucun appel ; la vue le dit simplement.
+  if (!locale) return <Section titre="Corpus"><p className="text-sm text-muted-foreground">Disponible seulement sur le Mac.</p><p className="mt-1 text-xs text-tertiary">Le Corpus de Shyrka vit sur le volume chiffré du Mac Studio : il s'ouvre sur la page locale, passerelle lancée.</p></Section>;
+  return <CorpusLocal presence={presence} />;
+}
+
+function CorpusLocal({ presence }: { presence: string | null }) {
   const [etat, setEtat] = useState<EtatCorpus | null>(null);
   const [indispo, setIndispo] = useState<string | null>(null);
   const [vue, setVue] = useState<Vue>("deposer");
@@ -45,21 +54,22 @@ export function CorpusVue() {
       setIndispo(null);
     } catch (e) {
       setEtat(null);
-      setIndispo(e instanceof ErreurLocale && e.code !== "http_404" && e.code !== "http_502" ? e.message : "Passerelle locale absente : le Corpus n'est disponible que sur le Mac Studio, passerelle lancée (pnpm shyrka:passerelle).");
+      setIndispo(e instanceof ErreurLocale && e.code !== "http_404" && e.code !== "http_502" && e.code !== "hors_mac" ? e.message : "Passerelle du Mac injoignable : relancer pnpm shyrka:passerelle.");
     }
   }, []);
-  useEffect(() => { void rafraichir(); const t = setInterval(() => void rafraichir(), 4000); return () => clearInterval(t); }, [rafraichir]);
+  useEffect(() => { void rafraichir(); const t = setInterval(() => void rafraichir(), 4000); return () => clearInterval(t); }, [rafraichir, presence]);
 
   if (!etat) return <Section titre="Corpus">{indispo ? <Alerte>{indispo}</Alerte> : <p className="text-sm text-muted-foreground">Connexion à la passerelle du Mac…</p>}</Section>;
   const aConfirmer = etat.propositions ?? 0;
-  return <div className="grid gap-6">
+  const libelleMode = { seul: "seul : tout est visible", entre_proches: "entre proches : public et interne seulement", externe: "avec un externe : public seulement" }[etat.presence] ?? etat.presence;
+  return <div className="grid gap-6" key={etat.presence}>
     <div>
       <p className="text-sm text-muted-foreground" aria-live="polite">
         <Pastille ton="ok">Volume chiffré actif</Pastille><span className="mx-2 text-tertiary">·</span>
         {etat.sourcesOia} sources OIA + {etat.sourcesPrivees} source{etat.sourcesPrivees > 1 ? "s" : ""} privée{etat.sourcesPrivees > 1 ? "s" : ""}<span className="mx-2 text-tertiary">·</span>
         {etat.prive ? "propositions masquées (mode privé)" : `${aConfirmer} proposition${aConfirmer > 1 ? "s" : ""} à confirmer`}
       </p>
-      <p className="mt-1 text-xs text-tertiary">Recherche par le sens ({etat.modeleSens}) : {etat.avecSens} extrait{etat.avecSens > 1 ? "s" : ""} sur {etat.extraits}{etat.avecSens < etat.extraits ? " (calcul en cours ; les mots servent en attendant)" : ""}. Tout reste sur le Mac.</p>
+      <p className="mt-1 text-xs text-tertiary">Mode {libelleMode}. Recherche par le sens ({etat.modeleSens}){etat.extraits !== undefined ? ` : ${etat.avecSens} extrait${(etat.avecSens ?? 0) > 1 ? "s" : ""} sur ${etat.extraits}${(etat.avecSens ?? 0) < etat.extraits ? " (calcul en cours ; les mots servent en attendant)" : ""}` : ""}. Tout reste sur le Mac.</p>
       {etat.prive && <p className="mt-2 text-xs text-warn">Mode privé : la recherche reste possible ; rien ne peut être ajouté, indexé ni proposé tant qu'il est actif.</p>}
     </div>
     <div role="tablist" aria-label="Actions du Corpus" className="flex flex-wrap gap-2">
@@ -71,6 +81,12 @@ export function CorpusVue() {
     {vue === "confirmer" && <AConfirmer prive={etat.prive} apres={rafraichir} />}
   </div>;
 }
+
+function ChoixNiveau({ valeur, onChange, id, libelle = "Confidentialité" }: { valeur: Niveau; onChange: (n: Niveau) => void; id: string; libelle?: string }) {
+  return <label className="grid gap-1 text-sm" htmlFor={id}><span className="text-xs text-tertiary">{libelle}</span>
+    <select id={id} className="min-h-11 rounded-md border border-border bg-background px-2 text-sm" value={valeur} onChange={(e) => onChange(e.target.value as Niveau)}>{NIVEAUX.map(([v, l]) => <option key={v} value={v}>{l}</option>)}</select></label>;
+}
+const libelleNiveau = (n: string) => NIVEAUX.find(([v]) => v === n)?.[1] ?? n;
 
 // ── Déposer ────────────────────────────────────────────────────────────────
 
@@ -127,12 +143,16 @@ function CarteDepot({ carte: c, maj, apres, taches }: { carte: Carte; maj: (p: P
   const [conversation, setConversation] = useState(false);
   const [version, setVersion] = useState(true);
   const [atteste, setAtteste] = useState(false);
+  const [niveauChoisi, setNiveauChoisi] = useState<Niveau | null>(null);
   const [erreur, setErreur] = useState<string | null>(null);
+  // Niveau proposé par Shyrka (selon le contenu et le compartiment) tant que Mickaël n'en a pas choisi un autre.
+  const propose = a ? (compartiment === "personnel" ? a.niveauPropose : a.niveauProposeProjet) : null;
+  const niveau = niveauChoisi ?? propose?.niveau ?? "personnel";
   const confirmer = async () => {
     if (!a) return;
     maj({ etat: "envoi" }); setErreur(null);
     try {
-      const r = await confirmerDocument({ jeton: a.jeton, compartiment, conversation, ...(a.memeNom && version ? { nouvelleVersionDe: a.memeNom.id } : {}), attestation: atteste });
+      const r = await confirmerDocument({ jeton: a.jeton, compartiment, conversation, niveau, ...(a.memeNom && version ? { nouvelleVersionDe: a.memeNom.id } : {}), attestation: atteste });
       maj({ etat: r.deja ? "deja" : "indexe", source: r.source });
       apres();
     } catch (e) { maj({ etat: "apercu" }); setErreur(message(e)); }
@@ -161,6 +181,8 @@ function CarteDepot({ carte: c, maj, apres, taches }: { carte: Carte; maj: (p: P
           <label className="flex min-h-11 items-center gap-2"><Checkbox checked={conversation} onCheckedChange={(v) => setConversation(v === true)} />Shyrka peut s'en servir dans mes conversations sur le Mac (modèle local)</label>
           <span className="text-xs text-tertiary">Jamais le cockpit, un agent ni un modèle en ligne.</span></div>
       </div>
+      <div className="grid gap-1 sm:max-w-xs"><ChoixNiveau id={`niveau-${a.jeton}`} valeur={niveau} onChange={setNiveauChoisi} libelle="Confidentialité (à confirmer)" />
+        <span className="text-xs text-tertiary">{niveauChoisi ? "Choisi par toi." : `Proposé par Shyrka : ${propose?.raison ?? ""}.`} Public et interne : visibles entre proches ; public seulement avec un externe.</span></div>
       {a.memeNom && <label className="flex min-h-11 items-center gap-2 text-sm"><Checkbox checked={version} onCheckedChange={(v) => setVersion(v === true)} />Nouvelle version de « {a.memeNom.nom} » (v{a.memeNom.version} ne sera plus servie)</label>}
       {erreur && <Alerte>{erreur}</Alerte>}
       <div className="flex flex-wrap gap-2">
@@ -242,36 +264,51 @@ function Rechercher({ filtreSource, setFiltreSource, apres }: { filtreSource: { 
 function Resultat({ r, voir, dans }: { r: ExtraitCorpus; voir: () => void; dans: () => void }) {
   const prive = r.connecteur !== "depot-git";
   return <li className="border-b border-border py-3 last:border-0">
-    <p className="text-sm">{r.titre} <span className="text-xs text-tertiary">· {r.compartiment} · {prive ? "document privé, Mac seulement" : "dépôt OIA"}</span></p>
+    <p className="text-sm">{r.titre} <span className="text-xs text-tertiary">· {r.compartiment} · {libelleNiveau(r.niveau)} · {prive ? "document privé, Mac seulement" : "dépôt OIA"}</span></p>
     <p className="mt-1 whitespace-pre-wrap break-words text-sm text-muted-foreground">{r.extrait}</p>
     <p className="mt-1 text-xs text-tertiary">{r.citation} · § {r.section} · version {r.version} · source du {jour(r.dateSource)} · indexé le {jour(r.indexeLe)}{r.mode === "sens" ? ` · proximité ${r.score.toFixed(2)}${r.sousLeSeuil ? " (pertinence faible)" : ""}` : ""}{r.identifiant ? " · identifiant exact" : ""}</p>
     {prive && <div className="mt-1 flex flex-wrap gap-1"><Button size="sm" variant="ghost" className="min-h-11 font-normal" onClick={voir}>Voir l'origine</Button><Button size="sm" variant="ghost" className="min-h-11 font-normal" onClick={dans}>Rechercher dans la source</Button></div>}
   </li>;
 }
 
+const ETATS_DOCUMENT = { disponible: ["ok", "Disponible"], analyse_en_cours: ["neutre", "Analyse en cours"], propositions_pretes: ["warn", "Propositions prêtes"], echec: ["danger", "Échec de lecture"] } as const;
+
 function SourcesPrivees({ voir, dans, apres }: { voir: (id: string, nom: string) => void; dans: (id: string, nom: string) => void; apres: () => void }) {
   const [sources, setSources] = useState<SourcePrivee[] | null>(null);
-  const [aRetirer, setARetirer] = useState<string | null>(null);
+  const [retrait, setRetrait] = useState<{ id: string; valides: number } | null>(null);
   const [info, setInfo] = useState<string | null>(null);
   const lire = useCallback(() => void sourcesCorpus().then((r) => setSources(r.sources), (e) => setInfo(message(e))), []);
   useEffect(() => { lire(); const t = setInterval(lire, 5000); return () => clearInterval(t); }, [lire]);
   const actives = (sources ?? []).filter((s) => s.statut !== "revoque");
+  const preparerRetrait = (s: SourcePrivee) => void souvenirsSource(s.id).then((r) => setRetrait({ id: s.id, valides: r.valides }), (e) => setInfo(message(e)));
+  const retirer = (s: SourcePrivee, souvenirs: "garder" | "oublier") =>
+    void retirerSource(s.id, souvenirs).then((r) => {
+      setInfo(`« ${s.nom} » retiré. ${r.propositionsRetirees} proposition(s) en attente retirée(s)${r.souvenirsGardes ? ` ; ${r.souvenirsGardes} souvenir(s) gardé(s), marqué(s) « source retirée »` : ""}${r.souvenirsOublies ? ` ; ${r.souvenirsOublies} souvenir(s) oublié(s)` : ""}. Ton fichier d'origine n'est pas touché.`);
+      setRetrait(null); lire(); apres();
+    }, (e) => setInfo(message(e)));
   return <Section titre="Sources privées" aside={<span className="num text-sm text-tertiary">{actives.length}</span>}>
     {info && <p role="status" className="mb-3 text-sm">{info}</p>}
-    {!sources ? <p className="text-sm text-muted-foreground">Chargement…</p> : actives.length === 0 ? <p className="text-sm text-muted-foreground">Aucun document privé pour l'instant. Les 18 documents du dépôt OIA sont consultables par la recherche.</p>
-      : <ul>{actives.map((s) => <li key={s.id} className="border-b border-border py-3 text-sm last:border-0">
-        <p className="break-all">{s.nom}</p>
-        <p className="mt-1 text-xs text-tertiary">{s.type.toUpperCase()} · {s.compartiment} · {s.lecteurs.includes("conversation") ? "lu par Shyrka en conversation (Mac)" : "toi seul"} · v{s.version} · ajouté le {jour(s.dateImport)} · empreinte {s.empreinte.slice(0, 12)}{s.statut === "echec" ? " · réindexation en échec" : ""}{s.tache && s.tache.etape !== "fini" ? ` · ${s.tache.etape} ${s.tache.fait}/${s.tache.total}` : ""}</p>
-        <div className="mt-1 flex flex-wrap items-center gap-1">
+    {!sources ? <p className="text-sm text-muted-foreground">Chargement…</p> : actives.length === 0 ? <p className="text-sm text-muted-foreground">Aucun document privé visible pour l'instant. Les documents du dépôt OIA sont consultables par la recherche.</p>
+      : <ul>{actives.map((s) => { const [ton, libelle] = ETATS_DOCUMENT[s.etat]; return <li key={s.id} className="border-b border-border py-3 text-sm last:border-0">
+        <div className="flex flex-wrap items-baseline justify-between gap-2"><p className="break-all">{s.nom}</p><Pastille ton={ton}>{libelle}{s.etat === "propositions_pretes" ? ` (${s.propositionsEnAttente})` : ""}{s.etat === "analyse_en_cours" && s.tache ? ` · ${s.tache.etape === "sens" ? `sens ${s.tache.fait}/${s.tache.total}` : "propositions"}` : ""}</Pastille></div>
+        <p className="mt-1 text-xs text-tertiary">{s.type.toUpperCase()} · {s.compartiment} · {s.lecteurs.includes("conversation") ? "lu par Shyrka en conversation (Mac)" : "toi seul"} · v{s.version} · ajouté le {jour(s.dateImport)} · empreinte {s.empreinte.slice(0, 12)}</p>
+        <div className="mt-1 flex flex-wrap items-end gap-2">
+          <div className="w-44"><ChoixNiveau id={`niv-${s.id}`} valeur={s.niveau} onChange={(n) => void fixerNiveauSource(s.id, n).then(() => { setInfo(`« ${s.nom} » : ${libelleNiveau(n)}.`); lire(); apres(); }, (e) => setInfo(message(e)))} /></div>
           <Button size="sm" variant="ghost" className="min-h-11 font-normal" onClick={() => voir(s.id, s.nom)}>Voir l'origine</Button>
           <Button size="sm" variant="ghost" className="min-h-11 font-normal" onClick={() => dans(s.id, s.nom)}>Rechercher dans la source</Button>
           <Button size="sm" variant="ghost" className="min-h-11 font-normal" onClick={() => void reindexerSource(s.id).then((r) => setInfo(`« ${s.nom} » réindexé : ${r.extraits} extraits.`), (e) => setInfo(message(e)))}>Réindexer</Button>
-          {aRetirer === s.id ? <><span className="text-xs">Retirer du Corpus (index et copie admise effacés) ?</span>
-            <Button size="sm" variant="ghost" className="min-h-11" onClick={() => void retirerSource(s.id).then((r) => { setInfo(`« ${s.nom} » retiré. ${r.propositionsRetirees} proposition(s) en attente retirée(s)${r.souvenirsValidesConserves ? ` ; ${r.souvenirsValidesConserves} souvenir(s) déjà validé(s) conservé(s) : tu peux les oublier dans la mémoire` : ""}. Ton fichier d'origine n'est pas touché.`); setARetirer(null); lire(); apres(); }, (e) => setInfo(message(e)))}>Oui, retirer</Button>
-            <Button size="sm" variant="ghost" className="min-h-11" onClick={() => setARetirer(null)}>Non</Button></>
-            : <Button size="sm" variant="ghost" className="min-h-11 font-normal" onClick={() => setARetirer(s.id)}>Retirer du Corpus</Button>}
+          {retrait?.id !== s.id && <Button size="sm" variant="ghost" className="min-h-11 font-normal" onClick={() => preparerRetrait(s)}>Retirer du Corpus</Button>}
         </div>
-      </li>)}</ul>}
+        {retrait?.id === s.id && <div role="alertdialog" aria-label={`Retirer ${s.nom}`} className="mt-2 rounded-md border border-border p-3">
+          <p className="text-sm">Retirer « {s.nom} » du Corpus ? L'index et la copie admise sont effacés ; ton fichier d'origine n'est pas touché.</p>
+          {retrait.valides > 0 && <p className="mt-1 text-sm">{retrait.valides} souvenir{retrait.valides > 1 ? "s" : ""} validé{retrait.valides > 1 ? "s" : ""} en vien{retrait.valides > 1 ? "nent" : "t"} : les garder (marqués « source retirée le … ») ou les oublier aussi ?</p>}
+          <div className="mt-2 flex flex-wrap gap-2">
+            {retrait.valides > 0 ? <><Button size="sm" className="min-h-11" onClick={() => retirer(s, "garder")}>Retirer et garder les souvenirs</Button><Button size="sm" variant="outline" className="min-h-11 font-normal" onClick={() => retirer(s, "oublier")}>Retirer et oublier aussi</Button></>
+              : <Button size="sm" className="min-h-11" onClick={() => retirer(s, "garder")}>Oui, retirer</Button>}
+            <Button size="sm" variant="ghost" className="min-h-11" onClick={() => setRetrait(null)}>Annuler</Button>
+          </div>
+        </div>}
+      </li>; })}</ul>}
   </Section>;
 }
 
@@ -284,10 +321,10 @@ function AConfirmer({ prive, apres }: { prive: boolean; apres: () => void }) {
   const lire = useCallback(() => void propositionsCorpus().then(setDonnees, (e) => setErreur(message(e))), []);
   useEffect(() => { if (!prive) lire(); }, [lire, prive]);
   if (prive) return <Section titre="À confirmer"><p className="text-sm text-muted-foreground">Mode privé : la mémoire n'est ni consultée ni modifiée.</p></Section>;
-  const decider = async (p: PropositionCorpus, action: "valider" | "corriger" | "refuser" | "reporter", contenu?: string) => {
+  const decider = async (p: PropositionCorpus, action: "valider" | "corriger" | "refuser" | "reporter", contenu?: string, niveau?: Niveau) => {
     setErreur(null);
     try {
-      await deciderProposition(p.id, action, contenu);
+      await deciderProposition(p.id, action, contenu, niveau);
       setFait({ valider: "Validé : Shyrka le retient comme souvenir confirmé.", corriger: "Corrigé et validé.", refuser: "Refusé : la proposition est oubliée et ne reviendra pas.", reporter: "Reporté d'une semaine." }[action]);
       lire(); apres();
     } catch (e) { setErreur(message(e)); }
@@ -297,26 +334,43 @@ function AConfirmer({ prive, apres }: { prive: boolean; apres: () => void }) {
     {fait && <p role="status" className="mb-3 text-sm">{fait}</p>}
     {erreur && <div className="mb-3"><Alerte>{erreur}</Alerte></div>}
     {!donnees ? <p className="text-sm text-muted-foreground">Chargement…</p> : donnees.lot.length === 0 ? <p className="text-sm text-muted-foreground">Rien à confirmer.</p>
-      : <ul className="grid gap-4">{donnees.lot.map((p) => <CarteProposition key={p.id} p={p} decider={(a, c) => void decider(p, a, c)} />)}</ul>}
+      : <ul className="grid gap-4">{donnees.lot.map((p) => <CarteProposition key={p.id} p={p} decider={(a, c, n) => void decider(p, a, c, n)} />)}</ul>}
     {donnees && donnees.total > donnees.lot.length && <p className="mt-3 text-xs text-tertiary">Lot de {donnees.lot.length} sur {donnees.total} : les suivantes apparaissent une fois celles-ci traitées.</p>}
+    <ConnaissancesValidees maj={fait} />
   </Section>;
 }
 
-function CarteProposition({ p, decider }: { p: PropositionCorpus; decider: (a: "valider" | "corriger" | "refuser" | "reporter", contenu?: string) => void }) {
+/** Connaissances validées visibles dans ce mode, les plus récentes : leur niveau reste modifiable. */
+function ConnaissancesValidees({ maj }: { maj: string | null }) {
+  const [liste, setListe] = useState<ConnaissanceValidee[] | null>(null);
+  const [info, setInfo] = useState<string | null>(null);
+  const lire = useCallback(() => void connaissancesValidees().then((r) => setListe(r.connaissances), (e) => setInfo(message(e))), []);
+  useEffect(() => lire(), [lire, maj]);
+  if (!liste?.length) return null;
+  return <div className="mt-8"><h3 className="mb-2 text-sm">Connaissances validées</h3>{info && <p role="status" className="mb-2 text-xs">{info}</p>}
+    <ul>{liste.map((k) => <li key={k.id} className="flex flex-wrap items-end gap-3 border-b border-border py-2 text-sm last:border-0">
+      <div className="min-w-0 flex-1"><p>{k.contenu}</p><p className="text-xs text-tertiary">{FORMES[k.forme] ?? k.forme} · {k.compartiment} · validée le {jour(k.valideLe ?? "")} · {k.provenance}</p></div>
+      <div className="w-44"><ChoixNiveau id={`k-${k.id}`} valeur={k.niveau} onChange={(n) => void fixerNiveauConnaissance(k.id, n).then(() => { setInfo(`Niveau : ${libelleNiveau(n)}.`); lire(); }, (e) => setInfo(message(e)))} /></div>
+    </li>)}</ul></div>;
+}
+
+function CarteProposition({ p, decider }: { p: PropositionCorpus; decider: (a: "valider" | "corriger" | "refuser" | "reporter", contenu?: string, niveau?: Niveau) => void }) {
   const [edition, setEdition] = useState<string | null>(null);
+  const [niveau, setNiveau] = useState<Niveau>(p.niveau);
   const d = p.details;
   return <li className="rounded-lg border border-border p-4">
     <p className="mb-1 text-xs text-tertiary">{FORMES[p.forme] ?? p.forme} · {p.compartiment} · {p.portee === "local_seulement" ? "Mac seulement" : p.portee} · proposée le {jour(p.date)} · incertitude {d.incertitude ?? "?"}</p>
-    {edition !== null ? <form className="grid gap-2" onSubmit={(e) => { e.preventDefault(); decider("corriger", edition); }}>
+    {edition !== null ? <form className="grid gap-2" onSubmit={(e) => { e.preventDefault(); decider("corriger", edition, niveau); }}>
       <label className="sr-only" htmlFor={`corr-${p.id}`}>Énoncé corrigé</label><Textarea id={`corr-${p.id}`} rows={3} value={edition} onChange={(e) => setEdition(e.target.value)} maxLength={2000} />
       <div className="flex gap-2"><Button type="submit" className="min-h-11" disabled={!edition.trim()}>Enregistrer et valider</Button><Button type="button" variant="ghost" className="min-h-11" onClick={() => setEdition(null)}>Annuler</Button></div>
     </form> : <p className="text-sm">{p.enonce}</p>}
+    <div className="mt-2 w-52"><ChoixNiveau id={`pn-${p.id}`} valeur={niveau} onChange={setNiveau} libelle="Confidentialité (proposée : celle du document)" /></div>
     {d.citation && <blockquote className="mt-3 border-l-2 border-border pl-3 text-sm text-muted-foreground">« {d.citation} »</blockquote>}
     <p className="mt-1 text-xs text-tertiary">{d.document ? `${d.document} · ` : ""}{d.ref ?? ""}{d.version ? ` · version ${d.version}` : ""}{d.raison ? ` · ${d.raison}` : ""}</p>
     <p className="mt-1 text-xs text-tertiary">{p.provenance}</p>
     {p.proches.length > 0 && <div className="mt-3 text-xs"><p className="text-tertiary">Souvenirs validés proches (doublon ou contradiction ?) :</p><ul className="mt-1 list-disc pl-5">{p.proches.map((x) => <li key={x.id}>{x.contenu}</li>)}</ul></div>}
     {edition === null && <div className="mt-3 flex flex-wrap gap-2">
-      <Button className="min-h-11" onClick={() => decider("valider")}>Valider</Button>
+      <Button className="min-h-11" onClick={() => decider("valider", undefined, niveau)}>Valider</Button>
       <Button variant="outline" className="min-h-11 font-normal" onClick={() => setEdition(p.enonce)}>Corriger</Button>
       <Button variant="ghost" className="min-h-11 font-normal" onClick={() => decider("refuser")}>Refuser</Button>
       <Button variant="ghost" className="min-h-11 font-normal" onClick={() => decider("reporter")}>Reporter</Button>

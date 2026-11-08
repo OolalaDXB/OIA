@@ -3,7 +3,7 @@ import { chmodSync, existsSync, mkdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import type { DatabaseSync as TypeBase } from "node:sqlite";
 import { z } from "zod";
-import { RefusMemoire, type Demandeur } from "@oia/shyrka-noyau";
+import { NIVEAUX, RefusMemoire, type Demandeur, type Niveau } from "@oia/shyrka-noyau";
 import { decouper, empreinte, type Passage } from "../corpus/extraction.js";
 import { depuisOctets, identifiants, produit, SEUIL_SENS, texteAVectoriser, versOctets, type Vectoriseur } from "../corpus/sens.js";
 import { RACINE_DEPOT } from "../local.js";
@@ -44,7 +44,10 @@ const Source = z.object({
   lecteurs: z.array(z.enum(["mickael", "conversation", "cockpit", "agent"])),
   statut: z.enum(["valide", "a_valider", "observe", "revoque"]),
   objet: z.string(),
+  /** Niveau de confidentialité ; « interne » par défaut pour les documents du dépôt OIA. */
+  niveau: z.enum(NIVEAUX).optional(),
 });
+export const niveauSource = (s: Pick<SourceCorpus, "niveau">): Niveau => s.niveau ?? "interne";
 export type SourceCorpus = z.infer<typeof Source>;
 const Catalogue = z.object({ format: z.literal("shyrka.catalogue"), version: z.literal(1), regles: z.string(), sources: z.array(Source.extend({ connecteur: z.literal("depot-git") })) });
 
@@ -80,6 +83,7 @@ export interface ExtraitCorpus {
   statut: SourceCorpus["statut"];
   compartiment: string;
   connecteur: SourceCorpus["connecteur"];
+  niveau: Niveau;
   extrait: string;
   /** Mode de recherche qui l'a trouvé ; score de proximité de sens (0 en mode mots). */
   mode: "sens" | "mots";
@@ -164,6 +168,8 @@ export interface OptionsRecherche {
   plancher?: number;
   /** Extraits au plus par document (2 par défaut). */
   parDocument?: number;
+  /** Niveaux visibles (mode de présence) ; tous si absent. */
+  niveaux?: Niveau[];
 }
 
 type LigneExtrait = { rid: number; source: string; titre: string; ligne: number; ref: string; corps: string; chemin: string; version: string; date_source: string; indexe_le: string; titre_doc: string };
@@ -332,9 +338,9 @@ export class Corpus {
   }
 
   /** Extraits d'une source, dans l'ordre (« Voir l'origine »). */
-  extraitsDe(source: string, pour: Demandeur): ExtraitCorpus[] {
+  extraitsDe(source: string, pour: Demandeur, niveaux: Niveau[] = [...NIVEAUX]): ExtraitCorpus[] {
     const s = this.catalogue().find((x) => x.id === source);
-    if (!s || !lisiblePar(s, pour)) return [];
+    if (!s || !lisiblePar(s, pour) || !niveaux.includes(niveauSource(s))) return [];
     const lignes = this.db.prepare(`${SELECT_EXTRAIT} WHERE e.source = ? ORDER BY e.rowid`).all(source) as LigneExtrait[];
     return lignes.map((l) => this.versExtrait(l, s, l.corps, "mots", 0, false));
   }
@@ -343,7 +349,7 @@ export class Corpus {
     const prive = s.connecteur !== "depot-git";
     return {
       source: l.source, chemin: l.chemin, section: l.titre, ligne: Number(l.ligne), ref: l.ref, citation: prive ? `${l.titre_doc} · ${l.ref}` : `${l.chemin}:${l.ligne}`,
-      titre: l.titre_doc, version: l.version.slice(0, 12), dateSource: l.date_source, indexeLe: l.indexe_le, statut: s.statut, compartiment: s.compartiment, connecteur: s.connecteur,
+      titre: l.titre_doc, version: l.version.slice(0, 12), dateSource: l.date_source, indexeLe: l.indexe_le, statut: s.statut, compartiment: s.compartiment, connecteur: s.connecteur, niveau: niveauSource(s),
       extrait: extrait.replace(/\s+/g, " "), mode, score, identifiant, nonFiable: true,
     };
   }
@@ -357,7 +363,7 @@ export class Corpus {
     const cat = new Map(this.catalogue().map((s) => [s.id, s]));
     const permis = (source: string) => {
       const s = cat.get(source);
-      return s && lisiblePar(s, pour) && (!opts.sources || opts.sources.includes(source)) ? s : null;
+      return s && lisiblePar(s, pour) && (!opts.sources || opts.sources.includes(source)) && (!opts.niveaux || opts.niveaux.includes(niveauSource(s))) ? s : null;
     };
     if (opts.vecteur && this.comptes().avecSens > 0) return this.chercherSens(texte, opts.vecteur, permis, limite, opts);
     return this.chercherMots(texte, permis, limite);

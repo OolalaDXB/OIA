@@ -7,6 +7,8 @@ import type { ExtraitCorpus } from "../executive/corpus.js";
 import { ErreurCorpus, type DepotCorpus } from "../corpus/depot.js";
 import type { Surveillance } from "../corpus/surveillance.js";
 import { TAILLE_MAX } from "../corpus/extraction.js";
+import { MODE_PROTEGE_PAR_DEFAUT, MODES_PRESENCE, NIVEAUX, niveauxPermis, REPONSE_PROTEGEE, type ModePresence, type Niveau } from "@oia/shyrka-noyau";
+import { commandePresence, RANG, REPONSES_PRESENCE } from "./presence.js";
 import type { ServiceMemoire } from "../memoire/commandes.js";
 import type { EtatSession, TurnResult } from "../session.js";
 import { consigneLangue, langueDuTexte } from "./langues.js";
@@ -29,7 +31,13 @@ import { analyserParole, lireWav, verdictApres, verdictAvant, type AnalyseParole
  *   POST /v1/interruption     prise courte faite pendant la voix : coupe Shyrka seulement si elle contient un mot d'arrêt
  *   POST /v1/prive            { actif } : mode privé (ni lecture ni écriture de mémoire)
  *   GET  /v1/evenements       flux SSE : état réel (repos, transcription, reflexion, parle, erreur, interrompu) et réponse
+ *   GET  /v1/presence         mode de présence (seul, entre_proches, externe)
+ *   POST /v1/presence         { mode } : change le mode (aussi à la voix : « je suis seul »…)
  *   …    /v1/corpus/…         module Corpus (déposer, consulter, valider) : voir `routesCorpus`
+ *
+ * Mode de présence : « entre proches » au démarrage et après 30 minutes sans
+ * action de Mickaël ; « seul » seulement quand il le dit. Le filtre de niveau
+ * s'applique avant tout modèle (corpus, mémoire), à la voix comme à l'écran.
  *
  * Défenses : écoute sur 127.0.0.1 ; en-tête Host limité à localhost et
  * 127.0.0.1 (rebinding DNS) ; Origin, s'il est présent, limité aux mêmes ;
@@ -69,7 +77,10 @@ export interface ApiCorpus {
 /** Mémoire et corpus du volume chiffré, rouverts quand le volume change d'état. */
 export interface Connaissances {
   memoire: ServiceMemoire;
+  /** Recherche pour le modèle, filtrée par le mode de présence. */
   chercher: ((texte: string) => ExtraitCorpus[]) | null;
+  /** Même recherche sans filtre de niveau : sert seulement à savoir qu'il faut répondre « je t'en parlerai quand tu seras seul ». Jamais rendue. */
+  chercherTout?: ((texte: string) => ExtraitCorpus[]) | null;
   /** Calcule à l'avance le sens de la question du tour (bge-m3), pour que `chercher` cherche par le sens. */
   preparerQuestion?: (texte: string) => Promise<void>;
   corpus?: ApiCorpus | null;
@@ -81,7 +92,7 @@ export interface DepsPasserelle {
   jeton: string;
   port?: number;
   /** Ouvre la mémoire et le corpus selon l'état du volume (ou les déclare indisponibles). `prive` : mode privé de la passerelle. */
-  connaissances: (h: { prive: () => boolean }) => Connaissances;
+  connaissances: (h: { prive: () => boolean; niveaux: () => Niveau[] }) => Connaissances;
   /** Clé de l'état du volume : un changement rouvre les connaissances. */
   etatVolume: () => string;
   creerSession: (h: { memoire: ServiceMemoire; contexteTour: (heard: string) => string; onEtat: (e: EtatSession) => void; print: (l: string) => void }) => SessionLike;
@@ -100,6 +111,8 @@ export interface DepsPasserelle {
   voix: string | null;
   journal?: (ligne: string) => void;
   maintenant?: () => number;
+  /** Inactivité après laquelle le mode revient à « entre proches » (30 minutes). */
+  inactiviteMs?: number;
 }
 
 class ErreurHttp extends Error {
@@ -187,12 +200,47 @@ export class Passerelle {
   private langueTour = "fr";
   private reponseDuTour: ((texte: string) => void) | null = null;
   private readonly horloge: () => number;
+  private presence: ModePresence = MODE_PROTEGE_PAR_DEFAUT;
+  private derniereActivite: number;
+  private minuteriePresence: ReturnType<typeof setInterval>;
 
   constructor(private readonly deps: DepsPasserelle) {
     this.horloge = deps.maintenant ?? Date.now;
+    this.derniereActivite = this.horloge();
     this.cleVolume = deps.etatVolume();
-    this.connaissances = deps.connaissances({ prive: () => this.prive });
+    this.connaissances = deps.connaissances(this.accesConnaissances());
     this.session = this.nouvelleSession();
+    this.minuteriePresence = setInterval(() => this.modePresence(), 30_000);
+    this.minuteriePresence.unref?.();
+  }
+
+  private accesConnaissances() {
+    return { prive: () => this.prive, niveaux: () => niveauxPermis(this.modePresence()) };
+  }
+
+  /** Mode courant ; après l'inactivité, retour à « entre proches » (jamais d'élargissement automatique). */
+  modePresence(): ModePresence {
+    if (RANG[this.presence] > RANG[MODE_PROTEGE_PAR_DEFAUT] && this.horloge() - this.derniereActivite > (this.deps.inactiviteMs ?? 30 * 60_000)) this.changerPresence(MODE_PROTEGE_PAR_DEFAUT, "inactivité");
+    return this.presence;
+  }
+
+  /** Une action de Mickaël (tour, clic, recherche) : remet le compteur d'inactivité à zéro. Les sondages de l'écran n'en sont pas. */
+  private activite(): void {
+    this.modePresence();
+    this.derniereActivite = this.horloge();
+  }
+
+  /** Change le mode ; plus restreint : nouvelle session (l'historique du modèle ne doit rien garder de ce qui devient masqué). */
+  changerPresence(mode: ModePresence, cause: string): { mode: ModePresence } {
+    if (!MODES_PRESENCE.includes(mode)) throw new ErreurHttp(400, "mode_inconnu", "Mode : seul, entre_proches ou externe.");
+    const avant = this.presence;
+    this.presence = mode;
+    if (RANG[mode] < RANG[avant] && !this.occupe) this.session = this.nouvelleSession();
+    if (mode !== avant) {
+      this.diffuser("presence", { mode, cause });
+      this.log(`présence : ${mode} (${cause})`);
+    }
+    return { mode };
   }
 
   private log(l: string): void {
@@ -244,7 +292,7 @@ export class Passerelle {
     const cle = this.deps.etatVolume();
     if (cle === this.cleVolume) return;
     this.connaissances.fermer();
-    this.connaissances = this.deps.connaissances({ prive: () => this.prive });
+    this.connaissances = this.deps.connaissances(this.accesConnaissances());
     this.cleVolume = cle;
     if (this.prive) this.connaissances.memoire.traiter("active le mode privé");
     this.log(`volume : ${this.connaissances.etat.memoire}, corpus ${this.connaissances.etat.corpus}`);
@@ -281,7 +329,7 @@ export class Passerelle {
     if (!detail) return { ok: true, service: "shyrka-passerelle", version: VERSION_API };
     this.verifierVolume();
     return {
-      ok: true, service: "shyrka-passerelle", version: VERSION_API, etat: this.etat, prive: this.prive,
+      ok: true, service: "shyrka-passerelle", version: VERSION_API, etat: this.etat, prive: this.prive, presence: this.modePresence(),
       modele: { nom: this.deps.modele.nom, disponible: await this.deps.modele.disponible(), local: true },
       transcription: this.deps.transcrire ? "whisper-local" : "indisponible",
       voix: this.deps.voix ? { sortie: "mac", nom: this.deps.voix } : { sortie: "aucune" },
@@ -295,6 +343,13 @@ export class Passerelle {
     if (t.length > TEXTE_MAX) throw new ErreurHttp(413, "texte_trop_long", `${TEXTE_MAX} caractères au plus.`);
     if (!(await this.deps.modele.disponible())) throw new ErreurHttp(503, "modele_indisponible", `Modèle local ${this.deps.modele.nom} indisponible : lancer Ollama. Aucun repli en ligne.`);
     this.limiter();
+    this.activite();
+    // « Je suis seul », « on est entre nous », « je suis avec quelqu'un » : traité par le code, avant tout modèle.
+    const presence = commandePresence(t);
+    if (presence && !this.occupe) {
+      this.changerPresence(presence, "voix");
+      return this.direHorsModele(t, REPONSES_PRESENCE[presence]);
+    }
     if (this.occupe) throw new ErreurHttp(409, "occupe", "Un tour est déjà en cours.");
     // Prise de congé (« Bonne nuit », « Au revoir ») : dans le terminal elle ferme la session ; ici, Shyrka répond et reste là.
     if (estArret(t)) return this.priseDeConge(t);
@@ -310,6 +365,13 @@ export class Passerelle {
     this.passer("reflexion");
     // Sens de la question (bge-m3, local, quelques dizaines de ms) : le corpus cherche alors par le sens.
     if (!this.prive) await this.connaissances.preparerQuestion?.(t).catch(() => undefined);
+    // Mode protégé : si ce qui répondrait est d'un niveau masqué et que rien de visible ne répond, la réponse
+    // vient du code, sans modèle, et ne dit pas ce qui existe.
+    if (!this.prive && this.estMasque(t)) {
+      this.occupe = false;
+      this.passer("repos");
+      return this.direHorsModele(t, REPONSE_PROTEGEE);
+    }
     const debut = this.horloge();
     const corpsDe = (reponse: string | null) => ({
       entendu: t, reponse,
@@ -350,6 +412,14 @@ export class Passerelle {
     return corps;
   }
 
+  /** Vrai si, dans le mode courant, la question ne trouve que des informations d'un niveau masqué (corpus ou mémoire). */
+  private estMasque(t: string): boolean {
+    if (niveauxPermis(this.presence).length === NIVEAUX.length || estSalutation(t)) return false;
+    const c = this.connaissances;
+    const corpusMasque = appelleLeCorpus(t) && !!c.chercherTout && !!c.chercher && c.chercher(t).length === 0 && c.chercherTout(t).length > 0;
+    return corpusMasque || c.memoire.masque?.(t) === true;
+  }
+
   private async priseDeConge(t: string): Promise<Record<string, unknown>> {
     const d = new Date(this.horloge());
     return this.direHorsModele(t, d.getHours() >= 21 || d.getHours() < 5 ? "Bonne nuit, Mickaël." : "À bientôt, Mickaël.");
@@ -374,6 +444,7 @@ export class Passerelle {
 
   async tourAudio(corps: Uint8Array, type: string): Promise<Record<string, unknown>> {
     if (!TYPES_AUDIO.test(type)) throw new ErreurHttp(415, "type_audio", "Audio attendu : webm, ogg, mp4 ou wav.");
+    this.activite();
     if (!corps.byteLength) throw new ErreurHttp(400, "audio_vide", "Prise vide.");
     const transcrire = this.deps.transcrire;
     if (!transcrire) throw new ErreurHttp(503, "transcription_indisponible", "Whisper local non lancé : le clavier reste disponible.");
@@ -471,6 +542,7 @@ export class Passerelle {
   }
 
   fermer(): void {
+    clearInterval(this.minuteriePresence);
     for (const r of this.abonnes) r.end();
     this.abonnes.clear();
     this.connaissances.fermer();
@@ -505,11 +577,18 @@ export class Passerelle {
     if (!c) throw new ErreurHttp(503, "corpus_indisponible", `Corpus indisponible : ${this.connaissances.etat.detail}`);
     const chemin = url.pathname.slice("/v1/corpus/".length);
     const methode = req.method ?? "GET";
-    const SOURCE = /^sources\/(prive-[0-9a-f]{12})\/(extraits|reindexer|retirer)$/;
+    if (methode === "POST" || chemin === "rechercher") this.activite();
+    const SOURCE = /^sources\/(prive-[0-9a-f]{12})\/(extraits|reindexer|retirer|souvenirs|niveau)$/;
     const PROPOSITION = /^propositions\/([0-9a-f-]{36})$/;
+    const CONNAISSANCE = /^connaissances\/([0-9a-f-]{36})\/niveau$/;
+    const niveauDuCorps = (v: unknown): Niveau => {
+      if (typeof v !== "string" || !NIVEAUX.includes(v as Niveau)) throw new ErreurHttp(400, "niveau_requis", "Niveau : public, interne, confidentiel ou personnel.");
+      return v as Niveau;
+    };
     const FICHIER = /^surveillance\/(f-[0-9a-f]{16})\/(examiner|effacer)$/;
     if (methode === "GET") {
-      if (chemin === "etat") return [200, { ...c.etat(), prive: this.prive }];
+      if (chemin === "etat") return [200, { ...c.etat(), ...c.depot.comptes(), prive: this.prive, presence: this.modePresence() }];
+      if (chemin === "connaissances") return [200, { connaissances: c.depot.connaissances() }];
       if (chemin === "sources") return [200, { sources: c.depot.sources() }];
       if (chemin === "propositions") return [200, c.depot.propositions()];
       if (chemin === "surveillance") return [200, { etat: c.surveillance.etat, aExaminer: c.surveillance.aExaminer() }];
@@ -525,6 +604,7 @@ export class Passerelle {
       }
       const m = SOURCE.exec(chemin);
       if (m && m[2] === "extraits") return [200, { extraits: c.depot.extraits(m[1]!) }];
+      if (m && m[2] === "souvenirs") return [200, c.depot.souvenirsDe(m[1]!)];
       throw new ErreurHttp(404, "inconnu", "Route inconnue.");
     }
     if (methode !== "POST") throw new ErreurHttp(405, "methode", "Méthode non autorisée.");
@@ -547,7 +627,7 @@ export class Passerelle {
       if (!jeton) throw new ErreurHttp(400, "jeton_requis", "Préparation à confirmer requise.");
       if (typeof corps.conversation !== "boolean") throw new ErreurHttp(400, "droits_requis", "Indique si Shyrka peut s'en servir en conversation (oui ou non).");
       const nv = texte("nouvelleVersionDe");
-      return [200, await c.depot.confirmer(jeton, { compartiment: texte("compartiment") ?? "", conversation: corps.conversation, ...(nv ? { nouvelleVersionDe: nv } : {}), attestation: corps.attestation === true })];
+      return [200, await c.depot.confirmer(jeton, { compartiment: texte("compartiment") ?? "", conversation: corps.conversation, niveau: niveauDuCorps(corps.niveau), ...(nv ? { nouvelleVersionDe: nv } : {}), attestation: corps.attestation === true })];
     }
     if (chemin === "surveillance") {
       const action = texte("action");
@@ -563,13 +643,18 @@ export class Passerelle {
     if (s && s[2] === "reindexer") return [200, await c.depot.reindexer(s[1]!)];
     if (s && s[2] === "retirer") {
       if (corps.confirmer !== true) throw new ErreurHttp(400, "confirmation_requise", "Retrait à confirmer explicitement.");
-      return [200, c.depot.retirer(s[1]!)];
+      const souvenirs = corps.souvenirs ?? "garder";
+      if (souvenirs !== "garder" && souvenirs !== "oublier") throw new ErreurHttp(400, "choix_requis", "Souvenirs validés : garder ou oublier.");
+      return [200, c.depot.retirer(s[1]!, souvenirs)];
     }
+    if (s && s[2] === "niveau") return [200, c.depot.fixerNiveau(s[1]!, niveauDuCorps(corps.niveau))];
+    const k = CONNAISSANCE.exec(chemin);
+    if (k) return [200, c.depot.fixerNiveauConnaissance(k[1]!, niveauDuCorps(corps.niveau))];
     const p = PROPOSITION.exec(chemin);
     if (p) {
       const action = texte("action");
       if (action !== "valider" && action !== "corriger" && action !== "refuser" && action !== "reporter") throw new ErreurHttp(400, "action_inconnue", "Action : valider, corriger, refuser ou reporter.");
-      return [200, c.depot.decider(p[1]!, action, texte("contenu"))];
+      return [200, c.depot.decider(p[1]!, action, texte("contenu"), corps.niveau === undefined ? undefined : niveauDuCorps(corps.niveau))];
     }
     const f = FICHIER.exec(chemin);
     if (f && f[2] === "examiner") {
@@ -615,6 +700,7 @@ export class Passerelle {
         if (route === "GET /v1/sante") return envoyer(200, await this.sante(jetonValide(req)));
         if (!jetonValide(req)) throw new ErreurHttp(401, "jeton_requis", "Jeton de la passerelle absent ou invalide.");
         if (route === "GET /v1/evenements") return this.abonner(res);
+        if (route === "GET /v1/presence") return envoyer(200, { mode: this.modePresence(), niveaux: niveauxPermis(this.presence) });
         if (url.pathname.startsWith("/v1/corpus/")) {
           const [statut, r] = await this.routesCorpus(req, url);
           return envoyer(statut, r);
@@ -636,6 +722,10 @@ export class Passerelle {
             return envoyer(200, this.definirPrive(corps.actif));
           case "/v1/session":
             return envoyer(200, this.reinitialiser());
+          case "/v1/presence":
+            if (typeof corps.mode !== "string") throw new ErreurHttp(400, "mode_requis", "Champ mode requis.");
+            this.activite();
+            return envoyer(200, this.changerPresence(corps.mode as ModePresence, "clic"));
           default:
             throw new ErreurHttp(404, "inconnu", "Route inconnue.");
         }

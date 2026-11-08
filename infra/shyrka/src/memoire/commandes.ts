@@ -1,4 +1,4 @@
-import { normaliserTexte, refCourte, RefusMemoire, type Compartiment, type Demandeur, type Forme, type Resultat } from "@oia/shyrka-noyau";
+import { NIVEAUX, niveauDe, normaliserTexte, refCourte, RefusMemoire, REPONSE_PROTEGEE, type Compartiment, type Demandeur, type Forme, type Niveau, type Requete, type Resultat } from "@oia/shyrka-noyau";
 import type { MemoireLocale } from "./sqlite.js";
 
 /**
@@ -62,8 +62,39 @@ export class ServiceMemoire {
 
   constructor(
     private readonly memoire: MemoireLocale | null,
-    private readonly opts: { projets: ProjetConnu[]; indisponible?: string; horloge?: () => string },
+    private readonly opts: {
+      projets: ProjetConnu[];
+      indisponible?: string;
+      horloge?: () => string;
+      /** Niveaux visibles dans le mode de présence courant (tous si absent). Filtre appliqué avant tout modèle. */
+      niveaux?: () => Niveau[];
+    },
   ) {}
+
+  private permis(): Niveau[] {
+    return this.opts.niveaux?.() ?? [...NIVEAUX];
+  }
+
+  /** Mode protégé (« entre proches », « avec un externe ») : certains niveaux sont masqués. */
+  get protege(): boolean {
+    return this.permis().length < NIVEAUX.length;
+  }
+
+  private visibles(r: Resultat[]): Resultat[] {
+    const p = this.permis();
+    return r.filter((x) => p.includes(niveauDe(x.element.restrictions)));
+  }
+
+  /** Recherche filtrée par niveau, paginée après filtrage (la mémoire rend 100 éléments par page). */
+  private retrouverVisibles(m: MemoireLocale, requete: Requete, pour: Demandeur, limite: number, apres = 0): Resultat[] {
+    const out: Resultat[] = [];
+    for (let page = 0; out.length < apres + limite; page += 100) {
+      const r = m.retrouver({ ...requete, limite: 100, apres: page }, pour);
+      out.push(...this.visibles(r));
+      if (r.length < 100) break;
+    }
+    return out.slice(apres, apres + limite);
+  }
 
   get modePrive(): boolean {
     return this.prive;
@@ -75,8 +106,16 @@ export class ServiceMemoire {
   /** Souvenirs pertinents pour un tour, filtrés pour ce demandeur. Vide en mode privé. */
   rappel(question: string, pour: Demandeur, limite = 4): Resultat[] {
     if (!this.memoire || this.prive) return [];
-    if (pour.type === "conversation" && pour.modele === "en_ligne") return this.memoire.retrouver({ texte: question, limite }, pour); // ne rend que la portée cockpit
-    return this.memoire.retrouver({ texte: question, limite, statuts: ["valide", "observe", "a_confirmer"] }, pour);
+    if (pour.type === "conversation" && pour.modele === "en_ligne") return this.retrouverVisibles(this.memoire, { texte: question }, pour, limite); // ne rend que la portée cockpit
+    return this.retrouverVisibles(this.memoire, { texte: question, statuts: ["valide", "observe", "a_confirmer"] }, pour, limite);
+  }
+
+  /** Mode protégé : la question ne trouve en mémoire que des éléments d'un niveau masqué (rien de visible). */
+  masque(question: string): boolean {
+    if (!this.memoire || this.prive || !this.protege) return false;
+    const pour: Demandeur = { type: "conversation", modele: "local" };
+    if (this.rappel(question, pour, 1).length) return false;
+    return this.memoire.retrouver({ texte: question, limite: 1, statuts: ["valide", "observe", "a_confirmer"] }, pour).length > 0;
   }
 
   /** Bloc de contexte pour un modèle local : données, pas instructions. */
@@ -105,7 +144,7 @@ export class ServiceMemoire {
     const corrige = /^corrige (?:le )?souvenir\s+([0-9a-f]{6,36})\s*[:,]\s*(.+)$/is.exec(brut);
     const oublie = /^(?:oublie|efface|supprime)\s+(?:le souvenir\s+)?(.+?)\s*[.!]?$/is.exec(brut);
     const decide = /^qu (?:avais|ai)[- ]je decide (?:pour|sur|concernant|a propos de) (.+)$/.exec(n);
-    const sais = /^(?:que sais[- ]tu de|que sais tu sur|tu te souviens de|rappelle[- ]moi|qu est ce que tu sais de)\s+(.+)$/.exec(n);
+    const sais = /^(?:que sais[- ]tu (?:de|du|des|sur)|tu te souviens (?:de|du|des)|rappelle[- ]moi|qu est ce que tu sais (?:de|du|des|sur))\s+(.+)$/.exec(n);
     if (!retiens && !estListe && !corrige && !oublie && !decide && !sais) return null;
 
     if (this.prive) return { texte: "Mode privé : je ne retiens rien et je ne consulte pas la mémoire pendant ce mode.", sensible: false };
@@ -116,8 +155,10 @@ export class ServiceMemoire {
     try {
       if (retiens) {
         const contenu = retiens[1]!.trim().replace(/[.!]+$/, "");
+        // Niveau par défaut : « confidentiel » quand Mickaël est seul ; sinon le plus haut niveau visible (ce que les présents entendent déjà).
+        const niveau: Niveau = this.protege ? this.permis().at(-1)! : "confidentiel";
         const e = m.enregistrer(
-          { compartiment: compartimentDe(contenu, this.opts.projets), forme: formeDe(contenu), contenu, source: { voie: "instruction", ref: `conversation ${(this.opts.horloge?.() ?? new Date().toISOString()).slice(0, 16)}Z` } },
+          { compartiment: compartimentDe(contenu, this.opts.projets), forme: formeDe(contenu), contenu, restrictions: [`niveau:${niveau}`], source: { voie: "instruction", ref: `conversation ${(this.opts.horloge?.() ?? new Date().toISOString()).slice(0, 16)}Z` } },
           par,
         );
         // Confirmation après COMMIT seulement : `enregistrer` n'a rendu qu'une fois la transaction validée.
@@ -125,8 +166,9 @@ export class ServiceMemoire {
       }
       if (estListe) {
         const page = /page suivante|souvenirs suivants/.test(n) ? this.dernierePage + 1 : Number(/page (\d+)/.exec(n)?.[1] ?? 1);
-        const tous = m.retrouver({ limite: PAGE + 1, apres: (page - 1) * PAGE, statuts: ["valide", "a_confirmer", "observe"] }, moi);
+        const tous = this.retrouverVisibles(m, { statuts: ["valide", "a_confirmer", "observe"] }, moi, PAGE + 1, (page - 1) * PAGE);
         this.dernierePage = page;
+        if (!tous.length && this.protege) return { texte: REPONSE_PROTEGEE, sensible: false };
         if (!tous.length) return { texte: page === 1 ? "Je n'ai aucun souvenir enregistré." : `Rien en page ${page}.`, sensible: false };
         const plus = tous.length > PAGE;
         return {
@@ -136,14 +178,16 @@ export class ServiceMemoire {
       }
       if (corrige) {
         const id = m.resoudre(corrige[1]!);
+        if (!this.permis().includes(niveauDe(m.historique(id).at(-1)?.restrictions ?? []))) return { texte: REPONSE_PROTEGEE, sensible: false };
         const e = m.corriger(id, { contenu: corrige[2]!.trim().replace(/[.!]+$/, "") }, par);
         return { texte: `Corrigé [${refCourte(e.id)}], version ${e.version} : « ${e.contenu} ». L'ancienne version n'est plus servie.`, sensible: true };
       }
       if (decide) {
         const cible = decide[1]!.replace(/\s*\?$/, "");
         const slug = compartimentDe(cible, this.opts.projets);
-        const r = slug === "personnel" ? m.retrouver({ texte: cible, formes: ["decision"], limite: 5 }, moi) : m.retrouver({ compartiment: slug, formes: ["decision"], limite: 5 }, moi);
+        const r = slug === "personnel" ? this.retrouverVisibles(m, { texte: cible, formes: ["decision"] }, moi, 5) : this.retrouverVisibles(m, { compartiment: slug, formes: ["decision"] }, moi, 5);
         const actifs = r.filter((x) => x.element.statut !== "retire");
+        if (!actifs.length && this.protege) return { texte: REPONSE_PROTEGEE, sensible: false };
         const aucune = `Je n'ai aucune décision enregistrée pour « ${cible} »${slug !== "personnel" ? ` (${slug})` : ""}. Je ne complète pas de mémoire.`;
         if (!actifs.length) return { texte: aucune, sensible: false };
         // Une proposition (d'un document, d'une IA) n'est jamais présentée comme une décision de Mickaël.
@@ -158,17 +202,20 @@ export class ServiceMemoire {
         };
       }
       if (sais) {
-        const r = m.retrouver({ texte: sais[1]!, limite: 5, statuts: ["valide", "a_confirmer", "observe"] }, moi);
+        const r = this.retrouverVisibles(m, { texte: sais[1]!, statuts: ["valide", "a_confirmer", "observe"] }, moi, 5);
+        if (!r.length && this.protege) return { texte: REPONSE_PROTEGEE, sensible: false };
         if (!r.length) return { texte: "Je n'ai pas de souvenir correspondant. Je ne l'invente pas.", sensible: false };
         return { texte: r.map((x) => ligne(x)).join("\n"), sensible: true };
       }
       if (oublie) {
         const cible = oublie[1]!.trim();
         let id: string;
-        if (/^[0-9a-f]{6,36}$/i.test(cible)) id = m.resoudre(cible);
-        else {
-          const r = m.retrouver({ texte: cible, limite: 5 }, moi);
-          if (r.length === 0) return { texte: "Aucun souvenir ne correspond : rien n'a été oublié.", sensible: false };
+        if (/^[0-9a-f]{6,36}$/i.test(cible)) {
+          id = m.resoudre(cible);
+          if (!this.permis().includes(niveauDe(m.historique(id).at(-1)?.restrictions ?? []))) return { texte: REPONSE_PROTEGEE, sensible: false };
+        } else {
+          const r = this.retrouverVisibles(m, { texte: cible }, moi, 5);
+          if (r.length === 0) return { texte: this.protege ? REPONSE_PROTEGEE : "Aucun souvenir ne correspond : rien n'a été oublié.", sensible: false };
           if (r.length > 1) return { texte: ["Plusieurs souvenirs correspondent ; rien n'a été oublié. Dis « oublie <référence> » :", ...r.map((x) => ligne(x))].join("\n"), sensible: true };
           id = r[0]!.element.id;
         }
