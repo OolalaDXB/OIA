@@ -15,7 +15,8 @@
     "entretien": "tsx src/cli.ts entretien",
     "diagnostic": "tsx src/cli.ts diagnostic",
     "mesure-echo": "tsx src/cli.ts echo",
-    "executive": "tsx src/executive/cli.ts"
+    "executive": "tsx src/executive/cli.ts",
+    "passerelle": "tsx src/passerelle/main.ts"
   },
   "dependencies": {
     "@oia/shyrka-noyau": "workspace:*",

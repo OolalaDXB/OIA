@@ -66,6 +66,17 @@ export class WhisperServer implements Transcriber {
     this.proc = null;
   }
 
+  /** Arrête le serveur et attend sa sortie ; au-delà du délai, il est tué (SIGKILL). Rien d'orphelin. */
+  async arreterEtAttendre(delaiMs = 3000): Promise<void> {
+    const p = this.proc;
+    if (!p) return;
+    const sorti = new Promise<void>((r) => p.once("exit", () => r()));
+    this.arreter();
+    const t = setTimeout(() => p.kill("SIGKILL"), delaiMs);
+    await sorti;
+    clearTimeout(t);
+  }
+
   async transcribe(clip: AudioClip, { language }: { language: string }): Promise<Transcript> {
     if (!this.proc) throw new Error("Serveur Whisper arrêté : appeler demarrer() d'abord.");
     const f = this.opts.fetch ?? (globalThis.fetch as unknown as Fetch);

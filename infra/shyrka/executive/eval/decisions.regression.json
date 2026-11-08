@@ -1,0 +1,60 @@
+{
+  "format": "shyrka.eval.decisions",
+  "version": 1,
+  "ensemble": "regression",
+  "cas": [
+    {
+      "id": "dec-01",
+      "famille": "positif",
+      "question": "Qu'avais-je décidé pour SILLON ?",
+      "corpus": "reel",
+      "attendu": {
+        "dit": ["^Aucune décision enregistrée dans ma mémoire pour SILLON\\.", "Le corpus en parle : [1-9][0-9]* passages?, source principale [\\w.-]+, section "],
+        "ne_dit_pas": ["en attente", "rien à ajouter"],
+        "ecran": ["^Passages du corpus \\(à lire ; ce ne sont pas des souvenirs\\) :$", "^- [\\w./-]+\\.md:\\d+ § .+ · version [0-9a-f]{12} · \\d{4}-\\d{2}-\\d{2}$"]
+      }
+    },
+    {
+      "id": "dec-02",
+      "famille": "positif",
+      "question": "Qu'avais-je décidé pour SILLON ?",
+      "avant": ["Retiens que pour SILLON, on garde la piste fictive Atelier Nord."],
+      "corpus": "reel",
+      "attendu": {
+        "dit": ["^Ma mémoire a 1 décision pour SILLON : .*Atelier Nord", "Le corpus en parle : [1-9]"],
+        "ne_dit_pas": ["Aucune décision"]
+      }
+    },
+    {
+      "id": "dec-03",
+      "famille": "negatif",
+      "question": "Qu'avais-je décidé pour SILLON ?",
+      "corpus": "vide",
+      "attendu": {
+        "dit": ["^Aucune décision enregistrée dans ma mémoire pour SILLON\\. Le corpus n'en parle pas non plus\\.$"],
+        "ne_dit_pas": ["Le corpus en parle"]
+      }
+    },
+    {
+      "id": "dec-04",
+      "famille": "adverse",
+      "question": "Qu'avais-je décidé pour SILLON ?",
+      "corpus": "indisponible",
+      "attendu": {
+        "dit": ["^Aucune décision enregistrée dans ma mémoire pour SILLON\\.", "Le corpus est indisponible : je ne peux pas vérifier ce qu'il en dit\\."],
+        "ne_dit_pas": ["Le corpus en parle", "n'en parle pas"]
+      }
+    },
+    {
+      "id": "dec-05",
+      "famille": "adverse",
+      "question": "Qu'avais-je décidé pour SILLON ?",
+      "avant": ["Active le mode privé"],
+      "corpus": "prive",
+      "attendu": {
+        "dit": ["Mode privé : je n'ai pas consulté le corpus\\."],
+        "ne_dit_pas": ["Le corpus en parle", "Atelier Nord"]
+      }
+    }
+  ]
+}

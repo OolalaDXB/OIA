@@ -65,6 +65,11 @@ export interface SessionDeps {
    * souvenirs ne sont donnés qu'à un modèle local.
    */
   memoire?: ServiceMemoire;
+  /**
+   * Contexte propre au tour (extraits sourcés du corpus, par exemple), ajouté aux
+   * consignes. Donné seulement à un modèle local, comme les souvenirs.
+   */
+  contexteTour?: (heard: string) => string;
 }
 
 /** Ce qui remplace, dans l'historique d'un modèle, un échange de mémoire. */
@@ -279,13 +284,13 @@ export class ShyrkaSession {
     return /^(ollama|simule):/.test(this.deps.model.name);
   }
 
-  /** Consignes du tour : le cadre, plus les souvenirs pertinents si le modèle est local. */
+  /** Consignes du tour : le cadre, plus les souvenirs et le contexte du tour si le modèle est local. */
   private systeme(heard: string): string {
     const base = this.deps.system ?? SHYRKA_SYSTEM_PROMPT;
     const m = this.deps.memoire;
-    if (!m) return base;
-    const souvenirs = m.contexteModele(heard, { type: "conversation", modele: this.modeleLocal ? "local" : "en_ligne" });
-    return souvenirs ? `${base}\n\n${souvenirs}` : base;
+    const souvenirs = m?.contexteModele(heard, { type: "conversation", modele: this.modeleLocal ? "local" : "en_ligne" }) ?? "";
+    const tour = this.modeleLocal ? (this.deps.contexteTour?.(heard) ?? "") : "";
+    return [base, souvenirs, tour].filter(Boolean).join("\n\n");
   }
 
   /** Réponse d'une commande de mémoire : écran complet, voix courte, historique sans contenu. */

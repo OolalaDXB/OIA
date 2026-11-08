@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
 import { appendFileSync, existsSync, mkdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { z } from "zod";
@@ -141,6 +142,12 @@ export function executerCapacite(id: string, opts: OptionsRun = {}): Resultat[] 
     const fichier = join(DOSSIER_JEUX, "recherche.regression.json");
     const r = evaluerRecherche(JeuRecherche.parse(JSON.parse(readFileSync(fichier, "utf8"))));
     out.push({ ...base, capacite: id, ensemble: "regression", empreinteJeu: empreinte(fichier), environnement: "reel", isole: false, mesures: { sourceTrouvee: r.sourceTrouvee, sansPreuveRefuse: r.sansPreuveRefuse, referencesCompletes: r.referencesCompletes }, compteurs: { n: r.sourceTrouvee.n + r.sansPreuveRefuse.n }, echecs: r.echecs });
+  } else if (id === "conversation.decisions") {
+    // Processus séparé : la session est asynchrone, le registre ne l'est pas.
+    const fichier = join(DOSSIER_JEUX, "decisions.regression.json");
+    const sortie = execFileSync(join(RACINE_DEPOT, "infra/shyrka/node_modules/.bin/tsx"), [join(RACINE_DEPOT, "infra/shyrka/src/executive/eval/decisions.ts"), fichier], { encoding: "utf8", timeout: 120_000 });
+    const r = JSON.parse(sortie) as { exactitude: Mesure; echecs: string[] };
+    out.push({ ...base, capacite: id, ensemble: "regression", empreinteJeu: empreinte(fichier), environnement: "reel", isole: true, mesures: { exactitude: r.exactitude }, compteurs: { n: r.exactitude.n }, echecs: r.echecs });
   } else throw new Error(`${id} : pas de banc exécutable (${cap.nonTesteParce ?? `mesurée par ${cap.source ?? "—"}`})`);
   if (opts.consigner !== false) for (const r of out) consigner(r);
   return out;
