@@ -1,128 +1,220 @@
-# OIA Knowledge Engine · rapport du prototype comparatif
+# OIA Knowledge Engine · rapport du prototype comparatif (version 2)
 
 8 novembre 2026. ADR associée : `docs/shyrka/adr/0005-oia-knowledge-engine.md`
-(**proposée**). Aucune donnée personnelle n'a été migrée ; la mémoire de
-Shyrka et le volume `Shyrka-corpus` n'ont pas été touchés.
+(**proposée, révisée**). Rien en production : aucun service installé, aucune
+donnée personnelle importée ; la mémoire de Shyrka (SQLite) et le volume
+`Shyrka-corpus` n'ont pas été modifiés.
 
-## Ce qui a été testé
+Code : `infra/oia-knowledge/prototype/` (Bun), `infra/oia-knowledge/exploitation/`
+(scripts non installés), `infra/shyrka/src/executive/semence-a-blanc.ts`.
 
-- **Jeu d'essai** : les 116 documents Markdown du dépôt (docs, infra),
-  découpés en **1 627 extraits** de 119 sources, plus **5 notes fictives**
-  classées `mickael_seulement` (cible des tests de confidentialité). Montée en
-  charge : 40 copies synthétiques, **66 507 extraits**.
-- **Deux variantes** de PostgreSQL 17 + pgvector, mêmes réglages (sommes de
-  contrôle, 1 Go de cache) : **natif** (Homebrew, pgvector 0.8.7) sur un
-  volume d'essai chiffré AES-256 ; **Docker** (image Supabase locale,
-  pgvector 0.8.0), d'abord sur le même volume, puis sur un volume Docker
-  interne (voir les incidents).
-- **Plongements** : bge-m3 par Ollama, en local (1 024 dimensions).
-- **Banc** : 15 cas du banc de recherche actuel de Shyrka + 5 reformulations,
-  4 questions en anglais et en russe, 2 questions hors corpus, 5 tentatives de
-  lecture des notes privées.
+## 0. Ce qui change depuis la version 1
 
-Code : `infra/oia-knowledge/prototype/` (`schema.sql`, `corpus.ts`,
-`charger.ts`, `banc.ts`, `ef.ts`, `cas.json`), exécuté avec Bun.
-
-## Qualité de recherche (1 627 extraits, identique en natif et en Docker)
-
-| Mode | Cas existants (source dans les 3 premières) | Hors corpus (abstention) | Reformulations | Autres langues |
-| --- | --- | --- | --- | --- |
-| SQLite FTS5 (actuel) | 11/12 | **0/5** | 2/5 | 0/4 |
-| Postgres lexical | 6/12 | 0/5 | 0/5 | 0/4 |
-| **Postgres sémantique** | **11/12** | **5/5** | **3/5** | **2/4** |
-| Postgres hybride | 10/12 (Docker 9/12) | 5/5 | 2/5 | 1/4 |
-
-- La recherche sémantique est la meilleure ; elle corrige le défaut connu du
-  corpus actuel (aucune abstention hors corpus).
-- L'hybride ne fait pas mieux sur ce jeu : la recherche lexicale française,
-  même limitée au départage, ajoute du bruit. À retravailler, surtout pour les
-  identifiants exacts : `ml_toutes_v1` est raté par tous les modes Postgres.
-- Échantillons petits (12, 5, 5, 4 cas) : résultats indicatifs.
-
-## Confidentialité
-
-| Essai | Résultat |
+| Version 1 | Version 2 |
 | --- | --- |
-| Agent (modèle externe) cherchant les 5 notes privées, 3 modes, 20 résultats | **0 fuite**, natif et Docker, à 1 627 et 66 507 extraits |
-| Shyrka (modèle local) cherchant les mêmes notes | retrouvées 2 à 4 sur 5 selon le mode |
-| Droits lus par une fonction de confiance | un premier essai (current_user au lieu de session_user) a **fermé** tous les accès : défaut sûr, corrigé |
-| Révocation logique | instantanée : extraits et vecteurs supprimés, empreinte qui bloque le retour |
-| Révocation physique | le texte **reste** dans les fichiers jusqu'à `VACUUM FULL` (83 s sur 96 507 extraits, table verrouillée) et dans le journal après rotation : purge physique à planifier |
+| montée en charge sur 40 copies synthétiques (rappel HNSW faussé) | **30 000 extraits distincts** de documentation publique installée (Postgres, Bun, pnpm, paquets npm…), mesurés de bout en bout, calcul du sens compris |
+| banc de 12 + 5 + 4 cas, réglé sur lui-même | jeu de mise au point (31 cas) **et jeu tenu à l'écart** (50 cas écrits par un agent séparé, 41 documents, FR 14 · EN 10 · RU 8 · identifiants 10 · hors corpus plausibles 8), dont seuls les agrégats ont été regardés |
+| pas de référence SQLite + bge-m3 | **mêmes extraits, mêmes vecteurs** dans SQLite (FTS5 + calcul exact) : on sait d'où vient le gain |
+| `ml_toutes_v1` raté par Postgres | **canal d'identifiants exacts** (vues, fichiers, migrations, décisions) |
+| abstention par seuil seul | abstention **en deux étages** (seuil, puis le modèle local juge les extraits) |
+| HNSW `m = 16`, `ef_search = 100` | `m = 24`, `ef_construction = 200`, `ef_search = 200` (mesuré) |
+| révocation physique constatée | **purge quotidienne avec preuve**, essayée (§ 6, `EFFACEMENT.md`) |
+| — | scripts d'exploitation essayés sur le volume d'essai (§ 7) |
+| — | semence personnelle du 8 novembre vérifiée et préparée **à blanc** (§ 8) |
 
-## Performances
+## 1. Pertinence par mode (32 169 extraits, dont 30 000 distracteurs publics)
 
-| Mesure | Natif (volume chiffré) | Docker |
+Jeu tenu à l'écart. Chaque case : bonne source **au rang 1 / dans les 3
+premières**, sur le nombre de cas. Hors corpus : questions refusées. Seuil de
+proximité 0,516, calibré sur le jeu de mise au point seulement.
+
+| Mode | FR (14) | EN (10) | RU (8) | Identifiants (10) | Hors corpus refusés (8) |
+| --- | --- | --- | --- | --- | --- |
+| SQLite FTS5, mots (corpus actuel) | 10 / 12 | 2 / 2 | 0 / 0 | 6 / 9 | 6 |
+| SQLite, sens exact (bge-m3) | 10 / 14 | 6 / 10 | 8 / 8 | 7 / 9 | 2 |
+| SQLite, sens + mots | 12 / 13 | 4 / 6 | 8 / 8 | 10 / 10 | 2 |
+| SQLite, sens + identifiants | 10 / 14 | 6 / 10 | 8 / 8 | 10 / 10 | 2 |
+| Postgres, mots | 1 / 4 | 0 / 0 | 0 / 0 | 1 / 2 | 3 |
+| Postgres, sens (HNSW) | 10 / 14 | 6 / 10 | 8 / 8 | 7 / 9 | 2 |
+| Postgres, sens + mots + identifiants | 10 / 13 | 5 / 9 | 7 / 7 | 8 / 10 | 2 |
+| **Postgres, sens + identifiants** | **10 / 14** | **6 / 10** | **8 / 8** | **10 / 10** | 2 |
+| **… + second étage (modèle local)** | 14 gardées | 7 gardées | 8 gardées | 7 gardées | **8** |
+
+À 2 169 extraits (sans distracteurs), même mode : 11/14, 7/10, 8/8, 10/10 au
+rang 1 ; 14, 10, 8, 10 dans les 3 premières ; second étage : 39 bonnes sources
+gardées sur 42, 8 refus sur 8.
+
+Lecture :
+
+- **Le gain vient du modèle, pas de la base.** Sur les mêmes vecteurs,
+  Postgres (HNSW réglé) et SQLite (calcul exact) donnent exactement les mêmes
+  résultats. bge-m3 apporte l'anglais (2 → 10 sur 10) et le russe (0 → 8 sur 8).
+- **Les mots nuisent.** La recherche plein texte de Postgres (`ts_rank`, sans
+  pondération IDF) est faible (4 sur 14 en français) et dégrade la fusion ;
+  le BM25 de FTS5 est meilleur mais rate les autres langues. Retenu : **sens +
+  identifiants**, sans les mots.
+- **Identifiants exacts : 10 sur 10**, au rang 1, grâce au canal dédié (index
+  GIN sur `identifiants`), classé par proximité de sens. Les vecteurs seuls en
+  ratent un sur dix et n'en classent que 7 au rang 1.
+- **Abstention.** Le seuil seul refuse les questions absurdes (10 sur 10 en
+  mise au point) mais pas les questions plausibles hors corpus (2 sur 8 :
+  « quel cabinet d'avocats… »). Le second étage (le modèle de Shyrka,
+  `qwen3:30b-a3b-instruct`, local, lit les 3 meilleurs extraits et répond
+  OUI ou NON) les refuse **toutes** (8 sur 8). Il coûte **0,05 à 0,8 s**
+  par question et écarte à tort 3 bonnes sources sur 42 à 2 169 extraits,
+  **6 sur 42 à 32 169** (anglais 3, identifiants 3). Sur le jeu de mise au
+  point, les refus à tort viennent de l'extrait montré (le meilleur extrait de
+  chaque document n'est pas toujours celui qui répond) : à retravailler
+  **sans** regarder le jeu tenu à l'écart (§ critères, A3).
+- Échantillons encore petits (8 à 14 cas par famille) : un cas = 7 à 12 points.
+
+## 2. Index approché (HNSW) contre calcul exact, 32 169 extraits, 81 questions
+
+| Réglage | `ef_search` 40 | 100 | 200 | 400 | 800 |
+| --- | --- | --- | --- | --- | --- |
+| `m = 16`, `ef_construction = 64` (v1) | 0,654 · 1,4 ms | 0,847 · 2,1 ms | 0,940 · 3,2 ms | 0,979 · 5,6 ms | 0,993 · 8,6 ms |
+| **`m = 24`, `ef_construction = 200`** | 0,862 · 1,8 ms | 0,948 · 2,7 ms | **0,985 · 4,2 ms** | 0,996 · 6,7 ms | 1,000 · 10,7 ms |
+
+Rappel@10 contre le calcul exact (69 ms sans index) · latence médiane, index
+forcé. Le réglage v1 perdait des voisins sur des documents distincts : il
+coûtait 1 cas en anglais, 1 en russe et 1 en français contre la référence
+exacte ; le réglage retenu les rattrape tous. Construction : 13 s → 37 s.
+Agent filtré par la RLS (Visibility seul) : 10 extraits rendus sur 10 demandés.
+
+## 3. Montée en charge de bout en bout (2 169 → 32 169 extraits)
+
+| Étape, 32 169 extraits (30 000 nouveaux) | Durée |
+| --- | --- |
+| Découpage | 4,2 s |
+| **Calcul du sens (bge-m3, Ollama local)** | **580 s** (≈ 52 extraits/s) |
+| Insertion | 6,1 s |
+| Index lexicaux et identifiants (GIN) | 1,1 s |
+| Index HNSW (`m = 24`) | 36,7 s |
+| **Total** | **≈ 10 min 30 · 53 extraits/s** (627/s quand le sens est déjà en cache) |
+
+| Recherche (32 169 extraits) | médiane | p95 |
 | --- | --- | --- |
-| Insertion de 66 507 extraits | 10,3 s | 24,1 s (volume interne) |
-| Index HNSW | 14,0 s | 5,2 s |
-| Recherche sémantique, 66 507 extraits | **0,66 ms** (p95 0,79) | 1,40 ms (p95 2,59) |
-| Recherche lexicale « OU », 66 507 extraits | 187 ms | 196 ms |
-| Recherche exacte sans index | 68 ms | — |
-| Plongement d'une question (bge-m3) | 40 ms | 40 ms |
-| Plongement à l'ingestion | ≈ 43 extraits/s | ≈ 43 extraits/s |
-| Taille | 1,04 Go pour 66 507 extraits (index HNSW 545 Mo), ≈ 15,6 Ko par extrait | idem |
-| Sauvegarde `pg_dump` / restauration | 32 s, 353 Mo / 24 s, comptes identiques | non mesuré |
+| Calcul du sens de la question | 15 à 23 ms | — |
+| **Postgres, sens + identifiants** | **5,2 ms** | 14,5 ms |
+| SQLite, sens exact en mémoire | 25,6 ms | 26,3 ms |
+| SQLite FTS5 | 0,8 ms | 11,6 ms |
+| Postgres, mots ou fusion avec mots | 82 ms | 307 ms |
+| Second étage (modèle local) | 0,05 à 0,6 s | 0,8 s |
 
-Limite : les copies synthétiques, presque identiques, faussent l'évaluation
-de l'index approché (rappel bas à `ef_search` 100, exact à 400 mais aussi lent
-qu'un parcours complet). **La montée en charge est à refaire sur des documents
-réellement distincts** avant de fixer les paramètres HNSW.
+Taille : base 545 Mo (index HNSW 237 Mo), **≈ 17 Ko par extrait**. Le calcul
+exact de SQLite croît linéairement (≈ 26 ms à 32 000, ≈ 140 ms attendus à
+175 000) ; HNSW reste sous 15 ms.
 
-## Robustesse
+## 4. Confidentialité : matrice de 45 essais, 45 réussis (`acces.ts`)
 
-| Essai | Natif | Docker |
+| Essai | Shyrka (modèle local) | Agent (modèle externe) | Agent Visibility |
+| --- | --- | --- | --- |
+| Compartiments visibles | les six | ceux accordés, **sans** le privé | Visibility seul |
+| Extraits `mickael_seulement` visibles | 5 | **0** | **0** |
+| Recherche « dossier ZEPHYRINE » : notes privées rendues | oui | **non** | **non** |
+| Lire ou modifier `ke.droits`, lire `ke.revocation` | refusé | refusé | refusé |
+| Insérer, effacer des extraits | refusé | refusé | refusé |
+| Désactiver la RLS, `row_security = off` | refusé | refusé | refusé |
+| Prendre le rôle ou l'identité de session de Shyrka | (lui-même) | refusé | refusé |
+
+Et : un rôle qui a le privilège `select` mais aucune ligne de droits ne voit
+**rien** ; une question piégée (`'); drop table … --`) reste un paramètre (32 169
+extraits avant et après) ; une source révoquée disparaît pour tous les rôles,
+sa réindexation et le renommage d'une autre source vers son adresse sont
+refusés par le déclencheur ; `ke.revocation` ne garde que l'empreinte.
+
+Les deux premiers « échecs » de la matrice venaient du test, pas de la base
+(un compartiment accordé mais entièrement privé paraît vide, à raison ; une
+session peut reprendre sa propre identité) : attendus corrigés.
+
+## 5. Effacement et purge physique (essayés)
+
+Voir `EFFACEMENT.md` pour la politique. Essai : deux notes fictives révoquées,
+recherche de leur texte octet par octet.
+
+| Où | Avant purge | Après `purger.sh` |
 | --- | --- | --- |
-| Chiffrement au repos | volume AES-256 ; texte en clair absent des fichiers de l'image | sur le volume : idem ; sur volume interne : **non chiffré** (FileVault désactivé) |
-| Éjection du volume, base arrêtée | possible ; sans volume, la base ne démarre pas ; remontée, tout revient | **impossible** : la VM Docker garde 1 109 fichiers ouverts, même conteneur supprimé ; éjection forcée nécessaire |
-| Remontée du volume après éjection | sans souci | **échec** : Docker ne remonte plus le chemin sans redémarrer Docker Desktop (qui fait tourner Elmo et Bawaba) |
-| Arrêt brutal (kill -9) pendant une écriture | reprise automatique en 2,7 s ; transaction validée conservée ; 0 erreur de somme de contrôle sur 288 202 blocs | volume plein → PANIC ; non relancé sur le volume (problème de remontée) |
-| Mémoire partagée | — | 64 Mo par défaut : construction de l'index HNSW impossible sans `--shm-size` |
+| Fichiers de données | 1 fichier | **0** |
+| WAL | 4 segments | **0** (`wal_recycle = off`, plus ancien segment postérieur à la révocation) |
+| Sauvegardes (lues par `pg_restore`, elles sont compressées) | 2 sur 2 | mode normal : **2 restantes, déclarées dans la preuve**, expirent sous 7 jours ; `--urgent` : **0**, nouvelle sauvegarde faite |
+| Journaux PostgreSQL et d'exploitation | 0 | 0 |
+| Instantanés APFS / Time Machine | aucun, volume et image exclus | idem |
 
-**Conclusion : PostgreSQL natif sur volume chiffré.** Docker apporte une
-installation simple mais casse le modèle de sécurité actuel (éjecter le volume
-rend les données illisibles) et ajoute des pannes propres à Docker Desktop.
+`vacuum full` : **40 s à 32 169 extraits**, recherche bloquée pendant ce temps
+(d'où la nuit). La preuve est inscrite dans `ke.revocation.preuve` (fichiers
+réécrits, segments WAL, sauvegardes restantes) sans texte ni adresse ;
+`sante.sh` alerte tant qu'une révocation n'est pas purgée.
 
-## Dimensionnement proposé (au lieu de 500 Go)
+L'essai a trouvé et corrigé trois défauts du script (sauvegardes comptées
+depuis la plus ancienne révocation au lieu de la plus récente ; contrôle des
+tuples morts faussé par l'écriture de la preuve ; preuve non écrite). Il a
+aussi montré la limite : le **cluster Docker de la version 1**, laissé sur le
+volume d'essai, contient encore le texte. Toute copie hors du cluster géré
+échappe à la purge ; d'où la règle « un seul cluster, rien d'autre sur le
+volume ».
 
-Base mesurée : ≈ 15,6 Ko par extrait (texte, vecteur, index HNSW et lexical).
+## 6. Exploitation (essayée sur le volume d'essai, non installée)
 
-| Hypothèse première année | Extraits | Base |
-| --- | --- | --- |
-| Dépôt OIA et documents | ≈ 5 000 | 0,08 Go |
-| Money Lookup (opportunités, notes, décisions) | ≈ 20 000 | 0,3 Go |
-| Visibility (réponses et preuves, ≈ 50 par jour) | ≈ 20 000 | 0,3 Go |
-| Conversations autorisées et courrier résumé | ≈ 30 000 | 0,5 Go |
-| Fichiers locaux choisis | ≈ 100 000 | 1,6 Go |
-| **Total** | **≈ 175 000** | **≈ 2,7 Go** |
+| Essai (`exploitation/essai.sh`) | Résultat |
+| --- | --- |
+| Sauvegarde `pg_dump` vers un **second volume chiffré** | 15 s, 177 Mo, vérifiée (`pg_restore --list`, SHA-256) ; refus si même support ou support non chiffré |
+| Restauration dans une base à part | 42 s, comptes identiques (2 240 sources, 32 168 extraits, révocations) |
+| Vérification (`pg_amcheck`, sommes de contrôle) | aucune corruption ; HNSW et GIN non couverts (reconstruits au besoin) |
+| Démarrage sans volume / sur volume non chiffré | ne fait rien / **refusé** |
+| Arrêt brutal (`kill -9`) puis démarrage | reprise automatique en ≈ 1 s |
+| Bilan de santé | JSON, code 1 si alerte (révocation non purgée, sauvegarde de plus de 26 h, sommes de contrôle, volume à 80 %, Time Machine, instantanés) |
+| Voisins | Docker : 20 conteneurs avant et après ; 27 ports écoutés avant et après ; Docker Desktop jamais touché |
 
-Avec le journal (≈ 2 Go), la place de réécriture d'un `VACUUM FULL` (×2) et la
-croissance : **volume `OIA-Knowledge` de 40 Go**, extensible (image disque
-redimensionnable). Sauvegardes chiffrées **sur un autre support** : 7
-quotidiennes + 4 hebdomadaires ≈ 11 × 1 Go compressé ≈ 12 Go.
+## 7. Semence personnelle du 8 novembre (à blanc, rien d'écrit)
 
-## Plan de migration proposé (après validation)
+`semence-a-blanc.ts`, agrégats seulement :
 
-1. **Valider l'ADR 0005** et le dimensionnement. Activer FileVault (Mickaël).
-2. **Volume `OIA-Knowledge`** (40 Go, chiffré, mot de passe de Mickaël dans le
-   trousseau), Postgres natif lancé par launchd **seulement si le volume est
-   monté**, port local uniquement, rôles et droits par compartiment.
-3. **Refaire la montée en charge sur de vrais documents distincts** et régler
-   HNSW (`m`, `ef_search`) et le seuil d'abstention sur un jeu tenu à l'écart.
-4. **Brancher la passerelle** sur le nouveau moteur derrière l'interface
-   actuelle `chercher(texte, demandeur)` ; garder FTS5 en secours pendant la
-   transition ; banc `recherche.sourcee` et `conversation.decisions` à
-   l'identique.
-5. **Connecteurs un par un**, chacun avec droits, test de rappel, test de
-   confidentialité et révocation : dépôt → Supabase (vues) → conversations
-   autorisées → courrier résumé → fichiers locaux choisis.
-6. **Purge physique planifiée** (réécriture des tables touchées par une
-   révocation, rotation du journal, expiration des sauvegardes).
-7. Retirer l'index FTS5 du volume `Shyrka-corpus` quand le nouveau moteur a
-   passé les bancs ; la mémoire personnelle SQLite reste où elle est.
+- **intégrité** : 15 fichiers de la semence, **0 altéré** (empreintes du
+  8 novembre) ; garde-fous du manifeste intacts (`contains_sensitive_data`
+  vrai, `safe_to_commit_to_git`, `remote_processing_allowed`,
+  `memory_preapproved` faux) ;
+- 225 faits → **217 propositions valides** au contrat de mémoire (voie
+  « proposition », affirmé par IA, statut « à confirmer », portée Mac
+  seulement), 0 doublon, 0 invalide ; **8 écartés** par la règle Swift ;
+- compartiments : personnel 178, projet 39 ; formes : préférence 207,
+  décision 7, travail 3 (la détection de forme par mots-clés est grossière :
+  à revoir à la confirmation) ;
+- 70 faits P3 porteraient la restriction `mickael_seulement`, qui, dans le
+  contrat actuel, les réserve à Mickaël : **Shyrka ne s'en servirait pas en
+  conversation**. À décider ;
+- **0 importable maintenant** : chaque fait porte `ingest_allowed: false`
+  et `not_approved`. Rien ne sera écrit tant que Mickaël ne l'a pas levé.
 
-## Environnement d'essai à nettoyer
+## 8. Dimensionnement
 
-Volume d'essai `scratchpad/ke/OIA-KE-essai.sparsebundle` (mot de passe
-généré pour l'essai), cluster natif d'essai, conteneur et volume Docker
-`oia-ke-essai`, modèles Ollama `bge-m3` (gardé pour la suite) et
-`qwen3:30b-a3b` (variante « thinking », inutile).
+≈ 17 Ko par extrait (v1 : 15,6). Hypothèse première année : 175 000 extraits
+≈ **3 Go**, ingestion initiale ≈ 55 min (calcul du sens). Le volume de 40 Go
+proposé en v1 reste large (journal, réécriture d'un `vacuum full` ×2,
+croissance). Sauvegardes : 7 quotidiennes ≈ 7 × 1 Go sur un autre support
+chiffré.
+
+## 9. Plan de migration (après validation de l'ADR, critères A3 et A9 atteints)
+
+1. **Second étage et jeu élargi** : retravailler le juge sur le jeu de mise au
+   point (plusieurs extraits par document, consigne), faire écrire 100 cas de
+   plus par un agent séparé, remesurer (A3, A9).
+2. **Volume `OIA-Knowledge`** (40 Go, APFS chiffré, exclu de Time Machine),
+   `initdb` avec sommes de contrôle et `reglages.conf`, rôles et droits par
+   compartiment ; installation des deux `.plist`.
+3. **Passerelle** branchée sur le nouveau moteur derrière `chercher(texte,
+   demandeur)`, FTS5 gardé en secours le temps de la transition ; bancs
+   `recherche.sourcee` et `conversation.decisions` à l'identique.
+4. **Connecteurs un par un**, chacun avec droits, banc de rappel, matrice de
+   confidentialité et essai de révocation-purge : dépôt → Supabase (vues) →
+   conversations autorisées → courrier résumé → fichiers locaux choisis.
+5. Retirer l'index FTS5 de `Shyrka-corpus` quand le nouveau moteur a passé
+   les bancs. La mémoire personnelle SQLite reste où elle est ; la semence du
+   8 novembre n'y entre que par propositions confirmées une à une, après levée
+   d'`ingest_allowed` par Mickaël.
+
+## 10. Environnement d'essai à nettoyer
+
+Volumes d'essai `scratchpad/ke/OIA-KE-essai.sparsebundle` (dont le cluster
+Docker de la v1) et `OIA-KE-sauv-essai.sparsebundle`, cluster natif d'essai
+(port 56432), conteneur et volume Docker `oia-ke-essai` s'ils existent,
+modèle Ollama `qwen3:30b-a3b` (variante « thinking », inutile).
