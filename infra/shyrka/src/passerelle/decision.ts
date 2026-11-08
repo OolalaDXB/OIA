@@ -1,5 +1,6 @@
 import { normaliserTexte } from "@oia/shyrka-noyau";
 import type { ExtraitCorpus } from "../executive/corpus.js";
+import { PROPOSITIONS_A_CONFIRMER } from "../memoire/commandes.js";
 import type { Reponse } from "../memoire/commandes.js";
 
 /** Une question sur une décision passée (« Qu'avais-je décidé pour SILLON ? »). */
@@ -35,11 +36,16 @@ export function composerDecision(r: Reponse, corpus: EtatCorpus, phrase: string)
   const [premiere = "", ...reste] = r.texte.split("\n");
   // « Je n'ai aucune décision enregistrée pour « sillon » … » : on dit explicitement que c'est la mémoire.
   // Décisions trouvées : l'en-tête seul ne dit rien à l'oral ; on dit leur nombre et la première.
-  const decisions = /^D[ée]cisions retenues pour/i.test(premiere) ? reste.filter((l) => /^\[[0-9a-f]{8}\]/.test(l.trim())).map((l) => l.trim().replace(/^\[[0-9a-f]{8}\]\s*/, "")) : [];
+  // Les décisions validées précèdent l'en-tête des propositions à confirmer, qui ne sont jamais comptées comme décisions.
+  const fin = reste.findIndex((l) => l.startsWith(PROPOSITIONS_A_CONFIRMER));
+  const blocDecisions = fin < 0 ? reste : reste.slice(0, fin);
+  const nPropositions = fin < 0 ? 0 : reste.slice(fin + 1).filter((l) => /^\[[0-9a-f]{8}\]/.test(l.trim())).length;
+  const decisions = /^D[ée]cisions retenues pour/i.test(premiere) ? blocDecisions.filter((l) => /^\[[0-9a-f]{8}\]/.test(l.trim())).map((l) => l.trim().replace(/^\[[0-9a-f]{8}\]\s*/, "")) : [];
+  const enAttente = nPropositions ? ` ${nPropositions} proposition${nPropositions > 1 ? "s" : ""} à confirmer, à l'écran : ce ne sont pas encore des décisions.` : "";
   const memoire = /aucune d[ée]cision enregistr[ée]e/i.test(premiere)
-    ? `Aucune décision enregistrée dans ma mémoire pour ${s}.`
+    ? `Aucune décision enregistrée dans ma mémoire pour ${s}.${enAttente}`
     : decisions.length
-      ? `Ma mémoire a ${decisions.length} décision${decisions.length > 1 ? "s" : ""} pour ${s} : ${decisions[0]!.replace(/[.\s]+$/, "")}${decisions.length > 1 ? " (les autres à l'écran)" : ""}.`
+      ? `Ma mémoire a ${decisions.length} décision${decisions.length > 1 ? "s" : ""} pour ${s} : ${decisions[0]!.replace(/[.\s]+$/, "")}${decisions.length > 1 ? " (les autres à l'écran)" : ""}.${enAttente}`
       : premiere.trim();
   let constat: string;
   let detail: string[] = [];
@@ -48,8 +54,8 @@ export function composerDecision(r: Reponse, corpus: EtatCorpus, phrase: string)
   else if (!corpus.length) constat = decisions.length ? "Le corpus n'en parle pas." : "Le corpus n'en parle pas non plus.";
   else {
     const p = sourcePrincipale(corpus, s);
-    constat = `Le corpus en parle : ${corpus.length} passage${corpus.length > 1 ? "s" : ""}, source principale ${fichier(p.chemin)}, section ${p.section}.`;
-    detail = ["Passages du corpus (à lire ; ce ne sont pas des souvenirs) :", ...corpus.map((e) => `- ${e.chemin}:${e.ligne} § ${e.section} · version ${e.version} · ${e.dateSource.slice(0, 10)}`)];
+    constat = `Le corpus en parle : ${corpus.length} passage${corpus.length > 1 ? "s" : ""}, source principale ${p.connecteur === "depot-git" ? fichier(p.chemin) : p.titre}, section ${p.section}.`;
+    detail = ["Passages du corpus (à lire ; ce ne sont pas des souvenirs) :", ...corpus.map((e) => `- ${e.citation} § ${e.section} · version ${e.version} · ${e.dateSource.slice(0, 10)}`)];
   }
   const restes = reste.filter((l) => !/^Je ne compl[èe]te pas/i.test(l.trim()));
   return { ...r, texte: [`${memoire} ${constat}`, ...restes, ...detail].join("\n") };

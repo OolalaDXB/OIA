@@ -32,6 +32,8 @@ export interface Reponse {
 }
 
 const PAGE = 8;
+/** En-tête des propositions non validées dans une réponse de mémoire : jamais « décisions ». */
+export const PROPOSITIONS_A_CONFIRMER = "Propositions à confirmer, pas encore des décisions (Corpus › À confirmer)";
 
 export function formeDe(texte: string): Forme {
   const n = normaliserTexte(texte);
@@ -142,8 +144,18 @@ export class ServiceMemoire {
         const slug = compartimentDe(cible, this.opts.projets);
         const r = slug === "personnel" ? m.retrouver({ texte: cible, formes: ["decision"], limite: 5 }, moi) : m.retrouver({ compartiment: slug, formes: ["decision"], limite: 5 }, moi);
         const actifs = r.filter((x) => x.element.statut !== "retire");
-        if (!actifs.length) return { texte: `Je n'ai aucune décision enregistrée pour « ${cible} »${slug !== "personnel" ? ` (${slug})` : ""}. Je ne complète pas de mémoire.`, sensible: false };
-        return { texte: [`Décisions retenues pour ${slug === "personnel" ? `« ${cible} »` : slug} :`, ...actifs.map((x) => ligne(x))].join("\n"), sensible: true };
+        const aucune = `Je n'ai aucune décision enregistrée pour « ${cible} »${slug !== "personnel" ? ` (${slug})` : ""}. Je ne complète pas de mémoire.`;
+        if (!actifs.length) return { texte: aucune, sensible: false };
+        // Une proposition (d'un document, d'une IA) n'est jamais présentée comme une décision de Mickaël.
+        const retenues = actifs.filter((x) => x.element.statut !== "a_confirmer");
+        const propositions = actifs.filter((x) => x.element.statut === "a_confirmer");
+        return {
+          texte: [
+            ...(retenues.length ? [`Décisions retenues pour ${slug === "personnel" ? `« ${cible} »` : slug} :`, ...retenues.map((x) => ligne(x))] : [aucune]),
+            ...(propositions.length ? [`${PROPOSITIONS_A_CONFIRMER} (${propositions.length}) :`, ...propositions.map((x) => ligne(x))] : []),
+          ].join("\n"),
+          sensible: true,
+        };
       }
       if (sais) {
         const r = m.retrouver({ texte: sais[1]!, limite: 5, statuts: ["valide", "a_confirmer", "observe"] }, moi);

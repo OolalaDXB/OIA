@@ -72,7 +72,7 @@ async function demarrer(over: Partial<DepsPasserelle> & { repondre?: (t: string)
     connaissances: (): Connaissances => {
       appels.ouvertures++;
       return volume.monte
-        ? { memoire: memoireFictive(appels.prive), chercher: (t) => (/sillon/i.test(t) ? [{ source: "roadmap", chemin: "docs/roadmap.md", section: "SILLON", ligne: 42, version: "abc123def456", dateSource: "2026-11-01T00:00:00Z", statut: "valide", compartiment: "projet:sillon", extrait: "SILLON : décision fictive", nonFiable: true }] : []), etat: { memoire: "active", corpus: "actif", detail: "monté" }, fermer: () => undefined }
+        ? { memoire: memoireFictive(appels.prive), chercher: (t) => (/sillon/i.test(t) ? [{ source: "roadmap", chemin: "docs/roadmap.md", section: "SILLON", ligne: 42, ref: "ligne 42", citation: "docs/roadmap.md:42", titre: "Roadmap", version: "abc123def456", dateSource: "2026-11-01T00:00:00Z", indexeLe: "2026-11-08T00:00:00Z", statut: "valide", compartiment: "projet:sillon", connecteur: "depot-git", extrait: "SILLON : décision fictive", mode: "mots", score: 0, identifiant: false, nonFiable: true }] : []), etat: { memoire: "active", corpus: "actif", detail: "monté" }, fermer: () => undefined }
         : { memoire: memoireFictive(appels.prive), chercher: null, etat: { memoire: "indisponible", corpus: "indisponible", detail: "volume démonté" }, fermer: () => undefined };
     },
     creerSession: (h): SessionLike => {
@@ -217,7 +217,7 @@ describe("passerelle locale : tours", () => {
     // Première ligne, celle qui est dite : la mémoire ET le corpus, avec le nombre de passages et la source principale.
     expect(String(r.reponse).split("\n")[0]).toBe("Aucune décision enregistrée dans ma mémoire pour SILLON. Le corpus en parle : 1 passage, source principale roadmap, section SILLON.");
     expect(r.reponse).toContain("Passages du corpus (à lire ; ce ne sont pas des souvenirs) :\n- docs/roadmap.md:42 § SILLON · version abc123def456 · 2026-11-01");
-    expect(r.sources).toEqual([{ chemin: "docs/roadmap.md", ligne: 42, section: "SILLON", version: "abc123def456", date: "2026-11-01" }]);
+    expect(r.sources).toEqual([{ chemin: "docs/roadmap.md", ligne: 42, ref: "ligne 42", citation: "docs/roadmap.md:42", titre: "Roadmap", section: "SILLON", version: "abc123def456", date: "2026-11-01" }]);
   });
   it("volume démonté en cours de route : mémoire et corpus déclarés indisponibles, aucune source inventée", async () => {
     const b = await demarrer();
@@ -368,5 +368,67 @@ describe("commande de voix dans la passerelle", () => {
     expect(dits).toEqual(["D'accord, je parle plus fort."]);
     expect(reglagesVoix).toEqual({ volume: 1.5 });
     expect(b.appels.textes).toEqual([]);
+  });
+});
+
+describe("passerelle locale : routes du Corpus (défenses)", () => {
+  const ouvrirCorpus = async () => {
+    const { mkdtempSync, mkdirSync, realpathSync } = await import("node:fs");
+    const { join } = await import("node:path");
+    const { CataloguePrive } = await import("../src/corpus/catalogue-prive.js");
+    const { DepotCorpus } = await import("../src/corpus/depot.js");
+    const { Surveillance } = await import("../src/corpus/surveillance.js");
+    const { Corpus, composer } = await import("../src/executive/corpus.js");
+    const dir = realpathSync(mkdtempSync(join(tmpdir(), "shyrka-corpus-http-")));
+    const v = (s: string) => ({ chemin: join(dir, s), volume: { point: dir, monte: true, chiffre: true, image: "t", inscriptible: true, detail: "t" } });
+    for (const s of ["brut/depots", "journal"]) mkdirSync(join(dir, s), { recursive: true });
+    return (h: { prive: () => boolean }): Connaissances => {
+      const cat = new CataloguePrive(v("connaissances"));
+      const corpus = new Corpus(v("connaissances"), () => composer([], cat.sourcesCorpus()), () => null);
+      const surveillance = new Surveillance(() => dir);
+      const depot = new DepotCorpus({ corpus, catalogue: cat, memoire: null, brut: join(dir, "brut/depots"), journal: join(dir, "journal"), vectoriser: async () => [], generer: null, surveillance, prive: h.prive });
+      return {
+        memoire: memoireFictive([]), chercher: null, etat: { memoire: "active", corpus: "actif", detail: "t" },
+        corpus: { depot, surveillance, vecteur: async () => null, etat: () => ({ volume: "chiffre", sourcesPrivees: cat.lister().length }) },
+        fermer: () => (surveillance.arreter(), corpus.fermer(), cat.fermer()),
+      };
+    };
+  };
+  const OCTETS = { "x-shyrka-jeton": JETON, "content-type": "application/octet-stream", "x-corpus-nom": "note.md" };
+
+  it("jeton, hôte et origine exigés ; aucun en-tête CORS ; corps typés ; 25 Mo au plus ; identifiants opaques seulement", async () => {
+    const b = await demarrer({ connaissances: await ouvrirCorpus() });
+    const md = new TextEncoder().encode("# Note fictive\n\nTexte fictif.\n");
+    expect((await fetch(`${b.url}/v1/corpus/etat`)).status).toBe(401);
+    expect((await post(b, "/v1/corpus/preparer", md, { "content-type": "application/octet-stream", "x-corpus-nom": "note.md" })).status).toBe(401);
+    expect((await fetch(`${b.url}/v1/corpus/etat`, { headers: { ...H, origin: "https://exemple.test" } })).status).toBe(403);
+    const r = await fetch(`${b.url}/v1/corpus/etat`, { headers: H });
+    expect(r.status).toBe(200);
+    expect(r.headers.get("access-control-allow-origin")).toBeNull();
+    expect((await post(b, "/v1/corpus/preparer", md, { ...OCTETS, "content-type": "text/plain" })).status).toBe(415);
+    expect((await post(b, "/v1/corpus/confirmer", "jeton=x", { ...H, "content-type": "application/x-www-form-urlencoded" })).status).toBe(415);
+    expect((await post(b, "/v1/corpus/preparer", new Uint8Array(25 * 1024 * 1024 + 1), OCTETS)).status).toBe(413);
+    expect((await post(b, "/v1/corpus/sources/..%2F..%2Fetc/retirer", { confirmer: true })).status).toBe(404);
+    expect((await post(b, "/v1/corpus/surveillance/f-..%2Fx/examiner", {})).status).toBe(404);
+    const a = (await (await post(b, "/v1/corpus/preparer", md, OCTETS)).json()) as { jeton: string; etat: string };
+    expect(a.etat).toBe("pret");
+    expect((await post(b, "/v1/corpus/confirmer", { jeton: a.jeton, compartiment: "personnel" })).status).toBe(400); // droits à choisir explicitement
+    expect((await post(b, "/v1/corpus/sources/prive-000000000000/retirer", {})).status).toBe(400); // confirmation explicite
+  });
+
+  it("mode privé : préparer et activer le dossier surveillé refusés (423)", async () => {
+    const b = await demarrer({ connaissances: await ouvrirCorpus() });
+    await post(b, "/v1/prive", { actif: true });
+    expect((await post(b, "/v1/corpus/preparer", new TextEncoder().encode("# x\n\ny"), OCTETS)).status).toBe(423);
+    expect((await post(b, "/v1/corpus/note", { titre: "t", texte: "x" })).status).toBe(423);
+    expect((await post(b, "/v1/corpus/surveillance", { action: "activer" })).status).toBe(423);
+  });
+
+  it("volume absent : le Corpus le dit (503), rien n'est écrit ailleurs", async () => {
+    const b = await demarrer();
+    b.volume.monte = false;
+    const r = await fetch(`${b.url}/v1/corpus/etat`, { headers: H });
+    expect(r.status).toBe(503);
+    expect(((await r.json()) as { message: string }).message).toMatch(/volume démonté/);
   });
 });

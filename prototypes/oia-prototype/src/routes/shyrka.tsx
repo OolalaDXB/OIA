@@ -4,6 +4,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Shell, Fictif } from "@/components/oia/ui";
 import { PresenceShyrka, ConversationShyrka, JournalShyrka, SauvegardeShyrka, useShyrka } from "@/components/oia/shyrka";
 import { BarreContexte, ContexteVue, SourcesVue, PermissionsVue, CadreVue, IdentiteVue, ApplicationsVue } from "@/components/oia/shyrka-zone";
+import { CorpusVue } from "@/components/oia/shyrka-corpus";
 
 export const Route = createFileRoute("/shyrka")({
   head: () => ({ meta: [
@@ -16,7 +17,7 @@ export const Route = createFileRoute("/shyrka")({
   component: ShyrkaPage,
 });
 
-const zones = [["conversation", "Conversation"], ["contexte", "Contexte"], ["sources", "Sources"], ["permissions", "Permissions"], ["cadre", "Cadre"], ["identite", "Identité"], ["applications", "Applications"], ["journal", "Journal"]] as const;
+const zones = [["conversation", "Conversation"], ["corpus", "Corpus"], ["contexte", "Contexte"], ["sources", "Sources"], ["permissions", "Permissions"], ["cadre", "Cadre"], ["identite", "Identité"], ["applications", "Applications"], ["journal", "Journal"]] as const;
 const tab = "min-h-12 shrink-0 rounded-none border-b-2 border-transparent px-2 text-sm font-normal text-muted-foreground data-[state=active]:border-bar data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none";
 
 function ShyrkaPage() {
@@ -35,6 +36,7 @@ function ShyrkaPage() {
           </div>
         </Tabs>
       </TabsContent>
+      <TabsContent value="corpus"><CorpusVue /></TabsContent>
       <TabsContent value="contexte"><ContexteVue /></TabsContent>
       <TabsContent value="sources"><SourcesVue /></TabsContent>
       <TabsContent value="permissions"><PermissionsVue /></TabsContent>

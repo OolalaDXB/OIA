@@ -208,13 +208,15 @@ export function motifExclusion(texte: string): string | null {
  *   modèle est local (ou sans modèle) ; jamais au cockpit, à un agent, ni à
  *   un message destiné à un modèle en ligne ;
  * - un agent ne lit que les compartiments de son mandat, en portée cockpit ;
- * - une restriction `mickael_seulement` réserve l'élément à Mickaël.
+ * - une restriction `mickael_seulement` (faits très privés) réserve l'élément
+ *   à Mickaël et à Shyrka locale avec son modèle local (décision de Mickaël,
+ *   8 novembre 2026) : jamais un modèle en ligne, un agent ni le cockpit.
  * Un dérivé n'est visible que si toutes ses sources le sont.
  */
 export function peutLire(e: Pick<ElementMemoire, "statut" | "portee" | "compartiment" | "restrictions">, pour: Demandeur): boolean {
   if (pour.type === "mickael") return true;
   if (e.statut === "retire") return false;
-  if (e.restrictions.includes("mickael_seulement")) return false;
+  if (e.restrictions.includes("mickael_seulement")) return pour.type === "conversation" && pour.modele !== "en_ligne";
   switch (pour.type) {
     case "conversation":
       return e.portee === "cockpit" || pour.modele !== "en_ligne";

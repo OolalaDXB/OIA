@@ -18,7 +18,8 @@ export interface SanteLocale {
   prive: boolean;
 }
 
-export interface SourceLocale { chemin: string; ligne: number; section: string; version: string; date: string }
+/** `citation` : « chemin:ligne » pour un document du dépôt, « titre · page 3 » pour un document privé (aucun chemin du Mac). */
+export interface SourceLocale { chemin: string; ligne: number; section: string; version: string; date: string; citation?: string; ref?: string; titre?: string }
 export interface ReponseLocale { reponse: string | null; sources: SourceLocale[]; memoire: SanteLocale["memoire"]; corpus: SanteLocale["corpus"]; langue: string; ms: number }
 /** `langue` : code ISO détecté par Whisper sur la prise (fr, ru, en…). */
 export interface Transcription { verdict: "parole" | "silence" | "douteux"; raison?: string; transcription: string; langue?: string; analyse: { dureeMs: number; paroleMs: number } }
@@ -124,3 +125,57 @@ export class PriseMicro {
     this.morceaux = [];
   }
 }
+
+// ── Corpus (mandat Corpus local) : déposer, consulter, valider. Tout passe par la passerelle du Mac. ──
+
+export interface EtatCorpus {
+  volume: "chiffre"; sourcesOia: number; sourcesPrivees: number; propositions: number | null; sources: number; extraits: number; avecSens: number; modeleSens: string;
+  surveillance: { etat: EtatSurveillance; aExaminer: number }; taches: Record<string, TacheCorpus>; prive: boolean;
+}
+export type EtatSurveillance = "arretee" | "active" | "pause" | "volume_absent";
+export interface TacheCorpus { etape: "indexation" | "sens" | "propositions" | "fini" | "erreur"; fait: number; total: number; propositions?: number; ecartees?: number; message?: string }
+export interface ApercuCorpus {
+  jeton: string; nom: string; type: string; taille: number; pages?: number; passages: number; apercu: string; etat: "pret" | "a_verifier"; motifs: string[]; avertissements: string[];
+  dejaPresent: { id: string; nom: string } | null; memeNom: { id: string; nom: string; version: number } | null; retireLe: string | null;
+}
+export interface SourcePrivee {
+  id: string; nom: string; origine: "depot" | "note" | "dossier"; type: string; compartiment: string; lecteurs: string[]; empreinte: string; taille: number;
+  dateSource: string; dateImport: string; version: number; statut: "indexe" | "echec" | "revoque"; attestation: string | null; revoqueLe: string | null; tache: TacheCorpus | null;
+}
+export interface ExtraitCorpus {
+  source: string; section: string; ligne: number; ref: string; citation: string; titre: string; version: string; dateSource: string; indexeLe: string;
+  statut: string; compartiment: string; connecteur: "depot-git" | "fichier-local" | "note"; extrait: string; mode: "sens" | "mots"; score: number; identifiant: boolean; sousLeSeuil?: boolean;
+}
+export interface PropositionCorpus {
+  id: string; enonce: string; forme: "preference" | "decision" | "travail" | "experience"; compartiment: string; date: string; portee: string; provenance: string;
+  details: { citation?: string; document?: string; ref?: string; version?: string; raison?: string; incertitude?: string; source_id?: string }; proches: { id: string; contenu: string; forme: string; valideLe: string | null }[];
+}
+export interface FichierDetecte { id: string; nom: string; taille: number; detecteLe: string }
+
+export const TAILLE_MAX_CORPUS = 25 * 1024 * 1024;
+
+export const etatCorpus = () => appel<EtatCorpus>("/corpus/etat");
+export const sourcesCorpus = () => appel<{ sources: SourcePrivee[] }>("/corpus/sources");
+export const extraitsSource = (id: string) => appel<{ extraits: ExtraitCorpus[] }>(`/corpus/sources/${encodeURIComponent(id)}/extraits`);
+export const rechercherCorpus = (q: string, f: { source?: string; compartiment?: string } = {}) => {
+  const p = new URLSearchParams({ q });
+  if (f.source) p.set("source", f.source);
+  if (f.compartiment) p.set("compartiment", f.compartiment);
+  return appel<{ mode: "sens" | "mots"; resultats: ExtraitCorpus[]; ms: number }>(`/corpus/rechercher?${p}`);
+};
+/** Envoie le document à la passerelle du Mac pour analyse : rien n'est écrit tant qu'il n'est pas confirmé. */
+export const preparerDocument = (f: File) =>
+  appel<ApercuCorpus>("/corpus/preparer", { method: "POST", headers: { "content-type": "application/octet-stream", "x-corpus-nom": encodeURIComponent(f.name), "x-corpus-date": new Date(f.lastModified || Date.now()).toISOString() }, body: f });
+export const preparerNote = (titre: string, texte: string) => appel<ApercuCorpus>("/corpus/note", json({ titre, texte }));
+export const annulerPreparation = (jeton: string) => appel<{ annule: boolean }>("/corpus/annuler", json({ jeton }));
+export const confirmerDocument = (c: { jeton: string; compartiment: string; conversation: boolean; nouvelleVersionDe?: string; attestation?: boolean }) =>
+  appel<{ source: string; version: number; extraits: number; deja?: boolean }>("/corpus/confirmer", json(c));
+export const reindexerSource = (id: string) => appel<{ extraits: number }>(`/corpus/sources/${encodeURIComponent(id)}/reindexer`, json({}));
+export const retirerSource = (id: string) => appel<{ retire: true; propositionsRetirees: number; souvenirsValidesConserves: number }>(`/corpus/sources/${encodeURIComponent(id)}/retirer`, json({ confirmer: true }));
+export const propositionsCorpus = () => appel<{ total: number; reportees: number; lot: PropositionCorpus[] }>("/corpus/propositions");
+export const deciderProposition = (id: string, action: "valider" | "corriger" | "refuser" | "reporter", contenu?: string) =>
+  appel<Record<string, unknown>>(`/corpus/propositions/${encodeURIComponent(id)}`, json(contenu ? { action, contenu } : { action }));
+export const etatSurveillance = () => appel<{ etat: EtatSurveillance; aExaminer: FichierDetecte[] }>("/corpus/surveillance");
+export const piloterSurveillance = (action: "activer" | "pause" | "arreter") => appel<{ etat: EtatSurveillance }>("/corpus/surveillance", json({ action }));
+export const examinerFichier = (id: string) => appel<ApercuCorpus>(`/corpus/surveillance/${encodeURIComponent(id)}/examiner`, json({}));
+export const effacerFichierDossier = (id: string) => appel<{ efface: true }>(`/corpus/surveillance/${encodeURIComponent(id)}/effacer`, json({ confirmer: true }));

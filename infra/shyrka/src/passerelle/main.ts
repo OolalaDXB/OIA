@@ -8,13 +8,18 @@ import { choisirVoix, MacSaySpeaker, voixInstallees } from "../adapters/macos-sa
 import { ollamaPresent } from "../adapters/mistral.js";
 import { DEFAULT_OLLAMA_MODEL, OllamaTextModel } from "../adapters/ollama.js";
 import { WhisperServer } from "../adapters/whisper-server.js";
-import { Corpus } from "../executive/corpus.js";
+import { chargerCatalogue, composer, Corpus } from "../executive/corpus.js";
+import { CataloguePrive } from "../corpus/catalogue-prive.js";
+import { DepotCorpus } from "../corpus/depot.js";
+import { generateurOllama } from "../corpus/propositions.js";
+import { vectoriseurOllama, type Vectoriseur } from "../corpus/sens.js";
+import { Surveillance } from "../corpus/surveillance.js";
 import { projetsConnus } from "../executive/config.js";
 import { loadIdentity, voiceOutputAllowed } from "../identity.js";
 import { RACINE_DEPOT } from "../local.js";
 import { ServiceMemoire } from "../memoire/commandes.js";
 import { MemoireLocale } from "../memoire/sqlite.js";
-import { dossierVerifie, etatVolume } from "../memoire/volume.js";
+import { dossierVerifie, etatVolume, VOLUME_SHYRKA } from "../memoire/volume.js";
 import { promptSysteme } from "../persona.js";
 import { execFileRunner } from "../runner.js";
 import { ShyrkaSession } from "../session.js";
@@ -44,33 +49,100 @@ function modeleWhisper(): string {
   return bins.length ? join(dossier, bins[0]!) : "";
 }
 
-/** Mémoire et corpus du volume chiffré ; indisponibles, et dits tels, s'il n'est pas monté. */
-function connaissances(): Connaissances {
+/**
+ * Mémoire et corpus du volume chiffré ; indisponibles, et dits tels, s'il n'est pas monté.
+ * Corpus : catalogue Git + catalogue privé, recherche par le sens (bge-m3) et les identifiants
+ * exacts (ADR 0005), module de dépôt et de validation (mandat Corpus local).
+ */
+/** Recette : `SHYRKA_RECETTE=recette/<nom>` place mémoire, corpus, fichiers admis et journaux sous ce sous-dossier du volume (essais sans toucher la vraie mémoire). */
+const sous = (d: string) => (env.SHYRKA_RECETTE ? `${env.SHYRKA_RECETTE.replace(/\/+$/, "")}/${d}` : d);
+
+function connaissances(modeleConversation: string, h: { prive: () => boolean }): Connaissances {
   const projets = projetsConnus();
   let memoire: MemoireLocale | null = null;
   let corpus: Corpus | null = null;
+  let cataloguePrive: CataloguePrive | null = null;
+  let depot: DepotCorpus | null = null;
   const raisons: string[] = [];
+  const vectoriser: Vectoriseur = vectoriseurOllama();
+  const surveillance = new Surveillance(() => (etatVolume().chiffre ? (env.SHYRKA_RECETTE ? `${VOLUME_SHYRKA}/${env.SHYRKA_RECETTE}` : VOLUME_SHYRKA) : null));
   try {
-    memoire = new MemoireLocale(dossierVerifie("memoire"));
+    memoire = new MemoireLocale(dossierVerifie(sous("memoire")));
   } catch (e) {
     raisons.push((e as Error).message);
   }
   try {
-    corpus = new Corpus(dossierVerifie("connaissances"));
+    const cp = new CataloguePrive(dossierVerifie(sous("connaissances")));
+    cataloguePrive = cp;
+    corpus = new Corpus(dossierVerifie(sous("connaissances")), () => composer(chargerCatalogue(), cp.sourcesCorpus()));
+    if (corpus.reconstruit) console.log("Index du corpus reconstruit (schéma 2 : références, sens, identifiants) ; les sources se réindexent.");
     corpus.indexer();
+    const brut = dossierVerifie(sous("brut/depots"));
+    const journal = dossierVerifie(sous("journal"));
+    for (const x of [brut, journal]) mkdirSync(x.chemin, { recursive: true, mode: 0o700 });
+    depot = new DepotCorpus({ corpus, catalogue: cp, memoire, brut: brut.chemin, journal: journal.chemin, vectoriser, generer: generateurOllama(modeleConversation), surveillance, prive: h.prive });
+    // En fond : sens des extraits qui n'en ont pas encore, sources privées à réindexer après une reconstruction.
+    const c0 = corpus;
+    const d0 = depot;
+    void d0
+      .rattraper()
+      .then(() => c0.calculerSens(vectoriser))
+      .then((r) => r.total && console.log(`Corpus : sens calculé pour ${r.total} extrait(s) (${r.calcules} nouveaux).`))
+      .catch((e: Error) => console.log(`! Corpus : sens non calculé (${e.message}) ; la recherche se fait par les mots en attendant.`));
   } catch (e) {
     corpus?.fermer();
+    cataloguePrive?.fermer();
     corpus = null;
+    depot = null;
     raisons.push(`corpus : ${(e as Error).message}`);
   }
   const c = corpus;
+  const d = depot;
+  // Sens de la question du tour, calculé juste avant : `chercher` (synchrone) le reprend.
+  const questions = new Map<string, Float32Array | null>();
+  const vecteur = async (texte: string): Promise<Float32Array | null> => {
+    try {
+      return (await Promise.race([vectoriser([texte]), new Promise<never>((_, ko) => setTimeout(() => ko(new Error("délai")), 3000))]))[0] ?? null;
+    } catch {
+      return null;
+    }
+  };
   return {
     memoire: new ServiceMemoire(memoire, { projets, ...(memoire ? {} : { indisponible: raisons[0] ?? "volume indisponible" }) }),
-    chercher: c ? (texte) => c.chercher(texte, { type: "conversation", modele: "local" }, 4) : null,
+    chercher: c ? (texte) => c.chercher(texte, { type: "conversation", modele: "local" }, 4, { vecteur: questions.get(texte) ?? null }) : null,
+    preparerQuestion: async (texte) => {
+      if (questions.size > 20) questions.clear();
+      questions.set(texte, await vecteur(texte));
+    },
+    corpus:
+      c && d && cataloguePrive
+        ? {
+            depot: d,
+            surveillance,
+            vecteur,
+            etat: () => {
+              const git = chargerCatalogue().filter((s) => s.statut !== "revoque").length;
+              const privees = cataloguePrive!.lister().filter((s) => s.statut !== "revoque").length;
+              let propositions: number | null = null;
+              try {
+                propositions = h.prive() ? null : d.propositions().total;
+              } catch {
+                propositions = null;
+              }
+              return {
+                volume: "chiffre", sourcesOia: git, sourcesPrivees: privees, propositions, ...c.comptes(), modeleSens: "bge-m3 (local)",
+                surveillance: { etat: surveillance.etat, aExaminer: surveillance.aExaminer().length },
+                taches: Object.fromEntries(d.taches),
+              };
+            },
+          }
+        : null,
     etat: { memoire: memoire ? "active" : "indisponible", corpus: c ? "actif" : "indisponible", detail: raisons.join(" ; ") || `volume ${etatVolume().point} monté et chiffré` },
     fermer: () => {
+      surveillance.arreter();
       memoire?.fermer();
       c?.fermer();
+      cataloguePrive?.fermer();
     },
   };
 }
@@ -124,7 +196,7 @@ async function main(): Promise<void> {
   const passerelle = new Passerelle({
     jeton,
     port,
-    connaissances,
+    connaissances: (h) => connaissances(modeleNom, h),
     etatVolume: () => {
       const v = etatVolume();
       return `${v.monte}:${v.chiffre}:${v.inscriptible}`;
