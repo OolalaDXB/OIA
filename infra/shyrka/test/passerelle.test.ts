@@ -351,6 +351,8 @@ describe("conversation (essai réel du soir)", () => {
     expect(c).toMatch(/Ne parle des décisions ouvertes, du budget, de J0 ou d'un projet que s'il en parle/);
     expect(c).toMatch(/Si sa phrase semble coupée ou incomplète, ne la répète pas/);
     expect(c).toMatch(/Ne redis jamais mot pour mot ta réponse précédente/);
+    expect(c).toMatch(/n'invente jamais un programme, un rendez-vous, une règle ou une habitude/);
+    expect(c).toMatch(/n'annonce jamais que tu préviens, bloques ou programmes quelque chose/);
     expect(c).toMatch(/une seule langue, celle de Mickaël, du premier au dernier mot/);
     expect(c).toMatch(/réponds « Tu t'appelles Mickaël » \(tu peux ajouter « je t'appellerai désormais ainsi »\), jamais « je t'appelle Mickaël »/);
   });

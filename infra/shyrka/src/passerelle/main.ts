@@ -74,10 +74,27 @@ function connaissances(): Connaissances {
   };
 }
 
+/**
+ * Modèle de conversation : qwen3 30b-a3b « instruct » (comparaison du 8 novembre 2026 sur les mêmes
+ * phrases : bien meilleur que qwen3:8b, aussi rapide ; la variante « thinking » raisonne à voix haute
+ * et met 12 à 22 s). Absent d'Ollama : qwen3:8b, signalé.
+ */
+export const MODELE_CONVERSATION = "qwen3:30b-a3b-instruct-2507-q4_K_M";
+async function modeleConversation(url: string): Promise<string> {
+  try {
+    const r = (await (await fetch(`${url}/api/tags`)).json()) as { models?: { name: string }[] };
+    if (r.models?.some((m) => m.name === MODELE_CONVERSATION)) return MODELE_CONVERSATION;
+  } catch {
+    /* Ollama injoignable : signalé au démarrage */
+  }
+  console.log(`! ${MODELE_CONVERSATION} absent d'Ollama : ${DEFAULT_OLLAMA_MODEL} utilisé (ollama pull ${MODELE_CONVERSATION}).`);
+  return DEFAULT_OLLAMA_MODEL;
+}
+
 async function main(): Promise<void> {
   const port = Number(env.SHYRKA_PASSERELLE_PORT ?? PORT_PASSERELLE);
   const ollamaUrl = env.SHYRKA_OLLAMA_URL ?? "http://127.0.0.1:11434";
-  const modeleNom = env.SHYRKA_OLLAMA_MODEL ?? DEFAULT_OLLAMA_MODEL;
+  const modeleNom = env.SHYRKA_OLLAMA_MODEL ?? (await modeleConversation(ollamaUrl));
   const { identity, warning } = loadIdentity(env.SHYRKA_IDENTITE ?? ICI("../../identite.json"));
   if (warning) console.log(`! ${warning}`);
   const dir = mkdtempSync(join(tmpdir(), "shyrka-voix-"));
