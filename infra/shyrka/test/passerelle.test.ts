@@ -58,7 +58,7 @@ afterEach(async () => {
   banc = null;
 });
 
-async function demarrer(over: Partial<DepsPasserelle> & { repondre?: (t: string) => Promise<TurnResult>; transcription?: string; langue?: string } = {}): Promise<Banc> {
+async function demarrer(over: Partial<DepsPasserelle> & { repondre?: (t: string) => Promise<TurnResult>; transcription?: string; langue?: string; presenceAuDemarrage?: boolean } = {}): Promise<Banc> {
   const appels = { transcrire: 0, textes: [] as string[], prive: [] as string[], ouvertures: 0, langues: [] as string[], contextes: [] as string[] };
   const volume = { monte: true };
   let etat: ((e: EtatSession) => void) | null = null;
@@ -120,6 +120,8 @@ async function demarrer(over: Partial<DepsPasserelle> & { repondre?: (t: string)
   const p2 = new Passerelle({ ...deps, port });
   const s2 = p2.serveur();
   await new Promise<void>((r) => s2.listen(port, "127.0.0.1", r));
+  // Les tests de conversation supposent Mickaël seul ; ceux de la présence gardent le mode du démarrage.
+  if (!over.presenceAuDemarrage) p2.changerPresence("seul", "test");
   banc = { url: `http://127.0.0.1:${port}`, serveur: s2, passerelle: p2, appels, volume };
   return banc;
 }
@@ -424,6 +426,14 @@ describe("passerelle locale : routes du Corpus (défenses)", () => {
     expect((await post(b, "/v1/corpus/surveillance", { action: "activer" })).status).toBe(423);
   });
 
+  it("hors du mode « seul » : noms du dossier de dépôt masqués, examen refusé", async () => {
+    const b = await demarrer({ connaissances: await ouvrirCorpus() });
+    await post(b, "/v1/presence", { mode: "entre_proches" });
+    const r = (await (await fetch(`${b.url}/v1/corpus/surveillance`, { headers: H })).json()) as { aExaminer: unknown[]; masques?: boolean };
+    expect(r).toMatchObject({ aExaminer: [], masques: true });
+    expect((await post(b, "/v1/corpus/surveillance/f-0123456789abcdef/examiner", {})).status).toBe(423);
+  });
+
   it("volume absent : le Corpus le dit (503), rien n'est écrit ailleurs", async () => {
     const b = await demarrer();
     b.volume.monte = false;
@@ -445,7 +455,7 @@ describe("passerelle locale : mode de présence", () => {
 
   it("« entre proches » au démarrage ; à la voix ou d'un clic ; retour après 30 minutes sans action ; les sondages ne comptent pas", async () => {
     let t = 1_000_000;
-    const b = await demarrer({ maintenant: () => t, inactiviteMs: 30 * 60_000 });
+    const b = await demarrer({ maintenant: () => t, inactiviteMs: 30 * 60_000, presenceAuDemarrage: true });
     const mode = async () => ((await (await fetch(`${b.url}/v1/presence`, { headers: H })).json()) as { mode: string }).mode;
     expect(await mode()).toBe("entre_proches");
     const r = (await (await post(b, "/v1/tour/texte", { texte: "Je suis seul" })).json()) as { reponse: string };
@@ -461,18 +471,21 @@ describe("passerelle locale : mode de présence", () => {
     expect((await post(b, "/v1/presence", { mode: "tous" })).status).toBe(400);
   });
 
-  it("mode protégé : une question qui ne trouve que du masqué reçoit la réponse protégée, sans modèle", async () => {
+  it("mode protégé : une question qui ne trouve rien de visible reçoit toujours la même réponse, sans modèle", async () => {
     const extrait = { source: "s", chemin: "prive/s", section: "S", ligne: 1, ref: "ligne 1", citation: "dossier · ligne 1", titre: "dossier", version: "v", dateSource: "2026-11-08T00:00:00Z", indexeLe: "2026-11-08T00:00:00Z", statut: "valide" as const, compartiment: "personnel", connecteur: "fichier-local" as const, niveau: "confidentiel" as const, extrait: "budget fictif du dossier Orion", mode: "sens" as const, score: 0.7, identifiant: false, nonFiable: true as const };
     const b = await demarrer({
+      presenceAuDemarrage: true,
       connaissances: (h) => ({
         memoire: memoireFictive([]), etat: { memoire: "active", corpus: "actif", detail: "t" }, fermer: () => undefined,
         chercher: (t) => (/orion/i.test(t) && h.niveaux().includes("confidentiel") ? [extrait] : []),
-        chercherTout: (t) => (/orion/i.test(t) ? [extrait] : []),
       }),
     });
     const r = (await (await post(b, "/v1/tour/texte", { texte: "Quel est le budget du dossier Orion pour le projet ?" })).json()) as { reponse: string; sources: unknown[] };
     expect(r).toMatchObject({ reponse: "Je t'en parlerai quand tu seras seul.", sources: [] });
     expect(b.appels.textes).toEqual([]);
+    // Même formulation quand rien n'existe : la réponse ne trahit pas qu'une information est masquée.
+    const rien = (await (await post(b, "/v1/tour/texte", { texte: "Quel est le budget du dossier Andromède pour le projet ?" })).json()) as { reponse: string };
+    expect(rien.reponse).toBe(r.reponse);
     await post(b, "/v1/presence", { mode: "seul" });
     const r2 = (await (await post(b, "/v1/tour/texte", { texte: "Quel est le budget du dossier Orion pour le projet ?" })).json()) as { sources: unknown[] };
     expect(r2.sources).toHaveLength(1);

@@ -206,6 +206,8 @@ function DossierSurveille({ prive, etatSurv, ajouter }: { prive: boolean; etatSu
   }, [etat]);
   const piloter = async (a: "activer" | "pause" | "arreter") => { setErreur(null); try { setEtat((await piloterSurveillance(a)).etat); } catch (e) { setErreur(message(e)); } };
   const libelle = { arretee: "Arrêté", active: "Actif", pause: "En pause", volume_absent: "Volume absent : arrêté" }[etat];
+  const { presence } = useShyrka();
+  const seul = presence === "seul";
   return <Section titre="Dossier « Déposer dans Shyrka »" aside={<Pastille ton={etat === "active" ? "ok" : "neutre"}>{libelle}</Pastille>}>
     <p className="mb-3 text-sm text-muted-foreground">Sur le volume chiffré. Un fichier copié dedans est signalé ici, jamais importé sans ta confirmation. Désactivé par défaut, sans son.</p>
     <div className="flex flex-wrap gap-2">
@@ -213,7 +215,8 @@ function DossierSurveille({ prive, etatSurv, ajouter }: { prive: boolean; etatSu
       {etat !== "arretee" && <Button variant="ghost" className="min-h-11 font-normal" onClick={() => void piloter("arreter")}>Arrêter</Button>}
     </div>
     {erreur && <div className="mt-3"><Alerte>{erreur}</Alerte></div>}
-    {etat === "active" && <p className="mt-3 text-sm" aria-live="polite">{fichiers.length ? `${fichiers.length} fichier${fichiers.length > 1 ? "s" : ""} à examiner` : "Aucun fichier à examiner."}</p>}
+    {etat === "active" && !seul && <p className="mt-3 text-sm text-muted-foreground">Les fichiers du dossier (pas encore classés) s'examinent quand tu es seul.</p>}
+    {etat === "active" && seul && <p className="mt-3 text-sm" aria-live="polite">{fichiers.length ? `${fichiers.length} fichier${fichiers.length > 1 ? "s" : ""} à examiner` : "Aucun fichier à examiner."}</p>}
     {fichiers.length > 0 && <ul className="mt-2">{fichiers.map((f) => <li key={f.id} className="flex flex-wrap items-center gap-2 border-b border-border py-2 text-sm last:border-0">
       <span className="min-w-0 flex-1 break-all">{f.nom} <span className="text-xs text-tertiary">· {taille(f.taille)}</span></span>
       <Button size="sm" className="min-h-11" onClick={() => ajouter(f)}>Examiner</Button>

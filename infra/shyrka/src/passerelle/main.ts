@@ -114,7 +114,6 @@ function connaissances(modeleConversation: string, h: { prive: () => boolean; ni
   return {
     memoire: new ServiceMemoire(memoire, { projets, niveaux: h.niveaux, ...(memoire ? {} : { indisponible: raisons[0] ?? "volume indisponible" }) }),
     chercher: c ? (texte) => c.chercher(texte, { type: "conversation", modele: "local" }, 4, { vecteur: questions.get(texte) ?? null, niveaux: h.niveaux() }) : null,
-    chercherTout: c ? (texte) => c.chercher(texte, { type: "conversation", modele: "local" }, 1, { vecteur: questions.get(texte) ?? null }) : null,
     preparerQuestion: async (texte) => {
       if (questions.size > 20) questions.clear();
       questions.set(texte, await vecteur(texte));
@@ -132,7 +131,7 @@ function connaissances(modeleConversation: string, h: { prive: () => boolean; ni
                 volume: "chiffre", sourcesOia: git, modeleSens: "bge-m3 (local)",
                 // Comptes d'extraits : seulement en « seul » (en mode protégé, ils trahiraient le volume de ce qui est masqué).
                 ...(h.niveaux().length === 4 ? c.comptes() : {}),
-                surveillance: { etat: surveillance.etat, aExaminer: surveillance.aExaminer().length },
+                surveillance: { etat: surveillance.etat, aExaminer: h.niveaux().length === 4 ? surveillance.aExaminer().length : 0 },
                 taches: Object.fromEntries([...d.taches].filter(([id]) => d.sources().some((x) => x.id === id))),
               };
             },

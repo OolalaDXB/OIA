@@ -79,8 +79,6 @@ export interface Connaissances {
   memoire: ServiceMemoire;
   /** Recherche pour le modèle, filtrée par le mode de présence. */
   chercher: ((texte: string) => ExtraitCorpus[]) | null;
-  /** Même recherche sans filtre de niveau : sert seulement à savoir qu'il faut répondre « je t'en parlerai quand tu seras seul ». Jamais rendue. */
-  chercherTout?: ((texte: string) => ExtraitCorpus[]) | null;
   /** Calcule à l'avance le sens de la question du tour (bge-m3), pour que `chercher` cherche par le sens. */
   preparerQuestion?: (texte: string) => Promise<void>;
   corpus?: ApiCorpus | null;
@@ -412,12 +410,18 @@ export class Passerelle {
     return corps;
   }
 
-  /** Vrai si, dans le mode courant, la question ne trouve que des informations d'un niveau masqué (corpus ou mémoire). */
+  /**
+   * Mode protégé : une question de travail ou de mémoire qui ne trouve RIEN de visible reçoit toujours la même
+   * réponse (« Je t'en parlerai quand tu seras seul »), qu'une information soit masquée ou non : la formulation ne
+   * trahit jamais ce qui existe. Les salutations et la conversation courante passent au modèle comme d'habitude.
+   */
   private estMasque(t: string): boolean {
     if (niveauxPermis(this.presence).length === NIVEAUX.length || estSalutation(t)) return false;
     const c = this.connaissances;
-    const corpusMasque = appelleLeCorpus(t) && !!c.chercherTout && !!c.chercher && c.chercher(t).length === 0 && c.chercherTout(t).length > 0;
-    return corpusMasque || c.memoire.masque?.(t) === true;
+    const question = appelleLeCorpus(t) || c.memoire.estQuestionDeMemoire?.(t) === true;
+    if (!question) return false;
+    const corpusVisible = c.chercher ? c.chercher(t).length > 0 : false;
+    return !corpusVisible && c.memoire.rienDeVisible?.(t) !== false;
   }
 
   private async priseDeConge(t: string): Promise<Record<string, unknown>> {
@@ -591,7 +595,8 @@ export class Passerelle {
       if (chemin === "connaissances") return [200, { connaissances: c.depot.connaissances() }];
       if (chemin === "sources") return [200, { sources: c.depot.sources() }];
       if (chemin === "propositions") return [200, c.depot.propositions()];
-      if (chemin === "surveillance") return [200, { etat: c.surveillance.etat, aExaminer: c.surveillance.aExaminer() }];
+      // Fichiers du dossier de dépôt : pas encore classés, donc traités comme « personnel » ; leurs noms ne sont montrés que seul.
+      if (chemin === "surveillance") return [200, this.modePresence() === "seul" ? { etat: c.surveillance.etat, aExaminer: c.surveillance.aExaminer() } : { etat: c.surveillance.etat, aExaminer: [], masques: true }];
       if (chemin === "rechercher") {
         const q = (url.searchParams.get("q") ?? "").trim();
         if (!q) throw new ErreurHttp(400, "requete_vide", "Que cherches-tu ?");
@@ -657,6 +662,7 @@ export class Passerelle {
       return [200, c.depot.decider(p[1]!, action, texte("contenu"), corps.niveau === undefined ? undefined : niveauDuCorps(corps.niveau))];
     }
     const f = FICHIER.exec(chemin);
+    if (f && this.modePresence() !== "seul") throw new ErreurHttp(423, "mode_protege", "Le dossier de dépôt s'examine quand tu es seul.");
     if (f && f[2] === "examiner") {
       if (this.prive) throw new ErreurHttp(423, "mode_prive", "Mode privé : rien n'est ajouté au Corpus tant qu'il est actif.");
       let lu: { nom: string; octets: Uint8Array };

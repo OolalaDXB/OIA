@@ -110,12 +110,16 @@ export class ServiceMemoire {
     return this.retrouverVisibles(this.memoire, { texte: question, statuts: ["valide", "observe", "a_confirmer"] }, pour, limite);
   }
 
-  /** Mode protégé : la question ne trouve en mémoire que des éléments d'un niveau masqué (rien de visible). */
-  masque(question: string): boolean {
-    if (!this.memoire || this.prive || !this.protege) return false;
-    const pour: Demandeur = { type: "conversation", modele: "local" };
-    if (this.rappel(question, pour, 1).length) return false;
-    return this.memoire.retrouver({ texte: question, limite: 1, statuts: ["valide", "observe", "a_confirmer"] }, pour).length > 0;
+  /** Vrai si la mémoire n'a rien de visible (dans le mode courant) pour cette question. Ne dit rien de ce qui est masqué. */
+  rienDeVisible(question: string): boolean {
+    if (!this.memoire || this.prive) return true;
+    return this.rappel(question, { type: "conversation", modele: "local" }, 1).length === 0;
+  }
+
+  /** « Qu'avais-je décidé… », « Que sais-tu de… », « Tu te souviens de… » : question adressée à la mémoire. */
+  estQuestionDeMemoire(phrase: string): boolean {
+    const n = normaliserTexte(phrase);
+    return /\b(?:qu (?:avais|ai)[- ]je decide|que sais[- ]tu|tu te souviens|rappelle[- ]moi|qu est ce que tu sais|est[- ]ce que j ai|ai[- ]je (?:un|une|des))/.test(n);
   }
 
   /** Bloc de contexte pour un modèle local : données, pas instructions. */

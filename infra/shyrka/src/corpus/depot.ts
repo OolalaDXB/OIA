@@ -196,14 +196,16 @@ export class DepotCorpus {
     }
     const jeton = randomBytes(12).toString("hex");
     this.preparations.set(jeton, { jeton, nom, octets, doc, verdict, origine, dateSource: dateSource ?? this.maintenant().toISOString(), ...(fichierDossier ? { fichierDossier } : {}), expire: this.maintenant().getTime() + EXPIRATION_MS });
-    const deja = this.d.catalogue.parEmpreinte(doc.empreinte);
-    const meme = deja ? null : this.d.catalogue.parNom(nom);
+    // Un document d'un niveau masqué dans ce mode n'est jamais nommé (ni doublon, ni version précédente).
+    const visibleNiv = (x: SourcePrivee | null) => (x && this.permis().includes(x.niveau) ? x : null);
+    const deja = visibleNiv(this.d.catalogue.parEmpreinte(doc.empreinte));
+    const meme = deja ? null : visibleNiv(this.d.catalogue.parNom(nom));
     return {
       jeton, nom, type: doc.type, taille: doc.taille, ...(doc.pages ? { pages: doc.pages } : {}), passages: doc.passages.length,
       apercu: doc.texte.slice(0, 1500), etat: verdict.decision === "quarantaine" ? "a_verifier" : "pret",
       motifs: verdict.decision === "quarantaine" ? verdict.motifs : [], avertissements: verdict.decision === "admis" ? verdict.avertissements : [],
       dejaPresent: deja ? { id: deja.id, nom: deja.nom } : null, memeNom: meme ? { id: meme.id, nom: meme.nom, version: meme.version } : null,
-      retireLe: this.d.catalogue.revoqueeAvec(doc.empreinte)?.revoqueLe ?? null,
+      retireLe: visibleNiv(this.d.catalogue.revoqueeAvec(doc.empreinte))?.revoqueLe ?? null,
       niveauPropose: proposerNiveau(doc.texte, verdict, "personnel", nom), niveauProposeProjet: proposerNiveau(doc.texte, verdict, "projet:oia", nom),
     };
   }

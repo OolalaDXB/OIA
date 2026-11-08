@@ -517,7 +517,8 @@ describe("Niveaux de confidentialité et modes de présence", () => {
     expect(s.traiter("Que sais-tu du code du portail ?")!.texte).toBe(REPONSE_PROTEGEE);
     expect(s.traiter("De quoi te souviens-tu ?")!.texte).toBe(REPONSE_PROTEGEE);
     expect(s.traiter("Que sais-tu de la recette fictive du gâteau ?")!.texte).toBe(REPONSE_PROTEGEE); // rien n'existe : même réponse
-    expect(s.masque("code du portail")).toBe(true);
+    expect(s.rienDeVisible("code du portail")).toBe(true);
+    expect(s.rienDeVisible("recette du gâteau")).toBe(true); // même réponse, que quelque chose soit masqué ou non
     expect(s.contexteModele("code du portail", { type: "conversation", modele: "local" })).toBe("");
     niveaux = ["public", "interne", "confidentiel", "personnel"];
     expect(s.traiter("Que sais-tu du code du portail ?")!.texte).toMatch(/4417/);
