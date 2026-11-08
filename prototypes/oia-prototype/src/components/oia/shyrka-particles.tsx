@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import faceDepth from "@/assets/shyrka-face-depth-yeux-ouverts.jpg";
+import faceDepth from "@/assets/shyrka-face-regard-doux.jpg";
 
 type Props = { mode: "repos" | "ecoute" | "reflexion" | "parle"; paused: boolean };
 export function ShyrkaParticles({ mode, paused }: Props) {
