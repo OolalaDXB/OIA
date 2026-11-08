@@ -66,3 +66,9 @@ Recette effacée ensuite (espace de recette et export fictif). Sur ton Mac, rien
 - Le code des dépôts n'est pas indexé (second temps).
 - La copie de nuit suppose le Mac allumé, le volume monté et la connexion `gh` valide ; un échec est noté dans `journal/depots.md` et `~/oia-shyrka-data/logs/depots.log`.
 - Les faits du corpus du 8 novembre sont cherchables et cités, mais aucun n'est devenu un souvenir : à proposer plus tard, par lots, sur ta décision.
+
+## Mise à jour : validation et essai réel du soir
+
+- Essai réel de Mickaël : « Je t'en parlerai quand tu seras seul » donné à une demande de voix (corrigé : la réponse protégée ne concerne qu'une vraie question sur ce que sait Shyrka) ; voix française sur une réponse anglaise (corrigé : la voix suit la langue de la réponse, et « parle-moi en anglais » vaut pour la suite) ; « Unheit » devenu un projet inventé (consigne ajoutée) ; banque, Vannes et dépôts sans réponse, parce que rien n'était indexé.
+- **Corpus du 8 novembre indexé** (import autorisé par Mickaël) : 16 éléments, 38 lignes Swift écartées ; confidentiel 11, personnel 5. Vannes et la banque y sont retrouvées (niveau personnel : seul).
+- **42 dépôts validés** sur décision de Mickaël, aux niveaux proposés, **OIA ramené à « interne »** : 467 documents, 10 389 extraits au total dans l'index ; public 34, interne 402, confidentiel 31, personnel 1 ; 233 s d'indexation et de calcul du sens. `padel.design` : README vide, exclu (une erreur sur un document ne bloque plus le dépôt).

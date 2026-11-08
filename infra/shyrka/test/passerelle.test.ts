@@ -522,3 +522,27 @@ describe("essai réel du 9 novembre : langue, voix et réponse protégée", () =
     expect(b.appels.langues.slice(-1)).toEqual(["fr"]);
   });
 });
+
+describe("passerelle locale : essais de voix", () => {
+  it("liste les moteurs ; joue un échantillon sur un clic ; « interrompre » le coupe ; ElevenLabs refusé sans confirmation ni clé", async () => {
+    const { mkdtempSync, writeFileSync } = await import("node:fs");
+    const { join } = await import("node:path");
+    const { EventEmitter } = await import("node:events");
+    const { LecteurEchantillons } = await import("../src/passerelle/moteurs-voix.js");
+    const d = mkdtempSync(join(tmpdir(), "shyrka-voix-http-"));
+    writeFileSync(join(d, "shyrka-en-v1-elevenlabs.mp3"), "x");
+    const tues: string[] = [];
+    const lecteur = new LecteurEchantillons(d, () => Object.assign(new EventEmitter(), { kill: (s: string) => (tues.push(s), true) }) as never);
+    const b = await demarrer({ echantillons: lecteur, moteurReponses: "macOS (local)", cleElevenLabs: () => null });
+    const v = (await (await fetch(`${b.url}/v1/voix`, { headers: H })).json()) as { reponses: string; elevenlabs: string; echantillons: { id: string }[] };
+    expect(v).toMatchObject({ reponses: "macOS (local)", echantillons: [{ id: "elevenlabs" }] });
+    expect((await post(b, "/v1/voix/echantillon", { id: "elevenlabs" })).status).toBe(200);
+    expect(lecteur.joue?.id).toBe("elevenlabs");
+    await post(b, "/v1/interrompre", {});
+    expect(tues).toEqual(["SIGTERM"]);
+    expect((await post(b, "/v1/voix/echantillon", { id: "inconnu" })).status).toBe(404);
+    expect((await post(b, "/v1/voix/elevenlabs-demonstration", {})).status).toBe(400);
+    expect((await post(b, "/v1/voix/elevenlabs-demonstration", { confirmer: true })).status).toBe(503); // sans clé : rien n'est envoyé
+    expect(v.elevenlabs).toBe("désactivé (aucune clé)");
+  });
+});

@@ -121,7 +121,7 @@ export function ShyrkaProvider({ children }: { children: ReactNode }) {
     setMode("reflexion");
     try {
       const r = await tourTexte(demande, langue);
-      const etat = [locale?.modele.nom.replace(/^ollama:/, "") ?? "modèle local", r.langue && r.langue !== "fr" ? `langue ${r.langue}` : null, `mémoire ${r.memoire}`, `corpus ${r.corpus}`, ctx.prive ? "mode privé" : null].filter(Boolean).join(" · ");
+      const etat = [locale?.modele.nom.replace(/^ollama:/, "") ?? "modèle local", r.moteurVoix ? `voix ${r.moteurVoix}` : null, r.langue && r.langue !== "fr" ? `langue ${r.langue}` : null, `mémoire ${r.memoire}`, `corpus ${r.corpus}`, ctx.prive ? "mode privé" : null].filter(Boolean).join(" · ");
       ajouter({ auteur: "Shyrka", texte: r.reponse ?? "(rien entendu)", meta: `Mac Studio · ${etat}`, sources: r.sources });
       // La fin du tour (voix comprise) arrive par le flux d'états.
       if (r.reponse === null) setOccupe(false);

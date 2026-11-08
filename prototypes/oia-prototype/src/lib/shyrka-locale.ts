@@ -20,7 +20,7 @@ export interface SanteLocale {
 
 /** `citation` : « chemin:ligne » pour un document du dépôt, « titre · page 3 » pour un document privé (aucun chemin du Mac). */
 export interface SourceLocale { chemin: string; ligne: number; section: string; version: string; date: string; citation?: string; ref?: string; titre?: string }
-export interface ReponseLocale { reponse: string | null; sources: SourceLocale[]; memoire: SanteLocale["memoire"]; corpus: SanteLocale["corpus"]; langue: string; ms: number }
+export interface ReponseLocale { reponse: string | null; sources: SourceLocale[]; memoire: SanteLocale["memoire"]; corpus: SanteLocale["corpus"]; langue: string; ms: number; moteurVoix?: string }
 /** `langue` : code ISO détecté par Whisper sur la prise (fr, ru, en…). */
 export interface Transcription { verdict: "parole" | "silence" | "douteux"; raison?: string; transcription: string; langue?: string; analyse: { dureeMs: number; paroleMs: number } }
 
@@ -215,3 +215,10 @@ export const exclureCollection = (id: string, groupe?: string) => appel<ResumeCo
 export const inclureGroupe = (id: string, groupe: string) => appel<ResumeCollection>(`/corpus/collections/${encodeURIComponent(id)}/inclure`, json({ groupe }));
 export const niveauElement = (id: string, eid: string, niveau: Niveau) => appel<unknown>(`/corpus/collections/${encodeURIComponent(id)}/elements/${encodeURIComponent(eid)}/niveau`, json({ niveau }));
 export const exclureElement = (id: string, eid: string) => appel<unknown>(`/corpus/collections/${encodeURIComponent(id)}/elements/${encodeURIComponent(eid)}/exclure`, json({}));
+
+// ── Voix : échantillons (référence ElevenLabs, essai Chatterbox), joués sur le Mac sur un clic. ──
+export interface EchantillonVoix { id: string; libelle: string; moteur: "macos" | "chatterbox" | "elevenlabs"; moteurLibelle: string; texte: string }
+export const lireVoix = () => appel<{ reponses: string; voix: string | null; elevenlabs: string; echantillons: EchantillonVoix[]; joue: string | null }>("/voix");
+/** Appel payant à ElevenLabs avec la seule phrase de démonstration (fixée par la passerelle) : seulement si une clé est installée. */
+export const demonstrationElevenLabs = () => appel<{ ms: number; joue: string }>("/voix/elevenlabs-demonstration", json({ confirmer: true }));
+export const jouerEchantillon = (id: string) => appel<{ joue: string; moteur: string; libelle: string }>("/voix/echantillon", json({ id }));

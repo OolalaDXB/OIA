@@ -28,6 +28,7 @@ import { ShyrkaSession } from "../session.js";
 import { inviteWhisper } from "./audio.js";
 import { VoixMultilingue, voixParLocale, voixPourLangue } from "./langues.js";
 import type { ReglagesVoix } from "./voix.js";
+import { LecteurEchantillons } from "./moteurs-voix.js";
 import { Passerelle, PORT_PASSERELLE, type Connaissances } from "./serveur.js";
 
 /**
@@ -292,6 +293,8 @@ async function main(): Promise<void> {
       : null,
     definirLangue: (code) => speaker?.langue(code),
     reglagesVoix,
+    echantillons: new LecteurEchantillons(),
+    moteurReponses: "macOS (local)",
     ...(speaker ? { dire: (texte: string) => speaker.speak(texte) } : {}),
     invite,
     modele: { nom: `ollama:${modeleNom}`, disponible: () => ollamaPresent(ollamaUrl) },

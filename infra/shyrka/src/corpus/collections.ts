@@ -502,7 +502,13 @@ export class Collections {
         let conversations: Map<string, Conversation> | null = null;
         if (c.type === "conversations") conversations = new Map((await lireExport(c.racine)).conversations.map((x) => [x.id, x]));
         for (const e of elements) {
-          const lu = await this.lireElement(c, e, conversations);
+          // Un document illisible ou vide est exclu avec son motif ; il n'arrête pas l'indexation des autres.
+          let lu: Awaited<ReturnType<Collections["lireElement"]>>;
+          try {
+            lu = await this.lireElement(c, e, conversations);
+          } catch (err) {
+            lu = { passages: [], empreinte: e.empreinte, swift: 0, motif: `illisible : ${(err as Error).message.slice(0, 120)}` };
+          }
           if (lu.passages.length) this.d.corpus.indexerPassages(e.id, `collection/${e.id}`, e.titre, lu.empreinte, e.dateSource, lu.passages);
           this.ecrireElement({ ...e, statut: lu.passages.length ? "indexe" : "exclu", motif: lu.passages.length ? null : lu.motif ?? "aucun passage indexable", empreinte: lu.empreinte, swift: lu.swift });
           t.fait++;

@@ -47,6 +47,7 @@ function depot(nom: string): string {
   ecrire(join(r, "exports", "ventes.csv"), "client,montant\nAlpha,100\n");
   ecrire(join(r, "docs", "acces.md"), "# Accès\n\npassword: Hk82!vQz\n");
   ecrire(join(r, "src", "index.ts"), "export const x = 1;\n");
+  ecrire(join(r, "docs", "vide.md"), "# Titre seul");
   return r;
 }
 const q = async (t: string) => (await vectoriser([t]))[0]!;
@@ -56,7 +57,7 @@ describe("dépôts : documentation seulement, exclusions signalées, validation 
     const c = g.analyserDepot(depot("nebula"), false);
     expect(c).toMatchObject({ etat: "a_valider", niveauDefaut: "interne" });
     const r = g.resume(c.id) as { aIndexer: number; exclusions: Record<string, number>; signales: { chemin: string }[]; passagesSwiftExclus: number; groupes: { groupe: string; niveau: string }[] };
-    expect(r.aIndexer).toBe(3); // README, docs/guide.md, clients/contrats.md
+    expect(r.aIndexer).toBe(4); // README, docs/guide.md, docs/vide.md, clients/contrats.md
     expect(r.exclusions).toEqual({ "fichier de secrets (environnement, clé, jeton)": 1, "données de clients ou sauvegarde": 1, "secret signalé : ressemble à un secret": 1 });
     expect(r.signales.map((x) => x.chemin).sort()).toEqual([".env.local", "docs/acces.md"]);
     expect(r.passagesSwiftExclus).toBe(1);
@@ -78,6 +79,7 @@ describe("dépôts : documentation seulement, exclusions signalées, validation 
     const contrat = () => corpus.chercher("contrat client Alpha", { type: "mickael" }, 5).filter((x) => x.titre.includes("contrats"));
     expect(contrat()[0]?.niveau).toBe("confidentiel");
     expect(corpus.chercher("contrat client Alpha", { type: "mickael" }, 5, { niveaux: ["public", "interne"] }).filter((x) => x.titre.includes("contrats"))).toEqual([]);
+    expect(g.elements(c.id).find((e) => e.chemin === "docs/vide.md")).toMatchObject({ statut: "exclu" }); // vide : exclu, sans bloquer les autres
     g.exclure(c.id, "clients");
     expect(contrat()).toEqual([]);
     g.changerNiveau(c.id, "public", "docs");

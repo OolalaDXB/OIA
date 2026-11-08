@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { demonstrationElevenLabs, interrompre, jouerEchantillon, lireVoix, type EchantillonVoix } from "@/lib/shyrka-locale";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Shell, Fictif } from "@/components/oia/ui";
 import { PresenceShyrka, ConversationShyrka, JournalShyrka, SauvegardeShyrka, useShyrka } from "@/components/oia/shyrka";
@@ -51,5 +53,37 @@ function ShyrkaPage() {
 /** D'où viennent la présence et les réponses : le Mac (passerelle locale) ou la démonstration. */
 function OriginePresence() {
   const { locale } = useShyrka();
-  return <p className="mt-2 text-xs text-tertiary">{locale ? "Présence pilotée par l’état réel du Mac Studio" : "Présence et réponses simulées"}</p>;
+  return <><p className="mt-2 text-xs text-tertiary">{locale ? "Présence pilotée par l’état réel du Mac Studio" : "Présence et réponses simulées"}</p>{locale && <EssaisVoix />}</>;
+}
+
+/**
+ * Essais de voix (mandat Shyrka English Voice V1) : chaque bouton joue un fichier local sur le Mac, sur un clic
+ * seulement ; « Arrêter » coupe tout de suite. Le moteur est toujours nommé ; aucun appel à ElevenLabs.
+ */
+function EssaisVoix() {
+  const [voix, setVoix] = useState<Awaited<ReturnType<typeof lireVoix>> | null>(null);
+  const [joue, setJoue] = useState<EchantillonVoix | null>(null);
+  const [erreur, setErreur] = useState<string | null>(null);
+  const [confirmer, setConfirmer] = useState(false);
+  useEffect(() => { void lireVoix().then(setVoix, () => undefined); }, [joue]);
+  useEffect(() => {
+    if (!joue) return;
+    const t = setInterval(() => void lireVoix().then((v) => { if (!v.joue) setJoue(null); }, () => undefined), 700);
+    return () => clearInterval(t);
+  }, [joue]);
+  if (!voix) return null;
+  const jouer = (e: EchantillonVoix) => { setErreur(null); void jouerEchantillon(e.id).then(() => setJoue(e), (x: unknown) => setErreur(x instanceof Error ? x.message : "Lecture impossible.")); };
+  return <div className="mt-4 border-t border-border pt-3 text-xs">
+    <p className="text-tertiary">Voix des réponses : {voix.reponses}{voix.voix ? ` · ${voix.voix} en français` : ""}</p>
+    {voix.echantillons.length > 0 && <div className="mt-2 flex flex-wrap gap-1">
+      {voix.echantillons.map((e) => <Button key={e.id} size="sm" variant={joue?.id === e.id ? "default" : "outline"} className="min-h-9 font-normal" title={`${e.moteurLibelle} · ${e.texte}`} onClick={() => jouer(e)}>{e.libelle}</Button>)}
+      {joue && <Button size="sm" variant="ghost" className="min-h-9 font-normal" onClick={() => { void interrompre().finally(() => setJoue(null)); }}>Arrêter</Button>}
+    </div>}
+    <p className="mt-1 text-tertiary" aria-live="polite">{joue ? `Lecture sur le Mac · moteur : ${joue.moteurLibelle}` : "Moteur indiqué à chaque lecture. Les fichiers sont joués depuis le Mac, sans appel à ElevenLabs."}</p>
+    <p className="mt-1 text-tertiary">API ElevenLabs : {voix.elevenlabs}.</p>
+    {voix.elevenlabs.startsWith("clé") && (confirmer
+      ? <div className="mt-1 flex flex-wrap items-center gap-1"><span>La phrase de démonstration part chez ElevenLabs (elle quitte le Mac) et consomme des crédits.</span><Button size="sm" variant="outline" className="min-h-9 font-normal" onClick={() => { setConfirmer(false); void demonstrationElevenLabs().then((r) => setErreur(`Généré par ElevenLabs en ${r.ms} ms.`), (x: unknown) => setErreur(x instanceof Error ? x.message : "Échec.")); }}>Envoyer</Button><Button size="sm" variant="ghost" className="min-h-9 font-normal" onClick={() => setConfirmer(false)}>Annuler</Button></div>
+      : <Button size="sm" variant="ghost" className="mt-1 min-h-9 font-normal" onClick={() => setConfirmer(true)}>Nouvelle phrase par l'API ElevenLabs…</Button>)}
+    {erreur && <p role="alert" className="mt-1">{erreur}</p>}
+  </div>;
 }

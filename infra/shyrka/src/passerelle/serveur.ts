@@ -10,6 +10,7 @@ import type { Collections } from "../corpus/collections.js";
 import { TAILLE_MAX } from "../corpus/extraction.js";
 import { MODE_PROTEGE_PAR_DEFAUT, MODES_PRESENCE, NIVEAUX, niveauxPermis, RefusMemoire as RefusMemoireLike, REPONSE_PROTEGEE, type ModePresence, type Niveau } from "@oia/shyrka-noyau";
 import { commandePresence, RANG, REPONSES_PRESENCE } from "./presence.js";
+import { cleElevenLabs, genererDemonstrationElevenLabs, type LecteurEchantillons } from "./moteurs-voix.js";
 import type { ServiceMemoire } from "../memoire/commandes.js";
 import type { EtatSession, TurnResult } from "../session.js";
 import { consigneLangue, langueDemandee, langueDuTexte, langueLatine } from "./langues.js";
@@ -113,6 +114,12 @@ export interface DepsPasserelle {
   dire?: (texte: string) => Promise<unknown>;
   /** Réglages de la voix (volume, débit), modifiés par les commandes « plus fort », « plus lentement ». */
   reglagesVoix?: ReglagesVoix;
+  /** Échantillons de voix (référence ElevenLabs, essai Chatterbox), joués sur le Mac sur un clic seulement. */
+  echantillons?: LecteurEchantillons;
+  /** Clé de l'API ElevenLabs (null : désactivé). Injectable : les tests n'en ont jamais. */
+  cleElevenLabs?: () => string | null;
+  /** Moteur des réponses vocales, affiché à l'écran (« macOS (local) » : Aurélie Enhanced, Milena, Ava…). */
+  moteurReponses?: string;
   invite: string;
   modele: { nom: string; disponible: () => Promise<boolean> };
   voix: string | null;
@@ -373,6 +380,7 @@ export class Passerelle {
     if (!(await this.deps.modele.disponible())) throw new ErreurHttp(503, "modele_indisponible", `Modèle local ${this.deps.modele.nom} indisponible : lancer Ollama. Aucun repli en ligne.`);
     this.limiter();
     this.activite();
+    this.deps.echantillons?.arreter(); // un nouveau tour coupe un échantillon en cours
     // « Je suis seul », « on est entre nous », « je suis avec quelqu'un » : traité par le code, avant tout modèle.
     const presence = commandePresence(t);
     if (presence && !this.occupe) {
@@ -407,7 +415,7 @@ export class Passerelle {
     const corpsDe = (reponse: string | null) => ({
       entendu: t, reponse,
       sources: this.sourcesDuTour.map((e) => ({ chemin: e.connecteur === "depot-git" ? e.chemin : "", ligne: e.ligne, ref: e.ref, citation: e.citation, titre: e.titre, section: e.section, version: e.version, date: e.dateSource.slice(0, 10) })),
-      memoire: this.connaissances.etat.memoire, corpus: this.connaissances.etat.corpus, prive: this.prive, langue: this.langueTour, ms: this.horloge() - debut,
+      memoire: this.connaissances.etat.memoire, corpus: this.connaissances.etat.corpus, prive: this.prive, langue: this.langueTour, ms: this.horloge() - debut, moteurVoix: this.deps.voix ? (this.deps.moteurReponses ?? "macOS (local)") : "aucune voix",
     });
     let diffuse: ReturnType<typeof corpsDe> | null = null;
     const prete = new Promise<string>((r) => (this.reponseDuTour = (x) => {
@@ -541,7 +549,7 @@ export class Passerelle {
       const { echantillons, frequence } = lireWav(readFileSync(wav));
       if (verdictAvant(analyserParole(echantillons, frequence)).verdict !== "parole") return { interrompue: false, raison: "silence" };
       const mot = motInterruption((await transcrire(wav)).texte);
-      const interrompue = mot !== null && this.session.interrompre();
+      const interrompue = mot !== null && (this.session.interrompre() || (this.deps.echantillons?.arreter() ?? false));
       this.log(`interruption : ${interrompue ? "mot d'arrêt entendu, Shyrka coupée" : "aucun mot d'arrêt, elle continue"}`);
       return { interrompue, ...(mot ? { mot } : {}) };
     } finally {
@@ -551,7 +559,28 @@ export class Passerelle {
   }
 
   interrompre(): { interrompue: boolean } {
-    return { interrompue: this.session.interrompre() };
+    const echantillon = this.deps.echantillons?.arreter() ?? false;
+    return { interrompue: this.session.interrompre() || echantillon };
+  }
+
+  /** Joue un échantillon de voix sur le Mac (clic de Mickaël seulement) ; jamais pendant un tour. */
+  jouerEchantillon(id: string): Record<string, unknown> {
+    const lecteur = this.deps.echantillons;
+    if (!lecteur) throw new ErreurHttp(503, "echantillons_indisponibles", "Aucun échantillon de voix sur ce Mac.");
+    if (this.occupe) throw new ErreurHttp(409, "occupe", "Shyrka parle ou réfléchit : attends la fin, ou coupe-la.");
+    let lecture: ReturnType<LecteurEchantillons["jouer"]>;
+    try {
+      lecture = lecteur.jouer(id, this.deps.reglagesVoix?.volume ?? 1);
+    } catch (e) {
+      throw new ErreurHttp(404, "echantillon_inconnu", (e as Error).message);
+    }
+    this.passer("parle");
+    void lecture.fin.then((f) => {
+      this.diffuser("fin", { interrompue: f === "interrompu", sortie: "echantillon", evenements: [] });
+      if (!this.occupe) this.passer(f === "interrompu" ? "interrompu" : "repos");
+    });
+    this.log(`échantillon de voix joué : ${lecture.echantillon.id} (${lecture.echantillon.moteur})`);
+    return { joue: lecture.echantillon.id, moteur: lecture.echantillon.moteur, libelle: lecture.echantillon.libelle };
   }
 
   definirPrive(actif: boolean): { prive: boolean } {
@@ -785,6 +814,7 @@ export class Passerelle {
         if (!jetonValide(req)) throw new ErreurHttp(401, "jeton_requis", "Jeton de la passerelle absent ou invalide.");
         if (route === "GET /v1/evenements") return this.abonner(res);
         if (route === "GET /v1/presence") return envoyer(200, { mode: this.modePresence(), niveaux: niveauxPermis(this.presence) });
+        if (route === "GET /v1/voix") return envoyer(200, { reponses: this.deps.moteurReponses ?? "macOS (local)", voix: this.deps.voix, elevenlabs: (this.deps.cleElevenLabs ?? cleElevenLabs)() ? "clé installée (démonstration seulement)" : "désactivé (aucune clé)", echantillons: this.deps.echantillons?.disponibles().map(({ fichier: _f, ...e }) => e) ?? [], joue: this.deps.echantillons?.joue?.id ?? null });
         if (url.pathname.startsWith("/v1/corpus/")) {
           const [statut, r] = await this.routesCorpus(req, url);
           return envoyer(statut, r);
@@ -801,6 +831,18 @@ export class Passerelle {
             return envoyer(200, await this.tourTexte(corps.texte, corps.langue as string | undefined));
           case "/v1/interrompre":
             return envoyer(200, this.interrompre());
+          case "/v1/voix/elevenlabs-demonstration": {
+            // Appel payant à ElevenLabs, sur un clic explicite, avec la seule phrase de démonstration (fixée ici, jamais venue du client).
+            if (corps.confirmer !== true) throw new ErreurHttp(400, "confirmation_requise", "La phrase de démonstration part chez ElevenLabs et consomme des crédits : confirme explicitement.");
+            const cle = (this.deps.cleElevenLabs ?? cleElevenLabs)();
+            if (!cle) throw new ErreurHttp(503, "elevenlabs_desactive", "ElevenLabs désactivé : aucune clé installée (voir le guide de la voix). Rien n'a été envoyé.");
+            const r = await genererDemonstrationElevenLabs(cle);
+            this.log(`ElevenLabs : phrase de démonstration générée (${r.ms} ms, ${r.octets} octets)`);
+            return envoyer(200, { ...r, ...this.jouerEchantillon("elevenlabs-api") });
+          }
+          case "/v1/voix/echantillon":
+            if (typeof corps.id !== "string") throw new ErreurHttp(400, "id_requis", "Échantillon à jouer requis.");
+            return envoyer(200, this.jouerEchantillon(corps.id));
           case "/v1/prive":
             if (typeof corps.actif !== "boolean") throw new ErreurHttp(400, "actif_requis", "Champ actif (booléen) requis.");
             return envoyer(200, this.definirPrive(corps.actif));
