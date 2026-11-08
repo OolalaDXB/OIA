@@ -491,3 +491,34 @@ describe("passerelle locale : mode de présence", () => {
     expect(r2.sources).toHaveLength(1);
   });
 });
+
+describe("essai réel du 9 novembre : langue, voix et réponse protégée", () => {
+  it("une demande à Shyrka (voix, langue) n'est jamais une question protégée ; une question sur Mickaël l'est", async () => {
+    const { questionDeConnaissance } = await import("../src/passerelle/serveur.js");
+    expect(questionDeConnaissance("Tu peux utiliser ta voix anglaise, tu n'es pas obligé de parler avec un accent français.")).toBe(false);
+    expect(questionDeConnaissance("Peux-tu me parler en anglais ?")).toBe(false);
+    expect(questionDeConnaissance("Unheit.")).toBe(false);
+    expect(questionDeConnaissance("Que représente Vannes pour moi, la ville de Vannes ?")).toBe(true);
+    expect(questionDeConnaissance("Ok, j'ai des comptes bancaires dans quelle banque ?")).toBe(true);
+    expect(questionDeConnaissance("Quel est mon projet le plus intéressant dans tous les projets que tu as dans le repos GitHub ?")).toBe(true);
+  });
+
+  it("langue demandée et langue de la réponse", async () => {
+    const { langueDemandee, langueLatine } = await import("../src/passerelle/langues.js");
+    expect(langueDemandee("Peux-tu me parler en anglais ?")).toBe("en");
+    expect(langueDemandee("Tu peux utiliser ta voix anglaise, tu n'es pas obligé de parler avec un accent français.")).toBe("en");
+    expect(langueDemandee("Parle en français maintenant")).toBe("fr");
+    expect(langueDemandee("Quel temps fait-il en Angleterre ?")).toBeNull();
+    expect(langueLatine("Of course, Mickaël. I'll switch to English for you.")).toBe("en");
+    expect(langueLatine("Bonsoir, Mickaël. Je t'écoute, dis-moi ce que tu veux faire.")).toBe("fr");
+  });
+
+  it("« parle-moi en anglais » vaut pour les tours suivants ; la voix suit la langue de la réponse", async () => {
+    const b = await demarrer({ repondre: async (t) => ({ heard: t, answer: "", output: "texte", events: [] }) });
+    await post(b, "/v1/tour/texte", { texte: "Peux-tu me parler en anglais ?" });
+    await post(b, "/v1/tour/texte", { texte: "Et ensuite, qu'est-ce qu'on fait ?" });
+    expect(b.appels.langues.slice(-1)).toEqual(["en"]); // préférence gardée, malgré une phrase en français
+    await post(b, "/v1/tour/texte", { texte: "Parle en français maintenant" });
+    expect(b.appels.langues.slice(-1)).toEqual(["fr"]);
+  });
+});

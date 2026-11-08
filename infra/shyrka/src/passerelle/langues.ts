@@ -124,3 +124,38 @@ export class VoixMultilingue implements Speaker {
     this.active?.interrompre?.();
   }
 }
+
+const LANGUES_DEMANDEES: [RegExp, string][] = [
+  [/anglais|english/, "en"], [/fran[cç]ais|french/, "fr"], [/russe|russian/, "ru"], [/espagnol|spanish/, "es"], [/allemand|german/, "de"],
+  [/italien|italian/, "it"], [/portugais|portuguese/, "pt"], [/arabe|arabic/, "ar"], [/ukrainien|ukrainian/, "uk"], [/chinois|chinese/, "zh"], [/japonais|japanese/, "ja"],
+];
+
+/**
+ * « Parle-moi en anglais », « réponds en russe », « utilise ta voix anglaise », « speak English » :
+ * langue demandée pour la suite de la conversation (jusqu'à « parle en français »). Null sinon.
+ */
+export function langueDemandee(texte: string): string | null {
+  const n = texte.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+  if (!/\b(parle|parler|parles|reponds|repondre|reponse|voix|speak|talk|answer|switch|passe|passer)\b/.test(n)) return null;
+  const m = /\b(?:en|in|ta voix|voix|to)\s+([a-z]+)/.exec(n) ?? /\b(english|french|russian|spanish|german|italian)\b/.exec(n);
+  if (!m) return null;
+  for (const [re, code] of LANGUES_DEMANDEES) if (re.test(m[1]!)) return code;
+  return null;
+}
+
+const MOTS_OUTILS: Record<string, RegExp> = {
+  fr: /\b(le|la|les|et|est|je|tu|de|des|une|pour|que|pas|avec|dans|sur|ce|vous|nous|mais|ou)\b/g,
+  en: /\b(the|and|you|is|are|to|of|it|for|with|your|this|that|in|on|be|have|will|can|i)\b/g,
+  es: /\b(el|los|las|y|es|que|de|para|con|una|no|por|como|pero|tu|usted)\b/g,
+  de: /\b(der|die|das|und|ist|ich|du|nicht|mit|ein|eine|zu|auf|sie|wir)\b/g,
+  it: /\b(il|che|di|per|non|una|sono|con|della|questo|ma|anche|ti)\b/g,
+  pt: /\b(o|os|e|que|de|para|com|uma|nao|voce|muito|isso)\b/g,
+};
+
+/** Langue d'un texte en alphabet latin, d'après ses mots outils (pour choisir la voix de la réponse). Null si incertain. */
+export function langueLatine(texte: string): string | null {
+  const n = ` ${texte.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")} `;
+  const scores = Object.entries(MOTS_OUTILS).map(([code, re]) => [code, (n.match(re) ?? []).length] as const).sort((a, b) => b[1] - a[1]);
+  const [premier, second] = scores;
+  return premier && premier[1] >= 3 && premier[1] >= (second?.[1] ?? 0) * 1.5 ? premier[0] : null;
+}

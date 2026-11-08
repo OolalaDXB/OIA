@@ -12,7 +12,7 @@ import { MODE_PROTEGE_PAR_DEFAUT, MODES_PRESENCE, NIVEAUX, niveauxPermis, RefusM
 import { commandePresence, RANG, REPONSES_PRESENCE } from "./presence.js";
 import type { ServiceMemoire } from "../memoire/commandes.js";
 import type { EtatSession, TurnResult } from "../session.js";
-import { consigneLangue, langueDuTexte } from "./langues.js";
+import { consigneLangue, langueDemandee, langueDuTexte, langueLatine } from "./langues.js";
 import { motInterruption } from "./interruption.js";
 import { estArret } from "../dialogue.js";
 import { appliquerCommandeVoix, commandeVoix, type ReglagesVoix } from "./voix.js";
@@ -160,6 +160,20 @@ export function appelleLeCorpus(texte: string): boolean {
   return (n.match(/\p{L}{4,}/gu) ?? []).length >= 4;
 }
 
+/**
+ * Question sur ce que sait Shyrka (projets, décisions, documents, vie de Mickaël) : seule une telle question
+ * reçoit la réponse protégée. Une demande adressée à Shyrka elle-même (voix, langue, débit, répéter) n'en est
+ * jamais une (essai réel du 9 novembre : « tu peux utiliser ta voix anglaise » recevait la réponse protégée).
+ */
+export function questionDeConnaissance(texte: string): boolean {
+  const n = ` ${texte.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/['’]/g, " ")} `;
+  if (/\b(voix|parle|parler|parles|langue|anglais|accent|fort|lentement|vite|repete|redis|ecoute|tais|stop|attends)\b/.test(n)) return false;
+  const interrogatif = /\?/.test(texte) || /^ (quel|quelle|quels|quelles|qui|ou|quand|combien|comment|pourquoi|que|qu|est ce|y a t il|as tu|sais tu|connais tu|dis moi|parle moi de|rappelle)\b/.test(n);
+  const travail = /\b(decision|projet|roadmap|rapport|contrat|mandat|budget|j0|fenetre|corpus|cadre|adr|document|sillon|visibility|money|shyrka|oia|depot|client|banque|compte|argent|sante|famille|maison|ville|societe|entreprise)\w*/.test(n);
+  const personnel = /\b(mon|ma|mes|notre|nos|j ai|je|moi)\b/.test(n);
+  return interrogatif && (travail || personnel);
+}
+
 /** Salutation selon l'heure du Mac : bonjour jusqu'à 18 h, bonsoir ensuite. */
 export function salutationDeLHeure(d: Date): string {
   return d.getHours() >= 18 || d.getHours() < 5 ? "Bonsoir" : "Bonjour";
@@ -182,6 +196,7 @@ export function consignesDuTour(d: Date): string {
     "Tu n'as accès ni à son agenda, ni à son planning, ni à ses habitudes, ni à ce qu'il a fait ou prévu : n'invente jamais un programme, un rendez-vous, une règle ou une habitude. Si tu ne sais pas, dis-le ; tu peux lui demander ce qu'il veut faire. Tu n'agis pas : n'annonce jamais que tu préviens, bloques ou programmes quelque chose.",
     "C'est une conversation : réponds à ce que Mickaël vient de dire, rien de plus. Ne parle des décisions ouvertes, du budget, de J0 ou d'un projet que s'il en parle.",
     "Si sa phrase semble coupée ou incomplète, ne la répète pas et ne la complète pas : demande-lui de la terminer. Si tu n'as pas compris, dis-le et demande-lui de reformuler. Ne redis jamais mot pour mot ta réponse précédente.",
+    "Un mot ou un nom que tu ne connais pas (souvent une transcription ratée) : dis que tu ne sais pas de quoi il s'agit et demande de préciser. N'invente jamais que c'est un projet, et ne réutilise jamais les extraits d'un tour précédent pour répondre à autre chose. Un extrait qui ne parle pas du sujet de la question ne répond pas à la question.",
     "Tu as une voix : tes réponses sont dites à voix haute sur le Mac. Ne dis jamais que tu ne peux pas parler ni qu'il faut configurer quelque chose pour ta voix ; s'il te demande de parler plus fort, moins fort, plus lentement ou plus vite, dis-lui de te le dire simplement ainsi.",
     "Appelle-le Mickaël. S'il te dit son nom, réponds « Tu t'appelles Mickaël » (tu peux ajouter « je t'appellerai désormais ainsi »), jamais « je t'appelle Mickaël ». Toute ta réponse est dans une seule langue, celle de Mickaël, du premier au dernier mot.",
   ].join("\n");
@@ -205,6 +220,8 @@ export class Passerelle {
   private etat: EtatPasserelle = "repos";
   private sourcesDuTour: ExtraitCorpus[] = [];
   private langueTour = "fr";
+  /** Langue demandée par Mickaël (« parle-moi en anglais ») : vaut pour les tours suivants, jusqu'à « parle en français ». */
+  private languePreferee: string | null = null;
   private reponseDuTour: ((texte: string) => void) | null = null;
   private readonly horloge: () => number;
   private presence: ModePresence = MODE_PROTEGE_PAR_DEFAUT;
@@ -288,8 +305,13 @@ export class Passerelle {
       },
       onEtat: (e) => this.passer(e === "reflexion" ? "reflexion" : e === "parole" ? "parle" : e === "interrompue" ? "interrompu" : e === "attente" || e === "arret" ? "repos" : this.etat),
       print: (l) => {
+        if (!l.startsWith("Shyrka · ")) return;
+        const reponse = l.slice("Shyrka · ".length);
+        // La voix suit la langue réelle de la réponse (une réponse en anglais n'est pas dite par la voix française).
+        const code = langueDuTexte(reponse) ?? langueLatine(reponse);
+        if (code && code !== this.langueTour) this.deps.definirLangue?.(code);
         // La réponse est diffusée dès qu'elle est prête, avant la voix.
-        if (l.startsWith("Shyrka · ") && this.reponseDuTour) this.reponseDuTour(l.slice("Shyrka · ".length));
+        this.reponseDuTour?.(reponse);
       },
     });
   }
@@ -365,7 +387,9 @@ export class Passerelle {
     // Le verrou tient jusqu'à la fin du tour, voix comprise ; la réponse part dès qu'elle est prête.
     this.occupe = true;
     // L'alphabet du texte prime ; sinon la langue détectée sur la prise ; sinon le français.
-    this.langueTour = langueDuTexte(t) ?? langue ?? "fr";
+    const demandee = langueDemandee(t);
+    if (demandee) this.languePreferee = demandee === "fr" ? null : demandee;
+    this.langueTour = langueDuTexte(t) ?? this.languePreferee ?? langue ?? "fr";
     this.deps.definirLangue?.(this.langueTour);
     this.verifierVolume();
     this.sourcesDuTour = [];
@@ -427,7 +451,7 @@ export class Passerelle {
   private estMasque(t: string): boolean {
     if (niveauxPermis(this.presence).length === NIVEAUX.length || estSalutation(t)) return false;
     const c = this.connaissances;
-    const question = appelleLeCorpus(t) || c.memoire.estQuestionDeMemoire?.(t) === true;
+    const question = c.memoire.estQuestionDeMemoire?.(t) === true || questionDeConnaissance(t);
     if (!question) return false;
     const corpusVisible = c.chercher ? c.chercher(t).length > 0 : false;
     return !corpusVisible && c.memoire.rienDeVisible?.(t) !== false;
