@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Shell, Fictif, Section, Statut } from "@/components/oia/ui";
 import { useDonnees } from "@/lib/donnees-visibility";
+import { FaviconSource } from "@/components/oia/identites";
 
 export function VisibilityShell({ children, page = "Vue d’ensemble", active = "overview" }: { children: ReactNode; page?: string; active?: string }) {
   const { reel } = useDonnees();
@@ -18,7 +19,7 @@ export const ongletsVisibility = [
 ] as const;
 export function SitesSuivis() {
   const { sites } = useDonnees();
-  return <Section titre="Sites suivis"><div className="overflow-x-auto"><table className="w-full min-w-[640px] text-sm"><thead className="text-left text-tertiary"><tr className="border-b border-border">{["Site", "Panel", "Mesure de départ", "Visibilité dans les IA", "Google"].map((h) => <th key={h} className="py-2 pr-4 font-normal">{h}</th>)}</tr></thead><tbody className="num">{sites.map((s) => <tr key={s.nom} className="border-b border-border last:border-0"><td className="py-3 pr-4"><Link to="/sites/$slug" params={{ slug: s.slug }} className="underline underline-offset-4">{s.nom}</Link><div className="text-tertiary">{s.url}</div></td><td className="pr-4 text-muted-foreground">{s.panel}</td><td className="pr-4 text-muted-foreground">{s.depart}</td><td className="pr-4">{s.ia === null ? <Statut etat="bloquant" label="Non mesuré" /> : `${s.ia} %`}</td><td className="text-muted-foreground">{s.google}</td></tr>)}</tbody></table></div></Section>;
+  return <Section titre="Sites suivis"><div className="overflow-x-auto"><table className="w-full min-w-[640px] text-sm"><thead className="text-left text-tertiary"><tr className="border-b border-border">{["Site", "Panel", "Mesure de départ", "Visibilité dans les IA", "Google"].map((h) => <th key={h} className="py-2 pr-4 font-normal">{h}</th>)}</tr></thead><tbody className="num">{sites.map((s) => <tr key={s.nom} className="border-b border-border last:border-0"><td className="py-3 pr-4"><span className="flex items-center gap-2.5"><FaviconSource source={s.url} /><span><Link to="/sites/$slug" params={{ slug: s.slug }} className="underline underline-offset-4">{s.nom}</Link><div className="text-tertiary">{s.url}</div></span></span></td><td className="pr-4 text-muted-foreground">{s.panel}</td><td className="pr-4 text-muted-foreground">{s.depart}</td><td className="pr-4">{s.ia === null ? <Statut etat="bloquant" label="Non mesuré" /> : `${s.ia} %`}</td><td className="text-muted-foreground">{s.google}</td></tr>)}</tbody></table></div></Section>;
 }
 export function SeoResume() {
   const { agents } = useDonnees();

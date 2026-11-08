@@ -3,18 +3,19 @@ import { useContexte } from "@/lib/shyrka-contexte";
 import { ShyrkaParticles } from "@/components/oia/shyrka-particles";
 import { Link, useRouterState } from "@tanstack/react-router";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { ArrowUp, Trash2, Maximize, Mic, MicOff, Pause, Play, X } from "lucide-react";
+import { ArrowUp, Trash2, Maximize, Mic, MicOff, Pause, Play, X, Keyboard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Sheet, SheetTrigger, SheetContent, SheetTitle, SheetDescription } from "@/components/ui/sheet";
-import { simulerShyrka, etatPresence } from "@/lib/donnees/shyrka";
+import { simulerShyrka } from "@/lib/donnees/shyrka";
+import { actionClavierImmersive, DELAI_ENVOI_MS, DELAI_REFLEXION_MS, libelleImmersif, TRANSCRIPTION_SIMULEE, type PhaseImmersive } from "@/lib/shyrka-immersive";
 import { useShyrkaDonnees } from "@/lib/donnees/provider";
 import { EtatEcran } from "@/components/oia/etat-donnees";
 
 import { lireShyrka, sauverShyrka } from "@/lib/shyrka-storage";
 
-type Mode = "repos" | "ecoute" | "parle";
+type Mode = "repos" | "ecoute" | "reflexion" | "parle";
 type Message = { id: number; auteur: "Vous" | "Shyrka"; texte: string };
 type Action = { id: number; texte: string; faite: boolean };
 type Session = {
@@ -80,10 +81,11 @@ export function useShyrka() {
 export function PresenceShyrka({ compacte = false, seule = false, modeForce, paused = false }: { compacte?: boolean; seule?: boolean; modeForce?: Mode; paused?: boolean }) {
   const { mode: modeSession, setPleinEcran } = useShyrka();
   const mode = modeForce ?? modeSession;
+  const description = mode === "repos" ? "au repos" : mode === "ecoute" ? "en écoute" : mode === "reflexion" ? "en réflexion" : "réponse simulée";
   return <div className={`shyrka-presence ${compacte ? "shyrka-presence-small" : ""}`} data-mode={mode}>
-    <div role="img" aria-label={`Présence de Shyrka, ${mode === "repos" ? "au repos" : mode === "ecoute" ? "en écoute" : "réponse simulée"}`}><ShyrkaParticles mode={mode} paused={paused} /></div>
-    {!seule && <Button variant="ghost" size="icon" className="absolute right-2 top-2 size-12 text-shyrka-light hover:bg-shyrka-night hover:text-shyrka-light" onClick={() => setPleinEcran(true)} aria-label="Afficher la présence de Shyrka en plein écran" title="Afficher en plein écran"><Maximize /></Button>}
-    {!seule && <span className="absolute bottom-4 left-4 text-xs text-shyrka-light">{mode === "repos" ? "Au repos" : mode === "ecoute" ? "À l’écoute" : "Réponse simulée"}</span>}
+    <div role="img" aria-label={`Présence de Shyrka, ${description}`}><ShyrkaParticles mode={mode} paused={paused} /></div>
+    {!seule && <Button variant="ghost" size="icon" className="absolute right-2 top-2 size-12 text-shyrka-light hover:bg-shyrka-night hover:text-shyrka-light" onClick={() => setPleinEcran(true)} aria-label="Afficher la présence de Shyrka en plein écran" title="Afficher en plein écran, touche F"><Maximize /></Button>}
+    {!seule && <span className="absolute bottom-4 left-4 text-xs text-shyrka-light">{mode === "repos" ? "Au repos" : mode === "ecoute" ? "À l’écoute" : mode === "reflexion" ? "Réflexion" : "Réponse simulée"}</span>}
   </div>;
 }
 
@@ -129,8 +131,19 @@ export function JournalShyrka() {
 }
 
 export function ShyrkaGlobale() {
-  const { ouvert, ouvrir } = useShyrka();
+  const { ouvert, ouvrir, pleinEcran, setPleinEcran } = useShyrka();
   const surPageShyrka = useRouterState({ select: (s) => s.location.pathname === "/shyrka" });
+  useEffect(() => {
+    const gererF = (event: KeyboardEvent) => {
+      const cible = event.target as HTMLElement | null;
+      if (cible?.matches("input, textarea, [contenteditable=true]") || event.ctrlKey || event.metaKey || event.altKey) return;
+      if (event.key.toLowerCase() !== "f" || (!pleinEcran && !surPageShyrka && !ouvert)) return;
+      event.preventDefault();
+      setPleinEcran(!pleinEcran);
+    };
+    window.addEventListener("keydown", gererF);
+    return () => window.removeEventListener("keydown", gererF);
+  }, [ouvert, pleinEcran, setPleinEcran, surPageShyrka]);
   return <>
     <Sheet open={ouvert} onOpenChange={ouvrir}>
     <SheetTrigger asChild><Button variant="outline" className={`shyrka-launcher fixed right-4 z-40 min-h-12 gap-2 bg-background font-normal ${surPageShyrka ? "hidden xl:inline-flex" : ""}`} aria-label="Ouvrir le panneau Shyrka"><span className="size-1.5 rounded-full bg-bar" aria-hidden="true" />Shyrka</Button></SheetTrigger>
@@ -146,39 +159,193 @@ export function ShyrkaGlobale() {
 }
 function PresencePleinEcran() {
   const { presenceInitiale } = useShyrkaDonnees();
-  const { pleinEcran, setPleinEcran, mode } = useShyrka();
+  const { pleinEcran, setPleinEcran, mode, envoyer, messages } = useShyrka();
   const [microActif, setMicroActif] = useState(presenceInitiale.microActif);
   const [pause, setPause] = useState(presenceInitiale.pause);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
+  const [phase, setPhase] = useState<PhaseImmersive>("repos");
+  const [compris, setCompris] = useState<string | null>(null);
+  const [edition, setEdition] = useState(false);
+  const [brouillon, setBrouillon] = useState("");
   const disparition = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const reflexionTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const envoiTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const retourFocus = useRef<HTMLElement | null>(null);
+  const contenuRef = useRef<HTMLDivElement>(null);
+  const saisieRef = useRef<HTMLInputElement>(null);
+  const phaseRef = useRef(phase);
+  const modeRef = useRef(mode);
+  const comprisRef = useRef(compris);
+  const editionRef = useRef(edition);
+  const envoyerRef = useRef(envoyer);
+  const envoyerTexteRef = useRef<(texte: string) => void>(() => {});
+  phaseRef.current = phase;
+  modeRef.current = mode;
+  comprisRef.current = compris;
+  editionRef.current = edition;
+  envoyerRef.current = envoyer;
+
+  const nettoyerMinuteurs = () => {
+    clearTimeout(reflexionTimer.current);
+    clearTimeout(envoiTimer.current);
+  };
   const reveiller = () => {
     setVisible(true);
     clearTimeout(disparition.current);
-    disparition.current = setTimeout(() => setVisible(false), 3000);
+    disparition.current = setTimeout(() => setVisible(false), 2400);
   };
+  const demarrerEcoute = () => {
+    if (pause || modeRef.current === "parle" || editionRef.current || phaseRef.current === "reflexion" || comprisRef.current) return;
+    nettoyerMinuteurs();
+    setCompris(null);
+    setPhase("ecoute");
+    phaseRef.current = "ecoute";
+    setMicroActif(true);
+  };
+  const envoyerTexte = (texte: string) => {
+    const demande = texte.trim();
+    if (!demande) return;
+    nettoyerMinuteurs();
+    setCompris(null);
+    comprisRef.current = null;
+    setPhase("repos");
+    phaseRef.current = "repos";
+    setMicroActif(false);
+    setEdition(false);
+    editionRef.current = false;
+    setBrouillon("");
+    envoyerRef.current(demande);
+  };
+  envoyerTexteRef.current = envoyerTexte;
+  const terminerEcoute = () => {
+    if (phaseRef.current !== "ecoute") return;
+    setPhase("reflexion");
+    phaseRef.current = "reflexion";
+    setMicroActif(false);
+    reflexionTimer.current = setTimeout(() => {
+      setCompris(TRANSCRIPTION_SIMULEE);
+      comprisRef.current = TRANSCRIPTION_SIMULEE;
+      envoiTimer.current = setTimeout(() => envoyerTexteRef.current(TRANSCRIPTION_SIMULEE), DELAI_ENVOI_MS);
+    }, DELAI_REFLEXION_MS);
+  };
+  const ouvrirSaisie = (base = "", touche = "") => {
+    nettoyerMinuteurs();
+    setCompris(null);
+    comprisRef.current = null;
+    setPhase("repos");
+    phaseRef.current = "repos";
+    setMicroActif(false);
+    setBrouillon(base + touche);
+    setEdition(true);
+    editionRef.current = true;
+  };
+
   useEffect(() => {
-    if (pleinEcran) {
-      setMicroActif(false);
-      setPause(false);
-      setVisible(true);
-      disparition.current = setTimeout(() => setVisible(false), 3000);
-    }
-    return () => clearTimeout(disparition.current);
+    if (!pleinEcran) return;
+    setMicroActif(false);
+    setPause(false);
+    setVisible(false);
+    setPhase("repos");
+    setCompris(null);
+    setEdition(false);
+    setBrouillon("");
+    return () => {
+      clearTimeout(disparition.current);
+      clearTimeout(reflexionTimer.current);
+      clearTimeout(envoiTimer.current);
+    };
   }, [pleinEcran]);
-  const etat = etatPresence(microActif, pause, mode === "parle");
+  useEffect(() => {
+    if (edition) saisieRef.current?.focus();
+  }, [edition]);
+  useEffect(() => {
+    if (mode !== "parle") return;
+    nettoyerMinuteurs();
+    setCompris(null);
+    setPhase("repos");
+    setMicroActif(false);
+    setEdition(false);
+  }, [mode]);
+  useEffect(() => {
+    if (!pleinEcran) return;
+    const clavier = (event: KeyboardEvent) => {
+      const cible = event.target as HTMLElement | null;
+      const saisie = Boolean(cible?.matches("input, textarea, [contenteditable=true]"));
+      const autreBouton = Boolean(cible?.closest("button") && !cible.closest(".shyrka-presence-button"));
+      if (event.key === "Escape" && (editionRef.current || comprisRef.current)) {
+        event.preventDefault();
+        event.stopPropagation();
+        nettoyerMinuteurs();
+        setEdition(false);
+        editionRef.current = false;
+        setBrouillon("");
+        setCompris(null);
+        comprisRef.current = null;
+        setPhase("repos");
+        phaseRef.current = "repos";
+        return;
+      }
+      if (saisie || autreBouton) return;
+      const action = actionClavierImmersive({
+        key: event.key,
+        repeat: event.repeat,
+        modifieur: event.ctrlKey || event.metaKey || event.altKey,
+        enAttente: Boolean(comprisRef.current),
+      });
+      if (action === "parole") {
+        event.preventDefault();
+        reveiller();
+        demarrerEcoute();
+      } else if (action === "envoyer" && comprisRef.current) {
+        event.preventDefault();
+        envoyerTexte(comprisRef.current);
+      } else if (action === "corriger") {
+        event.preventDefault();
+        ouvrirSaisie(comprisRef.current ?? "", event.key.length === 1 ? event.key : "");
+      } else if (action === "ecrire") {
+        event.preventDefault();
+        ouvrirSaisie("", event.key);
+      }
+    };
+    const relacher = (event: KeyboardEvent) => {
+      if (event.key === " " && phaseRef.current === "ecoute") {
+        event.preventDefault();
+        terminerEcoute();
+      }
+    };
+    window.addEventListener("keydown", clavier, true);
+    window.addEventListener("keyup", relacher);
+    return () => {
+      window.removeEventListener("keydown", clavier, true);
+      window.removeEventListener("keyup", relacher);
+    };
+  }, [pleinEcran, mode, pause]);
+
+  const derniereReponse = [...messages].reverse().find((message) => message.auteur === "Shyrka")?.texte ?? "";
+  const sousTitre = mode === "parle" ? derniereReponse : compris ?? "";
+  const etat = libelleImmersif(phase, mode === "parle", pause);
+  const presenceMode: Mode = mode === "parle" ? "parle" : phase;
   return <DialogPrimitive.Root open={pleinEcran} onOpenChange={setPleinEcran}><DialogPrimitive.Portal>
-    <DialogPrimitive.Content aria-describedby={undefined} className="shyrka-fullscreen" data-paused={pause} onOpenAutoFocus={() => { retourFocus.current = document.activeElement instanceof HTMLElement ? document.activeElement : null; }} onCloseAutoFocus={(e) => { if (retourFocus.current?.isConnected) { e.preventDefault(); retourFocus.current.focus(); } }} onPointerMove={reveiller} onPointerDown={reveiller} onKeyDown={reveiller}>
+    <DialogPrimitive.Content ref={contenuRef} aria-describedby="shyrka-immersion-aide" className="shyrka-fullscreen" data-paused={pause} onOpenAutoFocus={(event) => { event.preventDefault(); retourFocus.current = document.activeElement instanceof HTMLElement ? document.activeElement : null; contenuRef.current?.focus(); }} onCloseAutoFocus={(e) => { if (retourFocus.current?.isConnected) { e.preventDefault(); retourFocus.current.focus(); } }} onPointerMove={reveiller} onPointerDown={reveiller} onKeyDown={reveiller} onKeyDownCapture={(event) => { if (event.key === "Escape" && edition) { event.preventDefault(); event.stopPropagation(); setEdition(false); setBrouillon(""); } }}>
       <DialogPrimitive.Title className="sr-only">Présence de Shyrka, simulation</DialogPrimitive.Title>
-      <PresenceShyrka seule paused={pause} modeForce={mode === "parle" ? "parle" : microActif ? "ecoute" : "repos"} />
-      <div className="shyrka-controls" data-visible={visible} onFocus={reveiller}>
-        <p className="mb-3 text-center text-[10px]" role="status">{etat}</p>
-        <div className="flex justify-center gap-4">
-          <Button variant="ghost" size="icon" className="shyrka-control" aria-label="Micro simulé" aria-pressed={microActif} title={microActif ? "Couper le micro simulé" : "Activer le micro simulé"} onClick={() => setMicroActif((v) => !v)}>{microActif ? <Mic /> : <MicOff />}</Button>
-          <Button variant="ghost" size="icon" className="shyrka-control" aria-label="Mettre la présence en pause" aria-pressed={pause} title={pause ? "Relancer" : "Pause"} onClick={() => setPause((v) => !v)}>{pause ? <Play /> : <Pause />}</Button>
-          <Button variant="ghost" size="icon" className="shyrka-control" aria-label="Quitter la présence plein écran" title="Quitter" onClick={() => setPleinEcran(false)}><X /></Button>
+      <p id="shyrka-immersion-aide" className="sr-only">Maintenez la barre d’espace pour parler. Entrée envoie la transcription. Une autre touche permet de corriger. F ferme le plein écran.</p>
+      <button type="button" className="shyrka-presence-button" aria-label={phase === "ecoute" ? "Arrêter l’écoute simulée" : "Démarrer l’écoute simulée"} aria-describedby="shyrka-immersion-aide" onClick={() => { if (phaseRef.current === "ecoute") terminerEcoute(); else demarrerEcoute(); }}>
+        <PresenceShyrka seule paused={pause} modeForce={presenceMode} />
+      </button>
+      <Button variant="ghost" size="icon" className="shyrka-close" data-visible={visible} aria-label="Fermer le plein écran" title="Fermer, touche F" onFocus={reveiller} onClick={() => setPleinEcran(false)}><X /></Button>
+      {sousTitre && <p className="shyrka-sous-titre" aria-live="polite">{sousTitre}</p>}
+      {edition && <form className="shyrka-saisie" onSubmit={(event) => { event.preventDefault(); envoyerTexte(brouillon); }}>
+        <Input ref={saisieRef} aria-label="Écrire à Shyrka" placeholder="Écrire à Shyrka" autoComplete="off" value={brouillon} onChange={(event) => setBrouillon(event.target.value)} />
+        <Button type="submit" variant="ghost" size="icon" className="shyrka-control" aria-label="Envoyer le message" disabled={!brouillon.trim()}><ArrowUp /></Button>
+      </form>}
+      <div className="shyrka-controls" data-visible={visible && !edition} onFocus={reveiller}>
+        <div className="flex justify-center gap-3">
+          <Button variant="ghost" size="icon" className="shyrka-control" aria-label={microActif ? "Arrêter l’écoute simulée" : "Démarrer l’écoute simulée"} aria-pressed={microActif} title="Parler" onClick={() => { if (phaseRef.current === "ecoute") terminerEcoute(); else demarrerEcoute(); }}>{microActif ? <Mic /> : <MicOff />}</Button>
+          <Button variant="ghost" size="icon" className="shyrka-control" aria-label="Écrire à Shyrka" title="Écrire" onClick={() => ouvrirSaisie()}><Keyboard /></Button>
+          <Button variant="ghost" size="icon" className="shyrka-control" aria-label={pause ? "Relancer la présence" : "Mettre la présence en pause"} aria-pressed={pause} title={pause ? "Relancer" : "Pause"} onClick={() => setPause((valeur) => !valeur)}>{pause ? <Play /> : <Pause />}</Button>
         </div>
       </div>
+      <div aria-live="polite">{etat && <p className="shyrka-etat" data-controls-visible={visible && !edition}>{etat}</p>}</div>
     </DialogPrimitive.Content>
   </DialogPrimitive.Portal></DialogPrimitive.Root>;
 }

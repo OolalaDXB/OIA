@@ -1,6 +1,23 @@
 # Roadmap
 
 ## Open
+- [x] Shyrka : présence immersive plein écran, raccourci F, parole simulée, sous-titres, saisie discrète et accessibilité clavier, avec commit local uniquement.
+- [x] Shyrka : ouvrir légèrement les yeux du visage de particules sans changer la présence ni les animations.
+- [x] Visibility : permettre les ajouts locaux dans Marque, Concurrents et Questions/prompts, avec conservation après rechargement et Moteurs inchangé.
+- [x] Généraliser les logos et favicons aux réseaux, sources, sites et plateformes dans tout le cockpit, avec repli local et vérification visuelle.
+- [x] Visibility : ajouter les couleurs pastel des indicateurs, les logos des assistants et les pastilles des marques, puis vérifier sur grand écran et mobile.
+- [x] Vérifier la reprise, sécuriser aperçu et annulation avec les clés existantes (91cecd5), tests locaux réussis ; parcours connecté restant ci-dessous.
+- [x] Préparer le contrat commun des dépenses Visibility, Money Lookup et Shyrka, pour Moteurs et la colonne, sans création Supabase (91cecd5).
+- [x] Réduire les marges inutilisées sur grands écrans et vérifier la largeur sur mobile, livré sur main (7e79990).
+- [ ] Accès du nouveau compte : rattachement OIA absent, correction des droits à effectuer dans OIA hors cockpit.
+- [x] Corriger la boucle Money Lookup, tester les lectures uniques et la visite par entrée.
+- [x] Ajouter « Définir mon mot de passe » dans Réglages et livrer la récupération sur OIA main (c0a2ce6).
+- [x] Brancher Money Lookup sur les vues v2 avec connexion existante, accès et états explicites.
+- [x] Brancher décisions, projets, CRM, notes, tâches, vues, demandes, liens et journal sur les RPC existantes.
+- [x] Ajouter la reprise de l'ancienne console, bilan, historique et annulation protégée.
+- [x] Vérifier les règles et parcours disponibles, documenter les écarts puis transférer uniquement le cockpit vers OIA main (73c07af).
+- [ ] Vérifier les lectures et écritures de production avec un compte connecté : session Supabase externe non disponible ici.
+- [x] Reprendre Réglages > Moteurs avec cartes fournisseurs, dépenses fictives, plafond et plateformes en lecture seule, puis vérifier.
 - [x] Préparer une couche de données par module, sources réelles non branchées et états chargement, vide, erreur.
 - [x] Vérifier l’affichage et les parcours, puis envoyer uniquement sur la branche prototype OIA.
 - [x] Envoyer le prototype à jour sur `lovable/oia-visibility-prototype`, sans toucher `main` ni les dossiers protégés.
