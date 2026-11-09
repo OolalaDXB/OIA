@@ -13,7 +13,7 @@ import { commandePresence, RANG, REPONSES_PRESENCE } from "./presence.js";
 import { cleElevenLabs, genererDemonstrationElevenLabs, type LecteurEchantillons } from "./moteurs-voix.js";
 import type { ServiceMemoire } from "../memoire/commandes.js";
 import type { EtatSession, TurnResult } from "../session.js";
-import { consigneLangue, langueDemandee, langueDuTexte, langueLatine } from "./langues.js";
+import { consigneLangue, langueDemandee, langueProbable } from "./langues.js";
 import { motInterruption } from "./interruption.js";
 import { estArret } from "../dialogue.js";
 import { appliquerCommandeVoix, commandeVoix, type ReglagesVoix } from "./voix.js";
@@ -315,8 +315,9 @@ export class Passerelle {
         if (!l.startsWith("Shyrka · ")) return;
         const reponse = l.slice("Shyrka · ".length);
         // La voix suit la langue réelle de la réponse (une réponse en anglais n'est pas dite par la voix française).
-        const code = langueDuTexte(reponse) ?? langueLatine(reponse);
-        if (code && code !== this.langueTour) this.deps.definirLangue?.(code);
+        // Incertain (réponse très courte) : la langue du tour.
+        const code = langueProbable(reponse) ?? this.langueTour;
+        this.deps.definirLangue?.(code);
         // La réponse est diffusée dès qu'elle est prête, avant la voix.
         this.reponseDuTour?.(reponse);
       },
@@ -397,7 +398,8 @@ export class Passerelle {
     // L'alphabet du texte prime ; sinon la langue détectée sur la prise ; sinon le français.
     const demandee = langueDemandee(t);
     if (demandee) this.languePreferee = demandee === "fr" ? null : demandee;
-    this.langueTour = langueDuTexte(t) ?? this.languePreferee ?? langue ?? "fr";
+    // Le texte de la phrase décide (Whisper se trompe sur les phrases courtes) ; puis la langue demandée ; Whisper en dernier.
+    this.langueTour = this.languePreferee && !langueProbable(t)?.match(/^(ru|uk|ar|he|el|ko|ja|zh|hi)$/) ? this.languePreferee : langueProbable(t) ?? langue ?? "fr";
     this.deps.definirLangue?.(this.langueTour);
     this.verifierVolume();
     this.sourcesDuTour = [];
@@ -447,7 +449,7 @@ export class Passerelle {
     }
     const corps = diffuse ?? corpsDe(reponse);
     if (!diffuse) this.diffuser("reponse", corps);
-    this.log(`tour texte : ${t.length} car., ${corps.sources.length} source(s), ${corps.ms} ms`);
+    this.log(`tour texte : ${t.length} car., langue ${this.langueTour}${langue && langue !== this.langueTour ? ` (Whisper : ${langue})` : ""}, ${corps.sources.length} source(s), ${corps.ms} ms`);
     return corps;
   }
 

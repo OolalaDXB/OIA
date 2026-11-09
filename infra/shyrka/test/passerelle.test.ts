@@ -546,3 +546,21 @@ describe("passerelle locale : essais de voix", () => {
     expect(v.elevenlabs).toBe("désactivé (aucune clé)");
   });
 });
+
+describe("essai réel du 9 novembre (2) : français dit avec l'accent anglais", () => {
+  it("le texte décide de la langue, même court ; Whisper ne décide qu'en dernier recours", async () => {
+    const { langueProbable } = await import("../src/passerelle/langues.js");
+    for (const t of ["Je suis seul.", "C'est quoi ?", "Très bien, merci.", "Où en est le projet ?", "Bonsoir, Mickaël.", "Je t'écoute."]) expect(langueProbable(t), t).toBe("fr");
+    for (const t of ["What's my schedule today?", "Of course, I'll switch to English.", "I'm here, what do you need?"]) expect(langueProbable(t), t).toBe("en");
+    expect(langueProbable("Привет, как дела?")).toBe("ru");
+    expect(langueProbable("OK.")).toBeNull();
+  });
+
+  it("une phrase française que Whisper croit anglaise : tour en français, voix française, aucune consigne anglaise", async () => {
+    const b = await demarrer({ transcription: "Où en est le projet Sillon ?", langue: "en" });
+    const r = (await (await post(b, "/v1/tour/texte", { texte: "Où en est le projet Sillon ?", langue: "en" })).json()) as { langue: string };
+    expect(r.langue).toBe("fr");
+    expect(b.appels.langues.at(-1)).toBe("fr");
+    expect(b.appels.contextes.at(-1) ?? "").not.toMatch(/Langue de ce tour/);
+  });
+});

@@ -159,3 +159,18 @@ export function langueLatine(texte: string): string | null {
   const [premier, second] = scores;
   return premier && premier[1] >= 3 && premier[1] >= (second?.[1] ?? 0) * 1.5 ? premier[0] : null;
 }
+
+/**
+ * Langue la plus probable d'un texte (phrase de Mickaël ou réponse de Shyrka) : alphabet, puis lettres propres au
+ * français, puis mots outils. Plus sûre que la détection de Whisper sur une phrase courte (essai réel du 9 novembre :
+ * des phrases françaises détectées anglaises, réponses en français dites avec l'accent anglais). Null si incertain.
+ */
+export function langueProbable(texte: string): string | null {
+  const alphabet = langueDuTexte(texte);
+  if (alphabet) return alphabet;
+  const n = ` ${texte.toLowerCase()} `;
+  const francais = (n.match(/[éèêëàâçùûôîïœ]/g) ?? []).length + (n.match(/(^|[^a-z])(c'est|j'ai|qu'|d'|l'|n'|t')|\b(je|tu|il|elle|on|nous|vous|est|suis|es|sont|les|le|la|des|du|une|un|et|pour|avec|pas|oui|non|merci|bonjour|bonsoir|salut|quoi|moi|toi|mon|ma|mes|ton|ta|tes|ce|ça|ca|seul|seule|bien|mais|aussi|très|tres)\b/g) ?? []).length;
+  const anglais = (n.match(/\b(the|you|is|are|i|i'm|i'll|it's|what|what's|my|me|your|with|this|that|have|can|will|of|do|does|today|here|need|please|hello|hi|thanks|yes|no|how|where|when|why)\b/g) ?? []).length;
+  if (francais >= 2 && francais >= anglais * 1.5) return "fr";
+  return langueLatine(texte) ?? (anglais >= 2 && anglais > francais * 1.5 ? "en" : null);
+}
