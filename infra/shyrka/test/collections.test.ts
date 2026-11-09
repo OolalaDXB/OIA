@@ -180,3 +180,34 @@ describe("exports de conversations : une conversation = un document, niveau prop
     await expect(lireExport(piege)).rejects.toMatchObject({ code: "chemin_piege" });
   });
 });
+
+describe("questions personnelles (essai réel du 9 novembre)", () => {
+  it("noms propres : « Vannes » trouvé comme un identifiant ; mots courants ignorés", async () => {
+    const { nomsPropres } = await import("../src/executive/corpus.js");
+    expect(nomsPropres("Que représente Vannes pour moi ?")).toEqual(["vannes"]);
+    expect(nomsPropres("Quel est le projet de Mickaël avec Shyrka ?")).toEqual([]);
+    const { questionPersonnelle } = await import("../src/passerelle/serveur.js");
+    expect(questionPersonnelle("Dans quelle banque ai-je mes comptes ?")).toBe(true);
+    expect(questionPersonnelle("Quel service SILLON utilise-t-il ?")).toBe(false);
+  });
+
+  it("une question sur Mickaël fait passer ses sources personnelles devant la documentation des dépôts", async () => {
+    const r = depot("nebula");
+    ecrire(join(r, "docs", "banques.md"), "# Banques\n\nLe module fictif compare les banques, les comptes et les frais bancaires des clients.\n");
+    const c = g.analyserDepot(r, false);
+    g.valider(c.id);
+    const s = join(dir, "semence");
+    ecrire(join(s, "manifest.json"), JSON.stringify({ documents: [] }));
+    ecrire(join(s, "facts.jsonl"), JSON.stringify({ id: "b1", section: "Finances", text: "Fait fictif : les comptes de Mickaël sont à la banque Nordis.", privacy: "P3" }));
+    const sem = g.analyserSemence(s);
+    g.valider(sem.id);
+    await g.attendre();
+    const q = "Dans quelle banque ai-je mes comptes ?";
+    const qv = (await vectoriser([q]))[0]!;
+    const perso = corpus.chercher(q, { type: "mickael" }, 3, { vecteur: qv, personnelle: true, sansSeuil: true });
+    expect(perso[0]).toMatchObject({ connecteur: "semence", ref: "fait b1" });
+    const vannes = corpus.chercher("Que représente Nordis pour moi ?", { type: "mickael" }, 3, { vecteur: await q2("Que représente Nordis pour moi ?") });
+    expect(vannes[0]).toMatchObject({ ref: "fait b1", identifiant: true });
+  });
+});
+const q2 = async (t: string) => (await vectoriser([t]))[0]!;

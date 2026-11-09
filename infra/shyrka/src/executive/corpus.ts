@@ -176,6 +176,11 @@ export interface OptionsRecherche {
   parDocument?: number;
   /** Niveaux visibles (mode de présence) ; tous si absent. */
   niveaux?: Niveau[];
+  /**
+   * Question de Mickaël sur lui-même (« mes sociétés », « ma banque ») : ses sources personnelles (corpus ChatGPT,
+   * documents déposés, conversations d'IA) passent devant la documentation des dépôts, avec un seuil un peu plus bas.
+   */
+  personnelle?: boolean;
 }
 
 type LigneExtrait = { rid: number; source: string; titre: string; ligne: number; ref: string; corps: string; chemin: string; version: string; date_source: string; indexe_le: string; titre_doc: string };
@@ -403,7 +408,18 @@ export class Corpus {
     const qid = identifiants(texte);
     const avecId = new Set<number>();
     for (const id of qid) for (const r of this.db.prepare("SELECT rid FROM ids WHERE ident = ?").all(id) as { rid: number }[]) avecId.add(Number(r.rid));
-    const scores = this.matrice.rids.map((rid, i) => ({ rid, s: produit(q, this.matrice!.v[i]!) }));
+    // Noms propres de la question (« Vannes ») : un extrait qui les contient est trouvé comme un identifiant ; un nom trop courant (plus de 40 extraits) est ignoré.
+    for (const nom of nomsPropres(texte)) {
+      const r = this.db.prepare("SELECT rowid AS rid FROM extraits WHERE extraits MATCH ? LIMIT 41").all(`"${nom.replace(/"/g, "")}"`) as { rid: number }[];
+      if (r.length && r.length <= 40) for (const x of r) avecId.add(Number(x.rid));
+    }
+    const perso = new Set<number>();
+    if (opts.personnelle)
+      for (const r of this.db.prepare("SELECT e.rowid AS rid, e.source FROM extraits e").all() as { rid: number; source: string }[]) {
+        const s = permis(r.source);
+        if (s && PERSONNELS.has(s.connecteur)) perso.add(Number(r.rid));
+      }
+    const scores = this.matrice.rids.map((rid, i) => ({ rid, s: produit(q, this.matrice!.v[i]!) + (perso.has(rid) ? BONUS_PERSONNEL : 0) }));
     // Extrait trouvé par identifiant mais pas encore vectorisé (calcul en cours) : il passe quand même.
     const vectorises = new Set(this.matrice.rids);
     for (const rid of avecId) if (!vectorises.has(rid)) scores.push({ rid, s: 0 });
@@ -414,7 +430,7 @@ export class Corpus {
     const lire = this.db.prepare(`${SELECT_EXTRAIT} WHERE e.rowid = ?`);
     for (const { rid, s: score } of scores) {
       const id = avecId.has(rid);
-      if (!id && score < (opts.plancher ?? SEUIL_SENS) && !opts.sansSeuil) break;
+      if (!id && score < (opts.plancher ?? SEUIL_SENS) - (opts.personnelle ? BONUS_PERSONNEL : 0) && !opts.sansSeuil) break;
       const l = lire.get(rid) as LigneExtrait | undefined;
       if (!l) continue;
       const s = permis(l.source);
@@ -435,6 +451,17 @@ export class Corpus {
     }
     return out;
   }
+}
+
+/** Sources personnelles de Mickaël, favorisées pour une question sur lui-même. */
+const PERSONNELS = new Set<SourceCorpus["connecteur"]>(["semence", "conversation-ia", "fichier-local", "note"]);
+const BONUS_PERSONNEL = 0.07;
+const NOMS_COURANTS = new Set(["mickael", "mickaël", "shyrka", "oia", "je", "tu", "le", "la", "les", "quel", "quelle", "quels", "quelles", "que", "qui", "où", "ou", "comment", "pourquoi", "est", "dans", "pour", "avec", "mon", "ma", "mes", "what", "where", "who", "how", "the"]);
+
+/** Noms propres d'une question : mots à majuscule (hors premier mot), ou tout mot capitalisé de plus de 3 lettres hors mots courants. */
+export function nomsPropres(texte: string): string[] {
+  const mots = [...texte.matchAll(/[\p{Lu}][\p{L}\p{N}-]{2,}/gu)].map((m) => ({ mot: m[0], debut: m.index === 0 || /[.!?]\s*$/.test(texte.slice(0, m.index)) }));
+  return [...new Set(mots.filter((m) => !m.debut && !NOMS_COURANTS.has(m.mot.toLowerCase())).map((m) => m.mot.toLowerCase()))];
 }
 
 const SELECT_EXTRAIT = "SELECT e.rowid AS rid, e.source, e.titre, e.ligne, e.ref, e.corps, d.chemin, d.version, d.date_source, d.indexe_le, d.titre AS titre_doc FROM extraits e JOIN docs d ON d.source = e.source";

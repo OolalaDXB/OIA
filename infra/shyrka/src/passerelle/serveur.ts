@@ -181,6 +181,12 @@ export function questionDeConnaissance(texte: string): boolean {
   return interrogatif && (travail || personnel);
 }
 
+/** Question de Mickaël sur lui-même : « mes sociétés », « ma banque », « pour moi », « où je vis ». */
+export const questionPersonnelle = (t: string) => /(^|[^\p{L}])(mon|ma|mes|moi|je|j'ai|j’ai|my|me|mine)([^\p{L}]|$)/iu.test(t.replace(/^\s*(je suis (seul|seule)|tu peux|peux-tu)\b/i, ""));
+
+/** Sources personnelles de Mickaël (corpus ChatGPT, documents et notes déposés, conversations d'IA). */
+export const SOURCES_PERSONNELLES = new Set<ExtraitCorpus["connecteur"]>(["semence", "conversation-ia", "fichier-local", "note"]);
+
 /** Salutation selon l'heure du Mac : bonjour jusqu'à 18 h, bonsoir ensuite. */
 export function salutationDeLHeure(d: Date): string {
   return d.getHours() >= 18 || d.getHours() < 5 ? "Bonsoir" : "Bonjour";

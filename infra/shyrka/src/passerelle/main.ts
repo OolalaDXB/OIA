@@ -29,7 +29,7 @@ import { inviteWhisper } from "./audio.js";
 import { VoixMultilingue, voixParLocale, voixPourLangue } from "./langues.js";
 import type { ReglagesVoix } from "./voix.js";
 import { LecteurEchantillons } from "./moteurs-voix.js";
-import { Passerelle, PORT_PASSERELLE, type Connaissances } from "./serveur.js";
+import { Passerelle, PORT_PASSERELLE, questionPersonnelle, SOURCES_PERSONNELLES, type Connaissances } from "./serveur.js";
 
 /**
  * pnpm shyrka:passerelle   lance la passerelle locale de Shyrka sur 127.0.0.1:8179
@@ -121,7 +121,14 @@ function connaissances(modeleConversation: string, h: { prive: () => boolean; ni
   };
   return {
     memoire: new ServiceMemoire(memoire, { projets, niveaux: h.niveaux, ...(memoire ? {} : { indisponible: raisons[0] ?? "volume indisponible" }) }),
-    chercher: c ? (texte) => c.chercher(texte, { type: "conversation", modele: "local" }, 4, { vecteur: questions.get(texte) ?? null, niveaux: h.niveaux() }) : null,
+    chercher: c
+      ? (texte) => {
+          const personnelle = questionPersonnelle(texte);
+          const r = c.chercher(texte, { type: "conversation", modele: "local" }, 4, { vecteur: questions.get(texte) ?? null, niveaux: h.niveaux(), personnelle });
+          // Question sur Mickaël : seules ses sources personnelles y répondent (la doc d'un dépôt sur les banques ne dit rien de sa banque).
+          return personnelle ? r.filter((x) => SOURCES_PERSONNELLES.has(x.connecteur)) : r;
+        }
+      : null,
     preparerQuestion: async (texte) => {
       if (questions.size > 20) questions.clear();
       questions.set(texte, await vecteur(texte));

@@ -565,7 +565,7 @@ export class DepotCorpus {
   /** Recherche pour l'écran (Mickaël) ; le vecteur de la question est calculé par l'appelant. */
   chercher(q: string, vecteur: Float32Array | null, opts: { sources?: string[]; compartiment?: string; limite?: number } = {}): { mode: "sens" | "mots"; resultats: ExtraitCorpus[] } {
     const r = this.d.corpus
-      .chercher(q, { type: "mickael" }, opts.limite ?? 20, { vecteur, plancher: PLANCHER_ECRAN, niveaux: this.permis(), parDocument: opts.sources?.length === 1 ? 20 : 3, ...(opts.sources ? { sources: opts.sources } : {}) })
+      .chercher(q, { type: "mickael" }, opts.limite ?? 20, { vecteur, plancher: PLANCHER_ECRAN, niveaux: this.permis(), personnelle: /\b(mon|ma|mes|moi|je|j'|my|me)\b/i.test(q), parDocument: opts.sources?.length === 1 ? 20 : 3, ...(opts.sources ? { sources: opts.sources } : {}) })
       .filter((x) => !opts.compartiment || x.compartiment === opts.compartiment);
     return { mode: vecteur && this.d.corpus.comptes().avecSens > 0 ? "sens" : "mots", resultats: r };
   }
