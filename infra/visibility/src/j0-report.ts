@@ -35,26 +35,39 @@ export interface Provenance {
   digest: string;
 }
 
+/** Présence de la marque sur une famille de questions (marquées ou non marquées). */
+export interface Presence {
+  responses: number;
+  /** Réponses sans texte extrait : non mesurées, hors du dénominateur. */
+  unmeasured: number;
+  judged: number;
+  mentioned: number;
+  presencePct: number;
+  daily: { day: number; pct: number }[];
+  minPct: number;
+  maxPct: number;
+}
+
 export interface ReportFigures {
-  reportFormat: 1;
+  reportFormat: 2;
   subjectId: string;
   windowId: string;
   status: "à valider par Mickaël";
   window: { startedAt: string; days: number; daysWithResponses: number[]; missingDays: number[]; failedRuns: number };
+  /** Questions du panel couvertes (famille de chacune) et questions d'Elmo exclues par identifiant. */
+  scope: { prompts: { id: string; version: number; family: "unbranded" | "branded" }[]; excludedPromptIds: string[] };
   perEngine: {
     engine: string;
     versions: string[];
     responses: number;
-    judged: number;
-    mentioned: number;
-    presencePct: number;
-    daily: { day: number; pct: number }[];
-    minPct: number;
-    maxPct: number;
+    unmeasured: number;
+    unmeasuredDaily: { day: number; n: number }[];
+    unbranded: Presence;
+    branded: Presence;
     estimatedCostUsd: number;
     provenance: Provenance;
   }[];
-  total: { responses: number; judged: number; mentioned: number; presencePct: number; minPct: number; maxPct: number; provenance: Provenance };
+  total: { responses: number; unmeasured: number; unbranded: Presence; branded: Presence; provenance: Provenance };
   sources: { brandSite: number; brandProfiles: number; topDomains: { domain: string; n: number }[]; provenance: Provenance };
   competitorsInstead: { name: string; runs: number; rejectedByOia: boolean }[];
   factCheck: { factId: string; statement: string; checkedRuns: number; matches: number; contradicts: number; absent: number }[];
@@ -83,37 +96,59 @@ export function computeFigures(
   /** Instantané des redirections résolues à la clôture (Gemini) : liens remplacés par le site réel. */
   redirects: RedirectCache = {},
 ): ReportFigures {
-  const rows = evidence.filter((e) => e.windowId === windowId && e.subjectId === b.subject.id);
+  const excludedPromptIds = b.measurement.windows.find((w) => w.id === windowId)?.excludedPromptIds ?? [];
+  // Les questions exclues ne sont pas importées ; le filtre protège d'une table des preuves plus ancienne.
+  const rows = evidence.filter(
+    (e) => e.windowId === windowId && e.subjectId === b.subject.id && !excludedPromptIds.includes(st(e).elmoPromptId ?? ""),
+  );
+  const familyOf = (r: EvidenceRow) => {
+    const p = b.panel.prompts.find((x) => x.id === r.promptId && x.version === r.promptVersion);
+    if (!p) throw new Error(`preuve ${r.id} : question ${r.promptId}@v${r.promptVersion} absente du panel`);
+    return p.family;
+  };
   const start = Date.parse(window.startedAt);
   const dayOf = (r: EvidenceRow) => Math.floor((Date.parse(r.receivedAt) - start) / DAY_MS) + 1;
-  const judged = (rs: EvidenceRow[]) => rs.filter((r) => st(r).brandMentioned !== null);
-  const mentioned = (rs: EvidenceRow[]) => rs.filter((r) => st(r).brandMentioned === true);
+  // Une réponse sans texte extrait (Mistral) n'est pas mesurée, même si Elmo lui a donné un jugement.
+  const measured = (r: EvidenceRow) => r.rawText.trim() !== "";
+  const judged = (rs: EvidenceRow[]) => rs.filter((r) => measured(r) && st(r).brandMentioned !== null);
+  const mentioned = (rs: EvidenceRow[]) => judged(rs).filter((r) => st(r).brandMentioned === true);
   const days = [...new Set(rows.map(dayOf))].sort((a, z) => a - z);
-  const dailyOf = (rs: EvidenceRow[]) =>
-    days.map((day) => {
-      const j = judged(rs.filter((r) => dayOf(r) === day));
-      return { day, pct: pct(mentioned(j).length, j.length) };
+  const presence = (rs: EvidenceRow[]): Presence => {
+    const daily = days.map((day) => {
+      const d = rs.filter((r) => dayOf(r) === day);
+      return { day, pct: pct(mentioned(d).length, judged(d).length) };
     });
-  const engines = [...new Set(rows.map((r) => r.engine))].sort();
-
-  const perEngine = engines.map((engine) => {
-    const rs = rows.filter((r) => r.engine === engine);
-    const daily = dailyOf(rs);
     return {
-      engine,
-      versions: [...new Set(rs.map((r) => r.engineVersion ?? ""))].sort(),
       responses: rs.length,
+      unmeasured: rs.filter((r) => !measured(r)).length,
       judged: judged(rs).length,
       mentioned: mentioned(rs).length,
       presencePct: pct(mentioned(rs).length, judged(rs).length),
       daily,
       minPct: daily.length ? Math.min(...daily.map((d) => d.pct)) : 0,
       maxPct: daily.length ? Math.max(...daily.map((d) => d.pct)) : 0,
+    };
+  };
+  const unbranded = (rs: EvidenceRow[]) => rs.filter((r) => familyOf(r) === "unbranded");
+  const branded = (rs: EvidenceRow[]) => rs.filter((r) => familyOf(r) === "branded");
+  const engines = [...new Set(rows.map((r) => r.engine))].sort();
+
+  const perEngine = engines.map((engine) => {
+    const rs = rows.filter((r) => r.engine === engine);
+    return {
+      engine,
+      versions: [...new Set(rs.map((r) => r.engineVersion ?? ""))].sort(),
+      responses: rs.length,
+      unmeasured: rs.filter((r) => !measured(r)).length,
+      unmeasuredDaily: days.map((day) => ({ day, n: rs.filter((r) => dayOf(r) === day && !measured(r)).length })),
+      unbranded: presence(unbranded(rs)),
+      branded: presence(branded(rs)),
       estimatedCostUsd: Math.round(rs.reduce((n, r) => n + r.costUsd, 0) * 1e4) / 1e4,
       provenance: prov(rs),
     };
   });
-  const totalDaily = dailyOf(rows);
+  const prompts = [...new Map(rows.map((r) => [`${r.promptId}@v${r.promptVersion}`, { id: r.promptId, version: r.promptVersion, family: familyOf(r) }])).values()]
+    .sort((a, z) => a.id.localeCompare(z.id) || a.version - z.version);
 
   const s = b.subject;
   const brandDomains = [s.urls.primary, ...s.urls.additional.filter((a) => a.status !== "rejected").map((a) => a.url)].map((u) =>
@@ -144,7 +179,7 @@ export function computeFigures(
   const rejected = new Set(s.competitors.filter((c) => c.status === "rejected").map((c) => c.name));
   const instead = new Map<string, number>();
   for (const r of rows) {
-    if (st(r).brandMentioned !== false) continue;
+    if (!measured(r) || st(r).brandMentioned !== false) continue;
     for (const name of st(r).competitorsMentioned) instead.set(name, (instead.get(name) ?? 0) + 1);
   }
 
@@ -173,7 +208,7 @@ export function computeFigures(
   });
 
   return {
-    reportFormat: 1,
+    reportFormat: 2,
     subjectId: s.id,
     windowId,
     status: "à valider par Mickaël",
@@ -184,14 +219,13 @@ export function computeFigures(
       missingDays: Array.from({ length: window.days }, (_, i) => i + 1).filter((d) => !days.includes(d)),
       failedRuns: inWin.length,
     },
+    scope: { prompts, excludedPromptIds: [...excludedPromptIds] },
     perEngine,
     total: {
       responses: rows.length,
-      judged: judged(rows).length,
-      mentioned: mentioned(rows).length,
-      presencePct: pct(mentioned(rows).length, judged(rows).length),
-      minPct: totalDaily.length ? Math.min(...totalDaily.map((d) => d.pct)) : 0,
-      maxPct: totalDaily.length ? Math.max(...totalDaily.map((d) => d.pct)) : 0,
+      unmeasured: rows.filter((r) => !measured(r)).length,
+      unbranded: presence(unbranded(rows)),
+      branded: presence(branded(rows)),
       provenance: prov(rows),
     },
     sources: {
@@ -226,14 +260,42 @@ export function renderReportMarkdown(b: SubjectBundle, f: ReportFigures): string
   const L: string[] = [];
   L.push(`# Rapport ${f.windowId.toUpperCase()} · ${b.subject.displayName}`, "");
   L.push(`**Statut : ${f.status}.** Fenêtre démarrée le ${f.window.startedAt.slice(0, 16).replace("T", " ")} UTC, ${f.window.days} jours.`, "");
-  L.push("## Présence de la marque dans les réponses", "");
-  L.push("Part des réponses jugées par Jev qui mentionnent la marque ; intervalle = plus bas et plus haut des jours observés.", "");
-  L.push("| Assistant | Version servie | Réponses | Jugées | Mentions | Présence | Intervalle (jours) |", "|---|---|---|---|---|---|---|");
-  for (const e of f.perEngine) {
-    L.push(`| ${e.engine} | ${e.versions.join(", ")} | ${e.responses} | ${e.judged} | ${e.mentioned} | ${e.presencePct} % | ${e.minPct} – ${e.maxPct} % |`);
+  const nb = f.scope.prompts.filter((p) => p.family === "unbranded");
+  const br = f.scope.prompts.filter((p) => p.family === "branded");
+  const ids = (ps: typeof nb) => ps.map((p) => `${p.id}@v${p.version}`).join(", ");
+  L.push("## Périmètre", "");
+  L.push(`Questions du panel : ${f.scope.prompts.length}, dont ${nb.length} non marquées (${ids(nb)}) et ${br.length} marquées (${ids(br)}).`);
+  if (f.scope.excludedPromptIds.length) {
+    L.push(`Questions d'Elmo exclues par leur identifiant (hors panel ; leurs réponses restent dans Elmo et ne sont pas importées) : ${f.scope.excludedPromptIds.map((x) => `\`${x}\``).join(", ")}.`);
   }
+  L.push("Réponse « non mesurée » : réponse sans texte extrait ; retirée du dénominateur, même si Elmo lui a donné un jugement.", "");
   const t = f.total;
-  L.push(`| **Total** | | ${t.responses} | ${t.judged} | ${t.mentioned} | **${t.presencePct} %** | ${t.minPct} – ${t.maxPct} % |`, "");
+  const table = (title: string, intro: string, pick: (e: ReportFigures["perEngine"][number] | typeof t) => Presence) => {
+    L.push(title, "", intro, "");
+    L.push("| Assistant | Version servie | Réponses | Non mesurées | Jugées | Mentions | Présence | Intervalle (jours) |", "|---|---|---|---|---|---|---|---|");
+    for (const e of f.perEngine) {
+      const p = pick(e);
+      L.push(`| ${e.engine} | ${e.versions.join(", ")} | ${p.responses} | ${p.unmeasured} | ${p.judged} | ${p.mentioned} | ${p.presencePct} % | ${p.minPct} – ${p.maxPct} % |`);
+    }
+    const p = pick(t);
+    L.push(`| **Total** | | ${p.responses} | ${p.unmeasured} | ${p.judged} | ${p.mentioned} | **${p.presencePct} %** | ${p.minPct} – ${p.maxPct} % |`, "");
+  };
+  table(
+    `## Visibilité : questions non marquées (${nb.length})`,
+    "Part des réponses mesurées et jugées par Jev qui mentionnent la marque, sur les questions qui ne la nomment pas : c'est la lecture de la visibilité. Intervalle = plus bas et plus haut des jours observés.",
+    (e) => e.unbranded,
+  );
+  table(
+    `## Questions marquées (${br.length}), à part`,
+    "La question nomme la marque : une mention y est attendue et ne mesure pas la visibilité.",
+    (e) => e.branded,
+  );
+  if (t.unmeasured) {
+    L.push("## Réponses non mesurées, par jour", "");
+    L.push(`| Assistant | ${f.window.daysWithResponses.map((d) => `Jour ${d}`).join(" | ")} | Total |`, `|---|${f.window.daysWithResponses.map(() => "---|").join("")}---|`);
+    for (const e of f.perEngine.filter((x) => x.unmeasured)) L.push(`| ${e.engine} | ${e.unmeasuredDaily.map((d) => d.n).join(" | ")} | ${e.unmeasured} |`);
+    L.push("", "Aucun texte n'est reconstruit dans la base : ces réponses restent non mesurées.", "");
+  }
   L.push("## Sources citées", "");
   L.push(`Site de la marque : ${f.sources.brandSite} citation(s). Profils officiels (comptés pour la marque, à l'adresse près) : ${f.sources.brandProfiles}.`, "");
   for (const d of f.sources.topDomains) L.push(`- ${d.domain} : ${d.n}`);

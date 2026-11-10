@@ -12,7 +12,13 @@ const ROOT = resolve(here, "..");
 const START = "2026-11-01T09:00:00Z";
 
 /** Exportation fictive, forme exacte de scripts/j0-export.sh : 2 questions × 2 moteurs × 2 jours. */
-function fakeExport(): WindowExport {
+const PROMPT_IDS: Record<string, string> = {
+  "oia:en-01@v1": "11111111-1111-4111-8111-111111111111",
+  "oia:en-02@v1": "22222222-2222-4222-8222-222222222222",
+};
+const OFF_PANEL = "99999999-9999-4999-8999-999999999999";
+
+function fakeExport(opts: { offPanel?: boolean; emptyText?: boolean } = {}): WindowExport {
   const runs: WindowExport["runs"] = [];
   let n = 0;
   for (const day of [0, 1]) {
@@ -22,10 +28,12 @@ function fakeExport(): WindowExport {
         const branded = tag === "oia:en-02@v1";
         runs.push({
           id: `00000000-0000-4000-8000-${String(n).padStart(12, "0")}`,
+          promptId: PROMPT_IDS[tag],
           promptTags: [tag, "panel:v1", "lang:en", branded ? "family:branded" : "family:unbranded"],
           model, provider, version, webSearch: true,
           createdAt: new Date(Date.parse(START) + day * 86_400_000 + n * 1000).toISOString().replace(".000", ""),
-          text: branded ? `Demo Subject sells demos (${p}). See https://demo.example/` : "Rival Co is popular.",
+          // Réponse sans texte extrait (comme Mistral), mais jugée par Elmo : non mesurée.
+          text: opts.emptyText && day === 1 && model === "chatgpt" && !branded ? null : branded ? `Demo Subject sells demos (${p}). See https://demo.example/` : "Rival Co is popular.",
           usage: provider === "openai-api" ? { input_tokens: 1000, output_tokens: 200 } : { input_tokens: 1000, output_tokens: 200, server_tool_use: { web_search_requests: 1 } },
           searchItems: provider === "openai-api" ? 1 : 0,
           citations: branded ? ["https://demo.example/", "https://reddit.com/r/x"] : ["https://rival.example/"],
@@ -33,6 +41,15 @@ function fakeExport(): WindowExport {
           competitorsMentioned: branded ? [] : ["Rival Co"],
         });
       }
+    }
+    // Question ajoutée dans Elmo hors panel : sans tag oia:, étiquetée panel à la main.
+    if (opts.offPanel) {
+      runs.push({
+        id: `00000000-0000-4000-9000-00000000000${day}`, promptId: OFF_PANEL, promptTags: ["panel:v1", "lang:en", "family:unbranded"],
+        model: "chatgpt", provider: "openai-api", version: "gpt-6-luna", webSearch: true,
+        createdAt: new Date(Date.parse(START) + day * 86_400_000 + 60_000).toISOString().replace(".000", ""),
+        text: "Demo Subject is great.", usage: { input_tokens: 10, output_tokens: 10 }, searchItems: 0, citations: [], brandMentioned: true, competitorsMentioned: [],
+      });
     }
   }
   return { exportedAt: "2026-11-06T10:00:00Z", subjectId: "demo-subject", startedAt: START, days: 2, runs, failed: [{ model: "claude", createdAt: "2026-11-02T09:05:00Z" }] };
@@ -64,7 +81,7 @@ function siteRepo(dir: string, breakDuringWindow: boolean) {
   return work;
 }
 
-function setup(breakFreeze = false) {
+function setup(breakFreeze = false, opts: { offPanel?: boolean; emptyText?: boolean } = {}) {
   const dir = mkdtempSync(join(tmpdir(), "close-"));
   const data = join(dir, "data");
   mkdirSync(join(data, "j0"), { recursive: true });
@@ -74,7 +91,11 @@ function setup(breakFreeze = false) {
   writeFileSync(join(subjects, "demo-subject", "freeze-surface.yaml"), "repoPath: unused\nbranch: main\npublicFiles: [index.html, service.html]\nnoindexFiles: [service.html]\n");
   writeFileSync(join(subjects, "demo-subject", "fact-keywords.yaml"), "facts: []\n");
   const exportFile = join(dir, "export.json");
-  writeFileSync(exportFile, JSON.stringify(fakeExport()));
+  writeFileSync(exportFile, JSON.stringify(fakeExport(opts)));
+  if (opts.offPanel) {
+    const m = join(subjects, "demo-subject", "measurement.yaml");
+    writeFileSync(m, readFileSync(m, "utf8").replace("status: planned }", `status: planned, excludedPromptIds: ["${OFF_PANEL}"] }`));
+  }
   const windowData = join(dir, "wd.json");
   writeFileSync(windowData, JSON.stringify({ now: "2026-11-06T10:00:00Z", startedAt: START, days: 2, prompts: 2, engines: ["chatgpt", "claude"], runs: [], failed: [] }));
   const env = join(dir, "fake.env");
@@ -194,8 +215,16 @@ describe("vis:j0-report et vis:j0-verify", () => {
     expect(md).toMatch(/Dépense réelle : \*\*à relever\*\*/);
     expect(readFileSync(join(dir, "rapport-j0.html"), "utf8")).toMatch(/<table>/);
     const fig = JSON.parse(readFileSync(join(dir, "figures.json"), "utf8"));
-    // Questions marquées : 4 réponses jugées, 3 mentions ; non marquées : 4, 0 mention → 3/8.
-    expect(fig.total).toMatchObject({ responses: 8, judged: 8, mentioned: 3, presencePct: 37.5 });
+    // Visibilité lue sur les non marquées (4 jugées, 0 mention) ; marquées à part (4 jugées, 3 mentions).
+    expect(fig.total).toMatchObject({ responses: 8, unmeasured: 0 });
+    expect(fig.total.unbranded).toMatchObject({ responses: 4, judged: 4, mentioned: 0, presencePct: 0 });
+    expect(fig.total.branded).toMatchObject({ responses: 4, judged: 4, mentioned: 3, presencePct: 75 });
+    expect(fig.scope.prompts).toEqual([
+      { id: "en-01", version: 1, family: "unbranded" },
+      { id: "en-02", version: 1, family: "branded" },
+    ]);
+    expect(md).toMatch(/## Visibilité : questions non marquées \(1\)/);
+    expect(md).toMatch(/## Questions marquées \(1\), à part/);
     expect(fig.perEngine.map((e: { engine: string; versions: string[] }) => [e.engine, e.versions])).toEqual([
       ["chatgpt", ["gpt-6-luna"]],
       ["claude", ["claude-sonnet-5-5"]],
@@ -205,6 +234,30 @@ describe("vis:j0-report et vis:j0-verify", () => {
     const ok = s.report("verify");
     expect(ok.status, ok.stdout + ok.stderr).toBe(0);
     expect(ok.stdout).toMatch(/VÉRIFIÉ : 8 réponses/);
+  });
+
+  it("exclut par identifiant les questions hors panel et sort du dénominateur les réponses sans texte", () => {
+    const s = setup(false, { offPanel: true, emptyText: true });
+    const c = s.close();
+    expect(c.status, c.stdout + c.stderr).toBe(0);
+    expect(c.stdout).toMatch(new RegExp(`question exclue ${OFF_PANEL} : 2 réponse\\(s\\) non importée\\(s\\)`));
+    const ev = readEvidence(s.evidence);
+    expect(ev).toHaveLength(8);
+    expect(ev.some((e) => (e.structured as { elmoPromptId?: string }).elmoPromptId === OFF_PANEL)).toBe(false);
+    expect(s.report("report").status).toBe(0);
+    const dir = join(s.subjects, "demo-subject/reports/j0");
+    const fig = JSON.parse(readFileSync(join(dir, "figures.json"), "utf8"));
+    expect(fig.scope.excludedPromptIds).toEqual([OFF_PANEL]);
+    const gpt = fig.perEngine.find((e: { engine: string }) => e.engine === "chatgpt");
+    // Jour 2 : la réponse non marquée de ChatGPT n'a pas de texte, mais Elmo l'a jugée.
+    expect(gpt).toMatchObject({ responses: 4, unmeasured: 1, unmeasuredDaily: [{ day: 1, n: 0 }, { day: 2, n: 1 }] });
+    expect(gpt.unbranded).toMatchObject({ responses: 2, unmeasured: 1, judged: 1, mentioned: 0 });
+    expect(fig.competitorsInstead).toEqual([{ name: "Rival Co", runs: 3, rejectedByOia: false }]);
+    const md = readFileSync(join(dir, "rapport-j0.md"), "utf8");
+    expect(md).toContain(OFF_PANEL);
+    expect(md).toMatch(/## Réponses non mesurées, par jour/);
+    expect(md).toMatch(/\| chatgpt \| 0 \| 1 \| 1 \|/);
+    expect(s.report("verify").status).toBe(0);
   });
 
   it("refuse une preuve altérée et un chiffre modifié", () => {
@@ -225,7 +278,7 @@ describe("vis:j0-report et vis:j0-verify", () => {
     expect(t.report("report").status).toBe(0);
     const figFile = join(t.subjects, "demo-subject/reports/j0/figures.json");
     const fig = JSON.parse(readFileSync(figFile, "utf8"));
-    fig.total.presencePct = 50;
+    fig.total.unbranded.presencePct = 50;
     writeFileSync(figFile, JSON.stringify(fig));
     const wrong = t.report("verify");
     expect(wrong.status).toBe(1);

@@ -20,7 +20,7 @@ select json_build_object(
   'startedAt', :'started',
   'days', (:'days')::int,
   'runs', coalesce((select json_agg(json_build_object(
-      'id', r.id, 'promptTags', p.tags, 'model', r.model, 'provider', r.provider, 'version', r.version,
+      'id', r.id, 'promptId', p.id, 'promptTags', p.tags, 'model', r.model, 'provider', r.provider, 'version', r.version,
       'webSearch', r.web_search_enabled,
       'createdAt', to_char(r.created_at at time zone 'utc', 'YYYY-MM-DD"T"HH24:MI:SS"Z"'),
       'text', x.text_content,

@@ -20,6 +20,8 @@ export interface WindowExport {
   days: number;
   runs: {
     id: string;
+    /** Identifiant de la question dans Elmo (absent des exportations antérieures). */
+    promptId?: string;
     promptTags: string[];
     model: string;
     provider: string;
@@ -45,6 +47,8 @@ export interface EvidenceStructured {
   competitorsMentioned: string[];
   usage: unknown;
   costFromUsage: boolean;
+  /** Identifiant de la question dans Elmo, quand l'exportation le donne. */
+  elmoPromptId?: string;
 }
 
 export function promptFromTags(tags: string[]): { id: string; version: number; language: string } | null {
@@ -60,10 +64,27 @@ export function inWindow(exp: WindowExport, at: string): boolean {
   return t >= start && t < start + exp.days * 86_400_000;
 }
 
+/** Questions exclues de la fenêtre par identifiant Elmo (measurement.yaml, excludedPromptIds). */
+export function excludedPromptIds(b: SubjectBundle, windowId: string): Set<string> {
+  return new Set(b.measurement.windows.find((w) => w.id === windowId)?.excludedPromptIds ?? []);
+}
+
+/** Réponses de la fenêtre écartées parce que leur question est exclue : nombre par question Elmo. */
+export function excludedRuns(b: SubjectBundle, exp: WindowExport, windowId: string): Record<string, number> {
+  const excluded = excludedPromptIds(b, windowId);
+  const out: Record<string, number> = {};
+  for (const r of exp.runs) {
+    if (r.promptId && excluded.has(r.promptId) && inWindow(exp, r.createdAt)) out[r.promptId] = (out[r.promptId] ?? 0) + 1;
+  }
+  return out;
+}
+
 export function toEvidence(b: SubjectBundle, exp: WindowExport, windowId: string): EvidenceRow[] {
   const clientId = b.subject.ownership === "internal" ? "oia-internal" : b.subject.id;
+  const excluded = excludedPromptIds(b, windowId);
+  if (excluded.size && exp.runs.some((r) => !r.promptId)) throw new Error("exportation sans identifiant de question Elmo : exclusion par identifiant impossible, relancer scripts/j0-export.sh");
   return exp.runs
-    .filter((r) => inWindow(exp, r.createdAt))
+    .filter((r) => inWindow(exp, r.createdAt) && !(r.promptId && excluded.has(r.promptId)))
     .map((r) => {
       const prompt = promptFromTags(r.promptTags);
       if (!prompt) throw new Error(`run ${r.id} : question sans tag oia:<id>@v<n>, preuve impossible à rattacher au panel`);
@@ -78,6 +99,7 @@ export function toEvidence(b: SubjectBundle, exp: WindowExport, windowId: string
         competitorsMentioned: r.competitorsMentioned,
         usage: r.usage,
         costFromUsage: cost.fromUsage,
+        ...(r.promptId ? { elmoPromptId: r.promptId } : {}),
       };
       return {
         id: `elmo:${r.id}`,
@@ -109,8 +131,10 @@ if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).
     const dir = listSubjectDirs(defaultSubjectsDir()).find((d) => d.split(/[\\/]/).pop() === subjectId);
     if (!dir) throw new Error(`aucun sujet "${subjectId}"`);
     const exp = JSON.parse(readFileSync(exportFile, "utf8")) as WindowExport;
-    const r = appendEvidence(evidenceFile, toEvidence(loadSubject(dir), exp, windowId));
+    const b = loadSubject(dir);
+    const r = appendEvidence(evidenceFile, toEvidence(b, exp, windowId));
     process.stdout.write(`${r.added} preuve(s) ajoutée(s), ${r.skipped} déjà présente(s)\n`);
+    for (const [id, n] of Object.entries(excludedRuns(b, exp, windowId))) process.stdout.write(`question exclue ${id} : ${n} réponse(s) non importée(s)\n`);
   } catch (err) {
     process.stderr.write(`j0-evidence : ${err instanceof Error ? err.message : String(err)}\n`);
     process.exit(1);

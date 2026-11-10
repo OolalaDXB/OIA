@@ -198,6 +198,11 @@ export const WindowSchema = z
     /** Obligatoire si le panel, les cibles ou l'heure diffèrent de la référence : ce qui change, et pourquoi. */
     comparisonNote: z.string().min(10).optional(),
     note: z.string().optional(),
+    /**
+     * Questions d'Elmo exclues du rapport de la fenêtre, par identifiant (et non par étiquette : une question
+     * ajoutée à la main peut porter panel:v2 sans être du panel). Leurs réponses restent en base.
+     */
+    excludedPromptIds: z.array(z.string().uuid()).optional(),
   })
   .strict();
 
