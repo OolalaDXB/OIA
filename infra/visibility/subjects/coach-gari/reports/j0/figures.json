@@ -1,0 +1,787 @@
+{
+  "reportFormat": 2,
+  "subjectId": "coach-gari",
+  "windowId": "j0",
+  "status": "à valider par Mickaël",
+  "window": {
+    "startedAt": "2026-11-07T15:27:30Z",
+    "days": 5,
+    "daysWithResponses": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "missingDays": [],
+    "failedRuns": 0
+  },
+  "scope": {
+    "prompts": [
+      {
+        "id": "en-01",
+        "version": 2,
+        "family": "unbranded"
+      },
+      {
+        "id": "en-02",
+        "version": 2,
+        "family": "unbranded"
+      },
+      {
+        "id": "en-03",
+        "version": 2,
+        "family": "unbranded"
+      },
+      {
+        "id": "en-04",
+        "version": 2,
+        "family": "unbranded"
+      },
+      {
+        "id": "en-05",
+        "version": 2,
+        "family": "unbranded"
+      },
+      {
+        "id": "en-06",
+        "version": 2,
+        "family": "unbranded"
+      },
+      {
+        "id": "en-07",
+        "version": 2,
+        "family": "unbranded"
+      },
+      {
+        "id": "en-08",
+        "version": 2,
+        "family": "unbranded"
+      },
+      {
+        "id": "en-09",
+        "version": 2,
+        "family": "branded"
+      },
+      {
+        "id": "en-10",
+        "version": 1,
+        "family": "branded"
+      }
+    ],
+    "excludedPromptIds": [
+      "bf0b8284-cd44-4c1d-9245-7d66225bdaec",
+      "ff89627a-0804-48a7-8428-1886288a1113"
+    ]
+  },
+  "perEngine": [
+    {
+      "engine": "chatgpt",
+      "versions": [
+        "gpt-6-luna"
+      ],
+      "responses": 50,
+      "unmeasured": 0,
+      "unmeasuredDaily": [
+        {
+          "day": 1,
+          "n": 0
+        },
+        {
+          "day": 2,
+          "n": 0
+        },
+        {
+          "day": 3,
+          "n": 0
+        },
+        {
+          "day": 4,
+          "n": 0
+        },
+        {
+          "day": 5,
+          "n": 0
+        }
+      ],
+      "unbranded": {
+        "responses": 40,
+        "unmeasured": 0,
+        "judged": 40,
+        "mentioned": 0,
+        "presencePct": 0,
+        "daily": [
+          {
+            "day": 1,
+            "pct": 0
+          },
+          {
+            "day": 2,
+            "pct": 0
+          },
+          {
+            "day": 3,
+            "pct": 0
+          },
+          {
+            "day": 4,
+            "pct": 0
+          },
+          {
+            "day": 5,
+            "pct": 0
+          }
+        ],
+        "minPct": 0,
+        "maxPct": 0
+      },
+      "branded": {
+        "responses": 10,
+        "unmeasured": 0,
+        "judged": 10,
+        "mentioned": 1,
+        "presencePct": 10,
+        "daily": [
+          {
+            "day": 1,
+            "pct": 0
+          },
+          {
+            "day": 2,
+            "pct": 0
+          },
+          {
+            "day": 3,
+            "pct": 0
+          },
+          {
+            "day": 4,
+            "pct": 0
+          },
+          {
+            "day": 5,
+            "pct": 50
+          }
+        ],
+        "minPct": 0,
+        "maxPct": 50
+      },
+      "estimatedCostUsd": 1.3,
+      "provenance": {
+        "evidenceCount": 50,
+        "digest": "8b263d3d17d08b12ca10e197e32a13e0d949d71ba4653c7203ad5dc4cc41ecfe"
+      }
+    },
+    {
+      "engine": "claude",
+      "versions": [
+        "claude-sonnet-5-5"
+      ],
+      "responses": 50,
+      "unmeasured": 0,
+      "unmeasuredDaily": [
+        {
+          "day": 1,
+          "n": 0
+        },
+        {
+          "day": 2,
+          "n": 0
+        },
+        {
+          "day": 3,
+          "n": 0
+        },
+        {
+          "day": 4,
+          "n": 0
+        },
+        {
+          "day": 5,
+          "n": 0
+        }
+      ],
+      "unbranded": {
+        "responses": 40,
+        "unmeasured": 0,
+        "judged": 40,
+        "mentioned": 0,
+        "presencePct": 0,
+        "daily": [
+          {
+            "day": 1,
+            "pct": 0
+          },
+          {
+            "day": 2,
+            "pct": 0
+          },
+          {
+            "day": 3,
+            "pct": 0
+          },
+          {
+            "day": 4,
+            "pct": 0
+          },
+          {
+            "day": 5,
+            "pct": 0
+          }
+        ],
+        "minPct": 0,
+        "maxPct": 0
+      },
+      "branded": {
+        "responses": 10,
+        "unmeasured": 0,
+        "judged": 10,
+        "mentioned": 5,
+        "presencePct": 50,
+        "daily": [
+          {
+            "day": 1,
+            "pct": 50
+          },
+          {
+            "day": 2,
+            "pct": 50
+          },
+          {
+            "day": 3,
+            "pct": 50
+          },
+          {
+            "day": 4,
+            "pct": 50
+          },
+          {
+            "day": 5,
+            "pct": 50
+          }
+        ],
+        "minPct": 50,
+        "maxPct": 50
+      },
+      "estimatedCostUsd": 2.3831,
+      "provenance": {
+        "evidenceCount": 50,
+        "digest": "78681e6ee31852916304719f316fa9d8afde229a670b64f75a604009945b32dc"
+      }
+    },
+    {
+      "engine": "gemini",
+      "versions": [
+        "google/gemini-3-flash-preview"
+      ],
+      "responses": 50,
+      "unmeasured": 0,
+      "unmeasuredDaily": [
+        {
+          "day": 1,
+          "n": 0
+        },
+        {
+          "day": 2,
+          "n": 0
+        },
+        {
+          "day": 3,
+          "n": 0
+        },
+        {
+          "day": 4,
+          "n": 0
+        },
+        {
+          "day": 5,
+          "n": 0
+        }
+      ],
+      "unbranded": {
+        "responses": 40,
+        "unmeasured": 0,
+        "judged": 40,
+        "mentioned": 0,
+        "presencePct": 0,
+        "daily": [
+          {
+            "day": 1,
+            "pct": 0
+          },
+          {
+            "day": 2,
+            "pct": 0
+          },
+          {
+            "day": 3,
+            "pct": 0
+          },
+          {
+            "day": 4,
+            "pct": 0
+          },
+          {
+            "day": 5,
+            "pct": 0
+          }
+        ],
+        "minPct": 0,
+        "maxPct": 0
+      },
+      "branded": {
+        "responses": 10,
+        "unmeasured": 0,
+        "judged": 10,
+        "mentioned": 9,
+        "presencePct": 90,
+        "daily": [
+          {
+            "day": 1,
+            "pct": 50
+          },
+          {
+            "day": 2,
+            "pct": 100
+          },
+          {
+            "day": 3,
+            "pct": 100
+          },
+          {
+            "day": 4,
+            "pct": 100
+          },
+          {
+            "day": 5,
+            "pct": 100
+          }
+        ],
+        "minPct": 50,
+        "maxPct": 100
+      },
+      "estimatedCostUsd": 3.1176,
+      "provenance": {
+        "evidenceCount": 50,
+        "digest": "ef1e32bee1f70b6658e5b76f78d759c59107e9bc71d23b1237784a0aeb6df3b7"
+      }
+    },
+    {
+      "engine": "mistral",
+      "versions": [
+        "mistral-large-4"
+      ],
+      "responses": 50,
+      "unmeasured": 14,
+      "unmeasuredDaily": [
+        {
+          "day": 1,
+          "n": 3
+        },
+        {
+          "day": 2,
+          "n": 4
+        },
+        {
+          "day": 3,
+          "n": 2
+        },
+        {
+          "day": 4,
+          "n": 2
+        },
+        {
+          "day": 5,
+          "n": 3
+        }
+      ],
+      "unbranded": {
+        "responses": 40,
+        "unmeasured": 11,
+        "judged": 29,
+        "mentioned": 0,
+        "presencePct": 0,
+        "daily": [
+          {
+            "day": 1,
+            "pct": 0
+          },
+          {
+            "day": 2,
+            "pct": 0
+          },
+          {
+            "day": 3,
+            "pct": 0
+          },
+          {
+            "day": 4,
+            "pct": 0
+          },
+          {
+            "day": 5,
+            "pct": 0
+          }
+        ],
+        "minPct": 0,
+        "maxPct": 0
+      },
+      "branded": {
+        "responses": 10,
+        "unmeasured": 3,
+        "judged": 7,
+        "mentioned": 6,
+        "presencePct": 85.7,
+        "daily": [
+          {
+            "day": 1,
+            "pct": 50
+          },
+          {
+            "day": 2,
+            "pct": 100
+          },
+          {
+            "day": 3,
+            "pct": 100
+          },
+          {
+            "day": 4,
+            "pct": 100
+          },
+          {
+            "day": 5,
+            "pct": 100
+          }
+        ],
+        "minPct": 50,
+        "maxPct": 100
+      },
+      "estimatedCostUsd": 15.3585,
+      "provenance": {
+        "evidenceCount": 50,
+        "digest": "94d0cc631a58e6838343c7472a359de2facd23e7166a54d524df515a9f720a40"
+      }
+    },
+    {
+      "engine": "perplexity",
+      "versions": [
+        "perplexity/sonar"
+      ],
+      "responses": 50,
+      "unmeasured": 0,
+      "unmeasuredDaily": [
+        {
+          "day": 1,
+          "n": 0
+        },
+        {
+          "day": 2,
+          "n": 0
+        },
+        {
+          "day": 3,
+          "n": 0
+        },
+        {
+          "day": 4,
+          "n": 0
+        },
+        {
+          "day": 5,
+          "n": 0
+        }
+      ],
+      "unbranded": {
+        "responses": 40,
+        "unmeasured": 0,
+        "judged": 40,
+        "mentioned": 0,
+        "presencePct": 0,
+        "daily": [
+          {
+            "day": 1,
+            "pct": 0
+          },
+          {
+            "day": 2,
+            "pct": 0
+          },
+          {
+            "day": 3,
+            "pct": 0
+          },
+          {
+            "day": 4,
+            "pct": 0
+          },
+          {
+            "day": 5,
+            "pct": 0
+          }
+        ],
+        "minPct": 0,
+        "maxPct": 0
+      },
+      "branded": {
+        "responses": 10,
+        "unmeasured": 0,
+        "judged": 10,
+        "mentioned": 9,
+        "presencePct": 90,
+        "daily": [
+          {
+            "day": 1,
+            "pct": 50
+          },
+          {
+            "day": 2,
+            "pct": 100
+          },
+          {
+            "day": 3,
+            "pct": 100
+          },
+          {
+            "day": 4,
+            "pct": 100
+          },
+          {
+            "day": 5,
+            "pct": 100
+          }
+        ],
+        "minPct": 50,
+        "maxPct": 100
+      },
+      "estimatedCostUsd": 0.7597,
+      "provenance": {
+        "evidenceCount": 50,
+        "digest": "d645a2319e487f4bf56a5bbff56a0cf080262c113aa549fa5dd0c0776eaee664"
+      }
+    }
+  ],
+  "total": {
+    "responses": 250,
+    "unmeasured": 14,
+    "unbranded": {
+      "responses": 200,
+      "unmeasured": 11,
+      "judged": 189,
+      "mentioned": 0,
+      "presencePct": 0,
+      "daily": [
+        {
+          "day": 1,
+          "pct": 0
+        },
+        {
+          "day": 2,
+          "pct": 0
+        },
+        {
+          "day": 3,
+          "pct": 0
+        },
+        {
+          "day": 4,
+          "pct": 0
+        },
+        {
+          "day": 5,
+          "pct": 0
+        }
+      ],
+      "minPct": 0,
+      "maxPct": 0
+    },
+    "branded": {
+      "responses": 50,
+      "unmeasured": 3,
+      "judged": 47,
+      "mentioned": 30,
+      "presencePct": 63.8,
+      "daily": [
+        {
+          "day": 1,
+          "pct": 40
+        },
+        {
+          "day": 2,
+          "pct": 66.7
+        },
+        {
+          "day": 3,
+          "pct": 66.7
+        },
+        {
+          "day": 4,
+          "pct": 70
+        },
+        {
+          "day": 5,
+          "pct": 77.8
+        }
+      ],
+      "minPct": 40,
+      "maxPct": 77.8
+    },
+    "provenance": {
+      "evidenceCount": 250,
+      "digest": "4ec67f0dd0ff58d4c1c367f577abe98477975f9ff127fc47df7f7009bacd0f19"
+    }
+  },
+  "sources": {
+    "brandSite": 22,
+    "brandProfiles": 0,
+    "topDomains": [
+      {
+        "domain": "reddit.com",
+        "n": 383
+      },
+      {
+        "domain": "linkedin.com",
+        "n": 242
+      },
+      {
+        "domain": "en.wikipedia.org",
+        "n": 126
+      },
+      {
+        "domain": "trainerize.me",
+        "n": 69
+      },
+      {
+        "domain": "dubaigolf.com",
+        "n": 65
+      },
+      {
+        "domain": "isddubai.com",
+        "n": 48
+      },
+      {
+        "domain": "padeli.com",
+        "n": 45
+      },
+      {
+        "domain": "padelcoachfinder.com",
+        "n": 37
+      },
+      {
+        "domain": "acefitness.org",
+        "n": 33
+      },
+      {
+        "domain": "sanddune.ae",
+        "n": 30
+      }
+    ],
+    "provenance": {
+      "evidenceCount": 197,
+      "digest": "c9ef03d8e2cdb20bee44e192f2ceeb79a763b3dc35b54b4dfae02f7609188969"
+    }
+  },
+  "competitorsInstead": [
+    {
+      "name": "Future",
+      "runs": 15,
+      "rejectedByOia": false
+    },
+    {
+      "name": "Caliber",
+      "runs": 14,
+      "rejectedByOia": false
+    },
+    {
+      "name": "Fit Squad DXB",
+      "runs": 6,
+      "rejectedByOia": false
+    },
+    {
+      "name": "Fortius Dubai",
+      "runs": 2,
+      "rejectedByOia": false
+    },
+    {
+      "name": "Ultimate Performance",
+      "runs": 1,
+      "rejectedByOia": false
+    }
+  ],
+  "factCheck": [
+    {
+      "factId": "f-identity",
+      "statement": "Coach Gari est coach sportif et préparateur physique.",
+      "checkedRuns": 47,
+      "matches": 47,
+      "contradicts": 0,
+      "absent": 0
+    },
+    {
+      "factId": "f-offer-online",
+      "statement": "Coach Gari propose du coaching en ligne : entraînement et nutrition.",
+      "checkedRuns": 47,
+      "matches": 27,
+      "contradicts": 0,
+      "absent": 20
+    },
+    {
+      "factId": "f-offer-padel",
+      "statement": "Coach Gari propose du padel en complément.",
+      "checkedRuns": 47,
+      "matches": 25,
+      "contradicts": 0,
+      "absent": 22
+    },
+    {
+      "factId": "f-location",
+      "statement": "Coach Gari est basé à Dubaï.",
+      "checkedRuns": 47,
+      "matches": 26,
+      "contradicts": 0,
+      "absent": 21
+    },
+    {
+      "factId": "f-audience",
+      "statement": "L'audience de Coach Gari est surtout en Afrique australe, en particulier au Zimbabwe.",
+      "checkedRuns": 47,
+      "matches": 25,
+      "contradicts": 0,
+      "absent": 22
+    },
+    {
+      "factId": "f-profile-instagram",
+      "statement": "Le profil Instagram officiel de Coach Gari est https://www.instagram.com/coach_gari28 (@coach_gari28).",
+      "checkedRuns": 47,
+      "matches": 1,
+      "contradicts": 0,
+      "absent": 46
+    },
+    {
+      "factId": "f-profile-tiktok",
+      "statement": "Le profil TikTok officiel de Coach Gari est https://www.tiktok.com/@coach_gari28 (@coach_gari28).",
+      "checkedRuns": 47,
+      "matches": 0,
+      "contradicts": 0,
+      "absent": 47
+    },
+    {
+      "factId": "f-profile-myoolala",
+      "statement": "La page myOolala officielle de Coach Gari est https://myoolala.com/u/coachgari28.",
+      "checkedRuns": 47,
+      "matches": 0,
+      "contradicts": 0,
+      "absent": 47
+    }
+  ],
+  "spend": {
+    "estimatedUsd": 22.9189,
+    "worstCaseRuns": 50,
+    "realUsd": null,
+    "realNote": "À relever par Mickaël dans chaque console (OpenAI, Anthropic, Mistral, OpenRouter, TypeSafe), puis à reporter ici.",
+    "provenance": {
+      "evidenceCount": 250,
+      "digest": "4ec67f0dd0ff58d4c1c367f577abe98477975f9ff127fc47df7f7009bacd0f19"
+    }
+  }
+}
