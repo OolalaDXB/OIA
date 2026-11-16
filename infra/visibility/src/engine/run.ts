@@ -55,6 +55,7 @@ import { CompetitorSchema, MeasurementSchema, PanelSchema, SubjectSchema, type M
 import { siteAdd } from "../site-add.js";
 import { extractActors } from "../site/actors.js";
 import { DEFAULT_CRAWLIE_COMMAND, crawlieFailure, runCrawlie, summarizeCrawlie, type CrawlieCommand, type CrawlieSummary } from "../site/audit.js";
+import { extrairePlan } from "../audit-ia/express.js";
 import { AUDIT_MODEL, classementConcurrents, classementDomaines, collecter, noterReponse, proposerPlan, proposerQuestions, rapportMarkdown, scores, type LigneMatrice } from "../audit-ia/express.js";
 import { createMistralProvider } from "../../../../packages/providers/src/mistral.js";
 import type { LLMProvider } from "../../../../packages/providers/src/types.js";
@@ -200,7 +201,7 @@ export async function runEngine(o: EngineOptions): Promise<PassageResult> {
 async function handle(ctx: Ctx, d: Demande): Promise<Traitement> {
   ctx.log(`demande ${d.id} : ${d.type}${d.subject_id ? ` (${d.subject_id})` : ""}`);
   try {
-    const run = { SITE_ADD: siteAddDemande, RECON: reconDemande, WINDOW_RUN: windowRunDemande, REPORT: reportDemande, REMEASURE_PROPOSE: remeasureDemande, ANALYSE: analyseDemande, AUDIT_IA: auditIaDemande, NOTE_CONTENU: noteContenuDemande }[d.type];
+    const run = { SITE_ADD: siteAddDemande, RECON: reconDemande, WINDOW_RUN: windowRunDemande, REPORT: reportDemande, REMEASURE_PROPOSE: remeasureDemande, ANALYSE: analyseDemande, AUDIT_IA: auditIaDemande, NOTE_CONTENU: noteContenuDemande, EXTRAIRE_PLAN: extrairePlanDemande }[d.type];
     if (!run) throw new EngineRefusal(`type de demande inconnu « ${String(d.type)} »`);
     const resultat = await run(ctx, d);
     await ctx.o.db.terminer(d.id, resultat, null);
@@ -295,7 +296,9 @@ async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
   const s = scores(matrice, moteurs);
   const concurrents = classementConcurrents(matrice);
   const domaines = classementDomaines(matrice);
-  const plan = await proposerPlan(llm, { nom, site: url, matrice, scores: s, concurrents, domaines, constats: [] });
+  // Contexte : constats ouverts, audits et rapports externes, actions déjà proposées.
+  const contexte = await ctx.o.db.contexte(subjectId).catch(() => undefined);
+  const plan = await proposerPlan(llm, { nom, site: url, matrice, scores: s, concurrents, domaines, constats: [], contexte });
   // Nature des entités citées : seulement celles réellement relevées dans les réponses.
   const relevees = new Set(concurrents.map((c) => c.nom.toLowerCase()));
   const entites = (plan.entites ?? []).filter((e) => relevees.has(e.nom.toLowerCase())).map((e) => ({ entite: e.nom, nature: e.nature }));
@@ -335,6 +338,50 @@ async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
     if (ok) recos++;
   }
   return { audit_externe_id: auditId, score: s.global, cout_reel_usd: coutReel, questions: questions.length, reponses: col.reponses.length, echecs: col.echecs.length, recommandations: recos, arret_plafond: col.arretPlafond };
+}
+
+// ---------------------------------------------------------------- EXTRAIRE_PLAN (quelques centimes)
+
+/** Plan d'action d'un audit ou rapport externe, versé dans les recommandations avec son origine. */
+async function extrairePlanDemande(ctx: Ctx, d: Demande): Promise<Record<string, unknown>> {
+  const subjectId = subjectOf(d);
+  const go = await ctx.o.db.planDebut(d.id); // refusé sans GO
+  if (!go.rapport_md || go.rapport_md.trim().length < 200) throw new EngineRefusal("rapport vide ou trop court");
+  const sujet = await ctx.o.db.sujet(subjectId);
+  const llm = ctx.o.auditLlm
+    ? ctx.o.auditLlm()
+    : (() => {
+        const apiKey = ctx.o.env.MISTRAL_API_KEY;
+        if (!apiKey) throw new EngineRefusal("clé absente : MISTRAL_API_KEY");
+        return createMistralProvider({ apiKey, model: AUDIT_MODEL, maxCalls: 2, maxOutputTokens: 32_000 });
+      })();
+  const contexte = await ctx.o.db.contexte(subjectId).catch(() => undefined);
+  const plan = await extrairePlan(llm, { nom: sujet?.nom ?? subjectId, site: sujet?.site_url ?? "", outil: go.outil, date: String(go.realise_le), rapport: go.rapport_md, contexte });
+  const slugOutil = go.outil.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40);
+  const date = String(go.realise_le).slice(0, 10);
+  let recos = 0;
+  for (const [i, a] of plan.actions.entries()) {
+    const slug = a.titre.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40);
+    const ok = await ctx.o.db.recommandation(subjectId, null as unknown as string, {
+      id: `rec-${subjectId}-ext-${go.audit_externe_id.slice(0, 8)}-${i + 1}-${slug}`.slice(0, 120),
+      type: a.type,
+      title: a.titre,
+      statement: `${a.action} Pourquoi : ${a.pourquoi}`,
+      impact: { level: a.impact },
+      effort: { level: a.effort },
+      risk: "low",
+      confidence: "medium",
+      createdBy: `rapport-externe:${slugOutil}:${date}`,
+      priorite_audit: a.priorite,
+      questions: a.questions,
+      source: `rapport externe ${go.audit_externe_id}`,
+    });
+    if (ok) recos++;
+  }
+  const u = llm.usage?.();
+  const prix = findPrice("mistral-api", AUDIT_MODEL);
+  const cout = u && prix ? Math.round(((u.inputTokens * prix.inputPerMTok + u.outputTokens * prix.outputPerMTok) / 1_000_000) * 10_000) / 10_000 : 0;
+  return { audit_externe_id: go.audit_externe_id, actions: plan.actions.length, recommandations: recos, resume: plan.resume.slice(0, 300), cout_reel_usd: cout };
 }
 
 // ---------------------------------------------------------------- NOTE_CONTENU (payante, quelques centimes)

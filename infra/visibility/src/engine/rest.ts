@@ -137,6 +137,14 @@ export class RestEngineDb implements EngineDb {
   async auditResultat(demande: string, r: Record<string, unknown>) {
     return String(await this.rpc<string>("vis_moteur_audit_resultat", { p_demande: demande, p_resultat: r }));
   }
+  async contexte(subjectId: string) {
+    return (await this.rpc<{ constats: string[]; externes: { outil: string; date: string; resume: string | null; extrait: string | null }[]; actions: string[] }>("vis_moteur_contexte", { p_subject: subjectId })) ?? { constats: [], externes: [], actions: [] };
+  }
+  async planDebut(demande: string) {
+    const r = await this.rpc<{ audit_externe_id: string; outil: string; realise_le: string; resume: string | null; rapport_md: string | null; cout_max_usd: number }>("vis_moteur_plan_debut", { p_demande: demande });
+    if (!r) throw new Error("extraction refusée : réponse vide");
+    return r;
+  }
   async classerEntites(subjectId: string, entites: { entite: string; nature: string }[]) {
     return Number(await this.rpc<number>("vis_moteur_classer_entites", { p_subject: subjectId, p_entites: entites }));
   }

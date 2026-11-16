@@ -347,7 +347,7 @@ export function constatsContenu(criteres: Critere[]): Record<string, unknown>[] 
       source: "contenu",
       categorie: c.axe === "technique" ? "technique" : c.axe === "fonctionnel" ? "fonctionnel" : "commercial",
       gravite: c.gravite,
-      titre: c.titre,
+      titre: `À corriger : ${c.titre.charAt(0).toLowerCase()}${c.titre.slice(1)}`.slice(0, 200),
       explication: c.explication.length >= 10 ? c.explication : `${c.titre} : ${c.valeur}`,
       correction: c.correction,
       impact: null,

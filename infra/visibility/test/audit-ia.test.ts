@@ -122,3 +122,40 @@ describe("forme des réponses du modèle", () => {
     expect(e({ a: [1], b: [2] })).toEqual({ a: [1], b: [2] });
   });
 });
+
+describe("moteur : demande EXTRAIRE_PLAN", () => {
+  const rapport = "# Audit externe fictif\n\n" + "Le site Studio Fictif n'est pas relié depuis l'accueil vers ses pages d'offre. ".repeat(6);
+  const fauxLlm = () => ({
+    name: "faux", defaultModel: "faux", usage: () => ({ inputTokens: 5000, outputTokens: 800 }),
+    async extract(req: { schema: { parse: (x: unknown) => unknown } }) {
+      return { data: req.schema.parse([{ priorite: "p0", type: "tech_fix", titre: "Relier les offres depuis l'accueil", action: "Ajouter un lien vers chaque page d'offre dans l'accueil.", pourquoi: "Le rapport note des pages orphelines.", impact: "High", effort: "xs" }, { priorite: "P1", type: "SOURCE_TARGET", titre: "Être dans les annuaires cités", action: "Créer une fiche dans les annuaires cités par le rapport.", pourquoi: "Les concurrents y figurent.", impact: "high", effort: "M" }, { priorite: "P2", type: "CONTENT_GAP", titre: "Publier les prix en texte", action: "Afficher un prix de départ par offre, en texte.", pourquoi: "Les IA citent les prix publiés.", impact: "medium", effort: "S" }]) as never, run: { provider: "faux", model: "faux", promptHash: "x" } };
+    },
+  });
+  function preparer(go = true) {
+    const db = new MemoryEngineDb(() => new Date("2026-11-16T20:00:00Z"));
+    if (go) db.plansGo.set("ex-1", { audit_externe_id: "a6513f39-0000-0000-0000-000000000000", outil: "Perplexity Computer", realise_le: "2026-11-16", resume: null, rapport_md: rapport, cout_max_usd: 0.25 });
+    const d = db.demander({ type: "EXTRAIRE_PLAN", client_id: "client-fictif", subject_id: "studio-fictif", charge: { extraction_id: "ex-1", audit_externe_id: "a6513f39-0000-0000-0000-000000000000", cout_max_usd: 0.25 } });
+    return { db, d };
+  }
+  const opts = (db: MemoryEngineDb) => ({
+    db, dir: join(mkdtempSync(join(tmpdir(), "oia-plan-")), "m"), hote: "t", version: "v", env: {}, now: () => new Date("2026-11-16T20:00:00Z"),
+    fetch: async () => { throw new Error("aucune lecture"); }, crawlie: ["faux"], auditLlm: fauxLlm,
+    collector: () => { throw new Error("aucune collecte"); }, judge: () => noJudge(),
+  });
+  it("verse le plan du rapport en recommandations, avec l'origine", async () => {
+    const { db, d } = preparer();
+    const r = await runEngine(opts(db) as never);
+    expect(r.traitees[0]!.erreur).toBeNull();
+    expect(r.traitees[0]).toMatchObject({ id: d.id, type: "EXTRAIRE_PLAN", statut: "DONE" });
+    expect(db.recos.size).toBe(3);
+    const rec = [...db.recos.values()][0]!;
+    expect(rec.createdBy).toBe("rapport-externe:perplexity-computer:2026-11-16");
+    expect(rec.priorite_audit).toBe("P0");
+  });
+  it("sans GO : refusée", async () => {
+    const { db } = preparer(false);
+    const r = await runEngine(opts(db) as never);
+    expect(r.traitees[0]!.statut).toBe("FAILED");
+    expect(db.recos.size).toBe(0);
+  });
+});

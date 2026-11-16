@@ -172,8 +172,8 @@ export function classementDomaines(matrice: LigneMatrice[]): { domaine: string; 
   return [...n.entries()].map(([domaine, reponses]) => ({ domaine, reponses })).sort((a, b) => b.reponses - a.reponses).slice(0, 25);
 }
 
-const PlanSchema = z.preprocess(enveloppe("actions"), z.object({
-  resume: texte(20, 1200),
+export const PlanSchema = z.preprocess(enveloppe("actions"), z.object({
+  resume: z.string().default("").transform((x) => x.trim().slice(0, 1200)),
   actions: z
     .array(
       z.object({
@@ -199,7 +199,7 @@ export type Plan = z.infer<typeof PlanSchema>;
 
 export async function proposerPlan(
   llm: LLMProvider,
-  o: { nom: string; site: string; matrice: LigneMatrice[]; scores: ReturnType<typeof scores>; concurrents: ReturnType<typeof classementConcurrents>; domaines: ReturnType<typeof classementDomaines>; constats: string[] },
+  o: { nom: string; site: string; matrice: LigneMatrice[]; scores: ReturnType<typeof scores>; concurrents: ReturnType<typeof classementConcurrents>; domaines: ReturnType<typeof classementDomaines>; constats: string[]; contexte?: ContexteSite },
 ): Promise<Plan> {
   const lignes = o.matrice.map((l) => `${l.id} ${l.sujet}${l.marquee ? " (nomme la marque)" : ""} : ${Object.entries(l.scores).map(([m, s]) => `${m}=${s}`).join(", ")} ; cités à la place : ${[...new Set(Object.values(l.concurrents).flat())].slice(0, 6).join(", ")}`);
   const r = await llm.extract({
@@ -226,7 +226,8 @@ export async function proposerPlan(
       ...lignes,
       `Concurrents les plus cités : ${o.concurrents.slice(0, 15).map((c) => `${c.nom} (${c.reponses})`).join(", ")}`,
       `Domaines les plus cités : ${o.domaines.slice(0, 15).map((d) => `${d.domaine} (${d.reponses})`).join(", ")}`,
-      `Constats techniques ouverts : ${o.constats.slice(0, 15).join(" ; ") || "aucun"}`,
+      `Constats techniques ouverts : ${[...o.constats, ...(o.contexte?.constats ?? [])].slice(0, 25).join(" ; ") || "aucun"}`,
+      ...texteContexte(o.contexte),
     ].join("\n"),
   });
   return r.data;
@@ -319,4 +320,42 @@ export async function collecter(o: {
     o.log?.(`audit : ${Math.min(i + n, taches.length)}/${taches.length} appels, ${depense.toFixed(2)} $`);
   }
   return { reponses, echecs, depenseUsd: depense, arretPlafond: arret };
+}
+
+
+// ------------------------------------------------------------------ contexte et rapports externes
+
+export interface ContexteSite {
+  constats: string[];
+  externes: { outil: string; date: string; resume: string | null; extrait: string | null }[];
+  actions: string[];
+}
+
+/** Contexte lisible : audits et rapports externes (extraits), actions déjà proposées (à ne pas répéter). */
+export function texteContexte(c: ContexteSite | undefined): string[] {
+  if (!c) return [];
+  const t: string[] = [];
+  for (const e of c.externes.slice(0, 3)) t.push(`Rapport externe « ${e.outil} » du ${e.date} : ${(e.resume ?? "").slice(0, 600)}\n${(e.extrait ?? "").slice(0, 4000)}`);
+  if (c.actions.length) t.push(`Actions déjà proposées (ne pas les répéter, les compléter) : ${c.actions.slice(0, 40).join(" ; ")}`);
+  return t;
+}
+
+/** Plan d'action tiré d'un rapport externe (n'importe quel format texte), sans rien inventer. */
+export async function extrairePlan(llm: LLMProvider, o: { nom: string; site: string; outil: string; date: string; rapport: string; contexte?: ContexteSite }): Promise<Plan> {
+  const r = await llm.extract({
+    schema: PlanSchema,
+    schemaName: "AuditPlan",
+    purpose: "extraction-plan",
+    model: AUDIT_MODEL,
+    system: [
+      `Tu lis un rapport externe (« ${o.outil} », ${o.date}) sur la visibilité du site de « ${o.nom} » (${o.site}) et tu en tires le plan d'action, en français.`,
+      "Reprends les recommandations du rapport, fidèlement : n'ajoute aucun fait absent du rapport, garde les noms, chiffres et adresses cités.",
+      "Une action = une chose à faire, concrète et vérifiable. Regroupe les doublons. P0 cette semaine, P1 sous 2 à 6 semaines, P2 sous 3 à 10 semaines, P3 ensuite.",
+      "« pourquoi » cite la raison donnée par le rapport. « questions » : identifiants de questions du rapport s'il y en a, sinon [].",
+      'Format exact : {"resume":"…","actions":[{"priorite":"P0","type":"TECH_FIX","titre":"…","action":"…","pourquoi":"…","questions":[],"impact":"high","effort":"S"}],"entites":[]}.',
+      "type parmi TECH_FIX, CONTENT_GAP, ENTITY_INCONSISTENCY, SOURCE_TARGET, FIX_FACT ; impact parmi low, medium, high ; effort parmi XS, S, M, L, XL.",
+    ].join(" "),
+    input: [o.rapport.slice(0, 60_000), ...(o.contexte?.actions.length ? [`\nActions déjà connues (ne pas répéter) : ${o.contexte.actions.slice(0, 40).join(" ; ")}`] : [])].join("\n"),
+  });
+  return r.data;
 }

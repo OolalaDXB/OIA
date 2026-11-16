@@ -22,7 +22,7 @@ import { randomUUID } from "node:crypto";
 import { homedir } from "node:os";
 import { join } from "node:path";
 
-export const DEMANDE_TYPES = ["SITE_ADD", "RECON", "WINDOW_RUN", "REPORT", "REMEASURE_PROPOSE", "ANALYSE", "AUDIT_IA", "NOTE_CONTENU"] as const;
+export const DEMANDE_TYPES = ["SITE_ADD", "RECON", "WINDOW_RUN", "REPORT", "REMEASURE_PROPOSE", "ANALYSE", "AUDIT_IA", "NOTE_CONTENU", "EXTRAIRE_PLAN"] as const;
 export type DemandeType = (typeof DEMANDE_TYPES)[number];
 export type DemandeStatut = "QUEUED" | "RUNNING" | "DONE" | "FAILED" | "CANCELLED";
 
@@ -209,6 +209,10 @@ export interface EngineDb {
   auditResultat(demande: string, r: Record<string, unknown>): Promise<string>;
   /** Nature des entités citées (concurrent, plateforme…) proposée par le moteur ; jamais sur un classement humain. */
   classerEntites(subjectId: string, entites: { entite: string; nature: string }[]): Promise<number>;
+  /** Contexte d'un site pour un plan : constats ouverts, rapports externes, actions déjà proposées. */
+  contexte(subjectId: string): Promise<{ constats: string[]; externes: { outil: string; date: string; resume: string | null; extrait: string | null }[]; actions: string[] }>;
+  /** Extraction du plan d'un rapport externe : refusée sans GO ; rend le rapport. */
+  planDebut(demande: string): Promise<{ audit_externe_id: string; outil: string; realise_le: string; resume: string | null; rapport_md: string | null; cout_max_usd: number }>;
   /** Note du contenu : refusée sans GO en base ; rend le dépôt lié au moment du GO. */
   noteDebut(demande: string): Promise<{ note_id: string; depot: string | null; cout_max_usd: number }>;
 }
@@ -398,6 +402,18 @@ export class MemoryEngineDb implements EngineDb {
     if (!this.auditsGo.has(String(d.charge.audit_id))) throw new Error("42501 : audit refusé : aucun GO enregistré");
     return `${d.subject_id}-audit-test`;
   }
+  contextes = new Map<string, { constats: string[]; externes: { outil: string; date: string; resume: string | null; extrait: string | null }[]; actions: string[] }>();
+  async contexte(subjectId: string) {
+    return this.contextes.get(subjectId) ?? { constats: [], externes: [], actions: [] };
+  }
+  plansGo = new Map<string, { audit_externe_id: string; outil: string; realise_le: string; resume: string | null; rapport_md: string | null; cout_max_usd: number }>();
+  async planDebut(demande: string) {
+    const d = this.demandes.find((x) => x.id === demande);
+    if (!d || d.type !== "EXTRAIRE_PLAN" || d.statut !== "RUNNING") throw new Error(`55000 : demande ${demande} : pas une extraction en cours`);
+    const go = this.plansGo.get(String(d.charge.extraction_id));
+    if (!go) throw new Error("42501 : extraction refusée : aucun GO enregistré");
+    return go;
+  }
   entites: { subject_id: string; entite: string; nature: string }[] = [];
   async classerEntites(subjectId: string, entites: { entite: string; nature: string }[]) {
     for (const e of entites) this.entites.push({ subject_id: subjectId, ...e });
@@ -576,13 +592,19 @@ export class PsqlEngineDb implements EngineDb {
     return String(await this.run("select vis_moteur_page(:'p_subject', :'p_window', :'p_nature', :'p_langue', :'p_html');\n", { p_subject: p.subject_id, p_window: p.window_id, p_nature: p.nature, p_langue: p.langue, p_html: p.html }));
   }
   async recommandation(subjectId: string, windowId: string, rec: Record<string, unknown>) {
-    return (await this.run("select vis_moteur_recommandation(:'p_subject', :'p_window', :'p_recommandation'::jsonb);\n", { p_subject: subjectId, p_window: windowId, p_recommandation: rec })) === "t";
+    return (await this.run("select vis_moteur_recommandation(:'p_subject', nullif(:'p_window', ''), :'p_recommandation'::jsonb);\n", { p_subject: subjectId, p_window: windowId, p_recommandation: rec })) === "t";
   }
   async auditDebut(demande: string) {
     return String(await this.run("select vis_moteur_audit_debut(:'p_demande'::uuid);\n", { p_demande: demande }));
   }
   async auditResultat(demande: string, r: Record<string, unknown>) {
     return String(await this.run("select vis_moteur_audit_resultat(:'p_demande'::uuid, :'p_resultat'::jsonb);\n", { p_demande: demande, p_resultat: r }));
+  }
+  async contexte(subjectId: string) {
+    return JSON.parse(String(await this.run("select vis_moteur_contexte(:'p_subject');\n", { p_subject: subjectId })));
+  }
+  async planDebut(demande: string) {
+    return JSON.parse(String(await this.run("select vis_moteur_plan_debut(:'p_demande'::uuid);\n", { p_demande: demande })));
   }
   async classerEntites(subjectId: string, entites: { entite: string; nature: string }[]) {
     return Number(await this.run("select vis_moteur_classer_entites(:'p_subject', :'p_entites'::jsonb);\n", { p_subject: subjectId, p_entites: entites }));
