@@ -50,7 +50,7 @@ describe("moteur : demande AUDIT_IA", () => {
         const data =
           req.schemaName === "AuditQuestions"
             ? { questions: Array.from({ length: 5 }, (_, i) => ({ sujet: `sujet ${i}`, question: `Best padel coach number ${i} in Exempleville?`, ...(i === 0 ? {} : { langue: "en" }), marquee: i === 4, source: null })) }
-            : { resume: "Résumé fictif de l'audit, marque peu citée.", actions: [1, 2, 3].map((i) => ({ priorite: "P0", type: "SOURCE_TARGET", titre: `Action fictive ${i}`, action: "Faire une action fictive précise et vérifiable.", pourquoi: "Parce que les IA citent cet annuaire.", questions: ["K01"], impact: "high", effort: "S" })) };
+            : { resume: "Résumé fictif de l'audit, marque peu citée.", actions: [1, 2, 3].map((i) => ({ priorite: "P0", type: "SOURCE_TARGET", titre: `Action fictive ${i}`, action: "Faire une action fictive précise et vérifiable.", pourquoi: "Parce que les IA citent cet annuaire.", questions: ["K01"], impact: "high", effort: "S" })), entites: [{ nom: "Alpha Padel", nature: "Plateforme" }, { nom: "Inventé", nature: "concurrent" }] };
         return { data: req.schema.parse(data), run: { provider: "faux", model: "faux", promptHash: "x" } };
       },
     };
@@ -89,6 +89,9 @@ describe("moteur : demande AUDIT_IA", () => {
     expect((a.matrice as { scores: Record<string, number> }[])[0]!.scores).toEqual({ chatgpt: 0, gemini: 3 });
     expect(String(a.rapport_md)).toContain("Plan d'action");
     expect(db.recos.size).toBe(3);
+    // Nature des entités : seulement celles relevées dans les réponses ; le rapport les sépare.
+    expect(db.entites).toEqual([{ subject_id: "studio-fictif", entite: "Alpha Padel", nature: "plateforme" }]);
+    expect(String(a.rapport_md)).toContain("Plateformes, applications et annuaires");
     expect(r.traitees[0]!.resultat).toMatchObject({ questions: 5, reponses: 10, echecs: 0, recommandations: 3 });
   });
 

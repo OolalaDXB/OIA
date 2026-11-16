@@ -296,6 +296,10 @@ async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
   const concurrents = classementConcurrents(matrice);
   const domaines = classementDomaines(matrice);
   const plan = await proposerPlan(llm, { nom, site: url, matrice, scores: s, concurrents, domaines, constats: [] });
+  // Nature des entités citées : seulement celles réellement relevées dans les réponses.
+  const relevees = new Set(concurrents.map((c) => c.nom.toLowerCase()));
+  const entites = (plan.entites ?? []).filter((e) => relevees.has(e.nom.toLowerCase())).map((e) => ({ entite: e.nom, nature: e.nature }));
+  if (entites.length) await ctx.o.db.classerEntites(subjectId, entites);
   const u = llm.usage?.();
   const prix = findPrice("mistral-api", AUDIT_MODEL);
   const coutLlm = u && prix ? (u.inputTokens * prix.inputPerMTok + u.outputTokens * prix.outputPerMTok) / 1_000_000 : 0;

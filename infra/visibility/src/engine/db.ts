@@ -207,6 +207,8 @@ export interface EngineDb {
   /** Audit IA express (0015) : ouvre sa fenêtre (refusée sans GO en base), rend le résultat. */
   auditDebut(demande: string): Promise<string>;
   auditResultat(demande: string, r: Record<string, unknown>): Promise<string>;
+  /** Nature des entités citées (concurrent, plateforme…) proposée par le moteur ; jamais sur un classement humain. */
+  classerEntites(subjectId: string, entites: { entite: string; nature: string }[]): Promise<number>;
   /** Note du contenu : refusée sans GO en base ; rend le dépôt lié au moment du GO. */
   noteDebut(demande: string): Promise<{ note_id: string; depot: string | null; cout_max_usd: number }>;
 }
@@ -396,6 +398,11 @@ export class MemoryEngineDb implements EngineDb {
     if (!this.auditsGo.has(String(d.charge.audit_id))) throw new Error("42501 : audit refusé : aucun GO enregistré");
     return `${d.subject_id}-audit-test`;
   }
+  entites: { subject_id: string; entite: string; nature: string }[] = [];
+  async classerEntites(subjectId: string, entites: { entite: string; nature: string }[]) {
+    for (const e of entites) this.entites.push({ subject_id: subjectId, ...e });
+    return entites.length;
+  }
   notesGo = new Map<string, { depot: string | null; cout_max_usd: number }>();
   async noteDebut(demande: string) {
     const d = this.demandes.find((x) => x.id === demande);
@@ -576,6 +583,9 @@ export class PsqlEngineDb implements EngineDb {
   }
   async auditResultat(demande: string, r: Record<string, unknown>) {
     return String(await this.run("select vis_moteur_audit_resultat(:'p_demande'::uuid, :'p_resultat'::jsonb);\n", { p_demande: demande, p_resultat: r }));
+  }
+  async classerEntites(subjectId: string, entites: { entite: string; nature: string }[]) {
+    return Number(await this.run("select vis_moteur_classer_entites(:'p_subject', :'p_entites'::jsonb);\n", { p_subject: subjectId, p_entites: entites }));
   }
   async noteDebut(demande: string) {
     return JSON.parse(String(await this.run("select vis_moteur_note_debut(:'p_demande'::uuid);\n", { p_demande: demande }))) as { note_id: string; depot: string | null; cout_max_usd: number };

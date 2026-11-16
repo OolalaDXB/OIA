@@ -189,6 +189,11 @@ const PlanSchema = z.preprocess(enveloppe("actions"), z.object({
     )
     .min(3)
     .transform((a) => a.slice(0, 15)),
+  // Nature de chaque entité citée à la place de la marque (un concurrent n'est pas une plateforme).
+  entites: z
+    .array(z.object({ nom: z.string().trim().min(1).transform((x) => x.slice(0, 160)), nature: z.preprocess((x) => String(x).trim().toLowerCase(), z.enum(["concurrent", "plateforme", "application", "annuaire", "media", "autre"])) }))
+    .default([])
+    .catch([]),
 }));
 export type Plan = z.infer<typeof PlanSchema>;
 
@@ -210,6 +215,10 @@ export async function proposerPlan(
       "Chaque action dit quoi faire concrètement, pourquoi, et quelles questions (identifiants K..) elle sert.",
       'Format exact : {"resume":"…","actions":[{"priorite":"P0","type":"SOURCE_TARGET","titre":"…","action":"…","pourquoi":"…","questions":["K01"],"impact":"high","effort":"S"}]}.',
       "type parmi TECH_FIX, CONTENT_GAP, ENTITY_INCONSISTENCY, SOURCE_TARGET, FIX_FACT ; impact parmi low, medium, high ; effort parmi XS, S, M, L, XL.",
+      'Ajoute "entites":[{"nom":"…","nature":"concurrent"}] : une ligne par nom de la liste « Cités à la place », avec sa nature :',
+      "concurrent (même métier sur le même marché : un club, un coach, une salle), plateforme (réservation ou place de marché, ex. Playtomic, ClassPass),",
+      "application (application mobile ou logicielle), annuaire, media (presse, blog, guide), autre. Une plateforme ou une application n'est jamais un concurrent.",
+      "Dans le plan, traite les plateformes et annuaires comme des sources où être présent, pas comme des concurrents.",
     ].join(" "),
     input: [
       `Score global ${o.scores.global}/100 ; par moteur : ${JSON.stringify(o.scores.parMoteur)} ; questions sans le nom : citée ${o.scores.sansNom.citees} fois sur ${o.scores.sansNom.total}.`,
@@ -230,9 +239,21 @@ export function rapportMarkdown(o: { nom: string; site: string; date: string; mo
   t.push(`Questions sans le nom : marque citée ${o.s.sansNom.citees} fois sur ${o.s.sansNom.total} réponses.`, "", o.plan.resume, "");
   t.push("## Résultats par question", "", `| # | Sujet | ${o.moteurs.join(" | ")} |`, `|---|---|${o.moteurs.map(() => "---").join("|")}|`);
   for (const l of o.matrice) t.push(`| ${l.id} | ${l.sujet}${l.marquee ? " (nom)" : ""} | ${o.moteurs.map((m) => sym(l.scores[m])).join(" | ")} |`);
-  t.push("", "★ cité avec le site en source · ● cité · ◐ cité parce que nommé · ✗ absent", "", "## Cités à la place", "");
-  for (const c of o.concurrents.slice(0, 15)) t.push(`- ${c.nom} : ${c.reponses} réponse(s), ${c.moteurs} moteur(s)`);
-  t.push("", "## Sources les plus citées", "");
+  t.push("", "★ cité avec le site en source · ● cité · ◐ cité parce que nommé · ✗ absent", "");
+  const nature = new Map((o.plan.entites ?? []).map((e) => [e.nom.toLowerCase(), e.nature]));
+  const groupes: [string, (n: string | undefined) => boolean][] = [
+    ["Concurrents cités à la place", (n) => n === "concurrent" || n === undefined],
+    ["Plateformes, applications et annuaires cités (sources où être présent)", (n) => n === "plateforme" || n === "application" || n === "annuaire"],
+    ["Médias et autres", (n) => n === "media" || n === "autre"],
+  ];
+  for (const [titre, garde] of groupes) {
+    const liste = o.concurrents.filter((c) => garde(nature.get(c.nom.toLowerCase()))).slice(0, 15);
+    if (!liste.length) continue;
+    t.push(`## ${titre}`, "");
+    for (const c of liste) t.push(`- ${c.nom}${nature.get(c.nom.toLowerCase()) ? ` (${nature.get(c.nom.toLowerCase())})` : ""} : ${c.reponses} réponse(s), ${c.moteurs} moteur(s)`);
+    t.push("");
+  }
+  t.push("## Sources les plus citées", "");
   for (const d of o.domaines.slice(0, 15)) t.push(`- ${d.domaine} : ${d.reponses}`);
   t.push("", "## Plan d'action", "");
   for (const a of o.plan.actions) t.push(`- **${a.priorite} · ${a.titre}** — ${a.action} *Pourquoi :* ${a.pourquoi}${a.questions.length ? ` (${a.questions.join(", ")})` : ""}`);
