@@ -31,3 +31,12 @@ wait_healthy() { # project service
   done
   echo "$1/$2 pas healthy après 120 s" >&2; return 1
 }
+
+# Dossier de travail d'une fenêtre (début, clôture, journaux) : <data>/<sujet>/<fenêtre>.
+# Ancien emplacement <data>/<fenêtre>, d'avant les commandes génériques (mandat v13) :
+# gardé seulement s'il porte le nom du sujet (<data>/<fenêtre>/subject.txt) et que le
+# nouveau n'existe pas. OIA_VIS_STATE_DIR l'impose (tests).
+window_dir() { # data subject window
+  if [ -n "${OIA_VIS_STATE_DIR:-}" ]; then echo "$OIA_VIS_STATE_DIR"; return 0; fi
+  if [ ! -d "$1/$2/$3" ] && [ "$(cat "$1/$3/subject.txt" 2>/dev/null)" = "$2" ]; then echo "$1/$3"; else echo "$1/$2/$3"; fi
+}

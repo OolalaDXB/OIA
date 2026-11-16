@@ -1,4 +1,5 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
+import { parse } from "yaml";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { z } from "zod";
@@ -85,6 +86,21 @@ export const RecommendationSchema = z
     createdBy: z.string().min(1),
     createdAt: isoDate,
     windowId: z.string().optional(),
+    /** Qui exécute : le client (action sans code : annuaire, profil) ou l'équipe. */
+    owner: z.enum(["client", "team"]).optional(),
+    /** Ce qui empêche l'exécution (ex. prix à confirmer par le client). */
+    blockedBy: z.string().optional(),
+    /** Exécution déclarée : date de mise en ligne, preuve, fenêtre qui la mesurera. */
+    execution: z
+      .object({
+        executedAt: isoDate,
+        proof: z.object({ kind: z.enum(["commit", "url", "other"]), ref: z.string().min(1) }).strict(),
+        declaredBy: z.string().min(2),
+        measuredBy: z.string().regex(/^[a-z0-9][a-z0-9-]*$/).optional(),
+        note: z.string().optional(),
+      })
+      .strict()
+      .optional(),
   })
   .strict()
   .refine(
@@ -93,6 +109,25 @@ export const RecommendationSchema = z
   );
 
 export type Recommendation = z.infer<typeof RecommendationSchema>;
+
+/** Recommandations d'un sujet : subjects/<sujet>/recommendations.yaml (facultatif). */
+export const RecommendationsFileSchema = z
+  .object({ schemaVersion: z.literal(1), recommendations: z.array(RecommendationSchema) })
+  .strict()
+  .superRefine((f, ctx) => {
+    const seen = new Set<string>();
+    for (const r of f.recommendations) {
+      if (seen.has(r.id)) ctx.addIssue({ code: "custom", message: `recommandation ${r.id} en double` });
+      seen.add(r.id);
+      if (r.execution && r.decision.status !== "accepted") ctx.addIssue({ code: "custom", message: `${r.id} : exécutée sans être validée` });
+    }
+  });
+
+export function loadRecommendations(subjectDir: string): Recommendation[] {
+  const p = join(subjectDir, "recommendations.yaml");
+  if (!existsSync(p)) return [];
+  return RecommendationsFileSchema.parse(parse(readFileSync(p, "utf8"))).recommendations;
+}
 
 export function loadRecommendationJsonSchema(): object {
   const here = dirname(fileURLToPath(import.meta.url));

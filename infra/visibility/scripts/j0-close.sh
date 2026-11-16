@@ -3,7 +3,8 @@
 # après le dernier run. SEULE commande autorisée à arrêter le worker d'Elmo
 # pendant une fenêtre (amendement du 2026-11-07).
 #
-# Reprenable : chaque étape laisse un marqueur dans <data>/<fenêtre>/close/ ;
+# Reprenable : chaque étape laisse un marqueur dans <dossier de la fenêtre>/close/
+# (window_dir de lib.sh : <data>/<sujet>/<fenêtre>) ;
 # une relance reprend à l'étape interrompue et ne refait rien. L'import des
 # preuves ne duplique jamais une réponse (src/evidence-store.ts).
 #
@@ -21,6 +22,7 @@
 #   9 remove-watch  retrait de la tâche quotidienne
 #  10 crawlie       nouvel audit Crawlie de la surface publique (gratuit), comparé au
 #                   précédent ; ne bloque pas la clôture
+#  11 mark-done     fenêtre passée en done dans measurement.yaml (fin = début + durée)
 # Aucun nettoyage ni arrêt définitif avant que la sauvegarde soit vérifiée.
 #
 #   ./scripts/j0-close.sh <subjectId>
@@ -32,11 +34,12 @@ subject="${1:-}"
 window="${OIA_VIS_WINDOW:-j0}"
 days="${OIA_VIS_WINDOW_DAYS:-5}"
 data="${OIA_VIS_DATA:-$HOME/oia-visibility-data}"
-state="$data/$window/close"; mkdir -p "$state"
+wdir="$(window_dir "$data" "$subject" "$window")"; mkdir -p "$wdir"
+state="$wdir/close"; mkdir -p "$state"
 evidence="$data/$subject/evidence/$window.jsonl"
 tsx="$VIS_ROOT/node_modules/.bin/tsx"
-started="$(cat "$data/$window/started-at.txt" 2>/dev/null || true)"
-[ -n "$started" ] || { echo "début de fenêtre inconnu : $data/$window/started-at.txt" >&2; exit 1; }
+started="$(cat "$wdir/started-at.txt" 2>/dev/null || true)"
+[ -n "$started" ] || { echo "début de fenêtre inconnu : $wdir/started-at.txt" >&2; exit 1; }
 
 # Pas de clôture avant la fin des runs du dernier jour (début + (jours-1) × 24 h + 2 h).
 if [ -z "${OIA_VIS_CLOSE_EARLY:-}" ] && ! node -e 'process.exit(Date.now()>=Date.parse(process.argv[1])+((+process.argv[2])-1)*864e5+72e5?0:1)' "$started" "$days"; then
@@ -96,6 +99,15 @@ redirects() {
   if [ -n "${OIA_VIS_NO_RESOLVE:-}" ]; then echo "{}" > "$state/redirects.json"; return 0; fi
   "$tsx" "$VIS_ROOT/src/redirects.ts" "$state/export.json" "$state/redirects.json"
 }
+# Fenêtre passée en done dans measurement.yaml (fin = début + durée), si elle y est
+# encore en running ; OIA_VIS_NO_MARK_DONE=1 : laissée telle quelle (tests anciens).
+mark_done() {
+  [ -z "${OIA_VIS_NO_MARK_DONE:-}" ] || { echo "statut de la fenêtre laissé tel quel"; return 0; }
+  local end status
+  end="$(node -e 'process.stdout.write(new Date(Date.parse(process.argv[1])+Number(process.argv[2])*864e5).toISOString().slice(0,10))' "$started" "$days")"
+  status="$("$tsx" "$VIS_ROOT/src/window-gate.ts" info "$subject" "$window" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>process.stdout.write(JSON.parse(s).window.status))')"
+  if [ "$status" = running ]; then "$tsx" "$VIS_ROOT/src/window-gate.ts" end-window "$subject" "$window" "$end"; else echo "fenêtre déjà en $status dans measurement.yaml"; fi
+}
 crawlie() {
   local subjects_dir="${OIA_VIS_SUBJECTS_DIR:-$VIS_ROOT/subjects}" audit_cmd="${OIA_VIS_CRAWLIE_AUDIT:-$VIS_ROOT/scripts/crawlie-audit.sh}"
   local log="$state/crawlie.log" json today prev
@@ -125,6 +137,7 @@ step import import_evidence
 step redirects redirects
 step remove-watch remove_watch
 step crawlie crawlie
+step mark-done mark_done
 echo
 echo "Fenêtre $window clôturée. Preuves : $evidence"
-echo "Ensuite : pnpm vis:j0-report, puis pnpm vis:j0-verify."
+echo "Ensuite : pnpm vis report $subject $window, puis pnpm vis verify $subject $window."

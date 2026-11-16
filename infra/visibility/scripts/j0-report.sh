@@ -10,7 +10,8 @@ mode="${1:-}"; subject="${2:-}"
 { [ "$mode" = report ] || [ "$mode" = verify ]; } && [ -n "$subject" ] || { echo "usage: j0-report.sh report|verify <subjectId>" >&2; exit 2; }
 window="${OIA_VIS_WINDOW:-j0}"
 data="${OIA_VIS_DATA:-$HOME/oia-visibility-data}"
+wdir="$(window_dir "$data" "$subject" "$window")"; mkdir -p "$wdir"
 subjects_dir="${OIA_VIS_SUBJECTS_DIR:-$VIS_ROOT/subjects}"
 exec "$VIS_ROOT/node_modules/.bin/tsx" "$VIS_ROOT/src/j0-report.ts" "$mode" "$subject" "$window" \
   "$data/$subject/evidence/$window.jsonl" "$subjects_dir/$subject/reports/$window" \
-  "$data/$window/close/failed.json" "$subjects_dir/$subject/fact-keywords.yaml" "$data/$window/close/redirects.json"
+  "$wdir/close/failed.json" "$subjects_dir/$subject/fact-keywords.yaml" "$wdir/close/redirects.json"

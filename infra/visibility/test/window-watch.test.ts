@@ -121,8 +121,8 @@ describe("tâche quotidienne launchd (j0-watch.sh, j0-watch-day.sh)", () => {
     const dir = mkdtempSync(join(tmpdir(), "watch-"));
     const home = join(dir, "home");
     const dataDir = join(dir, "data");
-    mkdirSync(join(dataDir, "j0"), { recursive: true });
-    writeFileSync(join(dataDir, "j0", "started-at.txt"), "2026-11-08T09:00:00Z\n");
+    mkdirSync(join(dataDir, "demo-subject", "j0"), { recursive: true });
+    writeFileSync(join(dataDir, "demo-subject", "j0", "started-at.txt"), "2026-11-08T09:00:00Z\n");
     const subjects = join(dir, "subjects");
     cpSync(join(here, "fixtures", "demo-subject"), join(subjects, "demo-subject"), { recursive: true });
     const fake = fakeBin(dir, ["launchctl", "docker"]);

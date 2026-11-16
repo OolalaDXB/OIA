@@ -84,8 +84,8 @@ function siteRepo(dir: string, breakDuringWindow: boolean) {
 function setup(breakFreeze = false, opts: { offPanel?: boolean; emptyText?: boolean } = {}) {
   const dir = mkdtempSync(join(tmpdir(), "close-"));
   const data = join(dir, "data");
-  mkdirSync(join(data, "j0"), { recursive: true });
-  writeFileSync(join(data, "j0", "started-at.txt"), `${START}\n`);
+  mkdirSync(join(data, "demo-subject", "j0"), { recursive: true });
+  writeFileSync(join(data, "demo-subject", "j0", "started-at.txt"), `${START}\n`);
   const subjects = join(dir, "subjects");
   cpSync(join(here, "fixtures", "demo-subject"), join(subjects, "demo-subject"), { recursive: true });
   writeFileSync(join(subjects, "demo-subject", "freeze-surface.yaml"), "repoPath: unused\nbranch: main\npublicFiles: [index.html, service.html]\nnoindexFiles: [service.html]\n");
@@ -183,7 +183,7 @@ describe("vis:j0-close (reprenable, sans doublon, seul arrêt autorisé)", () =>
 
   it("refuse une clôture avant la fin du dernier jour", () => {
     const s = setup();
-    writeFileSync(join(s.data, "j0", "started-at.txt"), `${new Date().toISOString()}\n`);
+    writeFileSync(join(s.data, "demo-subject", "j0", "started-at.txt"), `${new Date().toISOString()}\n`);
     const r = s.close();
     expect(r.status).toBe(1);
     expect(r.stderr).toMatch(/Trop tôt/);
@@ -194,7 +194,7 @@ describe("vis:j0-close (reprenable, sans doublon, seul arrêt autorisé)", () =>
     const s = setup(true);
     const r = s.close();
     expect(r.status, r.stderr).toBe(0);
-    const freeze = readFileSync(join(s.data, "j0/close/freeze.txt"), "utf8");
+    const freeze = readFileSync(join(s.data, "demo-subject/j0/close/freeze.txt"), "utf8");
     expect(freeze).toMatch(/GEL ROMPU PENDANT LA FENÊTRE/);
     expect(freeze).toMatch(/index\.html/);
     expect(freeze).toMatch(/noindex conservé : service\.html/);

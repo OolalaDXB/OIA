@@ -14,15 +14,16 @@ subject="${1:-}"
 [ -n "$subject" ] || { echo "usage: j0-first-run.sh <subjectId>" >&2; exit 2; }
 window="${OIA_VIS_WINDOW:-j0}"
 tsx="$VIS_ROOT/node_modules/.bin/tsx"
-data="${OIA_VIS_DATA:-$HOME/oia-visibility-data}"; mkdir -p "$data/$window"
-out="$data/$window/first-run-$(date -u +%Y%m%dT%H%M%SZ).txt"
+data="${OIA_VIS_DATA:-$HOME/oia-visibility-data}"
+wdir="$(window_dir "$data" "$subject" "$window")"; mkdir -p "$wdir"
+out="$wdir/first-run-$(date -u +%Y%m%dT%H%M%SZ).txt"
 sql() { elmo_dc exec -T postgres psql -U elmo -d elmo -tA -F ' | ' -c "$1" 2>/dev/null; }
 brand="$(sql "select id from brands where id = '$subject'" | tr -d '[:space:]')"
 [ -n "$brand" ] || { echo "marque $subject absente d'Elmo" >&2; exit 1; }
 
 {
   echo "# Premier run · $window · $subject · $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-  echo "Début de fenêtre : $(cat "$data/$window/started-at.txt" 2>/dev/null || echo inconnu)"
+  echo "Début de fenêtre : $(cat "$wdir/started-at.txt" 2>/dev/null || echo inconnu)"
   echo
   echo "## Runs par moteur (modèle | fournisseur | réussis | version(s) servie(s) | estimation Elmo $)"
   sql "select r.model, r.provider, count(*), string_agg(distinct r.version, ', '),

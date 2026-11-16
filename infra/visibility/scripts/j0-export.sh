@@ -9,8 +9,9 @@ subject="${1:-}"
 [ -n "$subject" ] || { echo "usage: j0-export.sh <subjectId>" >&2; exit 2; }
 window="${OIA_VIS_WINDOW:-j0}"
 data="${OIA_VIS_DATA:-$HOME/oia-visibility-data}"
-started="$(cat "$data/$window/started-at.txt" 2>/dev/null || true)"
-[ -n "$started" ] || { echo "début de fenêtre inconnu : $data/$window/started-at.txt absent" >&2; exit 1; }
+wdir="$(window_dir "$data" "$subject" "$window")"
+started="$(cat "$wdir/started-at.txt" 2>/dev/null || true)"
+[ -n "$started" ] || { echo "début de fenêtre inconnu : $wdir/started-at.txt absent" >&2; exit 1; }
 days="${OIA_VIS_WINDOW_DAYS:-5}"
 elmo_dc exec -T -e PGOPTIONS='-c default_transaction_read_only=on' postgres \
   psql -U elmo -d elmo -tAq -v ON_ERROR_STOP=1 -v sid="$subject" -v started="$started" -v days="$days" <<'SQL'

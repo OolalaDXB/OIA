@@ -11,8 +11,9 @@ subject="${1:-}"
 [ -n "$subject" ] || { echo "usage: j0-window-data.sh <subjectId>" >&2; exit 2; }
 window="${OIA_VIS_WINDOW:-j0}"
 data="${OIA_VIS_DATA:-$HOME/oia-visibility-data}"
-started="$(cat "$data/$window/started-at.txt" 2>/dev/null || true)"
-[ -n "$started" ] || { echo "début de fenêtre inconnu : $data/$window/started-at.txt absent" >&2; exit 1; }
+wdir="$(window_dir "$data" "$subject" "$window")"
+started="$(cat "$wdir/started-at.txt" 2>/dev/null || true)"
+[ -n "$started" ] || { echo "début de fenêtre inconnu : $wdir/started-at.txt absent" >&2; exit 1; }
 days="${OIA_VIS_WINDOW_DAYS:-5}"
 engines="$(node -e 'const t=process.argv[1].split(",").filter(Boolean).map(x=>x.split(":")[0]);process.stdout.write(JSON.stringify(t))' \
   "$(awk -F= '$1=="SCRAPE_TARGETS"{print substr($0,16); exit}' "$ELMO_ENV_FILE")")"

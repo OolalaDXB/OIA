@@ -29,7 +29,8 @@ subject="${1:-}"; mode="${2:-}"
 window="${OIA_VIS_WINDOW:-j0}"
 targets="${OIA_VIS_J0_TARGETS:-chatgpt:openai-api:gpt-6-luna:online,claude:anthropic-api:claude-sonnet-5-5:online,mistral:mistral-api:mistral-large-4:online,gemini:openrouter:google/gemini-3-flash-preview:online,perplexity:openrouter:perplexity/sonar:online}"
 tsx="$VIS_ROOT/node_modules/.bin/tsx"
-data="${OIA_VIS_DATA:-$HOME/oia-visibility-data}"; mkdir -p "$data/$window"
+data="${OIA_VIS_DATA:-$HOME/oia-visibility-data}"
+wdir="$(window_dir "$data" "$subject" "$window")"; mkdir -p "$wdir"
 port=1515
 base="http://127.0.0.1:$port"
 
@@ -118,9 +119,9 @@ wait_web || nogo "web d'Elmo ne repart pas après l'ajout de la clé admin"
 ok "SCRAPE_TARGETS $([ -n "$targets_preset" ] && echo "inchangé (déjà posé)" || echo "posé"), clé admin temporaire active"
 
 # ---- 4. Marque, concurrents, questions -------------------------------------------
-body="$data/$window/elmo-brand-body.json"
+body="$wdir/elmo-brand-body.json"
 "$tsx" "$VIS_ROOT/src/elmo-load.ts" body "$subject" "$org_id" > "$body"
-resp="$data/$window/elmo-brand-response.json"
+resp="$wdir/elmo-brand-response.json"
 code="$(printf 'Authorization: Bearer %s\n' "$key" | curl -sS -o "$resp" -w '%{http_code}' -H @- \
   -H 'Content-Type: application/json' --data @"$body" "$base/api/v1/brands")"
 unset key
@@ -139,16 +140,16 @@ ok "dans Elmo : $comp concurrents, $prom questions actives"
 # ---- 6. Démarrage --------------------------------------------------------------------
 elmo_dc up -d worker >/dev/null 2>&1
 started="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-echo "$started" > "$data/$window/started-at.txt"
+echo "$started" > "$wdir/started-at.txt"
 ok "worker démarré à $started"
 "$tsx" "$VIS_ROOT/src/elmo-load.ts" start-window "$subject" "$window"
 if command -v caffeinate >/dev/null; then
   nohup caffeinate -ims >/dev/null 2>&1 &
-  echo $! > "$data/$window/caffeinate.pid"
-  ok "Mac maintenu éveillé (caffeinate, pid $(cat "$data/$window/caffeinate.pid"))"
+  echo $! > "$wdir/caffeinate.pid"
+  ok "Mac maintenu éveillé (caffeinate, pid $(cat "$wdir/caffeinate.pid"))"
 fi
-nohup "$VIS_ROOT/scripts/cost-guard.sh" --watch 60 >> "$data/$window/cost-guard.log" 2>&1 &
-echo $! > "$data/$window/cost-guard.pid"
-ok "cost-guard.sh --watch 60 actif (pid $(cat "$data/$window/cost-guard.pid"), journal $data/$window/cost-guard.log)"
+nohup "$VIS_ROOT/scripts/cost-guard.sh" --watch 60 >> "$wdir/cost-guard.log" 2>&1 &
+echo $! > "$wdir/cost-guard.pid"
+ok "cost-guard.sh --watch 60 actif (pid $(cat "$wdir/cost-guard.pid"), journal $wdir/cost-guard.log)"
 echo
 echo "J0 lancé. Dans 10 à 15 minutes : ./scripts/j0-first-run.sh $subject"

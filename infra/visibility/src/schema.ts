@@ -70,6 +70,8 @@ export const SubjectSchema = z
       })
       .strict(),
     languages: z.array(lang).min(1),
+    /** Langue des documents remis au client (page client). Par défaut, la première de `languages`. */
+    clientLanguage: lang.optional(),
     markets: z
       .array(
         z
