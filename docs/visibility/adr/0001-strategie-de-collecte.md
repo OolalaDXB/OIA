@@ -1,6 +1,6 @@
 # ADR 0001 · Stratégie de collecte
 
-**Statut** : proposé le 2026-11-08, à valider par Mickaël. Référence unique : `docs/roadmap-oia-shyrka-souffleur.md` v3.3.
+**Statut** : proposé le 2026-11-08 ; **validé par Mickaël le 2026-11-16** (mandat v14) : OIA Visibility devient le collecteur et la seule source de vérité de la mesure, trajectoire avancée à cette date ; Elmo vidé (export final vérifié), puis arrêté, jamais supprimé. Référence unique : `docs/roadmap-oia-shyrka-souffleur.md` v3.3.
 
 ## Décision
 
