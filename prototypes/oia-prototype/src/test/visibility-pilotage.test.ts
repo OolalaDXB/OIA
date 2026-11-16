@@ -78,3 +78,12 @@ describe("garde-fous du cockpit", () => {
     expect(dollars(null)).toBe("Non mesurable");
   });
 });
+
+import { estProprietaireOia } from "@/components/oia/visibility-pilotage";
+describe("propriétaire OIA", () => {
+  it("se lit sur la ligne `oia` de vis_budget_v2, même sans sujet", () => {
+    expect(estProprietaireOia([{ client_id: "oia", mon_role: "owner" }])).toBe(true);
+    expect(estProprietaireOia([{ client_id: "oia", mon_role: "viewer" }, { client_id: "autre", mon_role: "owner" }])).toBe(false);
+    expect(estProprietaireOia([])).toBe(false);
+  });
+});

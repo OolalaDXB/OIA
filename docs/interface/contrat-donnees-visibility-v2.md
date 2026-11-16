@@ -180,6 +180,7 @@ Réglages et portefeuille. Une ligne par client et par mois.
 | `reel_usd` | numeric | coût réel du mois |
 | `etat` | text | `ok`, `proche` (80 %), `atteint`, `non_fixe` |
 | `plafond_global_usd` | numeric | plafond global d'OIA (rappel) |
+| `mon_role` | text | rôle de l'appelant sur ce client (`owner`, `approver`, `viewer`) ; sur la ligne `oia`, il dit qui peut fixer les plafonds (ajouté le 2026-11-16, compatible) |
 
 ### `vis_alertes_v2`
 

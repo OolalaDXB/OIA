@@ -135,13 +135,19 @@ function PlafondForm({ client, titre, max }: { client: string | null; titre: str
   return <form className="border-t border-border py-4 first:border-0" onSubmit={soumettre}><h3 className="text-sm">{titre}</h3><div className="mt-3 flex flex-wrap items-end gap-3"><label className="grid gap-1.5 text-xs text-tertiary">Plafond mensuel en dollars<Input className="min-h-11 w-40" name="montant" type="number" min="0" max={max ?? undefined} step="0.01" required /></label><Button type="submit" className="min-h-11" disabled={geste.enCours}>Enregistrer le plafond</Button></div>{max !== null && max !== undefined && <p className="mt-2 text-xs text-tertiary">Maximum : {dollars(max)}</p>}<ErreurGeste erreur={geste.erreur} /></form>;
 }
 
+/** Propriétaire du client technique `oia` : seul à fixer les plafonds (vis_fixer_plafond). */
+export function estProprietaireOia(budgets: Array<{ client_id?: string | null } & Record<string, unknown>>): boolean {
+  return budgets.some((b) => b.client_id === "oia" && (b as { mon_role?: string | null }).mon_role === "owner");
+}
+
 export function BudgetVisibility() {
   const { global } = useVisibilityPilotage();
-  const proprietaireOia = global?.portefeuille.some((l) => l.client_id === "oia" && l.mon_role === "owner") ?? false;
+  // Rôle sur le client technique `oia` : sa ligne de vis_budget_v2 (mon_role), présente même sans sujet.
+  const proprietaireOia = estProprietaireOia(global?.budgets ?? []);
   if (!proprietaireOia) return <Section titre="Budget"><p className="text-sm text-muted-foreground">La modification des plafonds est réservée au propriétaire du client technique OIA.</p></Section>;
   const budgets = global?.budgets ?? [];
   const globalPlafond = budgets.find((b) => b.plafond_global_usd !== null)?.plafond_global_usd ?? null;
-  return <div className="grid gap-6"><Section titre="Plafonds mensuels"><p className="mb-4 text-sm text-muted-foreground">Fixez d'abord le plafond global OIA, puis le plafond de chaque client.</p><PlafondForm client={null} titre="Plafond global OIA" />{globalPlafond === null ? <p className="border-t border-border py-4 text-sm text-muted-foreground">Les plafonds clients seront disponibles après le plafond global.</p> : budgets.map((b) => <PlafondForm key={b.client_id} client={b.client_id} titre={`Client ${b.client_id}`} max={globalPlafond} />)}</Section>
+  return <div className="grid gap-6"><Section titre="Plafonds mensuels"><p className="mb-4 text-sm text-muted-foreground">Fixez d'abord le plafond global OIA, puis le plafond de chaque client.</p><PlafondForm client={null} titre="Plafond global OIA" />{globalPlafond === null ? <p className="border-t border-border py-4 text-sm text-muted-foreground">Les plafonds clients seront disponibles après le plafond global.</p> : budgets.filter((b) => b.client_id !== "oia").map((b) => <PlafondForm key={b.client_id} client={b.client_id} titre={`Client ${b.client_id}`} max={globalPlafond} />)}</Section>
     <Section titre="État du mois">{budgets.length === 0 ? <p className="text-sm text-muted-foreground">Aucun budget pour ce mois.</p> : budgets.map((b) => <div key={b.client_id} className="grid gap-2 border-b border-border py-3 text-sm last:border-0 sm:grid-cols-5"><span>{b.client_id}</span><span className="num">Réel : {dollars(b.reel_usd)}</span><span className="num">Engagé : {dollars(b.engage_usd)}</span><span className="num">Plafond : {b.plafond_usd === null ? "non fixé" : dollars(b.plafond_usd)}</span><Statut etat={b.etat === "atteint" ? "bloquant" : b.etat === "proche" || b.etat === "non_fixe" ? "verifier" : "conforme"} label={b.etat ?? "Inconnu"} /></div>)}</Section>
   </div>;
 }
