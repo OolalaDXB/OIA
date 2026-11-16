@@ -36,6 +36,12 @@ client, généricité, procédure de la 0008 pour la production). En plus :
   entre deux clients, colonnes des vues identiques au contrat.
 - Démonstration v2 (SQL et JSON) comme décrit dans le contrat.
 - Compléter le contrat avec les colonnes des vues reprises de la 0010.
+- Ajouter au contrat v2 les écarts relevés au branchement de la partie 1
+  (`VISIBILITY_BRANCHEMENT.md`, commit `3ffefa4`) que la base sait déjà fournir : sentiment
+  et position (jugements de Jev importés, marqués « extrait »), URL des citations par
+  réponse, recherches lancées par les moteurs, coût estimé par moteur. Les autres restent
+  « Non mesurable » avec leur raison.
+- Le rapport J0 de Coach Gari n'est pas en base (`vis_rapports_v1` vide) : l'y écrire.
 - **Production** : donner à Mickaël les commandes selon la 0008 (sauvegarde, répétition
   terminée par un retour arrière, application). Il valide chaque écriture. Puis
   `vis_fixer_plafond` pour Coach Gari et Maisons.co reste un geste de Mickaël dans le cockpit.
