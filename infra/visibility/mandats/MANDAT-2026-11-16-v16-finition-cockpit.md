@@ -97,3 +97,18 @@ revue de Maisons.co : la reconnaissance et le J0 sont les GO de Mickaël.
 - le résultat de la recette, écran par écran ;
 - les écarts avec Lovable ;
 - ce que Mickaël fait maintenant, uniquement dans le cockpit.
+
+## Décision du 16 novembre · le moteur tourne dans le dépôt, pas sur le Mac
+
+Décision de Mickaël : le moteur ne tourne pas sur le Mac. Il tourne dans le dépôt, en
+GitHub Actions (`.github/workflows/visibility-moteur.yml`), comme la recherche de Money Lookup
+(`discovery.yml`).
+- Base : l'API de Supabase avec la clé de service (`src/engine/rest.ts`, secrets
+  `SUPABASE_URL` et `SUPABASE_SERVICE_ROLE_KEY` déjà présents). Aucun mot de passe de base.
+- File toutes les 10 minutes ; passage quotidien chaque heure (il ne collecte qu'à partir de
+  l'heure de la fenêtre et ne refait jamais un jour).
+- Dépôt public : la sortie du moteur n'est jamais affichée ; seules les lignes « identifiant,
+  type, état » le sont. Le détail est en base et dans le cockpit.
+- Le `launchd` du bloc B et `docs/moteur-mac.md` ne servent plus ; ne pas les installer.
+- Clés à ajouter par Mickaël dans les secrets Actions du dépôt : `OPENAI_API_KEY`,
+  `ANTHROPIC_API_KEY`, `OPENROUTER_API_KEY`, `TYPESAFE_API_KEY` (`MISTRAL_API_KEY` y est déjà).

@@ -1,0 +1,109 @@
+name: Visibility · moteur
+
+# Le moteur d'OIA Visibility (infra/visibility/src/engine/run.ts) tourne ici, pas sur un Mac :
+# il lit les demandes faites dans le cockpit (file vis.demande), les traite, et écrit ses
+# résultats en base. Il signe sa présence à chaque passage : le cockpit affiche « actif » ou
+# « muet » (vis_moteur_v2).
+#
+# Base : l'API de Supabase avec la clé de service (secrets SUPABASE_URL et
+# SUPABASE_SERVICE_ROLE_KEY, déjà employés par Money Lookup). Le moteur n'appelle que les
+# fonctions vis_moteur_* ; aucune autre écriture.
+#
+# Dépenses : aucun appel payant sans GO donné dans le cockpit, sous le plafond du client et le
+# plafond global (contrôlés en base, puis relus par le moteur).
+#
+# Dépôt public, journaux publics : la sortie du moteur n'est JAMAIS affichée telle quelle.
+# Seules sont montrées les lignes « identifiant de demande, type, état » ; le détail (erreurs
+# comprises) est en base et dans le cockpit.
+#
+# Pour l'arrêter : désactiver ce workflow dans l'onglet Actions du dépôt.
+
+on:
+  schedule:
+    # File des demandes : toutes les 10 minutes (GitHub peut retarder un passage).
+    - cron: "*/10 * * * *"
+    # Passage quotidien sur les fenêtres en cours, chaque heure ; il ne collecte qu'à partir de
+    # l'heure de la fenêtre (runTimeUtc) et ne refait jamais un jour déjà fait.
+    - cron: "7 * * * *"
+  workflow_dispatch:
+    inputs:
+      quotidien:
+        description: "Faire aussi le passage quotidien"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: visibility-moteur
+  cancel-in-progress: false
+
+jobs:
+  passage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: Secrets présents (noms seulement)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+        run: |
+          manque=0
+          for n in SUPABASE_URL SUPABASE_SERVICE_ROLE_KEY OPENAI_API_KEY ANTHROPIC_API_KEY OPENROUTER_API_KEY MISTRAL_API_KEY TYPESAFE_API_KEY; do
+            if [ -n "${!n}" ]; then echo "  $n : présent"; else echo "  $n : ABSENT"; manque=1; fi
+          done
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo "::error::SUPABASE_URL ou SUPABASE_SERVICE_ROLE_KEY absent : le moteur ne peut pas lire la file."
+            exit 1
+          fi
+          if [ "$manque" = 1 ]; then
+            echo "::warning::Clé de moteur absente : les demandes qui en ont besoin échoueront, avec leur raison dans le cockpit."
+          fi
+
+      - name: Passage du moteur
+        working-directory: infra/visibility
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+          OIA_VIS_ENGINE_DB: rest
+          OIA_VIS_ENGINE_HOST: github-actions
+          OIA_VIS_ENGINE_VERSION: ${{ github.sha }}
+          QUOTIDIEN: ${{ github.event.schedule == '7 * * * *' || inputs.quotidien == true }}
+        run: |
+          export OIA_VIS_ENGINE_VERSION="${OIA_VIS_ENGINE_VERSION:0:12}"
+          export HOME_DATA="$RUNNER_TEMP/oia-visibility-data"
+          export OIA_VIS_ENGINE_DIR="$HOME_DATA/moteur"
+          export OIA_VIS_DATA="$HOME_DATA"
+          mkdir -p "$OIA_VIS_ENGINE_DIR"
+          args=()
+          [ "$QUOTIDIEN" = "true" ] && args+=(--quotidien)
+          set +e
+          ./node_modules/.bin/tsx src/engine/run.ts "${args[@]}" > "$RUNNER_TEMP/moteur.log" 2>&1
+          code=$?
+          set -e
+          # Seules les lignes sans donnée client : date, identifiant de demande, type, état ; et le bilan.
+          grep -E '^[0-9TZ:.-]+ ([0-9a-f-]{36} [A-Z_]+ [A-Z]+|passage : [0-9]+ demande\(s\)(, passage quotidien sur [0-9]+ sujet\(s\))?)$' "$RUNNER_TEMP/moteur.log" || true
+          echo "code de sortie : $code (0 : tout traité ; 3 : une demande en échec, raison dans le cockpit ; 1 : arrêt du moteur)"
+          rm -f "$RUNNER_TEMP/moteur.log"
+          [ "$code" = 0 ] || [ "$code" = 3 ]

@@ -61,6 +61,7 @@ import { safePageFetcher, type PageFetcher } from "../site/pages.js";
 import { assertOutsideRepo, ensurePrivateDir } from "../site/paths.js";
 import { readReconnaissanceAnswers, reconnaissanceBundle, reconnaissanceWindowId, runReconnaissance } from "../site/reconnaissance.js";
 import { subjectTerms } from "../site/terms.js";
+import { RestEngineDb, choisirBase } from "./rest.js";
 import { PsqlEngineDb, type AlerteMoteur, type Demande, type EngineDb, type GoEnBase, type NatureProposition, type PreuveBase, type SujetEnBase } from "./db.js";
 
 export interface EngineOptions {
@@ -692,7 +693,7 @@ if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).
     const recoModule = "../reco-generators.js";
     const generateRecommendations = await import(recoModule).then((m: { generateRecommendations?: GenerateRecommendations }) => m.generateRecommendations).catch(() => undefined);
     const r = await runEngine({
-      db: new PsqlEngineDb(),
+      db: choisirBase(env) === "rest" ? new RestEngineDb(env.SUPABASE_URL ?? "", env.SUPABASE_SERVICE_ROLE_KEY ?? "") : new PsqlEngineDb(),
       dir,
       hote: engineHost(env),
       version: env.OIA_VIS_ENGINE_VERSION ?? "inconnue",
