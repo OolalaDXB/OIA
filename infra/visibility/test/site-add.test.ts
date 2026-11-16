@@ -334,7 +334,7 @@ describe("site add : avec --go (fournisseurs fictifs)", () => {
     writeFileSync(join(r.dir, "panel.yaml"), stringify({ ...proposed, status: "validated", validatedBy: "Validateur fictif", validatedAt: DAY, prompts: proposed.prompts.map((p) => ({ ...p, status: "active" })) }));
     const subject = readYaml(join(r.dir, "subject.yaml"));
     subject.competitors = actors.acteurs
-      .filter((a) => a.reponses >= 10)
+      .filter((a) => a.reponses >= 15) // 5 moteurs depuis l'ajout de Grok : « Club Unique » (2 questions) reste sous le choix
       .map((a) => CompetitorSchema.parse({ name: a.name, domains: [], aliases: a.variantes, category: a.type, markets: [], status: "confirmed", rationale: `${a.reponses} réponses de la reconnaissance (exemple ${a.exemple})` }));
     writeFileSync(join(r.dir, "subject.yaml"), stringify(subject));
     const b = loadSubject(r.dir);
