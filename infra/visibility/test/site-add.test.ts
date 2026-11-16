@@ -280,7 +280,7 @@ describe("site add : sans --go", () => {
     const plan = JSON.parse(readFileSync(join(r.dir, "proposition", "reconnaissance.json"), "utf8"));
     expect(plan.statut).toBe("planifiee");
     expect(plan.questions).toHaveLength(16);
-    expect(plan.appels).toBe(16 * 4 + 8); // Mistral : français seulement
+    expect(plan.appels).toBe(16 * 5 + 8); // 5 moteurs (Grok compris) ; Mistral : français seulement
     expect(plan.coutMajorantUsd).toBeGreaterThan(0);
     expect(r.costs.faitsMistral.calls).toBe(3);
     expect(existsSync(join(r.dir, "proposition", "acteurs.json"))).toBe(false);
@@ -301,7 +301,7 @@ describe("site add : avec --go (fournisseurs fictifs)", () => {
     const { opts } = setup({ env: KEYS, llm: () => mistral, collector: () => fakeCollector(calls), go: { faits: true, reconnaissance: true } });
     const r = await siteAdd(opts);
     expect(r.paidCalls.mistral).toBe(3);
-    expect(r.paidCalls.moteurs).toBe(72);
+    expect(r.paidCalls.moteurs).toBe(88);
     // Aucune question marquée envoyée.
     expect(calls.every((c) => !c.promptText.includes("Coach Zed"))).toBe(true);
     expect(calls.filter((c) => c.engine === "mistral").every((c) => c.promptLanguage === "fr")).toBe(true);
@@ -315,7 +315,7 @@ describe("site add : avec --go (fournisseurs fictifs)", () => {
 
     const actors = ActorsFileSchema.parse(JSON.parse(readFileSync(join(r.dir, "proposition", "acteurs.json"), "utf8")));
     const byName = new Map(actors.acteurs.map((a) => [a.name, a]));
-    expect(byName.get("Studio Alpha")).toMatchObject({ type: "structure", reponses: 72, statut: "extrait", source: "https://studio-alpha.example/cours" });
+    expect(byName.get("Studio Alpha")).toMatchObject({ type: "structure", reponses: 88, statut: "extrait", source: "https://studio-alpha.example/cours" });
     expect(byName.get("Marie Durand")?.type).toBe("personne");
     expect(byName.get("FitBook")?.type).toBe("plateforme");
     expect(byName.has("Prix")).toBe(false);
@@ -326,7 +326,7 @@ describe("site add : avec --go (fournisseurs fictifs)", () => {
     expect(homonyms.homonymes.map((h) => h.nom)).toEqual(["Zed Harrow"]);
     expect(homonyms.homonymes[0]!.occurrences[0]!.moteur).toBe("claude");
     const props = lirePropositions(r.dir);
-    expect(props.concurrents!.find((c) => c.name === "Studio Alpha")).toMatchObject({ id: "studio-alpha", type: "structure", domains: ["studio-alpha.example"], citations: 72, statut: "extrait" });
+    expect(props.concurrents!.find((c) => c.name === "Studio Alpha")).toMatchObject({ id: "studio-alpha", type: "structure", domains: ["studio-alpha.example"], citations: 88, statut: "extrait" });
     expect(props.homonymes!.map((h) => [h.id, h.value, h.statut])).toEqual([["zed-harrow", "Zed Harrow", "extrait"]]);
 
     // Validation simulée (bloc B) : panel actif et validé, concurrents retenus.

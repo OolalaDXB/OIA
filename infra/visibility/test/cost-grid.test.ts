@@ -30,14 +30,16 @@ describe("grille de prix", () => {
     expect(runCostUsd(sonnetRun)?.usd).toBeCloseTo(0.055, 6);
   });
 
-  it("couvre les cinq moteurs retenus pour J0, et eux seuls", () => {
+  it("couvre les cinq moteurs de J0 et Grok (ajouté le 2026-11-16, prix provisoire), et eux seuls", () => {
     expect(PRICE_GRID.map((e) => `${e.provider}:${e.id}`).sort()).toEqual([
       "anthropic-api:claude-sonnet-5-5",
       "mistral-api:mistral-large-4",
       "openai-api:gpt-6-luna",
       "openrouter:google/gemini-3-flash-preview",
       "openrouter:perplexity/sonar",
+      "openrouter:x-ai/grok-4.7",
     ]);
+    expect(findPrice("openrouter", "x-ai/grok-4.7:online")?.provisional).toBeTruthy();
   });
 
   it("reconnaît les versions telles qu'Elmo les enregistre, sans confondre les modèles voisins", () => {

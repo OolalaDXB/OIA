@@ -20,6 +20,7 @@ export const DEFAULT_TARGETS: { engine: string; target: string; languages?: stri
   { engine: "claude", target: "claude:anthropic-api:claude-sonnet-5-5:online", note: "Anthropic en direct (:online, outil web_search)" },
   { engine: "gemini", target: "gemini:openrouter:google/gemini-3-flash-preview:online", note: "via OpenRouter (recherche Google native)" },
   { engine: "perplexity", target: "perplexity:openrouter:perplexity/sonar:online", note: "via OpenRouter (Sonar)" },
+  { engine: "grok", target: "grok:openrouter:x-ai/grok-4.7:online", note: "via OpenRouter (recherche web d'OpenRouter) ; ajouté le 2026-11-16, prix provisoire" },
   { engine: "mistral", target: "mistral:mistral-api:mistral-large-4:online", languages: ["fr"], note: "Mistral en direct (:online), panels en français seulement" },
 ];
 

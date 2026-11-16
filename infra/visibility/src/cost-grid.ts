@@ -105,6 +105,20 @@ export const PRICE_GRID: PriceEntry[] = [
     source: "openrouter.ai/api/v1/models (pricing.prompt, completion, web_search)",
     verifiedAt: "2026-11-07",
   },
+  {
+    provider: "openrouter",
+    id: "x-ai/grok-4.7",
+    versions: /^x-ai\/grok-4\.7(-\d[\w-]*)?(:online)?$/,
+    // Ajouté le 2026-11-16 (décision de Mickaël : Grok mesuré pour les nouvelles études).
+    inputPerMTok: 2,
+    outputPerMTok: 6,
+    // Recherche web d'OpenRouter (:online) : majorant prudent, à corriger au premier relevé.
+    perSearchUsd: 0.02,
+    maxSearchesPerRun: 5,
+    source: "annuaires tiers d'OpenRouter (pricepertoken.com, llmreference.com), 2026-11-16 : 2 $ / 6 $ par M ; openrouter.ai inaccessible depuis la session",
+    verifiedAt: "2026-11-16",
+    provisional: "prix non relevé sur openrouter.ai ; un annuaire signale une hausse récente : se lira sur le coût réel (usage.cost) du premier appel",
+  },
 ];
 
 export interface RunRecord {

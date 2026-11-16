@@ -23,7 +23,7 @@ export const EnvSchema = z.object({
 
   // Mistral is the default: OIA serves a studio whose own positioning is
   // European sovereignty, and it is the provider already exercised live here.
-  LLM_PROVIDER: z.enum(["mistral", "anthropic", "openai"]).default("mistral"),
+  LLM_PROVIDER: z.enum(["mistral", "anthropic", "openai", "openrouter"]).default("mistral"),
   LLM_MODEL: z.string().min(1).default("mistral-large-latest"),
   LLM_API_KEY: z.string().min(1).optional(),
 
