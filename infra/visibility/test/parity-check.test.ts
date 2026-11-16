@@ -207,3 +207,10 @@ describe("bloc E1 : mesure croisée Elmo / OIA", () => {
     expect(JSON.parse(readFileSync(join(out, "parite-p1.json"), "utf8")).perEngine[0].verdict).toBe("écart");
   });
 });
+
+describe("décisions de Mickaël du 16 novembre", () => {
+  it("la mention sur les questions marquées est une information, jamais un écart", async () => {
+    const { INFORMATIVE } = await import("../src/parity-check.js");
+    expect(INFORMATIVE).toEqual(["mention-marquees"]);
+  });
+});

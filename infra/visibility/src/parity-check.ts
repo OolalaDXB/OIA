@@ -53,12 +53,14 @@ import { BOOTSTRAP_RESAMPLES, BOOTSTRAP_SEED, MIN_DAYS, windowRate, type WindowR
 export const ELMO_COLLECTORS = ["elmo", "elmo-0.7.7"];
 
 export type CriterionId = "couverture" | "citations" | "longueur" | "mention-non-marquees" | "mention-marquees";
+/** Critères donnés en information, sans effet sur le verdict (décision de Mickaël, 2026-11-16). */
+export const INFORMATIVE: CriterionId[] = ["mention-marquees"];
 export const CRITERIA: { id: CriterionId; label: string; unit: string }[] = [
   { id: "couverture", label: "Couverture", unit: "%" },
   { id: "citations", label: "Citations par réponse", unit: "" },
   { id: "longueur", label: "Longueur médiane (caractères)", unit: "" },
   { id: "mention-non-marquees", label: "Mention, questions non marquées", unit: "%" },
-  { id: "mention-marquees", label: "Mention, questions marquées (à part)", unit: "%" },
+  { id: "mention-marquees", label: "Mention, questions marquées (information, sans effet sur le verdict)", unit: "%" },
 ];
 
 export type ParityReference =
@@ -312,10 +314,11 @@ export function parityCheck(b: SubjectBundle, windowId: string, evidence: Eviden
       return { criterion: id, label, reference: ref, elmo, oia, checks, status };
     });
 
-    const failing = criteria.flatMap((c) =>
+    const decisive = criteria.filter((c) => !INFORMATIVE.includes(c.criterion));
+    const failing = decisive.flatMap((c) =>
       (Object.entries(c.checks) as [keyof CriterionResult["checks"], CheckResult][]).filter(([, r]) => r.ok === false).map(([check, r]) => ({ criterion: c.criterion, check, detail: r.detail })),
     );
-    const missing = criteria.flatMap((c) =>
+    const missing = decisive.flatMap((c) =>
       (Object.entries(c.checks) as [keyof CriterionResult["checks"], CheckResult][]).filter(([, r]) => r.ok === null).map(([check, r]) => `${c.label} (${check}) : ${r.detail}`),
     );
     const verdict: ParityVerdict = failing.length ? "écart" : missing.length ? "non concluant" : "parité";
@@ -341,6 +344,7 @@ export function parityCheck(b: SubjectBundle, windowId: string, evidence: Eviden
 }
 
 export const PARITY_LIMITS = [
+  "Verdict sur 2 jours : une présomption de parité, pas une preuve (l'ADR 0001 demande une semaine et 30 appels sans échec) ; on n'allonge que pour un moteur en « écart » ou « non concluant ». La mention sur les questions marquées et la correspondance sur le texte sont données en information, sans effet sur le verdict.",
   "Critères mesurés ici : couverture, citations, longueur médiane, taux de mention. Les autres critères de l'ADR 0001 (mêmes URL et passages, fiabilité < 1 % d'échec sur 5 jours, coût, maintenance) se vérifient à part.",
   "L'ADR demande une semaine de mesure croisée et 0 échec sur 30 appels consécutifs : une fenêtre plus courte donne une présomption de parité, pas la preuve complète de l'ADR.",
   "Avec peu de jours, l'intervalle à 95 % d'une fenêtre est presque l'intervalle de ses jours : le contrôle jour par jour reste le plus exigeant.",
@@ -447,6 +451,11 @@ if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).
     }
     const p = parityCheck(b, windowId, evidence, reference, { mention: mentionArg });
     process.stdout.write(`${writeParity(outDir, b, p)}\n`);
+    // Correspondance sur le texte, en information (décision de Mickaël, 2026-11-16) : jamais le verdict.
+    if ((mentionArg ?? "jugement") === "jugement") {
+      const info = parityCheck(b, `${windowId}`, evidence, reference, { mention: "texte" });
+      process.stdout.write(`${writeParity(join(outDir, "information-texte"), b, info)} (information : correspondance sur le texte)\n`);
+    }
     for (const e of p.perEngine) process.stdout.write(`${e.engine} : ${e.verdict}${e.failing.length ? ` (${[...new Set(e.failing.map((f) => f.criterion))].join(", ")})` : ""}\n`);
   } catch (err) {
     process.stderr.write(`parity-check : ${err instanceof Error ? err.message : String(err)}\n`);

@@ -174,3 +174,14 @@ Aucun appel réseau. Le rapport est « à valider par Mickaël ».
   décider par Mickaël).
 - `parity-check` ne vérifie pas les autres critères de l'ADR : mêmes URL et passages,
   fiabilité, coût, maintenance.
+
+## Décisions de Mickaël (2026-11-16)
+
+1. Mention : le jugement de chaque collecteur (Jev des deux côtés), réglage par défaut ; la correspondance sur le texte est produite en information (`<outDir>/information-texte/`), sans effet sur le verdict.
+2. Questions marquées : information, sans effet sur le verdict (`INFORMATIVE` dans `src/parity-check.ts`).
+3. Seuil d'écart du même jour entre OIA et Elmo : l'étendue des jours de la référence.
+4. Durée : 2 jours ; le verdict est présenté comme une présomption. On n'allonge que si un moteur sort « écart » ou « non concluant ».
+5. Collecte OIA du jour 2 : par l'ordonnanceur du mandat v15 s'il est prêt, sinon à la main. Pas de tâche ad hoc.
+6. Rejugement des réponses passées par Elmo au démarrage du worker (concurrents rechargés) : accepté.
+
+Date de début, plafond de décembre et clés : à donner par Mickaël.
