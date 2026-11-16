@@ -1,6 +1,6 @@
 # Pilotage Visibility, contrat v2
 
-Date : 16 novembre 2026. Commit local uniquement, aucune publication et aucune modification Supabase.
+Date : 16 novembre 2026. Le pilotage est déjà dans le dépôt `OolalaDXB/OIA` (commits `cb82dab` et `b6e40c9`) et en ligne sur `oia-cockpit.vercel.app`. Rien n'a été poussé depuis la copie Lovable, aucune modification Supabase.
 
 ## Écrans et fonctions
 
@@ -12,7 +12,7 @@ Date : 16 novembre 2026. Commit local uniquement, aucune publication et aucune m
 - **Recommandations** : `vis_recommandations_v2`, décisions par `vis_valider_recommandation` et `vis_rejeter_recommandation`, exécution par `vis_declarer_execution` avec preuve et date, remesure affichée.
 - **Activité du moteur** : `vis_demandes_v2`, `vis_moteur_v2`, relance par `vis_relancer_demande`. L'état muet indique explicitement que les mesures ne tournent pas.
 - **Cloche** : `vis_alertes_v2`, acquittement par `vis_acquitter_alerte`. `MOTEUR_MUET` n'est pas acquittable.
-- **Réglages, Budget** : `vis_budget_v2`, plafond global puis plafonds clients par `vis_fixer_plafond`, réservés au propriétaire OIA identifié par la ligne `client_id=oia` du portefeuille.
+- **Réglages, Budget** : `vis_budget_v2`, plafond global puis plafonds clients par `vis_fixer_plafond`, réservés au propriétaire OIA identifié par `mon_role` sur la ligne `client_id=oia` de `vis_budget_v2`.
 - **Mesures existantes** : sentiment et position par `vis_jugements_v2` et `vis_jugements_moteurs_v2`, sources et recherches par `vis_reponses_sources_v2`, coûts par assistant par `vis_couts_moteurs_v2`. La mention `extrait (Jev 1.13)` accompagne les jugements.
 
 Chaque geste utilise le client public et la session utilisateur, conserve le message RPC près du bouton puis invalide et relit les vues. Aucun état optimiste, aucune écriture directe et aucune clé de service.
@@ -32,5 +32,5 @@ Chaque geste utilise le client public et la session utilisateur, conserve le mes
 - Exactitude des faits cités : toujours non mesurable, le contrôle par les faits validés n'est pas en base.
 - Intervalles par question, pages consultées mais non citées, opportunités de contenu, contrôles des profils sociaux, alias et plateformes non suivies : toujours non mesurables faute de données contractuelles.
 - Coût facturé consolidé : hors Visibility, dans `oia_ia_couts_v1`, donc non affiché comme un coût Visibility.
-- **Rôle OIA** : le contrat ne fournit pas de rôle global indépendant des sujets. Un propriétaire OIA sans ligne `client_id=oia` dans `vis_portefeuille_v2` ne peut pas être identifié. Une évolution doit exposer explicitement `mon_role_oia`, sans utiliser le rôle d'un client ordinaire comme substitut.
+- **Rôle OIA** : résolu le 16 novembre 2026. Le rôle se lit sur `vis_budget_v2.mon_role`, ligne `client_id=oia`, présente même sans sujet. Correction conservée dans la copie Lovable en `ef2b7d7`. Le rôle d'un client ordinaire ne sert toujours pas de substitut.
 - Le défaut connu du portefeuille Coach Gari, « à valider (0 question) », n'a pas été modifié.

@@ -11,10 +11,9 @@ import { FaviconSource, LogoReseau } from "@/components/oia/identites";
 import { useReglagesVisibility, useVisibilityDonnees } from "@/lib/donnees/provider";
 import { cleNormalisee, contientNormalise, normaliserSite } from "@/lib/visibility-reglages";
 import { BudgetVisibility, BandeauMoteur } from "@/components/oia/visibility-pilotage";
+import { listeSousOngletsVisibility, menuVisibility, ongletVisibility } from "@/components/oia/visibility-ui";
 
-const classeOnglet = "min-h-12 rounded-none border-b-2 border-transparent px-2 font-normal text-muted-foreground data-[state=active]:border-module-visibility data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none";
 const classeLigne = "flex flex-wrap items-center justify-between gap-3 border-b border-border py-2.5 text-sm last:border-0";
-const classeChamp = "min-h-11 w-full rounded-md border border-input bg-background px-3 text-sm text-foreground outline-none focus:border-ring";
 
 function Champ({ label, children }: { label: string; children: ReactNode }) {
   return <label className="grid gap-1.5 text-xs text-tertiary"><span>{label}</span>{children}</label>;
@@ -71,8 +70,8 @@ export function VueReglages() {
   const { ajouts, modifier, pret, erreur } = useReglagesVisibility();
 
   return <Tabs defaultValue="marque">
-    <TabsList aria-label="Réglages Visibility" className="mb-4 h-auto justify-start gap-2 rounded-none border-b border-border bg-transparent p-0">
-      {([["marque", "Marque"], ["concurrents", "Concurrents"], ["questions", "Questions"], ["moteurs", "Moteurs"], ["budget", "Budget"]] as const).map(([valeur, label]) => <TabsTrigger key={valeur} value={valeur} className={classeOnglet}>{label}</TabsTrigger>)}
+    <TabsList aria-label="Réglages Visibility" className={`${listeSousOngletsVisibility} h-auto rounded-none bg-transparent p-0 sm:grid-cols-3 lg:grid-cols-5`}>
+      {([["marque", "Marque"], ["concurrents", "Concurrents"], ["questions", "Questions"], ["moteurs", "Moteurs"], ["budget", "Budget"]] as const).map(([valeur, label]) => <TabsTrigger key={valeur} value={valeur} className={ongletVisibility}>{label}</TabsTrigger>)}
     </TabsList>
     <p className="mb-6 text-xs text-tertiary" role="status">{pret ? `Vos ajouts sont conservés dans ce navigateur. Ils ne lancent aucune mesure et ne modifient pas ${reel ? "les mesures réelles" : "les données de démonstration"}.` : "Ouverture des réglages locaux…"}</p>
     {erreur && <p role="alert" className="mb-6 text-sm text-block">Le navigateur refuse la sauvegarde. Les ajouts restent visibles pendant cette visite, mais pourraient être perdus au rechargement.</p>}
@@ -118,7 +117,7 @@ export function VueReglages() {
             if (marque.profils.some((x) => x.reseau === reseau && cleNormalisee(x.handle) === cleNormalisee(handle))) return "Ce profil est déjà présent.";
             modifier((actuel) => ({ ...actuel, profils: [...actuel.profils, { reseau, handle }] }));
             return undefined;
-          }}><div className="grid gap-4 sm:grid-cols-2"><Champ label="Réseau"><select name="reseau" className={classeChamp}>{["Instagram", "TikTok", "Facebook", "YouTube", "Google"].map((reseau) => <option key={reseau}>{reseau}</option>)}</select></Champ><Champ label="Identifiant ou nom du profil"><Input name="handle" className="min-h-11" required maxLength={120} /></Champ></div></FormulaireLocal>
+          }}><div className="grid gap-4 sm:grid-cols-2"><Champ label="Réseau"><select name="reseau" className={menuVisibility}>{["Instagram", "TikTok", "Facebook", "YouTube", "Google"].map((reseau) => <option key={reseau}>{reseau}</option>)}</select></Champ><Champ label="Identifiant ou nom du profil"><Input name="handle" className="min-h-11" required maxLength={120} /></Champ></div></FormulaireLocal>
         </div>
       </Section>
     </TabsContent>
@@ -161,7 +160,7 @@ export function VueReglages() {
           if (contientNormalise(questions.map((x) => x.q), q)) return "Cette question est déjà présente.";
           modifier((actuel) => ({ ...actuel, questions: [...actuel.questions, { id: `q-local-${crypto.randomUUID()}`, q, famille, langue, marque: famille === "Votre marque" }] }));
           return undefined;
-        }}><Champ label="Question ou prompt"><Textarea name="question" className="min-h-24" required maxLength={500} placeholder="Quelle question vos clients posent-ils aux assistants ?" /></Champ><div className="grid gap-4 sm:grid-cols-2"><Champ label="Famille"><select name="famille" className={classeChamp}>{familles.map((famille) => <option key={famille}>{famille}</option>)}</select></Champ><Champ label="Langue"><select name="langue" className={classeChamp}>{[["fr", "Français"], ["en", "Anglais"], ["es", "Espagnol"], ["de", "Allemand"], ["it", "Italien"], ["nl", "Néerlandais"]].map(([code, label]) => <option key={code} value={code}>{label}</option>)}</select></Champ></div></FormulaireLocal>
+        }}><Champ label="Question ou prompt"><Textarea name="question" className="min-h-24" required maxLength={500} placeholder="Quelle question vos clients posent-ils aux assistants ?" /></Champ><div className="grid gap-4 sm:grid-cols-2"><Champ label="Famille"><select name="famille" className={menuVisibility}>{familles.map((famille) => <option key={famille}>{famille}</option>)}</select></Champ><Champ label="Langue"><select name="langue" className={menuVisibility}>{[["fr", "Français"], ["en", "Anglais"], ["es", "Espagnol"], ["de", "Allemand"], ["it", "Italien"], ["nl", "Néerlandais"]].map(([code, label]) => <option key={code} value={code}>{label}</option>)}</select></Champ></div></FormulaireLocal>
       </div>
     </TabsContent>
 

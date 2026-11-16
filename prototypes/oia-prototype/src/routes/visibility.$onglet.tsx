@@ -4,7 +4,7 @@ import { vuesVisibility } from "@/components/oia/visibility-vues";
 
 export const Route = createFileRoute("/visibility/$onglet")({
   beforeLoad: ({ params }) => { if (!(params.onglet in vuesVisibility)) throw notFound(); },
-  head: ({ params }) => { const t = ongletsVisibility.find((o) => o.id === params.onglet)?.label ?? "Visibility"; return moduleHead(`${t}, Visibility`, `${t} : vue de mesure Visibility, données de démonstration.`); },
+  head: ({ params }) => { const t = ongletsVisibility.find((o) => o.id === params.onglet)?.label ?? "Visibility"; return moduleHead(`${t}, Visibility`, `${t} : mesures, analyses et actions du site dans Visibility.`); },
   component: Onglet,
 });
 function Onglet() {

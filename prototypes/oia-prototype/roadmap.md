@@ -1,10 +1,13 @@
 # Roadmap
 
 ## Open
+- [x] Visibility v3 : brancher score, historique, analyses, constats, SEO Command et la demande d'analyse sur les vues et RPC autorisées.
+- [x] Visibility v3 : livrer les écrans Score, Performance, À corriger, rapports, sentiment, réseaux sociaux et graphiques orientés action.
+- [x] Visibility v3 : tester les couleurs, valeurs non mesurées, appels RPC, tri, Markdown et profils, vérifier ordinateur et mobile, documenter les écarts sans publier.
 - [x] Visibility v2 : ajouter le portefeuille, la revue, les GO, le suivi, les rapports, l’activité, les alertes et le budget via les vues et RPC du contrat.
 - [x] Visibility v2 : brancher jugements, sources de réponses, coûts et recommandations v2, sans valeur fictive pour un compte connecté.
 - [x] Visibility v2 : tester chaque geste, le refus sans plafond, l’isolation des rapports et la relecture, puis documenter les écarts sans publier.
-- [ ] Vérifier en production le GO après plafonds et le rôle OIA sans ligne sujet `oia`, avec une session externe réelle.
+- [ ] Vérifier en production le GO après plafonds avec une session externe réelle. Le rôle OIA se lit sur `vis_budget_v2.mon_role` (correction `ef2b7d7`), l'identification sans sujet est résolue.
 - [x] Brancher Visibility sur les dix vues réelles du contrat v1 avec session utilisateur, sélecteurs de sujet et fenêtre, sans changer le design.
 - [x] Garantir « Non mesurable » avec raison pour chaque absence, réserver la démonstration aux visiteurs non connectés et tester les conversions et lectures.
 - [x] Vérifier la preview et documenter les écrans branchés, les vues et les demandes de contrat v2, sans publier.

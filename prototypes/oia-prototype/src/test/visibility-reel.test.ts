@@ -55,6 +55,14 @@ describe("adaptateur Visibility réel", () => {
     expect(d.indicateurs["coach-gari-j0"]!.presence.raison).toContain("dénominateur");
   });
 
+  it("garde un nouveau site sans fenêtre IA en état non mesurable, sans erreur", () => {
+    const d = convertirVisibility(sujet, [sujet], { ...vues, vis_mesure_v1: [], vis_apercu_v1: [] });
+    expect(d.fenetres).toEqual([]);
+    expect(d.vueSite.presence).toBeNull();
+    expect(d.citations).toEqual([]);
+    expect(d.etatCollecte.frequence).toContain("Aucune fenêtre");
+  });
+
   it("présente la fenêtre principale avant la fenêtre hors panel", () => {
     const horsPanel = { ...mesure, window_id: "coach-gari-j0-hors-panel" };
     const d = convertirVisibility(sujet, [sujet], { ...vues, vis_mesure_v1: [horsPanel, mesure] });

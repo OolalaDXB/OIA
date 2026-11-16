@@ -29,7 +29,7 @@ use the editor.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
 
-- Never modify Supabase schema or hosted settings; Money Lookup reads existing contract v2 views and calls existing RPCs, while Visibility reads its ten contract v1 views, both with the generated public session client; other modules retain their demonstration sources.
+- Never modify Supabase schema or hosted settings; Money Lookup reads existing contract v2 views and calls existing RPCs, while Visibility reads its contract v1, v2 and v3 views and calls only contract RPCs, both with the generated public session client; other modules retain their demonstration sources.
 - Share Shyrka conversation and journal through a root React provider, hydrating validated versioned browser storage in an effect before enabling writes; this keeps page and panel consistent across reloads without remote services.
 - Keep shared navigation in the OIA Shell and personal placeholders in a parameterized leaf route; this makes every module reachable without duplicating page structure.
 

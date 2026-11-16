@@ -3,13 +3,14 @@ import type { Fenetre, Valeur } from "@/lib/donnees/visibility";
 import { useSelectionVisibility, useVisibilityDonnees } from "@/lib/donnees/provider";
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 import { couleursGraphique } from "@/components/oia/graphiques";
+import { menuVisibility } from "@/components/oia/visibility-ui";
 
 type Filtres = { assistant: string; famille: string; fenetre: string; set: (k: "assistant" | "famille" | "fenetre", v: string) => void; fenetreActive: Fenetre };
 const Ctx = createContext<Filtres | null>(null);
 export function FiltresProvider({ children }: { children: ReactNode }) {
   const { fenetres } = useVisibilityDonnees();
   const [f, setF] = useState({ assistant: "Tous", famille: "Toutes", fenetre: "f2" });
-  const fenetreActive = fenetres.find((x) => x.id === f.fenetre) ?? fenetres[0]!;
+  const fenetreActive = fenetres.find((x) => x.id === f.fenetre) ?? fenetres[0] ?? { id: "", label: "Aucune fenêtre", type: "", enCours: false, jour: 0, joursPrevus: 5 };
   return <Ctx.Provider value={{ ...f, fenetreActive, set: (k, v) => setF((p) => ({ ...p, [k]: v })) }}>{children}</Ctx.Provider>;
 }
 export function useFiltres() {
@@ -18,16 +19,15 @@ export function useFiltres() {
   return c;
 }
 
-const select = "min-h-11 rounded-md border border-border bg-background px-2 text-sm text-muted-foreground";
 export function FiltresVisibility() {
   const { assistants, familles, fenetres } = useVisibilityDonnees();
   const selection = useSelectionVisibility();
   const f = useFiltres();
-  return <div role="group" aria-label="Filtres" className="mb-6 flex flex-wrap gap-3 text-sm">
-    {selection.reel && <label className="flex items-center gap-2 text-tertiary">Sujet<select className={select} aria-label="Sujet Visibility" value={selection.sujetId ?? ""} onChange={(e) => selection.setSujetId(e.target.value)}>{selection.sujets.map((s) => <option key={s.id} value={s.id}>{s.nom} · {s.id}</option>)}</select></label>}
-    <label className="flex items-center gap-2 text-tertiary">Assistant<select className={select} value={f.assistant} onChange={(e) => f.set("assistant", e.target.value)}><option>Tous</option>{assistants.map((a) => <option key={a.nom}>{a.nom}</option>)}</select></label>
-    <label className="flex items-center gap-2 text-tertiary">Famille de questions<select className={select} value={f.famille} onChange={(e) => f.set("famille", e.target.value)}><option>Toutes</option>{familles.map((a) => <option key={a}>{a}</option>)}</select></label>
-    <label className="flex items-center gap-2 text-tertiary">Fenêtre de mesure<select className={select} value={f.fenetreActive?.id ?? ""} onChange={(e) => f.set("fenetre", e.target.value)}>{fenetres.map((w) => <option key={w.id} value={w.id}>{w.label}{w.enCours ? " (en cours)" : ""}</option>)}</select></label>
+  return <div role="group" aria-label="Filtres" className={`mb-6 grid grid-cols-1 gap-3 text-sm sm:grid-cols-2 ${selection.reel ? "xl:grid-cols-4" : "xl:grid-cols-3"}`}>
+    {selection.reel && <label className="flex min-w-0 flex-col gap-1 text-xs text-tertiary">Sujet<select className={`${menuVisibility}`} aria-label="Sujet Visibility" value={selection.sujetId ?? ""} onChange={(e) => selection.setSujetId(e.target.value)}>{selection.sujets.map((s) => <option key={s.id} value={s.id}>{s.nom}</option>)}</select></label>}
+    <label className="flex min-w-0 flex-col gap-1 text-xs text-tertiary">Assistant<select className={`${menuVisibility}`} value={f.assistant} onChange={(e) => f.set("assistant", e.target.value)}><option>Tous</option>{assistants.map((a) => <option key={a.nom}>{a.nom}</option>)}</select></label>
+    <label className="flex min-w-0 flex-col gap-1 text-xs text-tertiary">Famille de questions<select className={`${menuVisibility}`} value={f.famille} onChange={(e) => f.set("famille", e.target.value)}><option>Toutes</option>{familles.map((a) => <option key={a}>{a}</option>)}</select></label>
+    <label className="flex min-w-0 flex-col gap-1 text-xs text-tertiary">Fenêtre de mesure<select className={`${menuVisibility}`} value={f.fenetreActive?.id ?? ""} onChange={(e) => f.set("fenetre", e.target.value)}>{fenetres.map((w) => <option key={w.id} value={w.id}>{w.label}{w.enCours ? " (en cours)" : ""}</option>)}</select></label>
   </div>;
 }
 

@@ -230,7 +230,7 @@ export function convertirVisibility(sujet: SujetVisibility, sujets: SujetVisibil
   });
   const rapports = vues.vis_rapports_v1.map((r) => ({ id: r.id ?? crypto.randomUUID(), titre: r.type || "Rapport de fenêtre", fenetre: fenetres.find((f) => f.id === r.window_id)?.label || r.window_id || "Fenêtre inconnue", statut: r.statut || "Statut non fourni" }));
   const questionsAvant: Record<string, mesure.Valeur> = fenetres.length > 1 ? presenceQuestionsParFenetre[fenetres.at(-1)!.id]!["Tous"]! : {};
-  const questionsApres: Record<string, mesure.Valeur> = presenceQuestionsParFenetre[derniere.id]!["Tous"]!;
+  const questionsApres: Record<string, mesure.Valeur> = presenceQuestionsParFenetre[derniere.id]?.["Tous"] ?? {};
   const comparaison = fenetres.length > 1 ? questionIds.map((question) => ({ question, avant: questionsAvant[question]?.v ?? null, apres: questionsApres[question]?.v ?? null })) : [];
 
   const referenceMois = jour(mesureDerniere.debut) ?? new Date();
@@ -248,7 +248,7 @@ export function convertirVisibility(sujet: SujetVisibility, sujets: SujetVisibil
   const domaines = sujet.domaines.length ? sujet.domaines : ["Domaine non fourni"];
   const sites = sujets.map((s) => {
     const actif = s.id === sujet.id;
-    return { slug: s.id, nom: s.nom, url: s.domaines[0] || "Domaine non fourni", panel: actif && aDesMesures ? `Panel v${mesureDerniere.version_panel ?? "non fourni"}` : actif ? "Panel à valider" : "Sélectionner ce sujet", depart: actif ? derniere.label : "Mesure non chargée", ia: actif ? indicateurs[derniere.id]!.presence.v : null, google: "Non mesurable, contrôle d'indexation disponible dans l'audit quand il existe" };
+    return { slug: s.id, nom: s.nom, url: s.domaines[0] || "Domaine non fourni", panel: actif && aDesMesures ? `Panel v${mesureDerniere.version_panel ?? "non fourni"}` : actif ? "Panel à valider" : "Sélectionner ce sujet", depart: actif ? derniere.label : "Mesure non chargée", ia: actif ? indicateurs[derniere.id]?.presence.v ?? null : null, google: "Non mesurable, contrôle d'indexation disponible dans l'audit quand il existe" };
   });
   const recommandationsV2 = vues.vis_recommandations_v2 ?? [];
   const recommandationsSource: (LigneVisibility<"vis_recommandations_v1"> | LigneVisibility<"vis_recommandations_v2">)[] = recommandationsV2.length ? recommandationsV2 : vues.vis_recommandations_v1;
@@ -256,13 +256,19 @@ export function convertirVisibility(sujet: SujetVisibility, sujets: SujetVisibil
     etat: (r.etat === "accepted" || r.etat === "validated" ? "conforme" : r.etat === "rejected" ? "bloquant" : "verifier") as "conforme" | "verifier" | "bloquant",
     titre: r.titre || r.id || "Recommandation", effet: [r.impact && `impact ${r.impact}`, r.effort && `effort ${r.effort}`].filter(Boolean).join(" · ") || "Impact et effort non fournis",
   }));
-  const indicateursDerniere = indicateurs[derniere.id]!;
-  const presenceDerniere = presenceAssistant[derniere.id]!;
-  const citationsDerniere = citationsParFenetre[derniere.id]!["Tous"]!;
-  const reseauxDerniere = reseauxParFenetre[derniere.id]!["Tous"]!;
-  const partVoixDerniere = partVoixParFenetre[derniere.id]!;
-  const presenceQuestionsDerniere = presenceQuestionsParFenetre[derniere.id]!["Tous"]!;
-  const etatCollecteDerniere = etatCollecteParFenetre[derniere.id]!;
+  const indicateursDerniere = indicateurs[derniere.id] ?? {
+    presence: nonMesurable("Aucune fenêtre de mesure IA pour ce site."),
+    partVoix: nonMesurable("Aucune fenêtre de mesure IA pour ce site."),
+    exactitude: nonMesurable("Le contrôle des réponses par les faits validés n'est pas en base."),
+    position: nonMesurable("Aucune fenêtre de mesure IA pour ce site."),
+    sentiment: { positif: null, neutre: null, negatif: null, raison: "Aucune fenêtre de mesure IA pour ce site." },
+  };
+  const presenceDerniere = presenceAssistant[derniere.id] ?? {};
+  const citationsDerniere = citationsParFenetre[derniere.id]?.["Tous"] ?? [];
+  const reseauxDerniere = reseauxParFenetre[derniere.id]?.["Tous"] ?? [];
+  const partVoixDerniere = partVoixParFenetre[derniere.id] ?? { global: [], parAssistant: {}, parQuestion: {} };
+  const presenceQuestionsDerniere = presenceQuestionsParFenetre[derniere.id]?.["Tous"] ?? {};
+  const etatCollecteDerniere = etatCollecteParFenetre[derniere.id] ?? { questions: 0, reponses: 0, frequence: "Aucune fenêtre de mesure IA", derniere: "Date non fournie" };
 
   return {
     ...mesure,

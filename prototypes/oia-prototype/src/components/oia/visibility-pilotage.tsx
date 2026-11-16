@@ -3,8 +3,9 @@ import { Link } from "@tanstack/react-router";
 import { Bell, ChevronDown, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Section, Statut, field } from "@/components/oia/ui";
+import { Section, Statut } from "@/components/oia/ui";
 import { FaviconSource } from "@/components/oia/identites";
+import { menuVisibility } from "@/components/oia/visibility-ui";
 import { useGesteVisibility, useVisibilityPilotage } from "@/lib/donnees/visibility-pilotage-provider";
 import { dollars, type LignePilotage } from "@/lib/donnees/visibility-pilotage";
 import { useSelectionVisibility } from "@/lib/donnees/provider";
@@ -84,7 +85,7 @@ function FormulaireSite({ clients, onFerme }: { clients: { id: string; nom: stri
       <label className="grid gap-1.5 text-xs text-tertiary">Nom de la marque<Input className="min-h-11" name="nom" required maxLength={160} /></label>
       <label className="grid gap-1.5 text-xs text-tertiary">Langues, séparées par des virgules<Input className="min-h-11" name="langues" defaultValue="fr, en" required /></label>
       <label className="grid gap-1.5 text-xs text-tertiary">Marchés, séparés par des virgules<Input className="min-h-11" name="marches" defaultValue="FR, AE" required /></label>
-      <label className="grid gap-1.5 text-xs text-tertiary">Client<select className={field} name="client" defaultValue="nouveau"><option value="nouveau">Nouveau client</option>{clients.map((c) => <option key={c.id} value={c.id}>{c.nom}</option>)}</select></label>
+      <label className="grid gap-1.5 text-xs text-tertiary">Client<select className={menuVisibility} name="client" defaultValue="nouveau"><option value="nouveau">Nouveau client</option>{clients.map((c) => <option key={c.id} value={c.id}>{c.nom}</option>)}</select></label>
       <label className="grid gap-1.5 text-xs text-tertiary">Nom du nouveau client<Input className="min-h-11" name="client_nom" maxLength={160} /></label>
     </div>
     <p className="text-xs text-tertiary">Pour un client existant, le nom du nouveau client est ignoré. La base vérifie vos droits et l'adresse publique.</p>

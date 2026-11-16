@@ -47,7 +47,7 @@ export type GesteVisibility =
   | "vis_go_reconnaissance" | "vis_go_fenetre" | "vis_annuler_fenetre"
   | "vis_valider_rapport" | "vis_declarer_execution" | "vis_fixer_plafond"
   | "vis_relancer_demande" | "vis_acquitter_alerte"
-  | "vis_valider_recommandation" | "vis_rejeter_recommandation";
+  | "vis_valider_recommandation" | "vis_rejeter_recommandation" | "vis_demander_analyse";
 export type ClientRpc = { rpc: (nom: string, params: Record<string, unknown>) => Promise<{ data: unknown; error: { message: string; code?: string } | null }> };
 
 /** Toutes les mutations Visibility passent par ce point. Aucun accès table en écriture. */
@@ -61,6 +61,7 @@ export async function gesteVisibility<N extends GesteVisibility>(
   return data as Fonctions[N]["Returns"];
 }
 
+export const demanderAnalyse = (p: Fonctions["vis_demander_analyse"]["Args"], client?: ClientRpc) => gesteVisibility("vis_demander_analyse", p, client);
 export const demanderSite = (p: Fonctions["vis_demander_site"]["Args"], client?: ClientRpc) => gesteVisibility("vis_demander_site", p, client);
 export const modifierProposition = (p: Fonctions["vis_modifier_proposition"]["Args"], client?: ClientRpc) => gesteVisibility("vis_modifier_proposition", p, client);
 export const ajouterProposition = (p: Fonctions["vis_ajouter_proposition"]["Args"], client?: ClientRpc) => gesteVisibility("vis_ajouter_proposition", p, client);

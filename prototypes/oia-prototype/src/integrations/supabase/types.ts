@@ -3231,6 +3231,60 @@ export type Database = {
         }
         Relationships: []
       }
+      vis_analyses_v3: {
+        Row: {
+          client_id: string | null
+          demande_id: string | null
+          derniere: boolean | null
+          erreur: string | null
+          id: string | null
+          metriques: Json | null
+          nature: string | null
+          outil: string | null
+          recu_le: string | null
+          resultat: Json | null
+          scores: Json | null
+          statut: string | null
+          strategie: string | null
+          subject_id: string | null
+          url: string | null
+        }
+        Insert: {
+          client_id?: string | null
+          demande_id?: string | null
+          derniere?: never
+          erreur?: string | null
+          id?: string | null
+          metriques?: Json | null
+          nature?: string | null
+          outil?: string | null
+          recu_le?: string | null
+          resultat?: Json | null
+          scores?: Json | null
+          statut?: string | null
+          strategie?: string | null
+          subject_id?: string | null
+          url?: string | null
+        }
+        Update: {
+          client_id?: string | null
+          demande_id?: string | null
+          derniere?: never
+          erreur?: string | null
+          id?: string | null
+          metriques?: Json | null
+          nature?: string | null
+          outil?: string | null
+          recu_le?: string | null
+          resultat?: Json | null
+          scores?: Json | null
+          statut?: string | null
+          strategie?: string | null
+          subject_id?: string | null
+          url?: string | null
+        }
+        Relationships: []
+      }
       vis_apercu_v1: {
         Row: {
           borne_basse: number | null
@@ -3258,6 +3312,7 @@ export type Database = {
           engage_usd: number | null
           etat: string | null
           mois: string | null
+          mon_role: string | null
           plafond_global_usd: number | null
           plafond_usd: number | null
           reel_usd: number | null
@@ -3384,6 +3439,31 @@ export type Database = {
           subject_id: string | null
           taux_apparition: number | null
           window_id: string | null
+        }
+        Relationships: []
+      }
+      vis_constats_v3: {
+        Row: {
+          analyse_id: string | null
+          categorie: string | null
+          cle: string | null
+          client_id: string | null
+          correction: string | null
+          derniere_fois: string | null
+          effort: string | null
+          etat: string | null
+          explication: string | null
+          gravite: string | null
+          id: string | null
+          impact: string | null
+          ordre: number | null
+          premiere_fois: string | null
+          preuve: Json | null
+          qui: string | null
+          source: string | null
+          subject_id: string | null
+          titre: string | null
+          valeur: string | null
         }
         Relationships: []
       }
@@ -3843,6 +3923,39 @@ export type Database = {
         }
         Relationships: []
       }
+      vis_score_historique_v3: {
+        Row: {
+          client_id: string | null
+          composante: string | null
+          le: string | null
+          origine: string | null
+          reference: string | null
+          subject_id: string | null
+          valeur: number | null
+        }
+        Relationships: []
+      }
+      vis_score_v3: {
+        Row: {
+          accessibilite: number | null
+          analyse_le: string | null
+          bonnes_pratiques: number | null
+          client_id: string | null
+          constats_critiques: number | null
+          constats_ouverts: number | null
+          constats_resolus: number | null
+          fenetre_ia: string | null
+          manquantes: string[] | null
+          notoriete_ia: number | null
+          performance_mobile: number | null
+          performance_ordinateur: number | null
+          score: number | null
+          seo_technique: number | null
+          subject_id: string | null
+          visibilite_ia: number | null
+        }
+        Relationships: []
+      }
       vis_seo_command_v1: {
         Row: {
           client_id: string | null
@@ -4117,6 +4230,7 @@ export type Database = {
         }
         Returns: number
       }
+      vis_demander_analyse: { Args: { p_subject: string }; Returns: string }
       vis_demander_site: {
         Args: {
           p_client_id?: string
@@ -4152,6 +4266,14 @@ export type Database = {
           p_subject: string
           p_type: string
         }
+        Returns: string
+      }
+      vis_moteur_analyse: {
+        Args: { p_analyse: Json; p_demande: string }
+        Returns: string
+      }
+      vis_moteur_constat: {
+        Args: { p_analyse: string; p_constat: Json; p_demande: string }
         Returns: string
       }
       vis_moteur_estimer: {
