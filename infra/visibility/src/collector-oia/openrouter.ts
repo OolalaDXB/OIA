@@ -55,7 +55,17 @@ export function openrouterSlug(model: string, webSearch: boolean): string {
   return webSearch && !model.includes(":online") ? `${model}:online` : model;
 }
 
+/**
+ * Grok (x-ai/…) : avec « :online », OpenRouter passe par la recherche native de xAI, facturée à
+ * la source consultée (2,27 $ pour une seule réponse le 16 novembre 2026). Pour Grok seulement,
+ * recherche web d'OpenRouter (Exa) plafonnée à 5 résultats : environ 0,02 $ par appel.
+ */
+export const GROK_WEB_PLUGIN = { id: "web", engine: "exa", max_results: 5 } as const;
+
 export function openrouterRequestBody(model: string, prompt: string, webSearch: boolean): Record<string, unknown> {
+  if (webSearch && model.replace(/:online$/, "").startsWith("x-ai/")) {
+    return { model: model.replace(/:online$/, ""), messages: [{ role: "user", content: prompt }], max_tokens: MAX_OUTPUT_TOKENS, plugins: [GROK_WEB_PLUGIN] };
+  }
   return { model: openrouterSlug(model, webSearch), messages: [{ role: "user", content: prompt }], max_tokens: MAX_OUTPUT_TOKENS };
 }
 

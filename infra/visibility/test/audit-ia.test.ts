@@ -103,6 +103,21 @@ describe("moteur : demande AUDIT_IA", () => {
     expect(appels).toHaveLength(0);
   });
 
+  it("réponse vide : gardée non mesurée, jamais notée ; écriture en échec : résultat calculé quand même", async () => {
+    const { db } = preparer();
+    const vide: Collector = {
+      name: "oia-direct",
+      async collect(req) {
+        return { collectorName: "oia-direct", collectorRunId: "r", rawText: req.engine === "chatgpt" ? "" : "Try **Alpha Padel**.", structured: {}, citations: [], costUsd: 0.01, receivedAt: "2026-11-16T20:00:00Z" };
+      },
+    };
+    db.preuves = async () => { throw new Error("violation de contrainte (23514)"); };
+    const r = await runEngine({ ...opts(db, []), collector: () => vide } as never);
+    expect(r.traitees[0]!.statut).toBe("DONE");
+    expect(r.traitees[0]!.resultat).toMatchObject({ vides: 5, preuves_erreur: "violation de contrainte (23514)" });
+    expect((db.audits[0]!.matrice as { scores: Record<string, number> }[])[0]!.scores).toEqual({ gemini: 0 });
+  });
+
   it("s'arrête au coût engagé", async () => {
     const { db } = preparer();
     const appels: string[] = [];
@@ -157,5 +172,17 @@ describe("moteur : demande EXTRAIRE_PLAN", () => {
     const r = await runEngine(opts(db) as never);
     expect(r.traitees[0]!.statut).toBe("FAILED");
     expect(db.recos.size).toBe(0);
+  });
+});
+
+describe("Grok par OpenRouter : coût de recherche borné", () => {
+  it("recherche Exa plafonnée à 5 résultats pour x-ai, :online inchangé pour les autres", async () => {
+    const { openrouterRequestBody } = await import("../src/collector-oia/openrouter");
+    const g = openrouterRequestBody("x-ai/grok-4.7:online", "q", true);
+    expect(g.model).toBe("x-ai/grok-4.7");
+    expect(g.plugins).toEqual([{ id: "web", engine: "exa", max_results: 5 }]);
+    const p = openrouterRequestBody("perplexity/sonar", "q", true);
+    expect(p.model).toBe("perplexity/sonar:online");
+    expect(p.plugins).toBeUndefined();
   });
 });

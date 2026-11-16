@@ -276,16 +276,26 @@ async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
     collector_name: r.resultat.collectorName,
     collector_run_id: r.resultat.collectorRunId,
     received_at: r.resultat.receivedAt,
-    raw_text: r.texte,
-    structured: { ...r.resultat.structured, audit: { demande: d.id, question: r.question.id, sujet: r.question.sujet, marquee: r.question.marquee } },
+    raw_text: r.texte ?? "",
+    // Réponse vide (appel en échec côté fournisseur) : gardée, marquée non mesurée, jamais notée 0.
+    structured: { ...r.resultat.structured, ...(r.texte?.trim() ? {} : { non_mesuree: true }), audit: { demande: d.id, question: r.question.id, sujet: r.question.sujet, marquee: r.question.marquee } },
     citations: r.citations,
     cost_usd: r.coutUsd,
   }));
-  if (preuves.length) await ctx.o.db.preuves(preuves);
+  // Une écriture en échec ne fait pas perdre l'audit : les réponses payées sont notées quand même.
+  let preuvesErreur: string | null = null;
+  if (preuves.length) {
+    try {
+      await ctx.o.db.preuves(preuves);
+    } catch (err) {
+      preuvesErreur = msg(err).slice(0, 200);
+      await ctx.o.db.alerter({ client_id: d.client_id, subject_id: subjectId, gravite: "alerte", type: "ECHEC_DEMANDE", message: `Audit IA express : réponses non enregistrées (${preuvesErreur}) ; résultat calculé quand même.` }).catch(() => undefined);
+    }
+  }
   const moteurs = [...new Set(cibles.map((c) => c.split(":")[0]!))];
   const matrice: LigneMatrice[] = questions.map((q) => {
     const l: LigneMatrice = { id: q.id, sujet: q.sujet, question: q.question, marquee: q.marquee, scores: {}, concurrents: {}, domaines: {} };
-    for (const r of col.reponses.filter((x) => x.question.id === q.id)) {
+    for (const r of col.reponses.filter((x) => x.question.id === q.id && x.texte?.trim())) {
       const note = noterReponse(r.texte, r.citations, config, q.marquee);
       l.scores[r.moteur] = note.score;
       l.concurrents[r.moteur] = note.concurrents;
@@ -337,7 +347,9 @@ async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
     });
     if (ok) recos++;
   }
-  return { audit_externe_id: auditId, score: s.global, cout_reel_usd: coutReel, questions: questions.length, reponses: col.reponses.length, echecs: col.echecs.length, recommandations: recos, arret_plafond: col.arretPlafond };
+  const coutParMoteur: Record<string, number> = {};
+  for (const r of col.reponses) coutParMoteur[r.moteur] = Math.round(((coutParMoteur[r.moteur] ?? 0) + r.coutUsd) * 100) / 100;
+  return { audit_externe_id: auditId, score: s.global, cout_reel_usd: coutReel, cout_par_moteur: coutParMoteur, questions: questions.length, reponses: col.reponses.length, vides: col.reponses.filter((r) => !r.texte?.trim()).length, echecs: col.echecs.length, recommandations: recos, arret_plafond: col.arretPlafond, preuves_erreur: preuvesErreur };
 }
 
 // ---------------------------------------------------------------- EXTRAIRE_PLAN (quelques centimes)
