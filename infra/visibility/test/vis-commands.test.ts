@@ -360,3 +360,13 @@ exit 0
     expect(readFileSync(log, "utf8")).not.toMatch(/ down| rm |volume rm/);
   });
 });
+
+describe("coût estimé d'une fenêtre d'après sa référence (bloc B)", () => {
+  it("coût par jour des seuls moteurs de la fenêtre, multiplié par sa durée", async () => {
+    const { windowEstimateUsd } = await import("../src/window-launch.js");
+    const fig = { window: { days: 5 }, perEngine: [{ engine: "chatgpt", estimatedCostUsd: 1.3 }, { engine: "mistral", estimatedCostUsd: 15.36 }, { engine: "gemini", estimatedCostUsd: 3.1 }] };
+    const w = { id: "p", kind: "follow-up", days: 2, panelVersion: 1, status: "planned", missingDays: [], targets: ["chatgpt:openai-api:gpt-6-luna:online", "gemini:openrouter:google/gemini-3-flash-preview:online"] } as const;
+    expect(windowEstimateUsd(w as never, fig)).toBe(1.76);
+    expect(windowEstimateUsd({ ...w, targets: ["grok:openrouter:x-ai/grok-4.5:online"] } as never, fig)).toBeNull();
+  });
+});

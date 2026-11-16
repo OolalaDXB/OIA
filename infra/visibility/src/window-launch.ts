@@ -152,6 +152,25 @@ export function launchChecks(b: SubjectBundle, windowId: string, st: ElmoState, 
   return out;
 }
 
+/**
+ * Coût estimé d'une fenêtre d'après sa référence : coût par jour de chacun de ses moteurs à la
+ * référence, multiplié par sa durée. Un moteur absent de la référence rend l'estimation inconnue.
+ */
+export function windowEstimateUsd(
+  w: SubjectBundle["measurement"]["windows"][number],
+  fig: { window?: { days: number }; perEngine?: { engine: string; estimatedCostUsd: number }[] },
+): number | null {
+  const refDays = fig.window?.days;
+  if (!refDays || !fig.perEngine || !w.targets?.length) return null;
+  let total = 0;
+  for (const t of w.targets) {
+    const e = fig.perEngine.find((x) => x.engine === t.split(":")[0]);
+    if (!e) return null;
+    total += (e.estimatedCostUsd / refDays) * w.days;
+  }
+  return Math.round(total * 100) / 100;
+}
+
 export function renderChecks(checks: Check[]): { text: string; go: boolean } {
   const go = !checks.some((c) => c.level === "nogo");
   const lines = checks.map((c) => `${c.level === "ok" ? "ok   " : c.level === "warn" ? "warn " : "NOGO "} ${c.n}. ${c.text}`);
@@ -201,9 +220,9 @@ if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).
       const st = JSON.parse(readFileSync(arg, "utf8")) as ElmoState;
       const ref = b.measurement.windows.find((x) => x.id === b.measurement.windows.find((y) => y.id === windowId)?.comparesWith);
       const figFile = ref ? join(dir, "reports", ref.id, "figures.json") : "";
-      const fig = figFile && existsSync(figFile) ? (JSON.parse(readFileSync(figFile, "utf8")) as { spend?: { estimatedUsd: number }; perEngine?: { engine: string; versions: string[] }[] }) : null;
+      const fig = figFile && existsSync(figFile) ? (JSON.parse(readFileSync(figFile, "utf8")) as { window?: { days: number }; spend?: { estimatedUsd: number }; perEngine?: { engine: string; versions: string[]; estimatedCostUsd: number }[] }) : null;
       const r = renderChecks(launchChecks(b, windowId, st, {
-        referenceEstimatedUsd: fig?.spend?.estimatedUsd ?? null,
+        referenceEstimatedUsd: fig ? windowEstimateUsd(b.measurement.windows.find((x) => x.id === windowId)!, fig) : null,
         referenceVersions: Object.fromEntries((fig?.perEngine ?? []).map((e) => [e.engine, e.versions])),
       }));
       process.stdout.write(r.text);
