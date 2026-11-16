@@ -35,7 +35,7 @@ estimé de J0 (22,92 $), `vis_mesure_v2` (2), `vis_recommandations_v2` (3).
 - **Plafonds** : aucun fixé. Le GO est refusé tant que Mickaël n'a pas fixé le plafond
   global, puis celui du client, dans le cockpit (`vis_fixer_plafond`). Coût réel de
   novembre pour Coach Gari, d'après les preuves : 25,00 $.
-- **Étape de Coach Gari** : le portefeuille affiche « à valider » (0 question), car le
+- **Étape de Coach Gari** : corrigé (`oia_0011_visibility_pilotage_5_sujet_anterieur`) : un sujet dont la référence est close n'est plus « à valider » ; Coach Gari affiche « Valider le rapport ». Constat initial : « à valider » (0 question), car le
   sujet a été mesuré avant le pilotage : pas de panel dans `vis.panel`, pas de
   reconnaissance. À traiter par la session du Mac : reprise du panel v2 validé le
   5 novembre, ou cas « sujet antérieur au pilotage » dans `vis_portefeuille_v2`.

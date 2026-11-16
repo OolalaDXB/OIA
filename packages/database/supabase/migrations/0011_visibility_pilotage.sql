@@ -354,7 +354,7 @@ with s as (
            or (f.moteur_etat = 'muet' and (f.travail_en_attente or f.active_statut = 'en_cours')) then 'bloque'
       when f.ajout_statut = 'QUEUED' then 'demande'
       when f.ajout_statut = 'RUNNING' or (f.ajout_statut = 'DONE' and f.propositions = 0) then 'audit_en_cours'
-      when f.panel is null or coalesce(f.reco_statut, 'proposee') = 'proposee' then 'a_valider'
+      when (f.panel is null or coalesce(f.reco_statut, 'proposee') = 'proposee') and f.ref_statut is distinct from 'close' then 'a_valider'
       when f.reco_statut in ('go_donne','en_cours') then 'reconnaissance_en_cours'
       when f.concurrents_a_valider > 0 then 'concurrents_a_valider'
       when f.active_id is not null then 'mesure_en_cours'
