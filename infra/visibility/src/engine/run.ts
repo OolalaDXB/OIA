@@ -59,6 +59,8 @@ import { AUDIT_MODEL, classementConcurrents, classementDomaines, collecter, note
 import { createMistralProvider } from "../../../../packages/providers/src/mistral.js";
 import type { LLMProvider } from "../../../../packages/providers/src/types.js";
 import { findPrice } from "../cost-grid.js";
+import { constatsContenu, criteresModele, noterContenu, type Critere, type PageBrute } from "../contenu/note.js";
+import { lireDepotGithub, type GithubFetch, type LectureDepot } from "../repo/github.js";
 import { readSite } from "../site/pages.js";
 import { DEFAULT_LIGHTHOUSE_COMMAND, LIGHTHOUSE_PACKAGE, constatsCrawl, constatsLighthouse, runLighthouse, summarizeLighthouse, type AnalyseLighthouse, type LighthouseCommand, type Strategie } from "../analyse/lighthouse.js";
 import { concurrentsFile, homonymesFile } from "../site/formats.js";
@@ -92,6 +94,10 @@ export interface EngineOptions {
   runCrawlie?: (cmd: CrawlieCommand, url: string, out: string, maxPages?: number) => Promise<void>;
   /** Mistral de l'audit IA express (questions et plan) : construit seulement sur GO ; un faux dans les tests. */
   auditLlm?: () => LLMProvider & { usage?: () => { inputTokens: number; outputTokens: number } };
+  /** Mistral de la note du contenu (grille commerciale) : construit seulement sur GO ; un faux dans les tests. */
+  noteLlm?: () => LLMProvider & { usage?: () => { inputTokens: number; outputTokens: number } };
+  /** Accès à l'API GitHub (lecture du dépôt lié) : fetch global par défaut, un faux dans les tests. */
+  github?: GithubFetch;
   /** Accès payants, créés seulement après le contrôle du GO en base. */
   collector: () => Collector;
   judge: () => MentionJudge;
@@ -194,7 +200,7 @@ export async function runEngine(o: EngineOptions): Promise<PassageResult> {
 async function handle(ctx: Ctx, d: Demande): Promise<Traitement> {
   ctx.log(`demande ${d.id} : ${d.type}${d.subject_id ? ` (${d.subject_id})` : ""}`);
   try {
-    const run = { SITE_ADD: siteAddDemande, RECON: reconDemande, WINDOW_RUN: windowRunDemande, REPORT: reportDemande, REMEASURE_PROPOSE: remeasureDemande, ANALYSE: analyseDemande, AUDIT_IA: auditIaDemande }[d.type];
+    const run = { SITE_ADD: siteAddDemande, RECON: reconDemande, WINDOW_RUN: windowRunDemande, REPORT: reportDemande, REMEASURE_PROPOSE: remeasureDemande, ANALYSE: analyseDemande, AUDIT_IA: auditIaDemande, NOTE_CONTENU: noteContenuDemande }[d.type];
     if (!run) throw new EngineRefusal(`type de demande inconnu « ${String(d.type)} »`);
     const resultat = await run(ctx, d);
     await ctx.o.db.terminer(d.id, resultat, null);
@@ -325,6 +331,87 @@ async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
     if (ok) recos++;
   }
   return { audit_externe_id: auditId, score: s.global, cout_reel_usd: coutReel, questions: questions.length, reponses: col.reponses.length, echecs: col.echecs.length, recommandations: recos, arret_plafond: col.arretPlafond };
+}
+
+// ---------------------------------------------------------------- NOTE_CONTENU (payante, quelques centimes)
+
+/**
+ * Note du contenu : refusée sans GO en base (vis_moteur_note_debut). Pages servies (HTML brut) et,
+ * si un dépôt est lié, le dépôt GitHub en lecture seule ; critères déterministes (technique,
+ * fonctionnel, part du commercial) et grille commerciale notée par Mistral, citation obligatoire.
+ * Un dépôt illisible ou un modèle en échec n'arrêtent pas la note : la part concernée est « non
+ * mesurée » et la raison est consignée.
+ */
+async function noteContenuDemande(ctx: Ctx, d: Demande): Promise<Record<string, unknown>> {
+  subjectOf(d);
+  const url = str(d.charge.url, "url");
+  const nom = str(d.charge.nom, "nom");
+  if (!/^https:\/\//.test(url)) throw new EngineRefusal("adresse du site : https attendu");
+  const go = await ctx.o.db.noteDebut(d.id); // refusé sans GO
+  // HTML brut des pages lues (les critères lisent les balises, pas seulement le texte).
+  const bruts = new Map<string, string>();
+  const capture: PageFetcher = async (u) => {
+    const r = await ctx.o.fetch(u);
+    bruts.set(r.url, r.body);
+    if (r.finalUrl) bruts.set(r.finalUrl, r.body);
+    return r;
+  };
+  const read = await readSite(url, { fetch: capture, maxPages: 12, allowedLocal: ctx.o.allowedLocal });
+  const pages: PageBrute[] = read.pages.map((p) => ({ url: p.url, html: bruts.get(p.url) ?? "" })).filter((p) => p.html);
+  let depot: LectureDepot | null = null;
+  let depotErreur: string | null = null;
+  if (go.depot) {
+    try {
+      depot = await lireDepotGithub({ depot: go.depot, branche: typeof d.charge.branche === "string" ? d.charge.branche : null, token: ctx.o.env.OIA_DEPOTS_TOKEN || null, fetch: ctx.o.github });
+    } catch (err) {
+      depotErreur = msg(err).slice(0, 200);
+    }
+  }
+  let modele: Critere[] = [];
+  let synthese: string | null = null;
+  let modeleErreur: string | null = null;
+  const llm = ctx.o.noteLlm
+    ? ctx.o.noteLlm()
+    : ctx.o.env.MISTRAL_API_KEY
+      ? createMistralProvider({ apiKey: ctx.o.env.MISTRAL_API_KEY, model: AUDIT_MODEL, maxCalls: 2, maxOutputTokens: 32_000 })
+      : null;
+  if (!llm) modeleErreur = "clé absente : MISTRAL_API_KEY";
+  else {
+    try {
+      const r = await criteresModele(llm, { nom, pages, modele: AUDIT_MODEL });
+      modele = r.criteres;
+      synthese = r.synthese;
+    } catch (err) {
+      modeleErreur = msg(err).slice(0, 300);
+    }
+  }
+  const u = llm?.usage?.();
+  const prix = findPrice("mistral-api", AUDIT_MODEL);
+  const coutReel = Math.round((u && prix ? (u.inputTokens * prix.inputPerMTok + u.outputTokens * prix.outputPerMTok) / 1_000_000 : 0) * 10_000) / 10_000;
+  const note = noterContenu(pages, depot, modele);
+  const sur1 = (x: number | null) => (x === null ? null : x / 100);
+  const aid = await ctx.o.db.analyse(d.id, {
+    nature: "contenu",
+    strategie: null,
+    url,
+    outil: "OIA · note du contenu",
+    statut: "fait",
+    scores: { technique: sur1(note.notes.technique), fonctionnel: sur1(note.notes.fonctionnel), commercial: sur1(note.notes.commercial) },
+    metriques: { pages: pages.length, criteres: note.criteres.length, mesures: note.criteres.filter((c) => c.ok !== null).length, fichiers_lus: depot ? depot.fichiers.filter((f) => f.contenu !== undefined).length : 0, cout_usd: coutReel },
+    resultat: {
+      criteres: note.criteres.map((c) => ({ id: c.id, axe: c.axe, titre: c.titre, points: c.points, ok: c.ok, valeur: c.valeur, source: c.source, preuve: c.preuve })),
+      synthese,
+      pages: note.pages,
+      depot: depot ? { depot: depot.depot, branche: depot.branche, sha: depot.sha, prive: depot.prive, fichiers: depot.fichiers.length, sensibles: depot.ignores.filter((i) => i.raison === "sensible").length, tronque: depot.tronque } : go.depot ? { depot: go.depot, erreur: depotErreur } : null,
+      modele: modeleErreur ? { erreur: modeleErreur } : { modele: AUDIT_MODEL },
+    },
+  });
+  let constats = 0;
+  for (const c of constatsContenu(note.criteres)) {
+    await ctx.o.db.constat(d.id, aid, c);
+    constats++;
+  }
+  return { analyse_id: aid, notes: note.notes, constats, cout_reel_usd: coutReel, depot: depot ? `${depot.depot}@${depot.sha.slice(0, 7)}` : depotErreur ? `échec : ${depotErreur}` : null, modele: modeleErreur ? `échec : ${modeleErreur}` : "ok" };
 }
 
 // ---------------------------------------------------------------- ANALYSE (v3, gratuite)

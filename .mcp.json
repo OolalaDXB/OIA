@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "oia-depot": {
+      "type": "stdio",
+      "command": "sh",
+      "args": ["-c", "cd infra/visibility && exec npx tsx src/mcp/depot-server.ts"],
+      "env": {
+        "OIA_DEPOTS": "${OIA_DEPOTS:-}",
+        "OIA_DEPOTS_TOKEN": "${OIA_DEPOTS_TOKEN:-}"
+      }
+    }
+  }
+}

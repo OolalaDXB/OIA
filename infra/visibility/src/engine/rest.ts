@@ -137,6 +137,11 @@ export class RestEngineDb implements EngineDb {
   async auditResultat(demande: string, r: Record<string, unknown>) {
     return String(await this.rpc<string>("vis_moteur_audit_resultat", { p_demande: demande, p_resultat: r }));
   }
+  async noteDebut(demande: string) {
+    const r = await this.rpc<{ note_id: string; depot: string | null; cout_max_usd: number }>("vis_moteur_note_debut", { p_demande: demande });
+    if (!r) throw new Error("note refusée : réponse vide");
+    return r;
+  }
   async analyse(demande: string, a: Record<string, unknown>) {
     return String(await this.rpc<string>("vis_moteur_analyse", { p_demande: demande, p_analyse: a }));
   }

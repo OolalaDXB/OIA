@@ -107,7 +107,11 @@ export async function lireDepotGithub(o: LireDepotOptions): Promise<LectureDepot
     else if (lus >= maxFichiers || total + taille > maxTotal) ignores.push({ chemin: t.path, raison: "borne" });
     else {
       const chemin = t.path.split("/").map(encodeURIComponent).join("/");
-      const r = await f(`https://api.github.com/repos/${ref.proprietaire}/${ref.nom}/contents/${chemin}?ref=${c.sha}`, { headers: { ...headers, accept: "application/vnd.github.raw" } });
+      // Dépôt public : fichiers bruts hors quota d'API (3 appels d'API par lecture en tout).
+      // Dépôt privé : API des contenus, avec le jeton.
+      const r = info.private
+        ? await f(`https://api.github.com/repos/${ref.proprietaire}/${ref.nom}/contents/${chemin}?ref=${c.sha}`, { headers: { ...headers, accept: "application/vnd.github.raw" } })
+        : await f(`https://raw.githubusercontent.com/${ref.proprietaire}/${ref.nom}/${c.sha}/${chemin}`, { headers: { "user-agent": headers["user-agent"]! } });
       if (!r.ok) {
         ignores.push({ chemin: t.path, raison: "borne" });
         continue;

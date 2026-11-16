@@ -22,7 +22,7 @@ import { randomUUID } from "node:crypto";
 import { homedir } from "node:os";
 import { join } from "node:path";
 
-export const DEMANDE_TYPES = ["SITE_ADD", "RECON", "WINDOW_RUN", "REPORT", "REMEASURE_PROPOSE", "ANALYSE", "AUDIT_IA"] as const;
+export const DEMANDE_TYPES = ["SITE_ADD", "RECON", "WINDOW_RUN", "REPORT", "REMEASURE_PROPOSE", "ANALYSE", "AUDIT_IA", "NOTE_CONTENU"] as const;
 export type DemandeType = (typeof DEMANDE_TYPES)[number];
 export type DemandeStatut = "QUEUED" | "RUNNING" | "DONE" | "FAILED" | "CANCELLED";
 
@@ -207,6 +207,8 @@ export interface EngineDb {
   /** Audit IA express (0015) : ouvre sa fenêtre (refusée sans GO en base), rend le résultat. */
   auditDebut(demande: string): Promise<string>;
   auditResultat(demande: string, r: Record<string, unknown>): Promise<string>;
+  /** Note du contenu : refusée sans GO en base ; rend le dépôt lié au moment du GO. */
+  noteDebut(demande: string): Promise<{ note_id: string; depot: string | null; cout_max_usd: number }>;
 }
 
 /** Délai au-delà duquel une demande RUNNING est tenue pour abandonnée, et prises au plus (en base). */
@@ -380,7 +382,8 @@ export class MemoryEngineDb implements EngineDb {
   constats: (Record<string, unknown> & { id: string; demande: string; analyse: string | null })[] = [];
   async analyse(demande: string, a: Record<string, unknown>): Promise<string> {
     const d = this.demandes.find((x) => x.id === demande);
-    if (!d || d.type !== "ANALYSE" || d.statut !== "RUNNING") throw new Error(`55000 : demande ${demande} : pas une analyse en cours`);
+    if (!d || (d.type !== "ANALYSE" && d.type !== "NOTE_CONTENU") || d.statut !== "RUNNING") throw new Error(`55000 : demande ${demande} : pas une analyse en cours`);
+    if ((d.type === "NOTE_CONTENU") !== (a.nature === "contenu")) throw new Error("22023 : nature « contenu » réservée à la note du contenu");
     const id = randomUUID();
     this.analyses.push({ ...structuredClone(a), id, demande });
     return id;
@@ -393,6 +396,14 @@ export class MemoryEngineDb implements EngineDb {
     if (!this.auditsGo.has(String(d.charge.audit_id))) throw new Error("42501 : audit refusé : aucun GO enregistré");
     return `${d.subject_id}-audit-test`;
   }
+  notesGo = new Map<string, { depot: string | null; cout_max_usd: number }>();
+  async noteDebut(demande: string) {
+    const d = this.demandes.find((x) => x.id === demande);
+    if (!d || d.type !== "NOTE_CONTENU" || d.statut !== "RUNNING") throw new Error(`55000 : demande ${demande} : pas une note en cours`);
+    const go = this.notesGo.get(String(d.charge.note_id));
+    if (!go) throw new Error("42501 : note refusée : aucun GO enregistré");
+    return { note_id: String(d.charge.note_id), ...go };
+  }
   async auditResultat(demande: string, r: Record<string, unknown>): Promise<string> {
     const id = randomUUID();
     this.audits.push({ ...structuredClone(r), id, demande });
@@ -400,7 +411,8 @@ export class MemoryEngineDb implements EngineDb {
   }
   async constat(demande: string, analyseId: string | null, c: Record<string, unknown>): Promise<string> {
     const d = this.demandes.find((x) => x.id === demande);
-    if (!d || d.type !== "ANALYSE") throw new Error(`P0002 : demande d'analyse ${demande} introuvable`);
+    if (!d || (d.type !== "ANALYSE" && d.type !== "NOTE_CONTENU")) throw new Error(`P0002 : demande d'analyse ${demande} introuvable`);
+    if ((d.type === "NOTE_CONTENU") !== (c.source === "contenu")) throw new Error("22023 : source « contenu » réservée à la note du contenu");
     if (analyseId && !this.analyses.some((x) => x.id === analyseId && x.demande === demande)) throw new Error("22023 : analyse d'une autre demande");
     const id = randomUUID();
     this.constats.push({ ...structuredClone(c), id, demande, analyse: analyseId });
@@ -564,6 +576,9 @@ export class PsqlEngineDb implements EngineDb {
   }
   async auditResultat(demande: string, r: Record<string, unknown>) {
     return String(await this.run("select vis_moteur_audit_resultat(:'p_demande'::uuid, :'p_resultat'::jsonb);\n", { p_demande: demande, p_resultat: r }));
+  }
+  async noteDebut(demande: string) {
+    return JSON.parse(String(await this.run("select vis_moteur_note_debut(:'p_demande'::uuid);\n", { p_demande: demande }))) as { note_id: string; depot: string | null; cout_max_usd: number };
   }
   async analyse(demande: string, a: Record<string, unknown>) {
     return String(await this.run("select vis_moteur_analyse(:'p_demande'::uuid, :'p_analyse'::jsonb);\n", { p_demande: demande, p_analyse: a }));

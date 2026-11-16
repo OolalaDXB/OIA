@@ -96,6 +96,9 @@ jobs:
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
+          # Lecture seule des dépôts des sites (note du contenu) : jeton « Contents: read » sur ces
+          # dépôts ; à défaut, le jeton d'Actions (dépôts publics, quota relevé).
+          OIA_DEPOTS_TOKEN: ${{ secrets.OIA_DEPOTS_TOKEN || github.token }}
           OIA_VIS_ENGINE_DB: rest
           OIA_VIS_ENGINE_HOST: github-actions
           OIA_VIS_ENGINE_VERSION: ${{ github.sha }}
