@@ -23,6 +23,7 @@ import { matchFacts } from "../judge.js";
 import type { MentionConfig } from "../judge-jev.js";
 import { candidatesIn } from "../site/actors.js";
 import type { SiteRead } from "../site/pages.js";
+import { enveloppe } from "../llm-forme.js";
 
 export const AUDIT_MODEL = "mistral-large-4";
 
@@ -37,7 +38,7 @@ export interface QuestionAudit {
 
 // Tolérant sur la forme (casse, longueur), strict sur le fond : une question reste une question.
 const texte = (min: number, max: number) => z.string().trim().min(min).transform((x) => x.slice(0, max));
-const QuestionsSchema = z.object({
+const QuestionsSchema = z.preprocess(enveloppe("questions"), z.object({
   questions: z
     .array(
       z.object({
@@ -50,7 +51,7 @@ const QuestionsSchema = z.object({
     )
     .min(5)
     .transform((q) => q.slice(0, 40)),
-});
+}));
 
 /** Résumé du site pour le modèle : titres, H1, extraits de texte, pages. */
 export function resumeSite(read: SiteRead, maxChars = 12_000): string {
@@ -170,8 +171,8 @@ export function classementDomaines(matrice: LigneMatrice[]): { domaine: string; 
   return [...n.entries()].map(([domaine, reponses]) => ({ domaine, reponses })).sort((a, b) => b.reponses - a.reponses).slice(0, 25);
 }
 
-const PlanSchema = z.object({
-  resume: z.string().min(20).max(1200),
+const PlanSchema = z.preprocess(enveloppe("actions"), z.object({
+  resume: texte(20, 1200),
   actions: z
     .array(
       z.object({
@@ -187,7 +188,7 @@ const PlanSchema = z.object({
     )
     .min(3)
     .transform((a) => a.slice(0, 15)),
-});
+}));
 export type Plan = z.infer<typeof PlanSchema>;
 
 export async function proposerPlan(

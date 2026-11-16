@@ -12,6 +12,7 @@
  */
 import { z } from "zod";
 import type { LLMProvider } from "../../../../packages/providers/src/types.js";
+import { enveloppe } from "../llm-forme.js";
 import { estSensible, type LectureDepot } from "../repo/github.js";
 import { decodeEntities, pricesIn } from "../site/pages.js";
 
@@ -263,15 +264,15 @@ export const GRILLE_MODELE: { id: string; axe: Axe; titre: string; points: numbe
   { id: "parcours-achat", axe: "fonctionnel", titre: "Parcours d'achat compréhensible", points: 3, consigne: "Un visiteur comprend-il en quelques secondes comment passer de l'intérêt à la réservation ou à l'achat ?", correction: "Rendre le parcours explicite en 3 étapes (choisir, réserver, payer) avec un bouton à chaque étape.", gravite: "important", effort: "M" },
 ];
 
-const NoteModele = z.object({
+const NoteModele = z.preprocess(enveloppe("criteres"), z.object({
   criteres: z.array(z.object({
     id: z.string(),
-    note: z.number().int().min(0).max(2),
-    citation: z.string().max(400).nullable().default(null),
-    justification: z.string().max(400),
+    note: z.coerce.number().int().min(0).max(2),
+    citation: z.string().nullable().default(null).transform((x) => (x ? x.slice(0, 400) : null)),
+    justification: z.string().default("").transform((x) => x.slice(0, 400)),
   })),
-  synthese: z.string().max(1200),
-});
+  synthese: z.string().default("").transform((x) => x.slice(0, 1200)),
+}));
 export type NoteModeleSortie = z.infer<typeof NoteModele>;
 
 const norm = (s: string) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[“”«»"’']/g, "").replace(/\s+/g, " ").trim();

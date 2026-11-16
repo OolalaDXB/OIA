@@ -108,3 +108,14 @@ describe("moteur : demande AUDIT_IA", () => {
     expect(appels.length).toBeLessThan(10);
   });
 });
+
+describe("forme des réponses du modèle", () => {
+  it("replace le tableau attendu sous sa clé, sans toucher au contenu", async () => {
+    const { enveloppe } = await import("../src/llm-forme");
+    const e = enveloppe("questions");
+    expect(e([1, 2])).toEqual({ questions: [1, 2] });
+    expect(e({ AuditQuestions: [1] })).toEqual({ AuditQuestions: [1], questions: [1] });
+    expect(e({ questions: [3], autres: [4] })).toEqual({ questions: [3], autres: [4] });
+    expect(e({ a: [1], b: [2] })).toEqual({ a: [1], b: [2] });
+  });
+});
