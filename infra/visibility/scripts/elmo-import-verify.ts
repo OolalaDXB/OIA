@@ -43,7 +43,8 @@ try {
   b.fichier(here("../../../packages/database/supabase/migrations/0006_visibility_vues.sql"));
   b.fichier(ecrireTemp(sql));
 
-  const n = Number(b.sql("select count(*) from vis.evidence where collector_name = 'elmo-0.7.7'"));
+  // Par identifiant : des réponses déjà synchronisées par vis-sync (collector « elmo ») gardent leur ligne.
+  const n = Number(b.sql(`select count(*) from vis.evidence where id in (${rows.map((r) => `'${r.id}'`).join(",")})`));
   check(n === exp.prompt_runs.length, `réponses en base = runs d'Elmo : ${n} / ${exp.prompt_runs.length}`);
   const empreintes = () => b.sql("select string_agg(id::text || encode(raw_sha256, 'hex'), ',' order by id) from vis.evidence");
 

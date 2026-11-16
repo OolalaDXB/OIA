@@ -22,7 +22,10 @@ engines:
   # propre mesure de départ : l'ajouter à une fenêtre en cours casserait la comparaison avec J0.
   # Via OpenRouter seulement dans Elmo 0.7.7 (x-ai/grok-4.5, seul Grok testé par Elmo).
   # - { model: grok,       collection: api, webSearch: true, note: "via OpenRouter, x-ai/grok-4.5" }
-  - { model: mistral,    collection: api, webSearch: true, note: "Mistral en direct, mistral-large-4 (Conversations API + outil web_search). Mesuré en anglais pour le pilote J0 (langue unique du panel)." }
+  # Retiré de la mesure de Coach Gari à partir de la mesure croisée et de J1 (décision de Mickaël,
+  # 2026-11-16) : panel en anglais, Mistral prévu pour les panels en français. Il n'est plus
+  # dans les cibles (targets) de parite-1 ni de j1, que le collecteur OIA interroge.
+  - { model: mistral,    collection: api, webSearch: true, note: "Mistral en direct, mistral-large-4 (Conversations API + outil web_search). Mesuré en anglais pour le pilote J0 seulement (langue unique du panel) ; retiré à partir de la mesure croisée et de J1 (décision de Mickaël, 2026-11-16) : 15,36 $ sur 22,92 $ de la dépense estimée de J0, aucune source renvoyée, 14 réponses sans texte. Gardé pour les sujets en français (Maisons.co)." }
 # Jev en direct chez TypeSafe (TYPESAFE_API_KEY, décision 2026-11-07 — voir elmo/.env.example).
 windows:
   - id: j0
@@ -39,7 +42,7 @@ windows:
       - mistral:mistral-api:mistral-large-4:online
       - gemini:openrouter:google/gemini-3-flash-preview:online
       - perplexity:openrouter:perplexity/sonar:online
-    note: "Mesure de départ, 5 moteurs (3 directs + Gemini et Perplexity via OpenRouter). Dates fixées au démarrage du worker, après validation du panel. Démarrée le 2026-11-07 à 15:27 UTC (démarrage du worker). Perturbation jour 1 : worker arrêté par erreur de 15:28:20 à 17:20:16 UTC (test de cost-guard.sh à blanc qui arrêtait le vrai worker ; correctif bc7a230) ; 3 runs Mistral et des jugements de Jev retardés, terminés à la relance ; premier passage complet (50/50, jugés 50/50), aucun jour manquant. Gel rompu, J0 conservé (décision de Mickaël, 2026-11-07) : le 7 nov. à 08:54 UTC, 710b4dd publie les quatre pages de service (noindex retiré, entrée dans le sitemap) ; à 09:24 UTC, d89380b ajoute une section à la page padel ; pendant la fenêtre, à 15:56 UTC (29 min après le démarrage), a7ac6a7 réécrit le texte « About » de la page d'accueil. J0 mesure donc un site en transition d'indexation (pages de service indexables depuis quelques heures au démarrage). Gel rétabli jusqu'à la fin de la fenêtre. Concurrents d'Elmo changés le 2026-11-08 (décision de Mickaël), en deux temps : à 08:28 UTC (première liste, remplacée), puis à 08:43 UTC par la liste validée en cinq segments (20 concurrents : subject.yaml et concurrents-candidats.yaml, section candidates). Playtomic supprimé ; les académies de padel sont des lieux où Gari travaille, pas des concurrents (section lieux, non chargées dans Elmo). Seuls les concurrents changent (marque, questions, moteurs et heure inchangés). Les étiquettes de concurrents d'Elmo changent donc à cette date : les réponses antérieures gardent celles de l'ancienne liste (Playtomic, Ultimate Performance, Future, Caliber), les suivantes portent la nouvelle. Le rapport J0 recompte toute la fenêtre avec cette liste (scripts/j0-reanalysis.sh avec concurrents-candidats.yaml, sur les réponses complètes ; lieux de travail comptés à part), et non avec les étiquettes d'Elmo. Listes d'Elmo avant chaque changement : ~/oia-visibility-data/coach-gari/elmo-concurrents-avant-2026-11-08.json et elmo-concurrents-avant-2026-11-08b.json. Perturbation (questions hors panel) : deux questions ajoutées le 2026-11-08 à 11:23 UTC par Mickaël depuis l'interface d'Elmo, sans identifiant oia:…, étiquetées à la main panel:v2, lang:en, family:unbranded (le filtre panel:v2 ne les exclut donc pas) : bf0b8284-cd44-4c1d-9245-7d66225bdaec « Best personal coach in Dubai » et ff89627a-0804-48a7-8428-1886288a1113 « PT in Dubai ». Effet : 12 runs par jour et par moteur au lieu de 10, coût de la mesure en hausse d'environ 20 %. Désactivées le 2026-11-10 à 21:58:19 UTC depuis l'interface d'Elmo (enabled = false, jamais supprimées : leurs 30 réponses sont conservées) ; Elmo 0.7.7 laisse leur travail en file, que le worker saute sans appeler de moteur. Le rapport J0 les exclut par identifiant (excludedPromptIds)."
+    note: "Mesure de départ, 5 moteurs (3 directs + Gemini et Perplexity via OpenRouter). Dates fixées au démarrage du worker, après validation du panel. Démarrée le 2026-11-07 à 15:27 UTC (démarrage du worker). Perturbation jour 1 : worker arrêté par erreur de 15:28:20 à 17:20:16 UTC (test de cost-guard.sh à blanc qui arrêtait le vrai worker ; correctif bc7a230) ; 3 runs Mistral et des jugements de Jev retardés, terminés à la relance ; premier passage complet (50/50, jugés 50/50), aucun jour manquant. Gel rompu, J0 conservé (décision de Mickaël, 2026-11-07) : le 7 nov. à 08:54 UTC, 710b4dd publie les quatre pages de service (noindex retiré, entrée dans le sitemap) ; à 09:24 UTC, d89380b ajoute une section à la page padel ; pendant la fenêtre, à 15:56 UTC (29 min après le démarrage), a7ac6a7 réécrit le texte « About » de la page d'accueil. J0 mesure donc un site en transition d'indexation (pages de service indexables depuis quelques heures au démarrage). Gel rétabli jusqu'à la fin de la fenêtre. Concurrents d'Elmo changés le 2026-11-08 (décision de Mickaël), en deux temps : à 08:28 UTC (première liste, remplacée), puis à 08:43 UTC par la liste validée en cinq segments (20 concurrents : subject.yaml et concurrents-candidats.yaml, section candidates). Playtomic supprimé ; les académies de padel sont des lieux où Gari travaille, pas des concurrents (section lieux, non chargées dans Elmo). Seuls les concurrents changent (marque, questions, moteurs et heure inchangés). Les étiquettes de concurrents d'Elmo changent donc à cette date : les réponses antérieures gardent celles de l'ancienne liste (Playtomic, Ultimate Performance, Future, Caliber), les suivantes portent la nouvelle. Le rapport J0 recompte toute la fenêtre avec cette liste (scripts/j0-reanalysis.sh avec concurrents-candidats.yaml, sur les réponses complètes ; lieux de travail comptés à part), et non avec les étiquettes d'Elmo. Listes d'Elmo avant chaque changement : ~/oia-visibility-data/coach-gari/elmo-concurrents-avant-2026-11-08.json et elmo-concurrents-avant-2026-11-08b.json. Perturbation (questions hors panel) : deux questions ajoutées le 2026-11-08 à 11:23 UTC par Mickaël depuis l'interface d'Elmo, sans identifiant oia:…, étiquetées à la main panel:v2, lang:en, family:unbranded (le filtre panel:v2 ne les exclut donc pas) : bf0b8284-cd44-4c1d-9245-7d66225bdaec « Best personal coach in Dubai » et ff89627a-0804-48a7-8428-1886288a1113 « PT in Dubai ». Effet : 12 runs par jour et par moteur au lieu de 10, coût de la mesure en hausse d'environ 20 %. Désactivées le 2026-11-10 à 21:58:19 UTC depuis l'interface d'Elmo (enabled = false, jamais supprimées : leurs 30 réponses sont conservées) ; Elmo 0.7.7 laisse leur travail en file, que le worker saute sans appeler de moteur. Le rapport J0 les exclut par identifiant (excludedPromptIds). Perturbation (concurrents d'Elmo, troisième changement) : le 2026-11-08 à 11:22:59 UTC, Mickaël a remplacé depuis l'interface d'Elmo la liste de 20 concurrents chargée à 08:43 par 9 noms (Caliber, Embody Fitness, Fit Squad DXB, Fortius Dubai, Future, PTD Fitness, Planet Fitness Play, StudioRepublik, Ultimate Performance), une minute avant l'ajout des deux questions hors panel ; constaté le 2026-11-16 (dates de création dans la base d'Elmo). Les étiquettes de concurrents d'Elmo des réponses suivantes portent donc ces 9 noms ; le recompte d'OIA sur les textes ne dépend pas de cette liste."
     # Questions hors panel exclues du rapport J0, par identifiant (pas par étiquette : elles portent panel:v2).
     excludedPromptIds:
       - bf0b8284-cd44-4c1d-9245-7d66225bdaec
@@ -48,6 +51,26 @@ windows:
   # cinq jours). Début à fixer par Mickaël, au moins trois semaines après la publication des
   # correctifs de P2 (p2/decisions.md). Grok n'y entre pas : candidat pour sa propre mesure
   # de départ, hors comparaison avec J0.
+  # Mesure croisée (mandat v14, bloc E, option E1 retenue par Mickaël le 2026-11-16) : les 10
+  # questions posées le même jour par Elmo et par le collecteur OIA, 2 jours, sur les 4 moteurs
+  # restants (Mistral retiré). Début en décembre, sur GO de Mickaël (budget de novembre épuisé).
+  - id: parite-1
+    kind: follow-up
+    comparesWith: j0
+    days: 2
+    panelVersion: 2
+    status: planned
+    runTimeUtc: "15:27"
+    targets:
+      - chatgpt:openai-api:gpt-6-luna:online
+      - claude:anthropic-api:claude-sonnet-5-5:online
+      - gemini:openrouter:google/gemini-3-flash-preview:online
+      - perplexity:openrouter:perplexity/sonar:online
+    comparisonNote: "Écart avec J0 : Mistral retiré (décision de Mickaël, 2026-11-16 : panel en anglais, Mistral prévu pour les panels en français ; 15,36 $ sur 22,92 $ de la dépense estimée de J0, aucune source renvoyée, 14 réponses sans texte). Mesure de parité : chaque question posée le même jour par Elmo 0.7.7 et par le collecteur OIA ; critères de l'ADR 0001 (couverture, nombre de citations, longueur médiane, taux de mention dans les intervalles de J0), moteur par moteur."
+    note: "Mesure croisée Elmo et collecteur OIA, 2 jours, 4 moteurs. Elmo reste actif jusqu'à la fin de ces 2 jours. Date fixée par Mickaël (décembre)."
+  # Remesure (mandat v7, bloc E ; v14) : sur le collecteur OIA, 4 moteurs (Mistral retiré).
+  # Début fixé par Mickaël, quand les premières actions seront exécutées (indexation Bing,
+  # fiches d'annuaire, LinkedIn), au moins trois semaines après la dernière exécution.
   - id: j1
     kind: follow-up
     comparesWith: j0
@@ -58,10 +81,10 @@ windows:
     targets:
       - chatgpt:openai-api:gpt-6-luna:online
       - claude:anthropic-api:claude-sonnet-5-5:online
-      - mistral:mistral-api:mistral-large-4:online
       - gemini:openrouter:google/gemini-3-flash-preview:online
       - perplexity:openrouter:perplexity/sonar:online
-    note: "Remesure après les correctifs de P2. Début à fixer par Mickaël (au moins trois semaines après leur publication). Mêmes questions, moteurs, modèles et heure que J0 ; mistral-large-4 conservé pour comparer à l'identique, bien qu'il ne renvoie pas ses sources (décision de Mickaël, 2026-11-07). J0 ayant mesuré un site en transition d'indexation (gel rompu le 7 nov.), les gains de la remesure ne pourront pas être attribués aux seuls correctifs de P2. Grok : candidat pour sa propre mesure de départ, hors comparaison."
+    comparisonNote: "Écart avec J0 : Mistral retiré (décision de Mickaël, 2026-11-16 : panel en anglais, Mistral prévu pour les panels en français ; 15,36 $ sur 22,92 $ de la dépense estimée de J0, aucune source renvoyée, 14 réponses sans texte) ; la comparaison porte sur les 4 autres moteurs. Collecteur : OIA direct au lieu d'Elmo 0.7.7 (mandat v14), parité établie par la mesure croisée parite-1."
+    note: "Remesure après les premières actions (indexation Bing, fiches d'annuaire, LinkedIn). Date fixée par Mickaël. Mêmes questions, modèles et heure que J0, sans Mistral. J0 ayant mesuré un site en transition d'indexation (gel rompu le 7 nov.), les gains de la remesure ne pourront pas être attribués aux seuls correctifs. Grok : candidat pour sa propre mesure de départ, hors comparaison."
 freezes:
   - id: freeze-j0
     scope: [site, repository]

@@ -166,7 +166,8 @@ export function buildImport(bundles: SubjectBundle[], exp: ElmoExport): ImportRo
     return {
       id: uuidStable(`elmo:${r.id}`),
       localEvidenceId: `elmo:${r.id}`,
-      client_id: s.ownership === "internal" ? "oia-internal" : s.id,
+      // Client en base = identifiant du sujet, comme vis-sync (la base de production le porte ainsi).
+      client_id: s.id,
       site_id: s.id,
       subject_id: s.id,
       window_id: windowId,
@@ -239,7 +240,7 @@ export function importSql(bundles: SubjectBundle[], rows: ImportRow[], exportedF
       const note = sample.scope === "panel" ? null
         : sample.scope === "hors-panel" ? `Réponses d'Elmo aux questions hors panel pendant la fenêtre ${w!.id} (import final, mandat v14) : conservées, jamais mesurées.`
         : "Réponses d'Elmo reçues hors de toute fenêtre de mesure (import final, mandat v14) : conservées, jamais mesurées.";
-      L.push(`insert into vis.window (id, subject_id, client_id, kind, panel_version, status, starts_on, ends_on, note) values (${lit(wid)}, ${lit(s.id)}, ${lit(client)}, ${lit(w?.kind ?? "baseline")}, ${w?.panelVersion ?? b.panel.panelVersion}, ${lit(w?.status === "running" ? "running" : "done")}, '${start}', '${end}', ${note ? lit(note) : "null"}) on conflict (id) do nothing;`);
+      L.push(`insert into vis.window (id, subject_id, client_id, kind, panel_version, status, starts_on, ends_on, note) values (${lit(wid)}, ${lit(s.id)}, ${lit(client)}, ${lit(w?.kind ?? "baseline")}, ${w?.panelVersion ?? b.panel.panelVersion}, ${lit(w?.status === "running" ? "running" : "done")}, '${start}', '${end}', ${note ? lit(note) : "null"}) on conflict (id) do update set status = excluded.status where vis.window.status <> 'done' and excluded.status = 'done';`);
     }
   }
   const payload = rows.map(({ scope: _s, windowLocalId: _w, localEvidenceId: _l, ...r }) => r);

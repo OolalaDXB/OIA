@@ -140,11 +140,12 @@
 | claude | API (Elmo) | oui | en | Anthropic en direct, claude-sonnet-5-5 (:online, outil web_search) |
 | gemini | API (Elmo) | oui | en | via OpenRouter, google/gemini-3-flash-preview (recherche Google native) |
 | perplexity | API (Elmo) | oui | en | via OpenRouter, perplexity/sonar |
-| mistral | API (Elmo) | oui | en | Mistral en direct, mistral-large-4 (Conversations API + outil web_search). Mesuré en anglais pour le pilote J0 (langue unique du panel). |
+| mistral | API (Elmo) | oui | en | Mistral en direct, mistral-large-4 (Conversations API + outil web_search). Mesuré en anglais pour le pilote J0 seulement (langue unique du panel) ; retiré à partir de la mesure croisée et de J1 (décision de Mickaël, 2026-11-16) : 15,36 $ sur 22,92 $ de la dépense estimée de J0, aucune source renvoyée, 14 réponses sans texte. Gardé pour les sujets en français (Maisons.co). |
 
 | Fenêtre | Type | Jours | Panel | Statut | Début | Fin | Jours manquants |
 |---|---|---|---|---|---|---|---|
 | j0 | baseline | 5 | v2 | done | 2026-11-07 | 2026-11-12 | — |
+| parite-1 | follow-up | 2 | v2 | planned | — | — | — |
 | j1 | follow-up | 5 | v2 | planned | — | — | — |
 
 ### Gel `freeze-j0` (levé) — jusqu'à la fin de la fenêtre j0
