@@ -1,0 +1,10 @@
+# Timer systemd (option VPS), PRÉPARÉ : à installer par Mickaël, jamais par une session.
+# /etc/systemd/system/oia-visibility.service + oia-visibility.timer
+[Unit]
+Description=OIA Visibility · ordonnanceur quotidien
+After=network-online.target docker.service
+
+[Service]
+Type=oneshot
+# Fichier d'environnement hors dépôt, droits 600 : clés, plafonds. Journal sans données client.
+ExecStart=/usr/bin/docker run --rm --env-file /etc/oia/visibility.env -v /srv/oia/data:/data oia-visibility --go

@@ -1,0 +1,10 @@
+[Unit]
+Description=OIA Visibility · chaque jour à l'heure des runs
+
+[Timer]
+# À régler sur runTimeUtc des fenêtres (UTC).
+OnCalendar=*-*-* 15:27:00 UTC
+Persistent=false
+
+[Install]
+WantedBy=timers.target

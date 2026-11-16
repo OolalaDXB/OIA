@@ -247,12 +247,26 @@ export const EngineSchema = z
   })
   .strict();
 
+/**
+ * Budget du client par mois UTC (mandat v15, bloc C) : l'ordonnanceur arrête ce sujet, et lui
+ * seul, quand sa dépense du mois atteindrait `monthlyCapUsd` ; `alertUsd` émet une alerte avant.
+ * Le plafond global reste OIA_VIS_MONTHLY_CAP_USD.
+ */
+export const BudgetSchema = z
+  .object({
+    monthlyCapUsd: z.number().nonnegative(),
+    alertUsd: z.number().nonnegative().optional(),
+  })
+  .strict()
+  .refine((b) => b.alertUsd === undefined || b.alertUsd <= b.monthlyCapUsd, "alertUsd must not exceed monthlyCapUsd");
+
 export const MeasurementSchema = z
   .object({
     schemaVersion: z.literal(SCHEMA_VERSION),
     engines: z.array(EngineSchema).min(1),
     windows: z.array(WindowSchema).min(1),
     freezes: z.array(FreezeSchema).default([]),
+    budget: BudgetSchema.optional(),
   })
   .strict();
 
