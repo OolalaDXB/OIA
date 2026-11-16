@@ -22,7 +22,7 @@ import { randomUUID } from "node:crypto";
 import { homedir } from "node:os";
 import { join } from "node:path";
 
-export const DEMANDE_TYPES = ["SITE_ADD", "RECON", "WINDOW_RUN", "REPORT", "REMEASURE_PROPOSE"] as const;
+export const DEMANDE_TYPES = ["SITE_ADD", "RECON", "WINDOW_RUN", "REPORT", "REMEASURE_PROPOSE", "ANALYSE"] as const;
 export type DemandeType = (typeof DEMANDE_TYPES)[number];
 export type DemandeStatut = "QUEUED" | "RUNNING" | "DONE" | "FAILED" | "CANCELLED";
 
@@ -200,6 +200,10 @@ export interface EngineDb {
   /** Recommandation générée (format de src/recommendation.ts), en `pending` ; jamais réécrite si présente. */
   recommandation(subjectId: string, windowId: string, rec: Record<string, unknown>): Promise<boolean>;
   alerter(a: AlerteMoteur): Promise<string>;
+  /** Analyse instantanée (0012) : une analyse (Lighthouse, audit) d'une demande ANALYSE en cours. */
+  analyse(demande: string, a: Record<string, unknown>): Promise<string>;
+  /** Constat expliqué rattaché à une demande ANALYSE (et à son analyse, si elle en vient). */
+  constat(demande: string, analyseId: string | null, c: Record<string, unknown>): Promise<string>;
 }
 
 /** Délai au-delà duquel une demande RUNNING est tenue pour abandonnée, et prises au plus (en base). */
@@ -369,6 +373,23 @@ export class MemoryEngineDb implements EngineDb {
     this.alertes.push({ ...a, id });
     return id;
   }
+  analyses: (Record<string, unknown> & { id: string; demande: string })[] = [];
+  constats: (Record<string, unknown> & { id: string; demande: string; analyse: string | null })[] = [];
+  async analyse(demande: string, a: Record<string, unknown>): Promise<string> {
+    const d = this.demandes.find((x) => x.id === demande);
+    if (!d || d.type !== "ANALYSE" || d.statut !== "RUNNING") throw new Error(`55000 : demande ${demande} : pas une analyse en cours`);
+    const id = randomUUID();
+    this.analyses.push({ ...structuredClone(a), id, demande });
+    return id;
+  }
+  async constat(demande: string, analyseId: string | null, c: Record<string, unknown>): Promise<string> {
+    const d = this.demandes.find((x) => x.id === demande);
+    if (!d || d.type !== "ANALYSE") throw new Error(`P0002 : demande d'analyse ${demande} introuvable`);
+    if (analyseId && !this.analyses.some((x) => x.id === analyseId && x.demande === demande)) throw new Error("22023 : analyse d'une autre demande");
+    const id = randomUUID();
+    this.constats.push({ ...structuredClone(c), id, demande, analyse: analyseId });
+    return id;
+  }
 }
 
 // ---------------------------------------------------------------- base réelle, par psql
@@ -521,6 +542,12 @@ export class PsqlEngineDb implements EngineDb {
   }
   async recommandation(subjectId: string, windowId: string, rec: Record<string, unknown>) {
     return (await this.run("select vis_moteur_recommandation(:'p_subject', :'p_window', :'p_recommandation'::jsonb);\n", { p_subject: subjectId, p_window: windowId, p_recommandation: rec })) === "t";
+  }
+  async analyse(demande: string, a: Record<string, unknown>) {
+    return String(await this.run("select vis_moteur_analyse(:'p_demande'::uuid, :'p_analyse'::jsonb);\n", { p_demande: demande, p_analyse: a }));
+  }
+  async constat(demande: string, analyseId: string | null, c: Record<string, unknown>) {
+    return String(await this.run("select vis_moteur_constat(:'p_demande'::uuid, nullif(:'p_analyse', '')::uuid, :'p_constat'::jsonb);\n", { p_demande: demande, p_analyse: analyseId, p_constat: c }));
   }
   async alerter(a: AlerteMoteur) {
     return String(await this.run("select vis_moteur_alerter(:'p_client', nullif(:'p_subject', ''), :'p_gravite', :'p_type', :'p_message');\n", { p_client: a.client_id, p_subject: a.subject_id, p_gravite: a.gravite, p_type: a.type, p_message: a.message }));

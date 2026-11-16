@@ -131,6 +131,12 @@ export class RestEngineDb implements EngineDb {
   async recommandation(subjectId: string, windowId: string, rec: Record<string, unknown>) {
     return (await this.rpc<boolean>("vis_moteur_recommandation", { p_subject: subjectId, p_window: windowId, p_recommandation: rec })) === true;
   }
+  async analyse(demande: string, a: Record<string, unknown>) {
+    return String(await this.rpc<string>("vis_moteur_analyse", { p_demande: demande, p_analyse: a }));
+  }
+  async constat(demande: string, analyseId: string | null, c: Record<string, unknown>) {
+    return String(await this.rpc<string>("vis_moteur_constat", { p_demande: demande, p_analyse: analyseId, p_constat: c }));
+  }
   async alerter(a: AlerteMoteur) {
     return String(await this.rpc<string>("vis_moteur_alerter", { p_client: a.client_id, p_subject: a.subject_id || null, p_gravite: a.gravite, p_type: a.type, p_message: a.message }));
   }

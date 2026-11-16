@@ -54,7 +54,8 @@ import { runScheduler, windowDir, type DayRecord, type GenerateRecommendations }
 import { CompetitorSchema, MeasurementSchema, PanelSchema, SubjectSchema, type Measurement, type Panel, type Prompt, type Subject } from "../schema.js";
 import { siteAdd } from "../site-add.js";
 import { extractActors } from "../site/actors.js";
-import { DEFAULT_CRAWLIE_COMMAND, type CrawlieCommand } from "../site/audit.js";
+import { DEFAULT_CRAWLIE_COMMAND, crawlieFailure, runCrawlie, summarizeCrawlie, type CrawlieCommand, type CrawlieSummary } from "../site/audit.js";
+import { DEFAULT_LIGHTHOUSE_COMMAND, LIGHTHOUSE_PACKAGE, constatsCrawl, constatsLighthouse, runLighthouse, summarizeLighthouse, type AnalyseLighthouse, type LighthouseCommand, type Strategie } from "../analyse/lighthouse.js";
 import { concurrentsFile, homonymesFile } from "../site/formats.js";
 import { findHomonyms } from "../site/homonyms.js";
 import { safePageFetcher, type PageFetcher } from "../site/pages.js";
@@ -79,6 +80,11 @@ export interface EngineOptions {
   quotidien?: boolean;
   fetch: PageFetcher;
   crawlie: CrawlieCommand;
+  /** Lighthouse (analyse instantanée, gratuite) : npx en production, un faux dans les tests. */
+  lighthouse?: LighthouseCommand;
+  /** Lanceurs injectables (tests) : par défaut runLighthouse et runCrawlie. */
+  runLighthouse?: (cmd: LighthouseCommand, url: string, s: Strategie) => Promise<unknown>;
+  runCrawlie?: (cmd: CrawlieCommand, url: string, out: string, maxPages?: number) => Promise<void>;
   /** Accès payants, créés seulement après le contrôle du GO en base. */
   collector: () => Collector;
   judge: () => MentionJudge;
@@ -181,7 +187,7 @@ export async function runEngine(o: EngineOptions): Promise<PassageResult> {
 async function handle(ctx: Ctx, d: Demande): Promise<Traitement> {
   ctx.log(`demande ${d.id} : ${d.type}${d.subject_id ? ` (${d.subject_id})` : ""}`);
   try {
-    const run = { SITE_ADD: siteAddDemande, RECON: reconDemande, WINDOW_RUN: windowRunDemande, REPORT: reportDemande, REMEASURE_PROPOSE: remeasureDemande }[d.type];
+    const run = { SITE_ADD: siteAddDemande, RECON: reconDemande, WINDOW_RUN: windowRunDemande, REPORT: reportDemande, REMEASURE_PROPOSE: remeasureDemande, ANALYSE: analyseDemande }[d.type];
     if (!run) throw new EngineRefusal(`type de demande inconnu « ${String(d.type)} »`);
     const resultat = await run(ctx, d);
     await ctx.o.db.terminer(d.id, resultat, null);
@@ -209,6 +215,63 @@ const subjectOf = (d: Demande) => {
   if (!d.subject_id) throw new EngineRefusal("demande sans sujet");
   return d.subject_id;
 };
+
+// ---------------------------------------------------------------- ANALYSE (v3, gratuite)
+
+/**
+ * Analyse instantanée : Lighthouse en mobile et en ordinateur, puis l'audit de lecture
+ * (Crawlie, 50 pages), et leurs constats expliqués. Aucun appel payant, aucun GO : le
+ * contrat v3 la rend gratuite. Un outil en échec est consigné « echec » ; l'autre continue.
+ */
+async function analyseDemande(ctx: Ctx, d: Demande): Promise<Record<string, unknown>> {
+  subjectOf(d);
+  const url = str(d.charge.url, "url");
+  if (!/^https:\/\//.test(url)) throw new EngineRefusal("adresse du site : https attendu");
+  const strategies = (Array.isArray(d.charge.strategies) ? d.charge.strategies : ["mobile", "ordinateur"]).filter((x): x is Strategie => x === "mobile" || x === "ordinateur");
+  const lh = ctx.o.runLighthouse ?? runLighthouse;
+  const crawl = ctx.o.runCrawlie ?? runCrawlie;
+  const bilan: Record<string, unknown> = { url, lighthouse: {}, constats: 0 };
+  for (const s of strategies) {
+    let resume: AnalyseLighthouse;
+    let raw: unknown = null;
+    try {
+      raw = await lh(ctx.o.lighthouse ?? DEFAULT_LIGHTHOUSE_COMMAND, url, s);
+      resume = summarizeLighthouse(raw, s, url);
+    } catch (err) {
+      resume = { nature: "lighthouse", strategie: s, url, outil: LIGHTHOUSE_PACKAGE.replace("@", " "), statut: "echec", scores: {}, metriques: {}, resultat: {}, erreur: msg(err).slice(0, 300) };
+    }
+    const aid = await ctx.o.db.analyse(d.id, resume as unknown as Record<string, unknown>);
+    (bilan.lighthouse as Record<string, unknown>)[s] = resume.statut === "fait" ? resume.scores : `échec : ${resume.erreur}`;
+    if (resume.statut === "fait") {
+      for (const c of constatsLighthouse(raw, s)) {
+        await ctx.o.db.constat(d.id, aid, c as unknown as Record<string, unknown>);
+        bilan.constats = (bilan.constats as number) + 1;
+      }
+    }
+  }
+  // Audit de lecture (Crawlie), dans le dossier privé du moteur.
+  const out = join(ctx.dataDir, `analyse-${d.id}.json`);
+  let summary: CrawlieSummary;
+  try {
+    await crawl(ctx.o.crawlie, url, out, 50);
+    summary = summarizeCrawlie(JSON.parse(readFileSync(out, "utf8")));
+  } catch (err) {
+    summary = crawlieFailure(msg(err).slice(0, 300));
+  }
+  const crawlRow = {
+    nature: "crawl", strategie: null, url, outil: "crawlie 0.5.3", statut: summary.statut,
+    scores: { sante: summary.scores.sante, geo: summary.scores.geo }, metriques: { pages: summary.pages.total, indexables: summary.pages.indexables },
+    resultat: { robots: summary.robots, donnees_structurees: summary.donneesStructurees, prix_sans_js: summary.prixSansJs.length, regles: summary.regles.slice(0, 15) },
+    ...(summary.statut === "echec" ? { erreur: summary.detail ?? "échec de Crawlie" } : {}),
+  };
+  const cid = await ctx.o.db.analyse(d.id, crawlRow);
+  for (const c of constatsCrawl(summary, url)) {
+    await ctx.o.db.constat(d.id, cid, c as unknown as Record<string, unknown>);
+    bilan.constats = (bilan.constats as number) + 1;
+  }
+  bilan.crawl = summary.statut;
+  return bilan;
+}
 
 // ---------------------------------------------------------------- SITE_ADD
 
