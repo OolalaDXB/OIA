@@ -7,6 +7,7 @@ import { BarreColoree } from "@/components/oia/graphiques";
 import { MarkdownSecurise } from "@/components/oia/visibility-markdown";
 import { EtatVisibilityV3, JaugeScore } from "@/components/oia/visibility-score";
 import { LogoAssistant } from "@/components/oia/visibility-identites";
+import { CarteAuditIaExpress } from "@/components/oia/visibility-audit-ia";
 import { useVisibilityV3 } from "@/lib/donnees/visibility-v3-provider";
 import { useGesteVisibility, useVisibilityPilotage } from "@/lib/donnees/visibility-pilotage-provider";
 import { useSelectionVisibility } from "@/lib/donnees/provider";
@@ -17,6 +18,7 @@ import {
   classementConcurrents, domainesCites, lireCsvAudit, matriceDepuisLignes,
   peutImporterAudit, type MatriceAudit,
 } from "@/lib/donnees/visibility-audits";
+import { auditsExternesAComparer } from "@/lib/donnees/visibility-audit-ia";
 
 const dateAudit = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeZone: "UTC" });
 const texteChamp = "min-h-24 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground";
@@ -30,7 +32,7 @@ function PastilleScore({ score }: { score: number }) {
 
 const legendeScore = ["Absent", "Cité ou inexact", "Listé", "Premier choix avec lien"];
 
-export function MatriceQuestions({ moteurs, matrice, prefixe = "audit" }: { moteurs: string[]; matrice: MatriceAudit[]; prefixe?: string }) {
+export function MatriceQuestions({ moteurs, matrice, prefixe = "audit", compact = false }: { moteurs: string[]; matrice: MatriceAudit[]; prefixe?: string; compact?: boolean }) {
   const [selection, setSelection] = useState<{ question: MatriceAudit; moteur: string } | null>(null);
   if (!matrice.length) return <p className="text-sm text-muted-foreground">Aucune ligne de question pour cet audit.</p>;
   const detail = selection ? {
@@ -42,8 +44,8 @@ export function MatriceQuestions({ moteurs, matrice, prefixe = "audit" }: { mote
       {[3, 2, 1, 0].map((score) => <span key={score} className="inline-flex items-center gap-1.5"><PastilleScore score={score} />{legendeScore[score]}</span>)}
     </div>
     <div className="max-w-full overflow-x-auto">
-      <table className="w-full min-w-[44rem] border-collapse text-sm">
-        <thead><tr className="border-b border-border text-left text-xs text-tertiary"><th className="min-w-64 py-2 pr-4 font-normal">Question</th>{moteurs.map((moteur) => <th key={moteur} className="min-w-32 px-2 py-2 text-center font-normal"><span className="inline-flex items-center gap-1.5"><LogoAssistant nom={moteur} petite />{moteur}</span></th>)}</tr></thead>
+      <table className={`w-full border-collapse text-sm ${compact ? "min-w-[20rem]" : "min-w-[44rem]"}`}>
+        <thead><tr className="border-b border-border text-left text-xs text-tertiary"><th className={`${compact ? "min-w-40" : "min-w-64"} py-2 pr-4 font-normal`}>Question</th>{moteurs.map((moteur) => <th key={moteur} className={`${compact ? "min-w-20" : "min-w-32"} px-2 py-2 text-center font-normal`}><span className="inline-flex items-center gap-1.5"><LogoAssistant nom={moteur} petite />{moteur}</span></th>)}</tr></thead>
         <tbody>{matrice.map((question) => <tr key={question.id} className="border-b border-border last:border-0">
           <th scope="row" className="py-2 pr-4 text-left font-normal"><span title={question.question} className="block cursor-help truncate">{question.id} · {question.sujet}</span><span className="sr-only">{question.question}</span></th>
           {moteurs.map((moteur) => {
@@ -81,7 +83,7 @@ function CarteAudit({ audit }: { audit: AuditExterneV3 }) {
   const maxDomaines = Math.max(1, ...domaines.map((d) => d.citations));
   const scoreOia = donnees.scores.find((s) => s.subject_id === audit.subject_id);
   const titre = audit.outil ?? "Audit externe";
-  return <article className="grid gap-6" aria-label={`${titre} du ${audit.realise_le ?? "jour non fourni"}`}>
+  return <article id={audit.id ? `audit-${audit.id}` : undefined} className="grid scroll-mt-6 gap-6" aria-label={`${titre} du ${audit.realise_le ?? "jour non fourni"}`}>
     <Section titre={titre} aside={<span className="text-xs text-tertiary">Complément aux mesures OIA</span>}>
       <div className="grid gap-6 lg:grid-cols-[12rem_minmax(0,1fr)] lg:items-start">
         <div><JaugeScore score={audit.score} petite /><p className="mt-2 max-w-40 text-xs text-tertiary">score de l'outil, méthode différente</p></div>
@@ -102,6 +104,26 @@ function CarteAudit({ audit }: { audit: AuditExterneV3 }) {
       {audit.rapport_md ? <details><summary className="min-h-11 cursor-pointer py-2 text-sm">Lire le rapport complet</summary><div className="mt-3 max-w-4xl border-t border-border pt-4 text-sm"><MarkdownSecurise texte={audit.rapport_md} /></div></details> : <p className="text-sm text-muted-foreground">Aucun rapport Markdown fourni.</p>}
     </Section>
   </article>;
+}
+
+function ComparaisonAuditsExternes({ audits, subject }: { audits: AuditExterneV3[]; subject: string }) {
+  const { donnees } = useVisibilityV3();
+  const paire = auditsExternesAComparer(audits, subject);
+  if (!paire) return null;
+  const construire = (audit: AuditExterneV3) => {
+    const lignes = donnees.auditLignes.filter((ligne) => ligne.audit_id === audit.id);
+    const moteurs = audit.moteurs ?? [...new Set(lignes.map((ligne) => ligne.moteur).filter((moteur): moteur is string => Boolean(moteur)))];
+    return { moteurs, matrice: matriceDepuisLignes(lignes, moteurs) };
+  };
+  const oia = construire(paire.oia);
+  const perplexity = construire(paire.perplexity);
+  const sujets = [...new Set([...oia.matrice.map((ligne) => ligne.sujet), ...perplexity.matrice.map((ligne) => ligne.sujet)])];
+  return <Section titre="Perplexity et OIA, matrices côte à côte">
+    <p className="mb-5 text-sm text-muted-foreground">méthodes différentes : comparer les tendances, pas les chiffres</p>
+    <div className="grid gap-8">{sujets.map((sujet) => <section key={sujet} aria-label={`Comparaison pour ${sujet}`}><h3 className="mb-4 text-base font-medium">{sujet}</h3><div className="grid gap-6 xl:grid-cols-2">
+      {([{ titre: "Perplexity Computer", donnees: perplexity }, { titre: "OIA · Audit IA express", donnees: oia }] as const).map(({ titre, donnees: audit }) => <div key={titre} className="min-w-0 rounded-md border border-border p-4"><h4 className="mb-3 text-sm">{titre}</h4><MatriceQuestions moteurs={audit.moteurs} matrice={audit.matrice.filter((ligne) => ligne.sujet === sujet)} prefixe={`${titre}, ${sujet}`} compact /></div>)}
+    </div></section>)}</div>
+  </Section>;
 }
 
 type ParametresImport = Fonctions["vis_importer_audit_externe"]["Args"];
@@ -175,11 +197,13 @@ export function VueAuditsExternes() {
   const { global, globalQuery } = useVisibilityPilotage();
   const selection = useSelectionVisibility();
   const [importOuvert, setImportOuvert] = useState(false);
-  const subject = selection.sujetId ?? donnees.audits[0]?.subject_id ?? donnees.scores[0]?.subject_id ?? "";
+  const subject = selection.sujetId ?? donnees.audits[0]?.subject_id ?? donnees.estimationsAuditIa[0]?.subject_id ?? donnees.scores[0]?.subject_id ?? "";
   const audits = donnees.audits.filter((a) => a.subject_id === subject).sort((a, b) => Number(b.dernier) - Number(a.dernier) || (b.realise_le ?? "").localeCompare(a.realise_le ?? ""));
   const role = global?.portefeuille.find((p) => p.subject_id === subject)?.mon_role;
   const autorise = connecte && peutImporterAudit(role);
   return <EtatVisibilityV3>
+    <div className="mb-6"><CarteAuditIaExpress subject={subject} /></div>
+    <div className="mb-6"><ComparaisonAuditsExternes audits={audits} subject={subject} /></div>
     <div className="mb-6 flex flex-wrap items-end justify-end gap-3">{autorise && <Button className="min-h-11" onClick={() => setImportOuvert((v) => !v)}><Plus aria-hidden="true" />Importer un audit externe</Button>}</div>
     {connecte && globalQuery.isPending && <p role="status" className="mb-6 text-xs text-tertiary">Vérification du rôle…</p>}
     {connecte && globalQuery.error && <div role="alert" className="mb-6"><p className="text-sm text-block">{globalQuery.error.message}</p><Button variant="outline" className="mt-2 min-h-11" onClick={() => void globalQuery.refetch()}>Réessayer</Button></div>}

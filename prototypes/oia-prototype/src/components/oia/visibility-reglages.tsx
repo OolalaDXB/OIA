@@ -11,6 +11,7 @@ import { FaviconSource, LogoReseau } from "@/components/oia/identites";
 import { useReglagesVisibility, useVisibilityDonnees } from "@/lib/donnees/provider";
 import { cleNormalisee, contientNormalise, normaliserSite } from "@/lib/visibility-reglages";
 import { BudgetVisibility, BandeauMoteur } from "@/components/oia/visibility-pilotage";
+import { ReglagesDepotGithub } from "@/components/oia/visibility-depot";
 import { listeSousOngletsVisibility, menuVisibility, ongletVisibility } from "@/components/oia/visibility-ui";
 
 const classeLigne = "flex flex-wrap items-center justify-between gap-3 border-b border-border py-2.5 text-sm last:border-0";
@@ -65,13 +66,13 @@ function MarqueLocale() {
   return <span className="text-[10px] font-normal text-tertiary">Ajout local</span>;
 }
 
-export function VueReglages() {
+export function VueReglages({ reglageInitial = "marque" }: { reglageInitial?: "marque" | "budget" | "site" }) {
   const { marque, concurrents, questions, familles, reel } = useVisibilityDonnees();
   const { ajouts, modifier, pret, erreur } = useReglagesVisibility();
 
-  return <Tabs defaultValue="marque">
-    <TabsList aria-label="Réglages Visibility" className={`${listeSousOngletsVisibility} h-auto rounded-none bg-transparent p-0 sm:grid-cols-3 lg:grid-cols-5`}>
-      {([["marque", "Marque"], ["concurrents", "Concurrents"], ["questions", "Questions"], ["moteurs", "Moteurs"], ["budget", "Budget"]] as const).map(([valeur, label]) => <TabsTrigger key={valeur} value={valeur} className={ongletVisibility}>{label}</TabsTrigger>)}
+  return <Tabs defaultValue={reglageInitial}>
+    <TabsList aria-label="Réglages Visibility" className={`${listeSousOngletsVisibility} h-auto rounded-none bg-transparent p-0 sm:grid-cols-3 lg:grid-cols-6`}>
+      {([["marque", "Marque"], ["site", "Site"], ["concurrents", "Concurrents"], ["questions", "Questions"], ["moteurs", "Moteurs"], ["budget", "Budget"]] as const).map(([valeur, label]) => <TabsTrigger key={valeur} id={valeur === "budget" ? "budget" : valeur === "site" ? "site" : undefined} value={valeur} className={`${ongletVisibility} scroll-mt-6`}>{label}</TabsTrigger>)}
     </TabsList>
     <p className="mb-6 text-xs text-tertiary" role="status">{pret ? `Vos ajouts sont conservés dans ce navigateur. Ils ne lancent aucune mesure et ne modifient pas ${reel ? "les mesures réelles" : "les données de démonstration"}.` : "Ouverture des réglages locaux…"}</p>
     {erreur && <p role="alert" className="mb-6 text-sm text-block">Le navigateur refuse la sauvegarde. Les ajouts restent visibles pendant cette visite, mais pourraient être perdus au rechargement.</p>}
@@ -164,6 +165,7 @@ export function VueReglages() {
       </div>
     </TabsContent>
 
+    <TabsContent value="site"><ReglagesDepotGithub /></TabsContent>
     <TabsContent value="moteurs"><VueMoteurs /></TabsContent>
     <TabsContent value="budget">{reel ? <><BandeauMoteur /><BudgetVisibility /></> : <Section titre="Budget"><p className="text-sm text-muted-foreground">Le budget réel est disponible après connexion.</p></Section>}</TabsContent>
   </Tabs>;

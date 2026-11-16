@@ -3324,6 +3324,24 @@ export type Database = {
         }
         Relationships: []
       }
+      vis_audit_ia_estimation_v3: {
+        Row: {
+          appels: number | null
+          client_id: string | null
+          cout_habituel_usd: number | null
+          cout_max_usd: number | null
+          engage_usd: number | null
+          etat: string | null
+          langues: Json | null
+          moteurs: Json | null
+          plafond_global_usd: number | null
+          plafond_usd: number | null
+          questions: number | null
+          reel_usd: number | null
+          subject_id: string | null
+        }
+        Relationships: []
+      }
       vis_audits_externes_v3: {
         Row: {
           client_id: string | null
@@ -3372,6 +3390,29 @@ export type Database = {
           resume?: string | null
           score?: number | null
           subject_id?: string | null
+        }
+        Relationships: []
+      }
+      vis_audits_ia_v3: {
+        Row: {
+          client_id: string | null
+          cout_habituel_usd: number | null
+          cout_max_usd: number | null
+          cout_reel_usd: number | null
+          cout_vu_usd: number | null
+          demande_id: string | null
+          erreur: string | null
+          id: string | null
+          langues: string[] | null
+          le: string | null
+          moteurs: string[] | null
+          par: string | null
+          questions: number | null
+          resultat_id: string | null
+          score: number | null
+          statut: string | null
+          subject_id: string | null
+          terminee_le: string | null
         }
         Relationships: []
       }
@@ -3567,6 +3608,18 @@ export type Database = {
         }
         Relationships: []
       }
+      vis_depots_v3: {
+        Row: {
+          branche: string | null
+          client_id: string | null
+          depot: string | null
+          fournisseur: string | null
+          le: string | null
+          par: string | null
+          subject_id: string | null
+        }
+        Relationships: []
+      }
       vis_fenetres_v2: {
         Row: {
           client_id: string | null
@@ -3700,6 +3753,49 @@ export type Database = {
           hote: string | null
           prochain_passage_le: string | null
           version: string | null
+        }
+        Relationships: []
+      }
+      vis_note_contenu_estimation_v3: {
+        Row: {
+          branche: string | null
+          client_id: string | null
+          cout_habituel_usd: number | null
+          cout_max_usd: number | null
+          depot: string | null
+          engage_usd: number | null
+          etat: string | null
+          plafond_global_usd: number | null
+          plafond_usd: number | null
+          reel_usd: number | null
+          subject_id: string | null
+        }
+        Relationships: []
+      }
+      vis_notes_contenu_v3: {
+        Row: {
+          analyse_id: string | null
+          client_id: string | null
+          cout_habituel_usd: number | null
+          cout_max_usd: number | null
+          cout_reel_usd: number | null
+          cout_vu_usd: number | null
+          criteres: Json | null
+          demande_id: string | null
+          depot: string | null
+          depot_lu: Json | null
+          derniere: boolean | null
+          erreur: string | null
+          id: string | null
+          le: string | null
+          note_commerciale: number | null
+          note_fonctionnelle: number | null
+          note_technique: number | null
+          par: string | null
+          statut: string | null
+          subject_id: string | null
+          synthese: string | null
+          terminee_le: string | null
         }
         Relationships: []
       }
@@ -4338,6 +4434,18 @@ export type Database = {
         }
         Returns: string
       }
+      vis_lancer_audit_ia: {
+        Args: { p_cout_vu_usd: number; p_questions?: number; p_subject: string }
+        Returns: string
+      }
+      vis_lancer_note_contenu: {
+        Args: { p_cout_vu_usd: number; p_subject: string }
+        Returns: string
+      }
+      vis_lier_depot: {
+        Args: { p_branche?: string; p_depot: string; p_subject: string }
+        Returns: number
+      }
       vis_modifier_proposition: {
         Args: { p_contenu: Json; p_id: string }
         Returns: number
@@ -4354,6 +4462,11 @@ export type Database = {
       }
       vis_moteur_analyse: {
         Args: { p_analyse: Json; p_demande: string }
+        Returns: string
+      }
+      vis_moteur_audit_debut: { Args: { p_demande: string }; Returns: string }
+      vis_moteur_audit_resultat: {
+        Args: { p_demande: string; p_resultat: Json }
         Returns: string
       }
       vis_moteur_constat: {
@@ -4400,6 +4513,7 @@ export type Database = {
         }
         Returns: undefined
       }
+      vis_moteur_note_debut: { Args: { p_demande: string }; Returns: Json }
       vis_moteur_page: {
         Args: {
           p_html: string

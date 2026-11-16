@@ -30,7 +30,8 @@ type Action = {
 };
 
 const sourceLabel: Record<string, string> = { lighthouse: "Lighthouse", crawl: "Audit Crawlie", indexation: "Indexation", mesure_ia: "Mesure IA" };
-const categorieLabel: Record<string, string> = { performance: "Performance", seo: "SEO", accessibilite: "Accessibilité", bonnes_pratiques: "Bonnes pratiques", contenu: "Contenu", technique: "Technique", visibilite_ia: "Visibilité IA" };
+const categorieLabel: Record<string, string> = { performance: "Performance", seo: "SEO", accessibilite: "Accessibilité", bonnes_pratiques: "Bonnes pratiques", contenu: "Contenu", technique: "Technique", fonctionnel: "Fonctionnel", commercial: "Commercial", visibilite_ia: "Visibilité IA" };
+const categorieCouleur: Record<string, string> = { fonctionnel: "var(--chart-3)", commercial: "var(--chart-4)" };
 const date = new Intl.DateTimeFormat("fr-FR", { dateStyle: "medium", timeZone: "UTC" });
 const jour = (valeur: string | null) => valeur ? date.format(new Date(valeur)) : "date non fournie";
 
@@ -61,7 +62,7 @@ function CarteAction({ action, resolus }: { action: Action; resolus: boolean }) 
   const recommandation = action.source === "mesure_ia";
   return <details className="group border-b border-border py-4 last:border-0">
     <summary className="flex min-h-11 cursor-pointer list-none flex-wrap items-center justify-between gap-3">
-      <span className="min-w-0 flex-1"><span className="block text-sm">{action.titre}</span><span className="mt-1 block text-xs text-tertiary">{sourceLabel[action.source] ?? action.source} · {categorieLabel[action.categorie] ?? action.categorie} · effort {action.effort}</span></span>
+      <span className="min-w-0 flex-1"><span className="block text-sm">{action.titre}</span><span className="mt-1 flex flex-wrap items-center gap-1.5 text-xs text-tertiary"><span>{sourceLabel[action.source] ?? action.source}</span><span aria-hidden="true">·</span><span className="rounded-sm border px-1.5 py-0.5" style={categorieCouleur[action.categorie] ? { color: categorieCouleur[action.categorie], borderColor: categorieCouleur[action.categorie] } : undefined}>{categorieLabel[action.categorie] ?? action.categorie}</span><span aria-hidden="true">·</span><span>effort {action.effort}</span></span></span>
       <Statut etat={resolus ? "conforme" : action.gravite === "critique" ? "bloquant" : action.gravite === "important" ? "verifier" : "conforme"} label={resolus ? recommandation ? "Exécutée" : "Résolu" : action.gravite === "non_precisee" ? "À examiner" : action.gravite} />
     </summary>
     <div className="mt-4 grid gap-5 border-t border-border pt-4 text-sm lg:grid-cols-2">

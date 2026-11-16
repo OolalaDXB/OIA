@@ -4,7 +4,7 @@ import { useOiaAuth } from "@/lib/oia-auth";
 import { useSelectionVisibility } from "./provider";
 import {
   gesteVisibility, lirePilotageGlobal, lirePilotageSujet,
-  type ClientRpc, type Fonctions, type GesteVisibility, type PilotageGlobal, type PilotageSujet,
+  type ArgsGeste, type ClientRpc, type GesteVisibility, type PilotageGlobal, type PilotageSujet,
 } from "./visibility-pilotage";
 
 export function optionsPilotageGlobal(userId: string) {
@@ -43,7 +43,7 @@ export function useGesteVisibility(client?: ClientRpc) {
   const queryClient = useQueryClient();
   const [enCours, setEnCours] = useState(false);
   const [erreur, setErreur] = useState<string | null>(null);
-  const executer = useCallback(async <N extends GesteVisibility>(nom: N, params: Fonctions[N]["Args"]) => {
+  const executer = useCallback(async <N extends GesteVisibility>(nom: N, params: ArgsGeste<N>) => {
     setEnCours(true); setErreur(null);
     try {
       const resultat = await gesteVisibility(nom, params, client);

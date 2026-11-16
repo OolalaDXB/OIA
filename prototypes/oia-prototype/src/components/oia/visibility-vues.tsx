@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { useSearch } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Section, Statut } from "@/components/oia/ui";
 import { Chiffre, Courbe, FiltresVisibility, Indicateur, NoteMesure, Surligne, useFiltres } from "@/components/oia/mesure";
 import { useDonnees } from "@/lib/donnees-visibility";
-import { useVisibilityDonnees } from "@/lib/donnees/provider";
+import { useSelectionVisibility, useVisibilityDonnees } from "@/lib/donnees/provider";
 import { BarreColoree, couleursGraphique } from "@/components/oia/graphiques";
 import type { IdFenetre, NomAssistant, Valeur } from "@/lib/donnees/visibility";
 import { VueReglages } from "@/components/oia/visibility-reglages";
@@ -22,6 +23,8 @@ import { RepartitionSentiment } from "@/components/oia/visibility-sentiment";
 import { ReponseMarkdown } from "@/components/oia/visibility-markdown";
 import { VueSeoV3 } from "@/components/oia/visibility-seo";
 import { VueAuditsExternes } from "@/components/oia/visibility-audits";
+import { CarteAuditIaExpress } from "@/components/oia/visibility-audit-ia";
+import { VueQualiteContenu } from "@/components/oia/visibility-contenu";
 import { RapportSite } from "@/components/oia/visibility-etude";
 import { libelleVisibility } from "@/components/oia/visibility-ui";
 import { sourceAuditExterne } from "@/lib/donnees/visibility-audits";
@@ -104,9 +107,12 @@ export function Paysage() {
 }
 
 export function VueEnsemble() {
-  const { assistants, presenceAssistant } = useVisibilityDonnees();
+  const donnees = useVisibilityDonnees();
+  const { assistants, presenceAssistant } = donnees;
+  const selection = useSelectionVisibility();
+  const subject = selection.sujetId ?? donnees.sujetActif ?? "studio-ardoise";
   const { fenetreActive: fen } = useFiltres();
-  return <><ScoreSitesVisibility /><FiltresVisibility /><Indicateurs /><div className="mt-6 grid gap-6"><Paysage />
+  return <><ScoreSitesVisibility /><div className="mb-6"><CarteAuditIaExpress subject={subject} compact /></div><FiltresVisibility /><Indicateurs /><div className="mt-6 grid gap-6"><Paysage />
     <Section titre="Détail par assistant"><p className="mb-4 text-sm text-muted-foreground">Comparez les assistants pour savoir où une correction de source aura le plus d'effet.</p>{assistants.map((a) => <BarreValeur key={a.nom} label={a.nom} sous={a.version} val={presenceAssistant[fen.id]?.[a.nom] ?? absent()} />)}</Section></div>
     <LigneEtat /><NoteMesure /></>;
 }
@@ -218,8 +224,13 @@ export function VueRapports() {
 
 export function VueSeo() { return <VueSeoV3 />; }
 
+function VueReglagesRoute() {
+  const { reglage } = useSearch({ from: "/visibility" });
+  return <VueReglages reglageInitial={reglage === "budget" ? "budget" : reglage === "site" ? "site" : "marque"} />;
+}
+
 export const vuesVisibility = {
   visibilite: VueVisibilite, "part-de-voix": VuePartVoix, sentiment: VueSentiment, reponses: VueReponses, recherches: VueRecherches,
-  citations: VueCitations, performance: VuePerformance, opportunites: VueOpportunites, reseaux: VueReseaux, recommandations: VueRecommandations,
-  rapports: VueRapports, "seo-command": VueSeo, audits: VueAuditsExternes, reglages: VueReglages, activite: ActiviteMoteur,
+  citations: VueCitations, performance: VuePerformance, contenu: VueQualiteContenu, opportunites: VueOpportunites, reseaux: VueReseaux, recommandations: VueRecommandations,
+  rapports: VueRapports, "seo-command": VueSeo, audits: VueAuditsExternes, reglages: VueReglagesRoute, activite: ActiviteMoteur,
 } as const;

@@ -1,6 +1,12 @@
 # Roadmap
 
 ## Open
+- [x] Visibility : ajouter Qualité du contenu, les trois notes, critères et preuves, synthèse et constats liés.
+- [x] Visibility : brancher estimation, lancement avec double confirmation, suivi 30 secondes et liaison/déliaison GitHub.
+- [x] Visibility : tester valeurs nulles, critères non vérifiables, plafonds, RPC et affichage, documenter sans publier.
+- [x] Visibility : ajouter l’audit IA express, son estimation, ses plafonds, sa double confirmation et son suivi toutes les 30 secondes.
+- [x] Visibility : réutiliser les audits externes pour le résultat OIA, comparer les matrices avec Perplexity et afficher les recommandations sources.
+- [x] Visibility : tester estimation, refus sans plafond, coût vu RPC, statuts, comparaison et affichage ordinateur/mobile, documenter sans publier.
 - [x] Visibility : séparer visibilité IA et santé technique, actualiser accueil, priorités, historique et tests.
 - [x] Visibility : regrouper la navigation, renforcer la hiérarchie visuelle et les graphiques sans changer la palette.
 - [x] Visibility : résumer J0 quand une seule fenêtre existe et traduire toutes les valeurs techniques visibles.

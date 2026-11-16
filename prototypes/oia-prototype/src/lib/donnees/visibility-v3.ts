@@ -12,9 +12,16 @@ export type SeoCommandV1 = LigneVisibility<"vis_seo_command_v1">;
 export type PlanificateurV1 = LigneVisibility<"vis_planificateur_v1">;
 export type AuditExterneV3 = LigneVisibility<"vis_audits_externes_v3">;
 export type AuditExterneLigneV3 = LigneVisibility<"vis_audit_externe_lignes_v3">;
+export type EstimationAuditIaV3 = LigneVisibility<"vis_audit_ia_estimation_v3">;
+export type AuditIaV3 = LigneVisibility<"vis_audits_ia_v3">;
+export type DepotV3 = LigneVisibility<"vis_depots_v3">;
+export type EstimationNoteContenuV3 = LigneVisibility<"vis_note_contenu_estimation_v3">;
+export type NoteContenuV3 = LigneVisibility<"vis_notes_contenu_v3">;
 
 export const VUES_VISIBILITY_V3 = ["vis_score_v3", "vis_score_historique_v3", "vis_analyses_v3", "vis_constats_v3"] as const;
 export const VUES_AUDITS_VISIBILITY = ["vis_audits_externes_v3", "vis_audit_externe_lignes_v3"] as const;
+export const VUES_AUDIT_IA_VISIBILITY = ["vis_audit_ia_estimation_v3", "vis_audits_ia_v3"] as const;
+export const VUES_CONTENU_VISIBILITY = ["vis_depots_v3", "vis_note_contenu_estimation_v3", "vis_notes_contenu_v3"] as const;
 export const VUES_SEO_VISIBILITY = ["vis_seo_command_v1", "vis_planificateur_v1"] as const;
 
 export type DonneesVisibilityV3 = {
@@ -26,10 +33,15 @@ export type DonneesVisibilityV3 = {
   planificateur: PlanificateurV1[];
   audits: AuditExterneV3[];
   auditLignes: AuditExterneLigneV3[];
+  estimationsAuditIa: EstimationAuditIaV3[];
+  auditsIa: AuditIaV3[];
+  depots: DepotV3[];
+  estimationsNotesContenu: EstimationNoteContenuV3[];
+  notesContenu: NoteContenuV3[];
 };
 
 export async function lireVisibilityV3(): Promise<DonneesVisibilityV3> {
-  const [scores, historique, analyses, constats, seo, planificateur, audits, auditLignes] = await Promise.all([
+  const [scores, historique, analyses, constats, seo, planificateur, audits, auditLignes, estimationsAuditIa, auditsIa, depots, estimationsNotesContenu, notesContenu] = await Promise.all([
     lireVueVisibility("vis_score_v3"),
     lireVueVisibility("vis_score_historique_v3"),
     lireVueVisibility("vis_analyses_v3"),
@@ -38,8 +50,13 @@ export async function lireVisibilityV3(): Promise<DonneesVisibilityV3> {
     lireVueVisibility("vis_planificateur_v1"),
     lireVueVisibility("vis_audits_externes_v3"),
     lireVueVisibility("vis_audit_externe_lignes_v3"),
+    lireVueVisibility("vis_audit_ia_estimation_v3"),
+    lireVueVisibility("vis_audits_ia_v3"),
+    lireVueVisibility("vis_depots_v3"),
+    lireVueVisibility("vis_note_contenu_estimation_v3"),
+    lireVueVisibility("vis_notes_contenu_v3"),
   ]);
-  return { scores, historique, analyses, constats, seo, planificateur, audits, auditLignes };
+  return { scores, historique, analyses, constats, seo, planificateur, audits, auditLignes, estimationsAuditIa, auditsIa, depots, estimationsNotesContenu, notesContenu };
 }
 
 export const COMPOSANTES_IA = [
@@ -281,4 +298,32 @@ export const donneesDemoVisibilityV3: DonneesVisibilityV3 = {
   planificateur: [],
   audits: [],
   auditLignes: [],
+  estimationsAuditIa: [ligne<EstimationAuditIaV3>({
+    subject_id: "studio-ardoise", client_id: "studio", langues: ["fr"], questions: 20, appels: 120,
+    moteurs: [
+      { moteur: "ChatGPT", cible: "chatgpt.com", appels: 20, max_usd: 2.4, habituel_usd: 0.7 },
+      { moteur: "Claude", cible: "claude.ai", appels: 20, max_usd: 2.4, habituel_usd: 0.7 },
+      { moteur: "Gemini", cible: "gemini.google.com", appels: 20, max_usd: 2.4, habituel_usd: 0.7 },
+      { moteur: "Perplexity", cible: "perplexity.ai", appels: 20, max_usd: 2.4, habituel_usd: 0.7 },
+      { moteur: "Grok", cible: "grok.com", appels: 20, max_usd: 2.4, habituel_usd: 0.7 },
+      { moteur: "Mistral", cible: "chat.mistral.ai", appels: 20, max_usd: 1.56, habituel_usd: 0.35 },
+    ],
+    cout_max_usd: 13.56, cout_habituel_usd: 3.85, plafond_usd: 30, reel_usd: 0, engage_usd: 0,
+    plafond_global_usd: 100, etat: "ok",
+  })],
+  auditsIa: [],
+  depots: [ligne<DepotV3>({ subject_id: "studio-ardoise", client_id: "studio", depot: "oolala/studio-ardoise", branche: "main", par: "Démonstration", le: "2026-11-16T09:00:00Z" })],
+  estimationsNotesContenu: [ligne<EstimationNoteContenuV3>({ subject_id: "studio-ardoise", client_id: "studio", depot: "oolala/studio-ardoise", branche: "main", cout_max_usd: 0.2, cout_habituel_usd: 0.03, plafond_usd: 30, reel_usd: 4, engage_usd: 2, plafond_global_usd: 100, etat: "ok" })],
+  notesContenu: [ligne<NoteContenuV3>({
+    id: "note-demo", subject_id: "studio-ardoise", client_id: "studio", demande_id: "demande-demo", depot: "oolala/studio-ardoise",
+    cout_max_usd: 0.2, cout_vu_usd: 0.2, cout_reel_usd: 0.03, par: "Démonstration", le: "2026-11-16T10:10:00Z", terminee_le: "2026-11-16T10:12:00Z",
+    statut: "DONE", note_technique: 82, note_fonctionnelle: 68, note_commerciale: null, derniere: true,
+    criteres: [
+      { id: "t1", axe: "technique", titre: "Titres hiérarchisés", points: 10, ok: true, valeur: "Une balise H1", source: "html", preuve: { pages: ["https://studio-ardoise.fr/stages"] } },
+      { id: "f1", axe: "fonctionnel", titre: "Formulaire utilisable", points: 10, ok: false, valeur: "Un libellé manquant", source: "depot", preuve: { fichiers: ["src/Formulaire.tsx"] } },
+      { id: "c1", axe: "commercial", titre: "Promesse commerciale citée", points: 10, ok: null, valeur: "Citation absente", source: "modele", preuve: {} },
+    ],
+    synthese: "La structure technique est lisible. Le parcours et la promesse commerciale demandent une revue ciblée.",
+    depot_lu: { depot: "oolala/studio-ardoise", sha: "a1b2c3d4e5f6", branche: "main", fichiers: 18, sensibles: 0 },
+  })],
 };

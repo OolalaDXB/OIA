@@ -252,7 +252,7 @@ export function convertirVisibility(sujet: SujetVisibility, sujets: SujetVisibil
     return { slug: s.id, nom: s.nom, url: s.domaines[0] || "Domaine non fourni", panel: actif && aDesMesures ? `Panel v${mesureDerniere.version_panel ?? "non fourni"}` : actif ? "Panel à valider" : "Sélectionner ce sujet", depart: actif ? derniere.label : "Mesure non chargée", ia: actif ? indicateurs[derniere.id]?.presence.v ?? null : null, google: "Non mesurable, contrôle d'indexation disponible dans l'audit quand il existe" };
   });
   const recommandationsV2 = vues.vis_recommandations_v2 ?? [];
-  const recommandationsSource: (LigneVisibility<"vis_recommandations_v1"> | LigneVisibility<"vis_recommandations_v2">)[] = recommandationsV2.length ? recommandationsV2 : vues.vis_recommandations_v1;
+  const recommandationsSource: (LigneVisibility<"vis_recommandations_v1"> | LigneVisibility<"vis_recommandations_v2">)[] = recommandationsV2.length ? recommandationsV2 : (vues.vis_recommandations_v1 ?? []);
   const recommandations = [...recommandationsSource].sort((a, b) => (a.priorite ?? 0) - (b.priorite ?? 0)).map((r) => ({
     etat: (r.etat === "accepted" || r.etat === "validated" ? "conforme" : r.etat === "rejected" ? "bloquant" : "verifier") as "conforme" | "verifier" | "bloquant",
     titre: r.titre || r.id || "Recommandation", effet: [r.impact && `impact ${r.impact}`, r.effort && `effort ${r.effort}`].filter(Boolean).join(" · ") || "Impact et effort non fournis",

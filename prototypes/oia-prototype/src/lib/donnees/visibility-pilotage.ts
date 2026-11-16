@@ -48,13 +48,16 @@ export type GesteVisibility =
   | "vis_valider_rapport" | "vis_declarer_execution" | "vis_fixer_plafond"
   | "vis_relancer_demande" | "vis_acquitter_alerte"
   | "vis_valider_recommandation" | "vis_rejeter_recommandation" | "vis_demander_analyse"
-  | "vis_importer_audit_externe";
+  | "vis_importer_audit_externe" | "vis_lancer_audit_ia" | "vis_lancer_note_contenu" | "vis_lier_depot";
+export type ArgsGeste<N extends GesteVisibility> = N extends "vis_lier_depot"
+  ? Omit<Fonctions[N]["Args"], "p_depot"> & { p_depot: string | null }
+  : Fonctions[N]["Args"];
 export type ClientRpc = { rpc: (nom: string, params: Record<string, unknown>) => Promise<{ data: unknown; error: { message: string; code?: string } | null }> };
 
 /** Toutes les mutations Visibility passent par ce point. Aucun accès table en écriture. */
 export async function gesteVisibility<N extends GesteVisibility>(
   nom: N,
-  params: Fonctions[N]["Args"],
+  params: ArgsGeste<N>,
   client: ClientRpc = supabase as unknown as ClientRpc,
 ): Promise<Fonctions[N]["Returns"]> {
   const { data, error } = await client.rpc(nom, params as Record<string, unknown>);
@@ -78,6 +81,9 @@ export const fixerPlafond = (p: Fonctions["vis_fixer_plafond"]["Args"], client?:
 export const relancerDemande = (p: Fonctions["vis_relancer_demande"]["Args"], client?: ClientRpc) => gesteVisibility("vis_relancer_demande", p, client);
 export const acquitterAlerte = (p: Fonctions["vis_acquitter_alerte"]["Args"], client?: ClientRpc) => gesteVisibility("vis_acquitter_alerte", p, client);
 export const importerAuditExterne = (p: Fonctions["vis_importer_audit_externe"]["Args"], client?: ClientRpc) => gesteVisibility("vis_importer_audit_externe", p, client);
+export const lancerAuditIa = (p: Fonctions["vis_lancer_audit_ia"]["Args"], client?: ClientRpc) => gesteVisibility("vis_lancer_audit_ia", p, client);
+export const lancerNoteContenu = (p: Fonctions["vis_lancer_note_contenu"]["Args"], client?: ClientRpc) => gesteVisibility("vis_lancer_note_contenu", p, client);
+export const lierDepot = (p: ArgsGeste<"vis_lier_depot">, client?: ClientRpc) => gesteVisibility("vis_lier_depot", p, client);
 
 export function dollars(valeur: number | null | undefined) {
   return typeof valeur === "number" && Number.isFinite(valeur)

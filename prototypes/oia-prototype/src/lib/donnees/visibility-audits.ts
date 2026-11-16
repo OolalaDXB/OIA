@@ -148,6 +148,10 @@ export function peutImporterAudit(role: string | null | undefined) {
 }
 
 export function sourceAuditExterne(creePar: string | null | undefined) {
+  if (creePar?.startsWith("audit-ia-express:")) {
+    const date = creePar.slice("audit-ia-express:".length);
+    return `Audit IA express${date ? ` · ${date.split("-").reverse().join("/")}` : ""}`;
+  }
   if (!creePar?.startsWith("audit-externe:")) return null;
   const [, outil, date] = creePar.split(":");
   if (!outil || !date) return "Audit externe";

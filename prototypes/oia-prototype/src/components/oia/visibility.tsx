@@ -16,14 +16,14 @@ export const ongletsVisibility = [
   { id: "overview", label: "Vue d'ensemble" }, { id: "visibilite", label: "Visibilité" }, { id: "part-de-voix", label: "Part de voix" },
   { id: "sentiment", label: "Sentiment" }, { id: "reponses", label: "Réponses" }, { id: "recherches", label: "Recherches" },
   { id: "citations", label: "Citations" }, { id: "reseaux", label: "Réseaux sociaux" },
-  { id: "opportunites", label: "À corriger" }, { id: "recommandations", label: "Recommandations" }, { id: "performance", label: "Performance" },
+  { id: "opportunites", label: "À corriger" }, { id: "recommandations", label: "Recommandations" }, { id: "performance", label: "Performance" }, { id: "contenu", label: "Qualité du contenu" },
   { id: "sites", label: "Sites et portefeuille" }, { id: "rapports", label: "Rapports" }, { id: "audits", label: "Audits externes" }, { id: "activite", label: "Activité du moteur" },
   { id: "reglages", label: "Réglages" }, { id: "seo-command", label: "SEO Command" },
 ] as const;
 
 const groupes = [
   { label: "Résultats", icone: ChartNoAxesCombined, ids: ["overview", "visibilite", "part-de-voix", "sentiment", "reponses", "recherches", "citations", "reseaux"] },
-  { label: "Agir", icone: ListChecks, ids: ["opportunites", "recommandations", "performance"] },
+  { label: "Agir", icone: ListChecks, ids: ["opportunites", "recommandations", "performance", "contenu"] },
   { label: "Études", icone: FolderSearch, ids: ["sites", "rapports", "audits", "activite"] },
   { label: "Réglages", icone: SlidersHorizontal, ids: ["reglages", "seo-command"] },
 ] as const;
