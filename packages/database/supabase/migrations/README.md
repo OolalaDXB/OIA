@@ -25,6 +25,32 @@ données, `SHA256SUMS`), relue sur un Postgres jetable.
 | 9 | `0008_money_lookup_v2.sql` | `20261108011100` (8 novembre 2026, sauvegarde `~/oia-sauvegardes/avant-0008/`) |
 | 10 | `0009_ia_couts.sql` | `20261108011200` (8 novembre 2026, sauvegarde `~/oia-sauvegardes/avant-0009/`) ; alimentée chaque jour par `infra/visibility/scripts/couts-sync.sh` |
 
+## Contrat Visibility version 2 (0010, proposée, non appliquée)
+
+Mandat v13, bloc F. **Proposée, non appliquée** : à appliquer selon la procédure de
+la 0008 (sauvegarde, répétition générale terminée par `rollback`, chaque commande
+d'écriture validée par Mickaël).
+
+Les vues `vis_*_v1` (0006) exposent déjà toutes les fenêtres d'un sujet : chacune
+porte `window_id`, aucune ne filtre sur J0, `vis_mesure_v1` donne une ligne par
+fenêtre. Elles ne sont pas modifiées. Il leur manque la comparaison entre fenêtres
+et la fenêtre qui mesure une recommandation exécutée ; 0010 ajoute :
+
+| Objet | Rôle |
+| --- | --- |
+| `vis_ui.comparaison` | Une ligne par fichier `comparaison-<fenêtre>-<référence>.json` (src/window-compare.ts, format 1), document entier en `jsonb`, colonnes extraites : sujet, fenêtre, référence, verdict du total non marqué, nombres de preuves et empreintes des deux fenêtres, SHA-256 du fichier. Ajout seul (modification, suppression et `truncate` refusées), identifiant dérivé de l'empreinte : rejouer ne change rien, la plus récente fait foi. Écrite par `tsx src/vis-sync.ts --comparaison <fichier>` |
+| `vis_ui.execution_mesure` | `measured_by_window` d'une exécution (`vis.execution`, ajout seul, sans colonne pour elle) : même client, fenêtre du sujet de la recommandation (déclencheur), ajout seul, la plus récente fait foi |
+| `vis_mesure_v2` | Colonnes de `vis_mesure_v1`, plus `rang_fenetre`, `fenetre_reference`, `comparaison_id`, `verdict_non_marque` (dernière comparaison) |
+| `vis_comparaisons_v2` | Une ligne par comparaison, `derniere`, verdicts non marqué et marqué, provenance, recommandations exécutées (contexte, jamais cause), document |
+| `vis_comparaison_moteurs_v2` | Par comparaison, famille (non marquée, marquée) et moteur (`tous` pour le total) : moyenne et intervalle à 95 % de chaque fenêtre, jours, verdict, fragilité, versions, réponses non mesurées. Rien n'est recalculé en SQL |
+| `vis_recommandations_v2` | Colonnes de `vis_recommandations_v1`, plus `mesuree_par_fenetre`, `mesure_declaree_le` |
+
+Vues `security_invoker`, lecture aux seuls `authenticated` (membres du client par la
+RLS), insertion au service. La synchronisation des preuves (`vis-sync.sh`) n'écrit
+rien dans ces tables : elle fonctionne avant comme après 0010.
+Tests : `test/vis-sync-v2.test.ts` (Postgres jetable : J0 puis une J1 fictive, 0010
+par-dessus, tests adverses). Retour arrière : bloc en fin de fichier.
+
 ## Dépenses d'IA (0009, appliquée)
 
 | Ordre | Fichier | Effet | Prérequis |

@@ -1,7 +1,13 @@
 /**
- * Synchronisation d'une fenêtre vers la base OIA (mandat v9, bloc C) : à
- * partir de l'exportation en LECTURE SEULE d'Elmo (scripts/j0-export.sh) et du
- * sujet OIA, un script SQL à appliquer sur le schéma `vis` :
+ * Synchronisation d'une fenêtre vers la base OIA (mandat v9, bloc C ; toute
+ * fenêtre de tout sujet depuis le mandat v13, bloc F) : à partir de
+ * l'exportation en LECTURE SEULE d'Elmo (scripts/j0-export.sh) et du sujet OIA,
+ * un script SQL à appliquer sur le schéma `vis` :
+ *
+ *   * la fenêtre doit être déclarée dans measurement.yaml (type, panel, durée,
+ *     début), sinon refus ; ses questions exclues (excludedPromptIds) sont
+ *     écartées ; seules les réponses de ses jours comptent, l'exportation
+ *     d'Elmo contenant toutes les réponses de la marque ;
  *
  *   * client, site, sujet, fenêtre et questions du panel : créés s'ils
  *     manquent, jamais écrasés (sauf l'état de la fenêtre, qui avance) ;
@@ -16,14 +22,19 @@
  * Une seule transaction. Aucun appel à un fournisseur d'IA, aucune écriture
  * dans Elmo.
  *
+ * Comparaison de deux fenêtres (src/window-compare.ts) : sqlComparaison, en
+ * ajout seul dans vis_ui.comparaison (migration 0010, proposée).
+ *
  * CLI : tsx src/vis-sync.ts <subjectId> <windowId> <export.json> [redirects-cache.json] > sync.sql
+ *       tsx src/vis-sync.ts --jours <subjectId> <windowId>   (durée déclarée, refus si fenêtre inconnue)
+ *       tsx src/vis-sync.ts --comparaison <comparaison.json> > comparaison.sql
  */
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import { toEvidence, type WindowExport } from "./j0-evidence.js";
 import { defaultSubjectsDir, listSubjectDirs, loadSubject } from "./load.js";
 import { applyRedirects, readCache, type RedirectCache } from "./redirects.js";
-import type { SubjectBundle } from "./schema.js";
+import type { Measurement, SubjectBundle } from "./schema.js";
 
 const DOLLAR = "$vis_sync$";
 const sha256 = (s: string) => createHash("sha256").update(s, "utf8").digest("hex");
@@ -36,6 +47,15 @@ export function uuidStable(texte: string): string {
 
 const jour = (iso: string) => iso.slice(0, 10);
 const plusJours = (d: string, n: number) => new Date(Date.parse(`${d}T00:00:00Z`) + n * 86_400_000).toISOString().slice(0, 10);
+
+type Fenetre = Measurement["windows"][number];
+
+/** Fenêtre déclarée dans measurement.yaml : aucune synchronisation d'une fenêtre inconnue. */
+export function fenetreDeclaree(b: SubjectBundle, windowId: string): Fenetre {
+  const w = b.measurement.windows.find((x) => x.id === windowId);
+  if (!w) throw new Error(`fenêtre "${windowId}" absente de measurement.yaml du sujet ${b.subject.id} : synchronisation refusée`);
+  return w;
+}
 
 export interface SyncOptions {
   windowId: string;
@@ -56,13 +76,18 @@ export interface SyncResult {
 
 export function sqlSync(b: SubjectBundle, exp: WindowExport, opts: SyncOptions): SyncResult {
   const s = b.subject;
+  const w = fenetreDeclaree(b, opts.windowId);
+  if (exp.subjectId !== s.id) throw new Error(`exportation du sujet "${exp.subjectId}", attendu "${s.id}"`);
+  if (exp.days !== w.days) throw new Error(`exportation sur ${exp.days} jour(s), fenêtre ${w.id} déclarée sur ${w.days}`);
+  if (w.start && jour(exp.startedAt) !== w.start) throw new Error(`exportation commencée le ${jour(exp.startedAt)}, fenêtre ${w.id} déclarée au ${w.start}`);
   const client = opts.clientId ?? s.id;
   const fenetre = `${s.id}-${opts.windowId}`;
   const debut = jour(exp.startedAt);
   const fin = plusJours(debut, exp.days - 1);
   const cache = opts.redirects ?? {};
 
-  const toutes = toEvidence(b, exp, fenetre);
+  // Identifiant de measurement.yaml (questions exclues), pas celui de la base.
+  const toutes = toEvidence(b, exp, opts.windowId);
   const vides = toutes.filter((e) => e.rawText.length === 0).length; // jamais inventées : écartées et comptées
   const preuves = toutes
     .filter((e) => e.rawText.length > 0)
@@ -129,7 +154,7 @@ on conflict (id) do nothing;
 insert into vis.subject_site (subject_id, site_id, client_id) values (${lit(s.id)}, ${lit(s.id)}, ${lit(client)})
 on conflict do nothing;
 insert into vis.window (id, subject_id, client_id, kind, panel_version, status, starts_on, ends_on)
-values (${lit(fenetre)}, ${lit(s.id)}, ${lit(client)}, 'baseline', ${b.panel.panelVersion}, ${lit(opts.status ?? "running")}, '${debut}', '${fin}')
+values (${lit(fenetre)}, ${lit(s.id)}, ${lit(client)}, ${lit(w.kind)}, ${w.panelVersion}, ${lit(opts.status ?? "running")}, '${debut}', '${fin}')
 on conflict (id) do update set status = excluded.status
 where vis.window.status is distinct from excluded.status and vis.window.status <> 'done';
 insert into vis_ui.question (client_id, subject_id, question_id, version, langue, texte, marquee, etiquettes)
@@ -155,6 +180,10 @@ begin
   if n > 0 then
     raise exception 'vis-sync : % preuve(s) déjà en base ne correspondent plus au texte exporté ; rien n''est appliqué', n;
   end if;
+  select count(*) into n from vis.evidence e join _vis_x x on x.id = e.id where e.window_id <> x.window_id;
+  if n > 0 then
+    raise exception 'vis-sync : % preuve(s) déjà en base appartiennent à une autre fenêtre ; rien n''est appliqué', n;
+  end if;
 end $$;
 select 'preuves en base pour la fenêtre : ' || count(*) from vis.evidence where window_id = ${lit(fenetre)};
 commit;
@@ -162,14 +191,102 @@ commit;
   return { sql, preuves: preuves.length, vides, joursManquants, fenetre };
 }
 
+/** Verdicts de src/window-compare.ts (bloc C). */
+export const VERDICTS = ["hausse", "baisse", "pas de changement démontrable", "non comparable"] as const;
+
+/** Ce que la base lit de la comparaison ; le reste est rangé tel quel en jsonb. */
+export interface ComparaisonLue {
+  comparisonFormat: 1;
+  subjectId: string;
+  windowId: string;
+  referenceId: string;
+  provenance: { reference: { evidenceCount: number; digest: string }; current: { evidenceCount: number; digest: string } };
+  unbranded: { total: { verdict: (typeof VERDICTS)[number] } };
+}
+
+export interface ComparaisonSql {
+  sql: string;
+  id: string;
+  /** SHA-256 du fichier JSON tel qu'écrit par le rapport comparé. */
+  empreinte: string;
+}
+
+/**
+ * Comparaison d'une fenêtre à sa référence → vis_ui.comparaison (0010), en
+ * ajout seul : identifiant dérivé de l'empreinte du fichier, rejouer ne change
+ * rien ; une comparaison refaite (nouvelles preuves) est une nouvelle ligne.
+ * Les deux fenêtres doivent être en base, du même sujet et du même client.
+ */
+export function sqlComparaison(texte: string): ComparaisonSql {
+  const c = JSON.parse(texte) as ComparaisonLue;
+  const ident = /^[a-z0-9][a-z0-9-]*$/;
+  if (c.comparisonFormat !== 1) throw new Error(`format de comparaison ${String(c.comparisonFormat)} inconnu (attendu 1)`);
+  for (const [nom, v] of [["subjectId", c.subjectId], ["windowId", c.windowId], ["referenceId", c.referenceId]] as const) {
+    if (typeof v !== "string" || !ident.test(v)) throw new Error(`comparaison : ${nom} invalide`);
+  }
+  if (c.windowId === c.referenceId) throw new Error("comparaison : une fenêtre ne se compare pas à elle-même");
+  for (const cote of ["reference", "current"] as const) {
+    const p = c.provenance?.[cote];
+    if (!p || !Number.isInteger(p.evidenceCount) || p.evidenceCount < 0 || typeof p.digest !== "string" || !p.digest) {
+      throw new Error(`comparaison : provenance ${cote} incomplète (evidenceCount, digest)`);
+    }
+  }
+  const verdict = c.unbranded?.total?.verdict;
+  if (!VERDICTS.includes(verdict)) throw new Error(`comparaison : verdict du total non marqué inconnu (${String(verdict)})`);
+  if (texte.includes(DOLLAR)) throw new Error("Données inattendues : le délimiteur SQL apparaît dans la comparaison.");
+
+  const empreinte = sha256(texte);
+  const id = uuidStable(`comparaison:${empreinte}`);
+  const lit = (v: string) => `'${v.replace(/'/g, "''")}'`;
+  const fenetre = `${c.subjectId}-${c.windowId}`;
+  const reference = `${c.subjectId}-${c.referenceId}`;
+  const { reference: pr, current: pc } = c.provenance;
+  const sql = `-- Comparaison Visibility · ${fenetre} contre ${reference} · empreinte ${empreinte}
+begin;
+insert into vis_ui.comparaison (id, client_id, subject_id, window_id, reference_window_id, format, verdict_non_marque,
+  preuves_reference, empreinte_reference, preuves_courantes, empreinte_courante, empreinte, donnees)
+select '${id}', w.client_id, w.subject_id, w.id, r.id, 1, ${lit(verdict)},
+  ${pr.evidenceCount}, ${lit(pr.digest)}, ${pc.evidenceCount}, ${lit(pc.digest)}, '${empreinte}', ${DOLLAR}${texte}${DOLLAR}::jsonb
+from vis.window w
+join vis.window r on r.id = ${lit(reference)} and r.subject_id = w.subject_id and r.client_id = w.client_id
+where w.id = ${lit(fenetre)} and w.subject_id = ${lit(c.subjectId)}
+on conflict (id) do nothing;
+do $$
+begin
+  if not exists (select 1 from vis_ui.comparaison where id = '${id}') then
+    raise exception 'vis-sync : fenêtres ${fenetre} et ${reference} absentes de la base, ou de sujets différents ; rien n''est appliqué';
+  end if;
+end $$;
+commit;
+`;
+  return { sql, id, empreinte };
+}
+
 if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href) {
   const [subjectId, windowId, exportFile, cacheFile] = process.argv.slice(2);
+  const sujet = (id: string) => {
+    const dir = listSubjectDirs(defaultSubjectsDir()).find((d) => d.split(/[\\/]/).pop() === id);
+    if (!dir) throw new Error(`aucun sujet "${id}"`);
+    return loadSubject(dir);
+  };
   try {
+    if (subjectId === "--jours") {
+      // vis-sync.sh : durée de la fenêtre pour l'exportation, refus avant toute lecture d'Elmo.
+      const [, id, fen] = process.argv.slice(2);
+      if (!id || !fen) throw new Error("usage: tsx src/vis-sync.ts --jours <subjectId> <windowId>");
+      process.stdout.write(`${fenetreDeclaree(sujet(id), fen).days}\n`);
+      process.exit(0);
+    }
+    if (subjectId === "--comparaison") {
+      if (!windowId) throw new Error("usage: tsx src/vis-sync.ts --comparaison <comparaison.json>");
+      const r = sqlComparaison(readFileSync(windowId, "utf8"));
+      process.stdout.write(r.sql);
+      process.stderr.write(`vis-sync : comparaison ${r.id} (empreinte ${r.empreinte})\n`);
+      process.exit(0);
+    }
     if (!subjectId || !windowId || !exportFile) throw new Error("usage: tsx src/vis-sync.ts <subjectId> <windowId> <export.json> [redirects-cache.json]");
-    const dir = listSubjectDirs(defaultSubjectsDir()).find((d) => d.split(/[\\/]/).pop() === subjectId);
-    if (!dir) throw new Error(`aucun sujet "${subjectId}"`);
     const exp = JSON.parse(readFileSync(exportFile, "utf8")) as WindowExport;
-    const r = sqlSync(loadSubject(dir), exp, {
+    const r = sqlSync(sujet(subjectId), exp, {
       windowId,
       redirects: cacheFile && existsSync(cacheFile) ? readCache(cacheFile) : {},
       status: process.env.OIA_VIS_WINDOW_STATUS === "done" ? "done" : "running",
