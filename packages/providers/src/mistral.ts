@@ -146,12 +146,12 @@ export function createMistralProvider(config: MistralConfig): MistralProvider {
       throw new Error(`Mistral API error ${res.status}: ${body}`);
     }
     const json = (await res.json()) as {
-      choices: Array<{ message?: { content?: string } }>;
+      choices: Array<{ message?: { content?: MistralContent } }>;
       usage?: { prompt_tokens?: number; completion_tokens?: number };
     };
     spent.inputTokens += json.usage?.prompt_tokens ?? 0;
     spent.outputTokens += json.usage?.completion_tokens ?? 0;
-    return { text: json.choices[0]?.message?.content ?? "", usage: json.usage };
+    return { text: contentText(json.choices[0]?.message?.content), usage: json.usage };
   }
 
   return {
@@ -201,4 +201,19 @@ export function createMistralProvider(config: MistralConfig): MistralProvider {
       throw new Error(`Mistral extract failed to produce valid ${req.schemaName}: ${String(lastErr)}`);
     },
   };
+}
+
+/**
+ * mistral-large-4 can answer with `content` as an array of chunks (reasoning chunks first,
+ * then text) instead of a string. Only the text chunks carry the answer.
+ */
+type MistralChunk = { type?: string; text?: string };
+type MistralContent = string | MistralChunk[] | null;
+export function contentText(content: MistralContent | undefined): string {
+  if (typeof content === "string") return content;
+  if (!Array.isArray(content)) return "";
+  return content
+    .filter((c) => c && (c.type === "text" || c.type === undefined) && typeof c.text === "string")
+    .map((c) => c.text)
+    .join("");
 }
