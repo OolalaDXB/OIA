@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { RestEngineDb, choisirBase, type RestFetch } from "../src/engine/rest.js";
 
 const URL_ = "https://exemple-fictif.supabase.co";
-const KEY = "cle-de-service-fictive-0123456789";
+const KEY = "eyJcle-de-service-fictive-0123456789";
 
 function fake(reponses: Array<{ status: number; body: string }>) {
   const appels: Array<{ url: string; headers: Record<string, string>; body: unknown }> = [];
@@ -24,6 +24,13 @@ describe("RestEngineDb", () => {
     expect(appels[0]!.headers.Authorization).toBe(`Bearer ${KEY}`);
     expect(appels[0]!.headers.apikey).toBe(KEY);
     expect(appels[0]!.body).toEqual({ p_hote: "github-actions" });
+  });
+
+  it("clé secrète récente : en-tête apikey seulement", async () => {
+    const { f, appels } = fake([{ status: 200, body: "null" }]);
+    await new RestEngineDb(URL_, "sb_secret_fictive_0123456789abcdef", f).prendre("h");
+    expect(appels[0]!.headers.apikey).toBe("sb_secret_fictive_0123456789abcdef");
+    expect(appels[0]!.headers.Authorization).toBeUndefined();
   });
 
   it("rend null pour une file vide et pour une fonction sans résultat", async () => {

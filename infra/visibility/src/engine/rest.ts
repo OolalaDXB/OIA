@@ -41,9 +41,11 @@ export class RestEngineDb implements EngineDb {
     if (!/^vis_moteur_[a-z_]+$/.test(fn)) throw new Error(`fonction refusée : ${fn}`);
     const res = await this.fetcher(`${this.base}/rest/v1/rpc/${fn}`, {
       method: "POST",
+      // Clé secrète récente (sb_secret_…) : en-tête apikey seulement, la passerelle pose le rôle
+      // service_role. Ancienne clé service_role (un JWT, « eyJ… ») : aussi en Authorization.
       headers: {
         apikey: this.key,
-        Authorization: `Bearer ${this.key}`,
+        ...(this.key.startsWith("eyJ") ? { Authorization: `Bearer ${this.key}` } : {}),
         "Content-Type": "application/json",
         Accept: "application/json",
       },
