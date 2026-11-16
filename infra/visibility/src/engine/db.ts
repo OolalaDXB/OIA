@@ -22,7 +22,7 @@ import { randomUUID } from "node:crypto";
 import { homedir } from "node:os";
 import { join } from "node:path";
 
-export const DEMANDE_TYPES = ["SITE_ADD", "RECON", "WINDOW_RUN", "REPORT", "REMEASURE_PROPOSE", "ANALYSE"] as const;
+export const DEMANDE_TYPES = ["SITE_ADD", "RECON", "WINDOW_RUN", "REPORT", "REMEASURE_PROPOSE", "ANALYSE", "AUDIT_IA"] as const;
 export type DemandeType = (typeof DEMANDE_TYPES)[number];
 export type DemandeStatut = "QUEUED" | "RUNNING" | "DONE" | "FAILED" | "CANCELLED";
 
@@ -204,6 +204,9 @@ export interface EngineDb {
   analyse(demande: string, a: Record<string, unknown>): Promise<string>;
   /** Constat expliqué rattaché à une demande ANALYSE (et à son analyse, si elle en vient). */
   constat(demande: string, analyseId: string | null, c: Record<string, unknown>): Promise<string>;
+  /** Audit IA express (0015) : ouvre sa fenêtre (refusée sans GO en base), rend le résultat. */
+  auditDebut(demande: string): Promise<string>;
+  auditResultat(demande: string, r: Record<string, unknown>): Promise<string>;
 }
 
 /** Délai au-delà duquel une demande RUNNING est tenue pour abandonnée, et prises au plus (en base). */
@@ -382,6 +385,19 @@ export class MemoryEngineDb implements EngineDb {
     this.analyses.push({ ...structuredClone(a), id, demande });
     return id;
   }
+  auditsGo = new Set<string>();
+  audits: (Record<string, unknown> & { id: string; demande: string })[] = [];
+  async auditDebut(demande: string): Promise<string> {
+    const d = this.demandes.find((x) => x.id === demande);
+    if (!d || d.type !== "AUDIT_IA" || d.statut !== "RUNNING") throw new Error(`55000 : demande ${demande} : pas un audit en cours`);
+    if (!this.auditsGo.has(String(d.charge.audit_id))) throw new Error("42501 : audit refusé : aucun GO enregistré");
+    return `${d.subject_id}-audit-test`;
+  }
+  async auditResultat(demande: string, r: Record<string, unknown>): Promise<string> {
+    const id = randomUUID();
+    this.audits.push({ ...structuredClone(r), id, demande });
+    return id;
+  }
   async constat(demande: string, analyseId: string | null, c: Record<string, unknown>): Promise<string> {
     const d = this.demandes.find((x) => x.id === demande);
     if (!d || d.type !== "ANALYSE") throw new Error(`P0002 : demande d'analyse ${demande} introuvable`);
@@ -542,6 +558,12 @@ export class PsqlEngineDb implements EngineDb {
   }
   async recommandation(subjectId: string, windowId: string, rec: Record<string, unknown>) {
     return (await this.run("select vis_moteur_recommandation(:'p_subject', :'p_window', :'p_recommandation'::jsonb);\n", { p_subject: subjectId, p_window: windowId, p_recommandation: rec })) === "t";
+  }
+  async auditDebut(demande: string) {
+    return String(await this.run("select vis_moteur_audit_debut(:'p_demande'::uuid);\n", { p_demande: demande }));
+  }
+  async auditResultat(demande: string, r: Record<string, unknown>) {
+    return String(await this.run("select vis_moteur_audit_resultat(:'p_demande'::uuid, :'p_resultat'::jsonb);\n", { p_demande: demande, p_resultat: r }));
   }
   async analyse(demande: string, a: Record<string, unknown>) {
     return String(await this.run("select vis_moteur_analyse(:'p_demande'::uuid, :'p_analyse'::jsonb);\n", { p_demande: demande, p_analyse: a }));

@@ -55,6 +55,11 @@ import { CompetitorSchema, MeasurementSchema, PanelSchema, SubjectSchema, type M
 import { siteAdd } from "../site-add.js";
 import { extractActors } from "../site/actors.js";
 import { DEFAULT_CRAWLIE_COMMAND, crawlieFailure, runCrawlie, summarizeCrawlie, type CrawlieCommand, type CrawlieSummary } from "../site/audit.js";
+import { AUDIT_MODEL, classementConcurrents, classementDomaines, collecter, noterReponse, proposerPlan, proposerQuestions, rapportMarkdown, scores, type LigneMatrice } from "../audit-ia/express.js";
+import { createMistralProvider } from "../../../../packages/providers/src/mistral.js";
+import type { LLMProvider } from "../../../../packages/providers/src/types.js";
+import { findPrice } from "../cost-grid.js";
+import { readSite } from "../site/pages.js";
 import { DEFAULT_LIGHTHOUSE_COMMAND, LIGHTHOUSE_PACKAGE, constatsCrawl, constatsLighthouse, runLighthouse, summarizeLighthouse, type AnalyseLighthouse, type LighthouseCommand, type Strategie } from "../analyse/lighthouse.js";
 import { concurrentsFile, homonymesFile } from "../site/formats.js";
 import { findHomonyms } from "../site/homonyms.js";
@@ -85,6 +90,8 @@ export interface EngineOptions {
   /** Lanceurs injectables (tests) : par défaut runLighthouse et runCrawlie. */
   runLighthouse?: (cmd: LighthouseCommand, url: string, s: Strategie) => Promise<unknown>;
   runCrawlie?: (cmd: CrawlieCommand, url: string, out: string, maxPages?: number) => Promise<void>;
+  /** Mistral de l'audit IA express (questions et plan) : construit seulement sur GO ; un faux dans les tests. */
+  auditLlm?: () => LLMProvider & { usage?: () => { inputTokens: number; outputTokens: number } };
   /** Accès payants, créés seulement après le contrôle du GO en base. */
   collector: () => Collector;
   judge: () => MentionJudge;
@@ -187,7 +194,7 @@ export async function runEngine(o: EngineOptions): Promise<PassageResult> {
 async function handle(ctx: Ctx, d: Demande): Promise<Traitement> {
   ctx.log(`demande ${d.id} : ${d.type}${d.subject_id ? ` (${d.subject_id})` : ""}`);
   try {
-    const run = { SITE_ADD: siteAddDemande, RECON: reconDemande, WINDOW_RUN: windowRunDemande, REPORT: reportDemande, REMEASURE_PROPOSE: remeasureDemande, ANALYSE: analyseDemande }[d.type];
+    const run = { SITE_ADD: siteAddDemande, RECON: reconDemande, WINDOW_RUN: windowRunDemande, REPORT: reportDemande, REMEASURE_PROPOSE: remeasureDemande, ANALYSE: analyseDemande, AUDIT_IA: auditIaDemande }[d.type];
     if (!run) throw new EngineRefusal(`type de demande inconnu « ${String(d.type)} »`);
     const resultat = await run(ctx, d);
     await ctx.o.db.terminer(d.id, resultat, null);
@@ -215,6 +222,110 @@ const subjectOf = (d: Demande) => {
   if (!d.subject_id) throw new EngineRefusal("demande sans sujet");
   return d.subject_id;
 };
+
+// ---------------------------------------------------------------- AUDIT_IA (premium, payant)
+
+/**
+ * Audit IA express : refusé sans GO en base (vis_moteur_audit_debut) ; questions tirées du site,
+ * une passe par question et par moteur, notation déterministe, plan d'action ; arrêt au coût
+ * engagé au GO. Réponses en preuves (fenêtre « audit »), résultat dans les audits, plan en
+ * recommandations en attente.
+ */
+async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unknown>> {
+  const subjectId = subjectOf(d);
+  const url = str(d.charge.url, "url");
+  const nom = str(d.charge.nom, "nom");
+  const n = Number(d.charge.questions ?? 20);
+  const cibles = strs(d.charge.cibles, "cibles");
+  const coutMax = Number(d.charge.cout_max_usd);
+  if (!Number.isFinite(coutMax) || coutMax <= 0) throw new EngineRefusal("audit : coût maximal absent");
+  const windowId = await ctx.o.db.auditDebut(d.id); // refusé sans GO
+  const sujet = await ctx.o.db.sujet(subjectId);
+  const langues = Array.isArray(d.charge.langues) && d.charge.langues.length ? (d.charge.langues as string[]) : sujet?.langues?.length ? sujet.langues : ["en"];
+  const read = await readSite(url, { fetch: ctx.o.fetch, maxPages: 8, allowedLocal: ctx.o.allowedLocal });
+  const llm = ctx.o.auditLlm
+    ? ctx.o.auditLlm()
+    : (() => {
+        const apiKey = ctx.o.env.MISTRAL_API_KEY;
+        if (!apiKey) throw new EngineRefusal("clé absente : MISTRAL_API_KEY");
+        return createMistralProvider({ apiKey, model: AUDIT_MODEL, maxCalls: 4, maxOutputTokens: 8000 });
+      })();
+  const questions = await proposerQuestions(llm, { read, nom, langues, marches: sujet?.marches ?? [], n });
+  const domaine = new URL(url).hostname.replace(/^www\./, "");
+  const config = { brand: { name: nom, aliases: [], domains: [url, domaine] }, competitors: [] };
+  const col = await collecter({ collector: ctx.o.collector(), questions, cibles, clientId: d.client_id, subjectId, windowId, coutMaxUsd: coutMax - 0.1, log: ctx.log });
+  // Preuves : ajout seul, empreintes calculées par la base.
+  const preuves: PreuveBase[] = col.reponses.map((r) => ({
+    id: evidenceUuid(`audit:${d.id}:${r.question.id}:${r.moteur}`),
+    client_id: d.client_id,
+    site_id: subjectId,
+    subject_id: subjectId,
+    window_id: windowId,
+    prompt_id: `audit-${r.question.id.toLowerCase()}`,
+    prompt_version: 1,
+    prompt_language: r.question.langue,
+    engine: r.moteur,
+    engine_version: r.resultat.engineVersion ?? null,
+    collector_name: r.resultat.collectorName,
+    collector_run_id: r.resultat.collectorRunId,
+    received_at: r.resultat.receivedAt,
+    raw_text: r.texte,
+    structured: { ...r.resultat.structured, audit: { demande: d.id, question: r.question.id, sujet: r.question.sujet, marquee: r.question.marquee } },
+    citations: r.citations,
+    cost_usd: r.coutUsd,
+  }));
+  if (preuves.length) await ctx.o.db.preuves(preuves);
+  const moteurs = [...new Set(cibles.map((c) => c.split(":")[0]!))];
+  const matrice: LigneMatrice[] = questions.map((q) => {
+    const l: LigneMatrice = { id: q.id, sujet: q.sujet, question: q.question, marquee: q.marquee, scores: {}, concurrents: {}, domaines: {} };
+    for (const r of col.reponses.filter((x) => x.question.id === q.id)) {
+      const note = noterReponse(r.texte, r.citations, config, q.marquee);
+      l.scores[r.moteur] = note.score;
+      l.concurrents[r.moteur] = note.concurrents;
+      l.domaines[r.moteur] = note.domaines;
+    }
+    return l;
+  });
+  const s = scores(matrice, moteurs);
+  const concurrents = classementConcurrents(matrice);
+  const domaines = classementDomaines(matrice);
+  const plan = await proposerPlan(llm, { nom, site: url, matrice, scores: s, concurrents, domaines, constats: [] });
+  const u = llm.usage?.();
+  const prix = findPrice("mistral-api", AUDIT_MODEL);
+  const coutLlm = u && prix ? (u.inputTokens * prix.inputPerMTok + u.outputTokens * prix.outputPerMTok) / 1_000_000 : 0;
+  const coutReel = Math.round((col.depenseUsd + coutLlm) * 100) / 100;
+  const date = today(ctx.now);
+  const rapport = rapportMarkdown({ nom, site: url, date, moteurs, matrice, s, concurrents, domaines, plan, coutUsd: coutReel });
+  const auditId = await ctx.o.db.auditResultat(d.id, {
+    window_id: windowId,
+    moteurs,
+    score: s.global,
+    methode: `Audit IA express OIA : ${questions.length} questions tirées du site, une passe par question sur ${moteurs.join(", ")}, par API avec recherche web, le ${date}. Notation déterministe (3 cité avec le site en source, 2 cité, 1 cité car nommé, 0 absent). ${col.echecs.length} appel(s) en échec${col.arretPlafond ? " ; arrêt au plafond engagé" : ""}.`,
+    resume: plan.resume,
+    rapport_md: rapport,
+    matrice: matrice.map((l) => ({ id: l.id, sujet: l.sujet, question: l.question, scores: l.scores, concurrents: l.concurrents, domaines: l.domaines })),
+  });
+  let recos = 0;
+  for (const [i, a] of plan.actions.entries()) {
+    const slug = a.titre.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40);
+    const ok = await ctx.o.db.recommandation(subjectId, windowId, {
+      id: `rec-${subjectId}-audit-${date.replace(/-/g, "")}-${i + 1}-${slug}`.slice(0, 120),
+      type: a.type,
+      title: a.titre,
+      statement: `${a.action} Pourquoi : ${a.pourquoi}`,
+      impact: { level: a.impact },
+      effort: { level: a.effort },
+      risk: "low",
+      confidence: "medium",
+      createdBy: `audit-ia-express:${date}`,
+      priorite_audit: a.priorite,
+      questions: a.questions,
+      source: `audit IA express ${auditId}`,
+    });
+    if (ok) recos++;
+  }
+  return { audit_externe_id: auditId, score: s.global, cout_reel_usd: coutReel, questions: questions.length, reponses: col.reponses.length, echecs: col.echecs.length, recommandations: recos, arret_plafond: col.arretPlafond };
+}
 
 // ---------------------------------------------------------------- ANALYSE (v3, gratuite)
 
