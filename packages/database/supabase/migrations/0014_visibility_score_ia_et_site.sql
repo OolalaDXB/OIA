@@ -1,0 +1,10 @@
+-- 0014 · Le score principal (vis_score_v3.score) devient la visibilité IA seule :
+--   round(0,7 × visibilite_ia + 0,3 × notoriete_ia), null si non mesurée.
+-- La santé technique du site (Lighthouse) devient un score séparé, score_site (colonne ajoutée en fin de vue) :
+--   performance mobile 35, SEO 30, accessibilité 15, performance ordinateur 10, bonnes pratiques 10.
+-- Raison : le score mêlait technique et visibilité ; un site techniquement parfait mais absent des IA
+-- affichait 58/100. Appliquée en production le 16 novembre 2026 (nom en base : oia_0014_visibility_score_ia_et_site).
+-- Texte SQL appliqué : identique à la définition de vis_score_v3 de 0012, avec score = vis_ui.score_ia(...)
+-- et la colonne score_site = vis_ui.score_site(...) ; fonctions vis_ui.score_ia(numeric, numeric) et
+-- vis_ui.score_site(jsonb). Retour arrière : réappliquer la définition de vis_score_v3 de 0012
+-- (la colonne score_site doit alors être retirée : drop view puis create).

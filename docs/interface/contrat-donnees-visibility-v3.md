@@ -57,7 +57,7 @@ Une ligne par problème (`cle` stable d'une analyse à l'autre), dans sa derniè
 ### `vis_score_v3`
 
 Une ligne par site.
-- **Score** : `score` de 0 à 100. C'est la moyenne pondérée des composantes mesurées, les
+- **Score (depuis 0014)** : `score` = visibilité IA seule, 0,7 × `visibilite_ia` + 0,3 × `notoriete_ia`. `score_site` (ajouté) = santé technique, Lighthouse. Ancienne règle, remplacée : moyenne pondérée des composantes mesurées, les
   poids étant renormalisés sur celles-ci.
 - **Composantes** (de 0 à 100, `null` si non mesurée, jamais 0) :
 
