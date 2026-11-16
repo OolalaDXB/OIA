@@ -44,8 +44,13 @@
  * output. », que `storableText` (text-extraction.ts, l. 424-427) change en NULL. Les
  * 200 à 300 jetons de sortie facturés sont ceux du raisonnement.
  *
- * Écart volontaire : quand aucun morceau `text` ne suit la dernière `tool.execution`,
- * OIA demande la suite de la MÊME conversation (`POST /v1/conversations/{id}`, sans
+ * Par défaut, OIA fait comme Elmo (décision de Mickaël, 16 novembre 2026, pour la
+ * comparabilité avec J0) : un seul appel ; une réponse sans réponse finale est consignée
+ * avec le texte qu'Elmo en aurait tiré (vide pour ces 15 réponses), `finalAnswer: false`
+ * et sa raison. Rien n'est inventé.
+ *
+ * Option (OIA_VIS_MISTRAL_CONTINUATION=1, `mistralContinuation`) : quand aucun morceau
+ * `text` ne suit la dernière `tool.execution`, OIA demande la suite de la MÊME conversation (`POST /v1/conversations/{id}`, sans
  * nouvelle entrée, l'exemple de la documentation de Mistral étant un corps vide), au
  * plus MISTRAL_MAX_CONTINUATIONS fois. La documentation ne donne aucun paramètre de
  * complétion pour borner les tours d'outil ou forcer une réponse finale ; aucune
@@ -103,7 +108,7 @@ function searchCount(raw: unknown): number {
 export const mistralProvider: ProviderImpl = {
   id: "mistral-api",
   keyEnv: "MISTRAL_API_KEY",
-  async call({ fetch, sleep, apiKey, model, webSearch, prompt }): Promise<ProviderCallResult> {
+  async call({ fetch, sleep, apiKey, model, webSearch, prompt, mistralContinuation = false }): Promise<ProviderCallResult> {
     const post = (path: string, body: unknown) =>
       postJson({ fetch, sleep, url: `${MISTRAL_BASE_URL}${path}`, headers: { Authorization: `Bearer ${apiKey}` }, body, label: "mistral-api", secrets: [apiKey] });
     const calls: BilledCall[] = [];
@@ -117,7 +122,7 @@ export const mistralProvider: ProviderImpl = {
     // Texte et sources sur l'ensemble des appels : la suite ne renvoie que les nouvelles entrées.
     const all = () => ({ outputs: calls.flatMap((c) => outputs(c.raw)) });
     let continuations = 0;
-    while (!hasFinalAnswer(all()) && outputs(calls[calls.length - 1]!.raw).length > 0 && continuations < MISTRAL_MAX_CONTINUATIONS && conversationId) {
+    while (mistralContinuation && !hasFinalAnswer(all()) && outputs(calls[calls.length - 1]!.raw).length > 0 && continuations < MISTRAL_MAX_CONTINUATIONS && conversationId) {
       continuations++;
       notes.push(`aucune réponse finale après les recherches : suite de la conversation demandée (${continuations}/${MISTRAL_MAX_CONTINUATIONS})`);
       const next = await post(`/v1/conversations/${encodeURIComponent(conversationId)}`, { completion_args: { max_tokens: MAX_OUTPUT_TOKENS } });
@@ -128,7 +133,9 @@ export const mistralProvider: ProviderImpl = {
     const finalAnswer = hasFinalAnswer(merged);
     let noTextReason: string | undefined;
     if (!finalAnswer) {
-      noTextReason = `sans réponse finale : aucun texte après la dernière exécution d'outil, après ${continuations} suite(s)`;
+      noTextReason = mistralContinuation
+        ? `sans réponse finale : aucun texte après la dernière exécution d'outil, après ${continuations} suite(s)`
+        : "sans réponse finale : aucun texte après la dernière exécution d'outil (suite de conversation désactivée)";
       notes.push(noTextReason);
     }
     return {
@@ -141,6 +148,7 @@ export const mistralProvider: ProviderImpl = {
       finishReason: null,
       notes,
       extra: {
+        continuationEnabled: mistralContinuation,
         continuations,
         finalAnswer,
         thinking: thinkingFromMistral(merged),

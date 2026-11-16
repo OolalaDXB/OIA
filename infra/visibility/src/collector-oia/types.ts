@@ -11,6 +11,11 @@ export interface ProviderCallInput {
   webSearch: boolean;
   /** Texte de la question, envoyé tel quel (aucun prompt système, comme Elmo). */
   prompt: string;
+  /**
+   * Mistral : demander la suite d'une conversation arrêtée après la recherche. Désactivé par
+   * défaut (comparabilité avec J0) ; activé par OIA_VIS_MISTRAL_CONTINUATION=1.
+   */
+  mistralContinuation?: boolean;
 }
 
 /** Un appel HTTP facturé : sa réponse brute COMPLÈTE et ce qu'il faut pour le chiffrer. */

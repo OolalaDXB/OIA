@@ -10,7 +10,7 @@
  *    la renvoyait), le corps d'erreur est tronqué à 500 caractères.
  */
 
-export type FetchLike = (url: string, init: { method: string; headers: Record<string, string>; body?: string }) => Promise<{
+export type FetchLike = (url: string, init: { method: string; headers: Record<string, string>; body?: string; signal?: AbortSignal }) => Promise<{
   ok: boolean;
   status: number;
   headers: { get(name: string): string | null };

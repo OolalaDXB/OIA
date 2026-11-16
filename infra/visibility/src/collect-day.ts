@@ -19,17 +19,25 @@
  * coût d'Elmo), car les comptes des fournisseurs sont partagés. Un journal ou une table
  * illisible arrête tout.
  *
+ * Juge des mentions (src/judge.ts) : chaque réponse est jugée avant d'être écrite (une seule
+ * ligne de preuve, ajout seul) ; juge par défaut `jev` (TYPESAFE_API_KEY obligatoire avec
+ * `--go`), ou `--juge aucun`. Son coût entre dans le majorant de chaque appel et dans le coût du
+ * mois. Mistral : suite des conversations arrêtées après la recherche seulement avec
+ * OIA_VIS_MISTRAL_CONTINUATION=1 (désactivée par défaut, comparabilité avec J0).
+ *
  * Sans `--go`, rien n'est appelé : le plan du jour et son coût au majorant sont affichés.
  * Les clés sont lues dans l'environnement du processus seulement, jamais affichées.
  *
- * CLI : tsx src/collect-day.ts <sujet> <fenêtre> [--go]
+ * CLI : tsx src/collect-day.ts <sujet> <fenêtre> [--juge jev|mistral|aucun] [--go]
  */
 import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import type { Collector } from "./collector.js";
 import { ProviderError, type FetchLike } from "./collector-oia/http.js";
-import { MissingKeyError, OIA_DIRECT_COLLECTOR, PROVIDERS, createOiaDirectCollector, parseTarget, targetWorstCaseUsd, type Target } from "./collector-oia-direct.js";
+import { MissingKeyError, OIA_DIRECT_COLLECTOR, PROVIDERS, createOiaDirectCollector, mistralContinuationEnabled, parseTarget, targetWorstCaseUsd, type Target } from "./collector-oia-direct.js";
+import { createJudge, JUDGE_NAMES, judgeWorstCaseUsd, mentionConfigFrom, type JudgeName, type MentionJudge } from "./judge.js";
+import type { MentionConfig } from "./judge-jev.js";
 import type { EvidenceRow } from "./elmo-import.js";
 import { appendEvidence, readEvidence, sha256Hex } from "./evidence-store.js";
 import { defaultSubjectsDir, listSubjectDirs, loadSubject } from "./load.js";
@@ -157,8 +165,13 @@ export function journalMonthUsd(file: string, month: string): number {
 }
 
 /** Coût du mois UTC déjà engagé par le collecteur OIA direct, tous sujets confondus. */
-export function monthSpendUsd(dataDir: string, month: string, journalFile: string): { usd: number; collectorUsd: number; failuresUsd: number; journalUsd: number } {
+export function monthSpendUsd(
+  dataDir: string,
+  month: string,
+  journalFile: string,
+): { usd: number; collectorUsd: number; judgeUsd: number; failuresUsd: number; journalUsd: number } {
   let collectorUsd = 0;
+  let judgeUsd = 0;
   let failuresUsd = 0;
   const subjects = existsSync(dataDir) ? readdirSync(dataDir, { withFileTypes: true }).filter((d) => d.isDirectory()) : [];
   for (const s of subjects) {
@@ -178,11 +191,17 @@ export function monthSpendUsd(dataDir: string, month: string, journalFile: strin
         const cost = (r.structured as { cost?: { readable?: unknown } }).cost;
         if (!Number.isFinite(r.costUsd) || cost?.readable === false) throw new CostUnreadableError(`preuve ${r.id} : coût illisible (modèle absent de la grille src/cost-grid.ts ?)`);
         collectorUsd += r.costUsd;
+        // Coût du juge, rangé à part (costUsd reste celui de la réponse, comme à J0).
+        const judgeCost = (r.structured as { mentions?: { judge?: { cost?: { usd?: unknown } } | null } }).mentions?.judge?.cost?.usd;
+        if (judgeCost !== undefined) {
+          if (typeof judgeCost !== "number" || !Number.isFinite(judgeCost)) throw new CostUnreadableError(`preuve ${r.id} : coût du juge illisible`);
+          judgeUsd += judgeCost;
+        }
       }
     }
   }
   const journalUsd = journalMonthUsd(journalFile, month);
-  return { usd: collectorUsd + failuresUsd + journalUsd, collectorUsd, failuresUsd, journalUsd };
+  return { usd: collectorUsd + judgeUsd + failuresUsd + journalUsd, collectorUsd, judgeUsd, failuresUsd, journalUsd };
 }
 
 export function readCap(env: Record<string, string | undefined>): number | null {
@@ -202,6 +221,10 @@ export interface RunDayOptions {
   journalFile?: string;
   /** Résolution des liens de redirection de Gemini ; absente = non résolus. */
   resolver?: Resolver;
+  /** Juge des mentions (src/judge.ts) : `createJudge("jev" | "aucun", …)`. */
+  judge: MentionJudge;
+  /** Marque et concurrents suivis ; par défaut, ceux du sujet. */
+  mentionConfig?: MentionConfig;
   log?: (line: string) => void;
 }
 
@@ -239,7 +262,9 @@ export async function runDay(o: RunDayOptions): Promise<DaySummary> {
   // Toutes les clés nécessaires avant le premier appel : pas de jour à moitié collecté pour une clé oubliée.
   const missing = [...new Set(todo.map((c) => PROVIDERS[c.target.provider].keyEnv))].filter((k) => !o.env[k]);
   if (missing.length) throw new MissingKeyError(`clé(s) absente(s) de l'environnement : ${missing.join(", ")}`);
-  for (const c of todo) if (targetWorstCaseUsd(c.target) === undefined) throw new CostUnreadableError(`cible ${c.target.raw} : aucun prix dans la grille`);
+  const continuation = { mistralContinuation: mistralContinuationEnabled(o.env) };
+  const mentionConfig = o.mentionConfig ?? mentionConfigFrom(b);
+  for (const c of todo) if (targetWorstCaseUsd(c.target, continuation) === undefined) throw new CostUnreadableError(`cible ${c.target.raw} : aucun prix dans la grille`);
 
   const before = monthSpendUsd(o.dataDir, month, o.journalFile ?? join(o.dataDir, "cost-journal.csv"));
   let spent = before.usd;
@@ -261,7 +286,8 @@ export async function runDay(o: RunDayOptions): Promise<DaySummary> {
 
   for (let i = 0; i < todo.length; i++) {
     const c = todo[i]!;
-    const worst = targetWorstCaseUsd(c.target)!;
+    // Majorant de la case : la réponse, plus le juge.
+    const worst = targetWorstCaseUsd(c.target, continuation)! + o.judge.worstCaseUsdPerAnswer;
     if (spent + worst > cap) {
       summary.stopped = "plafond";
       summary.notRun = todo.length - i;
@@ -281,6 +307,7 @@ export async function runDay(o: RunDayOptions): Promise<DaySummary> {
         engine: c.engine,
         engineOptions: { target: c.target.raw },
       });
+      const judged = await o.judge.judge({ text: r.rawText, question: c.promptText, config: mentionConfig });
       const row: EvidenceRow = {
         id: c.evidenceId,
         clientId,
@@ -297,15 +324,21 @@ export async function runDay(o: RunDayOptions): Promise<DaySummary> {
         receivedAt: r.receivedAt,
         rawText: r.rawText,
         rawSha256Hex: sha256Hex(r.rawText),
-        structured: { ...r.structured, day },
+        structured: {
+          ...r.structured,
+          day,
+          brandMentioned: judged.brandMentioned,
+          competitorsMentioned: judged.competitorsMentioned,
+          mentions: { judgeName: o.judge.name, ...judged.mentions },
+        },
         citations: r.citations,
         costUsd: r.costUsd,
       };
       appendEvidence(evFile, [row]);
       summary.collected++;
-      spent += r.costUsd;
+      spent += r.costUsd + judged.costUsd;
       citedRedirects.push(...r.citations.map((x) => x.url).filter(isRedirectLink));
-      log(`${c.engine} ${c.promptId}@v${c.promptVersion} : ${r.rawText.length} caractères, ${r.citations.length} citation(s), ${r.costUsd.toFixed(4)} $`);
+      log(`${c.engine} ${c.promptId}@v${c.promptVersion} : ${r.rawText.length} caractères, ${r.citations.length} citation(s), ${r.costUsd.toFixed(4)} $ + juge ${judged.costUsd.toFixed(4)} $`);
       if ((r.structured as { cost?: { readable?: boolean } }).cost?.readable === false) {
         summary.stopped = "cout-illisible";
         summary.notRun = todo.length - i - 1;
@@ -351,13 +384,18 @@ export async function runDay(o: RunDayOptions): Promise<DaySummary> {
 }
 
 /** Plan du jour et coût au majorant, sans aucun appel. */
-export function estimateDay(b: SubjectBundle, windowId: string, day: string): { lines: string[]; worstCaseUsd: number } {
+export function estimateDay(
+  b: SubjectBundle,
+  windowId: string,
+  day: string,
+  opts: { mistralContinuation?: boolean; judgeWorstCaseUsdPerAnswer?: number } = {},
+): { lines: string[]; worstCaseUsd: number } {
   const { calls, excluded } = planDay(b, windowId, day);
   const byEngine = new Map<string, { n: number; usd: number; target: string }>();
   for (const c of calls) {
     const e = byEngine.get(c.engine) ?? { n: 0, usd: 0, target: c.target.raw };
     e.n++;
-    e.usd += targetWorstCaseUsd(c.target) ?? Number.NaN;
+    e.usd += (targetWorstCaseUsd(c.target, opts) ?? Number.NaN) + (opts.judgeWorstCaseUsdPerAnswer ?? 0);
     byEngine.set(c.engine, e);
   }
   const lines = [...byEngine.entries()].map(([engine, e]) => `${engine} (${e.target}) : ${e.n} appel(s), au plus ${e.usd.toFixed(4)} $`);
@@ -368,28 +406,40 @@ export function estimateDay(b: SubjectBundle, windowId: string, day: string): { 
 if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href) {
   const args = process.argv.slice(2);
   const go = args.includes("--go");
-  const [subjectId, windowId] = args.filter((a) => !a.startsWith("--"));
+  const judgeAt = args.indexOf("--juge");
+  const judgeName = judgeAt >= 0 ? args[judgeAt + 1] ?? "" : "jev";
+  const [subjectId, windowId] = args.filter((a, i) => !a.startsWith("--") && !(judgeAt >= 0 && i === judgeAt + 1));
   (async () => {
-    if (!subjectId || !windowId) throw new Error("usage: tsx src/collect-day.ts <sujet> <fenêtre> [--go]");
+    if (!subjectId || !windowId) throw new Error("usage: tsx src/collect-day.ts <sujet> <fenêtre> [--juge jev|mistral|aucun] [--go]");
+    if (!JUDGE_NAMES.includes(judgeName as never)) throw new Error(`juge inconnu "${judgeName}" : ${JUDGE_NAMES.join(", ")}`);
+    // Juge non retenu : refusé dès l'estimation.
+    if (judgeName === "mistral") createJudge(judgeName, { fetch: async () => Promise.reject(new Error("aucun appel")), env: {} });
     const dir = listSubjectDirs(defaultSubjectsDir()).find((d) => d.split(/[\\/]/).pop() === subjectId);
     if (!dir) throw new Error(`aucun sujet "${subjectId}"`);
     const b = loadSubject(dir);
     const dataDir = resolve(process.env.OIA_VIS_DATA ?? join(homedir(), "oia-visibility-data"));
     const day = new Date().toISOString().slice(0, 10);
-    const est = estimateDay(b, windowId, day);
-    process.stdout.write(`${subjectId} / ${windowId}, jour ${day} :\n${est.lines.map((l) => `  ${l}`).join("\n")}\n  total au majorant : ${est.worstCaseUsd.toFixed(4)} $\n`);
+    const mistralContinuation = mistralContinuationEnabled(process.env);
+    const judgeWorst = judgeWorstCaseUsd(judgeName as JudgeName);
+    const est = estimateDay(b, windowId, day, { mistralContinuation, judgeWorstCaseUsdPerAnswer: judgeWorst });
+    process.stdout.write(`${subjectId} / ${windowId}, jour ${day} :\n${est.lines.map((l) => `  ${l}`).join("\n")}\n  total au majorant (réponses + juge ${judgeName}) : ${est.worstCaseUsd.toFixed(4)} $\n`);
+    process.stdout.write(`  suite des conversations Mistral : ${mistralContinuation ? "activée" : "désactivée"}\n`);
     const cap = readCap(process.env);
     process.stdout.write(`  plafond mensuel : ${cap === null ? "NON POSÉ (OIA_VIS_MONTHLY_CAP_USD)" : `${cap} $`}\n`);
     if (!go) {
       process.stdout.write("Aucun appel (estimation seule). Ajouter --go pour collecter.\n");
       return;
     }
+    const realFetch = globalThis.fetch as unknown as FetchLike;
+    // Juge avant tout appel : jev sans TYPESAFE_API_KEY est refusé ici.
+    const judge = createJudge(judgeName, { fetch: realFetch, env: process.env });
     const summary = await runDay({
       bundle: b,
       windowId,
       dataDir,
-      collector: createOiaDirectCollector({ fetch: globalThis.fetch as unknown as FetchLike, env: process.env }),
+      collector: createOiaDirectCollector({ fetch: realFetch, env: process.env }),
       env: process.env,
+      judge,
       journalFile: process.env.OIA_VIS_COST_JOURNAL,
       resolver: safeResolver,
       log: (l) => process.stdout.write(`${l}\n`),

@@ -91,15 +91,22 @@ final avec un morceau `text`, alors que toutes les réponses avec texte finissen
 
 Ce que fait OIA (`src/collector-oia/mistral.ts`) :
 1. détection : aucun morceau `text` après la dernière `tool.execution` (`hasFinalAnswer`) ;
-2. reprise : `POST /v1/conversations/{conversation_id}` (ajout à la conversation, rangée par
+2. **par défaut, aucune reprise** (décision de Mickaël du 16 novembre 2026, pour la
+   comparabilité avec J0) : un seul appel, comme Elmo. La réponse est consignée avec le texte
+   qu'Elmo en aurait tiré (vide pour ces réponses), `structured.finalAnswer: false` et
+   `noTextReason` « sans réponse finale … (suite de conversation désactivée) » ; le majorant d'un
+   appel Mistral est d'un appel ;
+3. **option** `OIA_VIS_MISTRAL_CONTINUATION=1`, dans l'environnement du processus (ce nom n'est
+   pas admis dans le fichier de clés) — reprise : `POST /v1/conversations/{conversation_id}` (ajout à la conversation, rangée par
    défaut chez Mistral, `store: true`), sans nouvelle entrée, avec
    `completion_args.max_tokens: 8000`, deux fois au plus (`MISTRAL_MAX_CONTINUATIONS`), et pas
    de nouvelle suite si la précédente n'a rien renvoyé. Aucune question n'est ajoutée. La
    documentation de la Conversations API ne donne aucun paramètre de complétion pour borner les
    tours d'outil ou forcer une réponse finale. Chaque suite est un appel facturé, chiffré et
-   gardé (`structured.raw`, rôle `continuation`) ; le majorant d'un appel Mistral compte trois
-   appels ;
-3. sans réponse finale après les suites : la preuve est consignée avec `structured.finalAnswer:
+   gardé (`structured.raw`, rôle `continuation`) ; avec l'option, le majorant d'un appel Mistral
+   compte trois appels. Activer l'option change la mesure de Mistral par rapport à J0 : le
+   rapport comparé doit alors le déclarer ;
+4. sans réponse finale (sans l'option, ou après les suites) : la preuve est consignée avec `structured.finalAnswer:
    false` et `noTextReason` « sans réponse finale… », avec un texte vide (ou le seul texte
    rédigé avant les recherches, s'il y en a). Rien n'est inventé ; le raisonnement reste dans
    `structured.thinking`, jamais compté comme réponse.
@@ -107,7 +114,7 @@ Ce que fait OIA (`src/collector-oia/mistral.ts`) :
 **À vérifier au premier appel réel** : la documentation de Mistral donne `{}` comme corps
 d'exemple de l'ajout à une conversation, sans dire comment le modèle continue après une
 recherche. Ce point n'a jamais été essayé contre l'API (aucun appel payant). Si la suite ne
-produit pas de texte, le comportement retombe sur le point 3.
+produit pas de texte, le comportement retombe sur le point 4.
 
 ## 5. Écarts volontaires avec Elmo (récapitulatif)
 
@@ -115,7 +122,8 @@ produit pas de texte, le comportement retombe sur le point 3.
 2. Corps complet de la réponse OpenAI, au lieu de la réponse reconstruite.
 3. Anthropic : contenu des pages gardé ; les deux réponses gardées et payées quand l'appel est
    refait.
-4. Mistral : suite de conversation (2 au plus) quand aucun texte ne suit la dernière recherche ;
+4. Mistral : en option seulement (`OIA_VIS_MISTRAL_CONTINUATION=1`, désactivée par défaut), suite
+   de conversation (2 au plus) quand aucun texte ne suit la dernière recherche ;
    `content` en chaîne lu ; raisonnement et pages consultées gardés à part.
 5. OpenRouter : en-tête `X-Title: OIA Visibility`, sans `HTTP-Referer` (attribution
    d'application seulement, sans effet sur la réponse).
@@ -134,25 +142,85 @@ produit pas de texte, le comportement retombe sur le point 3.
 
 ## 6. Planification et garde-fou
 
-`src/collect-day.ts <sujet> <fenêtre> [--go]` (ou `scripts/collect-day.sh`) :
+`src/collect-day.ts <sujet> <fenêtre> [--juge jev|mistral|aucun] [--go]` (ou `scripts/collect-day.sh`) :
 - sans `--go` : plan du jour (appels par moteur, exclusions par langue) et coût au majorant,
   aucun appel ;
 - avec `--go` : refus si la fenêtre n'est pas `running`, si le jour UTC est hors de ses dates,
   si `OIA_VIS_MONTHLY_CAP_USD` n'est pas posé, ou si une clé manque (toutes vérifiées avant le
-  premier appel) ;
-- avant chaque appel : coût du mois + majorant de l'appel ≤ plafond, sinon arrêt (code 3). Le
-  coût du mois additionne les preuves `oia-direct` du mois de tous les sujets, les échecs au
+  premier appel, `TYPESAFE_API_KEY` comprise avec le juge `jev`, juge par défaut) ;
+- avant chaque appel : coût du mois + majorant de l'appel et de son jugement ≤ plafond, sinon
+  arrêt (code 3). Le coût du mois additionne les preuves `oia-direct` du mois de tous les sujets
+  (réponse et juge), les échecs au
   majorant et le dernier relevé du mois de `cost-journal.csv` (coût d'Elmo retenu par
   cost-guard.sh), les comptes des fournisseurs étant partagés ;
 - coût illisible (version servie absente de la grille, table ou journal illisible) : la preuve
   payée est gardée, la collecte s'arrête (code 3), et toute collecte suivante du mois est refusée
   jusqu'à la mise à jour de la grille ;
-- majorant d'un appel : celui de la grille, ×2 pour Anthropic (appel refait), ×3 pour Mistral
-  (deux suites).
+- majorant d'un appel : celui de la grille, ×2 pour Anthropic (appel refait), ×1 pour Mistral
+  (×3 avec l'option de suite), plus le majorant du juge (Jev : 8 appels × 0,001 $).
 
-Clés : `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `MISTRAL_API_KEY`, `OPENROUTER_API_KEY`, lues dans
-l'environnement du processus seulement, jamais affichées, jamais écrites ; une clé renvoyée par
-un fournisseur dans un message d'erreur est masquée.
+Clés : `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `MISTRAL_API_KEY`, `OPENROUTER_API_KEY`,
+`TYPESAFE_API_KEY`, lues dans l'environnement du processus, jamais affichées, jamais écrites ;
+une clé renvoyée par un fournisseur dans un message d'erreur est masquée.
+
+## 7. Fichier de clés
+
+`scripts/collect-day.sh` complète l'environnement par un fichier de configuration d'OIA
+(`scripts/load-keys.sh`), sans rien afficher :
+
+- emplacement : `OIA_VIS_KEYS_FILE`, par défaut `~/.oia/visibility.env` ; s'il n'existe pas, rien
+  n'est chargé (les clés déjà dans l'environnement servent seules) ;
+- droits : `600` exactement (`chmod 600 ~/.oia/visibility.env`), sinon refus ;
+- contenu : des lignes `NOM=valeur` et des lignes vides, rien d'autre (ni commentaire, ni
+  `export`, ni espace autour de `=`). Une paire de guillemets englobant la valeur est retirée ;
+- noms admis, et eux seuls : `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `OPENROUTER_API_KEY`,
+  `MISTRAL_API_KEY`, `TYPESAFE_API_KEY`, `OIA_VIS_MONTHLY_CAP_USD`, `OIA_VIS_MONTHLY_ALERT_USD`.
+  Tout autre nom fait refuser le fichier entier ;
+- le fichier n'est jamais exécuté (pas de `source`) : il est lu ligne à ligne et, seulement s'il
+  est valide en entier, ses valeurs sont exportées au seul processus de la collecte (et à ses
+  enfants). Un refus ne cite que le numéro de ligne et le nom, jamais une valeur.
+
+## 8. Juge des mentions (option D1 : Jev)
+
+Décision de Mickaël du 16 novembre 2026 : Jev de TypeSafe, modèle épinglé `jev-1.13.0`, appelé
+directement par OIA (`src/judge.ts`, et `src/judge-jev.ts`, repris d'Elmo sous licence MIT :
+`apps/worker/src/mention-judge/{jev,analyze,clean,passages}.ts` et `packages/lib/src/mentions.ts`).
+Détail de la requête d'Elmo : `docs/elmo-calculs-et-juge.md` §2.
+
+Chaîne, pour chaque réponse collectée, avant l'écriture de sa preuve (une seule ligne, ajout seul) :
+1. **correspondance déterministe** (un fait, `structured.mentions.facts`) : noms, alias et
+   domaines de la marque et des concurrents, en mot entier, sur le texte nettoyé comme Elmo ; pour
+   chaque entreprise nommée : le terme, sa forme exacte, la première position et le nombre de
+   mentions dans `rawText`, et la phrase exacte qui contient la première mention ;
+2. seules les réponses qui nomment au moins une entreprise suivie partent chez Jev
+   (`POST https://api.typesafe.ai/v1/systemone`), avec la requête de J0 : mêmes `RULES`, mêmes
+   critères, seuil de mention 0,3, réponse nettoyée tronquée à 50 000 caractères, 12 phrases et
+   3 phrases par passage, découpage sur `max_tokens_exceeded`, tampon `jev-1.13.0+request-1` ;
+3. Jev ne peut que **retirer** une mention et donner un sentiment et un passage ; son résultat
+   est rangé comme « extrait (Jev 1.13) » (`structured.mentions.judge`, avec `assessments`,
+   `removed`, `usage` de chaque appel et coût), jamais comme fait ;
+4. `brandMentioned` et `competitorsMentioned` au premier niveau de `structured`, comme à J0 :
+   nommé par la correspondance et non retiré par Jev. Si Jev échoue, ils valent `null` (présence
+   non tranchée), les faits restent, et l'échec est consigné.
+
+Configuration suivie, lue dans le sujet (`mentionConfigFrom`) : marque = `displayName`, alias non
+rejetés, domaines = site principal tel qu'écrit (Elmo mettait son site en URL complète dans la
+question posée à Jev), puis domaines nus des sites additionnels et des alias de type domaine ;
+concurrents non rejetés de `subject.yaml`, dans leur ordre (clés `c0`, `c1`…). La liste de
+concurrents d'Elmo a changé pendant J0 (note de la fenêtre dans measurement.yaml) : pour juger
+avec une autre liste que celle de `subject.yaml`, la passer à `runDay` (`mentionConfig`) ; la
+commande ne l'expose pas encore.
+
+Écarts avec Elmo, hors de la requête : appels en série, 6 reprises au plus sur 429 (Retry-After),
+au plus 8 appels par réponse (découpages compris), `usage` gardé, passage gardé en texte, pas de
+réutilisation d'un jugement précédent.
+
+Prix : aucun tarif dans le code d'Elmo (« 0,15 à 0,35 $ par 1 000 réponses » selon sa
+documentation). Majorant **provisoire** : 0,001 $ par appel (`JEV_PRICE`), à corriger sur la
+première facture TypeSafe.
+
+Options de juge : `jev` (défaut, `TYPESAFE_API_KEY` obligatoire avec `--go` ; la valeur `stub`
+d'Elmo est refusée), `aucun` (correspondance seule), `mistral` (non retenu : erreur explicite).
 
 Aucune tâche planifiée n'est installée. L'heure de lancement est `runTimeUtc` de la fenêtre ; la
 tâche quotidienne (launchd), les clés et l'activation sont des décisions de Mickaël.

@@ -1,10 +1,16 @@
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname as dirOf } from "node:path";
+import { fileURLToPath } from "node:url";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { CostUnreadableError, estimateDay, evidencePath, failuresPath, journalMonthUsd, monthSpendUsd, planDay, runDay } from "../src/collect-day";
-import { MissingKeyError, createOiaDirectCollector } from "../src/collector-oia-direct";
+import { MissingKeyError, createOiaDirectCollector, targetWorstCaseUsd } from "../src/collector-oia-direct";
 import { readEvidence } from "../src/evidence-store";
+import { createJudge, JEV_PRICE, judgeWorstCaseUsd, noJudge } from "../src/judge";
+import type { FetchLike } from "../src/collector-oia/http";
+import { execFileSync } from "node:child_process";
+import { chmodSync } from "node:fs";
 import { loadSubject } from "../src/load";
 import { fakeFetch, geminiResponse, mistralResponse, ok, perplexityResponse } from "./collector-oia-fixtures";
 
@@ -85,7 +91,7 @@ const fetchFor = (n = 3) =>
 
 const env = { ...KEYS, OIA_VIS_MONTHLY_CAP_USD: "30" };
 const run = (s: ReturnType<typeof makeSubject>, f: ReturnType<typeof fakeFetch>, extra: Partial<Parameters<typeof runDay>[0]> = {}) =>
-  runDay({ bundle: s.bundle, windowId: "w1", dataDir: s.data, collector: createOiaDirectCollector({ fetch: f.fetch, env, sleep: async () => {}, now }), env, now, ...extra });
+  runDay({ bundle: s.bundle, windowId: "w1", dataDir: s.data, collector: createOiaDirectCollector({ fetch: f.fetch, env, sleep: async () => {}, now }), env, now, judge: noJudge(), ...extra });
 
 describe("choix du moteur par question", () => {
   it("une question n'est envoyée qu'aux moteurs qui mesurent sa langue ; questions non actives ignorées", () => {
@@ -200,5 +206,112 @@ describe("collecte d'un jour", () => {
     const cache = JSON.parse(readFileSync(join(s.data, "sujet-fictif", "redirects-cache.json"), "utf8"));
     expect(Object.values(cache).sort()).toEqual(["https://resolu.example/AAA", "https://resolu.example/BBB"]);
     expect(resolved).toHaveLength(2);
+  });
+});
+
+/** Jev fictif : confirme chaque entreprise demandée (neutre). */
+const jevFetch = () => {
+  const seen: any[] = [];
+  const fetch: FetchLike = async (_url, init) => {
+    const body = JSON.parse(init.body!);
+    seen.push(body);
+    const answers = Object.fromEntries(Object.keys(body.questions).map((k) => [k, k.endsWith("__verdict") ? { choice: "neutral", probabilities: { neutral: 0.9, no_info: 0.1 } } : { choice: "p1", probabilities: { p1: 1 } }]));
+    const text = JSON.stringify({ answers, usage: { input_tokens: 500, output_tokens: 6 } });
+    return { ok: true, status: 200, headers: { get: () => null }, text: async () => text };
+  };
+  return { fetch, seen };
+};
+
+describe("juge des mentions dans la collecte", () => {
+  it("jev : seules les réponses qui nomment une entreprise suivie partent chez Jev ; présence au premier niveau ; coût du juge dans le mois", async () => {
+    const s = makeSubject();
+    const named = { ...perplexityResponse, choices: [{ finish_reason: "stop", message: { role: "assistant", content: "Sujet Fictif is a good pick.", annotations: [] } }] };
+    const f = fakeFetch({ [URL_MISTRAL]: [ok(mistralResponse)], [URL_OPENROUTER]: [ok(named), ok(perplexityResponse)] });
+    const j = jevFetch();
+    const judge = createJudge("jev", { fetch: j.fetch, env: { TYPESAFE_API_KEY: "ts-test-key-000000" }, sleep: async () => {} });
+    const sum = await run(s, f, { judge });
+    expect(sum.collected).toBe(3);
+    expect(j.seen).toHaveLength(1);
+    const rows = readEvidence(evidencePath(s.data, "sujet-fictif", "w1"));
+    const en = rows.find((r) => r.promptId === "en-01")!;
+    expect(en.structured).toMatchObject({ brandMentioned: true, competitorsMentioned: [] });
+    expect((en.structured.mentions as any).judge).toMatchObject({ status: "juge", kind: "extrait (Jev 1.13)" });
+    const others = rows.filter((r) => r.promptId !== "en-01");
+    expect(others.every((r) => r.structured.brandMentioned === false && (r.structured.mentions as any).judge.status === "non-envoye")).toBe(true);
+    const spend = monthSpendUsd(s.data, "2026-12", join(s.data, "absent.csv"));
+    expect(spend.judgeUsd).toBeCloseTo(JEV_PRICE.perCallUsd, 9);
+    expect(spend.usd).toBeCloseTo(sum.monthUsdAfter, 6);
+  });
+
+  it("le majorant du juge compte dans le plafond", async () => {
+    const s = makeSubject();
+    const journal = join(s.data, "cost-journal.csv");
+    // Assez pour la réponse Perplexity seule, pas pour la réponse plus le juge.
+    const t0 = planDay(s.bundle, "w1", DAY).calls[0]!.target;
+    const room = targetWorstCaseUsd(t0)! + JEV_PRICE.perCallUsd;
+    expect(room).toBeLessThan(targetWorstCaseUsd(t0)! + judgeWorstCaseUsd("jev"));
+    writeFileSync(journal, `utc_time,month_utc,retained_usd\n2026-12-01T10:00:00Z,2026-12,${30 - room}\n`);
+    const j = jevFetch();
+    const judge = createJudge("jev", { fetch: j.fetch, env: { TYPESAFE_API_KEY: "ts-test-key-000000" } });
+    const f = fetchFor();
+    const sum = await run(s, f, { judge, journalFile: journal });
+    expect(sum.stopped).toBe("plafond");
+    expect(f.seen).toHaveLength(0);
+    // Sans juge, la même marge suffit pour le premier appel.
+    const s2 = makeSubject();
+    writeFileSync(join(s2.data, "cost-journal.csv"), readFileSync(journal, "utf8"));
+    const f2 = fetchFor();
+    const sum2 = await run(s2, f2, { journalFile: join(s2.data, "cost-journal.csv") });
+    expect(sum2.collected).toBeGreaterThanOrEqual(1);
+  });
+});
+
+describe("fichier de clés (scripts/load-keys.sh)", () => {
+  const script = join(dirOf(fileURLToPath(import.meta.url)), "..", "scripts", "load-keys.sh");
+  /** Charge le fichier puis dit, pour chaque nom, s'il est posé et sa longueur ; aucune valeur n'est imprimée. */
+  const load = (file: string) =>
+    execFileSync("bash", ["-c", `set -euo pipefail; source "$1"; load_keys_file "$2"; for n in OPENAI_API_KEY TYPESAFE_API_KEY OIA_VIS_MONTHLY_CAP_USD; do echo "$n=\${!n:+set:\${#n}}:\${#n}"; done`, "_", script, file], {
+      encoding: "utf8",
+      env: { PATH: process.env.PATH ?? "" },
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+  const write = (content: string, mode = 0o600) => {
+    const dir = mkdtempSync(join(tmpdir(), "oia-keys-"));
+    const file = join(dir, "visibility.env");
+    writeFileSync(file, content);
+    chmodSync(file, mode);
+    return file;
+  };
+  const lengths = (out: string) => Object.fromEntries(out.trim().split("\n").map((l) => l.split("=") as [string, string]));
+
+  it("charge un fichier 600 aux noms connus, sans rien afficher des valeurs", () => {
+    const file = write('OPENAI_API_KEY=sk-fictive-0001\n\nTYPESAFE_API_KEY="ts-fictive-02"\nOIA_VIS_MONTHLY_CAP_USD=30\n');
+    const out = execFileSync("bash", ["-c", `source "$1"; load_keys_file "$2"; printf '%s|%s|%s' "\${#OPENAI_API_KEY}" "\${#TYPESAFE_API_KEY}" "$OIA_VIS_MONTHLY_CAP_USD"`, "_", script, file], { encoding: "utf8", env: { PATH: process.env.PATH ?? "" } });
+    expect(out).toBe("15|13|30");
+    expect(lengths(load(file)).OPENAI_API_KEY).toMatch(/^set/);
+  });
+
+  it("fichier absent : rien n'est chargé, pas d'erreur", () => {
+    expect(lengths(load(join(tmpdir(), "absent-oia-keys.env"))).OPENAI_API_KEY).not.toMatch(/^set/);
+  });
+
+  it("refus : droits autres que 600, nom inconnu, ligne mal formée ; rien d'exporté, aucune valeur dans le message", () => {
+    const refused = (file: string) => {
+      try {
+        load(file);
+        return "chargé";
+      } catch (e: any) {
+        return String(e.stderr);
+      }
+    };
+    const wide = refused(write("OPENAI_API_KEY=sk-fictive-0001\n", 0o644));
+    expect(wide).toMatch(/droits 644, 600 exigés/);
+    const unknown = refused(write("OPENAI_API_KEY=sk-fictive-0001\nPATH=/tmp/evil\n"));
+    expect(unknown).toMatch(/ligne 2 : nom PATH inconnu/);
+    expect(unknown).not.toContain("sk-fictive-0001");
+    const bad = refused(write("export OPENAI_API_KEY=sk-fictive-0001\n"));
+    expect(bad).toMatch(/ligne 1 : NOM=valeur attendu/);
+    expect(bad).not.toContain("sk-fictive");
+    expect(refused(write("# commentaire\n"))).toMatch(/NOM=valeur attendu/);
   });
 });

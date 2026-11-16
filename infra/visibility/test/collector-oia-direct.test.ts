@@ -20,6 +20,8 @@ import {
 } from "./collector-oia-fixtures";
 
 const KEYS = { OPENAI_API_KEY: "sk-test-openai-0000", ANTHROPIC_API_KEY: "sk-test-anthropic-0000", MISTRAL_API_KEY: "test-mistral-0000", OPENROUTER_API_KEY: "sk-or-test-0000" };
+/** Option de suite des conversations Mistral (désactivée par défaut). */
+const CONT = { ...KEYS, OIA_VIS_MISTRAL_CONTINUATION: "1" };
 const URL_OPENAI = "https://api.openai.com/v1/responses";
 const URL_ANTHROPIC = "https://api.anthropic.com/v1/messages";
 const URL_MISTRAL = "https://api.mistral.ai/v1/conversations";
@@ -140,9 +142,19 @@ describe("Mistral (Conversations API)", () => {
     expect(r.structured.searchItems).toBe(1);
   });
 
-  it("réponse arrêtée sur une recherche (vide dans Elmo) : suite de la même conversation, texte récupéré", async () => {
-    const f = fakeFetch({ [URL_MISTRAL]: [ok(mistralStopsOnTool)], [`${URL_MISTRAL}/conv_fictif_2`]: [ok(mistralContinuation)] });
+  it("par défaut (comme Elmo, comparabilité avec J0) : aucune suite, réponse consignée vide, finalAnswer false, avec sa raison", async () => {
+    const f = fakeFetch({ [URL_MISTRAL]: [ok(mistralNoFinalAnswer)] });
     const r = await make(f.fetch).collect(req("mistral", target));
+    expect(f.seen).toHaveLength(1);
+    expect(r.rawText).toBe("");
+    expect(r.structured).toMatchObject({ finalAnswer: false, continuationEnabled: false, continuations: 0 });
+    expect(String(r.structured.noTextReason)).toMatch(/^sans réponse finale.*désactivée/);
+    expect(r.costUsd).toBeCloseTo(runCostUsd({ provider: "mistral-api", version: "mistral-large-4", webSearch: true, usage: mistralNoFinalAnswer.usage, searchItems: 5 })!.usd, 6);
+  });
+
+  it("option OIA_VIS_MISTRAL_CONTINUATION=1 : réponse arrêtée sur une recherche (vide dans Elmo), suite de la même conversation, texte récupéré", async () => {
+    const f = fakeFetch({ [URL_MISTRAL]: [ok(mistralStopsOnTool)], [`${URL_MISTRAL}/conv_fictif_2`]: [ok(mistralContinuation)] });
+    const r = await make(f.fetch, CONT).collect(req("mistral", target));
     expect(f.seen.map((s) => s.url)).toEqual([URL_MISTRAL, `${URL_MISTRAL}/conv_fictif_2`]);
     // Aucune question ajoutée dans la suite.
     expect(f.seen[1]!.body).toEqual({ completion_args: { max_tokens: 8000 } });
@@ -158,7 +170,7 @@ describe("Mistral (Conversations API)", () => {
       [URL_MISTRAL]: [ok(mistralStopsOnTool)],
       [`${URL_MISTRAL}/conv_fictif_2`]: Array.from({ length: MISTRAL_MAX_CONTINUATIONS }, () => ok({ ...mistralStopsOnTool, outputs: [mistralStopsOnTool.outputs[1]] })),
     });
-    const r = await make(f.fetch).collect(req("mistral", target));
+    const r = await make(f.fetch, CONT).collect(req("mistral", target));
     expect(f.seen).toHaveLength(1 + MISTRAL_MAX_CONTINUATIONS);
     expect(r.rawText).toBe("");
     expect(r.structured.answered).toBe(false);
@@ -172,7 +184,7 @@ describe("Mistral : réponses sans réponse finale (forme exacte de la base d'El
 
   it("thinking > 3 tool.execution > thinking > 2 tool.execution : détectée, une suite donne la réponse finale, coût des deux appels", async () => {
     const f = fakeFetch({ [URL_MISTRAL]: [ok(mistralNoFinalAnswer)], [URL_CONV3]: [ok(mistralFinalAfterContinuation)] });
-    const r = await make(f.fetch).collect(req("mistral", target));
+    const r = await make(f.fetch, CONT).collect(req("mistral", target));
     expect(f.seen.map((s) => s.url)).toEqual([URL_MISTRAL, URL_CONV3]);
     expect(r.rawText).toBe("Réponse finale.");
     expect(r.structured).toMatchObject({ finalAnswer: true, continuations: 1, searchItems: 5 });
@@ -188,7 +200,7 @@ describe("Mistral : réponses sans réponse finale (forme exacte de la base d'El
       [URL_MISTRAL]: [ok(mistralNoFinalAnswer)],
       [URL_CONV3]: Array.from({ length: MISTRAL_MAX_CONTINUATIONS }, () => ok({ ...mistralNoFinalAnswer, outputs: mistralNoFinalAnswer.outputs.slice(4) })),
     });
-    const r = await make(f.fetch).collect(req("mistral", target));
+    const r = await make(f.fetch, CONT).collect(req("mistral", target));
     expect(f.seen).toHaveLength(1 + MISTRAL_MAX_CONTINUATIONS);
     expect(r.rawText).toBe("");
     expect(r.structured.finalAnswer).toBe(false);
@@ -198,7 +210,7 @@ describe("Mistral : réponses sans réponse finale (forme exacte de la base d'El
 
   it("suite vide : arrêt sans nouvel appel", async () => {
     const f = fakeFetch({ [URL_MISTRAL]: [ok(mistralNoFinalAnswer)], [URL_CONV3]: [ok({ conversation_id: "conv_fictif_3", outputs: [], usage: {} })] });
-    const r = await make(f.fetch).collect(req("mistral", target));
+    const r = await make(f.fetch, CONT).collect(req("mistral", target));
     expect(f.seen).toHaveLength(2);
     expect(r.structured.finalAnswer).toBe(false);
   });
@@ -291,10 +303,12 @@ describe("erreurs et reprises", () => {
     expect(r.costUsd).toBeGreaterThan(0.1);
   });
 
-  it("majorant d'une cible : plusieurs appels facturés pour Mistral et Anthropic", () => {
-    const m = targetWorstCaseUsd(parseTarget("mistral:mistral-api:mistral-large-4:online"))!;
+  it("majorant d'une cible : un appel pour Mistral sans l'option, trois avec ; deux pour Anthropic", () => {
+    const t = parseTarget("mistral:mistral-api:mistral-large-4:online");
+    const one = targetWorstCaseUsd(t)!;
+    expect(targetWorstCaseUsd(t, { mistralContinuation: true })).toBeCloseTo(one * (1 + MISTRAL_MAX_CONTINUATIONS), 9);
     const p = targetWorstCaseUsd(parseTarget("perplexity:openrouter:perplexity/sonar:online"))!;
-    expect(m).toBeGreaterThan(p);
+    expect(one).toBeGreaterThan(p);
     expect(vi.isMockFunction(globalThis.fetch)).toBe(false);
   });
 });

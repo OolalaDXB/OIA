@@ -20,7 +20,7 @@ import { assertCollectRequestSafe, type CollectRequest, type CollectResult, type
 import { anthropicProvider } from "./collector-oia/anthropic.js";
 import type { FetchLike, Sleep } from "./collector-oia/http.js";
 import { realSleep } from "./collector-oia/http.js";
-import { mistralProvider } from "./collector-oia/mistral.js";
+import { MISTRAL_MAX_CONTINUATIONS, mistralProvider } from "./collector-oia/mistral.js";
 import { openaiProvider } from "./collector-oia/openai.js";
 import { openrouterProvider } from "./collector-oia/openrouter.js";
 import type { ProviderId, ProviderImpl } from "./collector-oia/types.js";
@@ -64,11 +64,16 @@ export function providerWorstCaseUsd(provider: string): number | undefined {
   return entries.length ? Math.max(...entries.map(worstCaseRunUsd)) : undefined;
 }
 
+/** Suite des conversations Mistral arrêtées après la recherche : désactivée sauf OIA_VIS_MISTRAL_CONTINUATION=1. */
+export function mistralContinuationEnabled(env: Record<string, string | undefined>): boolean {
+  return env.OIA_VIS_MISTRAL_CONTINUATION === "1";
+}
+
 /** Majorant d'un appel pour une cible : son entrée de la grille, sinon celle du fournisseur. */
-export function targetWorstCaseUsd(t: Target): number | undefined {
+export function targetWorstCaseUsd(t: Target, opts: { mistralContinuation?: boolean } = {}): number | undefined {
   const entry = PRICE_GRID.find((e) => e.provider === t.provider && e.versions.test(t.model));
-  // Une suite de conversation Mistral ou un nouvel essai d'Anthropic font jusqu'à 3 appels facturés.
-  const calls = t.provider === "mistral-api" ? 3 : t.provider === "anthropic-api" ? 2 : 1;
+  // Appels facturés au plus : Anthropic refait l'appel une fois ; Mistral, avec l'option, demande deux suites.
+  const calls = t.provider === "mistral-api" ? (opts.mistralContinuation ? 1 + MISTRAL_MAX_CONTINUATIONS : 1) : t.provider === "anthropic-api" ? 2 : 1;
   const one = entry ? worstCaseRunUsd(entry) : providerWorstCaseUsd(t.provider);
   return one === undefined ? undefined : one * calls;
 }
@@ -110,7 +115,15 @@ export function createOiaDirectCollector(opts: OiaDirectOptions): Collector {
       const apiKey = opts.env[impl.keyEnv];
       if (!apiKey) throw new MissingKeyError(`clé absente de l'environnement : ${impl.keyEnv}`);
 
-      const r = await impl.call({ fetch: opts.fetch, sleep, apiKey, model: target.model, webSearch: target.webSearch, prompt: req.promptText });
+      const r = await impl.call({
+        fetch: opts.fetch,
+        sleep,
+        apiKey,
+        model: target.model,
+        webSearch: target.webSearch,
+        prompt: req.promptText,
+        mistralContinuation: mistralContinuationEnabled(opts.env),
+      });
 
       const worst = providerWorstCaseUsd(target.provider) ?? 0;
       const costs: CallCost[] = r.calls.map((c) => {
