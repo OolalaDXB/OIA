@@ -90,7 +90,7 @@ export function createMistralProvider(config: MistralConfig): MistralProvider {
   const maxCalls = config.maxCalls ?? Number.POSITIVE_INFINITY;
   const spent: MistralUsage = { calls: 0, inputTokens: 0, outputTokens: 0 };
 
-  async function call(system: string, user: string, model: string, attempt = 0): Promise<{ text: string; usage?: { prompt_tokens?: number; completion_tokens?: number } }> {
+  async function call(system: string, user: string, model: string, attempt = 0): Promise<{ text: string; usage?: { prompt_tokens?: number; completion_tokens?: number }; finish?: string; chunks?: string }> {
     if (attempt === 0 && spent.calls >= maxCalls) {
       // A budget that is only advisory is not a budget. Stopping mid-run is the
       // point: an unbounded agent loop against a paid API is exactly the failure
@@ -146,12 +146,14 @@ export function createMistralProvider(config: MistralConfig): MistralProvider {
       throw new Error(`Mistral API error ${res.status}: ${body}`);
     }
     const json = (await res.json()) as {
-      choices: Array<{ message?: { content?: MistralContent } }>;
+      choices: Array<{ message?: { content?: MistralContent }; finish_reason?: string }>;
       usage?: { prompt_tokens?: number; completion_tokens?: number };
     };
     spent.inputTokens += json.usage?.prompt_tokens ?? 0;
     spent.outputTokens += json.usage?.completion_tokens ?? 0;
-    return { text: contentText(json.choices[0]?.message?.content), usage: json.usage };
+    const c0 = json.choices[0];
+    const chunks = Array.isArray(c0?.message?.content) ? (c0!.message!.content as MistralChunk[]).map((c) => c?.type ?? "?").join("+") : typeof c0?.message?.content;
+    return { text: contentText(c0?.message?.content), usage: json.usage, finish: c0?.finish_reason ?? "?", chunks };
   }
 
   return {
@@ -165,7 +167,7 @@ export function createMistralProvider(config: MistralConfig): MistralProvider {
 
       let lastErr: unknown;
       for (let attempt = 0; attempt < 2; attempt++) {
-        const { text, usage } = await call(system, req.input, model);
+        const { text, usage, finish, chunks } = await call(system, req.input, model);
         config.onRawResponse?.({ purpose: req.purpose, text });
         try {
           const data = req.schema.parse(unwrapEnvelope(JSON.parse(extractJson(text)), req.schemaName));
@@ -193,12 +195,12 @@ export function createMistralProvider(config: MistralConfig): MistralProvider {
           const looksTruncated = text.trimStart().startsWith("{") && !text.trimEnd().endsWith("}");
           if (err instanceof SyntaxError && looksTruncated) {
             throw new Error(
-              `Mistral output was cut off at ${text.length} characters — raise maxOutputTokens (currently ${config.maxOutputTokens ?? 16_000}).`,
+              `Mistral output was cut off at ${text.length} characters (finish_reason ${finish}, content ${chunks}, ${usage?.completion_tokens ?? "?"} output tokens) — raise maxOutputTokens (currently ${config.maxOutputTokens ?? 16_000}).`,
             );
           }
         }
       }
-      throw new Error(`Mistral extract failed to produce valid ${req.schemaName}: ${String(lastErr)}`);
+      throw new Error(`Mistral extract failed to produce valid ${req.schemaName}: ${String(lastErr).slice(0, 300)}`);
     },
   };
 }

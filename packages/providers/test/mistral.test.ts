@@ -119,7 +119,7 @@ describe("output truncation", () => {
       maxOutputTokens: 4096,
       fetchImpl: fakeFetch([truncated]) as unknown as typeof fetch,
     });
-    await expect(p.extract(req)).rejects.toThrow(/cut off at \d+ characters — raise maxOutputTokens \(currently 4096\)/);
+    await expect(p.extract(req)).rejects.toThrow(/cut off at \d+ characters \(finish_reason [^)]*\) — raise maxOutputTokens \(currently 4096\)/);
   });
 
   it("does not burn a second call retrying something that will truncate identically", async () => {

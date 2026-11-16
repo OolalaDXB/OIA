@@ -248,7 +248,7 @@ async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
     : (() => {
         const apiKey = ctx.o.env.MISTRAL_API_KEY;
         if (!apiKey) throw new EngineRefusal("clé absente : MISTRAL_API_KEY");
-        return createMistralProvider({ apiKey, model: AUDIT_MODEL, maxCalls: 4, maxOutputTokens: 8000 });
+        return createMistralProvider({ apiKey, model: AUDIT_MODEL, maxCalls: 4, maxOutputTokens: 32_000 });
       })();
   const questions = await proposerQuestions(llm, { read, nom, langues, marches: sujet?.marches ?? [], n });
   const domaine = new URL(url).hostname.replace(/^www\./, "");
