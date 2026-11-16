@@ -161,3 +161,66 @@ Le moteur s'arrête dès que le coût engagé atteint le maximum vu au GO.
 - `vis_moteur_audit_debut(p_demande)` → fenêtre `<site>-audit-AAAAMMJJHHMI`. Exige le GO
   `vis.audit_ia`.
 - `vis_moteur_audit_resultat(p_demande, p_resultat jsonb)` → id de l'audit.
+
+## Note du contenu et dépôt GitHub (0016, appliquée)
+
+Trois notes de 0 à 100 : **technique**, **fonctionnel** et **commercial**. Chacune est la part
+des points obtenus sur les critères mesurés. Un critère vaut ok, non ou « non mesuré » (null).
+Une note sans aucun critère mesuré vaut null, jamais 0. Comme l'audit IA express, cette note
+n'entre pas dans le score de visibilité IA.
+
+- **Technique et fonctionnel** : critères déterministes, lus dans le HTML servi (12 pages au
+  plus) et dans le dépôt lié. Exemples : titres, descriptions, h1, langue, JSON-LD, viewport,
+  textes alternatifs, liens factices (#, SOCIAL_URL), lien public vers l'administration,
+  sitemap, llms.txt, secrets versionnés, contact direct, chemin de réservation ou de paiement,
+  offres liées depuis l'accueil, pages légales, page 404.
+- **Commercial** :
+  - critères déterministes : prix visibles, preuve sociale, appels à l'action ;
+  - plus une grille fixe notée par Mistral : proposition de valeur, public, différenciation,
+    offres détaillées, objections, confiance, parcours d'achat ;
+  - toute note positive doit citer un extrait exact du site. Une citation introuvable rend le
+    critère « non vérifiable » (null).
+- **Constats** : un par critère manqué, avec `cle` = `contenu:<id>`, `source` = `contenu` et
+  `categorie` = `technique`, `fonctionnel` ou `commercial`. Dans `vis_constats_v3`, l'état
+  (ouvert ou résolu) se compare désormais à la dernière demande terminée **du même type**.
+
+### Dépôt lié : lecture seule
+
+- `vis_depots_v3` donne le dépôt en vigueur par site : `depot` (« proprietaire/nom » ou null),
+  `branche`, `par`, `le`.
+- `vis_lier_depot(p_subject, p_depot, p_branche default null)` → id. Un `p_depot` null délie
+  le dépôt.
+- Le moteur lit le dépôt par l'API GitHub, sans clonage ni exécution :
+  - dépôt public : fichiers bruts ;
+  - dépôt privé : jeton `OIA_DEPOTS_TOKEN` (Contents: read), secret du dépôt OIA ;
+  - le contenu des fichiers sensibles (.env, clés, certificats…) n'est jamais lu ; leur seule
+    présence est un constat critique.
+- Un dépôt illisible n'empêche pas la note : l'erreur est consignée dans `depot_lu.erreur`.
+
+### Coût et geste
+
+- `vis_note_contenu_estimation_v3` : `depot`, `cout_max_usd`, `cout_habituel_usd`, le budget
+  du mois et `etat`. Le tarif vient de `vis.tarif_moteur`, ligne `note_contenu`.
+- `vis_lancer_note_contenu(p_subject, p_cout_vu_usd)` → uuid. Mêmes règles que l'audit : coût
+  vu, plafonds global et client, double clic.
+- `vis_notes_contenu_v3` : historique, statut, `note_technique`, `note_fonctionnelle`,
+  `note_commerciale`, `criteres`, `synthese`, `depot_lu`, `cout_reel_usd`, `derniere`.
+
+### Moteur
+
+- `vis_moteur_note_debut(p_demande)` → `{note_id, depot, cout_max_usd}`. Refusée sans GO.
+- `vis_moteur_analyse` et `vis_moteur_constat` acceptent NOTE_CONTENU. La nature et la source
+  `contenu` lui sont réservées.
+
+## Serveur MCP `oia-depot`
+
+Déclaré dans `.mcp.json` ; code dans `infra/visibility/src/mcp/depot-server.ts`. Il sert aux
+agents d'OIA (SEO Command technique, contenu, conversion) et à Claude.
+
+- Transport stdio (JSON-RPC), sans dépendance externe.
+- **Lecture seule** : aucun outil n'écrit, ne pousse ni n'exécute quoi que ce soit.
+- Liste blanche obligatoire `OIA_DEPOTS` (« proprietaire/nom », séparés par des virgules) ;
+  jeton facultatif `OIA_DEPOTS_TOKEN`.
+- Outils : `depot_infos`, `depot_arborescence`, `depot_lire` (refuse les fichiers sensibles),
+  `depot_chercher`, `depot_note_technique` (critères déterministes sur les pages du dépôt, sans
+  modèle ni coût).
