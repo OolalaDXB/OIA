@@ -115,6 +115,8 @@ export function createMistralProvider(config: MistralConfig): MistralProvider {
         // Native JSON mode: a constraint, not a polite request in the prompt.
         response_format: { type: "json_object" },
         temperature: 0,
+        // mistral-large-4 rejects greedy sampling unless top_p is exactly 1 (error 3054).
+        top_p: 1,
         // A listing page with twenty programmes does not fit in 4096 tokens.
         // It did not fail loudly either: the JSON came back cut off mid-array
         // and surfaced as a generic parse error ("Expected ',' or ']' at
