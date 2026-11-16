@@ -35,19 +35,21 @@ export interface QuestionAudit {
   source: string | null;
 }
 
+// Tolérant sur la forme (casse, longueur), strict sur le fond : une question reste une question.
+const texte = (min: number, max: number) => z.string().trim().min(min).transform((x) => x.slice(0, max));
 const QuestionsSchema = z.object({
   questions: z
     .array(
       z.object({
-        sujet: z.string().min(3).max(120),
-        question: z.string().min(10).max(400),
-        langue: z.string().regex(/^[a-z]{2}$/),
-        marquee: z.boolean(),
-        source: z.string().max(300).nullable().optional(),
+        sujet: texte(2, 120),
+        question: texte(10, 600),
+        langue: z.string().trim().transform((x) => x.slice(0, 2).toLowerCase()).pipe(z.string().regex(/^[a-z]{2}$/)),
+        marquee: z.preprocess((x) => (x === "true" ? true : x === "false" ? false : x), z.boolean()),
+        source: z.string().nullable().optional().transform((x) => (x ? x.slice(0, 300) : null)),
       }),
     )
     .min(5)
-    .max(40),
+    .transform((q) => q.slice(0, 40)),
 });
 
 /** Résumé du site pour le modèle : titres, H1, extraits de texte, pages. */
@@ -173,18 +175,18 @@ const PlanSchema = z.object({
   actions: z
     .array(
       z.object({
-        priorite: z.enum(["P0", "P1", "P2", "P3"]),
-        type: z.enum(["TECH_FIX", "CONTENT_GAP", "ENTITY_INCONSISTENCY", "SOURCE_TARGET", "FIX_FACT"]),
-        titre: z.string().min(5).max(160),
-        action: z.string().min(20).max(1200),
-        pourquoi: z.string().min(10).max(600),
-        questions: z.array(z.string()).max(20),
-        impact: z.enum(["low", "medium", "high"]),
-        effort: z.enum(["XS", "S", "M", "L", "XL"]),
+        priorite: z.preprocess((x) => String(x).trim().toUpperCase(), z.enum(["P0", "P1", "P2", "P3"])),
+        type: z.preprocess((x) => String(x).trim().toUpperCase(), z.enum(["TECH_FIX", "CONTENT_GAP", "ENTITY_INCONSISTENCY", "SOURCE_TARGET", "FIX_FACT"])),
+        titre: texte(5, 160),
+        action: texte(20, 1200),
+        pourquoi: texte(10, 600),
+        questions: z.array(z.string()).default([]).transform((q) => q.slice(0, 20)),
+        impact: z.preprocess((x) => String(x).trim().toLowerCase(), z.enum(["low", "medium", "high"])),
+        effort: z.preprocess((x) => String(x).trim().toUpperCase(), z.enum(["XS", "S", "M", "L", "XL"])),
       }),
     )
     .min(3)
-    .max(15),
+    .transform((a) => a.slice(0, 15)),
 });
 export type Plan = z.infer<typeof PlanSchema>;
 

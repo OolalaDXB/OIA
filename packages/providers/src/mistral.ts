@@ -200,7 +200,7 @@ export function createMistralProvider(config: MistralConfig): MistralProvider {
           }
         }
       }
-      throw new Error(`Mistral extract failed to produce valid ${req.schemaName}: ${String(lastErr).slice(0, 300)}`);
+      throw new Error(`Mistral extract failed to produce valid ${req.schemaName}: ${describeError(lastErr)}`);
     },
   };
 }
@@ -218,4 +218,13 @@ export function contentText(content: MistralContent | undefined): string {
     .filter((c) => c && (c.type === "text" || c.type === undefined) && typeof c.text === "string")
     .map((c) => c.text)
     .join("");
+}
+
+/** One readable line: Zod issues as « path: message », never the model's content. */
+function describeError(err: unknown): string {
+  const issues = (err as { issues?: { path: (string | number)[]; message: string }[] })?.issues;
+  if (Array.isArray(issues)) {
+    return issues.slice(0, 5).map((i) => `${i.path.join(".") || "(racine)"}: ${i.message}`).join(" ; ").slice(0, 400);
+  }
+  return String(err instanceof Error ? err.message : err).replace(/\s+/g, " ").slice(0, 300);
 }
