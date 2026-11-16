@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRouter, useRouterState } from "@tanstack/react-router";
 import { queryOptions, useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 import { useOiaAuth } from "@/lib/oia-auth";
@@ -324,15 +325,37 @@ export function optionsSujetsVisibility(userId: string) {
 export function optionsDonneesVisibility(userId: string, sujet: SujetVisibility, sujets: SujetVisibility[]) {
   return queryOptions({ queryKey: ["visibility-reel", userId, sujet.id], queryFn: () => lireDonneesSujetVisibility(sujet, sujets), retry: false, staleTime: Infinity, refetchOnWindowFocus: false, refetchOnReconnect: false });
 }
+export function avecSiteDansRecherche<T extends Record<string, unknown>>(recherche: T, site: string) {
+  return { ...recherche, site };
+}
+export function adresseAvecSite(adresse: string, site: string) {
+  const url = new URL(adresse, "https://visibility.local");
+  url.searchParams.set("site", site);
+  return `${url.pathname}${url.search}${url.hash}`;
+}
+
 export function useVisibilityReel() {
   const auth = useOiaAuth();
+  const router = useRouter();
+  const siteUrl = useRouterState({ select: (s) => typeof (s.location.search as Record<string, unknown>)["site"] === "string" ? String((s.location.search as Record<string, unknown>)["site"]) : "" });
   const userId = auth.user?.id ?? "";
   const [sujetId, setSujetId] = useState<string | null>(null);
   const sujetsQuery = useQuery({ ...optionsSujetsVisibility(userId), enabled: Boolean(userId) && !auth.loading });
   const sujets = sujetsValides(sujetsQuery.data ?? []);
+  const choisirSujet = (id: string) => {
+    setSujetId(id);
+    router.history.replace(adresseAvecSite(window.location.href, id));
+  };
   useEffect(() => { setSujetId(null); }, [userId]);
-  useEffect(() => { if (sujets.length && !sujets.some((s) => s.id === sujetId)) setSujetId(sujets[0]!.id); }, [sujetsQuery.data, sujetId]);
+  useEffect(() => {
+    if (!sujets.length) return;
+    if (siteUrl && sujets.some((s) => s.id === siteUrl)) {
+      if (sujetId !== siteUrl) setSujetId(siteUrl);
+      return;
+    }
+    if (!sujetId || !sujets.some((s) => s.id === sujetId)) choisirSujet(sujets[0]!.id);
+  }, [sujetsQuery.data, siteUrl, sujetId]);
   const sujet = sujets.find((s) => s.id === sujetId) ?? null;
   const donneesQuery = useQuery({ ...optionsDonneesVisibility(userId, sujet ?? { id: "", clientId: "", nom: "", role: "", statut: "", domaines: [] }, sujets), enabled: Boolean(userId && sujet) });
-  return { auth, sujets, sujetId: sujet?.id ?? null, setSujetId, sujetsQuery, donneesQuery };
+  return { auth, sujets, sujetId: sujet?.id ?? null, setSujetId: choisirSujet, sujetsQuery, donneesQuery };
 }

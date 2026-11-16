@@ -65,7 +65,7 @@ export function Section({ titre, aside, children }: { titre: ReactNode; aside?: 
   return (
     <section className="card min-w-0 p-5 md:p-6">
       <div className="mb-5 flex items-baseline justify-between gap-4">
-        <h2 className="text-base">{titre}</h2>
+        <h2 className="text-lg font-medium tracking-[-0.01em]">{titre}</h2>
         {aside}
       </div>
       {children}

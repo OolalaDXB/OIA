@@ -193,6 +193,19 @@
   background: var(--indicateur-couleur);
 }
 .indicateur-ton h3, .indicateur-valeur { color: var(--indicateur-couleur); }
+.visibility-site-header {
+  border: 1px solid color-mix(in oklab, var(--module-visibility) 24%, var(--border));
+  border-top: 4px solid var(--module-visibility);
+  background: color-mix(in oklab, var(--module-visibility) 6%, var(--card));
+}
+.visibility-nav-groupe { min-width: 0; }
+.visibility-nav-groupe h2 { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; color: var(--foreground); font-size: 13px; font-weight: 600; }
+.visibility-nav-groupe nav { display: flex; flex-wrap: wrap; gap: 2px 10px; }
+.visibility-nav-groupe nav a { min-height: 40px; padding: 6px 0; color: var(--muted-foreground); font-size: 13px; }
+.visibility-nav-groupe nav a[aria-current="page"] { color: var(--module-visibility); font-weight: 600; text-decoration: underline; text-underline-offset: 5px; }
+.score-panel { border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; background: var(--card); }
+.score-panel-principal { border-color: color-mix(in oklab, var(--module-visibility) 30%, var(--border)); background: color-mix(in oklab, var(--module-visibility) 5%, var(--card)); }
+.carte-chiffre { border-left: 4px solid var(--carte-couleur, var(--module-visibility)); border-radius: var(--radius); padding: 16px; background: color-mix(in oklab, var(--carte-couleur, var(--module-visibility)) 8%, var(--card)); }
 .logo-identite {
   display: inline-flex;
   width: 28px;

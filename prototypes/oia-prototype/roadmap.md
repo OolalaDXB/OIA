@@ -1,6 +1,14 @@
 # Roadmap
 
 ## Open
+- [x] Visibility : séparer visibilité IA et santé technique, actualiser accueil, priorités, historique et tests.
+- [x] Visibility : regrouper la navigation, renforcer la hiérarchie visuelle et les graphiques sans changer la palette.
+- [x] Visibility : résumer J0 quand une seule fenêtre existe et traduire toutes les valeurs techniques visibles.
+- [x] Visibility : ajouter un sélecteur de site persistant dans `?site=` avec accès à l’ajout, puis tester et documenter sans publier.
+- [x] Audits externes : vérifier depuis la navigation plusieurs audits et sites, les dix recommandations, tous les rôles et les états vides/erreur sur ordinateur et mobile.
+- [x] Visibility : ajouter les audits externes, leur matrice, les classements, le rapport sûr et la comparaison séparée du score OIA.
+- [x] Visibility : importer CSV et Markdown via la RPC owner/approver, avec aperçu, erreurs exactes et badge de source des recommandations.
+- [x] Visibility : tester CSV, matrice, concurrents, Markdown, paramètres RPC et parcours desktop/mobile, puis documenter les écarts sans publier.
 - [x] Visibility v3 : brancher score, historique, analyses, constats, SEO Command et la demande d'analyse sur les vues et RPC autorisées.
 - [x] Visibility v3 : livrer les écrans Score, Performance, À corriger, rapports, sentiment, réseaux sociaux et graphiques orientés action.
 - [x] Visibility v3 : tester les couleurs, valeurs non mesurées, appels RPC, tri, Markdown et profils, vérifier ordinateur et mobile, documenter les écarts sans publier.

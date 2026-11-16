@@ -10,8 +10,11 @@ export type ConstatV3 = LigneVisibility<"vis_constats_v3">;
 export type DemandeV2 = LigneVisibility<"vis_demandes_v2">;
 export type SeoCommandV1 = LigneVisibility<"vis_seo_command_v1">;
 export type PlanificateurV1 = LigneVisibility<"vis_planificateur_v1">;
+export type AuditExterneV3 = LigneVisibility<"vis_audits_externes_v3">;
+export type AuditExterneLigneV3 = LigneVisibility<"vis_audit_externe_lignes_v3">;
 
 export const VUES_VISIBILITY_V3 = ["vis_score_v3", "vis_score_historique_v3", "vis_analyses_v3", "vis_constats_v3"] as const;
+export const VUES_AUDITS_VISIBILITY = ["vis_audits_externes_v3", "vis_audit_externe_lignes_v3"] as const;
 export const VUES_SEO_VISIBILITY = ["vis_seo_command_v1", "vis_planificateur_v1"] as const;
 
 export type DonneesVisibilityV3 = {
@@ -21,29 +24,36 @@ export type DonneesVisibilityV3 = {
   constats: ConstatV3[];
   seo: SeoCommandV1[];
   planificateur: PlanificateurV1[];
+  audits: AuditExterneV3[];
+  auditLignes: AuditExterneLigneV3[];
 };
 
 export async function lireVisibilityV3(): Promise<DonneesVisibilityV3> {
-  const [scores, historique, analyses, constats, seo, planificateur] = await Promise.all([
+  const [scores, historique, analyses, constats, seo, planificateur, audits, auditLignes] = await Promise.all([
     lireVueVisibility("vis_score_v3"),
     lireVueVisibility("vis_score_historique_v3"),
     lireVueVisibility("vis_analyses_v3"),
     lireVueVisibility("vis_constats_v3"),
     lireVueVisibility("vis_seo_command_v1"),
     lireVueVisibility("vis_planificateur_v1"),
+    lireVueVisibility("vis_audits_externes_v3"),
+    lireVueVisibility("vis_audit_externe_lignes_v3"),
   ]);
-  return { scores, historique, analyses, constats, seo, planificateur };
+  return { scores, historique, analyses, constats, seo, planificateur, audits, auditLignes };
 }
 
-export const COMPOSANTES_SCORE = [
-  { id: "visibilite_ia", label: "Visibilité IA", poids: 35, mesure: "ia" },
-  { id: "seo_technique", label: "SEO technique", poids: 15, mesure: "analyse" },
-  { id: "performance_mobile", label: "Performance mobile", poids: 15, mesure: "analyse" },
-  { id: "notoriete_ia", label: "Notoriété IA", poids: 15, mesure: "ia" },
-  { id: "accessibilite", label: "Accessibilité", poids: 10, mesure: "analyse" },
-  { id: "performance_ordinateur", label: "Performance ordinateur", poids: 5, mesure: "analyse" },
-  { id: "bonnes_pratiques", label: "Bonnes pratiques", poids: 5, mesure: "analyse" },
+export const COMPOSANTES_IA = [
+  { id: "visibilite_ia", label: "Questions sans le nom", mesure: "ia" },
+  { id: "notoriete_ia", label: "Questions avec le nom", mesure: "ia" },
 ] as const;
+export const COMPOSANTES_SITE = [
+  { id: "performance_mobile", label: "Performance mobile", mesure: "analyse" },
+  { id: "seo_technique", label: "SEO technique", mesure: "analyse" },
+  { id: "accessibilite", label: "Accessibilité", mesure: "analyse" },
+  { id: "performance_ordinateur", label: "Performance ordinateur", mesure: "analyse" },
+  { id: "bonnes_pratiques", label: "Bonnes pratiques", mesure: "analyse" },
+] as const;
+export const COMPOSANTES_SCORE = [...COMPOSANTES_IA, ...COMPOSANTES_SITE] as const;
 export type ComposanteScore = (typeof COMPOSANTES_SCORE)[number]["id"];
 
 export function valeurComposante(score: ScoreV3 | undefined, composante: ComposanteScore) {
@@ -80,6 +90,39 @@ export function trierConstats(constats: ConstatV3[]) {
 
 export function actionsPrioritaires(constats: ConstatV3[], subject: string, limite = 3) {
   return trierConstats(constats.filter((c) => c.subject_id === subject && c.etat === "ouvert")).slice(0, limite);
+}
+
+export type RecommandationV2 = LigneVisibility<"vis_recommandations_v2">;
+export type ActionPrioritaire = {
+  id: string;
+  titre: string;
+  explication: string;
+  impact: string | null;
+  effort: string | null;
+  origine: "Visibilité IA" | "Santé technique";
+};
+/** Les recommandations IA en attente priment, puis les constats techniques ouverts. */
+export function actionsPrioritairesMixtes(recommandations: RecommandationV2[], constats: ConstatV3[], subject: string, limite = 3): ActionPrioritaire[] {
+  const ia = recommandations
+    .filter((r) => r.subject_id === subject && r.etat === "pending")
+    .sort((a, b) => (a.priorite ?? 999) - (b.priorite ?? 999))
+    .map((r): ActionPrioritaire => ({
+      id: r.id ?? `recommandation-${r.priorite ?? 0}`,
+      titre: r.titre ?? "Recommandation de visibilité IA",
+      explication: r.enonce ?? "Recommandation en attente de décision.",
+      impact: r.impact ?? null,
+      effort: r.effort ?? null,
+      origine: "Visibilité IA",
+    }));
+  const techniques = actionsPrioritaires(constats, subject).map((c): ActionPrioritaire => ({
+    id: c.id ?? c.cle ?? "constat",
+    titre: c.titre ?? "Constat technique",
+    explication: c.explication ?? "Correction technique à examiner.",
+    impact: c.impact ?? null,
+    effort: c.effort ?? null,
+    origine: "Santé technique",
+  }));
+  return [...ia, ...techniques].slice(0, limite);
 }
 
 export function variationScore(score: ScoreV3 | undefined, historique: HistoriqueScoreV3[]) {
@@ -210,16 +253,18 @@ const ligne = <T,>(valeur: Partial<T>): T => valeur as T;
 /** Données uniquement destinées aux visiteurs non connectés, signalées par le Shell. */
 export const donneesDemoVisibilityV3: DonneesVisibilityV3 = {
   scores: [ligne<ScoreV3>({
-    subject_id: "studio-ardoise", client_id: "studio", score: 68, visibilite_ia: 15, notoriete_ia: 64,
+    subject_id: "studio-ardoise", client_id: "studio", score: 19, score_site: 97, visibilite_ia: 0, notoriete_ia: 64,
     performance_mobile: 88, performance_ordinateur: 100, seo_technique: 100, accessibilite: 100,
     bonnes_pratiques: 100, manquantes: [], analyse_le: "2026-11-16T10:00:00Z", fenetre_ia: "f3",
     constats_ouverts: 4, constats_critiques: 1, constats_resolus: 2,
   })],
   historique: [
-    ligne<HistoriqueScoreV3>({ subject_id: "studio-ardoise", le: "2026-11-09T10:00:00Z", composante: "score", valeur: 61, origine: "analyse", reference: "a1" }),
+    ligne<HistoriqueScoreV3>({ subject_id: "studio-ardoise", le: "2026-11-09T10:00:00Z", composante: "score", valeur: 13, origine: "analyse", reference: "a1" }),
     ligne<HistoriqueScoreV3>({ subject_id: "studio-ardoise", le: "2026-11-09T10:00:00Z", composante: "performance_mobile", valeur: 76, origine: "analyse", reference: "a1" }),
-    ligne<HistoriqueScoreV3>({ subject_id: "studio-ardoise", le: "2026-11-16T10:00:00Z", composante: "score", valeur: 68, origine: "analyse", reference: "a2" }),
+    ligne<HistoriqueScoreV3>({ subject_id: "studio-ardoise", le: "2026-11-16T10:00:00Z", composante: "score", valeur: 19, origine: "analyse", reference: "a2" }),
     ligne<HistoriqueScoreV3>({ subject_id: "studio-ardoise", le: "2026-11-16T10:00:00Z", composante: "performance_mobile", valeur: 88, origine: "analyse", reference: "a2" }),
+    ligne<HistoriqueScoreV3>({ subject_id: "studio-ardoise", le: "2026-11-09T10:00:00Z", composante: "score_site", valeur: 94, origine: "analyse", reference: "a1" }),
+    ligne<HistoriqueScoreV3>({ subject_id: "studio-ardoise", le: "2026-11-16T10:00:00Z", composante: "score_site", valeur: 97, origine: "analyse", reference: "a2" }),
   ],
   analyses: [
     ligne<AnalyseV3>({ id: "lh-mobile", subject_id: "studio-ardoise", nature: "lighthouse", strategie: "mobile", statut: "fait", derniere: true, recu_le: "2026-11-16T10:00:00Z", outil: "Lighthouse 12.6.0", url: "https://studio-ardoise.fr", scores: { performance: 0.88, accessibilite: 1, bonnes_pratiques: 1, seo: 1 }, metriques: { lcp_ms: 2300, fcp_ms: 1400, cls: 0.06, tbt_ms: 180, si_ms: 2500, ttfb_ms: 420, poids_ko: 1450, requetes: 58 }, resultat: { opportunites: [{ id: "images", titre: "Différer les images hors écran", gain_ms: 450, gain_ko: 280 }, { id: "js", titre: "Réduire le JavaScript inutilisé", gain_ms: 220, gain_ko: 90 }] } }),
@@ -234,4 +279,6 @@ export const donneesDemoVisibilityV3: DonneesVisibilityV3 = {
   ],
   seo: [],
   planificateur: [],
+  audits: [],
+  auditLignes: [],
 };

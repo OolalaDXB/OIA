@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Section, Statut } from "@/components/oia/ui";
 import { FaviconSource } from "@/components/oia/identites";
-import { menuVisibility } from "@/components/oia/visibility-ui";
+import { libelleVisibility, menuVisibility } from "@/components/oia/visibility-ui";
 import { useGesteVisibility, useVisibilityPilotage } from "@/lib/donnees/visibility-pilotage-provider";
 import { dollars, type LignePilotage } from "@/lib/donnees/visibility-pilotage";
 import { useSelectionVisibility } from "@/lib/donnees/provider";
@@ -37,7 +37,7 @@ export function BandeauMoteur() {
   const etat = m?.etat ?? "muet";
   const muet = etat === "muet";
   return <div role={muet ? "alert" : "status"} className="mb-5 flex flex-wrap items-center justify-between gap-3 border-y border-border py-3 text-sm">
-    <Statut etat={muet ? "bloquant" : etat === "en_retard" ? "verifier" : "conforme"} label={`Moteur ${etat.replace("_", " ")}`} />
+    <Statut etat={muet ? "bloquant" : etat === "en_retard" ? "verifier" : "conforme"} label={`Moteur ${libelleVisibility(etat).toLocaleLowerCase("fr-FR")}`} />
     <span className="text-muted-foreground">{muet ? "Les mesures ne tournent pas : le moteur n'est pas encore installé." : `${m?.hote ?? "Hôte non fourni"} · ${global.moteur[0]?.demandes_en_file ?? 0} demande(s) en file`}</span>
     <Link to="/visibility/$onglet" params={{ onglet: "activite" }} className="inline-flex min-h-11 items-center text-xs underline underline-offset-4">Activité du moteur</Link>
   </div>;
@@ -101,17 +101,17 @@ export function PortefeuilleVisibility() {
   const lignes = global?.portefeuille ?? [];
   const clients = [...new Map(lignes.filter((l) => l.client_id).map((l) => [l.client_id!, { id: l.client_id!, nom: l.client_nom || l.client_id! }])).values()];
   return <ChargementPilotage><BandeauMoteur />
-    <div className="mb-6 flex flex-wrap items-center justify-between gap-3"><p className="text-sm text-muted-foreground">Chaque ligne indique la prochaine action et la personne concernée.</p><Button className="min-h-11" onClick={() => setAjout((v) => !v)}><Plus aria-hidden="true" />Ajouter un site</Button></div>
+    <div className="mb-6 flex flex-wrap items-center justify-between gap-3"><p className="text-sm text-muted-foreground">Chaque ligne indique la prochaine action et la personne concernée.</p><Button id="ajouter-un-site" className="min-h-11 scroll-mt-6" onClick={() => setAjout((v) => !v)}><Plus aria-hidden="true" />Ajouter un site</Button></div>
     {ajout && <FormulaireSite clients={clients} onFerme={() => setAjout(false)} />}
     <Section titre="Portefeuille" aside={<span className="num text-sm text-tertiary">{lignes.length} site(s)</span>}>
       {lignes.length === 0 ? <p className="text-sm text-muted-foreground">Aucun site dans votre portefeuille.</p> : <div className="overflow-x-auto"><table className="w-full min-w-[1080px] text-sm"><thead className="text-left text-xs text-tertiary"><tr className="border-b border-border">{["Site", "Étape", "Prochaine action", "Présence non marquée", "Coût du mois", "Alertes"].map((h) => <th key={h} className="py-2 pr-4 font-normal">{h}</th>)}</tr></thead><tbody>{lignes.map((l) => {
         const etape = l.etape ?? "demande";
         return <tr key={l.subject_id} className="border-b border-border last:border-0"><td className="py-4 pr-4"><Link to="/sites/$slug" params={{ slug: l.subject_id ?? "" }} onClick={() => l.subject_id && selection.setSujetId(l.subject_id)} className="flex min-h-11 items-center gap-2.5 underline underline-offset-4"><FaviconSource source={l.site_url ?? ""} petite /><span>{l.nom || l.subject_id}<span className="block text-xs font-normal text-tertiary no-underline">{l.site_url} · {l.client_nom}</span></span></Link></td>
-          <td className="pr-4"><Statut etat={etape === "bloque" ? "bloquant" : ["a_valider", "concurrents_a_valider", "rapport_a_valider"].includes(etape) ? "verifier" : "conforme"} label={etiquettesEtapes[etape] ?? etape} />{etape === "mesure_en_cours" && <span className="num mt-1 block text-xs text-tertiary">Jour {l.jour_courant ?? "?"} sur 5</span>}</td>
+          <td className="pr-4"><Statut etat={etape === "bloque" ? "bloquant" : ["a_valider", "concurrents_a_valider", "rapport_a_valider"].includes(etape) ? "verifier" : "conforme"} label={etiquettesEtapes[etape] ?? libelleVisibility(etape)} />{etape === "mesure_en_cours" && <span className="num mt-1 block text-xs text-tertiary">Jour {l.jour_courant ?? "?"} sur 5</span>}</td>
           <td className="pr-4"><span>{l.prochaine_action || "Aucune action"}</span><span className="block text-xs text-tertiary">Qui : {quiLabel[l.qui ?? ""] ?? l.qui}</span></td>
           <td className="num pr-4">{l.presence_non_marquee === null ? "Non mesurable" : `${l.presence_non_marquee} %`}<span className="block text-xs text-tertiary">{l.presence_effectif ?? "Effectif non fourni"}</span></td>
           <td className="num pr-4">{dollars(l.cout_mois_usd)}<span className="block text-xs text-tertiary">Plafond : {l.plafond_mois_usd === null ? "non fixé" : dollars(l.plafond_mois_usd)}</span></td>
-          <td className="num">{l.alertes_ouvertes ?? 0}<span className="block text-xs text-tertiary">{peutGerer(l.mon_role) ? l.mon_role : "lecture seule"}</span></td></tr>;
+          <td className="num">{l.alertes_ouvertes ?? 0}<span className="block text-xs text-tertiary">{peutGerer(l.mon_role) ? libelleVisibility(l.mon_role) : "Lecture seule"}</span></td></tr>;
       })}</tbody></table></div>}
     </Section>
   </ChargementPilotage>;
@@ -122,7 +122,7 @@ export function ActiviteMoteur() {
   const geste = useGesteVisibility();
   const demandes = [...(global?.demandes ?? [])].sort((a, b) => (b.demande_le ?? "").localeCompare(a.demande_le ?? ""));
   return <ChargementPilotage><BandeauMoteur /><Section titre="Demandes au moteur" aside={<span className="num text-sm text-tertiary">{demandes.length}</span>}>
-    {demandes.length === 0 ? <p className="text-sm text-muted-foreground">Aucune demande enregistrée.</p> : <div className="overflow-x-auto"><table className="w-full min-w-[850px] text-sm"><thead className="text-left text-xs text-tertiary"><tr className="border-b border-border">{["Demande", "Sujet", "Statut", "Tentatives", "Détail", "Action"].map((h) => <th key={h} className="py-2 pr-4 font-normal">{h}</th>)}</tr></thead><tbody>{demandes.map((d) => <tr key={d.id} className="border-b border-border last:border-0"><td className="py-3 pr-4">{d.type}<span className="block text-xs text-tertiary">{d.demande_le}</span></td><td className="pr-4">{d.subject_id ?? "Création en attente"}</td><td className="pr-4"><Statut etat={d.statut === "FAILED" ? "bloquant" : d.statut === "QUEUED" || d.statut === "RUNNING" ? "verifier" : "conforme"} label={d.statut ?? "Inconnu"} /></td><td className="num pr-4">{d.tentatives ?? 0}</td><td className="max-w-md pr-4 text-xs text-muted-foreground">{d.erreur ?? "Aucune erreur"}</td><td>{d.statut === "FAILED" && d.id ? <Button variant="outline" className="min-h-11" disabled={geste.enCours} onClick={async () => { try { await geste.executer("vis_relancer_demande", { p_demande: d.id! }); } catch { /* erreur affichée */ } }}>Relancer</Button> : <span className="text-xs text-tertiary">Aucune</span>}</td></tr>)}</tbody></table></div>}
+    {demandes.length === 0 ? <p className="text-sm text-muted-foreground">Aucune demande enregistrée.</p> : <div className="overflow-x-auto"><table className="w-full min-w-[850px] text-sm"><thead className="text-left text-xs text-tertiary"><tr className="border-b border-border">{["Demande", "Sujet", "Statut", "Tentatives", "Détail", "Action"].map((h) => <th key={h} className="py-2 pr-4 font-normal">{h}</th>)}</tr></thead><tbody>{demandes.map((d) => <tr key={d.id} className="border-b border-border last:border-0"><td className="py-3 pr-4">{libelleVisibility(d.type)}<span className="block text-xs text-tertiary">{d.demande_le}</span></td><td className="pr-4">{d.subject_id ?? "Création en attente"}</td><td className="pr-4"><Statut etat={d.statut === "FAILED" ? "bloquant" : d.statut === "QUEUED" || d.statut === "RUNNING" ? "verifier" : "conforme"} label={libelleVisibility(d.statut, "Inconnu")} /></td><td className="num pr-4">{d.tentatives ?? 0}</td><td className="max-w-md pr-4 text-xs text-muted-foreground">{d.erreur ?? "Aucune erreur"}</td><td>{d.statut === "FAILED" && d.id ? <Button variant="outline" className="min-h-11" disabled={geste.enCours} onClick={async () => { try { await geste.executer("vis_relancer_demande", { p_demande: d.id! }); } catch { /* erreur affichée */ } }}>Relancer</Button> : <span className="text-xs text-tertiary">Aucune</span>}</td></tr>)}</tbody></table></div>}
     <ErreurGeste erreur={geste.erreur} />
   </Section></ChargementPilotage>;
 }
@@ -149,6 +149,6 @@ export function BudgetVisibility() {
   const budgets = global?.budgets ?? [];
   const globalPlafond = budgets.find((b) => b.plafond_global_usd !== null)?.plafond_global_usd ?? null;
   return <div className="grid gap-6"><Section titre="Plafonds mensuels"><p className="mb-4 text-sm text-muted-foreground">Fixez d'abord le plafond global OIA, puis le plafond de chaque client.</p><PlafondForm client={null} titre="Plafond global OIA" />{globalPlafond === null ? <p className="border-t border-border py-4 text-sm text-muted-foreground">Les plafonds clients seront disponibles après le plafond global.</p> : budgets.filter((b) => b.client_id !== "oia").map((b) => <PlafondForm key={b.client_id} client={b.client_id} titre={`Client ${b.client_id}`} max={globalPlafond} />)}</Section>
-    <Section titre="État du mois">{budgets.length === 0 ? <p className="text-sm text-muted-foreground">Aucun budget pour ce mois.</p> : budgets.map((b) => <div key={b.client_id} className="grid gap-2 border-b border-border py-3 text-sm last:border-0 sm:grid-cols-5"><span>{b.client_id}</span><span className="num">Réel : {dollars(b.reel_usd)}</span><span className="num">Engagé : {dollars(b.engage_usd)}</span><span className="num">Plafond : {b.plafond_usd === null ? "non fixé" : dollars(b.plafond_usd)}</span><Statut etat={b.etat === "atteint" ? "bloquant" : b.etat === "proche" || b.etat === "non_fixe" ? "verifier" : "conforme"} label={b.etat ?? "Inconnu"} /></div>)}</Section>
+    <Section titre="État du mois">{budgets.length === 0 ? <p className="text-sm text-muted-foreground">Aucun budget pour ce mois.</p> : budgets.map((b) => <div key={b.client_id} className="grid gap-2 border-b border-border py-3 text-sm last:border-0 sm:grid-cols-5"><span>{b.client_id}</span><span className="num">Réel : {dollars(b.reel_usd)}</span><span className="num">Engagé : {dollars(b.engage_usd)}</span><span className="num">Plafond : {b.plafond_usd === null ? "non fixé" : dollars(b.plafond_usd)}</span><Statut etat={b.etat === "atteint" ? "bloquant" : b.etat === "proche" || b.etat === "non_fixe" ? "verifier" : "conforme"} label={libelleVisibility(b.etat, "Inconnu")} /></div>)}</Section>
   </div>;
 }

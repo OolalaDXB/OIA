@@ -4,18 +4,20 @@ import { JaugeScore } from "@/components/oia/visibility-score";
 import { MarkdownSecurise, ReponseMarkdown } from "@/components/oia/visibility-markdown";
 import { demanderAnalyse, type ClientRpc } from "@/lib/donnees/visibility-pilotage";
 import {
-  actionsPrioritaires, analyseReussie, couleurScore, demandeAnalyseActive, groupesReseaux,
+  actionsPrioritaires, actionsPrioritairesMixtes, analyseReussie, couleurScore, demandeAnalyseActive, groupesReseaux,
   lireVisibilityV3, niveauSignal, opportunitesLighthouse, scoreLighthouse, separerProfils,
   tonScore, trierConstats, valeurComposante, variationScore, VUES_VISIBILITY_V3,
-  type AnalyseV3, type ConstatV3, type DemandeV2, type HistoriqueScoreV3, type ScoreV3,
+  type AnalyseV3, type ConstatV3, type DemandeV2, type HistoriqueScoreV3, type RecommandationV2, type ScoreV3,
 } from "@/lib/donnees/visibility-v3";
+import { adresseAvecSite, avecSiteDansRecherche } from "@/lib/donnees/visibility-reel";
+import { libelleFenetreVisibility, libelleVisibility } from "@/components/oia/visibility-ui";
 import type { ReseauVisibility } from "@/lib/donnees/visibility";
 
 const ligne = <T,>(valeur: Partial<T>): T => valeur as T;
 afterEach(cleanup);
 
 const scoreCoach = ligne<ScoreV3>({
-  subject_id: "coach-gari", score: 58, visibilite_ia: 0, notoriete_ia: 64,
+  subject_id: "coach-gari", score: 19, score_site: 97, visibilite_ia: 0, notoriete_ia: 64,
   performance_mobile: 88, performance_ordinateur: 100, seo_technique: 100,
   accessibilite: 100, bonnes_pratiques: 100, manquantes: [],
   constats_ouverts: 24, constats_critiques: 1, constats_resolus: 0,
@@ -40,9 +42,10 @@ describe("score et composantes Visibility v3", () => {
     expect(couleurScore(58)).toBe("var(--warn)");
   });
 
-  it("affiche le score Coach Gari de 58 sans transformer une absence en zéro", () => {
-    const vue = render(<JaugeScore score={scoreCoach.score} />);
-    expect(vue.getByRole("img", { name: "Score 58 sur 100" })).toBeInTheDocument();
+  it("sépare la visibilité IA de 19 et la santé technique de 97 sans transformer une absence en zéro", () => {
+    const vue = render(<><JaugeScore score={scoreCoach.score} /><JaugeScore score={scoreCoach.score_site} petite /></>);
+    expect(vue.getByRole("img", { name: "Score 19 sur 100" })).toBeInTheDocument();
+    expect(vue.getByRole("img", { name: "Score 97 sur 100" })).toBeInTheDocument();
     expect(valeurComposante(scoreCoach, "visibilite_ia")).toBe(0);
     expect(valeurComposante(scoreCoach, "notoriete_ia")).toBe(64);
     expect(valeurComposante(ligne<ScoreV3>({ ...scoreCoach, visibilite_ia: null, manquantes: ["visibilite_ia"] }), "visibilite_ia")).toBeNull();
@@ -64,8 +67,8 @@ describe("score et composantes Visibility v3", () => {
 
   it("calcule la variation depuis le point précédent, sans reporter de valeur", () => {
     const historique = [
-      ligne<HistoriqueScoreV3>({ subject_id: "coach-gari", composante: "score", valeur: 52, le: "2026-11-09T10:00:00Z" }),
-      ligne<HistoriqueScoreV3>({ subject_id: "coach-gari", composante: "score", valeur: 58, le: "2026-11-16T10:00:00Z" }),
+      ligne<HistoriqueScoreV3>({ subject_id: "coach-gari", composante: "score", valeur: 13, le: "2026-11-09T10:00:00Z" }),
+      ligne<HistoriqueScoreV3>({ subject_id: "coach-gari", composante: "score", valeur: 19, le: "2026-11-16T10:00:00Z" }),
       ligne<HistoriqueScoreV3>({ subject_id: "coach-gari", composante: "performance_mobile", valeur: 88, le: "2026-11-16T10:00:00Z" }),
     ];
     expect(variationScore(scoreCoach, historique)).toBe(6);
@@ -83,6 +86,11 @@ describe("actions et signaux", () => {
   it("trie par gravité puis effort et met le noindex critique en première action", () => {
     expect(trierConstats([mineur, importantLong, critique, importantCourt]).map((c) => c.id)).toEqual(["noindex", "important-court", "important-long", "mineur"]);
     expect(actionsPrioritaires([mineur, importantLong, critique, importantCourt, resolu], "coach-gari").map((c) => c.id)).toEqual(["noindex", "important-court", "important-long"]);
+  });
+
+  it("fait passer les recommandations IA en attente avant les constats techniques", () => {
+    const recommandation = ligne<RecommandationV2>({ id: "rec-ia", subject_id: "coach-gari", etat: "pending", priorite: 1, titre: "Créer les pages utiles", enonce: "Répondre aux questions sans le nom." });
+    expect(actionsPrioritairesMixtes([recommandation], [critique, importantCourt], "coach-gari").map((a) => [a.id, a.origine])).toEqual([["rec-ia", "Visibilité IA"], ["noindex", "Santé technique"], ["important-court", "Santé technique"]]);
   });
 
   it("utilise les seuils Google exacts sans classer une valeur absente", () => {
@@ -141,6 +149,21 @@ describe("Markdown et profils", () => {
     expect(separation.autres).toHaveLength(2);
     expect(groupesReseaux(separation.autres).map((g) => g.reseau)).toEqual(["Instagram", "TikTok"]);
     expect(separerProfils(profils, { sites: [], profils: [] }).marque).toEqual([]);
+  });
+});
+
+describe("sélection du site et libellés visibles", () => {
+  it("conserve les autres paramètres lorsque le site change dans l'URL", () => {
+    expect(avecSiteDansRecherche({ site: "coach-gari", fenetre: "j0" }, "atelier-rouge")).toEqual({ site: "atelier-rouge", fenetre: "j0" });
+    expect(adresseAvecSite("https://oia.local/visibility/rapports?site=atelier-rouge", "coach-gari")).toBe("/visibility/rapports?site=coach-gari");
+  });
+  it("traduit les statuts et les rôles techniques", () => {
+    expect(libelleVisibility("a_valider")).toBe("À valider");
+    expect(libelleVisibility("owner")).toBe("Propriétaire");
+    expect(libelleVisibility("approver")).toBe("Approbateur");
+    expect(libelleVisibility("RUNNING")).toBe("En cours");
+    expect(libelleVisibility("high")).toBe("élevé");
+    expect(libelleFenetreVisibility("coach-gari-j0")).toBe("Fenêtre J0");
   });
 });
 

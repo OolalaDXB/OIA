@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, type CSSProperties, type ReactNode } from "react";
 import type { Fenetre, Valeur } from "@/lib/donnees/visibility";
-import { useSelectionVisibility, useVisibilityDonnees } from "@/lib/donnees/provider";
+import { useVisibilityDonnees } from "@/lib/donnees/provider";
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 import { couleursGraphique } from "@/components/oia/graphiques";
 import { menuVisibility } from "@/components/oia/visibility-ui";
@@ -21,10 +21,8 @@ export function useFiltres() {
 
 export function FiltresVisibility() {
   const { assistants, familles, fenetres } = useVisibilityDonnees();
-  const selection = useSelectionVisibility();
   const f = useFiltres();
-  return <div role="group" aria-label="Filtres" className={`mb-6 grid grid-cols-1 gap-3 text-sm sm:grid-cols-2 ${selection.reel ? "xl:grid-cols-4" : "xl:grid-cols-3"}`}>
-    {selection.reel && <label className="flex min-w-0 flex-col gap-1 text-xs text-tertiary">Sujet<select className={`${menuVisibility}`} aria-label="Sujet Visibility" value={selection.sujetId ?? ""} onChange={(e) => selection.setSujetId(e.target.value)}>{selection.sujets.map((s) => <option key={s.id} value={s.id}>{s.nom}</option>)}</select></label>}
+  return <div role="group" aria-label="Filtres" className="mb-6 grid grid-cols-1 gap-3 text-sm sm:grid-cols-2 xl:grid-cols-3">
     <label className="flex min-w-0 flex-col gap-1 text-xs text-tertiary">Assistant<select className={`${menuVisibility}`} value={f.assistant} onChange={(e) => f.set("assistant", e.target.value)}><option>Tous</option>{assistants.map((a) => <option key={a.nom}>{a.nom}</option>)}</select></label>
     <label className="flex min-w-0 flex-col gap-1 text-xs text-tertiary">Famille de questions<select className={`${menuVisibility}`} value={f.famille} onChange={(e) => f.set("famille", e.target.value)}><option>Toutes</option>{familles.map((a) => <option key={a}>{a}</option>)}</select></label>
     <label className="flex min-w-0 flex-col gap-1 text-xs text-tertiary">Fenêtre de mesure<select className={`${menuVisibility}`} value={f.fenetreActive?.id ?? ""} onChange={(e) => f.set("fenetre", e.target.value)}>{fenetres.map((w) => <option key={w.id} value={w.id}>{w.label}{w.enCours ? " (en cours)" : ""}</option>)}</select></label>
@@ -62,7 +60,12 @@ export function Surligne({ texte, marque, concurrents }: { texte: string; marque
 
 export function Courbe({ fenetres: x, lignes }: { fenetres: string[]; lignes: { nom: string; marque: boolean; v: (number | null)[] }[] }) {
   const data = x.map((fenetre, i) => Object.fromEntries([["fenetre", fenetre], ...lignes.map((l) => [l.nom, l.v[i] ?? null])]));
+  const dernieres = lignes.map((ligne) => ({ nom: ligne.nom, marque: ligne.marque, valeur: [...ligne.v].reverse().find((v): v is number => typeof v === "number") ?? null }));
+  const marque = dernieres.find((l) => l.marque && l.valeur !== null);
+  const leader = [...dernieres].filter((l) => l.valeur !== null).sort((a, b) => (b.valeur ?? -1) - (a.valeur ?? -1))[0];
+  const conclusion = marque ? `${marque.nom} atteint ${marque.valeur} % à sa dernière mesure${leader && leader.nom !== marque.nom ? `, derrière ${leader.nom} à ${leader.valeur} %` : ""}.` : leader ? `${leader.nom} mène avec ${leader.valeur} % à la dernière mesure disponible.` : "Aucune mesure de présence n'est disponible.";
   return <figure aria-label="Présence dans le temps, la marque et ses concurrents" className="min-w-0">
+    <figcaption className="carte-chiffre mb-4 text-sm" style={{ "--carte-couleur": "var(--module-visibility)" } as CSSProperties}><strong className="num mr-2 text-xl">{marque?.valeur ?? leader?.valeur ?? "Non mesuré"}{marque || leader ? " %" : ""}</strong>{conclusion}</figcaption>
     <div className="h-72 w-full"><ResponsiveContainer width="100%" height="100%"><LineChart data={data} accessibilityLayer margin={{ top: 12, right: 12, left: 0, bottom: 8 }}>
       <CartesianGrid stroke="var(--border)" vertical={false} strokeDasharray="3 3" />
       <XAxis dataKey="fenetre" tick={{ fill: "var(--tertiary)", fontSize: 11 }} axisLine={false} tickLine={false} />

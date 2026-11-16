@@ -9,7 +9,7 @@ export function couleurSerie(label: string) {
 export function BarreColoree({ label, largeur, detail, couleur }: { label: string; largeur: number; detail: string; couleur?: string | undefined }) {
   const color = couleur ?? couleurSerie(label);
   return <TooltipProvider delayDuration={100}><Tooltip><TooltipTrigger asChild>
-    <span tabIndex={0} aria-label={`${label} : ${detail}`} className="block h-4 w-full rounded-sm bg-track outline-offset-2 focus-visible:outline-2 focus-visible:outline-ring">
+    <span tabIndex={0} aria-label={`${label} : ${detail}`} className="block h-5 w-full rounded-sm bg-track outline-offset-2 focus-visible:outline-2 focus-visible:outline-ring">
       <span className="block h-full rounded-sm" style={{ width: `${Math.max(0, Math.min(100, largeur))}%`, backgroundColor: color }} />
     </span>
   </TooltipTrigger><TooltipContent className="border border-border bg-popover text-popover-foreground"><span className="inline-flex items-center gap-2"><span className="size-2 rounded-sm" style={{ backgroundColor: color }} />{label}</span><p className="num mt-1">{detail}</p></TooltipContent></Tooltip></TooltipProvider>;

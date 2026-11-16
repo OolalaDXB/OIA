@@ -47,7 +47,8 @@ export type GesteVisibility =
   | "vis_go_reconnaissance" | "vis_go_fenetre" | "vis_annuler_fenetre"
   | "vis_valider_rapport" | "vis_declarer_execution" | "vis_fixer_plafond"
   | "vis_relancer_demande" | "vis_acquitter_alerte"
-  | "vis_valider_recommandation" | "vis_rejeter_recommandation" | "vis_demander_analyse";
+  | "vis_valider_recommandation" | "vis_rejeter_recommandation" | "vis_demander_analyse"
+  | "vis_importer_audit_externe";
 export type ClientRpc = { rpc: (nom: string, params: Record<string, unknown>) => Promise<{ data: unknown; error: { message: string; code?: string } | null }> };
 
 /** Toutes les mutations Visibility passent par ce point. Aucun accès table en écriture. */
@@ -76,6 +77,7 @@ export const declarerExecution = (p: Fonctions["vis_declarer_execution"]["Args"]
 export const fixerPlafond = (p: Fonctions["vis_fixer_plafond"]["Args"], client?: ClientRpc) => gesteVisibility("vis_fixer_plafond", p, client);
 export const relancerDemande = (p: Fonctions["vis_relancer_demande"]["Args"], client?: ClientRpc) => gesteVisibility("vis_relancer_demande", p, client);
 export const acquitterAlerte = (p: Fonctions["vis_acquitter_alerte"]["Args"], client?: ClientRpc) => gesteVisibility("vis_acquitter_alerte", p, client);
+export const importerAuditExterne = (p: Fonctions["vis_importer_audit_externe"]["Args"], client?: ClientRpc) => gesteVisibility("vis_importer_audit_externe", p, client);
 
 export function dollars(valeur: number | null | undefined) {
   return typeof valeur === "number" && Number.isFinite(valeur)

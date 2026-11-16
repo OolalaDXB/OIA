@@ -14,7 +14,7 @@ export function optionsVisibilityV3(userId: string) {
   });
 }
 
-const vide: DonneesVisibilityV3 = { scores: [], historique: [], analyses: [], constats: [], seo: [], planificateur: [] };
+const vide: DonneesVisibilityV3 = { scores: [], historique: [], analyses: [], constats: [], seo: [], planificateur: [], audits: [], auditLignes: [] };
 type Contexte = {
   connecte: boolean;
   donnees: DonneesVisibilityV3;

@@ -82,6 +82,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  validateSearch: (search: Record<string, unknown>): { site?: string } => ({ ...(typeof search["site"] === "string" && search["site"] ? { site: search["site"] } : {}) }),
   head: () => ({
     meta: [
       { charSet: "utf-8" },

@@ -3306,6 +3306,75 @@ export type Database = {
         }
         Relationships: []
       }
+      vis_audit_externe_lignes_v3: {
+        Row: {
+          audit_id: string | null
+          client_id: string | null
+          concurrents: Json | null
+          domaines: Json | null
+          moteur: string | null
+          ordre: number | null
+          outil: string | null
+          question: string | null
+          question_id: string | null
+          realise_le: string | null
+          score: number | null
+          subject_id: string | null
+          sujet: string | null
+        }
+        Relationships: []
+      }
+      vis_audits_externes_v3: {
+        Row: {
+          client_id: string | null
+          dernier: boolean | null
+          id: string | null
+          importe_le: string | null
+          importe_par: string | null
+          methode: string | null
+          moteurs: string[] | null
+          outil: string | null
+          questions: number | null
+          rapport_md: string | null
+          realise_le: string | null
+          resume: string | null
+          score: number | null
+          subject_id: string | null
+        }
+        Insert: {
+          client_id?: string | null
+          dernier?: never
+          id?: string | null
+          importe_le?: string | null
+          importe_par?: string | null
+          methode?: string | null
+          moteurs?: string[] | null
+          outil?: string | null
+          questions?: never
+          rapport_md?: string | null
+          realise_le?: string | null
+          resume?: string | null
+          score?: number | null
+          subject_id?: string | null
+        }
+        Update: {
+          client_id?: string | null
+          dernier?: never
+          id?: string | null
+          importe_le?: string | null
+          importe_par?: string | null
+          methode?: string | null
+          moteurs?: string[] | null
+          outil?: string | null
+          questions?: never
+          rapport_md?: string | null
+          realise_le?: string | null
+          resume?: string | null
+          score?: number | null
+          subject_id?: string | null
+        }
+        Relationships: []
+      }
       vis_budget_v2: {
         Row: {
           client_id: string | null
@@ -3950,6 +4019,7 @@ export type Database = {
           performance_mobile: number | null
           performance_ordinateur: number | null
           score: number | null
+          score_site: number | null
           seo_technique: number | null
           subject_id: string | null
           visibilite_ia: number | null
@@ -4252,6 +4322,20 @@ export type Database = {
       }
       vis_go_reconnaissance: {
         Args: { p_cout_vu_usd: number; p_subject: string }
+        Returns: string
+      }
+      vis_importer_audit_externe: {
+        Args: {
+          p_matrice: Json
+          p_methode: string
+          p_moteurs: string[]
+          p_outil: string
+          p_rapport_md: string
+          p_realise_le: string
+          p_resume: string
+          p_score: number
+          p_subject: string
+        }
         Returns: string
       }
       vis_modifier_proposition: {

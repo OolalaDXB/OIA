@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Section, Statut } from "@/components/oia/ui";
 import { BarreColoree } from "@/components/oia/graphiques";
 import { Button } from "@/components/ui/button";
-import { BoutonAnalyse, EtatVisibilityV3, SelecteurSujetV3 } from "@/components/oia/visibility-score";
+import { BoutonAnalyse, EtatVisibilityV3 } from "@/components/oia/visibility-score";
 import { menuVisibility } from "@/components/oia/visibility-ui";
 import { useSelectionVisibility } from "@/lib/donnees/provider";
 import { useVisibilityV3 } from "@/lib/donnees/visibility-v3-provider";
@@ -58,6 +58,7 @@ function Opportunites({ analyse }: { analyse: AnalyseV3 | undefined }) {
   const max = Math.max(1, ...opportunites.map((o) => o.gainMs));
   return <Section titre="Opportunités de gain">
     <p className="mb-5 text-sm text-muted-foreground">Les plus longues barres sont les gains de temps à traiter en premier sur cet appareil.</p>
+    {opportunites[0] && <p className="carte-chiffre mb-5 text-sm" style={{ "--carte-couleur": "var(--chart-3)" } as React.CSSProperties}><strong className="num mr-2 text-xl">{(opportunites[0].gainMs / 1000).toLocaleString("fr-FR", { maximumFractionDigits: 2 })} s</strong>à gagner en priorité sur « {opportunites[0].titre} ».</p>}
     {opportunites.length === 0 ? <p className="text-sm text-muted-foreground">Aucune opportunité chiffrée dans cette analyse.</p> : <ol>{opportunites.map((o) => <li key={o.id} className="grid gap-2 border-b border-border py-3 last:border-0 sm:grid-cols-[minmax(12rem,1fr)_minmax(10rem,1fr)_7rem] sm:items-center sm:gap-4"><span className="text-sm">{o.titre}</span><BarreColoree label={o.titre} largeur={o.gainMs / max * 100} detail={`${(o.gainMs / 1000).toLocaleString("fr-FR", { maximumFractionDigits: 2 })} s${o.gainKo !== null ? ` · ${o.gainKo} Ko` : ""}`} couleur="var(--chart-3)" /><span className="num text-sm sm:text-right">{(o.gainMs / 1000).toLocaleString("fr-FR", { maximumFractionDigits: 2 })} s{o.gainKo !== null && <span className="block text-xs text-tertiary">{o.gainKo} Ko</span>}</span></li>)}</ol>}
     <dl className="mt-5 grid gap-4 border-t border-border pt-4 sm:grid-cols-2"><div><dt className="text-xs text-tertiary">Poids de la page</dt><dd className="num mt-1 text-xl">{metrique(analyse, "poids_ko") === null ? "Non mesuré" : `${metrique(analyse, "poids_ko")!.toLocaleString("fr-FR")} Ko`}</dd></div><div><dt className="text-xs text-tertiary">Nombre de requêtes</dt><dd className="num mt-1 text-xl">{metrique(analyse, "requetes") ?? "Non mesuré"}</dd></div></dl>
   </Section>;
@@ -83,7 +84,7 @@ export function VuePerformance() {
   const [strategie, setStrategie] = useState<"mobile" | "ordinateur">("mobile");
   const recente = analyseRecente(donnees.analyses, subject, "lighthouse", strategie);
   const analyse = analyseReussie(donnees.analyses, subject, "lighthouse", strategie);
-  return <EtatVisibilityV3><div className="mb-6 flex flex-wrap items-end justify-between gap-3"><SelecteurSujetV3 subject={subject} /><label className="grid min-w-56 gap-1.5 text-xs text-tertiary">Appareil analysé<select className={menuVisibility} value={strategie} onChange={(e) => setStrategie(e.target.value as "mobile" | "ordinateur")}><option value="mobile">Mobile</option><option value="ordinateur">Ordinateur</option></select></label><BoutonAnalyse subject={subject} /></div>
+  return <EtatVisibilityV3><div className="mb-6 flex flex-wrap items-end justify-between gap-3"><label className="grid min-w-56 gap-1.5 text-xs text-tertiary">Appareil analysé<select className={menuVisibility} value={strategie} onChange={(e) => setStrategie(e.target.value as "mobile" | "ordinateur")}><option value="mobile">Mobile</option><option value="ordinateur">Ordinateur</option></select></label><BoutonAnalyse subject={subject} /></div>
     <div className="grid gap-6"><Section titre={`Lighthouse ${strategie === "mobile" ? "mobile" : "ordinateur"}`} aside={<span className="text-xs text-tertiary">{analyse?.outil ?? "Outil non fourni"}</span>}>
       <p className="mb-5 text-sm text-muted-foreground">Un score faible indique le chantier à ouvrir, sans masquer les mesures absentes.</p><ErreurAnalyse analyse={recente} />{!analyse ? <p className="text-sm text-muted-foreground">Aucune analyse Lighthouse réussie pour cet appareil.</p> : <ScoresLighthouse analyse={analyse} />}{analyse?.url && <p className="mt-4 break-all text-xs text-tertiary">{analyse.url} · {analyse.recu_le}</p>}
     </Section><SignauxWeb analyse={analyse} /><Opportunites analyse={analyse} /><AuditLecture subject={subject} /></div>
