@@ -6,7 +6,7 @@
 # guillemets englobante est retirée) ; le fichier n'est jamais exécuté (pas de `source`), et
 # aucune valeur n'est jamais affichée : un message d'erreur ne cite que le numéro de ligne.
 # Les valeurs sont exportées au seul processus qui source ce fichier (et à ses enfants).
-VIS_KEY_NAMES="OPENAI_API_KEY ANTHROPIC_API_KEY OPENROUTER_API_KEY MISTRAL_API_KEY TYPESAFE_API_KEY OIA_VIS_MONTHLY_CAP_USD OIA_VIS_MONTHLY_ALERT_USD"
+VIS_KEY_NAMES="OPENAI_API_KEY ANTHROPIC_API_KEY OPENROUTER_API_KEY MISTRAL_API_KEY TYPESAFE_API_KEY XAI_API_KEY GEMINI_API_KEY PERPLEXITY_API_KEY OIA_VIS_MONTHLY_CAP_USD OIA_VIS_MONTHLY_ALERT_USD"
 
 load_keys_file() {
   local file="$1" mode n=0 line name value names=() values=()

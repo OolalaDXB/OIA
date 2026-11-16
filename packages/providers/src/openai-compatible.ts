@@ -57,13 +57,19 @@ function extractJson(text: string): string {
 const DEFAULT_URL = {
   openai: "https://api.openai.com/v1/chat/completions",
   openrouter: "https://openrouter.ai/api/v1/chat/completions",
+  xai: "https://api.x.ai/v1/chat/completions",
+  gemini: "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+  perplexity: "https://api.perplexity.ai/chat/completions",
 } as const;
 
-function createOpenAICompatibleProvider(name: "openai" | "openrouter", config: OpenAICompatibleConfig): MeteredProvider {
+type CompatibleName = keyof typeof DEFAULT_URL;
+const LABEL: Record<CompatibleName, string> = { openai: "OpenAI", openrouter: "OpenRouter", xai: "xAI", gemini: "Gemini", perplexity: "Perplexity" };
+
+function createOpenAICompatibleProvider(name: CompatibleName, config: OpenAICompatibleConfig): MeteredProvider {
   const baseUrl = config.baseUrl ?? DEFAULT_URL[name];
   const doFetch = config.fetchImpl ?? fetch;
   const maxCalls = config.maxCalls ?? Number.POSITIVE_INFINITY;
-  const label = name === "openai" ? "OpenAI" : "OpenRouter";
+  const label = LABEL[name];
   const spent: ProviderUsage = { calls: 0, inputTokens: 0, outputTokens: 0, costUsd: 0 };
 
   type Usage = { prompt_tokens?: number; completion_tokens?: number; cost?: number };
@@ -87,7 +93,9 @@ function createOpenAICompatibleProvider(name: "openai" | "openrouter", config: O
         { role: "system", content: system },
         { role: "user", content: user },
       ],
-      response_format: { type: "json_object" },
+      // Perplexity n'accepte pas json_object (seulement json_schema) : JSON demandé par le prompt,
+      // puis extrait et validé comme pour les autres.
+      ...(name === "perplexity" ? {} : { response_format: { type: "json_object" } }),
       temperature: 0,
       max_tokens: config.maxOutputTokens ?? 16_000,
     };
@@ -165,4 +173,19 @@ export function createOpenAIProvider(config: OpenAICompatibleConfig): MeteredPro
 /** OpenRouter: Gemini (`google/…`), Perplexity (`perplexity/…`), Grok (`x-ai/…`) and others, one key. */
 export function createOpenRouterProvider(config: OpenAICompatibleConfig): MeteredProvider {
   return createOpenAICompatibleProvider("openrouter", config);
+}
+
+/** xAI en direct (Grok), clé XAI_API_KEY. */
+export function createXaiProvider(config: OpenAICompatibleConfig): MeteredProvider {
+  return createOpenAICompatibleProvider("xai", config);
+}
+
+/** Google en direct (Gemini, interface compatible OpenAI), clé GEMINI_API_KEY. */
+export function createGeminiProvider(config: OpenAICompatibleConfig): MeteredProvider {
+  return createOpenAICompatibleProvider("gemini", config);
+}
+
+/** Perplexity en direct (Sonar), clé PERPLEXITY_API_KEY. */
+export function createPerplexityProvider(config: OpenAICompatibleConfig): MeteredProvider {
+  return createOpenAICompatibleProvider("perplexity", config);
 }

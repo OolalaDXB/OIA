@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { z } from "zod";
-import { createOpenAIProvider, createOpenRouterProvider, createProviderFromEnv } from "../src";
+import { createGeminiProvider, createOpenAIProvider, createOpenRouterProvider, createPerplexityProvider, createProviderFromEnv, createXaiProvider, keyEnvFor } from "../src";
 
 const Schema = z.object({ title: z.string() });
 const req = { schema: Schema, schemaName: "Thing", system: "read", input: "text", purpose: "test" };
@@ -62,10 +62,31 @@ describe("openai-compatible providers", () => {
     await expect(p.extract(req)).rejects.toThrow("OpenRouter API error 401");
   });
 
+  it("xAI, Gemini et Perplexity en direct : bonne adresse, clé en Bearer", async () => {
+    const cas = [
+      [createXaiProvider, "https://api.x.ai/v1/chat/completions", "xai"],
+      [createGeminiProvider, "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", "gemini"],
+      [createPerplexityProvider, "https://api.perplexity.ai/chat/completions", "perplexity"],
+    ] as const;
+    for (const [make, attendu, nom] of cas) {
+      let url = "";
+      let body: Record<string, unknown> = {};
+      const p = make({ apiKey: "k", model: "m", fetchImpl: fakeFetch(['{"title":"C"}'], (u, i) => { url = u; body = JSON.parse(String(i.body)); }) });
+      const r = await p.extract(req);
+      expect(url).toBe(attendu);
+      expect(r.run.provider).toBe(nom);
+      expect(body.response_format === undefined).toBe(nom === "perplexity");
+    }
+    expect(keyEnvFor("xai")).toBe("XAI_API_KEY");
+    expect(keyEnvFor("gemini")).toBe("GEMINI_API_KEY");
+    expect(keyEnvFor("perplexity")).toBe("PERPLEXITY_API_KEY");
+  });
+
   it("is selectable from the environment", () => {
     const base = { LLM_API_KEY: "k", LLM_MODEL: "m" } as Record<string, unknown>;
     expect(createProviderFromEnv({ ...base, LLM_PROVIDER: "openai" } as never).name).toBe("openai");
     expect(createProviderFromEnv({ ...base, LLM_PROVIDER: "openrouter" } as never).name).toBe("openrouter");
     expect(createProviderFromEnv({ ...base, LLM_PROVIDER: "mistral" } as never).name).toBe("mistral");
+    for (const n of ["xai", "gemini", "perplexity"]) expect(createProviderFromEnv({ ...base, LLM_PROVIDER: n } as never).name).toBe(n);
   });
 });
