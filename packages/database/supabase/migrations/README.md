@@ -25,7 +25,7 @@ données, `SHA256SUMS`), relue sur un Postgres jetable.
 | 9 | `0008_money_lookup_v2.sql` | `20261108011100` (8 novembre 2026, sauvegarde `~/oia-sauvegardes/avant-0008/`) |
 | 10 | `0009_ia_couts.sql` | `20261108011200` (8 novembre 2026, sauvegarde `~/oia-sauvegardes/avant-0009/`) ; alimentée chaque jour par `infra/visibility/scripts/couts-sync.sh` |
 
-## Contrat Visibility version 2 (0010, proposée, non appliquée)
+## Contrat Visibility version 2 (0010, appliquée le 2026-11-16)
 
 Mandat v13, bloc F. **Proposée, non appliquée** : à appliquer selon la procédure de
 la 0008 (sauvegarde, répétition générale terminée par `rollback`, chaque commande
@@ -51,7 +51,7 @@ rien dans ces tables : elle fonctionne avant comme après 0010.
 Tests : `test/vis-sync-v2.test.ts` (Postgres jetable : J0 puis une J1 fictive, 0010
 par-dessus, tests adverses). Retour arrière : bloc en fin de fichier.
 
-## Contrat Visibility version 2 : pilotage depuis le cockpit (vis 0006_pilotage et 0011, proposées, non appliquées)
+## Contrat Visibility version 2 : pilotage depuis le cockpit (vis 0006_pilotage et 0011, appliquées le 2026-11-16)
 
 Mandat v16, bloc A. **Proposées, non appliquées** : à appliquer selon la procédure de
 la 0008 (sauvegarde, répétition générale terminée par `rollback`, chaque commande
