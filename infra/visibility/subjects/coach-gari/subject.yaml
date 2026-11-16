@@ -10,6 +10,7 @@ urls:
       status: proposed
       note: "à confirmer ; selon le plan SEO/AEO (action 1.4), coachgari.com et www redirigent en 308 vers coachgari28.com, vérifié sur Vercel le 2026-09-30"
 languages: [en]
+clientLanguage: en
 markets:
   - { country: AE, label: "Dubaï (base)", languages: [en], status: confirmed }
   - { country: ZW, label: "Zimbabwe (audience principale)", languages: [en], status: confirmed }

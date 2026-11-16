@@ -1,0 +1,186 @@
+# Recommandations de Coach Gari (mandat v13, bloc D), tirées des constats de J0.
+# Toutes « pending » : la validation est un geste de Mickaël (decision.status: accepted,
+# by, at). Une fois exécutée, chaque recommandation reçoit `execution` : date de mise en
+# ligne, preuve (commit ou URL), qui la déclare, et la fenêtre qui la mesurera (j1).
+# Les actions sans code (owner: client) se consignent de la même façon, avec l'URL et la
+# date, déclarées par Mickaël.
+# Preuves : `evidence-row` = identifiant de preuve de la table locale (elmo:<run>).
+schemaVersion: 1
+recommendations:
+  - id: rec-cg-bing-index
+    schemaVersion: 1
+    type: TECH_FIX
+    clientId: oia-internal
+    siteId: coach-gari
+    subjectId: coach-gari
+    windowId: j0
+    owner: team
+    title: Faire indexer coachgari28.com par Bing
+    statement: >-
+      Aucune page de coachgari28.com n'apparaît dans la recherche publique de Bing (site: et
+      nom de domaine, relevé du 2026-11-10). ChatGPT s'appuie sur Bing pour sa recherche web
+      et ne trouve jamais le site. Soumission préparée (plan du site, URL, IndexNow), rien
+      d'envoyé avant l'accord de Mickaël ; vérification dans Bing Webmaster Tools par Mickaël.
+    evidence:
+      - { kind: other, ref: "~/oia-visibility-data/j0/constats/bing-2026-11-10.md", note: "recherche publique Bing, lecture seule" }
+      - { kind: other, ref: "subjects/coach-gari/p2/soumission-bing.md", note: "soumission préparée, non envoyée" }
+    impact: { level: high }
+    effort: { level: XS }
+    risk: low
+    confidence: medium
+    fix: { kind: sitemap-xml, generator: manual, notes: "Soumission dans Bing Webmaster Tools ou IndexNow ; aucune modification du site." }
+    decision: { status: pending }
+    createdBy: claude-code
+    createdAt: "2026-11-16"
+
+  - id: rec-cg-entite-homonymes
+    schemaVersion: 1
+    type: ENTITY_INCONSISTENCY
+    clientId: oia-internal
+    siteId: coach-gari
+    subjectId: coach-gari
+    windowId: j0
+    owner: team
+    title: Désambiguïser Coach Gari des homonymes
+    statement: >-
+      Sur les questions marquées, ChatGPT décrit d'autres personnes : Gari McIntyre, Gari
+      Harvey, Coach Garo, Coach Garry Mc. Désambiguïsation : nom public choisi par Gari,
+      Dubaï, padel, page « à propos », profils officiels en sameAs (correctif P2 n° 1 prêt).
+    evidence:
+      - { kind: evidence-row, ref: "elmo:3a1029aa-a7cc-435d-a548-106612cf9b9a", note: "ChatGPT, en-09@v2, 07/11 : Gari McIntyre, Gari Harvey" }
+      - { kind: evidence-row, ref: "elmo:b8948904-85ea-4055-a2b8-6d7a26ed1904", note: "ChatGPT, en-09@v2, 08/11 : Gari McIntyre" }
+      - { kind: evidence-row, ref: "elmo:519561ac-73a8-4e49-b308-cc4c54ef6d0d", note: "ChatGPT, en-10@v1, 08/11 : Coach Garo" }
+      - { kind: evidence-row, ref: "elmo:6e53d7ec-7f81-4d50-998a-e7666c828d86", note: "ChatGPT, en-10@v1, 09/11 : Coach Garry Mc" }
+      - { kind: repo-file, ref: "subjects/coach-gari/p2/prs/01-sameas-profils.md", note: "correctif P2 n° 1" }
+    impact: { level: high }
+    effort: { level: S }
+    risk: low
+    confidence: medium
+    fix: { kind: jsonld-organization, generator: p2-prepare, notes: "sameAs prêt (P2 n° 1) ; nom public et page « à propos » à décider avec Gari." }
+    decision: { status: pending }
+    createdBy: claude-code
+    createdAt: "2026-11-16"
+
+  - id: rec-cg-prix-autres-coachs
+    schemaVersion: 1
+    type: FIX_FACT
+    clientId: oia-internal
+    siteId: coach-gari
+    subjectId: coach-gari
+    windowId: j0
+    owner: team
+    title: Publier les prix de Gari pour que ChatGPT cesse de citer ceux d'autres coachs
+    statement: >-
+      À la question des prix de Coach Gari, ChatGPT attribue chaque jour les prix d'un autre
+      coach (Gary Dhillon, Coach Garo, Coach Garry Mc, Coach Guy's Training). Correctifs P2
+      n° 2 et 3 prêts, bloqués tant que Gari n'a pas confirmé ses prix.
+    blockedBy: prix et formules à confirmer par Gari (fait f-prices « à fournir »)
+    evidence:
+      - { kind: evidence-row, ref: "elmo:84367be4-f001-402c-b9e3-6cd36434083d", note: "ChatGPT, en-10@v1, 07/11 : Gary Dhillon" }
+      - { kind: evidence-row, ref: "elmo:519561ac-73a8-4e49-b308-cc4c54ef6d0d", note: "ChatGPT, en-10@v1, 08/11 : Coach Garo" }
+      - { kind: evidence-row, ref: "elmo:6e53d7ec-7f81-4d50-998a-e7666c828d86", note: "ChatGPT, en-10@v1, 09/11 : Coach Garry Mc" }
+      - { kind: evidence-row, ref: "elmo:8515fa18-eafd-41b1-a2f3-c66324646465", note: "ChatGPT, en-10@v1, 10/11 : Coach Guy's Training" }
+      - { kind: fact, ref: "facts.yaml#f-prices" }
+    impact: { level: high }
+    effort: { level: S }
+    risk: medium
+    confidence: medium
+    fix: { kind: price-ssr-placeholder, generator: p2-prepare, notes: "P2 n° 2 (JSON-LD) et n° 3 (prix sans JavaScript)." }
+    decision: { status: pending }
+    createdBy: claude-code
+    createdAt: "2026-11-16"
+
+  - id: rec-cg-annuaires-padel
+    schemaVersion: 1
+    type: SOURCE_TARGET
+    clientId: oia-internal
+    siteId: coach-gari
+    subjectId: coach-gari
+    windowId: j0
+    owner: client
+    title: Créer une fiche de coach sur padelcoachfinder.com et padeli.com
+    statement: >-
+      Annuaires de padel cités par les assistants pendant J0 : padelcoachfinder.com (37
+      citations) et padeli.com (45). Même nom, photo, courte présentation, Dubaï et lien vers
+      coachgari28.com. Action de Gari, sans code : URL et date à consigner quand c'est fait.
+    evidence:
+      - { kind: other, ref: "reports/j0/figures.json#sources.topDomains", note: "padeli.com 45, padelcoachfinder.com 37" }
+    impact: { level: medium }
+    effort: { level: XS }
+    risk: low
+    confidence: medium
+    decision: { status: pending }
+    createdBy: claude-code
+    createdAt: "2026-11-16"
+
+  - id: rec-cg-academies
+    schemaVersion: 1
+    type: SOURCE_TARGET
+    clientId: oia-internal
+    siteId: coach-gari
+    subjectId: coach-gari
+    windowId: j0
+    owner: client
+    title: Figurer sur les pages coaching de Viya Padel et d'ISD
+    statement: >-
+      Gari enseigne dans ces lieux, dont les pages sont citées pendant J0 : dubaigolf.com
+      (Viya Padel, 65 citations) et isddubai.com (ISD, 48). Une ligne avec son nom et un lien
+      vers son site suffit. Action de Gari, sans code : URL et date à consigner.
+    evidence:
+      - { kind: other, ref: "reports/j0/figures.json#sources.topDomains", note: "dubaigolf.com 65, isddubai.com 48" }
+    impact: { level: medium }
+    effort: { level: S }
+    risk: low
+    confidence: medium
+    decision: { status: pending }
+    createdBy: claude-code
+    createdAt: "2026-11-16"
+
+  - id: rec-cg-linkedin
+    schemaVersion: 1
+    type: SOURCE_TARGET
+    clientId: oia-internal
+    siteId: coach-gari
+    subjectId: coach-gari
+    windowId: j0
+    owner: client
+    title: Compléter le profil LinkedIn de Gari
+    statement: >-
+      linkedin.com est la deuxième source la plus citée de J0 (242 citations). Même nom et
+      photo que partout, Dubaï, padel et coaching sportif, lien vers coachgari28.com. Action
+      de Gari, sans code : URL et date à consigner.
+    evidence:
+      - { kind: other, ref: "reports/j0/figures.json#sources.topDomains", note: "linkedin.com 242" }
+    impact: { level: medium }
+    effort: { level: XS }
+    risk: low
+    confidence: medium
+    decision: { status: pending }
+    createdBy: claude-code
+    createdAt: "2026-11-16"
+
+  - id: rec-cg-concurrents-j1
+    schemaVersion: 1
+    type: WATCH
+    clientId: oia-internal
+    siteId: coach-gari
+    subjectId: coach-gari
+    windowId: j0
+    owner: team
+    title: Revoir la liste des concurrents pour J1
+    statement: >-
+      Les 20 concurrents de J0 sont surtout des organisations ; les assistants nomment des
+      coachs individuels (Nacho Gadea, Jordi Casanova chez ChatGPT). Liste proposée dans
+      concurrents-candidats.yaml, section proposes-j1, chaque nom « extrait » jusqu'à la
+      validation de Mickaël ; chargée dans Elmo seulement avant J1.
+    evidence:
+      - { kind: evidence-row, ref: "elmo:49d78c82-22a0-4805-adb5-e11d089ab272", note: "ChatGPT, en-01@v2, 07/11 : Jordi Casanova" }
+      - { kind: evidence-row, ref: "elmo:c4814b22-5196-406a-9424-fd9948f98bb9", note: "ChatGPT, en-01@v2, 09/11 : Nacho Gadea" }
+      - { kind: repo-file, ref: "subjects/coach-gari/concurrents-candidats.yaml#proposes-j1" }
+    impact: { level: medium }
+    effort: { level: S }
+    risk: low
+    confidence: medium
+    decision: { status: pending }
+    createdBy: claude-code
+    createdAt: "2026-11-16"

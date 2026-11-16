@@ -144,10 +144,10 @@
 
 | Fenêtre | Type | Jours | Panel | Statut | Début | Fin | Jours manquants |
 |---|---|---|---|---|---|---|---|
-| j0 | baseline | 5 | v2 | running | 2026-11-07 | — | — |
+| j0 | baseline | 5 | v2 | done | 2026-11-07 | 2026-11-12 | — |
 | j1 | follow-up | 5 | v2 | planned | — | — | — |
 
-### Gel `freeze-j0` (en vigueur) — jusqu'à la fin de la fenêtre j0
+### Gel `freeze-j0` (levé) — jusqu'à la fin de la fenêtre j0
 
 - Périmètre : site, repository
 - Règle : Le site ne publie rien qui change ce que voient Google et les assistants IA avant la fin de la fenêtre J0.

@@ -29,8 +29,9 @@ windows:
     kind: baseline
     days: 5
     panelVersion: 2
-    status: running
+    status: done
     start: "2026-11-07"
+    end: "2026-11-12"
     runTimeUtc: "15:27"
     targets:
       - chatgpt:openai-api:gpt-6-luna:online

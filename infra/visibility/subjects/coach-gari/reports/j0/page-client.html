@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coach Gari · J0</title>
+<style>
+:root{--bg:#fbfaf7;--surface:#ffffff;--text:#1c1b19;--muted:#6b675f;--line:#e4e0d8;--accent:#2f5d50;--accent-soft:#dcebe5;--bar:#b9b3a7;--warn:#8a5a00;--warn-soft:#f6ead2;color-scheme:light}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#161614;--surface:#201f1c;--text:#ece9e2;--muted:#a39e94;--line:#36342f;--accent:#8fcbb5;--accent-soft:#233a32;--bar:#5c584f;--warn:#e7b85c;--warn-soft:#3a2f1a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#161614;--surface:#201f1c;--text:#ece9e2;--muted:#a39e94;--line:#36342f;--accent:#8fcbb5;--accent-soft:#233a32;--bar:#5c584f;--warn:#e7b85c;--warn-soft:#3a2f1a;color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-wrap:break-word}
+main{max-width:44rem;margin:0 auto;padding:32px 16px 48px}
+header{margin-bottom:8px}
+.eyebrow{color:var(--muted);font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;margin:0 0 8px}
+h1{font-size:1.6rem;line-height:1.25;margin:0 0 12px}
+h2{font-size:1.15rem;margin:0 0 8px}
+.lede{color:var(--muted);margin:0}
+section{border-top:1px solid var(--line);padding:24px 0}
+footer{border-top:1px solid var(--line);padding:24px 0 0;font-size:.9rem}
+.big{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px;margin:8px 0}
+.figure{font-size:3rem;font-weight:700;line-height:1;color:var(--accent)}
+.figure-label{max-width:20rem;color:var(--muted)}
+.muted{color:var(--muted)}
+ul{padding-left:1.2rem;margin:8px 0}
+li{margin:4px 0}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0}
+table{border-collapse:collapse;width:100%;min-width:20rem;background:var(--surface)}
+th,td{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+th{font-weight:600;font-size:.9rem}
+.num{text-align:right;white-space:nowrap}
+tr.total td{font-weight:600}
+.bars{list-style:none;padding:0}
+.bars li{display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr) 2.5rem;gap:8px;align-items:center}
+.bar-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-track{height:10px;background:var(--line);border-radius:5px;overflow:hidden}
+.bar{display:block;height:100%;background:var(--bar)}
+.bar-n{text-align:right}
+.bars li.own{font-weight:600}
+.bars li.own .bar{background:var(--accent)}
+.bars li.own .bar-track{outline:2px solid var(--accent-soft)}
+.actions li.is-done{color:var(--muted)}
+.tag{display:inline-block;font-size:.8rem;padding:0 6px;border-radius:4px;white-space:nowrap}
+.tag.done{background:var(--accent-soft);color:var(--accent)}
+.tag.wait{background:var(--warn-soft);color:var(--warn);white-space:normal}
+@media (max-width:30rem){.bars li{grid-template-columns:minmax(0,1fr) 2.5rem}.bar-track{grid-column:1/-1;grid-row:2}h1{font-size:1.35rem}.figure{font-size:2.4rem}}
+</style>
+</head><body>
+<main>
+<header>
+<p class="eyebrow">Measurement J0 · 5 days from 7 November 2026</p>
+<h1>Coach Gari does not appear yet in AI assistants' answers to questions that do not include the name.</h1>
+<p class="lede">We asked 10 questions to 5 AI assistants (ChatGPT, Claude, Gemini, Mistral, Perplexity), once a day for 5 days. Their web search was on, as when they look for a recent answer.</p>
+</header>
+<section>
+<h2>The result</h2>
+<div class="big"><span class="figure">0%</span><span class="figure-label">of answers mention you, on questions that do not name you</span></div>
+<p>0 mentions out of 189 judged answers, all assistants together.</p>
+<p class="muted">11 answers without usable text (Mistral: 11) were not measured: left out of the calculation, not counted as absences.</p>
+<p class="muted">The questions asked, without your name:</p>
+<ul><li>“Best padel coach in Dubai”</li><li>“How much do padel lessons cost in Dubai?”</li><li>“Personal trainer in Dubai who focuses on mobility”</li><li>“Corporate wellness sessions for a team in Dubai”</li><li>“Online fitness coach with live video sessions, not just a PDF plan”</li><li>“Online personal trainer who does meal planning based on where you live”</li><li>“Zimbabwean fitness coach”</li><li>“Fitness coach in Harare, Zimbabwe”</li></ul>
+</section>
+<section>
+<h2>When someone types your name</h2>
+<p>These questions name you, so a mention is expected. They show what assistants know about you, not whether they recommend you.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Assistant</th><th class="num">Mentions / judged answers</th><th class="num">Presence</th></tr></thead>
+<tbody>
+<tr><td>ChatGPT</td><td class="num">1 / 10</td><td class="num">10%</td></tr>
+<tr><td>Claude</td><td class="num">5 / 10</td><td class="num">50%</td></tr>
+<tr><td>Gemini</td><td class="num">9 / 10</td><td class="num">90%</td></tr>
+<tr><td>Mistral</td><td class="num">6 / 7</td><td class="num">85.7%</td></tr>
+<tr><td>Perplexity</td><td class="num">9 / 10</td><td class="num">90%</td></tr>
+<tr class="total"><td>Total</td><td class="num">30 / 47</td><td class="num">63.8%</td></tr>
+</tbody></table></div>
+<p class="muted">3 answers without usable text (Mistral: 3) were not measured: left out of the calculation, not counted as absences.</p>
+<p class="muted">The questions asked, with your name:</p>
+<ul><li>“Who is Coach Gari?”</li><li>“Is Coach Gari a good choice for online training and nutrition coaching? What formats and prices are available?”</li></ul>
+</section>
+<section>
+<h2>Where assistants look</h2>
+<p>The sites cited most often in the answers, and where yours stands.</p>
+<ul class="bars">
+<li class=""><span class="bar-label">reddit.com</span><span class="bar-track"><span class="bar" style="width:100%"></span></span><span class="bar-n">383</span></li>
+<li class=""><span class="bar-label">linkedin.com</span><span class="bar-track"><span class="bar" style="width:63%"></span></span><span class="bar-n">242</span></li>
+<li class=""><span class="bar-label">en.wikipedia.org</span><span class="bar-track"><span class="bar" style="width:33%"></span></span><span class="bar-n">126</span></li>
+<li class=""><span class="bar-label">trainerize.me</span><span class="bar-track"><span class="bar" style="width:18%"></span></span><span class="bar-n">69</span></li>
+<li class=""><span class="bar-label">dubaigolf.com</span><span class="bar-track"><span class="bar" style="width:17%"></span></span><span class="bar-n">65</span></li>
+<li class=""><span class="bar-label">isddubai.com</span><span class="bar-track"><span class="bar" style="width:13%"></span></span><span class="bar-n">48</span></li>
+<li class=""><span class="bar-label">padeli.com</span><span class="bar-track"><span class="bar" style="width:12%"></span></span><span class="bar-n">45</span></li>
+<li class=""><span class="bar-label">padelcoachfinder.com</span><span class="bar-track"><span class="bar" style="width:10%"></span></span><span class="bar-n">37</span></li>
+<li class=""><span class="bar-label">acefitness.org</span><span class="bar-track"><span class="bar" style="width:9%"></span></span><span class="bar-n">33</span></li>
+<li class=""><span class="bar-label">sanddune.ae</span><span class="bar-track"><span class="bar" style="width:8%"></span></span><span class="bar-n">30</span></li>
+<li class="own"><span class="bar-label">coachgari28.com <em>(your site)</em></span><span class="bar-track"><span class="bar" style="width:6%"></span></span><span class="bar-n">22</span></li>
+</ul>
+<p>Your site was cited 22 times, your official profiles 0 times.</p>
+</section>
+<section>
+<h2>Who is cited instead of you</h2>
+<p>In the answers that do not mention you, the assistants name:</p>
+<ul><li><strong>Future</strong> <span class="muted">· 15 answers</span></li><li><strong>Caliber</strong> <span class="muted">· 14 answers</span></li><li><strong>Fit Squad DXB</strong> <span class="muted">· 6 answers</span></li><li><strong>Fortius Dubai</strong> <span class="muted">· 2 answers</span></li><li><strong>Ultimate Performance</strong> <span class="muted">· 1 answer</span></li></ul>
+</section>
+<section>
+<h2>Your part</h2>
+<p>The actions are being validated.</p>
+</section>
+<section>
+<h2>What we take care of</h2>
+<p>The actions are being validated.</p>
+</section>
+<section>
+<h2>Next measurement</h2>
+<p>Measurement J1 will last 5 days, with the same questions and the same assistants: date to be set.</p>
+</section>
+<footer>
+<h2>Limits</h2>
+<ul><li>Measured through the assistants' APIs, with their web search: not the consumer apps, which have their own memory, location and settings.</li><li>No guarantee of being recommended or ranked by any assistant.</li><li>This page states what was measured, not what will be achieved.</li></ul>
+<p class="muted">Every figure on this page comes from the 250 answers recorded during measurement J0.</p>
+</footer>
+</main>
+</body></html>
