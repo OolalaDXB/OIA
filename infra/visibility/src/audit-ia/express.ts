@@ -44,7 +44,7 @@ const QuestionsSchema = z.preprocess(enveloppe("questions"), z.object({
       z.object({
         sujet: texte(2, 120),
         question: texte(10, 600),
-        langue: z.string().trim().transform((x) => x.slice(0, 2).toLowerCase()).pipe(z.string().regex(/^[a-z]{2}$/)),
+        langue: z.string().trim().transform((x) => x.slice(0, 2).toLowerCase()).pipe(z.string().regex(/^[a-z]{2}$/)).optional(),
         marquee: z.preprocess((x) => (x === "true" ? true : x === "false" ? false : x), z.boolean()),
         source: z.string().nullable().optional().transform((x) => (x ? x.slice(0, 300) : null)),
       }),
@@ -79,6 +79,7 @@ export async function proposerQuestions(
       `Formule chaque question pour obtenir des noms précis (« recommande des coachs par leur nom »).`,
       `Langue : ${o.langues.join(" ou ")}. Pour chaque question, « sujet » = mot-clé court, « source » = adresse de la page qui justifie le sujet.`,
       `N'invente aucune offre absente du site.`,
+      `Format exact : {"questions":[{"sujet":"padel","question":"…","langue":"${o.langues[0] ?? "en"}","marquee":false,"source":"https://…"}]}`,
     ].join(" "),
     input: resumeSite(o.read),
   });
@@ -86,7 +87,7 @@ export async function proposerQuestions(
     id: `K${String(i + 1).padStart(2, "0")}`,
     sujet: q.sujet,
     question: q.question,
-    langue: q.langue,
+    langue: q.langue ?? o.langues[0] ?? "en",
     marquee: q.marquee,
     source: q.source ?? null,
   }));
@@ -207,6 +208,8 @@ export async function proposerPlan(
       "concurrents et domaines cités par les IA, constats techniques du site. N'invente aucun fait sur la marque.",
       "Priorités : P0 cette semaine (blocages), P1 signaux d'autorité (annuaires, fiches, presse : vise les domaines réellement cités), P2 contenu, P3 données structurées.",
       "Chaque action dit quoi faire concrètement, pourquoi, et quelles questions (identifiants K..) elle sert.",
+      'Format exact : {"resume":"…","actions":[{"priorite":"P0","type":"SOURCE_TARGET","titre":"…","action":"…","pourquoi":"…","questions":["K01"],"impact":"high","effort":"S"}]}.',
+      "type parmi TECH_FIX, CONTENT_GAP, ENTITY_INCONSISTENCY, SOURCE_TARGET, FIX_FACT ; impact parmi low, medium, high ; effort parmi XS, S, M, L, XL.",
     ].join(" "),
     input: [
       `Score global ${o.scores.global}/100 ; par moteur : ${JSON.stringify(o.scores.parMoteur)} ; questions sans le nom : citée ${o.scores.sansNom.citees} fois sur ${o.scores.sansNom.total}.`,

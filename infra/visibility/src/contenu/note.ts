@@ -264,7 +264,7 @@ export const GRILLE_MODELE: { id: string; axe: Axe; titre: string; points: numbe
   { id: "parcours-achat", axe: "fonctionnel", titre: "Parcours d'achat compréhensible", points: 3, consigne: "Un visiteur comprend-il en quelques secondes comment passer de l'intérêt à la réservation ou à l'achat ?", correction: "Rendre le parcours explicite en 3 étapes (choisir, réserver, payer) avec un bouton à chaque étape.", gravite: "important", effort: "M" },
 ];
 
-const NoteModele = z.preprocess(enveloppe("criteres"), z.object({
+const NoteModele = z.preprocess((x) => enveloppe("criteres")(grilleEnTableau(x)), z.object({
   criteres: z.array(z.object({
     id: z.string(),
     note: z.coerce.number().int().min(0).max(2),
@@ -273,6 +273,17 @@ const NoteModele = z.preprocess(enveloppe("criteres"), z.object({
   })),
   synthese: z.string().default("").transform((x) => x.slice(0, 1200)),
 }));
+/** Grille rendue en objet ({ "proposition-valeur": { note, … } }) : remise en tableau avec l'id. */
+function grilleEnTableau(x: unknown): unknown {
+  if (!x || typeof x !== "object" || Array.isArray(x)) return x;
+  const o = x as Record<string, unknown>;
+  const ids = new Set(GRILLE_MODELE.map((g) => g.id));
+  const versTableau = (v: Record<string, unknown>) =>
+    Object.entries(v).filter(([k, c]) => ids.has(k) && c && typeof c === "object").map(([k, c]) => ({ id: k, ...(c as Record<string, unknown>) }));
+  if (o.criteres && typeof o.criteres === "object" && !Array.isArray(o.criteres)) return { ...o, criteres: versTableau(o.criteres as Record<string, unknown>) };
+  if (!("criteres" in o) && Object.keys(o).some((k) => ids.has(k))) return { ...o, criteres: versTableau(o) };
+  return x;
+}
 export type NoteModeleSortie = z.infer<typeof NoteModele>;
 
 const norm = (s: string) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[“”«»"’']/g, "").replace(/\s+/g, " ").trim();
@@ -291,6 +302,7 @@ export async function criteresModele(llm: LLMProvider, o: { nom: string; pages: 
       "Pour toute note de 1 ou 2, « citation » doit être un extrait EXACT (copié mot pour mot, 5 à 30 mots) du texte fourni qui la justifie ; sinon null.",
       "« justification » : une phrase concrète. Ne suppose rien qui ne soit pas dans le texte.",
       "« synthese » : 3 à 5 phrases, forces et priorités. Réponds en français, en JSON.",
+      'Format exact : {"criteres":[{"id":"proposition-valeur","note":2,"citation":"…","justification":"…"}],"synthese":"…"} — un élément par critère de la grille, avec son id tel quel.',
       "Grille :",
       ...GRILLE_MODELE.map((g) => `- ${g.id} : ${g.consigne}`),
     ].join("\n"),

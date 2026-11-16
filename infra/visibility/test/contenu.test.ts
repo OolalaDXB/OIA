@@ -202,3 +202,17 @@ describe("dépôt public", () => {
     expect(brut.auth).toBeUndefined();
   });
 });
+
+describe("grille rendue en objet par le modèle", () => {
+  it("est remise en tableau avec l'id du critère", async () => {
+    const page = { url: "https://studio-fictif.example/", html: BON };
+    const llm = {
+      name: "faux", defaultModel: "faux",
+      async extract(req: { schema: { parse: (x: unknown) => unknown } }) {
+        return { data: req.schema.parse({ "proposition-valeur": { note: 2, citation: "Séance d'essai à partir de 40 €", justification: "Claire." }, synthese: "S." }) as never, run: { provider: "faux", model: "faux", promptHash: "x" } };
+      },
+    };
+    const r = await criteresModele(llm as never, { nom: "Studio Fictif", pages: [page], modele: "faux" });
+    expect(r.criteres.find((c) => c.id === "proposition-valeur")!.ok).toBe(true);
+  });
+});

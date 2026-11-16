@@ -49,7 +49,7 @@ describe("moteur : demande AUDIT_IA", () => {
         calls++;
         const data =
           req.schemaName === "AuditQuestions"
-            ? { questions: Array.from({ length: 5 }, (_, i) => ({ sujet: `sujet ${i}`, question: `Best padel coach number ${i} in Exempleville?`, langue: "en", marquee: i === 4, source: null })) }
+            ? { questions: Array.from({ length: 5 }, (_, i) => ({ sujet: `sujet ${i}`, question: `Best padel coach number ${i} in Exempleville?`, ...(i === 0 ? {} : { langue: "en" }), marquee: i === 4, source: null })) }
             : { resume: "Résumé fictif de l'audit, marque peu citée.", actions: [1, 2, 3].map((i) => ({ priorite: "P0", type: "SOURCE_TARGET", titre: `Action fictive ${i}`, action: "Faire une action fictive précise et vérifiable.", pourquoi: "Parce que les IA citent cet annuaire.", questions: ["K01"], impact: "high", effort: "S" })) };
         return { data: req.schema.parse(data), run: { provider: "faux", model: "faux", promptHash: "x" } };
       },
