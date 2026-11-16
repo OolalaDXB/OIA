@@ -119,3 +119,45 @@ le même audit rend la même ligne.
 
 Le plan d'action d'un audit externe peut être versé dans les recommandations. Ces lignes
 portent `created_by = audit-externe:<outil>:<date>` et restent en attente de validation.
+
+## Audit IA express, premium (0015, appliquée)
+
+Vingt questions tirées du site (Mistral), posées une fois à chaque IA par API : ChatGPT,
+Claude, Gemini, Perplexity, Grok, et Mistral pour les sites en français. La notation est
+déterministe, avec le même barème que les audits externes. Le résultat arrive dans
+`vis_audits_externes_v3` avec `outil` = « OIA · Audit IA express ». Le plan d'action arrive
+dans `vis_recommandations_v2`, avec `cree_par` = `audit-ia-express:<date>`, en attente de
+validation. Comme un audit externe, il n'entre pas dans le score.
+
+### `vis_audit_ia_estimation_v3`
+
+Une ligne par site :
+- `questions`, `langues`, `appels` ;
+- `moteurs` (jsonb : `moteur`, `cible`, `appels`, `max_usd`, `habituel_usd`) ;
+- `cout_max_usd` (« au plus ») et `cout_habituel_usd` (« environ ») ;
+- `plafond_usd`, `reel_usd`, `engage_usd`, `plafond_global_usd` ;
+- `etat` : `ok`, `plafond_client_non_fixe`, `plafond_global_non_fixe` ou `plafond_depasse`.
+
+Les prix viennent de `vis.tarif_moteur` (par appel, maximum et habituel).
+
+### `vis_audits_ia_v3`
+
+Historique : `id`, `subject_id`, `demande_id`, `questions`, `moteurs`, `langues`,
+`cout_max_usd`, `cout_habituel_usd`, `cout_vu_usd`, `par`, `le`, `statut`, `erreur`,
+`terminee_le`, `resultat_id`, `cout_reel_usd`, `score`.
+
+### Geste
+
+`vis_lancer_audit_ia(p_subject, p_cout_vu_usd, p_questions default 20)` → `uuid`.
+- `p_cout_vu_usd` est le coût maximal affiché. S'il ne correspond plus à l'estimation, la
+  fonction renvoie l'erreur « estimation changée ».
+- L'audit est refusé sans plafond global et client, ou si le plafond serait dépassé.
+- Un audit déjà en cours est rendu tel quel.
+
+Le moteur s'arrête dès que le coût engagé atteint le maximum vu au GO.
+
+### Fonctions du moteur
+
+- `vis_moteur_audit_debut(p_demande)` → fenêtre `<site>-audit-AAAAMMJJHHMI`. Exige le GO
+  `vis.audit_ia`.
+- `vis_moteur_audit_resultat(p_demande, p_resultat jsonb)` → id de l'audit.
