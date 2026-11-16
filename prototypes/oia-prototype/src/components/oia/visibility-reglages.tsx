@@ -10,6 +10,7 @@ import { LogoMarque } from "@/components/oia/visibility-identites";
 import { FaviconSource, LogoReseau } from "@/components/oia/identites";
 import { useReglagesVisibility, useVisibilityDonnees } from "@/lib/donnees/provider";
 import { cleNormalisee, contientNormalise, normaliserSite } from "@/lib/visibility-reglages";
+import { BudgetVisibility, BandeauMoteur } from "@/components/oia/visibility-pilotage";
 
 const classeOnglet = "min-h-12 rounded-none border-b-2 border-transparent px-2 font-normal text-muted-foreground data-[state=active]:border-module-visibility data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none";
 const classeLigne = "flex flex-wrap items-center justify-between gap-3 border-b border-border py-2.5 text-sm last:border-0";
@@ -66,14 +67,14 @@ function MarqueLocale() {
 }
 
 export function VueReglages() {
-  const { marque, concurrents, questions, familles } = useVisibilityDonnees();
+  const { marque, concurrents, questions, familles, reel } = useVisibilityDonnees();
   const { ajouts, modifier, pret, erreur } = useReglagesVisibility();
 
   return <Tabs defaultValue="marque">
     <TabsList aria-label="Réglages Visibility" className="mb-4 h-auto justify-start gap-2 rounded-none border-b border-border bg-transparent p-0">
-      {([["marque", "Marque"], ["concurrents", "Concurrents"], ["questions", "Questions"], ["moteurs", "Moteurs"]] as const).map(([valeur, label]) => <TabsTrigger key={valeur} value={valeur} className={classeOnglet}>{label}</TabsTrigger>)}
+      {([["marque", "Marque"], ["concurrents", "Concurrents"], ["questions", "Questions"], ["moteurs", "Moteurs"], ["budget", "Budget"]] as const).map(([valeur, label]) => <TabsTrigger key={valeur} value={valeur} className={classeOnglet}>{label}</TabsTrigger>)}
     </TabsList>
-    <p className="mb-6 text-xs text-tertiary" role="status">{pret ? "Vos ajouts sont conservés dans ce navigateur. Ils ne lancent aucune mesure et ne modifient pas les données de démonstration." : "Ouverture des réglages locaux…"}</p>
+    <p className="mb-6 text-xs text-tertiary" role="status">{pret ? `Vos ajouts sont conservés dans ce navigateur. Ils ne lancent aucune mesure et ne modifient pas ${reel ? "les mesures réelles" : "les données de démonstration"}.` : "Ouverture des réglages locaux…"}</p>
     {erreur && <p role="alert" className="mb-6 text-sm text-block">Le navigateur refuse la sauvegarde. Les ajouts restent visibles pendant cette visite, mais pourraient être perdus au rechargement.</p>}
 
     <TabsContent value="marque">
@@ -165,5 +166,6 @@ export function VueReglages() {
     </TabsContent>
 
     <TabsContent value="moteurs"><VueMoteurs /></TabsContent>
+    <TabsContent value="budget">{reel ? <><BandeauMoteur /><BudgetVisibility /></> : <Section titre="Budget"><p className="text-sm text-muted-foreground">Le budget réel est disponible après connexion.</p></Section>}</TabsContent>
   </Tabs>;
 }

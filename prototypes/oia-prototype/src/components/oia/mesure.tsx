@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, type CSSProperties, type ReactNode } from "react";
 import type { Fenetre, Valeur } from "@/lib/donnees/visibility";
-import { useVisibilityDonnees } from "@/lib/donnees/provider";
+import { useSelectionVisibility, useVisibilityDonnees } from "@/lib/donnees/provider";
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 import { couleursGraphique } from "@/components/oia/graphiques";
 
@@ -9,7 +9,7 @@ const Ctx = createContext<Filtres | null>(null);
 export function FiltresProvider({ children }: { children: ReactNode }) {
   const { fenetres } = useVisibilityDonnees();
   const [f, setF] = useState({ assistant: "Tous", famille: "Toutes", fenetre: "f2" });
-  const fenetreActive = fenetres.find((x) => x.id === f.fenetre) ?? fenetres[1];
+  const fenetreActive = fenetres.find((x) => x.id === f.fenetre) ?? fenetres[0]!;
   return <Ctx.Provider value={{ ...f, fenetreActive, set: (k, v) => setF((p) => ({ ...p, [k]: v })) }}>{children}</Ctx.Provider>;
 }
 export function useFiltres() {
@@ -21,26 +21,29 @@ export function useFiltres() {
 const select = "min-h-11 rounded-md border border-border bg-background px-2 text-sm text-muted-foreground";
 export function FiltresVisibility() {
   const { assistants, familles, fenetres } = useVisibilityDonnees();
+  const selection = useSelectionVisibility();
   const f = useFiltres();
   return <div role="group" aria-label="Filtres" className="mb-6 flex flex-wrap gap-3 text-sm">
+    {selection.reel && <label className="flex items-center gap-2 text-tertiary">Sujet<select className={select} aria-label="Sujet Visibility" value={selection.sujetId ?? ""} onChange={(e) => selection.setSujetId(e.target.value)}>{selection.sujets.map((s) => <option key={s.id} value={s.id}>{s.nom} · {s.id}</option>)}</select></label>}
     <label className="flex items-center gap-2 text-tertiary">Assistant<select className={select} value={f.assistant} onChange={(e) => f.set("assistant", e.target.value)}><option>Tous</option>{assistants.map((a) => <option key={a.nom}>{a.nom}</option>)}</select></label>
     <label className="flex items-center gap-2 text-tertiary">Famille de questions<select className={select} value={f.famille} onChange={(e) => f.set("famille", e.target.value)}><option>Toutes</option>{familles.map((a) => <option key={a}>{a}</option>)}</select></label>
-    <label className="flex items-center gap-2 text-tertiary">Fenêtre de mesure<select className={select} value={f.fenetre} onChange={(e) => f.set("fenetre", e.target.value)}>{fenetres.map((w) => <option key={w.id} value={w.id}>{w.label}{w.enCours ? " (en cours)" : ""}</option>)}</select></label>
+    <label className="flex items-center gap-2 text-tertiary">Fenêtre de mesure<select className={select} value={f.fenetreActive?.id ?? ""} onChange={(e) => f.set("fenetre", e.target.value)}>{fenetres.map((w) => <option key={w.id} value={w.id}>{w.label}{w.enCours ? " (en cours)" : ""}</option>)}</select></label>
   </div>;
 }
 
 /** Règle d'affichage : en cours = pas de chiffre définitif ; null = non mesurable ; rouge seulement si définitif et significatif. */
 export function texteChiffre(val: Valeur, fen: Fenetre, unite = " %") {
-  if (fen.enCours) return { principal: `Mesure en cours, jour ${fen.jour} sur 5`, intervalle: null as string | null };
-  if (val.v === null) return { principal: "non mesurable", intervalle: null };
-  return { principal: `${String(val.v).replace(".", ",")}${unite}`, intervalle: `${String(val.min).replace(".", ",")} à ${String(val.max).replace(".", ",")}${unite}` };
+  if (fen.enCours) return { principal: `Mesure en cours, jour ${fen.jour} sur ${fen.joursPrevus ?? 5}`, intervalle: null as string | null };
+  if (val.v === null) return { principal: "Non mesurable", intervalle: val.raison ?? "Valeur absente de la source." };
+  const intervalle = val.min !== null && val.max !== null ? `${String(val.min).replace(".", ",")} à ${String(val.max).replace(".", ",")}${unite}` : null;
+  return { principal: `${String(val.v).replace(".", ",")}${unite}`, intervalle: intervalle ?? val.raison ?? "Intervalle non fourni." };
 }
 export function Chiffre({ val, fen, unite = " %", alerte = false, grand = false }: { val: Valeur; fen: Fenetre; unite?: string | undefined; alerte?: boolean | undefined; grand?: boolean }) {
   const t = texteChiffre(val, fen, unite);
   const definitif = !fen.enCours && val.v !== null;
   return <div>
     <div className={`num ${definitif ? (grand ? "text-4xl" : "text-base") : "text-sm text-muted-foreground"} ${definitif && alerte ? "text-block" : ""}`}>{t.principal}</div>
-    {t.intervalle && <div className="num mt-1 text-xs text-tertiary">Intervalle {t.intervalle}</div>}
+    {t.intervalle && <div className="num mt-1 text-xs text-tertiary">{t.intervalle.startsWith("Intervalle") || /^\d/.test(t.intervalle) ? `Intervalle ${t.intervalle}` : t.intervalle}</div>}
   </div>;
 }
 export type TonIndicateur = "presence" | "part-voix" | "exactitude" | "position";
@@ -57,7 +60,7 @@ export function Surligne({ texte, marque, concurrents }: { texte: string; marque
   return <>{texte.split(re).map((p, i) => p === marque ? <mark key={i} className="rounded-sm bg-track px-0.5 text-foreground underline decoration-module-visibility underline-offset-4">{p}</mark> : concurrents.includes(p) ? <mark key={i} className="rounded-sm bg-muted px-0.5 text-foreground">{p}</mark> : <span key={i}>{p}</span>)}</>;
 }
 
-export function Courbe({ fenetres: x, lignes }: { fenetres: string[]; lignes: { nom: string; marque: boolean; v: number[] }[] }) {
+export function Courbe({ fenetres: x, lignes }: { fenetres: string[]; lignes: { nom: string; marque: boolean; v: (number | null)[] }[] }) {
   const data = x.map((fenetre, i) => Object.fromEntries([["fenetre", fenetre], ...lignes.map((l) => [l.nom, l.v[i] ?? null])]));
   return <figure aria-label="Présence dans le temps, la marque et ses concurrents" className="min-w-0">
     <div className="h-72 w-full"><ResponsiveContainer width="100%" height="100%"><LineChart data={data} accessibilityLayer margin={{ top: 12, right: 12, left: 0, bottom: 8 }}>

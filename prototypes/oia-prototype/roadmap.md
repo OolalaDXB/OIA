@@ -1,6 +1,14 @@
 # Roadmap
 
 ## Open
+- [x] Visibility v2 : ajouter le portefeuille, la revue, les GO, le suivi, les rapports, l’activité, les alertes et le budget via les vues et RPC du contrat.
+- [x] Visibility v2 : brancher jugements, sources de réponses, coûts et recommandations v2, sans valeur fictive pour un compte connecté.
+- [x] Visibility v2 : tester chaque geste, le refus sans plafond, l’isolation des rapports et la relecture, puis documenter les écarts sans publier.
+- [ ] Vérifier en production le GO après plafonds et le rôle OIA sans ligne sujet `oia`, avec une session externe réelle.
+- [x] Brancher Visibility sur les dix vues réelles du contrat v1 avec session utilisateur, sélecteurs de sujet et fenêtre, sans changer le design.
+- [x] Garantir « Non mesurable » avec raison pour chaque absence, réserver la démonstration aux visiteurs non connectés et tester les conversions et lectures.
+- [x] Vérifier la preview et documenter les écrans branchés, les vues et les demandes de contrat v2, sans publier.
+- [x] Restaurer exactement le visage Shyrka « yeux ouverts » de `30bf1b4`, puis annuler les logos et le favicon de `7352fcf`.
 - [x] Shyrka : présence immersive plein écran, raccourci F, parole simulée, sous-titres, saisie discrète et accessibilité clavier, avec commit local uniquement.
 - [x] Shyrka : ouvrir légèrement les yeux du visage de particules sans changer la présence ni les animations.
 - [x] Visibility : permettre les ajouts locaux dans Marque, Concurrents et Questions/prompts, avec conservation après rechargement et Moteurs inchangé.

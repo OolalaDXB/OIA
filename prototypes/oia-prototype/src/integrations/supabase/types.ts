@@ -3217,6 +3217,20 @@ export type Database = {
           },
         ]
       }
+      vis_alertes_v2: {
+        Row: {
+          acquittee_le: string | null
+          acquittee_par: string | null
+          client_id: string | null
+          cree_le: string | null
+          gravite: string | null
+          id: string | null
+          message: string | null
+          subject_id: string | null
+          type: string | null
+        }
+        Relationships: []
+      }
       vis_apercu_v1: {
         Row: {
           borne_basse: number | null
@@ -3238,6 +3252,18 @@ export type Database = {
         }
         Relationships: []
       }
+      vis_budget_v2: {
+        Row: {
+          client_id: string | null
+          engage_usd: number | null
+          etat: string | null
+          mois: string | null
+          plafond_global_usd: number | null
+          plafond_usd: number | null
+          reel_usd: number | null
+        }
+        Relationships: []
+      }
       vis_citations_v1: {
         Row: {
           categorie: string | null
@@ -3252,6 +3278,92 @@ export type Database = {
           subject_id: string | null
           url: string | null
           window_id: string | null
+        }
+        Relationships: []
+      }
+      vis_comparaison_moteurs_v2: {
+        Row: {
+          client_id: string | null
+          comparaison_id: string | null
+          courante_borne_basse: number | null
+          courante_borne_haute: number | null
+          courante_jours: number | null
+          courante_moyenne: number | null
+          famille: string | null
+          fenetre_reference: string | null
+          fragile: boolean | null
+          moteur: string | null
+          non_mesurees: Json | null
+          ordre: number | null
+          raison_fragile: string | null
+          reference_borne_basse: number | null
+          reference_borne_haute: number | null
+          reference_jours: number | null
+          reference_moyenne: number | null
+          subject_id: string | null
+          verdict: string | null
+          versions: Json | null
+          window_id: string | null
+        }
+        Relationships: []
+      }
+      vis_comparaisons_v2: {
+        Row: {
+          client_id: string | null
+          derniere: boolean | null
+          donnees: Json | null
+          empreinte: string | null
+          empreinte_courante: string | null
+          empreinte_reference: string | null
+          fenetre_reference: string | null
+          format: number | null
+          id: string | null
+          preuves_courantes: number | null
+          preuves_reference: number | null
+          recommandations_executees: Json | null
+          recu_le: string | null
+          subject_id: string | null
+          verdict_marque: string | null
+          verdict_non_marque: string | null
+          window_id: string | null
+        }
+        Insert: {
+          client_id?: string | null
+          derniere?: never
+          donnees?: Json | null
+          empreinte?: string | null
+          empreinte_courante?: string | null
+          empreinte_reference?: string | null
+          fenetre_reference?: string | null
+          format?: number | null
+          id?: string | null
+          preuves_courantes?: number | null
+          preuves_reference?: number | null
+          recommandations_executees?: never
+          recu_le?: string | null
+          subject_id?: string | null
+          verdict_marque?: never
+          verdict_non_marque?: string | null
+          window_id?: string | null
+        }
+        Update: {
+          client_id?: string | null
+          derniere?: never
+          donnees?: Json | null
+          empreinte?: string | null
+          empreinte_courante?: string | null
+          empreinte_reference?: string | null
+          fenetre_reference?: string | null
+          format?: number | null
+          id?: string | null
+          preuves_courantes?: number | null
+          preuves_reference?: number | null
+          recommandations_executees?: never
+          recu_le?: string | null
+          subject_id?: string | null
+          verdict_marque?: never
+          verdict_non_marque?: string | null
+          window_id?: string | null
         }
         Relationships: []
       }
@@ -3271,6 +3383,104 @@ export type Database = {
           reponses_jugees: number | null
           subject_id: string | null
           taux_apparition: number | null
+          window_id: string | null
+        }
+        Relationships: []
+      }
+      vis_couts_moteurs_v2: {
+        Row: {
+          client_id: string | null
+          cout_estime_usd: number | null
+          cout_reel_usd: number | null
+          moteur: string | null
+          reponses: number | null
+          reponses_cout_reel: number | null
+          subject_id: string | null
+          window_id: string | null
+        }
+        Relationships: []
+      }
+      vis_demandes_v2: {
+        Row: {
+          charge: Json | null
+          client_id: string | null
+          commencee_le: string | null
+          demande_le: string | null
+          demande_par: string | null
+          erreur: string | null
+          id: string | null
+          resultat: Json | null
+          statut: string | null
+          subject_id: string | null
+          tentatives: number | null
+          terminee_le: string | null
+          type: string | null
+        }
+        Relationships: []
+      }
+      vis_fenetres_v2: {
+        Row: {
+          client_id: string | null
+          compare_avec: string | null
+          cout_estime_usd: number | null
+          cout_reel_usd: number | null
+          cout_vu_au_go_usd: number | null
+          debut: string | null
+          detail_estimation: Json | null
+          go_le: string | null
+          go_par: string | null
+          heure_utc: string | null
+          jours: Json | null
+          jours_prevus: number | null
+          libelle: string | null
+          moteurs: string[] | null
+          nature: string | null
+          questions: number | null
+          statut: string | null
+          subject_id: string | null
+          window_id: string | null
+        }
+        Relationships: []
+      }
+      vis_jugements_moteurs_v2: {
+        Row: {
+          client_id: string | null
+          etat: string | null
+          jugees: number | null
+          marque_citee: number | null
+          moteur: string | null
+          non_mesurables: number | null
+          position_moyenne: number | null
+          raison: string | null
+          reponses: number | null
+          sentiment_mixte: number | null
+          sentiment_negatif: number | null
+          sentiment_neutre: number | null
+          sentiment_positif: number | null
+          source: string | null
+          subject_id: string | null
+          window_id: string | null
+        }
+        Relationships: []
+      }
+      vis_jugements_v2: {
+        Row: {
+          client_id: string | null
+          collecteur: string | null
+          etat: string | null
+          langue: string | null
+          marque_citee: boolean | null
+          mentions: number | null
+          moteur: string | null
+          passage: string | null
+          position: number | null
+          question_id: string | null
+          raison_non_mesurable: string | null
+          recu_le: string | null
+          reponse_id: string | null
+          sentiment: string | null
+          source: string | null
+          subject_id: string | null
           window_id: string | null
         }
         Relationships: []
@@ -3302,6 +3512,64 @@ export type Database = {
         }
         Relationships: []
       }
+      vis_mesure_v2: {
+        Row: {
+          changement_modele: boolean | null
+          client_id: string | null
+          collecteurs: string[] | null
+          comparaison_id: string | null
+          cout_estime_usd: number | null
+          debut: string | null
+          etat: string | null
+          fenetre_reference: string | null
+          fin: string | null
+          jours_manquants: number | null
+          jours_mesures: number | null
+          jours_prevus: number | null
+          langues: string[] | null
+          moteurs: string[] | null
+          questions: number | null
+          rang_fenetre: number | null
+          reponses: number | null
+          reponses_jugees: number | null
+          reponses_non_jugees: number | null
+          statut_fenetre: string | null
+          subject_id: string | null
+          type_fenetre: string | null
+          verdict_non_marque: string | null
+          version_panel: number | null
+          versions_modele: string[] | null
+          window_id: string | null
+        }
+        Relationships: []
+      }
+      vis_moteur_v2: {
+        Row: {
+          demandes_en_file: number | null
+          dernier_signe_le: string | null
+          etat: string | null
+          hote: string | null
+          prochain_passage_le: string | null
+          version: string | null
+        }
+        Relationships: []
+      }
+      vis_pages_client_v2: {
+        Row: {
+          client_id: string | null
+          etat: string | null
+          genere_le: string | null
+          html: string | null
+          id: string | null
+          langue: string | null
+          nature: string | null
+          subject_id: string | null
+          valide_le: string | null
+          valide_par: string | null
+          window_id: string | null
+        }
+        Relationships: []
+      }
       vis_planificateur_v1: {
         Row: {
           actif: boolean | null
@@ -3309,6 +3577,46 @@ export type Database = {
           bascule_par: string | null
           client_id: string | null
           motif: string | null
+        }
+        Relationships: []
+      }
+      vis_portefeuille_v2: {
+        Row: {
+          alertes_ouvertes: number | null
+          client_id: string | null
+          client_nom: string | null
+          cout_mois_usd: number | null
+          depuis_le: string | null
+          etape: string | null
+          fenetre_active: string | null
+          jour_courant: number | null
+          langues: string[] | null
+          marches: string[] | null
+          mon_role: string | null
+          nom: string | null
+          plafond_mois_usd: number | null
+          presence_effectif: string | null
+          presence_non_marquee: number | null
+          prochaine_action: string | null
+          qui: string | null
+          site_url: string | null
+          subject_id: string | null
+        }
+        Relationships: []
+      }
+      vis_propositions_v2: {
+        Row: {
+          client_id: string | null
+          contenu: Json | null
+          decide_le: string | null
+          decide_par: string | null
+          etat: string | null
+          id: string | null
+          nature: string | null
+          propose_par: string | null
+          source: string | null
+          subject_id: string | null
+          version: number | null
         }
         Relationships: []
       }
@@ -3398,6 +3706,52 @@ export type Database = {
           subject_id: string | null
           titre: string | null
           type: string | null
+          window_id: string | null
+        }
+        Relationships: []
+      }
+      vis_recommandations_v2: {
+        Row: {
+          client_id: string | null
+          confiance: string | null
+          cree_le: string | null
+          cree_par: string | null
+          decide_le: string | null
+          decide_par: string | null
+          derniere_execution: string | null
+          effort: string | null
+          enonce: string | null
+          etat: string | null
+          execute_le: string | null
+          id: string | null
+          impact: string | null
+          mesure_declaree_le: string | null
+          mesuree_par_fenetre: string | null
+          motif: string | null
+          preuves: Json | null
+          priorite: number | null
+          reference_execution: string | null
+          risque: string | null
+          site_id: string | null
+          subject_id: string | null
+          titre: string | null
+          type: string | null
+          window_id: string | null
+        }
+        Relationships: []
+      }
+      vis_reponses_sources_v2: {
+        Row: {
+          citations: Json | null
+          client_id: string | null
+          etat_recherches: string | null
+          moteur: string | null
+          nb_citations: number | null
+          question_id: string | null
+          recherches: Json | null
+          recu_le: string | null
+          reponse_id: string | null
+          subject_id: string | null
           window_id: string | null
         }
         Relationships: []
@@ -3745,10 +4099,154 @@ export type Database = {
         Args: { p_id: string; p_statut: string }
         Returns: undefined
       }
+      vis_acquitter_alerte: { Args: { p_alerte: string }; Returns: undefined }
+      vis_ajouter_proposition: {
+        Args: { p_contenu: Json; p_nature: string; p_subject: string }
+        Returns: string
+      }
+      vis_annuler_fenetre: {
+        Args: { p_motif: string; p_window: string }
+        Returns: undefined
+      }
+      vis_declarer_execution: {
+        Args: {
+          p_date: string
+          p_note?: string
+          p_preuve: string
+          p_recommandation: string
+        }
+        Returns: number
+      }
+      vis_demander_site: {
+        Args: {
+          p_client_id?: string
+          p_client_nom?: string
+          p_langues: string[]
+          p_marches: string[]
+          p_nom: string
+          p_url: string
+        }
+        Returns: string
+      }
+      vis_fixer_plafond: {
+        Args: { p_client: string; p_plafond_usd: number }
+        Returns: undefined
+      }
+      vis_go_fenetre: {
+        Args: { p_cout_vu_usd: number; p_debut: string; p_subject: string }
+        Returns: string
+      }
+      vis_go_reconnaissance: {
+        Args: { p_cout_vu_usd: number; p_subject: string }
+        Returns: string
+      }
+      vis_modifier_proposition: {
+        Args: { p_contenu: Json; p_id: string }
+        Returns: number
+      }
+      vis_moteur_alerter: {
+        Args: {
+          p_client: string
+          p_gravite: string
+          p_message: string
+          p_subject: string
+          p_type: string
+        }
+        Returns: string
+      }
+      vis_moteur_estimer: {
+        Args: {
+          p_compare_avec: string
+          p_cout_usd: number
+          p_detail: Json
+          p_heure_utc?: string
+          p_jours: number
+          p_libelle: string
+          p_moteurs: string[]
+          p_nature: string
+          p_questions: number
+          p_subject: string
+          p_window: string
+        }
+        Returns: undefined
+      }
+      vis_moteur_fenetre: {
+        Args: {
+          p_debut: string
+          p_statut: string
+          p_subject: string
+          p_window: string
+        }
+        Returns: undefined
+      }
+      vis_moteur_go: {
+        Args: { p_subject: string; p_window: string }
+        Returns: Json
+      }
+      vis_moteur_jour: {
+        Args: {
+          p_date: string
+          p_detail: Json
+          p_etat: string
+          p_jour: number
+          p_subject: string
+          p_window: string
+        }
+        Returns: undefined
+      }
+      vis_moteur_page: {
+        Args: {
+          p_html: string
+          p_langue: string
+          p_nature: string
+          p_subject: string
+          p_window: string
+        }
+        Returns: string
+      }
+      vis_moteur_prendre: { Args: { p_hote: string }; Returns: Json }
+      vis_moteur_preuves: { Args: { p_preuves: Json }; Returns: number }
+      vis_moteur_proposer: {
+        Args: {
+          p_contenu: Json
+          p_id: string
+          p_nature: string
+          p_source: string
+          p_subject: string
+        }
+        Returns: number
+      }
+      vis_moteur_recommandation: {
+        Args: { p_recommandation: Json; p_subject: string; p_window: string }
+        Returns: boolean
+      }
+      vis_moteur_signe: {
+        Args: { p_hote: string; p_prochain: string; p_version: string }
+        Returns: undefined
+      }
+      vis_moteur_sujet: { Args: { p_subject: string }; Returns: Json }
+      vis_moteur_terminer: {
+        Args: { p_demande: string; p_erreur: string; p_resultat: Json }
+        Returns: undefined
+      }
       vis_rejeter_recommandation: {
         Args: { p_motif: string; p_recommandation: string }
         Returns: number
       }
+      vis_relancer_demande: { Args: { p_demande: string }; Returns: string }
+      vis_valider_concurrents: {
+        Args: { p_homonymes?: string[]; p_ids: string[]; p_subject: string }
+        Returns: number
+      }
+      vis_valider_faits: {
+        Args: { p_ids: string[]; p_rejetes?: string[]; p_subject: string }
+        Returns: number
+      }
+      vis_valider_panel: {
+        Args: { p_ids: string[]; p_subject: string }
+        Returns: number
+      }
+      vis_valider_rapport: { Args: { p_page: string }; Returns: undefined }
       vis_valider_recommandation: {
         Args: { p_motif?: string; p_recommandation: string }
         Returns: number

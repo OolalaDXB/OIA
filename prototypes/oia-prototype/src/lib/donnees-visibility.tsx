@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { chargerFichierVisibility, donneesFictives, type DonneesVisibility } from "@/lib/donnees/visibility";
+import { chargerFichierVisibility, donneesFictives, type DonneesModuleVisibility, type DonneesVisibility } from "@/lib/donnees/visibility";
 import { useVisibilityDonnees } from "@/lib/donnees/provider";
 export { lireVisibility, donneesFictives, schemaVisibility, type DonneesVisibility } from "@/lib/donnees/visibility";
 
@@ -15,4 +15,4 @@ export function DonneesProvider({ children }: { children: ReactNode }) {
   return <Ctx.Provider value={donnees}>{children}</Ctx.Provider>;
 }
 
-export function useDonnees() { const fichier = useContext(Ctx); const module = useVisibilityDonnees(); return fichier ?? module; }
+export function useDonnees(): DonneesModuleVisibility { const fichier = useContext(Ctx); const module = useVisibilityDonnees(); return module.reel ? module : fichier ? { ...module, ...fichier } : module; }

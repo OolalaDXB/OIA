@@ -40,7 +40,8 @@ function Toggle<T extends string>(list: T[]) {
 }
 
 function NouveauCompte() {
-  const o = useDonnees().onboarding;
+  const donnees = useDonnees();
+  const o = donnees.onboarding;
   const [step, setStep] = useState(1);
   const [url, setUrl] = useState(o.url);
   const [shown, setShown] = useState(0);
@@ -64,6 +65,8 @@ function NouveauCompte() {
   const suite = (n: number) => (
     <button className={`${btnPrimary} mt-6`} onClick={() => setStep(n)}>Continuer</button>
   );
+
+  if (donnees.reel) return <VisibilityShell page="Nouveau compte" active="sites"><h1 className="mt-2 text-3xl md:text-4xl">Nouveau compte</h1><p className="mt-6 text-sm text-muted-foreground">La création d'un sujet n'est pas disponible dans le contrat Visibility v1.</p></VisibilityShell>;
 
   return (
     <VisibilityShell page="Nouveau compte" active="sites">

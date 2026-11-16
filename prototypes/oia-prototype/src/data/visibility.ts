@@ -1,43 +1,46 @@
 // Données fictives des vues de mesure Visibility.
 import type { Etat } from "@/data/demo";
 
-export type Valeur = { v: number | null; min: number; max: number };
-export type IdFenetre = "f1" | "f2" | "f3";
-export type Fenetre = { id: IdFenetre; label: string; type: "J0" | "Remesure"; enCours: boolean; jour?: number };
+export type Valeur = { v: number | null; min: number | null; max: number | null; raison?: string };
+export type IdFenetre = string;
+export type Fenetre = { id: IdFenetre; label: string; type: string; enCours: boolean; jour?: number; joursPrevus?: number };
 
-export const NOTE_MESURE = "Mesures réalisées par les API des assistants, avec recherche web. Les réponses des applications grand public peuvent différer.";
+export const NOTE_MESURE: string ="Mesures réalisées par les API des assistants, avec recherche web. Les réponses des applications grand public peuvent différer.";
 
-export const fenetres: [Fenetre, Fenetre, Fenetre] = [
+export const fenetres: Fenetre[] = [
   { id: "f3", label: "9 – 13 nov. 2026", type: "Remesure", enCours: true, jour: 2 },
   { id: "f2", label: "2 – 6 nov. 2026", type: "Remesure", enCours: false },
   { id: "f1", label: "26 – 30 oct. 2026", type: "J0", enCours: false },
 ];
 
-export const assistants = [
+export type AssistantVisibility = { nom: string; modele: string; version: string; recherche: boolean | null; derniere: string };
+export const assistants: AssistantVisibility[] = [
   { nom: "ChatGPT", modele: "GPT", version: "gpt-5.2 (2026-09) · exemple fictif", recherche: true, derniere: "6 nov. 2026, 23:10" },
   { nom: "Claude", modele: "Claude", version: "claude-sonnet-5 (2026-08) · exemple fictif", recherche: true, derniere: "6 nov. 2026, 23:14" },
   { nom: "Gemini", modele: "Gemini", version: "gemini-3-pro (2026-10) · exemple fictif", recherche: true, derniere: "6 nov. 2026, 23:18" },
   { nom: "Le Chat", modele: "Mistral", version: "mistral-medium-4 (2026-07) · exemple fictif", recherche: false, derniere: "6 nov. 2026, 23:21" },
   { nom: "Perplexity", modele: "Sonar", version: "sonar-pro (2026-09) · exemple fictif", recherche: true, derniere: "6 nov. 2026, 23:25" },
 ] as const;
-export type NomAssistant = (typeof assistants)[number]["nom"];
+export type NomAssistant = string;
 
 /** Coûts entièrement fictifs, sans appel fournisseur ni facturation. */
-export const moteurs = [
-  { assistant: "ChatGPT", fournisseur: "openai", modele: "GPT", version: assistants[0].version, acces: "API directe", estime: 0.018, observe: 0.021, suivi: true },
-  { assistant: "Claude", fournisseur: "anthropic", modele: "Claude", version: assistants[1].version, acces: "API directe", estime: 0.024, observe: 0.027, suivi: true },
-  { assistant: "Mistral", fournisseur: "mistral", modele: "Mistral", version: assistants[3].version, acces: "OpenRouter", estime: 0.006, observe: null, suivi: false },
-  { assistant: "Gemini", fournisseur: "google", modele: "Gemini", version: assistants[2].version, acces: "API directe", estime: 0.009, observe: 0.011, suivi: true },
-  { assistant: "Perplexity", fournisseur: "perplexity", modele: "Sonar", version: assistants[4].version, acces: "API directe", estime: 0.012, observe: 0.015, suivi: true },
+export type MoteurVisibility = { assistant: string; fournisseur: string; modele: string; version: string; acces: string; estime: number | null; observe: number | null; suivi: boolean };
+export const moteurs: MoteurVisibility[] = [
+  { assistant: "ChatGPT", fournisseur: "openai", modele: "GPT", version: assistants[0]!.version, acces: "API directe", estime: 0.018, observe: 0.021, suivi: true },
+  { assistant: "Claude", fournisseur: "anthropic", modele: "Claude", version: assistants[1]!.version, acces: "API directe", estime: 0.024, observe: 0.027, suivi: true },
+  { assistant: "Mistral", fournisseur: "mistral", modele: "Mistral", version: assistants[3]!.version, acces: "OpenRouter", estime: 0.006, observe: null, suivi: false },
+  { assistant: "Gemini", fournisseur: "google", modele: "Gemini", version: assistants[2]!.version, acces: "API directe", estime: 0.009, observe: 0.011, suivi: true },
+  { assistant: "Perplexity", fournisseur: "perplexity", modele: "Sonar", version: assistants[4]!.version, acces: "API directe", estime: 0.012, observe: 0.015, suivi: true },
 ] as const;
-export const depensesMoteurs = { questions: 9, joursMesures: 20, frequence: "4 fenêtres de 5 jours, une réponse par question et par jour", mois: "Novembre 2026", observe: 24.9, plafond: 30 };
-export const plateformesMoteurs = [
+export type DepensesMoteurs = { questions: number; joursMesures: number; frequence: string; mois: string; observe: number | null; plafond: number | null; estimeGlobal?: number | null };
+export const depensesMoteurs: DepensesMoteurs = { questions: 9, joursMesures: 20, frequence: "4 fenêtres de 5 jours, une réponse par question et par jour", mois: "Novembre 2026", observe: 24.9, plafond: 30 };
+export const plateformesMoteurs: { nom: string; acces: string }[] = [
   { nom: "Google AI Mode", acces: "Extracteur" }, { nom: "Google AI Overview", acces: "Extracteur" },
   { nom: "Copilot", acces: "Extracteur" }, { nom: "DeepSeek", acces: "OpenRouter" },
   { nom: "Qwen", acces: "OpenRouter" }, { nom: "Kimi", acces: "OpenRouter" }, { nom: "Grok", acces: "OpenRouter" },
 ] as const;
 
-export const familles = ["Découverte locale", "Prix et offres", "Cadeaux et famille", "Votre marque"] as const;
+export const familles: string[] = ["Découverte locale", "Prix et offres", "Cadeaux et famille", "Votre marque"];
 
 export type QuestionVisibility = { id: string; q: string; famille: string; langue: string; marque: boolean };
 export const questions: QuestionVisibility[] = [
@@ -65,7 +68,8 @@ export const concurrents = [
 ];
 
 /** Indicateurs par fenêtre ; en cours = valeurs provisoires jamais affichées comme définitives. */
-export const indicateurs: Record<IdFenetre, { presence: Valeur; partVoix: Valeur; exactitude: Valeur; position: Valeur; sentiment: { positif: number; neutre: number; negatif: number } }> = {
+export type SentimentGlobal = { positif: number | null; neutre: number | null; negatif: number | null; mixte?: number | null; raison?: string; source?: string; effectif?: number | null; positifN?: number; neutreN?: number; negatifN?: number; mixteN?: number };
+export const indicateurs: Record<IdFenetre, { presence: Valeur; partVoix: Valeur; exactitude: Valeur; position: Valeur; sentiment: SentimentGlobal }> = {
   f1: { presence: { v: 9, min: 5, max: 13 }, partVoix: { v: 8, min: 5, max: 11 }, exactitude: { v: 71, min: 62, max: 80 }, position: { v: 4.1, min: 3.4, max: 4.8 }, sentiment: { positif: 58, neutre: 38, negatif: 4 } },
   f2: { presence: { v: 12, min: 8, max: 16 }, partVoix: { v: 11, min: 8, max: 14 }, exactitude: { v: 64, min: 55, max: 73 }, position: { v: 3.6, min: 3.0, max: 4.2 }, sentiment: { positif: 61, neutre: 35, negatif: 4 } },
   f3: { presence: { v: 15, min: 6, max: 24 }, partVoix: { v: 13, min: 6, max: 20 }, exactitude: { v: null, min: 0, max: 0 }, position: { v: 3.2, min: 2.1, max: 4.3 }, sentiment: { positif: 60, neutre: 36, negatif: 4 } },
@@ -81,7 +85,8 @@ export const presenceAssistant: Record<IdFenetre, Record<NomAssistant, Valeur>> 
 export const presenceQuestion: Record<string, number | null> = { q1: 22, q2: 11, q3: 0, q4: 18, q5: null, q6: 9, q7: 0, q8: 74, q9: 66 };
 
 /** Série temporelle de présence (%) par fenêtre, marque puis concurrents. */
-export const serie = {
+export type SerieVisibility = { fenetres: string[]; lignes: { nom: string; marque: boolean; v: (number | null)[] }[] };
+export const serie: SerieVisibility = {
   fenetres: ["26 – 30 oct.", "2 – 6 nov.", "9 – 13 nov."],
   lignes: [
     { nom: "Studio Ardoise", marque: true, v: [9, 12, 15] },
@@ -93,14 +98,17 @@ export const serie = {
 };
 
 /** Part de voix par concurrent et par assistant (fenêtre définitive f2). */
-export const partVoix = {
+export type PartVoixEntite = { nom: string; v: number | null; min?: number | null; max?: number | null; raison?: string };
+export type PartVoixVisibility = { global: PartVoixEntite[]; parAssistant: Record<string, number | null>; parQuestion: Record<string, number | null> };
+export const partVoix: PartVoixVisibility = {
   global: [{ nom: "Atelier Terre de Rance", v: 34 }, { nom: "Les Mains d'Argile", v: 27 }, { nom: "Céramique du Ponant", v: 18 }, { nom: "Tour et Émail", v: 10 }, { nom: "Studio Ardoise", v: 11 }],
   parAssistant: { ChatGPT: 12, Claude: 8, Gemini: 16, "Le Chat": null, Perplexity: 11 } as Record<NomAssistant, number | null>,
   parQuestion: { q1: 18, q2: 9, q3: 0, q4: 15, q5: null, q6: 7, q7: 0, q8: 81, q9: 70 } as Record<string, number | null>,
 };
 
-export type Sentiment = "positif" | "neutre" | "negatif";
-export const reponses = [
+export type Sentiment = "positif" | "neutre" | "negatif" | "mixte";
+export type ReponseVisibility = { id: string; question: string; assistant: string; date: string; fenetre: string; sentiment: Sentiment | null; texte: string; sources: string[] | null; recherches: string[] | null; pages: string[] | null; nbCitations?: number | null; empreinte?: string; versionModele?: string; marqueCitee?: boolean | null; sourceJugement?: string; raisonNonMesurable?: string; position?: number | null; passage?: string | null };
+export const reponses: ReponseVisibility[] = [
   { id: "r1", question: "q1", assistant: "ChatGPT", date: "4 nov. 2026, 14:02", fenetre: "f2", sentiment: "positif" as Sentiment,
     texte: "À Vannes, plusieurs ateliers proposent des cours de poterie. Atelier Terre de Rance est souvent recommandé pour ses cours hebdomadaires. Studio Ardoise propose des initiations au tour dans un cadre chaleureux, avec de petits groupes. Les Mains d'Argile organise aussi des ateliers associatifs.",
     sources: ["tripadvisor.fr", "studio-ardoise.fr", "ouest-france.fr"], recherches: ["cours poterie Vannes", "atelier céramique Vannes avis"], pages: ["tripadvisor.fr/Attractions-Vannes", "studio-ardoise.fr/cours", "ouest-france.fr/vannes/poterie"] },
@@ -145,7 +153,8 @@ export const opportunites = [
   { sujet: "Presse locale", source: "ouest-france.fr", concurrents: ["Atelier Terre de Rance", "Les Mains d'Argile"], piste: "Proposer un sujet à la rédaction locale sur les ateliers parent enfant." },
 ];
 
-export const reseaux = [
+export type ReseauVisibility = { reseau: string; handle: string; citations: number; controles: { nom: string; etat: Etat; detail: string }[]; part?: number | null; questions?: number; moteurs?: string[] };
+export const reseaux: ReseauVisibility[] = [
   { reseau: "Instagram", handle: "@studio.ardoise", citations: 4, controles: [
     { nom: "Nom", etat: "conforme" as Etat, detail: "Studio Ardoise" }, { nom: "Ville", etat: "conforme" as Etat, detail: "Vannes" },
     { nom: "Offres", etat: "verifier" as Etat, detail: "Cours particuliers absents" }, { nom: "Lien vers le site", etat: "conforme" as Etat, detail: "studio-ardoise.fr" } ] },
@@ -163,7 +172,7 @@ export const rapports = [
   { id: "f2", titre: "Remesure 1", fenetre: "2 – 6 nov. 2026", statut: "Définitif" },
   { id: "f3", titre: "Remesure 2", fenetre: "9 – 13 nov. 2026", statut: "Mesure en cours, jour 2 sur 5" },
 ];
-export const comparaison = [
+export const comparaison: { question: string; avant: number | null; apres: number | null }[] = [
   { question: "q1", avant: 15, apres: 22 }, { question: "q2", avant: 8, apres: 11 }, { question: "q4", avant: 18, apres: 18 },
   { question: "q5", avant: null, apres: null }, { question: "q8", avant: 70, apres: 74 }, { question: "q9", avant: 69, apres: 66 },
 ];
@@ -171,4 +180,4 @@ export const comparaison = [
 export const etatCollecte = { questions: 9, reponses: 135, frequence: "Une fenêtre de cinq jours par semaine", derniere: "6 nov. 2026, 23:25" };
 
 /** Un écart n'est significatif que si les intervalles ne se recouvrent pas. */
-export function significatif(a: Valeur, b: Valeur) { return a.v !== null && b.v !== null && (a.max < b.min || b.max < a.min); }
+export function significatif(a: Valeur, b: Valeur) { return a.v !== null && b.v !== null && a.min !== null && a.max !== null && b.min !== null && b.max !== null && (a.max < b.min || b.max < a.min); }

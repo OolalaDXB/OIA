@@ -87,7 +87,7 @@ export function avecReglagesVisibility(
     },
     concurrents: [...donnees.concurrents, ...ajouts.concurrents],
     questions: [...donnees.questions, ...ajouts.questions],
-    etatCollecte: {
+    etatCollecte: donnees.reel ? donnees.etatCollecte : {
       ...donnees.etatCollecte,
       questions: donnees.questions.length + ajouts.questions.length,
     },

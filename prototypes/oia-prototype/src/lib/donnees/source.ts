@@ -3,6 +3,7 @@ export type EtatDonnees<T> =
   | { statut: "chargement" }
   | { statut: "vide" }
   | { statut: "erreur"; message: string }
+  | { statut: "acces"; message: string }
   | { statut: "pret"; donnees: T };
 
 export type SourceDonnees<T> = () => T | null | Promise<T | null>;

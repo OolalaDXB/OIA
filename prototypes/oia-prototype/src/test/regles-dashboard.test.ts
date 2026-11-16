@@ -25,6 +25,6 @@ describe("Affichage des chiffres Visibility", () => {
   const enCours = fenetres.find((f) => f.enCours)!; const fini = fenetres.find((f) => !f.enCours)!;
   it("identifie chaque version d'assistant inventée comme un exemple fictif", () => expect(assistants.every((a) => a.version.includes("exemple fictif"))).toBe(true));
   it("affiche la mesure en cours au lieu d'un chiffre", () => expect(texteChiffre({ v: 15, min: 6, max: 24 }, enCours).principal).toBe("Mesure en cours, jour 2 sur 5"));
-  it("affiche « non mesurable », jamais zéro", () => expect(texteChiffre({ v: null, min: 0, max: 0 }, fini).principal).toBe("non mesurable"));
+  it("affiche « non mesurable », jamais zéro", () => expect(texteChiffre({ v: null, min: 0, max: 0 }, fini).principal).toBe("Non mesurable"));
   it("donne l'intervalle sous un chiffre définitif", () => expect(texteChiffre({ v: 12, min: 8, max: 16 }, fini).intervalle).toBe("8 à 16 %"));
 });

@@ -16,8 +16,9 @@ import { DonneesProvider } from "@/lib/donnees-visibility";
 import { ShyrkaProvider, ShyrkaGlobale } from "@/components/oia/shyrka";
 import { FiltresProvider } from "@/components/oia/mesure";
 import { ContexteProvider } from "@/lib/shyrka-contexte";
-import { SourcesProvider } from "@/lib/donnees/provider";
+import { SourcesProvider, VisibilityReelProvider } from "@/lib/donnees/provider";
 import { OiaAuthProvider } from "@/lib/oia-auth";
+import { VisibilityPilotageProvider } from "@/lib/donnees/visibility-pilotage-provider";
 
 function NotFoundComponent() {
   return (
@@ -125,7 +126,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <OiaAuthProvider><SourcesProvider><DonneesProvider><FiltresProvider><ContexteProvider><ShyrkaProvider><Outlet /><ShyrkaGlobale /></ShyrkaProvider></ContexteProvider></FiltresProvider></DonneesProvider></SourcesProvider></OiaAuthProvider>
+      <OiaAuthProvider><VisibilityReelProvider><SourcesProvider><VisibilityPilotageProvider><DonneesProvider><FiltresProvider><ContexteProvider><ShyrkaProvider><Outlet /><ShyrkaGlobale /></ShyrkaProvider></ContexteProvider></FiltresProvider></DonneesProvider></VisibilityPilotageProvider></SourcesProvider></VisibilityReelProvider></OiaAuthProvider>
     </QueryClientProvider>
   );
 }

@@ -1,12 +1,13 @@
 import { Link, useRouter, useRouterState } from "@tanstack/react-router";
 import { useId, useRef, useState, type ReactNode } from "react";
 import type { Etat } from "@/lib/donnees/accueil";
-import { useAccueilDonnees } from "@/lib/donnees/provider";
+import { useAccueilDonnees, useVisibilityDonnees } from "@/lib/donnees/provider";
 import { EtatEcran } from "@/components/oia/etat-donnees";
 import { Button } from "@/components/ui/button";
 import { LockKeyhole, Menu, X } from "lucide-react";
 import { BarreColoree } from "@/components/oia/graphiques";
 import { useOiaAuth } from "@/lib/oia-auth";
+import { useVisibilityPilotage } from "@/lib/donnees/visibility-pilotage-provider";
 
 export function Shell({ children, large = false, fictif = true }: { children: ReactNode; large?: boolean; fictif?: boolean }) {
   const { modulesPersonnels, modules, depenses } = useAccueilDonnees();
@@ -17,6 +18,12 @@ export function Shell({ children, large = false, fictif = true }: { children: Re
   const contenuId = useId();
   const router = useRouter();
   const auth = useOiaAuth();
+  const visibility = useVisibilityDonnees();
+  const pilotage = useVisibilityPilotage();
+  const coutVisibilityReel = module === "visibility" && auth.user && visibility.reel;
+  const clientActif = pilotage.global?.portefeuille.find((l) => l.subject_id === visibility.sujetActif)?.client_id;
+  const budgetActif = pilotage.global?.budgets.find((b) => b.client_id === clientActif);
+  const depenseReelle = budgetActif?.reel_usd ?? null;
   return <div className="oia-shell min-h-dvh bg-background text-foreground md:grid md:grid-cols-[230px_minmax(0,1fr)]">
     <a href={`#${contenuId}`} className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-background focus:p-3">Aller au contenu principal</a>
     <header className="sticky top-0 z-30 bg-background border-b border-border md:sticky md:top-0 md:h-dvh md:overflow-y-auto md:border-r md:border-b-0" onKeyDown={(e) => { if (e.key === "Escape" && menuOuvert) { e.preventDefault(); setMenuOuvert(false); menuButton.current?.focus(); } }}>
@@ -32,7 +39,7 @@ export function Shell({ children, large = false, fictif = true }: { children: Re
         <section className="mt-5 border-t border-border pt-5"><h2 className="mb-2 flex items-center gap-2 text-xs text-tertiary">Personnel <LockKeyhole className="size-3" aria-label="Espace privé" /></h2>
           <nav aria-label="Personnel" className="flex flex-col">{modulesPersonnels.map((m) => <Link key={m.slug} to="/personnel/$module" params={{ module: m.slug }} className="flex min-h-11 flex-wrap items-center gap-2 px-2 text-sm text-muted-foreground" activeProps={{ className: "text-foreground underline underline-offset-4" }}><span className="size-2 bg-module-personnel" aria-hidden="true" /><span>{m.nom}</span><span className="ml-auto text-[10px] text-tertiary">En préparation</span></Link>)}</nav>
         </section>
-        <nav aria-label="Assistante et réglages" className="mt-5 border-t border-border pt-3 md:mt-auto"><Link to="/shyrka" className="flex min-h-11 items-center px-2 text-sm text-muted-foreground" activeProps={{ className: "text-foreground underline underline-offset-4" }}>Shyrka</Link><Link to="/reglages" className="flex min-h-11 items-center px-2 text-sm text-muted-foreground" activeProps={{ className: "text-foreground underline underline-offset-4" }}>Réglages</Link><Link to={auth.user ? "/reglages" : "/auth"} className="flex min-h-11 items-center px-2 text-sm text-muted-foreground">{auth.loading ? "Connexion…" : auth.user ? "Compte connecté" : "Se connecter"}</Link></nav><p className="num mt-3 px-2 text-xs text-tertiary">Dépense du mois : {depenses.montant} $ <span className="block">plafond Visibility : {depenses.plafond} $ · exemple fictif</span></p>
+        <nav aria-label="Assistante et réglages" className="mt-5 border-t border-border pt-3 md:mt-auto"><Link to="/shyrka" className="flex min-h-11 items-center px-2 text-sm text-muted-foreground" activeProps={{ className: "text-foreground underline underline-offset-4" }}>Shyrka</Link><Link to="/reglages" className="flex min-h-11 items-center px-2 text-sm text-muted-foreground" activeProps={{ className: "text-foreground underline underline-offset-4" }}>Réglages</Link><Link to={auth.user ? "/reglages" : "/auth"} className="flex min-h-11 items-center px-2 text-sm text-muted-foreground">{auth.loading ? "Connexion…" : auth.user ? "Compte connecté" : "Se connecter"}</Link></nav>{coutVisibilityReel ? <p className="num mt-3 px-2 text-xs text-tertiary">Dépense Visibility du mois : {depenseReelle === null ? "Non mesurable" : `${depenseReelle.toLocaleString("fr-FR", { maximumFractionDigits: 2 })} $`}<span className="block">plafond Visibility : {!budgetActif || budgetActif.plafond_usd === null ? "non fixé" : `${budgetActif.plafond_usd} $`}</span></p> : <p className="num mt-3 px-2 text-xs text-tertiary">Dépense du mois : {depenses.montant} $ <span className="block">plafond Visibility : {depenses.plafond} $ · exemple fictif</span></p>}
       </div>
     </header>
     <div className="min-w-0"><main id={contenuId} tabIndex={-1} className={`w-full px-5 py-8 md:px-8 md:py-10 ${large ? "mx-auto max-w-[1600px]" : "max-w-none"}`}><EtatEcran module={module}>{children}</EtatEcran></main>{fictif && <footer className="w-full px-5 pb-20 text-xs text-tertiary md:px-8">Exemple fictif, données de démonstration.</footer>}</div>
