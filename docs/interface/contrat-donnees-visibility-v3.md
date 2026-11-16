@@ -87,3 +87,35 @@ d'une date à l'autre.
 
 - `vis_moteur_analyse(p_demande uuid, p_analyse jsonb)` → `uuid`
 - `vis_moteur_constat(p_demande uuid, p_analyse uuid, p_constat jsonb)` → `uuid`
+
+## Audits externes (0013, appliquée)
+
+Audits faits par d'autres outils (Perplexity Computer…), **en complément** : jamais dans le
+score d'OIA, car leurs méthodes ne sont pas comparables (interfaces grand public, une seule
+passe, lieu du navigateur).
+
+### `vis_audits_externes_v3`
+
+Une ligne par audit importé : `id`, `client_id`, `subject_id`, `outil`, `realise_le`,
+`methode`, `moteurs`, `score` (le score de l'outil), `resume`, `rapport_md` (Markdown, sans
+script), `questions`, `importe_par`, `importe_le`, `dernier`.
+
+### `vis_audit_externe_lignes_v3`
+
+Une ligne par question et par moteur : `audit_id`, `question_id`, `sujet`, `question`,
+`ordre`, `moteur`, `score`, `concurrents` (tableau), `domaines` (tableau).
+
+Barème du score : 3 premier choix avec lien, 2 listé, 1 cité parce que nommé ou de façon
+inexacte, 0 absent.
+
+### Geste
+
+`vis_importer_audit_externe(p_subject, p_outil, p_realise_le, p_methode, p_moteurs text[],
+p_score, p_resume, p_rapport_md, p_matrice jsonb)` → `uuid`. Bouton « Importer un audit
+externe » : le cockpit lit le CSV de l'outil, avec les colonnes `id`, `topic`, `prompt`,
+`<moteur>_score`, `<moteur>_competitors` (séparés par « ; ») et `<moteur>_cited_domains`
+(séparés par « , »), plus le rapport en Markdown. Il appelle ensuite la fonction. Réimporter
+le même audit rend la même ligne.
+
+Le plan d'action d'un audit externe peut être versé dans les recommandations. Ces lignes
+portent `created_by = audit-externe:<outil>:<date>` et restent en attente de validation.
