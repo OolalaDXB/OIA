@@ -55,6 +55,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - name: Secrets présents (noms seulement)
+        id: secrets
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
@@ -69,14 +70,17 @@ jobs:
             if [ -n "${!n}" ]; then echo "  $n : présent"; else echo "  $n : ABSENT"; manque=1; fi
           done
           if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
-            echo "::error::SUPABASE_URL ou SUPABASE_SERVICE_ROLE_KEY absent : le moteur ne peut pas lire la file."
-            exit 1
+            echo "::warning::SUPABASE_URL ou SUPABASE_SERVICE_ROLE_KEY absent (Settings > Secrets and variables > Actions) : aucun passage ; le cockpit affiche « moteur muet »."
+            echo "pret=non" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
           if [ "$manque" = 1 ]; then
             echo "::warning::Clé de moteur absente : les demandes qui en ont besoin échoueront, avec leur raison dans le cockpit."
           fi
+          echo "pret=oui" >> "$GITHUB_OUTPUT"
 
       - name: Passage du moteur
+        if: steps.secrets.outputs.pret == 'oui'
         working-directory: infra/visibility
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
