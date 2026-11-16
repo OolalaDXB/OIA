@@ -172,3 +172,26 @@ update vis.window w set status = 'aborted'
 insert into vis.tarif_moteur (moteur, cible, langues, majorant_usd, habituel_usd, source)
 select moteur, cible, null, majorant_usd, habituel_usd, source || ' ; toutes langues depuis le 2026-11-16'
 from (select * from vis.tarif_moteur where moteur = 'mistral' order by id desc limit 1) t;
+
+-- 0017b (appliquée à part) : l'estimation de l'audit ne compte que les moteurs interrogés ;
+-- « analyse » (questions et plan) est ajoutée une fois, « note_contenu » n'en fait pas partie.
+create or replace function vis_ui.estimation_audit(p_subject text, p_questions int)
+returns jsonb language sql stable security definer set search_path = '' as $$
+  with s as (
+    select su.id, su.client_id,
+           coalesce(nullif(array(select jsonb_array_elements_text(case when jsonb_typeof(su.extra -> 'langues') = 'array' then su.extra -> 'langues' else '[]'::jsonb end)), '{}'), array['en']) as langues
+    from vis.subject su where su.id = p_subject
+  ), t as (
+    select distinct on (moteur) * from vis.tarif_moteur order by moteur, id desc
+  ), m as (
+    select t.* from t, s where t.actif and t.moteur not in ('analyse', 'note_contenu') and (t.langues is null or t.langues && s.langues)
+  ), a as (select * from t where moteur = 'analyse')
+  select jsonb_build_object(
+    'subject_id', s.id, 'client_id', s.client_id, 'langues', to_jsonb(s.langues), 'questions', p_questions,
+    'moteurs', (select jsonb_agg(jsonb_build_object('moteur', m.moteur, 'cible', m.cible, 'appels', p_questions,
+                  'max_usd', round(m.majorant_usd * p_questions, 2), 'habituel_usd', round(m.habituel_usd * p_questions, 2)) order by m.moteur) from m),
+    'appels', (select count(*) * p_questions from m),
+    'cout_max_usd', round(coalesce((select sum(m.majorant_usd) * p_questions from m), 0) + coalesce((select majorant_usd from a), 0), 2),
+    'cout_habituel_usd', round(coalesce((select sum(m.habituel_usd) * p_questions from m), 0) + coalesce((select habituel_usd from a), 0), 2))
+  from s
+$$;
