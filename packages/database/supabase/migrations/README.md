@@ -51,6 +51,33 @@ rien dans ces tables : elle fonctionne avant comme après 0010.
 Tests : `test/vis-sync-v2.test.ts` (Postgres jetable : J0 puis une J1 fictive, 0010
 par-dessus, tests adverses). Retour arrière : bloc en fin de fichier.
 
+## Contrat Visibility version 2 : pilotage depuis le cockpit (vis 0006_pilotage et 0011, proposées, non appliquées)
+
+Mandat v16, bloc A. **Proposées, non appliquées** : à appliquer selon la procédure de
+la 0008 (sauvegarde, répétition générale terminée par `rollback`, chaque commande
+d'écriture validée par Mickaël). Contrat : `docs/interface/contrat-donnees-visibility-v2.md`.
+
+| Ordre | Fichier | Version proposée | Prérequis |
+| --- | --- | --- | --- |
+| après vis 0005 (`20261116140000`) | `0010_visibility_vues_v2.sql`, si elle n'est pas déjà appliquée | `20261116150000` | 0006 appliquée |
+| suivante | `infra/visibility/migrations/0006_pilotage.sql` | `20261116150100` | vis 0001 à 0005, 0006, 0010 |
+| suivante | `0011_visibility_pilotage.sql` | `20261116150200` | vis 0006_pilotage |
+
+| Objet | Rôle |
+| --- | --- |
+| vis 0006_pilotage | Tables en ajout seul du schéma `vis` : `geste` (journal des gestes), `demande` et `demande_etat` (file du moteur : `QUEUED`, `RUNNING` avec tentative et hôte, `DONE`, `FAILED`, `CANCELLED`), `proposition` (versionnée), `proposition_decision`, `panel`, `fenetre`, `fenetre_estimation`, `fenetre_statut`, `fenetre_go`, `fenetre_jour`, `plafond` (client, ou global si `client_id` est nul), `alerte`, `alerte_acquit`, `moteur_signe`, `page`, `page_validation`. RLS : lecture par les membres du client ; aucune écriture accordée, ni à `authenticated` ni à `service_role`. `vis.window.kind` accepte `reconnaissance` ; `vis.execution.kind` accepte `url` et `other` |
+| 0011 | Vues `vis_portefeuille_v2`, `vis_demandes_v2`, `vis_propositions_v2`, `vis_fenetres_v2`, `vis_budget_v2`, `vis_alertes_v2`, `vis_moteur_v2`, `vis_pages_client_v2` ; 14 fonctions de geste (`authenticated`) ; 13 fonctions du moteur `vis_moteur_*` (`service_role`), dont la reprise en base des demandes `RUNNING` depuis plus de 30 minutes |
+
+Tests : `test/visibility-pilotage.test.ts` (Postgres jetable : parcours complet d'un site
+fictif, refus du contrat par rôle et par étape, RLS entre clients, prise unique par trois
+moteurs en concurrence, reprise après 30 minutes, colonnes des vues identiques au contrat,
+vues v1 et de 0010 inchangées, démonstration figée, retour arrière). Démonstration :
+`demo/visibility-v2-demo.sql`, `docs/interface/demo/visibility-v2-demo.json`.
+
+Retour arrière : le bloc en tête de `0011_visibility_pilotage.sql`, puis celui de
+`0006_pilotage.sql` (il supprime le contenu des tables : l'exporter d'abord), chacun dans
+une transaction, puis `delete from supabase_migrations.schema_migrations where version = '…'`.
+
 ## Dépenses d'IA (0009, appliquée)
 
 | Ordre | Fichier | Effet | Prérequis |
