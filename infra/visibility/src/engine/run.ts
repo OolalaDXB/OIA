@@ -62,6 +62,8 @@ import type { LLMProvider } from "../../../../packages/providers/src/types.js";
 import { findPrice } from "../cost-grid.js";
 import { constatsContenu, criteresModele, noterContenu, type Critere, type PageBrute } from "../contenu/note.js";
 import { lireDepotGithub, type GithubFetch, type LectureDepot } from "../repo/github.js";
+import { constatsHygiene, controlerSite } from "../hygiene/controles.js";
+import { bilanBing, createBingClient, type BingFetch, type ResultatBing } from "../hygiene/bing.js";
 import { readSite } from "../site/pages.js";
 import { DEFAULT_LIGHTHOUSE_COMMAND, LIGHTHOUSE_PACKAGE, constatsCrawl, constatsLighthouse, runLighthouse, summarizeLighthouse, type AnalyseLighthouse, type LighthouseCommand, type Strategie } from "../analyse/lighthouse.js";
 import { concurrentsFile, homonymesFile } from "../site/formats.js";
@@ -99,6 +101,8 @@ export interface EngineOptions {
   noteLlm?: () => LLMProvider & { usage?: () => { inputTokens: number; outputTokens: number } };
   /** Accès à l'API GitHub (lecture du dépôt lié) : fetch global par défaut, un faux dans les tests. */
   github?: GithubFetch;
+  /** Accès à l'API Bing Webmaster (hygiène d'indexation) : fetch global par défaut, un faux dans les tests. */
+  bing?: BingFetch;
   /** Accès payants, créés seulement après le contrôle du GO en base. */
   collector: () => Collector;
   judge: () => MentionJudge;
@@ -188,6 +192,15 @@ export async function runEngine(o: EngineOptions): Promise<PassageResult> {
   const dir = ensurePrivateDir(o.dir);
   const ctx: Ctx = { o, now, log: o.log ?? (() => {}), subjectsDir: ensurePrivateDir(join(dir, "sujets")), dataDir: ensurePrivateDir(join(dir, "donnees")) };
   await o.db.signe(o.hote, o.version, new Date(now.getTime() + (o.everyMinutes ?? 5) * 60_000));
+  // Passage quotidien : une hygiène d'indexation par site et par jour (gratuite), traitée dans ce passage.
+  if (o.quotidien) {
+    try {
+      const n = await o.db.planifierHygiene();
+      if (n) ctx.log(`hygiène d'indexation : ${n} site(s) planifié(s)`);
+    } catch (err) {
+      ctx.log(`hygiène d'indexation non planifiée : ${msg(err)}`);
+    }
+  }
   const traitees: Traitement[] = [];
   for (let i = 0; i < (o.max ?? 20); i++) {
     const d = await o.db.prendre(o.hote);
@@ -201,7 +214,7 @@ export async function runEngine(o: EngineOptions): Promise<PassageResult> {
 async function handle(ctx: Ctx, d: Demande): Promise<Traitement> {
   ctx.log(`demande ${d.id} : ${d.type}${d.subject_id ? ` (${d.subject_id})` : ""}`);
   try {
-    const run = { SITE_ADD: siteAddDemande, RECON: reconDemande, WINDOW_RUN: windowRunDemande, REPORT: reportDemande, REMEASURE_PROPOSE: remeasureDemande, ANALYSE: analyseDemande, AUDIT_IA: auditIaDemande, NOTE_CONTENU: noteContenuDemande, EXTRAIRE_PLAN: extrairePlanDemande }[d.type];
+    const run = { SITE_ADD: siteAddDemande, RECON: reconDemande, WINDOW_RUN: windowRunDemande, REPORT: reportDemande, REMEASURE_PROPOSE: remeasureDemande, ANALYSE: analyseDemande, AUDIT_IA: auditIaDemande, NOTE_CONTENU: noteContenuDemande, EXTRAIRE_PLAN: extrairePlanDemande, HYGIENE: hygieneDemande }[d.type];
     if (!run) throw new EngineRefusal(`type de demande inconnu « ${String(d.type)} »`);
     const resultat = await run(ctx, d);
     await ctx.o.db.terminer(d.id, resultat, null);
@@ -350,6 +363,56 @@ async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
   const coutParMoteur: Record<string, number> = {};
   for (const r of col.reponses) coutParMoteur[r.moteur] = Math.round(((coutParMoteur[r.moteur] ?? 0) + r.coutUsd) * 100) / 100;
   return { audit_externe_id: auditId, score: s.global, cout_reel_usd: coutReel, cout_par_moteur: coutParMoteur, questions: questions.length, reponses: col.reponses.length, vides: col.reponses.filter((r) => !r.texte?.trim()).length, echecs: col.echecs.length, recommandations: recos, arret_plafond: col.arretPlafond, preuves_erreur: preuvesErreur };
+}
+
+// ---------------------------------------------------------------- HYGIENE (gratuite, quotidienne)
+
+/**
+ * Hygiène d'indexation : contrôles du site en ligne (règles fixes), puis Bing Webmaster Tools si la
+ * clé est là (sitemap soumis s'il manque). Aucun modèle de langage, aucun coût. Une analyse
+ * « indexation » et un constat par écart, qui entrent dans le plan d'action unique.
+ */
+async function hygieneDemande(ctx: Ctx, d: Demande): Promise<Record<string, unknown>> {
+  subjectOf(d);
+  const url = str(d.charge.url, "url");
+  if (!/^https:\/\//.test(url)) throw new EngineRefusal("adresse du site : https attendu");
+  const site = new URL(url).origin;
+  const ctrl = await controlerSite(site, ctx.o.fetch);
+  let bing: ResultatBing | null = null;
+  let bingErreur: string | null = null;
+  const cle = ctx.o.env.BING_WEBMASTER_API_KEY?.trim();
+  if (cle) {
+    try {
+      bing = await bilanBing(createBingClient(cle, ctx.o.bing), site, ctrl.sitemap.url);
+    } catch (err) {
+      bingErreur = msg(err).slice(0, 200);
+    }
+  } else bingErreur = "clé absente : BING_WEBMASTER_API_KEY";
+  const controles = [...ctrl.controles, ...(bing?.controles ?? [])];
+  const mesures = controles.filter((c) => c.ok !== null);
+  const total = mesures.reduce((s, c) => s + c.points, 0);
+  const score = total ? Math.round((100 * mesures.filter((c) => c.ok).reduce((s, c) => s + c.points, 0)) / total) : null;
+  const aid = await ctx.o.db.analyse(d.id, {
+    nature: "indexation",
+    strategie: null,
+    url: site,
+    outil: "OIA · hygiène d'indexation",
+    statut: "fait",
+    scores: { indexation: score === null ? null : score / 100 },
+    metriques: { controles: controles.length, ecarts: controles.filter((c) => c.ok === false).length, adresses_sitemap: ctrl.sitemap.adresses.length, bing_problemes: bing?.problemes.total ?? null },
+    resultat: {
+      controles: controles.map((c) => ({ id: c.id, titre: c.titre, ok: c.ok, valeur: c.valeur, gravite: c.gravite, preuve: c.preuve })),
+      sitemap: { url: ctrl.sitemap.url, adresses: ctrl.sitemap.adresses.length },
+      bing: bing ? { site: bing.site, verifie: bing.verifie, feeds: bing.feeds, problemes: bing.problemes, exploration: bing.exploration, requetes: bing.requetes } : { erreur: bingErreur },
+      actions: bing?.actions ?? [],
+    },
+  });
+  let constats = 0;
+  for (const c of constatsHygiene(controles)) {
+    await ctx.o.db.constat(d.id, aid, c);
+    constats++;
+  }
+  return { analyse_id: aid, score, ecarts: constats, bing: bing ? (bing.verifie ? "vérifié" : "non vérifié") : `non lu : ${bingErreur}`, actions: (bing?.actions ?? []).map((a) => `${a.action} : ${a.resultat}`) };
 }
 
 // ---------------------------------------------------------------- EXTRAIRE_PLAN (quelques centimes)
