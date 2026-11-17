@@ -186,6 +186,7 @@ grant execute on function public.vis_moteur_planifier_hygiene() to service_role;
 create or replace view public.vis_hygiene_v3 with (security_invoker = true) as
 select distinct on (a.subject_id) a.client_id, a.subject_id, a.id as analyse_id, a.demande_id, a.url, a.statut, a.scores, a.metriques,
        a.resultat -> 'controles' as controles, a.resultat -> 'bing' as bing, a.resultat -> 'actions' as actions, a.recu_le,
+       a.resultat -> 'gsc' as gsc,
        (select count(*) from public.vis_constats_v3 c where c.subject_id = a.subject_id and c.source = 'indexation' and c.etat = 'ouvert')::int as ecarts_ouverts
 from vis.analyse a
 where a.nature = 'indexation'
