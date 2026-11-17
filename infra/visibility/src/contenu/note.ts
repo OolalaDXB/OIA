@@ -173,6 +173,23 @@ export function criteresDeterministes(pages: PageBrute[], depot: LectureDepot | 
       explication: "llms.txt résume le site pour les assistants IA : offres, lieux, prix, pages clés.",
       correction: "Ajouter /llms.txt (Markdown court : qui, quoi, où, prix, liens).", gravite: "mineur", effort: "S", qui: "equipe",
     }));
+    // IndexNow : fichier clé servi à la racine (son contenu est son propre nom) et envoi automatique
+    // des pages modifiées (script ou workflow qui appelle l'API IndexNow).
+    const clesIndexNow = depot.fichiers
+      .filter((f) => /^(public\/)?[A-Za-z0-9-]{8,128}\.txt$/.test(f.chemin) && f.contenu?.trim() === f.chemin.replace(/^public\//, "").slice(0, -4))
+      .map((f) => f.chemin);
+    const envoiIndexNow = depot.fichiers
+      .filter((f) => f.contenu !== undefined && /\.(m?js|cjs|ts|ya?ml|json|sh|py)$/i.test(f.chemin) && /indexnow\.org|bing\.com\/indexnow|\/indexnow\b/i.test(f.contenu))
+      .map((f) => f.chemin);
+    out.push(critere({
+      id: "indexnow", axe: "technique", titre: "Pages annoncées à Bing par IndexNow", points: 1, source: "depot",
+      ok: clesIndexNow.length > 0 && envoiIndexNow.length > 0,
+      valeur: clesIndexNow.length && envoiIndexNow.length ? "clé et envoi automatique" : clesIndexNow.length ? "clé présente, aucun envoi automatique trouvé" : envoiIndexNow.length ? "envoi trouvé, fichier clé absent" : "absent",
+      preuve: { cle: clesIndexNow.slice(0, 2), envoi: envoiIndexNow.slice(0, 4) },
+      explication: "IndexNow prévient Bing dès qu'une page change ; Bing alimente la recherche de ChatGPT et Copilot. Sans lui, il faut attendre le prochain passage du robot. Google ne l'utilise pas (Search Console).",
+      correction: "Publier le fichier clé /<clé>.txt à la racine et, après chaque déploiement en production, envoyer les adresses modifiées du sitemap à api.indexnow.org (workflow sur le statut de déploiement).",
+      gravite: "mineur", effort: "S", qui: "equipe",
+    }));
     const sensibles = depot.fichiers.filter((f) => estSensible(f.chemin)).map((f) => f.chemin);
     out.push(critere({
       id: "secrets-versionnes", axe: "technique", titre: "Aucun fichier secret versionné", points: 4, source: "depot", ok: sensibles.length === 0,

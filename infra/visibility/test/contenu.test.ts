@@ -216,3 +216,17 @@ describe("grille rendue en objet par le modèle", () => {
     expect(r.criteres.find((c) => c.id === "proposition-valeur")!.ok).toBe(true);
   });
 });
+
+describe("critère IndexNow", () => {
+  const base = { depot: "o/r", branche: "main", sha: "abc1234", prive: false, tronque: false, ignores: [] };
+  const page = [{ url: "https://studio-fictif.example/", html: BON }];
+  const idx = (fichiers: { chemin: string; taille: number; contenu?: string }[]) => criteresDeterministes(page, { ...base, fichiers }).find((c) => c.id === "indexnow")!;
+  it("ok avec le fichier clé et un envoi automatique ; sinon dit ce qui manque", () => {
+    const cle = { chemin: "664e90b6f8a9f8d15a97e7c9b397bfa1.txt", taille: 33, contenu: "664e90b6f8a9f8d15a97e7c9b397bfa1\n" };
+    const envoi = { chemin: "scripts/indexnow.mjs", taille: 50, contenu: "const ENDPOINT = 'https://api.indexnow.org/indexnow';" };
+    expect(idx([cle, envoi])).toMatchObject({ ok: true, valeur: "clé et envoi automatique" });
+    expect(idx([cle])).toMatchObject({ ok: false, valeur: "clé présente, aucun envoi automatique trouvé" });
+    expect(idx([{ ...cle, contenu: "autre chose" }, envoi])).toMatchObject({ ok: false, valeur: "envoi trouvé, fichier clé absent" });
+    expect(idx([{ chemin: "robots.txt", taille: 5, contenu: "robots" }])).toMatchObject({ ok: false, valeur: "absent" });
+  });
+});
