@@ -9,7 +9,9 @@
 --      et SOUMET le sitemap s'il ne l'est pas (action sans risque, idempotente, consignée) ;
 --   3. écrit une analyse « indexation » et un constat par écart (source « indexation »), qui
 --      entrent dans le plan d'action unique.
--- Google Search Console suivra, avec un compte de service (même demande, même analyse).
+--   2 bis. interroge Google Search Console (compte de service, secret GSC_SERVICE_ACCOUNT_JSON) :
+--      propriété, sitemaps et erreurs, inspection d'un échantillon (indexée ? canonique ?), requêtes ;
+--      et soumet le sitemap s'il manque (autorisation Complète seulement).
 --
 -- Retour arrière : drop view public.vis_hygiene_v3 ; drop function public.vis_demander_hygiene(text),
 --   public.vis_moteur_planifier_hygiene() ; vis_moteur_analyse / vis_moteur_constat de la 0016 ;

@@ -64,6 +64,7 @@ import { constatsContenu, criteresModele, noterContenu, type Critere, type PageB
 import { lireDepotGithub, type GithubFetch, type LectureDepot } from "../repo/github.js";
 import { constatsHygiene, controlerSite } from "../hygiene/controles.js";
 import { bilanBing, createBingClient, type BingFetch, type ResultatBing } from "../hygiene/bing.js";
+import { bilanGsc, createGscClient, type GscFetch, type ResultatGsc } from "../hygiene/gsc.js";
 import { readSite } from "../site/pages.js";
 import { DEFAULT_LIGHTHOUSE_COMMAND, LIGHTHOUSE_PACKAGE, constatsCrawl, constatsLighthouse, runLighthouse, summarizeLighthouse, type AnalyseLighthouse, type LighthouseCommand, type Strategie } from "../analyse/lighthouse.js";
 import { concurrentsFile, homonymesFile } from "../site/formats.js";
@@ -103,6 +104,8 @@ export interface EngineOptions {
   github?: GithubFetch;
   /** Accès à l'API Bing Webmaster (hygiène d'indexation) : fetch global par défaut, un faux dans les tests. */
   bing?: BingFetch;
+  /** Accès à Google (jeton et API Search Console) : fetch global par défaut, un faux dans les tests. */
+  gsc?: GscFetch;
   /** Accès payants, créés seulement après le contrôle du GO en base. */
   collector: () => Collector;
   judge: () => MentionJudge;
@@ -388,7 +391,18 @@ async function hygieneDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
       bingErreur = msg(err).slice(0, 200);
     }
   } else bingErreur = "clé absente : BING_WEBMASTER_API_KEY";
-  const controles = [...ctrl.controles, ...(bing?.controles ?? [])];
+  let gsc: ResultatGsc | null = null;
+  let gscErreur: string | null = null;
+  const compte = ctx.o.env.GSC_SERVICE_ACCOUNT_JSON?.trim();
+  if (compte) {
+    try {
+      const pages = [`${site}/`, ...ctrl.sitemap.adresses.filter((u) => u.replace(/\/$/, "") !== site)].slice(0, 10);
+      gsc = await bilanGsc(createGscClient(compte, ctx.o.gsc, () => ctx.now.getTime()), site, ctrl.sitemap.url, pages, ctx.now);
+    } catch (err) {
+      gscErreur = msg(err).slice(0, 200);
+    }
+  } else gscErreur = "secret absent : GSC_SERVICE_ACCOUNT_JSON";
+  const controles = [...ctrl.controles, ...(bing?.controles ?? []), ...(gsc?.controles ?? [])];
   const mesures = controles.filter((c) => c.ok !== null);
   const total = mesures.reduce((s, c) => s + c.points, 0);
   const score = total ? Math.round((100 * mesures.filter((c) => c.ok).reduce((s, c) => s + c.points, 0)) / total) : null;
@@ -399,12 +413,13 @@ async function hygieneDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
     outil: "OIA · hygiène d'indexation",
     statut: "fait",
     scores: { indexation: score === null ? null : score / 100 },
-    metriques: { controles: controles.length, ecarts: controles.filter((c) => c.ok === false).length, adresses_sitemap: ctrl.sitemap.adresses.length, bing_problemes: bing?.problemes.total ?? null },
+    metriques: { controles: controles.length, ecarts: controles.filter((c) => c.ok === false).length, adresses_sitemap: ctrl.sitemap.adresses.length, bing_problemes: bing?.problemes.total ?? null, google_pages_inspectees: gsc?.inspection.length ?? null, google_pages_indexees: gsc ? gsc.inspection.filter((x) => x.verdict === "PASS").length : null },
     resultat: {
       controles: controles.map((c) => ({ id: c.id, titre: c.titre, ok: c.ok, valeur: c.valeur, gravite: c.gravite, preuve: c.preuve })),
       sitemap: { url: ctrl.sitemap.url, adresses: ctrl.sitemap.adresses.length },
       bing: bing ? { site: bing.site, verifie: bing.verifie, feeds: bing.feeds, problemes: bing.problemes, exploration: bing.exploration, requetes: bing.requetes } : { erreur: bingErreur },
-      actions: bing?.actions ?? [],
+      gsc: gsc ? { propriete: gsc.propriete, autorisation: gsc.autorisation, sitemaps: gsc.sitemaps, inspection: gsc.inspection, requetes: gsc.requetes } : { erreur: gscErreur },
+      actions: [...(bing?.actions ?? []), ...(gsc?.actions ?? [])],
     },
   });
   let constats = 0;
@@ -412,7 +427,7 @@ async function hygieneDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
     await ctx.o.db.constat(d.id, aid, c);
     constats++;
   }
-  return { analyse_id: aid, score, ecarts: constats, bing: bing ? (bing.verifie ? "vérifié" : "non vérifié") : `non lu : ${bingErreur}`, actions: (bing?.actions ?? []).map((a) => `${a.action} : ${a.resultat}`) };
+  return { analyse_id: aid, score, ecarts: constats, bing: bing ? (bing.verifie ? "vérifié" : "non vérifié") : `non lu : ${bingErreur}`, gsc: gsc ? (gsc.propriete ? `propriété ${gsc.propriete}` : "propriété introuvable") : `non lu : ${gscErreur}`, actions: [...(bing?.actions ?? []), ...(gsc?.actions ?? [])].map((a) => `${a.action} : ${a.resultat}`) };
 }
 
 // ---------------------------------------------------------------- EXTRAIRE_PLAN (quelques centimes)
