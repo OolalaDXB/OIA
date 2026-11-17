@@ -230,3 +230,16 @@ describe("critère IndexNow", () => {
     expect(idx([{ chemin: "robots.txt", taille: 5, contenu: "robots" }])).toMatchObject({ ok: false, valeur: "absent" });
   });
 });
+
+describe("llms.txt et sitemap : servis à la racine seulement", () => {
+  const base = { depot: "o/r", branche: "main", sha: "abc1234", prive: false, tronque: false, ignores: [] };
+  const page = [{ url: "https://studio-fictif.example/", html: BON }];
+  const c = (fichiers: { chemin: string; taille: number; contenu?: string }[], id: string) => criteresDeterministes(page, { ...base, fichiers }).find((x) => x.id === id)!.ok;
+  it("un llms.txt dans un sous-dossier ne compte pas ; à la racine, dans public/ ou généré à la construction, oui", () => {
+    expect(c([{ chemin: "sites/autre/llms.txt", taille: 5, contenu: "x" }], "llms-txt")).toBe(false);
+    expect(c([{ chemin: "llms.txt", taille: 5, contenu: "x" }], "llms-txt")).toBe(true);
+    expect(c([{ chemin: "public/llms.txt", taille: 5, contenu: "x" }], "llms-txt")).toBe(true);
+    expect(c([{ chemin: "scripts/prerender.mjs", taille: 50, contenu: 'fs.writeFileSync(path.join(dist, "llms.txt"), llms);' }], "llms-txt")).toBe(true);
+    expect(c([{ chemin: "docs/sitemap.xml", taille: 5, contenu: "x" }], "sitemap")).toBe(false);
+  });
+});

@@ -88,6 +88,8 @@ export function criteresDeterministes(pages: PageBrute[], depot: LectureDepot | 
   const fichiers = depot?.fichiers ?? [];
   const contenuDepot = (re: RegExp) => fichiers.filter((f) => f.contenu !== undefined && /\.(html?|jsx|tsx|vue|svelte|astro)$/i.test(f.chemin) && re.test(f.contenu!));
   const aFichier = (re: RegExp) => fichiers.some((f) => re.test(f.chemin));
+  /** Fichier écrit à la construction par un script du dépôt (writeFile… "sitemap.xml"). */
+  const generePar = (nom: RegExp) => fichiers.some((f) => f.contenu !== undefined && /^scripts\/|^src\/prerender\//.test(f.chemin) && /writeFile/.test(f.contenu) && nom.test(f.contenu));
 
   // --- Technique
   const sansTitre = pages.filter((p) => titre(p.html).length < 10).map((p) => p.url);
@@ -161,13 +163,15 @@ export function criteresDeterministes(pages: PageBrute[], depot: LectureDepot | 
     correction: "Retirer le lien de la navigation publique ; garder l'accès par adresse directe et authentification.", gravite: "important", effort: "XS", qui: "equipe",
   }));
   if (depot) {
-    const sitemap = aFichier(/(^|\/)sitemap[^/]*\.xml$/i) || aFichier(/(^|\/)app\/sitemap\.(ts|js)$/);
+    // Servis à la racine du site : à la racine du dépôt, dans public/ ou static/ ; ou générés
+    // par un script de construction (un fichier rangé ailleurs ne compte pas).
+    const sitemap = aFichier(/^(public\/|static\/)?sitemap[^/]*\.xml$/i) || aFichier(/^(src\/)?app\/sitemap\.(ts|js)$/) || generePar(/sitemap\.xml/);
     out.push(critere({
       id: "sitemap", axe: "technique", titre: "Plan du site (sitemap.xml) versionné", points: 2, source: "depot", ok: sitemap, valeur: sitemap ? "présent" : "absent", preuve: {},
       explication: "Le plan du site liste les pages à indexer ; sans lui, les pages profondes sont découvertes tard.",
       correction: "Ajouter sitemap.xml à la racine et le déclarer dans robots.txt.", gravite: "mineur", effort: "XS", qui: "equipe",
     }));
-    const llms = aFichier(/(^|\/)llms\.txt$/i);
+    const llms = aFichier(/^(public\/|static\/)?llms\.txt$/i) || generePar(/llms\.txt/);
     out.push(critere({
       id: "llms-txt", axe: "technique", titre: "Fichier llms.txt pour les assistants IA", points: 1, source: "depot", ok: llms, valeur: llms ? "présent" : "absent", preuve: {},
       explication: "llms.txt résume le site pour les assistants IA : offres, lieux, prix, pages clés.",
