@@ -18,8 +18,8 @@ import type { Offer, PageSource, Place, SiteFindings } from "./facts.js";
 /**
  * Moteurs mesurés par défaut : les moins chers par réponse (relevé du 2026-11-18 : ChatGPT
  * 0,03 $, Perplexity 0,015 $, Gemini 0,06 $) et Mistral, gratuit (offre gratuite de La
- * Plateforme). Claude et Grok restent disponibles (OPTIONAL_TARGETS) mais ne sont plus proposés
- * d'office : Grok a coûté 2,27 $ pour une réponse avec la recherche native de xAI.
+ * Plateforme). Claude reste disponible sur demande (OPTIONAL_TARGETS). Grok est retiré (décision de
+ * Mickaël, 2026-11-18) : 2,27 $ pour une seule réponse avec la recherche native de xAI.
  */
 export const DEFAULT_TARGETS: { engine: string; target: string; languages?: string[]; note: string }[] = [
   { engine: "chatgpt", target: "chatgpt:openai-api:gpt-6-luna:online", note: "OpenAI en direct (:online, outil web_search)" },
@@ -32,7 +32,6 @@ export const DEFAULT_TARGETS: { engine: string; target: string; languages?: stri
 /** Moteurs disponibles sur demande, plus chers par réponse. */
 export const OPTIONAL_TARGETS: { engine: string; target: string; languages?: string[]; note: string }[] = [
   { engine: "claude", target: "claude:anthropic-api:claude-sonnet-5-5:online", note: "Anthropic en direct (:online, outil web_search)" },
-  { engine: "grok", target: "grok:openrouter:x-ai/grok-4.7:online", note: "via OpenRouter (recherche Exa plafonnée à 5 résultats)" },
 ];
 
 /** Langues usuelles d'un marché, pour répartir les langues demandées entre les marchés. */
