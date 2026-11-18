@@ -75,6 +75,8 @@ import { assertOutsideRepo, ensurePrivateDir } from "../site/paths.js";
 import { readReconnaissanceAnswers, reconnaissanceBundle, reconnaissanceWindowId, runReconnaissance } from "../site/reconnaissance.js";
 import { subjectTerms } from "../site/terms.js";
 import { RestEngineDb, choisirBase } from "./rest.js";
+import { blocSceau, construireRapport } from "../rapport/construire.js";
+import { clePublique, lireClePrivee, sceller } from "../rapport/sceau.js";
 import { PsqlEngineDb, type AlerteMoteur, type Demande, type EngineDb, type GoEnBase, type NatureProposition, type PreuveBase, type SujetEnBase } from "./db.js";
 
 export interface EngineOptions {
@@ -228,7 +230,7 @@ export async function runEngine(o: EngineOptions): Promise<PassageResult> {
 async function handle(ctx: Ctx, d: Demande): Promise<Traitement> {
   ctx.log(`demande ${d.id} : ${d.type}${d.subject_id ? ` (${d.subject_id})` : ""}`);
   try {
-    const run = { SITE_ADD: siteAddDemande, RECON: reconDemande, WINDOW_RUN: windowRunDemande, REPORT: reportDemande, REMEASURE_PROPOSE: remeasureDemande, ANALYSE: analyseDemande, AUDIT_IA: auditIaDemande, NOTE_CONTENU: noteContenuDemande, EXTRAIRE_PLAN: extrairePlanDemande, HYGIENE: hygieneDemande, CONSOLIDER_PLAN: consoliderPlanDemande }[d.type];
+    const run = { SITE_ADD: siteAddDemande, RECON: reconDemande, WINDOW_RUN: windowRunDemande, REPORT: reportDemande, REMEASURE_PROPOSE: remeasureDemande, ANALYSE: analyseDemande, AUDIT_IA: auditIaDemande, NOTE_CONTENU: noteContenuDemande, EXTRAIRE_PLAN: extrairePlanDemande, HYGIENE: hygieneDemande, CONSOLIDER_PLAN: consoliderPlanDemande, RAPPORT: rapportDemande }[d.type];
     if (!run) throw new EngineRefusal(`type de demande inconnu « ${String(d.type)} »`);
     const resultat = await run(ctx, d);
     await ctx.o.db.terminer(d.id, resultat, null);
@@ -447,6 +449,32 @@ async function consoliderPlanDemande(ctx: Ctx, d: Demande): Promise<Record<strin
   const sources = [...new Set(plan.groupes.flatMap((g) => g.sources))];
   const id = await ctx.o.db.planConsolide(d.id, { resume: plan.resume, groupes: plan.groupes, sources, actions_lues: e.actions.length, modele: AUDIT_MODEL });
   return { plan_id: id, groupes: plan.groupes.length, actions: e.actions.length, multi_sources: plan.groupes.filter((g) => g.sources.length > 1).length, sources };
+}
+
+// ---------------------------------------------------------------- RAPPORT (gratuit, scellé)
+
+/**
+ * Rapport sourcé et scellé : données lues dans la base, mises en forme par règles fixes (aucun
+ * modèle), empreinte SHA-256 du JSON canonique signée en Ed25519. Sans clé de signature, refusé :
+ * un rapport non scellé ne doit pas pouvoir passer pour scellé.
+ */
+async function rapportDemande(ctx: Ctx, d: Demande): Promise<Record<string, unknown>> {
+  subjectOf(d);
+  const secret = ctx.o.env.OIA_RAPPORT_CLE_PRIVEE?.trim();
+  if (!secret) throw new EngineRefusal("secret absent : OIA_RAPPORT_CLE_PRIVEE (clé de signature des rapports)");
+  let cle;
+  try {
+    cle = lireClePrivee(secret);
+  } catch {
+    throw new EngineRefusal("OIA_RAPPORT_CLE_PRIVEE illisible : clé Ed25519 PKCS#8 attendue (PEM, ou PEM en base64)");
+  }
+  const pub = clePublique(cle);
+  await ctx.o.db.enregistrerCle(pub.id, pub.pem);
+  const entree = await ctx.o.db.rapportEntree(d.id);
+  const { rapport, markdown } = construireRapport(entree, ctx.now);
+  const sceau = sceller(rapport, cle, ctx.now);
+  const id = await ctx.o.db.rapportScelle(d.id, { rapport, markdown: `${markdown}\n${blocSceau(sceau)}`, sceau });
+  return { rapport_id: id, type: rapport.type, sources: rapport.sources.length, empreinte: sceau.empreinte, cle_id: sceau.cle_id };
 }
 
 // ---------------------------------------------------------------- HYGIENE (gratuite, quotidienne)

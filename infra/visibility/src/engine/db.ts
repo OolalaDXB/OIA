@@ -22,7 +22,7 @@ import { randomUUID } from "node:crypto";
 import { homedir } from "node:os";
 import { join } from "node:path";
 
-export const DEMANDE_TYPES = ["SITE_ADD", "RECON", "WINDOW_RUN", "REPORT", "REMEASURE_PROPOSE", "ANALYSE", "AUDIT_IA", "NOTE_CONTENU", "EXTRAIRE_PLAN", "HYGIENE", "CONSOLIDER_PLAN"] as const;
+export const DEMANDE_TYPES = ["SITE_ADD", "RECON", "WINDOW_RUN", "REPORT", "REMEASURE_PROPOSE", "ANALYSE", "AUDIT_IA", "NOTE_CONTENU", "EXTRAIRE_PLAN", "HYGIENE", "CONSOLIDER_PLAN", "RAPPORT"] as const;
 export type DemandeType = (typeof DEMANDE_TYPES)[number];
 export type DemandeStatut = "QUEUED" | "RUNNING" | "DONE" | "FAILED" | "CANCELLED";
 
@@ -227,6 +227,10 @@ export interface EngineDb {
   /** Plan consolidé : ce qu'il faut croiser, puis la version consolidée. */
   planEntree(subjectId: string): Promise<Record<string, unknown>>;
   planConsolide(demande: string, plan: Record<string, unknown>): Promise<string>;
+  /** Rapports scellés (0024) : données sourcées, clé publique, rapport scellé. */
+  rapportEntree(demande: string): Promise<Record<string, unknown>>;
+  enregistrerCle(id: string, publique: string): Promise<string>;
+  rapportScelle(demande: string, scelle: Record<string, unknown>): Promise<string>;
   /** Mesure mensuelle (audit IA express, mêmes questions) pour chaque site dû et dans son budget. */
   planifierMesureMensuelle(): Promise<number>;
   /** Une hygiène d'indexation par site et par jour : nombre de demandes créées. */
@@ -438,7 +442,27 @@ export class MemoryEngineDb implements EngineDb {
     if (!d || d.type !== "CONSOLIDER_PLAN" || d.statut !== "RUNNING") throw new Error("55000 : pas une consolidation en cours");
     this.plansConsolides.push({ ...structuredClone(plan), demande });
     return randomUUID();
+  }  /** Tests : données d'un rapport par demande ; clés et rapports enregistrés. */
+  rapportEntrees = new Map<string, Record<string, unknown>>();
+  cles = new Map<string, string>();
+  rapports: Record<string, unknown>[] = [];
+  async rapportEntree(demande: string) {
+    const d = this.demandes.find((x) => x.id === demande);
+    if (!d || d.type !== "RAPPORT" || d.statut !== "RUNNING") throw new Error(`55000 : demande ${demande} : pas un rapport en cours`);
+    return structuredClone(this.rapportEntrees.get(demande) ?? {});
   }
+  async enregistrerCle(id: string, publique: string) {
+    const deja = this.cles.get(id);
+    if (deja && deja !== publique) throw new Error("23505 : clé : identifiant déjà pris par une autre clé");
+    this.cles.set(id, publique);
+    return id;
+  }
+  async rapportScelle(demande: string, scelle: Record<string, unknown>) {
+    const id = randomUUID();
+    this.rapports.push({ ...structuredClone(scelle), id, demande });
+    return id;
+  }
+
   async planifierHygiene() {
     let n = 0;
     for (const [id, su] of this.sujets) {
@@ -661,7 +685,16 @@ export class PsqlEngineDb implements EngineDb {
   }
   async planConsolide(demande: string, plan: Record<string, unknown>) {
     return String(await this.run("select vis_moteur_plan_consolide(:'p_demande'::uuid, :'p_plan'::jsonb);\n", { p_demande: demande, p_plan: plan }));
+  }  async rapportEntree(demande: string) {
+    return JSON.parse(String(await this.run("select vis_moteur_rapport_entree(:'p_demande'::uuid);\n", { p_demande: demande })));
   }
+  async enregistrerCle(id: string, publique: string) {
+    return String(await this.run("select vis_moteur_cle(:'p_id', :'p_publique');\n", { p_id: id, p_publique: publique }));
+  }
+  async rapportScelle(demande: string, scelle: Record<string, unknown>) {
+    return String(await this.run("select vis_moteur_rapport_scelle(:'p_demande'::uuid, :'p_scelle'::jsonb);\n", { p_demande: demande, p_scelle: scelle }));
+  }
+
   async planifierMesureMensuelle() {
     return Number(await this.run("select vis_moteur_planifier_mesure_mensuelle();\n", {}));
   }
