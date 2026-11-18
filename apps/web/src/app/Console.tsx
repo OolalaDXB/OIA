@@ -163,6 +163,11 @@ export function Rail({ active, onExportAudit }: { active: RailKey; onExportAudit
           {n.key === "today" && open.length > 0 && <span className="railBadge">{open.length}</span>}
         </Link>
       ))}
+      <div className="railGroup">
+        <Link href="/transformation/" className="railItem" title="Espace personnel de transformation physique — données locales">
+          <span>Transformation 90</span>
+        </Link>
+      </div>
       {onExportAudit && (
         <div className="railFoot">
           <button className="ghostBtn" onClick={onExportAudit}>{ui("exportAudit", lang)}</button>
