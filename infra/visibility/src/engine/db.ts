@@ -128,6 +128,19 @@ export interface PageMoteur {
 }
 
 export type TypeAlerte = "RAPPORT_PRET" | "JOUR_PARTIEL" | "JOUR_MANQUANT" | "ECHEC_DEMANDE" | "PLAFOND" | "MOTEUR_MUET" | "COUT_ILLISIBLE";
+/** Réponse d'audit déjà enregistrée (vis.evidence), relue pour une reprise. */
+export interface PreuveAudit {
+  moteur: string;
+  langue: string;
+  texte: string;
+  citations: { url: string; label?: string }[];
+  cout_usd: number | string;
+  question: string;
+  sujet: string | null;
+  marquee: boolean | null;
+  question_texte: string | null;
+}
+
 export interface AlerteMoteur {
   client_id: string;
   subject_id: string | null;
@@ -207,6 +220,8 @@ export interface EngineDb {
   /** Audit IA express (0015) : ouvre sa fenêtre (refusée sans GO en base), rend le résultat. */
   auditDebut(demande: string): Promise<string>;
   auditResultat(demande: string, r: Record<string, unknown>): Promise<string>;
+  /** Reprise (0023) : les réponses déjà payées d'une demande d'audit du même site. */
+  preuvesAudit(demande: string, de: string): Promise<PreuveAudit[]>;
   /** Nature des entités citées (concurrent, plateforme…) proposée par le moteur ; jamais sur un classement humain. */
   classerEntites(subjectId: string, entites: { entite: string; nature: string }[]): Promise<number>;
   /** Plan consolidé : ce qu'il faut croiser, puis la version consolidée. */
@@ -459,6 +474,11 @@ export class MemoryEngineDb implements EngineDb {
     if (!go) throw new Error("42501 : note refusée : aucun GO enregistré");
     return { note_id: String(d.charge.note_id), ...go };
   }
+  async preuvesAudit(_demande: string, de: string): Promise<PreuveAudit[]> {
+    return structuredClone(this.preuvesReprise.get(de) ?? []);
+  }
+  /** Tests : réponses d'une demande d'audit passée, pour la reprise. */
+  preuvesReprise = new Map<string, PreuveAudit[]>();
   async auditResultat(demande: string, r: Record<string, unknown>): Promise<string> {
     const id = randomUUID();
     this.audits.push({ ...structuredClone(r), id, demande });
@@ -629,6 +649,9 @@ export class PsqlEngineDb implements EngineDb {
   }
   async auditDebut(demande: string) {
     return String(await this.run("select vis_moteur_audit_debut(:'p_demande'::uuid);\n", { p_demande: demande }));
+  }
+  async preuvesAudit(demande: string, de: string): Promise<PreuveAudit[]> {
+    return JSON.parse(String(await this.run("select vis_moteur_preuves_audit(:'p_demande'::uuid, :'p_de'::uuid);\n", { p_demande: demande, p_de: de })) || "[]");
   }
   async auditResultat(demande: string, r: Record<string, unknown>) {
     return String(await this.run("select vis_moteur_audit_resultat(:'p_demande'::uuid, :'p_resultat'::jsonb);\n", { p_demande: demande, p_resultat: r }));

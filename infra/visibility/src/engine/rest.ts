@@ -17,6 +17,7 @@ import type {
   GoEnBase,
   JourConsigne,
   PageMoteur,
+  PreuveAudit,
   PreuveBase,
   PropositionMoteur,
   StatutFenetre,
@@ -133,6 +134,9 @@ export class RestEngineDb implements EngineDb {
   }
   async auditDebut(demande: string) {
     return String(await this.rpc<string>("vis_moteur_audit_debut", { p_demande: demande }));
+  }
+  async preuvesAudit(demande: string, de: string) {
+    return (await this.rpc<PreuveAudit[]>("vis_moteur_preuves_audit", { p_demande: demande, p_de: de })) ?? [];
   }
   async auditResultat(demande: string, r: Record<string, unknown>) {
     return String(await this.rpc<string>("vis_moteur_audit_resultat", { p_demande: demande, p_resultat: r }));

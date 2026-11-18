@@ -95,6 +95,31 @@ describe("moteur : demande AUDIT_IA", () => {
     expect(r.traitees[0]!.resultat).toMatchObject({ questions: 5, reponses: 10, echecs: 0, recommandations: 3 });
   });
 
+  it("reprise : relit les réponses déjà payées, note et rend le plan, sans aucun appel payant ni lecture du site", async () => {
+    const { db, d } = preparer();
+    const ancienne = "00000000-0000-4000-8000-000000000001";
+    db.demandes.find((x) => x.id === d.id)!.charge.reprise_de = ancienne;
+    db.preuvesReprise.set(ancienne, [
+      { moteur: "chatgpt", langue: "en", texte: "Try **Studio Fictif**.", citations: [{ url: "https://studio-fictif.example" }], cout_usd: "0.03", question: "K01", sujet: "présentation", marquee: false, question_texte: null },
+      { moteur: "chatgpt", langue: "en", texte: "Try **Alpha Padel**.", citations: [], cout_usd: "0.03", question: "K02", sujet: "tarifs", marquee: true, question_texte: "How much does Studio Fictif cost?" },
+      { moteur: "mistral", langue: "en", texte: "", citations: [], cout_usd: "0", question: "K02", sujet: "tarifs", marquee: true, question_texte: null },
+    ]);
+    const appels: string[] = [];
+    const r = await runEngine({ ...opts(db, appels), fetch: async () => { throw new Error("aucune lecture"); } } as never);
+    expect(r.traitees[0]).toMatchObject({ id: d.id, statut: "DONE" });
+    expect(appels).toEqual([]);
+    expect(db.evidence.size).toBe(0);
+    const a = db.audits[0]!;
+    expect(a.moteurs).toEqual(["chatgpt"]);
+    const m = a.matrice as { id: string; question: string; scores: Record<string, number> }[];
+    expect(m.map((x) => x.id)).toEqual(["K01", "K02"]);
+    expect(m[0]!.question).toBe("[texte non conservé] présentation");
+    expect(m[1]!.question).toBe("How much does Studio Fictif cost?");
+    expect(m[0]!.scores).toEqual({ chatgpt: 3 });
+    expect(String(a.methode)).toContain("Reconstruit");
+    expect(r.traitees[0]!.resultat).toMatchObject({ reponses: 3, recommandations: 3 });
+  });
+
   it("sans GO en base : refusée, aucun appel payant", async () => {
     const { db } = preparer(false);
     const appels: string[] = [];

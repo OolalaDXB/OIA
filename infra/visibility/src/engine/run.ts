@@ -276,7 +276,11 @@ async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
   const windowId = await ctx.o.db.auditDebut(d.id); // refusé sans GO
   const sujet = await ctx.o.db.sujet(subjectId);
   const langues = Array.isArray(d.charge.langues) && d.charge.langues.length ? (d.charge.langues as string[]) : sujet?.langues?.length ? sujet.langues : ["en"];
-  const read = await readSite(url, { fetch: ctx.o.fetch, maxPages: 8, allowedLocal: ctx.o.allowedLocal });
+  // Reprise : les réponses déjà payées d'une demande passée du même site ; aucun appel payant.
+  const repriseDe = typeof d.charge.reprise_de === "string" ? d.charge.reprise_de : null;
+  const anciennes = repriseDe ? await ctx.o.db.preuvesAudit(d.id, repriseDe) : [];
+  if (repriseDe && !anciennes.length) throw new EngineRefusal("reprise : aucune réponse enregistrée pour cette demande");
+  const read = repriseDe ? null : await readSite(url, { fetch: ctx.o.fetch, maxPages: 8, allowedLocal: ctx.o.allowedLocal });
   const llm = ctx.o.auditLlm
     ? ctx.o.auditLlm()
     : (() => {
@@ -286,8 +290,20 @@ async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
       })();
   // Mesure mensuelle : les MÊMES questions que la mesure précédente, pour que les mois soient
   // comparables (et sans appel au modèle pour les écrire). Sinon : questions tirées du site.
-  const fixes = Array.isArray(d.charge.questions_fixes) ? (d.charge.questions_fixes as Record<string, unknown>[]) : [];
-  const questions = fixes.length
+  // Une question dont le texte n'a pas été conservé (« [texte non conservé] … ») n'est pas reposée.
+  const fixes = Array.isArray(d.charge.questions_fixes)
+    ? (d.charge.questions_fixes as Record<string, unknown>[]).filter((q) => !String(q.question ?? "").startsWith("["))
+    : [];
+  const questions = repriseDe
+    ? [...anciennes.reduce((m, a) => (m.get(a.question)?.question_texte ? m : m.set(a.question, { ...a, question_texte: a.question_texte ?? m.get(a.question)?.question_texte ?? null })), new Map<string, (typeof anciennes)[number]>()).values()].sort((a, b) => a.question.localeCompare(b.question)).map((a) => ({
+        id: a.question,
+        sujet: String(a.sujet ?? "").slice(0, 120),
+        question: a.question_texte ?? `[texte non conservé] ${a.sujet ?? a.question}`,
+        langue: a.langue,
+        marquee: a.marquee ?? false,
+        source: null,
+      }))
+    : fixes.length
     ? fixes.slice(0, n).map((q, i) => ({
         id: typeof q.id === "string" && /^K\d{2}$/.test(q.id) ? q.id : `K${String(i + 1).padStart(2, "0")}`,
         sujet: String(q.sujet ?? "").slice(0, 120),
@@ -296,12 +312,20 @@ async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
         marquee: typeof q.marquee === "boolean" ? q.marquee : String(q.question ?? "").toLowerCase().includes(nom.toLowerCase()),
         source: null,
       })).filter((q) => q.question.length >= 10)
-    : await proposerQuestions(llm, { read, nom, langues, marches: sujet?.marches ?? [], n });
+    : await proposerQuestions(llm, { read: read!, nom, langues, marches: sujet?.marches ?? [], n });
   const domaine = new URL(url).hostname.replace(/^www\./, "");
   const config = { brand: { name: nom, aliases: [], domains: [url, domaine] }, competitors: [] };
-  const col = await collecter({ collector: ctx.o.collector(), questions, cibles, clientId: d.client_id, subjectId, windowId, coutMaxUsd: coutMax - 0.1, log: ctx.log });
+  const col = repriseDe
+    ? {
+        // Déjà payées et déjà comptées dans le réel du mois : coût 0 ici, rien n'est réécrit.
+        reponses: anciennes.map((a) => ({ question: questions.find((q) => q.id === a.question)!, moteur: a.moteur, texte: a.texte ?? "", citations: Array.isArray(a.citations) ? a.citations : [], coutUsd: 0, resultat: null as never })),
+        echecs: [] as { question: string; moteur: string; erreur: string }[],
+        depenseUsd: 0,
+        arretPlafond: false,
+      }
+    : await collecter({ collector: ctx.o.collector(), questions, cibles, clientId: d.client_id, subjectId, windowId, coutMaxUsd: coutMax - 0.1, log: ctx.log });
   // Preuves : ajout seul, empreintes calculées par la base.
-  const preuves: PreuveBase[] = col.reponses.map((r) => ({
+  const preuves: PreuveBase[] = repriseDe ? [] : col.reponses.map((r) => ({
     id: evidenceUuid(`audit:${d.id}:${r.question.id}:${r.moteur}`),
     client_id: d.client_id,
     site_id: subjectId,
@@ -317,7 +341,7 @@ async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
     received_at: r.resultat.receivedAt,
     raw_text: r.texte ?? "",
     // Réponse vide (appel en échec côté fournisseur) : gardée, marquée non mesurée, jamais notée 0.
-    structured: { ...r.resultat.structured, ...(r.texte?.trim() ? {} : { non_mesuree: true }), audit: { demande: d.id, question: r.question.id, sujet: r.question.sujet, marquee: r.question.marquee } },
+    structured: { ...r.resultat.structured, ...(r.texte?.trim() ? {} : { non_mesuree: true }), audit: { demande: d.id, question: r.question.id, sujet: r.question.sujet, marquee: r.question.marquee, texte: r.question.question } },
     citations: r.citations,
     cost_usd: r.coutUsd,
   }));
@@ -331,7 +355,8 @@ async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
       await ctx.o.db.alerter({ client_id: d.client_id, subject_id: subjectId, gravite: "alerte", type: "ECHEC_DEMANDE", message: `Audit IA express : réponses non enregistrées (${preuvesErreur}) ; résultat calculé quand même.` }).catch(() => undefined);
     }
   }
-  const moteurs = [...new Set(cibles.map((c) => c.split(":")[0]!))];
+  // En reprise : seulement les moteurs qui ont répondu (un moteur en échec n'est pas noté absent).
+  const moteurs = repriseDe ? [...new Set(anciennes.filter((a) => a.texte?.trim()).map((a) => a.moteur))] : [...new Set(cibles.map((c) => c.split(":")[0]!))];
   const matrice: LigneMatrice[] = questions.map((q) => {
     const l: LigneMatrice = { id: q.id, sujet: q.sujet, question: q.question, marquee: q.marquee, scores: {}, concurrents: {}, domaines: {} };
     for (const r of col.reponses.filter((x) => x.question.id === q.id && x.texte?.trim())) {
@@ -369,7 +394,7 @@ async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
     window_id: windowId,
     moteurs,
     score: s.global,
-    methode: `Audit IA express OIA : ${questions.length} questions tirées du site, une passe par question sur ${moteurs.join(", ")}, par API avec recherche web, le ${date}. Notation déterministe (3 cité avec le site en source, 2 cité, 1 cité car nommé, 0 absent). ${col.echecs.length} appel(s) en échec${col.arretPlafond ? " ; arrêt au plafond engagé" : ""}.`,
+    methode: `${repriseDe ? `Reconstruit le ${date} depuis les réponses enregistrées de la demande ${repriseDe} (aucun nouvel appel payant ; textes des questions non conservés à l'époque). ` : ""}Audit IA express OIA : ${questions.length} questions tirées du site, une passe par question sur ${moteurs.join(", ")}, par API avec recherche web, le ${date}. Notation déterministe (3 cité avec le site en source, 2 cité, 1 cité car nommé, 0 absent). ${col.echecs.length} appel(s) en échec${col.arretPlafond ? " ; arrêt au plafond engagé" : ""}.`,
     resume: plan.resume,
     rapport_md: rapport,
     matrice: matrice.map((l) => ({ id: l.id, sujet: l.sujet, question: l.question, marquee: l.marquee, langue: questions.find((q) => q.id === l.id)?.langue ?? null, scores: l.scores, concurrents: l.concurrents, domaines: l.domaines })),
