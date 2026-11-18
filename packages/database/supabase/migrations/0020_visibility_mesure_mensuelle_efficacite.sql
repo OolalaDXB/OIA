@@ -41,6 +41,9 @@ begin
     -- tentée depuis 24 h (un échec ne boucle pas).
     continue when exists (select 1 from vis_ui.demande_courante d where d.subject_id = s.id and d.type = 'AUDIT_IA'
                           and (d.statut in ('QUEUED','RUNNING') or (d.statut = 'DONE' and d.terminee_le > now() - interval '27 days') or d.demande_le > now() - interval '24 hours'));
+    -- Au plus 2 tentatives par site et par mois : un échec répété ne dépense pas chaque jour.
+    continue when (select count(*) from vis.demande d where d.subject_id = s.id and d.type = 'AUDIT_IA'
+                   and coalesce((d.charge ->> 'mensuelle')::boolean, false) and d.demande_le >= mois::timestamp at time zone 'UTC') >= 2;
     est := vis_ui.estimation_audit(s.id, 20);
     maxu := (est ->> 'cout_max_usd')::numeric;
     continue when maxu is null or jsonb_array_length(coalesce(est -> 'moteurs', '[]'::jsonb)) = 0;
