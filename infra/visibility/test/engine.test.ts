@@ -144,7 +144,7 @@ describe("moteur (bloc B) : une demande de chaque type, sur la fausse base", () 
     expect(db.estimations.get(recon)).toMatchObject({ nature: "reconnaissance", libelle: "Reconnaissance", jours_prevus: 1 });
     expect(r1.traitees[0]!.resultat).toMatchObject({ faits_mistral: expect.stringMatching(/aucun GO/) });
     const q = [...db.propositions.values()].find((v) => v[0]!.nature === "question")![0]!;
-    expect(q.contenu).toMatchObject({ langue: "fr", marquee: expect.any(Boolean), moteurs: expect.arrayContaining(["chatgpt", "mistral"]) });
+    expect(q.contenu).toMatchObject({ langue: "fr", marquee: expect.any(Boolean), moteurs: expect.arrayContaining(["chatgpt", "gemini", "perplexity"]) });
 
     // RECON sans GO : refusée, aucune collecte.
     db.demander({ type: "RECON", client_id: CLIENT, subject_id: SUBJECT, charge: { window_id: recon } });

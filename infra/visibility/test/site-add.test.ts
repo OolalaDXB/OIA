@@ -216,7 +216,8 @@ describe("site add : sans --go", () => {
     ]);
     expect(b.panel.prompts.every((p) => p.status !== "active")).toBe(true);
     expect(b.measurement.windows).toMatchObject([{ id: "j0", status: "planned", days: 5 }]);
-    expect(b.measurement.engines.find((e) => e.model === "mistral")?.languages).toEqual(["fr"]);
+    // Par défaut, les trois moteurs les moins chers ; Mistral, Claude et Grok sur demande seulement.
+    expect(b.measurement.engines.map((e) => e.model)).toEqual(["chatgpt", "gemini", "perplexity"]);
 
     // Panel proposé : 10 questions par langue dont 2 marquées, à partir des offres et des lieux.
     const panel: Panel = PanelSchema.parse(readYaml(join(r.dir, "proposition", "panel.yaml")));
@@ -280,7 +281,7 @@ describe("site add : sans --go", () => {
     const plan = JSON.parse(readFileSync(join(r.dir, "proposition", "reconnaissance.json"), "utf8"));
     expect(plan.statut).toBe("planifiee");
     expect(plan.questions).toHaveLength(16);
-    expect(plan.appels).toBe(16 * 5 + 8); // 5 moteurs (Grok compris) ; Mistral : français seulement
+    expect(plan.appels).toBe(16 * 3); // 3 moteurs par défaut : ChatGPT, Gemini, Perplexity
     expect(plan.coutMajorantUsd).toBeGreaterThan(0);
     expect(r.costs.faitsMistral.calls).toBe(3);
     expect(existsSync(join(r.dir, "proposition", "acteurs.json"))).toBe(false);
@@ -301,7 +302,7 @@ describe("site add : avec --go (fournisseurs fictifs)", () => {
     const { opts } = setup({ env: KEYS, llm: () => mistral, collector: () => fakeCollector(calls), go: { faits: true, reconnaissance: true } });
     const r = await siteAdd(opts);
     expect(r.paidCalls.mistral).toBe(3);
-    expect(r.paidCalls.moteurs).toBe(88);
+    expect(r.paidCalls.moteurs).toBe(48);
     // Aucune question marquée envoyée.
     expect(calls.every((c) => !c.promptText.includes("Coach Zed"))).toBe(true);
     expect(calls.filter((c) => c.engine === "mistral").every((c) => c.promptLanguage === "fr")).toBe(true);
@@ -315,7 +316,7 @@ describe("site add : avec --go (fournisseurs fictifs)", () => {
 
     const actors = ActorsFileSchema.parse(JSON.parse(readFileSync(join(r.dir, "proposition", "acteurs.json"), "utf8")));
     const byName = new Map(actors.acteurs.map((a) => [a.name, a]));
-    expect(byName.get("Studio Alpha")).toMatchObject({ type: "structure", reponses: 88, statut: "extrait", source: "https://studio-alpha.example/cours" });
+    expect(byName.get("Studio Alpha")).toMatchObject({ type: "structure", reponses: 48, statut: "extrait", source: "https://studio-alpha.example/cours" });
     expect(byName.get("Marie Durand")?.type).toBe("personne");
     expect(byName.get("FitBook")?.type).toBe("plateforme");
     expect(byName.has("Prix")).toBe(false);
