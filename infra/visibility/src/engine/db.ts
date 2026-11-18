@@ -22,7 +22,7 @@ import { randomUUID } from "node:crypto";
 import { homedir } from "node:os";
 import { join } from "node:path";
 
-export const DEMANDE_TYPES = ["SITE_ADD", "RECON", "WINDOW_RUN", "REPORT", "REMEASURE_PROPOSE", "ANALYSE", "AUDIT_IA", "NOTE_CONTENU", "EXTRAIRE_PLAN", "HYGIENE"] as const;
+export const DEMANDE_TYPES = ["SITE_ADD", "RECON", "WINDOW_RUN", "REPORT", "REMEASURE_PROPOSE", "ANALYSE", "AUDIT_IA", "NOTE_CONTENU", "EXTRAIRE_PLAN", "HYGIENE", "CONSOLIDER_PLAN"] as const;
 export type DemandeType = (typeof DEMANDE_TYPES)[number];
 export type DemandeStatut = "QUEUED" | "RUNNING" | "DONE" | "FAILED" | "CANCELLED";
 
@@ -209,6 +209,9 @@ export interface EngineDb {
   auditResultat(demande: string, r: Record<string, unknown>): Promise<string>;
   /** Nature des entités citées (concurrent, plateforme…) proposée par le moteur ; jamais sur un classement humain. */
   classerEntites(subjectId: string, entites: { entite: string; nature: string }[]): Promise<number>;
+  /** Plan consolidé : ce qu'il faut croiser, puis la version consolidée. */
+  planEntree(subjectId: string): Promise<Record<string, unknown>>;
+  planConsolide(demande: string, plan: Record<string, unknown>): Promise<string>;
   /** Mesure mensuelle (audit IA express, mêmes questions) pour chaque site dû et dans son budget. */
   planifierMesureMensuelle(): Promise<number>;
   /** Une hygiène d'indexation par site et par jour : nombre de demandes créées. */
@@ -409,6 +412,17 @@ export class MemoryEngineDb implements EngineDb {
   }
   async planifierMesureMensuelle() {
     return 0;
+  }
+  entreesPlan = new Map<string, Record<string, unknown>>();
+  plansConsolides: (Record<string, unknown> & { demande: string })[] = [];
+  async planEntree(subjectId: string) {
+    return this.entreesPlan.get(subjectId) ?? { site: null, depot: null, actions: [], rapports: [], etat: null };
+  }
+  async planConsolide(demande: string, plan: Record<string, unknown>) {
+    const d = this.demandes.find((x) => x.id === demande);
+    if (!d || d.type !== "CONSOLIDER_PLAN" || d.statut !== "RUNNING") throw new Error("55000 : pas une consolidation en cours");
+    this.plansConsolides.push({ ...structuredClone(plan), demande });
+    return randomUUID();
   }
   async planifierHygiene() {
     let n = 0;
@@ -618,6 +632,12 @@ export class PsqlEngineDb implements EngineDb {
   }
   async auditResultat(demande: string, r: Record<string, unknown>) {
     return String(await this.run("select vis_moteur_audit_resultat(:'p_demande'::uuid, :'p_resultat'::jsonb);\n", { p_demande: demande, p_resultat: r }));
+  }
+  async planEntree(subjectId: string) {
+    return JSON.parse(String(await this.run("select vis_moteur_plan_entree(:'p_subject');\n", { p_subject: subjectId })));
+  }
+  async planConsolide(demande: string, plan: Record<string, unknown>) {
+    return String(await this.run("select vis_moteur_plan_consolide(:'p_demande'::uuid, :'p_plan'::jsonb);\n", { p_demande: demande, p_plan: plan }));
   }
   async planifierMesureMensuelle() {
     return Number(await this.run("select vis_moteur_planifier_mesure_mensuelle();\n", {}));

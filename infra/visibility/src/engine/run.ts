@@ -56,6 +56,7 @@ import { siteAdd } from "../site-add.js";
 import { extractActors } from "../site/actors.js";
 import { DEFAULT_CRAWLIE_COMMAND, crawlieFailure, runCrawlie, summarizeCrawlie, type CrawlieCommand, type CrawlieSummary } from "../site/audit.js";
 import { extrairePlan } from "../audit-ia/express.js";
+import { consoliderPlan, type EntreePlan } from "../plan/consolider.js";
 import { AUDIT_MODEL, classementConcurrents, classementDomaines, collecter, noterReponse, proposerPlan, proposerQuestions, rapportMarkdown, scores, type LigneMatrice } from "../audit-ia/express.js";
 import { createMistralProvider } from "../../../../packages/providers/src/mistral.js";
 import type { LLMProvider } from "../../../../packages/providers/src/types.js";
@@ -227,7 +228,7 @@ export async function runEngine(o: EngineOptions): Promise<PassageResult> {
 async function handle(ctx: Ctx, d: Demande): Promise<Traitement> {
   ctx.log(`demande ${d.id} : ${d.type}${d.subject_id ? ` (${d.subject_id})` : ""}`);
   try {
-    const run = { SITE_ADD: siteAddDemande, RECON: reconDemande, WINDOW_RUN: windowRunDemande, REPORT: reportDemande, REMEASURE_PROPOSE: remeasureDemande, ANALYSE: analyseDemande, AUDIT_IA: auditIaDemande, NOTE_CONTENU: noteContenuDemande, EXTRAIRE_PLAN: extrairePlanDemande, HYGIENE: hygieneDemande }[d.type];
+    const run = { SITE_ADD: siteAddDemande, RECON: reconDemande, WINDOW_RUN: windowRunDemande, REPORT: reportDemande, REMEASURE_PROPOSE: remeasureDemande, ANALYSE: analyseDemande, AUDIT_IA: auditIaDemande, NOTE_CONTENU: noteContenuDemande, EXTRAIRE_PLAN: extrairePlanDemande, HYGIENE: hygieneDemande, CONSOLIDER_PLAN: consoliderPlanDemande }[d.type];
     if (!run) throw new EngineRefusal(`type de demande inconnu « ${String(d.type)} »`);
     const resultat = await run(ctx, d);
     await ctx.o.db.terminer(d.id, resultat, null);
@@ -388,6 +389,26 @@ async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
   const coutParMoteur: Record<string, number> = {};
   for (const r of col.reponses) coutParMoteur[r.moteur] = Math.round(((coutParMoteur[r.moteur] ?? 0) + r.coutUsd) * 100) / 100;
   return { audit_externe_id: auditId, score: s.global, cout_reel_usd: coutReel, cout_par_moteur: coutParMoteur, questions: questions.length, reponses: col.reponses.length, vides: col.reponses.filter((r) => !r.texte?.trim()).length, echecs: col.echecs.length, recommandations: recos, arret_plafond: col.arretPlafond, preuves_erreur: preuvesErreur };
+}
+
+// ---------------------------------------------------------------- CONSOLIDER_PLAN (gratuit : Mistral)
+
+/** Plan consolidé : actions croisées, priorisées, préparées (étapes, critère, prompt d'exécution). */
+async function consoliderPlanDemande(ctx: Ctx, d: Demande): Promise<Record<string, unknown>> {
+  const subjectId = subjectOf(d);
+  const e = (await ctx.o.db.planEntree(subjectId)) as unknown as EntreePlan;
+  if (!e.actions?.length) return { groupes: 0, actions: 0, note: "aucune action ouverte" };
+  const llm = ctx.o.auditLlm
+    ? ctx.o.auditLlm()
+    : (() => {
+        const apiKey = ctx.o.env.MISTRAL_API_KEY;
+        if (!apiKey) throw new EngineRefusal("clé absente : MISTRAL_API_KEY");
+        return createMistralProvider({ apiKey, model: AUDIT_MODEL, maxCalls: 2, maxOutputTokens: 32_000 });
+      })();
+  const plan = await consoliderPlan(llm, e, AUDIT_MODEL);
+  const sources = [...new Set(plan.groupes.flatMap((g) => g.sources))];
+  const id = await ctx.o.db.planConsolide(d.id, { resume: plan.resume, groupes: plan.groupes, sources, actions_lues: e.actions.length, modele: AUDIT_MODEL });
+  return { plan_id: id, groupes: plan.groupes.length, actions: e.actions.length, multi_sources: plan.groupes.filter((g) => g.sources.length > 1).length, sources };
 }
 
 // ---------------------------------------------------------------- HYGIENE (gratuite, quotidienne)

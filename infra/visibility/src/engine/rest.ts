@@ -137,6 +137,12 @@ export class RestEngineDb implements EngineDb {
   async auditResultat(demande: string, r: Record<string, unknown>) {
     return String(await this.rpc<string>("vis_moteur_audit_resultat", { p_demande: demande, p_resultat: r }));
   }
+  async planEntree(subjectId: string) {
+    return (await this.rpc<Record<string, unknown>>("vis_moteur_plan_entree", { p_subject: subjectId })) ?? {};
+  }
+  async planConsolide(demande: string, plan: Record<string, unknown>) {
+    return String(await this.rpc<string>("vis_moteur_plan_consolide", { p_demande: demande, p_plan: plan }));
+  }
   async planifierMesureMensuelle() {
     return Number(await this.rpc<number>("vis_moteur_planifier_mesure_mensuelle", {}));
   }
