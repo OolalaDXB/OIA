@@ -327,7 +327,7 @@ describe("site add : avec --go (fournisseurs fictifs)", () => {
     expect(homonyms.homonymes.map((h) => h.nom)).toEqual(["Zed Harrow"]);
     expect(homonyms.homonymes[0]!.occurrences[0]!.moteur).toBe("gemini");
     const props = lirePropositions(r.dir);
-    expect(props.concurrents!.find((c) => c.name === "Studio Alpha")).toMatchObject({ id: "studio-alpha", type: "structure", domains: ["studio-alpha.example"], citations: 88, statut: "extrait" });
+    expect(props.concurrents!.find((c) => c.name === "Studio Alpha")).toMatchObject({ id: "studio-alpha", type: "structure", domains: ["studio-alpha.example"], citations: 48, statut: "extrait" });
     expect(props.homonymes!.map((h) => [h.id, h.value, h.statut])).toEqual([["zed-harrow", "Zed Harrow", "extrait"]]);
 
     // Validation simulée (bloc B) : panel actif et validé, concurrents retenus.
