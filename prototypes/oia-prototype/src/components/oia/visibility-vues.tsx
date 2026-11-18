@@ -1,3 +1,4 @@
+import { VueEfficacite } from "@/components/oia/visibility-efficacite";
 import { useState } from "react";
 import { Link, useSearch } from "@tanstack/react-router";
 import { VuePlanAction } from "@/components/oia/visibility-plan";
@@ -114,7 +115,7 @@ export function VueEnsemble() {
   const donnees = useVisibilityDonnees();
   const selection = useSelectionVisibility();
   const subject = selection.sujetId ?? donnees.sujetActif ?? "studio-ardoise";
-  return <><ScoreSitesVisibility /><DernieresEtudes subject={subject} /></>;
+  return <><ScoreSitesVisibility /><VueEfficacite subject={subject} /><DernieresEtudes subject={subject} /></>;
 }
 
 function DernieresEtudes({ subject }: { subject: string }) {

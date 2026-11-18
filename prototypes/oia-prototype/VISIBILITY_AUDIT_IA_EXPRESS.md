@@ -4,6 +4,7 @@
 
 - La carte « Audit IA express » est présente sur l'accueil Visibility et en tête de l'onglet Audits externes pour le site sélectionné.
 - Elle affiche le texte contractuel, le badge Premium, le coût habituel, le coût maximal, le détail par moteur dans une info-bulle, le nombre d'appels et le budget client restant du mois.
+- Les moteurs par défaut de la démonstration sont ChatGPT, Gemini, Perplexity et Mistral (Mistral gratuit, 0 $), soit 2,06 $ habituel et 4,10 $ au plus pour 20 questions et 80 appels. Claude reste une option et Grok n'est plus proposé.
 - Le lancement exige une première action puis une confirmation portant le montant maximal affiché. Le bouton est désactivé sans session, sans estimation valide, sans plafond client ou global, au plafond dépassé et pendant un audit actif.
 - Le lien « Réglages › Budget » conduit aux réglages du site. Les erreurs RPC sont reprises sans réécriture. Le message « estimation changée, recharger » provoque une relecture et demande une nouvelle confirmation.
 - Les statuts QUEUED et RUNNING affichent une barre de suivi. La requête Visibility v3 est relue toutes les 30 secondes au premier plan uniquement pendant ces statuts.
@@ -36,6 +37,7 @@ Aucune écriture directe, aucune clé de service, aucune modification de Supabas
 
 - 160 tests réussis dans 29 fichiers.
 - Tests ciblés : estimation 3,85 $ et 13,56 $, budget restant, refus sans plafond, double confirmation, paramètres RPC exacts, suivi QUEUED/RUNNING, arrêt du rechargement après DONE, erreur verbatim, sélection des audits à comparer et badge de recommandation.
+- Test du retrait de Grok : plateformes à ajouter, assistants mesurés, estimation de démonstration à quatre moteurs (2,06 $ et 4,10 $), texte contractuel et écran des moteurs rendus.
 - Parcours Playwright avec session et réponses contractuelles simulées : accueil, info-bulle au survol et au tactile, double confirmation, coût vu exact, rechargement RUNNING observé après 30 secondes, résultat DONE, coût réel, score et matrices Perplexity/OIA.
 - Le lien du résultat ouvre le bon audit et son rapport Markdown. Le badge de recommandation, l'erreur verbatim, les trois blocages de plafond et le deuxième site ont été vérifiés.
 - Le lien « Réglages › Budget » ouvre directement l'onglet Budget et conserve le site dans l'adresse.

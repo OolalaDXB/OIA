@@ -5,7 +5,7 @@ import { useVisibilityDonnees } from "@/lib/donnees/provider";
 import { alerteDepense, estimerDepense } from "@/lib/visibility-couts";
 
 const dollars = (v: number, precision = 2) => `${v.toLocaleString("fr-FR", { minimumFractionDigits: precision, maximumFractionDigits: precision })} $`;
-const domainesPlateformes: Record<string, string> = { "Google AI Mode": "google.com", "Google AI Overview": "google.com", Copilot: "copilot.microsoft.com", DeepSeek: "deepseek.com", Qwen: "qwen.ai", Kimi: "kimi.com", Grok: "grok.com" };
+const domainesPlateformes: Record<string, string> = { "Google AI Mode": "google.com", "Google AI Overview": "google.com", Copilot: "copilot.microsoft.com", DeepSeek: "deepseek.com", Qwen: "qwen.ai", Kimi: "kimi.com" };
 
 export function VueMoteurs() {
   const { marque, moteurs, depensesMoteurs: d, plateformesMoteurs, reel } = useVisibilityDonnees();

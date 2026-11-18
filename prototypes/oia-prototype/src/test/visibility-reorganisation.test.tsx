@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { cleanup, fireEvent, render, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { entreeActive, entreesSite } from "@/components/oia/visibility";
@@ -44,7 +45,7 @@ describe("accueil des sites analysés", () => {
   });
   it("affiche une carte par site qui ouvre le site", () => {
     ctx.portefeuille = [{ subject_id: "coach-gari", nom: "Coach Gari", site_url: "https://coachgari.com", etape: "actions_en_cours", prochaine_action: "Valider le rapport", cout_mois_usd: 4.2, jour_courant: null }];
-    const vue = render(<AccueilSitesVisibility />);
+    const vue = render(<QueryClientProvider client={new QueryClient()}><AccueilSitesVisibility /></QueryClientProvider>);
     expect(vue.getByRole("heading", { name: "Sites analysés" })).toBeInTheDocument();
     expect(vue.getByRole("button", { name: "Ajouter un site" })).toBeEnabled();
     expect(vue.getByRole("link", { name: "Ouvrir Coach Gari" })).toHaveAttribute("href", "/visibility?site=coach-gari");

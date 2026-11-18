@@ -37,7 +37,7 @@ export const depensesMoteurs: DepensesMoteurs = { questions: 9, joursMesures: 20
 export const plateformesMoteurs: { nom: string; acces: string }[] = [
   { nom: "Google AI Mode", acces: "Extracteur" }, { nom: "Google AI Overview", acces: "Extracteur" },
   { nom: "Copilot", acces: "Extracteur" }, { nom: "DeepSeek", acces: "OpenRouter" },
-  { nom: "Qwen", acces: "OpenRouter" }, { nom: "Kimi", acces: "OpenRouter" }, { nom: "Grok", acces: "OpenRouter" },
+  { nom: "Qwen", acces: "OpenRouter" }, { nom: "Kimi", acces: "OpenRouter" },
 ] as const;
 
 export const familles: string[] = ["Découverte locale", "Prix et offres", "Cadeaux et famille", "Votre marque"];

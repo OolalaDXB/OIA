@@ -3622,6 +3622,77 @@ export type Database = {
         }
         Relationships: []
       }
+      vis_efficacite_mesures_v3: {
+        Row: {
+          audit_id: string | null
+          citations_sans_nom: number | null
+          client_id: string | null
+          cout_reel_usd: number | null
+          memes_questions_que: string | null
+          mensuelle: boolean | null
+          moteurs: string[] | null
+          questions: number | null
+          realise_le: string | null
+          reponses_sans_nom: number | null
+          score: number | null
+          subject_id: string | null
+        }
+        Relationships: []
+      }
+      vis_efficacite_v3: {
+        Row: {
+          bing_clics_28j: number | null
+          bing_impressions_28j: number | null
+          bing_pages_indexees: number | null
+          client_id: string | null
+          constats_resolus_cumules: number | null
+          ecarts: number | null
+          google_clics_28j: number | null
+          google_impressions_28j: number | null
+          google_pages_indexees: number | null
+          google_pages_inspectees: number | null
+          google_position: number | null
+          jour: string | null
+          recu_le: string | null
+          score_indexation: number | null
+          subject_id: string | null
+        }
+        Insert: {
+          bing_clics_28j?: never
+          bing_impressions_28j?: never
+          bing_pages_indexees?: never
+          client_id?: string | null
+          constats_resolus_cumules?: never
+          ecarts?: never
+          google_clics_28j?: never
+          google_impressions_28j?: never
+          google_pages_indexees?: never
+          google_pages_inspectees?: never
+          google_position?: never
+          jour?: never
+          recu_le?: string | null
+          score_indexation?: never
+          subject_id?: string | null
+        }
+        Update: {
+          bing_clics_28j?: never
+          bing_impressions_28j?: never
+          bing_pages_indexees?: never
+          client_id?: string | null
+          constats_resolus_cumules?: never
+          ecarts?: never
+          google_clics_28j?: never
+          google_impressions_28j?: never
+          google_pages_indexees?: never
+          google_pages_inspectees?: never
+          google_position?: never
+          jour?: never
+          recu_le?: string | null
+          score_indexation?: never
+          subject_id?: string | null
+        }
+        Relationships: []
+      }
       vis_entites_v3: {
         Row: {
           client_id: string | null
@@ -3655,6 +3726,25 @@ export type Database = {
           statut: string | null
           subject_id: string | null
           window_id: string | null
+        }
+        Relationships: []
+      }
+      vis_hygiene_v3: {
+        Row: {
+          actions: Json | null
+          analyse_id: string | null
+          bing: Json | null
+          client_id: string | null
+          controles: Json | null
+          demande_id: string | null
+          ecarts_ouverts: number | null
+          gsc: Json | null
+          metriques: Json | null
+          recu_le: string | null
+          scores: Json | null
+          statut: string | null
+          subject_id: string | null
+          url: string | null
         }
         Relationships: []
       }
@@ -4429,6 +4519,10 @@ export type Database = {
         Args: { p_entite: string; p_nature: string; p_subject: string }
         Returns: number
       }
+      vis_constat_resolu_le: {
+        Args: { p_cle: string; p_subject: string }
+        Returns: string
+      }
       vis_declarer_execution: {
         Args: {
           p_date: string
@@ -4439,6 +4533,7 @@ export type Database = {
         Returns: number
       }
       vis_demander_analyse: { Args: { p_subject: string }; Returns: string }
+      vis_demander_hygiene: { Args: { p_subject: string }; Returns: string }
       vis_demander_site: {
         Args: {
           p_client_id?: string
@@ -4586,6 +4681,8 @@ export type Database = {
         Returns: string
       }
       vis_moteur_plan_debut: { Args: { p_demande: string }; Returns: Json }
+      vis_moteur_planifier_hygiene: { Args: never; Returns: number }
+      vis_moteur_planifier_mesure_mensuelle: { Args: never; Returns: number }
       vis_moteur_prendre: { Args: { p_hote: string }; Returns: Json }
       vis_moteur_preuves: { Args: { p_preuves: Json }; Returns: number }
       vis_moteur_proposer: {

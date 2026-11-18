@@ -14,7 +14,7 @@ import {
   raisonEtatAuditIa, DELAI_SUIVI_AUDIT_IA,
 } from "@/lib/donnees/visibility-audit-ia";
 
-export const DESCRIPTION_AUDIT_IA = "20 questions tirées de votre site, posées une fois à chaque IA (ChatGPT, Claude, Gemini, Perplexity, Grok ; Mistral pour les sites en français) : où vous apparaissez, qui est cité à votre place, plan d'action";
+export const DESCRIPTION_AUDIT_IA = "20 questions tirées de votre site, posées une fois à chaque IA (ChatGPT, Gemini, Perplexity ; Claude en option ; Mistral pour les sites en français) : où vous apparaissez, qui est cité à votre place, plan d'action";
 
 function DetailCout({ subject }: { subject: string }) {
   const { donnees } = useVisibilityV3();

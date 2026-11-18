@@ -1,6 +1,7 @@
 # Roadmap
 
 ## Open
+- [x] Visibility : retirer Grok des plateformes, des moteurs et de la démonstration d'audit IA, avec un test de non-apparition.
 - [x] Visibility : ajouter Résultats › Indexation avec score, contrôles et preuves, Bing, actions OIA et carte Google à venir.
 - [x] Visibility : appeler `vis_demander_hygiene`, suivre HYGIENE et tester contrôles, cas Bing et lancement sans modifier Supabase ni publier.
 - [ ] Vérifier Indexation avec une session OIA réelle après l'application de la migration 0019, indisponible dans cet environnement.
