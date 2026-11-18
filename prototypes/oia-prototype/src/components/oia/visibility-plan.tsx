@@ -4,6 +4,7 @@ import { ListChecks } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, Statut } from "@/components/oia/ui";
 import { FiltreSelect } from "@/components/oia/filtre-select";
+import { VuePilotagePlan } from "@/components/oia/visibility-chantiers";
 import { ErreurGeste } from "@/components/oia/visibility-pilotage";
 import { EtatVisibilityV3 } from "@/components/oia/visibility-score";
 import { useGesteVisibility } from "@/lib/donnees/visibility-pilotage-provider";
@@ -80,7 +81,10 @@ function CarteAction({ carte }: { carte: CartePlan }) {
   </li>;
 }
 
-export function VuePlanAction() {
+export function VuePlanAction() { return <VuePilotagePlan />; }
+
+/** Ancienne vue par horizon, conservée pour référence. */
+export function VuePlanActionHorizons() {
   const { donnees } = useVisibilityV3();
   const subject = useSujetPlan();
   const [f, setF] = useState<FiltresPlan>(filtresPlanVides);

@@ -3943,6 +3943,58 @@ export type Database = {
         }
         Relationships: []
       }
+      vis_plan_consolide_v3: {
+        Row: {
+          actions_lues: number | null
+          client_id: string | null
+          groupes: Json | null
+          le: string | null
+          modele: string | null
+          plan_id: string | null
+          resume: string | null
+          sources: Json | null
+          subject_id: string | null
+        }
+        Relationships: []
+      }
+      vis_plan_suivi_v3: {
+        Row: {
+          action_cle: string | null
+          apres_le: string | null
+          avant_le: string | null
+          categorie: string | null
+          client_id: string | null
+          delta_bing_impressions: number | null
+          delta_google_clics: number | null
+          delta_google_impressions: number | null
+          delta_google_pages_indexees: number | null
+          delta_score_indexation: number | null
+          echeance: string | null
+          echeance_proposee: boolean | null
+          effet: string | null
+          effort: string | null
+          en_retard: boolean | null
+          fait_le: string | null
+          horizon: string | null
+          nature: string | null
+          note: string | null
+          ordre: number | null
+          origine: Json | null
+          pourquoi: string | null
+          preuve: string | null
+          priorite: string | null
+          qui: string | null
+          quoi_faire: string | null
+          releve_le: string | null
+          responsable: string | null
+          subject_id: string | null
+          suivi: string | null
+          titre: string | null
+          verification: string | null
+          verifie_le: string | null
+        }
+        Relationships: []
+      }
       vis_planificateur_v1: {
         Row: {
           actif: boolean | null
@@ -4533,6 +4585,10 @@ export type Database = {
         Returns: number
       }
       vis_demander_analyse: { Args: { p_subject: string }; Returns: string }
+      vis_demander_consolidation: {
+        Args: { p_subject: string }
+        Returns: string
+      }
       vis_demander_hygiene: { Args: { p_subject: string }; Returns: string }
       vis_demander_site: {
         Args: {
@@ -4680,7 +4736,12 @@ export type Database = {
         }
         Returns: string
       }
+      vis_moteur_plan_consolide: {
+        Args: { p_demande: string; p_plan: Json }
+        Returns: string
+      }
       vis_moteur_plan_debut: { Args: { p_demande: string }; Returns: Json }
+      vis_moteur_plan_entree: { Args: { p_subject: string }; Returns: Json }
       vis_moteur_planifier_hygiene: { Args: never; Returns: number }
       vis_moteur_planifier_mesure_mensuelle: { Args: never; Returns: number }
       vis_moteur_prendre: { Args: { p_hote: string }; Returns: Json }
@@ -4713,6 +4774,18 @@ export type Database = {
         Returns: number
       }
       vis_relancer_demande: { Args: { p_demande: string }; Returns: string }
+      vis_suivre_action: {
+        Args: {
+          p_action_cle: string
+          p_echeance?: string
+          p_etat: string
+          p_note?: string
+          p_preuve?: string
+          p_responsable?: string
+          p_subject: string
+        }
+        Returns: number
+      }
       vis_valider_concurrents: {
         Args: { p_homonymes?: string[]; p_ids: string[]; p_subject: string }
         Returns: number

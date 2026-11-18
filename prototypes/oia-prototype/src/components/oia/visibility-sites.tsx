@@ -13,6 +13,7 @@ import { useDonnees } from "@/lib/donnees-visibility";
 import { couleurScore, type ScoreV3 } from "@/lib/donnees/visibility-v3";
 import { dollars } from "@/lib/donnees/visibility-pilotage";
 import { ResumeEfficaciteCarte, useResumeEfficacite } from "@/components/oia/visibility-efficacite";
+import { ResumePilotageCarte, useResumePilotage } from "@/components/oia/visibility-chantiers";
 import { actionsP0AFaire, type PlanActionV3 } from "@/lib/donnees/visibility-plan";
 
 export type CarteSite = { id: string; nom: string; adresse: string; etape: string | null; prochaineAction: string | null; coutMois: number | null; jour: number | null };
@@ -32,7 +33,7 @@ function Score({ label, valeur }: { label: string; valeur: number | null }) {
   return <div className="carte-chiffre" style={{ "--carte-couleur": couleurScore(valeur) } as CSSProperties}><p className="text-xs">{label}</p><p className="num mt-1 text-2xl">{valeur ?? "Non mesuré"}{valeur !== null && <span className="text-xs"> / 100</span>}</p></div>;
 }
 
-function Carte({ site, resume }: { site: CarteSite; resume: ReturnType<ReturnType<typeof useResumeEfficacite>> }) {
+function Carte({ site, resume, pilotage }: { site: CarteSite; resume: ReturnType<ReturnType<typeof useResumeEfficacite>>; pilotage: ReturnType<ReturnType<typeof useResumePilotage>> }) {
   const { donnees } = useVisibilityV3();
   const r = resumeSite(site, donnees.scores, donnees.planAction);
   const etape = site.etape ?? "demande";
@@ -46,13 +47,15 @@ function Carte({ site, resume }: { site: CarteSite; resume: ReturnType<ReturnTyp
       <div><dt className="text-xs text-tertiary">Coût du mois</dt><dd className="num mt-0.5">{dollars(site.coutMois)}</dd></div>
       <div className="col-span-2"><dt className="text-xs text-tertiary">Prochaine action</dt><dd className="mt-0.5">{site.prochaineAction || "Aucune action"}</dd></div>
     </dl>
+    <ResumePilotageCarte {...pilotage} />
     <ResumeEfficaciteCarte {...resume} />
   </Link></li>;
 }
 
 function Grille({ sites, ajout }: { sites: CarteSite[]; ajout: React.ReactNode }) {
   const resume = useResumeEfficacite();
-  return <>{ajout}{sites.length === 0 ? <Section titre="Aucun site"><p className="text-sm text-muted-foreground">Aucun site analysé pour l'instant.</p></Section> : <ul className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">{sites.map((s) => <Carte key={s.id} site={s} resume={resume(s.id)} />)}</ul>}</>;
+  const pilotage = useResumePilotage();
+  return <>{ajout}{sites.length === 0 ? <Section titre="Aucun site"><p className="text-sm text-muted-foreground">Aucun site analysé pour l'instant.</p></Section> : <ul className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">{sites.map((s) => <Carte key={s.id} site={s} resume={resume(s.id)} pilotage={pilotage(s.id)} />)}</ul>}</>;
 }
 
 export function AccueilSitesVisibility() {

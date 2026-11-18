@@ -69,3 +69,4 @@
 
 ## Done
 - [x] Prototype initial, Shyrka, sauvegarde locale, accessibilité mobile, transfert GitHub (PR #4).
+- [x] Plan d'action piloté : onglets Chantiers (vis_plan_consolide_v3, Recroiser, Marquer fait, prompt copiable) et Actions (vis_plan_suivi_v3, vis_suivre_action), résumé chantiers et retards sur l'accueil des sites

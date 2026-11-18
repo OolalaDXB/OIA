@@ -54,3 +54,4 @@ use the editor.
 - Keep password recovery on public routes using the existing Supabase client and root recovery event; recovery updates send only the new password and never change hosted authentication settings.
 - Pass the original backup JSON unchanged to the import RPC; local preview only counts the six verified workspace keys and cancellation always requires a fresh preview before explicit confirmation.
 - Parse cancellation risks from the existing modified-elements array and unverifiable count; reset confirmation when the target changes or the RPC requests a fresh preview.
+- Visibility Plan d'action: two tabs, Chantiers (vis_plan_consolide_v3) and Actions (vis_plan_suivi_v3), in components/oia/visibility-chantiers.tsx with data in lib/donnees/visibility-suivi.ts; every write goes through vis_suivre_action or vis_demander_consolidation, step checkboxes stay local; this keeps the plan pilotable without schema changes.

@@ -49,7 +49,7 @@ export type GesteVisibility =
   | "vis_relancer_demande" | "vis_acquitter_alerte"
   | "vis_valider_recommandation" | "vis_rejeter_recommandation" | "vis_demander_analyse"
   | "vis_importer_audit_externe" | "vis_lancer_audit_ia" | "vis_lancer_note_contenu" | "vis_lier_depot"
-  | "vis_classer_entite" | "vis_importer_rapport_externe" | "vis_extraire_plan" | "vis_demander_hygiene";
+  | "vis_classer_entite" | "vis_importer_rapport_externe" | "vis_extraire_plan" | "vis_demander_hygiene" | "vis_suivre_action" | "vis_demander_consolidation";
 export type ArgsGeste<N extends GesteVisibility> = N extends "vis_lier_depot"
   ? Omit<Fonctions["vis_lier_depot"]["Args"], "p_depot"> & { p_depot: string | null }
   : N extends "vis_demander_hygiene" ? { p_subject: string }
