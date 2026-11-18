@@ -64,6 +64,7 @@ export function createBingClient(apiKey: string, f: BingFetch = globalThis.fetch
     soumettreFeed: (siteUrl: string, feedUrl: string) => appel<null>("SubmitFeed", {}, { siteUrl, feedUrl }),
     problemes: (siteUrl: string) => appel<{ Url: string; Issues?: number; HttpCode?: number }[]>("GetCrawlIssues", { siteUrl }),
     exploration: (siteUrl: string) => appel<Record<string, unknown>[]>("GetCrawlStats", { siteUrl }),
+    trafic: (siteUrl: string) => appel<{ Date?: string; Impressions?: number; Clicks?: number }[]>("GetRankAndTrafficStats", { siteUrl }),
     requetes: (siteUrl: string) => appel<{ Query: string; Impressions?: number; Clicks?: number; AvgImpressionPosition?: number }[]>("GetQueryStats", { siteUrl }),
   };
 }
@@ -84,6 +85,8 @@ export interface ResultatBing {
   problemes: { total: number; exemples: { url: string; http: number | null }[] };
   exploration: Record<string, unknown> | null;
   requetes: { requete: string; impressions: number; clics: number; position: number | null }[];
+  /** Totaux des 28 derniers jours relevés par Bing (toutes requêtes). */
+  totaux: { impressions: number; clics: number } | null;
   actions: { action: string; cible: string; resultat: string }[];
   controles: Controle[];
 }
@@ -93,7 +96,7 @@ export interface ResultatBing {
  * les autres : elle devient un contrôle « non mesuré » avec sa raison.
  */
 export async function bilanBing(client: BingClient, site: string, sitemapUrl: string | null): Promise<ResultatBing> {
-  const r: ResultatBing = { site: null, verifie: false, feeds: [], problemes: { total: 0, exemples: [] }, exploration: null, requetes: [], actions: [], controles: [] };
+  const r: ResultatBing = { site: null, verifie: false, feeds: [], problemes: { total: 0, exemples: [] }, exploration: null, requetes: [], totaux: null, actions: [], controles: [] };
   const sites = await client.sites();
   const trouve = (sites ?? []).find((s) => hote(s.Url) === hote(site));
   r.site = trouve?.Url ?? null;
@@ -158,6 +161,16 @@ export async function bilanBing(client: BingClient, site: string, sitemapUrl: st
       .map((x) => ({ requete: x.Query, impressions: x.Impressions ?? 0, clics: x.Clicks ?? 0, position: typeof x.AvgImpressionPosition === "number" ? x.AvgImpressionPosition : null }))
       .sort((a, b) => b.impressions - a.impressions)
       .slice(0, 20);
+  } catch {
+    /* non bloquant */
+  }
+  try {
+    const jours = ((await client.trafic(siteUrl)) ?? [])
+      .map((x) => ({ date: dateBing(x.Date), impressions: x.Impressions ?? 0, clics: x.Clicks ?? 0 }))
+      .filter((x) => x.date)
+      .sort((a, b) => String(b.date).localeCompare(String(a.date)))
+      .slice(0, 28);
+    r.totaux = { impressions: jours.reduce((s, x) => s + x.impressions, 0), clics: jours.reduce((s, x) => s + x.clics, 0) };
   } catch {
     /* non bloquant */
   }

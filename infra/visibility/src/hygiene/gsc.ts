@@ -86,6 +86,8 @@ export function createGscClient(json: string, f: GscFetch = globalThis.fetch as 
     soumettreSitemap: (site: string, sitemap: string) => appel<unknown>(`${WM}/sites/${enc(site)}/sitemaps/${enc(sitemap)}`, "soumission du sitemap", "PUT"),
     requetes: (site: string, debut: string, fin: string) =>
       appel<{ rows?: { keys: string[]; clicks: number; impressions: number; ctr: number; position: number }[] }>(`${WM}/sites/${enc(site)}/searchAnalytics/query`, "requêtes", "POST", { startDate: debut, endDate: fin, dimensions: ["query"], rowLimit: 20 }),
+    totaux: (site: string, debut: string, fin: string) =>
+      appel<{ rows?: { clicks: number; impressions: number; ctr: number; position: number }[] }>(`${WM}/sites/${enc(site)}/searchAnalytics/query`, "totaux", "POST", { startDate: debut, endDate: fin }),
     inspecter: (site: string, url: string) => appel<{ inspectionResult?: { indexStatusResult?: GscIndexStatus } }>(INSPECT, "inspection", "POST", { inspectionUrl: url, siteUrl: site, languageCode: "fr" }),
   };
 }
@@ -134,6 +136,8 @@ export interface ResultatGsc {
   sitemaps: { url: string; envoye: string | null; lu: string | null; erreurs: number; avertissements: number; soumises: number | null; indexees: number | null }[];
   inspection: { url: string; verdict: string | null; couverture: string | null; dernier_passage: string | null; canonique_google: string | null; canonique_site: string | null }[];
   requetes: { requete: string; impressions: number; clics: number; position: number | null }[];
+  /** Totaux des 28 derniers jours disponibles (toutes requêtes). */
+  totaux: { impressions: number; clics: number; position: number | null } | null;
   actions: { action: string; cible: string; resultat: string }[];
   controles: Controle[];
 }
@@ -146,7 +150,7 @@ const n = (v: unknown) => (v === undefined || v === null || v === "" ? null : Nu
  * n'arrête pas les autres : elle devient un contrôle « non mesuré » avec sa raison.
  */
 export async function bilanGsc(client: GscClient, site: string, sitemapUrl: string | null, pages: string[], maintenant: Date): Promise<ResultatGsc> {
-  const r: ResultatGsc = { propriete: null, autorisation: null, sitemaps: [], inspection: [], requetes: [], actions: [], controles: [] };
+  const r: ResultatGsc = { propriete: null, autorisation: null, sitemaps: [], inspection: [], requetes: [], totaux: null, actions: [], controles: [] };
   const p = proprieteDuSite(site, (await client.proprietes()).siteEntry ?? []);
   r.propriete = p?.siteUrl ?? null;
   r.autorisation = p?.permissionLevel ?? null;
@@ -225,6 +229,8 @@ export async function bilanGsc(client: GscClient, site: string, sitemapUrl: stri
     const debut = new Date(fin.getTime() - 28 * 86_400_000);
     const q = (await client.requetes(propriete, iso(debut), iso(fin))).rows ?? [];
     r.requetes = q.map((x) => ({ requete: x.keys[0] ?? "", impressions: x.impressions, clics: x.clicks, position: Number.isFinite(x.position) ? Math.round(x.position * 10) / 10 : null }));
+    const t = (await client.totaux(propriete, iso(debut), iso(fin))).rows?.[0];
+    r.totaux = t ? { impressions: t.impressions, clics: t.clicks, position: Number.isFinite(t.position) ? Math.round(t.position * 10) / 10 : null } : { impressions: 0, clics: 0, position: null };
   } catch {
     /* non bloquant */
   }

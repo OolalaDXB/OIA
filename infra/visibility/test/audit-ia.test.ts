@@ -186,3 +186,34 @@ describe("Grok par OpenRouter : coût de recherche borné", () => {
     expect(p.plugins).toBeUndefined();
   });
 });
+
+describe("mesure mensuelle : mêmes questions que la mesure précédente", () => {
+  it("reprend les questions fixées sans les faire réécrire par le modèle, et garde langue et marque", async () => {
+    const db = new MemoryEngineDb(() => new Date("2026-12-01T08:00:00Z"));
+    db.sujets.set("studio-fictif", { subject_id: "studio-fictif", client_id: "client-fictif", client_nom: "C", site_url: "https://studio-fictif.example", nom: "Studio Fictif", langues: ["en"], marches: ["AE"], panel_version: null, executions: [], plafond_usd: 5, plafond_global_usd: 20 });
+    db.auditsGo.add("audit-m");
+    const fixes = Array.from({ length: 5 }, (_, i) => ({ id: `K0${i + 1}`, sujet: `sujet ${i}`, question: i === 4 ? "Is Studio Fictif a good padel coach?" : `Best padel coach number ${i} in Exempleville?`, marquee: i === 4, langue: "en" }));
+    db.demander({ type: "AUDIT_IA", client_id: "client-fictif", subject_id: "studio-fictif", charge: { audit_id: "audit-m", url: "https://studio-fictif.example", nom: "Studio Fictif", questions: 5, cibles: ["chatgpt:openai-api:gpt-6-luna:online"], langues: ["en"], cout_max_usd: 2, mensuelle: true, questions_fixes: fixes } });
+    const schemas: string[] = [];
+    const llm = () => ({
+      name: "faux", defaultModel: "faux", usage: () => ({ inputTokens: 0, outputTokens: 0 }),
+      async extract(req: { schemaName: string; schema: { parse: (x: unknown) => unknown } }) {
+        schemas.push(req.schemaName);
+        return { data: req.schema.parse({ resume: "Résumé fictif.", actions: [1, 2, 3].map((i) => ({ priorite: "P1", type: "SOURCE_TARGET", titre: `Action fictive ${i}`, action: "Faire une action fictive précise.", pourquoi: "Raison fictive donnée.", questions: [], impact: "high", effort: "S" })) }) as never, run: { provider: "faux", model: "faux", promptHash: "x" } };
+      },
+    });
+    const collecte: string[] = [];
+    const r = await runEngine({
+      db, dir: join(mkdtempSync(join(tmpdir(), "oia-mens-")), "m"), hote: "t", version: "v", env: {}, now: () => new Date("2026-12-01T08:00:00Z"),
+      fetch: async (url: string) => ({ url, finalUrl: url, status: 200, contentType: "text/html", body: "<html><title>Studio Fictif</title><body>Padel</body></html>" }), crawlie: ["faux"], allowedLocal: ["studio-fictif.example"],
+      collector: () => ({ name: "oia-direct", async collect(req: { promptText: string; engine: string }) { collecte.push(req.promptText); return { collectorName: "oia-direct", collectorRunId: "r", rawText: "Try **Alpha Padel**.", structured: {}, citations: [], costUsd: 0.01, receivedAt: "2026-12-01T08:00:00Z" }; } }),
+      judge: () => noJudge(), auditLlm: llm,
+    } as never);
+    expect(r.traitees[0]!.statut).toBe("DONE");
+    expect(schemas).toEqual(["AuditPlan"]); // aucune question réécrite
+    expect(collecte).toEqual(fixes.map((q) => q.question));
+    const m = db.audits[0]!.matrice as { id: string; marquee: boolean; langue: string }[];
+    expect(m.map((x) => x.id)).toEqual(["K01", "K02", "K03", "K04", "K05"]);
+    expect(m[4]).toMatchObject({ marquee: true, langue: "en" });
+  });
+});

@@ -204,6 +204,16 @@ export async function runEngine(o: EngineOptions): Promise<PassageResult> {
       ctx.log(`hygiène d'indexation non planifiée : ${msg(err)}`);
     }
   }
+  // Passage quotidien : la mesure mensuelle (audit de 20 questions, mêmes questions chaque mois),
+  // seulement si le budget du mois le permet ; la base refuse sinon.
+  if (o.quotidien) {
+    try {
+      const n = await o.db.planifierMesureMensuelle();
+      if (n) ctx.log(`mesure mensuelle : ${n} site(s) planifié(s)`);
+    } catch (err) {
+      ctx.log(`mesure mensuelle non planifiée : ${msg(err)}`);
+    }
+  }
   const traitees: Traitement[] = [];
   for (let i = 0; i < (o.max ?? 20); i++) {
     const d = await o.db.prendre(o.hote);
@@ -273,7 +283,19 @@ async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
         if (!apiKey) throw new EngineRefusal("clé absente : MISTRAL_API_KEY");
         return createMistralProvider({ apiKey, model: AUDIT_MODEL, maxCalls: 4, maxOutputTokens: 32_000 });
       })();
-  const questions = await proposerQuestions(llm, { read, nom, langues, marches: sujet?.marches ?? [], n });
+  // Mesure mensuelle : les MÊMES questions que la mesure précédente, pour que les mois soient
+  // comparables (et sans appel au modèle pour les écrire). Sinon : questions tirées du site.
+  const fixes = Array.isArray(d.charge.questions_fixes) ? (d.charge.questions_fixes as Record<string, unknown>[]) : [];
+  const questions = fixes.length
+    ? fixes.slice(0, n).map((q, i) => ({
+        id: typeof q.id === "string" && /^K\d{2}$/.test(q.id) ? q.id : `K${String(i + 1).padStart(2, "0")}`,
+        sujet: String(q.sujet ?? "").slice(0, 120),
+        question: String(q.question ?? ""),
+        langue: typeof q.langue === "string" && /^[a-z]{2}$/.test(q.langue) ? q.langue : langues[0] ?? "en",
+        marquee: typeof q.marquee === "boolean" ? q.marquee : String(q.question ?? "").toLowerCase().includes(nom.toLowerCase()),
+        source: null,
+      })).filter((q) => q.question.length >= 10)
+    : await proposerQuestions(llm, { read, nom, langues, marches: sujet?.marches ?? [], n });
   const domaine = new URL(url).hostname.replace(/^www\./, "");
   const config = { brand: { name: nom, aliases: [], domains: [url, domaine] }, competitors: [] };
   const col = await collecter({ collector: ctx.o.collector(), questions, cibles, clientId: d.client_id, subjectId, windowId, coutMaxUsd: coutMax - 0.1, log: ctx.log });
@@ -342,7 +364,7 @@ async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
     methode: `Audit IA express OIA : ${questions.length} questions tirées du site, une passe par question sur ${moteurs.join(", ")}, par API avec recherche web, le ${date}. Notation déterministe (3 cité avec le site en source, 2 cité, 1 cité car nommé, 0 absent). ${col.echecs.length} appel(s) en échec${col.arretPlafond ? " ; arrêt au plafond engagé" : ""}.`,
     resume: plan.resume,
     rapport_md: rapport,
-    matrice: matrice.map((l) => ({ id: l.id, sujet: l.sujet, question: l.question, scores: l.scores, concurrents: l.concurrents, domaines: l.domaines })),
+    matrice: matrice.map((l) => ({ id: l.id, sujet: l.sujet, question: l.question, marquee: l.marquee, langue: questions.find((q) => q.id === l.id)?.langue ?? null, scores: l.scores, concurrents: l.concurrents, domaines: l.domaines })),
   });
   let recos = 0;
   for (const [i, a] of plan.actions.entries()) {
@@ -413,12 +435,12 @@ async function hygieneDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
     outil: "OIA · hygiène d'indexation",
     statut: "fait",
     scores: { indexation: score === null ? null : score / 100 },
-    metriques: { controles: controles.length, ecarts: controles.filter((c) => c.ok === false).length, adresses_sitemap: ctrl.sitemap.adresses.length, bing_problemes: bing?.problemes.total ?? null, google_pages_inspectees: gsc?.inspection.length ?? null, google_pages_indexees: gsc ? gsc.inspection.filter((x) => x.verdict === "PASS").length : null },
+    metriques: { controles: controles.length, ecarts: controles.filter((c) => c.ok === false).length, adresses_sitemap: ctrl.sitemap.adresses.length, bing_problemes: bing?.problemes.total ?? null, google_pages_inspectees: gsc?.inspection.length ?? null, google_pages_indexees: gsc ? gsc.inspection.filter((x) => x.verdict === "PASS").length : null, google_impressions_28j: gsc?.totaux?.impressions ?? null, google_clics_28j: gsc?.totaux?.clics ?? null, google_position: gsc?.totaux?.position ?? null, bing_impressions_28j: bing?.totaux?.impressions ?? null, bing_clics_28j: bing?.totaux?.clics ?? null, bing_pages_indexees: typeof bing?.exploration?.InIndex === "number" ? bing.exploration.InIndex : null },
     resultat: {
       controles: controles.map((c) => ({ id: c.id, titre: c.titre, ok: c.ok, valeur: c.valeur, gravite: c.gravite, preuve: c.preuve })),
       sitemap: { url: ctrl.sitemap.url, adresses: ctrl.sitemap.adresses.length },
-      bing: bing ? { site: bing.site, verifie: bing.verifie, feeds: bing.feeds, problemes: bing.problemes, exploration: bing.exploration, requetes: bing.requetes } : { erreur: bingErreur },
-      gsc: gsc ? { propriete: gsc.propriete, autorisation: gsc.autorisation, sitemaps: gsc.sitemaps, inspection: gsc.inspection, requetes: gsc.requetes } : { erreur: gscErreur },
+      bing: bing ? { site: bing.site, verifie: bing.verifie, feeds: bing.feeds, problemes: bing.problemes, exploration: bing.exploration, requetes: bing.requetes, totaux: bing.totaux } : { erreur: bingErreur },
+      gsc: gsc ? { propriete: gsc.propriete, autorisation: gsc.autorisation, sitemaps: gsc.sitemaps, inspection: gsc.inspection, requetes: gsc.requetes, totaux: gsc.totaux } : { erreur: gscErreur },
       actions: [...(bing?.actions ?? []), ...(gsc?.actions ?? [])],
     },
   });

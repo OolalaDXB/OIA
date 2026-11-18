@@ -209,6 +209,8 @@ export interface EngineDb {
   auditResultat(demande: string, r: Record<string, unknown>): Promise<string>;
   /** Nature des entités citées (concurrent, plateforme…) proposée par le moteur ; jamais sur un classement humain. */
   classerEntites(subjectId: string, entites: { entite: string; nature: string }[]): Promise<number>;
+  /** Mesure mensuelle (audit IA express, mêmes questions) pour chaque site dû et dans son budget. */
+  planifierMesureMensuelle(): Promise<number>;
   /** Une hygiène d'indexation par site et par jour : nombre de demandes créées. */
   planifierHygiene(): Promise<number>;
   /** Contexte d'un site pour un plan : constats ouverts, rapports externes, actions déjà proposées. */
@@ -404,6 +406,9 @@ export class MemoryEngineDb implements EngineDb {
     if (!d || d.type !== "AUDIT_IA" || d.statut !== "RUNNING") throw new Error(`55000 : demande ${demande} : pas un audit en cours`);
     if (!this.auditsGo.has(String(d.charge.audit_id))) throw new Error("42501 : audit refusé : aucun GO enregistré");
     return `${d.subject_id}-audit-test`;
+  }
+  async planifierMesureMensuelle() {
+    return 0;
   }
   async planifierHygiene() {
     let n = 0;
@@ -613,6 +618,9 @@ export class PsqlEngineDb implements EngineDb {
   }
   async auditResultat(demande: string, r: Record<string, unknown>) {
     return String(await this.run("select vis_moteur_audit_resultat(:'p_demande'::uuid, :'p_resultat'::jsonb);\n", { p_demande: demande, p_resultat: r }));
+  }
+  async planifierMesureMensuelle() {
+    return Number(await this.run("select vis_moteur_planifier_mesure_mensuelle();\n", {}));
   }
   async planifierHygiene() {
     return Number(await this.run("select vis_moteur_planifier_hygiene();\n", {}));
