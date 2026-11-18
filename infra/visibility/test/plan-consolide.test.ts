@@ -2,7 +2,7 @@ import { mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { consoliderPlan, type EntreePlan } from "../src/plan/consolider";
+import { consoliderPlan, nettoyerPlan, type EntreePlan } from "../src/plan/consolider";
 import { MemoryEngineDb } from "../src/engine/db";
 import { runEngine } from "../src/engine/run";
 import { noJudge } from "../src/judge";
@@ -60,5 +60,18 @@ describe("moteur : demande CONSOLIDER_PLAN", () => {
     expect(r.traitees[0]).toMatchObject({ id: d.id, type: "CONSOLIDER_PLAN", statut: "DONE" });
     expect(r.traitees[0]!.resultat).toMatchObject({ groupes: 1, actions: 4, multi_sources: 1 });
     expect((db.plansConsolides[0]!.groupes as unknown[]).length).toBe(1);
+  });
+});
+
+describe("plan consolidé : actions citées par numéro", () => {
+  it("A1, [A2], a3 et 4 renvoient aux actions ; un numéro inconnu est ignoré, rien ne se perd", () => {
+    const action = (cle: string) => ({ cle, origine: "Analyse Lighthouse", priorite: "P1", titre: cle, quoi: "faire", pourquoi: "", effort: "S", qui: "equipe", suivi: "a_planifier" });
+    const e: EntreePlan = { site: null, depot: null, rapports: [], etat: null, actions: ["constat:a", "constat:b", "recommandation:rec-long-identifiant-1", "constat:d", "constat:e"].map(action) };
+    const g = { titre: "Chantier", pourquoi: "", priorite: "P2" as const, impact: "high" as const, effort: "S" as const, qui: "equipe" as const, etapes: ["x"], critere_reussite: "c", prompt_execution: "p" };
+    const r = nettoyerPlan({ resume: "r", groupes: [{ ...g, actions: ["A1", "[A2]", "a3", "A99"] }, { ...g, actions: ["4", "A1"] }] }, e);
+    expect(r.groupes[0]!.actions).toEqual(["constat:a", "constat:b", "recommandation:rec-long-identifiant-1"]);
+    expect(r.groupes[0]!.prompt_execution).toBe("p");
+    expect(r.groupes[1]!.actions).toEqual(["constat:d"]);
+    expect(r.groupes.flatMap((x) => x.actions).sort()).toEqual(e.actions.map((a) => a.cle).sort());
   });
 });

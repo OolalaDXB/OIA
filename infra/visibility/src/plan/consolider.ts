@@ -52,10 +52,17 @@ const ORDRE: Record<string, number> = { P0: 0, P1: 1, P2: 2, P3: 3 };
 /** Garde-fous : clés existantes, une action par groupe, rien d'oublié ; sources et priorité recalculées. */
 export function nettoyerPlan(brut: z.infer<typeof PlanSchema>, e: EntreePlan): { resume: string; groupes: GroupeConsolide[] } {
   const parCle = new Map(e.actions.map((a) => [a.cle, a]));
+  // Le modèle cite chaque action par son numéro court (A1, A2…) ; une clé complète recopiée est acceptée aussi.
+  const resoudre = (k: string): string | undefined => {
+    const x = String(k).trim().replace(/^\[|\]$/g, "").trim();
+    const n = /^a?(\d{1,3})$/i.exec(x);
+    if (n) return e.actions[Number(n[1]) - 1]?.cle;
+    return parCle.has(x) ? x : undefined;
+  };
   const vues = new Set<string>();
   const groupes: GroupeConsolide[] = [];
   for (const g of brut.groupes) {
-    const actions = [...new Set(g.actions)].filter((k) => parCle.has(k) && !vues.has(k));
+    const actions = [...new Set(g.actions.map(resoudre).filter((k): k is string => !!k))].filter((k) => !vues.has(k));
     if (!actions.length) continue;
     actions.forEach((k) => vues.add(k));
     const membres = actions.map((k) => parCle.get(k)!);
@@ -80,7 +87,7 @@ export function nettoyerPlan(brut: z.infer<typeof PlanSchema>, e: EntreePlan): {
 }
 
 export async function consoliderPlan(llm: LLMProvider, e: EntreePlan, modele: string) {
-  const lignes = e.actions.map((a) => `[${a.cle}] (${a.priorite}, ${a.origine ?? "?"}, effort ${a.effort ?? "?"}, ${a.qui ?? "?"}) ${a.titre} — ${a.quoi}${a.pourquoi ? ` Pourquoi : ${a.pourquoi}` : ""}`);
+  const lignes = e.actions.map((a, i) => `[A${i + 1}] (${a.priorite}, ${a.origine ?? "?"}, effort ${a.effort ?? "?"}, ${a.qui ?? "?"}) ${a.titre} — ${a.quoi}${a.pourquoi ? ` Pourquoi : ${a.pourquoi}` : ""}`);
   const r = await llm.extract({
     schema: PlanSchema,
     schemaName: "PlanConsolide",
@@ -89,12 +96,12 @@ export async function consoliderPlan(llm: LLMProvider, e: EntreePlan, modele: st
     system: [
       `Tu es chef de projet SEO et visibilité IA pour le site « ${e.site?.nom ?? "?"} » (${e.site?.url ?? "?"})${e.depot ? `, dont le code est dans le dépôt GitHub ${e.depot}` : ""}.`,
       "On te donne toutes les actions ouvertes, venues de sources différentes (mesures OIA, audits et rapports externes, Lighthouse, hygiène d'indexation, note du contenu), et des extraits des rapports externes.",
-      "Croise-les : regroupe en un même chantier les actions qui visent le même problème (même correction, même page, même cause). Une action ne va que dans un chantier. Garde chaque clé telle quelle, entre crochets dans la liste.",
+      "Croise-les : regroupe en un même chantier les actions qui visent le même problème (même correction, même page, même cause). Une action ne va que dans un chantier. Cite chaque action par son numéro entre crochets (A1, A2…), sans rien d'autre.",
       "Pour chaque chantier : un titre clair ; « pourquoi » (l'effet attendu sur Google, Bing et les réponses des IA) ; priorité P0 (cette semaine) à P3 ; impact ; effort ; qui (client ou equipe) ;",
       "« etapes » : 2 à 8 étapes concrètes à cocher, dans l'ordre ; « critere_reussite » : comment vérifier que c'est fait (ce que le contrôle verra) ;",
       "« prompt_execution » : un prompt autonome, en français, prêt à coller dans Lovable ou Claude Code pour faire la correction dans le code du site : contexte, fichiers ou pages visés si connus, changements précis, contraintes (ne rien inventer ; laisser « [à fournir] » pour un prix, un texte ou un avis réel ; travailler sur une branche, pas sur main ; tester), et le critère de réussite. Si le chantier ne se fait pas dans le code (ex. fiche Google Business, annuaires), le prompt devient une checklist d'actions pour une personne.",
       "N'invente aucun fait sur l'entreprise : reprends seulement ce que disent les actions et les rapports.",
-      'Format exact : {"resume":"…","groupes":[{"titre":"…","pourquoi":"…","priorite":"P0","impact":"high","effort":"S","qui":"equipe","actions":["constat:…"],"etapes":["…"],"critere_reussite":"…","prompt_execution":"…"}]}',
+      'Format exact : {"resume":"…","groupes":[{"titre":"…","pourquoi":"…","priorite":"P0","impact":"high","effort":"S","qui":"equipe","actions":["A1","A4"],"etapes":["…"],"critere_reussite":"…","prompt_execution":"…"}]}',
     ].join("\n"),
     input: [
       `État actuel : ${JSON.stringify(e.etat ?? {})}`,
