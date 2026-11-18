@@ -386,9 +386,15 @@ async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
     });
     if (ok) recos++;
   }
+  // Échecs par moteur, avec un exemple de raison (les clés sont déjà masquées par le collecteur).
+  const echecsParMoteur: Record<string, { n: number; exemple: string }> = {};
+  for (const e of col.echecs) {
+    const x = (echecsParMoteur[e.moteur] ??= { n: 0, exemple: e.erreur.slice(0, 160) });
+    x.n++;
+  }
   const coutParMoteur: Record<string, number> = {};
   for (const r of col.reponses) coutParMoteur[r.moteur] = Math.round(((coutParMoteur[r.moteur] ?? 0) + r.coutUsd) * 100) / 100;
-  return { audit_externe_id: auditId, score: s.global, cout_reel_usd: coutReel, cout_par_moteur: coutParMoteur, questions: questions.length, reponses: col.reponses.length, vides: col.reponses.filter((r) => !r.texte?.trim()).length, echecs: col.echecs.length, recommandations: recos, arret_plafond: col.arretPlafond, preuves_erreur: preuvesErreur };
+  return { audit_externe_id: auditId, score: s.global, cout_reel_usd: coutReel, cout_par_moteur: coutParMoteur, echecs_par_moteur: echecsParMoteur, questions: questions.length, reponses: col.reponses.length, vides: col.reponses.filter((r) => !r.texte?.trim()).length, echecs: col.echecs.length, recommandations: recos, arret_plafond: col.arretPlafond, preuves_erreur: preuvesErreur };
 }
 
 // ---------------------------------------------------------------- CONSOLIDER_PLAN (gratuit : Mistral)
