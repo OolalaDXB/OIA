@@ -3,7 +3,7 @@ import { Section, Statut } from "@/components/oia/ui";
 import { BarreColoree } from "@/components/oia/graphiques";
 import { Button } from "@/components/ui/button";
 import { BoutonAnalyse, EtatVisibilityV3 } from "@/components/oia/visibility-score";
-import { menuVisibility } from "@/components/oia/visibility-ui";
+import { FiltreSelect } from "@/components/oia/filtre-select";
 import { useSelectionVisibility } from "@/lib/donnees/provider";
 import { useVisibilityV3 } from "@/lib/donnees/visibility-v3-provider";
 import {
@@ -84,7 +84,7 @@ export function VuePerformance() {
   const [strategie, setStrategie] = useState<"mobile" | "ordinateur">("mobile");
   const recente = analyseRecente(donnees.analyses, subject, "lighthouse", strategie);
   const analyse = analyseReussie(donnees.analyses, subject, "lighthouse", strategie);
-  return <EtatVisibilityV3><div className="mb-6 flex flex-wrap items-end justify-between gap-3"><label className="grid min-w-56 gap-1.5 text-xs text-tertiary">Appareil analysé<select className={menuVisibility} value={strategie} onChange={(e) => setStrategie(e.target.value as "mobile" | "ordinateur")}><option value="mobile">Mobile</option><option value="ordinateur">Ordinateur</option></select></label><BoutonAnalyse subject={subject} /></div>
+  return <EtatVisibilityV3><div className="mb-6 flex flex-wrap items-end justify-between gap-3"><label className="grid gap-1.5 text-xs text-tertiary">Appareil analysé<FiltreSelect value={strategie} onChange={(e) => setStrategie(e.target.value as "mobile" | "ordinateur")}><option value="mobile">Mobile</option><option value="ordinateur">Ordinateur</option></FiltreSelect></label><BoutonAnalyse subject={subject} /></div>
     <div className="grid gap-6"><Section titre={`Lighthouse ${strategie === "mobile" ? "mobile" : "ordinateur"}`} aside={<span className="text-xs text-tertiary">{analyse?.outil ?? "Outil non fourni"}</span>}>
       <p className="mb-5 text-sm text-muted-foreground">Un score faible indique le chantier à ouvrir, sans masquer les mesures absentes.</p><ErreurAnalyse analyse={recente} />{!analyse ? <p className="text-sm text-muted-foreground">Aucune analyse Lighthouse réussie pour cet appareil.</p> : <ScoresLighthouse analyse={analyse} />}{analyse?.url && <p className="mt-4 break-all text-xs text-tertiary">{analyse.url} · {analyse.recu_le}</p>}
     </Section><SignauxWeb analyse={analyse} /><Opportunites analyse={analyse} /><AuditLecture subject={subject} /></div>

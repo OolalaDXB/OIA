@@ -14,7 +14,7 @@ export function optionsVisibilityV3(userId: string) {
   });
 }
 
-const vide: DonneesVisibilityV3 = { scores: [], historique: [], analyses: [], constats: [], seo: [], planificateur: [], audits: [], auditLignes: [], estimationsAuditIa: [], auditsIa: [], depots: [], estimationsNotesContenu: [], notesContenu: [] };
+const vide: DonneesVisibilityV3 = { scores: [], historique: [], analyses: [], constats: [], seo: [], planificateur: [], audits: [], auditLignes: [], estimationsAuditIa: [], auditsIa: [], depots: [], estimationsNotesContenu: [], notesContenu: [], entites: [], planAction: [] };
 type Contexte = {
   connecte: boolean;
   donnees: DonneesVisibilityV3;

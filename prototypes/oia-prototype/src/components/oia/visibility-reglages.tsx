@@ -6,13 +6,14 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Section } from "@/components/oia/ui";
 import { VueMoteurs } from "@/components/oia/visibility-moteurs";
-import { LogoMarque } from "@/components/oia/visibility-identites";
+import { GestionEntitesVisibility } from "@/components/oia/visibility-entites";
 import { FaviconSource, LogoReseau } from "@/components/oia/identites";
 import { useReglagesVisibility, useVisibilityDonnees } from "@/lib/donnees/provider";
 import { cleNormalisee, contientNormalise, normaliserSite } from "@/lib/visibility-reglages";
 import { BudgetVisibility, BandeauMoteur } from "@/components/oia/visibility-pilotage";
 import { ReglagesDepotGithub } from "@/components/oia/visibility-depot";
-import { listeSousOngletsVisibility, menuVisibility, ongletVisibility } from "@/components/oia/visibility-ui";
+import { listeSousOngletsVisibility, ongletVisibility } from "@/components/oia/visibility-ui";
+import { FiltreSelect } from "@/components/oia/filtre-select";
 
 const classeLigne = "flex flex-wrap items-center justify-between gap-3 border-b border-border py-2.5 text-sm last:border-0";
 
@@ -67,7 +68,7 @@ function MarqueLocale() {
 }
 
 export function VueReglages({ reglageInitial = "marque" }: { reglageInitial?: "marque" | "budget" | "site" }) {
-  const { marque, concurrents, questions, familles, reel } = useVisibilityDonnees();
+  const { marque, questions, familles, reel } = useVisibilityDonnees();
   const { ajouts, modifier, pret, erreur } = useReglagesVisibility();
 
   return <Tabs defaultValue={reglageInitial}>
@@ -118,26 +119,12 @@ export function VueReglages({ reglageInitial = "marque" }: { reglageInitial?: "m
             if (marque.profils.some((x) => x.reseau === reseau && cleNormalisee(x.handle) === cleNormalisee(handle))) return "Ce profil est déjà présent.";
             modifier((actuel) => ({ ...actuel, profils: [...actuel.profils, { reseau, handle }] }));
             return undefined;
-          }}><div className="grid gap-4 sm:grid-cols-2"><Champ label="Réseau"><select name="reseau" className={menuVisibility}>{["Instagram", "TikTok", "Facebook", "YouTube", "Google"].map((reseau) => <option key={reseau}>{reseau}</option>)}</select></Champ><Champ label="Identifiant ou nom du profil"><Input name="handle" className="min-h-11" required maxLength={120} /></Champ></div></FormulaireLocal>
+          }}><div className="grid gap-4 sm:grid-cols-2"><Champ label="Réseau"><FiltreSelect name="reseau">{["Instagram", "TikTok", "Facebook", "YouTube", "Google"].map((reseau) => <option key={reseau}>{reseau}</option>)}</FiltreSelect></Champ><Champ label="Identifiant ou nom du profil"><Input name="handle" className="min-h-11" required maxLength={120} /></Champ></div></FormulaireLocal>
         </div>
       </Section>
     </TabsContent>
 
-    <TabsContent value="concurrents">
-      <Section titre="Concurrents">
-        {concurrents.map((concurrent) => {
-          const local = ajouts.concurrents.some((x) => x.nom === concurrent.nom);
-          return <div key={concurrent.nom} className={classeLigne}><span className="flex items-center gap-2.5"><LogoMarque nom={concurrent.nom} /><span>{concurrent.nom}{local && <span className="ml-2"><MarqueLocale /></span>}</span></span><span className="flex items-center gap-2 text-muted-foreground">{concurrent.categorie}{local && <Retirer label={concurrent.nom} onRetirer={() => modifier((actuel) => ({ ...actuel, concurrents: actuel.concurrents.filter((x) => x.nom !== concurrent.nom) }))} />}</span></div>;
-        })}
-        <div className="mt-6"><FormulaireLocal titre="Ajouter un concurrent" onAjouter={(donnees) => {
-          const nom = String(donnees.get("nom") ?? "").trim();
-          const categorie = String(donnees.get("categorie") ?? "").trim();
-          if (contientNormalise(concurrents.map((x) => x.nom), nom)) return "Ce concurrent est déjà présent.";
-          modifier((actuel) => ({ ...actuel, concurrents: [...actuel.concurrents, { nom, categorie }] }));
-          return undefined;
-        }}><div className="grid gap-4 sm:grid-cols-2"><Champ label="Nom du concurrent"><Input name="nom" className="min-h-11" required maxLength={120} /></Champ><Champ label="Catégorie"><Input name="categorie" className="min-h-11" placeholder="Atelier indépendant" required maxLength={120} /></Champ></div></FormulaireLocal></div>
-      </Section>
-    </TabsContent>
+    <TabsContent value="concurrents"><GestionEntitesVisibility /></TabsContent>
 
     <TabsContent value="questions">
       <div className="grid gap-6">
@@ -161,7 +148,7 @@ export function VueReglages({ reglageInitial = "marque" }: { reglageInitial?: "m
           if (contientNormalise(questions.map((x) => x.q), q)) return "Cette question est déjà présente.";
           modifier((actuel) => ({ ...actuel, questions: [...actuel.questions, { id: `q-local-${crypto.randomUUID()}`, q, famille, langue, marque: famille === "Votre marque" }] }));
           return undefined;
-        }}><Champ label="Question ou prompt"><Textarea name="question" className="min-h-24" required maxLength={500} placeholder="Quelle question vos clients posent-ils aux assistants ?" /></Champ><div className="grid gap-4 sm:grid-cols-2"><Champ label="Famille"><select name="famille" className={menuVisibility}>{familles.map((famille) => <option key={famille}>{famille}</option>)}</select></Champ><Champ label="Langue"><select name="langue" className={menuVisibility}>{[["fr", "Français"], ["en", "Anglais"], ["es", "Espagnol"], ["de", "Allemand"], ["it", "Italien"], ["nl", "Néerlandais"]].map(([code, label]) => <option key={code} value={code}>{label}</option>)}</select></Champ></div></FormulaireLocal>
+        }}><Champ label="Question ou prompt"><Textarea name="question" className="min-h-24" required maxLength={500} placeholder="Quelle question vos clients posent-ils aux assistants ?" /></Champ><div className="grid gap-4 sm:grid-cols-2"><Champ label="Famille"><FiltreSelect name="famille">{familles.map((famille) => <option key={famille}>{famille}</option>)}</FiltreSelect></Champ><Champ label="Langue"><FiltreSelect name="langue">{[["fr", "Français"], ["en", "Anglais"], ["es", "Espagnol"], ["de", "Allemand"], ["it", "Italien"], ["nl", "Néerlandais"]].map(([code, label]) => <option key={code} value={code}>{label}</option>)}</FiltreSelect></Champ></div></FormulaireLocal>
       </div>
     </TabsContent>
 

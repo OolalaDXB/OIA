@@ -5,7 +5,7 @@ const etiquettes: Record<string, string> = {
   owner: "Propriétaire", approver: "Approbateur", viewer: "Lecteur", editor: "Éditeur", membre: "Membre",
   pending: "À décider", accepted: "Acceptée", rejected: "Rejetée", propose: "Proposée", valide: "Validée",
   proposee: "Proposée", go_donne: "GO donné", en_cours: "En cours", terminee: "Terminée", annulee: "Annulée",
-  QUEUED: "En file", RUNNING: "En cours", DONE: "Terminée", FAILED: "Échec", ANALYSE: "Analyse", MESURE: "Mesure",
+  QUEUED: "En file", RUNNING: "En cours", DONE: "Terminée", FAILED: "Échec", SUCCESS: "Succès", WARNING: "Avertissement", ANALYSE: "Analyse", MESURE: "Mesure",
   non_fixe: "Non fixé", proche: "Proche du plafond", atteint: "Plafond atteint", actif: "Actif",
   baseline: "Mesure initiale", reconnaissance: "Reconnaissance", remesure: "Remesure",
   a_venir: "À venir", manquant: "Manquant", partiel: "Partiel", complet: "Complet",
@@ -26,7 +26,4 @@ export function libelleFenetreVisibility(valeur: string | null | undefined) {
 }
 
 export const listeSousOngletsVisibility = "mb-6 grid grid-cols-2 border-b border-border";
-
 export const ongletVisibility = "inline-flex min-h-11 min-w-0 items-center justify-center whitespace-nowrap rounded-none border-b-2 border-transparent px-3 py-2 text-center text-sm font-normal text-muted-foreground data-[state=active]:border-module-visibility data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none lg:whitespace-normal";
-
-export const menuVisibility = "min-h-11 w-full min-w-0 rounded-md border border-input bg-background px-3 text-sm text-foreground outline-none focus:border-ring";

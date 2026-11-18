@@ -3543,6 +3543,7 @@ export type Database = {
           mentions: number | null
           methode_intervalle: string | null
           moteur: string | null
+          nature: string | null
           part_de_voix: number | null
           questions: number | null
           reponses_jugees: number | null
@@ -3599,6 +3600,7 @@ export type Database = {
           demande_par: string | null
           erreur: string | null
           id: string | null
+          remplacee_par: string | null
           resultat: Json | null
           statut: string | null
           subject_id: string | null
@@ -3615,6 +3617,18 @@ export type Database = {
           depot: string | null
           fournisseur: string | null
           le: string | null
+          par: string | null
+          subject_id: string | null
+        }
+        Relationships: []
+      }
+      vis_entites_v3: {
+        Row: {
+          client_id: string | null
+          entite: string | null
+          le: string | null
+          nature: string | null
+          origine: string | null
           par: string | null
           subject_id: string | null
         }
@@ -3812,6 +3826,30 @@ export type Database = {
           valide_le: string | null
           valide_par: string | null
           window_id: string | null
+        }
+        Relationships: []
+      }
+      vis_plan_action_v3: {
+        Row: {
+          categorie: string | null
+          client_id: string | null
+          effort: string | null
+          etat: string | null
+          horizon: string | null
+          id: string | null
+          impact: string | null
+          le: string | null
+          nature: string | null
+          ordre: number | null
+          origine: Json | null
+          origine_ref: string | null
+          pourquoi: string | null
+          priorite: string | null
+          qui: string | null
+          quoi_faire: string | null
+          reference: string | null
+          subject_id: string | null
+          titre: string | null
         }
         Relationships: []
       }
@@ -4387,6 +4425,10 @@ export type Database = {
         Args: { p_motif: string; p_window: string }
         Returns: undefined
       }
+      vis_classer_entite: {
+        Args: { p_entite: string; p_nature: string; p_subject: string }
+        Returns: number
+      }
       vis_declarer_execution: {
         Args: {
           p_date: string
@@ -4406,6 +4448,10 @@ export type Database = {
           p_nom: string
           p_url: string
         }
+        Returns: string
+      }
+      vis_extraire_plan: {
+        Args: { p_audit_externe: string; p_cout_vu_usd: number }
         Returns: string
       }
       vis_fixer_plafond: {
@@ -4431,6 +4477,16 @@ export type Database = {
           p_resume: string
           p_score: number
           p_subject: string
+        }
+        Returns: string
+      }
+      vis_importer_rapport_externe: {
+        Args: {
+          p_outil: string
+          p_rapport_md: string
+          p_realise_le: string
+          p_subject: string
+          p_titre: string
         }
         Returns: string
       }
@@ -4469,10 +4525,15 @@ export type Database = {
         Args: { p_demande: string; p_resultat: Json }
         Returns: string
       }
+      vis_moteur_classer_entites: {
+        Args: { p_entites: Json; p_subject: string }
+        Returns: number
+      }
       vis_moteur_constat: {
         Args: { p_analyse: string; p_constat: Json; p_demande: string }
         Returns: string
       }
+      vis_moteur_contexte: { Args: { p_subject: string }; Returns: Json }
       vis_moteur_estimer: {
         Args: {
           p_compare_avec: string
@@ -4524,6 +4585,7 @@ export type Database = {
         }
         Returns: string
       }
+      vis_moteur_plan_debut: { Args: { p_demande: string }; Returns: Json }
       vis_moteur_prendre: { Args: { p_hote: string }; Returns: Json }
       vis_moteur_preuves: { Args: { p_preuves: Json }; Returns: number }
       vis_moteur_proposer: {

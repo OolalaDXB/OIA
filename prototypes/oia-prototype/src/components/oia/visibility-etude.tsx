@@ -8,7 +8,8 @@ import { Section, Statut } from "@/components/oia/ui";
 import { ChargementPilotage, ErreurGeste } from "./visibility-pilotage";
 import { useGesteVisibility, useVisibilityPilotage } from "@/lib/donnees/visibility-pilotage-provider";
 import { demainIso, dollars, objet, proprietesRapport, raisonGo, tableau, texte, type LignePilotage } from "@/lib/donnees/visibility-pilotage";
-import { libelleFenetreVisibility, libelleVisibility, listeSousOngletsVisibility, menuVisibility, ongletVisibility } from "@/components/oia/visibility-ui";
+import { libelleFenetreVisibility, libelleVisibility, listeSousOngletsVisibility, ongletVisibility } from "@/components/oia/visibility-ui";
+import { FiltreSelect } from "@/components/oia/filtre-select";
 import type { Json } from "@/integrations/supabase/types";
 import { ResumeRapportV3 } from "@/components/oia/visibility-score";
 type Proposition = LignePilotage<"vis_propositions_v2">;
@@ -56,11 +57,11 @@ function AjouterProposition({ subject, nature }: { subject: string; nature: "fai
     else contenu = { nom: String(f.get("principal") ?? ""), type: String(f.get("type") ?? "structure"), domaines: String(f.get("secondaire") ?? "").split(",").map((v) => v.trim()).filter(Boolean), citations: 0 };
     try { await geste.executer("vis_ajouter_proposition", { p_subject: subject, p_nature: nature, p_contenu: contenu }); setOuvert(false); } catch { /* erreur RPC affichée */ }
   }
-  return <form className="mt-4 grid gap-3 rounded-md border border-border p-4" onSubmit={soumettre}>
+  return <form className="mt-4 grid w-full min-w-0 gap-3 rounded-md border border-border p-4" onSubmit={soumettre}>
     <div className="grid gap-3 sm:grid-cols-2"><label className="grid gap-1.5 text-xs text-tertiary">{nature === "fait" ? "Énoncé" : nature === "question" ? "Question" : "Nom"}<Input name="principal" className="min-h-11" required /></label><label className="grid gap-1.5 text-xs text-tertiary">{nature === "fait" ? "Catégorie" : nature === "question" ? "Famille" : "Domaines, séparés par des virgules"}<Input name="secondaire" className="min-h-11" required={nature !== "concurrent"} /></label></div>
     {nature === "question" && <div className="grid gap-3 sm:grid-cols-2"><label className="grid gap-1.5 text-xs text-tertiary">Langue<Input name="langue" className="min-h-11" defaultValue="fr" required /></label><label className="grid gap-1.5 text-xs text-tertiary">Moteurs, séparés par des virgules<Input name="moteurs" className="min-h-11" defaultValue="chatgpt, claude" /></label><label className="flex min-h-11 items-center gap-2 text-sm"><input type="checkbox" name="marquee" className="size-4" />Question marquée</label></div>}
-    {nature === "concurrent" && <label className="grid gap-1.5 text-xs text-tertiary">Type<select className={menuVisibility} name="type"><option value="structure">Structure</option><option value="personne">Personne</option><option value="plateforme">Plateforme</option></select></label>}
-    <div className="flex gap-2"><Button type="submit" className="min-h-11" disabled={geste.enCours}>Ajouter la proposition</Button><Button type="button" variant="ghost" className="min-h-11" onClick={() => setOuvert(false)}>Annuler</Button></div><ErreurGeste erreur={locale ?? geste.erreur} />
+    {nature === "concurrent" && <label className="grid gap-1.5 text-xs text-tertiary">Type<FiltreSelect name="type"><option value="structure">Structure</option><option value="personne">Personne</option><option value="plateforme">Plateforme</option></FiltreSelect></label>}
+    <div className="flex flex-wrap gap-2"><Button type="submit" className="min-h-11" disabled={geste.enCours}>Ajouter la proposition</Button><Button type="button" variant="ghost" className="min-h-11" onClick={() => setOuvert(false)}>Annuler</Button></div><ErreurGeste erreur={locale ?? geste.erreur} />
   </form>;
 }
 
@@ -146,7 +147,7 @@ function LancerSite({ subject, client }: { subject: string; client: string }) {
     }
   }
   return <Section titre="Lancer une étude"><div className="grid gap-6 lg:grid-cols-2"><div>
-    {candidates.length === 0 ? <p className="text-sm text-muted-foreground">Aucune étape chiffrée n'attend un GO.</p> : <><label className="grid gap-1.5 text-xs text-tertiary">Étude à lancer<select className={menuVisibility} value={fenetre?.window_id ?? ""} onChange={(e) => { setWindowId(e.target.value); setConfirmation(false); }}>{candidates.map((f) => <option key={f.window_id} value={f.window_id ?? ""}>{f.libelle} · {libelleVisibility(f.nature)}</option>)}</select></label>
+    {candidates.length === 0 ? <p className="text-sm text-muted-foreground">Aucune étape chiffrée n'attend un GO.</p> : <><label className="grid gap-1.5 text-xs text-tertiary">Étude à lancer<FiltreSelect value={fenetre?.window_id ?? ""} onChange={(e) => { setWindowId(e.target.value); setConfirmation(false); }}>{candidates.map((f) => <option key={f.window_id} value={f.window_id ?? ""}>{f.libelle} · {libelleVisibility(f.nature)}</option>)}</FiltreSelect></label>
       <dl className="mt-5 grid gap-3 text-sm sm:grid-cols-2"><div><dt className="text-xs text-tertiary">Estimation</dt><dd className="num mt-1 text-3xl">{dollars(fenetre?.cout_estime_usd)}</dd></div><div><dt className="text-xs text-tertiary">Plafond restant du mois</dt><dd className="num mt-1 text-xl">{budget?.plafond_usd == null ? "Non fixé" : dollars(Math.max(0, budget.plafond_usd - (budget.reel_usd ?? 0) - (budget.engage_usd ?? 0)))}</dd></div></dl>
       <div className="mt-4 text-xs text-tertiary"><p>Détail par moteur</p>{Object.keys(parMoteur).length === 0 ? <p className="mt-1">Détail non fourni.</p> : <pre className="mt-2 overflow-auto rounded-md bg-muted p-3 text-xs whitespace-pre-wrap">{JSON.stringify(parMoteur, null, 2)}</pre>}</div>
     </>}</div>

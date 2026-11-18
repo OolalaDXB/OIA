@@ -25,6 +25,8 @@ vi.mock("@/lib/donnees/visibility-pilotage-provider", () => ({
   useGesteVisibility: () => ({ enCours: false, erreur: null, executer: vi.fn() }),
 }));
 
+vi.mock("@tanstack/react-router", () => ({ Link: ({ children }: { children: React.ReactNode }) => <a href="/visibility/plan">{children}</a> }));
+
 afterEach(cleanup);
 
 describe("résumé J0 avec une seule fenêtre", () => {
@@ -38,6 +40,7 @@ describe("résumé J0 avec une seule fenêtre", () => {
     expect(vue.getByText("0 %")).toBeInTheDocument();
     expect(vue.getByText("64 %")).toBeInTheDocument();
     expect(vue.getByText("FitDubai")).toBeInTheDocument();
+    expect(vue.getByRole("link", { name: "Les 3 actions prioritaires" })).toHaveAttribute("href", "/visibility/plan");
     expect(vue.getByText("Créer les réponses utiles")).toBeInTheDocument();
     expect(vue.getByRole("button", { name: "Lire le rapport" })).toBeInTheDocument();
     expect(vue.getByRole("button", { name: "Valider" })).toBeInTheDocument();

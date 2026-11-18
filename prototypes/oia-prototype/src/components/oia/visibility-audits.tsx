@@ -1,3 +1,4 @@
+import { BoutonRapportExterne, CarteExtrairePlan } from "@/components/oia/visibility-rapport-externe";
 import { useState, type FormEvent } from "react";
 import { Circle, CircleDashed, Download, Plus, Star, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -204,11 +205,12 @@ export function VueAuditsExternes() {
   return <EtatVisibilityV3>
     <div className="mb-6"><CarteAuditIaExpress subject={subject} /></div>
     <div className="mb-6"><ComparaisonAuditsExternes audits={audits} subject={subject} /></div>
+    {connecte && <BoutonRapportExterne subject={subject} />}
     <div className="mb-6 flex flex-wrap items-end justify-end gap-3">{autorise && <Button className="min-h-11" onClick={() => setImportOuvert((v) => !v)}><Plus aria-hidden="true" />Importer un audit externe</Button>}</div>
     {connecte && globalQuery.isPending && <p role="status" className="mb-6 text-xs text-tertiary">Vérification du rôle…</p>}
     {connecte && globalQuery.error && <div role="alert" className="mb-6"><p className="text-sm text-block">{globalQuery.error.message}</p><Button variant="outline" className="mt-2 min-h-11" onClick={() => void globalQuery.refetch()}>Réessayer</Button></div>}
     {connecte && !globalQuery.isPending && !globalQuery.error && !autorise && <p className="mb-6 text-xs text-tertiary">L'import est réservé aux propriétaires et approbateurs.</p>}
     {importOuvert && autorise && <FormulaireImport subject={subject} onFerme={() => setImportOuvert(false)} />}
-    {audits.length === 0 ? <Section titre="Audits externes"><p className="text-sm text-muted-foreground">Aucun audit externe pour ce site. Les audits importés resteront séparés du score OIA.</p></Section> : <div className="grid gap-10">{audits.map((audit) => <CarteAudit key={audit.id ?? `${audit.outil}-${audit.realise_le}`} audit={audit} />)}</div>}
+    {audits.length === 0 ? <Section titre="Audits externes"><p className="text-sm text-muted-foreground">Aucun audit externe pour ce site. Les audits importés resteront séparés du score OIA.</p></Section> : <div className="grid gap-10">{audits.map((audit) => <div key={audit.id ?? `${audit.outil}-${audit.realise_le}`}><CarteAudit audit={audit} />{audit.id && <CarteExtrairePlan audit={audit.id} />}</div>)}</div>}
   </EtatVisibilityV3>;
 }

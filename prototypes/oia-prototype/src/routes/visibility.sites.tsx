@@ -1,6 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { VisibilityShell, SitesSuivis, moduleHead } from "@/components/oia/visibility";
-import { PortefeuilleVisibility } from "@/components/oia/visibility-pilotage";
-import { useDonnees } from "@/lib/donnees-visibility";
-export const Route = createFileRoute("/visibility/sites")({ head: () => moduleHead("Sites, Visibility", "Portefeuille des sites et pilotage des études Visibility."), component: () => (<VisibilityShell page="Sites" active="sites"><SitesOuPortefeuille /></VisibilityShell>) });
-function SitesOuPortefeuille() { const { reel } = useDonnees(); return reel ? <PortefeuilleVisibility /> : <SitesSuivis />; }
+import { createFileRoute, redirect } from "@tanstack/react-router";
+/** Ancienne adresse du portefeuille : l'accueil Visibility liste désormais les sites. */
+export const Route = createFileRoute("/visibility/sites")({
+  beforeLoad: () => { throw redirect({ to: "/visibility", search: ((prev: { site?: string; reglage?: string }) => ({ ...prev, site: undefined })) as unknown as () => { reglage?: string }, hash: "ajouter-un-site" }); },
+});

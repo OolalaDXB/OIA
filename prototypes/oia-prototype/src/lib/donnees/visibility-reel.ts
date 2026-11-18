@@ -37,6 +37,10 @@ async function paginer<V extends keyof Vues>(vue: V, sujet?: string): Promise<Li
 
 export function lireSujetsVisibility() { return paginer("vis_sujets_v1"); }
 export function lireVueVisibility<V extends keyof Vues>(vue: V, sujet?: string) { return paginer(vue, sujet); }
+/** Contrat annoncé avant régénération des types : la session et la pagination restent celles des autres vues. */
+export function lireVueVisibilityBrute<T>(vue: string, sujet?: string): Promise<T[]> {
+  return paginer(vue as keyof Vues, sujet) as unknown as Promise<T[]>;
+}
 
 export type VuesSujet = { [K in Exclude<VueSujetVisibility, "vis_recommandations_v2" | "vis_jugements_v2" | "vis_jugements_moteurs_v2" | "vis_reponses_sources_v2" | "vis_couts_moteurs_v2">]: LigneVisibility<K>[] } & {
   vis_recommandations_v2?: LigneVisibility<"vis_recommandations_v2">[];
@@ -127,8 +131,45 @@ function agregerPresenceQuestions(lignes: LigneVisibility<"vis_questions_v1">[],
   }));
 }
 
+type PartVoixDirecte = mesure.PartVoixEntite & { marque: boolean };
+
+/** Les mentions des autres natures ne peuvent pas gonfler le dénominateur des concurrents directs. */
+export function calculerPartVoixDirecte(lignes: LigneVisibility<"vis_concurrents_v1">[]): PartVoixDirecte[] {
+  const retenues = lignes.filter((c) => c.est_marque === true || c.nature === "marque" || c.nature === "concurrent");
+  const aExclure = retenues.length !== lignes.length;
+  const total = retenues.reduce((somme, c) => somme + (c.mentions ?? 0), 0);
+  const aConcurrent = retenues.some((c) => c.nature === "concurrent" && c.est_marque !== true);
+  const mentionsCompletes = retenues.every((c) => typeof c.mentions === "number");
+  return retenues.map((c) => {
+    const marque = c.est_marque === true || c.nature === "marque";
+    const recalculable = aConcurrent && mentionsCompletes && total > 0;
+    const valeur = !aConcurrent ? null : aExclure
+      ? recalculable ? Math.round((c.mentions ?? 0) / total * 10000) / 100 : null
+      : c.denominateur_part ? pct(c.part_de_voix) : null;
+    return {
+      nom: c.entite || "Entité inconnue", marque, v: valeur,
+      min: !aExclure && c.denominateur_part ? pct(c.borne_basse) : null,
+      max: !aExclure && c.denominateur_part ? pct(c.borne_haute) : null,
+      ...(valeur === null || aExclure ? { raison: !aConcurrent ? "Aucun concurrent direct classé." : aExclure ? "Intervalle non fourni après exclusion des autres natures." : "Aucun dénominateur de part de voix directe." } : {}),
+    };
+  });
+}
+
+function partVoixMarque(lignes: LigneVisibility<"vis_concurrents_v1">[]): mesure.Valeur {
+  const marque = calculerPartVoixDirecte(lignes).find((c) => c.marque);
+  if (!marque) return nonMesurable("La part de voix de la marque n'est pas fournie.");
+  return { v: marque.v, min: marque.min ?? null, max: marque.max ?? null, ...(marque.raison ? { raison: marque.raison } : {}) };
+}
+
+export function fenetreMesureVisible(mesure: LigneVisibility<"vis_mesure_v1">): boolean {
+  return Boolean(mesure.window_id)
+    && mesure.statut_fenetre !== "aborted"
+    && !mesure.window_id!.includes("-audit-")
+    && ["baseline", "reconnaissance", "remesure"].includes(mesure.type_fenetre ?? "");
+}
+
 export function convertirVisibility(sujet: SujetVisibility, sujets: SujetVisibility[], vues: VuesSujet): DonneesModuleVisibility {
-  const mesuresReelles = [...vues.vis_mesure_v1].filter((m) => m.window_id).sort((a, b) => Number(a.window_id?.includes("hors-panel")) - Number(b.window_id?.includes("hors-panel")) || (b.debut ?? "").localeCompare(a.debut ?? ""));
+  const mesuresReelles = [...vues.vis_mesure_v1].filter(fenetreMesureVisible).sort((a, b) => Number(a.window_id?.includes("hors-panel")) - Number(b.window_id?.includes("hors-panel")) || (b.debut ?? "").localeCompare(a.debut ?? ""));
   const aDesMesures = mesuresReelles.length > 0;
   const mesures: LigneVisibility<"vis_mesure_v1">[] = aDesMesures ? mesuresReelles : [{ client_id: sujet.clientId, subject_id: sujet.id, window_id: "", type_fenetre: null, version_panel: null, statut_fenetre: null, debut: null, fin: null, jours_prevus: null, jours_mesures: null, jours_manquants: null, reponses: null, reponses_jugees: null, reponses_non_jugees: null, questions: null, moteurs: null, versions_modele: null, changement_modele: null, langues: null, collecteurs: null, cout_estime_usd: null, etat: "non_mesurable" }];
   const fenetres: mesure.Fenetre[] = mesuresReelles.map((m) => ({
@@ -139,8 +180,9 @@ export function convertirVisibility(sujet: SujetVisibility, sujets: SujetVisibil
   const derniere = fenetres[0] ?? { id: "", label: "Aucune fenêtre", type: "", enCours: false, jour: 0, joursPrevus: 5 };
   const mesureDerniere = mesures[0]!;
   const moteurIds = [...new Set(mesures.flatMap((m) => m.moteurs ?? []))];
+  const reponsesVisibles = vues.vis_reponses_v1.filter((r) => idsFenetres.includes(r.window_id ?? ""));
   const assistants: mesure.AssistantVisibility[] = moteurIds.map((id) => {
-    const reponses = vues.vis_reponses_v1.filter((r) => r.moteur === id);
+    const reponses = reponsesVisibles.filter((r) => r.moteur === id);
     const versionBrute = mesureDerniere.versions_modele?.find((v) => v.startsWith(`${id}:`));
     const recuLe = reponses.map((r) => r.recu_le).filter((v): v is string => Boolean(v)).sort().at(-1) ?? null;
     return { nom: nomMoteur(id), modele: versionBrute?.split(":").slice(1).join(":") || id, version: versionBrute?.split(":").slice(1).join(":") || "Version non fournie", recherche: reponses.length ? reponses.some((r) => r.recherche_web) : null, derniere: date(recuLe) };
@@ -166,9 +208,11 @@ export function convertirVisibility(sujet: SujetVisibility, sujets: SujetVisibil
   for (const fenetre of fenetres) {
     const id = fenetre.id;
     const jugement = ligneJugement(vues, id);
+    const concurrentsFenetre = vues.vis_concurrents_v1.filter((c) => c.window_id === id);
+    const partVoixGlobale = calculerPartVoixDirecte(concurrentsFenetre.filter((c) => (c.moteur ?? "tous") === "tous"));
     indicateurs[id] = {
       presence: valeurApercu(ligneApercu(vues, id, "presence")),
-      partVoix: valeurApercu(ligneApercu(vues, id, "part_de_voix")),
+      partVoix: partVoixMarque(concurrentsFenetre.filter((c) => (c.moteur ?? "tous") === "tous")),
       exactitude: nonMesurable("Le contrôle des réponses par les faits validés n'est pas en base."),
       position: jugement && jugement.etat === "mesure" && nombre(jugement.position_moyenne) !== null ? { v: jugement.position_moyenne, min: null, max: null, raison: `${jugement.source || "extrait (Jev 1.13)"} · intervalle non fourni` } : nonMesurable(jugement?.raison || "Aucune position mesurée par Jev."),
       sentiment: sentimentJugement(jugement),
@@ -179,17 +223,11 @@ export function convertirVisibility(sujet: SujetVisibility, sujets: SujetVisibil
     presenceQuestionsParFenetre[id] = { Tous: agregerPresenceQuestions(lignesQuestions, questionIds) };
     for (const nom of nomsAssistants) presenceQuestionsParFenetre[id][nom] = agregerPresenceQuestions(lignesQuestions.filter((q) => nomMoteur(q.moteur) === nom), questionIds);
 
-    const concurrentsFenetre = vues.vis_concurrents_v1.filter((c) => c.window_id === id);
-    const global = concurrentsFenetre.filter((c) => (c.moteur ?? "tous") === "tous").map((c): mesure.PartVoixEntite => ({
-      nom: c.entite || "Entité inconnue", v: c.denominateur_part ? pct(c.part_de_voix) : null,
-      min: c.denominateur_part ? pct(c.borne_basse) : null, max: c.denominateur_part ? pct(c.borne_haute) : null,
-      ...(!c.denominateur_part ? { raison: "Aucun dénominateur de part de voix." } : {}),
-    }));
     const parAssistant = Object.fromEntries(nomsAssistants.map((nom) => {
-      const valeur = valeurApercu(ligneApercu(vues, id, "part_de_voix", clesMoteurs[nom] ?? nom));
+      const valeur = partVoixMarque(concurrentsFenetre.filter((c) => (c.moteur ?? "tous") === (clesMoteurs[nom] ?? nom)));
       return [nom, valeur.v];
     }));
-    partVoixParFenetre[id] = { global, parAssistant, parQuestion: Object.fromEntries(questionIds.map((q) => [q, null])) };
+    partVoixParFenetre[id] = { global: partVoixGlobale, parAssistant, parQuestion: Object.fromEntries(questionIds.map((q) => [q, null])) };
 
     const citationsFenetre = vues.vis_citations_v1.filter((c) => c.window_id === id);
     citationsParFenetre[id] = { Tous: agregerCitations(citationsFenetre) };
@@ -204,18 +242,19 @@ export function convertirVisibility(sujet: SujetVisibility, sujets: SujetVisibil
   }
 
   const entites = new Map<string, boolean>();
-  for (const c of vues.vis_concurrents_v1) if (c.entite) entites.set(c.entite, c.est_marque ?? false);
+  const lignesEntitesVisibles = vues.vis_concurrents_v1.filter((c) => idsFenetres.includes(c.window_id ?? "") && (c.est_marque === true || c.nature === "marque" || c.nature === "concurrent"));
+  for (const c of lignesEntitesVisibles) if (c.entite) entites.set(c.entite, c.est_marque === true || c.nature === "marque");
   const fenetresChrono = [...fenetres].reverse();
   const serie: mesure.SerieVisibility = {
     fenetres: fenetresChrono.map((f) => f.label.replace("du ", "").replace("au ", "–")),
     lignes: [...entites.entries()].map(([nom, marque]) => ({ nom, marque, v: fenetresChrono.map((f) => {
-      const ligne = vues.vis_concurrents_v1.find((c) => c.window_id === f.id && c.entite === nom && (c.moteur ?? "tous") === "tous");
+      const ligne = lignesEntitesVisibles.find((c) => c.window_id === f.id && c.entite === nom && (c.moteur ?? "tous") === "tous");
       return ligne?.reponses_jugees ? pct(ligne.taux_apparition) : null;
     }) })),
   };
   const concurrents = [...entites.entries()].filter(([, estMarque]) => !estMarque).map(([nom]) => ({ nom, categorie: "Concurrent cité" }));
   const marqueNom = [...entites.entries()].find(([, estMarque]) => estMarque)?.[0] ?? sujet.nom;
-  const reponses: mesure.ReponseVisibility[] = [...vues.vis_reponses_v1].sort((a, b) => (b.recu_le ?? "").localeCompare(a.recu_le ?? "")).map((r) => {
+  const reponses: mesure.ReponseVisibility[] = [...reponsesVisibles].sort((a, b) => (b.recu_le ?? "").localeCompare(a.recu_le ?? "")).map((r) => {
     const jugement = (vues.vis_jugements_v2 ?? []).find((j) => j.reponse_id === r.id);
     const detail = (vues.vis_reponses_sources_v2 ?? []).find((s) => s.reponse_id === r.id);
     const citations = Array.isArray(detail?.citations) ? detail.citations.map((c) => c && typeof c === "object" && !Array.isArray(c) ? (c as Record<string, unknown>)["url"] : null).filter((url): url is string => typeof url === "string") : null;
@@ -236,7 +275,7 @@ export function convertirVisibility(sujet: SujetVisibility, sujets: SujetVisibil
 
   const referenceMois = jour(mesureDerniere.debut) ?? new Date();
   const cleMois = referenceMois.toISOString().slice(0, 7);
-  const reponsesMois = vues.vis_reponses_v1.filter((r) => r.recu_le?.startsWith(cleMois));
+  const reponsesMois = reponsesVisibles.filter((r) => r.recu_le?.startsWith(cleMois));
   const coutsMoteurs = (vues.vis_couts_moteurs_v2 ?? []).filter((c) => c.window_id === derniere.id);
   const moteurs: mesure.MoteurVisibility[] = assistants.map((a) => {
     const rs = reponsesMois.filter((r) => nomMoteur(r.moteur) === a.nom);
@@ -353,7 +392,8 @@ export function useVisibilityReel() {
       if (sujetId !== siteUrl) setSujetId(siteUrl);
       return;
     }
-    if (!sujetId || !sujets.some((s) => s.id === sujetId)) choisirSujet(sujets[0]!.id);
+    // Sans ?site=, le premier site sert de repli interne sans réécrire l'adresse : /visibility reste l'accueil des sites.
+    if (!sujetId || !sujets.some((s) => s.id === sujetId)) setSujetId(sujets[0]!.id);
   }, [sujetsQuery.data, siteUrl, sujetId]);
   const sujet = sujets.find((s) => s.id === sujetId) ?? null;
   const donneesQuery = useQuery({ ...optionsDonneesVisibility(userId, sujet ?? { id: "", clientId: "", nom: "", role: "", statut: "", domaines: [] }, sujets), enabled: Boolean(userId && sujet) });

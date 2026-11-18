@@ -14,7 +14,11 @@ const vues: VuesSujet = {
   vis_reponses_v1: [ligne<LigneVisibility<"vis_reponses_v1">>({ id: "reponse-1", client_id: "coach-gari", subject_id: "coach-gari", window_id: "coach-gari-j0", question_id: "en-01", version_question: 2, langue: "en", moteur: "chatgpt", version_modele: "gpt-reel", fournisseur: "openai-api", collecteur: "elmo", recu_le: "2026-11-12T10:00:00Z", jour: "2026-11-12", texte: "Réponse réelle", empreinte: "preuve-reelle", statut_jugement: "jugee", marque_citee: true, concurrents: [], recherche_web: true, nb_citations: 2, cout_usd: 0.25 })],
   vis_citations_v1: [ligne<LigneVisibility<"vis_citations_v1">>({ client_id: "coach-gari", subject_id: "coach-gari", window_id: "coach-gari-j0", moteur: "chatgpt", url: "https://coachgari28.com/", domaine: "coachgari28.com", categorie: "marque", citations: 10, reponses: 5, questions: 2, premier_jour: "2026-11-07", dernier_jour: "2026-11-12" })],
   vis_reseaux_sociaux_v1: [ligne<LigneVisibility<"vis_reseaux_sociaux_v1">>({ client_id: "coach-gari", subject_id: "coach-gari", window_id: "coach-gari-j0", plateforme: "linkedin", url: "https://linkedin.com/in/profil", citations: 8, denominateur: 100, part: 0.08, questions: 2, moteurs: ["chatgpt"] })],
-  vis_concurrents_v1: [ligne<LigneVisibility<"vis_concurrents_v1">>({ client_id: "coach-gari", subject_id: "coach-gari", window_id: "coach-gari-j0", moteur: "tous", entite: "coach-gari", est_marque: true, mentions: 30, denominateur_part: 69, part_de_voix: 0.4348, reponses_jugees: 236, taux_apparition: 0.1271, methode_intervalle: "wilson_95", borne_basse: 0.3636, borne_haute: 0.4667, questions: 2 })],
+  vis_concurrents_v1: [
+    ligne<LigneVisibility<"vis_concurrents_v1">>({ client_id: "coach-gari", subject_id: "coach-gari", window_id: "coach-gari-j0", moteur: "tous", entite: "coach-gari", nature: "marque", est_marque: true, mentions: 30, denominateur_part: 169, part_de_voix: 0.1775, reponses_jugees: 236, taux_apparition: 0.1271, methode_intervalle: "wilson_95", borne_basse: 0.3636, borne_haute: 0.4667, questions: 2 }),
+    ligne<LigneVisibility<"vis_concurrents_v1">>({ client_id: "coach-gari", subject_id: "coach-gari", window_id: "coach-gari-j0", moteur: "tous", entite: "Urban Padel", nature: "concurrent", est_marque: false, mentions: 39, denominateur_part: 169, part_de_voix: 0.2308, reponses_jugees: 236, taux_apparition: 0.1653, questions: 2 }),
+    ligne<LigneVisibility<"vis_concurrents_v1">>({ client_id: "coach-gari", subject_id: "coach-gari", window_id: "coach-gari-j0", moteur: "tous", entite: "Playtomic", nature: "plateforme", est_marque: false, mentions: 100, denominateur_part: 169, part_de_voix: 0.5917, reponses_jugees: 236, taux_apparition: 0.4237, questions: 2 }),
+  ],
   vis_questions_v1: [ligne<LigneVisibility<"vis_questions_v1">>({ client_id: "coach-gari", subject_id: "coach-gari", window_id: "coach-gari-j0", question_id: "en-01", version_question: 2, langue: "en", texte: "Best padel coach in Dubai", marquee: false, etiquettes: ["unbranded", "AE"], moteur: "chatgpt", jour: "2026-11-12", reponses: 2, reponses_jugees: 2, avec_marque: 1, etat: "mesure" })],
   vis_recommandations_v1: [ligne<LigneVisibility<"vis_recommandations_v1">>({ id: "rec-1", client_id: "coach-gari", subject_id: "coach-gari", site_id: "coach-gari", window_id: null, type: "TECH_FIX", titre: "Prix lisibles", enonce: "Énoncé réel", impact: "medium", effort: "S", risque: "low", confiance: "medium", cree_par: "moteur", cree_le: "2026-11-07T10:00:00Z", priorite: 2, etat: "pending", decide_par: null, decide_le: null, motif: null, derniere_execution: null, reference_execution: null, execute_le: null, preuves: [] })],
   vis_rapports_v1: [],
@@ -29,6 +33,8 @@ describe("adaptateur Visibility réel", () => {
     expect(d.fenetres[0]!).toMatchObject({ id: "coach-gari-j0", label: "du 7 au 12 novembre 2026", enCours: false });
     expect(d.indicateurs["coach-gari-j0"]!.presence).toMatchObject({ v: 12.71, min: 9.05, max: 17.57 });
     expect(d.indicateurs["coach-gari-j0"]!.partVoix.v).toBe(43.48);
+    expect(d.partVoix.global.map((c) => c.nom)).not.toContain("Playtomic");
+    expect(d.partVoix.global.find((c) => c.nom === "Urban Padel")?.v).toBe(56.52);
     expect(d.etatCollecte.reponses).toBe(250);
     expect(d.reponses[0]!.texte).toBe("Réponse réelle");
     expect(JSON.stringify(d)).not.toContain("Studio Ardoise");
@@ -76,6 +82,16 @@ describe("adaptateur Visibility réel", () => {
     const d = convertirVisibility(sujet, [sujet], { ...vues, vis_mesure_v1: [horsPanel, mesure] });
     expect(d.fenetres[0]!.id).toBe("coach-gari-j0");
     expect(d.fenetres.map((f) => f.id)).toContain("coach-gari-j0-hors-panel");
+  });
+
+  it("exclut les fenêtres abandonnées, d'audit et les types hors mesure", () => {
+    const abandonnee = { ...mesure, window_id: "coach-gari-j1", statut_fenetre: "aborted" };
+    const audit = { ...mesure, window_id: "coach-gari-audit-2026-11-16", statut_fenetre: "done" };
+    const autre = { ...mesure, window_id: "coach-gari-test", type_fenetre: "essai" };
+    const d = convertirVisibility(sujet, [sujet], { ...vues, vis_mesure_v1: [mesure, abandonnee, audit, autre] });
+    expect(d.fenetres.map((f) => f.id)).toEqual(["coach-gari-j0"]);
+    expect(d.serie.fenetres).toHaveLength(1);
+    expect(d.reponses.every((r) => r.fenetre === "coach-gari-j0")).toBe(true);
   });
 
   it("utilise les vues v1 et les compléments v2 sans revenir aux recommandations v1", () => {

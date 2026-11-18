@@ -3,7 +3,7 @@ import type { Fenetre, Valeur } from "@/lib/donnees/visibility";
 import { useVisibilityDonnees } from "@/lib/donnees/provider";
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 import { couleursGraphique } from "@/components/oia/graphiques";
-import { menuVisibility } from "@/components/oia/visibility-ui";
+import { FiltreSelect } from "@/components/oia/filtre-select";
 
 type Filtres = { assistant: string; famille: string; fenetre: string; set: (k: "assistant" | "famille" | "fenetre", v: string) => void; fenetreActive: Fenetre };
 const Ctx = createContext<Filtres | null>(null);
@@ -22,10 +22,10 @@ export function useFiltres() {
 export function FiltresVisibility() {
   const { assistants, familles, fenetres } = useVisibilityDonnees();
   const f = useFiltres();
-  return <div role="group" aria-label="Filtres" className="mb-6 grid grid-cols-1 gap-3 text-sm sm:grid-cols-2 xl:grid-cols-3">
-    <label className="flex min-w-0 flex-col gap-1 text-xs text-tertiary">Assistant<select className={`${menuVisibility}`} value={f.assistant} onChange={(e) => f.set("assistant", e.target.value)}><option>Tous</option>{assistants.map((a) => <option key={a.nom}>{a.nom}</option>)}</select></label>
-    <label className="flex min-w-0 flex-col gap-1 text-xs text-tertiary">Famille de questions<select className={`${menuVisibility}`} value={f.famille} onChange={(e) => f.set("famille", e.target.value)}><option>Toutes</option>{familles.map((a) => <option key={a}>{a}</option>)}</select></label>
-    <label className="flex min-w-0 flex-col gap-1 text-xs text-tertiary">Fenêtre de mesure<select className={`${menuVisibility}`} value={f.fenetreActive?.id ?? ""} onChange={(e) => f.set("fenetre", e.target.value)}>{fenetres.map((w) => <option key={w.id} value={w.id}>{w.label}{w.enCours ? " (en cours)" : ""}</option>)}</select></label>
+  return <div role="group" aria-label="Filtres" className="mb-6 flex flex-wrap items-end justify-start gap-3 text-sm">
+    <label className="flex min-w-0 flex-col gap-1 text-xs text-tertiary">Assistant<FiltreSelect value={f.assistant} onChange={(e) => f.set("assistant", e.target.value)}><option>Tous</option>{assistants.map((a) => <option key={a.nom}>{a.nom}</option>)}</FiltreSelect></label>
+    <label className="flex min-w-0 flex-col gap-1 text-xs text-tertiary">Famille de questions<FiltreSelect value={f.famille} onChange={(e) => f.set("famille", e.target.value)}><option>Toutes</option>{familles.map((a) => <option key={a}>{a}</option>)}</FiltreSelect></label>
+    <label className="flex min-w-0 flex-col gap-1 text-xs text-tertiary">Fenêtre de mesure<FiltreSelect value={f.fenetreActive?.id ?? ""} onChange={(e) => f.set("fenetre", e.target.value)}>{fenetres.map((w) => <option key={w.id} value={w.id}>{w.label}{w.enCours ? " (en cours)" : ""}</option>)}</FiltreSelect></label>
   </div>;
 }
 

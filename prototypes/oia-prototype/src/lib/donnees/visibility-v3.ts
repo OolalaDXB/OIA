@@ -2,6 +2,7 @@ import type { Json } from "@/integrations/supabase/types";
 import type { ReseauVisibility } from "@/data/visibility";
 import { lireVueVisibility, type LigneVisibility } from "./visibility-reel";
 import { objet, tableau, texte } from "./visibility-pilotage";
+import { planDemo, type PlanActionV3 } from "./visibility-plan";
 
 export type ScoreV3 = LigneVisibility<"vis_score_v3">;
 export type HistoriqueScoreV3 = LigneVisibility<"vis_score_historique_v3">;
@@ -17,11 +18,13 @@ export type AuditIaV3 = LigneVisibility<"vis_audits_ia_v3">;
 export type DepotV3 = LigneVisibility<"vis_depots_v3">;
 export type EstimationNoteContenuV3 = LigneVisibility<"vis_note_contenu_estimation_v3">;
 export type NoteContenuV3 = LigneVisibility<"vis_notes_contenu_v3">;
+export type EntiteV3 = LigneVisibility<"vis_entites_v3">;
 
 export const VUES_VISIBILITY_V3 = ["vis_score_v3", "vis_score_historique_v3", "vis_analyses_v3", "vis_constats_v3"] as const;
 export const VUES_AUDITS_VISIBILITY = ["vis_audits_externes_v3", "vis_audit_externe_lignes_v3"] as const;
 export const VUES_AUDIT_IA_VISIBILITY = ["vis_audit_ia_estimation_v3", "vis_audits_ia_v3"] as const;
 export const VUES_CONTENU_VISIBILITY = ["vis_depots_v3", "vis_note_contenu_estimation_v3", "vis_notes_contenu_v3"] as const;
+export const VUES_PLAN_VISIBILITY = ["vis_plan_action_v3"] as const;
 export const VUES_SEO_VISIBILITY = ["vis_seo_command_v1", "vis_planificateur_v1"] as const;
 
 export type DonneesVisibilityV3 = {
@@ -38,10 +41,12 @@ export type DonneesVisibilityV3 = {
   depots: DepotV3[];
   estimationsNotesContenu: EstimationNoteContenuV3[];
   notesContenu: NoteContenuV3[];
+  entites: EntiteV3[];
+  planAction: PlanActionV3[];
 };
 
 export async function lireVisibilityV3(): Promise<DonneesVisibilityV3> {
-  const [scores, historique, analyses, constats, seo, planificateur, audits, auditLignes, estimationsAuditIa, auditsIa, depots, estimationsNotesContenu, notesContenu] = await Promise.all([
+  const [scores, historique, analyses, constats, seo, planificateur, audits, auditLignes, estimationsAuditIa, auditsIa, depots, estimationsNotesContenu, notesContenu, entites, planAction] = await Promise.all([
     lireVueVisibility("vis_score_v3"),
     lireVueVisibility("vis_score_historique_v3"),
     lireVueVisibility("vis_analyses_v3"),
@@ -55,8 +60,10 @@ export async function lireVisibilityV3(): Promise<DonneesVisibilityV3> {
     lireVueVisibility("vis_depots_v3"),
     lireVueVisibility("vis_note_contenu_estimation_v3"),
     lireVueVisibility("vis_notes_contenu_v3"),
+    lireVueVisibility("vis_entites_v3"),
+    lireVueVisibility("vis_plan_action_v3"),
   ]);
-  return { scores, historique, analyses, constats, seo, planificateur, audits, auditLignes, estimationsAuditIa, auditsIa, depots, estimationsNotesContenu, notesContenu };
+  return { scores, historique, analyses, constats, seo, planificateur, audits, auditLignes, estimationsAuditIa, auditsIa, depots, estimationsNotesContenu, notesContenu, entites, planAction };
 }
 
 export const COMPOSANTES_IA = [
@@ -289,7 +296,7 @@ export const donneesDemoVisibilityV3: DonneesVisibilityV3 = {
     ligne<AnalyseV3>({ id: "crawl", subject_id: "studio-ardoise", nature: "crawl", strategie: null, statut: "fait", derniere: true, recu_le: "2026-11-16T10:02:00Z", outil: "Crawlie", url: "https://studio-ardoise.fr", scores: { sante: 0.82, geo: 0.74 }, metriques: { pages: 50, indexables: 47 }, resultat: { robots: "Présent", donnees_structurees: "LocalBusiness détecté", prix_sans_js: "3 pages sans prix lisible", regles: [] } }),
   ],
   constats: [
-    ligne<ConstatV3>({ id: "c1", cle: "crawl:noindex", subject_id: "studio-ardoise", source: "crawl", categorie: "seo", gravite: "critique", ordre: 1, titre: "Une page importante est en noindex", explication: "Google ne peut pas intégrer cette page à ses résultats.", correction: "Retirez la directive noindex de la page des stages, puis demandez une nouvelle indexation.", impact: "Page à nouveau éligible à l'indexation", effort: "XS", qui: "client", valeur: "1 page", preuve: { documentation: "https://developers.google.com/search/docs/crawling-indexing/block-indexed" }, etat: "ouvert", premiere_fois: "2026-11-16T10:02:00Z", derniere_fois: "2026-11-16T10:02:00Z" }),
+    ligne<ConstatV3>({ id: "c1", cle: "indexation:noindex", subject_id: "studio-ardoise", source: "indexation", categorie: "seo", gravite: "critique", ordre: 1, titre: "Une page importante est en noindex", explication: "Google ne peut pas intégrer cette page à ses résultats.", correction: "Retirez la directive noindex de la page des stages, puis demandez une nouvelle indexation.", impact: "Page à nouveau éligible à l'indexation", effort: "XS", qui: "client", valeur: "1 page", preuve: { documentation: "https://developers.google.com/search/docs/crawling-indexing/block-indexed" }, etat: "ouvert", premiere_fois: "2026-11-16T10:02:00Z", derniere_fois: "2026-11-16T10:02:00Z" }),
     ligne<ConstatV3>({ id: "c2", cle: "lighthouse:images:mobile", subject_id: "studio-ardoise", source: "lighthouse", categorie: "performance", gravite: "important", ordre: 2, titre: "Les images ralentissent le premier affichage mobile", explication: "Le contenu principal attend des images qui ne sont pas encore visibles.", correction: "Différez leur chargement et réservez leurs dimensions.", impact: "0,45 s", effort: "S", qui: "equipe", valeur: "2,3 s", preuve: { documentation: "https://web.dev/articles/offscreen-images" }, etat: "ouvert", premiere_fois: "2026-11-16T10:00:00Z", derniere_fois: "2026-11-16T10:00:00Z" }),
     ligne<ConstatV3>({ id: "c3", cle: "crawl:prix", subject_id: "studio-ardoise", source: "crawl", categorie: "contenu", gravite: "mineur", ordre: 3, titre: "Les prix sont absents sur trois pages", explication: "Les visiteurs et les assistants ne peuvent pas comparer les formules.", correction: "Affichez les prix dans le HTML, sans attendre JavaScript.", impact: null, effort: "M", qui: "client", valeur: "3 pages", preuve: {}, etat: "ouvert", premiere_fois: "2026-11-16T10:02:00Z", derniere_fois: "2026-11-16T10:02:00Z" }),
     ligne<ConstatV3>({ id: "c4", cle: "lighthouse:cls", subject_id: "studio-ardoise", source: "lighthouse", categorie: "performance", gravite: "mineur", ordre: 3, titre: "Le bandeau déplaçait le contenu", explication: "Ce déplacement a disparu à la dernière analyse.", correction: "Conservez les dimensions réservées du bandeau.", impact: null, effort: "S", qui: "equipe", valeur: "0", preuve: {}, etat: "resolu", premiere_fois: "2026-11-09T10:00:00Z", derniere_fois: "2026-11-09T10:00:00Z" }),
@@ -326,4 +333,11 @@ export const donneesDemoVisibilityV3: DonneesVisibilityV3 = {
     synthese: "La structure technique est lisible. Le parcours et la promesse commerciale demandent une revue ciblée.",
     depot_lu: { depot: "oolala/studio-ardoise", sha: "a1b2c3d4e5f6", branche: "main", fichiers: 18, sensibles: 0 },
   })],
-};
+  entites: [
+    ligne<EntiteV3>({ subject_id: "studio-ardoise", entite: "Atelier Terre de Rance", nature: "concurrent", origine: "humain" }),
+    ligne<EntiteV3>({ subject_id: "studio-ardoise", entite: "Les Mains d'Argile", nature: "concurrent", origine: "moteur" }),
+    ligne<EntiteV3>({ subject_id: "studio-ardoise", entite: "Céramique du Ponant", nature: "concurrent", origine: "moteur" }),
+    ligne<EntiteV3>({ subject_id: "studio-ardoise", entite: "Tour et Émail", nature: "application", origine: "moteur" }),
+  ],
+  planAction: planDemo,
+};;

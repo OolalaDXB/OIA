@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import {
-  acquitterAlerte, ajouterProposition, annulerFenetre, declarerExecution, demanderSite,
+  acquitterAlerte, ajouterProposition, annulerFenetre, classerEntite, declarerExecution, demanderSite,
   demainIso, dollars, fixerPlafond, gesteVisibility, goFenetre, goReconnaissance,
   modifierProposition, proprietesRapport, raisonGo, relancerDemande, validerConcurrents,
   validerFaits, validerPanel, validerRapport, type ClientRpc, type LignePilotage,
@@ -29,6 +29,7 @@ describe("gestes Visibility v2", () => {
       [(c) => fixerPlafond({ p_client: "client", p_plafond_usd: 30 }, c), "vis_fixer_plafond", { p_client: "client", p_plafond_usd: 30 }],
       [(c) => relancerDemande({ p_demande: "d" }, c), "vis_relancer_demande", { p_demande: "d" }],
       [(c) => acquitterAlerte({ p_alerte: "a" }, c), "vis_acquitter_alerte", { p_alerte: "a" }],
+      [(c) => classerEntite({ p_subject: "coach-gari", p_entite: "Playtomic", p_nature: "plateforme" }, c), "vis_classer_entite", { p_subject: "coach-gari", p_entite: "Playtomic", p_nature: "plateforme" }],
     ];
     for (const [appel, nom, params] of cas) {
       const c = client();

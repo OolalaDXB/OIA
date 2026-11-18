@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { useSearch } from "@tanstack/react-router";
+import { Link, useSearch } from "@tanstack/react-router";
+import { VuePlanAction } from "@/components/oia/visibility-plan";
+import { useVisibilityV3 } from "@/lib/donnees/visibility-v3-provider";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Section, Statut } from "@/components/oia/ui";
@@ -25,6 +27,8 @@ import { VueSeoV3 } from "@/components/oia/visibility-seo";
 import { VueAuditsExternes } from "@/components/oia/visibility-audits";
 import { CarteAuditIaExpress } from "@/components/oia/visibility-audit-ia";
 import { VueQualiteContenu } from "@/components/oia/visibility-contenu";
+import { VueIndexation } from "@/components/oia/visibility-hygiene";
+import { GestionEntitesVisibility } from "@/components/oia/visibility-entites";
 import { RapportSite } from "@/components/oia/visibility-etude";
 import { libelleVisibility } from "@/components/oia/visibility-ui";
 import { sourceAuditExterne } from "@/lib/donnees/visibility-audits";
@@ -108,13 +112,23 @@ export function Paysage() {
 
 export function VueEnsemble() {
   const donnees = useVisibilityDonnees();
-  const { assistants, presenceAssistant } = donnees;
   const selection = useSelectionVisibility();
   const subject = selection.sujetId ?? donnees.sujetActif ?? "studio-ardoise";
-  const { fenetreActive: fen } = useFiltres();
-  return <><ScoreSitesVisibility /><div className="mb-6"><CarteAuditIaExpress subject={subject} compact /></div><FiltresVisibility /><Indicateurs /><div className="mt-6 grid gap-6"><Paysage />
-    <Section titre="Détail par assistant"><p className="mb-4 text-sm text-muted-foreground">Comparez les assistants pour savoir où une correction de source aura le plus d'effet.</p>{assistants.map((a) => <BarreValeur key={a.nom} label={a.nom} sous={a.version} val={presenceAssistant[fen.id]?.[a.nom] ?? absent()} />)}</Section></div>
-    <LigneEtat /><NoteMesure /></>;
+  return <><ScoreSitesVisibility /><DernieresEtudes subject={subject} /></>;
+}
+
+function DernieresEtudes({ subject }: { subject: string }) {
+  const { donnees } = useVisibilityV3();
+  const dateCourte = (v: string | null | undefined) => v ? new Intl.DateTimeFormat("fr-FR", { dateStyle: "medium", timeZone: "UTC" }).format(new Date(v.length === 10 ? `${v}T00:00:00Z` : v)) : "Date non fournie";
+  const etudes = [
+    ...donnees.audits.filter((a) => a.subject_id === subject).map((a) => ({ id: `a-${a.id}`, titre: a.outil ?? "Audit externe", date: a.realise_le, detail: typeof a.score === "number" ? `score de l'outil ${a.score} / 100` : "score non fourni" })),
+    ...donnees.auditsIa.filter((a) => a.subject_id === subject).map((a) => ({ id: `i-${a.id}`, titre: "Audit IA express", date: a.le, detail: libelleVisibility(a.statut) })),
+    ...donnees.notesContenu.filter((n) => n.subject_id === subject).map((n) => ({ id: `n-${n.id}`, titre: "Note du contenu", date: n.le, detail: libelleVisibility(n.statut) })),
+  ].sort((a, b) => (b.date ?? "").localeCompare(a.date ?? "")).slice(0, 5);
+  return <div className="mt-6 grid gap-6"><CarteAuditIaExpress subject={subject} compact /><Section titre="Dernières études" aside={<Button asChild variant="outline" className="min-h-11"><Link to="/visibility/$onglet" params={{ onglet: "audits" }}>Toutes les études</Link></Button>}>
+    {etudes.length === 0 ? <p className="text-sm text-muted-foreground">Aucune étude pour ce site.</p> : <ul>{etudes.map((e) => <li key={e.id} className="flex flex-wrap justify-between gap-2 border-b border-border py-3 text-sm last:border-0"><span>{e.titre}<span className="block text-xs text-tertiary">{e.detail}</span></span><span className="text-xs text-tertiary">{dateCourte(e.date)}</span></li>)}</ul>}
+    <Link to="/sites/$slug" params={{ slug: subject }} className="mt-4 inline-flex min-h-11 items-center text-sm underline underline-offset-4">Piloter l'étude du site</Link>
+  </Section></div>;
 }
 
 export function VueVisibilite() {
@@ -133,7 +147,7 @@ export function VuePartVoix() {
   const f = useFiltres(); const fen = f.fenetreActive;
   const partVoix = donnees.partVoixParFenetre?.[fen.id] ?? donnees.partVoix;
   return <><FiltresVisibility /><div className="grid gap-6">
-    <Section titre="La marque face à chaque concurrent"><p className="mb-4 text-sm text-muted-foreground">Le premier écart défavorable indique le concurrent à examiner dans les réponses et les citations.</p>{[...partVoix.global].sort((a, b) => (b.v ?? -1) - (a.v ?? -1)).map((c) => <BarreValeur key={c.nom} label={c.nom} sous={c.nom === marque.nom ? "votre marque" : concurrents.find((x) => x.nom === c.nom)?.categorie} val={{ v: c.v, min: c.min ?? (c.v === null ? null : Math.max(0, c.v - 4)), max: c.max ?? (c.v === null ? null : c.v + 4), ...(c.raison ? { raison: c.raison } : {}) }} />)}</Section>
+    <Section titre="La marque face à chaque concurrent"><p className="mb-4 text-sm text-muted-foreground">Seuls les concurrents directs comptent ici. Plateformes, applications, annuaires et médias sont suivis séparément dans l'écran Concurrents.</p><p className="mb-4 text-sm text-muted-foreground">Le premier écart défavorable indique le concurrent à examiner dans les réponses et les citations.</p>{[...partVoix.global].sort((a, b) => (b.v ?? -1) - (a.v ?? -1)).map((c) => <BarreValeur key={c.nom} label={c.nom} sous={c.nom === marque.nom ? "votre marque" : concurrents.find((x) => x.nom === c.nom)?.categorie} val={{ v: c.v, min: c.min ?? null, max: c.max ?? null, ...(c.raison ? { raison: c.raison } : {}) }} />)}</Section>
     <Section titre="Par assistant"><p className="mb-4 text-sm text-muted-foreground">Un assistant qui favorise les concurrents indique où vérifier en premier les sources utilisées.</p>{assistants.map((a) => { const v = partVoix.parAssistant[a.nom] ?? null; return <BarreValeur key={a.nom} label={a.nom} sous={a.version} val={v === null ? absent("Part de voix absente pour cet assistant.") : { v, min: Math.max(0, v - 4), max: v + 4 }} />; })}</Section>
     <Section titre="Par question"><p className="mb-4 text-sm text-muted-foreground">Les questions dominées par un concurrent donnent les prochains sujets de contenu à renforcer.</p>{questions.filter((q) => f.famille === "Toutes" || q.famille === f.famille).map((q) => { const v = partVoix.parQuestion[q.id] ?? null; return <BarreValeur key={q.id} label={q.q} sous={q.famille} max={100} val={v === null ? { v: null, min: null, max: null, raison: "La part de voix par question n'est pas fournie par le contrat v1." } : { v, min: Math.max(0, v - 5), max: v + 5 }} />; })}</Section>
   </div>{fen.enCours && <p className="mt-4 text-xs text-tertiary">Les valeurs par question attendent la fin de la fenêtre.</p>}<NoteMesure /></>;
@@ -230,7 +244,7 @@ function VueReglagesRoute() {
 }
 
 export const vuesVisibility = {
-  visibilite: VueVisibilite, "part-de-voix": VuePartVoix, sentiment: VueSentiment, reponses: VueReponses, recherches: VueRecherches,
-  citations: VueCitations, performance: VuePerformance, contenu: VueQualiteContenu, opportunites: VueOpportunites, reseaux: VueReseaux, recommandations: VueRecommandations,
+  visibilite: VueVisibilite, "part-de-voix": VuePartVoix, concurrents: GestionEntitesVisibility, sentiment: VueSentiment, reponses: VueReponses, recherches: VueRecherches,
+  citations: VueCitations, performance: VuePerformance, contenu: VueQualiteContenu, indexation: VueIndexation, opportunites: VuePlanAction, reseaux: VueReseaux, recommandations: VuePlanAction, plan: VuePlanAction,
   rapports: VueRapports, "seo-command": VueSeo, audits: VueAuditsExternes, reglages: VueReglagesRoute, activite: ActiviteMoteur,
 } as const;

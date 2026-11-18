@@ -5,12 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Section, Statut } from "@/components/oia/ui";
 import { FaviconSource } from "@/components/oia/identites";
-import { libelleVisibility, menuVisibility } from "@/components/oia/visibility-ui";
+import { libelleVisibility } from "@/components/oia/visibility-ui";
+import { FiltreSelect } from "@/components/oia/filtre-select";
 import { useGesteVisibility, useVisibilityPilotage } from "@/lib/donnees/visibility-pilotage-provider";
 import { dollars, type LignePilotage } from "@/lib/donnees/visibility-pilotage";
 import { useSelectionVisibility } from "@/lib/donnees/provider";
+import { erreurTronquee, libelleTypeDemande, peutRelancer } from "@/lib/donnees/visibility-plan";
 
-const etiquettesEtapes: Record<string, string> = {
+export const etiquettesEtapes: Record<string, string> = {
   demande: "Demandé", audit_en_cours: "Audit en cours", a_valider: "À valider",
   reconnaissance_en_cours: "Reconnaissance en cours", concurrents_a_valider: "Concurrents à valider",
   pret_pour_go: "Prêt pour le GO", mesure_en_cours: "Mesure en cours", rapport_a_valider: "Rapport à valider",
@@ -63,7 +65,7 @@ export function ClocheAlertes() {
   </div>;
 }
 
-function FormulaireSite({ clients, onFerme }: { clients: { id: string; nom: string }[]; onFerme: () => void }) {
+export function FormulaireSite({ clients, onFerme }: { clients: { id: string; nom: string }[]; onFerme: () => void }) {
   const geste = useGesteVisibility();
   async function soumettre(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -85,7 +87,7 @@ function FormulaireSite({ clients, onFerme }: { clients: { id: string; nom: stri
       <label className="grid gap-1.5 text-xs text-tertiary">Nom de la marque<Input className="min-h-11" name="nom" required maxLength={160} /></label>
       <label className="grid gap-1.5 text-xs text-tertiary">Langues, séparées par des virgules<Input className="min-h-11" name="langues" defaultValue="fr, en" required /></label>
       <label className="grid gap-1.5 text-xs text-tertiary">Marchés, séparés par des virgules<Input className="min-h-11" name="marches" defaultValue="FR, AE" required /></label>
-      <label className="grid gap-1.5 text-xs text-tertiary">Client<select className={menuVisibility} name="client" defaultValue="nouveau"><option value="nouveau">Nouveau client</option>{clients.map((c) => <option key={c.id} value={c.id}>{c.nom}</option>)}</select></label>
+      <label className="grid gap-1.5 text-xs text-tertiary">Client<FiltreSelect name="client" defaultValue="nouveau"><option value="nouveau">Nouveau client</option>{clients.map((c) => <option key={c.id} value={c.id}>{c.nom}</option>)}</FiltreSelect></label>
       <label className="grid gap-1.5 text-xs text-tertiary">Nom du nouveau client<Input className="min-h-11" name="client_nom" maxLength={160} /></label>
     </div>
     <p className="text-xs text-tertiary">Pour un client existant, le nom du nouveau client est ignoré. La base vérifie vos droits et l'adresse publique.</p>
@@ -106,7 +108,7 @@ export function PortefeuilleVisibility() {
     <Section titre="Portefeuille" aside={<span className="num text-sm text-tertiary">{lignes.length} site(s)</span>}>
       {lignes.length === 0 ? <p className="text-sm text-muted-foreground">Aucun site dans votre portefeuille.</p> : <div className="overflow-x-auto"><table className="w-full min-w-[1080px] text-sm"><thead className="text-left text-xs text-tertiary"><tr className="border-b border-border">{["Site", "Étape", "Prochaine action", "Présence non marquée", "Coût du mois", "Alertes"].map((h) => <th key={h} className="py-2 pr-4 font-normal">{h}</th>)}</tr></thead><tbody>{lignes.map((l) => {
         const etape = l.etape ?? "demande";
-        return <tr key={l.subject_id} className="border-b border-border last:border-0"><td className="py-4 pr-4"><Link to="/sites/$slug" params={{ slug: l.subject_id ?? "" }} onClick={() => l.subject_id && selection.setSujetId(l.subject_id)} className="flex min-h-11 items-center gap-2.5 underline underline-offset-4"><FaviconSource source={l.site_url ?? ""} petite /><span>{l.nom || l.subject_id}<span className="block text-xs font-normal text-tertiary no-underline">{l.site_url} · {l.client_nom}</span></span></Link></td>
+        return <tr key={l.subject_id} className="border-b border-border last:border-0"><td className="py-4 pr-4"><Link to="/visibility" search={{ site: l.subject_id ?? "" }} onClick={() => l.subject_id && selection.setSujetId(l.subject_id)} className="flex min-h-11 items-center gap-2.5 underline underline-offset-4"><FaviconSource source={l.site_url ?? ""} petite /><span>{l.nom || l.subject_id}<span className="block text-xs font-normal text-tertiary no-underline">{l.site_url} · {l.client_nom}</span></span></Link></td>
           <td className="pr-4"><Statut etat={etape === "bloque" ? "bloquant" : ["a_valider", "concurrents_a_valider", "rapport_a_valider"].includes(etape) ? "verifier" : "conforme"} label={etiquettesEtapes[etape] ?? libelleVisibility(etape)} />{etape === "mesure_en_cours" && <span className="num mt-1 block text-xs text-tertiary">Jour {l.jour_courant ?? "?"} sur 5</span>}</td>
           <td className="pr-4"><span>{l.prochaine_action || "Aucune action"}</span><span className="block text-xs text-tertiary">Qui : {quiLabel[l.qui ?? ""] ?? l.qui}</span></td>
           <td className="num pr-4">{l.presence_non_marquee === null ? "Non mesurable" : `${l.presence_non_marquee} %`}<span className="block text-xs text-tertiary">{l.presence_effectif ?? "Effectif non fourni"}</span></td>
@@ -117,12 +119,19 @@ export function PortefeuilleVisibility() {
   </ChargementPilotage>;
 }
 
+function ErreurDemande({ erreur }: { erreur: string | null | undefined }) {
+  const { court, tronquee } = erreurTronquee(erreur);
+  if (!court) return <span>Aucune erreur</span>;
+  if (!tronquee) return <span className="text-block">{court}</span>;
+  return <details><summary className="cursor-pointer text-block">{court}</summary><p className="mt-2 whitespace-pre-wrap break-words text-block">{erreur}</p></details>;
+}
+
 export function ActiviteMoteur() {
   const { global } = useVisibilityPilotage();
   const geste = useGesteVisibility();
   const demandes = [...(global?.demandes ?? [])].sort((a, b) => (b.demande_le ?? "").localeCompare(a.demande_le ?? ""));
   return <ChargementPilotage><BandeauMoteur /><Section titre="Demandes au moteur" aside={<span className="num text-sm text-tertiary">{demandes.length}</span>}>
-    {demandes.length === 0 ? <p className="text-sm text-muted-foreground">Aucune demande enregistrée.</p> : <div className="overflow-x-auto"><table className="w-full min-w-[850px] text-sm"><thead className="text-left text-xs text-tertiary"><tr className="border-b border-border">{["Demande", "Sujet", "Statut", "Tentatives", "Détail", "Action"].map((h) => <th key={h} className="py-2 pr-4 font-normal">{h}</th>)}</tr></thead><tbody>{demandes.map((d) => <tr key={d.id} className="border-b border-border last:border-0"><td className="py-3 pr-4">{libelleVisibility(d.type)}<span className="block text-xs text-tertiary">{d.demande_le}</span></td><td className="pr-4">{d.subject_id ?? "Création en attente"}</td><td className="pr-4"><Statut etat={d.statut === "FAILED" ? "bloquant" : d.statut === "QUEUED" || d.statut === "RUNNING" ? "verifier" : "conforme"} label={libelleVisibility(d.statut, "Inconnu")} /></td><td className="num pr-4">{d.tentatives ?? 0}</td><td className="max-w-md pr-4 text-xs text-muted-foreground">{d.erreur ?? "Aucune erreur"}</td><td>{d.statut === "FAILED" && d.id ? <Button variant="outline" className="min-h-11" disabled={geste.enCours} onClick={async () => { try { await geste.executer("vis_relancer_demande", { p_demande: d.id! }); } catch { /* erreur affichée */ } }}>Relancer</Button> : <span className="text-xs text-tertiary">Aucune</span>}</td></tr>)}</tbody></table></div>}
+    {demandes.length === 0 ? <p className="text-sm text-muted-foreground">Aucune demande enregistrée.</p> : <div className="overflow-x-auto"><table className="w-full min-w-[850px] text-sm"><thead className="text-left text-xs text-tertiary"><tr className="border-b border-border">{["Demande", "Sujet", "Statut", "Tentatives", "Détail", "Action"].map((h) => <th key={h} className="py-2 pr-4 font-normal">{h}</th>)}</tr></thead><tbody>{demandes.map((d) => <tr key={d.id} id={d.id ? `demande-${d.id}` : undefined} className="scroll-mt-6 border-b border-border last:border-0"><td className="py-3 pr-4">{libelleTypeDemande(d.type)}<span className="block text-xs text-tertiary">{d.demande_le}</span></td><td className="pr-4">{d.subject_id ?? "Création en attente"}</td><td className="pr-4"><Statut etat={d.statut === "FAILED" ? "bloquant" : d.statut === "QUEUED" || d.statut === "RUNNING" ? "verifier" : "conforme"} label={libelleVisibility(d.statut, "Inconnu")} /></td><td className="num pr-4">{d.tentatives ?? 0}</td><td className="max-w-md pr-4 text-xs text-muted-foreground"><ErreurDemande erreur={d.erreur} /></td><td>{d.remplacee_par ? <a href={`#demande-${d.remplacee_par}`} className="inline-flex min-h-11 items-center text-xs underline underline-offset-4">relancée</a> : peutRelancer(d) ? <Button variant="outline" className="min-h-11" disabled={geste.enCours} onClick={async () => { try { await geste.executer("vis_relancer_demande", { p_demande: d.id! }); } catch { /* erreur affichée */ } }}>Relancer</Button> : <span className="text-xs text-tertiary">Aucune</span>}</td></tr>)}</tbody></table></div>}
     <ErreurGeste erreur={geste.erreur} />
   </Section></ChargementPilotage>;
 }

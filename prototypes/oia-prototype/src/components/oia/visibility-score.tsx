@@ -6,7 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Section } from "@/components/oia/ui";
 import { BarreColoree } from "@/components/oia/graphiques";
 import { ErreurGeste } from "@/components/oia/visibility-pilotage";
-import { libelleVisibility, menuVisibility } from "@/components/oia/visibility-ui";
+import { ApercuPlan, LienPlan } from "@/components/oia/visibility-plan";
+import { libelleVisibility } from "@/components/oia/visibility-ui";
+import { FiltreSelect } from "@/components/oia/filtre-select";
 import { useGesteVisibility, useVisibilityPilotage } from "@/lib/donnees/visibility-pilotage-provider";
 import { useSelectionVisibility, useVisibilityDonnees } from "@/lib/donnees/provider";
 import { useVisibilityV3 } from "@/lib/donnees/visibility-v3-provider";
@@ -27,7 +29,7 @@ export function SelecteurSujetV3({ subject }: { subject: string }) {
   const selection = useSelectionVisibility();
   if (!connecte) return null;
   const ids = [...new Set([...selection.sujets.map((s) => s.id), ...donnees.scores.map((s) => s.subject_id).filter((id): id is string => Boolean(id)), ...donnees.audits.map((a) => a.subject_id).filter((id): id is string => Boolean(id))])];
-  return <label className="grid min-w-56 gap-1.5 text-xs text-tertiary">Site<select aria-label="Site analysé" className={menuVisibility} value={subject} onChange={(e) => selection.setSujetId(e.target.value)}>{ids.map((id) => <option key={id} value={id}>{selection.sujets.find((s) => s.id === id)?.nom ?? id}</option>)}</select></label>;
+  return <label className="grid gap-1.5 text-xs text-tertiary">Site<FiltreSelect aria-label="Site analysé" value={subject} onChange={(e) => selection.setSujetId(e.target.value)}>{ids.map((id) => <option key={id} value={id}>{selection.sujets.find((s) => s.id === id)?.nom ?? id}</option>)}</FiltreSelect></label>;
 }
 
 export function BoutonAnalyse({ subject, compact = false }: { subject: string; compact?: boolean }) {
@@ -161,7 +163,7 @@ export function ResumeRapportV3({ subject, actions }: { subject: string; actions
       <div className="carte-chiffre" style={{ "--carte-couleur": couleurScore(score?.visibilite_ia) } as React.CSSProperties}><p className="text-xs">Questions sans le nom</p><p className="num mt-2 text-4xl">{score?.visibilite_ia ?? "Non mesuré"}{typeof score?.visibilite_ia === "number" && " %"}</p></div>
       <div className="carte-chiffre" style={{ "--carte-couleur": couleurScore(score?.notoriete_ia) } as React.CSSProperties}><p className="text-xs">Questions avec le nom</p><p className="num mt-2 text-4xl">{score?.notoriete_ia ?? "Non mesuré"}{typeof score?.notoriete_ia === "number" && " %"}</p></div>
     </div>
-    <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_1.5fr]"><div><h3 className="text-sm font-medium">Concurrents cités</h3>{concurrents.length ? <ul className="mt-3 space-y-2 text-sm">{concurrents.map((c) => <li key={c.nom} className="flex justify-between gap-3 border-b border-border pb-2"><span>{c.nom}</span><span className="num">{c.v === null ? "Non mesurable" : `${c.v} %`}</span></li>)}</ul> : <p className="mt-3 text-sm text-muted-foreground">Aucun concurrent cité dans cette fenêtre.</p>}</div><div><h3 className="mb-2 text-sm font-medium">Les 3 actions prioritaires</h3><TopActions subject={subject} /></div></div>
+    <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_1.5fr]"><div><h3 className="text-sm font-medium">Concurrents cités</h3>{concurrents.length ? <ul className="mt-3 space-y-2 text-sm">{concurrents.map((c) => <li key={c.nom} className="flex justify-between gap-3 border-b border-border pb-2"><span>{c.nom}</span><span className="num">{c.v === null ? "Non mesurable" : `${c.v} %`}</span></li>)}</ul> : <p className="mt-3 text-sm text-muted-foreground">Aucun concurrent cité dans cette fenêtre.</p>}</div><div><h3 className="mb-2 text-sm font-medium"><Link to="/visibility/$onglet" params={{ onglet: "plan" }} className="underline underline-offset-4">Les 3 actions prioritaires</Link></h3><TopActions subject={subject} /><div className="mt-3"><LienPlan /></div></div></div>
     {actions && <div className="mt-5 flex flex-wrap gap-2 border-t border-border pt-5">{actions}</div>}
   </Section></EtatVisibilityV3>;
 }
@@ -176,7 +178,7 @@ export function ScoreSite({ subject }: { subject: string }) {
       <div className="grid gap-5 xl:grid-cols-[1.25fr_1fr]"><BlocScore subject={subject} score={score} /><BlocScore subject={subject} score={score} technique /></div>
       {!connecte && <p className="mt-4 text-xs text-tertiary">Exemple fictif. Les boutons d'analyse réelle sont réservés aux comptes connectés.</p>}
     </Section>
-    <div className="grid gap-6 xl:grid-cols-2"><Section titre="Les 3 actions prioritaires"><p className="mb-3 text-sm text-muted-foreground">Les recommandations de visibilité IA en attente passent avant les corrections techniques.</p><TopActions subject={subject} /><Button asChild variant="outline" className="mt-4 min-h-11"><Link to="/visibility/$onglet" params={{ onglet: "opportunites" }}>Voir tous les constats</Link></Button></Section><CourbeScore subject={subject} /></div>
+    <div className="grid gap-6 xl:grid-cols-2"><ApercuPlan subject={subject} /><CourbeScore subject={subject} /></div>
   </article>;
 }
 

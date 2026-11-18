@@ -1,6 +1,14 @@
 # Roadmap
 
 ## Open
+- [x] Visibility : ajouter Résultats › Indexation avec score, contrôles et preuves, Bing, actions OIA et carte Google à venir.
+- [x] Visibility : appeler `vis_demander_hygiene`, suivre HYGIENE et tester contrôles, cas Bing et lancement sans modifier Supabase ni publier.
+- [ ] Vérifier Indexation avec une session OIA réelle après l'application de la migration 0019, indisponible dans cet environnement.
+- [x] Visibility : auditer toutes les listes, tous les onglets, le thème clair disponible et les deux tailles, puis vérifier les fenêtres et entités sur plusieurs jeux réels simulés.
+- [x] Visibility : créer FiltreSelect compact avec chevron maison et l’appliquer à toutes les listes déroulantes.
+- [x] Visibility : exclure les fenêtres abandonnées et d’audit des mesures, moteurs et graphiques.
+- [x] Visibility : grouper les entités par nature, classer via RPC et limiter la part de voix aux concurrents directs.
+- [x] Visibility : tester styles, exclusions, groupes et appels RPC sur plusieurs sites et tailles, sans publier.
 - [x] Visibility : ajouter Qualité du contenu, les trois notes, critères et preuves, synthèse et constats liés.
 - [x] Visibility : brancher estimation, lancement avec double confirmation, suivi 30 secondes et liaison/déliaison GitHub.
 - [x] Visibility : tester valeurs nulles, critères non vérifiables, plafonds, RPC et affichage, documenter sans publier.

@@ -33,7 +33,7 @@ use the editor.
 - Share Shyrka conversation and journal through a root React provider, hydrating validated versioned browser storage in an effect before enabling writes; this keeps page and panel consistent across reloads without remote services.
 - Keep shared navigation in the OIA Shell and personal placeholders in a parameterized leaf route; this makes every module reachable without duplicating page structure.
 
-- Keep Visibility pages under an Outlet layout and reuse VisibilityShell for tabs and breadcrumbs, including legacy site and onboarding URLs; this preserves existing links.
+- Keep Visibility pages under an Outlet layout: `/visibility` without `?site=` lists sites, and every site page reuses VisibilityShell with four entries (overview, plan, results, studies) plus a settings icon, mapping legacy tab ids to their entry; this keeps old links working while the site navigation stays simple.
 - Render presence-only Shyrka as a root session-controlled modal with local simulated microphone and pause state; this restores the previous page or panel without requesting hardware access.
 - Render Shyrka with a browser-initialized Three.js particle shader and the original bundled synthetic depth map; continuous particle morphing preserves sphere-to-face transitions across page, panel and fullscreen without hardware access.
 

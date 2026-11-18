@@ -1,11 +1,14 @@
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { VueReglages } from "@/components/oia/visibility-reglages";
 import { SourcesProvider } from "@/lib/donnees/provider";
+import { VisibilityV3Provider } from "@/lib/donnees/visibility-v3-provider";
 import { CLE_REGLAGES_VISIBILITY } from "@/lib/visibility-reglages";
 
 function monter() {
-  return render(<SourcesProvider><VueReglages /></SourcesProvider>);
+  const client = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+  return render(<QueryClientProvider client={client}><SourcesProvider><VisibilityV3Provider><VueReglages /></VisibilityV3Provider></SourcesProvider></QueryClientProvider>);
 }
 function ouvrirOnglet(nom: string) {
   const onglet = screen.getByRole("tab", { name: nom });
@@ -17,34 +20,12 @@ beforeEach(() => window.localStorage.clear());
 afterEach(cleanup);
 
 describe("Ajouts dans les réglages Visibility", () => {
-  it("ajoute un concurrent et le retrouve après une nouvelle ouverture", async () => {
-    const vue = monter();
-    ouvrirOnglet("Concurrents");
-    const ouvrir = screen.getByRole("button", { name: "Ajouter un concurrent" });
-    await waitFor(() => expect(ouvrir).toBeEnabled());
-    fireEvent.click(ouvrir);
-    fireEvent.change(screen.getByLabelText("Nom du concurrent"), { target: { value: "Atelier Local" } });
-    fireEvent.change(screen.getByLabelText("Catégorie"), { target: { value: "Atelier indépendant" } });
-    fireEvent.click(screen.getByRole("button", { name: "Ajouter" }));
-    expect(await screen.findByText("Atelier Local")).toBeInTheDocument();
-    await waitFor(() => expect(window.localStorage.getItem(CLE_REGLAGES_VISIBILITY)).toContain("Atelier Local"));
-
-    vue.unmount();
+  it("n'écrit plus les concurrents dans le stockage local", async () => {
     monter();
     ouvrirOnglet("Concurrents");
-    expect(await screen.findByText("Atelier Local")).toBeInTheDocument();
-  });
-
-  it("refuse un concurrent déjà présent", async () => {
-    monter();
-    ouvrirOnglet("Concurrents");
-    const ouvrir = screen.getByRole("button", { name: "Ajouter un concurrent" });
-    await waitFor(() => expect(ouvrir).toBeEnabled());
-    fireEvent.click(ouvrir);
-    fireEvent.change(screen.getByLabelText("Nom du concurrent"), { target: { value: "atelier terre de rance" } });
-    fireEvent.change(screen.getByLabelText("Catégorie"), { target: { value: "Autre" } });
-    fireEvent.click(screen.getByRole("button", { name: "Ajouter" }));
-    expect(await screen.findByRole("alert")).toHaveTextContent("Ce concurrent est déjà présent.");
+    expect(screen.getByRole("button", { name: "Ajouter un concurrent" })).toBeDisabled();
+    expect(screen.getByText("La démonstration est en lecture seule. Connectez-vous pour enregistrer le classement en base.")).toBeInTheDocument();
+    expect(window.localStorage.getItem(CLE_REGLAGES_VISIBILITY)).toBeNull();
   });
 
   it("ajoute puis retire un prompt local", async () => {

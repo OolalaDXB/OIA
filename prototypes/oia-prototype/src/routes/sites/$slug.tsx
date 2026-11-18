@@ -36,7 +36,7 @@ function VueSite() {
   const d = donnees.vueSite;
   const f = useFiltres();
   const fen = f.fenetreActive;
-  if (donnees.reel && donnees.fenetres.length === 0) return <VisibilityShell page={d.nom} active="sites"><div className="mb-8"><h1 className="text-3xl md:text-4xl">{d.nom}</h1><p className="mt-1 flex items-center gap-2 text-tertiary"><FaviconSource source={d.url} petite />{d.url}</p></div><PilotageSite subject={slug} client={selection.sujets.find((s) => s.id === slug)?.clientId ?? ""} /></VisibilityShell>;
+  if (donnees.reel && donnees.fenetres.length === 0) return <VisibilityShell page="Étude" active="etude"><div className="mb-8"><h1 className="text-3xl md:text-4xl">{d.nom}</h1><p className="mt-1 flex items-center gap-2 text-tertiary"><FaviconSource source={d.url} petite />{d.url}</p></div><PilotageSite subject={slug} client={selection.sujets.find((s) => s.id === slug)?.clientId ?? ""} /></VisibilityShell>;
   const presence = donnees.indicateurs[fen.id]?.presence ?? { v: null, min: null, max: null, raison: "Mesure en cours de chargement." };
   const textePresence = texteChiffre(presence, fen);
   const citations = donnees.citationsParFenetre?.[fen.id]?.[f.assistant] ?? donnees.citations;
@@ -45,7 +45,7 @@ function VueSite() {
   const concurrents = donnees.reel ? partVoix.global.filter((c) => c.nom !== donnees.marque.nom) : d.concurrents;
   const maxSrc = Math.max(1, ...sources.map((s) => s.n));
   return (
-    <VisibilityShell page={d.nom} active="sites">
+    <VisibilityShell page="Étude" active="etude">
       <div className="mt-2 mb-10 flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-3xl md:text-4xl">{d.nom}</h1>

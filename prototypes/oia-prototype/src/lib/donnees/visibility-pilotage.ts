@@ -48,10 +48,13 @@ export type GesteVisibility =
   | "vis_valider_rapport" | "vis_declarer_execution" | "vis_fixer_plafond"
   | "vis_relancer_demande" | "vis_acquitter_alerte"
   | "vis_valider_recommandation" | "vis_rejeter_recommandation" | "vis_demander_analyse"
-  | "vis_importer_audit_externe" | "vis_lancer_audit_ia" | "vis_lancer_note_contenu" | "vis_lier_depot";
+  | "vis_importer_audit_externe" | "vis_lancer_audit_ia" | "vis_lancer_note_contenu" | "vis_lier_depot"
+  | "vis_classer_entite" | "vis_importer_rapport_externe" | "vis_extraire_plan" | "vis_demander_hygiene";
 export type ArgsGeste<N extends GesteVisibility> = N extends "vis_lier_depot"
-  ? Omit<Fonctions[N]["Args"], "p_depot"> & { p_depot: string | null }
-  : Fonctions[N]["Args"];
+  ? Omit<Fonctions["vis_lier_depot"]["Args"], "p_depot"> & { p_depot: string | null }
+  : N extends "vis_demander_hygiene" ? { p_subject: string }
+  : N extends keyof Fonctions ? Fonctions[N]["Args"] : never;
+export type RetourGeste<N extends GesteVisibility> = N extends "vis_demander_hygiene" ? string : N extends keyof Fonctions ? Fonctions[N]["Returns"] : never;
 export type ClientRpc = { rpc: (nom: string, params: Record<string, unknown>) => Promise<{ data: unknown; error: { message: string; code?: string } | null }> };
 
 /** Toutes les mutations Visibility passent par ce point. Aucun accès table en écriture. */
@@ -59,13 +62,14 @@ export async function gesteVisibility<N extends GesteVisibility>(
   nom: N,
   params: ArgsGeste<N>,
   client: ClientRpc = supabase as unknown as ClientRpc,
-): Promise<Fonctions[N]["Returns"]> {
+): Promise<RetourGeste<N>> {
   const { data, error } = await client.rpc(nom, params as Record<string, unknown>);
   if (error) throw new ErreurVisibility(error.message, error.code);
-  return data as Fonctions[N]["Returns"];
+  return data as RetourGeste<N>;
 }
 
 export const demanderAnalyse = (p: Fonctions["vis_demander_analyse"]["Args"], client?: ClientRpc) => gesteVisibility("vis_demander_analyse", p, client);
+export const demanderHygiene = (p: { p_subject: string }, client?: ClientRpc) => gesteVisibility("vis_demander_hygiene", p, client);
 export const demanderSite = (p: Fonctions["vis_demander_site"]["Args"], client?: ClientRpc) => gesteVisibility("vis_demander_site", p, client);
 export const modifierProposition = (p: Fonctions["vis_modifier_proposition"]["Args"], client?: ClientRpc) => gesteVisibility("vis_modifier_proposition", p, client);
 export const ajouterProposition = (p: Fonctions["vis_ajouter_proposition"]["Args"], client?: ClientRpc) => gesteVisibility("vis_ajouter_proposition", p, client);
@@ -84,6 +88,10 @@ export const importerAuditExterne = (p: Fonctions["vis_importer_audit_externe"][
 export const lancerAuditIa = (p: Fonctions["vis_lancer_audit_ia"]["Args"], client?: ClientRpc) => gesteVisibility("vis_lancer_audit_ia", p, client);
 export const lancerNoteContenu = (p: Fonctions["vis_lancer_note_contenu"]["Args"], client?: ClientRpc) => gesteVisibility("vis_lancer_note_contenu", p, client);
 export const lierDepot = (p: ArgsGeste<"vis_lier_depot">, client?: ClientRpc) => gesteVisibility("vis_lier_depot", p, client);
+export const classerEntite = (p: Fonctions["vis_classer_entite"]["Args"], client?: ClientRpc) => gesteVisibility("vis_classer_entite", p, client);
+
+export const importerRapportExterne = (p: Fonctions["vis_importer_rapport_externe"]["Args"], client?: ClientRpc) => gesteVisibility("vis_importer_rapport_externe", p, client);
+export const extrairePlan = (p: Fonctions["vis_extraire_plan"]["Args"], client?: ClientRpc) => gesteVisibility("vis_extraire_plan", p, client);
 
 export function dollars(valeur: number | null | undefined) {
   return typeof valeur === "number" && Number.isFinite(valeur)
