@@ -216,8 +216,8 @@ describe("site add : sans --go", () => {
     ]);
     expect(b.panel.prompts.every((p) => p.status !== "active")).toBe(true);
     expect(b.measurement.windows).toMatchObject([{ id: "j0", status: "planned", days: 5 }]);
-    // Par défaut, les trois moteurs les moins chers ; Mistral, Claude et Grok sur demande seulement.
-    expect(b.measurement.engines.map((e) => e.model)).toEqual(["chatgpt", "gemini", "perplexity"]);
+    // Par défaut : les trois moteurs les moins chers et Mistral (offre gratuite) ; Claude et Grok sur demande.
+    expect(b.measurement.engines.map((e) => e.model)).toEqual(["chatgpt", "gemini", "perplexity", "mistral"]);
 
     // Panel proposé : 10 questions par langue dont 2 marquées, à partir des offres et des lieux.
     const panel: Panel = PanelSchema.parse(readYaml(join(r.dir, "proposition", "panel.yaml")));
@@ -281,7 +281,7 @@ describe("site add : sans --go", () => {
     const plan = JSON.parse(readFileSync(join(r.dir, "proposition", "reconnaissance.json"), "utf8"));
     expect(plan.statut).toBe("planifiee");
     expect(plan.questions).toHaveLength(16);
-    expect(plan.appels).toBe(16 * 3); // 3 moteurs par défaut : ChatGPT, Gemini, Perplexity
+    expect(plan.appels).toBe(16 * 4); // 4 moteurs par défaut : ChatGPT, Gemini, Perplexity, Mistral (gratuit)
     expect(plan.coutMajorantUsd).toBeGreaterThan(0);
     expect(r.costs.faitsMistral.calls).toBe(3);
     expect(existsSync(join(r.dir, "proposition", "acteurs.json"))).toBe(false);
@@ -302,10 +302,11 @@ describe("site add : avec --go (fournisseurs fictifs)", () => {
     const { opts } = setup({ env: KEYS, llm: () => mistral, collector: () => fakeCollector(calls), go: { faits: true, reconnaissance: true } });
     const r = await siteAdd(opts);
     expect(r.paidCalls.mistral).toBe(3);
-    expect(r.paidCalls.moteurs).toBe(48);
+    expect(r.paidCalls.moteurs).toBe(64);
     // Aucune question marquée envoyée.
     expect(calls.every((c) => !c.promptText.includes("Coach Zed"))).toBe(true);
-    expect(calls.filter((c) => c.engine === "mistral").every((c) => c.promptLanguage === "fr")).toBe(true);
+    // Mistral (gratuit) est interrogé dans toutes les langues du panel, comme les autres moteurs.
+    expect(new Set(calls.filter((c) => c.engine === "mistral").map((c) => c.promptLanguage))).toEqual(new Set(["fr", "en"]));
 
     const faits = FaitsSchema.parse(readYaml(join(r.dir, "proposition", "faits.yaml"))).faits;
     expect(faits.find((f) => f.id === "m-001")).toMatchObject({ statement: "Séance individuelle à 80 €", statut: "extrait", sourceUrl: "https://coach-zed.example/tarifs" });
@@ -316,7 +317,7 @@ describe("site add : avec --go (fournisseurs fictifs)", () => {
 
     const actors = ActorsFileSchema.parse(JSON.parse(readFileSync(join(r.dir, "proposition", "acteurs.json"), "utf8")));
     const byName = new Map(actors.acteurs.map((a) => [a.name, a]));
-    expect(byName.get("Studio Alpha")).toMatchObject({ type: "structure", reponses: 48, statut: "extrait", source: "https://studio-alpha.example/cours" });
+    expect(byName.get("Studio Alpha")).toMatchObject({ type: "structure", reponses: 64, statut: "extrait", source: "https://studio-alpha.example/cours" });
     expect(byName.get("Marie Durand")?.type).toBe("personne");
     expect(byName.get("FitBook")?.type).toBe("plateforme");
     expect(byName.has("Prix")).toBe(false);
@@ -327,7 +328,7 @@ describe("site add : avec --go (fournisseurs fictifs)", () => {
     expect(homonyms.homonymes.map((h) => h.nom)).toEqual(["Zed Harrow"]);
     expect(homonyms.homonymes[0]!.occurrences[0]!.moteur).toBe("gemini");
     const props = lirePropositions(r.dir);
-    expect(props.concurrents!.find((c) => c.name === "Studio Alpha")).toMatchObject({ id: "studio-alpha", type: "structure", domains: ["studio-alpha.example"], citations: 48, statut: "extrait" });
+    expect(props.concurrents!.find((c) => c.name === "Studio Alpha")).toMatchObject({ id: "studio-alpha", type: "structure", domains: ["studio-alpha.example"], citations: 64, statut: "extrait" });
     expect(props.homonymes!.map((h) => [h.id, h.value, h.statut])).toEqual([["zed-harrow", "Zed Harrow", "extrait"]]);
 
     // Validation simulée (bloc B) : panel actif et validé, concurrents retenus.

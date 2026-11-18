@@ -138,8 +138,20 @@ export interface RunCost {
   fromUsage: boolean;
 }
 
-export function findPrice(provider: string, version: string): PriceEntry | undefined {
-  return PRICE_GRID.find((e) => e.provider === provider && e.versions.test(version));
+/**
+ * Fournisseurs sur une offre gratuite (OIA_FOURNISSEURS_GRATUITS, ex. « mistral-api ») : la grille
+ * garde leur prix public, mais leur coût compté est nul. Mistral : clé d'OIA sur l'offre gratuite
+ * de La Plateforme (« Experiment »), confirmée le 2026-11-18 ; contreparties : débit limité, et
+ * requêtes utilisables pour l'entraînement sauf désactivation dans les réglages de confidentialité.
+ */
+export function fournisseursGratuits(env: Record<string, string | undefined> = process.env): Set<string> {
+  return new Set((env.OIA_FOURNISSEURS_GRATUITS ?? "").split(",").map((x) => x.trim()).filter(Boolean));
+}
+
+export function findPrice(provider: string, version: string, env: Record<string, string | undefined> = process.env): PriceEntry | undefined {
+  const e = PRICE_GRID.find((x) => x.provider === provider && x.versions.test(version));
+  if (!e || !fournisseursGratuits(env).has(provider)) return e;
+  return { ...e, inputPerMTok: 0, outputPerMTok: 0, perSearchUsd: 0, source: `${e.source} ; offre gratuite (OIA_FOURNISSEURS_GRATUITS)` };
 }
 
 const num = (v: unknown): number => (typeof v === "number" && Number.isFinite(v) && v >= 0 ? v : 0);

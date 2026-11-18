@@ -16,23 +16,23 @@ import type { Offer, PageSource, Place, SiteFindings } from "./facts.js";
 
 /** Cibles par défaut d'une première mesure (moteur:fournisseur:modèle:online), prix dans src/cost-grid.ts. */
 /**
- * Moteurs mesurés par défaut : les trois les moins chers par réponse (relevé du 2026-11-18 :
- * ChatGPT 0,03 $, Perplexity 0,015 $, Gemini 0,06 $). Claude, Grok et Mistral restent
- * disponibles (OPTIONAL_TARGETS) mais ne sont plus proposés d'office : Mistral pesait les deux
- * tiers du coût de J0 (estimation, prix de sa recherche web non publié), Grok a coûté 2,27 $
- * pour une réponse avec la recherche native de xAI.
+ * Moteurs mesurés par défaut : les moins chers par réponse (relevé du 2026-11-18 : ChatGPT
+ * 0,03 $, Perplexity 0,015 $, Gemini 0,06 $) et Mistral, gratuit (offre gratuite de La
+ * Plateforme). Claude et Grok restent disponibles (OPTIONAL_TARGETS) mais ne sont plus proposés
+ * d'office : Grok a coûté 2,27 $ pour une réponse avec la recherche native de xAI.
  */
 export const DEFAULT_TARGETS: { engine: string; target: string; languages?: string[]; note: string }[] = [
   { engine: "chatgpt", target: "chatgpt:openai-api:gpt-6-luna:online", note: "OpenAI en direct (:online, outil web_search)" },
   { engine: "gemini", target: "gemini:openrouter:google/gemini-3-flash-preview:online", note: "via OpenRouter (recherche Google native)" },
   { engine: "perplexity", target: "perplexity:openrouter:perplexity/sonar:online", note: "via OpenRouter (Sonar)" },
+  // Gratuit : la clé Mistral d'OIA est sur l'offre gratuite (débit limité). Toutes langues.
+  { engine: "mistral", target: "mistral:mistral-api:mistral-large-4:online", note: "Mistral en direct (:online), offre gratuite" },
 ];
 
 /** Moteurs disponibles sur demande, plus chers par réponse. */
 export const OPTIONAL_TARGETS: { engine: string; target: string; languages?: string[]; note: string }[] = [
   { engine: "claude", target: "claude:anthropic-api:claude-sonnet-5-5:online", note: "Anthropic en direct (:online, outil web_search)" },
   { engine: "grok", target: "grok:openrouter:x-ai/grok-4.7:online", note: "via OpenRouter (recherche Exa plafonnée à 5 résultats)" },
-  { engine: "mistral", target: "mistral:mistral-api:mistral-large-4:online", languages: ["fr"], note: "Mistral en direct (:online), panels en français seulement" },
 ];
 
 /** Langues usuelles d'un marché, pour répartir les langues demandées entre les marchés. */

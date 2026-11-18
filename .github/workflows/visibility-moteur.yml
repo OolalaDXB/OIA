@@ -105,6 +105,8 @@ jobs:
           # Lecture seule des dépôts des sites (note du contenu) : jeton « Contents: read » sur ces
           # dépôts ; à défaut, le jeton d'Actions (dépôts publics, quota relevé).
           OIA_DEPOTS_TOKEN: ${{ secrets.OIA_DEPOTS_TOKEN || github.token }}
+          # Fournisseurs sur offre gratuite : coût compté nul (prix public gardé dans la grille).
+          OIA_FOURNISSEURS_GRATUITS: mistral-api
           OIA_VIS_ENGINE_DB: rest
           OIA_VIS_ENGINE_HOST: github-actions
           OIA_VIS_ENGINE_VERSION: ${{ github.sha }}

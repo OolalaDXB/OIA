@@ -213,3 +213,20 @@ describe("cost-guard.sh avec la grille (à blanc : ni Docker, ni réseau, ni bas
     expect(dockerCalls).toEqual([]);
   });
 });
+
+describe("offre gratuite", () => {
+  it("un fournisseur déclaré gratuit garde son prix public dans la grille mais coûte 0", async () => {
+    const { findPrice, runCostUsd, PRICE_GRID } = await import("../src/cost-grid");
+    const env = { OIA_FOURNISSEURS_GRATUITS: "mistral-api" };
+    expect(findPrice("mistral-api", "mistral-large-4", env)!.inputPerMTok).toBe(0);
+    expect(findPrice("mistral-api", "mistral-large-4", {})!.inputPerMTok).toBe(0.7);
+    expect(PRICE_GRID.find((e) => e.id === "mistral-large-4")!.perSearchUsd).toBe(0.03);
+    process.env.OIA_FOURNISSEURS_GRATUITS = "mistral-api";
+    try {
+      const c = runCostUsd({ provider: "mistral-api", version: "mistral-large-4", webSearch: true, usage: { prompt_tokens: 1000, completion_tokens: 500 }, searchItems: 5 } as never);
+      expect(c!.usd).toBe(0);
+    } finally {
+      delete process.env.OIA_FOURNISSEURS_GRATUITS;
+    }
+  });
+});
