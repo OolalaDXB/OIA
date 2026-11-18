@@ -107,7 +107,7 @@ function answerFor(engine: string, promptId: string): { text: string; citations:
     `1. **Studio Alpha** – un studio de coaching avec plusieurs salles, [site](https://studio-alpha.example/cours).`,
     `2. **Marie Durand** : coach personnelle certifiée, elle propose des séances à domicile.`,
     n % 2 === 0 ? `3. **FitBook**, une plateforme de réservation de coachs en ligne.` : `3. **Prix** : de 50 à 90 € la séance.`,
-    engine === "claude" ? `À ne pas confondre : Zed Harrow, professeur de step, n'a aucun lien avec Coach Zed.` : `Coach Zed Paris propose aussi du coaching en ligne.`,
+    engine === "gemini" ? `À ne pas confondre : Zed Harrow, professeur de step, n'a aucun lien avec Coach Zed.` : `Coach Zed Paris propose aussi du coaching en ligne.`,
     n === 1 ? `**Club Unique** n'apparaît qu'une fois.` : ``,
   ];
   return { text: lines.join("\n"), citations: [{ url: "https://annuaire-fictif.example/fitbook" }, { url: "https://studio-alpha.example/" }] };
