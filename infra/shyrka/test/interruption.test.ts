@@ -233,6 +233,20 @@ describe("routage des décisions et références", () => {
     expect(lignes.slice(1)).toEqual(DECISIONS.slice(0, 3).map((d) => `${d.id} · ${d.intitule} (roadmap, ligne ${d.ligne})`));
   });
 
+  it("nombre demandé sans verbe de liste (« donne-moi les 3 premières décisions ») : D01 à D03, sans le modèle", async () => {
+    for (const phrase of ["Donne-moi les 3 premières décisions", "Donne moi les trois premières décisions", "Quelles sont les 3 premières décisions ?", "Les 2 dernières décisions"]) {
+      const { s, model } = session();
+      const r = await s.textTurn(phrase);
+      expect(model.calls, phrase).toHaveLength(0);
+      const n = /2 dernières/.test(phrase) ? 2 : 3;
+      const attendu = /dernières/.test(phrase) ? DECISIONS.slice(-n) : DECISIONS.slice(0, n);
+      expect(r.answer!.split("\n").slice(1), phrase).toEqual(attendu.map((d) => `${d.id} · ${d.intitule} (roadmap, ligne ${d.ligne})`));
+    }
+    // Une question sur des décisions, sans liste demandée, reste au modèle.
+    expect(routerDecision("Pourquoi les 3 premières décisions sont-elles bloquées ?", DECISIONS, null)).toBeNull();
+    expect(routerDecision("Comment avancer sur les deux premières décisions ?", DECISIONS, null)).toBeNull();
+  });
+
   it("suivi D01 → « pourquoi cette décision ? » : la dernière décision discutée, avec sa source", async () => {
     const { s, model } = session(new SimulatedTextModel("La roadmap ne donne pas la raison ; à mon avis, elle conditionne Shyrka 2."));
     const r1 = await s.textTurn("Explique D01");

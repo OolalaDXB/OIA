@@ -1,11 +1,21 @@
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, realpathSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, realpathSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
+import { homedir, tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { RefusMemoire, type Demandeur } from "@oia/shyrka-noyau";
 import { ServiceMemoire } from "../src/memoire/commandes.js";
 import { MemoireLocale } from "../src/memoire/sqlite.js";
 import { dossierVerifie, etatVolume, VOLUME_SHYRKA, type DossierVerifie } from "../src/memoire/volume.js";
+
+/** Vrai quand le test tourne dans le bac à sable de vérification (lecture de ~/.oia refusée) : certains essais réels y sont impossibles et sont alors sautés, pas comptés réussis. */
+const dansBacASable = (() => {
+  try {
+    readdirSync(join(homedir(), ".oia"));
+    return false;
+  } catch (e) {
+    return (e as NodeJS.ErrnoException).code === "EPERM";
+  }
+})();
 
 const MICKAEL = { type: "mickael" as const, via: "test" };
 const MOI: Demandeur = { type: "mickael" };
@@ -171,8 +181,7 @@ describe("M6 · stockage absent, non chiffré, lien, base corrompue", () => {
     symlinkSync(dir, p);
     expect(etatVolume(p).detail).toMatch(/lien symbolique/);
   });
-  it("image non chiffrée : refus (sonde)", () => {
-    if (!existsSync(VOLUME_SHYRKA)) return; // le test exige un vrai point de montage
+  it.skipIf(dansBacASable || !existsSync(VOLUME_SHYRKA))("image non chiffrée : refus (sonde ; exige le vrai point de montage)", () => {
     expect(etatVolume(VOLUME_SHYRKA, () => ({ monte: true, chiffre: false, image: "x", inscriptible: true })).chiffre).toBe(false);
   });
   it("base illisible : erreur explicite, jamais recréée vide", () => {
