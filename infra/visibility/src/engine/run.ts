@@ -347,7 +347,14 @@ async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
   const domaines = classementDomaines(matrice);
   // Contexte : constats ouverts, audits et rapports externes, actions déjà proposées.
   const contexte = await ctx.o.db.contexte(subjectId).catch(() => undefined);
-  const plan = await proposerPlan(llm, { nom, site: url, matrice, scores: s, concurrents, domaines, constats: [], contexte });
+  // Le plan (Mistral, gratuit) ne doit jamais faire perdre les réponses payées : en échec, l'audit
+  // est enregistré quand même, sans plan, et une alerte le dit.
+  let planErreur: string | null = null;
+  const plan = await proposerPlan(llm, { nom, site: url, matrice, scores: s, concurrents, domaines, constats: [], contexte }).catch(async (err) => {
+    planErreur = msg(err).slice(0, 200);
+    await ctx.o.db.alerter({ client_id: d.client_id, subject_id: subjectId, gravite: "alerte", type: "ECHEC_DEMANDE", message: `Audit IA express : plan d'action non produit (${planErreur}) ; mesure enregistrée quand même.` }).catch(() => undefined);
+    return { resume: `Mesure enregistrée ; plan d'action non produit (${planErreur}).`, actions: [], entites: [] } as Awaited<ReturnType<typeof proposerPlan>>;
+  });
   // Nature des entités citées : seulement celles réellement relevées dans les réponses.
   const relevees = new Set(concurrents.map((c) => c.nom.toLowerCase()));
   const entites = (plan.entites ?? []).filter((e) => relevees.has(e.nom.toLowerCase())).map((e) => ({ entite: e.nom, nature: e.nature }));
@@ -394,7 +401,7 @@ async function auditIaDemande(ctx: Ctx, d: Demande): Promise<Record<string, unkn
   }
   const coutParMoteur: Record<string, number> = {};
   for (const r of col.reponses) coutParMoteur[r.moteur] = Math.round(((coutParMoteur[r.moteur] ?? 0) + r.coutUsd) * 100) / 100;
-  return { audit_externe_id: auditId, score: s.global, cout_reel_usd: coutReel, cout_par_moteur: coutParMoteur, echecs_par_moteur: echecsParMoteur, questions: questions.length, reponses: col.reponses.length, vides: col.reponses.filter((r) => !r.texte?.trim()).length, echecs: col.echecs.length, recommandations: recos, arret_plafond: col.arretPlafond, preuves_erreur: preuvesErreur };
+  return { audit_externe_id: auditId, score: s.global, cout_reel_usd: coutReel, cout_par_moteur: coutParMoteur, echecs_par_moteur: echecsParMoteur, questions: questions.length, reponses: col.reponses.length, vides: col.reponses.filter((r) => !r.texte?.trim()).length, echecs: col.echecs.length, recommandations: recos, arret_plafond: col.arretPlafond, preuves_erreur: preuvesErreur, plan_erreur: planErreur };
 }
 
 // ---------------------------------------------------------------- CONSOLIDER_PLAN (gratuit : Mistral)

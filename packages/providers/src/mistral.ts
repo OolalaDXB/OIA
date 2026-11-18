@@ -84,6 +84,40 @@ export interface MistralProvider extends LLMProvider {
   usage(): MistralUsage;
 }
 
+/** Réponse diffusée (SSE) : texte recollé, raison d'arrêt et usage du dernier morceau. */
+async function lireFlux(res: Response): Promise<{
+  choices: Array<{ message?: { content?: MistralContent }; finish_reason?: string }>;
+  usage?: { prompt_tokens?: number; completion_tokens?: number };
+}> {
+  let texte = "";
+  let finish: string | undefined;
+  let usage: { prompt_tokens?: number; completion_tokens?: number } | undefined;
+  const lire = (ligne: string) => {
+    const l = ligne.trim();
+    if (!l.startsWith("data:")) return;
+    const data = l.slice(5).trim();
+    if (!data || data === "[DONE]") return;
+    const m = JSON.parse(data) as { choices?: Array<{ delta?: { content?: MistralContent }; finish_reason?: string | null }>; usage?: typeof usage };
+    const c = m.choices?.[0];
+    if (c?.delta?.content != null) texte += contentText(c.delta.content);
+    if (c?.finish_reason) finish = c.finish_reason;
+    if (m.usage) usage = m.usage;
+  };
+  const dec = new TextDecoder();
+  let reste = "";
+  const corps = res.body;
+  if (!corps) throw new Error("Mistral : réponse diffusée sans corps");
+  for await (const morceau of corps as unknown as AsyncIterable<Uint8Array>) {
+    reste += dec.decode(morceau, { stream: true });
+    const lignes = reste.split("\n");
+    reste = lignes.pop() ?? "";
+    lignes.forEach(lire);
+  }
+  reste += dec.decode();
+  if (reste) lire(reste);
+  return { choices: [{ message: { content: texte }, finish_reason: finish }], usage };
+}
+
 export function createMistralProvider(config: MistralConfig): MistralProvider {
   const baseUrl = config.baseUrl ?? "https://api.mistral.ai/v1/chat/completions";
   const doFetch = config.fetchImpl ?? fetch;
@@ -99,7 +133,9 @@ export function createMistralProvider(config: MistralConfig): MistralProvider {
     }
     if (attempt === 0) spent.calls += 1;
 
-    const res = await doFetch(baseUrl, {
+    let res: Response;
+    try {
+      res = await doFetch(baseUrl, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -123,8 +159,21 @@ export function createMistralProvider(config: MistralConfig): MistralProvider {
         // position 12035"), which reads like a model problem and is a ceiling
         // problem.
         max_tokens: config.maxOutputTokens ?? 16_000,
+        // Streamed: a long answer (plan, consolidation) takes more than 5 minutes, and Node's
+        // fetch gives up waiting for the response headers after 300 s (« fetch failed »).
+        // With a stream the headers come at once and the text arrives as it is written.
+        stream: true,
+        stream_options: { include_usage: true },
       }),
-    });
+      });
+    } catch (err) {
+      // Network failure (« fetch failed »): one more try after a pause, then stop.
+      if (attempt < 2) {
+        await new Promise((r) => setTimeout(r, (config.retryBaseMs ?? 2000) * 2 ** attempt));
+        return call(system, user, model, attempt + 1);
+      }
+      throw err;
+    }
     if (!res.ok) {
       const body = (await res.text()).slice(0, 300);
       // 429 and 5xx are "come back later", not "you asked wrongly". Forty
@@ -145,10 +194,12 @@ export function createMistralProvider(config: MistralConfig): MistralProvider {
       }
       throw new Error(`Mistral API error ${res.status}: ${body}`);
     }
-    const json = (await res.json()) as {
-      choices: Array<{ message?: { content?: MistralContent }; finish_reason?: string }>;
-      usage?: { prompt_tokens?: number; completion_tokens?: number };
-    };
+    const json = (res.headers.get("content-type") ?? "").includes("text/event-stream")
+      ? await lireFlux(res)
+      : ((await res.json()) as {
+          choices: Array<{ message?: { content?: MistralContent }; finish_reason?: string }>;
+          usage?: { prompt_tokens?: number; completion_tokens?: number };
+        });
     spent.inputTokens += json.usage?.prompt_tokens ?? 0;
     spent.outputTokens += json.usage?.completion_tokens ?? 0;
     const c0 = json.choices[0];
