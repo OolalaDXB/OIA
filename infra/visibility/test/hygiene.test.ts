@@ -152,3 +152,17 @@ describe("moteur : demande HYGIENE", () => {
     expect(db.constats[0]).toMatchObject({ cle: "indexation:bing-verifie", gravite: "critique", source: "indexation" });
   });
 });
+
+describe("Bing : hôte exact", () => {
+  it("propriété sur la forme sans www alors que le site est servi sur www : signalée", async () => {
+    const f: BingFetch = async (url) => {
+      const m = new URL(url).pathname.split("/").pop();
+      const d = m === "GetUserSites" ? [{ Url: "https://studio-fictif.example/", IsVerified: true }] : [];
+      return { ok: true, status: 200, text: async () => JSON.stringify({ d }) };
+    };
+    const r = await bilanBing(createBingClient("abcdef0123456789abcdef0123456789", f), "https://www.studio-fictif.example", null);
+    expect(r.controles.find((c) => c.id === "bing-hote")).toMatchObject({ ok: false, gravite: "important" });
+    const ok = await bilanBing(createBingClient("abcdef0123456789abcdef0123456789", f), "https://studio-fictif.example", null);
+    expect(ok.controles.find((c) => c.id === "bing-hote")!.ok).toBe(true);
+  });
+});

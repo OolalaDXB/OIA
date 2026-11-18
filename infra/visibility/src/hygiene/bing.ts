@@ -98,7 +98,16 @@ export interface ResultatBing {
 export async function bilanBing(client: BingClient, site: string, sitemapUrl: string | null): Promise<ResultatBing> {
   const r: ResultatBing = { site: null, verifie: false, feeds: [], problemes: { total: 0, exemples: [] }, exploration: null, requetes: [], totaux: null, actions: [], controles: [] };
   const sites = await client.sites();
-  const trouve = (sites ?? []).find((s) => hote(s.Url) === hote(site));
+  // L'hôte exact d'abord (www.exemple.com ≠ exemple.com pour les statistiques de Bing), sinon l'autre forme.
+  const exact = (u: string) => {
+    try {
+      return new URL(u).hostname.toLowerCase();
+    } catch {
+      return "";
+    }
+  };
+  const trouve = (sites ?? []).find((s) => exact(s.Url) === exact(site)) ?? (sites ?? []).find((s) => hote(s.Url) === hote(site));
+  const autreHote = !!trouve && exact(trouve.Url) !== exact(site);
   r.site = trouve?.Url ?? null;
   r.verifie = !!trouve?.IsVerified;
   r.controles.push({
@@ -110,6 +119,13 @@ export async function bilanBing(client: BingClient, site: string, sitemapUrl: st
   });
   if (!trouve || !r.verifie) return r;
   const siteUrl = trouve.Url;
+  r.controles.push({
+    id: "bing-hote", titre: "Propriété Bing sur l'hôte réel du site", categorie: "visibilite_ia", points: 2, ok: !autreHote,
+    valeur: autreHote ? `Bing suit ${exact(trouve.Url)}, le site est servi sur ${exact(site)}` : exact(site), preuve: { propriete: trouve.Url, site },
+    gravite: "important", effort: "XS",
+    explication: "Bing range exploration, pages indexées et requêtes par hôte exact. Si la propriété est sur l'autre forme (avec ou sans www), ses statistiques restent vides.",
+    correction: `Bing Webmaster Tools › Ajouter un site : ${site}/ (vérification par le même moyen que la propriété existante), et garder l'autre forme en redirection 301.`,
+  });
 
   try {
     const feeds = (await client.feeds(siteUrl)) ?? [];
